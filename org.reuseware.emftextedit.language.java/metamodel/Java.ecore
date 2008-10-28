@@ -44,13 +44,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
         eType="#//PackageOrClassifierReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Primary" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ReferenceSequence">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primary" eType="#//Primary"
+  <eClassifiers xsi:type="ecore:EClass" name="PrimaryReference" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primary" eType="#//PrimaryReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arraySelectors" upperBound="-1"
         eType="#//Expression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="next" upperBound="-1" eType="#//ReferenceSequence"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" upperBound="-1" eType="#//Reference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageOrClassifierReference">
@@ -59,7 +59,7 @@
         eType="#//TypeArgument" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageOrClassifierOrMethodOrVariableReference"
-      eSuperTypes="#//Primary">
+      eSuperTypes="#//PrimaryReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//ReferenceableElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="#//TypeArgument" containment="true"/>
@@ -68,16 +68,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendTypes" upperBound="-1"
-        eType="#//ReferenceSequence" containment="true"/>
+        eType="#//Reference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeArgument" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="QualifiedTypeArgument" eSuperTypes="#//TypeArgument #//TypedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExtendsTypeArgument" eSuperTypes="#//TypeArgument">
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendTypes" upperBound="-1"
-        eType="#//ReferenceSequence" containment="true"/>
+        eType="#//Reference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SuperTypeArgument" eSuperTypes="#//TypeArgument">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//ReferenceSequence"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//Reference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownTypeArgument" eSuperTypes="#//TypeArgument"/>
@@ -104,9 +104,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NewConstructorCall" eSuperTypes="#//Instantiation #//Primary"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExplicitConstructorCall" eSuperTypes="#//Instantiation #//Primary">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="callTarget" eType="#//ThisOrSuper"
+  <eClassifiers xsi:type="ecore:EClass" name="NewConstructorCall" eSuperTypes="#//Instantiation #//PrimaryReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExplicitConstructorCall" eSuperTypes="#//Instantiation #//PrimaryReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callTarget" eType="#//SelfReference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayInstantiationBySize" eSuperTypes="#//Expression #//TypedElement">
@@ -137,7 +137,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//Classifier #//MemberContainer"/>
   <eClassifiers xsi:type="ecore:EClass" name="AnnotationInstance" eSuperTypes="#//AnnotationElementValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//ReferenceSequence"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//Reference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementValuePairs" upperBound="-1"
         eType="#//AnnotationElementValuePair" containment="true"/>
@@ -323,7 +323,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//SingleExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//ReferenceSequence" containment="true"/>
+        eType="#//Reference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
@@ -353,7 +353,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Transient" eSuperTypes="#//Modifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Volatile" eSuperTypes="#//Modifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Strictfp" eSuperTypes="#//Modifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//TypeReference #//Primary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//TypeReference #//PrimaryReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="#//PrimitiveType"/>
   <eClassifiers xsi:type="ecore:EClass" name="Char" eSuperTypes="#//PrimitiveType"/>
   <eClassifiers xsi:type="ecore:EClass" name="Byte" eSuperTypes="#//PrimitiveType"/>
@@ -380,8 +380,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullLiteral" eSuperTypes="#//Literal"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ThisOrSuper"/>
-  <eClassifiers xsi:type="ecore:EClass" name="This" eSuperTypes="#//ThisOrSuper #//Primary"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Super" eSuperTypes="#//ThisOrSuper #//Primary"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassLiteral" eSuperTypes="#//Primary"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SelfReference" eSuperTypes="#//PrimaryReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="This" eSuperTypes="#//SelfReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Super" eSuperTypes="#//SelfReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassLiteral" eSuperTypes="#//PrimaryReference"/>
 </ecore:EPackage>
