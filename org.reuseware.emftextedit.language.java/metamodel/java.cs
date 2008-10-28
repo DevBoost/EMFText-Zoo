@@ -147,7 +147,7 @@ ArrayInstantiationBySize
 		("[" sizes "]")+
 	;
 
-ReferenceSequence
+Reference
 	::= primary ("[" arraySelectors? "]")* ("." next)? 
 	;
 	
