@@ -147,9 +147,12 @@ ArrayInstantiationBySize
 		("[" sizes "]")+
 	;
 
+ReferenceSequence
+	::= primary ("[" arraySelectors? "]")* ("." next)? 
+	;
+	
 TypeReferenceSequence
-	::=
-		parts ("." parts)*
+	::= parts ("." parts)*
 	;
 
 PackageOrClassifierReference
@@ -163,9 +166,9 @@ PackageOrClassifierOrMethodOrVariableReference
 		("(" (arguments ("," arguments)* )? ")")?
 	;
 
-PrimitiveTypeArray
-	::= type (arrayDimensions)*
-	;
+//TypeArray
+//	::= type (arrayDimensions)*
+//	;
 
 QualifiedTypeArgument
 	::= type
@@ -241,20 +244,19 @@ JumpLabel
 	::= name[] ":" statement ;
 
 Assignment
-	::= target "=" value
+	::= target ("=" value)?
 	;
-
-ReferenceSequence
-	::= primary ("." selectors)* ;
 
 // TODO was a subtype of Expression, but this generalization was
 // temporarily removed, because variable declarations could not
 // be distinguished from single expressions
-SingleExpression 
-	::= expression ";" ;
+ExpressionStatement 
+	::= expression ";" 
+	;
 
 ExpressionList
-	::= expressions ("," expressions)* ;
+	::= expressions ("," expressions)* 
+	;
 
 BooleanExpression
 	::=	

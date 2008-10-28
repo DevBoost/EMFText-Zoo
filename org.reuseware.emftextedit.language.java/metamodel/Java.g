@@ -674,8 +674,8 @@ primary
     |   literal // DONE
     |   'new' creator // DONE
     |   Identifier ('.' Identifier)* identifierSuffix? // DONE without the suffix
-    |   primitiveType ('[' ']')* '.' 'class'
-    |   'void' '.' 'class'
+    |   primitiveType ('[' ']')* '.' 'class' // DONE
+    |   'void' '.' 'class' // DONE
     ;
 
 identifierSuffix
@@ -683,7 +683,7 @@ identifierSuffix
     |   ('[' expression ']')+ // can also be matched by selector, but do here
     |   arguments
     |   '.' 'class'
-    |   '.' explicitGenericInvocation
+    |   '.' explicitGenericInvocation // TODO can't find an example for this case
     |   '.' 'this'
     |   '.' 'super' arguments
     |   '.' 'new' innerCreator
