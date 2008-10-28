@@ -228,6 +228,20 @@ public class JavaParserTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testAssignments() throws Exception {
+		String typename = "Assignments";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 2);
+		List<Member> members = clazz.getMembers();
+
+		assertType(members.get(0), Field.class);
+		assertType(members.get(1), Method.class);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testBasicEnums() throws Exception {
 		checkBasicEnum("BasicEnum");
 		checkBasicEnum("BasicEnumWithCommaAndSemicolonAtTheEnd");

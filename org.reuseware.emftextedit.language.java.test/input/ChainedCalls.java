@@ -1,6 +1,16 @@
 public class ChainedCalls {
+	public class Inner {
+
+	}
+	public class InnerGeneric<T> {
+		public <T> InnerGeneric () {
+			ChainedCalls.this.toString();
+			ChainedCalls.super.hashCode();
+		}
+	}
 	public int a;
 	public ChainedCalls ref;
+	public ChainedCalls[] refArray;
 	
 	public static ChainedCalls m() {
 		return null;
@@ -39,5 +49,17 @@ public class ChainedCalls {
 	}
 	{
 		new ChainedCalls().m();
+	}
+	{
+		ChainedCalls[].class.toString();
+	}
+	{
+		refArray[1].toString();
+	}
+	{
+		ChainedCalls.Inner.class.toString();
+	}
+	{
+		this.new Inner();
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 import org.reuseware.emftextedit.language.java.Block;
 import org.reuseware.emftextedit.language.java.Expression;
+import org.reuseware.emftextedit.language.java.ExpressionStatement;
 import org.reuseware.emftextedit.language.java.Member;
 import org.reuseware.emftextedit.language.java.Method;
 import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
@@ -40,9 +41,9 @@ public class MethodCallResolverTest extends AbstractResolverTest {
 	}
 
 	private void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
-		assertType(statement, SingleExpression.class);
-		SingleExpression expression = (SingleExpression) statement;
-		Expression methodCallExpression = expression.getExpression();
+		assertType(statement, ExpressionStatement.class);
+		ExpressionStatement expression = (ExpressionStatement) statement;
+		SingleExpression methodCallExpression = expression.getExpression();
 		assertType(methodCallExpression, PackageOrClassifierOrMethodOrVariableReference.class);
 		PackageOrClassifierOrMethodOrVariableReference methodCall = (PackageOrClassifierOrMethodOrVariableReference) methodCallExpression;
 		assertEquals(expectedCallTarget, methodCall.getTarget());
