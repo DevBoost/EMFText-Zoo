@@ -50,7 +50,7 @@ public class TemplateInterpreterTest {
 		Map<?, ?> options = Collections.EMPTY_MAP;
 		InputStream inputStream = new FileInputStream(templateFile);
 		SimpletemplateResourceImpl resource = new SimpletemplateResourceImpl();
-		resource.doLoad(inputStream, options);
+		resource.load(inputStream, options);
 		inputStream.close();
 		return resource;
 	}
