@@ -236,7 +236,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		List<Member> members = clazz.getMembers();
 
 		assertType(members.get(0), Field.class);
-		assertType(members.get(1), Method.class);
+		assertType(members.get(1), Block.class);
 
 		parseAndReprint(filename);
 	}
@@ -264,7 +264,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		String typename = "ChainedCalls";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 14);
+		assertMemberCount(clazz, 21);
 
 		parseAndReprint(filename);
 	}
