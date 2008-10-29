@@ -43,6 +43,7 @@ public class TemplateInterpreterTest {
 		// pass template to interpreter
 		SimpleTemplateInterpreter interpreter = new SimpleTemplateInterpreterImpl();
 		EObject result = interpreter.interprete(template, null);
+		assertNotNull(result);
 		// TODO mboehme: check whether the template was instantiated correctly
 	}
 
