@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.reuseware.emftextedit.GenPackageFinder;
+import org.reuseware.emftextedit.IGenPackageFinderResult;
 import org.reuseware.emftextedit.MetamodelManager;
 import org.reuseware.emftextedit.codegen.BaseGenerator;
 import org.reuseware.emftextedit.codegen.IGenerator;
@@ -33,16 +34,19 @@ import org.reuseware.emftextedit.codegen.ResourcePackageGenerator;
 import org.reuseware.emftextedit.codegen.TextParserGenerator;
 import org.reuseware.emftextedit.concretesyntax.ConcreteSyntax;
 import org.reuseware.emftextedit.resource.TextResource;
+
 /**
  * This test checks whether regenerating the parser with EMFText
  * results in the same Java code.
+ * 
+ * This test must be run as JUnit Plug-in test.
  */
 public class ParserGenerationTest {
 	
 	@Before
 	public void setUp() {
 		MetamodelManager.INSTANCE.addGenPackageFinder(new GenPackageFinder() {
-			public GenPackage findGenPackage(String nsURI, TextResource resource) {
+			public IGenPackageFinderResult findGenPackage(String nsURI, TextResource resource) {
 				System.out.println("findGenPackage("+nsURI+","+resource+")");
 				
 				ResourceSet rs = new ResourceSetImpl();
@@ -54,7 +58,18 @@ public class ParserGenerationTest {
             	Resource genModelResource = rs.getResource(genModelURI, true);
             	GenModel genModel = (GenModel) genModelResource.getContents().get(0);
             	Map<String, GenPackage> genPackages = MetamodelManager.getGenPackages(genModel);
-            	return genPackages.get(nsURI);
+            	final GenPackage result = genPackages.get(nsURI);
+            	
+            	return new IGenPackageFinderResult() {
+
+					public GenPackage getResult() {
+		            	return result;
+					}
+
+					public boolean hasChanged() {
+						return false;
+					}
+            	};
 			}
 		});
 		/*
