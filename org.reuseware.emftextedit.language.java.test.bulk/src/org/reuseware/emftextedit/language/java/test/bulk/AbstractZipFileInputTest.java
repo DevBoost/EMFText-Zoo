@@ -47,7 +47,9 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
-			suite.addTest(new ParseZipFileEntryTest(zipFile, entry));
+			if (entry.getName().endsWith(".java")) {
+				suite.addTest(new ParseZipFileEntryTest(zipFile, entry));
+			}
 		}
 	}
 }
