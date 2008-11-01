@@ -16,7 +16,6 @@ public class AllTests {
 		//$JUnit-BEGIN$
 		suite.addTestSuite(JavaParserTest.class);
 		suite.addTest(AutomatedJavaParserTest.suite());
-		suite.addTest(AutomatedJacksTest.suite());
 		
 		//$JUnit-END$
 		return suite;

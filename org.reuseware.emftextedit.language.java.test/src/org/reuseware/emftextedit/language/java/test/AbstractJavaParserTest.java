@@ -79,7 +79,11 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File file = new File(inputFolder, inputFile.getPath());
 		assertTrue("File " + file + " should exist.", file.exists());
 		parsedResources.add(file);
-		return loadResource(new FileInputStream(file), file.getName());
+		return parseResource(new FileInputStream(file), file.getName());
+	}
+
+	protected CompilationUnit parseResource(InputStream inputStream, String filename) throws IOException {
+		return loadResource(inputStream, filename);
 	}
 
 	protected static CompilationUnit parseResource(ZipFile file, ZipEntry entry)
