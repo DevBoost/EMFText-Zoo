@@ -2,11 +2,11 @@ package org.reuseware.emftextedit.language.java.test;
 
 import org.junit.Test;
 
-public class OrderedJavaParserTest {
+public class OrderedJavaLanguageFeatureTest {
 
 	@Test
 	public void testOrdered() throws Exception {
-		JavaParserTest test = new JavaParserTest() {
+		JavaLanguageFeatureTest test = new JavaLanguageFeatureTest() {
 
 			@Override
 			protected boolean isExcludedFromReprintTest(String filename) {

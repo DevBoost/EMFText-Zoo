@@ -6,7 +6,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
-import org.reuseware.emftextedit.language.java.test.ThreadedTestSuite;
+import org.reuseware.emftextedit.language.java.test.util.ThreadedTestSuite;
 
 public class Tomcat6Test extends AbstractZipFileInputTest {
 	

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.reuseware.emftextedit.language.java.test;
+package org.reuseware.emftextedit.language.java.test.util;
 
 import java.util.ArrayList;
 import java.util.Enumeration;

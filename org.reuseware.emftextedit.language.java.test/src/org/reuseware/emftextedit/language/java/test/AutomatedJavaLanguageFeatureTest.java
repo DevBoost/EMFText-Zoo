@@ -8,15 +8,16 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
+import org.reuseware.emftextedit.language.java.test.util.ThreadedTestSuite;
 
 
-public class AutomatedJavaParserTest extends AbstractJavaParserTest {
+public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTest {
 	
 	protected static final String TEST_INPUT_FOLDER_NAME = "input";
 	protected static final String TEST_OUTPUT_FOLDER_NAME = "output";
 	
 	public static Test suite() throws CoreException {
-		final AutomatedJavaParserTest test = new AutomatedJavaParserTest();
+		final AutomatedJavaLanguageFeatureTest test = new AutomatedJavaLanguageFeatureTest();
 		
 		TestSuite suite = new ThreadedTestSuite(
 		"Suite testing all files in the input directory automatically", 1000, 100);
@@ -30,7 +31,7 @@ public class AutomatedJavaParserTest extends AbstractJavaParserTest {
 		return suite;
 	}
 
-	private static void addParseTest(final AutomatedJavaParserTest test,
+	private static void addParseTest(final AutomatedJavaLanguageFeatureTest test,
 			TestSuite suite, final File file) {
 		suite.addTest(new TestCase("Parse " + file.getName()) {
 			public void runTest() {
@@ -46,7 +47,7 @@ public class AutomatedJavaParserTest extends AbstractJavaParserTest {
 	}
 
 	private static void addParseAndReprintTest(
-			final AutomatedJavaParserTest test, TestSuite suite, final File file) {
+			final AutomatedJavaLanguageFeatureTest test, TestSuite suite, final File file) {
 		suite.addTest(new TestCase("Parse and Reprint " + file.getName()) {
 			public void runTest() {
 				try {

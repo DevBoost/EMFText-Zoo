@@ -47,7 +47,7 @@ import pkg.EscapedStrings;
  * 
  * @author Christian Wende
  */
-public class JavaParserTest extends AbstractJavaParserTest {
+public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	// a list of files that are excluded from the reprint test, because
 	// they contain optional tokens which are lost after parsing them

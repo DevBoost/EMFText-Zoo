@@ -14,8 +14,8 @@ public class AllTests {
 		TestSuite suite = new TestSuite(
 				"Test for org.reuseware.emftextedit.language.java.test");
 		//$JUnit-BEGIN$
-		suite.addTestSuite(JavaParserTest.class);
-		suite.addTest(AutomatedJavaParserTest.suite());
+		suite.addTestSuite(JavaLanguageFeatureTest.class);
+		suite.addTest(AutomatedJavaLanguageFeatureTest.suite());
 		
 		//$JUnit-END$
 		return suite;
