@@ -679,14 +679,14 @@ primary
     ;
 
 identifierSuffix
-    :   ('[' ']')+ '.' 'class'
-    |   ('[' expression ']')+ // can also be matched by selector, but do here
-    |   arguments
-    |   '.' 'class'
+    :   ('[' ']')+ '.' 'class' // DONE
+    |   ('[' expression ']')+ // DONE (can also be matched by selector, but do here)
+    |   arguments // DONE
+    |   '.' 'class' // DONE
     |   '.' explicitGenericInvocation // TODO can't find an example for this case
-    |   '.' 'this'
-    |   '.' 'super' arguments
-    |   '.' 'new' innerCreator
+    |   '.' 'this' // DONE
+    |   '.' 'super' arguments // TODO can't find an example for this case
+    |   '.' 'new' innerCreator // DONE
     ;
 
 creator

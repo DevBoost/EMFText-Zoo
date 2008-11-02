@@ -169,7 +169,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		String typename = "AnonymousInner";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
+		assertMemberCount(clazz, 3);
 
 		parseAndReprint(filename);
 	}
@@ -264,7 +264,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		String typename = "ChainedCalls";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 21);
+		assertMemberCount(clazz, 24);
 
 		parseAndReprint(filename);
 	}

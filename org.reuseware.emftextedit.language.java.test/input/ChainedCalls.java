@@ -11,8 +11,13 @@ public class ChainedCalls {
 	public int a;
 	public ChainedCalls ref;
 	public ChainedCalls[] refArray;
+	public ChainedCalls[][] twoDimensionalArray;
 	
 	public static ChainedCalls m() {
+		return null;
+	}
+	
+	public static ChainedCalls m(ChainedCalls cc) {
 		return null;
 	}
 	
@@ -27,6 +32,9 @@ public class ChainedCalls {
 	}
 	{
 		m().m().m();
+	}
+	{
+		m(null).m(null).m(this);
 	}
 	{
 		this.m();
@@ -54,7 +62,13 @@ public class ChainedCalls {
 		ChainedCalls[].class.toString();
 	}
 	{
+		ChainedCalls[][].class.toString();
+	}
+	{
 		refArray[1].toString();
+	}
+	{
+		twoDimensionalArray[1][2].toString();
 	}
 	{
 		ChainedCalls.Inner.class.toString();

@@ -126,17 +126,19 @@ AdditionalField
 	::= name[] arrayDimensions* ("=" initialValue)?
 	;
 
+// INSTANTIATIONS
 NewConstructorCall 
 	::= "new" type 
 		("<" typeArguments[] ("," typeArguments[])* ">")?
 		"(" (arguments ("," arguments)* )? ")"
+		("{" (members (";")?)* "}")?
      ;
      
 ExplicitConstructorCall 
 	::= ("<" typeArguments[] ("," typeArguments[])* ">")?
 		callTarget "(" (arguments ("," arguments)* )? ")"
      ;
-     
+
 ArrayInstantiationByValues
 	::= "new" type arrayDimensions+
 		"{" (initialValues ((",") initialValues)* (",")? )? "}"
@@ -165,10 +167,6 @@ PackageOrClassifierOrMethodOrVariableReference
 		("<" typeArguments ("," typeArguments)* ">")?
 		("(" (arguments ("," arguments)* )? ")")?
 	;
-
-//TypeArray
-//	::= type (arrayDimensions)*
-//	;
 
 QualifiedTypeArgument
 	::= type
