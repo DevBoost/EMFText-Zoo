@@ -30,7 +30,7 @@ public class VariableReferenceResolverTest extends AbstractResolverTest {
 		assertNotNull(methodBody);
 		List<Statement> statements = methodBody.getStatements();
 		
-		assertEquals(4, statements.size());
+		assertEquals(6, statements.size());
 		Statement statement1 = statements.get(0);
 		assertType(statement1, Assignment.class);
 		Assignment assignment1 = (Assignment) statement1;
