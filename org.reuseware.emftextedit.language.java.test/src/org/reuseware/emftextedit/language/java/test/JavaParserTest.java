@@ -270,6 +270,16 @@ public class JavaParserTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testComments() throws Exception {
+		String typename = "Comments";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 2);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testClassWithEnumeratingFieldDeclaration() throws Exception {
 		String typename = "ClassWithEnumeratingFieldDeclaration";
 		String filename = typename + ".java";
