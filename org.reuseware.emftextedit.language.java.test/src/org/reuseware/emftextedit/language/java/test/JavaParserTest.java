@@ -264,7 +264,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		String typename = "ChainedCalls";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 24);
+		assertMemberCount(clazz, 26);
 
 		parseAndReprint(filename);
 	}
