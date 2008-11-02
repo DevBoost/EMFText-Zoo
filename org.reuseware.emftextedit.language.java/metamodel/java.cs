@@ -128,8 +128,12 @@ AdditionalField
 
 // INSTANTIATIONS
 NewConstructorCall 
-	::= "new" type 
+	::= "new" 
+		// these are the arguments for the constructor type parameters
 		("<" typeArguments[] ("," typeArguments[])* ">")?
+		type 
+		// these are the arguments for the class type parameters
+		("<" classTypeArguments[] ("," classTypeArguments[])* ">")?
 		"(" (arguments ("," arguments)* )? ")"
 		("{" (members (";")?)* "}")?
      ;

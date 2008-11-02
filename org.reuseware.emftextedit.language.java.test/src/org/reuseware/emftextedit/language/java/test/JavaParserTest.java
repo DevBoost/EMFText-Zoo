@@ -437,6 +437,16 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		assertType(forEach, ForEachLoop.class);
 		parseAndReprint(filename);
 	}
+	
+	@Test
+	public void testGenericConstructorCalls() throws Exception {
+		String typename = "GenericConstructorCalls";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 5);
+		
+		parseAndReprint(filename);
+	}
 
 	@Test
 	public void testGenericConstructors() throws Exception {

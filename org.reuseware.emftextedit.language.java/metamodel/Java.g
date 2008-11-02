@@ -690,6 +690,7 @@ identifierSuffix
     |   '.' 'new' innerCreator // DONE
     ;
 
+// done
 creator
     :   nonWildcardTypeArguments createdName classCreatorRest
     |   createdName (arrayCreatorRest | classCreatorRest)
