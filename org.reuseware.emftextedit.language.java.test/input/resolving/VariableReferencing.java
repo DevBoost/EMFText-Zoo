@@ -21,5 +21,7 @@ public class VariableReferencing {
 				var = null;
 			}
 		}
+		var = new VariableReferencing();
+		var.method();
 	}
 }

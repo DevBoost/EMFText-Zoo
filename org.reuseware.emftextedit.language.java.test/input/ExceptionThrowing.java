@@ -11,4 +11,6 @@ public class ExceptionThrowing extends Exception {
 
 	public void methodThatThrowsMultiple() throws ExceptionThrowing, Exception {
 	}
+
+	private static final long serialVersionUID = 1;
 }

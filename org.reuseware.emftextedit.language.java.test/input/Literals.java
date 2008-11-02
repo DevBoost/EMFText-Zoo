@@ -11,6 +11,19 @@ public class Literals {
 		boolean truh = true;
 		Literals nuhl = null;
 		float f2 = 1.5f;
+		
+		// some assignments to avoid warnings
+		this.i1 = i1;
+		this.i2 = i2;
+		this.i3 = i3;
+		this.i4 = i4;
+		this.f1 = f1;
+		this.c = c;
+		this.s = s;
+		this.falze = falze;
+		this.truh = truh;
+		this.nuhl = nuhl;
+		this.f2 = f2;
 	}
 	public int i1 = 3;
 	public int i2 = 0x1;

@@ -52,15 +52,25 @@ public class LoopStatements {
 	}
 	
 	{
-		for(int i = 0;condition;){}
-		for(int i = 0, j = 1;condition;){}
+		int x = 0;
+		for(int i = 0;condition;){
+			x = i;
+		}
+		for(int i = 0, j = 1;condition;){
+			x = i;
+			j = x;
+			i = j;
+		}
 	}
 
 	public void expressionListInit() {
 		int i;
 		int j;
 		i=0;
-		for(i=0,j=0;condition;){}
+		for(i=0,j=0;condition;){
+			i = j;
+			j = i;
+		}
 	}
 
 	public void expressionListCondition() {

@@ -17,5 +17,6 @@ public class ConstructorCalls {
 
 	public void method() {
 		ConstructorCalls cc = new ConstructorCalls(new ConstructorCalls());
+		cc.method();
 	}
 }

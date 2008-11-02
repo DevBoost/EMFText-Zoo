@@ -20,6 +20,17 @@ public final class Modifiers {
 	}
 	static private class StaticPrivateClass {
 	}
+	
+	{
+		// some instantiations to avoid warnings
+		new PrivateClass();
+		new PrivateFinalClass();
+		new FinalPrivateClass();
+		new PrivateAbstractClass() {};
+		new AbstractPrivateClass() {};
+		new PrivateStaticClass();
+		new StaticPrivateClass();
+	}
 
 	protected class ProtectedClass {
 	}

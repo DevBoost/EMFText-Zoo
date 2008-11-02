@@ -3,7 +3,7 @@ public class ChainedCalls {
 
 	}
 	public class InnerGeneric<T> {
-		public <T> InnerGeneric () {
+		public <S> InnerGeneric () {
 			ChainedCalls.this.toString();
 			ChainedCalls.super.hashCode();
 		}
@@ -13,11 +13,15 @@ public class ChainedCalls {
 	public ChainedCalls[] refArray;
 	public ChainedCalls[][] twoDimensionalArray;
 	
-	public static ChainedCalls m() {
+	public ChainedCalls m() {
 		return null;
 	}
 	
-	public static ChainedCalls m(ChainedCalls cc) {
+	public static ChainedCalls staticM() {
+		return null;
+	}
+	
+	public ChainedCalls m(ChainedCalls cc) {
 		return null;
 	}
 	
@@ -49,7 +53,7 @@ public class ChainedCalls {
 		java.lang.String.class.toString();
 	}
 	{
-		ChainedCalls.m();
+		ChainedCalls.staticM();
 	}
 	{
 		ref = ChainedCalls.this;

@@ -264,7 +264,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "ChainedCalls";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 26);
+		assertMemberCount(clazz, 27);
 
 		parseAndReprint(filename);
 	}
@@ -377,7 +377,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
 
-		assertMemberCount(clazz, 4);
+		assertMemberCount(clazz, 5);
 
 		List<Member> members = clazz.getMembers();
 		assertConstructorThrowsCount(members.get(0), 1);
@@ -661,7 +661,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Modifiers";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 28);
+		assertMemberCount(clazz, 29);
 
 		parseAndReprint(filename);
 	}
@@ -728,7 +728,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	@Test
 	public void testStatements() throws Exception {
 		assertParsesToClass("ConditionalStatements", 1);
-		assertParsesToClass("TryCatchStatements", 3);
+		assertParsesToClass("TryCatchStatements", 4);
 		assertParsesToClass("AssertStatements", 1);
 		assertParsesToClass("ThrowStatements", 1);
 		assertParsesToClass("SynchronizedStatements", 3);

@@ -24,10 +24,12 @@ public class ArrayInitializers {
 
 	public void m1() {
 		ArrayInitializers[] variable = new ArrayInitializers[2341];
+		variable.toString();
 	}
 
 	public void m2() {
 		ArrayInitializers[][] variable2 = new ArrayInitializers[2341][];
+		variable2.toString();
 	}
 
 	public void m3() {
@@ -41,5 +43,7 @@ public class ArrayInitializers {
 				new ArrayInitializers(), 
 				new ArrayInitializers()
 		};
+		variableWithCommaAtEnd.toString();
+		variableWithoutCommaAtEnd.toString();
 	}
 }

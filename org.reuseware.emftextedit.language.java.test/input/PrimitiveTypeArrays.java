@@ -3,6 +3,8 @@ public class PrimitiveTypeArrays {
 	
 	public void m1() {
 		int[][] arr;
+		arr = new int[1][1];
+		arr[1][1] = 0;
 	}
 
 	{
