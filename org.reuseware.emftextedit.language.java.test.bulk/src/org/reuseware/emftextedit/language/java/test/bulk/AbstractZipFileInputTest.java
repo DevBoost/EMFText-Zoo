@@ -12,7 +12,7 @@ import junit.framework.TestSuite;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
-	protected final static String BULK_INPUT_DIR = "input_bulk/";
+	protected final static String BULK_INPUT_DIR = "input/";
 
 	private static final class ParseZipFileEntryTest extends
 			AbstractJavaParserTest {

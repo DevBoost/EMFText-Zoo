@@ -10,7 +10,7 @@ import org.reuseware.emftextedit.language.java.test.ThreadedTestSuite;
 
 public class Eclipse341Test extends AbstractZipFileInputTest {
 	
-	private static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-platform-3.4.1/eclipse-3.4.1-platform-src-java-files.zip";
+	private static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-3.4.1-platform-src-java-files.zip";
 
 	public static Test suite() throws CoreException, IOException {
 		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the eclipse 3.4.1 zip file", 1000);
