@@ -13,21 +13,21 @@ import junit.framework.TestSuite;
 
 public final class ThreadedTestSuite extends TestSuite {
 	
-	private final static int MAX_ACTIVE_THREADS = 300;
-	
 	private List<Thread> threads = new ArrayList<Thread>();
-	private int timeout;
+	private final int timeout;
+	private final int maxActiveThreads;
 	
-	public ThreadedTestSuite(String name, int timeout) {
+	public ThreadedTestSuite(String name, int timeout, int maxActiveThreads) {
 		super(name);
 		this.timeout = timeout;
+		this.maxActiveThreads = maxActiveThreads;
 	}
 	
 	public void run(final TestResult result) {
 		Enumeration<Test> tests = tests();
 		
 		while (tests.hasMoreElements()) {
-			if (threads.size() > MAX_ACTIVE_THREADS) {
+			if (threads.size() > maxActiveThreads) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {

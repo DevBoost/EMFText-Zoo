@@ -19,7 +19,7 @@ public class AutomatedJavaParserTest extends AbstractJavaParserTest {
 		final AutomatedJavaParserTest test = new AutomatedJavaParserTest();
 		
 		TestSuite suite = new ThreadedTestSuite(
-		"Suite testing all files in the input directory automatically", 1000);
+		"Suite testing all files in the input directory automatically", 1000, 100);
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder);
 		for (final File file : allTestFiles) {
@@ -35,7 +35,7 @@ public class AutomatedJavaParserTest extends AbstractJavaParserTest {
 		suite.addTest(new TestCase("Parse " + file.getName()) {
 			public void runTest() {
 				try {
-					test.parseResource(file, TEST_INPUT_FOLDER_NAME);
+					test.parseResource(file, "./");
 				}
 				catch (Exception e) {
 					fail(e.getClass() +  ": " + e.getMessage());
