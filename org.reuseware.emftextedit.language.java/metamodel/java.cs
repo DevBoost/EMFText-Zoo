@@ -147,6 +147,7 @@ ArrayInstantiationByValues
 ArrayInstantiationBySize 
 	::= "new" type 
 		("[" sizes "]")+
+		arrayDimensions*
 	;
 
 Reference

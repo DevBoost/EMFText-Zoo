@@ -189,7 +189,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		String typename = "ArrayInitializers";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 6);
+		assertMemberCount(clazz, 8);
 
 		parseAndReprint(filename);
 	}

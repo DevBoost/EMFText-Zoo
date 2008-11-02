@@ -22,8 +22,15 @@ public class ArrayInitializers {
 			},
 	};
 
-	public void method() {
+	public void m1() {
 		ArrayInitializers[] variable = new ArrayInitializers[2341];
+	}
+
+	public void m2() {
+		ArrayInitializers[][] variable2 = new ArrayInitializers[2341][];
+	}
+
+	public void m3() {
 		ArrayInitializers[] variableWithCommaAtEnd = new ArrayInitializers[] {
 				new ArrayInitializers(), 
 				new ArrayInitializers(), 

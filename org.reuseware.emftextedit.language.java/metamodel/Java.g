@@ -703,6 +703,7 @@ innerCreator
     :   nonWildcardTypeArguments? Identifier classCreatorRest
     ;
 
+// done
 arrayCreatorRest
     :   '['
         (   ']' ('[' ']')* arrayInitializer
@@ -710,6 +711,7 @@ arrayCreatorRest
         )
     ;
 
+// done
 classCreatorRest
     :   arguments classBody?
     ;
