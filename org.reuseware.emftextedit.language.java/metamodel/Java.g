@@ -696,6 +696,7 @@ creator
     |   createdName (arrayCreatorRest | classCreatorRest)
     ;
 
+// done
 createdName
     :   classOrInterfaceType
     |   primitiveType
