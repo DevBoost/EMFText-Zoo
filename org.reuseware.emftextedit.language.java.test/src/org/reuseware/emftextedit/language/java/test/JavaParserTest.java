@@ -379,6 +379,17 @@ public class JavaParserTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testExplicitGenericInvocation() throws Exception {
+		String typename = "ExplicitGenericInvocation";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+
+		assertMemberCount(clazz, 2);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testExpressions() throws Exception {
 		String typename = "Expressions";
 		String filename = typename + ".java";

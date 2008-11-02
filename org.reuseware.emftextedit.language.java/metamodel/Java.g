@@ -683,7 +683,7 @@ identifierSuffix
     |   ('[' expression ']')+ // DONE (can also be matched by selector, but do here)
     |   arguments // DONE
     |   '.' 'class' // DONE
-    |   '.' explicitGenericInvocation // TODO can't find an example for this case
+    |   '.' explicitGenericInvocation // DONE
     |   '.' 'this' // DONE
     |   '.' 'super' arguments // TODO can't find an example for this case
     |   '.' 'new' innerCreator // DONE
@@ -713,7 +713,8 @@ arrayCreatorRest
 classCreatorRest
     :   arguments classBody?
     ;
-    
+
+// done
 explicitGenericInvocation
     :   nonWildcardTypeArguments Identifier arguments
     ;
@@ -722,13 +723,14 @@ explicitGenericInvocation
 nonWildcardTypeArguments
     :   '<' typeList '>'
     ;
-    
+
+// done
 selector
-    :   '.' Identifier arguments?
+    :   '.' Identifier arguments? // DONE
     |   '.' 'this' // DONE
-    |   '.' 'super' superSuffix
-    |   '.' 'new' innerCreator
-    |   '[' expression ']'
+    |   '.' 'super' superSuffix // DONE
+    |   '.' 'new' innerCreator // DONE
+    |   '[' expression ']' // DONE
     ;
     
 // done

@@ -168,6 +168,12 @@ PackageOrClassifierOrMethodOrVariableReference
 		("(" (arguments ("," arguments)* )? ")")?
 	;
 
+ExplicitGenericInvocation
+	::= ("<" typeArguments ("," typeArguments)* ">")?
+		target[]
+		("(" (arguments ("," arguments)* )? ")")?
+	;
+
 QualifiedTypeArgument
 	::= type
 	;
