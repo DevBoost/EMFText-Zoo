@@ -678,6 +678,7 @@ primary
     |   'void' '.' 'class' // DONE
     ;
 
+// done
 identifierSuffix
     :   ('[' ']')+ '.' 'class' // DONE
     |   ('[' expression ']')+ // DONE (can also be matched by selector, but do here)
@@ -698,7 +699,8 @@ createdName
     :   classOrInterfaceType
     |   primitiveType
     ;
-    
+
+// done
 innerCreator
     :   nonWildcardTypeArguments? Identifier classCreatorRest
     ;

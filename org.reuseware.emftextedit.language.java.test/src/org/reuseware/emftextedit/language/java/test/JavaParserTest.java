@@ -287,7 +287,7 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		String typename = "ConstructorCalls";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 7);
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}
@@ -374,6 +374,28 @@ public class JavaParserTest extends AbstractJavaParserTest {
 		assertConstructorThrowsCount(members.get(1), 2);
 		assertMethodThrowsCount(members.get(2), 1);
 		assertMethodThrowsCount(members.get(3), 2);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
+	public void testExplicitConstructorCalls() throws Exception {
+		String typename = "ExplicitConstructorCalls";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+
+		assertMemberCount(clazz, 3);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
+	public void testExplicitGenericConstructorCalls() throws Exception {
+		String typename = "ExplicitGenericConstructorCalls";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}

@@ -1,6 +1,5 @@
 public class GenericConstructors {
 	public <T> GenericConstructors() {
-		<GenericConstructors, GenericConstructors>this(null);
 	}
 
 	public <T1, T2> GenericConstructors(GenericConstructors dummyParameter) {
