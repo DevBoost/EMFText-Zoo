@@ -19,7 +19,9 @@ import java.util.zip.ZipFile;
 import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jdt.core.ToolFactory;
@@ -95,6 +97,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	private static CompilationUnit loadResource(InputStream fileInputStream,
 			String fileIdentifier) throws IOException {
 		JavaResourceImplTestWrapper resource = new JavaResourceImplTestWrapper();
+		resource.setURI(URI.createURI(fileIdentifier));
 		resource.load(fileInputStream, Collections.EMPTY_MAP);
 		assertNoErrors(fileIdentifier, resource);
 		assertNoWarnings(fileIdentifier, resource);
@@ -110,7 +113,12 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	private static void assertNoErrors(String fileIdentifier,
 			JavaResourceImplTestWrapper resource) {
-		EList<Diagnostic> errors = resource.getErrors();
+		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
+		for(Diagnostic error : resource.getErrors()) {
+			if (error.getMessage().contains("ProxyResolver")) {
+				errors.remove(error);
+			}
+		}
 		printErrors(fileIdentifier, errors);
 		assertTrue("The resource should be parsed without errors.", errors
 				.size() == 0);
