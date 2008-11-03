@@ -1,16 +1,8 @@
 package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
+import org.reuseware.emftextedit.resource.impl.ProxyResolverImpl;
 
 
-public class EnumerationImplementsProxyResolver extends ExternalTypeResolver {
-
-	@Override
-	protected String getQualifiedClassName(EObject container,
-			InternalEObject proxy) {
-		String className = proxy.eProxyURI().fragment();
-		return "java.lang." + className;
-	}
+public class EnumerationImplementsProxyResolver extends ProxyResolverImpl {
 
 }
