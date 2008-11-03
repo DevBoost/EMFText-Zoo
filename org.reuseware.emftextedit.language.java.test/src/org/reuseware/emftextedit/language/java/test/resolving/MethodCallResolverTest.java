@@ -3,12 +3,13 @@ package org.reuseware.emftextedit.language.java.test.resolving;
 import java.util.List;
 
 import org.junit.Test;
+import org.reuseware.emftextedit.language.java.Assignment;
 import org.reuseware.emftextedit.language.java.Block;
 import org.reuseware.emftextedit.language.java.ExpressionStatement;
 import org.reuseware.emftextedit.language.java.Member;
 import org.reuseware.emftextedit.language.java.Method;
 import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.reuseware.emftextedit.language.java.SingleExpression;
+import org.reuseware.emftextedit.language.java.PrimaryReference;
 import org.reuseware.emftextedit.language.java.Statement;
 
 public class MethodCallResolverTest extends AbstractResolverTest {
@@ -42,9 +43,10 @@ public class MethodCallResolverTest extends AbstractResolverTest {
 	private void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
 		assertType(statement, ExpressionStatement.class);
 		ExpressionStatement expression = (ExpressionStatement) statement;
-		SingleExpression methodCallExpression = expression.getExpression();
-		assertType(methodCallExpression, PackageOrClassifierOrMethodOrVariableReference.class);
-		PackageOrClassifierOrMethodOrVariableReference methodCall = (PackageOrClassifierOrMethodOrVariableReference) methodCallExpression;
+		Assignment methodCallExpression = (Assignment) expression.getExpression();
+		PrimaryReference reference = methodCallExpression.getTarget().getPrimary();
+		assertType(reference, PackageOrClassifierOrMethodOrVariableReference.class);
+		PackageOrClassifierOrMethodOrVariableReference methodCall = (PackageOrClassifierOrMethodOrVariableReference) reference;
 		assertEquals(expectedCallTarget, methodCall.getTarget());
 	}
 }
