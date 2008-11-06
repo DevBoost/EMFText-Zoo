@@ -9,7 +9,7 @@ OPTIONS {
 
 TOKENS {
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'))*$;
-	//DEFINE ML_COMMENT $'/*'(options{greedy=false;}:.)* '*/'$;
+	DEFINE ML_COMMENT $'/*'.*'*/'$;
 
 	DEFINE FLOATING_POINT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))? |   ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('f'|'F'|'d'|'D')))$;
 	DEFINE HEX_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+('l'|'L')?$;
@@ -27,7 +27,7 @@ RULES {
 
 CompilationUnit 
    ::=	annotations*
-        ("package" package[] ("." package[])* ";" !1)?
+        ("package" package[] ("." package[])* ";" )?
         ("import" ("static")? imports ";")*
         classifierDeclarations+
 	;
