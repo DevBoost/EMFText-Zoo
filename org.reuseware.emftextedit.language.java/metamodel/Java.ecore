@@ -3,23 +3,15 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="java"
     nsURI="http://www.reuseware.org/java" nsPrefix="org.reuseware">
-  <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit">
-    <eAnnotations source="missing">
-      <details key="enum"/>
-      <details key="genericMethod"/>
-      <details key="constants"/>
-      <details key="varInit + Arrays"/>
-      <details key="switchStatement"/>
-      <details key="synchronized"/>
-    </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//Commentable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
         eType="#//AnnotationInstance" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classifierDeclarations"
-        upperBound="-1" eType="#//Classifier" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
+        eType="#//Classifier" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" upperBound="-1"
@@ -388,4 +380,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="This" eSuperTypes="#//SelfReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="Super" eSuperTypes="#//SelfReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassLiteral" eSuperTypes="#//PrimaryReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Comment" abstract="true" eSuperTypes="#//Member #//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleLineComment" eSuperTypes="#//Comment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiLineComment" eSuperTypes="#//Comment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Commentable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
+        eType="#//Comment" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

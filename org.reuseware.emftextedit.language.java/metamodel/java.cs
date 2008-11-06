@@ -26,10 +26,13 @@ TOKENS {
 RULES {
 
 CompilationUnit 
-   ::=	annotations*
+   ::=	comments*
+   		annotations*
+   		comments*
         ("package" package[] ("." package[])* ";" )?
+        comments*
         ("import" ("static")? imports ";")*
-        classifierDeclarations+
+        classifiers+
 	;
 	
 Import
@@ -330,4 +333,10 @@ StringLiteral
 
 BooleanLiteral 
 	::= value[BOOLEAN_LITERAL];
+	
+SingleLineComment
+	::= content[SL_COMMENT];
+	
+MultiLineComment
+	::= content[ML_COMMENT];
 }

@@ -60,8 +60,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	private void checkBasicEnum(final String typeName) throws Exception {
 		String filename = typeName + ".java";
 		CompilationUnit model = parseResource(filename);
-		assertNumberOfClassifierDeclarations(model, 1);
-		Classifier declaration = model.getClassifierDeclarations().get(0);
+		assertNumberOfClassifiers(model, 1);
+		Classifier declaration = model.getClassifiers().get(0);
 		assertClassifierName(declaration, typeName);
 		assertType(declaration, Enumeration.class);
 
@@ -179,7 +179,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Arguments";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 5);
+		assertMemberCount(clazz, 6);
 
 		parseAndReprint(filename);
 	}
@@ -274,7 +274,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Comments";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 2);
+		assertMemberCount(clazz, 6);
 
 		parseAndReprint(filename);
 	}
@@ -305,11 +305,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	@Test
 	public void testEmptyClass() throws Exception {
 		CompilationUnit model = parseResource("EmptyClass.java");
-		assertEquals("EmptyClass.java contains exactly one class declaration.",
-				1, model.getClassifierDeclarations().size());
-		Classifier declaraction = model.getClassifierDeclarations().get(0);
+		assertNumberOfClassifiers(model, 1);
+
+		Classifier declaration = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'EmptyClass'",
-				"EmptyClass", declaraction.getName());
+				"EmptyClass", declaration.getName());
 		parseAndReprint("EmptyClass.java");
 	}
 	
@@ -622,7 +622,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "LocalVariableDeclarations";
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 2);
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}
@@ -689,9 +689,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	@Test
 	public void testPkg_EmptyClass() throws Exception {
 		CompilationUnit model = parseResource("pkg/EmptyClass.java");
-		assertEquals("pkg.EmptyClass contains exactly one class declaration.",
-				1, model.getClassifierDeclarations().size());
-		Classifier declaraction = model.getClassifierDeclarations().get(0);
+		assertNumberOfClassifiers(model, 1);
+		Classifier declaraction = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'EmptyClass'",
 				"EmptyClass", declaraction.getName());
 		assertEquals("pkg.Empty is located in a package 'pkg'", "pkg", model
@@ -702,9 +701,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	@Test
 	public void testPkg_inner_EmptyClass() throws Exception {
 		CompilationUnit model = parseResource("pkg/inner/Inner.java");
-		assertEquals("pkg.inner.Inner contains exactly one class declaration.",
-				1, model.getClassifierDeclarations().size());
-		Classifier declaraction = model.getClassifierDeclarations().get(0);
+		assertNumberOfClassifiers(model, 1);
+		Classifier declaraction = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'Inner'", "Inner",
 				declaraction.getName());
 		assertEquals("pkg.inner.Inner is located in a package 'inner'",

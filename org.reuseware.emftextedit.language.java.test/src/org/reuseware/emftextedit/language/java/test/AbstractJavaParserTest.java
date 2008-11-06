@@ -402,11 +402,11 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				+ expectedName + "'", expectedName, declaration.getName());
 	}
 
-	protected void assertNumberOfClassifierDeclarations(CompilationUnit model,
+	protected void assertNumberOfClassifiers(CompilationUnit model,
 			int expectedCount) {
 		assertEquals("The compilation unit should contain " + expectedCount
 				+ " classifier declaration(s).", expectedCount, model
-				.getClassifierDeclarations().size());
+				.getClassifiers().size());
 	}
 
 	protected void assertModifierCount(Method method,
@@ -446,11 +446,9 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			Class<T> expectedType) throws Exception {
 		String filename = typename + ".java";
 		CompilationUnit model = parseResource(filename, folder);
-		assertEquals(
-				filename + " contains exactly one classifier declaration.", 1,
-				model.getClassifierDeclarations().size());
+		assertNumberOfClassifiers(model, 1);
 
-		Classifier declaration = model.getClassifierDeclarations().get(0);
+		Classifier declaration = model.getClassifiers().get(0);
 		assertClassifierName(declaration, typename);
 		assertType(declaration, expectedType);
 		return expectedType.cast(declaration);
@@ -465,10 +463,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	private <T> T assertParsesToType(File file, Class<T> expectedType)
 			throws Exception {
 		CompilationUnit model = parseResource(file);
-		assertEquals(file + " contains exactly one classifier declaration.", 1,
-				model.getClassifierDeclarations().size());
 
-		Classifier declaration = model.getClassifierDeclarations().get(0);
+		assertNumberOfClassifiers(model, 1);
+
+		Classifier declaration = model.getClassifiers().get(0);
 		assertType(declaration, expectedType);
 		return expectedType.cast(declaration);
 	}
