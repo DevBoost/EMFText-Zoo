@@ -1,7 +1,6 @@
 package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
 import java.lang.reflect.Method;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -11,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.reuseware.emftextedit.language.java.Assignment;
 import org.reuseware.emftextedit.language.java.Expression;
 import org.reuseware.emftextedit.language.java.JavaFactory;
@@ -258,7 +256,11 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 					if (method.getParameters().size() == argumentTypes.size()) {
 						for (int i = 0; i < argumentTypes.size(); i++) {
 							Type type = getReferencedType(method.getParameters().get(i).getType());
-							if(!argumentTypes.get(i).equals(type)) {
+							Type argumentType = argumentTypes.get(i);
+							if (argumentType == null) {
+								break;
+							}
+							if (!argumentType.equals(type)) {
 								result = false;
 								break;
 							}
