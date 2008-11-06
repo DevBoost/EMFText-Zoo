@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.java.analysis;
+package org.reuseware.emftextedit.language.java.test.analysis;
 
 import static org.junit.Assert.assertEquals;
 
