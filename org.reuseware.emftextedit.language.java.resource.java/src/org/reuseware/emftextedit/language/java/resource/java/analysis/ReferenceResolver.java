@@ -1,22 +1,27 @@
 package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
 import java.lang.reflect.Method;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.reuseware.emftextedit.language.java.Assignment;
 import org.reuseware.emftextedit.language.java.Expression;
 import org.reuseware.emftextedit.language.java.JavaFactory;
+import org.reuseware.emftextedit.language.java.JavaPackage;
 import org.reuseware.emftextedit.language.java.NamedElement;
 import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
 import org.reuseware.emftextedit.language.java.PackageOrClassifierReference;
 import org.reuseware.emftextedit.language.java.PrimaryReference;
 import org.reuseware.emftextedit.language.java.Reference;
+import org.reuseware.emftextedit.language.java.ReferenceableElement;
 import org.reuseware.emftextedit.language.java.Type;
 import org.reuseware.emftextedit.language.java.TypeReference;
 import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
@@ -26,6 +31,31 @@ import org.reuseware.emftextedit.resource.impl.ProxyResolverImpl;
 
 public abstract class ReferenceResolver extends ProxyResolverImpl {
 
+	//candidates for template methods
+	
+	protected boolean breakIfNext(EObject element, EClass typeToResolve) {
+		if (element instanceof org.reuseware.emftextedit.language.java.Class) {
+			return false;
+		}
+		if (element instanceof org.reuseware.emftextedit.language.java.CompilationUnit) {
+			return false;
+		}
+		return true;
+	}
+	
+	protected boolean breakIfChild(EObject element, EClass typeToResolve)  {
+		if (typeToResolve.equals(JavaPackage.Literals.METHOD) &&
+				element instanceof org.reuseware.emftextedit.language.java.Class) {
+			return true;
+		}
+		if (element instanceof org.reuseware.emftextedit.language.java.Block) {
+			return true;
+		}
+		return false;
+	}
+	
+	//-------------
+	
 	@Override
 	protected String doDeResolve(EObject element, EObject container,
 			EReference reference) {
@@ -50,20 +80,13 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 				return findScoped(id, container, container, reference.getEReferenceType());
 			}
 			
-			//TODO: @mseifert should TypeReferenceSequence be a subclass of Reference?
-			
 			Reference ref = (Reference) container.eContainer();
 
 			if (ref.eContainer() instanceof Reference) {
 				//chained reference: scope given by previous element in chain
-				PrimaryReference previousRef = ((Reference)ref.eContainer()).getPrimary();
-				if (previousRef instanceof PackageOrClassifierOrMethodOrVariableReference) {
-					EObject previous = ((PackageOrClassifierOrMethodOrVariableReference) previousRef).getTarget();
-					return find(id, container, null, previous, reference.getEReferenceType());
-				}
-				else if (previousRef instanceof PackageOrClassifierReference) {
-					EObject previous = ((PackageOrClassifierReference) previousRef).getTarget();
-					return find(id, container, null, previous, reference.getEReferenceType());
+				Type previousType = getTypeOfReferencedElement((Reference)ref.eContainer());
+				if (previousType != null) {
+					return find(id, container, null, previousType, reference.getEReferenceType());
 				}
 				else {
 					return null;
@@ -103,7 +126,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	protected EObject find(String id, EObject context, EObject element,  EObject container, EClass type) throws UnresolvedProxiesException {
 		for(EObject cand : container.eContents()) {
 			//the reference has to be defined prior to the referencing element
-			if(considerOrder(container)) {
+			if(breakIfNext(container, type)) {
 				if (cand.equals(element)) {
 					break;
 				}
@@ -113,21 +136,24 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 					return cand;
 				}
 			}
+			//consider also children
+			for(TreeIterator<EObject> it = cand.eAllContents(); it.hasNext(); ) {
+				EObject subCand = it.next();
+				if (breakIfChild(subCand, type)) {
+					it.prune();
+				}
+				else {
+					if(hasCorrectType(subCand, type)) {
+						if (isReferencedElement(id, context, subCand)) {
+							return subCand;
+						}
+					}
+				}
+			}
 		}
 		return null;
 	}
-	
-	protected boolean considerOrder(EObject container) {
-		if (container instanceof org.reuseware.emftextedit.language.java.Class) {
-			return false;
-		}
-		if (container instanceof org.reuseware.emftextedit.language.java.CompilationUnit) {
-			return false;
-		}
-		
-		
-		return true;
-	}
+
 	
 	protected boolean hasCorrectType(EObject object, EClass eClass) {
 		if(object.eClass().equals(eClass)) {
@@ -146,15 +172,23 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		
 		if (value instanceof Reference) {
 			Reference reference = (Reference) value;
-			//TODO @mseifert why is Reference.next a list?
-			while (!reference.getNext().isEmpty()) {
-				//find the last reference
-				reference = reference.getNext().get(0);
-			}
 			PrimaryReference primaryRef = reference.getPrimary();
+			//referenced element point to a type
 			if (primaryRef instanceof TypedElement /*NewConstructorCall*/) {
 				TypeReference typeRef = ((TypedElement) primaryRef).getType();
 				type = getReferencedType(typeRef);
+			}
+			//referenced element points to an element with a type
+			else if (primaryRef instanceof PackageOrClassifierOrMethodOrVariableReference) {
+				ReferenceableElement target = ((PackageOrClassifierOrMethodOrVariableReference) primaryRef).getTarget();
+				if (target.eIsProxy()) {
+					throw new UnresolvedProxiesException();
+				}
+				
+				if (target instanceof TypedElement) {
+					TypeReference typeRef = ((TypedElement) target).getType();
+					type = getReferencedType(typeRef);
+				}
 			}
 		}
 		else {
@@ -172,6 +206,8 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			type = classRef.getTarget();
 			
 		}
+
+		
 		//TODO handle primitive type individually
 		
 		if (type == null || type.eIsProxy()) {
@@ -182,13 +218,19 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	}
 	
 	
-	public EList<Type> getArgumentTypes(PackageOrClassifierOrMethodOrVariableReference reference) throws UnresolvedProxiesException {
+	public EList<Type> getArgumentTypes(PackageOrClassifierOrMethodOrVariableReference primaryRef) throws UnresolvedProxiesException {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 		
-		for(Expression arg : reference.getArguments()) {
+		for(Expression arg : primaryRef.getArguments()) {
 			if (arg instanceof Assignment) {
 				Assignment assignment = (Assignment) arg;
+				Reference reference = assignment.getTarget();
+				//TODO @mseifert why is Reference.next a list?
+				while (!reference.getNext().isEmpty()) {
+					//find the last reference
+					reference = reference.getNext().get(0);
+				}
 				Type type = getTypeOfReferencedElement(assignment.getTarget());
 				resultList.add(type);
 			}

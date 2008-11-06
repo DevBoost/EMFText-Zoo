@@ -1,7 +1,7 @@
 package resolving;
 
 public class VariableReferencing {
-	public Object var;
+	public VariableReferencing var;
 	
 	public void method() {
 		// a reference to a member variable

@@ -81,25 +81,25 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File file = new File(inputFolder, inputFile.getPath());
 		assertTrue("File " + file + " should exist.", file.exists());
 		parsedResources.add(file);
-		return parseResource(new FileInputStream(file), file.getName());
+		return parseResource(new FileInputStream(file), file.getName(), ignoreSemanticErrors());
 	}
 
-	protected CompilationUnit parseResource(InputStream inputStream, String filename) throws IOException {
-		return loadResource(inputStream, filename);
+	protected CompilationUnit parseResource(InputStream inputStream, String filename, boolean ignoreSemanticErrors) throws IOException {
+		return loadResource(inputStream, filename, ignoreSemanticErrors);
 	}
 
-	protected static CompilationUnit parseResource(ZipFile file, ZipEntry entry)
+	protected static CompilationUnit parseResource(ZipFile file, ZipEntry entry, boolean ignoreSemanticErrors)
 			throws IOException {
-		return loadResource(file.getInputStream(entry), entry.getName());
+		return loadResource(file.getInputStream(entry), entry.getName(), ignoreSemanticErrors);
 
 	}
 
 	private static CompilationUnit loadResource(InputStream fileInputStream,
-			String fileIdentifier) throws IOException {
+			String fileIdentifier, boolean ignoreSemanticErrors) throws IOException {
 		JavaResourceImplTestWrapper resource = new JavaResourceImplTestWrapper();
 		resource.setURI(URI.createURI(fileIdentifier));
 		resource.load(fileInputStream, Collections.EMPTY_MAP);
-		assertNoErrors(fileIdentifier, resource);
+		assertNoErrors(fileIdentifier, resource, ignoreSemanticErrors);
 		assertNoWarnings(fileIdentifier, resource);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
@@ -112,11 +112,13 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	private static void assertNoErrors(String fileIdentifier,
-			JavaResourceImplTestWrapper resource) {
+			JavaResourceImplTestWrapper resource, boolean ignoreSemanticErrors) {
 		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
-		for(Diagnostic error : resource.getErrors()) {
-			if (error.getMessage().contains("ProxyResolver")) {
-				errors.remove(error);
+		if (ignoreSemanticErrors) {
+			for(Diagnostic error : resource.getErrors()) {
+				if (error.getMessage().contains("ProxyResolver")) {
+					errors.remove(error);
+				}
 			}
 		}
 		printErrors(fileIdentifier, errors);
@@ -211,6 +213,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected abstract boolean isExcludedFromReprintTest(String filename);
 
+	protected boolean ignoreSemanticErrors() {
+		return true;
+	}
+	
 	private static void parseAndReprint(InputStream inputStream,
 			OutputStream outputStream) throws IOException,
 			MalformedTreeException, BadLocationException {
