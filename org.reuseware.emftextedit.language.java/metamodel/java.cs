@@ -31,12 +31,12 @@ CompilationUnit
    		comments*
         ("package" package[] ("." package[])* ";" )?
         comments*
-        ("import" ("static")? imports ";")*
+        ("import" imports ";")*
         classifiers+
 	;
 	
 Import
-	::= package[] ("." package[])*  "." classifiers[];
+	::= static? package[] ("." package[])*  "." classifiers[];
 	
 Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?

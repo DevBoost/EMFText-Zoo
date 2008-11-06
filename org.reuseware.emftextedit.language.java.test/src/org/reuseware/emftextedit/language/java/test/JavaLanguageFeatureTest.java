@@ -22,6 +22,7 @@ import org.reuseware.emftextedit.language.java.Enumeration;
 import org.reuseware.emftextedit.language.java.Field;
 import org.reuseware.emftextedit.language.java.FloatingPointLiteral;
 import org.reuseware.emftextedit.language.java.ForEachLoop;
+import org.reuseware.emftextedit.language.java.Import;
 import org.reuseware.emftextedit.language.java.InitialValue;
 import org.reuseware.emftextedit.language.java.IntegerLiteral;
 import org.reuseware.emftextedit.language.java.Interface;
@@ -657,6 +658,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testMethodCallsWithLocalTypeReferences() throws Exception {
+		String typename = "MethodCallsWithLocalTypeReferences";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.reuseware.emftextedit.language.java.Class.class);
+		assertMemberCount(clazz, 4);
+		
+		parseAndReprint(filename, TEST_INPUT_FOLDER_RESOLVING, TEST_OUTPUT_FOLDER);
+	}
+
+	@Test
 	public void testModifiers() throws Exception {
 		String typename = "Modifiers";
 		String filename = typename + ".java";
@@ -734,6 +745,19 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertParsesToClass("DeclarationStatements", 1);
 		assertParsesToClass("JumpLabelStatements", 2);
 		assertParsesToClass("LoopStatements", 10);
+	}
+	
+	@Test
+	public void testStaticImports() throws Exception {
+		String typename = "StaticImports";
+		String filename = typename + ".java";
+		CompilationUnit unit = parseResource(filename, TEST_INPUT_FOLDER);
+		List<Import> imports = unit.getImports();
+		assertEquals(2, imports.size());
+		assertNull("first import is not static", imports.get(0).getStatic());
+		assertNotNull("second import is static", imports.get(1).getStatic());
+
+		parseAndReprint(filename);
 	}
 
 	@Test
