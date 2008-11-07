@@ -14,7 +14,7 @@ import org.reuseware.emftextedit.language.java.PrimaryReference;
 import org.reuseware.emftextedit.language.java.Statement;
 import org.reuseware.emftextedit.language.java.resource.java.JavaClasspath;
 
-public class MethodCallResolverTestWithoutInheritance extends AbstractResolverTest {
+public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTest {
 	
 	@Before
 	public void setUp() {
@@ -23,7 +23,7 @@ public class MethodCallResolverTestWithoutInheritance extends AbstractResolverTe
 	
 	@Test
 	public void testReferencing() throws Exception {
-		String typename = "MethodCalls";
+		String typename = "MethodCallsWithoutInheritance";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		assertMemberCount(clazz, 4);
