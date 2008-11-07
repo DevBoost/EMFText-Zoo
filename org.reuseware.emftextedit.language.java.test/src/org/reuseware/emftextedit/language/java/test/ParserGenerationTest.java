@@ -3,6 +3,7 @@ package org.reuseware.emftextedit.language.java.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.Assert;
@@ -20,6 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -33,7 +36,9 @@ import org.reuseware.emftextedit.codegen.IGenerator;
 import org.reuseware.emftextedit.codegen.ResourcePackageGenerator;
 import org.reuseware.emftextedit.codegen.TextParserGenerator;
 import org.reuseware.emftextedit.concretesyntax.ConcreteSyntax;
+import org.reuseware.emftextedit.concretesyntax.resource.cs.CsResourceImpl;
 import org.reuseware.emftextedit.resource.TextResource;
+import org.reuseware.emftextedit.resource.impl.TextResourceImpl;
 
 /**
  * This test checks whether regenerating the parser with EMFText
@@ -72,10 +77,13 @@ public class ParserGenerationTest {
             	};
 			}
 		});
-		/*
+		org.reuseware.emftextedit.concretesyntax.resource.cs.CsResourceFactoryImpl csResourceFactoryImpl = new org.reuseware.emftextedit.concretesyntax.resource.cs.CsResourceFactoryImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"cs", new org.reuseware.emftextedit.concretesyntax.resource.cs.CsResourceFactoryImpl());
-				*/
+				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"genmodel", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"cs", csResourceFactoryImpl);
 	}
 	
 	@Test
@@ -143,7 +151,10 @@ public class ParserGenerationTest {
 
 	private IGenerator createANTLRGenerator(ConcreteSyntax concreteSyntax) {
 		String antlrName = BaseGenerator.cap(concreteSyntax.getName());
-		String csPackageName = (concreteSyntax.getPackage().getBasePackage() == null ? "" : concreteSyntax.getPackage().getBasePackage()+".")+concreteSyntax.getPackage().getEcorePackage().getName()+".resource."+concreteSyntax.getName();
+		GenPackage csPackage = concreteSyntax.getPackage();
+		String csBasePackage = csPackage.getBasePackage();
+		EPackage ecorePackage = csPackage.getEcorePackage();
+		String csPackageName = (csBasePackage == null ? "" : csBasePackage + ".") + ecorePackage.getName() + ".resource." + concreteSyntax.getName();
 		String tokenResolverFactoryName = antlrName + ResourcePackageGenerator.CLASS_TOKEN_RESOLVER_FACTORY;
 		
 		IGenerator antlrGenerator = new TextParserGenerator(
@@ -156,9 +167,15 @@ public class ParserGenerationTest {
 	}
 
 	private Resource getConcreteSyntaxResource(URI fileURI) {
-		ResourceSet rs = new ResourceSetImpl();
-		Resource csResource = rs.getResource(fileURI, true);
-		return csResource;
+		CsResourceImpl resource = new CsResourceImpl(fileURI);
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put(TextResourceImpl.OPTION_NO_VALIDATE, Boolean.TRUE);
+		try {
+			resource.load(options);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+		return resource;
 	}
 
 	private ConcreteSyntax getConcreteSyntax(Resource csResource) {
