@@ -19,17 +19,13 @@ import java.util.Map;
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.reuseware.emftextedit.GenPackageFinder;
-import org.reuseware.emftextedit.IGenPackageFinderResult;
+import org.reuseware.emftextedit.GenPackageByNameFinder;
 import org.reuseware.emftextedit.MetamodelManager;
 import org.reuseware.emftextedit.codegen.BaseGenerator;
 import org.reuseware.emftextedit.codegen.IGenerator;
@@ -50,33 +46,7 @@ public class ParserGenerationTest {
 	
 	@Before
 	public void setUp() {
-		MetamodelManager.INSTANCE.addGenPackageFinder(new GenPackageFinder() {
-			public IGenPackageFinderResult findGenPackage(String nsURI, TextResource resource) {
-				System.out.println("findGenPackage("+nsURI+","+resource+")");
-				
-				ResourceSet rs = new ResourceSetImpl();
-				// TODO this will not work on Linux, because the genmodel file
-				// name starts with a capital letter
-				URI resourceURI = resource.getURI();
-				resourceURI = resourceURI.trimFileExtension();
-				URI genModelURI = resourceURI.appendFileExtension("genmodel");
-            	Resource genModelResource = rs.getResource(genModelURI, true);
-            	GenModel genModel = (GenModel) genModelResource.getContents().get(0);
-            	Map<String, GenPackage> genPackages = MetamodelManager.getGenPackages(genModel);
-            	final GenPackage result = genPackages.get(nsURI);
-            	
-            	return new IGenPackageFinderResult() {
-
-					public GenPackage getResult() {
-		            	return result;
-					}
-
-					public boolean hasChanged() {
-						return false;
-					}
-            	};
-			}
-		});
+		MetamodelManager.INSTANCE.addGenPackageFinder(new GenPackageByNameFinder());
 		org.reuseware.emftextedit.concretesyntax.resource.cs.CsResourceFactoryImpl csResourceFactoryImpl = new org.reuseware.emftextedit.concretesyntax.resource.cs.CsResourceFactoryImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
