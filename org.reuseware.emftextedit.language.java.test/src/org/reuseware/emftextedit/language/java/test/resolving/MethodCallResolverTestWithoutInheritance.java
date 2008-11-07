@@ -14,7 +14,7 @@ import org.reuseware.emftextedit.language.java.PrimaryReference;
 import org.reuseware.emftextedit.language.java.Statement;
 import org.reuseware.emftextedit.language.java.resource.java.JavaClasspath;
 
-public class MethodCallResolverTest extends AbstractResolverTest {
+public class MethodCallResolverTestWithoutInheritance extends AbstractResolverTest {
 	
 	@Before
 	public void setUp() {

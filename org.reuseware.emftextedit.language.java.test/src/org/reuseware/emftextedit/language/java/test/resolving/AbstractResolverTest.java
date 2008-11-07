@@ -29,4 +29,9 @@ public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return false;
 	}
+	
+	@Override
+	protected boolean ignoreSemanticErrors() {
+		return false;
+	}
 }
