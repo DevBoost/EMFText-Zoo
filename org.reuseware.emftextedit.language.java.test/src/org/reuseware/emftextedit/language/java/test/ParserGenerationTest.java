@@ -40,7 +40,7 @@ import org.reuseware.emftextedit.resource.impl.TextResourceImpl;
  * This test checks whether regenerating the parser with EMFText
  * results in the same Java code.
  * 
- * This test must be run as JUnit Plug-in test.
+ * This test runs as JUnit test.
  */
 public class ParserGenerationTest {
 	
