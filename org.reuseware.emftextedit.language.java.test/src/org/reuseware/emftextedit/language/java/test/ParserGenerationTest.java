@@ -28,7 +28,7 @@ import org.reuseware.emftextedit.resource.TextResource;
 
 /**
  * This test checks whether regenerating the parser with EMFText
- * results in the same Java code.
+ * results in the same ANTLR grammar.
  * 
  * This test runs as JUnit test.
  */
@@ -41,7 +41,7 @@ public class ParserGenerationTest {
 	}
 	
 	@Test
-	public void parserRegeneration() throws IOException, CoreException, InterruptedException {
+	public void testDeterministicParserGeneration() throws IOException, CoreException, InterruptedException {
 		String path = "..\\org.reuseware.emftextedit.language.java\\metamodel\\java.cs";
 		String absolutePath = new File(path).getAbsolutePath();
 		System.out.println(absolutePath);
