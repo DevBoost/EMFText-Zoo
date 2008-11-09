@@ -16,7 +16,7 @@ RULES {
 	Method ::= "void" name[] "(" ")" "{" statements* "}" ;
 	
 	Variable ::= "int" name[] ";" ;
-	
+
 	Struct ::= "struct" name[] "{" "}" ;
 	
 	Statement ::= "return" ";";

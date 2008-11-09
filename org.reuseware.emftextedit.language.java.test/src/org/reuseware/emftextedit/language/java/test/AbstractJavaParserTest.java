@@ -43,7 +43,7 @@ import org.reuseware.emftextedit.language.java.NamedElement;
 import org.reuseware.emftextedit.language.java.Public;
 import org.reuseware.emftextedit.language.java.Type;
 import org.reuseware.emftextedit.language.java.TypeParameter;
-import org.reuseware.emftextedit.resource.TextDiagnostic;
+import org.reuseware.emftextedit.runtime.resource.TextDiagnostic;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper

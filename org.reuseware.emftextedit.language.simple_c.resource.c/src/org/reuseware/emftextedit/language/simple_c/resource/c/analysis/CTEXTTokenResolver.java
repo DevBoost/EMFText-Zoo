@@ -2,9 +2,9 @@ package org.reuseware.emftextedit.language.simple_c.resource.c.analysis;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;
-import org.reuseware.emftextedit.resource.TokenResolver;
-import org.reuseware.emftextedit.resource.TextResource;
-import org.reuseware.emftextedit.resource.impl.JavaBasedTokenResolver;
+import org.reuseware.emftextedit.runtime.resource.TokenResolver;
+import org.reuseware.emftextedit.runtime.resource.TextResource;
+import org.reuseware.emftextedit.runtime.resource.impl.JavaBasedTokenResolver;
 
 public class CTEXTTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
 	@Override

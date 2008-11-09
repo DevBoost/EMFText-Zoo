@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.reuseware.emftextedit.language.java.Classifier;
 import org.reuseware.emftextedit.language.java.Import;
 import org.reuseware.emftextedit.language.java.resource.java.JavaClasspath;
-import org.reuseware.emftextedit.resource.TextResource;
-import org.reuseware.emftextedit.resource.impl.ProxyResolverImpl;
+import org.reuseware.emftextedit.runtime.resource.TextResource;
+import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
 
 public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
 

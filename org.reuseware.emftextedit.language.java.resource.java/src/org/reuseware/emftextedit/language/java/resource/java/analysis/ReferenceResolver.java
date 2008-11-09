@@ -31,8 +31,8 @@ import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
 import org.reuseware.emftextedit.language.java.TypedElement;
 import org.reuseware.emftextedit.language.java.resource.java.JavaClasspath;
 import org.reuseware.emftextedit.language.java.resource.java.JavaUniquePathConstructor;
-import org.reuseware.emftextedit.resource.TextResource;
-import org.reuseware.emftextedit.resource.impl.ProxyResolverImpl;
+import org.reuseware.emftextedit.runtime.resource.TextResource;
+import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
 
 public abstract class ReferenceResolver extends ProxyResolverImpl {
 

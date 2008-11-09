@@ -1,7 +1,6 @@
 package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
-import org.reuseware.emftextedit.resource.*;
-import org.reuseware.emftextedit.resource.impl.*;
+import org.reuseware.emftextedit.runtime.resource.impl.*;
 
 public class NewConstructorCallClassTypeArgumentsProxyResolver extends ProxyResolverImpl {
 

@@ -19,12 +19,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import org.reuseware.emftextedit.GenPackageByNameFinder;
-import org.reuseware.emftextedit.MetamodelManager;
-import org.reuseware.emftextedit.codegen.IGenerator;
-import org.reuseware.emftextedit.codegen.ResourcePackageGenerator;
+import org.reuseware.emftextedit.sdk.GenPackageByNameFinder;
+import org.reuseware.emftextedit.runtime.MetamodelManager;
+import org.reuseware.emftextedit.sdk.codegen.IGenerator;
+import org.reuseware.emftextedit.sdk.codegen.ResourcePackageGenerator;
 import org.reuseware.emftextedit.concretesyntax.ConcreteSyntax;
-import org.reuseware.emftextedit.resource.TextResource;
+import org.reuseware.emftextedit.runtime.resource.TextResource;
 
 /**
  * This test checks whether regenerating the parser with EMFText
