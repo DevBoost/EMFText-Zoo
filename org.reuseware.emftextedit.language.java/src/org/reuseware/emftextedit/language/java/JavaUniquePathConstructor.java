@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.java.resource;
+package org.reuseware.emftextedit.language.java;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -19,7 +19,6 @@ import org.reuseware.emftextedit.language.java.Type;
 import org.reuseware.emftextedit.language.java.TypeReference;
 import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
 import org.reuseware.emftextedit.language.java.TypedElement;
-import org.reuseware.emftextedit.language.java.resource.java.analysis.UnresolvedProxiesException;
 
 public class JavaUniquePathConstructor {
 	

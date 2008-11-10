@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.java.resource.java.analysis;
+package org.reuseware.emftextedit.language.java;
 
 public class UnresolvedProxiesException extends Exception {
 

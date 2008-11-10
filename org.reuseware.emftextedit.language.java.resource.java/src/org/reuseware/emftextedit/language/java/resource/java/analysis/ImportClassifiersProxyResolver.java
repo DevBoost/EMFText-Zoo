@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.reuseware.emftextedit.language.java.Classifier;
 import org.reuseware.emftextedit.language.java.Import;
-import org.reuseware.emftextedit.language.java.resource.JavaClasspath;
+import org.reuseware.emftextedit.language.java.JavaClasspath;
 import org.reuseware.emftextedit.runtime.resource.TextResource;
 import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
 

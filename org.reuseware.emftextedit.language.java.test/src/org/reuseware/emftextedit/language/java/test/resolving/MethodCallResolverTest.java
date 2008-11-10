@@ -7,12 +7,12 @@ import org.junit.Test;
 import org.reuseware.emftextedit.language.java.Assignment;
 import org.reuseware.emftextedit.language.java.Block;
 import org.reuseware.emftextedit.language.java.ExpressionStatement;
+import org.reuseware.emftextedit.language.java.JavaClasspath;
 import org.reuseware.emftextedit.language.java.Member;
 import org.reuseware.emftextedit.language.java.Method;
 import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
 import org.reuseware.emftextedit.language.java.PrimaryReference;
 import org.reuseware.emftextedit.language.java.Statement;
-import org.reuseware.emftextedit.language.java.resource.JavaClasspath;
 
 public class MethodCallResolverTest extends AbstractResolverTest {
 	

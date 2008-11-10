@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.java.resource;
+package org.reuseware.emftextedit.language.java;
 
 import java.util.ArrayList;
 import java.util.HashMap;
