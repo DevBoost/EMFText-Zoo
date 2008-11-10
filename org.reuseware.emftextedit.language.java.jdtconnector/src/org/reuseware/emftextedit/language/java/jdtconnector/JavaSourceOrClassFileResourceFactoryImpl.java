@@ -11,9 +11,9 @@ import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.reuseware.emftextedit.language.java.resource.java.JavaClasspath;
+import org.reuseware.emftextedit.language.java.resource.JavaClasspath;
+import org.reuseware.emftextedit.language.java.resource.JavaUniquePathConstructor;
 import org.reuseware.emftextedit.language.java.resource.java.JavaResourceImpl;
-import org.reuseware.emftextedit.language.java.resource.java.JavaUniquePathConstructor;
 
 
 public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factory {
