@@ -1,23 +1,17 @@
 package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.reuseware.emftextedit.language.java.Assignment;
-import org.reuseware.emftextedit.language.java.Classifier;
 import org.reuseware.emftextedit.language.java.CompilationUnit;
 import org.reuseware.emftextedit.language.java.Expression;
-import org.reuseware.emftextedit.language.java.JavaFactory;
 import org.reuseware.emftextedit.language.java.JavaPackage;
 import org.reuseware.emftextedit.language.java.NamedElement;
 import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
@@ -29,8 +23,8 @@ import org.reuseware.emftextedit.language.java.Type;
 import org.reuseware.emftextedit.language.java.TypeReference;
 import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
 import org.reuseware.emftextedit.language.java.TypedElement;
-import org.reuseware.emftextedit.language.java.resource.java.JavaClasspath;
-import org.reuseware.emftextedit.language.java.resource.java.JavaUniquePathConstructor;
+import org.reuseware.emftextedit.language.java.resource.JavaClasspath;
+import org.reuseware.emftextedit.language.java.resource.JavaUniquePathConstructor;
 import org.reuseware.emftextedit.runtime.resource.TextResource;
 import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
 
