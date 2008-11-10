@@ -346,7 +346,8 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		if (context instanceof PackageOrClassifierOrMethodOrVariableReference) {
 			Reference previous = (Reference) context.eContainer().eContainer();
 			Type type = getTypeOfReferencedElement(previous);
-			
+			// FIXME type can be null, which leads to subsequent NPEs.
+			// @jjohannes: how can we handle this case properly?
 			if (isInternalProxy((InternalEObject) type)) {
 				throw new UnresolvedProxiesException();
 			}
