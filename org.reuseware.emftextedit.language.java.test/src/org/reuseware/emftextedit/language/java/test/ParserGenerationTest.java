@@ -23,7 +23,7 @@ import org.reuseware.emftextedit.sdk.GenPackageByNameFinder;
 import org.reuseware.emftextedit.runtime.MetamodelManager;
 import org.reuseware.emftextedit.sdk.codegen.IGenerator;
 import org.reuseware.emftextedit.sdk.codegen.ResourcePackageGenerator;
-import org.reuseware.emftextedit.concretesyntax.ConcreteSyntax;
+import org.reuseware.emftextedit.sdk.concretesyntax.ConcreteSyntax;
 import org.reuseware.emftextedit.runtime.resource.TextResource;
 
 /**
