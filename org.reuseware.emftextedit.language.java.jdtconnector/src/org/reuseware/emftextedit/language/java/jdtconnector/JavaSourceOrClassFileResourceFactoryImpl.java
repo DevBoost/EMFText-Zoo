@@ -11,8 +11,8 @@ import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.reuseware.emftextedit.language.java.resource.JavaClasspath;
-import org.reuseware.emftextedit.language.java.resource.JavaUniquePathConstructor;
+import org.reuseware.emftextedit.language.java.JavaClasspath;
+import org.reuseware.emftextedit.language.java.JavaUniquePathConstructor;
 import org.reuseware.emftextedit.language.java.resource.java.JavaResourceImpl;
 
 
