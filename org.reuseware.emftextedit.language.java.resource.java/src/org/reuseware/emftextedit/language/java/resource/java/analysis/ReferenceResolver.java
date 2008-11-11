@@ -348,7 +348,9 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			// FIXME jjohannes: casting the container to 'Reference' after
 			// checking that it is an instance of 'PackageOrClassifierOrMethodOrVariableReference'
 			// leads to ClassCastExceptions because 'PackageOrClassifierOrMethodOrVariableReference' 
-			// is not a sub class of 'Reference'.
+			// are not necessarily contained in sub classes of 'Reference' (e.g., if the container
+			// has type AnnotationInstance). Even though this might be an error in the meta model
+			// we should add an 'instanceof' check.
 			Reference previous = (Reference) context.eContainer().eContainer();
 			Type type = getTypeOfReferencedElement(previous);
 			// FIXME type can be null, which leads to subsequent NPEs.
