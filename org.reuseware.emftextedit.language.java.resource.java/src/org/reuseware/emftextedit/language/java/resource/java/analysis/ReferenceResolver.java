@@ -345,6 +345,10 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	protected EObject tryToConvertToExternalProxy(InternalEObject proxy, EObject context) throws UnresolvedProxiesException {
 		String id = proxy.eProxyURI().fragment();
 		if (context instanceof PackageOrClassifierOrMethodOrVariableReference) {
+			// FIXME jjohannes: casting the container to 'Reference' after
+			// checking that it is an instance of 'PackageOrClassifierOrMethodOrVariableReference'
+			// leads to ClassCastExceptions because 'PackageOrClassifierOrMethodOrVariableReference' 
+			// is not a sub class of 'Reference'.
 			Reference previous = (Reference) context.eContainer().eContainer();
 			Type type = getTypeOfReferencedElement(previous);
 			// FIXME type can be null, which leads to subsequent NPEs.
