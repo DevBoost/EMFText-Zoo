@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.Assert;
 
@@ -20,7 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
 import org.reuseware.emftextedit.sdk.GenPackageByNameFinder;
-import org.reuseware.emftextedit.runtime.MetamodelManager;
+import org.reuseware.emftextedit.sdk.MetamodelHelper;
 import org.reuseware.emftextedit.sdk.codegen.IGenerator;
 import org.reuseware.emftextedit.sdk.codegen.ResourcePackageGenerator;
 import org.reuseware.emftextedit.sdk.concretesyntax.ConcreteSyntax;
@@ -34,9 +36,12 @@ import org.reuseware.emftextedit.runtime.resource.TextResource;
  */
 public class ParserGenerationTest {
 	
+	private Map<String, Object> options;
+	
 	@Before
 	public void setUp() {
-		MetamodelManager.INSTANCE.addGenPackageFinder(new GenPackageByNameFinder());
+		options = new HashMap<String, Object>();
+		options.put(MetamodelHelper.GEN_PACKAGE_FINDER_KEY, new GenPackageByNameFinder());
 		registerResourceFactories();
 	}
 	
@@ -47,9 +52,9 @@ public class ParserGenerationTest {
 		System.out.println(absolutePath);
 		URI fileURI = URI.createFileURI(absolutePath);
 		
-		File result1 = generateANTLRGrammarToTempFile(fileURI, true);
+		File result1 = generateANTLRGrammarToTempFile(fileURI, options);
 		String content1 = getContent(result1);
-		File result2 = generateANTLRGrammarToTempFile(fileURI, true);
+		File result2 = generateANTLRGrammarToTempFile(fileURI, options);
 		String content2 = getContent(result2);
 		assertEquals(content1, content2);
 
@@ -59,7 +64,7 @@ public class ParserGenerationTest {
 	}
 
 	private String getGrammar(URI fileURI) throws CoreException {
-		TextResource concreteSyntaxResource = (TextResource) getConcreteSyntaxResource(fileURI, true);
+		TextResource concreteSyntaxResource = (TextResource) getConcreteSyntaxResource(fileURI, options);
 		ConcreteSyntax concreteSyntax = getConcreteSyntax(concreteSyntaxResource);
 		IGenerator antlrGen = createANTLRGenerator(concreteSyntax);
 		InputStream grammarStream = ResourcePackageGenerator.deriveGrammar(concreteSyntaxResource, antlrGen);
