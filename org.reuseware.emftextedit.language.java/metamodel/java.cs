@@ -29,24 +29,26 @@ CompilationUnit
    ::=	comments*
    		annotations*
    		comments*
-        ("package" package[] ("." package[])* ";" )?
+        ("package" package[] (#0 "." #0 package[])* #0 ";" )? 
+        !0 !0
         comments*
-        ("import" imports ";")*
-        classifiers+
+        ("import" imports #0 ";" !0 )*
+        !0
+        (classifiers !0 !0)+
 	;
 	
 Import
-	::= static? package[] ("." package[])*  "." classifiers[];
+	::= static? package[] #0 ("." #0 package[])* #0 "." #0 classifiers[];
 	
 Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" implements)?
-        "{" !1 (members (";")?)* "}"
+        "{" (!1 members (";")?)* !0 "}"
 	;
 
 Interface
-	::=	modifiers* "interface" name[] ("<" typeParameters ("," typeParameters)* ">")?
+	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 	       ("extends" (extends ("," extends)*))? 
 	       "{" ((members (";")?) | (";")?)* "}"
 	;
@@ -82,7 +84,7 @@ EnumConstant
     ;
 
 Block
-	::=	modifiers* "{" statements* "}"
+	::=	modifiers* "{" #1 statements* #0 "}"
 	;
 
 Constructor
@@ -92,8 +94,8 @@ Constructor
 	;
 
 Method
-	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensions*) name[]  
-	"(" (parameters ("," parameters)* )? ")" arrayDimensions*
+	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensions*) name[]  
+	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensions*
 	("throws" exceptions[] ("," exceptions[])?)? (body | ";")
 	;
 	
@@ -159,11 +161,11 @@ ArrayInstantiationBySize
 	;
 
 Reference
-	::= primary ("[" arraySelectors? "]")* ("." next)? 
+	::= primary ("[" arraySelectors? "]")* (#0 "." #0 next)? 
 	;
 	
 TypeReferenceSequence
-	::= parts ("." parts)*
+	::= parts (#0 "." #0 parts)*
 	;
 
 PackageOrClassifierReference
