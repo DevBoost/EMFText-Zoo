@@ -344,33 +344,35 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	
 	protected EObject tryToConvertToExternalProxy(InternalEObject proxy, EObject context) throws UnresolvedProxiesException {
 		String id = proxy.eProxyURI().fragment();
-		if (context instanceof PackageOrClassifierOrMethodOrVariableReference) {
-			// FIXME jjohannes: casting the container to 'Reference' after
-			// checking that it is an instance of 'PackageOrClassifierOrMethodOrVariableReference'
-			// leads to ClassCastExceptions because 'PackageOrClassifierOrMethodOrVariableReference' 
-			// are not necessarily contained in sub classes of 'Reference' (e.g., if the container
-			// has type AnnotationInstance). Even though this might be an error in the meta model
-			// we should add an 'instanceof' check.
-			Reference previous = (Reference) context.eContainer().eContainer();
-			Type type = getTypeOfReferencedElement(previous);
-			// FIXME type can be null, which leads to subsequent NPEs.
-			// @jjohannes: how can we handle this case properly?
-			if (isInternalProxy((InternalEObject) type)) {
-				throw new UnresolvedProxiesException();
-			}
-			
-			String fragment = ((InternalEObject) type).eProxyURI().fragment();
-			fragment = fragment + "/" + JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
-			URI externalProxyURI = 
-				((InternalEObject) type).eProxyURI().appendFragment(fragment);
-			proxy.eSetProxyURI(externalProxyURI);
-			return proxy;
+		if (!(context instanceof PackageOrClassifierOrMethodOrVariableReference)) {
+			return null;
 		}
-		return null;
+		EObject container = context.eContainer();
+		if (!(container instanceof Reference)) {
+			return null;
+		}
+		Reference previous = (Reference) container;
+		Type type = getTypeOfReferencedElement(previous);
+		if (type == null) {
+			return null;
+		}
+		assert type != null;
+		if (isInternalProxy((InternalEObject) type)) {
+			throw new UnresolvedProxiesException();
+		}
+		
+		String fragment = ((InternalEObject) type).eProxyURI().fragment();
+		fragment = fragment + "/" + JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
+		URI externalProxyURI = 
+			((InternalEObject) type).eProxyURI().appendFragment(fragment);
+		proxy.eSetProxyURI(externalProxyURI);
+		return proxy;
 	}
 	
 	protected boolean isInternalProxy(InternalEObject proxy) {
-		if (!proxy.eIsProxy()) return false;
+		if (!proxy.eIsProxy()) {
+			return false;
+		}
 		
 		if (proxy.eProxyURI().fileExtension().contains("javax")) { //TODO condition should use own URI
 			return false;

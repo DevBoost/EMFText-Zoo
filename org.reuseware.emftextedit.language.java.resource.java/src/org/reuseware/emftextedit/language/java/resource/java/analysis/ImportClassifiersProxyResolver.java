@@ -53,7 +53,11 @@ public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
 			theImport.getClassifiers().add(classifiers.remove(0));
 		}
 		
-		return classifiers.remove(0);
+		if (classifiers.size() == 1) {
+			return classifiers.remove(0);
+		} else {
+			return null;
+		}
 	}
 
 }
