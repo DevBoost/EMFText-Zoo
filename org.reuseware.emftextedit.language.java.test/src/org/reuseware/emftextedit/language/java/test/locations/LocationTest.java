@@ -27,7 +27,7 @@ public class LocationTest extends AbstractJavaParserTest {
 			
 			List<Member> members = clazz.getMembers();
 			// check location of the field 'm'
-			assertElementLocation(members.get(0), 4, 2, 2, 13);
+			assertElementLocation(members.get(0), 4, 2, 49, 61);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
