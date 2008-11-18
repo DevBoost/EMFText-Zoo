@@ -65,19 +65,19 @@ featuremodel returns [FeatureModel element = null]
 :
 	'FeatureModel'
 	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-	'{'
 	(
 		(
+			'{'
 			'constraints'
 			(
 				(
 					a1 = constraint{((List) element.eGet(element.eClass().getEStructuralFeature("constraints"))).add(a1); copyLocalizationInfos(a1, element); }
 					';'
 				)
-			)*
+			)?
+			'}'
 		)
 	)?
-	'}'
 	a2 = feature{element.eSet(element.eClass().getEStructuralFeature("root"), a2); copyLocalizationInfos(a2, element); }
 ;
 

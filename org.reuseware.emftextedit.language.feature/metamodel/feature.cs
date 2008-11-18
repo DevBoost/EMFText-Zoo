@@ -10,7 +10,7 @@ TOKENS{
 
 RULES{
 		
-		FeatureModel::= "FeatureModel"  name['"','"'] "{" ( "constraints"  ( constraints ";")* )? "}"  root  ;
+		FeatureModel::= "FeatureModel"  name['"','"'] ( "{" "constraints"  ( constraints ";")? "}" )?   root  ;
 		
 		Constraint::= "Constraint" "(" (constrainedFeatures[] ("," constrainedFeatures[])*)? ")" 
 					 language[] ":" expression['"','"'];
