@@ -60,11 +60,11 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	protected String doDeResolve(EObject element, EObject container,
 			EReference reference) {
 		
-		if (element instanceof NamedElement) {
+		if (!element.eIsProxy() && (element instanceof NamedElement)) {
 			return ((NamedElement) element).getName();
 		}
 		else {
-			return super.deResolve(element, container, reference);
+			return "UNDEFINED"; //TODO ?
 		}
 	}
 
