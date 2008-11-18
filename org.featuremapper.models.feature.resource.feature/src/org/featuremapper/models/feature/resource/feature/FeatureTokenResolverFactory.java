@@ -9,7 +9,7 @@ public class FeatureTokenResolverFactory extends BasicTokenResolverFactory imple
 
 	public FeatureTokenResolverFactory(){
 		super.registerTokenResolver("TEXT",new FeatureTEXTTokenResolver());
-		super.registerTokenResolver("INTEGER",new FeatureINTEGERTokenResolver());
 		super.registerTokenResolver("QUOTED_34_34",new FeatureQUOTED_34_34TokenResolver());
+		super.registerTokenResolver("INTEGER",new FeatureINTEGERTokenResolver());
 	}
 }
