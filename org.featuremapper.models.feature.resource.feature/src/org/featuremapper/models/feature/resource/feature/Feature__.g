@@ -17,63 +17,54 @@ package org.featuremapper.models.feature.resource.feature;
 T11 : 'FeatureModel' ;
 T12 : '{' ;
 T13 : 'constraints' ;
-T14 : ':' ;
-T15 : 'root' ;
-T16 : 'name' ;
-T17 : 'children' ;
-T18 : 'parent' ;
-T19 : '}' ;
-T20 : 'Feature' ;
-T21 : 'minCardinality' ;
-T22 : 'maxCardinality' ;
-T23 : 'attributes' ;
-T24 : 'groups' ;
-T25 : 'parentGroup' ;
-T26 : 'annotations' ;
+T14 : ';' ;
+T15 : '}' ;
+T16 : 'Constraint' ;
+T17 : '(' ;
+T18 : ',' ;
+T19 : ')' ;
+T20 : ':' ;
+T21 : 'Feature' ;
+T22 : '..' ;
+T23 : '/*' ;
+T24 : '*/' ;
+T25 : '[' ;
+T26 : ']' ;
 T27 : 'Group' ;
-T28 : 'parentFeature' ;
-T29 : 'childFeatures' ;
-T30 : 'Constraint' ;
-T31 : 'language' ;
-T32 : 'expression' ;
-T33 : 'constrainedFeatures' ;
-T34 : 'Attribute' ;
-T35 : 'feature' ;
-T36 : 'type' ;
-T37 : 'value' ;
-T38 : 'Annotation' ;
+T28 : 'type' ;
+T29 : '=' ;
 
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 258
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 189
 COMMENT
 :
 	'//'(~('\n'|'\r'))*{ channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 262
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 193
 INTEGER
 :
 	('-')?('1'..'9')('0'..'9')*|'0'
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 266
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 197
 FLOAT
 :
 	('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ { channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 270
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 201
 LB
 :
 	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 274
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 205
 WS
 :
 	(' ' | '\t' | '\f'){ channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 278
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 209
 TEXT
 :
 	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 282
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 213
 QUOTED_34_34
 :
 	('"')(~('"')|('\\''"'))*('"')

@@ -10,16 +10,22 @@ TOKENS{
 
 RULES{
 		
-		FeatureModel::= "FeatureModel"  "{" ( "constraints"  ":" constraints | "root"  ":" root | "name"  ":" name['"','"'] | "children"  ":" children | "parent"  ":" parent[] )* "}"  ;
+		FeatureModel::= "FeatureModel"  name['"','"'] "{" ( "constraints"  ( constraints ";")* )? "}"  root  ;
 		
-		Feature::= "Feature"  "{" ( "name"  ":" name['"','"'] | "minCardinality"  ":" minCardinality[INTEGER]| "maxCardinality"  ":" maxCardinality[INTEGER]| "attributes"  ":" attributes | "groups"  ":" groups | "parentGroup"  ":" parentGroup[]| "annotations"  ":" annotations | "constraints"  ":" constraints[] )* "}"  ;
+		Constraint::= "Constraint" "(" (constrainedFeatures[] ("," constrainedFeatures[])*)? ")" 
+					 language[] ":" expression['"','"'];
+	
 		
-		Group::= "Group"  "{" ( "minCardinality"  ":" minCardinality[INTEGER]| "maxCardinality"  ":" maxCardinality[INTEGER]| "parentFeature"  ":" parentFeature[]| "childFeatures"  ":" childFeatures  )* "}"  ;
+		Feature::= "Feature" name['"','"'] 
+					
+					("(" minCardinality[INTEGER]".." maxCardinality[INTEGER] ")")? 
+					("/*" attributes* "*/")? 
+					("[" attributes* "]")? 
+					( groups* )?  ;
 		
-		Constraint::= "Constraint"  "{" ( "language"  ":" language['"','"'] | "expression"  ":" expression['"','"'] | "constrainedFeatures"  ":" constrainedFeatures[] )* "}"  ;
+		Group::= "Group" ("(" minCardinality[INTEGER] ".." maxCardinality[INTEGER] ")" )?
+				   ("{" childFeatures* "}")?;
 		
-		Attribute::= "Attribute"  "{" ( "feature"  ":" feature[]| "name"  ":" name['"','"'] | "type"  ":" type['"','"'] | "value"  ":" value['"','"']  )* "}"  ;
-		
-		Annotation::= "Annotation"  "{" ( "feature"  ":" feature[] )* "}"  ;
+		Attribute::= type[] name[] "type"  "=" value['"','"'] ;
 		
 }

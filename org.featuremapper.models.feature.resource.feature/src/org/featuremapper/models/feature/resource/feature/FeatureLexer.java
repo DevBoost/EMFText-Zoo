@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g 2008-11-18 18:31:07
+// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g 2008-11-18 18:53:17
 
 package org.featuremapper.models.feature.resource.feature;
 
@@ -18,7 +18,7 @@ public class FeatureLexer extends Lexer {
     public static final int T26=26;
     public static final int TEXT=5;
     public static final int T25=25;
-    public static final int Tokens=39;
+    public static final int Tokens=30;
     public static final int T24=24;
     public static final int EOF=-1;
     public static final int T23=23;
@@ -27,26 +27,17 @@ public class FeatureLexer extends Lexer {
     public static final int T20=20;
     public static final int WS=10;
     public static final int LB=9;
-    public static final int T38=38;
     public static final int T11=11;
-    public static final int T37=37;
     public static final int T12=12;
     public static final int T13=13;
     public static final int T14=14;
-    public static final int T34=34;
     public static final int COMMENT=7;
     public static final int T15=15;
-    public static final int T33=33;
     public static final int T16=16;
-    public static final int T36=36;
     public static final int T17=17;
-    public static final int T35=35;
     public static final int QUOTED_34_34=4;
     public static final int T18=18;
-    public static final int T30=30;
     public static final int T19=19;
-    public static final int T32=32;
-    public static final int T31=31;
 
     	public java.util.List<RecognitionException> lexerExceptions  = new java.util.ArrayList<RecognitionException>();
     	public java.util.List<Integer> lexerExceptionsPosition       = new java.util.ArrayList<Integer>();
@@ -123,10 +114,10 @@ public class FeatureLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:5: ( ':' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:7: ':'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:5: ( ';' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:7: ';'
             {
-            match(':'); 
+            match(';'); 
 
             }
 
@@ -141,11 +132,10 @@ public class FeatureLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:5: ( 'root' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:7: 'root'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:5: ( '}' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:7: '}'
             {
-            match("root"); 
-
+            match('}'); 
 
             }
 
@@ -160,10 +150,10 @@ public class FeatureLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:5: ( 'name' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:7: 'name'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:5: ( 'Constraint' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:7: 'Constraint'
             {
-            match("name"); 
+            match("Constraint"); 
 
 
             }
@@ -179,11 +169,10 @@ public class FeatureLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:5: ( 'children' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:7: 'children'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:5: ( '(' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:7: '('
             {
-            match("children"); 
-
+            match('('); 
 
             }
 
@@ -198,11 +187,10 @@ public class FeatureLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:5: ( 'parent' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:7: 'parent'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:5: ( ',' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:7: ','
             {
-            match("parent"); 
-
+            match(','); 
 
             }
 
@@ -217,10 +205,10 @@ public class FeatureLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:5: ( '}' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:7: '}'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:5: ( ')' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:7: ')'
             {
-            match('}'); 
+            match(')'); 
 
             }
 
@@ -235,11 +223,10 @@ public class FeatureLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:5: ( 'Feature' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:7: 'Feature'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:5: ( ':' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:7: ':'
             {
-            match("Feature"); 
-
+            match(':'); 
 
             }
 
@@ -254,10 +241,10 @@ public class FeatureLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:5: ( 'minCardinality' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:7: 'minCardinality'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:5: ( 'Feature' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:7: 'Feature'
             {
-            match("minCardinality"); 
+            match("Feature"); 
 
 
             }
@@ -273,10 +260,10 @@ public class FeatureLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:5: ( 'maxCardinality' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:7: 'maxCardinality'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:5: ( '..' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:7: '..'
             {
-            match("maxCardinality"); 
+            match(".."); 
 
 
             }
@@ -292,10 +279,10 @@ public class FeatureLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:5: ( 'attributes' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:7: 'attributes'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:5: ( '/*' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:7: '/*'
             {
-            match("attributes"); 
+            match("/*"); 
 
 
             }
@@ -311,10 +298,10 @@ public class FeatureLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:5: ( 'groups' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:7: 'groups'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:5: ( '*/' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:7: '*/'
             {
-            match("groups"); 
+            match("*/"); 
 
 
             }
@@ -330,11 +317,10 @@ public class FeatureLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:5: ( 'parentGroup' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:7: 'parentGroup'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:5: ( '[' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:7: '['
             {
-            match("parentGroup"); 
-
+            match('['); 
 
             }
 
@@ -349,11 +335,10 @@ public class FeatureLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:32:5: ( 'annotations' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:32:7: 'annotations'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:32:5: ( ']' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:32:7: ']'
             {
-            match("annotations"); 
-
+            match(']'); 
 
             }
 
@@ -387,10 +372,10 @@ public class FeatureLexer extends Lexer {
     public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:34:5: ( 'parentFeature' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:34:7: 'parentFeature'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:34:5: ( 'type' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:34:7: 'type'
             {
-            match("parentFeature"); 
+            match("type"); 
 
 
             }
@@ -406,11 +391,10 @@ public class FeatureLexer extends Lexer {
     public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:35:5: ( 'childFeatures' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:35:7: 'childFeatures'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:35:5: ( '=' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:35:7: '='
             {
-            match("childFeatures"); 
-
+            match('='); 
 
             }
 
@@ -421,187 +405,16 @@ public class FeatureLexer extends Lexer {
     }
     // $ANTLR end T29
 
-    // $ANTLR start T30
-    public final void mT30() throws RecognitionException {
-        try {
-            int _type = T30;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:36:5: ( 'Constraint' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:36:7: 'Constraint'
-            {
-            match("Constraint"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T30
-
-    // $ANTLR start T31
-    public final void mT31() throws RecognitionException {
-        try {
-            int _type = T31;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:37:5: ( 'language' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:37:7: 'language'
-            {
-            match("language"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T31
-
-    // $ANTLR start T32
-    public final void mT32() throws RecognitionException {
-        try {
-            int _type = T32;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:38:5: ( 'expression' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:38:7: 'expression'
-            {
-            match("expression"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T32
-
-    // $ANTLR start T33
-    public final void mT33() throws RecognitionException {
-        try {
-            int _type = T33;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:39:5: ( 'constrainedFeatures' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:39:7: 'constrainedFeatures'
-            {
-            match("constrainedFeatures"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T33
-
-    // $ANTLR start T34
-    public final void mT34() throws RecognitionException {
-        try {
-            int _type = T34;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:40:5: ( 'Attribute' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:40:7: 'Attribute'
-            {
-            match("Attribute"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T34
-
-    // $ANTLR start T35
-    public final void mT35() throws RecognitionException {
-        try {
-            int _type = T35;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:41:5: ( 'feature' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:41:7: 'feature'
-            {
-            match("feature"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T35
-
-    // $ANTLR start T36
-    public final void mT36() throws RecognitionException {
-        try {
-            int _type = T36;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:42:5: ( 'type' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:42:7: 'type'
-            {
-            match("type"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T36
-
-    // $ANTLR start T37
-    public final void mT37() throws RecognitionException {
-        try {
-            int _type = T37;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:43:5: ( 'value' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:43:7: 'value'
-            {
-            match("value"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T37
-
-    // $ANTLR start T38
-    public final void mT38() throws RecognitionException {
-        try {
-            int _type = T38;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:44:5: ( 'Annotation' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:44:7: 'Annotation'
-            {
-            match("Annotation"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T38
-
     // $ANTLR start COMMENT
     public final void mCOMMENT() throws RecognitionException {
         try {
             int _type = COMMENT;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:259:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:260:2: '//' (~ ( '\\n' | '\\r' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:190:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:191:2: '//' (~ ( '\\n' | '\\r' ) )*
             {
             match("//"); 
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:260:6: (~ ( '\\n' | '\\r' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:191:6: (~ ( '\\n' | '\\r' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -614,7 +427,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:260:7: ~ ( '\\n' | '\\r' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:191:7: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -650,7 +463,7 @@ public class FeatureLexer extends Lexer {
     public final void mINTEGER() throws RecognitionException {
         try {
             int _type = INTEGER;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:263:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:194:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -662,15 +475,15 @@ public class FeatureLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("262:1: INTEGER : ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' );", 4, 0, input);
+                    new NoViableAltException("193:1: INTEGER : ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' );", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:2: ( '-' )?
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:2: ( '-' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -679,7 +492,7 @@ public class FeatureLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:3: '-'
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:3: '-'
                             {
                             match('-'); 
 
@@ -688,14 +501,14 @@ public class FeatureLexer extends Lexer {
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:8: ( '1' .. '9' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:9: '1' .. '9'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:8: ( '1' .. '9' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:9: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:18: ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:18: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -708,7 +521,7 @@ public class FeatureLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:19: '0' .. '9'
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:19: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -724,7 +537,7 @@ public class FeatureLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:264:30: '0'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:195:30: '0'
                     {
                     match('0'); 
 
@@ -743,10 +556,10 @@ public class FeatureLexer extends Lexer {
     public final void mFLOAT() throws RecognitionException {
         try {
             int _type = FLOAT;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:267:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:198:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:2: ( '-' )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:2: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -755,7 +568,7 @@ public class FeatureLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:3: '-'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:3: '-'
                     {
                     match('-'); 
 
@@ -764,7 +577,7 @@ public class FeatureLexer extends Lexer {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -776,22 +589,22 @@ public class FeatureLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("268:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )", 7, 0, input);
+                    new NoViableAltException("199:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )", 7, 0, input);
 
                 throw nvae;
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:9: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:9: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:9: ( '1' .. '9' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:10: '1' .. '9'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:9: ( '1' .. '9' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:10: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:20: ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:20: ( '0' .. '9' )*
                     loop6:
                     do {
                         int alt6=2;
@@ -804,7 +617,7 @@ public class FeatureLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:21: '0' .. '9'
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:21: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -820,7 +633,7 @@ public class FeatureLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:34: '0'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:34: '0'
                     {
                     match('0'); 
 
@@ -830,7 +643,7 @@ public class FeatureLexer extends Lexer {
             }
 
             match('.'); 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:43: ( '0' .. '9' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:43: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -844,7 +657,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:268:44: '0' .. '9'
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:199:44: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -875,10 +688,10 @@ public class FeatureLexer extends Lexer {
     public final void mLB() throws RecognitionException {
         try {
             int _type = LB;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:271:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:272:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:202:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:203:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:272:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:203:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt9=3;
             int LA9_0 = input.LA(1);
 
@@ -896,13 +709,13 @@ public class FeatureLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("272:2: ( '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
+                    new NoViableAltException("203:2: ( '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
 
                 throw nvae;
             }
             switch (alt9) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:272:3: '\\r\\n'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:203:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -910,14 +723,14 @@ public class FeatureLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:272:12: '\\r'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:203:12: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:272:19: '\\n'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:203:19: '\\n'
                     {
                     match('\n'); 
 
@@ -941,8 +754,8 @@ public class FeatureLexer extends Lexer {
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:275:1: ( ( ' ' | '\\t' | '\\f' ) )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:276:2: ( ' ' | '\\t' | '\\f' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:206:1: ( ( ' ' | '\\t' | '\\f' ) )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:207:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -969,10 +782,10 @@ public class FeatureLexer extends Lexer {
     public final void mTEXT() throws RecognitionException {
         try {
             int _type = TEXT;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:279:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:280:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:210:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:211:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:280:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:211:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt10=0;
             loop10:
             do {
@@ -1025,17 +838,17 @@ public class FeatureLexer extends Lexer {
     public final void mQUOTED_34_34() throws RecognitionException {
         try {
             int _type = QUOTED_34_34;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:283:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:214:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:2: ( '\"' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:3: '\"'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:2: ( '\"' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:3: '\"'
             {
             match('\"'); 
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
             loop11:
             do {
                 int alt11=3;
@@ -1069,7 +882,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:8: ~ ( '\"' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:8: ~ ( '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1085,10 +898,10 @@ public class FeatureLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:15: ( '\\\\' '\"' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:15: ( '\\\\' '\"' )
             	    {
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:15: ( '\\\\' '\"' )
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:16: '\\\\' '\"'
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:15: ( '\\\\' '\"' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:16: '\\\\' '\"'
             	    {
             	    match('\\'); 
             	    match('\"'); 
@@ -1104,8 +917,8 @@ public class FeatureLexer extends Lexer {
                 }
             } while (true);
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:26: ( '\"' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:284:27: '\"'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:26: ( '\"' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:215:27: '\"'
             {
             match('\"'); 
 
@@ -1122,8 +935,8 @@ public class FeatureLexer extends Lexer {
     // $ANTLR end QUOTED_34_34
 
     public void mTokens() throws RecognitionException {
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 )
-        int alt12=35;
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 )
+        int alt12=26;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -1260,112 +1073,49 @@ public class FeatureLexer extends Lexer {
                 }
                 break;
             case 20 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:86: T30
-                {
-                mT30(); 
-
-                }
-                break;
-            case 21 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:90: T31
-                {
-                mT31(); 
-
-                }
-                break;
-            case 22 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:94: T32
-                {
-                mT32(); 
-
-                }
-                break;
-            case 23 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:98: T33
-                {
-                mT33(); 
-
-                }
-                break;
-            case 24 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:102: T34
-                {
-                mT34(); 
-
-                }
-                break;
-            case 25 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:106: T35
-                {
-                mT35(); 
-
-                }
-                break;
-            case 26 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:110: T36
-                {
-                mT36(); 
-
-                }
-                break;
-            case 27 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:114: T37
-                {
-                mT37(); 
-
-                }
-                break;
-            case 28 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:118: T38
-                {
-                mT38(); 
-
-                }
-                break;
-            case 29 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:122: COMMENT
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:86: COMMENT
                 {
                 mCOMMENT(); 
 
                 }
                 break;
-            case 30 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:130: INTEGER
+            case 21 :
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:94: INTEGER
                 {
                 mINTEGER(); 
 
                 }
                 break;
-            case 31 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:138: FLOAT
+            case 22 :
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:102: FLOAT
                 {
                 mFLOAT(); 
 
                 }
                 break;
-            case 32 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:144: LB
+            case 23 :
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:108: LB
                 {
                 mLB(); 
 
                 }
                 break;
-            case 33 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:147: WS
+            case 24 :
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:111: WS
                 {
                 mWS(); 
 
                 }
                 break;
-            case 34 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:150: TEXT
+            case 25 :
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:114: TEXT
                 {
                 mTEXT(); 
 
                 }
                 break;
-            case 35 :
-                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:155: QUOTED_34_34
+            case 26 :
+                // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:119: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 
@@ -1379,114 +1129,105 @@ public class FeatureLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\32\1\uffff\1\32\1\uffff\3\32\1\uffff\13\32\1\uffff\1"+
-        "\32\2\63\4\uffff\25\32\1\63\2\uffff\27\32\1\137\1\140\15\32\1\156"+
-        "\4\32\2\uffff\6\32\1\172\6\32\1\uffff\1\u0081\4\32\1\u0088\4\32"+
-        "\1\u008d\1\uffff\6\32\1\uffff\1\u0095\5\32\1\uffff\4\32\1\uffff"+
-        "\5\32\1\u00a4\1\32\1\uffff\2\32\1\u00a8\7\32\1\u00b0\3\32\1\uffff"+
-        "\3\32\1\uffff\7\32\1\uffff\2\32\1\u00c1\10\32\1\u00ca\1\32\1\u00cc"+
-        "\1\u00cd\1\u00ce\1\uffff\2\32\1\u00d1\2\32\1\u00d4\2\32\1\uffff"+
-        "\1\u00d7\3\uffff\1\u00d8\1\32\1\uffff\2\32\1\uffff\2\32\2\uffff"+
-        "\1\32\1\u00df\1\u00e0\3\32\2\uffff\1\u00e4\1\u00e5\1\32\2\uffff"+
-        "\3\32\1\u00ea\1\uffff";
+        "\1\uffff\1\30\1\uffff\1\30\2\uffff\1\30\11\uffff\2\30\1\uffff\1"+
+        "\30\2\44\4\uffff\3\30\2\uffff\3\30\1\44\2\uffff\11\30\1\63\3\30"+
+        "\1\67\1\uffff\3\30\1\uffff\1\74\3\30\1\uffff\7\30\1\107\1\30\1\111"+
+        "\1\uffff\1\112\2\uffff";
     static final String DFA12_eofS =
-        "\u00eb\uffff";
+        "\113\uffff";
     static final String DFA12_minS =
-        "\1\11\1\145\1\uffff\1\150\1\uffff\1\157\2\141\1\uffff\1\141\1\156"+
-        "\2\162\1\157\1\141\1\170\1\156\1\145\1\171\1\141\1\uffff\1\60\2"+
-        "\55\4\uffff\1\141\1\156\1\151\1\157\1\155\1\162\1\156\1\170\1\164"+
-        "\1\156\2\157\2\156\1\160\1\156\1\164\1\141\1\160\1\154\1\56\1\55"+
-        "\2\uffff\1\164\1\163\1\154\1\164\2\145\2\103\1\162\1\157\2\165\1"+
-        "\163\1\147\1\162\1\157\1\162\1\164\1\145\2\165\1\164\1\144\2\55"+
-        "\1\156\2\141\1\151\1\164\2\160\1\164\1\165\1\145\1\164\1\151\1\165"+
-        "\1\55\1\145\2\162\1\106\2\uffff\1\164\2\162\1\142\1\141\1\163\1"+
-        "\55\1\162\1\141\1\163\1\141\1\142\1\162\1\uffff\1\55\1\145\1\141"+
-        "\2\145\1\55\2\144\1\165\1\164\1\55\1\uffff\1\141\1\147\1\163\1\164"+
-        "\1\165\1\145\1\uffff\1\55\1\151\1\141\1\156\1\145\1\162\1\uffff"+
-        "\2\151\1\164\1\151\1\uffff\1\151\1\145\2\151\1\164\1\55\1\157\1"+
-        "\uffff\1\156\1\164\1\55\1\141\1\157\2\156\1\145\1\157\1\156\1\55"+
-        "\2\157\1\145\1\uffff\1\144\1\145\1\165\1\uffff\1\164\1\165\2\141"+
-        "\1\163\1\156\1\164\1\uffff\2\156\1\55\1\145\1\144\1\163\1\162\1"+
-        "\165\1\160\2\154\1\55\1\163\3\55\1\uffff\1\154\1\106\1\55\1\145"+
-        "\1\162\1\55\2\151\1\uffff\1\55\3\uffff\1\55\1\145\1\uffff\1\163"+
-        "\1\145\1\uffff\2\164\2\uffff\1\141\2\55\2\171\1\164\2\uffff\2\55"+
-        "\1\165\2\uffff\1\162\1\145\1\163\1\55\1\uffff";
+        "\1\11\1\145\1\uffff\1\157\2\uffff\1\157\5\uffff\1\52\3\uffff\1"+
+        "\162\1\171\1\uffff\1\60\2\55\4\uffff\1\141\2\156\2\uffff\1\157\1"+
+        "\160\1\56\1\55\2\uffff\1\164\2\163\1\165\1\145\1\165\2\164\1\160"+
+        "\1\55\3\162\1\55\1\uffff\1\145\2\141\1\uffff\1\55\2\151\1\157\1"+
+        "\uffff\2\156\1\144\2\164\1\145\1\163\1\55\1\154\1\55\1\uffff\1\55"+
+        "\2\uffff";
     static final String DFA12_maxS =
-        "\1\175\1\145\1\uffff\1\157\1\uffff\1\157\2\141\1\uffff\1\151\1"+
-        "\164\2\162\1\157\1\141\1\170\1\164\1\145\1\171\1\141\1\uffff\1\71"+
-        "\2\172\4\uffff\1\141\1\156\1\151\1\157\1\155\1\162\1\156\1\170\1"+
-        "\164\1\156\2\157\2\156\1\160\1\156\1\164\1\141\1\160\1\154\1\56"+
-        "\1\172\2\uffff\1\164\1\163\1\154\1\164\2\145\2\103\1\162\1\157\2"+
-        "\165\1\163\1\147\1\162\1\157\1\162\1\164\1\145\2\165\1\164\1\144"+
-        "\2\172\1\156\2\141\1\151\1\164\2\160\1\164\1\165\1\145\1\164\1\151"+
-        "\1\165\1\172\1\145\3\162\2\uffff\1\164\2\162\1\142\1\141\1\163\1"+
-        "\172\1\162\1\141\1\163\1\141\1\142\1\162\1\uffff\1\172\1\145\1\141"+
-        "\2\145\1\172\2\144\1\165\1\164\1\172\1\uffff\1\141\1\147\1\163\1"+
-        "\164\1\165\1\145\1\uffff\1\172\1\151\1\141\1\156\1\145\1\162\1\uffff"+
-        "\2\151\1\164\1\151\1\uffff\1\151\1\145\2\151\1\164\1\172\1\157\1"+
-        "\uffff\1\156\1\164\1\172\1\141\1\157\2\156\1\145\1\157\1\156\1\172"+
-        "\2\157\1\145\1\uffff\1\144\1\164\1\165\1\uffff\1\164\1\165\2\141"+
-        "\1\163\1\156\1\164\1\uffff\2\156\1\172\1\145\1\144\1\163\1\162\1"+
-        "\165\1\160\2\154\1\172\1\163\3\172\1\uffff\1\154\1\106\1\172\1\145"+
-        "\1\162\1\172\2\151\1\uffff\1\172\3\uffff\1\172\1\145\1\uffff\1\163"+
-        "\1\145\1\uffff\2\164\2\uffff\1\141\2\172\2\171\1\164\2\uffff\2\172"+
-        "\1\165\2\uffff\1\162\1\145\1\163\1\172\1\uffff";
+        "\1\175\1\145\1\uffff\1\157\2\uffff\1\157\5\uffff\1\57\3\uffff\1"+
+        "\162\1\171\1\uffff\1\71\2\172\4\uffff\1\141\2\156\2\uffff\1\157"+
+        "\1\160\1\56\1\172\2\uffff\1\164\2\163\1\165\1\145\1\165\2\164\1"+
+        "\160\1\172\3\162\1\172\1\uffff\1\145\2\141\1\uffff\1\172\2\151\1"+
+        "\157\1\uffff\2\156\1\144\2\164\1\145\1\163\1\172\1\154\1\172\1\uffff"+
+        "\1\172\2\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\uffff\1\4\3\uffff\1\11\13\uffff\1\35\3\uffff\1\40"+
-        "\1\41\1\42\1\43\26\uffff\1\37\1\36\53\uffff\1\5\1\6\15\uffff\1\32"+
-        "\13\uffff\1\21\6\uffff\1\33\6\uffff\1\10\4\uffff\1\16\7\uffff\1"+
-        "\12\16\uffff\1\31\3\uffff\1\7\7\uffff\1\25\20\uffff\1\30\10\uffff"+
-        "\1\15\1\uffff\1\24\1\26\1\34\2\uffff\1\3\2\uffff\1\17\2\uffff\1"+
-        "\20\1\1\6\uffff\1\23\1\22\3\uffff\1\13\1\14\4\uffff\1\27";
+        "\2\uffff\1\2\1\uffff\1\4\1\5\1\uffff\1\7\1\10\1\11\1\12\1\14\1"+
+        "\uffff\1\16\1\17\1\20\2\uffff\1\23\3\uffff\1\27\1\30\1\31\1\32\3"+
+        "\uffff\1\15\1\24\4\uffff\1\26\1\25\16\uffff\1\22\3\uffff\1\21\4"+
+        "\uffff\1\13\12\uffff\1\6\1\uffff\1\3\1\1";
     static final String DFA12_specialS =
-        "\u00eb\uffff}>";
+        "\113\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\1\31\1\30\1\uffff\1\31\1\30\22\uffff\1\31\1\uffff\1\33\12"+
-            "\uffff\1\25\1\uffff\1\24\1\27\11\26\1\4\6\uffff\1\20\1\32\1"+
-            "\15\2\32\1\1\1\14\23\32\4\uffff\1\32\1\uffff\1\12\1\32\1\3\1"+
-            "\32\1\17\1\21\1\13\4\32\1\16\1\11\1\6\1\32\1\7\1\32\1\5\1\32"+
-            "\1\22\1\32\1\23\4\32\1\2\1\uffff\1\10",
+            "\1\27\1\26\1\uffff\1\27\1\26\22\uffff\1\27\1\uffff\1\31\5\uffff"+
+            "\1\7\1\11\1\15\1\uffff\1\10\1\23\1\13\1\14\1\25\11\24\1\12\1"+
+            "\4\1\uffff\1\22\3\uffff\2\30\1\6\2\30\1\1\1\20\23\30\1\16\1"+
+            "\uffff\1\17\1\uffff\1\30\1\uffff\2\30\1\3\20\30\1\21\6\30\1"+
+            "\2\1\uffff\1\5",
+            "\1\32",
+            "",
+            "\1\33",
+            "",
+            "",
             "\1\34",
             "",
-            "\1\36\6\uffff\1\35",
+            "",
+            "",
+            "",
+            "",
+            "\1\35\4\uffff\1\36",
+            "",
+            "",
             "",
             "\1\37",
             "\1\40",
-            "\1\41",
             "",
-            "\1\43\7\uffff\1\42",
-            "\1\45\5\uffff\1\44",
+            "\1\41\11\24",
+            "\1\30\1\43\1\uffff\12\42\7\uffff\32\30\4\uffff\1\30\1\uffff"+
+            "\32\30",
+            "\1\30\1\43\1\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff"+
+            "\32\30",
+            "",
+            "",
+            "",
+            "",
+            "\1\45",
             "\1\46",
             "\1\47",
+            "",
+            "",
             "\1\50",
             "\1\51",
+            "\1\43",
+            "\1\30\1\43\1\uffff\12\42\7\uffff\32\30\4\uffff\1\30\1\uffff"+
+            "\32\30",
+            "",
+            "",
             "\1\52",
-            "\1\53\5\uffff\1\54",
+            "\1\53",
+            "\1\54",
             "\1\55",
             "\1\56",
             "\1\57",
-            "",
-            "\1\60\11\26",
-            "\1\32\1\62\1\uffff\12\61\7\uffff\32\32\4\uffff\1\32\1\uffff"+
-            "\32\32",
-            "\1\32\1\62\1\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff"+
-            "\32\32",
-            "",
-            "",
-            "",
-            "",
+            "\1\60",
+            "\1\61",
+            "\1\62",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32"+
+            "\30",
             "\1\64",
             "\1\65",
             "\1\66",
-            "\1\67",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32"+
+            "\30",
+            "",
             "\1\70",
             "\1\71",
             "\1\72",
-            "\1\73",
-            "\1\74",
+            "",
+            "\1\30\2\uffff\12\30\7\uffff\14\30\1\73\15\30\4\uffff\1\30"+
+            "\1\uffff\32\30",
             "\1\75",
             "\1\76",
             "\1\77",
+            "",
             "\1\100",
             "\1\101",
             "\1\102",
@@ -1494,219 +1235,15 @@ public class FeatureLexer extends Lexer {
             "\1\104",
             "\1\105",
             "\1\106",
-            "\1\107",
-            "\1\62",
-            "\1\32\1\62\1\uffff\12\61\7\uffff\32\32\4\uffff\1\32\1\uffff"+
-            "\32\32",
-            "",
-            "",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32"+
+            "\30",
             "\1\110",
-            "\1\111",
-            "\1\112",
-            "\1\113",
-            "\1\114",
-            "\1\115",
-            "\1\116",
-            "\1\117",
-            "\1\120",
-            "\1\121",
-            "\1\122",
-            "\1\123",
-            "\1\124",
-            "\1\125",
-            "\1\126",
-            "\1\127",
-            "\1\130",
-            "\1\131",
-            "\1\132",
-            "\1\133",
-            "\1\134",
-            "\1\135",
-            "\1\136",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\141",
-            "\1\142",
-            "\1\143",
-            "\1\144",
-            "\1\145",
-            "\1\146",
-            "\1\147",
-            "\1\150",
-            "\1\151",
-            "\1\152",
-            "\1\153",
-            "\1\154",
-            "\1\155",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\157",
-            "\1\160",
-            "\1\161",
-            "\1\162\53\uffff\1\163",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32"+
+            "\30",
             "",
+            "\1\30\2\uffff\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32"+
+            "\30",
             "",
-            "\1\164",
-            "\1\165",
-            "\1\166",
-            "\1\167",
-            "\1\170",
-            "\1\171",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\173",
-            "\1\174",
-            "\1\175",
-            "\1\176",
-            "\1\177",
-            "\1\u0080",
-            "",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u0082",
-            "\1\u0083",
-            "\1\u0084",
-            "\1\u0085",
-            "\1\32\2\uffff\12\32\7\uffff\5\32\1\u0086\1\u0087\23\32\4\uffff"+
-            "\1\32\1\uffff\32\32",
-            "\1\u0089",
-            "\1\u008a",
-            "\1\u008b",
-            "\1\u008c",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "",
-            "\1\u008e",
-            "\1\u008f",
-            "\1\u0090",
-            "\1\u0091",
-            "\1\u0092",
-            "\1\u0093",
-            "",
-            "\1\32\2\uffff\12\32\7\uffff\14\32\1\u0094\15\32\4\uffff\1"+
-            "\32\1\uffff\32\32",
-            "\1\u0096",
-            "\1\u0097",
-            "\1\u0098",
-            "\1\u0099",
-            "\1\u009a",
-            "",
-            "\1\u009b",
-            "\1\u009c",
-            "\1\u009d",
-            "\1\u009e",
-            "",
-            "\1\u009f",
-            "\1\u00a0",
-            "\1\u00a1",
-            "\1\u00a2",
-            "\1\u00a3",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00a5",
-            "",
-            "\1\u00a6",
-            "\1\u00a7",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00a9",
-            "\1\u00aa",
-            "\1\u00ab",
-            "\1\u00ac",
-            "\1\u00ad",
-            "\1\u00ae",
-            "\1\u00af",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00b1",
-            "\1\u00b2",
-            "\1\u00b3",
-            "",
-            "\1\u00b4",
-            "\1\u00b5\16\uffff\1\u00b6",
-            "\1\u00b7",
-            "",
-            "\1\u00b8",
-            "\1\u00b9",
-            "\1\u00ba",
-            "\1\u00bb",
-            "\1\u00bc",
-            "\1\u00bd",
-            "\1\u00be",
-            "",
-            "\1\u00bf",
-            "\1\u00c0",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00c2",
-            "\1\u00c3",
-            "\1\u00c4",
-            "\1\u00c5",
-            "\1\u00c6",
-            "\1\u00c7",
-            "\1\u00c8",
-            "\1\u00c9",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00cb",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "",
-            "\1\u00cf",
-            "\1\u00d0",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00d2",
-            "\1\u00d3",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00d5",
-            "\1\u00d6",
-            "",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "",
-            "",
-            "",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00d9",
-            "",
-            "\1\u00da",
-            "\1\u00db",
-            "",
-            "\1\u00dc",
-            "\1\u00dd",
-            "",
-            "",
-            "\1\u00de",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00e1",
-            "\1\u00e2",
-            "\1\u00e3",
-            "",
-            "",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
-            "\1\u00e6",
-            "",
-            "",
-            "\1\u00e7",
-            "\1\u00e8",
-            "\1\u00e9",
-            "\1\32\2\uffff\12\32\7\uffff\32\32\4\uffff\1\32\1\uffff\32"+
-            "\32",
             ""
     };
 
@@ -1740,7 +1277,7 @@ public class FeatureLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 );";
+            return "1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 );";
         }
     }
  
