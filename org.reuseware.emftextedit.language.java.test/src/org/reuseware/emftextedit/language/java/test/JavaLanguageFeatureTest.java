@@ -249,6 +249,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		checkBasicEnum("BasicEnumWithCommaAtTheEnd");
 		checkBasicEnum("BasicEnumWithSemicolonAtTheEnd");
 	}
+	
+	@Test
+	public void testBooleanExpressions() throws Exception {
+		String typename = "BooleanExpressions";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
 
 	@Test
 	public void testBlocks() throws Exception {
@@ -550,6 +560,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(members.get(3),
 				org.reuseware.emftextedit.language.java.Class.class);
 		assertType(members.get(4), Enumeration.class);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
+	public void testIncDec() throws Exception {
+		String typename = "IncDec";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
 
 		parseAndReprint(filename);
 	}

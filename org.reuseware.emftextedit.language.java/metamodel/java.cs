@@ -273,6 +273,9 @@ ExpressionList
 	::= expressions ("," expressions)* 
 	;
 
+UnaryExpressionNotPlusMinus
+	::= expression ("++")?;
+	
 BooleanExpression
 	::=	
 	left[]

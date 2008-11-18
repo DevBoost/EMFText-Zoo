@@ -14,6 +14,8 @@ public class OrderedJavaLanguageFeatureTest {
 			}
 		};
 		test.testEmptyClass();
+		test.testBooleanExpressions();
+		/*
 		test.testEmptyEnum();
 		test.testBlocks();
 		test.testArguments();
@@ -21,6 +23,7 @@ public class OrderedJavaLanguageFeatureTest {
 		test.testBasicEnums();
 		test.testPrimitiveTypeArrays();
 		test.testTypeReferencing();
-		test.testHasMissingParses();
+		*/
+		//test.testHasMissingParses();
 	}
 }
