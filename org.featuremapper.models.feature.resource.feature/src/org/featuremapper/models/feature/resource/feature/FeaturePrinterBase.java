@@ -213,20 +213,6 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				printCountingMap.put("expression",count-1);
 			}
 		}
-		public void printConstraint_0_0(Constraint element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print(",");
-			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
-			count = printCountingMap.get("constrainedFeatures");
-			if(count>0){
-				Object o =element.getConstrainedFeatures();
-				o = ((List<Object>)o).get(((List<Object>)o).size()-count);
-				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");resolver.setOptions(getOptions());out.print(resolver.deResolve(treeAnalyser.deResolve((EObject)o,element,(EReference)element.eClass().getEStructuralFeature("constrainedFeatures")),element.eClass().getEStructuralFeature("constrainedFeatures"),element));
-				printCountingMap.put("constrainedFeatures",count-1);
-			}
-		}
 		public void printConstraint_0(Constraint element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
@@ -255,6 +241,20 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 					out.print(sWriter.toString());
 					printCountingMap.putAll(printCountingMap1);
 				}
+			}
+		}
+		public void printConstraint_0_0(Constraint element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print(",");
+			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
+			count = printCountingMap.get("constrainedFeatures");
+			if(count>0){
+				Object o =element.getConstrainedFeatures();
+				o = ((List<Object>)o).get(((List<Object>)o).size()-count);
+				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");resolver.setOptions(getOptions());out.print(resolver.deResolve(treeAnalyser.deResolve((EObject)o,element,(EReference)element.eClass().getEStructuralFeature("constrainedFeatures")),element.eClass().getEStructuralFeature("constrainedFeatures"),element));
+				printCountingMap.put("constrainedFeatures",count-1);
 			}
 		}
 		public void printFeature(Feature element,String outertab,PrintWriter out){
@@ -347,24 +347,6 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				printCountingMap.putAll(printCountingMap1);
 			}
 		}
-		public void printFeature_2(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("[");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("attributes");
-			if(count>0){
-				ListIterator it  = ((List)element.getAttributes()).listIterator(((List)element.getAttributes()).size()-count);
-				while(it.hasNext()){
-					Object o = it.next();
-					doPrint((EObject)o,out,localtab);
-				}
-				printCountingMap.put("attributes",0);
-			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("]");
-		}
 		public void printFeature_3(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
@@ -378,24 +360,6 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				}
 				printCountingMap.put("groups",0);
 			}
-		}
-		public void printFeature_1(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("/*");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("attributes");
-			if(count>0){
-				ListIterator it  = ((List)element.getAttributes()).listIterator(((List)element.getAttributes()).size()-count);
-				while(it.hasNext()){
-					Object o = it.next();
-					doPrint((EObject)o,out,localtab);
-				}
-				printCountingMap.put("attributes",0);
-			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("*/");
 		}
 		public void printFeature_0(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
@@ -426,6 +390,42 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			}
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print(")");
+		}
+		public void printFeature_1(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("/*");
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("attributes");
+			if(count>0){
+				ListIterator it  = ((List)element.getAttributes()).listIterator(((List)element.getAttributes()).size()-count);
+				while(it.hasNext()){
+					Object o = it.next();
+					doPrint((EObject)o,out,localtab);
+				}
+				printCountingMap.put("attributes",0);
+			}
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("*/");
+		}
+		public void printFeature_2(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("[");
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("attributes");
+			if(count>0){
+				ListIterator it  = ((List)element.getAttributes()).listIterator(((List)element.getAttributes()).size()-count);
+				while(it.hasNext()){
+					Object o = it.next();
+					doPrint((EObject)o,out,localtab);
+				}
+				printCountingMap.put("attributes",0);
+			}
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("]");
 		}
 		public void printGroup(Group element,String outertab,PrintWriter out){
 			String localtab = outertab;

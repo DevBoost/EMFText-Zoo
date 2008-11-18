@@ -33,7 +33,6 @@ import org.featuremapper.models.feature.Attribute;
 import org.featuremapper.models.feature.Annotation;
 //Implementation: org.featuremapper.models.feature.impl.AnnotationImpl
 import org.featuremapper.models.feature.*;
-import org.featuremapper.models.feature.impl.*;
 import org.reuseware.emftextedit.runtime.resource.*;
 import org.reuseware.emftextedit.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;

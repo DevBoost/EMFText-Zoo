@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g 2008-11-18 18:02:52
+// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g 2008-11-18 19:15:23
 
 package org.eclipse.uml2.uml.resource.uml;
 
@@ -315,12 +315,12 @@ public class UmlLexer extends Lexer {
     public final void mCOMMENT() throws RecognitionException {
         try {
             int _type = COMMENT;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:713:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:714:2: '//' (~ ( '\\n' | '\\r' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:711:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:712:2: '//' (~ ( '\\n' | '\\r' ) )*
             {
             match("//"); 
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:714:6: (~ ( '\\n' | '\\r' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:712:6: (~ ( '\\n' | '\\r' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -333,7 +333,7 @@ public class UmlLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:714:7: ~ ( '\\n' | '\\r' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:712:7: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -369,7 +369,7 @@ public class UmlLexer extends Lexer {
     public final void mINTEGER() throws RecognitionException {
         try {
             int _type = INTEGER;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:717:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:715:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -381,15 +381,15 @@ public class UmlLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("716:1: INTEGER : ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' );", 4, 0, input);
+                    new NoViableAltException("714:1: INTEGER : ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' );", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:2: ( '-' )?
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:2: ( '-' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -398,7 +398,7 @@ public class UmlLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:3: '-'
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:3: '-'
                             {
                             match('-'); 
 
@@ -407,14 +407,14 @@ public class UmlLexer extends Lexer {
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:8: ( '1' .. '9' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:9: '1' .. '9'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:8: ( '1' .. '9' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:9: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:18: ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:18: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -427,7 +427,7 @@ public class UmlLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:19: '0' .. '9'
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:19: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -443,7 +443,7 @@ public class UmlLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:718:30: '0'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:716:30: '0'
                     {
                     match('0'); 
                      channel=99; 
@@ -463,10 +463,10 @@ public class UmlLexer extends Lexer {
     public final void mFLOAT() throws RecognitionException {
         try {
             int _type = FLOAT;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:721:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:719:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:2: ( '-' )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:2: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -475,7 +475,7 @@ public class UmlLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:3: '-'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:3: '-'
                     {
                     match('-'); 
 
@@ -484,7 +484,7 @@ public class UmlLexer extends Lexer {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -496,22 +496,22 @@ public class UmlLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("722:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )", 7, 0, input);
+                    new NoViableAltException("720:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )", 7, 0, input);
 
                 throw nvae;
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:9: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:9: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:9: ( '1' .. '9' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:10: '1' .. '9'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:9: ( '1' .. '9' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:10: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:20: ( '0' .. '9' )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:20: ( '0' .. '9' )*
                     loop6:
                     do {
                         int alt6=2;
@@ -524,7 +524,7 @@ public class UmlLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:21: '0' .. '9'
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:21: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -540,7 +540,7 @@ public class UmlLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:34: '0'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:34: '0'
                     {
                     match('0'); 
 
@@ -550,7 +550,7 @@ public class UmlLexer extends Lexer {
             }
 
             match('.'); 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:43: ( '0' .. '9' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:43: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -564,7 +564,7 @@ public class UmlLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:722:44: '0' .. '9'
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:720:44: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -595,10 +595,10 @@ public class UmlLexer extends Lexer {
     public final void mLB() throws RecognitionException {
         try {
             int _type = LB;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:725:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:726:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:723:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:724:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:726:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:724:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt9=3;
             int LA9_0 = input.LA(1);
 
@@ -616,13 +616,13 @@ public class UmlLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("726:2: ( '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
+                    new NoViableAltException("724:2: ( '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
 
                 throw nvae;
             }
             switch (alt9) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:726:3: '\\r\\n'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:724:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -630,14 +630,14 @@ public class UmlLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:726:12: '\\r'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:724:12: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:726:19: '\\n'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:724:19: '\\n'
                     {
                     match('\n'); 
 
@@ -661,8 +661,8 @@ public class UmlLexer extends Lexer {
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:729:1: ( ( ' ' | '\\t' | '\\f' ) )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:730:2: ( ' ' | '\\t' | '\\f' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:727:1: ( ( ' ' | '\\t' | '\\f' ) )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:728:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -689,10 +689,10 @@ public class UmlLexer extends Lexer {
     public final void mTEXT() throws RecognitionException {
         try {
             int _type = TEXT;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:733:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:734:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:731:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:732:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:734:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:732:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt10=0;
             loop10:
             do {
@@ -745,17 +745,17 @@ public class UmlLexer extends Lexer {
     public final void mQUOTED_34_34() throws RecognitionException {
         try {
             int _type = QUOTED_34_34;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:737:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:735:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:2: ( '\"' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:3: '\"'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:2: ( '\"' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:3: '\"'
             {
             match('\"'); 
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
             loop11:
             do {
                 int alt11=3;
@@ -789,7 +789,7 @@ public class UmlLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:8: ~ ( '\"' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:8: ~ ( '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -805,10 +805,10 @@ public class UmlLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:15: ( '\\\\' '\"' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:15: ( '\\\\' '\"' )
             	    {
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:15: ( '\\\\' '\"' )
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:16: '\\\\' '\"'
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:15: ( '\\\\' '\"' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:16: '\\\\' '\"'
             	    {
             	    match('\\'); 
             	    match('\"'); 
@@ -824,8 +824,8 @@ public class UmlLexer extends Lexer {
                 }
             } while (true);
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:26: ( '\"' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:738:27: '\"'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:26: ( '\"' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:736:27: '\"'
             {
             match('\"'); 
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g 2008-11-18 19:02:47
+// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g 2008-11-18 19:13:52
 
 package org.featuremapper.models.feature.resource.feature;
 
@@ -16,7 +16,6 @@ import org.featuremapper.models.feature.Attribute;
 import org.featuremapper.models.feature.Annotation;
 //Implementation: org.featuremapper.models.feature.impl.AnnotationImpl
 import org.featuremapper.models.feature.*;
-import org.featuremapper.models.feature.impl.*;
 import org.reuseware.emftextedit.runtime.resource.*;
 import org.reuseware.emftextedit.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;
@@ -64,7 +63,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
     // $ANTLR start start
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:54:1: start returns [ EObject element = null] : c0= featuremodel ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:53:1: start returns [ EObject element = null] : c0= featuremodel ;
     public final EObject start() throws RecognitionException {
         EObject element =  null;
 
@@ -72,8 +71,8 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:56:1: (c0= featuremodel )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:57:1: c0= featuremodel
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:55:1: (c0= featuremodel )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:56:1: c0= featuremodel
             {
             pushFollow(FOLLOW_featuremodel_in_start61);
             c0=featuremodel();
@@ -98,7 +97,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
     // $ANTLR start featuremodel
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:61:1: featuremodel returns [FeatureModel element = null] : 'FeatureModel' a0= QUOTED_34_34 ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )? a2= feature ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:60:1: featuremodel returns [FeatureModel element = null] : 'FeatureModel' a0= QUOTED_34_34 ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )? a2= feature ;
     public final FeatureModel featuremodel() throws RecognitionException {
         FeatureModel element =  null;
 
@@ -112,8 +111,8 @@ public class FeatureParser extends EMFTextParserImpl {
         	element = FeatureFactory.eINSTANCE.createFeatureModel();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:65:1: ( 'FeatureModel' a0= QUOTED_34_34 ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )? a2= feature )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:66:2: 'FeatureModel' a0= QUOTED_34_34 ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )? a2= feature
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:64:1: ( 'FeatureModel' a0= QUOTED_34_34 ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )? a2= feature )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:65:2: 'FeatureModel' a0= QUOTED_34_34 ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )? a2= feature
             {
             match(input,11,FOLLOW_11_in_featuremodel81); if (failed) return element;
             a0=(Token)input.LT(1);
@@ -121,7 +120,7 @@ public class FeatureParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:68:2: ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:67:2: ( ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -130,14 +129,14 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:69:3: ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:68:3: ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:69:3: ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:70:4: '{' 'constraints' ( (a1= constraint ';' ) )? '}'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:68:3: ( '{' 'constraints' ( (a1= constraint ';' ) )? '}' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:69:4: '{' 'constraints' ( (a1= constraint ';' ) )? '}'
                     {
                     match(input,12,FOLLOW_12_in_featuremodel101); if (failed) return element;
                     match(input,13,FOLLOW_13_in_featuremodel106); if (failed) return element;
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:72:4: ( (a1= constraint ';' ) )?
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:71:4: ( (a1= constraint ';' ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -146,10 +145,10 @@ public class FeatureParser extends EMFTextParserImpl {
                     }
                     switch (alt1) {
                         case 1 :
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:73:5: (a1= constraint ';' )
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:72:5: (a1= constraint ';' )
                             {
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:73:5: (a1= constraint ';' )
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:74:6: a1= constraint ';'
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:72:5: (a1= constraint ';' )
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:73:6: a1= constraint ';'
                             {
                             pushFollow(FOLLOW_constraint_in_featuremodel128);
                             a1=constraint();
@@ -201,7 +200,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
     // $ANTLR start constraint
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:84:1: constraint returns [Constraint element = null] : 'Constraint' '(' ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )? ')' a2= TEXT ':' a3= QUOTED_34_34 ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:83:1: constraint returns [Constraint element = null] : 'Constraint' '(' ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )? ')' a2= TEXT ':' a3= QUOTED_34_34 ;
     public final Constraint constraint() throws RecognitionException {
         Constraint element =  null;
 
@@ -214,12 +213,12 @@ public class FeatureParser extends EMFTextParserImpl {
         	element = FeatureFactory.eINSTANCE.createConstraint();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:88:1: ( 'Constraint' '(' ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )? ')' a2= TEXT ':' a3= QUOTED_34_34 )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:89:2: 'Constraint' '(' ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )? ')' a2= TEXT ':' a3= QUOTED_34_34
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:87:1: ( 'Constraint' '(' ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )? ')' a2= TEXT ':' a3= QUOTED_34_34 )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:88:2: 'Constraint' '(' ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )? ')' a2= TEXT ':' a3= QUOTED_34_34
             {
             match(input,16,FOLLOW_16_in_constraint187); if (failed) return element;
             match(input,17,FOLLOW_17_in_constraint190); if (failed) return element;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:91:2: ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:90:2: ( (a0= TEXT ( ( ',' a1= TEXT ) )* ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -228,17 +227,17 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:92:3: (a0= TEXT ( ( ',' a1= TEXT ) )* )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:91:3: (a0= TEXT ( ( ',' a1= TEXT ) )* )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:92:3: (a0= TEXT ( ( ',' a1= TEXT ) )* )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:93:4: a0= TEXT ( ( ',' a1= TEXT ) )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:91:3: (a0= TEXT ( ( ',' a1= TEXT ) )* )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:92:4: a0= TEXT ( ( ',' a1= TEXT ) )*
                     {
                     a0=(Token)input.LT(1);
                     match(input,TEXT,FOLLOW_TEXT_in_constraint206); if (failed) return element;
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("constrainedFeatures"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Feature proxy = FeatureFactory.eINSTANCE.createFeature();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("constrainedFeatures"))).add(proxy); copyLocalizationInfos((CommonToken) a0, element); copyLocalizationInfos((CommonToken) a0, proxy); 
                     }
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:94:4: ( ( ',' a1= TEXT ) )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:93:4: ( ( ',' a1= TEXT ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -251,10 +250,10 @@ public class FeatureParser extends EMFTextParserImpl {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:95:5: ( ',' a1= TEXT )
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:94:5: ( ',' a1= TEXT )
                     	    {
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:95:5: ( ',' a1= TEXT )
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:96:6: ',' a1= TEXT
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:94:5: ( ',' a1= TEXT )
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:95:6: ',' a1= TEXT
                     	    {
                     	    match(input,18,FOLLOW_18_in_constraint225); if (failed) return element;
                     	    a1=(Token)input.LT(1);
@@ -311,7 +310,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
     // $ANTLR start feature
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:108:1: feature returns [Feature element = null] : 'Feature' a0= QUOTED_34_34 ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )? ( ( '/*' (a3= attribute )* '*/' ) )? ( ( '[' (a4= attribute )* ']' ) )? ( ( (a5= group )* ) )? ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:107:1: feature returns [Feature element = null] : 'Feature' a0= QUOTED_34_34 ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )? ( ( '/*' (a3= attribute )* '*/' ) )? ( ( '[' (a4= attribute )* ']' ) )? ( ( (a5= group )* ) )? ;
     public final Feature feature() throws RecognitionException {
         Feature element =  null;
 
@@ -329,8 +328,8 @@ public class FeatureParser extends EMFTextParserImpl {
         	element = FeatureFactory.eINSTANCE.createFeature();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:112:1: ( 'Feature' a0= QUOTED_34_34 ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )? ( ( '/*' (a3= attribute )* '*/' ) )? ( ( '[' (a4= attribute )* ']' ) )? ( ( (a5= group )* ) )? )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:113:2: 'Feature' a0= QUOTED_34_34 ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )? ( ( '/*' (a3= attribute )* '*/' ) )? ( ( '[' (a4= attribute )* ']' ) )? ( ( (a5= group )* ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:111:1: ( 'Feature' a0= QUOTED_34_34 ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )? ( ( '/*' (a3= attribute )* '*/' ) )? ( ( '[' (a4= attribute )* ']' ) )? ( ( (a5= group )* ) )? )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:112:2: 'Feature' a0= QUOTED_34_34 ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )? ( ( '/*' (a3= attribute )* '*/' ) )? ( ( '[' (a4= attribute )* ']' ) )? ( ( (a5= group )* ) )?
             {
             match(input,21,FOLLOW_21_in_feature297); if (failed) return element;
             a0=(Token)input.LT(1);
@@ -338,7 +337,7 @@ public class FeatureParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:115:2: ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:114:2: ( ( '(' a1= INTEGER '..' a2= INTEGER ')' ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -347,10 +346,10 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:116:3: ( '(' a1= INTEGER '..' a2= INTEGER ')' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:115:3: ( '(' a1= INTEGER '..' a2= INTEGER ')' )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:116:3: ( '(' a1= INTEGER '..' a2= INTEGER ')' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:117:4: '(' a1= INTEGER '..' a2= INTEGER ')'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:115:3: ( '(' a1= INTEGER '..' a2= INTEGER ')' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:116:4: '(' a1= INTEGER '..' a2= INTEGER ')'
                     {
                     match(input,17,FOLLOW_17_in_feature317); if (failed) return element;
                     a1=(Token)input.LT(1);
@@ -374,7 +373,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:124:2: ( ( '/*' (a3= attribute )* '*/' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:123:2: ( ( '/*' (a3= attribute )* '*/' ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -383,13 +382,13 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:125:3: ( '/*' (a3= attribute )* '*/' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:124:3: ( '/*' (a3= attribute )* '*/' )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:125:3: ( '/*' (a3= attribute )* '*/' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:126:4: '/*' (a3= attribute )* '*/'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:124:3: ( '/*' (a3= attribute )* '*/' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:125:4: '/*' (a3= attribute )* '*/'
                     {
                     match(input,23,FOLLOW_23_in_feature367); if (failed) return element;
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:127:4: (a3= attribute )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:126:4: (a3= attribute )*
                     loop6:
                     do {
                         int alt6=2;
@@ -402,7 +401,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:128:5: a3= attribute
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:127:5: a3= attribute
                     	    {
                     	    pushFollow(FOLLOW_attribute_in_feature382);
                     	    a3=attribute();
@@ -430,7 +429,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:133:2: ( ( '[' (a4= attribute )* ']' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:132:2: ( ( '[' (a4= attribute )* ']' ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -439,13 +438,13 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt9) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:134:3: ( '[' (a4= attribute )* ']' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:133:3: ( '[' (a4= attribute )* ']' )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:134:3: ( '[' (a4= attribute )* ']' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:135:4: '[' (a4= attribute )* ']'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:133:3: ( '[' (a4= attribute )* ']' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:134:4: '[' (a4= attribute )* ']'
                     {
                     match(input,25,FOLLOW_25_in_feature414); if (failed) return element;
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:136:4: (a4= attribute )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:135:4: (a4= attribute )*
                     loop8:
                     do {
                         int alt8=2;
@@ -458,7 +457,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:137:5: a4= attribute
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:136:5: a4= attribute
                     	    {
                     	    pushFollow(FOLLOW_attribute_in_feature429);
                     	    a4=attribute();
@@ -486,7 +485,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:142:2: ( ( (a5= group )* ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:141:2: ( ( (a5= group )* ) )?
             int alt11=2;
             switch ( input.LA(1) ) {
                 case 27:
@@ -525,12 +524,12 @@ public class FeatureParser extends EMFTextParserImpl {
 
             switch (alt11) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:3: ( (a5= group )* )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:142:3: ( (a5= group )* )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:3: ( (a5= group )* )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:144:4: (a5= group )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:142:3: ( (a5= group )* )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:4: (a5= group )*
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:144:4: (a5= group )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:4: (a5= group )*
                     loop10:
                     do {
                         int alt10=2;
@@ -543,7 +542,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
                         switch (alt10) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:145:5: a5= group
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:144:5: a5= group
                     	    {
                     	    pushFollow(FOLLOW_group_in_feature471);
                     	    a5=group();
@@ -586,7 +585,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
     // $ANTLR start group
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:151:1: group returns [Group element = null] : 'Group' ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )? ( ( '{' (a2= feature )* '}' ) )? ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:150:1: group returns [Group element = null] : 'Group' ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )? ( ( '{' (a2= feature )* '}' ) )? ;
     public final Group group() throws RecognitionException {
         Group element =  null;
 
@@ -599,11 +598,11 @@ public class FeatureParser extends EMFTextParserImpl {
         	element = FeatureFactory.eINSTANCE.createGroup();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:155:1: ( 'Group' ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )? ( ( '{' (a2= feature )* '}' ) )? )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:156:2: 'Group' ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )? ( ( '{' (a2= feature )* '}' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:154:1: ( 'Group' ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )? ( ( '{' (a2= feature )* '}' ) )? )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:155:2: 'Group' ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )? ( ( '{' (a2= feature )* '}' ) )?
             {
             match(input,27,FOLLOW_27_in_group504); if (failed) return element;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:157:2: ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:156:2: ( ( '(' a0= INTEGER '..' a1= INTEGER ')' ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -612,10 +611,10 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt12) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:158:3: ( '(' a0= INTEGER '..' a1= INTEGER ')' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:157:3: ( '(' a0= INTEGER '..' a1= INTEGER ')' )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:158:3: ( '(' a0= INTEGER '..' a1= INTEGER ')' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:159:4: '(' a0= INTEGER '..' a1= INTEGER ')'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:157:3: ( '(' a0= INTEGER '..' a1= INTEGER ')' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:158:4: '(' a0= INTEGER '..' a1= INTEGER ')'
                     {
                     match(input,17,FOLLOW_17_in_group516); if (failed) return element;
                     a0=(Token)input.LT(1);
@@ -639,7 +638,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:166:2: ( ( '{' (a2= feature )* '}' ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:2: ( ( '{' (a2= feature )* '}' ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -648,13 +647,13 @@ public class FeatureParser extends EMFTextParserImpl {
             }
             switch (alt14) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:167:3: ( '{' (a2= feature )* '}' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:166:3: ( '{' (a2= feature )* '}' )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:167:3: ( '{' (a2= feature )* '}' )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:168:4: '{' (a2= feature )* '}'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:166:3: ( '{' (a2= feature )* '}' )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:167:4: '{' (a2= feature )* '}'
                     {
                     match(input,12,FOLLOW_12_in_group566); if (failed) return element;
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:4: (a2= feature )*
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:168:4: (a2= feature )*
                     loop13:
                     do {
                         int alt13=2;
@@ -667,7 +666,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:170:5: a2= feature
+                    	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:5: a2= feature
                     	    {
                     	    pushFollow(FOLLOW_feature_in_group581);
                     	    a2=feature();
@@ -711,7 +710,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
 
     // $ANTLR start attribute
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:1: attribute returns [Attribute element = null] : a0= TEXT a1= TEXT 'type' '=' a2= QUOTED_34_34 ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:176:1: attribute returns [Attribute element = null] : a0= TEXT a1= TEXT 'type' '=' a2= QUOTED_34_34 ;
     public final Attribute attribute() throws RecognitionException {
         Attribute element =  null;
 
@@ -723,8 +722,8 @@ public class FeatureParser extends EMFTextParserImpl {
         	element = FeatureFactory.eINSTANCE.createAttribute();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:181:1: (a0= TEXT a1= TEXT 'type' '=' a2= QUOTED_34_34 )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:182:2: a0= TEXT a1= TEXT 'type' '=' a2= QUOTED_34_34
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:180:1: (a0= TEXT a1= TEXT 'type' '=' a2= QUOTED_34_34 )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:181:2: a0= TEXT a1= TEXT 'type' '=' a2= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
             match(input,TEXT,FOLLOW_TEXT_in_attribute623); if (failed) return element;
@@ -759,13 +758,13 @@ public class FeatureParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred11
     public final void synpred11_fragment() throws RecognitionException {   
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:3: ( ( ( group )* ) )
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:3: ( ( group )* )
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:142:3: ( ( ( group )* ) )
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:142:3: ( ( group )* )
         {
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:3: ( ( group )* )
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:144:4: ( group )*
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:142:3: ( ( group )* )
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:4: ( group )*
         {
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:144:4: ( group )*
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:143:4: ( group )*
         loop19:
         do {
             int alt19=2;
@@ -778,7 +777,7 @@ public class FeatureParser extends EMFTextParserImpl {
 
             switch (alt19) {
         	case 1 :
-        	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:145:5: group
+        	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:144:5: group
         	    {
         	    pushFollow(FOLLOW_group_in_synpred11471);
         	    group();

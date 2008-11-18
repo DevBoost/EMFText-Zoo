@@ -513,7 +513,6 @@ import org.eclipse.uml2.uml.ProtocolTransition;
 import org.eclipse.uml2.uml.AssociationClass;
 //Implementation: org.eclipse.uml2.uml.internal.impl.AssociationClassImpl
 import org.eclipse.uml2.uml.*;
-import org.eclipse.uml2.uml.impl.*;
 //+++++++++++++++++++++++imports for org.eclipse.emf.ecore begin++++++++++++++++++++++
 import org.eclipse.emf.ecore.EAttribute;
 //Implementation: org.eclipse.emf.ecore.impl.EAttributeImpl
@@ -556,7 +555,6 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ETypeParameter;
 //Implementation: org.eclipse.emf.ecore.impl.ETypeParameterImpl
 import org.eclipse.emf.ecore.*;
-import org.eclipse.emf.ecore.impl.*;
 import org.reuseware.emftextedit.runtime.resource.*;
 import org.reuseware.emftextedit.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;

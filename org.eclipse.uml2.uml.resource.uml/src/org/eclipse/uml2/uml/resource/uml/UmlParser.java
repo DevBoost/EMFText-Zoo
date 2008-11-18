@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g 2008-11-18 18:02:51
+// $ANTLR 3.0.1 D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g 2008-11-18 19:15:23
 
 package org.eclipse.uml2.uml.resource.uml;
 
@@ -496,7 +496,6 @@ import org.eclipse.uml2.uml.ProtocolTransition;
 import org.eclipse.uml2.uml.AssociationClass;
 //Implementation: org.eclipse.uml2.uml.internal.impl.AssociationClassImpl
 import org.eclipse.uml2.uml.*;
-import org.eclipse.uml2.uml.impl.*;
 //+++++++++++++++++++++++imports for org.eclipse.emf.ecore begin++++++++++++++++++++++
 import org.eclipse.emf.ecore.EAttribute;
 //Implementation: org.eclipse.emf.ecore.impl.EAttributeImpl
@@ -539,7 +538,6 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ETypeParameter;
 //Implementation: org.eclipse.emf.ecore.impl.ETypeParameterImpl
 import org.eclipse.emf.ecore.*;
-import org.eclipse.emf.ecore.impl.*;
 import org.reuseware.emftextedit.runtime.resource.*;
 import org.reuseware.emftextedit.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;
@@ -587,7 +585,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start start
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:577:1: start returns [ EObject element = null] : c0= statemachine ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:575:1: start returns [ EObject element = null] : c0= statemachine ;
     public final EObject start() throws RecognitionException {
         EObject element =  null;
 
@@ -595,8 +593,8 @@ public class UmlParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:579:1: (c0= statemachine )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:580:1: c0= statemachine
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:577:1: (c0= statemachine )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:578:1: c0= statemachine
             {
             pushFollow(FOLLOW_statemachine_in_start61);
             c0=statemachine();
@@ -621,7 +619,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start statemachine
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:584:1: statemachine returns [StateMachine element = null] : 'StateMachine' a0= QUOTED_34_34 a1= region ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:582:1: statemachine returns [StateMachine element = null] : 'StateMachine' a0= QUOTED_34_34 a1= region ;
     public final StateMachine statemachine() throws RecognitionException {
         StateMachine element =  null;
 
@@ -633,8 +631,8 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createStateMachine();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:588:1: ( 'StateMachine' a0= QUOTED_34_34 a1= region )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:589:2: 'StateMachine' a0= QUOTED_34_34 a1= region
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:586:1: ( 'StateMachine' a0= QUOTED_34_34 a1= region )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:587:2: 'StateMachine' a0= QUOTED_34_34 a1= region
             {
             match(input,11,FOLLOW_11_in_statemachine81); if (failed) return element;
             a0=(Token)input.LT(1);
@@ -665,7 +663,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start region
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:594:1: region returns [Region element = null] : ( (a0= vertex ';' ) )* ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:592:1: region returns [Region element = null] : ( (a0= vertex ';' ) )* ;
     public final Region region() throws RecognitionException {
         Region element =  null;
 
@@ -676,10 +674,10 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createRegion();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:598:1: ( ( (a0= vertex ';' ) )* )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:599:2: ( (a0= vertex ';' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:596:1: ( ( (a0= vertex ';' ) )* )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:597:2: ( (a0= vertex ';' ) )*
             {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:599:2: ( (a0= vertex ';' ) )*
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:597:2: ( (a0= vertex ';' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -692,10 +690,10 @@ public class UmlParser extends EMFTextParserImpl {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:600:3: (a0= vertex ';' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:598:3: (a0= vertex ';' )
             	    {
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:600:3: (a0= vertex ';' )
-            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:601:4: a0= vertex ';'
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:598:3: (a0= vertex ';' )
+            	    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:599:4: a0= vertex ';'
             	    {
             	    pushFollow(FOLLOW_vertex_in_region128);
             	    a0=vertex();
@@ -733,7 +731,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start state
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:607:1: state returns [State element = null] : ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate );
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:605:1: state returns [State element = null] : ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate );
     public final State state() throws RecognitionException {
         State element =  null;
 
@@ -751,7 +749,7 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createState();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:611:1: ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:609:1: ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -764,13 +762,13 @@ public class UmlParser extends EMFTextParserImpl {
             else {
                 if (backtracking>0) {failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("607:1: state returns [State element = null] : ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate );", 4, 0, input);
+                    new NoViableAltException("605:1: state returns [State element = null] : ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate );", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:612:2: 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}'
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:610:2: 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}'
                     {
                     match(input,13,FOLLOW_13_in_state160); if (failed) return element;
                     a0=(Token)input.LT(1);
@@ -779,7 +777,7 @@ public class UmlParser extends EMFTextParserImpl {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
                     }
                     match(input,14,FOLLOW_14_in_state171); if (failed) return element;
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:615:2: ( ( 'entry' ':' a1= behavior ) )?
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:613:2: ( ( 'entry' ':' a1= behavior ) )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -788,10 +786,10 @@ public class UmlParser extends EMFTextParserImpl {
                     }
                     switch (alt2) {
                         case 1 :
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:616:3: ( 'entry' ':' a1= behavior )
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:614:3: ( 'entry' ':' a1= behavior )
                             {
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:616:3: ( 'entry' ':' a1= behavior )
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:617:4: 'entry' ':' a1= behavior
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:614:3: ( 'entry' ':' a1= behavior )
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:615:4: 'entry' ':' a1= behavior
                             {
                             match(input,15,FOLLOW_15_in_state183); if (failed) return element;
                             match(input,16,FOLLOW_16_in_state188); if (failed) return element;
@@ -811,7 +809,7 @@ public class UmlParser extends EMFTextParserImpl {
 
                     }
 
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:622:2: ( ( 'exit' ':' a2= behavior ) )?
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:620:2: ( ( 'exit' ':' a2= behavior ) )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -820,10 +818,10 @@ public class UmlParser extends EMFTextParserImpl {
                     }
                     switch (alt3) {
                         case 1 :
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:623:3: ( 'exit' ':' a2= behavior )
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:621:3: ( 'exit' ':' a2= behavior )
                             {
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:623:3: ( 'exit' ':' a2= behavior )
-                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:624:4: 'exit' ':' a2= behavior
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:621:3: ( 'exit' ':' a2= behavior )
+                            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:622:4: 'exit' ':' a2= behavior
                             {
                             match(input,17,FOLLOW_17_in_state218); if (failed) return element;
                             match(input,16,FOLLOW_16_in_state223); if (failed) return element;
@@ -857,7 +855,7 @@ public class UmlParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:634:2: c0= finalstate
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:632:2: c0= finalstate
                     {
                     pushFollow(FOLLOW_finalstate_in_state268);
                     c0=finalstate();
@@ -884,7 +882,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start finalstate
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:637:1: finalstate returns [FinalState element = null] : 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:635:1: finalstate returns [FinalState element = null] : 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' ;
     public final FinalState finalstate() throws RecognitionException {
         FinalState element =  null;
 
@@ -900,8 +898,8 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createFinalState();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:641:1: ( 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:642:2: 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}'
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:639:1: ( 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:640:2: 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}'
             {
             match(input,20,FOLLOW_20_in_finalstate287); if (failed) return element;
             match(input,13,FOLLOW_13_in_finalstate290); if (failed) return element;
@@ -911,7 +909,7 @@ public class UmlParser extends EMFTextParserImpl {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
             match(input,14,FOLLOW_14_in_finalstate301); if (failed) return element;
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:646:2: ( ( 'entry' ':' a1= behavior ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:644:2: ( ( 'entry' ':' a1= behavior ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -920,10 +918,10 @@ public class UmlParser extends EMFTextParserImpl {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:647:3: ( 'entry' ':' a1= behavior )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:645:3: ( 'entry' ':' a1= behavior )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:647:3: ( 'entry' ':' a1= behavior )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:648:4: 'entry' ':' a1= behavior
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:645:3: ( 'entry' ':' a1= behavior )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:646:4: 'entry' ':' a1= behavior
                     {
                     match(input,15,FOLLOW_15_in_finalstate313); if (failed) return element;
                     match(input,16,FOLLOW_16_in_finalstate318); if (failed) return element;
@@ -943,7 +941,7 @@ public class UmlParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:653:2: ( ( 'exit' ':' a2= behavior ) )?
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:651:2: ( ( 'exit' ':' a2= behavior ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -952,10 +950,10 @@ public class UmlParser extends EMFTextParserImpl {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:654:3: ( 'exit' ':' a2= behavior )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:652:3: ( 'exit' ':' a2= behavior )
                     {
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:654:3: ( 'exit' ':' a2= behavior )
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:655:4: 'exit' ':' a2= behavior
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:652:3: ( 'exit' ':' a2= behavior )
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:653:4: 'exit' ':' a2= behavior
                     {
                     match(input,17,FOLLOW_17_in_finalstate348); if (failed) return element;
                     match(input,16,FOLLOW_16_in_finalstate353); if (failed) return element;
@@ -1001,7 +999,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start transition
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:666:1: transition returns [Transition element = null] : 'transition' 'from' a0= TEXT 'to' a1= TEXT 'when' a2= trigger 'do' a3= behavior ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:664:1: transition returns [Transition element = null] : 'transition' 'from' a0= TEXT 'to' a1= TEXT 'when' a2= trigger 'do' a3= behavior ;
     public final Transition transition() throws RecognitionException {
         Transition element =  null;
 
@@ -1016,8 +1014,8 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createTransition();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:670:1: ( 'transition' 'from' a0= TEXT 'to' a1= TEXT 'when' a2= trigger 'do' a3= behavior )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:671:2: 'transition' 'from' a0= TEXT 'to' a1= TEXT 'when' a2= trigger 'do' a3= behavior
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:668:1: ( 'transition' 'from' a0= TEXT 'to' a1= TEXT 'when' a2= trigger 'do' a3= behavior )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:669:2: 'transition' 'from' a0= TEXT 'to' a1= TEXT 'when' a2= trigger 'do' a3= behavior
             {
             match(input,21,FOLLOW_21_in_transition406); if (failed) return element;
             match(input,22,FOLLOW_22_in_transition409); if (failed) return element;
@@ -1064,7 +1062,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start trigger
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:682:1: trigger returns [Trigger element = null] : a0= QUOTED_34_34 ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:680:1: trigger returns [Trigger element = null] : a0= QUOTED_34_34 ;
     public final Trigger trigger() throws RecognitionException {
         Trigger element =  null;
 
@@ -1074,8 +1072,8 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createTrigger();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:686:1: (a0= QUOTED_34_34 )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:687:2: a0= QUOTED_34_34
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:684:1: (a0= QUOTED_34_34 )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:685:2: a0= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
             match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_trigger472); if (failed) return element;
@@ -1098,7 +1096,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start activity
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:690:1: activity returns [Activity element = null] : a0= QUOTED_34_34 ;
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:688:1: activity returns [Activity element = null] : a0= QUOTED_34_34 ;
     public final Activity activity() throws RecognitionException {
         Activity element =  null;
 
@@ -1108,8 +1106,8 @@ public class UmlParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createActivity();
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:694:1: (a0= QUOTED_34_34 )
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:695:2: a0= QUOTED_34_34
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:692:1: (a0= QUOTED_34_34 )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:693:2: a0= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
             match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_activity495); if (failed) return element;
@@ -1132,7 +1130,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start vertex
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );
     public final Vertex vertex() throws RecognitionException {
         Vertex element =  null;
 
@@ -1142,7 +1140,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:700:1: (c0= state | c1= finalstate )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:698:1: (c0= state | c1= finalstate )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1182,7 +1180,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 18, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 18, input);
 
                                                 throw nvae;
                                             }
@@ -1190,7 +1188,7 @@ public class UmlParser extends EMFTextParserImpl {
                                         else {
                                             if (backtracking>0) {failed=true; return element;}
                                             NoViableAltException nvae =
-                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 12, input);
+                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 12, input);
 
                                             throw nvae;
                                         }
@@ -1219,7 +1217,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                         else {
                                                             if (backtracking>0) {failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 19, input);
+                                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 19, input);
 
                                                             throw nvae;
                                                         }
@@ -1227,7 +1225,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                     else {
                                                         if (backtracking>0) {failed=true; return element;}
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 14, input);
+                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 14, input);
 
                                                         throw nvae;
                                                     }
@@ -1256,7 +1254,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                                     else {
                                                                         if (backtracking>0) {failed=true; return element;}
                                                                         NoViableAltException nvae =
-                                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
+                                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
 
                                                                         throw nvae;
                                                                     }
@@ -1264,7 +1262,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                                 else {
                                                                     if (backtracking>0) {failed=true; return element;}
                                                                     NoViableAltException nvae =
-                                                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
+                                                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
 
                                                                     throw nvae;
                                                                 }
@@ -1284,7 +1282,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                                     else {
                                                                         if (backtracking>0) {failed=true; return element;}
                                                                         NoViableAltException nvae =
-                                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
+                                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
 
                                                                         throw nvae;
                                                                     }
@@ -1292,7 +1290,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                                 else {
                                                                     if (backtracking>0) {failed=true; return element;}
                                                                     NoViableAltException nvae =
-                                                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
+                                                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
 
                                                                     throw nvae;
                                                                 }
@@ -1300,7 +1298,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                             else {
                                                                 if (backtracking>0) {failed=true; return element;}
                                                                 NoViableAltException nvae =
-                                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
+                                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
 
                                                                 throw nvae;
                                                             }
@@ -1308,7 +1306,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                         else {
                                                             if (backtracking>0) {failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
+                                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
 
                                                             throw nvae;
                                                         }
@@ -1316,7 +1314,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                     else {
                                                         if (backtracking>0) {failed=true; return element;}
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 15, input);
+                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 15, input);
 
                                                         throw nvae;
                                                     }
@@ -1324,7 +1322,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                 else {
                                                     if (backtracking>0) {failed=true; return element;}
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 10, input);
+                                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 10, input);
 
                                                     throw nvae;
                                                 }
@@ -1332,7 +1330,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 7, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 7, input);
 
                                                 throw nvae;
                                             }
@@ -1358,7 +1356,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                         else {
                                                             if (backtracking>0) {failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
+                                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
 
                                                             throw nvae;
                                                         }
@@ -1366,7 +1364,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                     else {
                                                         if (backtracking>0) {failed=true; return element;}
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
+                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
 
                                                         throw nvae;
                                                     }
@@ -1386,7 +1384,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                         else {
                                                             if (backtracking>0) {failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
+                                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
 
                                                             throw nvae;
                                                         }
@@ -1394,7 +1392,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                     else {
                                                         if (backtracking>0) {failed=true; return element;}
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
+                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
 
                                                         throw nvae;
                                                     }
@@ -1402,7 +1400,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                 else {
                                                     if (backtracking>0) {failed=true; return element;}
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
+                                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
 
                                                     throw nvae;
                                                 }
@@ -1410,7 +1408,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
 
                                                 throw nvae;
                                             }
@@ -1418,7 +1416,7 @@ public class UmlParser extends EMFTextParserImpl {
                                         else {
                                             if (backtracking>0) {failed=true; return element;}
                                             NoViableAltException nvae =
-                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 13, input);
+                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 13, input);
 
                                             throw nvae;
                                         }
@@ -1426,7 +1424,7 @@ public class UmlParser extends EMFTextParserImpl {
                                     else {
                                         if (backtracking>0) {failed=true; return element;}
                                         NoViableAltException nvae =
-                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 9, input);
+                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 9, input);
 
                                         throw nvae;
                                     }
@@ -1434,7 +1432,7 @@ public class UmlParser extends EMFTextParserImpl {
                                 else {
                                     if (backtracking>0) {failed=true; return element;}
                                     NoViableAltException nvae =
-                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 6, input);
+                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 6, input);
 
                                     throw nvae;
                                 }
@@ -1462,7 +1460,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 19, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 19, input);
 
                                                 throw nvae;
                                             }
@@ -1470,7 +1468,7 @@ public class UmlParser extends EMFTextParserImpl {
                                         else {
                                             if (backtracking>0) {failed=true; return element;}
                                             NoViableAltException nvae =
-                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 14, input);
+                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 14, input);
 
                                             throw nvae;
                                         }
@@ -1499,7 +1497,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                         else {
                                                             if (backtracking>0) {failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
+                                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
 
                                                             throw nvae;
                                                         }
@@ -1507,7 +1505,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                     else {
                                                         if (backtracking>0) {failed=true; return element;}
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
+                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
 
                                                         throw nvae;
                                                     }
@@ -1527,7 +1525,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                         else {
                                                             if (backtracking>0) {failed=true; return element;}
                                                             NoViableAltException nvae =
-                                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
+                                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
 
                                                             throw nvae;
                                                         }
@@ -1535,7 +1533,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                     else {
                                                         if (backtracking>0) {failed=true; return element;}
                                                         NoViableAltException nvae =
-                                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
+                                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
 
                                                         throw nvae;
                                                     }
@@ -1543,7 +1541,7 @@ public class UmlParser extends EMFTextParserImpl {
                                                 else {
                                                     if (backtracking>0) {failed=true; return element;}
                                                     NoViableAltException nvae =
-                                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
+                                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
 
                                                     throw nvae;
                                                 }
@@ -1551,7 +1549,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
 
                                                 throw nvae;
                                             }
@@ -1559,7 +1557,7 @@ public class UmlParser extends EMFTextParserImpl {
                                         else {
                                             if (backtracking>0) {failed=true; return element;}
                                             NoViableAltException nvae =
-                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 15, input);
+                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 15, input);
 
                                             throw nvae;
                                         }
@@ -1567,7 +1565,7 @@ public class UmlParser extends EMFTextParserImpl {
                                     else {
                                         if (backtracking>0) {failed=true; return element;}
                                         NoViableAltException nvae =
-                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 10, input);
+                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 10, input);
 
                                         throw nvae;
                                     }
@@ -1575,7 +1573,7 @@ public class UmlParser extends EMFTextParserImpl {
                                 else {
                                     if (backtracking>0) {failed=true; return element;}
                                     NoViableAltException nvae =
-                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 7, input);
+                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 7, input);
 
                                     throw nvae;
                                 }
@@ -1603,7 +1601,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 20, input);
 
                                                 throw nvae;
                                             }
@@ -1611,7 +1609,7 @@ public class UmlParser extends EMFTextParserImpl {
                                         else {
                                             if (backtracking>0) {failed=true; return element;}
                                             NoViableAltException nvae =
-                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
+                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 16, input);
 
                                             throw nvae;
                                         }
@@ -1631,7 +1629,7 @@ public class UmlParser extends EMFTextParserImpl {
                                             else {
                                                 if (backtracking>0) {failed=true; return element;}
                                                 NoViableAltException nvae =
-                                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
+                                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 21, input);
 
                                                 throw nvae;
                                             }
@@ -1639,7 +1637,7 @@ public class UmlParser extends EMFTextParserImpl {
                                         else {
                                             if (backtracking>0) {failed=true; return element;}
                                             NoViableAltException nvae =
-                                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
+                                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 17, input);
 
                                             throw nvae;
                                         }
@@ -1647,7 +1645,7 @@ public class UmlParser extends EMFTextParserImpl {
                                     else {
                                         if (backtracking>0) {failed=true; return element;}
                                         NoViableAltException nvae =
-                                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
+                                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 11, input);
 
                                         throw nvae;
                                     }
@@ -1655,7 +1653,7 @@ public class UmlParser extends EMFTextParserImpl {
                                 else {
                                     if (backtracking>0) {failed=true; return element;}
                                     NoViableAltException nvae =
-                                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
+                                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 8, input);
 
                                     throw nvae;
                                 }
@@ -1664,7 +1662,7 @@ public class UmlParser extends EMFTextParserImpl {
                             default:
                                 if (backtracking>0) {failed=true; return element;}
                                 NoViableAltException nvae =
-                                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 5, input);
+                                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 5, input);
 
                                 throw nvae;
                             }
@@ -1673,7 +1671,7 @@ public class UmlParser extends EMFTextParserImpl {
                         else {
                             if (backtracking>0) {failed=true; return element;}
                             NoViableAltException nvae =
-                                new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 4, input);
+                                new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 4, input);
 
                             throw nvae;
                         }
@@ -1681,7 +1679,7 @@ public class UmlParser extends EMFTextParserImpl {
                     else {
                         if (backtracking>0) {failed=true; return element;}
                         NoViableAltException nvae =
-                            new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 3, input);
+                            new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 3, input);
 
                         throw nvae;
                     }
@@ -1689,7 +1687,7 @@ public class UmlParser extends EMFTextParserImpl {
                 else {
                     if (backtracking>0) {failed=true; return element;}
                     NoViableAltException nvae =
-                        new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 2, input);
+                        new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 2, input);
 
                     throw nvae;
                 }
@@ -1697,13 +1695,13 @@ public class UmlParser extends EMFTextParserImpl {
             else {
                 if (backtracking>0) {failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("698:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 0, input);
+                    new NoViableAltException("696:1: vertex returns [Vertex element = null] : (c0= state | c1= finalstate );", 7, 0, input);
 
                 throw nvae;
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:701:2: c0= state
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:699:2: c0= state
                     {
                     pushFollow(FOLLOW_state_in_vertex514);
                     c0=state();
@@ -1716,7 +1714,7 @@ public class UmlParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:702:2: c1= finalstate
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:700:2: c1= finalstate
                     {
                     pushFollow(FOLLOW_finalstate_in_vertex524);
                     c1=finalstate();
@@ -1743,7 +1741,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
     // $ANTLR start behavior
-    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:705:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );
+    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:703:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );
     public final Behavior behavior() throws RecognitionException {
         Behavior element =  null;
 
@@ -1753,7 +1751,7 @@ public class UmlParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:707:1: (c0= statemachine | c1= activity )
+            // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:705:1: (c0= statemachine | c1= activity )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1766,13 +1764,13 @@ public class UmlParser extends EMFTextParserImpl {
             else {
                 if (backtracking>0) {failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("705:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );", 8, 0, input);
+                    new NoViableAltException("703:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );", 8, 0, input);
 
                 throw nvae;
             }
             switch (alt8) {
                 case 1 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:708:2: c0= statemachine
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:706:2: c0= statemachine
                     {
                     pushFollow(FOLLOW_statemachine_in_behavior543);
                     c0=statemachine();
@@ -1785,7 +1783,7 @@ public class UmlParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:709:2: c1= activity
+                    // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:707:2: c1= activity
                     {
                     pushFollow(FOLLOW_activity_in_behavior553);
                     c1=activity();
@@ -1812,8 +1810,8 @@ public class UmlParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred7
     public final void synpred7_fragment() throws RecognitionException {   
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:701:2: ( state )
-        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:701:2: state
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:699:2: ( state )
+        // D:\\userdata\\work\\ete.examples\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.uml\\src\\org\\eclipse\\uml2\\uml\\resource\\uml\\Uml.g:699:2: state
         {
         pushFollow(FOLLOW_state_in_synpred7514);
         state();

@@ -620,21 +620,6 @@ public abstract class UmlPrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print("}");
 		}
-		public void printFinalState_0(FinalState element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("entry");
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print(":");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("entry");
-			if(count>0){
-				Object o =element.getEntry();
-				doPrint((EObject)o,out,localtab);
-				printCountingMap.put("entry",count-1);
-			}
-		}
 		public void printFinalState_1(FinalState element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
@@ -648,6 +633,21 @@ public abstract class UmlPrinterBase extends EMFTextPrinterImpl {
 				Object o =element.getExit();
 				doPrint((EObject)o,out,localtab);
 				printCountingMap.put("exit",count-1);
+			}
+		}
+		public void printFinalState_0(FinalState element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("entry");
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print(":");
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("entry");
+			if(count>0){
+				Object o =element.getEntry();
+				doPrint((EObject)o,out,localtab);
+				printCountingMap.put("entry",count-1);
 			}
 		}
 		public void printTransition(Transition element,String outertab,PrintWriter out){

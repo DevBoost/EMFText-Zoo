@@ -34,37 +34,37 @@ T27 : 'Group' ;
 T28 : 'type' ;
 T29 : '=' ;
 
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 189
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 188
 COMMENT
 :
 	'//'(~('\n'|'\r'))*{ channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 193
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 192
 INTEGER
 :
 	('-')?('1'..'9')('0'..'9')*|'0'
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 197
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 196
 FLOAT
 :
 	('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ { channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 201
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 200
 LB
 :
 	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 205
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 204
 WS
 :
 	(' ' | '\t' | '\f'){ channel=99; }
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 209
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 208
 TEXT
 :
 	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
 ;
-// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 213
+// $ANTLR src "D:\userdata\work\ete.examples\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 212
 QUOTED_34_34
 :
 	('"')(~('"')|('\\''"'))*('"')
