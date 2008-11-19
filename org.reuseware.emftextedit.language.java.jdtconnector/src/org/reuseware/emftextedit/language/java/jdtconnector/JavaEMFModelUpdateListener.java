@@ -10,6 +10,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
+import org.reuseware.emftextedit.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
 
 public class JavaEMFModelUpdateListener implements IElementChangedListener {
 	
@@ -44,12 +45,12 @@ public class JavaEMFModelUpdateListener implements IElementChangedListener {
 		for(ICompilationUnit cu : pFragment.getCompilationUnits()) {
 			if(pFragment.isReadOnly()) {
 				//construct binary
-				resourceFactory.registerCompiledCompilationUnit(pFragment.getElementName(), cu);
+				//FIXME resourceFactory.registerCompiledCompilationUnit(pFragment.getElementName(), cu);
 			}
 			else {
 				//source can be parsed
 				URI uri = URI.createPlatformResourceURI(cu.getPath().toString(), false);
-				resourceFactory.registerSourceCompilationUnit(pFragment.getElementName(), cu, uri);
+				//FIXME resourceFactory.registerSourceCompilationUnit(pFragment.getElementName(), cu, uri);
 			}
 		}
 	}
