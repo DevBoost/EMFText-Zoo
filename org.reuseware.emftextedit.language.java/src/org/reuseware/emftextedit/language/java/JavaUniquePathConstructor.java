@@ -22,7 +22,11 @@ import org.reuseware.emftextedit.language.java.TypedElement;
 
 public class JavaUniquePathConstructor {
 	
+	private static final String CLASSIFIERS_PATH_PREFIX = "//@classifiers[name='";
+	private static final String PATH_SUFIX = "']";
+	
 	public static final String JAVA_PATHMAP = "pathmap://java/";
+	public static final String DEFAULT_PACKAGE_NAME = "default";
 	
 	public static String convertClassifierURIToFragmentPart(URI proxyURI) {
 		return proxyURI.toString().substring(JAVA_PATHMAP.length());
@@ -99,17 +103,17 @@ public class JavaUniquePathConstructor {
 	
 	public static String getMemberURIFragmentPart(Member member) {
 
-		String uriFragment = "@member[name=" + member.getName();
+		String uriFragment = "@member[name='" + member.getName();
 		
 		if (member instanceof Method) {
-			uriFragment = uriFragment + ",parameters=";
+			uriFragment = uriFragment + "',parameters='";
 			for(Parameter param : ((Method) member).getParameters()) {
 				String uriFragmentPart = getClassifierURIFragmentPart(param.getType());
 				uriFragment = uriFragment + uriFragmentPart + " ";
 			}
 		}
 		
-		uriFragment = uriFragment + "]";
+		uriFragment = uriFragment + PATH_SUFIX;
 			
 		return uriFragment;
 	}
@@ -117,7 +121,7 @@ public class JavaUniquePathConstructor {
 	
 	public static String getMemberURIFragmentPart(PrimaryReference reference, String id) throws UnresolvedProxiesException {
 
-		String uriFragment = "@member[name=" + id;
+		String uriFragment = "@members[name='" + id;
 		
 		EList<Expression> arguments = null;
 		
@@ -138,7 +142,7 @@ public class JavaUniquePathConstructor {
 			uriFragment = uriFragment + uriFragmentPart + " ";
 		}
 		
-		uriFragment = uriFragment + "]";
+		uriFragment = uriFragment + PATH_SUFIX;
 		
 		return uriFragment;
 	}
@@ -175,7 +179,7 @@ public class JavaUniquePathConstructor {
 	public static URI getClassifierResourceURI(String packageName, String name) {
 		//TODO construct different if the packageName contains Classes and name points at an inner class
 		URI logicalUriString = 
-			URI.createURI(JAVA_PATHMAP + packageName + "/" + name + ".javax");
+			URI.createURI(JAVA_PATHMAP + packageName + "/" + name + ".java");
 		
 		return logicalUriString;
 	}
@@ -183,8 +187,30 @@ public class JavaUniquePathConstructor {
 	public static URI getClassifierURI(String packageName, String name) {
 		URI logicalUriString = getClassifierResourceURI(packageName, name);
 		//TODO construct different if the packageName contains Classes and name points at an inner class
-		logicalUriString = logicalUriString.appendFragment(name);
+		logicalUriString = logicalUriString.appendFragment(CLASSIFIERS_PATH_PREFIX + name + PATH_SUFIX);
 		return logicalUriString;
 	}
+	
+	public static boolean pointsAtClassifie(URI proxyURI, String classifierName) {
+		String nameInProxy = proxyURI.fragment().substring(CLASSIFIERS_PATH_PREFIX.length());
+		nameInProxy = nameInProxy.substring(0, nameInProxy.length() - PATH_SUFIX.length());
+		return nameInProxy.equals(classifierName);
+	}
 
+	public static String packageName(CompilationUnit cu) {
+		String packageName = null;
+		for(String packageNameFragment : cu.getPackage()) {
+			if (packageName == null) {
+				packageName = packageNameFragment;
+			}
+			else {
+				packageName = packageName + "." + packageNameFragment;
+			}
+		}
+		
+		if (packageName == null) {
+			packageName = DEFAULT_PACKAGE_NAME;
+		}
+		return packageName;
+	}
 }
