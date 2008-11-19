@@ -150,9 +150,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	/**
 	 * This method is executed before every single test and initializes fields
 	 * typically needed by the test cases
+	 * @throws Exception 
 	 */
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 	}
 
 	@Test

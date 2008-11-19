@@ -17,9 +17,15 @@ import org.reuseware.emftextedit.language.java.Statement;
 public class MethodCallResolverTest extends AbstractResolverTest {
 	
 	@Before
-	public void setUp() {
-		JavaClasspath.INSTANCE.registerClassifier("java.lang", "Object", null);
+	public void setUp() throws Exception {
+		super.setUp();
+		
+		JavaClasspath.INSTANCE.registerClassifierJar(
+				"/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar");
+		
 	}
+	
+	
 	
 	@Test
 	public void testReferencing() throws Exception {

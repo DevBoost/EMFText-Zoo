@@ -45,6 +45,8 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 		assertIsCallToMethod(methodStatements2.get(2), method3);
 		// the last call should refer to m4, because of the signature
 		assertIsCallToMethod(methodStatements2.get(3), method4);
+		
+		assertResolveAllProxies(clazz);
 	}
 
 	private void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
