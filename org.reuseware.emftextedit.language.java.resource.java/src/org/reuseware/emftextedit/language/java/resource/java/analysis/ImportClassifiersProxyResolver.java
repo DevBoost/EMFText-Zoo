@@ -36,15 +36,7 @@ public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
 		
 		Import theImport = (Import) container;
 		
-		String packageName = null;
-		for(String packageNameFragment : theImport.getPackage()) {
-			if (packageName == null) {
-				packageName = packageNameFragment;
-			}
-			else {
-				packageName = packageName + "." + packageNameFragment;
-			}
-		}
+		String packageName = createPackageName(theImport);
 		
 		EList<Classifier> classifiers =  
 			JavaClasspath.INSTANCE.getClassifiers(packageName, proxy.eProxyURI().fragment());
@@ -58,6 +50,19 @@ public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
 		} else {
 			return null;
 		}
+	}
+	
+	public static String createPackageName(Import theImport) {
+		String packageName = null;
+		for(String packageNameFragment : theImport.getPackage()) {
+			if (packageName == null) {
+				packageName = packageNameFragment;
+			}
+			else {
+				packageName = packageName + "." + packageNameFragment;
+			}
+		}
+		return packageName;
 	}
 
 }

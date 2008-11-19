@@ -1,5 +1,7 @@
 package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -8,10 +10,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.reuseware.emftextedit.language.java.Assignment;
+import org.reuseware.emftextedit.language.java.Classifier;
 import org.reuseware.emftextedit.language.java.CompilationUnit;
 import org.reuseware.emftextedit.language.java.Expression;
+import org.reuseware.emftextedit.language.java.Import;
 import org.reuseware.emftextedit.language.java.JavaClasspath;
 import org.reuseware.emftextedit.language.java.JavaPackage;
 import org.reuseware.emftextedit.language.java.JavaUniquePathConstructor;
@@ -31,6 +37,9 @@ import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
 
 public abstract class ReferenceResolver extends ProxyResolverImpl {
 
+	
+	protected TextResource myResource = null;
+	
 	//candidates for template methods
 	
 	protected boolean breakIfNext(EObject element, EClass typeToResolve) {
@@ -60,6 +69,8 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	protected String doDeResolve(EObject element, EObject container,
 			EReference reference) {
 		
+		EcoreUtil.resolveAll(element);
+		
 		if (!element.eIsProxy() && (element instanceof NamedElement)) {
 			return ((NamedElement) element).getName();
 		}
@@ -72,8 +83,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	protected EObject doResolve(InternalEObject proxy, EObject container,
 			EReference reference, TextResource resource) {
 		
-		//set the default imports in the compilation unit (TODO this could be done in one initialization)
-		setDefaultImports(container);
+		myResource = resource;
 		
 		try {
 			EObject result = null;
@@ -107,7 +117,6 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			return null;
 		}
 	}
-	
 
 	protected EObject findScoped(InternalEObject proxy, EObject context, EObject endOfScopeElement,
 			EClass type) throws UnresolvedProxiesException {
@@ -128,41 +137,14 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		//search in next scope
 		return findScoped(proxy, context, container, type);
 	}
-	
-	
-	protected void setDefaultImports(EObject context) {
-		CompilationUnit cu = (CompilationUnit) EcoreUtil.getRootContainer(context);
-		
-		if(!cu.getImplicitImportedClassifiers().isEmpty()) {
-			//already done
-			return;
-		}
-		
-		String packageName = null;
-		for(String packageNameFragment : cu.getPackage()) {
-			if (packageName == null) {
-				packageName = packageNameFragment;
-			}
-			else {
-				packageName = packageName + "." + packageNameFragment;
-			}
-		}
-		
-		//my package
-		cu.getImplicitImportedClassifiers().addAll(
-				JavaClasspath.INSTANCE.getClassifiers(packageName, "*"));
-
-		//java.lang package	
-		cu.getImplicitImportedClassifiers().addAll(
-				JavaClasspath.INSTANCE.getClassifiers("java.lang", "*"));
-		
-	}
 
 	protected EObject find(InternalEObject proxy, EObject context, EObject element,  EObject container, EClass type) throws UnresolvedProxiesException {
 		EList<EObject> contentsList = new BasicEList<EObject>();
 		contentsList.addAll(container.eContents());
 		if (container instanceof CompilationUnit) {
-			contentsList.addAll(((CompilationUnit) container).getImplicitImportedClassifiers());
+			CompilationUnit cu = (CompilationUnit) container;
+			String packageName = JavaUniquePathConstructor.packageName(cu);
+			contentsList.addAll(JavaClasspath.INSTANCE.getDefaultImports(packageName));
 		}
 		
 		for(EObject cand : contentsList) {
@@ -194,7 +176,6 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		}
 		return null;
 	}
-
 	
 	protected boolean hasCorrectType(EObject object, EClass eClass) {
 		if(object.eClass().equals(eClass)) {
@@ -216,17 +197,20 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			PrimaryReference primaryRef = reference.getPrimary();
 			//referenced element point to a type
 			if (primaryRef instanceof TypedElement /*NewConstructorCall*/) {
-				TypeReference typeRef = ((TypedElement) primaryRef).getType(); //TODO ensure that that getType does not resolve proxies
+				TypeReference typeRef = ((TypedElement) primaryRef).getType();
 				type = getReferencedType(typeRef);
 			}
 			//referenced element points to an element with a type
 			else if (primaryRef instanceof PackageOrClassifierOrMethodOrVariableReference) {
-				ReferenceableElement target = ((PackageOrClassifierOrMethodOrVariableReference) primaryRef).getTarget(); //TODO ensure that getTarget does not resolve proxies
+				ReferenceableElement target = 
+					(ReferenceableElement) ((PackageOrClassifierOrMethodOrVariableReference) primaryRef).eGet(
+						JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET, false);
 				if (target.eIsProxy()) {
 					if(isInternalProxy((InternalEObject)target)) {
 						throw new UnresolvedProxiesException();
 					}
 					else {
+						System.out.println("c");
 						URI proxyURI = ((InternalEObject)target).eProxyURI();
 						//TODO ??
 					}
@@ -240,6 +224,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		}
 		else {
 			//TODO what other cases?
+			System.out.println("X");
 		}
 		
 		return type;
@@ -250,7 +235,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		if (typeRef instanceof TypeReferenceSequence) {
 			//TODO @mseifert is it okay that e.g. a ConstructorCall has a list of types?
 			PackageOrClassifierReference classRef = ((TypeReferenceSequence) typeRef).getParts().get(0);
-			type = classRef.getTarget();
+			type = (Type) classRef.eGet(JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET, false);
 			if (isInternalProxy((InternalEObject)type)) {
 				throw new UnresolvedProxiesException();
 			}
@@ -299,7 +284,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			
 			//is it an external proxy 
 			if(referencedElement.eIsProxy() && !isInternalProxy((InternalEObject) referencedElement)) {
-				if (((InternalEObject)referencedElement).eProxyURI().fragment().endsWith(id)) {
+				if (JavaUniquePathConstructor.pointsAtClassifie(((InternalEObject)referencedElement).eProxyURI(), id)) { 
 					return true;
 				}
 			}
@@ -344,37 +329,90 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	
 	protected EObject tryToConvertToExternalProxy(InternalEObject proxy, EObject context) throws UnresolvedProxiesException {
 		String id = proxy.eProxyURI().fragment();
-		if (!(context instanceof PackageOrClassifierOrMethodOrVariableReference)) {
+		if (!(context instanceof PackageOrClassifierOrMethodOrVariableReference ||
+				context instanceof PackageOrClassifierReference)) {
 			return null;
 		}
+
+		
+		Type type =null;
+		
+		//type defined by previous
 		EObject container = context.eContainer();
-		if (!(container instanceof Reference)) {
-			return null;
+		if (container.eContainer() instanceof Reference) {
+			Reference previous = (Reference) container.eContainer();
+			type = getTypeOfReferencedElement(previous);
+			if (type == null) {
+				return null;
+			}
+			if (isInternalProxy((InternalEObject) type)) {
+				throw new UnresolvedProxiesException();
+			}
+			URI externalProxyURI = null;
+			if (type.eIsProxy()) {	
+				externalProxyURI = 
+					((InternalEObject) type).eProxyURI();
+			}
+			else {
+				//the reference can be declared in an external superclass, create a porxy
+				CompilationUnit cu = (CompilationUnit) EcoreUtil.getRootContainer(type);
+				externalProxyURI = JavaUniquePathConstructor.getClassifierURI(
+						JavaUniquePathConstructor.packageName(cu), ((NamedElement)type).getName());
+			}
+			String fragment = externalProxyURI.fragment();
+			fragment = fragment + "/" + JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
+			externalProxyURI = externalProxyURI.appendFragment(fragment);
+			proxy.eSetProxyURI(externalProxyURI);
+			return proxy;
 		}
-		Reference previous = (Reference) container;
-		Type type = getTypeOfReferencedElement(previous);
-		if (type == null) {
-			return null;
+		else {
+			return findTypeInImports(id, context);
 		}
-		assert type != null;
-		if (isInternalProxy((InternalEObject) type)) {
-			throw new UnresolvedProxiesException();
+
+		
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected Type findTypeInImports(String id, EObject context) {
+		CompilationUnit cu = (CompilationUnit) EcoreUtil.getRootContainer(context);
+		
+		for(Import i : cu.getImports()) {
+			InternalEList<InternalEObject> extProxies = (InternalEList<InternalEObject>) 
+				i.eGet(JavaPackage.Literals.IMPORT__CLASSIFIERS, 
+				false /*do not resolved!*/);
+			
+			
+			for(Iterator<InternalEObject> candIt = extProxies.basicIterator(); candIt.hasNext(); ) {
+				InternalEObject cand = candIt.next();
+				if(JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), id)) { 
+					return (Type) cand;
+				}
+			}
 		}
 		
-		String fragment = ((InternalEObject) type).eProxyURI().fragment();
-		fragment = fragment + "/" + JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
-		URI externalProxyURI = 
-			((InternalEObject) type).eProxyURI().appendFragment(fragment);
-		proxy.eSetProxyURI(externalProxyURI);
-		return proxy;
+		//TODO do the same for defaults, there should be one getAllImportend classifiers method on CU
+		EList<Classifier> extProxies = 
+			JavaClasspath.INSTANCE.getDefaultImports(
+					JavaUniquePathConstructor.packageName(cu));
+		
+		for(Iterator<Classifier> candIt = extProxies.iterator(); candIt.hasNext(); ) {
+			InternalEObject cand = (InternalEObject) candIt.next();
+			if(JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), id)) { 
+				return (Type) cand;
+			}
+		}
+		
+		return null;
 	}
+	
 	
 	protected boolean isInternalProxy(InternalEObject proxy) {
 		if (!proxy.eIsProxy()) {
 			return false;
 		}
 		
-		if (proxy.eProxyURI().fileExtension().contains("javax")) { //TODO condition should use own URI
+		if (!proxy.eProxyURI().trimFragment().equals(myResource.getURI())) { //TODO condition should use own URI
 			return false;
 		}
 		return true;
