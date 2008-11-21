@@ -22,21 +22,22 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 
 	public Resource createResource(URI uri){
 		//is there a physical source file behind this URI?
-		URI normailzeURI = myURIConverter.normalize(uri);
+		URI normailzedURI = myURIConverter.normalize(uri);
 
-		if("pathmap:".equals(normailzeURI.scheme())) {
+		if("pathmap".equals(normailzedURI.scheme())) {
 			//something wrong
 			System.out.println("Warning: " + uri + " not registered in ClassPath");
 			return new JavaResourceImpl(uri);
 		}
 		
-		if(normailzeURI.fileExtension().equals("java")) {
-			if(!"pathmap".equals(normailzeURI.scheme())) {
-				loadAndRegister(uri);
+		if(normailzedURI.fileExtension().equals("java")) {
+			if(!JavaClasspath.INSTANCE.URI_MAP.values().contains(normailzedURI)) {
+				//not yet registered in classpath
+				loadAndRegister(normailzedURI);
 			}
 			return new JavaResourceImpl(uri);
 		}
-		if(normailzeURI.fileExtension().equals("class"))  {
+		if(normailzedURI.fileExtension().equals("class"))  {
 			return new JavaClassFileResorce(uri);
 		}
 		
@@ -50,7 +51,7 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 		try {
 			tempResource.load(null);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		if (!tempResource.getContents().isEmpty()) {
 			CompilationUnit cu = (CompilationUnit) tempResource.getContents().get(0);
