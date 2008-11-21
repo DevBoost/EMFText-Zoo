@@ -19,6 +19,7 @@ import org.reuseware.emftextedit.language.java.CompilationUnit;
 import org.reuseware.emftextedit.language.java.Expression;
 import org.reuseware.emftextedit.language.java.Import;
 import org.reuseware.emftextedit.language.java.JavaClasspath;
+import org.reuseware.emftextedit.language.java.JavaFactory;
 import org.reuseware.emftextedit.language.java.JavaPackage;
 import org.reuseware.emftextedit.language.java.JavaUniquePathConstructor;
 import org.reuseware.emftextedit.language.java.NamedElement;
@@ -75,7 +76,8 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			return ((NamedElement) element).getName();
 		}
 		else {
-			return "UNDEFINED"; //TODO ?
+			return "UNDEFINED"; 
+			//TODO ?
 		}
 	}
 
@@ -360,7 +362,12 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 						JavaUniquePathConstructor.packageName(cu), ((NamedElement)type).getName());
 			}
 			String fragment = externalProxyURI.fragment();
-			fragment = fragment + "/" + JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
+			String fragmentPart =  JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
+			if (fragmentPart == null) {
+				//can not yet be resolved
+				return null;
+			}
+			fragment = fragment + "/" + fragmentPart;
 			externalProxyURI = externalProxyURI.appendFragment(fragment);
 			proxy.eSetProxyURI(externalProxyURI);
 			return proxy;
@@ -403,7 +410,11 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			}
 		}
 		
-		return null;
+		//assume type to be in own package (but not yet registered)
+		InternalEObject classifierProxy = (InternalEObject) JavaFactory.eINSTANCE.createClass();
+		classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(JavaUniquePathConstructor.packageName(cu), id));
+		
+		return (Type) classifierProxy;
 	}
 	
 	
