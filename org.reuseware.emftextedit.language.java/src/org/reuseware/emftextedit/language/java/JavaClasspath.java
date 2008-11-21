@@ -23,7 +23,7 @@ public class JavaClasspath {
 
 	public static final JavaClasspath INSTANCE = new JavaClasspath();
 	
-	protected Map<URI, URI> URI_MAP = URIConverter.URI_MAP;
+	public final Map<URI, URI> URI_MAP = URIConverter.URI_MAP;
 
 	protected Map<String, List<String>> packageClassifierMap =
 		new HashMap<String, List<String>>();
@@ -88,6 +88,8 @@ public class JavaClasspath {
 		}
 	}
 	
+	private EList<Classifier> javaLangPackage = null;
+	
 	/**
 	 * Constructs a list of proxies that point at the classifiers of the given package
 	 * 
@@ -119,7 +121,12 @@ public class JavaClasspath {
 		resultList.addAll(getClassifiers(packageName, "*"));
 
 		//java.lang package	
-		resultList.addAll(getClassifiers("java.lang", "*"));
+		if (javaLangPackage == null) {
+			javaLangPackage = new BasicEList<Classifier>();
+			javaLangPackage.addAll(getClassifiers("java.lang", "*"));
+		}
+		
+		resultList.addAll(javaLangPackage);
 		
 		return resultList;
 	}
