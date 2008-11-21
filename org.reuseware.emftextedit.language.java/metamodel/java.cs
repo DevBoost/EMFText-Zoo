@@ -259,8 +259,7 @@ JumpLabel
 	::= name[] ":" statement ;
 
 Assignment
-	::= target ("=" value)?
-	;
+	::= target "=" value;
 
 // TODO was a subtype of Expression, but this generalization was
 // temporarily removed, because variable declarations could not
@@ -273,8 +272,26 @@ ExpressionList
 	::= expressions ("," expressions)* 
 	;
 
+UnaryExpression
+    ::= operator unaryExpressionNotPlusMinus
+    |	operatorIncDec unaryExpressionNotPlusMinus
+    |   unaryExpressionNotPlusMinus
+    ;
+    
 UnaryExpressionNotPlusMinus
-	::= expression ("++")?;
+	::= operatorNotPlusMinus reference
+	|   reference (operatorIncDec)?
+//    |   expression (operatorIncDec)?
+//    |   castExpression
+    
+    ;
+	
+UnaryOperatorPlusPlus 	::= "++";
+UnaryOperatorMinusMinus ::= "--";
+UnaryOperatorPlus		::= "+";
+UnaryOperatorMinus		::= "-";
+UnaryOperatorNegation	::= "!";
+UnaryOperatorWave		::= "~";
 	
 BooleanExpression
 	::=	

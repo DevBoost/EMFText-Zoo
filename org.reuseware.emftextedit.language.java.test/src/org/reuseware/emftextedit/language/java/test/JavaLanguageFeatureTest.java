@@ -566,16 +566,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
-	public void testIncDec() throws Exception {
-		String typename = "IncDec";
-		String filename = typename + ".java";
-		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
-
-		parseAndReprint(filename);
-	}
-
-	@Test
 	public void testIOneMethod() throws Exception {
 		String typename = "IOneMethod";
 		String filename = typename + ".java";
@@ -814,6 +804,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 
+	@Test
+	public void testUnaryExpressions() throws Exception {
+		String typename = "UnaryExpressions";
+		String filename = typename + ".java";
+		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
 	@Test
 	public void testVariableLengthArgumentList() throws Exception {
 		String typename = "VariableLengthArgumentList";
