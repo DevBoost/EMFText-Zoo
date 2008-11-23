@@ -30,6 +30,9 @@ public class JavaClasspath {
 	
 	public JavaClasspath() {
 		try {
+			// TODO implement this in a platform-independent way
+			// maybe System.getProperty("sun.boot.class.path") is a
+			// useful quick fix?
 			registerClassifierJar(
 				"/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar");
 		} catch (IOException e) {
