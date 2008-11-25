@@ -76,15 +76,15 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			String localtab = outertab;
 			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(5);
 			Object temp;
-			temp = element.getConstraints();
+			temp = element.eGet(element.eClass().getEStructuralFeature("constraints"));
 			printCountingMap.put("constraints", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
-			temp = element.getRoot();
+			temp = element.eGet(element.eClass().getEStructuralFeature("root"));
 			printCountingMap.put("root", temp == null ? 0 : 1);
-			temp = element.getName();
+			temp = element.eGet(element.eClass().getEStructuralFeature("name"));
 			printCountingMap.put("name", temp == null ? 0 : 1);
-			temp = element.getChildren();
+			temp = element.eGet(element.eClass().getEStructuralFeature("children"));
 			printCountingMap.put("children", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
-			temp = element.getParent();
+			temp = element.eGet(element.eClass().getEStructuralFeature("parent"));
 			printCountingMap.put("parent", temp == null ? 0 : 1);
 			int count;
 			//////////////DEFINITION PART BEGINS (CsString):
@@ -92,7 +92,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("name");
 			if(count>0){
-				Object o =element.getName();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("name"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("name"),element));
@@ -116,24 +116,10 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (Containment):
 			count = printCountingMap.get("root");
 			if(count>0){
-				Object o =element.getRoot();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("root"));
 				doPrint((EObject)o,out,localtab);
 				printCountingMap.put("root",count-1);
 			}
-		}
-		public void printFeatureModel_0_0(FeatureModel element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("constraints");
-			if(count>0){
-				Object o =element.getConstraints();
-				o = ((List<Object>)o).get(((List<Object>)o).size()-count);
-				doPrint((EObject)o,out,localtab);
-				printCountingMap.put("constraints",count-1);
-			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print(";");
 		}
 		public void printFeatureModel_0(FeatureModel element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
@@ -159,41 +145,35 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print("}");
 		}
+		public void printFeatureModel_0_0(FeatureModel element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("constraints");
+			if(count>0){
+				Object o =element.eGet(element.eClass().getEStructuralFeature("constraints"));
+				o = ((List<Object>)o).get(((List<Object>)o).size()-count);
+				doPrint((EObject)o,out,localtab);
+				printCountingMap.put("constraints",count-1);
+			}
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print(";");
+		}
 		public void printConstraint(Constraint element,String outertab,PrintWriter out){
 			String localtab = outertab;
-			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(3);
+			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(2);
 			Object temp;
-			temp = element.getLanguage();
+			temp = element.eGet(element.eClass().getEStructuralFeature("language"));
 			printCountingMap.put("language", temp == null ? 0 : 1);
-			temp = element.getExpression();
+			temp = element.eGet(element.eClass().getEStructuralFeature("expression"));
 			printCountingMap.put("expression", temp == null ? 0 : 1);
-			temp = element.getConstrainedFeatures();
-			printCountingMap.put("constrainedFeatures", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
 			int count;
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print("Constraint");
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("(");
-			//////////////DEFINITION PART BEGINS (CompoundDefinition):
-			StringWriter sWriter = new StringWriter();
-			PrintWriter out1 = new PrintWriter(sWriter);
-			HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = new HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			printConstraint_0(element,localtab,out1,printCountingMap1);
-			if(printCountingMap.equals(printCountingMap1)){
-				out1.close();
-			}
-			else{
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print(")");
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("language");
 			if(count>0){
-				Object o =element.getLanguage();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("language"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("language"),element));
@@ -205,7 +185,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("expression");
 			if(count>0){
-				Object o =element.getExpression();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("expression"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("expression"),element));
@@ -213,77 +193,29 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				printCountingMap.put("expression",count-1);
 			}
 		}
-		public void printConstraint_0(Constraint element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
-			count = printCountingMap.get("constrainedFeatures");
-			if(count>0){
-				Object o =element.getConstrainedFeatures();
-				o = ((List<Object>)o).get(((List<Object>)o).size()-count);
-				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");resolver.setOptions(getOptions());out.print(resolver.deResolve(treeAnalyser.deResolve((EObject)o,element,(EReference)element.eClass().getEStructuralFeature("constrainedFeatures")),element.eClass().getEStructuralFeature("constrainedFeatures"),element));
-				printCountingMap.put("constrainedFeatures",count-1);
-			}
-			//////////////DEFINITION PART BEGINS (CompoundDefinition):
-			boolean iterate = true;
-			while(iterate){
-				StringWriter sWriter = new StringWriter();
-				PrintWriter out1 = new PrintWriter(sWriter);
-				HashMap<java.lang.String, java.lang.Integer> printCountingMap1 = new HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-				printConstraint_0_0(element,localtab,out1,printCountingMap1);
-				if(printCountingMap.equals(printCountingMap1)){
-					iterate = false;
-					out1.close();
-				}
-				else{
-					out1.flush();
-					out1.close();
-					out.print(sWriter.toString());
-					printCountingMap.putAll(printCountingMap1);
-				}
-			}
-		}
-		public void printConstraint_0_0(Constraint element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print(",");
-			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
-			count = printCountingMap.get("constrainedFeatures");
-			if(count>0){
-				Object o =element.getConstrainedFeatures();
-				o = ((List<Object>)o).get(((List<Object>)o).size()-count);
-				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");resolver.setOptions(getOptions());out.print(resolver.deResolve(treeAnalyser.deResolve((EObject)o,element,(EReference)element.eClass().getEStructuralFeature("constrainedFeatures")),element.eClass().getEStructuralFeature("constrainedFeatures"),element));
-				printCountingMap.put("constrainedFeatures",count-1);
-			}
-		}
 		public void printFeature(Feature element,String outertab,PrintWriter out){
 			String localtab = outertab;
-			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(8);
+			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(6);
 			Object temp;
-			temp = element.getName();
+			temp = element.eGet(element.eClass().getEStructuralFeature("name"));
 			printCountingMap.put("name", temp == null ? 0 : 1);
-			temp = element.getMinCardinality();
+			temp = element.eGet(element.eClass().getEStructuralFeature("minCardinality"));
 			printCountingMap.put("minCardinality", temp == null ? 0 : 1);
-			temp = element.getMaxCardinality();
+			temp = element.eGet(element.eClass().getEStructuralFeature("maxCardinality"));
 			printCountingMap.put("maxCardinality", temp == null ? 0 : 1);
-			temp = element.getAttributes();
+			temp = element.eGet(element.eClass().getEStructuralFeature("attributes"));
 			printCountingMap.put("attributes", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
-			temp = element.getGroups();
+			temp = element.eGet(element.eClass().getEStructuralFeature("groups"));
 			printCountingMap.put("groups", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
-			temp = element.getParentGroup();
+			temp = element.eGet(element.eClass().getEStructuralFeature("parentGroup"));
 			printCountingMap.put("parentGroup", temp == null ? 0 : 1);
-			temp = element.getAnnotations();
-			printCountingMap.put("annotations", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
-			temp = element.getConstraints();
-			printCountingMap.put("constraints", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
 			int count;
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print("Feature");
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("name");
 			if(count>0){
-				Object o =element.getName();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("name"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("name"),element));
@@ -332,34 +264,6 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				out.print(sWriter.toString());
 				printCountingMap.putAll(printCountingMap1);
 			}
-			//////////////DEFINITION PART BEGINS (CompoundDefinition):
-			sWriter = new StringWriter();
-			out1 = new PrintWriter(sWriter);
-			printCountingMap1 = new HashMap<java.lang.String, java.lang.Integer>(printCountingMap);
-			printFeature_3(element,localtab,out1,printCountingMap1);
-			if(printCountingMap.equals(printCountingMap1)){
-				out1.close();
-			}
-			else{
-				out1.flush();
-				out1.close();
-				out.print(sWriter.toString());
-				printCountingMap.putAll(printCountingMap1);
-			}
-		}
-		public void printFeature_3(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("groups");
-			if(count>0){
-				ListIterator it  = ((List)element.getGroups()).listIterator(((List)element.getGroups()).size()-count);
-				while(it.hasNext()){
-					Object o = it.next();
-					doPrint((EObject)o,out,localtab);
-				}
-				printCountingMap.put("groups",0);
-			}
 		}
 		public void printFeature_0(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
@@ -369,7 +273,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DefinedPlaceholder):
 			count = printCountingMap.get("minCardinality");
 			if(count>0){
-				Object o =element.getMinCardinality();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("minCardinality"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("minCardinality"),element));
@@ -381,7 +285,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DefinedPlaceholder):
 			count = printCountingMap.get("maxCardinality");
 			if(count>0){
-				Object o =element.getMaxCardinality();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("maxCardinality"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("maxCardinality"),element));
@@ -391,25 +295,21 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print(")");
 		}
-		public void printFeature_1(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		public void printFeature_2(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("/*");
 			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("attributes");
+			count = printCountingMap.get("groups");
 			if(count>0){
-				ListIterator it  = ((List)element.getAttributes()).listIterator(((List)element.getAttributes()).size()-count);
+				ListIterator it  = ((List)element.eGet(element.eClass().getEStructuralFeature("groups"))).listIterator(((List)element.eGet(element.eClass().getEStructuralFeature("groups"))).size()-count);
 				while(it.hasNext()){
 					Object o = it.next();
 					doPrint((EObject)o,out,localtab);
 				}
-				printCountingMap.put("attributes",0);
+				printCountingMap.put("groups",0);
 			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("*/");
 		}
-		public void printFeature_2(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+		public void printFeature_1(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
 			//////////////DEFINITION PART BEGINS (CsString):
@@ -417,7 +317,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (Containment):
 			count = printCountingMap.get("attributes");
 			if(count>0){
-				ListIterator it  = ((List)element.getAttributes()).listIterator(((List)element.getAttributes()).size()-count);
+				ListIterator it  = ((List)element.eGet(element.eClass().getEStructuralFeature("attributes"))).listIterator(((List)element.eGet(element.eClass().getEStructuralFeature("attributes"))).size()-count);
 				while(it.hasNext()){
 					Object o = it.next();
 					doPrint((EObject)o,out,localtab);
@@ -431,13 +331,13 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			String localtab = outertab;
 			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(4);
 			Object temp;
-			temp = element.getMinCardinality();
+			temp = element.eGet(element.eClass().getEStructuralFeature("minCardinality"));
 			printCountingMap.put("minCardinality", temp == null ? 0 : 1);
-			temp = element.getMaxCardinality();
+			temp = element.eGet(element.eClass().getEStructuralFeature("maxCardinality"));
 			printCountingMap.put("maxCardinality", temp == null ? 0 : 1);
-			temp = element.getParentFeature();
+			temp = element.eGet(element.eClass().getEStructuralFeature("parentFeature"));
 			printCountingMap.put("parentFeature", temp == null ? 0 : 1);
-			temp = element.getChildFeatures();
+			temp = element.eGet(element.eClass().getEStructuralFeature("childFeatures"));
 			printCountingMap.put("childFeatures", temp == null ? 0 : ((java.util.Collection<?>)temp).size());
 			int count;
 			//////////////DEFINITION PART BEGINS (CsString):
@@ -471,24 +371,6 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				printCountingMap.putAll(printCountingMap1);
 			}
 		}
-		public void printGroup_1(Group element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("{");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("childFeatures");
-			if(count>0){
-				ListIterator it  = ((List)element.getChildFeatures()).listIterator(((List)element.getChildFeatures()).size()-count);
-				while(it.hasNext()){
-					Object o = it.next();
-					doPrint((EObject)o,out,localtab);
-				}
-				printCountingMap.put("childFeatures",0);
-			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("}");
-		}
 		public void printGroup_0(Group element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
@@ -497,7 +379,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DefinedPlaceholder):
 			count = printCountingMap.get("minCardinality");
 			if(count>0){
-				Object o =element.getMinCardinality();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("minCardinality"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("minCardinality"),element));
@@ -509,7 +391,7 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DefinedPlaceholder):
 			count = printCountingMap.get("maxCardinality");
 			if(count>0){
-				Object o =element.getMaxCardinality();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("maxCardinality"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("INTEGER");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("maxCardinality"),element));
@@ -519,23 +401,41 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print(")");
 		}
+		public void printGroup_1(Group element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("{");
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("childFeatures");
+			if(count>0){
+				ListIterator it  = ((List)element.eGet(element.eClass().getEStructuralFeature("childFeatures"))).listIterator(((List)element.eGet(element.eClass().getEStructuralFeature("childFeatures"))).size()-count);
+				while(it.hasNext()){
+					Object o = it.next();
+					doPrint((EObject)o,out,localtab);
+				}
+				printCountingMap.put("childFeatures",0);
+			}
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("}");
+		}
 		public void printAttribute(Attribute element,String outertab,PrintWriter out){
 			String localtab = outertab;
 			java.util.Map<java.lang.String, java.lang.Integer> printCountingMap = new java.util.HashMap<java.lang.String, java.lang.Integer>(4);
 			Object temp;
-			temp = element.getFeature();
+			temp = element.eGet(element.eClass().getEStructuralFeature("feature"));
 			printCountingMap.put("feature", temp == null ? 0 : 1);
-			temp = element.getName();
+			temp = element.eGet(element.eClass().getEStructuralFeature("name"));
 			printCountingMap.put("name", temp == null ? 0 : 1);
-			temp = element.getType();
+			temp = element.eGet(element.eClass().getEStructuralFeature("type"));
 			printCountingMap.put("type", temp == null ? 0 : 1);
-			temp = element.getValue();
+			temp = element.eGet(element.eClass().getEStructuralFeature("value"));
 			printCountingMap.put("value", temp == null ? 0 : 1);
 			int count;
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("type");
 			if(count>0){
-				Object o =element.getType();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("type"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("type"),element));
@@ -545,26 +445,30 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("name");
 			if(count>0){
-				Object o =element.getName();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("name"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("TEXT");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("name"),element));
 				
 				printCountingMap.put("name",count-1);
 			}
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("type");
+			//////////////DEFINITION PART BEGINS (WhiteSpaces):
+			out.print(" ");
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print("=");
 			//////////////DEFINITION PART BEGINS (DerivedPlaceholder):
 			count = printCountingMap.get("value");
 			if(count>0){
-				Object o =element.getValue();
+				Object o =element.eGet(element.eClass().getEStructuralFeature("value"));
 				TokenResolver resolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");
 				resolver.setOptions(getOptions());
 				out.print(resolver.deResolve((Object)o,element.eClass().getEStructuralFeature("value"),element));
 				
 				printCountingMap.put("value",count-1);
 			}
+			//////////////DEFINITION PART BEGINS (LineBreak):
+			localtab += "		";
+			out.println();
+			out.print(localtab);
 		}
 		}

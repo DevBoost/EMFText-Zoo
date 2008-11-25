@@ -10,22 +10,16 @@ TOKENS{
 
 RULES{
 		
-		FeatureModel::= "FeatureModel"  name['"','"'] ( "{" "constraints"  ( constraints ";")? "}" )?   root  ;
-		
-		Constraint::= "Constraint" "(" (constrainedFeatures[] ("," constrainedFeatures[])*)? ")" 
-					 language[] ":" expression['"','"'];
-	
-		
+		FeatureModel::= "FeatureModel"  name['"','"'] 
+						( "{" "constraints"  ( constraints ";")? "}" )? 
+						root;
+		Constraint::= "Constraint" language[] ":" expression['"','"'];
 		Feature::= "Feature" name['"','"'] 
-					
-					("(" minCardinality[INTEGER]".." maxCardinality[INTEGER] ")")? 
-					("/*" attributes* "*/")? 
+					("(" minCardinality[INTEGER] ".." maxCardinality[INTEGER] ")")?
 					("[" attributes* "]")? 
 					( groups* )?  ;
-		
 		Group::= "Group" ("(" minCardinality[INTEGER] ".." maxCardinality[INTEGER] ")" )?
 				   ("{" childFeatures* "}")?;
-		
-		Attribute::= type[] name[] "type"  "=" value['"','"'] ;
+		Attribute::= type[] name[] #1 "=" value['"','"'] !2;
 		
 }

@@ -11,32 +11,32 @@ import org.eclipse.uml2.uml.resource.uml.analysis.*;
 
 public class UmlTreeAnalyser extends EMFTextTreeAnalyserImpl {
 
-	protected TransitionSourceProxyResolver transitionSourceProxyResolver = new TransitionSourceProxyResolver();
-
 	protected TransitionTargetProxyResolver transitionTargetProxyResolver = new TransitionTargetProxyResolver();
 
+	protected TransitionSourceProxyResolver transitionSourceProxyResolver = new TransitionSourceProxyResolver();
+
 	public EObject resolve(InternalEObject proxy, EObject container, EReference reference, TextResource resource, boolean reportErrors) {
-		if (container instanceof Transition && reference.getFeatureID() == 26) {
-			return transitionSourceProxyResolver.resolve(proxy,container,reference,resource,reportErrors);
-		}
 		if (container instanceof Transition && reference.getFeatureID() == 25) {
 			return transitionTargetProxyResolver.resolve(proxy,container,reference,resource,reportErrors);
+		}
+		if (container instanceof Transition && reference.getFeatureID() == 26) {
+			return transitionSourceProxyResolver.resolve(proxy,container,reference,resource,reportErrors);
 		}
 		return null;
 	}
 
 	public String deResolve(EObject refObject, EObject container, EReference reference) {
-		if (container instanceof Transition && reference.getFeatureID() == 26) {
-			return transitionSourceProxyResolver.deResolve(refObject,container,reference);
-		}
 		if (container instanceof Transition && reference.getFeatureID() == 25) {
 			return transitionTargetProxyResolver.deResolve(refObject,container,reference);
+		}
+		if (container instanceof Transition && reference.getFeatureID() == 26) {
+			return transitionSourceProxyResolver.deResolve(refObject,container,reference);
 		}
 		return null;
 	}
 
 	public void setOptions(java.util.Map<?, ?> options) {
-		transitionSourceProxyResolver.setOptions(options);
 		transitionTargetProxyResolver.setOptions(options);
+		transitionSourceProxyResolver.setOptions(options);
 	}
 }
