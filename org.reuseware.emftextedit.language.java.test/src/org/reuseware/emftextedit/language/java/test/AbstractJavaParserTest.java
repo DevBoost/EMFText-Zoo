@@ -215,7 +215,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		Resource resource = myResourceSet.createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
 
 		resource.load(null);
-		assertResolveAllProxies(resource);
+		
+		if (!ignoreSemanticErrors()) {
+			assertResolveAllProxies(resource);
+		}
 		
 		resource.setURI(URI.createFileURI(outputFileName));
 		
