@@ -3,7 +3,8 @@ FOR <http://www.eclipse.org/uml2/2.1.0/UML>
 START StateMachine
 
 TOKENS{
-		DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
+		DEFINE SL_COMMENT $'//'(~('\n'|'\r'))*$;
+		DEFINE ML_COMMENT $'/*'.*'*/'$;
 		DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 		DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
 }

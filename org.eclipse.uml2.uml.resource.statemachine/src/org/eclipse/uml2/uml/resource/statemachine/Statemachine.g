@@ -729,9 +729,13 @@ returns [Behavior element = null]
 	c1 = activity{ element = c1; }
 ;
 
-COMMENT
+SL_COMMENT
 :
 	'//'(~('\n'|'\r'))*{ channel=99; }
+;
+ML_COMMENT
+:
+	'/*'.*'*/'{ channel=99; }
 ;
 INTEGER
 :

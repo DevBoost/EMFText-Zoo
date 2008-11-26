@@ -490,21 +490,6 @@ public abstract class StatemachinePrinterBase extends EMFTextPrinterImpl {
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print("}");
 		}
-		public void printState_0(State element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print("entry");
-			//////////////DEFINITION PART BEGINS (CsString):
-			out.print(":");
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("entry");
-			if(count>0){
-				Object o =element.eGet(element.eClass().getEStructuralFeature("entry"));
-				doPrint((EObject)o,out,localtab);
-				printCountingMap.put("entry",count-1);
-			}
-		}
 		public void printState_1(State element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
@@ -518,6 +503,21 @@ public abstract class StatemachinePrinterBase extends EMFTextPrinterImpl {
 				Object o =element.eGet(element.eClass().getEStructuralFeature("exit"));
 				doPrint((EObject)o,out,localtab);
 				printCountingMap.put("exit",count-1);
+			}
+		}
+		public void printState_0(State element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print("entry");
+			//////////////DEFINITION PART BEGINS (CsString):
+			out.print(":");
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("entry");
+			if(count>0){
+				Object o =element.eGet(element.eClass().getEStructuralFeature("entry"));
+				doPrint((EObject)o,out,localtab);
+				printCountingMap.put("entry",count-1);
 			}
 		}
 		public void printPseudostate(Pseudostate element,String outertab,PrintWriter out){
