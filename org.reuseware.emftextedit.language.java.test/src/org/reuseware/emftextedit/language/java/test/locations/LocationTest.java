@@ -29,11 +29,11 @@ public class LocationTest extends AbstractJavaParserTest {
 			List<Member> members = clazz.getMembers();
 			// check location of the method x
 			Method x = (Method) members.get(1);
-			assertElementLocation(x.getBody().getStatements().get(0), 6, 2, 85, 85);
+			assertElementLocation(x.getBody().getStatements().get(0), 6, 2, 85, 88);
 			// check location of class
-			assertElementLocation(clazz, 3, 0, 22, 85);
+			assertElementLocation(clazz, 3, 0, 22, 96);
 			// check location of the field 'm'
-			assertElementLocation(members.get(0), 4, 3, 49, 61);
+			assertElementLocation(members.get(0), 4, 1, 48, 59);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
