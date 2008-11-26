@@ -1,0 +1,27 @@
+StateMachine "Hello" {
+	initial state "init";
+	transition from "init" to "first" when "step";
+	
+	state "first" {
+		entry : "init"
+		do : StateMachine "sub" {
+				initial state "subinit";
+				
+				// scoping problem with default resolver 
+				// lookup of state end should first consider inner machine 
+				transition from "subinit" to "end" when "do";
+				
+				state "end" { do : "leave submachine" };
+								
+			}
+	};
+	
+	final state "end" {
+		do : "goodbye"
+	};
+	
+	transition from "first" to "end" when "step";
+	
+}
+	
+	
