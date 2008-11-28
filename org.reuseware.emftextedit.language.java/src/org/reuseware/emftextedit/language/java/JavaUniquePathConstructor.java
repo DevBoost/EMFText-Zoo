@@ -95,9 +95,9 @@ public class JavaUniquePathConstructor {
 			reference = assignment.getTarget();
 		}
 		
-		if (argument instanceof UnaryExpressionNotPlusMinus) {
-			UnaryExpressionNotPlusMinus unaryExp = (UnaryExpressionNotPlusMinus) argument;
-			reference = unaryExp.getReference();
+		if (argument instanceof Primary) {
+			Primary primary = (Primary) argument;
+			reference = primary.getReference();
 		}
 		
 		
