@@ -276,15 +276,16 @@ ExpressionList
 	::= expressions ("," expressions)* 
 	;
 
+ParExpression ::= "(" expression ")" ;
+
 UnaryExpression
     ::= (unaryOperator)? unaryExpressionNotPlusMinus
     ;
     
 UnaryExpressionNotPlusMinus
 	::= unaryOperator primary
+	|   castExpression
 	|   primary (unaryOperator)?
-//    |   castExpression
-    
     ;
 CastExpression
     ::= "(" primitiveType ")" unaryExpression
@@ -296,8 +297,6 @@ Primary
 	| literal
 	| parExpression
 	;    
-
-ParExpression ::= "(" expression ")" ;
 
 UnaryOperator	::= value[UNARY_OPERATOR_LITERAL] ;
 	
