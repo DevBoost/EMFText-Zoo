@@ -584,11 +584,11 @@ statemachine returns [StateMachine element = null]
 	element = UMLFactory.eINSTANCE.createStateMachine();
 }
 :
-	'StateMachine'
-	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-	'{'
-	a1 = region{((List) element.eGet(element.eClass().getEStructuralFeature("region"))).add(a1); copyLocalizationInfos(a1, element); }
-	'}'
+	a0 = 'StateMachine'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
+	a2 = '{'{copyLocalizationInfos((CommonToken)a2, element); }
+	a3 = region{((List) element.eGet(element.eClass().getEStructuralFeature("region"))).add(a3); copyLocalizationInfos(a3, element); }
+	a4 = '}'{copyLocalizationInfos((CommonToken)a4, element); }
 ;
 
 region returns [Region element = null]
@@ -599,11 +599,11 @@ region returns [Region element = null]
 	(
 		(
 			a0 = vertex{((List) element.eGet(element.eClass().getEStructuralFeature("subvertex"))).add(a0); copyLocalizationInfos(a0, element); }
-			';'
+			a1 = ';'{copyLocalizationInfos((CommonToken)a1, element); }
 
 			|
-			a1 = transition{((List) element.eGet(element.eClass().getEStructuralFeature("transition"))).add(a1); copyLocalizationInfos(a1, element); }
-			';'
+			a2 = transition{((List) element.eGet(element.eClass().getEStructuralFeature("transition"))).add(a2); copyLocalizationInfos(a2, element); }
+			a3 = ';'{copyLocalizationInfos((CommonToken)a3, element); }
 		)
 	)*
 ;
@@ -613,27 +613,27 @@ state returns [State element = null]
 	element = UMLFactory.eINSTANCE.createState();
 }
 :
-	'state'
-	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-	'{'
+	a0 = 'state'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
+	a2 = '{'{copyLocalizationInfos((CommonToken)a2, element); }
 	(
 		(
-			'entry'
-			':'
-			a1 = behavior{element.eSet(element.eClass().getEStructuralFeature("entry"), a1); copyLocalizationInfos(a1, element); }
+			a3 = 'entry'{copyLocalizationInfos((CommonToken)a3, element); }
+			a4 = ':'{copyLocalizationInfos((CommonToken)a4, element); }
+			a5 = behavior{element.eSet(element.eClass().getEStructuralFeature("entry"), a5); copyLocalizationInfos(a5, element); }
 		)
 	)?
 	(
 		(
-			'exit'
-			':'
-			a2 = behavior{element.eSet(element.eClass().getEStructuralFeature("exit"), a2); copyLocalizationInfos(a2, element); }
+			a6 = 'exit'{copyLocalizationInfos((CommonToken)a6, element); }
+			a7 = ':'{copyLocalizationInfos((CommonToken)a7, element); }
+			a8 = behavior{element.eSet(element.eClass().getEStructuralFeature("exit"), a8); copyLocalizationInfos(a8, element); }
 		)
 	)?
-	'do'
-	':'
-	a3 = behavior{element.eSet(element.eClass().getEStructuralFeature("doActivity"), a3); copyLocalizationInfos(a3, element); }
-	'}'
+	a9 = 'do'{copyLocalizationInfos((CommonToken)a9, element); }
+	a10 = ':'{copyLocalizationInfos((CommonToken)a10, element); }
+	a11 = behavior{element.eSet(element.eClass().getEStructuralFeature("doActivity"), a11); copyLocalizationInfos(a11, element); }
+	a12 = '}'{copyLocalizationInfos((CommonToken)a12, element); }
 	|//derived choice rules for sub-classes: 
 	c0 = finalstate{ element = c0; }
 ;
@@ -644,8 +644,8 @@ pseudostate returns [Pseudostate element = null]
 }
 :
 	a0 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("kind"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());PseudostateKind resolved = (PseudostateKind)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("kind"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-	'state'
-	a1 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
+	a1 = 'state'{copyLocalizationInfos((CommonToken)a1, element); }
+	a2 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); }
 ;
 
 finalstate returns [FinalState element = null]
@@ -653,28 +653,28 @@ finalstate returns [FinalState element = null]
 	element = UMLFactory.eINSTANCE.createFinalState();
 }
 :
-	'final'
-	'state'
-	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-	'{'
+	a0 = 'final'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = 'state'{copyLocalizationInfos((CommonToken)a1, element); }
+	a2 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); }
+	a3 = '{'{copyLocalizationInfos((CommonToken)a3, element); }
 	(
 		(
-			'entry'
-			':'
-			a1 = behavior{element.eSet(element.eClass().getEStructuralFeature("entry"), a1); copyLocalizationInfos(a1, element); }
+			a4 = 'entry'{copyLocalizationInfos((CommonToken)a4, element); }
+			a5 = ':'{copyLocalizationInfos((CommonToken)a5, element); }
+			a6 = behavior{element.eSet(element.eClass().getEStructuralFeature("entry"), a6); copyLocalizationInfos(a6, element); }
 		)
 	)?
 	(
 		(
-			'exit'
-			':'
-			a2 = behavior{element.eSet(element.eClass().getEStructuralFeature("exit"), a2); copyLocalizationInfos(a2, element); }
+			a7 = 'exit'{copyLocalizationInfos((CommonToken)a7, element); }
+			a8 = ':'{copyLocalizationInfos((CommonToken)a8, element); }
+			a9 = behavior{element.eSet(element.eClass().getEStructuralFeature("exit"), a9); copyLocalizationInfos(a9, element); }
 		)
 	)?
-	'do'
-	':'
-	a3 = behavior{element.eSet(element.eClass().getEStructuralFeature("doActivity"), a3); copyLocalizationInfos(a3, element); }
-	'}'
+	a10 = 'do'{copyLocalizationInfos((CommonToken)a10, element); }
+	a11 = ':'{copyLocalizationInfos((CommonToken)a11, element); }
+	a12 = behavior{element.eSet(element.eClass().getEStructuralFeature("doActivity"), a12); copyLocalizationInfos(a12, element); }
+	a13 = '}'{copyLocalizationInfos((CommonToken)a13, element); }
 ;
 
 transition returns [Transition element = null]
@@ -682,18 +682,18 @@ transition returns [Transition element = null]
 	element = UMLFactory.eINSTANCE.createTransition();
 }
 :
-	'transition'
-	'from'
-	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("source"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("source"), proxy); copyLocalizationInfos((CommonToken) a0, element); copyLocalizationInfos((CommonToken) a0, proxy); }
-	'to'
-	a1 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a1, element); copyLocalizationInfos((CommonToken) a1, proxy); }
-	'when'
-	a2 = trigger{((List) element.eGet(element.eClass().getEStructuralFeature("trigger"))).add(a2); copyLocalizationInfos(a2, element); }
+	a0 = 'transition'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = 'from'{copyLocalizationInfos((CommonToken)a1, element); }
+	a2 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("source"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("source"), proxy); copyLocalizationInfos((CommonToken) a2, element); copyLocalizationInfos((CommonToken) a2, proxy); }
+	a3 = 'to'{copyLocalizationInfos((CommonToken)a3, element); }
+	a4 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a4, element); copyLocalizationInfos((CommonToken) a4, proxy); }
+	a5 = 'when'{copyLocalizationInfos((CommonToken)a5, element); }
+	a6 = trigger{((List) element.eGet(element.eClass().getEStructuralFeature("trigger"))).add(a6); copyLocalizationInfos(a6, element); }
 	(
 		(
-			'do'
-			':'
-			a3 = behavior{element.eSet(element.eClass().getEStructuralFeature("effect"), a3); copyLocalizationInfos(a3, element); }
+			a7 = 'do'{copyLocalizationInfos((CommonToken)a7, element); }
+			a8 = ':'{copyLocalizationInfos((CommonToken)a8, element); }
+			a9 = behavior{element.eSet(element.eClass().getEStructuralFeature("effect"), a9); copyLocalizationInfos(a9, element); }
 		)
 	)?
 ;
@@ -729,35 +729,19 @@ returns [Behavior element = null]
 	c1 = activity{ element = c1; }
 ;
 
-SL_COMMENT
+WS
 :
-	'//'(~('\n'|'\r'))*{ channel=99; }
-;
-ML_COMMENT
-:
-	'/*'.*'*/'{ channel=99; }
-;
-INTEGER
-:
-	('-')?('1'..'9')('0'..'9')*|'0'{ channel=99; }
-;
-FLOAT
-:
-	('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ { channel=99; }
+	(' ' | '\t' | '\f'){ channel=99; }
 ;
 LB
 :
 	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-WS
+QUOTED_34_34
 :
-	(' ' | '\t' | '\f'){ channel=99; }
+	('"')(~('"')|('\\''"'))*('"')
 ;
 TEXT
 :
 	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
-;
-QUOTED_34_34
-:
-	('"')(~('"')|('\\''"'))*('"')
 ;

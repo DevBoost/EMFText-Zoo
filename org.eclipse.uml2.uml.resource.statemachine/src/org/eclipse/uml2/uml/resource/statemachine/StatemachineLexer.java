@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g 2008-11-26 14:40:25
+// $ANTLR 3.0.1 /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g 2008-12-02 18:59:02
 
 package org.eclipse.uml2.uml.resource.statemachine;
 
@@ -10,30 +10,26 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class StatemachineLexer extends Lexer {
-    public static final int INTEGER=8;
-    public static final int FLOAT=9;
-    public static final int TEXT=5;
-    public static final int T25=25;
-    public static final int Tokens=26;
-    public static final int T24=24;
-    public static final int EOF=-1;
-    public static final int T23=23;
-    public static final int T22=22;
     public static final int T21=21;
-    public static final int T20=20;
-    public static final int ML_COMMENT=7;
-    public static final int WS=11;
-    public static final int SL_COMMENT=6;
-    public static final int LB=10;
+    public static final int T14=14;
+    public static final int T11=11;
+    public static final int T9=9;
+    public static final int WS=6;
     public static final int T12=12;
     public static final int T13=13;
-    public static final int T14=14;
-    public static final int T15=15;
-    public static final int T16=16;
-    public static final int T17=17;
-    public static final int QUOTED_34_34=4;
+    public static final int T20=20;
+    public static final int T10=10;
     public static final int T18=18;
+    public static final int T15=15;
+    public static final int EOF=-1;
+    public static final int LB=7;
+    public static final int TEXT=4;
+    public static final int T17=17;
+    public static final int Tokens=22;
+    public static final int T16=16;
+    public static final int T8=8;
     public static final int T19=19;
+    public static final int QUOTED_34_34=5;
 
     	public java.util.List<RecognitionException> lexerExceptions  = new java.util.ArrayList<RecognitionException>();
     	public java.util.List<Integer> lexerExceptionsPosition       = new java.util.ArrayList<Integer>();
@@ -48,16 +44,89 @@ public class StatemachineLexer extends Lexer {
     public StatemachineLexer(CharStream input) {
         super(input);
     }
-    public String getGrammarFileName() { return "C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g"; }
+    public String getGrammarFileName() { return "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g"; }
+
+    // $ANTLR start T8
+    public final void mT8() throws RecognitionException {
+        try {
+            int _type = T8;
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:17:4: ( 'StateMachine' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:17:6: 'StateMachine'
+            {
+            match("StateMachine"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T8
+
+    // $ANTLR start T9
+    public final void mT9() throws RecognitionException {
+        try {
+            int _type = T9;
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:18:4: ( '{' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:18:6: '{'
+            {
+            match('{'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T9
+
+    // $ANTLR start T10
+    public final void mT10() throws RecognitionException {
+        try {
+            int _type = T10;
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:19:5: ( '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:19:7: '}'
+            {
+            match('}'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T10
+
+    // $ANTLR start T11
+    public final void mT11() throws RecognitionException {
+        try {
+            int _type = T11;
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:20:5: ( ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:20:7: ';'
+            {
+            match(';'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T11
 
     // $ANTLR start T12
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:17:5: ( 'StateMachine' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:17:7: 'StateMachine'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:21:5: ( 'state' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:21:7: 'state'
             {
-            match("StateMachine"); 
+            match("state"); 
 
 
             }
@@ -73,10 +142,11 @@ public class StatemachineLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:18:5: ( '{' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:18:7: '{'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:22:5: ( 'entry' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:22:7: 'entry'
             {
-            match('{'); 
+            match("entry"); 
+
 
             }
 
@@ -91,10 +161,10 @@ public class StatemachineLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:19:5: ( '}' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:19:7: '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:23:5: ( ':' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:23:7: ':'
             {
-            match('}'); 
+            match(':'); 
 
             }
 
@@ -109,10 +179,11 @@ public class StatemachineLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:20:5: ( ';' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:20:7: ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:24:5: ( 'exit' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:24:7: 'exit'
             {
-            match(';'); 
+            match("exit"); 
+
 
             }
 
@@ -127,10 +198,10 @@ public class StatemachineLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:21:5: ( 'state' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:21:7: 'state'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:25:5: ( 'do' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:25:7: 'do'
             {
-            match("state"); 
+            match("do"); 
 
 
             }
@@ -146,10 +217,10 @@ public class StatemachineLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:22:5: ( 'entry' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:22:7: 'entry'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:26:5: ( 'final' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:26:7: 'final'
             {
-            match("entry"); 
+            match("final"); 
 
 
             }
@@ -165,10 +236,11 @@ public class StatemachineLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:23:5: ( ':' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:23:7: ':'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:27:5: ( 'transition' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:27:7: 'transition'
             {
-            match(':'); 
+            match("transition"); 
+
 
             }
 
@@ -183,10 +255,10 @@ public class StatemachineLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:24:5: ( 'exit' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:24:7: 'exit'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:28:5: ( 'from' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:28:7: 'from'
             {
-            match("exit"); 
+            match("from"); 
 
 
             }
@@ -202,10 +274,10 @@ public class StatemachineLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:25:5: ( 'do' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:25:7: 'do'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:29:5: ( 'to' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:29:7: 'to'
             {
-            match("do"); 
+            match("to"); 
 
 
             }
@@ -221,84 +293,8 @@ public class StatemachineLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:26:5: ( 'final' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:26:7: 'final'
-            {
-            match("final"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T21
-
-    // $ANTLR start T22
-    public final void mT22() throws RecognitionException {
-        try {
-            int _type = T22;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:27:5: ( 'transition' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:27:7: 'transition'
-            {
-            match("transition"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T22
-
-    // $ANTLR start T23
-    public final void mT23() throws RecognitionException {
-        try {
-            int _type = T23;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:28:5: ( 'from' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:28:7: 'from'
-            {
-            match("from"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T23
-
-    // $ANTLR start T24
-    public final void mT24() throws RecognitionException {
-        try {
-            int _type = T24;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:29:5: ( 'to' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:29:7: 'to'
-            {
-            match("to"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T24
-
-    // $ANTLR start T25
-    public final void mT25() throws RecognitionException {
-        try {
-            int _type = T25;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:30:5: ( 'when' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:30:7: 'when'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:30:5: ( 'when' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:30:7: 'when'
             {
             match("when"); 
 
@@ -310,419 +306,14 @@ public class StatemachineLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end T25
-
-    // $ANTLR start SL_COMMENT
-    public final void mSL_COMMENT() throws RecognitionException {
-        try {
-            int _type = SL_COMMENT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:733:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:734:2: '//' (~ ( '\\n' | '\\r' ) )*
-            {
-            match("//"); 
-
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:734:6: (~ ( '\\n' | '\\r' ) )*
-            loop1:
-            do {
-                int alt1=2;
-                int LA1_0 = input.LA(1);
-
-                if ( ((LA1_0>='\u0000' && LA1_0<='\t')||(LA1_0>='\u000B' && LA1_0<='\f')||(LA1_0>='\u000E' && LA1_0<='\uFFFE')) ) {
-                    alt1=1;
-                }
-
-
-                switch (alt1) {
-            	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:734:7: ~ ( '\\n' | '\\r' )
-            	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
-            	        input.consume();
-
-            	    }
-            	    else {
-            	        MismatchedSetException mse =
-            	            new MismatchedSetException(null,input);
-            	        recover(mse);    throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop1;
-                }
-            } while (true);
-
-             channel=99; 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end SL_COMMENT
-
-    // $ANTLR start ML_COMMENT
-    public final void mML_COMMENT() throws RecognitionException {
-        try {
-            int _type = ML_COMMENT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:737:1: ( '/*' ( . )* '*/' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:738:2: '/*' ( . )* '*/'
-            {
-            match("/*"); 
-
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:738:6: ( . )*
-            loop2:
-            do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
-
-                if ( (LA2_0=='*') ) {
-                    int LA2_1 = input.LA(2);
-
-                    if ( (LA2_1=='/') ) {
-                        alt2=2;
-                    }
-                    else if ( ((LA2_1>='\u0000' && LA2_1<='.')||(LA2_1>='0' && LA2_1<='\uFFFE')) ) {
-                        alt2=1;
-                    }
-
-
-                }
-                else if ( ((LA2_0>='\u0000' && LA2_0<=')')||(LA2_0>='+' && LA2_0<='\uFFFE')) ) {
-                    alt2=1;
-                }
-
-
-                switch (alt2) {
-            	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:738:6: .
-            	    {
-            	    matchAny(); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop2;
-                }
-            } while (true);
-
-            match("*/"); 
-
-             channel=99; 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end ML_COMMENT
-
-    // $ANTLR start INTEGER
-    public final void mINTEGER() throws RecognitionException {
-        try {
-            int _type = INTEGER;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:741:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
-
-            if ( (LA5_0=='-'||(LA5_0>='1' && LA5_0<='9')) ) {
-                alt5=1;
-            }
-            else if ( (LA5_0=='0') ) {
-                alt5=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("740:1: INTEGER : ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' );", 5, 0, input);
-
-                throw nvae;
-            }
-            switch (alt5) {
-                case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
-                    {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:2: ( '-' )?
-                    int alt3=2;
-                    int LA3_0 = input.LA(1);
-
-                    if ( (LA3_0=='-') ) {
-                        alt3=1;
-                    }
-                    switch (alt3) {
-                        case 1 :
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:3: '-'
-                            {
-                            match('-'); 
-
-                            }
-                            break;
-
-                    }
-
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:8: ( '1' .. '9' )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:9: '1' .. '9'
-                    {
-                    matchRange('1','9'); 
-
-                    }
-
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:18: ( '0' .. '9' )*
-                    loop4:
-                    do {
-                        int alt4=2;
-                        int LA4_0 = input.LA(1);
-
-                        if ( ((LA4_0>='0' && LA4_0<='9')) ) {
-                            alt4=1;
-                        }
-
-
-                        switch (alt4) {
-                    	case 1 :
-                    	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:19: '0' .. '9'
-                    	    {
-                    	    matchRange('0','9'); 
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop4;
-                        }
-                    } while (true);
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:742:30: '0'
-                    {
-                    match('0'); 
-                     channel=99; 
-
-                    }
-                    break;
-
-            }
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end INTEGER
-
-    // $ANTLR start FLOAT
-    public final void mFLOAT() throws RecognitionException {
-        try {
-            int _type = FLOAT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:745:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
-            {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:2: ( '-' )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
-
-            if ( (LA6_0=='-') ) {
-                alt6=1;
-            }
-            switch (alt6) {
-                case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:3: '-'
-                    {
-                    match('-'); 
-
-                    }
-                    break;
-
-            }
-
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
-            int alt8=2;
-            int LA8_0 = input.LA(1);
-
-            if ( ((LA8_0>='1' && LA8_0<='9')) ) {
-                alt8=1;
-            }
-            else if ( (LA8_0=='0') ) {
-                alt8=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("746:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )", 8, 0, input);
-
-                throw nvae;
-            }
-            switch (alt8) {
-                case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:9: ( '1' .. '9' ) ( '0' .. '9' )*
-                    {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:9: ( '1' .. '9' )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:10: '1' .. '9'
-                    {
-                    matchRange('1','9'); 
-
-                    }
-
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:20: ( '0' .. '9' )*
-                    loop7:
-                    do {
-                        int alt7=2;
-                        int LA7_0 = input.LA(1);
-
-                        if ( ((LA7_0>='0' && LA7_0<='9')) ) {
-                            alt7=1;
-                        }
-
-
-                        switch (alt7) {
-                    	case 1 :
-                    	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:21: '0' .. '9'
-                    	    {
-                    	    matchRange('0','9'); 
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop7;
-                        }
-                    } while (true);
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:34: '0'
-                    {
-                    match('0'); 
-
-                    }
-                    break;
-
-            }
-
-            match('.'); 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:43: ( '0' .. '9' )+
-            int cnt9=0;
-            loop9:
-            do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
-
-                if ( ((LA9_0>='0' && LA9_0<='9')) ) {
-                    alt9=1;
-                }
-
-
-                switch (alt9) {
-            	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:746:44: '0' .. '9'
-            	    {
-            	    matchRange('0','9'); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt9 >= 1 ) break loop9;
-                        EarlyExitException eee =
-                            new EarlyExitException(9, input);
-                        throw eee;
-                }
-                cnt9++;
-            } while (true);
-
-             channel=99; 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end FLOAT
-
-    // $ANTLR start LB
-    public final void mLB() throws RecognitionException {
-        try {
-            int _type = LB;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:749:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:750:2: ( '\\r\\n' | '\\r' | '\\n' )
-            {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:750:2: ( '\\r\\n' | '\\r' | '\\n' )
-            int alt10=3;
-            int LA10_0 = input.LA(1);
-
-            if ( (LA10_0=='\r') ) {
-                int LA10_1 = input.LA(2);
-
-                if ( (LA10_1=='\n') ) {
-                    alt10=1;
-                }
-                else {
-                    alt10=2;}
-            }
-            else if ( (LA10_0=='\n') ) {
-                alt10=3;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("750:2: ( '\\r\\n' | '\\r' | '\\n' )", 10, 0, input);
-
-                throw nvae;
-            }
-            switch (alt10) {
-                case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:750:3: '\\r\\n'
-                    {
-                    match("\r\n"); 
-
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:750:12: '\\r'
-                    {
-                    match('\r'); 
-
-                    }
-                    break;
-                case 3 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:750:19: '\\n'
-                    {
-                    match('\n'); 
-
-                    }
-                    break;
-
-            }
-
-             channel=99; 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end LB
+    // $ANTLR end T21
 
     // $ANTLR start WS
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:753:1: ( ( ' ' | '\\t' | '\\f' ) )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:754:2: ( ' ' | '\\t' | '\\f' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:733:1: ( ( ' ' | '\\t' | '\\f' ) )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:734:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -745,28 +336,194 @@ public class StatemachineLexer extends Lexer {
     }
     // $ANTLR end WS
 
+    // $ANTLR start LB
+    public final void mLB() throws RecognitionException {
+        try {
+            int _type = LB;
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:737:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:738:2: ( '\\r\\n' | '\\r' | '\\n' )
+            {
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:738:2: ( '\\r\\n' | '\\r' | '\\n' )
+            int alt1=3;
+            int LA1_0 = input.LA(1);
+
+            if ( (LA1_0=='\r') ) {
+                int LA1_1 = input.LA(2);
+
+                if ( (LA1_1=='\n') ) {
+                    alt1=1;
+                }
+                else {
+                    alt1=2;}
+            }
+            else if ( (LA1_0=='\n') ) {
+                alt1=3;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("738:2: ( '\\r\\n' | '\\r' | '\\n' )", 1, 0, input);
+
+                throw nvae;
+            }
+            switch (alt1) {
+                case 1 :
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:738:3: '\\r\\n'
+                    {
+                    match("\r\n"); 
+
+
+                    }
+                    break;
+                case 2 :
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:738:12: '\\r'
+                    {
+                    match('\r'); 
+
+                    }
+                    break;
+                case 3 :
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:738:19: '\\n'
+                    {
+                    match('\n'); 
+
+                    }
+                    break;
+
+            }
+
+             channel=99; 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end LB
+
+    // $ANTLR start QUOTED_34_34
+    public final void mQUOTED_34_34() throws RecognitionException {
+        try {
+            int _type = QUOTED_34_34;
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:741:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
+            {
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:2: ( '\"' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:3: '\"'
+            {
+            match('\"'); 
+
+            }
+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
+            loop2:
+            do {
+                int alt2=3;
+                int LA2_0 = input.LA(1);
+
+                if ( (LA2_0=='\\') ) {
+                    int LA2_2 = input.LA(2);
+
+                    if ( (LA2_2=='\"') ) {
+                        int LA2_4 = input.LA(3);
+
+                        if ( ((LA2_4>='\u0000' && LA2_4<='\uFFFE')) ) {
+                            alt2=2;
+                        }
+
+                        else {
+                            alt2=1;
+                        }
+
+                    }
+                    else if ( ((LA2_2>='\u0000' && LA2_2<='!')||(LA2_2>='#' && LA2_2<='\uFFFE')) ) {
+                        alt2=1;
+                    }
+
+
+                }
+                else if ( ((LA2_0>='\u0000' && LA2_0<='!')||(LA2_0>='#' && LA2_0<='[')||(LA2_0>=']' && LA2_0<='\uFFFE')) ) {
+                    alt2=1;
+                }
+
+
+                switch (alt2) {
+            	case 1 :
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:8: ~ ( '\"' )
+            	    {
+            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFE') ) {
+            	        input.consume();
+
+            	    }
+            	    else {
+            	        MismatchedSetException mse =
+            	            new MismatchedSetException(null,input);
+            	        recover(mse);    throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:15: ( '\\\\' '\"' )
+            	    {
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:15: ( '\\\\' '\"' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:16: '\\\\' '\"'
+            	    {
+            	    match('\\'); 
+            	    match('\"'); 
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop2;
+                }
+            } while (true);
+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:26: ( '\"' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:742:27: '\"'
+            {
+            match('\"'); 
+
+            }
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end QUOTED_34_34
+
     // $ANTLR start TEXT
     public final void mTEXT() throws RecognitionException {
         try {
             int _type = TEXT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:757:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:758:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:745:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:746:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:758:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
-            int cnt11=0;
-            loop11:
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:746:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            int cnt3=0;
+            loop3:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-                if ( (LA11_0=='-'||(LA11_0>='0' && LA11_0<='9')||(LA11_0>='A' && LA11_0<='Z')||LA11_0=='_'||(LA11_0>='a' && LA11_0<='z')) ) {
-                    alt11=1;
+                if ( (LA3_0=='-'||(LA3_0>='0' && LA3_0<='9')||(LA3_0>='A' && LA3_0<='Z')||LA3_0=='_'||(LA3_0>='a' && LA3_0<='z')) ) {
+                    alt3=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt3) {
             	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:
             	    {
             	    if ( input.LA(1)=='-'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -783,12 +540,12 @@ public class StatemachineLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt11 >= 1 ) break loop11;
+            	    if ( cnt3 >= 1 ) break loop3;
                         EarlyExitException eee =
-                            new EarlyExitException(11, input);
+                            new EarlyExitException(3, input);
                         throw eee;
                 }
-                cnt11++;
+                cnt3++;
             } while (true);
 
 
@@ -801,434 +558,605 @@ public class StatemachineLexer extends Lexer {
     }
     // $ANTLR end TEXT
 
-    // $ANTLR start QUOTED_34_34
-    public final void mQUOTED_34_34() throws RecognitionException {
-        try {
-            int _type = QUOTED_34_34;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:761:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
-            {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:2: ( '\"' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:3: '\"'
-            {
-            match('\"'); 
-
-            }
-
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
-            loop12:
-            do {
-                int alt12=3;
-                int LA12_0 = input.LA(1);
-
-                if ( (LA12_0=='\\') ) {
-                    int LA12_2 = input.LA(2);
-
-                    if ( (LA12_2=='\"') ) {
-                        int LA12_4 = input.LA(3);
-
-                        if ( ((LA12_4>='\u0000' && LA12_4<='\uFFFE')) ) {
-                            alt12=2;
-                        }
-
-                        else {
-                            alt12=1;
-                        }
-
-                    }
-                    else if ( ((LA12_2>='\u0000' && LA12_2<='!')||(LA12_2>='#' && LA12_2<='\uFFFE')) ) {
-                        alt12=1;
-                    }
-
-
-                }
-                else if ( ((LA12_0>='\u0000' && LA12_0<='!')||(LA12_0>='#' && LA12_0<='[')||(LA12_0>=']' && LA12_0<='\uFFFE')) ) {
-                    alt12=1;
-                }
-
-
-                switch (alt12) {
-            	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:8: ~ ( '\"' )
-            	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFE') ) {
-            	        input.consume();
-
-            	    }
-            	    else {
-            	        MismatchedSetException mse =
-            	            new MismatchedSetException(null,input);
-            	        recover(mse);    throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-            	case 2 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:15: ( '\\\\' '\"' )
-            	    {
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:15: ( '\\\\' '\"' )
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:16: '\\\\' '\"'
-            	    {
-            	    match('\\'); 
-            	    match('\"'); 
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop12;
-                }
-            } while (true);
-
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:26: ( '\"' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:762:27: '\"'
-            {
-            match('\"'); 
-
-            }
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end QUOTED_34_34
-
     public void mTokens() throws RecognitionException {
-        // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | SL_COMMENT | ML_COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 )
-        int alt13=22;
-        alt13 = dfa13.predict(input);
-        switch (alt13) {
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:8: ( T8 | T9 | T10 | T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | WS | LB | QUOTED_34_34 | TEXT )
+        int alt4=18;
+        switch ( input.LA(1) ) {
+        case 'S':
+            {
+            int LA4_1 = input.LA(2);
+
+            if ( (LA4_1=='t') ) {
+                int LA4_16 = input.LA(3);
+
+                if ( (LA4_16=='a') ) {
+                    int LA4_26 = input.LA(4);
+
+                    if ( (LA4_26=='t') ) {
+                        int LA4_36 = input.LA(5);
+
+                        if ( (LA4_36=='e') ) {
+                            int LA4_44 = input.LA(6);
+
+                            if ( (LA4_44=='M') ) {
+                                int LA4_52 = input.LA(7);
+
+                                if ( (LA4_52=='a') ) {
+                                    int LA4_57 = input.LA(8);
+
+                                    if ( (LA4_57=='c') ) {
+                                        int LA4_59 = input.LA(9);
+
+                                        if ( (LA4_59=='h') ) {
+                                            int LA4_61 = input.LA(10);
+
+                                            if ( (LA4_61=='i') ) {
+                                                int LA4_63 = input.LA(11);
+
+                                                if ( (LA4_63=='n') ) {
+                                                    int LA4_65 = input.LA(12);
+
+                                                    if ( (LA4_65=='e') ) {
+                                                        int LA4_67 = input.LA(13);
+
+                                                        if ( (LA4_67=='-'||(LA4_67>='0' && LA4_67<='9')||(LA4_67>='A' && LA4_67<='Z')||LA4_67=='_'||(LA4_67>='a' && LA4_67<='z')) ) {
+                                                            alt4=18;
+                                                        }
+                                                        else {
+                                                            alt4=1;}
+                                                    }
+                                                    else {
+                                                        alt4=18;}
+                                                }
+                                                else {
+                                                    alt4=18;}
+                                            }
+                                            else {
+                                                alt4=18;}
+                                        }
+                                        else {
+                                            alt4=18;}
+                                    }
+                                    else {
+                                        alt4=18;}
+                                }
+                                else {
+                                    alt4=18;}
+                            }
+                            else {
+                                alt4=18;}
+                        }
+                        else {
+                            alt4=18;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+            }
+            else {
+                alt4=18;}
+            }
+            break;
+        case '{':
+            {
+            alt4=2;
+            }
+            break;
+        case '}':
+            {
+            alt4=3;
+            }
+            break;
+        case ';':
+            {
+            alt4=4;
+            }
+            break;
+        case 's':
+            {
+            int LA4_5 = input.LA(2);
+
+            if ( (LA4_5=='t') ) {
+                int LA4_17 = input.LA(3);
+
+                if ( (LA4_17=='a') ) {
+                    int LA4_27 = input.LA(4);
+
+                    if ( (LA4_27=='t') ) {
+                        int LA4_37 = input.LA(5);
+
+                        if ( (LA4_37=='e') ) {
+                            int LA4_45 = input.LA(6);
+
+                            if ( (LA4_45=='-'||(LA4_45>='0' && LA4_45<='9')||(LA4_45>='A' && LA4_45<='Z')||LA4_45=='_'||(LA4_45>='a' && LA4_45<='z')) ) {
+                                alt4=18;
+                            }
+                            else {
+                                alt4=5;}
+                        }
+                        else {
+                            alt4=18;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+            }
+            else {
+                alt4=18;}
+            }
+            break;
+        case 'e':
+            {
+            switch ( input.LA(2) ) {
+            case 'n':
+                {
+                int LA4_18 = input.LA(3);
+
+                if ( (LA4_18=='t') ) {
+                    int LA4_28 = input.LA(4);
+
+                    if ( (LA4_28=='r') ) {
+                        int LA4_38 = input.LA(5);
+
+                        if ( (LA4_38=='y') ) {
+                            int LA4_46 = input.LA(6);
+
+                            if ( (LA4_46=='-'||(LA4_46>='0' && LA4_46<='9')||(LA4_46>='A' && LA4_46<='Z')||LA4_46=='_'||(LA4_46>='a' && LA4_46<='z')) ) {
+                                alt4=18;
+                            }
+                            else {
+                                alt4=6;}
+                        }
+                        else {
+                            alt4=18;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+                }
+                break;
+            case 'x':
+                {
+                int LA4_19 = input.LA(3);
+
+                if ( (LA4_19=='i') ) {
+                    int LA4_29 = input.LA(4);
+
+                    if ( (LA4_29=='t') ) {
+                        int LA4_39 = input.LA(5);
+
+                        if ( (LA4_39=='-'||(LA4_39>='0' && LA4_39<='9')||(LA4_39>='A' && LA4_39<='Z')||LA4_39=='_'||(LA4_39>='a' && LA4_39<='z')) ) {
+                            alt4=18;
+                        }
+                        else {
+                            alt4=8;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+                }
+                break;
+            default:
+                alt4=18;}
+
+            }
+            break;
+        case ':':
+            {
+            alt4=7;
+            }
+            break;
+        case 'd':
+            {
+            int LA4_8 = input.LA(2);
+
+            if ( (LA4_8=='o') ) {
+                int LA4_20 = input.LA(3);
+
+                if ( (LA4_20=='-'||(LA4_20>='0' && LA4_20<='9')||(LA4_20>='A' && LA4_20<='Z')||LA4_20=='_'||(LA4_20>='a' && LA4_20<='z')) ) {
+                    alt4=18;
+                }
+                else {
+                    alt4=9;}
+            }
+            else {
+                alt4=18;}
+            }
+            break;
+        case 'f':
+            {
+            switch ( input.LA(2) ) {
+            case 'r':
+                {
+                int LA4_21 = input.LA(3);
+
+                if ( (LA4_21=='o') ) {
+                    int LA4_31 = input.LA(4);
+
+                    if ( (LA4_31=='m') ) {
+                        int LA4_40 = input.LA(5);
+
+                        if ( (LA4_40=='-'||(LA4_40>='0' && LA4_40<='9')||(LA4_40>='A' && LA4_40<='Z')||LA4_40=='_'||(LA4_40>='a' && LA4_40<='z')) ) {
+                            alt4=18;
+                        }
+                        else {
+                            alt4=12;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+                }
+                break;
+            case 'i':
+                {
+                int LA4_22 = input.LA(3);
+
+                if ( (LA4_22=='n') ) {
+                    int LA4_32 = input.LA(4);
+
+                    if ( (LA4_32=='a') ) {
+                        int LA4_41 = input.LA(5);
+
+                        if ( (LA4_41=='l') ) {
+                            int LA4_49 = input.LA(6);
+
+                            if ( (LA4_49=='-'||(LA4_49>='0' && LA4_49<='9')||(LA4_49>='A' && LA4_49<='Z')||LA4_49=='_'||(LA4_49>='a' && LA4_49<='z')) ) {
+                                alt4=18;
+                            }
+                            else {
+                                alt4=10;}
+                        }
+                        else {
+                            alt4=18;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+                }
+                break;
+            default:
+                alt4=18;}
+
+            }
+            break;
+        case 't':
+            {
+            switch ( input.LA(2) ) {
+            case 'o':
+                {
+                int LA4_23 = input.LA(3);
+
+                if ( (LA4_23=='-'||(LA4_23>='0' && LA4_23<='9')||(LA4_23>='A' && LA4_23<='Z')||LA4_23=='_'||(LA4_23>='a' && LA4_23<='z')) ) {
+                    alt4=18;
+                }
+                else {
+                    alt4=13;}
+                }
+                break;
+            case 'r':
+                {
+                int LA4_24 = input.LA(3);
+
+                if ( (LA4_24=='a') ) {
+                    int LA4_34 = input.LA(4);
+
+                    if ( (LA4_34=='n') ) {
+                        int LA4_42 = input.LA(5);
+
+                        if ( (LA4_42=='s') ) {
+                            int LA4_50 = input.LA(6);
+
+                            if ( (LA4_50=='i') ) {
+                                int LA4_56 = input.LA(7);
+
+                                if ( (LA4_56=='t') ) {
+                                    int LA4_58 = input.LA(8);
+
+                                    if ( (LA4_58=='i') ) {
+                                        int LA4_60 = input.LA(9);
+
+                                        if ( (LA4_60=='o') ) {
+                                            int LA4_62 = input.LA(10);
+
+                                            if ( (LA4_62=='n') ) {
+                                                int LA4_64 = input.LA(11);
+
+                                                if ( (LA4_64=='-'||(LA4_64>='0' && LA4_64<='9')||(LA4_64>='A' && LA4_64<='Z')||LA4_64=='_'||(LA4_64>='a' && LA4_64<='z')) ) {
+                                                    alt4=18;
+                                                }
+                                                else {
+                                                    alt4=11;}
+                                            }
+                                            else {
+                                                alt4=18;}
+                                        }
+                                        else {
+                                            alt4=18;}
+                                    }
+                                    else {
+                                        alt4=18;}
+                                }
+                                else {
+                                    alt4=18;}
+                            }
+                            else {
+                                alt4=18;}
+                        }
+                        else {
+                            alt4=18;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+                }
+                break;
+            default:
+                alt4=18;}
+
+            }
+            break;
+        case 'w':
+            {
+            int LA4_11 = input.LA(2);
+
+            if ( (LA4_11=='h') ) {
+                int LA4_25 = input.LA(3);
+
+                if ( (LA4_25=='e') ) {
+                    int LA4_35 = input.LA(4);
+
+                    if ( (LA4_35=='n') ) {
+                        int LA4_43 = input.LA(5);
+
+                        if ( (LA4_43=='-'||(LA4_43>='0' && LA4_43<='9')||(LA4_43>='A' && LA4_43<='Z')||LA4_43=='_'||(LA4_43>='a' && LA4_43<='z')) ) {
+                            alt4=18;
+                        }
+                        else {
+                            alt4=14;}
+                    }
+                    else {
+                        alt4=18;}
+                }
+                else {
+                    alt4=18;}
+            }
+            else {
+                alt4=18;}
+            }
+            break;
+        case '\t':
+        case '\f':
+        case ' ':
+            {
+            alt4=15;
+            }
+            break;
+        case '\n':
+        case '\r':
+            {
+            alt4=16;
+            }
+            break;
+        case '\"':
+            {
+            alt4=17;
+            }
+            break;
+        case '-':
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+        case 'F':
+        case 'G':
+        case 'H':
+        case 'I':
+        case 'J':
+        case 'K':
+        case 'L':
+        case 'M':
+        case 'N':
+        case 'O':
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'T':
+        case 'U':
+        case 'V':
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+        case '_':
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+        case 'k':
+        case 'l':
+        case 'm':
+        case 'n':
+        case 'o':
+        case 'p':
+        case 'q':
+        case 'r':
+        case 'u':
+        case 'v':
+        case 'x':
+        case 'y':
+        case 'z':
+            {
+            alt4=18;
+            }
+            break;
+        default:
+            NoViableAltException nvae =
+                new NoViableAltException("1:1: Tokens : ( T8 | T9 | T10 | T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | WS | LB | QUOTED_34_34 | TEXT );", 4, 0, input);
+
+            throw nvae;
+        }
+
+        switch (alt4) {
             case 1 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:10: T12
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:10: T8
+                {
+                mT8(); 
+
+                }
+                break;
+            case 2 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:13: T9
+                {
+                mT9(); 
+
+                }
+                break;
+            case 3 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:16: T10
+                {
+                mT10(); 
+
+                }
+                break;
+            case 4 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:20: T11
+                {
+                mT11(); 
+
+                }
+                break;
+            case 5 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:24: T12
                 {
                 mT12(); 
 
                 }
                 break;
-            case 2 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:14: T13
+            case 6 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:28: T13
                 {
                 mT13(); 
 
                 }
                 break;
-            case 3 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:18: T14
+            case 7 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:32: T14
                 {
                 mT14(); 
 
                 }
                 break;
-            case 4 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:22: T15
+            case 8 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:36: T15
                 {
                 mT15(); 
 
                 }
                 break;
-            case 5 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:26: T16
+            case 9 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:40: T16
                 {
                 mT16(); 
 
                 }
                 break;
-            case 6 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:30: T17
+            case 10 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:44: T17
                 {
                 mT17(); 
 
                 }
                 break;
-            case 7 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:34: T18
+            case 11 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:48: T18
                 {
                 mT18(); 
 
                 }
                 break;
-            case 8 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:38: T19
+            case 12 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:52: T19
                 {
                 mT19(); 
 
                 }
                 break;
-            case 9 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:42: T20
+            case 13 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:56: T20
                 {
                 mT20(); 
 
                 }
                 break;
-            case 10 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:46: T21
+            case 14 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:60: T21
                 {
                 mT21(); 
 
                 }
                 break;
-            case 11 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:50: T22
-                {
-                mT22(); 
-
-                }
-                break;
-            case 12 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:54: T23
-                {
-                mT23(); 
-
-                }
-                break;
-            case 13 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:58: T24
-                {
-                mT24(); 
-
-                }
-                break;
-            case 14 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:62: T25
-                {
-                mT25(); 
-
-                }
-                break;
             case 15 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:66: SL_COMMENT
-                {
-                mSL_COMMENT(); 
-
-                }
-                break;
-            case 16 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:77: ML_COMMENT
-                {
-                mML_COMMENT(); 
-
-                }
-                break;
-            case 17 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:88: INTEGER
-                {
-                mINTEGER(); 
-
-                }
-                break;
-            case 18 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:96: FLOAT
-                {
-                mFLOAT(); 
-
-                }
-                break;
-            case 19 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:102: LB
-                {
-                mLB(); 
-
-                }
-                break;
-            case 20 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:105: WS
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:64: WS
                 {
                 mWS(); 
 
                 }
                 break;
-            case 21 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:108: TEXT
+            case 16 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:67: LB
                 {
-                mTEXT(); 
+                mLB(); 
 
                 }
                 break;
-            case 22 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:1:113: QUOTED_34_34
+            case 17 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:70: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 
                 }
                 break;
+            case 18 :
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:1:83: TEXT
+                {
+                mTEXT(); 
+
+                }
+                break;
 
         }
 
     }
 
 
-    protected DFA13 dfa13 = new DFA13(this);
-    static final String DFA13_eotS =
-        "\1\uffff\1\22\3\uffff\2\22\1\uffff\4\22\1\uffff\1\22\2\43\4\uffff"+
-        "\4\22\1\50\3\22\1\54\1\22\2\uffff\1\22\1\43\2\uffff\4\22\1\uffff"+
-        "\3\22\1\uffff\4\22\1\71\1\22\1\73\1\22\1\75\1\22\1\77\1\100\1\uffff"+
-        "\1\101\1\uffff\1\22\1\uffff\1\22\3\uffff\10\22\1\114\1\22\1\uffff"+
-        "\1\116\1\uffff";
-    static final String DFA13_eofS =
-        "\117\uffff";
-    static final String DFA13_minS =
-        "\1\11\1\164\3\uffff\1\164\1\156\1\uffff\1\157\1\151\1\157\1\150"+
-        "\1\52\1\60\2\55\4\uffff\2\141\1\164\1\151\1\55\1\156\1\157\1\141"+
-        "\1\55\1\145\2\uffff\1\56\1\55\2\uffff\2\164\1\162\1\164\1\uffff"+
-        "\1\141\1\155\1\156\1\uffff\1\156\2\145\1\171\1\55\1\154\1\55\1\163"+
-        "\1\55\1\115\2\55\1\uffff\1\55\1\uffff\1\151\1\uffff\1\141\3\uffff"+
-        "\1\164\1\143\1\151\1\150\1\157\1\151\2\156\1\55\1\145\1\uffff\1"+
-        "\55\1\uffff";
-    static final String DFA13_maxS =
-        "\1\175\1\164\3\uffff\1\164\1\170\1\uffff\1\157\2\162\1\150\1\57"+
-        "\1\71\2\172\4\uffff\2\141\1\164\1\151\1\172\1\156\1\157\1\141\1"+
-        "\172\1\145\2\uffff\1\56\1\172\2\uffff\2\164\1\162\1\164\1\uffff"+
-        "\1\141\1\155\1\156\1\uffff\1\156\2\145\1\171\1\172\1\154\1\172\1"+
-        "\163\1\172\1\115\2\172\1\uffff\1\172\1\uffff\1\151\1\uffff\1\141"+
-        "\3\uffff\1\164\1\143\1\151\1\150\1\157\1\151\2\156\1\172\1\145\1"+
-        "\uffff\1\172\1\uffff";
-    static final String DFA13_acceptS =
-        "\2\uffff\1\2\1\3\1\4\2\uffff\1\7\10\uffff\1\23\1\24\1\25\1\26\12"+
-        "\uffff\1\20\1\17\2\uffff\1\22\1\21\4\uffff\1\11\3\uffff\1\15\14"+
-        "\uffff\1\10\1\uffff\1\14\1\uffff\1\16\1\uffff\1\5\1\6\1\12\12\uffff"+
-        "\1\13\1\uffff\1\1";
-    static final String DFA13_specialS =
-        "\117\uffff}>";
-    static final String[] DFA13_transitionS = {
-            "\1\21\1\20\1\uffff\1\21\1\20\22\uffff\1\21\1\uffff\1\23\12"+
-            "\uffff\1\15\1\uffff\1\14\1\17\11\16\1\7\1\4\5\uffff\22\22\1"+
-            "\1\7\22\4\uffff\1\22\1\uffff\3\22\1\10\1\6\1\11\14\22\1\5\1"+
-            "\12\2\22\1\13\3\22\1\2\1\uffff\1\3",
-            "\1\24",
-            "",
-            "",
-            "",
-            "\1\25",
-            "\1\26\11\uffff\1\27",
-            "",
-            "\1\30",
-            "\1\31\10\uffff\1\32",
-            "\1\34\2\uffff\1\33",
-            "\1\35",
-            "\1\36\4\uffff\1\37",
-            "\1\40\11\16",
-            "\1\22\1\42\1\uffff\12\41\7\uffff\32\22\4\uffff\1\22\1\uffff"+
-            "\32\22",
-            "\1\22\1\42\1\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff"+
-            "\32\22",
-            "",
-            "",
-            "",
-            "",
-            "\1\44",
-            "\1\45",
-            "\1\46",
-            "\1\47",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\51",
-            "\1\52",
-            "\1\53",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\55",
-            "",
-            "",
-            "\1\42",
-            "\1\22\1\42\1\uffff\12\41\7\uffff\32\22\4\uffff\1\22\1\uffff"+
-            "\32\22",
-            "",
-            "",
-            "\1\56",
-            "\1\57",
-            "\1\60",
-            "\1\61",
-            "",
-            "\1\62",
-            "\1\63",
-            "\1\64",
-            "",
-            "\1\65",
-            "\1\66",
-            "\1\67",
-            "\1\70",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\72",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\74",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\76",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "",
-            "\1\102",
-            "",
-            "\1\103",
-            "",
-            "",
-            "",
-            "\1\104",
-            "\1\105",
-            "\1\106",
-            "\1\107",
-            "\1\110",
-            "\1\111",
-            "\1\112",
-            "\1\113",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            "\1\115",
-            "",
-            "\1\22\2\uffff\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32"+
-            "\22",
-            ""
-    };
-
-    static final short[] DFA13_eot = DFA.unpackEncodedString(DFA13_eotS);
-    static final short[] DFA13_eof = DFA.unpackEncodedString(DFA13_eofS);
-    static final char[] DFA13_min = DFA.unpackEncodedStringToUnsignedChars(DFA13_minS);
-    static final char[] DFA13_max = DFA.unpackEncodedStringToUnsignedChars(DFA13_maxS);
-    static final short[] DFA13_accept = DFA.unpackEncodedString(DFA13_acceptS);
-    static final short[] DFA13_special = DFA.unpackEncodedString(DFA13_specialS);
-    static final short[][] DFA13_transition;
-
-    static {
-        int numStates = DFA13_transitionS.length;
-        DFA13_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA13_transition[i] = DFA.unpackEncodedString(DFA13_transitionS[i]);
-        }
-    }
-
-    class DFA13 extends DFA {
-
-        public DFA13(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 13;
-            this.eot = DFA13_eot;
-            this.eof = DFA13_eof;
-            this.min = DFA13_min;
-            this.max = DFA13_max;
-            this.accept = DFA13_accept;
-            this.special = DFA13_special;
-            this.transition = DFA13_transition;
-        }
-        public String getDescription() {
-            return "1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | SL_COMMENT | ML_COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 );";
-        }
-    }
  
 
 }

@@ -1,27 +1,20 @@
-StateMachine "Hello" {
-	initial state "init";
-	transition from "init" to "first" when "step";
+StateMachine HelloWorld {
+  transition from init       to helloWorld when "start up";
+  transition from helloWorld to end        when "shut down";
+
+  initial state init;
+			
+  state helloWorld {
+    entry : "initialise printer"
+    do : StateMachine sub {
+      transition from init     to printing when "start printing";
+      transition from printing to end      when "stop printing";
+
+      initial state init;
+      state printing { do : "print Hello World" };
+      final state end { do : "print linebreak" };			
+    }
+  };
 	
-	state "first" {
-		entry : "init"
-		do : StateMachine "sub" {
-				initial state "subinit";
-				
-				// scoping problem with default resolver 
-				// lookup of state end should first consider inner machine 
-				transition from "subinit" to "end" when "do";
-				
-				state "end" { do : "leave submachine" };
-								
-			}
-	};
-	
-	final state "end" {
-		do : "goodbye"
-	};
-	
-	transition from "first" to "end" when "step";
-	
+  final state end { do : "goodbye" };	
 }
-	
-	

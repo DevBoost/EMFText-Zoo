@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g 2008-11-26 14:40:25
+// $ANTLR 3.0.1 /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g 2008-12-02 18:59:01
 
 package org.eclipse.uml2.uml.resource.statemachine;
 
@@ -553,17 +553,13 @@ import java.util.Map;
 import java.util.HashMap;
 public class StatemachineParser extends EMFTextParserImpl {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "QUOTED_34_34", "TEXT", "SL_COMMENT", "ML_COMMENT", "INTEGER", "FLOAT", "LB", "WS", "'StateMachine'", "'{'", "'}'", "';'", "'state'", "'entry'", "':'", "'exit'", "'do'", "'final'", "'transition'", "'from'", "'to'", "'when'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "TEXT", "QUOTED_34_34", "WS", "LB", "'StateMachine'", "'{'", "'}'", "';'", "'state'", "'entry'", "':'", "'exit'", "'do'", "'final'", "'transition'", "'from'", "'to'", "'when'"
     };
-    public static final int INTEGER=8;
-    public static final int ML_COMMENT=7;
-    public static final int WS=11;
-    public static final int SL_COMMENT=6;
-    public static final int LB=10;
-    public static final int FLOAT=9;
-    public static final int TEXT=5;
     public static final int EOF=-1;
-    public static final int QUOTED_34_34=4;
+    public static final int WS=6;
+    public static final int LB=7;
+    public static final int TEXT=4;
+    public static final int QUOTED_34_34=5;
 
         public StatemachineParser(TokenStream input) {
             super(input);
@@ -572,7 +568,7 @@ public class StatemachineParser extends EMFTextParserImpl {
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g"; }
+    public String getGrammarFileName() { return "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g"; }
 
 
     	private TokenResolverFactory tokenResolverFactory = new StatemachineTokenResolverFactory();
@@ -586,7 +582,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start start
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:575:1: start returns [ EObject element = null] : c0= statemachine ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:575:1: start returns [ EObject element = null] : c0= statemachine ;
     public final EObject start() throws RecognitionException {
         EObject element =  null;
 
@@ -594,8 +590,8 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:577:1: (c0= statemachine )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:578:1: c0= statemachine
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:577:1: (c0= statemachine )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:578:1: c0= statemachine
             {
             pushFollow(FOLLOW_statemachine_in_start61);
             c0=statemachine();
@@ -620,36 +616,51 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start statemachine
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:582:1: statemachine returns [StateMachine element = null] : 'StateMachine' a0= QUOTED_34_34 '{' a1= region '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:582:1: statemachine returns [StateMachine element = null] : a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}' ;
     public final StateMachine statemachine() throws RecognitionException {
         StateMachine element =  null;
 
         Token a0=null;
-        Region a1 = null;
+        Token a1=null;
+        Token a2=null;
+        Token a4=null;
+        Region a3 = null;
 
 
 
         	element = UMLFactory.eINSTANCE.createStateMachine();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:586:1: ( 'StateMachine' a0= QUOTED_34_34 '{' a1= region '}' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:587:2: 'StateMachine' a0= QUOTED_34_34 '{' a1= region '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:586:1: (a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:587:2: a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}'
             {
-            match(input,12,FOLLOW_12_in_statemachine81); if (failed) return element;
             a0=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_statemachine88); if (failed) return element;
+            match(input,8,FOLLOW_8_in_statemachine85); if (failed) return element;
             if ( backtracking==0 ) {
-              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
+              copyLocalizationInfos((CommonToken)a0, element); 
             }
-            match(input,13,FOLLOW_13_in_statemachine92); if (failed) return element;
-            pushFollow(FOLLOW_region_in_statemachine99);
-            a1=region();
+            a1=(Token)input.LT(1);
+            match(input,TEXT,FOLLOW_TEXT_in_statemachine93); if (failed) return element;
+            if ( backtracking==0 ) {
+              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); 
+            }
+            a2=(Token)input.LT(1);
+            match(input,9,FOLLOW_9_in_statemachine101); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a2, element); 
+            }
+            pushFollow(FOLLOW_region_in_statemachine109);
+            a3=region();
             _fsp--;
             if (failed) return element;
             if ( backtracking==0 ) {
-              ((List) element.eGet(element.eClass().getEStructuralFeature("region"))).add(a1); copyLocalizationInfos(a1, element); 
+              ((List) element.eGet(element.eClass().getEStructuralFeature("region"))).add(a3); copyLocalizationInfos(a3, element); 
             }
-            match(input,14,FOLLOW_14_in_statemachine103); if (failed) return element;
+            a4=(Token)input.LT(1);
+            match(input,10,FOLLOW_10_in_statemachine117); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a4, element); 
+            }
 
             }
 
@@ -666,80 +677,90 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start region
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:594:1: region returns [Region element = null] : ( (a0= vertex ';' | a1= transition ';' ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:594:1: region returns [Region element = null] : ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )* ;
     public final Region region() throws RecognitionException {
         Region element =  null;
 
+        Token a1=null;
+        Token a3=null;
         Vertex a0 = null;
 
-        Transition a1 = null;
+        Transition a2 = null;
 
 
 
         	element = UMLFactory.eINSTANCE.createRegion();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:598:1: ( ( (a0= vertex ';' | a1= transition ';' ) )* )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:599:2: ( (a0= vertex ';' | a1= transition ';' ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:598:1: ( ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:599:2: ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )*
             {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:599:2: ( (a0= vertex ';' | a1= transition ';' ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:599:2: ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==TEXT||LA2_0==16||(LA2_0>=21 && LA2_0<=22)) ) {
+                if ( (LA2_0==TEXT||LA2_0==12||(LA2_0>=17 && LA2_0<=18)) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:600:3: (a0= vertex ';' | a1= transition ';' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )
             	    {
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:600:3: (a0= vertex ';' | a1= transition ';' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )
             	    int alt1=2;
             	    int LA1_0 = input.LA(1);
 
-            	    if ( (LA1_0==TEXT||LA1_0==16||LA1_0==21) ) {
+            	    if ( (LA1_0==TEXT||LA1_0==12||LA1_0==17) ) {
             	        alt1=1;
             	    }
-            	    else if ( (LA1_0==22) ) {
+            	    else if ( (LA1_0==18) ) {
             	        alt1=2;
             	    }
             	    else {
             	        if (backtracking>0) {failed=true; return element;}
             	        NoViableAltException nvae =
-            	            new NoViableAltException("600:3: (a0= vertex ';' | a1= transition ';' )", 1, 0, input);
+            	            new NoViableAltException("600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )", 1, 0, input);
 
             	        throw nvae;
             	    }
             	    switch (alt1) {
             	        case 1 :
-            	            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:601:4: a0= vertex ';'
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:601:4: a0= vertex a1= ';'
             	            {
-            	            pushFollow(FOLLOW_vertex_in_region134);
+            	            pushFollow(FOLLOW_vertex_in_region149);
             	            a0=vertex();
             	            _fsp--;
             	            if (failed) return element;
             	            if ( backtracking==0 ) {
             	              ((List) element.eGet(element.eClass().getEStructuralFeature("subvertex"))).add(a0); copyLocalizationInfos(a0, element); 
             	            }
-            	            match(input,15,FOLLOW_15_in_region140); if (failed) return element;
+            	            a1=(Token)input.LT(1);
+            	            match(input,11,FOLLOW_11_in_region159); if (failed) return element;
+            	            if ( backtracking==0 ) {
+            	              copyLocalizationInfos((CommonToken)a1, element); 
+            	            }
 
             	            }
             	            break;
             	        case 2 :
-            	            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:605:4: a1= transition ';'
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:605:4: a2= transition a3= ';'
             	            {
-            	            pushFollow(FOLLOW_transition_in_region155);
-            	            a1=transition();
+            	            pushFollow(FOLLOW_transition_in_region175);
+            	            a2=transition();
             	            _fsp--;
             	            if (failed) return element;
             	            if ( backtracking==0 ) {
-            	              ((List) element.eGet(element.eClass().getEStructuralFeature("transition"))).add(a1); copyLocalizationInfos(a1, element); 
+            	              ((List) element.eGet(element.eClass().getEStructuralFeature("transition"))).add(a2); copyLocalizationInfos(a2, element); 
             	            }
-            	            match(input,15,FOLLOW_15_in_region161); if (failed) return element;
+            	            a3=(Token)input.LT(1);
+            	            match(input,11,FOLLOW_11_in_region185); if (failed) return element;
+            	            if ( backtracking==0 ) {
+            	              copyLocalizationInfos((CommonToken)a3, element); 
+            	            }
 
             	            }
             	            break;
@@ -771,16 +792,25 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start state
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:611:1: state returns [State element = null] : ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:611:1: state returns [State element = null] : (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate );
     public final State state() throws RecognitionException {
         State element =  null;
 
         Token a0=null;
-        Behavior a1 = null;
+        Token a1=null;
+        Token a2=null;
+        Token a3=null;
+        Token a4=null;
+        Token a6=null;
+        Token a7=null;
+        Token a9=null;
+        Token a10=null;
+        Token a12=null;
+        Behavior a5 = null;
 
-        Behavior a2 = null;
+        Behavior a8 = null;
 
-        Behavior a3 = null;
+        Behavior a11 = null;
 
         FinalState c0 = null;
 
@@ -789,56 +819,72 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createState();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:615:1: ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:615:1: (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==16) ) {
+            if ( (LA5_0==12) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==21) ) {
+            else if ( (LA5_0==17) ) {
                 alt5=2;
             }
             else {
                 if (backtracking>0) {failed=true; return element;}
                 NoViableAltException nvae =
-                    new NoViableAltException("611:1: state returns [State element = null] : ( 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' | c0= finalstate );", 5, 0, input);
+                    new NoViableAltException("611:1: state returns [State element = null] : (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate );", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:616:2: 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:616:2: a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}'
                     {
-                    match(input,16,FOLLOW_16_in_state187); if (failed) return element;
                     a0=(Token)input.LT(1);
-                    match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_state194); if (failed) return element;
+                    match(input,12,FOLLOW_12_in_state216); if (failed) return element;
                     if ( backtracking==0 ) {
-                      TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
+                      copyLocalizationInfos((CommonToken)a0, element); 
                     }
-                    match(input,13,FOLLOW_13_in_state198); if (failed) return element;
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:619:2: ( ( 'entry' ':' a1= behavior ) )?
+                    a1=(Token)input.LT(1);
+                    match(input,TEXT,FOLLOW_TEXT_in_state224); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); 
+                    }
+                    a2=(Token)input.LT(1);
+                    match(input,9,FOLLOW_9_in_state232); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a2, element); 
+                    }
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:619:2: ( (a3= 'entry' a4= ':' a5= behavior ) )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
-                    if ( (LA3_0==17) ) {
+                    if ( (LA3_0==13) ) {
                         alt3=1;
                     }
                     switch (alt3) {
                         case 1 :
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:620:3: ( 'entry' ':' a1= behavior )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:620:3: (a3= 'entry' a4= ':' a5= behavior )
                             {
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:620:3: ( 'entry' ':' a1= behavior )
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:621:4: 'entry' ':' a1= behavior
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:620:3: (a3= 'entry' a4= ':' a5= behavior )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:621:4: a3= 'entry' a4= ':' a5= behavior
                             {
-                            match(input,17,FOLLOW_17_in_state210); if (failed) return element;
-                            match(input,18,FOLLOW_18_in_state215); if (failed) return element;
-                            pushFollow(FOLLOW_behavior_in_state224);
-                            a1=behavior();
+                            a3=(Token)input.LT(1);
+                            match(input,13,FOLLOW_13_in_state249); if (failed) return element;
+                            if ( backtracking==0 ) {
+                              copyLocalizationInfos((CommonToken)a3, element); 
+                            }
+                            a4=(Token)input.LT(1);
+                            match(input,14,FOLLOW_14_in_state259); if (failed) return element;
+                            if ( backtracking==0 ) {
+                              copyLocalizationInfos((CommonToken)a4, element); 
+                            }
+                            pushFollow(FOLLOW_behavior_in_state269);
+                            a5=behavior();
                             _fsp--;
                             if (failed) return element;
                             if ( backtracking==0 ) {
-                              element.eSet(element.eClass().getEStructuralFeature("entry"), a1); copyLocalizationInfos(a1, element); 
+                              element.eSet(element.eClass().getEStructuralFeature("entry"), a5); copyLocalizationInfos(a5, element); 
                             }
 
                             }
@@ -849,28 +895,36 @@ public class StatemachineParser extends EMFTextParserImpl {
 
                     }
 
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:626:2: ( ( 'exit' ':' a2= behavior ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:626:2: ( (a6= 'exit' a7= ':' a8= behavior ) )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
-                    if ( (LA4_0==19) ) {
+                    if ( (LA4_0==15) ) {
                         alt4=1;
                     }
                     switch (alt4) {
                         case 1 :
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:627:3: ( 'exit' ':' a2= behavior )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:627:3: (a6= 'exit' a7= ':' a8= behavior )
                             {
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:627:3: ( 'exit' ':' a2= behavior )
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:628:4: 'exit' ':' a2= behavior
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:627:3: (a6= 'exit' a7= ':' a8= behavior )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:628:4: a6= 'exit' a7= ':' a8= behavior
                             {
-                            match(input,19,FOLLOW_19_in_state245); if (failed) return element;
-                            match(input,18,FOLLOW_18_in_state250); if (failed) return element;
-                            pushFollow(FOLLOW_behavior_in_state259);
-                            a2=behavior();
+                            a6=(Token)input.LT(1);
+                            match(input,15,FOLLOW_15_in_state294); if (failed) return element;
+                            if ( backtracking==0 ) {
+                              copyLocalizationInfos((CommonToken)a6, element); 
+                            }
+                            a7=(Token)input.LT(1);
+                            match(input,14,FOLLOW_14_in_state304); if (failed) return element;
+                            if ( backtracking==0 ) {
+                              copyLocalizationInfos((CommonToken)a7, element); 
+                            }
+                            pushFollow(FOLLOW_behavior_in_state314);
+                            a8=behavior();
                             _fsp--;
                             if (failed) return element;
                             if ( backtracking==0 ) {
-                              element.eSet(element.eClass().getEStructuralFeature("exit"), a2); copyLocalizationInfos(a2, element); 
+                              element.eSet(element.eClass().getEStructuralFeature("exit"), a8); copyLocalizationInfos(a8, element); 
                             }
 
                             }
@@ -881,23 +935,35 @@ public class StatemachineParser extends EMFTextParserImpl {
 
                     }
 
-                    match(input,20,FOLLOW_20_in_state271); if (failed) return element;
-                    match(input,18,FOLLOW_18_in_state274); if (failed) return element;
-                    pushFollow(FOLLOW_behavior_in_state281);
-                    a3=behavior();
+                    a9=(Token)input.LT(1);
+                    match(input,16,FOLLOW_16_in_state330); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a9, element); 
+                    }
+                    a10=(Token)input.LT(1);
+                    match(input,14,FOLLOW_14_in_state338); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a10, element); 
+                    }
+                    pushFollow(FOLLOW_behavior_in_state346);
+                    a11=behavior();
                     _fsp--;
                     if (failed) return element;
                     if ( backtracking==0 ) {
-                      element.eSet(element.eClass().getEStructuralFeature("doActivity"), a3); copyLocalizationInfos(a3, element); 
+                      element.eSet(element.eClass().getEStructuralFeature("doActivity"), a11); copyLocalizationInfos(a11, element); 
                     }
-                    match(input,14,FOLLOW_14_in_state285); if (failed) return element;
+                    a12=(Token)input.LT(1);
+                    match(input,10,FOLLOW_10_in_state354); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a12, element); 
+                    }
 
                     }
                     break;
                 case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:638:2: c0= finalstate
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:638:2: c0= finalstate
                     {
-                    pushFollow(FOLLOW_finalstate_in_state295);
+                    pushFollow(FOLLOW_finalstate_in_state365);
                     c0=finalstate();
                     _fsp--;
                     if (failed) return element;
@@ -922,30 +988,35 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start pseudostate
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:641:1: pseudostate returns [Pseudostate element = null] : a0= TEXT 'state' a1= QUOTED_34_34 ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:641:1: pseudostate returns [Pseudostate element = null] : a0= TEXT a1= 'state' a2= TEXT ;
     public final Pseudostate pseudostate() throws RecognitionException {
         Pseudostate element =  null;
 
         Token a0=null;
         Token a1=null;
+        Token a2=null;
 
 
         	element = UMLFactory.eINSTANCE.createPseudostate();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:645:1: (a0= TEXT 'state' a1= QUOTED_34_34 )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:646:2: a0= TEXT 'state' a1= QUOTED_34_34
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:645:1: (a0= TEXT a1= 'state' a2= TEXT )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:646:2: a0= TEXT a1= 'state' a2= TEXT
             {
             a0=(Token)input.LT(1);
-            match(input,TEXT,FOLLOW_TEXT_in_pseudostate318); if (failed) return element;
+            match(input,TEXT,FOLLOW_TEXT_in_pseudostate388); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("kind"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());PseudostateKind resolved = (PseudostateKind)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("kind"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            match(input,16,FOLLOW_16_in_pseudostate322); if (failed) return element;
             a1=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_pseudostate329); if (failed) return element;
+            match(input,12,FOLLOW_12_in_pseudostate396); if (failed) return element;
             if ( backtracking==0 ) {
-              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); 
+              copyLocalizationInfos((CommonToken)a1, element); 
+            }
+            a2=(Token)input.LT(1);
+            match(input,TEXT,FOLLOW_TEXT_in_pseudostate404); if (failed) return element;
+            if ( backtracking==0 ) {
+              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); 
             }
 
             }
@@ -963,55 +1034,85 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start finalstate
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:651:1: finalstate returns [FinalState element = null] : 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:651:1: finalstate returns [FinalState element = null] : a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}' ;
     public final FinalState finalstate() throws RecognitionException {
         FinalState element =  null;
 
         Token a0=null;
-        Behavior a1 = null;
+        Token a1=null;
+        Token a2=null;
+        Token a3=null;
+        Token a4=null;
+        Token a5=null;
+        Token a7=null;
+        Token a8=null;
+        Token a10=null;
+        Token a11=null;
+        Token a13=null;
+        Behavior a6 = null;
 
-        Behavior a2 = null;
+        Behavior a9 = null;
 
-        Behavior a3 = null;
+        Behavior a12 = null;
 
 
 
         	element = UMLFactory.eINSTANCE.createFinalState();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:655:1: ( 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:656:2: 'final' 'state' a0= QUOTED_34_34 '{' ( ( 'entry' ':' a1= behavior ) )? ( ( 'exit' ':' a2= behavior ) )? 'do' ':' a3= behavior '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:655:1: (a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:656:2: a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}'
             {
-            match(input,21,FOLLOW_21_in_finalstate348); if (failed) return element;
-            match(input,16,FOLLOW_16_in_finalstate351); if (failed) return element;
             a0=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_finalstate358); if (failed) return element;
+            match(input,17,FOLLOW_17_in_finalstate427); if (failed) return element;
             if ( backtracking==0 ) {
-              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
+              copyLocalizationInfos((CommonToken)a0, element); 
             }
-            match(input,13,FOLLOW_13_in_finalstate362); if (failed) return element;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:660:2: ( ( 'entry' ':' a1= behavior ) )?
+            a1=(Token)input.LT(1);
+            match(input,12,FOLLOW_12_in_finalstate435); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a1, element); 
+            }
+            a2=(Token)input.LT(1);
+            match(input,TEXT,FOLLOW_TEXT_in_finalstate443); if (failed) return element;
+            if ( backtracking==0 ) {
+              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); 
+            }
+            a3=(Token)input.LT(1);
+            match(input,9,FOLLOW_9_in_finalstate451); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a3, element); 
+            }
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:660:2: ( (a4= 'entry' a5= ':' a6= behavior ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==17) ) {
+            if ( (LA6_0==13) ) {
                 alt6=1;
             }
             switch (alt6) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:661:3: ( 'entry' ':' a1= behavior )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:661:3: (a4= 'entry' a5= ':' a6= behavior )
                     {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:661:3: ( 'entry' ':' a1= behavior )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:662:4: 'entry' ':' a1= behavior
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:661:3: (a4= 'entry' a5= ':' a6= behavior )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:662:4: a4= 'entry' a5= ':' a6= behavior
                     {
-                    match(input,17,FOLLOW_17_in_finalstate374); if (failed) return element;
-                    match(input,18,FOLLOW_18_in_finalstate379); if (failed) return element;
-                    pushFollow(FOLLOW_behavior_in_finalstate388);
-                    a1=behavior();
+                    a4=(Token)input.LT(1);
+                    match(input,13,FOLLOW_13_in_finalstate468); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a4, element); 
+                    }
+                    a5=(Token)input.LT(1);
+                    match(input,14,FOLLOW_14_in_finalstate478); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a5, element); 
+                    }
+                    pushFollow(FOLLOW_behavior_in_finalstate488);
+                    a6=behavior();
                     _fsp--;
                     if (failed) return element;
                     if ( backtracking==0 ) {
-                      element.eSet(element.eClass().getEStructuralFeature("entry"), a1); copyLocalizationInfos(a1, element); 
+                      element.eSet(element.eClass().getEStructuralFeature("entry"), a6); copyLocalizationInfos(a6, element); 
                     }
 
                     }
@@ -1022,28 +1123,36 @@ public class StatemachineParser extends EMFTextParserImpl {
 
             }
 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:667:2: ( ( 'exit' ':' a2= behavior ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:667:2: ( (a7= 'exit' a8= ':' a9= behavior ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==19) ) {
+            if ( (LA7_0==15) ) {
                 alt7=1;
             }
             switch (alt7) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:668:3: ( 'exit' ':' a2= behavior )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:668:3: (a7= 'exit' a8= ':' a9= behavior )
                     {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:668:3: ( 'exit' ':' a2= behavior )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:669:4: 'exit' ':' a2= behavior
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:668:3: (a7= 'exit' a8= ':' a9= behavior )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:669:4: a7= 'exit' a8= ':' a9= behavior
                     {
-                    match(input,19,FOLLOW_19_in_finalstate409); if (failed) return element;
-                    match(input,18,FOLLOW_18_in_finalstate414); if (failed) return element;
-                    pushFollow(FOLLOW_behavior_in_finalstate423);
-                    a2=behavior();
+                    a7=(Token)input.LT(1);
+                    match(input,15,FOLLOW_15_in_finalstate513); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a7, element); 
+                    }
+                    a8=(Token)input.LT(1);
+                    match(input,14,FOLLOW_14_in_finalstate523); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a8, element); 
+                    }
+                    pushFollow(FOLLOW_behavior_in_finalstate533);
+                    a9=behavior();
                     _fsp--;
                     if (failed) return element;
                     if ( backtracking==0 ) {
-                      element.eSet(element.eClass().getEStructuralFeature("exit"), a2); copyLocalizationInfos(a2, element); 
+                      element.eSet(element.eClass().getEStructuralFeature("exit"), a9); copyLocalizationInfos(a9, element); 
                     }
 
                     }
@@ -1054,16 +1163,28 @@ public class StatemachineParser extends EMFTextParserImpl {
 
             }
 
-            match(input,20,FOLLOW_20_in_finalstate435); if (failed) return element;
-            match(input,18,FOLLOW_18_in_finalstate438); if (failed) return element;
-            pushFollow(FOLLOW_behavior_in_finalstate445);
-            a3=behavior();
+            a10=(Token)input.LT(1);
+            match(input,16,FOLLOW_16_in_finalstate549); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a10, element); 
+            }
+            a11=(Token)input.LT(1);
+            match(input,14,FOLLOW_14_in_finalstate557); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a11, element); 
+            }
+            pushFollow(FOLLOW_behavior_in_finalstate565);
+            a12=behavior();
             _fsp--;
             if (failed) return element;
             if ( backtracking==0 ) {
-              element.eSet(element.eClass().getEStructuralFeature("doActivity"), a3); copyLocalizationInfos(a3, element); 
+              element.eSet(element.eClass().getEStructuralFeature("doActivity"), a12); copyLocalizationInfos(a12, element); 
             }
-            match(input,14,FOLLOW_14_in_finalstate449); if (failed) return element;
+            a13=(Token)input.LT(1);
+            match(input,10,FOLLOW_10_in_finalstate573); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a13, element); 
+            }
 
             }
 
@@ -1080,67 +1201,97 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start transition
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:680:1: transition returns [Transition element = null] : 'transition' 'from' a0= QUOTED_34_34 'to' a1= QUOTED_34_34 'when' a2= trigger ( ( 'do' ':' a3= behavior ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:680:1: transition returns [Transition element = null] : a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )? ;
     public final Transition transition() throws RecognitionException {
         Transition element =  null;
 
         Token a0=null;
         Token a1=null;
-        Trigger a2 = null;
+        Token a2=null;
+        Token a3=null;
+        Token a4=null;
+        Token a5=null;
+        Token a7=null;
+        Token a8=null;
+        Trigger a6 = null;
 
-        Behavior a3 = null;
+        Behavior a9 = null;
 
 
 
         	element = UMLFactory.eINSTANCE.createTransition();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:684:1: ( 'transition' 'from' a0= QUOTED_34_34 'to' a1= QUOTED_34_34 'when' a2= trigger ( ( 'do' ':' a3= behavior ) )? )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:685:2: 'transition' 'from' a0= QUOTED_34_34 'to' a1= QUOTED_34_34 'when' a2= trigger ( ( 'do' ':' a3= behavior ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:684:1: (a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:685:2: a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )?
             {
-            match(input,22,FOLLOW_22_in_transition467); if (failed) return element;
-            match(input,23,FOLLOW_23_in_transition470); if (failed) return element;
             a0=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_transition477); if (failed) return element;
+            match(input,18,FOLLOW_18_in_transition596); if (failed) return element;
             if ( backtracking==0 ) {
-              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("source"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("source"), proxy); copyLocalizationInfos((CommonToken) a0, element); copyLocalizationInfos((CommonToken) a0, proxy); 
+              copyLocalizationInfos((CommonToken)a0, element); 
             }
-            match(input,24,FOLLOW_24_in_transition481); if (failed) return element;
             a1=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_transition488); if (failed) return element;
+            match(input,19,FOLLOW_19_in_transition604); if (failed) return element;
             if ( backtracking==0 ) {
-              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a1, element); copyLocalizationInfos((CommonToken) a1, proxy); 
+              copyLocalizationInfos((CommonToken)a1, element); 
             }
-            match(input,25,FOLLOW_25_in_transition492); if (failed) return element;
-            pushFollow(FOLLOW_trigger_in_transition499);
-            a2=trigger();
+            a2=(Token)input.LT(1);
+            match(input,TEXT,FOLLOW_TEXT_in_transition612); if (failed) return element;
+            if ( backtracking==0 ) {
+              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("source"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("source"), proxy); copyLocalizationInfos((CommonToken) a2, element); copyLocalizationInfos((CommonToken) a2, proxy); 
+            }
+            a3=(Token)input.LT(1);
+            match(input,20,FOLLOW_20_in_transition620); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a3, element); 
+            }
+            a4=(Token)input.LT(1);
+            match(input,TEXT,FOLLOW_TEXT_in_transition628); if (failed) return element;
+            if ( backtracking==0 ) {
+              TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;State proxy = UMLFactory.eINSTANCE.createState();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a4, element); copyLocalizationInfos((CommonToken) a4, proxy); 
+            }
+            a5=(Token)input.LT(1);
+            match(input,21,FOLLOW_21_in_transition636); if (failed) return element;
+            if ( backtracking==0 ) {
+              copyLocalizationInfos((CommonToken)a5, element); 
+            }
+            pushFollow(FOLLOW_trigger_in_transition644);
+            a6=trigger();
             _fsp--;
             if (failed) return element;
             if ( backtracking==0 ) {
-              ((List) element.eGet(element.eClass().getEStructuralFeature("trigger"))).add(a2); copyLocalizationInfos(a2, element); 
+              ((List) element.eGet(element.eClass().getEStructuralFeature("trigger"))).add(a6); copyLocalizationInfos(a6, element); 
             }
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:692:2: ( ( 'do' ':' a3= behavior ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:692:2: ( (a7= 'do' a8= ':' a9= behavior ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
-            if ( (LA8_0==20) ) {
+            if ( (LA8_0==16) ) {
                 alt8=1;
             }
             switch (alt8) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:693:3: ( 'do' ':' a3= behavior )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:693:3: (a7= 'do' a8= ':' a9= behavior )
                     {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:693:3: ( 'do' ':' a3= behavior )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:694:4: 'do' ':' a3= behavior
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:693:3: (a7= 'do' a8= ':' a9= behavior )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:694:4: a7= 'do' a8= ':' a9= behavior
                     {
-                    match(input,20,FOLLOW_20_in_transition512); if (failed) return element;
-                    match(input,18,FOLLOW_18_in_transition517); if (failed) return element;
-                    pushFollow(FOLLOW_behavior_in_transition526);
-                    a3=behavior();
+                    a7=(Token)input.LT(1);
+                    match(input,16,FOLLOW_16_in_transition661); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a7, element); 
+                    }
+                    a8=(Token)input.LT(1);
+                    match(input,14,FOLLOW_14_in_transition671); if (failed) return element;
+                    if ( backtracking==0 ) {
+                      copyLocalizationInfos((CommonToken)a8, element); 
+                    }
+                    pushFollow(FOLLOW_behavior_in_transition681);
+                    a9=behavior();
                     _fsp--;
                     if (failed) return element;
                     if ( backtracking==0 ) {
-                      element.eSet(element.eClass().getEStructuralFeature("effect"), a3); copyLocalizationInfos(a3, element); 
+                      element.eSet(element.eClass().getEStructuralFeature("effect"), a9); copyLocalizationInfos(a9, element); 
                     }
 
                     }
@@ -1167,7 +1318,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start trigger
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:701:1: trigger returns [Trigger element = null] : a0= QUOTED_34_34 ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:701:1: trigger returns [Trigger element = null] : a0= QUOTED_34_34 ;
     public final Trigger trigger() throws RecognitionException {
         Trigger element =  null;
 
@@ -1177,11 +1328,11 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createTrigger();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:705:1: (a0= QUOTED_34_34 )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:706:2: a0= QUOTED_34_34
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:705:1: (a0= QUOTED_34_34 )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:706:2: a0= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_trigger557); if (failed) return element;
+            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_trigger712); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
@@ -1201,7 +1352,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start activity
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:709:1: activity returns [Activity element = null] : a0= QUOTED_34_34 ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:709:1: activity returns [Activity element = null] : a0= QUOTED_34_34 ;
     public final Activity activity() throws RecognitionException {
         Activity element =  null;
 
@@ -1211,11 +1362,11 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createActivity();
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:713:1: (a0= QUOTED_34_34 )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:714:2: a0= QUOTED_34_34
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:713:1: (a0= QUOTED_34_34 )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:714:2: a0= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
-            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_activity580); if (failed) return element;
+            match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_activity735); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
@@ -1235,7 +1386,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start vertex
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:717:1: vertex returns [Vertex element = null] : (c0= state | c1= pseudostate | c2= finalstate );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:717:1: vertex returns [Vertex element = null] : (c0= state | c1= pseudostate | c2= finalstate );
     public final Vertex vertex() throws RecognitionException {
         Vertex element =  null;
 
@@ -1247,40 +1398,40 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:719:1: (c0= state | c1= pseudostate | c2= finalstate )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:719:1: (c0= state | c1= pseudostate | c2= finalstate )
             int alt9=3;
             switch ( input.LA(1) ) {
-            case 16:
+            case 12:
                 {
                 alt9=1;
                 }
                 break;
-            case 21:
+            case 17:
                 {
                 int LA9_2 = input.LA(2);
 
-                if ( (LA9_2==16) ) {
+                if ( (LA9_2==12) ) {
                     int LA9_4 = input.LA(3);
 
-                    if ( (LA9_4==QUOTED_34_34) ) {
+                    if ( (LA9_4==TEXT) ) {
                         int LA9_5 = input.LA(4);
 
-                        if ( (LA9_5==13) ) {
+                        if ( (LA9_5==9) ) {
                             switch ( input.LA(5) ) {
-                            case 17:
+                            case 13:
                                 {
                                 int LA9_7 = input.LA(6);
 
-                                if ( (LA9_7==18) ) {
+                                if ( (LA9_7==14) ) {
                                     int LA9_10 = input.LA(7);
 
-                                    if ( (LA9_10==12) ) {
+                                    if ( (LA9_10==8) ) {
                                         int LA9_13 = input.LA(8);
 
-                                        if ( (LA9_13==QUOTED_34_34) ) {
+                                        if ( (LA9_13==TEXT) ) {
                                             int LA9_19 = input.LA(9);
 
-                                            if ( (LA9_19==13) ) {
+                                            if ( (LA9_19==9) ) {
                                                 int LA9_23 = input.LA(10);
 
                                                 if ( (synpred9()) ) {
@@ -1316,19 +1467,19 @@ public class StatemachineParser extends EMFTextParserImpl {
                                     else if ( (LA9_10==QUOTED_34_34) ) {
                                         int LA9_14 = input.LA(8);
 
-                                        if ( (LA9_14==19) ) {
+                                        if ( (LA9_14==15) ) {
                                             int LA9_8 = input.LA(9);
 
-                                            if ( (LA9_8==18) ) {
+                                            if ( (LA9_8==14) ) {
                                                 int LA9_11 = input.LA(10);
 
-                                                if ( (LA9_11==12) ) {
+                                                if ( (LA9_11==8) ) {
                                                     int LA9_15 = input.LA(11);
 
-                                                    if ( (LA9_15==QUOTED_34_34) ) {
+                                                    if ( (LA9_15==TEXT) ) {
                                                         int LA9_20 = input.LA(12);
 
-                                                        if ( (LA9_20==13) ) {
+                                                        if ( (LA9_20==9) ) {
                                                             int LA9_24 = input.LA(13);
 
                                                             if ( (synpred9()) ) {
@@ -1364,19 +1515,19 @@ public class StatemachineParser extends EMFTextParserImpl {
                                                 else if ( (LA9_11==QUOTED_34_34) ) {
                                                     int LA9_16 = input.LA(11);
 
-                                                    if ( (LA9_16==20) ) {
+                                                    if ( (LA9_16==16) ) {
                                                         int LA9_9 = input.LA(12);
 
-                                                        if ( (LA9_9==18) ) {
+                                                        if ( (LA9_9==14) ) {
                                                             int LA9_12 = input.LA(13);
 
-                                                            if ( (LA9_12==12) ) {
+                                                            if ( (LA9_12==8) ) {
                                                                 int LA9_17 = input.LA(14);
 
-                                                                if ( (LA9_17==QUOTED_34_34) ) {
+                                                                if ( (LA9_17==TEXT) ) {
                                                                     int LA9_21 = input.LA(15);
 
-                                                                    if ( (LA9_21==13) ) {
+                                                                    if ( (LA9_21==9) ) {
                                                                         int LA9_25 = input.LA(16);
 
                                                                         if ( (synpred9()) ) {
@@ -1412,7 +1563,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                                                             else if ( (LA9_12==QUOTED_34_34) ) {
                                                                 int LA9_18 = input.LA(14);
 
-                                                                if ( (LA9_18==14) ) {
+                                                                if ( (LA9_18==10) ) {
                                                                     int LA9_22 = input.LA(15);
 
                                                                     if ( (synpred9()) ) {
@@ -1477,19 +1628,19 @@ public class StatemachineParser extends EMFTextParserImpl {
                                                 throw nvae;
                                             }
                                         }
-                                        else if ( (LA9_14==20) ) {
+                                        else if ( (LA9_14==16) ) {
                                             int LA9_9 = input.LA(9);
 
-                                            if ( (LA9_9==18) ) {
+                                            if ( (LA9_9==14) ) {
                                                 int LA9_12 = input.LA(10);
 
-                                                if ( (LA9_12==12) ) {
+                                                if ( (LA9_12==8) ) {
                                                     int LA9_17 = input.LA(11);
 
-                                                    if ( (LA9_17==QUOTED_34_34) ) {
+                                                    if ( (LA9_17==TEXT) ) {
                                                         int LA9_21 = input.LA(12);
 
-                                                        if ( (LA9_21==13) ) {
+                                                        if ( (LA9_21==9) ) {
                                                             int LA9_25 = input.LA(13);
 
                                                             if ( (synpred9()) ) {
@@ -1525,7 +1676,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                                                 else if ( (LA9_12==QUOTED_34_34) ) {
                                                     int LA9_18 = input.LA(11);
 
-                                                    if ( (LA9_18==14) ) {
+                                                    if ( (LA9_18==10) ) {
                                                         int LA9_22 = input.LA(12);
 
                                                         if ( (synpred9()) ) {
@@ -1591,20 +1742,20 @@ public class StatemachineParser extends EMFTextParserImpl {
                                 }
                                 }
                                 break;
-                            case 19:
+                            case 15:
                                 {
                                 int LA9_8 = input.LA(6);
 
-                                if ( (LA9_8==18) ) {
+                                if ( (LA9_8==14) ) {
                                     int LA9_11 = input.LA(7);
 
-                                    if ( (LA9_11==12) ) {
+                                    if ( (LA9_11==8) ) {
                                         int LA9_15 = input.LA(8);
 
-                                        if ( (LA9_15==QUOTED_34_34) ) {
+                                        if ( (LA9_15==TEXT) ) {
                                             int LA9_20 = input.LA(9);
 
-                                            if ( (LA9_20==13) ) {
+                                            if ( (LA9_20==9) ) {
                                                 int LA9_24 = input.LA(10);
 
                                                 if ( (synpred9()) ) {
@@ -1640,19 +1791,19 @@ public class StatemachineParser extends EMFTextParserImpl {
                                     else if ( (LA9_11==QUOTED_34_34) ) {
                                         int LA9_16 = input.LA(8);
 
-                                        if ( (LA9_16==20) ) {
+                                        if ( (LA9_16==16) ) {
                                             int LA9_9 = input.LA(9);
 
-                                            if ( (LA9_9==18) ) {
+                                            if ( (LA9_9==14) ) {
                                                 int LA9_12 = input.LA(10);
 
-                                                if ( (LA9_12==12) ) {
+                                                if ( (LA9_12==8) ) {
                                                     int LA9_17 = input.LA(11);
 
-                                                    if ( (LA9_17==QUOTED_34_34) ) {
+                                                    if ( (LA9_17==TEXT) ) {
                                                         int LA9_21 = input.LA(12);
 
-                                                        if ( (LA9_21==13) ) {
+                                                        if ( (LA9_21==9) ) {
                                                             int LA9_25 = input.LA(13);
 
                                                             if ( (synpred9()) ) {
@@ -1688,7 +1839,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                                                 else if ( (LA9_12==QUOTED_34_34) ) {
                                                     int LA9_18 = input.LA(11);
 
-                                                    if ( (LA9_18==14) ) {
+                                                    if ( (LA9_18==10) ) {
                                                         int LA9_22 = input.LA(12);
 
                                                         if ( (synpred9()) ) {
@@ -1754,20 +1905,20 @@ public class StatemachineParser extends EMFTextParserImpl {
                                 }
                                 }
                                 break;
-                            case 20:
+                            case 16:
                                 {
                                 int LA9_9 = input.LA(6);
 
-                                if ( (LA9_9==18) ) {
+                                if ( (LA9_9==14) ) {
                                     int LA9_12 = input.LA(7);
 
-                                    if ( (LA9_12==12) ) {
+                                    if ( (LA9_12==8) ) {
                                         int LA9_17 = input.LA(8);
 
-                                        if ( (LA9_17==QUOTED_34_34) ) {
+                                        if ( (LA9_17==TEXT) ) {
                                             int LA9_21 = input.LA(9);
 
-                                            if ( (LA9_21==13) ) {
+                                            if ( (LA9_21==9) ) {
                                                 int LA9_25 = input.LA(10);
 
                                                 if ( (synpred9()) ) {
@@ -1803,7 +1954,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                                     else if ( (LA9_12==QUOTED_34_34) ) {
                                         int LA9_18 = input.LA(8);
 
-                                        if ( (LA9_18==14) ) {
+                                        if ( (LA9_18==10) ) {
                                             int LA9_22 = input.LA(9);
 
                                             if ( (synpred9()) ) {
@@ -1894,9 +2045,9 @@ public class StatemachineParser extends EMFTextParserImpl {
 
             switch (alt9) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:720:2: c0= state
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:720:2: c0= state
                     {
-                    pushFollow(FOLLOW_state_in_vertex599);
+                    pushFollow(FOLLOW_state_in_vertex754);
                     c0=state();
                     _fsp--;
                     if (failed) return element;
@@ -1907,9 +2058,9 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:721:2: c1= pseudostate
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:721:2: c1= pseudostate
                     {
-                    pushFollow(FOLLOW_pseudostate_in_vertex609);
+                    pushFollow(FOLLOW_pseudostate_in_vertex764);
                     c1=pseudostate();
                     _fsp--;
                     if (failed) return element;
@@ -1920,9 +2071,9 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:722:2: c2= finalstate
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:722:2: c2= finalstate
                     {
-                    pushFollow(FOLLOW_finalstate_in_vertex619);
+                    pushFollow(FOLLOW_finalstate_in_vertex774);
                     c2=finalstate();
                     _fsp--;
                     if (failed) return element;
@@ -1947,7 +2098,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start behavior
-    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:725:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:725:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );
     public final Behavior behavior() throws RecognitionException {
         Behavior element =  null;
 
@@ -1957,11 +2108,11 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
         try {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:727:1: (c0= statemachine | c1= activity )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:727:1: (c0= statemachine | c1= activity )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==12) ) {
+            if ( (LA10_0==8) ) {
                 alt10=1;
             }
             else if ( (LA10_0==QUOTED_34_34) ) {
@@ -1976,9 +2127,9 @@ public class StatemachineParser extends EMFTextParserImpl {
             }
             switch (alt10) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:728:2: c0= statemachine
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:728:2: c0= statemachine
                     {
-                    pushFollow(FOLLOW_statemachine_in_behavior638);
+                    pushFollow(FOLLOW_statemachine_in_behavior793);
                     c0=statemachine();
                     _fsp--;
                     if (failed) return element;
@@ -1989,9 +2140,9 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:729:2: c1= activity
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:729:2: c1= activity
                     {
-                    pushFollow(FOLLOW_activity_in_behavior648);
+                    pushFollow(FOLLOW_activity_in_behavior803);
                     c1=activity();
                     _fsp--;
                     if (failed) return element;
@@ -2016,10 +2167,10 @@ public class StatemachineParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred9
     public final void synpred9_fragment() throws RecognitionException {   
-        // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:720:2: ( state )
-        // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:720:2: state
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:720:2: ( state )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:720:2: state
         {
-        pushFollow(FOLLOW_state_in_synpred9599);
+        pushFollow(FOLLOW_state_in_synpred9754);
         state();
         _fsp--;
         if (failed) return ;
@@ -2047,63 +2198,63 @@ public class StatemachineParser extends EMFTextParserImpl {
  
 
     public static final BitSet FOLLOW_statemachine_in_start61 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_statemachine81 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_statemachine88 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_statemachine92 = new BitSet(new long[]{0x0000000000614020L});
-    public static final BitSet FOLLOW_region_in_statemachine99 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_statemachine103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_vertex_in_region134 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_region140 = new BitSet(new long[]{0x0000000000610022L});
-    public static final BitSet FOLLOW_transition_in_region155 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_region161 = new BitSet(new long[]{0x0000000000610022L});
-    public static final BitSet FOLLOW_16_in_state187 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_state194 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_state198 = new BitSet(new long[]{0x00000000001A0000L});
-    public static final BitSet FOLLOW_17_in_state210 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_state215 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_state224 = new BitSet(new long[]{0x0000000000180000L});
-    public static final BitSet FOLLOW_19_in_state245 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_state250 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_state259 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_state271 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_state274 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_state281 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_state285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_finalstate_in_state295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TEXT_in_pseudostate318 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_pseudostate322 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_pseudostate329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_finalstate348 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_finalstate351 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_finalstate358 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_finalstate362 = new BitSet(new long[]{0x00000000001A0000L});
-    public static final BitSet FOLLOW_17_in_finalstate374 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_finalstate379 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_finalstate388 = new BitSet(new long[]{0x0000000000180000L});
-    public static final BitSet FOLLOW_19_in_finalstate409 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_finalstate414 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_finalstate423 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_finalstate435 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_finalstate438 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_finalstate445 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_finalstate449 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_transition467 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_transition470 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_transition477 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_transition481 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_transition488 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_transition492 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_trigger_in_transition499 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_20_in_transition512 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_transition517 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_behavior_in_transition526 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_trigger557 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_QUOTED_34_34_in_activity580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_state_in_vertex599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_pseudostate_in_vertex609 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_finalstate_in_vertex619 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_statemachine_in_behavior638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_activity_in_behavior648 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_state_in_synpred9599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_8_in_statemachine85 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_statemachine93 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_statemachine101 = new BitSet(new long[]{0x0000000000061410L});
+    public static final BitSet FOLLOW_region_in_statemachine109 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_statemachine117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_vertex_in_region149 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_region159 = new BitSet(new long[]{0x0000000000061012L});
+    public static final BitSet FOLLOW_transition_in_region175 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_region185 = new BitSet(new long[]{0x0000000000061012L});
+    public static final BitSet FOLLOW_12_in_state216 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_state224 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_state232 = new BitSet(new long[]{0x000000000001A000L});
+    public static final BitSet FOLLOW_13_in_state249 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_state259 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_state269 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_15_in_state294 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_state304 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_state314 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_state330 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_state338 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_state346 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_state354 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_finalstate_in_state365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TEXT_in_pseudostate388 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_pseudostate396 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_pseudostate404 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_finalstate427 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_finalstate435 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_finalstate443 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_finalstate451 = new BitSet(new long[]{0x000000000001A000L});
+    public static final BitSet FOLLOW_13_in_finalstate468 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_finalstate478 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_finalstate488 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_15_in_finalstate513 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_finalstate523 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_finalstate533 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_finalstate549 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_finalstate557 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_finalstate565 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_finalstate573 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_transition596 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_transition604 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_transition612 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_transition620 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_TEXT_in_transition628 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_transition636 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_trigger_in_transition644 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_transition661 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_transition671 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_behavior_in_transition681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_trigger712 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_QUOTED_34_34_in_activity735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_state_in_vertex754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_pseudostate_in_vertex764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_finalstate_in_vertex774 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_statemachine_in_behavior793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_activity_in_behavior803 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_state_in_synpred9754 = new BitSet(new long[]{0x0000000000000002L});
 
 }

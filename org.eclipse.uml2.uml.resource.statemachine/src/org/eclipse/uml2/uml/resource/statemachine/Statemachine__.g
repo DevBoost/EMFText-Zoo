@@ -14,58 +14,38 @@ package org.eclipse.uml2.uml.resource.statemachine;
 
 }
 
-T12 : 'StateMachine' ;
-T13 : '{' ;
-T14 : '}' ;
-T15 : ';' ;
-T16 : 'state' ;
-T17 : 'entry' ;
-T18 : ':' ;
-T19 : 'exit' ;
-T20 : 'do' ;
-T21 : 'final' ;
-T22 : 'transition' ;
-T23 : 'from' ;
-T24 : 'to' ;
-T25 : 'when' ;
+T8 : 'StateMachine' ;
+T9 : '{' ;
+T10 : '}' ;
+T11 : ';' ;
+T12 : 'state' ;
+T13 : 'entry' ;
+T14 : ':' ;
+T15 : 'exit' ;
+T16 : 'do' ;
+T17 : 'final' ;
+T18 : 'transition' ;
+T19 : 'from' ;
+T20 : 'to' ;
+T21 : 'when' ;
 
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 732
-SL_COMMENT
-:
-	'//'(~('\n'|'\r'))*{ channel=99; }
-;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 736
-ML_COMMENT
-:
-	'/*'.*'*/'{ channel=99; }
-;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 740
-INTEGER
-:
-	('-')?('1'..'9')('0'..'9')*|'0'{ channel=99; }
-;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 744
-FLOAT
-:
-	('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ { channel=99; }
-;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 748
-LB
-:
-	('\r\n' | '\r' | '\n'){ channel=99; }
-;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 752
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 732
 WS
 :
 	(' ' | '\t' | '\f'){ channel=99; }
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 756
-TEXT
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 736
+LB
 :
-	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
+	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 760
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 740
 QUOTED_34_34
 :
 	('"')(~('"')|('\\''"'))*('"')
+;
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 744
+TEXT
+:
+	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
 ;
