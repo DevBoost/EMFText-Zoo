@@ -335,28 +335,38 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicativeExpression"
-        lowerBound="1" upperBound="-1" eType="#//MultiplicativeExpression" containment="true"/>
+        upperBound="-1" eType="#//MultiplicativeExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="additiveOperator" upperBound="-1"
         eType="#//AdditiveOperator" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
-        upperBound="-1" eType="#//UnaryExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" upperBound="-1"
+        eType="#//UnaryExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicativeOperator"
         upperBound="-1" eType="#//MultiplicativeOperator" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpressionNotPlusMinus"
-        lowerBound="1" eType="#//UnaryExpressionNotPlusMinus" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryOperator" eType="#//UnaryOperator"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additiveOperator" eType="#//AdditiveOperator"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plusplus" eType="#//PlusPlus"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minusminus" eType="#//MinusMinus"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpressionNotPlusMinus"
+        eType="#//UnaryExpressionNotPlusMinus" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryExpressionNotPlusMinus">
     <eStructuralFeatures xsi:type="ecore:EReference" name="primary" eType="#//Primary"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryOperator" eType="#//UnaryOperator"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="castExpression" eType="#//CastExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complement" eType="#//Complement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="negate" eType="#//Negate"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plusplus" eType="#//PlusPlus"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minusminus" eType="#//MinusMinus"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CastExpression">
@@ -384,9 +394,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeOperator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnaryOperator">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlusPlus"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MinusMinus"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Complement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negate"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//ForLoopInitializer">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//Expression" containment="true"/>

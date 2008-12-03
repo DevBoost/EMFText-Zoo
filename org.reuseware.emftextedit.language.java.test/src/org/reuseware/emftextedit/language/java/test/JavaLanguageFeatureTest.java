@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.junit.Before;
@@ -32,6 +34,7 @@ import org.reuseware.emftextedit.language.java.NamedElement;
 import org.reuseware.emftextedit.language.java.Statement;
 import org.reuseware.emftextedit.language.java.StringLiteral;
 import org.reuseware.emftextedit.language.java.VariableLengthParameter;
+import org.reuseware.emftextedit.language.java.impl.IntegerLiteralImpl;
 
 import pkg.EscapedStrings;
 
@@ -73,8 +76,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(member, Field.class);
 		Field booleanField = (Field) member;
 		InitialValue initValueForBoolean = booleanField.getInitialValue();
-		assertType(initValueForBoolean, BooleanLiteral.class);
-		BooleanLiteral initLiteralForBoolean = (BooleanLiteral) initValueForBoolean;
+
+		TreeIterator<EObject> iter = initValueForBoolean.eAllContents();
+		BooleanLiteral literal = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof BooleanLiteral) literal = (BooleanLiteral)obj;
+		}
+		assertType(literal, BooleanLiteral.class);
+		BooleanLiteral initLiteralForBoolean = (BooleanLiteral) literal;
 		assertEquals(expectedInitValue, initLiteralForBoolean.isValue());
 	}
 
@@ -82,8 +92,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
 		InitialValue initValue = charField.getInitialValue();
-		assertType(initValue, CharacterLiteral.class);
-		CharacterLiteral initLiteral = (CharacterLiteral) initValue;
+		
+		TreeIterator<EObject> iter = initValue.eAllContents();
+		CharacterLiteral literal = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof CharacterLiteral) literal = (CharacterLiteral)obj;
+		}
+		assertType(literal, CharacterLiteral.class);
+		CharacterLiteral initLiteral = (CharacterLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
 
@@ -91,17 +108,31 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
 		InitialValue initValue = charField.getInitialValue();
-		assertType(initValue, FloatingPointLiteral.class);
-		FloatingPointLiteral initLiteral = (FloatingPointLiteral) initValue;
+		
+		TreeIterator<EObject> iter = initValue.eAllContents();
+		FloatingPointLiteral literal = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof FloatingPointLiteral) literal = (FloatingPointLiteral)obj;
+		}
+		assertType(literal, FloatingPointLiteral.class);
+		FloatingPointLiteral initLiteral = (FloatingPointLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
 
 	private void checkIntegerMember(Member member, long expectedInitValue) {
 		assertType(member, Field.class);
-		Field longField = (Field) member;
-		InitialValue initValueForBoolean = longField.getInitialValue();
-		assertType(initValueForBoolean, IntegerLiteral.class);
-		IntegerLiteral initLiteralForBoolean = (IntegerLiteral) initValueForBoolean;
+		Field longField = (Field) member;		
+		InitialValue initValue = longField.getInitialValue();
+		
+		TreeIterator<EObject> iter = initValue.eAllContents();
+		IntegerLiteral literal = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof IntegerLiteral) literal = (IntegerLiteral)obj;
+		}
+		assertType(literal, IntegerLiteral.class);
+		IntegerLiteral initLiteralForBoolean = (IntegerLiteral) literal;
 		assertEquals(expectedInitValue, initLiteralForBoolean.getValue());
 	}
 
@@ -112,8 +143,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(fieldUnicode, Field.class);
 		Field unicode = (Field) fieldUnicode;
 		InitialValue value = unicode.getInitialValue();
-		assertType(value, StringLiteral.class);
-		StringLiteral stringValue = (StringLiteral) value;
+		
+		TreeIterator<EObject> iter = value.eAllContents();
+		StringLiteral literal = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof StringLiteral) literal = (StringLiteral)obj;
+		}
+		assertType(literal, StringLiteral.class);
+		StringLiteral stringValue = (StringLiteral) literal;
 		assertEquals("Unescaped value expected for field \"" + name + "\".",
 				expectedValue, stringValue.getValue());
 	}
@@ -122,8 +160,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
 		InitialValue initValue = charField.getInitialValue();
-		assertType(initValue, StringLiteral.class);
-		StringLiteral initLiteral = (StringLiteral) initValue;
+		
+		TreeIterator<EObject> iter = initValue.eAllContents();
+		StringLiteral literal = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof StringLiteral) literal = (StringLiteral)obj;
+		}
+		assertType(literal, StringLiteral.class);
+		StringLiteral initLiteral = (StringLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
 	
@@ -614,7 +659,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 12);
-
+		
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
 		checkIntegerMember(members.get(1), 3);
