@@ -87,6 +87,14 @@ public class JavaClasspath {
 			URI logicalUri = 
 				JavaUniquePathConstructor.getClassifierResourceURI(packageName, name);
 			
+			if (URI_MAP.containsKey(logicalUri)) {
+				//TODO where to put this warning?
+				System.out.println("[JaMoPP] WARNING: Two versions of " + packageName + "." + name + 
+						"\n[JaMoPP]   1) " + URI_MAP.get(logicalUri) +
+						"\n[JaMoPP]   2) " + uri +
+						"\n[JaMoPP] Version 1) will be ignored!");
+			}
+			
 			URI_MAP.put(logicalUri, uri);
 		}
 	}

@@ -1,5 +1,7 @@
 package org.reuseware.emftextedit.language.java;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -95,11 +97,20 @@ public class JavaUniquePathConstructor {
 			reference = assignment.getTarget();
 		}
 		
-		if (argument instanceof Primary) {
-			Primary primary = (Primary) argument;
-			reference = primary.getReference();
+		//navigate down the expression tree until we reach a primary
+		for(Iterator<EObject> it = argument.eAllContents(); it.hasNext(); ) {
+			EObject child = it.next();
+			if (child instanceof Primary) {
+				Primary primary = (Primary) child;
+				reference = primary.getReference();
+				break;
+			}
 		}
 		
+		
+		if (argument instanceof UnaryExpression) {
+			reference = ((UnaryExpression)argument).getUnaryExpressionNotPlusMinus().getPrimary().getReference();
+		}
 		
 		//TODO what other cases need to be considered here
 		
