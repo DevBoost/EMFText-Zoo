@@ -333,7 +333,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ShiftExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additiveExpression" upperBound="-1"
+        eType="#//AdditiveExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shiftOperator" upperBound="-1"
+        eType="#//ShiftOperator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicativeExpression"
         upperBound="-1" eType="#//MultiplicativeExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="additiveOperator" upperBound="-1"
@@ -388,12 +394,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parExpression" eType="#//ParExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShiftOperator" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveOperator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeOperator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeftShift" eSuperTypes="#//ShiftOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RightShift" eSuperTypes="#//ShiftOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnsignedRightShift" eSuperTypes="#//ShiftOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="PlusPlus"/>
   <eClassifiers xsi:type="ecore:EClass" name="MinusMinus"/>
   <eClassifiers xsi:type="ecore:EClass" name="Complement"/>
