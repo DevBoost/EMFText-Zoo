@@ -3,14 +3,13 @@ package org.reuseware.emftextedit.language.java.resource.java.analysis;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.reuseware.emftextedit.language.java.Classifier;
 import org.reuseware.emftextedit.language.java.Import;
 import org.reuseware.emftextedit.language.java.JavaClasspath;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
-import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
+import org.reuseware.emftextedit.runtime.resource.ResolveResult;
+import org.reuseware.emftextedit.runtime.resource.impl.ReferenceResolverImpl;
 
-public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
+public class ImportClassifiersReferenceResolver extends ReferenceResolverImpl {
 
 	@Override
 	protected String doDeResolve(EObject element, EObject container,
@@ -31,24 +30,23 @@ public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
 	}
 
 	@Override
-	protected EObject doResolve(InternalEObject proxy, EObject container,
-			EReference reference, TextResource resource) {
+	protected void doResolve(String proxyURIFragment, EObject container,
+			EReference reference, int position, boolean resolveFuzzy, ResolveResult result) {
 		
 		Import theImport = (Import) container;
 		
 		String packageName = createPackageName(theImport);
 		
 		EList<Classifier> classifiers =  
-			JavaClasspath.INSTANCE.getClassifiers(packageName, proxy.eProxyURI().fragment());
-		
+			JavaClasspath.INSTANCE.getClassifiers(packageName, proxyURIFragment);
+
+		// TODO mseifert: this should return all classifiers as a collection
 		while (classifiers.size() > 1) {
 			theImport.getClassifiers().add(classifiers.remove(0));
 		}
 		
 		if (classifiers.size() == 1) {
-			return classifiers.remove(0);
-		} else {
-			return null;
+			result.addMapping(proxyURIFragment, classifiers.remove(0));
 		}
 	}
 	
@@ -64,5 +62,4 @@ public class ImportClassifiersProxyResolver extends ProxyResolverImpl {
 		}
 		return packageName;
 	}
-
 }

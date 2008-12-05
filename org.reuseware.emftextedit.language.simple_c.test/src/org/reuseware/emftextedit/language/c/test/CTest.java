@@ -2,18 +2,13 @@ package org.reuseware.emftextedit.language.c.test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.eclipse.emf.ecore.EObject;
 import org.reuseware.emftextedit.language.simple_c.CompilationUnit;
 import org.reuseware.emftextedit.language.simple_c.Definition;
 import org.reuseware.emftextedit.language.simple_c.Variable;
 
-public class CTest extends TestCase {
+public class CTest extends AbstractCTest {
 	
 	public void testVariables() {
 		try {
@@ -28,21 +23,4 @@ public class CTest extends TestCase {
 			fail(e.getMessage());
 		}
 	}
-
-
-	private static CompilationUnit loadResource(InputStream inputStream,
-			String fileIdentifier) throws IOException {
-		
-		CResourceImplTestWrapper resource = new CResourceImplTestWrapper();
-		resource.load(inputStream, Collections.EMPTY_MAP);
-		assertEquals("The resource should have one content element.", 1,
-				resource.getContents().size());
-		EObject content = resource.getContents().get(0);
-		assertTrue("File '" + fileIdentifier
-				+ "' was parsed to CompilationUnit.",
-				content instanceof CompilationUnit);
-		CompilationUnit cUnit = (CompilationUnit) content;
-		return cUnit;
-	}
-
 }

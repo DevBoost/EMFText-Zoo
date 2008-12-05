@@ -11,8 +11,7 @@ public class JavaLanguageFeatureTestWithoutReprintingWithSemanticErrors extends 
 	public void setUp() throws Exception {
 		super.setUp();
 		
-		JavaClasspath.INSTANCE.registerClassifierJar(
-				"/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar");
+		//JavaClasspath.INSTANCE.registerClassifierJar("/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar");
 		
 	}
 	

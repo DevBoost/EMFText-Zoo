@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.reuseware.emftextedit.language.java.Member;
 import org.reuseware.emftextedit.language.java.Method;
 import org.reuseware.emftextedit.language.java.test.AbstractJavaParserTest;
+import org.reuseware.emftextedit.runtime.resource.LocationMap;
 import org.reuseware.emftextedit.runtime.resource.TextResource;
 
 /**
@@ -43,11 +44,12 @@ public class LocationTest extends AbstractJavaParserTest {
 		Resource resource = element.eResource();
 		assertTrue(resource instanceof TextResource);
 		TextResource textResource = (TextResource) resource;
+		LocationMap locationMap = textResource.getLocationMap();
 		
-		assertEquals(element.eClass().getName() + ": Wrong line", line, textResource.getElementLine(element));
-		assertEquals(element.eClass().getName() + ": Wrong column", column, textResource.getElementColumn(element));
-		assertEquals(element.eClass().getName() + ": Wrong start character", charStart, textResource.getElementCharStart(element));
-		assertEquals(element.eClass().getName() + ": Wrong end character", charEnd, textResource.getElementCharEnd(element));
+		assertEquals(element.eClass().getName() + ": Wrong line", line, locationMap.getLine(element));
+		assertEquals(element.eClass().getName() + ": Wrong column", column, locationMap.getColumn(element));
+		assertEquals(element.eClass().getName() + ": Wrong start character", charStart, locationMap.getCharStart(element));
+		assertEquals(element.eClass().getName() + ": Wrong end character", charEnd, locationMap.getCharEnd(element));
 	}
 
 	@Override

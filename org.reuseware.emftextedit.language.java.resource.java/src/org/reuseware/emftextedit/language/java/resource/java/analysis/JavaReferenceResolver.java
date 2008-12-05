@@ -32,10 +32,11 @@ import org.reuseware.emftextedit.language.java.TypeReference;
 import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
 import org.reuseware.emftextedit.language.java.TypedElement;
 import org.reuseware.emftextedit.language.java.UnresolvedProxiesException;
+import org.reuseware.emftextedit.runtime.resource.ResolveResult;
 import org.reuseware.emftextedit.runtime.resource.TextResource;
-import org.reuseware.emftextedit.runtime.resource.impl.ProxyResolverImpl;
+import org.reuseware.emftextedit.runtime.resource.impl.ReferenceResolverImpl;
 
-public abstract class ReferenceResolver extends ProxyResolverImpl {
+public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 
 	
 	protected TextResource myResource = null;
@@ -81,17 +82,18 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	}
 
 	@Override
-	protected EObject doResolve(InternalEObject proxy, EObject container,
-			EReference reference, TextResource resource) {
+	protected void doResolve(String identifier, EObject container,
+			EReference reference, int position, boolean resolveFuzzy,
+			ResolveResult result) {
 		
-		myResource = resource;
+		myResource = (TextResource) container.eResource();
 		
 		try {
-			EObject result = null;
+			EObject targetObject = null;
 			
 			if (!(container.eContainer() instanceof Reference)) {
 				//direct primary reference: resolve in scope of the current compilation unit
-				result =  findScoped(proxy, container, container, reference.getEReferenceType());
+				targetObject =  findScoped(identifier, container, container, reference.getEReferenceType());
 			}
 			else {
 				Reference ref = (Reference) container.eContainer();
@@ -100,26 +102,26 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 					//chained reference: scope given by previous element in chain
 					Type previousType = getTypeOfReferencedElement((Reference)ref.eContainer());
 					if (previousType != null) {
-						result = find(proxy, container, null, previousType, reference.getEReferenceType());
+						targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
 					}
 				}
 				else {
 					//reference in scope of the current compilation unit
-					result = findScoped(proxy, container, container, reference.getEReferenceType());
+					targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
 				}
 			}
 			
-			if (result == null) {
-				result = tryToConvertToExternalProxy(proxy, container);		
+			if (targetObject != null) {
+				result.addMapping(identifier, targetObject);
+			} else {
+				tryToConvertToExternalProxy(identifier, container, result);		
 			}
-			return result;
-			
 		} catch (UnresolvedProxiesException e) {
-			return null;
+			// do nothing
 		}
 	}
 
-	protected EObject findScoped(InternalEObject proxy, EObject context, EObject endOfScopeElement,
+	protected EObject findScoped(String proxyURIFragment, EObject context, EObject endOfScopeElement,
 			EClass type) throws UnresolvedProxiesException {
 		
 		EObject container = endOfScopeElement.eContainer();
@@ -129,17 +131,17 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			return null;
 		}
 		
-		EObject result = find(proxy, context, endOfScopeElement, container, type);
+		EObject result = find(proxyURIFragment, context, endOfScopeElement, container, type);
 
 		if (result != null) {
 			return result;
 		}
 		
 		//search in next scope
-		return findScoped(proxy, context, container, type);
+		return findScoped(proxyURIFragment, context, container, type);
 	}
 
-	protected EObject find(InternalEObject proxy, EObject context, EObject element,  EObject container, EClass type) throws UnresolvedProxiesException {
+	protected EObject find(String proxyURIFragment, EObject context, EObject element,  EObject container, EClass type) throws UnresolvedProxiesException {
 		EList<EObject> contentsList = new BasicEList<EObject>();
 		contentsList.addAll(container.eContents());
 		if (container instanceof CompilationUnit) {
@@ -156,7 +158,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 				}
 			}
 			if(hasCorrectType(cand, type)) {
-				if (isReferencedElement(proxy, context, cand)) {
+				if (isReferencedElement(proxyURIFragment, context, cand)) {
 					return cand;
 				}
 			}
@@ -168,7 +170,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 				}
 				else {
 					if(hasCorrectType(subCand, type)) {
-						if (isReferencedElement(proxy, context, subCand)) {
+						if (isReferencedElement(proxyURIFragment, context, subCand)) {
 							return subCand;
 						}
 					}
@@ -276,12 +278,12 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 	}
 	
 	
-	protected boolean isReferencedElement(InternalEObject proxy, EObject context, EObject referencedElement) throws UnresolvedProxiesException {
+	protected boolean isReferencedElement(String proxyURIFragment, EObject context, EObject referencedElement) throws UnresolvedProxiesException {
 		boolean result = false;
 		
 		if(referencedElement instanceof NamedElement) {
 			
-			String id = proxy.eProxyURI().fragment();
+			String id = proxyURIFragment; //proxy.eProxyURI().fragment();
 			
 			//is it an external proxy 
 			if(referencedElement.eIsProxy() && !isInternalProxy((InternalEObject) referencedElement)) {
@@ -328,11 +330,10 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		return result;
 	}
 	
-	protected EObject tryToConvertToExternalProxy(InternalEObject proxy, EObject context) throws UnresolvedProxiesException {
-		String id = proxy.eProxyURI().fragment();
+	protected void tryToConvertToExternalProxy(String identifier, EObject context, ResolveResult result) throws UnresolvedProxiesException {
 		if (!(context instanceof PackageOrClassifierOrMethodOrVariableReference ||
 				context instanceof PackageOrClassifierReference)) {
-			return null;
+			return;
 		}
 
 		
@@ -344,7 +345,7 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			Reference previous = (Reference) container.eContainer();
 			type = getTypeOfReferencedElement(previous);
 			if (type == null) {
-				return null;
+				return;
 			}
 			if (isInternalProxy((InternalEObject) type)) {
 				throw new UnresolvedProxiesException();
@@ -361,26 +362,22 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 						JavaUniquePathConstructor.packageName(cu), ((NamedElement)type).getName());
 			}
 			String fragment = externalProxyURI.fragment();
-			String fragmentPart =  JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, id);
+			String fragmentPart =  JavaUniquePathConstructor.getMemberURIFragmentPart((PrimaryReference) context, identifier);
 			if (fragmentPart == null) {
 				//can not yet be resolved
-				return null;
+				return;
 			}
 			fragment = fragment + "/" + fragmentPart;
 			externalProxyURI = externalProxyURI.appendFragment(fragment);
-			proxy.eSetProxyURI(externalProxyURI);
-			return proxy;
+			result.addMapping(identifier, externalProxyURI.toString());
 		}
 		else {
-			return findTypeInImports(id, context);
+			findTypeInImports(identifier, context, result);
 		}
-
-		
-
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected Type findTypeInImports(String id, EObject context) {
+	protected void findTypeInImports(String identifier, EObject context, ResolveResult result) {
 		CompilationUnit cu = (CompilationUnit) EcoreUtil.getRootContainer(context);
 		
 		for(Import i : cu.getImports()) {
@@ -391,8 +388,9 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 			
 			for(Iterator<InternalEObject> candIt = extProxies.basicIterator(); candIt.hasNext(); ) {
 				InternalEObject cand = candIt.next();
-				if(JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), id)) { 
-					return (Type) cand;
+				if (JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), identifier)) {
+					result.addMapping(identifier, cand.eProxyURI().toString());
+					return;
 				}
 			}
 		}
@@ -404,16 +402,17 @@ public abstract class ReferenceResolver extends ProxyResolverImpl {
 		
 		for(Iterator<Classifier> candIt = extProxies.iterator(); candIt.hasNext(); ) {
 			InternalEObject cand = (InternalEObject) candIt.next();
-			if(JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), id)) { 
-				return (Type) cand;
+			if (JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), identifier)) { 
+				result.addMapping(identifier, cand.eProxyURI().toString());
+				return;
 			}
 		}
 		
 		//assume type to be in own package (but not yet registered)
 		InternalEObject classifierProxy = (InternalEObject) JavaFactory.eINSTANCE.createClass();
-		classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(JavaUniquePathConstructor.packageName(cu), id));
+		classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(JavaUniquePathConstructor.packageName(cu), identifier));
 		
-		return (Type) classifierProxy;
+		result.addMapping(identifier, classifierProxy.eProxyURI().toString());
 	}
 	
 	

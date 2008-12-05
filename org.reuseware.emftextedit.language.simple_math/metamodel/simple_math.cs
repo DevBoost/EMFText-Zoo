@@ -2,7 +2,8 @@ SYNTAXDEF sm
 FOR       <http://www.reuseware.org/simple_math>
 START     Additive
 
-IMPORTS {
+OPTIONS {
+	forceEOF = 1;
 }
 
 TOKENS {
@@ -29,5 +30,6 @@ RULES {
 		
 		RealType ::= typename[REAL_TYPE];
 		IntegerType ::= typename[INTEGER_TYPE];
+		
+		BracketExp ::= "(" body ")";
 }
-

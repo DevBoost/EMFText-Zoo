@@ -36,6 +36,15 @@ public class SimpleMathTest extends TestCase {
 		}
 	}
 
+	public void testBrackets() {
+		try {
+			Additive root = loadResource(new FileInputStream("input\\brackets.sm"), "brackets.sm");
+			assertNotNull(root);
+			// check left
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+	}
 
 	private static Additive loadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {
@@ -48,6 +57,8 @@ public class SimpleMathTest extends TestCase {
 		assertTrue("File '" + fileIdentifier
 				+ "' was parsed to Additive.",
 				content instanceof Additive);
+		assertEquals(0, resource.getErrors().size());
+		assertEquals(0, resource.getWarnings().size());
 		Additive root = (Additive) content;
 		return root;
 	}
