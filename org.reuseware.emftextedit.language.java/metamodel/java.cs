@@ -280,6 +280,9 @@ ExpressionList
 
 ParExpression ::= "(" expression ")" ;
 
+RelationExpression
+	::= shiftExpression ( relationOperator shiftExpression)*;
+	
 ShiftExpression
 	::= additiveExpression ( shiftOperator additiveExpression)*;
 
@@ -312,9 +315,14 @@ Primary
 AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
 MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
 
-LeftShift::= "<" "<";
-RightShift::= ">" ">";
-UnsignedRightShift::= ">" ">" ">";
+LessThan 			::= "<";
+LessThanOrEqual		::= "<" "=";
+GreaterThan			::= ">";
+GreaterThanOrEqual	::= ">" "=";
+
+LeftShift 			::= "<" "<" ;
+RightShift 			::= ">" ">" ;
+UnsignedRightShift	::= ">" ">" ">" ;
 
 	
 PlusPlus ::= "++" ;

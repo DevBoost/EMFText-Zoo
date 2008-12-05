@@ -484,7 +484,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + ".java";
 		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
 
-		assertMemberCount(clazz, 9);
+		assertMemberCount(clazz, 15);
 
 		parseAndReprint(filename);
 	}
