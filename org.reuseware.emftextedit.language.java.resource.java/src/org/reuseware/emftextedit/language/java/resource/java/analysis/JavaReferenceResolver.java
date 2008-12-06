@@ -32,9 +32,9 @@ import org.reuseware.emftextedit.language.java.TypeReference;
 import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
 import org.reuseware.emftextedit.language.java.TypedElement;
 import org.reuseware.emftextedit.language.java.UnresolvedProxiesException;
-import org.reuseware.emftextedit.runtime.resource.ResolveResult;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
-import org.reuseware.emftextedit.runtime.resource.impl.ReferenceResolverImpl;
+import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.ResolveResult;
+import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
 
 public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 

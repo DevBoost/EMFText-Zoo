@@ -2,9 +2,9 @@ package org.reuseware.emftextedit.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
-import org.reuseware.emftextedit.runtime.resource.TokenResolver;
-import org.reuseware.emftextedit.runtime.resource.impl.JavaBasedTokenResolver;
+import org.emftext.runtime.resource.TokenResolver;
+import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
 public class JavaBOOLEAN_LITERALTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
 	@Override

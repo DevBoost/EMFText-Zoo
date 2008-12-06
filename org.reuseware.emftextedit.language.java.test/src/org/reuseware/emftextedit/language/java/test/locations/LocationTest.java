@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.reuseware.emftextedit.language.java.Member;
 import org.reuseware.emftextedit.language.java.Method;
 import org.reuseware.emftextedit.language.java.test.AbstractJavaParserTest;
-import org.reuseware.emftextedit.runtime.resource.LocationMap;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
+import org.emftext.runtime.resource.LocationMap;
+import org.emftext.runtime.resource.TextResource;
 
 /**
  * A test case that checks whether the generated parser creates 

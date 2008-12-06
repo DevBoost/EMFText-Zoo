@@ -1,11 +1,11 @@
 package org.reuseware.emftextedit.language.java.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.reuseware.emftextedit.test.ConcreteSyntaxTestHelper.createANTLRGenerator;
-import static org.reuseware.emftextedit.test.ConcreteSyntaxTestHelper.generateANTLRGrammarToTempFile;
-import static org.reuseware.emftextedit.test.ConcreteSyntaxTestHelper.getConcreteSyntax;
-import static org.reuseware.emftextedit.test.ConcreteSyntaxTestHelper.getConcreteSyntaxResource;
-import static org.reuseware.emftextedit.test.ConcreteSyntaxTestHelper.registerResourceFactories;
+import static org.emftext.test.ConcreteSyntaxTestHelper.createANTLRGenerator;
+import static org.emftext.test.ConcreteSyntaxTestHelper.generateANTLRGrammarToTempFile;
+import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntax;
+import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntaxResource;
+import static org.emftext.test.ConcreteSyntaxTestHelper.registerResourceFactories;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,12 +21,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import org.reuseware.emftextedit.sdk.GenPackageByNameFinder;
-import org.reuseware.emftextedit.sdk.MetamodelHelper;
-import org.reuseware.emftextedit.sdk.codegen.IGenerator;
-import org.reuseware.emftextedit.sdk.codegen.ResourcePackageGenerator;
-import org.reuseware.emftextedit.sdk.concretesyntax.ConcreteSyntax;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
+import org.emftext.sdk.GenPackageByNameFinder;
+import org.emftext.sdk.MetamodelHelper;
+import org.emftext.sdk.codegen.IGenerator;
+import org.emftext.sdk.codegen.ResourcePackageGenerator;
+import org.emftext.sdk.concretesyntax.ConcreteSyntax;
+import org.emftext.runtime.resource.TextResource;
 
 /**
  * This test checks whether regenerating the parser with EMFText

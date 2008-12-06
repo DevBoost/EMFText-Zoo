@@ -2,9 +2,9 @@ package org.reuseware.emftextedit.language.simple_math.resource.sm.analysis;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;
-import org.reuseware.emftextedit.runtime.resource.TokenResolver;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
-import org.reuseware.emftextedit.runtime.resource.impl.JavaBasedTokenResolver;
+import org.emftext.runtime.resource.TokenResolver;
+import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
 public class SmINTEGER_TYPETokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
 	@Override

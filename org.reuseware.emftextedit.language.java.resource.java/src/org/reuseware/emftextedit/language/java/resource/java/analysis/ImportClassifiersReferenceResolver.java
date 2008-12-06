@@ -6,8 +6,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.reuseware.emftextedit.language.java.Classifier;
 import org.reuseware.emftextedit.language.java.Import;
 import org.reuseware.emftextedit.language.java.JavaClasspath;
-import org.reuseware.emftextedit.runtime.resource.ResolveResult;
-import org.reuseware.emftextedit.runtime.resource.impl.ReferenceResolverImpl;
+import org.emftext.runtime.resource.ResolveResult;
+import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
 
 public class ImportClassifiersReferenceResolver extends ReferenceResolverImpl {
 
