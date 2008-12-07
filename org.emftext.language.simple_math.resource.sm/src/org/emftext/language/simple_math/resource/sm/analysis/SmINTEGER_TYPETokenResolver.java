@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.simple_math.resource.sm.analysis;
+package org.emftext.language.simple_math.resource.sm.analysis;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;
@@ -6,7 +6,7 @@ import org.emftext.runtime.resource.TokenResolver;
 import org.emftext.runtime.resource.TextResource;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-public class SmMULTIPLICATIVE_OPERATORTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
+public class SmINTEGER_TYPETokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
 	@Override
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = super.deResolve(value,feature,container);

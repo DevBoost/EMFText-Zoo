@@ -1,5 +1,5 @@
 SYNTAXDEF sm
-FOR       <http://www.reuseware.org/simple_math>
+FOR       <http://www.emftext.org/simple_math>
 START     Additive
 
 OPTIONS {

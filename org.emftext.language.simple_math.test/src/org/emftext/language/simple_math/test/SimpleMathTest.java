@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.simple_math.test;
+package org.emftext.language.simple_math.test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import java.util.Collections;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EObject;
-import org.reuseware.emftextedit.language.simple_math.Additive;
-import org.reuseware.emftextedit.language.simple_math.IntegerLiteralExp;
-import org.reuseware.emftextedit.language.simple_math.NumberAtom;
+import org.emftext.language.simple_math.Additive;
+import org.emftext.language.simple_math.IntegerLiteralExp;
+import org.emftext.language.simple_math.NumberAtom;
 
 public class SimpleMathTest extends TestCase {
 	

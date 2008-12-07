@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.simple_math.test;
+package org.emftext.language.simple_math.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.reuseware.emftextedit.language.simple_math.resource.sm.SmResourceImpl;
+import org.emftext.language.simple_math.resource.sm.SmResourceImpl;
 
 public class SmResourceImplTestWrapper extends SmResourceImpl {
 	
