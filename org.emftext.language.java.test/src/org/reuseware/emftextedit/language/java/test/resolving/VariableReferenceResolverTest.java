@@ -2,25 +2,25 @@ package org.reuseware.emftextedit.language.java.test.resolving;
 
 import java.util.List;
 
+import org.emftext.language.java.Assignment;
+import org.emftext.language.java.Block;
+import org.emftext.language.java.ExpressionStatement;
+import org.emftext.language.java.Field;
+import org.emftext.language.java.LocalVariable;
+import org.emftext.language.java.LocalVariableStatement;
+import org.emftext.language.java.Member;
+import org.emftext.language.java.Method;
+import org.emftext.language.java.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.Reference;
+import org.emftext.language.java.Statement;
 import org.junit.Test;
-import org.reuseware.emftextedit.language.java.Assignment;
-import org.reuseware.emftextedit.language.java.Block;
-import org.reuseware.emftextedit.language.java.ExpressionStatement;
-import org.reuseware.emftextedit.language.java.Field;
-import org.reuseware.emftextedit.language.java.LocalVariable;
-import org.reuseware.emftextedit.language.java.LocalVariableStatement;
-import org.reuseware.emftextedit.language.java.Member;
-import org.reuseware.emftextedit.language.java.Method;
-import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.reuseware.emftextedit.language.java.Reference;
-import org.reuseware.emftextedit.language.java.Statement;
 
 public class VariableReferenceResolverTest extends AbstractResolverTest {
 	
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "VariableReferencing";
-		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		
 		List<Member> members = clazz.getMembers();

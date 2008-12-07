@@ -1,14 +1,14 @@
 package org.reuseware.emftextedit.language.java.test.resolving;
 
-import org.reuseware.emftextedit.language.java.Field;
-import org.reuseware.emftextedit.language.java.Member;
-import org.reuseware.emftextedit.language.java.Method;
+import org.emftext.language.java.Field;
+import org.emftext.language.java.Member;
+import org.emftext.language.java.Method;
 import org.reuseware.emftextedit.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 
-	protected org.reuseware.emftextedit.language.java.Class assertParsesToClass(String typename) throws Exception {
-		return assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.reuseware.emftextedit.language.java.Class.class);
+	protected org.emftext.language.java.Class assertParsesToClass(String typename) throws Exception {
+		return assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.emftext.language.java.Class.class);
 	}
 	
 	protected Field assertIsField(Member member, String expectedName) {

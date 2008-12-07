@@ -2,17 +2,17 @@ package org.reuseware.emftextedit.language.java.test.resolving;
 
 import java.util.List;
 
+import org.emftext.language.java.Assignment;
+import org.emftext.language.java.Block;
+import org.emftext.language.java.ExpressionStatement;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.Member;
+import org.emftext.language.java.Method;
+import org.emftext.language.java.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.PrimaryReference;
+import org.emftext.language.java.Statement;
 import org.junit.Before;
 import org.junit.Test;
-import org.reuseware.emftextedit.language.java.Assignment;
-import org.reuseware.emftextedit.language.java.Block;
-import org.reuseware.emftextedit.language.java.ExpressionStatement;
-import org.reuseware.emftextedit.language.java.JavaClasspath;
-import org.reuseware.emftextedit.language.java.Member;
-import org.reuseware.emftextedit.language.java.Method;
-import org.reuseware.emftextedit.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.reuseware.emftextedit.language.java.PrimaryReference;
-import org.reuseware.emftextedit.language.java.Statement;
 
 public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTest {
 	
@@ -24,7 +24,7 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "MethodCallsWithoutInheritance";
-		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		assertMemberCount(clazz, 4);
 		

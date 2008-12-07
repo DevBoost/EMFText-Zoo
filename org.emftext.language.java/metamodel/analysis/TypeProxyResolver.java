@@ -12,13 +12,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.reuseware.emftextedit.resource.*;
-import org.reuseware.emftextedit.resource.impl.*;
 import org.reuseware.java.Classifier;
 import org.reuseware.java.CompilationUnit;
 import org.reuseware.java.Import;
 
-public class TypeProxyResolver extends ProxyResolverImpl {
+public class TypeProxyResolver extends ReferenceResolverImpl {
 
 	
 	protected EObject doResolve(InternalEObject proxy, EObject container,

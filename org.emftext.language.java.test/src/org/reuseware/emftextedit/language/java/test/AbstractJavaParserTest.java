@@ -34,20 +34,20 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.text.edits.TextEdit;
-import org.reuseware.emftextedit.language.java.Annotation;
-import org.reuseware.emftextedit.language.java.Classifier;
-import org.reuseware.emftextedit.language.java.CompilationUnit;
-import org.reuseware.emftextedit.language.java.Constructor;
-import org.reuseware.emftextedit.language.java.Enumeration;
-import org.reuseware.emftextedit.language.java.Interface;
-import org.reuseware.emftextedit.language.java.Member;
-import org.reuseware.emftextedit.language.java.MemberContainer;
-import org.reuseware.emftextedit.language.java.Method;
-import org.reuseware.emftextedit.language.java.NamedElement;
-import org.reuseware.emftextedit.language.java.Public;
-import org.reuseware.emftextedit.language.java.Type;
-import org.reuseware.emftextedit.language.java.TypeParameter;
 import org.reuseware.emftextedit.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.language.java.Annotation;
+import org.emftext.language.java.Classifier;
+import org.emftext.language.java.CompilationUnit;
+import org.emftext.language.java.Constructor;
+import org.emftext.language.java.Enumeration;
+import org.emftext.language.java.Interface;
+import org.emftext.language.java.Member;
+import org.emftext.language.java.MemberContainer;
+import org.emftext.language.java.Method;
+import org.emftext.language.java.NamedElement;
+import org.emftext.language.java.Public;
+import org.emftext.language.java.Type;
+import org.emftext.language.java.TypeParameter;
 import org.emftext.runtime.resource.TextDiagnostic;
 import org.emftext.runtime.resource.TextResource;
 
@@ -338,8 +338,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected void assertClassTypeParameterCount(Member member,
 			int expectedNumberOfTypeArguments) {
-		assertType(member, org.reuseware.emftextedit.language.java.Class.class);
-		org.reuseware.emftextedit.language.java.Class clazz = (org.reuseware.emftextedit.language.java.Class) member;
+		assertType(member, org.emftext.language.java.Class.class);
+		org.emftext.language.java.Class clazz = (org.emftext.language.java.Class) member;
 		List<TypeParameter> typeParameters = clazz.getTypeParameters();
 		assertEquals("Expected " + expectedNumberOfTypeArguments
 				+ " type parameter(s).", expectedNumberOfTypeArguments,
@@ -398,7 +398,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected void assertIsClass(Classifier classifier) {
 		assertType(classifier,
-				org.reuseware.emftextedit.language.java.Class.class);
+				org.emftext.language.java.Class.class);
 	}
 
 	protected void assertIsInterface(Classifier classifier) {
@@ -442,10 +442,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				method.getModifiers().get(0) instanceof Public);
 	}
 
-	protected org.reuseware.emftextedit.language.java.Class assertParsesToClass(
+	protected org.emftext.language.java.Class assertParsesToClass(
 			File file) throws Exception {
 		return assertParsesToType(file,
-				org.reuseware.emftextedit.language.java.Class.class);
+				org.emftext.language.java.Class.class);
 	}
 
 	protected Enumeration assertParsesToEnumeration(String typename)
@@ -511,10 +511,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		return parseResource(filename, TEST_INPUT_FOLDER);
 	}
 
-	protected org.reuseware.emftextedit.language.java.Class assertParsesToClass(
+	protected org.emftext.language.java.Class assertParsesToClass(
 			String typename) throws Exception {
 		return assertParsesToType(typename,
-				org.reuseware.emftextedit.language.java.Class.class);
+				org.emftext.language.java.Class.class);
 	}
 
 	protected void assertMemberCount(
@@ -531,7 +531,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	protected void assertParsesToClass(String typename, int expectedMembers)
 			throws Exception, IOException, BadLocationException {
 		String filename = typename + ".java";
-		org.reuseware.emftextedit.language.java.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.Class clazz = assertParsesToClass(typename);
 		assertEquals(typename + " should have " + expectedMembers
 				+ " member(s).", expectedMembers, clazz.getMembers().size());
 

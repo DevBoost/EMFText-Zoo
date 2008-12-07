@@ -6,9 +6,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.reuseware.emftextedit.language.java.CompilationUnit;
-import org.reuseware.emftextedit.language.java.JavaClasspath;
-import org.reuseware.emftextedit.language.java.resource.java.JavaResourceImpl;
+import org.emftext.language.java.CompilationUnit;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.resource.java.JavaResourceImpl;
 
 
 public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factory {

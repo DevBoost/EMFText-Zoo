@@ -10,13 +10,13 @@ import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.reuseware.emftextedit.language.java.Classifier;
-import org.reuseware.emftextedit.language.java.CompilationUnit;
-import org.reuseware.emftextedit.language.java.Field;
-import org.reuseware.emftextedit.language.java.JavaFactory;
-import org.reuseware.emftextedit.language.java.Method;
-import org.reuseware.emftextedit.language.java.Parameter;
-import org.reuseware.emftextedit.language.java.TypeReferenceSequence;
+import org.emftext.language.java.Classifier;
+import org.emftext.language.java.CompilationUnit;
+import org.emftext.language.java.Field;
+import org.emftext.language.java.JavaFactory;
+import org.emftext.language.java.Method;
+import org.emftext.language.java.Parameter;
+import org.emftext.language.java.TypeReferenceSequence;
 
 public class JavaClassFileResorce extends ResourceImpl {
 
@@ -49,7 +49,7 @@ public class JavaClassFileResorce extends ResourceImpl {
 	}
 
 	protected Classifier constructClassifier(JavaClass clazz) {
-		org.reuseware.emftextedit.language.java.Class classifier = javaFactory.createClass(); //TODO This is not always a class
+		org.emftext.language.java.Class classifier = javaFactory.createClass(); //TODO This is not always a class
 		classifier.setName(clazz.getClassName().substring(clazz.getClassName().lastIndexOf(".") + 1));
 		
 		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
@@ -74,7 +74,7 @@ public class JavaClassFileResorce extends ResourceImpl {
 	}
 	
 	protected Parameter constructParameter(Attribute attr) {
-		org.reuseware.emftextedit.language.java.Parameter param = javaFactory.createOrdinaryParameter();
+		org.emftext.language.java.Parameter param = javaFactory.createOrdinaryParameter();
 		//
 		//TODO type...
 		return param;

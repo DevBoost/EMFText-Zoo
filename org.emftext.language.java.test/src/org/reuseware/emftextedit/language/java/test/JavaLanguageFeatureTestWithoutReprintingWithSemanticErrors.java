@@ -1,6 +1,5 @@
 package org.reuseware.emftextedit.language.java.test;
 
-import org.reuseware.emftextedit.language.java.JavaClasspath;
 
 /**
  * A test class that executed all tests from JavaParserTest but

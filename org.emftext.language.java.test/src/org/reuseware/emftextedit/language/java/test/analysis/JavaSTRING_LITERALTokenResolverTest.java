@@ -2,8 +2,8 @@ package org.reuseware.emftextedit.language.java.test.analysis;
 
 import static org.junit.Assert.assertEquals;
 
+import org.emftext.language.java.resource.java.analysis.JavaSTRING_LITERALTokenResolver;
 import org.junit.Test;
-import org.reuseware.emftextedit.language.java.resource.java.analysis.JavaSTRING_LITERALTokenResolver;
 
 public class JavaSTRING_LITERALTokenResolverTest {
 

@@ -1,5 +1,5 @@
 SYNTAXDEF java
-FOR <http://www.reuseware.org/java>
+FOR <http://www.emftext.org/java>
 START CompilationUnit
 
 OPTIONS {
