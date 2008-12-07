@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g 2008-12-02 18:59:01
+// $ANTLR 3.0.1 D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g 2008-12-07 19:51:11
 
 package org.eclipse.uml2.uml.resource.statemachine;
 
@@ -538,8 +538,8 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ETypeParameter;
 //Implementation: org.eclipse.emf.ecore.impl.ETypeParameterImpl
 import org.eclipse.emf.ecore.*;
-import org.reuseware.emftextedit.runtime.resource.*;
-import org.reuseware.emftextedit.runtime.resource.impl.*;
+import org.emftext.runtime.resource.*;
+import org.emftext.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.common.util.URI;
@@ -553,12 +553,12 @@ import java.util.Map;
 import java.util.HashMap;
 public class StatemachineParser extends EMFTextParserImpl {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "TEXT", "QUOTED_34_34", "WS", "LB", "'StateMachine'", "'{'", "'}'", "';'", "'state'", "'entry'", "':'", "'exit'", "'do'", "'final'", "'transition'", "'from'", "'to'", "'when'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "TEXT", "QUOTED_34_34", "LB", "WS", "'StateMachine'", "'{'", "'}'", "';'", "'state'", "'entry'", "':'", "'exit'", "'do'", "'final'", "'transition'", "'from'", "'to'", "'when'"
     };
-    public static final int EOF=-1;
-    public static final int WS=6;
-    public static final int LB=7;
+    public static final int WS=7;
+    public static final int LB=6;
     public static final int TEXT=4;
+    public static final int EOF=-1;
     public static final int QUOTED_34_34=5;
 
         public StatemachineParser(TokenStream input) {
@@ -568,7 +568,7 @@ public class StatemachineParser extends EMFTextParserImpl {
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g"; }
+    public String getGrammarFileName() { return "D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g"; }
 
 
     	private TokenResolverFactory tokenResolverFactory = new StatemachineTokenResolverFactory();
@@ -582,7 +582,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start start
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:575:1: start returns [ EObject element = null] : c0= statemachine ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:575:1: start returns [ EObject element = null] : c0= statemachine ;
     public final EObject start() throws RecognitionException {
         EObject element =  null;
 
@@ -590,8 +590,8 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:577:1: (c0= statemachine )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:578:1: c0= statemachine
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:577:1: (c0= statemachine )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:578:1: c0= statemachine
             {
             pushFollow(FOLLOW_statemachine_in_start61);
             c0=statemachine();
@@ -616,7 +616,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start statemachine
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:582:1: statemachine returns [StateMachine element = null] : a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}' ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:582:1: statemachine returns [StateMachine element = null] : a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}' ;
     public final StateMachine statemachine() throws RecognitionException {
         StateMachine element =  null;
 
@@ -631,8 +631,8 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createStateMachine();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:586:1: (a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}' )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:587:2: a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:586:1: (a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:587:2: a0= 'StateMachine' a1= TEXT a2= '{' a3= region a4= '}'
             {
             a0=(Token)input.LT(1);
             match(input,8,FOLLOW_8_in_statemachine85); if (failed) return element;
@@ -677,7 +677,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start region
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:594:1: region returns [Region element = null] : ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )* ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:594:1: region returns [Region element = null] : ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )* ;
     public final Region region() throws RecognitionException {
         Region element =  null;
 
@@ -692,10 +692,10 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createRegion();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:598:1: ( ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )* )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:599:2: ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )*
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:598:1: ( ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )* )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:599:2: ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )*
             {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:599:2: ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )*
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:599:2: ( (a0= vertex a1= ';' | a2= transition a3= ';' ) )*
             loop2:
             do {
                 int alt2=2;
@@ -708,9 +708,9 @@ public class StatemachineParser extends EMFTextParserImpl {
 
                 switch (alt2) {
             	case 1 :
-            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )
             	    {
-            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:600:3: (a0= vertex a1= ';' | a2= transition a3= ';' )
             	    int alt1=2;
             	    int LA1_0 = input.LA(1);
 
@@ -729,7 +729,7 @@ public class StatemachineParser extends EMFTextParserImpl {
             	    }
             	    switch (alt1) {
             	        case 1 :
-            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:601:4: a0= vertex a1= ';'
+            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:601:4: a0= vertex a1= ';'
             	            {
             	            pushFollow(FOLLOW_vertex_in_region149);
             	            a0=vertex();
@@ -747,7 +747,7 @@ public class StatemachineParser extends EMFTextParserImpl {
             	            }
             	            break;
             	        case 2 :
-            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:605:4: a2= transition a3= ';'
+            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:605:4: a2= transition a3= ';'
             	            {
             	            pushFollow(FOLLOW_transition_in_region175);
             	            a2=transition();
@@ -792,7 +792,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start state
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:611:1: state returns [State element = null] : (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate );
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:611:1: state returns [State element = null] : (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate );
     public final State state() throws RecognitionException {
         State element =  null;
 
@@ -819,7 +819,7 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createState();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:615:1: (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:615:1: (a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}' | c0= finalstate )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -838,7 +838,7 @@ public class StatemachineParser extends EMFTextParserImpl {
             }
             switch (alt5) {
                 case 1 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:616:2: a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:616:2: a0= 'state' a1= TEXT a2= '{' ( (a3= 'entry' a4= ':' a5= behavior ) )? ( (a6= 'exit' a7= ':' a8= behavior ) )? a9= 'do' a10= ':' a11= behavior a12= '}'
                     {
                     a0=(Token)input.LT(1);
                     match(input,12,FOLLOW_12_in_state216); if (failed) return element;
@@ -855,7 +855,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a2, element); 
                     }
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:619:2: ( (a3= 'entry' a4= ':' a5= behavior ) )?
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:619:2: ( (a3= 'entry' a4= ':' a5= behavior ) )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -864,10 +864,10 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     switch (alt3) {
                         case 1 :
-                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:620:3: (a3= 'entry' a4= ':' a5= behavior )
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:620:3: (a3= 'entry' a4= ':' a5= behavior )
                             {
-                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:620:3: (a3= 'entry' a4= ':' a5= behavior )
-                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:621:4: a3= 'entry' a4= ':' a5= behavior
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:620:3: (a3= 'entry' a4= ':' a5= behavior )
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:621:4: a3= 'entry' a4= ':' a5= behavior
                             {
                             a3=(Token)input.LT(1);
                             match(input,13,FOLLOW_13_in_state249); if (failed) return element;
@@ -895,7 +895,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
                     }
 
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:626:2: ( (a6= 'exit' a7= ':' a8= behavior ) )?
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:626:2: ( (a6= 'exit' a7= ':' a8= behavior ) )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -904,10 +904,10 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     switch (alt4) {
                         case 1 :
-                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:627:3: (a6= 'exit' a7= ':' a8= behavior )
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:627:3: (a6= 'exit' a7= ':' a8= behavior )
                             {
-                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:627:3: (a6= 'exit' a7= ':' a8= behavior )
-                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:628:4: a6= 'exit' a7= ':' a8= behavior
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:627:3: (a6= 'exit' a7= ':' a8= behavior )
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:628:4: a6= 'exit' a7= ':' a8= behavior
                             {
                             a6=(Token)input.LT(1);
                             match(input,15,FOLLOW_15_in_state294); if (failed) return element;
@@ -961,7 +961,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:638:2: c0= finalstate
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:638:2: c0= finalstate
                     {
                     pushFollow(FOLLOW_finalstate_in_state365);
                     c0=finalstate();
@@ -988,7 +988,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start pseudostate
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:641:1: pseudostate returns [Pseudostate element = null] : a0= TEXT a1= 'state' a2= TEXT ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:641:1: pseudostate returns [Pseudostate element = null] : a0= TEXT a1= 'state' a2= TEXT ;
     public final Pseudostate pseudostate() throws RecognitionException {
         Pseudostate element =  null;
 
@@ -1000,8 +1000,8 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createPseudostate();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:645:1: (a0= TEXT a1= 'state' a2= TEXT )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:646:2: a0= TEXT a1= 'state' a2= TEXT
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:645:1: (a0= TEXT a1= 'state' a2= TEXT )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:646:2: a0= TEXT a1= 'state' a2= TEXT
             {
             a0=(Token)input.LT(1);
             match(input,TEXT,FOLLOW_TEXT_in_pseudostate388); if (failed) return element;
@@ -1034,7 +1034,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start finalstate
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:651:1: finalstate returns [FinalState element = null] : a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}' ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:651:1: finalstate returns [FinalState element = null] : a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}' ;
     public final FinalState finalstate() throws RecognitionException {
         FinalState element =  null;
 
@@ -1060,8 +1060,8 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createFinalState();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:655:1: (a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}' )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:656:2: a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:655:1: (a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:656:2: a0= 'final' a1= 'state' a2= TEXT a3= '{' ( (a4= 'entry' a5= ':' a6= behavior ) )? ( (a7= 'exit' a8= ':' a9= behavior ) )? a10= 'do' a11= ':' a12= behavior a13= '}'
             {
             a0=(Token)input.LT(1);
             match(input,17,FOLLOW_17_in_finalstate427); if (failed) return element;
@@ -1083,7 +1083,7 @@ public class StatemachineParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a3, element); 
             }
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:660:2: ( (a4= 'entry' a5= ':' a6= behavior ) )?
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:660:2: ( (a4= 'entry' a5= ':' a6= behavior ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1092,10 +1092,10 @@ public class StatemachineParser extends EMFTextParserImpl {
             }
             switch (alt6) {
                 case 1 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:661:3: (a4= 'entry' a5= ':' a6= behavior )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:661:3: (a4= 'entry' a5= ':' a6= behavior )
                     {
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:661:3: (a4= 'entry' a5= ':' a6= behavior )
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:662:4: a4= 'entry' a5= ':' a6= behavior
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:661:3: (a4= 'entry' a5= ':' a6= behavior )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:662:4: a4= 'entry' a5= ':' a6= behavior
                     {
                     a4=(Token)input.LT(1);
                     match(input,13,FOLLOW_13_in_finalstate468); if (failed) return element;
@@ -1123,7 +1123,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
             }
 
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:667:2: ( (a7= 'exit' a8= ':' a9= behavior ) )?
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:667:2: ( (a7= 'exit' a8= ':' a9= behavior ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1132,10 +1132,10 @@ public class StatemachineParser extends EMFTextParserImpl {
             }
             switch (alt7) {
                 case 1 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:668:3: (a7= 'exit' a8= ':' a9= behavior )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:668:3: (a7= 'exit' a8= ':' a9= behavior )
                     {
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:668:3: (a7= 'exit' a8= ':' a9= behavior )
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:669:4: a7= 'exit' a8= ':' a9= behavior
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:668:3: (a7= 'exit' a8= ':' a9= behavior )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:669:4: a7= 'exit' a8= ':' a9= behavior
                     {
                     a7=(Token)input.LT(1);
                     match(input,15,FOLLOW_15_in_finalstate513); if (failed) return element;
@@ -1201,7 +1201,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start transition
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:680:1: transition returns [Transition element = null] : a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )? ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:680:1: transition returns [Transition element = null] : a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )? ;
     public final Transition transition() throws RecognitionException {
         Transition element =  null;
 
@@ -1222,8 +1222,8 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createTransition();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:684:1: (a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )? )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:685:2: a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )?
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:684:1: (a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )? )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:685:2: a0= 'transition' a1= 'from' a2= TEXT a3= 'to' a4= TEXT a5= 'when' a6= trigger ( (a7= 'do' a8= ':' a9= behavior ) )?
             {
             a0=(Token)input.LT(1);
             match(input,18,FOLLOW_18_in_transition596); if (failed) return element;
@@ -1262,7 +1262,7 @@ public class StatemachineParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("trigger"))).add(a6); copyLocalizationInfos(a6, element); 
             }
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:692:2: ( (a7= 'do' a8= ':' a9= behavior ) )?
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:692:2: ( (a7= 'do' a8= ':' a9= behavior ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1271,10 +1271,10 @@ public class StatemachineParser extends EMFTextParserImpl {
             }
             switch (alt8) {
                 case 1 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:693:3: (a7= 'do' a8= ':' a9= behavior )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:693:3: (a7= 'do' a8= ':' a9= behavior )
                     {
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:693:3: (a7= 'do' a8= ':' a9= behavior )
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:694:4: a7= 'do' a8= ':' a9= behavior
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:693:3: (a7= 'do' a8= ':' a9= behavior )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:694:4: a7= 'do' a8= ':' a9= behavior
                     {
                     a7=(Token)input.LT(1);
                     match(input,16,FOLLOW_16_in_transition661); if (failed) return element;
@@ -1318,7 +1318,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start trigger
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:701:1: trigger returns [Trigger element = null] : a0= QUOTED_34_34 ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:701:1: trigger returns [Trigger element = null] : a0= QUOTED_34_34 ;
     public final Trigger trigger() throws RecognitionException {
         Trigger element =  null;
 
@@ -1328,8 +1328,8 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createTrigger();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:705:1: (a0= QUOTED_34_34 )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:706:2: a0= QUOTED_34_34
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:705:1: (a0= QUOTED_34_34 )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:706:2: a0= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
             match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_trigger712); if (failed) return element;
@@ -1352,7 +1352,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start activity
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:709:1: activity returns [Activity element = null] : a0= QUOTED_34_34 ;
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:709:1: activity returns [Activity element = null] : a0= QUOTED_34_34 ;
     public final Activity activity() throws RecognitionException {
         Activity element =  null;
 
@@ -1362,8 +1362,8 @@ public class StatemachineParser extends EMFTextParserImpl {
         	element = UMLFactory.eINSTANCE.createActivity();
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:713:1: (a0= QUOTED_34_34 )
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:714:2: a0= QUOTED_34_34
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:713:1: (a0= QUOTED_34_34 )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:714:2: a0= QUOTED_34_34
             {
             a0=(Token)input.LT(1);
             match(input,QUOTED_34_34,FOLLOW_QUOTED_34_34_in_activity735); if (failed) return element;
@@ -1386,7 +1386,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start vertex
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:717:1: vertex returns [Vertex element = null] : (c0= state | c1= pseudostate | c2= finalstate );
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:717:1: vertex returns [Vertex element = null] : (c0= state | c1= pseudostate | c2= finalstate );
     public final Vertex vertex() throws RecognitionException {
         Vertex element =  null;
 
@@ -1398,7 +1398,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:719:1: (c0= state | c1= pseudostate | c2= finalstate )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:719:1: (c0= state | c1= pseudostate | c2= finalstate )
             int alt9=3;
             switch ( input.LA(1) ) {
             case 12:
@@ -2045,7 +2045,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
             switch (alt9) {
                 case 1 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:720:2: c0= state
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:720:2: c0= state
                     {
                     pushFollow(FOLLOW_state_in_vertex754);
                     c0=state();
@@ -2058,7 +2058,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:721:2: c1= pseudostate
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:721:2: c1= pseudostate
                     {
                     pushFollow(FOLLOW_pseudostate_in_vertex764);
                     c1=pseudostate();
@@ -2071,7 +2071,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:722:2: c2= finalstate
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:722:2: c2= finalstate
                     {
                     pushFollow(FOLLOW_finalstate_in_vertex774);
                     c2=finalstate();
@@ -2098,7 +2098,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
     // $ANTLR start behavior
-    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:725:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );
+    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:725:1: behavior returns [Behavior element = null] : (c0= statemachine | c1= activity );
     public final Behavior behavior() throws RecognitionException {
         Behavior element =  null;
 
@@ -2108,7 +2108,7 @@ public class StatemachineParser extends EMFTextParserImpl {
 
 
         try {
-            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:727:1: (c0= statemachine | c1= activity )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:727:1: (c0= statemachine | c1= activity )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2127,7 +2127,7 @@ public class StatemachineParser extends EMFTextParserImpl {
             }
             switch (alt10) {
                 case 1 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:728:2: c0= statemachine
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:728:2: c0= statemachine
                     {
                     pushFollow(FOLLOW_statemachine_in_behavior793);
                     c0=statemachine();
@@ -2140,7 +2140,7 @@ public class StatemachineParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:729:2: c1= activity
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:729:2: c1= activity
                     {
                     pushFollow(FOLLOW_activity_in_behavior803);
                     c1=activity();
@@ -2167,8 +2167,8 @@ public class StatemachineParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred9
     public final void synpred9_fragment() throws RecognitionException {   
-        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:720:2: ( state )
-        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g:720:2: state
+        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:720:2: ( state )
+        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.eclipse.uml2.uml.resource.statemachine\\src\\org\\eclipse\\uml2\\uml\\resource\\statemachine\\Statemachine.g:720:2: state
         {
         pushFollow(FOLLOW_state_in_synpred9754);
         state();

@@ -1,7 +1,7 @@
 package org.eclipse.uml2.uml.resource.statemachine;
 
 import java.io.OutputStream;
-import org.reuseware.emftextedit.runtime.resource.*;
+import org.emftext.runtime.resource.*;
 
 /**
 * This is the printer class used by EMFText.

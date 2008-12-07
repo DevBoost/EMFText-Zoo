@@ -2,9 +2,9 @@ package org.eclipse.uml2.uml.resource.statemachine.analysis;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;
-import org.reuseware.emftextedit.runtime.resource.TokenResolver;
-import org.reuseware.emftextedit.runtime.resource.TextResource;
-import org.reuseware.emftextedit.runtime.resource.impl.JavaBasedTokenResolver;
+import org.emftext.runtime.resource.TokenResolver;
+import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
 public class StatemachineTEXTTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
 	@Override

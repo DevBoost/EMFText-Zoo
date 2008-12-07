@@ -29,23 +29,23 @@ T19 : 'from' ;
 T20 : 'to' ;
 T21 : 'when' ;
 
-// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 732
-WS
-:
-	(' ' | '\t' | '\f'){ channel=99; }
-;
-// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 736
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 732
 LB
 :
 	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 740
-QUOTED_34_34
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 736
+WS
 :
-	('"')(~('"')|('\\''"'))*('"')
+	(' ' | '\t' | '\f'){ channel=99; }
 ;
-// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.eclipse.uml2.uml.resource.statemachine/src/org/eclipse/uml2/uml/resource/statemachine/Statemachine.g" 744
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 740
 TEXT
 :
 	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
+;
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.eclipse.uml2.uml.resource.statemachine\src\org\eclipse\uml2\uml\resource\statemachine\Statemachine.g" 744
+QUOTED_34_34
+:
+	('"')(~('"')|('\\''"'))*('"')
 ;

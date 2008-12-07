@@ -555,8 +555,8 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ETypeParameter;
 //Implementation: org.eclipse.emf.ecore.impl.ETypeParameterImpl
 import org.eclipse.emf.ecore.*;
-import org.reuseware.emftextedit.runtime.resource.*;
-import org.reuseware.emftextedit.runtime.resource.impl.*;
+import org.emftext.runtime.resource.*;
+import org.emftext.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.common.util.URI;
@@ -729,19 +729,19 @@ returns [Behavior element = null]
 	c1 = activity{ element = c1; }
 ;
 
-WS
-:
-	(' ' | '\t' | '\f'){ channel=99; }
-;
 LB
 :
 	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-QUOTED_34_34
+WS
 :
-	('"')(~('"')|('\\''"'))*('"')
+	(' ' | '\t' | '\f'){ channel=99; }
 ;
 TEXT
 :
 	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
+;
+QUOTED_34_34
+:
+	('"')(~('"')|('\\''"'))*('"')
 ;
