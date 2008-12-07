@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.simple_template.test;
+package org.emftext.language.simple_template.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -13,11 +13,11 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.simple_template.interpreter.SimpleTemplateInterpreter;
+import org.emftext.language.simple_template.interpreter.SimpleTemplateInterpreterImpl;
 import org.junit.Test;
-import org.reuseware.emftextedit.language.simple_template.Template;
-import org.reuseware.emftextedit.language.simple_template.interpreter.SimpleTemplateInterpreter;
-import org.reuseware.emftextedit.language.simple_template.interpreter.SimpleTemplateInterpreterImpl;
-import org.reuseware.emftextedit.language.simple_template.resource.simpletemplate.SimpletemplateResourceImpl;
+import org.emftext.language.simple_template.Template;
+import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplateResourceImpl;
 
 public class TemplateInterpreterTest {
 	

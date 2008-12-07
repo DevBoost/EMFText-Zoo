@@ -1,5 +1,5 @@
 SYNTAXDEF simpletemplate
-FOR <http://www.reuseware.org/simple_template>
+FOR <http://www.emftext.org/simple_template>
 START Template
 
 RULES {
