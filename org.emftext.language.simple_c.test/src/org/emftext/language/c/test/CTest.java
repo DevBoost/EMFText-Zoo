@@ -1,12 +1,12 @@
-package org.reuseware.emftextedit.language.c.test;
+package org.emftext.language.c.test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.reuseware.emftextedit.language.simple_c.CompilationUnit;
-import org.reuseware.emftextedit.language.simple_c.Definition;
-import org.reuseware.emftextedit.language.simple_c.Variable;
+import org.emftext.language.simple_c.CompilationUnit;
+import org.emftext.language.simple_c.Definition;
+import org.emftext.language.simple_c.Variable;
 
 public class CTest extends AbstractCTest {
 	

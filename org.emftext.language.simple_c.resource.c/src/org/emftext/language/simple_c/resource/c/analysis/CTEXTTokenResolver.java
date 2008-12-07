@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.simple_c.resource.c.analysis;
+package org.emftext.language.simple_c.resource.c.analysis;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;

@@ -1,9 +1,9 @@
-package org.reuseware.emftextedit.language.c.test;
+package org.emftext.language.c.test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.reuseware.emftextedit.language.simple_c.CompilationUnit;
+import org.emftext.language.simple_c.CompilationUnit;
 
 public class ForceEOFTest extends AbstractCTest {
 	

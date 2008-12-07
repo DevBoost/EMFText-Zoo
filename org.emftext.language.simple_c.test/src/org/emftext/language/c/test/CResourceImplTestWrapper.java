@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.c.test;
+package org.emftext.language.c.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.reuseware.emftextedit.language.simple_c.resource.c.CResourceImpl;
+import org.emftext.language.simple_c.resource.c.CResourceImpl;
 
 public class CResourceImplTestWrapper extends CResourceImpl {
 	

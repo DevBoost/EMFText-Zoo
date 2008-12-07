@@ -1,4 +1,4 @@
-package org.reuseware.emftextedit.language.c.test;
+package org.emftext.language.c.test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.reuseware.emftextedit.language.simple_c.CompilationUnit;
+import org.emftext.language.simple_c.CompilationUnit;
 
 public class AbstractCTest extends TestCase {
 	protected CompilationUnit loadResource(InputStream inputStream,
