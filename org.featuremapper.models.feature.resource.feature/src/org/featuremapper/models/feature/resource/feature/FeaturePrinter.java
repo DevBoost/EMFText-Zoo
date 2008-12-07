@@ -1,7 +1,7 @@
 package org.featuremapper.models.feature.resource.feature;
 
 import java.io.OutputStream;
-import org.reuseware.emftextedit.runtime.resource.*;
+import org.emftext.runtime.resource.*;
 
 /**
 * This is the printer class used by EMFText.

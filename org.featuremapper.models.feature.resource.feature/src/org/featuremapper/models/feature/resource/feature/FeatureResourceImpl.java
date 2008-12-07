@@ -7,10 +7,13 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.reuseware.emftextedit.runtime.resource.*;
-import org.reuseware.emftextedit.runtime.resource.impl.*;
+import org.emftext.runtime.resource.*;
+import org.emftext.runtime.resource.impl.*;
 
 public class FeatureResourceImpl extends TextResourceImpl {
+	private EMFTextTreeAnalyser analyser;
+
+
 	public FeatureResourceImpl(){
 		super();
 	}
@@ -20,19 +23,20 @@ public class FeatureResourceImpl extends TextResourceImpl {
 	}
 
 	protected void doLoad(InputStream inputStream, Map<?,?> options) throws IOException {
+		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		EMFTextParser p = new FeatureParser(new CommonTokenStream(new FeatureLexer(new ANTLRInputStream(inputStream))));
 		p.setResource(this);
-		p.setOptions(options);
+		p.setOptions(loadOptions);
 		EObject root = p.parse();
 		while (root != null) {
 			getContents().add(root);
 			root = null; //p.parse();
 		}
 
-		EMFTextTreeAnalyser a = new FeatureTreeAnalyser();
+		EMFTextTreeAnalyser analyser = getTreeAnalyser();
 
-		a.setOptions(options);
-		a.analyse(this);
+		analyser.setOptions(loadOptions);
+		analyser.analyse(this);
 	}
 
 	protected void doSave(OutputStream outputStream, Map<?,?> options) throws IOException {
@@ -50,4 +54,10 @@ public class FeatureResourceImpl extends TextResourceImpl {
 		return new FeatureLexer();
 	}
 
+	public EMFTextTreeAnalyser getTreeAnalyser() {
+		if (analyser == null) {
+			analyser = new FeatureTreeAnalyser();
+		}
+		return analyser;
+	}
 }

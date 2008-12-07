@@ -31,8 +31,8 @@ import org.featuremapper.models.feature.Constraint;
 import org.featuremapper.models.feature.Attribute;
 //Implementation: org.featuremapper.models.feature.impl.AttributeImpl
 import org.featuremapper.models.feature.*;
-import org.reuseware.emftextedit.runtime.resource.*;
-import org.reuseware.emftextedit.runtime.resource.impl.*;
+import org.emftext.runtime.resource.*;
+import org.emftext.runtime.resource.impl.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.common.util.URI;
@@ -60,22 +60,22 @@ featuremodel returns [FeatureModel element = null]
 	element = FeatureFactory.eINSTANCE.createFeatureModel();
 }
 :
-	'FeatureModel'
-	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
+	a0 = 'FeatureModel'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
 	(
 		(
-			'{'
-			'constraints'
+			a2 = '{'{copyLocalizationInfos((CommonToken)a2, element); }
+			a3 = 'constraints'{copyLocalizationInfos((CommonToken)a3, element); }
 			(
 				(
-					a1 = constraint{((List) element.eGet(element.eClass().getEStructuralFeature("constraints"))).add(a1); copyLocalizationInfos(a1, element); }
-					';'
+					a4 = constraint{((List) element.eGet(element.eClass().getEStructuralFeature("constraints"))).add(a4); copyLocalizationInfos(a4, element); }
+					a5 = ';'{copyLocalizationInfos((CommonToken)a5, element); }
 				)
 			)?
-			'}'
+			a6 = '}'{copyLocalizationInfos((CommonToken)a6, element); }
 		)
 	)?
-	a2 = feature{element.eSet(element.eClass().getEStructuralFeature("root"), a2); copyLocalizationInfos(a2, element); }
+	a7 = feature{element.eSet(element.eClass().getEStructuralFeature("root"), a7); copyLocalizationInfos(a7, element); }
 ;
 
 constraint returns [Constraint element = null]
@@ -83,10 +83,10 @@ constraint returns [Constraint element = null]
 	element = FeatureFactory.eINSTANCE.createConstraint();
 }
 :
-	'Constraint'
-	a0 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("language"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("language"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-	':'
-	a1 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("expression"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("expression"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
+	a0 = 'Constraint'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("language"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("language"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
+	a2 = ':'{copyLocalizationInfos((CommonToken)a2, element); }
+	a3 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a3.getText(),element.eClass().getEStructuralFeature("expression"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a3,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("expression"), resolved); copyLocalizationInfos((CommonToken) a3, element); }
 ;
 
 feature returns [Feature element = null]
@@ -94,30 +94,30 @@ feature returns [Feature element = null]
 	element = FeatureFactory.eINSTANCE.createFeature();
 }
 :
-	'Feature'
-	a0 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
+	a0 = 'Feature'{copyLocalizationInfos((CommonToken)a0, element); }
+	a1 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
 	(
 		(
-			'('
-			a1 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("minCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("minCardinality"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
-			'..'
-			a2 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("maxCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("maxCardinality"), resolved); copyLocalizationInfos((CommonToken) a2, element); }
-			')'
+			a2 = '('{copyLocalizationInfos((CommonToken)a2, element); }
+			a3 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a3.getText(),element.eClass().getEStructuralFeature("minCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a3,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("minCardinality"), resolved); copyLocalizationInfos((CommonToken) a3, element); }
+			a4 = '..'{copyLocalizationInfos((CommonToken)a4, element); }
+			a5 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a5.getText(),element.eClass().getEStructuralFeature("maxCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a5,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("maxCardinality"), resolved); copyLocalizationInfos((CommonToken) a5, element); }
+			a6 = ')'{copyLocalizationInfos((CommonToken)a6, element); }
 		)
 	)?
 	(
 		(
-			'['
+			a7 = '['{copyLocalizationInfos((CommonToken)a7, element); }
 			(
-				a3 = attribute{((List) element.eGet(element.eClass().getEStructuralFeature("attributes"))).add(a3); copyLocalizationInfos(a3, element); }
+				a8 = attribute{((List) element.eGet(element.eClass().getEStructuralFeature("attributes"))).add(a8); copyLocalizationInfos(a8, element); }
 			)*
-			']'
+			a9 = ']'{copyLocalizationInfos((CommonToken)a9, element); }
 		)
 	)?
 	(
 		(
 			(
-				a4 = group{((List) element.eGet(element.eClass().getEStructuralFeature("groups"))).add(a4); copyLocalizationInfos(a4, element); }
+				a10 = group{((List) element.eGet(element.eClass().getEStructuralFeature("groups"))).add(a10); copyLocalizationInfos(a10, element); }
 			)*
 		)
 	)?
@@ -128,23 +128,23 @@ group returns [Group element = null]
 	element = FeatureFactory.eINSTANCE.createGroup();
 }
 :
-	'Group'
+	a0 = 'Group'{copyLocalizationInfos((CommonToken)a0, element); }
 	(
 		(
-			'('
-			a0 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("minCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("minCardinality"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
-			'..'
-			a1 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("maxCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("maxCardinality"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
-			')'
+			a1 = '('{copyLocalizationInfos((CommonToken)a1, element); }
+			a2 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("minCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("minCardinality"), resolved); copyLocalizationInfos((CommonToken) a2, element); }
+			a3 = '..'{copyLocalizationInfos((CommonToken)a3, element); }
+			a4 = INTEGER{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("INTEGER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("maxCardinality"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());int resolved = (java.lang.Integer)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("maxCardinality"), resolved); copyLocalizationInfos((CommonToken) a4, element); }
+			a5 = ')'{copyLocalizationInfos((CommonToken)a5, element); }
 		)
 	)?
 	(
 		(
-			'{'
+			a6 = '{'{copyLocalizationInfos((CommonToken)a6, element); }
 			(
-				a2 = feature{((List) element.eGet(element.eClass().getEStructuralFeature("childFeatures"))).add(a2); copyLocalizationInfos(a2, element); }
+				a7 = feature{((List) element.eGet(element.eClass().getEStructuralFeature("childFeatures"))).add(a7); copyLocalizationInfos(a7, element); }
 			)*
-			'}'
+			a8 = '}'{copyLocalizationInfos((CommonToken)a8, element); }
 		)
 	)?
 ;
@@ -156,8 +156,8 @@ attribute returns [Attribute element = null]
 :
 	a0 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("type"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("type"), resolved); copyLocalizationInfos((CommonToken) a0, element); }
 	a1 = TEXT{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("TEXT");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a1, element); }
-	'='
-	a2 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("value"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("value"), resolved); copyLocalizationInfos((CommonToken) a2, element); }
+	a2 = '='{copyLocalizationInfos((CommonToken)a2, element); }
+	a3 = QUOTED_34_34{TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("QUOTED_34_34");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a3.getText(),element.eClass().getEStructuralFeature("value"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a3,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("value"), resolved); copyLocalizationInfos((CommonToken) a3, element); }
 ;
 
 COMMENT

@@ -30,37 +30,37 @@ T23 : ']' ;
 T24 : 'Group' ;
 T25 : '=' ;
 
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 163
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 163
 COMMENT
 :
 	'//'(~('\n'|'\r'))*{ channel=99; }
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 167
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 167
 INTEGER
 :
 	('-')?('1'..'9')('0'..'9')*|'0'
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 171
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 171
 FLOAT
 :
 	('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ { channel=99; }
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 175
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 175
 LB
 :
 	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 179
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 179
 WS
 :
 	(' ' | '\t' | '\f'){ channel=99; }
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 183
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 183
 TEXT
 :
 	('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+
 ;
-// $ANTLR src "C:\work\reusewareSvn\EMFTextEdit Languages\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 187
+// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.featuremapper.models.feature.resource.feature\src\org\featuremapper\models\feature\resource\feature\Feature.g" 187
 QUOTED_34_34
 :
 	('"')(~('"')|('\\''"'))*('"')

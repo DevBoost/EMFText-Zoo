@@ -1,7 +1,7 @@
 package org.featuremapper.models.feature.resource.feature;
 
-import org.reuseware.emftextedit.runtime.resource.TokenResolverFactory;
-import org.reuseware.emftextedit.runtime.resource.impl.BasicTokenResolverFactory;
+import org.emftext.runtime.resource.TokenResolverFactory;
+import org.emftext.runtime.resource.impl.BasicTokenResolverFactory;
 
 import org.featuremapper.models.feature.resource.feature.analysis.*;
 

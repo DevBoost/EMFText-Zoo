@@ -1,8 +1,7 @@
 package org.featuremapper.models.feature.resource.feature.analysis;
 
-import org.reuseware.emftextedit.runtime.resource.*;
-import org.reuseware.emftextedit.runtime.resource.impl.*;
+import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
 
-public class FeatureModelParentProxyResolver extends ProxyResolverImpl {
+public class FeatureModelParentProxyResolver extends ReferenceResolverImpl {
 
 }

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g 2008-11-25 16:53:51
+// $ANTLR 3.0.1 D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g 2008-12-07 18:45:03
 
 package org.featuremapper.models.feature.resource.feature;
 
@@ -48,14 +48,14 @@ public class FeatureLexer extends Lexer {
     public FeatureLexer(CharStream input) {
         super(input);
     }
-    public String getGrammarFileName() { return "C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g"; }
+    public String getGrammarFileName() { return "D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g"; }
 
     // $ANTLR start T11
     public final void mT11() throws RecognitionException {
         try {
             int _type = T11;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:17:5: ( 'FeatureModel' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:17:7: 'FeatureModel'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:17:5: ( 'FeatureModel' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:17:7: 'FeatureModel'
             {
             match("FeatureModel"); 
 
@@ -73,8 +73,8 @@ public class FeatureLexer extends Lexer {
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:18:5: ( '{' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:18:7: '{'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:18:5: ( '{' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:18:7: '{'
             {
             match('{'); 
 
@@ -91,8 +91,8 @@ public class FeatureLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:19:5: ( 'constraints' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:19:7: 'constraints'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:19:5: ( 'constraints' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:19:7: 'constraints'
             {
             match("constraints"); 
 
@@ -110,8 +110,8 @@ public class FeatureLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:5: ( ';' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:7: ';'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:5: ( ';' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:20:7: ';'
             {
             match(';'); 
 
@@ -128,8 +128,8 @@ public class FeatureLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:5: ( '}' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:7: '}'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:5: ( '}' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:21:7: '}'
             {
             match('}'); 
 
@@ -146,8 +146,8 @@ public class FeatureLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:5: ( 'Constraint' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:7: 'Constraint'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:5: ( 'Constraint' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:22:7: 'Constraint'
             {
             match("Constraint"); 
 
@@ -165,8 +165,8 @@ public class FeatureLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:5: ( ':' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:7: ':'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:5: ( ':' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:23:7: ':'
             {
             match(':'); 
 
@@ -183,8 +183,8 @@ public class FeatureLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:5: ( 'Feature' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:7: 'Feature'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:5: ( 'Feature' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:24:7: 'Feature'
             {
             match("Feature"); 
 
@@ -202,8 +202,8 @@ public class FeatureLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:5: ( '(' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:7: '('
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:5: ( '(' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:25:7: '('
             {
             match('('); 
 
@@ -220,8 +220,8 @@ public class FeatureLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:5: ( '..' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:7: '..'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:5: ( '..' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:26:7: '..'
             {
             match(".."); 
 
@@ -239,8 +239,8 @@ public class FeatureLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:5: ( ')' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:7: ')'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:5: ( ')' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:27:7: ')'
             {
             match(')'); 
 
@@ -257,8 +257,8 @@ public class FeatureLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:5: ( '[' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:7: '['
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:5: ( '[' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:28:7: '['
             {
             match('['); 
 
@@ -275,8 +275,8 @@ public class FeatureLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:5: ( ']' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:7: ']'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:5: ( ']' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:29:7: ']'
             {
             match(']'); 
 
@@ -293,8 +293,8 @@ public class FeatureLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:5: ( 'Group' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:7: 'Group'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:5: ( 'Group' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:30:7: 'Group'
             {
             match("Group"); 
 
@@ -312,8 +312,8 @@ public class FeatureLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:5: ( '=' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:7: '='
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:5: ( '=' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:31:7: '='
             {
             match('='); 
 
@@ -330,12 +330,12 @@ public class FeatureLexer extends Lexer {
     public final void mCOMMENT() throws RecognitionException {
         try {
             int _type = COMMENT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:164:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:2: '//' (~ ( '\\n' | '\\r' ) )*
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:164:1: ( '//' (~ ( '\\n' | '\\r' ) )* )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:2: '//' (~ ( '\\n' | '\\r' ) )*
             {
             match("//"); 
 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:6: (~ ( '\\n' | '\\r' ) )*
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:6: (~ ( '\\n' | '\\r' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -348,7 +348,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:7: ~ ( '\\n' | '\\r' )
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:165:7: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -384,7 +384,7 @@ public class FeatureLexer extends Lexer {
     public final void mINTEGER() throws RecognitionException {
         try {
             int _type = INTEGER;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:168:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:168:1: ( ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -402,9 +402,9 @@ public class FeatureLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:2: ( '-' )? ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:2: ( '-' )?
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:2: ( '-' )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -413,7 +413,7 @@ public class FeatureLexer extends Lexer {
                     }
                     switch (alt2) {
                         case 1 :
-                            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:3: '-'
+                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:3: '-'
                             {
                             match('-'); 
 
@@ -422,14 +422,14 @@ public class FeatureLexer extends Lexer {
 
                     }
 
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:8: ( '1' .. '9' )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:9: '1' .. '9'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:8: ( '1' .. '9' )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:9: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:18: ( '0' .. '9' )*
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:18: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -442,7 +442,7 @@ public class FeatureLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:19: '0' .. '9'
+                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:19: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -458,7 +458,7 @@ public class FeatureLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:30: '0'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:169:30: '0'
                     {
                     match('0'); 
 
@@ -477,10 +477,10 @@ public class FeatureLexer extends Lexer {
     public final void mFLOAT() throws RecognitionException {
         try {
             int _type = FLOAT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:172:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:172:1: ( ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+ )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:2: ( '-' )? ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) '.' ( '0' .. '9' )+
             {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:2: ( '-' )?
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:2: ( '-' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -489,7 +489,7 @@ public class FeatureLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:3: '-'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:3: '-'
                     {
                     match('-'); 
 
@@ -498,7 +498,7 @@ public class FeatureLexer extends Lexer {
 
             }
 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:8: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -516,16 +516,16 @@ public class FeatureLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:9: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:9: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:9: ( '1' .. '9' )
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:10: '1' .. '9'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:9: ( '1' .. '9' )
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:10: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
 
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:20: ( '0' .. '9' )*
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:20: ( '0' .. '9' )*
                     loop6:
                     do {
                         int alt6=2;
@@ -538,7 +538,7 @@ public class FeatureLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:21: '0' .. '9'
+                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:21: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -554,7 +554,7 @@ public class FeatureLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:34: '0'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:34: '0'
                     {
                     match('0'); 
 
@@ -564,7 +564,7 @@ public class FeatureLexer extends Lexer {
             }
 
             match('.'); 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:43: ( '0' .. '9' )+
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:43: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -578,7 +578,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:44: '0' .. '9'
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:173:44: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -609,10 +609,10 @@ public class FeatureLexer extends Lexer {
     public final void mLB() throws RecognitionException {
         try {
             int _type = LB;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:176:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:176:1: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt9=3;
             int LA9_0 = input.LA(1);
 
@@ -636,7 +636,7 @@ public class FeatureLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:3: '\\r\\n'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -644,14 +644,14 @@ public class FeatureLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:12: '\\r'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:12: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:19: '\\n'
+                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:177:19: '\\n'
                     {
                     match('\n'); 
 
@@ -675,8 +675,8 @@ public class FeatureLexer extends Lexer {
     public final void mWS() throws RecognitionException {
         try {
             int _type = WS;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:180:1: ( ( ' ' | '\\t' | '\\f' ) )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:181:2: ( ' ' | '\\t' | '\\f' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:180:1: ( ( ' ' | '\\t' | '\\f' ) )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:181:2: ( ' ' | '\\t' | '\\f' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -703,10 +703,10 @@ public class FeatureLexer extends Lexer {
     public final void mTEXT() throws RecognitionException {
         try {
             int _type = TEXT;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:184:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:185:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:184:1: ( ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+ )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:185:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:185:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:185:2: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' | '-' )+
             int cnt10=0;
             loop10:
             do {
@@ -720,7 +720,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:
             	    {
             	    if ( input.LA(1)=='-'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -759,17 +759,17 @@ public class FeatureLexer extends Lexer {
     public final void mQUOTED_34_34() throws RecognitionException {
         try {
             int _type = QUOTED_34_34;
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:188:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:188:1: ( ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' ) )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:2: ( '\"' ) (~ ( '\"' ) | ( '\\\\' '\"' ) )* ( '\"' )
             {
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:2: ( '\"' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:3: '\"'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:2: ( '\"' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:3: '\"'
             {
             match('\"'); 
 
             }
 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:7: (~ ( '\"' ) | ( '\\\\' '\"' ) )*
             loop11:
             do {
                 int alt11=3;
@@ -803,7 +803,7 @@ public class FeatureLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:8: ~ ( '\"' )
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:8: ~ ( '\"' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -819,10 +819,10 @@ public class FeatureLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:15: ( '\\\\' '\"' )
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:15: ( '\\\\' '\"' )
             	    {
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:15: ( '\\\\' '\"' )
-            	    // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:16: '\\\\' '\"'
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:15: ( '\\\\' '\"' )
+            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:16: '\\\\' '\"'
             	    {
             	    match('\\'); 
             	    match('\"'); 
@@ -838,8 +838,8 @@ public class FeatureLexer extends Lexer {
                 }
             } while (true);
 
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:26: ( '\"' )
-            // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:27: '\"'
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:26: ( '\"' )
+            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:189:27: '\"'
             {
             match('\"'); 
 
@@ -856,159 +856,159 @@ public class FeatureLexer extends Lexer {
     // $ANTLR end QUOTED_34_34
 
     public void mTokens() throws RecognitionException {
-        // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 )
+        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | COMMENT | INTEGER | FLOAT | LB | WS | TEXT | QUOTED_34_34 )
         int alt12=22;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:10: T11
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:10: T11
                 {
                 mT11(); 
 
                 }
                 break;
             case 2 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:14: T12
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:14: T12
                 {
                 mT12(); 
 
                 }
                 break;
             case 3 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:18: T13
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:18: T13
                 {
                 mT13(); 
 
                 }
                 break;
             case 4 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:22: T14
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:22: T14
                 {
                 mT14(); 
 
                 }
                 break;
             case 5 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:26: T15
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:26: T15
                 {
                 mT15(); 
 
                 }
                 break;
             case 6 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:30: T16
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:30: T16
                 {
                 mT16(); 
 
                 }
                 break;
             case 7 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:34: T17
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:34: T17
                 {
                 mT17(); 
 
                 }
                 break;
             case 8 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:38: T18
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:38: T18
                 {
                 mT18(); 
 
                 }
                 break;
             case 9 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:42: T19
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:42: T19
                 {
                 mT19(); 
 
                 }
                 break;
             case 10 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:46: T20
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:46: T20
                 {
                 mT20(); 
 
                 }
                 break;
             case 11 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:50: T21
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:50: T21
                 {
                 mT21(); 
 
                 }
                 break;
             case 12 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:54: T22
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:54: T22
                 {
                 mT22(); 
 
                 }
                 break;
             case 13 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:58: T23
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:58: T23
                 {
                 mT23(); 
 
                 }
                 break;
             case 14 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:62: T24
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:62: T24
                 {
                 mT24(); 
 
                 }
                 break;
             case 15 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:66: T25
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:66: T25
                 {
                 mT25(); 
 
                 }
                 break;
             case 16 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:70: COMMENT
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:70: COMMENT
                 {
                 mCOMMENT(); 
 
                 }
                 break;
             case 17 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:78: INTEGER
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:78: INTEGER
                 {
                 mINTEGER(); 
 
                 }
                 break;
             case 18 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:86: FLOAT
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:86: FLOAT
                 {
                 mFLOAT(); 
 
                 }
                 break;
             case 19 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:92: LB
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:92: LB
                 {
                 mLB(); 
 
                 }
                 break;
             case 20 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:95: WS
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:95: WS
                 {
                 mWS(); 
 
                 }
                 break;
             case 21 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:98: TEXT
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:98: TEXT
                 {
                 mTEXT(); 
 
                 }
                 break;
             case 22 :
-                // C:\\work\\reusewareSvn\\EMFTextEdit Languages\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:103: QUOTED_34_34
+                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.featuremapper.models.feature.resource.feature\\src\\org\\featuremapper\\models\\feature\\resource\\feature\\Feature.g:1:103: QUOTED_34_34
                 {
                 mQUOTED_34_34(); 
 

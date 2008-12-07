@@ -16,8 +16,8 @@ import java.util.Map;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import org.reuseware.emftextedit.runtime.resource.*;
-import org.reuseware.emftextedit.runtime.resource.impl.*;
+import org.emftext.runtime.resource.*;
+import org.emftext.runtime.resource.impl.*;
 
 public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 
@@ -265,6 +265,20 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 				printCountingMap.putAll(printCountingMap1);
 			}
 		}
+		public void printFeature_2(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
+			String localtab = outertab;
+			int count;
+			//////////////DEFINITION PART BEGINS (Containment):
+			count = printCountingMap.get("groups");
+			if(count>0){
+				ListIterator it  = ((List)element.eGet(element.eClass().getEStructuralFeature("groups"))).listIterator(((List)element.eGet(element.eClass().getEStructuralFeature("groups"))).size()-count);
+				while(it.hasNext()){
+					Object o = it.next();
+					doPrint((EObject)o,out,localtab);
+				}
+				printCountingMap.put("groups",0);
+			}
+		}
 		public void printFeature_0(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
 			int count;
@@ -294,20 +308,6 @@ public abstract class FeaturePrinterBase extends EMFTextPrinterImpl {
 			}
 			//////////////DEFINITION PART BEGINS (CsString):
 			out.print(")");
-		}
-		public void printFeature_2(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
-			String localtab = outertab;
-			int count;
-			//////////////DEFINITION PART BEGINS (Containment):
-			count = printCountingMap.get("groups");
-			if(count>0){
-				ListIterator it  = ((List)element.eGet(element.eClass().getEStructuralFeature("groups"))).listIterator(((List)element.eGet(element.eClass().getEStructuralFeature("groups"))).size()-count);
-				while(it.hasNext()){
-					Object o = it.next();
-					doPrint((EObject)o,out,localtab);
-				}
-				printCountingMap.put("groups",0);
-			}
 		}
 		public void printFeature_1(Feature element,String outertab,PrintWriter out, java.util.Map<java.lang.String, java.lang.Integer> printCountingMap){
 			String localtab = outertab;
