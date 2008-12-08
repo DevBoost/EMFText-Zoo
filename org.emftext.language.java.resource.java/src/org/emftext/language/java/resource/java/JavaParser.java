@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g 2008-12-07 13:45:18
+// $ANTLR 3.0.1 /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g 2008-12-08 09:46:59
 
 package org.emftext.language.java.resource.java;
 
@@ -303,23 +303,23 @@ import java.util.Map;
 import java.util.HashMap;
 public class JavaParser extends EMFTextParserImpl {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "IDENTIFIER", "ADDITIVE_OPERATOR_LITERAL", "MULTIPLICATIVE_OPERATOR_LITERAL", "DECIMAL_LITERAL", "HEX_LITERAL", "OCTAL_LITERAL", "FLOATING_POINT_LITERAL", "CHARACTER_LITERAL", "STRING_LITERAL", "BOOLEAN_LITERAL", "SL_COMMENT", "ML_COMMENT", "LB", "WS", "'package'", "'.'", "';'", "'import'", "'class'", "'<'", "','", "'>'", "'extends'", "'implements'", "'{'", "'}'", "'interface'", "'@'", "'('", "')'", "'='", "'enum'", "'&'", "'throws'", "'default'", "'...'", "'new'", "'['", "']'", "'?'", "'super'", "'assert'", "':'", "'if'", "'else'", "'for'", "'while'", "'do'", "'synchronized'", "'try'", "'finally'", "'catch'", "'switch'", "'case'", "'return'", "'throw'", "'break'", "'continue'", "'++'", "'--'", "'~'", "'!'", "'+='", "'-='", "'*='", "'/='", "'&='", "'|='", "'^='", "'%='", "'null'", "'void'", "'this'", "'public'", "'abstract'", "'protected'", "'private'", "'final'", "'static'", "'native'", "'transient'", "'volatile'", "'strictfp'", "'boolean'", "'char'", "'byte'", "'short'", "'int'", "'long'", "'float'", "'double'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "IDENTIFIER", "ADDITIVE_OPERATOR_LITERAL", "MULTIPLICATIVE_OPERATOR_LITERAL", "DECIMAL_LITERAL", "HEX_LITERAL", "OCTAL_LITERAL", "FLOATING_POINT_LITERAL", "CHARACTER_LITERAL", "STRING_LITERAL", "BOOLEAN_LITERAL", "SL_COMMENT", "ML_COMMENT", "WS", "LB", "'package'", "'.'", "';'", "'import'", "'class'", "'<'", "','", "'>'", "'extends'", "'implements'", "'{'", "'}'", "'interface'", "'@'", "'('", "')'", "'='", "'enum'", "'&'", "'throws'", "'default'", "'...'", "'new'", "'['", "']'", "'?'", "'super'", "'assert'", "':'", "'if'", "'else'", "'for'", "'while'", "'do'", "'synchronized'", "'try'", "'finally'", "'catch'", "'switch'", "'case'", "'return'", "'throw'", "'break'", "'continue'", "'++'", "'--'", "'~'", "'!'", "'+='", "'-='", "'*='", "'/='", "'&='", "'|='", "'^='", "'%='", "'null'", "'void'", "'this'", "'public'", "'abstract'", "'protected'", "'private'", "'final'", "'static'", "'native'", "'transient'", "'volatile'", "'strictfp'", "'boolean'", "'char'", "'byte'", "'short'", "'int'", "'long'", "'float'", "'double'"
     };
-    public static final int BOOLEAN_LITERAL=13;
-    public static final int ML_COMMENT=15;
-    public static final int ADDITIVE_OPERATOR_LITERAL=5;
-    public static final int WS=17;
-    public static final int STRING_LITERAL=12;
-    public static final int FLOATING_POINT_LITERAL=10;
-    public static final int IDENTIFIER=4;
-    public static final int SL_COMMENT=14;
     public static final int CHARACTER_LITERAL=11;
-    public static final int OCTAL_LITERAL=9;
-    public static final int LB=16;
-    public static final int HEX_LITERAL=8;
-    public static final int EOF=-1;
     public static final int MULTIPLICATIVE_OPERATOR_LITERAL=6;
     public static final int DECIMAL_LITERAL=7;
+    public static final int WS=16;
+    public static final int EOF=-1;
+    public static final int LB=17;
+    public static final int STRING_LITERAL=12;
+    public static final int ADDITIVE_OPERATOR_LITERAL=5;
+    public static final int BOOLEAN_LITERAL=13;
+    public static final int ML_COMMENT=15;
+    public static final int IDENTIFIER=4;
+    public static final int OCTAL_LITERAL=9;
+    public static final int SL_COMMENT=14;
+    public static final int HEX_LITERAL=8;
+    public static final int FLOATING_POINT_LITERAL=10;
 
         public JavaParser(TokenStream input) {
             super(input);
@@ -328,7 +328,7 @@ public class JavaParser extends EMFTextParserImpl {
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g"; }
+    public String getGrammarFileName() { return "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g"; }
 
 
     	private TokenResolverFactory tokenResolverFactory = new JavaTokenResolverFactory();
@@ -342,7 +342,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start start
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:325:1: start returns [ EObject element = null] : c0= compilationunit ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:325:1: start returns [ EObject element = null] : c0= compilationunit ;
     public final EObject start() throws RecognitionException {
         EObject element =  null;
 
@@ -350,8 +350,8 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:327:1: (c0= compilationunit )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:328:1: c0= compilationunit
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:327:1: (c0= compilationunit )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:328:1: c0= compilationunit
             {
             pushFollow(FOLLOW_compilationunit_in_start61);
             c0=compilationunit();
@@ -376,7 +376,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start compilationunit
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:332:1: compilationunit returns [CompilationUnit element = null] : (a0= comment )* (a1= annotationinstance )* (a2= comment )* ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )? (a8= comment )* ( (a9= 'import' a10= keywordimport a11= ';' ) )* ( (a12= classifier ) )+ ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:332:1: compilationunit returns [CompilationUnit element = null] : (a0= comment )* (a1= annotationinstance )* (a2= comment )* ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )? (a8= comment )* ( (a9= 'import' a10= keywordimport a11= ';' ) )* ( (a12= classifier ) )+ ;
     public final CompilationUnit compilationunit() throws RecognitionException {
         CompilationUnit element =  null;
 
@@ -404,10 +404,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createCompilationUnit();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:336:1: ( (a0= comment )* (a1= annotationinstance )* (a2= comment )* ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )? (a8= comment )* ( (a9= 'import' a10= keywordimport a11= ';' ) )* ( (a12= classifier ) )+ )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:337:2: (a0= comment )* (a1= annotationinstance )* (a2= comment )* ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )? (a8= comment )* ( (a9= 'import' a10= keywordimport a11= ';' ) )* ( (a12= classifier ) )+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:336:1: ( (a0= comment )* (a1= annotationinstance )* (a2= comment )* ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )? (a8= comment )* ( (a9= 'import' a10= keywordimport a11= ';' ) )* ( (a12= classifier ) )+ )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:337:2: (a0= comment )* (a1= annotationinstance )* (a2= comment )* ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )? (a8= comment )* ( (a9= 'import' a10= keywordimport a11= ';' ) )* ( (a12= classifier ) )+
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:337:2: (a0= comment )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:337:2: (a0= comment )*
             loop1:
             do {
                 int alt1=2;
@@ -435,7 +435,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:338:3: a0= comment
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:338:3: a0= comment
             	    {
             	    pushFollow(FOLLOW_comment_in_compilationunit89);
             	    a0=comment();
@@ -453,7 +453,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:340:2: (a1= annotationinstance )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:340:2: (a1= annotationinstance )*
             loop2:
             do {
                 int alt2=2;
@@ -472,7 +472,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt2) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:341:3: a1= annotationinstance
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:341:3: a1= annotationinstance
             	    {
             	    pushFollow(FOLLOW_annotationinstance_in_compilationunit105);
             	    a1=annotationinstance();
@@ -490,7 +490,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:343:2: (a2= comment )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:343:2: (a2= comment )*
             loop3:
             do {
                 int alt3=2;
@@ -518,7 +518,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt3) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:344:3: a2= comment
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:344:3: a2= comment
             	    {
             	    pushFollow(FOLLOW_comment_in_compilationunit121);
             	    a2=comment();
@@ -536,7 +536,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:346:2: ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:346:2: ( (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -545,10 +545,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:347:3: (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:347:3: (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:347:3: (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:348:4: a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:347:3: (a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:348:4: a3= 'package' a4= IDENTIFIER ( (a5= '.' a6= IDENTIFIER ) )* a7= ';'
                     {
                     a3=(Token)input.LT(1);
                     match(input,18,FOLLOW_18_in_compilationunit142); if (failed) return element;
@@ -560,7 +560,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("package"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;((List) element.eGet(element.eClass().getEStructuralFeature("package"))).add(resolved); copyLocalizationInfos((CommonToken) a4, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:350:4: ( (a5= '.' a6= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:350:4: ( (a5= '.' a6= IDENTIFIER ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -573,10 +573,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:351:5: (a5= '.' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:351:5: (a5= '.' a6= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:351:5: (a5= '.' a6= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:352:6: a5= '.' a6= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:351:5: (a5= '.' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:352:6: a5= '.' a6= IDENTIFIER
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,19,FOLLOW_19_in_compilationunit175); if (failed) return element;
@@ -614,7 +614,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:359:2: (a8= comment )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:359:2: (a8= comment )*
             loop6:
             do {
                 int alt6=2;
@@ -627,7 +627,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt6) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:360:3: a8= comment
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:360:3: a8= comment
             	    {
             	    pushFollow(FOLLOW_comment_in_compilationunit229);
             	    a8=comment();
@@ -645,7 +645,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:362:2: ( (a9= 'import' a10= keywordimport a11= ';' ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:362:2: ( (a9= 'import' a10= keywordimport a11= ';' ) )*
             loop7:
             do {
                 int alt7=2;
@@ -658,10 +658,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt7) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:363:3: (a9= 'import' a10= keywordimport a11= ';' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:363:3: (a9= 'import' a10= keywordimport a11= ';' )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:363:3: (a9= 'import' a10= keywordimport a11= ';' )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:364:4: a9= 'import' a10= keywordimport a11= ';'
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:363:3: (a9= 'import' a10= keywordimport a11= ';' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:364:4: a9= 'import' a10= keywordimport a11= ';'
             	    {
             	    a9=(Token)input.LT(1);
             	    match(input,21,FOLLOW_21_in_compilationunit250); if (failed) return element;
@@ -692,7 +692,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:369:2: ( (a12= classifier ) )+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:369:2: ( (a12= classifier ) )+
             int cnt8=0;
             loop8:
             do {
@@ -706,10 +706,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt8) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:370:3: (a12= classifier )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:370:3: (a12= classifier )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:370:3: (a12= classifier )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:371:4: a12= classifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:370:3: (a12= classifier )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:371:4: a12= classifier
             	    {
             	    pushFollow(FOLLOW_classifier_in_compilationunit295);
             	    a12=classifier();
@@ -751,7 +751,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordimport
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:376:1: keywordimport returns [Import element = null] : (a0= keywordstatic )? a1= IDENTIFIER ( (a2= '.' a3= IDENTIFIER ) )* a4= '.' a5= IDENTIFIER ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:376:1: keywordimport returns [Import element = null] : (a0= keywordstatic )? a1= IDENTIFIER ( (a2= '.' a3= IDENTIFIER ) )* a4= '.' a5= IDENTIFIER ;
     public final Import keywordimport() throws RecognitionException {
         Import element =  null;
 
@@ -767,10 +767,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createImport();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:380:1: ( (a0= keywordstatic )? a1= IDENTIFIER ( (a2= '.' a3= IDENTIFIER ) )* a4= '.' a5= IDENTIFIER )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:381:2: (a0= keywordstatic )? a1= IDENTIFIER ( (a2= '.' a3= IDENTIFIER ) )* a4= '.' a5= IDENTIFIER
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:380:1: ( (a0= keywordstatic )? a1= IDENTIFIER ( (a2= '.' a3= IDENTIFIER ) )* a4= '.' a5= IDENTIFIER )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:381:2: (a0= keywordstatic )? a1= IDENTIFIER ( (a2= '.' a3= IDENTIFIER ) )* a4= '.' a5= IDENTIFIER
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:381:2: (a0= keywordstatic )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:381:2: (a0= keywordstatic )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -779,7 +779,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt9) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:382:3: a0= keywordstatic
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:382:3: a0= keywordstatic
                     {
                     pushFollow(FOLLOW_keywordstatic_in_keywordimport330);
                     a0=keywordstatic();
@@ -799,7 +799,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("package"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;((List) element.eGet(element.eClass().getEStructuralFeature("package"))).add(resolved); copyLocalizationInfos((CommonToken) a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:385:2: ( (a2= '.' a3= IDENTIFIER ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:385:2: ( (a2= '.' a3= IDENTIFIER ) )*
             loop10:
             do {
                 int alt10=2;
@@ -824,10 +824,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt10) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:386:3: (a2= '.' a3= IDENTIFIER )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:386:3: (a2= '.' a3= IDENTIFIER )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:386:3: (a2= '.' a3= IDENTIFIER )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:387:4: a2= '.' a3= IDENTIFIER
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:386:3: (a2= '.' a3= IDENTIFIER )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:387:4: a2= '.' a3= IDENTIFIER
             	    {
             	    a2=(Token)input.LT(1);
             	    match(input,19,FOLLOW_19_in_keywordimport359); if (failed) return element;
@@ -877,7 +877,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordclass
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:395:1: keywordclass returns [Class element = null] : (a0= modifier )* a1= 'class' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' a9= qualifiedtypeargument ) )? ( (a10= 'implements' a11= qualifiedtypeargument ) )? a12= '{' ( (a13= member ( (a14= ';' ) )? ) )* a15= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:395:1: keywordclass returns [Class element = null] : (a0= modifier )* a1= 'class' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' a9= qualifiedtypeargument ) )? ( (a10= 'implements' a11= qualifiedtypeargument ) )? a12= '{' ( (a13= member ( (a14= ';' ) )? ) )* a15= '}' ;
     public final Class keywordclass() throws RecognitionException {
         Class element =  null;
 
@@ -908,10 +908,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createClass();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:399:1: ( (a0= modifier )* a1= 'class' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' a9= qualifiedtypeargument ) )? ( (a10= 'implements' a11= qualifiedtypeargument ) )? a12= '{' ( (a13= member ( (a14= ';' ) )? ) )* a15= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:400:2: (a0= modifier )* a1= 'class' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' a9= qualifiedtypeargument ) )? ( (a10= 'implements' a11= qualifiedtypeargument ) )? a12= '{' ( (a13= member ( (a14= ';' ) )? ) )* a15= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:399:1: ( (a0= modifier )* a1= 'class' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' a9= qualifiedtypeargument ) )? ( (a10= 'implements' a11= qualifiedtypeargument ) )? a12= '{' ( (a13= member ( (a14= ';' ) )? ) )* a15= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:400:2: (a0= modifier )* a1= 'class' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' a9= qualifiedtypeargument ) )? ( (a10= 'implements' a11= qualifiedtypeargument ) )? a12= '{' ( (a13= member ( (a14= ';' ) )? ) )* a15= '}'
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:400:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:400:2: (a0= modifier )*
             loop11:
             do {
                 int alt11=2;
@@ -924,7 +924,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt11) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:401:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:401:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_keywordclass420);
             	    a0=modifier();
@@ -952,7 +952,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:405:2: ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:405:2: ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -961,10 +961,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt13) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:406:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:406:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:406:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:407:4: a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:406:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:407:4: a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>'
                     {
                     a3=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_keywordclass457); if (failed) return element;
@@ -978,7 +978,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("typeParameters"))).add(a4); copyLocalizationInfos(a4, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:409:4: ( (a5= ',' a6= typeparameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:409:4: ( (a5= ',' a6= typeparameter ) )*
                     loop12:
                     do {
                         int alt12=2;
@@ -991,10 +991,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:410:5: (a5= ',' a6= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:410:5: (a5= ',' a6= typeparameter )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:410:5: (a5= ',' a6= typeparameter )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:411:6: a5= ',' a6= typeparameter
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:410:5: (a5= ',' a6= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:411:6: a5= ',' a6= typeparameter
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_keywordclass490); if (failed) return element;
@@ -1034,7 +1034,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:418:2: ( (a8= 'extends' a9= qualifiedtypeargument ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:418:2: ( (a8= 'extends' a9= qualifiedtypeargument ) )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1043,10 +1043,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt14) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:419:3: (a8= 'extends' a9= qualifiedtypeargument )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:419:3: (a8= 'extends' a9= qualifiedtypeargument )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:419:3: (a8= 'extends' a9= qualifiedtypeargument )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:420:4: a8= 'extends' a9= qualifiedtypeargument
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:419:3: (a8= 'extends' a9= qualifiedtypeargument )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:420:4: a8= 'extends' a9= qualifiedtypeargument
                     {
                     a8=(Token)input.LT(1);
                     match(input,26,FOLLOW_26_in_keywordclass549); if (failed) return element;
@@ -1069,7 +1069,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:424:2: ( (a10= 'implements' a11= qualifiedtypeargument ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:424:2: ( (a10= 'implements' a11= qualifiedtypeargument ) )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1078,10 +1078,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt15) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:425:3: (a10= 'implements' a11= qualifiedtypeargument )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:425:3: (a10= 'implements' a11= qualifiedtypeargument )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:425:3: (a10= 'implements' a11= qualifiedtypeargument )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:426:4: a10= 'implements' a11= qualifiedtypeargument
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:425:3: (a10= 'implements' a11= qualifiedtypeargument )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:426:4: a10= 'implements' a11= qualifiedtypeargument
                     {
                     a10=(Token)input.LT(1);
                     match(input,27,FOLLOW_27_in_keywordclass584); if (failed) return element;
@@ -1109,7 +1109,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a12, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:431:2: ( (a13= member ( (a14= ';' ) )? ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:431:2: ( (a13= member ( (a14= ';' ) )? ) )*
             loop17:
             do {
                 int alt17=2;
@@ -1122,10 +1122,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt17) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:432:3: (a13= member ( (a14= ';' ) )? )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:432:3: (a13= member ( (a14= ';' ) )? )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:432:3: (a13= member ( (a14= ';' ) )? )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:433:4: a13= member ( (a14= ';' ) )?
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:432:3: (a13= member ( (a14= ';' ) )? )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:433:4: a13= member ( (a14= ';' ) )?
             	    {
             	    pushFollow(FOLLOW_member_in_keywordclass627);
             	    a13=member();
@@ -1134,7 +1134,7 @@ public class JavaParser extends EMFTextParserImpl {
             	    if ( backtracking==0 ) {
             	      ((List) element.eGet(element.eClass().getEStructuralFeature("members"))).add(a13); copyLocalizationInfos(a13, element); 
             	    }
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:434:4: ( (a14= ';' ) )?
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:434:4: ( (a14= ';' ) )?
             	    int alt16=2;
             	    int LA16_0 = input.LA(1);
 
@@ -1143,10 +1143,10 @@ public class JavaParser extends EMFTextParserImpl {
             	    }
             	    switch (alt16) {
             	        case 1 :
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:435:5: (a14= ';' )
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:435:5: (a14= ';' )
             	            {
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:435:5: (a14= ';' )
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:436:6: a14= ';'
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:435:5: (a14= ';' )
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:436:6: a14= ';'
             	            {
             	            a14=(Token)input.LT(1);
             	            match(input,20,FOLLOW_20_in_keywordclass650); if (failed) return element;
@@ -1195,7 +1195,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordinterface
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:444:1: keywordinterface returns [Interface element = null] : (a0= modifier )* a1= 'interface' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )? a12= '{' ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )* a16= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:444:1: keywordinterface returns [Interface element = null] : (a0= modifier )* a1= 'interface' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )? a12= '{' ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )* a16= '}' ;
     public final Interface keywordinterface() throws RecognitionException {
         Interface element =  null;
 
@@ -1227,10 +1227,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createInterface();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:448:1: ( (a0= modifier )* a1= 'interface' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )? a12= '{' ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )* a16= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:449:2: (a0= modifier )* a1= 'interface' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )? a12= '{' ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )* a16= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:448:1: ( (a0= modifier )* a1= 'interface' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )? a12= '{' ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )* a16= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:449:2: (a0= modifier )* a1= 'interface' a2= IDENTIFIER ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )? ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )? a12= '{' ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )* a16= '}'
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:449:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:449:2: (a0= modifier )*
             loop18:
             do {
                 int alt18=2;
@@ -1243,7 +1243,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt18) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:450:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:450:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_keywordinterface705);
             	    a0=modifier();
@@ -1271,7 +1271,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:454:2: ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:454:2: ( (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' ) )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -1280,10 +1280,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt20) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:455:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:455:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:455:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:456:4: a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:455:3: (a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:456:4: a3= '<' a4= typeparameter ( (a5= ',' a6= typeparameter ) )* a7= '>'
                     {
                     a3=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_keywordinterface742); if (failed) return element;
@@ -1297,7 +1297,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("typeParameters"))).add(a4); copyLocalizationInfos(a4, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:458:4: ( (a5= ',' a6= typeparameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:458:4: ( (a5= ',' a6= typeparameter ) )*
                     loop19:
                     do {
                         int alt19=2;
@@ -1310,10 +1310,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt19) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:459:5: (a5= ',' a6= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:459:5: (a5= ',' a6= typeparameter )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:459:5: (a5= ',' a6= typeparameter )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:460:6: a5= ',' a6= typeparameter
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:459:5: (a5= ',' a6= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:460:6: a5= ',' a6= typeparameter
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_keywordinterface775); if (failed) return element;
@@ -1353,7 +1353,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:467:2: ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:467:2: ( (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -1362,18 +1362,18 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt22) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:468:3: (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:468:3: (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:468:3: (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:469:4: a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:468:3: (a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* ) )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:469:4: a8= 'extends' (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* )
                     {
                     a8=(Token)input.LT(1);
                     match(input,26,FOLLOW_26_in_keywordinterface834); if (failed) return element;
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a8, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:470:4: (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:471:5: a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:470:4: (a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:471:5: a9= qualifiedtypeargument ( (a10= ',' a11= qualifiedtypeargument ) )*
                     {
                     pushFollow(FOLLOW_qualifiedtypeargument_in_keywordinterface850);
                     a9=qualifiedtypeargument();
@@ -1382,7 +1382,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("extends"))).add(a9); copyLocalizationInfos(a9, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:472:5: ( (a10= ',' a11= qualifiedtypeargument ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:472:5: ( (a10= ',' a11= qualifiedtypeargument ) )*
                     loop21:
                     do {
                         int alt21=2;
@@ -1395,10 +1395,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt21) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:473:6: (a10= ',' a11= qualifiedtypeargument )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:473:6: (a10= ',' a11= qualifiedtypeargument )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:473:6: (a10= ',' a11= qualifiedtypeargument )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:474:7: a10= ',' a11= qualifiedtypeargument
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:473:6: (a10= ',' a11= qualifiedtypeargument )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:474:7: a10= ',' a11= qualifiedtypeargument
                     	    {
                     	    a10=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_keywordinterface876); if (failed) return element;
@@ -1441,7 +1441,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a12, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:482:2: ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:482:2: ( ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? ) )*
             loop26:
             do {
                 int alt26=2;
@@ -1463,9 +1463,9 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt26) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:483:3: ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:483:3: ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:483:3: ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:483:3: ( (a13= member ( (a14= ';' ) )? ) | ( (a15= ';' ) )? )
             	    int alt25=2;
             	    switch ( input.LA(1) ) {
             	    case 77:
@@ -2035,10 +2035,10 @@ public class JavaParser extends EMFTextParserImpl {
 
             	    switch (alt25) {
             	        case 1 :
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: (a13= member ( (a14= ';' ) )? )
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: (a13= member ( (a14= ';' ) )? )
             	            {
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: (a13= member ( (a14= ';' ) )? )
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:485:5: a13= member ( (a14= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: (a13= member ( (a14= ';' ) )? )
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:485:5: a13= member ( (a14= ';' ) )?
             	            {
             	            pushFollow(FOLLOW_member_in_keywordinterface947);
             	            a13=member();
@@ -2047,7 +2047,7 @@ public class JavaParser extends EMFTextParserImpl {
             	            if ( backtracking==0 ) {
             	              ((List) element.eGet(element.eClass().getEStructuralFeature("members"))).add(a13); copyLocalizationInfos(a13, element); 
             	            }
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:486:5: ( (a14= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:486:5: ( (a14= ';' ) )?
             	            int alt23=2;
             	            int LA23_0 = input.LA(1);
 
@@ -2060,10 +2060,10 @@ public class JavaParser extends EMFTextParserImpl {
             	            }
             	            switch (alt23) {
             	                case 1 :
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: (a14= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: (a14= ';' )
             	                    {
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: (a14= ';' )
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:488:7: a14= ';'
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: (a14= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:488:7: a14= ';'
             	                    {
             	                    a14=(Token)input.LT(1);
             	                    match(input,20,FOLLOW_20_in_keywordinterface973); if (failed) return element;
@@ -2086,9 +2086,9 @@ public class JavaParser extends EMFTextParserImpl {
             	            }
             	            break;
             	        case 2 :
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:494:4: ( (a15= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:494:4: ( (a15= ';' ) )?
             	            {
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:494:4: ( (a15= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:494:4: ( (a15= ';' ) )?
             	            int alt24=2;
             	            int LA24_0 = input.LA(1);
 
@@ -2101,10 +2101,10 @@ public class JavaParser extends EMFTextParserImpl {
             	            }
             	            switch (alt24) {
             	                case 1 :
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: (a15= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: (a15= ';' )
             	                    {
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: (a15= ';' )
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:496:6: a15= ';'
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: (a15= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:496:6: a15= ';'
             	                    {
             	                    a15=(Token)input.LT(1);
             	                    match(input,20,FOLLOW_20_in_keywordinterface1021); if (failed) return element;
@@ -2156,7 +2156,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start annotation
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:504:1: annotation returns [Annotation element = null] : (a0= modifier )* a1= '@' a2= 'interface' a3= IDENTIFIER a4= '{' ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )* a8= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:504:1: annotation returns [Annotation element = null] : (a0= modifier )* a1= '@' a2= 'interface' a3= IDENTIFIER a4= '{' ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )* a8= '}' ;
     public final Annotation annotation() throws RecognitionException {
         Annotation element =  null;
 
@@ -2176,10 +2176,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAnnotation();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:508:1: ( (a0= modifier )* a1= '@' a2= 'interface' a3= IDENTIFIER a4= '{' ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )* a8= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:509:2: (a0= modifier )* a1= '@' a2= 'interface' a3= IDENTIFIER a4= '{' ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )* a8= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:508:1: ( (a0= modifier )* a1= '@' a2= 'interface' a3= IDENTIFIER a4= '{' ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )* a8= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:509:2: (a0= modifier )* a1= '@' a2= 'interface' a3= IDENTIFIER a4= '{' ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )* a8= '}'
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:509:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:509:2: (a0= modifier )*
             loop27:
             do {
                 int alt27=2;
@@ -2192,7 +2192,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt27) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:510:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:510:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_annotation1076);
             	    a0=modifier();
@@ -2230,7 +2230,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a4, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:516:2: ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:516:2: ( ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? ) )*
             loop31:
             do {
                 int alt31=2;
@@ -2252,9 +2252,9 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt31) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:517:3: ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:517:3: ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:517:3: ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:517:3: ( (a5= member ( (a6= ';' ) )? ) | ( (a7= ';' ) )? )
             	    int alt30=2;
             	    switch ( input.LA(1) ) {
             	    case 77:
@@ -2824,10 +2824,10 @@ public class JavaParser extends EMFTextParserImpl {
 
             	    switch (alt30) {
             	        case 1 :
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: (a5= member ( (a6= ';' ) )? )
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: (a5= member ( (a6= ';' ) )? )
             	            {
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: (a5= member ( (a6= ';' ) )? )
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:519:5: a5= member ( (a6= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: (a5= member ( (a6= ';' ) )? )
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:519:5: a5= member ( (a6= ';' ) )?
             	            {
             	            pushFollow(FOLLOW_member_in_annotation1135);
             	            a5=member();
@@ -2836,7 +2836,7 @@ public class JavaParser extends EMFTextParserImpl {
             	            if ( backtracking==0 ) {
             	              ((List) element.eGet(element.eClass().getEStructuralFeature("members"))).add(a5); copyLocalizationInfos(a5, element); 
             	            }
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:520:5: ( (a6= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:520:5: ( (a6= ';' ) )?
             	            int alt28=2;
             	            int LA28_0 = input.LA(1);
 
@@ -2849,10 +2849,10 @@ public class JavaParser extends EMFTextParserImpl {
             	            }
             	            switch (alt28) {
             	                case 1 :
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: (a6= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: (a6= ';' )
             	                    {
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: (a6= ';' )
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:522:7: a6= ';'
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: (a6= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:522:7: a6= ';'
             	                    {
             	                    a6=(Token)input.LT(1);
             	                    match(input,20,FOLLOW_20_in_annotation1161); if (failed) return element;
@@ -2875,9 +2875,9 @@ public class JavaParser extends EMFTextParserImpl {
             	            }
             	            break;
             	        case 2 :
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:528:4: ( (a7= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:528:4: ( (a7= ';' ) )?
             	            {
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:528:4: ( (a7= ';' ) )?
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:528:4: ( (a7= ';' ) )?
             	            int alt29=2;
             	            int LA29_0 = input.LA(1);
 
@@ -2890,10 +2890,10 @@ public class JavaParser extends EMFTextParserImpl {
             	            }
             	            switch (alt29) {
             	                case 1 :
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: (a7= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: (a7= ';' )
             	                    {
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: (a7= ';' )
-            	                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:530:6: a7= ';'
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: (a7= ';' )
+            	                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:530:6: a7= ';'
             	                    {
             	                    a7=(Token)input.LT(1);
             	                    match(input,20,FOLLOW_20_in_annotation1209); if (failed) return element;
@@ -2945,7 +2945,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start annotationinstance
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:538:1: annotationinstance returns [AnnotationInstance element = null] : a0= '@' a1= reference ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:538:1: annotationinstance returns [AnnotationInstance element = null] : a0= '@' a1= reference ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )? ;
     public final AnnotationInstance annotationinstance() throws RecognitionException {
         AnnotationInstance element =  null;
 
@@ -2966,8 +2966,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAnnotationInstance();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:542:1: (a0= '@' a1= reference ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:543:2: a0= '@' a1= reference ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:542:1: (a0= '@' a1= reference ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:543:2: a0= '@' a1= reference ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )?
             {
             a0=(Token)input.LT(1);
             match(input,31,FOLLOW_31_in_annotationinstance1260); if (failed) return element;
@@ -2981,7 +2981,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("annotation"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:545:2: ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:545:2: ( (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' ) )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -2990,17 +2990,17 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt34) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:546:3: (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:546:3: (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:546:3: (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:547:4: a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:546:3: (a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:547:4: a2= '(' (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) ) a7= ')'
                     {
                     a2=(Token)input.LT(1);
                     match(input,32,FOLLOW_32_in_annotationinstance1285); if (failed) return element;
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a2, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:548:4: (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:548:4: (a3= annotationelementvalue | (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* ) )
                     int alt33=2;
                     int LA33_0 = input.LA(1);
 
@@ -3019,7 +3019,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt33) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:549:5: a3= annotationelementvalue
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:549:5: a3= annotationelementvalue
                             {
                             pushFollow(FOLLOW_annotationelementvalue_in_annotationinstance1301);
                             a3=annotationelementvalue();
@@ -3032,10 +3032,10 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             break;
                         case 2 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:552:5: (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:552:5: (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:552:5: (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:553:6: a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:552:5: (a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:553:6: a4= annotationelementvaluepair ( (a5= ',' a6= annotationelementvaluepair ) )*
                             {
                             pushFollow(FOLLOW_annotationelementvaluepair_in_annotationinstance1326);
                             a4=annotationelementvaluepair();
@@ -3044,7 +3044,7 @@ public class JavaParser extends EMFTextParserImpl {
                             if ( backtracking==0 ) {
                               ((List) element.eGet(element.eClass().getEStructuralFeature("elementValuePairs"))).add(a4); copyLocalizationInfos(a4, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:554:6: ( (a5= ',' a6= annotationelementvaluepair ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:554:6: ( (a5= ',' a6= annotationelementvaluepair ) )*
                             loop32:
                             do {
                                 int alt32=2;
@@ -3057,10 +3057,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                                 switch (alt32) {
                             	case 1 :
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:555:7: (a5= ',' a6= annotationelementvaluepair )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:555:7: (a5= ',' a6= annotationelementvaluepair )
                             	    {
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:555:7: (a5= ',' a6= annotationelementvaluepair )
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:556:8: a5= ',' a6= annotationelementvaluepair
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:555:7: (a5= ',' a6= annotationelementvaluepair )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:556:8: a5= ',' a6= annotationelementvaluepair
                             	    {
                             	    a5=(Token)input.LT(1);
                             	    match(input,24,FOLLOW_24_in_annotationinstance1355); if (failed) return element;
@@ -3125,7 +3125,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start annotationelementvaluepair
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:567:1: annotationelementvaluepair returns [AnnotationElementValuePair element = null] : a0= IDENTIFIER a1= '=' a2= annotationelementvalue ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:567:1: annotationelementvaluepair returns [AnnotationElementValuePair element = null] : a0= IDENTIFIER a1= '=' a2= annotationelementvalue ;
     public final AnnotationElementValuePair annotationelementvaluepair() throws RecognitionException {
         AnnotationElementValuePair element =  null;
 
@@ -3138,8 +3138,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAnnotationElementValuePair();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:571:1: (a0= IDENTIFIER a1= '=' a2= annotationelementvalue )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:572:2: a0= IDENTIFIER a1= '=' a2= annotationelementvalue
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:571:1: (a0= IDENTIFIER a1= '=' a2= annotationelementvalue )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:572:2: a0= IDENTIFIER a1= '=' a2= annotationelementvalue
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_annotationelementvaluepair1437); if (failed) return element;
@@ -3174,7 +3174,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start annotationelementvaluearray
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:577:1: annotationelementvaluearray returns [AnnotationElementValueArray element = null] : a0= '{' ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )? ( (a4= ',' ) )? a5= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:577:1: annotationelementvaluearray returns [AnnotationElementValueArray element = null] : a0= '{' ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )? ( (a4= ',' ) )? a5= '}' ;
     public final AnnotationElementValueArray annotationelementvaluearray() throws RecognitionException {
         AnnotationElementValueArray element =  null;
 
@@ -3191,15 +3191,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAnnotationElementValueArray();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:581:1: (a0= '{' ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )? ( (a4= ',' ) )? a5= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:582:2: a0= '{' ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )? ( (a4= ',' ) )? a5= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:581:1: (a0= '{' ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )? ( (a4= ',' ) )? a5= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:582:2: a0= '{' ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )? ( (a4= ',' ) )? a5= '}'
             {
             a0=(Token)input.LT(1);
             match(input,28,FOLLOW_28_in_annotationelementvaluearray1476); if (failed) return element;
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:583:2: ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:583:2: ( (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* ) )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -3208,10 +3208,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt36) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:584:3: (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:584:3: (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:584:3: (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:585:4: a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:584:3: (a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:585:4: a1= annotationelementvalue ( (a2= ',' a3= annotationelementvalue ) )*
                     {
                     pushFollow(FOLLOW_annotationelementvalue_in_annotationelementvaluearray1493);
                     a1=annotationelementvalue();
@@ -3220,7 +3220,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("values"))).add(a1); copyLocalizationInfos(a1, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:586:4: ( (a2= ',' a3= annotationelementvalue ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:586:4: ( (a2= ',' a3= annotationelementvalue ) )*
                     loop35:
                     do {
                         int alt35=2;
@@ -3239,10 +3239,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt35) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:587:5: (a2= ',' a3= annotationelementvalue )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:587:5: (a2= ',' a3= annotationelementvalue )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:587:5: (a2= ',' a3= annotationelementvalue )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:588:6: a2= ',' a3= annotationelementvalue
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:587:5: (a2= ',' a3= annotationelementvalue )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:588:6: a2= ',' a3= annotationelementvalue
                     	    {
                     	    a2=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_annotationelementvaluearray1516); if (failed) return element;
@@ -3277,7 +3277,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:594:2: ( (a4= ',' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:594:2: ( (a4= ',' ) )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -3286,10 +3286,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt37) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:595:3: (a4= ',' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:595:3: (a4= ',' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:595:3: (a4= ',' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:596:4: a4= ','
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:595:3: (a4= ',' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:596:4: a4= ','
                     {
                     a4=(Token)input.LT(1);
                     match(input,24,FOLLOW_24_in_annotationelementvaluearray1565); if (failed) return element;
@@ -3326,7 +3326,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start enumeration
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:602:1: enumeration returns [Enumeration element = null] : (a0= modifier )* a1= 'enum' a2= IDENTIFIER ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )? a7= '{' ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )? ( (a11= ',' ) )? ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? ) a15= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:602:1: enumeration returns [Enumeration element = null] : (a0= modifier )* a1= 'enum' a2= IDENTIFIER ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )? a7= '{' ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )? ( (a11= ',' ) )? ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? ) a15= '}' ;
     public final Enumeration enumeration() throws RecognitionException {
         Enumeration element =  null;
 
@@ -3355,10 +3355,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createEnumeration();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:606:1: ( (a0= modifier )* a1= 'enum' a2= IDENTIFIER ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )? a7= '{' ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )? ( (a11= ',' ) )? ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? ) a15= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:607:2: (a0= modifier )* a1= 'enum' a2= IDENTIFIER ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )? a7= '{' ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )? ( (a11= ',' ) )? ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? ) a15= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:606:1: ( (a0= modifier )* a1= 'enum' a2= IDENTIFIER ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )? a7= '{' ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )? ( (a11= ',' ) )? ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? ) a15= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:607:2: (a0= modifier )* a1= 'enum' a2= IDENTIFIER ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )? a7= '{' ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )? ( (a11= ',' ) )? ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? ) a15= '}'
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:607:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:607:2: (a0= modifier )*
             loop38:
             do {
                 int alt38=2;
@@ -3371,7 +3371,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt38) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:608:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:608:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_enumeration1608);
             	    a0=modifier();
@@ -3399,7 +3399,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a2, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:612:2: ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:612:2: ( (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) ) )?
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -3408,25 +3408,25 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt40) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:613:3: (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:613:3: (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:613:3: (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:614:4: a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:613:3: (a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* ) )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:614:4: a3= 'implements' (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* )
                     {
                     a3=(Token)input.LT(1);
                     match(input,27,FOLLOW_27_in_enumeration1645); if (failed) return element;
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a3, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:615:4: (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:616:5: a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:615:4: (a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:616:5: a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )*
                     {
                     a4=(Token)input.LT(1);
                     match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_enumeration1661); if (failed) return element;
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("implements"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("implements"))).add(proxy); copyLocalizationInfos((CommonToken) a4, element); copyLocalizationInfos((CommonToken) a4, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:617:5: ( (a5= ',' a6= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:617:5: ( (a5= ',' a6= IDENTIFIER ) )*
                     loop39:
                     do {
                         int alt39=2;
@@ -3439,10 +3439,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt39) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:618:6: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:618:6: (a5= ',' a6= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:618:6: (a5= ',' a6= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:619:7: a5= ',' a6= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:618:6: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:619:7: a5= ',' a6= IDENTIFIER
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_enumeration1687); if (failed) return element;
@@ -3483,7 +3483,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a7, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:627:2: ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:627:2: ( (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* ) )?
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -3492,10 +3492,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt42) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:628:3: (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:628:3: (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:628:3: (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:629:4: a8= enumconstant ( (a9= ',' a10= enumconstant ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:628:3: (a8= enumconstant ( (a9= ',' a10= enumconstant ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:629:4: a8= enumconstant ( (a9= ',' a10= enumconstant ) )*
                     {
                     pushFollow(FOLLOW_enumconstant_in_enumeration1752);
                     a8=enumconstant();
@@ -3504,7 +3504,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("constants"))).add(a8); copyLocalizationInfos(a8, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:630:4: ( (a9= ',' a10= enumconstant ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:630:4: ( (a9= ',' a10= enumconstant ) )*
                     loop41:
                     do {
                         int alt41=2;
@@ -3523,10 +3523,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt41) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:631:5: (a9= ',' a10= enumconstant )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:631:5: (a9= ',' a10= enumconstant )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:631:5: (a9= ',' a10= enumconstant )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:632:6: a9= ',' a10= enumconstant
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:631:5: (a9= ',' a10= enumconstant )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:632:6: a9= ',' a10= enumconstant
                     	    {
                     	    a9=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_enumeration1775); if (failed) return element;
@@ -3561,7 +3561,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:638:2: ( (a11= ',' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:638:2: ( (a11= ',' ) )?
             int alt43=2;
             int LA43_0 = input.LA(1);
 
@@ -3570,10 +3570,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt43) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:639:3: (a11= ',' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:639:3: (a11= ',' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:639:3: (a11= ',' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:640:4: a11= ','
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:639:3: (a11= ',' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:640:4: a11= ','
                     {
                     a11=(Token)input.LT(1);
                     match(input,24,FOLLOW_24_in_enumeration1824); if (failed) return element;
@@ -3589,7 +3589,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:643:2: ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:643:2: ( ( (a12= ';' (a13= member )* ) )? | ( (a14= ';' ) )? )
             int alt47=2;
             int LA47_0 = input.LA(1);
 
@@ -3636,9 +3636,9 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt47) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:644:3: ( (a12= ';' (a13= member )* ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:644:3: ( (a12= ';' (a13= member )* ) )?
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:644:3: ( (a12= ';' (a13= member )* ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:644:3: ( (a12= ';' (a13= member )* ) )?
                     int alt45=2;
                     int LA45_0 = input.LA(1);
 
@@ -3647,17 +3647,17 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt45) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:645:4: (a12= ';' (a13= member )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:645:4: (a12= ';' (a13= member )* )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:645:4: (a12= ';' (a13= member )* )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:646:5: a12= ';' (a13= member )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:645:4: (a12= ';' (a13= member )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:646:5: a12= ';' (a13= member )*
                             {
                             a12=(Token)input.LT(1);
                             match(input,20,FOLLOW_20_in_enumeration1855); if (failed) return element;
                             if ( backtracking==0 ) {
                               copyLocalizationInfos((CommonToken)a12, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:647:5: (a13= member )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:647:5: (a13= member )*
                             loop44:
                             do {
                                 int alt44=2;
@@ -3670,7 +3670,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                                 switch (alt44) {
                             	case 1 :
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:648:6: a13= member
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:648:6: a13= member
                             	    {
                             	    pushFollow(FOLLOW_member_in_enumeration1873);
                             	    a13=member();
@@ -3701,9 +3701,9 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:654:3: ( (a14= ';' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:654:3: ( (a14= ';' ) )?
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:654:3: ( (a14= ';' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:654:3: ( (a14= ';' ) )?
                     int alt46=2;
                     int LA46_0 = input.LA(1);
 
@@ -3712,10 +3712,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt46) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:655:4: (a14= ';' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:655:4: (a14= ';' )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:655:4: (a14= ';' )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:656:5: a14= ';'
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:655:4: (a14= ';' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:656:5: a14= ';'
                             {
                             a14=(Token)input.LT(1);
                             match(input,20,FOLLOW_20_in_enumeration1915); if (failed) return element;
@@ -3758,7 +3758,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start typeparameter
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:663:1: typeparameter returns [TypeParameter element = null] : a0= IDENTIFIER ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:663:1: typeparameter returns [TypeParameter element = null] : a0= IDENTIFIER ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )? ;
     public final TypeParameter typeparameter() throws RecognitionException {
         TypeParameter element =  null;
 
@@ -3774,15 +3774,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createTypeParameter();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:667:1: (a0= IDENTIFIER ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:668:2: a0= IDENTIFIER ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:667:1: (a0= IDENTIFIER ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:668:2: a0= IDENTIFIER ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )?
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_typeparameter1959); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:669:2: ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:669:2: ( (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ) )?
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -3791,10 +3791,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt49) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:670:3: (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:670:3: (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:670:3: (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:671:4: a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:670:3: (a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:671:4: a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )*
                     {
                     a1=(Token)input.LT(1);
                     match(input,26,FOLLOW_26_in_typeparameter1976); if (failed) return element;
@@ -3808,7 +3808,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("extendTypes"))).add(a2); copyLocalizationInfos(a2, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:673:4: ( (a3= '&' a4= reference ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:673:4: ( (a3= '&' a4= reference ) )*
                     loop48:
                     do {
                         int alt48=2;
@@ -3821,10 +3821,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt48) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:674:5: (a3= '&' a4= reference )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:674:5: (a3= '&' a4= reference )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:674:5: (a3= '&' a4= reference )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:675:6: a3= '&' a4= reference
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:674:5: (a3= '&' a4= reference )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:675:6: a3= '&' a4= reference
                     	    {
                     	    a3=(Token)input.LT(1);
                     	    match(input,36,FOLLOW_36_in_typeparameter2009); if (failed) return element;
@@ -3875,7 +3875,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start enumconstant
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:683:1: enumconstant returns [EnumConstant element = null] : a0= IDENTIFIER ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )? (a6= member )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:683:1: enumconstant returns [EnumConstant element = null] : a0= IDENTIFIER ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )? (a6= member )* ;
     public final EnumConstant enumconstant() throws RecognitionException {
         EnumConstant element =  null;
 
@@ -3894,15 +3894,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createEnumConstant();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:687:1: (a0= IDENTIFIER ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )? (a6= member )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:688:2: a0= IDENTIFIER ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )? (a6= member )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:687:1: (a0= IDENTIFIER ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )? (a6= member )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:688:2: a0= IDENTIFIER ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )? (a6= member )*
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_enumconstant2064); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:689:2: ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:689:2: ( (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' ) )?
             int alt51=2;
             int LA51_0 = input.LA(1);
 
@@ -3911,10 +3911,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt51) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:690:3: (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:690:3: (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:690:3: (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:691:4: a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:690:3: (a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:691:4: a1= '(' a2= expression ( (a3= ',' a4= expression ) )* a5= ')'
                     {
                     a1=(Token)input.LT(1);
                     match(input,32,FOLLOW_32_in_enumconstant2081); if (failed) return element;
@@ -3928,7 +3928,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("arguments"))).add(a2); copyLocalizationInfos(a2, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:693:4: ( (a3= ',' a4= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:693:4: ( (a3= ',' a4= expression ) )*
                     loop50:
                     do {
                         int alt50=2;
@@ -3941,10 +3941,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt50) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:694:5: (a3= ',' a4= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:694:5: (a3= ',' a4= expression )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:694:5: (a3= ',' a4= expression )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:695:6: a3= ',' a4= expression
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:694:5: (a3= ',' a4= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:695:6: a3= ',' a4= expression
                     	    {
                     	    a3=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_enumconstant2114); if (failed) return element;
@@ -3984,7 +3984,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:702:2: (a6= member )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:702:2: (a6= member )*
             loop52:
             do {
                 int alt52=2;
@@ -3997,7 +3997,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt52) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:703:3: a6= member
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:703:3: a6= member
             	    {
             	    pushFollow(FOLLOW_member_in_enumconstant2168);
             	    a6=member();
@@ -4031,7 +4031,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start block
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:707:1: block returns [Block element = null] : (a0= modifier )* a1= '{' (a2= statement )* a3= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:707:1: block returns [Block element = null] : (a0= modifier )* a1= '{' (a2= statement )* a3= '}' ;
     public final Block block() throws RecognitionException {
         Block element =  null;
 
@@ -4046,10 +4046,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createBlock();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:711:1: ( (a0= modifier )* a1= '{' (a2= statement )* a3= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:712:2: (a0= modifier )* a1= '{' (a2= statement )* a3= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:711:1: ( (a0= modifier )* a1= '{' (a2= statement )* a3= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:712:2: (a0= modifier )* a1= '{' (a2= statement )* a3= '}'
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:712:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:712:2: (a0= modifier )*
             loop53:
             do {
                 int alt53=2;
@@ -4062,7 +4062,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt53) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:713:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:713:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_block2199);
             	    a0=modifier();
@@ -4085,7 +4085,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:716:2: (a2= statement )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:716:2: (a2= statement )*
             loop54:
             do {
                 int alt54=2;
@@ -4098,7 +4098,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt54) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:717:3: a2= statement
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:717:3: a2= statement
             	    {
             	    pushFollow(FOLLOW_statement_in_block2223);
             	    a2=statement();
@@ -4137,7 +4137,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start constructor
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:722:1: constructor returns [Constructor element = null] : (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? a7= IDENTIFIER a8= '(' ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )? a12= ')' ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )? a17= block ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:722:1: constructor returns [Constructor element = null] : (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? a7= IDENTIFIER a8= '(' ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )? a12= ')' ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )? a17= block ;
     public final Constructor constructor() throws RecognitionException {
         Constructor element =  null;
 
@@ -4171,10 +4171,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createConstructor();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:726:1: ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? a7= IDENTIFIER a8= '(' ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )? a12= ')' ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )? a17= block )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:727:2: (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? a7= IDENTIFIER a8= '(' ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )? a12= ')' ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )? a17= block
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:726:1: ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? a7= IDENTIFIER a8= '(' ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )? a12= ')' ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )? a17= block )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:727:2: (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? a7= IDENTIFIER a8= '(' ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )? a12= ')' ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )? a17= block
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:727:2: (a0= annotationinstance )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:727:2: (a0= annotationinstance )*
             loop55:
             do {
                 int alt55=2;
@@ -4187,7 +4187,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt55) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:728:3: a0= annotationinstance
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:728:3: a0= annotationinstance
             	    {
             	    pushFollow(FOLLOW_annotationinstance_in_constructor2262);
             	    a0=annotationinstance();
@@ -4205,7 +4205,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:730:2: (a1= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:730:2: (a1= modifier )*
             loop56:
             do {
                 int alt56=2;
@@ -4218,7 +4218,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt56) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:731:3: a1= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:731:3: a1= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_constructor2278);
             	    a1=modifier();
@@ -4236,7 +4236,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:733:2: ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:733:2: ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )?
             int alt58=2;
             int LA58_0 = input.LA(1);
 
@@ -4245,10 +4245,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt58) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:734:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:734:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:734:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:735:4: a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:734:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:735:4: a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>'
                     {
                     a2=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_constructor2299); if (failed) return element;
@@ -4262,7 +4262,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("typeParameters"))).add(a3); copyLocalizationInfos(a3, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:737:4: ( (a4= ',' a5= typeparameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:737:4: ( (a4= ',' a5= typeparameter ) )*
                     loop57:
                     do {
                         int alt57=2;
@@ -4275,10 +4275,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt57) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:738:5: (a4= ',' a5= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:738:5: (a4= ',' a5= typeparameter )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:738:5: (a4= ',' a5= typeparameter )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:739:6: a4= ',' a5= typeparameter
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:738:5: (a4= ',' a5= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:739:6: a4= ',' a5= typeparameter
                     	    {
                     	    a4=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_constructor2332); if (failed) return element;
@@ -4328,7 +4328,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a8, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:748:2: ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:748:2: ( (a9= parameter ( (a10= ',' a11= parameter ) )* ) )?
             int alt60=2;
             int LA60_0 = input.LA(1);
 
@@ -4337,10 +4337,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt60) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:749:3: (a9= parameter ( (a10= ',' a11= parameter ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:749:3: (a9= parameter ( (a10= ',' a11= parameter ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:749:3: (a9= parameter ( (a10= ',' a11= parameter ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:750:4: a9= parameter ( (a10= ',' a11= parameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:749:3: (a9= parameter ( (a10= ',' a11= parameter ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:750:4: a9= parameter ( (a10= ',' a11= parameter ) )*
                     {
                     pushFollow(FOLLOW_parameter_in_constructor2407);
                     a9=parameter();
@@ -4349,7 +4349,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("parameters"))).add(a9); copyLocalizationInfos(a9, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:751:4: ( (a10= ',' a11= parameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:751:4: ( (a10= ',' a11= parameter ) )*
                     loop59:
                     do {
                         int alt59=2;
@@ -4362,10 +4362,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt59) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:752:5: (a10= ',' a11= parameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:752:5: (a10= ',' a11= parameter )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:752:5: (a10= ',' a11= parameter )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:753:6: a10= ',' a11= parameter
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:752:5: (a10= ',' a11= parameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:753:6: a10= ',' a11= parameter
                     	    {
                     	    a10=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_constructor2430); if (failed) return element;
@@ -4405,7 +4405,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a12, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:760:2: ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:760:2: ( (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? ) )?
             int alt62=2;
             int LA62_0 = input.LA(1);
 
@@ -4414,10 +4414,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt62) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:761:3: (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:761:3: (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:761:3: (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:762:4: a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:761:3: (a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )? )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:762:4: a13= 'throws' a14= IDENTIFIER ( (a15= ',' a16= IDENTIFIER ) )?
                     {
                     a13=(Token)input.LT(1);
                     match(input,37,FOLLOW_37_in_constructor2487); if (failed) return element;
@@ -4429,7 +4429,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a14.getText(),element.eClass().getEStructuralFeature("exceptions"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a14,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("exceptions"))).add(proxy); copyLocalizationInfos((CommonToken) a14, element); copyLocalizationInfos((CommonToken) a14, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:764:4: ( (a15= ',' a16= IDENTIFIER ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:764:4: ( (a15= ',' a16= IDENTIFIER ) )?
                     int alt61=2;
                     int LA61_0 = input.LA(1);
 
@@ -4438,10 +4438,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt61) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:765:5: (a15= ',' a16= IDENTIFIER )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:765:5: (a15= ',' a16= IDENTIFIER )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:765:5: (a15= ',' a16= IDENTIFIER )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:766:6: a15= ',' a16= IDENTIFIER
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:765:5: (a15= ',' a16= IDENTIFIER )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:766:6: a15= ',' a16= IDENTIFIER
                             {
                             a15=(Token)input.LT(1);
                             match(input,24,FOLLOW_24_in_constructor2520); if (failed) return element;
@@ -4494,7 +4494,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start method
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:775:1: method returns [Method element = null] : ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? (a20= block | a21= ';' ) | c0= annotationmethod );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:775:1: method returns [Method element = null] : ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? (a20= block | a21= ';' ) | c0= annotationmethod );
     public final Method method() throws RecognitionException {
         Method element =  null;
 
@@ -4537,7 +4537,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createMethod();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:779:1: ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? (a20= block | a21= ';' ) | c0= annotationmethod )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:779:1: ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? (a20= block | a21= ';' ) | c0= annotationmethod )
             int alt74=2;
             switch ( input.LA(1) ) {
             case 31:
@@ -4987,9 +4987,9 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt74) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:780:2: (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? (a20= block | a21= ';' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:780:2: (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? (a20= block | a21= ';' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:780:2: (a0= annotationinstance )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:780:2: (a0= annotationinstance )*
                     loop63:
                     do {
                         int alt63=2;
@@ -5002,7 +5002,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt63) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:781:3: a0= annotationinstance
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:781:3: a0= annotationinstance
                     	    {
                     	    pushFollow(FOLLOW_annotationinstance_in_method2587);
                     	    a0=annotationinstance();
@@ -5020,7 +5020,7 @@ public class JavaParser extends EMFTextParserImpl {
                         }
                     } while (true);
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:783:2: (a1= modifier )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:783:2: (a1= modifier )*
                     loop64:
                     do {
                         int alt64=2;
@@ -5033,7 +5033,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt64) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:784:3: a1= modifier
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:784:3: a1= modifier
                     	    {
                     	    pushFollow(FOLLOW_modifier_in_method2603);
                     	    a1=modifier();
@@ -5051,7 +5051,7 @@ public class JavaParser extends EMFTextParserImpl {
                         }
                     } while (true);
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:786:2: ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:786:2: ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )?
                     int alt66=2;
                     int LA66_0 = input.LA(1);
 
@@ -5060,10 +5060,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt66) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:787:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:787:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:787:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:788:4: a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>'
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:787:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:788:4: a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>'
                             {
                             a2=(Token)input.LT(1);
                             match(input,23,FOLLOW_23_in_method2624); if (failed) return element;
@@ -5077,7 +5077,7 @@ public class JavaParser extends EMFTextParserImpl {
                             if ( backtracking==0 ) {
                               ((List) element.eGet(element.eClass().getEStructuralFeature("typeParameters"))).add(a3); copyLocalizationInfos(a3, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:790:4: ( (a4= ',' a5= typeparameter ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:790:4: ( (a4= ',' a5= typeparameter ) )*
                             loop65:
                             do {
                                 int alt65=2;
@@ -5090,10 +5090,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                                 switch (alt65) {
                             	case 1 :
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:791:5: (a4= ',' a5= typeparameter )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:791:5: (a4= ',' a5= typeparameter )
                             	    {
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:791:5: (a4= ',' a5= typeparameter )
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:792:6: a4= ',' a5= typeparameter
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:791:5: (a4= ',' a5= typeparameter )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:792:6: a4= ',' a5= typeparameter
                             	    {
                             	    a4=(Token)input.LT(1);
                             	    match(input,24,FOLLOW_24_in_method2657); if (failed) return element;
@@ -5133,8 +5133,8 @@ public class JavaParser extends EMFTextParserImpl {
 
                     }
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:799:2: (a7= typereference (a8= arraydimension )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:800:3: a7= typereference (a8= arraydimension )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:799:2: (a7= typereference (a8= arraydimension )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:800:3: a7= typereference (a8= arraydimension )*
                     {
                     pushFollow(FOLLOW_typereference_in_method2711);
                     a7=typereference();
@@ -5143,7 +5143,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       element.eSet(element.eClass().getEStructuralFeature("type"), a7); copyLocalizationInfos(a7, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:801:3: (a8= arraydimension )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:801:3: (a8= arraydimension )*
                     loop67:
                     do {
                         int alt67=2;
@@ -5156,7 +5156,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt67) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:802:4: a8= arraydimension
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:802:4: a8= arraydimension
                     	    {
                     	    pushFollow(FOLLOW_arraydimension_in_method2725);
                     	    a8=arraydimension();
@@ -5187,7 +5187,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a10, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:807:2: ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:807:2: ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )?
                     int alt69=2;
                     int LA69_0 = input.LA(1);
 
@@ -5196,10 +5196,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt69) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:808:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:808:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:808:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:809:4: a11= parameter ( (a12= ',' a13= parameter ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:808:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:809:4: a11= parameter ( (a12= ',' a13= parameter ) )*
                             {
                             pushFollow(FOLLOW_parameter_in_method2766);
                             a11=parameter();
@@ -5208,7 +5208,7 @@ public class JavaParser extends EMFTextParserImpl {
                             if ( backtracking==0 ) {
                               ((List) element.eGet(element.eClass().getEStructuralFeature("parameters"))).add(a11); copyLocalizationInfos(a11, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:810:4: ( (a12= ',' a13= parameter ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:810:4: ( (a12= ',' a13= parameter ) )*
                             loop68:
                             do {
                                 int alt68=2;
@@ -5221,10 +5221,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                                 switch (alt68) {
                             	case 1 :
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:811:5: (a12= ',' a13= parameter )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:811:5: (a12= ',' a13= parameter )
                             	    {
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:811:5: (a12= ',' a13= parameter )
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:812:6: a12= ',' a13= parameter
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:811:5: (a12= ',' a13= parameter )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:812:6: a12= ',' a13= parameter
                             	    {
                             	    a12=(Token)input.LT(1);
                             	    match(input,24,FOLLOW_24_in_method2789); if (failed) return element;
@@ -5264,7 +5264,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a14, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:819:2: (a15= arraydimension )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:819:2: (a15= arraydimension )*
                     loop70:
                     do {
                         int alt70=2;
@@ -5277,7 +5277,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt70) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:820:3: a15= arraydimension
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:820:3: a15= arraydimension
                     	    {
                     	    pushFollow(FOLLOW_arraydimension_in_method2841);
                     	    a15=arraydimension();
@@ -5295,7 +5295,7 @@ public class JavaParser extends EMFTextParserImpl {
                         }
                     } while (true);
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:822:2: ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:822:2: ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )?
                     int alt72=2;
                     int LA72_0 = input.LA(1);
 
@@ -5304,10 +5304,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt72) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:823:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:823:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:823:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:824:4: a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )?
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:823:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:824:4: a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )?
                             {
                             a16=(Token)input.LT(1);
                             match(input,37,FOLLOW_37_in_method2862); if (failed) return element;
@@ -5319,7 +5319,7 @@ public class JavaParser extends EMFTextParserImpl {
                             if ( backtracking==0 ) {
                               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a17.getText(),element.eClass().getEStructuralFeature("exceptions"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a17,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("exceptions"))).add(proxy); copyLocalizationInfos((CommonToken) a17, element); copyLocalizationInfos((CommonToken) a17, proxy); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:826:4: ( (a18= ',' a19= IDENTIFIER ) )?
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:826:4: ( (a18= ',' a19= IDENTIFIER ) )?
                             int alt71=2;
                             int LA71_0 = input.LA(1);
 
@@ -5328,10 +5328,10 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             switch (alt71) {
                                 case 1 :
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:827:5: (a18= ',' a19= IDENTIFIER )
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:827:5: (a18= ',' a19= IDENTIFIER )
                                     {
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:827:5: (a18= ',' a19= IDENTIFIER )
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:828:6: a18= ',' a19= IDENTIFIER
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:827:5: (a18= ',' a19= IDENTIFIER )
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:828:6: a18= ',' a19= IDENTIFIER
                                     {
                                     a18=(Token)input.LT(1);
                                     match(input,24,FOLLOW_24_in_method2895); if (failed) return element;
@@ -5361,7 +5361,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                     }
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:834:2: (a20= block | a21= ';' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:834:2: (a20= block | a21= ';' )
                     int alt73=2;
                     int LA73_0 = input.LA(1);
 
@@ -5380,7 +5380,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt73) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:835:3: a20= block
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:835:3: a20= block
                             {
                             pushFollow(FOLLOW_block_in_method2939);
                             a20=block();
@@ -5393,7 +5393,7 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             break;
                         case 2 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:838:3: a21= ';'
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:838:3: a21= ';'
                             {
                             a21=(Token)input.LT(1);
                             match(input,20,FOLLOW_20_in_method2953); if (failed) return element;
@@ -5410,7 +5410,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:841:2: c0= annotationmethod
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:841:2: c0= annotationmethod
                     {
                     pushFollow(FOLLOW_annotationmethod_in_method2967);
                     c0=annotationmethod();
@@ -5437,7 +5437,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start annotationmethod
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:844:1: annotationmethod returns [AnnotationMethod element = null] : (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? a20= 'default' a21= annotationelementvalue (a22= block | a23= ';' ) ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:844:1: annotationmethod returns [AnnotationMethod element = null] : (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? a20= 'default' a21= annotationelementvalue (a22= block | a23= ';' ) ;
     public final AnnotationMethod annotationmethod() throws RecognitionException {
         AnnotationMethod element =  null;
 
@@ -5481,10 +5481,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAnnotationMethod();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:848:1: ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? a20= 'default' a21= annotationelementvalue (a22= block | a23= ';' ) )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:849:2: (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? a20= 'default' a21= annotationelementvalue (a22= block | a23= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:848:1: ( (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? a20= 'default' a21= annotationelementvalue (a22= block | a23= ';' ) )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:849:2: (a0= annotationinstance )* (a1= modifier )* ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )? (a7= typereference (a8= arraydimension )* ) a9= IDENTIFIER a10= '(' ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )? a14= ')' (a15= arraydimension )* ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )? a20= 'default' a21= annotationelementvalue (a22= block | a23= ';' )
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:849:2: (a0= annotationinstance )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:849:2: (a0= annotationinstance )*
             loop75:
             do {
                 int alt75=2;
@@ -5497,7 +5497,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt75) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:850:3: a0= annotationinstance
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:850:3: a0= annotationinstance
             	    {
             	    pushFollow(FOLLOW_annotationinstance_in_annotationmethod2994);
             	    a0=annotationinstance();
@@ -5515,7 +5515,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:852:2: (a1= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:852:2: (a1= modifier )*
             loop76:
             do {
                 int alt76=2;
@@ -5528,7 +5528,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt76) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:853:3: a1= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:853:3: a1= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_annotationmethod3010);
             	    a1=modifier();
@@ -5546,7 +5546,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:855:2: ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:855:2: ( (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' ) )?
             int alt78=2;
             int LA78_0 = input.LA(1);
 
@@ -5555,10 +5555,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt78) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:856:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:856:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:856:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:857:4: a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:856:3: (a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:857:4: a2= '<' a3= typeparameter ( (a4= ',' a5= typeparameter ) )* a6= '>'
                     {
                     a2=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_annotationmethod3031); if (failed) return element;
@@ -5572,7 +5572,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("typeParameters"))).add(a3); copyLocalizationInfos(a3, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:859:4: ( (a4= ',' a5= typeparameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:859:4: ( (a4= ',' a5= typeparameter ) )*
                     loop77:
                     do {
                         int alt77=2;
@@ -5585,10 +5585,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt77) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:860:5: (a4= ',' a5= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:860:5: (a4= ',' a5= typeparameter )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:860:5: (a4= ',' a5= typeparameter )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:861:6: a4= ',' a5= typeparameter
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:860:5: (a4= ',' a5= typeparameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:861:6: a4= ',' a5= typeparameter
                     	    {
                     	    a4=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_annotationmethod3064); if (failed) return element;
@@ -5628,8 +5628,8 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:868:2: (a7= typereference (a8= arraydimension )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:869:3: a7= typereference (a8= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:868:2: (a7= typereference (a8= arraydimension )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:869:3: a7= typereference (a8= arraydimension )*
             {
             pushFollow(FOLLOW_typereference_in_annotationmethod3118);
             a7=typereference();
@@ -5638,7 +5638,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a7); copyLocalizationInfos(a7, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:870:3: (a8= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:870:3: (a8= arraydimension )*
             loop79:
             do {
                 int alt79=2;
@@ -5651,7 +5651,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt79) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:871:4: a8= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:871:4: a8= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_annotationmethod3132);
             	    a8=arraydimension();
@@ -5682,7 +5682,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a10, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:876:2: ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:876:2: ( (a11= parameter ( (a12= ',' a13= parameter ) )* ) )?
             int alt81=2;
             int LA81_0 = input.LA(1);
 
@@ -5691,10 +5691,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt81) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:877:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:877:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:877:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:878:4: a11= parameter ( (a12= ',' a13= parameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:877:3: (a11= parameter ( (a12= ',' a13= parameter ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:878:4: a11= parameter ( (a12= ',' a13= parameter ) )*
                     {
                     pushFollow(FOLLOW_parameter_in_annotationmethod3173);
                     a11=parameter();
@@ -5703,7 +5703,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("parameters"))).add(a11); copyLocalizationInfos(a11, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:879:4: ( (a12= ',' a13= parameter ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:879:4: ( (a12= ',' a13= parameter ) )*
                     loop80:
                     do {
                         int alt80=2;
@@ -5716,10 +5716,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt80) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:880:5: (a12= ',' a13= parameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:880:5: (a12= ',' a13= parameter )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:880:5: (a12= ',' a13= parameter )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:881:6: a12= ',' a13= parameter
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:880:5: (a12= ',' a13= parameter )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:881:6: a12= ',' a13= parameter
                     	    {
                     	    a12=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_annotationmethod3196); if (failed) return element;
@@ -5759,7 +5759,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a14, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:888:2: (a15= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:888:2: (a15= arraydimension )*
             loop82:
             do {
                 int alt82=2;
@@ -5772,7 +5772,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt82) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:889:3: a15= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:889:3: a15= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_annotationmethod3248);
             	    a15=arraydimension();
@@ -5790,7 +5790,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:891:2: ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:891:2: ( (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? ) )?
             int alt84=2;
             int LA84_0 = input.LA(1);
 
@@ -5799,10 +5799,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt84) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:892:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:892:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:892:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:893:4: a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:892:3: (a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )? )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:893:4: a16= 'throws' a17= IDENTIFIER ( (a18= ',' a19= IDENTIFIER ) )?
                     {
                     a16=(Token)input.LT(1);
                     match(input,37,FOLLOW_37_in_annotationmethod3269); if (failed) return element;
@@ -5814,7 +5814,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a17.getText(),element.eClass().getEStructuralFeature("exceptions"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a17,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("exceptions"))).add(proxy); copyLocalizationInfos((CommonToken) a17, element); copyLocalizationInfos((CommonToken) a17, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:895:4: ( (a18= ',' a19= IDENTIFIER ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:895:4: ( (a18= ',' a19= IDENTIFIER ) )?
                     int alt83=2;
                     int LA83_0 = input.LA(1);
 
@@ -5823,10 +5823,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt83) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:896:5: (a18= ',' a19= IDENTIFIER )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:896:5: (a18= ',' a19= IDENTIFIER )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:896:5: (a18= ',' a19= IDENTIFIER )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:897:6: a18= ',' a19= IDENTIFIER
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:896:5: (a18= ',' a19= IDENTIFIER )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:897:6: a18= ',' a19= IDENTIFIER
                             {
                             a18=(Token)input.LT(1);
                             match(input,24,FOLLOW_24_in_annotationmethod3302); if (failed) return element;
@@ -5868,7 +5868,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("defaultValue"), a21); copyLocalizationInfos(a21, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:905:2: (a22= block | a23= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:905:2: (a22= block | a23= ';' )
             int alt85=2;
             int LA85_0 = input.LA(1);
 
@@ -5887,7 +5887,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt85) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:906:3: a22= block
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:906:3: a22= block
                     {
                     pushFollow(FOLLOW_block_in_annotationmethod3362);
                     a22=block();
@@ -5900,7 +5900,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:909:3: a23= ';'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:909:3: a23= ';'
                     {
                     a23=(Token)input.LT(1);
                     match(input,20,FOLLOW_20_in_annotationmethod3376); if (failed) return element;
@@ -5929,7 +5929,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start ordinaryparameter
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:913:1: ordinaryparameter returns [OrdinaryParameter element = null] : (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:913:1: ordinaryparameter returns [OrdinaryParameter element = null] : (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ;
     public final OrdinaryParameter ordinaryparameter() throws RecognitionException {
         OrdinaryParameter element =  null;
 
@@ -5952,10 +5952,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createOrdinaryParameter();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:917:1: ( (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:918:2: (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:917:1: ( (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:918:2: (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )*
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:918:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:918:2: (a0= modifier )*
             loop86:
             do {
                 int alt86=2;
@@ -5968,7 +5968,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt86) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:919:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:919:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_ordinaryparameter3406);
             	    a0=modifier();
@@ -5993,7 +5993,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:922:2: (a2= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:922:2: (a2= arraydimension )*
             loop87:
             do {
                 int alt87=2;
@@ -6006,7 +6006,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt87) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:923:3: a2= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:923:3: a2= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_ordinaryparameter3430);
             	    a2=arraydimension();
@@ -6024,7 +6024,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:925:2: ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:925:2: ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )?
             int alt89=2;
             int LA89_0 = input.LA(1);
 
@@ -6033,10 +6033,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt89) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:926:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:926:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:926:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:927:4: a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:926:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:927:4: a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>'
                     {
                     a3=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_ordinaryparameter3451); if (failed) return element;
@@ -6048,7 +6048,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("typeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a4, element); copyLocalizationInfos((CommonToken) a4, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:929:4: ( (a5= ',' a6= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:929:4: ( (a5= ',' a6= IDENTIFIER ) )*
                     loop88:
                     do {
                         int alt88=2;
@@ -6061,10 +6061,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt88) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:930:5: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:930:5: (a5= ',' a6= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:930:5: (a5= ',' a6= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:931:6: a5= ',' a6= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:930:5: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:931:6: a5= ',' a6= IDENTIFIER
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_ordinaryparameter3484); if (failed) return element;
@@ -6107,7 +6107,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a8.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a8,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a8, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:939:2: (a9= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:939:2: (a9= arraydimension )*
             loop90:
             do {
                 int alt90=2;
@@ -6120,7 +6120,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt90) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:940:3: a9= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:940:3: a9= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_ordinaryparameter3546);
             	    a9=arraydimension();
@@ -6154,7 +6154,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start variablelengthparameter
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:944:1: variablelengthparameter returns [VariableLengthParameter element = null] : (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= '...' a9= IDENTIFIER ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:944:1: variablelengthparameter returns [VariableLengthParameter element = null] : (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= '...' a9= IDENTIFIER ;
     public final VariableLengthParameter variablelengthparameter() throws RecognitionException {
         VariableLengthParameter element =  null;
 
@@ -6176,10 +6176,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createVariableLengthParameter();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:948:1: ( (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= '...' a9= IDENTIFIER )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:949:2: (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= '...' a9= IDENTIFIER
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:948:1: ( (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= '...' a9= IDENTIFIER )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:949:2: (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= '...' a9= IDENTIFIER
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:949:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:949:2: (a0= modifier )*
             loop91:
             do {
                 int alt91=2;
@@ -6192,7 +6192,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt91) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:950:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:950:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_variablelengthparameter3577);
             	    a0=modifier();
@@ -6217,7 +6217,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:953:2: (a2= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:953:2: (a2= arraydimension )*
             loop92:
             do {
                 int alt92=2;
@@ -6230,7 +6230,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt92) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:954:3: a2= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:954:3: a2= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_variablelengthparameter3601);
             	    a2=arraydimension();
@@ -6248,7 +6248,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:956:2: ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:956:2: ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )?
             int alt94=2;
             int LA94_0 = input.LA(1);
 
@@ -6257,10 +6257,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt94) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:957:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:957:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:957:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:958:4: a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:957:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:958:4: a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>'
                     {
                     a3=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_variablelengthparameter3622); if (failed) return element;
@@ -6272,7 +6272,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("typeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a4, element); copyLocalizationInfos((CommonToken) a4, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:960:4: ( (a5= ',' a6= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:960:4: ( (a5= ',' a6= IDENTIFIER ) )*
                     loop93:
                     do {
                         int alt93=2;
@@ -6285,10 +6285,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt93) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:961:5: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:961:5: (a5= ',' a6= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:961:5: (a5= ',' a6= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:962:6: a5= ',' a6= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:961:5: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:962:6: a5= ',' a6= IDENTIFIER
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_variablelengthparameter3655); if (failed) return element;
@@ -6352,7 +6352,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start localvariable
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:973:1: localvariable returns [LocalVariable element = null] : (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ( (a10= '=' a11= initialvalue ) )? ( (a12= ',' a13= additionallocalvariable ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:973:1: localvariable returns [LocalVariable element = null] : (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ( (a10= '=' a11= initialvalue ) )? ( (a12= ',' a13= additionallocalvariable ) )* ;
     public final LocalVariable localvariable() throws RecognitionException {
         LocalVariable element =  null;
 
@@ -6381,10 +6381,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createLocalVariable();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:977:1: ( (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ( (a10= '=' a11= initialvalue ) )? ( (a12= ',' a13= additionallocalvariable ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:978:2: (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ( (a10= '=' a11= initialvalue ) )? ( (a12= ',' a13= additionallocalvariable ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:977:1: ( (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ( (a10= '=' a11= initialvalue ) )? ( (a12= ',' a13= additionallocalvariable ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:978:2: (a0= modifier )* a1= typereference (a2= arraydimension )* ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )? a8= IDENTIFIER (a9= arraydimension )* ( (a10= '=' a11= initialvalue ) )? ( (a12= ',' a13= additionallocalvariable ) )*
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:978:2: (a0= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:978:2: (a0= modifier )*
             loop95:
             do {
                 int alt95=2;
@@ -6397,7 +6397,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt95) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:979:3: a0= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:979:3: a0= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_localvariable3740);
             	    a0=modifier();
@@ -6422,7 +6422,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:982:2: (a2= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:982:2: (a2= arraydimension )*
             loop96:
             do {
                 int alt96=2;
@@ -6435,7 +6435,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt96) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:983:3: a2= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:983:3: a2= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_localvariable3764);
             	    a2=arraydimension();
@@ -6453,7 +6453,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:985:2: ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:985:2: ( (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' ) )?
             int alt98=2;
             int LA98_0 = input.LA(1);
 
@@ -6462,10 +6462,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt98) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:986:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:986:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:986:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:987:4: a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:986:3: (a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:987:4: a3= '<' a4= IDENTIFIER ( (a5= ',' a6= IDENTIFIER ) )* a7= '>'
                     {
                     a3=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_localvariable3785); if (failed) return element;
@@ -6477,7 +6477,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a4.getText(),element.eClass().getEStructuralFeature("typeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a4,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a4, element); copyLocalizationInfos((CommonToken) a4, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:989:4: ( (a5= ',' a6= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:989:4: ( (a5= ',' a6= IDENTIFIER ) )*
                     loop97:
                     do {
                         int alt97=2;
@@ -6490,10 +6490,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt97) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:990:5: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:990:5: (a5= ',' a6= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:990:5: (a5= ',' a6= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:991:6: a5= ',' a6= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:990:5: (a5= ',' a6= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:991:6: a5= ',' a6= IDENTIFIER
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_localvariable3818); if (failed) return element;
@@ -6536,7 +6536,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a8.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a8,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a8, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:999:2: (a9= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:999:2: (a9= arraydimension )*
             loop99:
             do {
                 int alt99=2;
@@ -6549,7 +6549,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt99) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1000:3: a9= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1000:3: a9= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_localvariable3880);
             	    a9=arraydimension();
@@ -6567,7 +6567,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1002:2: ( (a10= '=' a11= initialvalue ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1002:2: ( (a10= '=' a11= initialvalue ) )?
             int alt100=2;
             int LA100_0 = input.LA(1);
 
@@ -6576,10 +6576,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt100) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1003:3: (a10= '=' a11= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1003:3: (a10= '=' a11= initialvalue )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1003:3: (a10= '=' a11= initialvalue )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1004:4: a10= '=' a11= initialvalue
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1003:3: (a10= '=' a11= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1004:4: a10= '=' a11= initialvalue
                     {
                     a10=(Token)input.LT(1);
                     match(input,34,FOLLOW_34_in_localvariable3901); if (failed) return element;
@@ -6602,7 +6602,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1008:2: ( (a12= ',' a13= additionallocalvariable ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1008:2: ( (a12= ',' a13= additionallocalvariable ) )*
             loop101:
             do {
                 int alt101=2;
@@ -6615,10 +6615,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt101) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1009:3: (a12= ',' a13= additionallocalvariable )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1009:3: (a12= ',' a13= additionallocalvariable )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1009:3: (a12= ',' a13= additionallocalvariable )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1010:4: a12= ',' a13= additionallocalvariable
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1009:3: (a12= ',' a13= additionallocalvariable )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1010:4: a12= ',' a13= additionallocalvariable
             	    {
             	    a12=(Token)input.LT(1);
             	    match(input,24,FOLLOW_24_in_localvariable3936); if (failed) return element;
@@ -6660,7 +6660,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start localvariablestatement
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1016:1: localvariablestatement returns [LocalVariableStatement element = null] : a0= localvariable a1= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1016:1: localvariablestatement returns [LocalVariableStatement element = null] : a0= localvariable a1= ';' ;
     public final LocalVariableStatement localvariablestatement() throws RecognitionException {
         LocalVariableStatement element =  null;
 
@@ -6672,8 +6672,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createLocalVariableStatement();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1020:1: (a0= localvariable a1= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1021:2: a0= localvariable a1= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1020:1: (a0= localvariable a1= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1021:2: a0= localvariable a1= ';'
             {
             pushFollow(FOLLOW_localvariable_in_localvariablestatement3977);
             a0=localvariable();
@@ -6703,7 +6703,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start additionallocalvariable
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1025:1: additionallocalvariable returns [AdditionalLocalVariable element = null] : a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1025:1: additionallocalvariable returns [AdditionalLocalVariable element = null] : a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? ;
     public final AdditionalLocalVariable additionallocalvariable() throws RecognitionException {
         AdditionalLocalVariable element =  null;
 
@@ -6718,15 +6718,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAdditionalLocalVariable();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1029:1: (a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1030:2: a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1029:1: (a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1030:2: a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )?
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_additionallocalvariable4008); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1031:2: (a1= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1031:2: (a1= arraydimension )*
             loop102:
             do {
                 int alt102=2;
@@ -6739,7 +6739,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt102) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1032:3: a1= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1032:3: a1= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_additionallocalvariable4020);
             	    a1=arraydimension();
@@ -6757,7 +6757,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1034:2: ( (a2= '=' a3= initialvalue ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1034:2: ( (a2= '=' a3= initialvalue ) )?
             int alt103=2;
             int LA103_0 = input.LA(1);
 
@@ -6766,10 +6766,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt103) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1035:3: (a2= '=' a3= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1035:3: (a2= '=' a3= initialvalue )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1035:3: (a2= '=' a3= initialvalue )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1036:4: a2= '=' a3= initialvalue
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1035:3: (a2= '=' a3= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1036:4: a2= '=' a3= initialvalue
                     {
                     a2=(Token)input.LT(1);
                     match(input,34,FOLLOW_34_in_additionallocalvariable4041); if (failed) return element;
@@ -6808,7 +6808,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start field
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1042:1: field returns [Field element = null] : (a0= annotationinstance )* (a1= modifier )* a2= typereference (a3= arraydimension )* ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )? a9= IDENTIFIER (a10= arraydimension )* ( (a11= '=' a12= initialvalue ) )? ( (a13= ',' a14= additionallocalvariable ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1042:1: field returns [Field element = null] : (a0= annotationinstance )* (a1= modifier )* a2= typereference (a3= arraydimension )* ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )? a9= IDENTIFIER (a10= arraydimension )* ( (a11= '=' a12= initialvalue ) )? ( (a13= ',' a14= additionallocalvariable ) )* ;
     public final Field field() throws RecognitionException {
         Field element =  null;
 
@@ -6839,10 +6839,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createField();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1046:1: ( (a0= annotationinstance )* (a1= modifier )* a2= typereference (a3= arraydimension )* ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )? a9= IDENTIFIER (a10= arraydimension )* ( (a11= '=' a12= initialvalue ) )? ( (a13= ',' a14= additionallocalvariable ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1047:2: (a0= annotationinstance )* (a1= modifier )* a2= typereference (a3= arraydimension )* ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )? a9= IDENTIFIER (a10= arraydimension )* ( (a11= '=' a12= initialvalue ) )? ( (a13= ',' a14= additionallocalvariable ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1046:1: ( (a0= annotationinstance )* (a1= modifier )* a2= typereference (a3= arraydimension )* ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )? a9= IDENTIFIER (a10= arraydimension )* ( (a11= '=' a12= initialvalue ) )? ( (a13= ',' a14= additionallocalvariable ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1047:2: (a0= annotationinstance )* (a1= modifier )* a2= typereference (a3= arraydimension )* ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )? a9= IDENTIFIER (a10= arraydimension )* ( (a11= '=' a12= initialvalue ) )? ( (a13= ',' a14= additionallocalvariable ) )*
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1047:2: (a0= annotationinstance )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1047:2: (a0= annotationinstance )*
             loop104:
             do {
                 int alt104=2;
@@ -6855,7 +6855,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt104) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1048:3: a0= annotationinstance
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1048:3: a0= annotationinstance
             	    {
             	    pushFollow(FOLLOW_annotationinstance_in_field4086);
             	    a0=annotationinstance();
@@ -6873,7 +6873,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1050:2: (a1= modifier )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1050:2: (a1= modifier )*
             loop105:
             do {
                 int alt105=2;
@@ -6886,7 +6886,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt105) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1051:3: a1= modifier
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1051:3: a1= modifier
             	    {
             	    pushFollow(FOLLOW_modifier_in_field4102);
             	    a1=modifier();
@@ -6911,7 +6911,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a2); copyLocalizationInfos(a2, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1054:2: (a3= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1054:2: (a3= arraydimension )*
             loop106:
             do {
                 int alt106=2;
@@ -6924,7 +6924,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt106) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1055:3: a3= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1055:3: a3= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_field4126);
             	    a3=arraydimension();
@@ -6942,7 +6942,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1057:2: ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1057:2: ( (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' ) )?
             int alt108=2;
             int LA108_0 = input.LA(1);
 
@@ -6951,10 +6951,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt108) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1058:3: (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1058:3: (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1058:3: (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1059:4: a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1058:3: (a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1059:4: a4= '<' a5= IDENTIFIER ( (a6= ',' a7= IDENTIFIER ) )* a8= '>'
                     {
                     a4=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_field4147); if (failed) return element;
@@ -6966,7 +6966,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a5.getText(),element.eClass().getEStructuralFeature("typeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a5,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a5, element); copyLocalizationInfos((CommonToken) a5, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1061:4: ( (a6= ',' a7= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1061:4: ( (a6= ',' a7= IDENTIFIER ) )*
                     loop107:
                     do {
                         int alt107=2;
@@ -6979,10 +6979,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt107) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1062:5: (a6= ',' a7= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1062:5: (a6= ',' a7= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1062:5: (a6= ',' a7= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1063:6: a6= ',' a7= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1062:5: (a6= ',' a7= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1063:6: a6= ',' a7= IDENTIFIER
                     	    {
                     	    a6=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_field4180); if (failed) return element;
@@ -7025,7 +7025,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a9.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a9,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a9, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1071:2: (a10= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1071:2: (a10= arraydimension )*
             loop109:
             do {
                 int alt109=2;
@@ -7038,7 +7038,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt109) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1072:3: a10= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1072:3: a10= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_field4242);
             	    a10=arraydimension();
@@ -7056,7 +7056,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1074:2: ( (a11= '=' a12= initialvalue ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1074:2: ( (a11= '=' a12= initialvalue ) )?
             int alt110=2;
             int LA110_0 = input.LA(1);
 
@@ -7065,10 +7065,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt110) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1075:3: (a11= '=' a12= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1075:3: (a11= '=' a12= initialvalue )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1075:3: (a11= '=' a12= initialvalue )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1076:4: a11= '=' a12= initialvalue
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1075:3: (a11= '=' a12= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1076:4: a11= '=' a12= initialvalue
                     {
                     a11=(Token)input.LT(1);
                     match(input,34,FOLLOW_34_in_field4263); if (failed) return element;
@@ -7091,7 +7091,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             }
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1080:2: ( (a13= ',' a14= additionallocalvariable ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1080:2: ( (a13= ',' a14= additionallocalvariable ) )*
             loop111:
             do {
                 int alt111=2;
@@ -7116,10 +7116,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt111) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1081:3: (a13= ',' a14= additionallocalvariable )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1081:3: (a13= ',' a14= additionallocalvariable )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1081:3: (a13= ',' a14= additionallocalvariable )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1082:4: a13= ',' a14= additionallocalvariable
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1081:3: (a13= ',' a14= additionallocalvariable )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1082:4: a13= ',' a14= additionallocalvariable
             	    {
             	    a13=(Token)input.LT(1);
             	    match(input,24,FOLLOW_24_in_field4298); if (failed) return element;
@@ -7161,7 +7161,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start additionalfield
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1088:1: additionalfield returns [AdditionalField element = null] : a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1088:1: additionalfield returns [AdditionalField element = null] : a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? ;
     public final AdditionalField additionalfield() throws RecognitionException {
         AdditionalField element =  null;
 
@@ -7176,15 +7176,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAdditionalField();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1092:1: (a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1093:2: a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1092:1: (a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1093:2: a0= IDENTIFIER (a1= arraydimension )* ( (a2= '=' a3= initialvalue ) )?
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_additionalfield4339); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("name"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("name"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1094:2: (a1= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1094:2: (a1= arraydimension )*
             loop112:
             do {
                 int alt112=2;
@@ -7197,7 +7197,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt112) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1095:3: a1= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1095:3: a1= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_additionalfield4351);
             	    a1=arraydimension();
@@ -7215,7 +7215,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1097:2: ( (a2= '=' a3= initialvalue ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1097:2: ( (a2= '=' a3= initialvalue ) )?
             int alt113=2;
             int LA113_0 = input.LA(1);
 
@@ -7224,10 +7224,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt113) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1098:3: (a2= '=' a3= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1098:3: (a2= '=' a3= initialvalue )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1098:3: (a2= '=' a3= initialvalue )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1099:4: a2= '=' a3= initialvalue
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1098:3: (a2= '=' a3= initialvalue )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1099:4: a2= '=' a3= initialvalue
                     {
                     a2=(Token)input.LT(1);
                     match(input,34,FOLLOW_34_in_additionalfield4372); if (failed) return element;
@@ -7266,7 +7266,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start newconstructorcall
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1105:1: newconstructorcall returns [NewConstructorCall element = null] : a0= 'new' ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )? a6= typereference ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )? a12= '(' ( (a13= expression ( (a14= ',' a15= expression ) )* ) )? a16= ')' ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1105:1: newconstructorcall returns [NewConstructorCall element = null] : a0= 'new' ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )? a6= typereference ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )? a12= '(' ( (a13= expression ( (a14= ',' a15= expression ) )* ) )? a16= ')' ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )? ;
     public final NewConstructorCall newconstructorcall() throws RecognitionException {
         NewConstructorCall element =  null;
 
@@ -7300,15 +7300,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createNewConstructorCall();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1109:1: (a0= 'new' ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )? a6= typereference ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )? a12= '(' ( (a13= expression ( (a14= ',' a15= expression ) )* ) )? a16= ')' ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1110:2: a0= 'new' ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )? a6= typereference ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )? a12= '(' ( (a13= expression ( (a14= ',' a15= expression ) )* ) )? a16= ')' ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1109:1: (a0= 'new' ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )? a6= typereference ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )? a12= '(' ( (a13= expression ( (a14= ',' a15= expression ) )* ) )? a16= ')' ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1110:2: a0= 'new' ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )? a6= typereference ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )? a12= '(' ( (a13= expression ( (a14= ',' a15= expression ) )* ) )? a16= ')' ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )?
             {
             a0=(Token)input.LT(1);
             match(input,40,FOLLOW_40_in_newconstructorcall4413); if (failed) return element;
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1111:2: ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1111:2: ( (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' ) )?
             int alt115=2;
             int LA115_0 = input.LA(1);
 
@@ -7317,10 +7317,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt115) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1112:3: (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1112:3: (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1112:3: (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1113:4: a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1112:3: (a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1113:4: a1= '<' a2= IDENTIFIER ( (a3= ',' a4= IDENTIFIER ) )* a5= '>'
                     {
                     a1=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_newconstructorcall4430); if (failed) return element;
@@ -7332,7 +7332,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a2.getText(),element.eClass().getEStructuralFeature("typeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a2,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a2, element); copyLocalizationInfos((CommonToken) a2, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1115:4: ( (a3= ',' a4= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1115:4: ( (a3= ',' a4= IDENTIFIER ) )*
                     loop114:
                     do {
                         int alt114=2;
@@ -7345,10 +7345,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt114) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1116:5: (a3= ',' a4= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1116:5: (a3= ',' a4= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1116:5: (a3= ',' a4= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1117:6: a3= ',' a4= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1116:5: (a3= ',' a4= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1117:6: a3= ',' a4= IDENTIFIER
                     	    {
                     	    a3=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_newconstructorcall4463); if (failed) return element;
@@ -7393,7 +7393,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a6); copyLocalizationInfos(a6, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1125:2: ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1125:2: ( (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' ) )?
             int alt117=2;
             int LA117_0 = input.LA(1);
 
@@ -7402,10 +7402,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt117) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1126:3: (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1126:3: (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1126:3: (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1127:4: a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1126:3: (a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1127:4: a7= '<' a8= IDENTIFIER ( (a9= ',' a10= IDENTIFIER ) )* a11= '>'
                     {
                     a7=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_newconstructorcall4530); if (failed) return element;
@@ -7417,7 +7417,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a8.getText(),element.eClass().getEStructuralFeature("classTypeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a8,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("classTypeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a8, element); copyLocalizationInfos((CommonToken) a8, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1129:4: ( (a9= ',' a10= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1129:4: ( (a9= ',' a10= IDENTIFIER ) )*
                     loop116:
                     do {
                         int alt116=2;
@@ -7430,10 +7430,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt116) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1130:5: (a9= ',' a10= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1130:5: (a9= ',' a10= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1130:5: (a9= ',' a10= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1131:6: a9= ',' a10= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1130:5: (a9= ',' a10= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1131:6: a9= ',' a10= IDENTIFIER
                     	    {
                     	    a9=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_newconstructorcall4563); if (failed) return element;
@@ -7476,7 +7476,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a12, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1139:2: ( (a13= expression ( (a14= ',' a15= expression ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1139:2: ( (a13= expression ( (a14= ',' a15= expression ) )* ) )?
             int alt119=2;
             int LA119_0 = input.LA(1);
 
@@ -7485,10 +7485,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt119) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1140:3: (a13= expression ( (a14= ',' a15= expression ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1140:3: (a13= expression ( (a14= ',' a15= expression ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1140:3: (a13= expression ( (a14= ',' a15= expression ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1141:4: a13= expression ( (a14= ',' a15= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1140:3: (a13= expression ( (a14= ',' a15= expression ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1141:4: a13= expression ( (a14= ',' a15= expression ) )*
                     {
                     pushFollow(FOLLOW_expression_in_newconstructorcall4630);
                     a13=expression();
@@ -7497,7 +7497,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("arguments"))).add(a13); copyLocalizationInfos(a13, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1142:4: ( (a14= ',' a15= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1142:4: ( (a14= ',' a15= expression ) )*
                     loop118:
                     do {
                         int alt118=2;
@@ -7510,10 +7510,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt118) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1143:5: (a14= ',' a15= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1143:5: (a14= ',' a15= expression )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1143:5: (a14= ',' a15= expression )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1144:6: a14= ',' a15= expression
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1143:5: (a14= ',' a15= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1144:6: a14= ',' a15= expression
                     	    {
                     	    a14=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_newconstructorcall4653); if (failed) return element;
@@ -7553,7 +7553,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a16, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1151:2: ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1151:2: ( (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' ) )?
             int alt122=2;
             int LA122_0 = input.LA(1);
 
@@ -7566,17 +7566,17 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt122) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1152:3: (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1152:3: (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1152:3: (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1153:4: a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1152:3: (a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1153:4: a17= '{' ( (a18= member ( (a19= ';' ) )? ) )* a20= '}'
                     {
                     a17=(Token)input.LT(1);
                     match(input,28,FOLLOW_28_in_newconstructorcall4710); if (failed) return element;
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a17, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1154:4: ( (a18= member ( (a19= ';' ) )? ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1154:4: ( (a18= member ( (a19= ';' ) )? ) )*
                     loop121:
                     do {
                         int alt121=2;
@@ -7589,10 +7589,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt121) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1155:5: (a18= member ( (a19= ';' ) )? )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1155:5: (a18= member ( (a19= ';' ) )? )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1155:5: (a18= member ( (a19= ';' ) )? )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1156:6: a18= member ( (a19= ';' ) )?
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1155:5: (a18= member ( (a19= ';' ) )? )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1156:6: a18= member ( (a19= ';' ) )?
                     	    {
                     	    pushFollow(FOLLOW_member_in_newconstructorcall4733);
                     	    a18=member();
@@ -7601,7 +7601,7 @@ public class JavaParser extends EMFTextParserImpl {
                     	    if ( backtracking==0 ) {
                     	      ((List) element.eGet(element.eClass().getEStructuralFeature("members"))).add(a18); copyLocalizationInfos(a18, element); 
                     	    }
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1157:6: ( (a19= ';' ) )?
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1157:6: ( (a19= ';' ) )?
                     	    int alt120=2;
                     	    int LA120_0 = input.LA(1);
 
@@ -7610,10 +7610,10 @@ public class JavaParser extends EMFTextParserImpl {
                     	    }
                     	    switch (alt120) {
                     	        case 1 :
-                    	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1158:7: (a19= ';' )
+                    	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1158:7: (a19= ';' )
                     	            {
-                    	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1158:7: (a19= ';' )
-                    	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1159:8: a19= ';'
+                    	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1158:7: (a19= ';' )
+                    	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1159:8: a19= ';'
                     	            {
                     	            a19=(Token)input.LT(1);
                     	            match(input,20,FOLLOW_20_in_newconstructorcall4762); if (failed) return element;
@@ -7671,7 +7671,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start explicitconstructorcall
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1169:1: explicitconstructorcall returns [ExplicitConstructorCall element = null] : ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )? a5= selfreference a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1169:1: explicitconstructorcall returns [ExplicitConstructorCall element = null] : ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )? a5= selfreference a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ;
     public final ExplicitConstructorCall explicitconstructorcall() throws RecognitionException {
         ExplicitConstructorCall element =  null;
 
@@ -7694,10 +7694,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createExplicitConstructorCall();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1173:1: ( ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )? a5= selfreference a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1174:2: ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )? a5= selfreference a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1173:1: ( ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )? a5= selfreference a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1174:2: ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )? a5= selfreference a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')'
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1174:2: ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1174:2: ( (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' ) )?
             int alt124=2;
             int LA124_0 = input.LA(1);
 
@@ -7706,10 +7706,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt124) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1175:3: (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1175:3: (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1175:3: (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1176:4: a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1175:3: (a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1176:4: a0= '<' a1= IDENTIFIER ( (a2= ',' a3= IDENTIFIER ) )* a4= '>'
                     {
                     a0=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_explicitconstructorcall4840); if (failed) return element;
@@ -7721,7 +7721,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a1.getText(),element.eClass().getEStructuralFeature("typeArguments"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a1,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(proxy); copyLocalizationInfos((CommonToken) a1, element); copyLocalizationInfos((CommonToken) a1, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1178:4: ( (a2= ',' a3= IDENTIFIER ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1178:4: ( (a2= ',' a3= IDENTIFIER ) )*
                     loop123:
                     do {
                         int alt123=2;
@@ -7734,10 +7734,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt123) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1179:5: (a2= ',' a3= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1179:5: (a2= ',' a3= IDENTIFIER )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1179:5: (a2= ',' a3= IDENTIFIER )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1180:6: a2= ',' a3= IDENTIFIER
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1179:5: (a2= ',' a3= IDENTIFIER )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1180:6: a2= ',' a3= IDENTIFIER
                     	    {
                     	    a2=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_explicitconstructorcall4873); if (failed) return element;
@@ -7787,7 +7787,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a6, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1189:2: ( (a7= expression ( (a8= ',' a9= expression ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1189:2: ( (a7= expression ( (a8= ',' a9= expression ) )* ) )?
             int alt126=2;
             int LA126_0 = input.LA(1);
 
@@ -7796,10 +7796,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt126) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1190:3: (a7= expression ( (a8= ',' a9= expression ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1190:3: (a7= expression ( (a8= ',' a9= expression ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1190:3: (a7= expression ( (a8= ',' a9= expression ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1191:4: a7= expression ( (a8= ',' a9= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1190:3: (a7= expression ( (a8= ',' a9= expression ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1191:4: a7= expression ( (a8= ',' a9= expression ) )*
                     {
                     pushFollow(FOLLOW_expression_in_explicitconstructorcall4948);
                     a7=expression();
@@ -7808,7 +7808,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("arguments"))).add(a7); copyLocalizationInfos(a7, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1192:4: ( (a8= ',' a9= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1192:4: ( (a8= ',' a9= expression ) )*
                     loop125:
                     do {
                         int alt125=2;
@@ -7821,10 +7821,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt125) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1193:5: (a8= ',' a9= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1193:5: (a8= ',' a9= expression )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1193:5: (a8= ',' a9= expression )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1194:6: a8= ',' a9= expression
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1193:5: (a8= ',' a9= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1194:6: a8= ',' a9= expression
                     	    {
                     	    a8=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_explicitconstructorcall4971); if (failed) return element;
@@ -7880,7 +7880,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start arrayinstantiationbyvalues
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1203:1: arrayinstantiationbyvalues returns [ArrayInstantiationByValues element = null] : a0= 'new' a1= typereference (a2= arraydimension )+ a3= '{' ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )? a8= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1203:1: arrayinstantiationbyvalues returns [ArrayInstantiationByValues element = null] : a0= 'new' a1= typereference (a2= arraydimension )+ a3= '{' ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )? a8= '}' ;
     public final ArrayInstantiationByValues arrayinstantiationbyvalues() throws RecognitionException {
         ArrayInstantiationByValues element =  null;
 
@@ -7902,8 +7902,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createArrayInstantiationByValues();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1207:1: (a0= 'new' a1= typereference (a2= arraydimension )+ a3= '{' ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )? a8= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1208:2: a0= 'new' a1= typereference (a2= arraydimension )+ a3= '{' ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )? a8= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1207:1: (a0= 'new' a1= typereference (a2= arraydimension )+ a3= '{' ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )? a8= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1208:2: a0= 'new' a1= typereference (a2= arraydimension )+ a3= '{' ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )? a8= '}'
             {
             a0=(Token)input.LT(1);
             match(input,40,FOLLOW_40_in_arrayinstantiationbyvalues5034); if (failed) return element;
@@ -7917,7 +7917,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1210:2: (a2= arraydimension )+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1210:2: (a2= arraydimension )+
             int cnt127=0;
             loop127:
             do {
@@ -7931,7 +7931,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt127) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1211:3: a2= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1211:3: a2= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_arrayinstantiationbyvalues5054);
             	    a2=arraydimension();
@@ -7959,7 +7959,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a3, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1214:2: ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1214:2: ( (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? ) )?
             int alt130=2;
             int LA130_0 = input.LA(1);
 
@@ -7968,10 +7968,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt130) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1215:3: (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1215:3: (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1215:3: (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1216:4: a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1215:3: (a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )? )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1216:4: a4= initialvalue ( ( (a5= ',' ) a6= initialvalue ) )* ( (a7= ',' ) )?
                     {
                     pushFollow(FOLLOW_initialvalue_in_arrayinstantiationbyvalues5083);
                     a4=initialvalue();
@@ -7980,7 +7980,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("initialValues"))).add(a4); copyLocalizationInfos(a4, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1217:4: ( ( (a5= ',' ) a6= initialvalue ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1217:4: ( ( (a5= ',' ) a6= initialvalue ) )*
                     loop128:
                     do {
                         int alt128=2;
@@ -7999,13 +7999,13 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt128) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1218:5: ( (a5= ',' ) a6= initialvalue )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1218:5: ( (a5= ',' ) a6= initialvalue )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1218:5: ( (a5= ',' ) a6= initialvalue )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1219:6: (a5= ',' ) a6= initialvalue
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1218:5: ( (a5= ',' ) a6= initialvalue )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1219:6: (a5= ',' ) a6= initialvalue
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1219:6: (a5= ',' )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1220:7: a5= ','
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1219:6: (a5= ',' )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1220:7: a5= ','
                     	    {
                     	    a5=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_arrayinstantiationbyvalues5114); if (failed) return element;
@@ -8034,7 +8034,7 @@ public class JavaParser extends EMFTextParserImpl {
                         }
                     } while (true);
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1225:4: ( (a7= ',' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1225:4: ( (a7= ',' ) )?
                     int alt129=2;
                     int LA129_0 = input.LA(1);
 
@@ -8043,10 +8043,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt129) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1226:5: (a7= ',' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1226:5: (a7= ',' )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1226:5: (a7= ',' )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1227:6: a7= ','
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1226:5: (a7= ',' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1227:6: a7= ','
                             {
                             a7=(Token)input.LT(1);
                             match(input,24,FOLLOW_24_in_arrayinstantiationbyvalues5168); if (failed) return element;
@@ -8092,7 +8092,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start arrayinstantiationbysize
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1235:1: arrayinstantiationbysize returns [ArrayInstantiationBySize element = null] : a0= 'new' a1= typereference ( (a2= '[' a3= expression a4= ']' ) )+ (a5= arraydimension )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1235:1: arrayinstantiationbysize returns [ArrayInstantiationBySize element = null] : a0= 'new' a1= typereference ( (a2= '[' a3= expression a4= ']' ) )+ (a5= arraydimension )* ;
     public final ArrayInstantiationBySize arrayinstantiationbysize() throws RecognitionException {
         ArrayInstantiationBySize element =  null;
 
@@ -8110,8 +8110,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createArrayInstantiationBySize();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1239:1: (a0= 'new' a1= typereference ( (a2= '[' a3= expression a4= ']' ) )+ (a5= arraydimension )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1240:2: a0= 'new' a1= typereference ( (a2= '[' a3= expression a4= ']' ) )+ (a5= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1239:1: (a0= 'new' a1= typereference ( (a2= '[' a3= expression a4= ']' ) )+ (a5= arraydimension )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1240:2: a0= 'new' a1= typereference ( (a2= '[' a3= expression a4= ']' ) )+ (a5= arraydimension )*
             {
             a0=(Token)input.LT(1);
             match(input,40,FOLLOW_40_in_arrayinstantiationbysize5219); if (failed) return element;
@@ -8125,7 +8125,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("type"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1242:2: ( (a2= '[' a3= expression a4= ']' ) )+
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1242:2: ( (a2= '[' a3= expression a4= ']' ) )+
             int cnt131=0;
             loop131:
             do {
@@ -8145,10 +8145,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt131) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1243:3: (a2= '[' a3= expression a4= ']' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1243:3: (a2= '[' a3= expression a4= ']' )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1243:3: (a2= '[' a3= expression a4= ']' )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1244:4: a2= '[' a3= expression a4= ']'
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1243:3: (a2= '[' a3= expression a4= ']' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1244:4: a2= '[' a3= expression a4= ']'
             	    {
             	    a2=(Token)input.LT(1);
             	    match(input,41,FOLLOW_41_in_arrayinstantiationbysize5244); if (failed) return element;
@@ -8184,7 +8184,7 @@ public class JavaParser extends EMFTextParserImpl {
                 cnt131++;
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1249:2: (a5= arraydimension )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1249:2: (a5= arraydimension )*
             loop132:
             do {
                 int alt132=2;
@@ -8197,7 +8197,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt132) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1250:3: a5= arraydimension
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1250:3: a5= arraydimension
             	    {
             	    pushFollow(FOLLOW_arraydimension_in_arrayinstantiationbysize5284);
             	    a5=arraydimension();
@@ -8231,7 +8231,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start reference
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1254:1: reference returns [Reference element = null] : a0= primaryreference ( (a1= '[' (a2= expression )? a3= ']' ) )* ( (a4= '.' a5= reference ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1254:1: reference returns [Reference element = null] : a0= primaryreference ( (a1= '[' (a2= expression )? a3= ']' ) )* ( (a4= '.' a5= reference ) )? ;
     public final Reference reference() throws RecognitionException {
         Reference element =  null;
 
@@ -8249,8 +8249,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createReference();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1258:1: (a0= primaryreference ( (a1= '[' (a2= expression )? a3= ']' ) )* ( (a4= '.' a5= reference ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1259:2: a0= primaryreference ( (a1= '[' (a2= expression )? a3= ']' ) )* ( (a4= '.' a5= reference ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1258:1: (a0= primaryreference ( (a1= '[' (a2= expression )? a3= ']' ) )* ( (a4= '.' a5= reference ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1259:2: a0= primaryreference ( (a1= '[' (a2= expression )? a3= ']' ) )* ( (a4= '.' a5= reference ) )?
             {
             pushFollow(FOLLOW_primaryreference_in_reference5311);
             a0=primaryreference();
@@ -8259,7 +8259,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("primary"), a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1260:2: ( (a1= '[' (a2= expression )? a3= ']' ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1260:2: ( (a1= '[' (a2= expression )? a3= ']' ) )*
             loop134:
             do {
                 int alt134=2;
@@ -8272,17 +8272,17 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt134) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1261:3: (a1= '[' (a2= expression )? a3= ']' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1261:3: (a1= '[' (a2= expression )? a3= ']' )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1261:3: (a1= '[' (a2= expression )? a3= ']' )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1262:4: a1= '[' (a2= expression )? a3= ']'
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1261:3: (a1= '[' (a2= expression )? a3= ']' )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1262:4: a1= '[' (a2= expression )? a3= ']'
             	    {
             	    a1=(Token)input.LT(1);
             	    match(input,41,FOLLOW_41_in_reference5328); if (failed) return element;
             	    if ( backtracking==0 ) {
             	      copyLocalizationInfos((CommonToken)a1, element); 
             	    }
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1263:4: (a2= expression )?
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1263:4: (a2= expression )?
             	    int alt133=2;
             	    int LA133_0 = input.LA(1);
 
@@ -8291,7 +8291,7 @@ public class JavaParser extends EMFTextParserImpl {
             	    }
             	    switch (alt133) {
             	        case 1 :
-            	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1264:5: a2= expression
+            	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1264:5: a2= expression
             	            {
             	            pushFollow(FOLLOW_expression_in_reference5344);
             	            a2=expression();
@@ -8323,7 +8323,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1269:2: ( (a4= '.' a5= reference ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1269:2: ( (a4= '.' a5= reference ) )?
             int alt135=2;
             int LA135_0 = input.LA(1);
 
@@ -8332,10 +8332,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt135) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1270:3: (a4= '.' a5= reference )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1270:3: (a4= '.' a5= reference )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1270:3: (a4= '.' a5= reference )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1271:4: a4= '.' a5= reference
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1270:3: (a4= '.' a5= reference )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1271:4: a4= '.' a5= reference
                     {
                     a4=(Token)input.LT(1);
                     match(input,19,FOLLOW_19_in_reference5385); if (failed) return element;
@@ -8374,7 +8374,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start typereferencesequence
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1277:1: typereferencesequence returns [TypeReferenceSequence element = null] : a0= packageorclassifierreference ( (a1= '.' a2= packageorclassifierreference ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1277:1: typereferencesequence returns [TypeReferenceSequence element = null] : a0= packageorclassifierreference ( (a1= '.' a2= packageorclassifierreference ) )* ;
     public final TypeReferenceSequence typereferencesequence() throws RecognitionException {
         TypeReferenceSequence element =  null;
 
@@ -8388,8 +8388,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createTypeReferenceSequence();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1281:1: (a0= packageorclassifierreference ( (a1= '.' a2= packageorclassifierreference ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1282:2: a0= packageorclassifierreference ( (a1= '.' a2= packageorclassifierreference ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1281:1: (a0= packageorclassifierreference ( (a1= '.' a2= packageorclassifierreference ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1282:2: a0= packageorclassifierreference ( (a1= '.' a2= packageorclassifierreference ) )*
             {
             pushFollow(FOLLOW_packageorclassifierreference_in_typereferencesequence5426);
             a0=packageorclassifierreference();
@@ -8398,7 +8398,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("parts"))).add(a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1283:2: ( (a1= '.' a2= packageorclassifierreference ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1283:2: ( (a1= '.' a2= packageorclassifierreference ) )*
             loop136:
             do {
                 int alt136=2;
@@ -8411,10 +8411,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt136) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1284:3: (a1= '.' a2= packageorclassifierreference )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1284:3: (a1= '.' a2= packageorclassifierreference )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1284:3: (a1= '.' a2= packageorclassifierreference )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1285:4: a1= '.' a2= packageorclassifierreference
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1284:3: (a1= '.' a2= packageorclassifierreference )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1285:4: a1= '.' a2= packageorclassifierreference
             	    {
             	    a1=(Token)input.LT(1);
             	    match(input,19,FOLLOW_19_in_typereferencesequence5443); if (failed) return element;
@@ -8456,7 +8456,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start packageorclassifierreference
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1291:1: packageorclassifierreference returns [PackageOrClassifierReference element = null] : a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1291:1: packageorclassifierreference returns [PackageOrClassifierReference element = null] : a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ;
     public final PackageOrClassifierReference packageorclassifierreference() throws RecognitionException {
         PackageOrClassifierReference element =  null;
 
@@ -8473,23 +8473,23 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createPackageOrClassifierReference();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1295:1: (a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1296:2: a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1295:1: (a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1296:2: a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )?
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_packageorclassifierreference5484); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;Class proxy = JavaFactory.eINSTANCE.createClass();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a0, element); copyLocalizationInfos((CommonToken) a0, proxy); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1297:2: ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1297:2: ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )?
             int alt138=2;
             alt138 = dfa138.predict(input);
             switch (alt138) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1298:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1298:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1298:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1299:4: a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1298:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1299:4: a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>'
                     {
                     a1=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_packageorclassifierreference5501); if (failed) return element;
@@ -8503,7 +8503,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(a2); copyLocalizationInfos(a2, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1301:4: ( (a3= ',' a4= typeargument ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1301:4: ( (a3= ',' a4= typeargument ) )*
                     loop137:
                     do {
                         int alt137=2;
@@ -8516,10 +8516,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt137) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1302:5: (a3= ',' a4= typeargument )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1302:5: (a3= ',' a4= typeargument )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1302:5: (a3= ',' a4= typeargument )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1303:6: a3= ',' a4= typeargument
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1302:5: (a3= ',' a4= typeargument )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1303:6: a3= ',' a4= typeargument
                     	    {
                     	    a3=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_packageorclassifierreference5534); if (failed) return element;
@@ -8575,7 +8575,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start packageorclassifierormethodorvariablereference
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1312:1: packageorclassifierormethodorvariablereference returns [PackageOrClassifierOrMethodOrVariableReference element = null] : (a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? | c0= explicitgenericinvocation );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1312:1: packageorclassifierormethodorvariablereference returns [PackageOrClassifierOrMethodOrVariableReference element = null] : (a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? | c0= explicitgenericinvocation );
     public final PackageOrClassifierOrMethodOrVariableReference packageorclassifierormethodorvariablereference() throws RecognitionException {
         PackageOrClassifierOrMethodOrVariableReference element =  null;
 
@@ -8601,7 +8601,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createPackageOrClassifierOrMethodOrVariableReference();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1316:1: (a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? | c0= explicitgenericinvocation )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1316:1: (a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? | c0= explicitgenericinvocation )
             int alt144=2;
             int LA144_0 = input.LA(1);
 
@@ -8634,14 +8634,14 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt144) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1317:2: a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1317:2: a0= IDENTIFIER ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )? ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
                     {
                     a0=(Token)input.LT(1);
                     match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_packageorclassifierormethodorvariablereference5599); if (failed) return element;
                     if ( backtracking==0 ) {
                       TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;AnnotationMethod proxy = JavaFactory.eINSTANCE.createAnnotationMethod();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a0, element); copyLocalizationInfos((CommonToken) a0, proxy); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1318:2: ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1318:2: ( (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' ) )?
                     int alt140=2;
                     int LA140_0 = input.LA(1);
 
@@ -8654,10 +8654,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt140) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1320:4: a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>'
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: (a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1320:4: a1= '<' a2= typeargument ( (a3= ',' a4= typeargument ) )* a5= '>'
                             {
                             a1=(Token)input.LT(1);
                             match(input,23,FOLLOW_23_in_packageorclassifierormethodorvariablereference5616); if (failed) return element;
@@ -8671,7 +8671,7 @@ public class JavaParser extends EMFTextParserImpl {
                             if ( backtracking==0 ) {
                               ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(a2); copyLocalizationInfos(a2, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1322:4: ( (a3= ',' a4= typeargument ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1322:4: ( (a3= ',' a4= typeargument ) )*
                             loop139:
                             do {
                                 int alt139=2;
@@ -8684,10 +8684,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                                 switch (alt139) {
                             	case 1 :
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1323:5: (a3= ',' a4= typeargument )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1323:5: (a3= ',' a4= typeargument )
                             	    {
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1323:5: (a3= ',' a4= typeargument )
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1324:6: a3= ',' a4= typeargument
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1323:5: (a3= ',' a4= typeargument )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1324:6: a3= ',' a4= typeargument
                             	    {
                             	    a3=(Token)input.LT(1);
                             	    match(input,24,FOLLOW_24_in_packageorclassifierormethodorvariablereference5649); if (failed) return element;
@@ -8727,22 +8727,22 @@ public class JavaParser extends EMFTextParserImpl {
 
                     }
 
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1331:2: ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1331:2: ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
                     int alt143=2;
                     alt143 = dfa143.predict(input);
                     switch (alt143) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1333:4: a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')'
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1333:4: a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')'
                             {
                             a6=(Token)input.LT(1);
                             match(input,32,FOLLOW_32_in_packageorclassifierormethodorvariablereference5708); if (failed) return element;
                             if ( backtracking==0 ) {
                               copyLocalizationInfos((CommonToken)a6, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1334:4: ( (a7= expression ( (a8= ',' a9= expression ) )* ) )?
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1334:4: ( (a7= expression ( (a8= ',' a9= expression ) )* ) )?
                             int alt142=2;
                             int LA142_0 = input.LA(1);
 
@@ -8751,10 +8751,10 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             switch (alt142) {
                                 case 1 :
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1335:5: (a7= expression ( (a8= ',' a9= expression ) )* )
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1335:5: (a7= expression ( (a8= ',' a9= expression ) )* )
                                     {
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1335:5: (a7= expression ( (a8= ',' a9= expression ) )* )
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1336:6: a7= expression ( (a8= ',' a9= expression ) )*
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1335:5: (a7= expression ( (a8= ',' a9= expression ) )* )
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1336:6: a7= expression ( (a8= ',' a9= expression ) )*
                                     {
                                     pushFollow(FOLLOW_expression_in_packageorclassifierormethodorvariablereference5731);
                                     a7=expression();
@@ -8763,7 +8763,7 @@ public class JavaParser extends EMFTextParserImpl {
                                     if ( backtracking==0 ) {
                                       ((List) element.eGet(element.eClass().getEStructuralFeature("arguments"))).add(a7); copyLocalizationInfos(a7, element); 
                                     }
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1337:6: ( (a8= ',' a9= expression ) )*
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1337:6: ( (a8= ',' a9= expression ) )*
                                     loop141:
                                     do {
                                         int alt141=2;
@@ -8776,10 +8776,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                                         switch (alt141) {
                                     	case 1 :
-                                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1338:7: (a8= ',' a9= expression )
+                                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1338:7: (a8= ',' a9= expression )
                                     	    {
-                                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1338:7: (a8= ',' a9= expression )
-                                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1339:8: a8= ',' a9= expression
+                                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1338:7: (a8= ',' a9= expression )
+                                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1339:8: a8= ',' a9= expression
                                     	    {
                                     	    a8=(Token)input.LT(1);
                                     	    match(input,24,FOLLOW_24_in_packageorclassifierormethodorvariablereference5760); if (failed) return element;
@@ -8832,7 +8832,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1349:2: c0= explicitgenericinvocation
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1349:2: c0= explicitgenericinvocation
                     {
                     pushFollow(FOLLOW_explicitgenericinvocation_in_packageorclassifierormethodorvariablereference5831);
                     c0=explicitgenericinvocation();
@@ -8859,7 +8859,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start explicitgenericinvocation
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1352:1: explicitgenericinvocation returns [ExplicitGenericInvocation element = null] : ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )? a5= IDENTIFIER ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1352:1: explicitgenericinvocation returns [ExplicitGenericInvocation element = null] : ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )? a5= IDENTIFIER ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? ;
     public final ExplicitGenericInvocation explicitgenericinvocation() throws RecognitionException {
         ExplicitGenericInvocation element =  null;
 
@@ -8883,10 +8883,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createExplicitGenericInvocation();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1356:1: ( ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )? a5= IDENTIFIER ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1357:2: ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )? a5= IDENTIFIER ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1356:1: ( ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )? a5= IDENTIFIER ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1357:2: ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )? a5= IDENTIFIER ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1357:2: ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1357:2: ( (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' ) )?
             int alt146=2;
             int LA146_0 = input.LA(1);
 
@@ -8895,10 +8895,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt146) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1358:3: (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1358:3: (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1358:3: (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1359:4: a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1358:3: (a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1359:4: a0= '<' a1= typeargument ( (a2= ',' a3= typeargument ) )* a4= '>'
                     {
                     a0=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_explicitgenericinvocation5863); if (failed) return element;
@@ -8912,7 +8912,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("typeArguments"))).add(a1); copyLocalizationInfos(a1, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1361:4: ( (a2= ',' a3= typeargument ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1361:4: ( (a2= ',' a3= typeargument ) )*
                     loop145:
                     do {
                         int alt145=2;
@@ -8925,10 +8925,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt145) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1362:5: (a2= ',' a3= typeargument )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1362:5: (a2= ',' a3= typeargument )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1362:5: (a2= ',' a3= typeargument )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1363:6: a2= ',' a3= typeargument
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1362:5: (a2= ',' a3= typeargument )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1363:6: a2= ',' a3= typeargument
                     	    {
                     	    a2=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_explicitgenericinvocation5896); if (failed) return element;
@@ -8973,22 +8973,22 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a5.getText(),element.eClass().getEStructuralFeature("target"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a5,resolvedResolver.getErrorMessage());String resolved = (String) resolvedObject;AnnotationMethod proxy = JavaFactory.eINSTANCE.createAnnotationMethod();((InternalEObject)proxy).eSetProxyURI((resource.getURI()==null?URI.createURI("dummy"):resource.getURI()).appendFragment(resolved)); element.eSet(element.eClass().getEStructuralFeature("target"), proxy); copyLocalizationInfos((CommonToken) a5, element); copyLocalizationInfos((CommonToken) a5, proxy); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1371:2: ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1371:2: ( (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' ) )?
             int alt149=2;
             alt149 = dfa149.predict(input);
             switch (alt149) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1372:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1372:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1372:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1373:4: a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')'
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1372:3: (a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')' )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1373:4: a6= '(' ( (a7= expression ( (a8= ',' a9= expression ) )* ) )? a10= ')'
                     {
                     a6=(Token)input.LT(1);
                     match(input,32,FOLLOW_32_in_explicitgenericinvocation5963); if (failed) return element;
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a6, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1374:4: ( (a7= expression ( (a8= ',' a9= expression ) )* ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1374:4: ( (a7= expression ( (a8= ',' a9= expression ) )* ) )?
                     int alt148=2;
                     int LA148_0 = input.LA(1);
 
@@ -8997,10 +8997,10 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt148) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1375:5: (a7= expression ( (a8= ',' a9= expression ) )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1375:5: (a7= expression ( (a8= ',' a9= expression ) )* )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1375:5: (a7= expression ( (a8= ',' a9= expression ) )* )
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1376:6: a7= expression ( (a8= ',' a9= expression ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1375:5: (a7= expression ( (a8= ',' a9= expression ) )* )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1376:6: a7= expression ( (a8= ',' a9= expression ) )*
                             {
                             pushFollow(FOLLOW_expression_in_explicitgenericinvocation5986);
                             a7=expression();
@@ -9009,7 +9009,7 @@ public class JavaParser extends EMFTextParserImpl {
                             if ( backtracking==0 ) {
                               ((List) element.eGet(element.eClass().getEStructuralFeature("arguments"))).add(a7); copyLocalizationInfos(a7, element); 
                             }
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1377:6: ( (a8= ',' a9= expression ) )*
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1377:6: ( (a8= ',' a9= expression ) )*
                             loop147:
                             do {
                                 int alt147=2;
@@ -9022,10 +9022,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                                 switch (alt147) {
                             	case 1 :
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1378:7: (a8= ',' a9= expression )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1378:7: (a8= ',' a9= expression )
                             	    {
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1378:7: (a8= ',' a9= expression )
-                            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1379:8: a8= ',' a9= expression
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1378:7: (a8= ',' a9= expression )
+                            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1379:8: a8= ',' a9= expression
                             	    {
                             	    a8=(Token)input.LT(1);
                             	    match(input,24,FOLLOW_24_in_explicitgenericinvocation6015); if (failed) return element;
@@ -9090,7 +9090,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start qualifiedtypeargument
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1390:1: qualifiedtypeargument returns [QualifiedTypeArgument element = null] : a0= typereference ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1390:1: qualifiedtypeargument returns [QualifiedTypeArgument element = null] : a0= typereference ;
     public final QualifiedTypeArgument qualifiedtypeargument() throws RecognitionException {
         QualifiedTypeArgument element =  null;
 
@@ -9101,8 +9101,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createQualifiedTypeArgument();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1394:1: (a0= typereference )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1395:2: a0= typereference
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1394:1: (a0= typereference )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1395:2: a0= typereference
             {
             pushFollow(FOLLOW_typereference_in_qualifiedtypeargument6098);
             a0=typereference();
@@ -9127,7 +9127,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start unknowntypeargument
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1398:1: unknowntypeargument returns [UnknownTypeArgument element = null] : a0= '?' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1398:1: unknowntypeargument returns [UnknownTypeArgument element = null] : a0= '?' ;
     public final UnknownTypeArgument unknowntypeargument() throws RecognitionException {
         UnknownTypeArgument element =  null;
 
@@ -9137,8 +9137,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createUnknownTypeArgument();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1402:1: (a0= '?' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1403:2: a0= '?'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1402:1: (a0= '?' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1403:2: a0= '?'
             {
             a0=(Token)input.LT(1);
             match(input,43,FOLLOW_43_in_unknowntypeargument6121); if (failed) return element;
@@ -9161,7 +9161,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start extendstypeargument
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1406:1: extendstypeargument returns [ExtendsTypeArgument element = null] : a0= '?' a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1406:1: extendstypeargument returns [ExtendsTypeArgument element = null] : a0= '?' a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* ;
     public final ExtendsTypeArgument extendstypeargument() throws RecognitionException {
         ExtendsTypeArgument element =  null;
 
@@ -9177,8 +9177,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createExtendsTypeArgument();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1410:1: (a0= '?' a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1411:2: a0= '?' a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1410:1: (a0= '?' a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1411:2: a0= '?' a1= 'extends' a2= reference ( (a3= '&' a4= reference ) )*
             {
             a0=(Token)input.LT(1);
             match(input,43,FOLLOW_43_in_extendstypeargument6144); if (failed) return element;
@@ -9197,7 +9197,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("extendTypes"))).add(a2); copyLocalizationInfos(a2, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1414:2: ( (a3= '&' a4= reference ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1414:2: ( (a3= '&' a4= reference ) )*
             loop150:
             do {
                 int alt150=2;
@@ -9210,10 +9210,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt150) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1415:3: (a3= '&' a4= reference )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1415:3: (a3= '&' a4= reference )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1415:3: (a3= '&' a4= reference )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1416:4: a3= '&' a4= reference
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1415:3: (a3= '&' a4= reference )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1416:4: a3= '&' a4= reference
             	    {
             	    a3=(Token)input.LT(1);
             	    match(input,36,FOLLOW_36_in_extendstypeargument6177); if (failed) return element;
@@ -9255,7 +9255,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start supertypeargument
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1422:1: supertypeargument returns [SuperTypeArgument element = null] : a0= '?' a1= 'super' a2= reference ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1422:1: supertypeargument returns [SuperTypeArgument element = null] : a0= '?' a1= 'super' a2= reference ;
     public final SuperTypeArgument supertypeargument() throws RecognitionException {
         SuperTypeArgument element =  null;
 
@@ -9268,8 +9268,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createSuperTypeArgument();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1426:1: (a0= '?' a1= 'super' a2= reference )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1427:2: a0= '?' a1= 'super' a2= reference
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1426:1: (a0= '?' a1= 'super' a2= reference )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1427:2: a0= '?' a1= 'super' a2= reference
             {
             a0=(Token)input.LT(1);
             match(input,43,FOLLOW_43_in_supertypeargument6218); if (failed) return element;
@@ -9304,7 +9304,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordassert
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1432:1: keywordassert returns [Assert element = null] : a0= 'assert' a1= expression ( (a2= ':' a3= expression ) )? a4= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1432:1: keywordassert returns [Assert element = null] : a0= 'assert' a1= expression ( (a2= ':' a3= expression ) )? a4= ';' ;
     public final Assert keywordassert() throws RecognitionException {
         Assert element =  null;
 
@@ -9320,8 +9320,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAssert();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1436:1: (a0= 'assert' a1= expression ( (a2= ':' a3= expression ) )? a4= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1437:2: a0= 'assert' a1= expression ( (a2= ':' a3= expression ) )? a4= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1436:1: (a0= 'assert' a1= expression ( (a2= ':' a3= expression ) )? a4= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1437:2: a0= 'assert' a1= expression ( (a2= ':' a3= expression ) )? a4= ';'
             {
             a0=(Token)input.LT(1);
             match(input,45,FOLLOW_45_in_keywordassert6257); if (failed) return element;
@@ -9335,7 +9335,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("expression1"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1439:2: ( (a2= ':' a3= expression ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1439:2: ( (a2= ':' a3= expression ) )?
             int alt151=2;
             int LA151_0 = input.LA(1);
 
@@ -9344,10 +9344,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt151) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1440:3: (a2= ':' a3= expression )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1440:3: (a2= ':' a3= expression )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1440:3: (a2= ':' a3= expression )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1441:4: a2= ':' a3= expression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1440:3: (a2= ':' a3= expression )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1441:4: a2= ':' a3= expression
                     {
                     a2=(Token)input.LT(1);
                     match(input,46,FOLLOW_46_in_keywordassert6282); if (failed) return element;
@@ -9391,7 +9391,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start condition
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1448:1: condition returns [Condition element = null] : a0= 'if' a1= '(' a2= expression a3= ')' a4= statement ( (a5= 'else' a6= statement ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1448:1: condition returns [Condition element = null] : a0= 'if' a1= '(' a2= expression a3= ')' a4= statement ( (a5= 'else' a6= statement ) )? ;
     public final Condition condition() throws RecognitionException {
         Condition element =  null;
 
@@ -9410,8 +9410,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createCondition();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1452:1: (a0= 'if' a1= '(' a2= expression a3= ')' a4= statement ( (a5= 'else' a6= statement ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1453:2: a0= 'if' a1= '(' a2= expression a3= ')' a4= statement ( (a5= 'else' a6= statement ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1452:1: (a0= 'if' a1= '(' a2= expression a3= ')' a4= statement ( (a5= 'else' a6= statement ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1453:2: a0= 'if' a1= '(' a2= expression a3= ')' a4= statement ( (a5= 'else' a6= statement ) )?
             {
             a0=(Token)input.LT(1);
             match(input,47,FOLLOW_47_in_condition6331); if (failed) return element;
@@ -9442,7 +9442,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("ifStatement"), a4); copyLocalizationInfos(a4, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1458:2: ( (a5= 'else' a6= statement ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1458:2: ( (a5= 'else' a6= statement ) )?
             int alt152=2;
             int LA152_0 = input.LA(1);
 
@@ -9455,10 +9455,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt152) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1459:3: (a5= 'else' a6= statement )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1459:3: (a5= 'else' a6= statement )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1459:3: (a5= 'else' a6= statement )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1460:4: a5= 'else' a6= statement
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1459:3: (a5= 'else' a6= statement )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1460:4: a5= 'else' a6= statement
                     {
                     a5=(Token)input.LT(1);
                     match(input,48,FOLLOW_48_in_condition6380); if (failed) return element;
@@ -9497,7 +9497,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start forloop
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1466:1: forloop returns [ForLoop element = null] : a0= 'for' a1= '(' (a2= forloopinitializer )? a3= ';' (a4= expression )? a5= ';' ( (a6= expression ( (a7= ',' a8= expression ) )* ) )? a9= ')' a10= block ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1466:1: forloop returns [ForLoop element = null] : a0= 'for' a1= '(' (a2= forloopinitializer )? a3= ';' (a4= expression )? a5= ';' ( (a6= expression ( (a7= ',' a8= expression ) )* ) )? a9= ')' a10= block ;
     public final ForLoop forloop() throws RecognitionException {
         ForLoop element =  null;
 
@@ -9522,8 +9522,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createForLoop();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1470:1: (a0= 'for' a1= '(' (a2= forloopinitializer )? a3= ';' (a4= expression )? a5= ';' ( (a6= expression ( (a7= ',' a8= expression ) )* ) )? a9= ')' a10= block )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1471:2: a0= 'for' a1= '(' (a2= forloopinitializer )? a3= ';' (a4= expression )? a5= ';' ( (a6= expression ( (a7= ',' a8= expression ) )* ) )? a9= ')' a10= block
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1470:1: (a0= 'for' a1= '(' (a2= forloopinitializer )? a3= ';' (a4= expression )? a5= ';' ( (a6= expression ( (a7= ',' a8= expression ) )* ) )? a9= ')' a10= block )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1471:2: a0= 'for' a1= '(' (a2= forloopinitializer )? a3= ';' (a4= expression )? a5= ';' ( (a6= expression ( (a7= ',' a8= expression ) )* ) )? a9= ')' a10= block
             {
             a0=(Token)input.LT(1);
             match(input,49,FOLLOW_49_in_forloop6421); if (failed) return element;
@@ -9535,7 +9535,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1473:2: (a2= forloopinitializer )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1473:2: (a2= forloopinitializer )?
             int alt153=2;
             int LA153_0 = input.LA(1);
 
@@ -9544,7 +9544,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt153) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1474:3: a2= forloopinitializer
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1474:3: a2= forloopinitializer
                     {
                     pushFollow(FOLLOW_forloopinitializer_in_forloop6441);
                     a2=forloopinitializer();
@@ -9564,7 +9564,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a3, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1477:2: (a4= expression )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1477:2: (a4= expression )?
             int alt154=2;
             int LA154_0 = input.LA(1);
 
@@ -9573,7 +9573,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt154) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1478:3: a4= expression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1478:3: a4= expression
                     {
                     pushFollow(FOLLOW_expression_in_forloop6465);
                     a4=expression();
@@ -9593,7 +9593,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a5, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1481:2: ( (a6= expression ( (a7= ',' a8= expression ) )* ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1481:2: ( (a6= expression ( (a7= ',' a8= expression ) )* ) )?
             int alt156=2;
             int LA156_0 = input.LA(1);
 
@@ -9602,10 +9602,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt156) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1482:3: (a6= expression ( (a7= ',' a8= expression ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1482:3: (a6= expression ( (a7= ',' a8= expression ) )* )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1482:3: (a6= expression ( (a7= ',' a8= expression ) )* )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1483:4: a6= expression ( (a7= ',' a8= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1482:3: (a6= expression ( (a7= ',' a8= expression ) )* )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1483:4: a6= expression ( (a7= ',' a8= expression ) )*
                     {
                     pushFollow(FOLLOW_expression_in_forloop6494);
                     a6=expression();
@@ -9614,7 +9614,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       ((List) element.eGet(element.eClass().getEStructuralFeature("updates"))).add(a6); copyLocalizationInfos(a6, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1484:4: ( (a7= ',' a8= expression ) )*
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1484:4: ( (a7= ',' a8= expression ) )*
                     loop155:
                     do {
                         int alt155=2;
@@ -9627,10 +9627,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                         switch (alt155) {
                     	case 1 :
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1485:5: (a7= ',' a8= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1485:5: (a7= ',' a8= expression )
                     	    {
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1485:5: (a7= ',' a8= expression )
-                    	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1486:6: a7= ',' a8= expression
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1485:5: (a7= ',' a8= expression )
+                    	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1486:6: a7= ',' a8= expression
                     	    {
                     	    a7=(Token)input.LT(1);
                     	    match(input,24,FOLLOW_24_in_forloop6517); if (failed) return element;
@@ -9693,7 +9693,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start foreachloop
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1496:1: foreachloop returns [ForEachLoop element = null] : a0= 'for' a1= '(' a2= ordinaryparameter a3= ':' a4= expression a5= ')' a6= block ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1496:1: foreachloop returns [ForEachLoop element = null] : a0= 'for' a1= '(' a2= ordinaryparameter a3= ':' a4= expression a5= ')' a6= block ;
     public final ForEachLoop foreachloop() throws RecognitionException {
         ForEachLoop element =  null;
 
@@ -9712,8 +9712,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createForEachLoop();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1500:1: (a0= 'for' a1= '(' a2= ordinaryparameter a3= ':' a4= expression a5= ')' a6= block )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1501:2: a0= 'for' a1= '(' a2= ordinaryparameter a3= ':' a4= expression a5= ')' a6= block
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1500:1: (a0= 'for' a1= '(' a2= ordinaryparameter a3= ':' a4= expression a5= ')' a6= block )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1501:2: a0= 'for' a1= '(' a2= ordinaryparameter a3= ':' a4= expression a5= ')' a6= block
             {
             a0=(Token)input.LT(1);
             match(input,49,FOLLOW_49_in_foreachloop6588); if (failed) return element;
@@ -9772,7 +9772,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start whileloop
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1510:1: whileloop returns [WhileLoop element = null] : (a0= 'while' a1= '(' a2= expression a3= ')' a4= block | c0= dowhileloop );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1510:1: whileloop returns [WhileLoop element = null] : (a0= 'while' a1= '(' a2= expression a3= ')' a4= block | c0= dowhileloop );
     public final WhileLoop whileloop() throws RecognitionException {
         WhileLoop element =  null;
 
@@ -9790,7 +9790,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createWhileLoop();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1514:1: (a0= 'while' a1= '(' a2= expression a3= ')' a4= block | c0= dowhileloop )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1514:1: (a0= 'while' a1= '(' a2= expression a3= ')' a4= block | c0= dowhileloop )
             int alt157=2;
             int LA157_0 = input.LA(1);
 
@@ -9809,7 +9809,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt157) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1515:2: a0= 'while' a1= '(' a2= expression a3= ')' a4= block
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1515:2: a0= 'while' a1= '(' a2= expression a3= ')' a4= block
                     {
                     a0=(Token)input.LT(1);
                     match(input,50,FOLLOW_50_in_whileloop6659); if (failed) return element;
@@ -9844,7 +9844,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1521:2: c0= dowhileloop
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1521:2: c0= dowhileloop
                     {
                     pushFollow(FOLLOW_dowhileloop_in_whileloop6702);
                     c0=dowhileloop();
@@ -9871,7 +9871,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start dowhileloop
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1524:1: dowhileloop returns [DoWhileLoop element = null] : a0= 'do' a1= block a2= 'while' a3= '(' a4= expression a5= ')' a6= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1524:1: dowhileloop returns [DoWhileLoop element = null] : a0= 'do' a1= block a2= 'while' a3= '(' a4= expression a5= ')' a6= ';' ;
     public final DoWhileLoop dowhileloop() throws RecognitionException {
         DoWhileLoop element =  null;
 
@@ -9889,8 +9889,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createDoWhileLoop();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1528:1: (a0= 'do' a1= block a2= 'while' a3= '(' a4= expression a5= ')' a6= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1529:2: a0= 'do' a1= block a2= 'while' a3= '(' a4= expression a5= ')' a6= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1528:1: (a0= 'do' a1= block a2= 'while' a3= '(' a4= expression a5= ')' a6= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1529:2: a0= 'do' a1= block a2= 'while' a3= '(' a4= expression a5= ')' a6= ';'
             {
             a0=(Token)input.LT(1);
             match(input,51,FOLLOW_51_in_dowhileloop6725); if (failed) return element;
@@ -9947,7 +9947,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start emptystatement
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1538:1: emptystatement returns [EmptyStatement element = null] : a0= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1538:1: emptystatement returns [EmptyStatement element = null] : a0= ';' ;
     public final EmptyStatement emptystatement() throws RecognitionException {
         EmptyStatement element =  null;
 
@@ -9957,8 +9957,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createEmptyStatement();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1542:1: (a0= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1543:2: a0= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1542:1: (a0= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1543:2: a0= ';'
             {
             a0=(Token)input.LT(1);
             match(input,20,FOLLOW_20_in_emptystatement6796); if (failed) return element;
@@ -9981,7 +9981,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start synchronizedblock
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1546:1: synchronizedblock returns [SynchronizedBlock element = null] : a0= 'synchronized' a1= '(' a2= expression a3= ')' a4= block ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1546:1: synchronizedblock returns [SynchronizedBlock element = null] : a0= 'synchronized' a1= '(' a2= expression a3= ')' a4= block ;
     public final SynchronizedBlock synchronizedblock() throws RecognitionException {
         SynchronizedBlock element =  null;
 
@@ -9997,8 +9997,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createSynchronizedBlock();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1550:1: (a0= 'synchronized' a1= '(' a2= expression a3= ')' a4= block )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1551:2: a0= 'synchronized' a1= '(' a2= expression a3= ')' a4= block
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1550:1: (a0= 'synchronized' a1= '(' a2= expression a3= ')' a4= block )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1551:2: a0= 'synchronized' a1= '(' a2= expression a3= ')' a4= block
             {
             a0=(Token)input.LT(1);
             match(input,52,FOLLOW_52_in_synchronizedblock6819); if (failed) return element;
@@ -10045,7 +10045,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start tryblock
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1558:1: tryblock returns [TryBlock element = null] : a0= 'try' a1= block (a2= catchclause )* ( (a3= 'finally' a4= block ) )? ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1558:1: tryblock returns [TryBlock element = null] : a0= 'try' a1= block (a2= catchclause )* ( (a3= 'finally' a4= block ) )? ;
     public final TryBlock tryblock() throws RecognitionException {
         TryBlock element =  null;
 
@@ -10062,8 +10062,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createTryBlock();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1562:1: (a0= 'try' a1= block (a2= catchclause )* ( (a3= 'finally' a4= block ) )? )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1563:2: a0= 'try' a1= block (a2= catchclause )* ( (a3= 'finally' a4= block ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1562:1: (a0= 'try' a1= block (a2= catchclause )* ( (a3= 'finally' a4= block ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1563:2: a0= 'try' a1= block (a2= catchclause )* ( (a3= 'finally' a4= block ) )?
             {
             a0=(Token)input.LT(1);
             match(input,53,FOLLOW_53_in_tryblock6874); if (failed) return element;
@@ -10077,7 +10077,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               element.eSet(element.eClass().getEStructuralFeature("tryBlock"), a1); copyLocalizationInfos(a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1565:2: (a2= catchclause )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1565:2: (a2= catchclause )*
             loop158:
             do {
                 int alt158=2;
@@ -10090,7 +10090,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt158) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1566:3: a2= catchclause
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1566:3: a2= catchclause
             	    {
             	    pushFollow(FOLLOW_catchclause_in_tryblock6894);
             	    a2=catchclause();
@@ -10108,7 +10108,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1568:2: ( (a3= 'finally' a4= block ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1568:2: ( (a3= 'finally' a4= block ) )?
             int alt159=2;
             int LA159_0 = input.LA(1);
 
@@ -10117,10 +10117,10 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt159) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1569:3: (a3= 'finally' a4= block )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1569:3: (a3= 'finally' a4= block )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1569:3: (a3= 'finally' a4= block )
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1570:4: a3= 'finally' a4= block
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1569:3: (a3= 'finally' a4= block )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1570:4: a3= 'finally' a4= block
                     {
                     a3=(Token)input.LT(1);
                     match(input,54,FOLLOW_54_in_tryblock6915); if (failed) return element;
@@ -10159,7 +10159,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start catchclause
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1576:1: catchclause returns [CatchClause element = null] : a0= 'catch' a1= '(' a2= ordinaryparameter a3= ')' a4= block ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1576:1: catchclause returns [CatchClause element = null] : a0= 'catch' a1= '(' a2= ordinaryparameter a3= ')' a4= block ;
     public final CatchClause catchclause() throws RecognitionException {
         CatchClause element =  null;
 
@@ -10175,8 +10175,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createCatchClause();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1580:1: (a0= 'catch' a1= '(' a2= ordinaryparameter a3= ')' a4= block )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1581:2: a0= 'catch' a1= '(' a2= ordinaryparameter a3= ')' a4= block
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1580:1: (a0= 'catch' a1= '(' a2= ordinaryparameter a3= ')' a4= block )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1581:2: a0= 'catch' a1= '(' a2= ordinaryparameter a3= ')' a4= block
             {
             a0=(Token)input.LT(1);
             match(input,55,FOLLOW_55_in_catchclause6956); if (failed) return element;
@@ -10223,7 +10223,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordswitch
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1588:1: keywordswitch returns [Switch element = null] : a0= 'switch' a1= '(' a2= expression a3= ')' a4= '{' (a5= normalswitchcase )* (a6= defaultswitchcase )? a7= '}' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1588:1: keywordswitch returns [Switch element = null] : a0= 'switch' a1= '(' a2= expression a3= ')' a4= '{' (a5= normalswitchcase )* (a6= defaultswitchcase )? a7= '}' ;
     public final Switch keywordswitch() throws RecognitionException {
         Switch element =  null;
 
@@ -10243,8 +10243,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createSwitch();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1592:1: (a0= 'switch' a1= '(' a2= expression a3= ')' a4= '{' (a5= normalswitchcase )* (a6= defaultswitchcase )? a7= '}' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1593:2: a0= 'switch' a1= '(' a2= expression a3= ')' a4= '{' (a5= normalswitchcase )* (a6= defaultswitchcase )? a7= '}'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1592:1: (a0= 'switch' a1= '(' a2= expression a3= ')' a4= '{' (a5= normalswitchcase )* (a6= defaultswitchcase )? a7= '}' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1593:2: a0= 'switch' a1= '(' a2= expression a3= ')' a4= '{' (a5= normalswitchcase )* (a6= defaultswitchcase )? a7= '}'
             {
             a0=(Token)input.LT(1);
             match(input,56,FOLLOW_56_in_keywordswitch7011); if (failed) return element;
@@ -10273,7 +10273,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a4, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1598:2: (a5= normalswitchcase )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1598:2: (a5= normalswitchcase )*
             loop160:
             do {
                 int alt160=2;
@@ -10286,7 +10286,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt160) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1599:3: a5= normalswitchcase
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1599:3: a5= normalswitchcase
             	    {
             	    pushFollow(FOLLOW_normalswitchcase_in_keywordswitch7055);
             	    a5=normalswitchcase();
@@ -10304,7 +10304,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
             } while (true);
 
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1601:2: (a6= defaultswitchcase )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1601:2: (a6= defaultswitchcase )?
             int alt161=2;
             int LA161_0 = input.LA(1);
 
@@ -10313,7 +10313,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt161) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1602:3: a6= defaultswitchcase
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1602:3: a6= defaultswitchcase
                     {
                     pushFollow(FOLLOW_defaultswitchcase_in_keywordswitch7071);
                     a6=defaultswitchcase();
@@ -10349,7 +10349,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start normalswitchcase
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1607:1: normalswitchcase returns [NormalSwitchCase element = null] : a0= 'case' a1= expression a2= ':' (a3= statement )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1607:1: normalswitchcase returns [NormalSwitchCase element = null] : a0= 'case' a1= expression a2= ':' (a3= statement )* ;
     public final NormalSwitchCase normalswitchcase() throws RecognitionException {
         NormalSwitchCase element =  null;
 
@@ -10364,8 +10364,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createNormalSwitchCase();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1611:1: (a0= 'case' a1= expression a2= ':' (a3= statement )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1612:2: a0= 'case' a1= expression a2= ':' (a3= statement )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1611:1: (a0= 'case' a1= expression a2= ':' (a3= statement )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1612:2: a0= 'case' a1= expression a2= ':' (a3= statement )*
             {
             a0=(Token)input.LT(1);
             match(input,57,FOLLOW_57_in_normalswitchcase7106); if (failed) return element;
@@ -10384,7 +10384,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a2, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1615:2: (a3= statement )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1615:2: (a3= statement )*
             loop162:
             do {
                 int alt162=2;
@@ -10397,7 +10397,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt162) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1616:3: a3= statement
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1616:3: a3= statement
             	    {
             	    pushFollow(FOLLOW_statement_in_normalswitchcase7134);
             	    a3=statement();
@@ -10431,7 +10431,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start defaultswitchcase
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1620:1: defaultswitchcase returns [DefaultSwitchCase element = null] : a0= 'default' a1= ':' (a2= statement )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1620:1: defaultswitchcase returns [DefaultSwitchCase element = null] : a0= 'default' a1= ':' (a2= statement )* ;
     public final DefaultSwitchCase defaultswitchcase() throws RecognitionException {
         DefaultSwitchCase element =  null;
 
@@ -10444,8 +10444,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createDefaultSwitchCase();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1624:1: (a0= 'default' a1= ':' (a2= statement )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1625:2: a0= 'default' a1= ':' (a2= statement )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1624:1: (a0= 'default' a1= ':' (a2= statement )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1625:2: a0= 'default' a1= ':' (a2= statement )*
             {
             a0=(Token)input.LT(1);
             match(input,38,FOLLOW_38_in_defaultswitchcase7161); if (failed) return element;
@@ -10457,7 +10457,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a1, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1627:2: (a2= statement )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1627:2: (a2= statement )*
             loop163:
             do {
                 int alt163=2;
@@ -10470,7 +10470,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt163) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1628:3: a2= statement
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1628:3: a2= statement
             	    {
             	    pushFollow(FOLLOW_statement_in_defaultswitchcase7181);
             	    a2=statement();
@@ -10504,7 +10504,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordreturn
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1632:1: keywordreturn returns [Return element = null] : a0= 'return' (a1= expression )? a2= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1632:1: keywordreturn returns [Return element = null] : a0= 'return' (a1= expression )? a2= ';' ;
     public final Return keywordreturn() throws RecognitionException {
         Return element =  null;
 
@@ -10517,15 +10517,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createReturn();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1636:1: (a0= 'return' (a1= expression )? a2= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1637:2: a0= 'return' (a1= expression )? a2= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1636:1: (a0= 'return' (a1= expression )? a2= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1637:2: a0= 'return' (a1= expression )? a2= ';'
             {
             a0=(Token)input.LT(1);
             match(input,58,FOLLOW_58_in_keywordreturn7208); if (failed) return element;
             if ( backtracking==0 ) {
               copyLocalizationInfos((CommonToken)a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1638:2: (a1= expression )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1638:2: (a1= expression )?
             int alt164=2;
             int LA164_0 = input.LA(1);
 
@@ -10534,7 +10534,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt164) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1639:3: a1= expression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1639:3: a1= expression
                     {
                     pushFollow(FOLLOW_expression_in_keywordreturn7220);
                     a1=expression();
@@ -10570,7 +10570,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordthrow
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1644:1: keywordthrow returns [Throw element = null] : a0= 'throw' a1= expression a2= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1644:1: keywordthrow returns [Throw element = null] : a0= 'throw' a1= expression a2= ';' ;
     public final Throw keywordthrow() throws RecognitionException {
         Throw element =  null;
 
@@ -10583,8 +10583,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createThrow();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1648:1: (a0= 'throw' a1= expression a2= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1649:2: a0= 'throw' a1= expression a2= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1648:1: (a0= 'throw' a1= expression a2= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1649:2: a0= 'throw' a1= expression a2= ';'
             {
             a0=(Token)input.LT(1);
             match(input,59,FOLLOW_59_in_keywordthrow7255); if (failed) return element;
@@ -10619,7 +10619,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordbreak
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1654:1: keywordbreak returns [Break element = null] : a0= 'break' a1= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1654:1: keywordbreak returns [Break element = null] : a0= 'break' a1= ';' ;
     public final Break keywordbreak() throws RecognitionException {
         Break element =  null;
 
@@ -10630,8 +10630,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createBreak();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1658:1: (a0= 'break' a1= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1659:2: a0= 'break' a1= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1658:1: (a0= 'break' a1= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1659:2: a0= 'break' a1= ';'
             {
             a0=(Token)input.LT(1);
             match(input,60,FOLLOW_60_in_keywordbreak7294); if (failed) return element;
@@ -10659,7 +10659,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordcontinue
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1663:1: keywordcontinue returns [Continue element = null] : a0= 'continue' a1= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1663:1: keywordcontinue returns [Continue element = null] : a0= 'continue' a1= ';' ;
     public final Continue keywordcontinue() throws RecognitionException {
         Continue element =  null;
 
@@ -10670,8 +10670,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createContinue();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1667:1: (a0= 'continue' a1= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1668:2: a0= 'continue' a1= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1667:1: (a0= 'continue' a1= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1668:2: a0= 'continue' a1= ';'
             {
             a0=(Token)input.LT(1);
             match(input,61,FOLLOW_61_in_keywordcontinue7325); if (failed) return element;
@@ -10699,7 +10699,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start jumplabel
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1672:1: jumplabel returns [JumpLabel element = null] : a0= IDENTIFIER a1= ':' a2= statement ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1672:1: jumplabel returns [JumpLabel element = null] : a0= IDENTIFIER a1= ':' a2= statement ;
     public final JumpLabel jumplabel() throws RecognitionException {
         JumpLabel element =  null;
 
@@ -10712,8 +10712,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createJumpLabel();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1676:1: (a0= IDENTIFIER a1= ':' a2= statement )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1677:2: a0= IDENTIFIER a1= ':' a2= statement
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1676:1: (a0= IDENTIFIER a1= ':' a2= statement )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1677:2: a0= IDENTIFIER a1= ':' a2= statement
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_jumplabel7356); if (failed) return element;
@@ -10748,7 +10748,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start assignment
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1682:1: assignment returns [Assignment element = null] : a0= reference a1= '=' a2= expression ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1682:1: assignment returns [Assignment element = null] : a0= reference a1= '=' a2= expression ;
     public final Assignment assignment() throws RecognitionException {
         Assignment element =  null;
 
@@ -10762,8 +10762,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAssignment();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1686:1: (a0= reference a1= '=' a2= expression )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1687:2: a0= reference a1= '=' a2= expression
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1686:1: (a0= reference a1= '=' a2= expression )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1687:2: a0= reference a1= '=' a2= expression
             {
             pushFollow(FOLLOW_reference_in_assignment7395);
             a0=reference();
@@ -10800,7 +10800,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start expressionstatement
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1692:1: expressionstatement returns [ExpressionStatement element = null] : a0= expression a1= ';' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1692:1: expressionstatement returns [ExpressionStatement element = null] : a0= expression a1= ';' ;
     public final ExpressionStatement expressionstatement() throws RecognitionException {
         ExpressionStatement element =  null;
 
@@ -10812,8 +10812,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createExpressionStatement();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1696:1: (a0= expression a1= ';' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1697:2: a0= expression a1= ';'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1696:1: (a0= expression a1= ';' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1697:2: a0= expression a1= ';'
             {
             pushFollow(FOLLOW_expression_in_expressionstatement7434);
             a0=expression();
@@ -10843,7 +10843,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start expressionlist
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1701:1: expressionlist returns [ExpressionList element = null] : a0= expression ( (a1= ',' a2= expression ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1701:1: expressionlist returns [ExpressionList element = null] : a0= expression ( (a1= ',' a2= expression ) )* ;
     public final ExpressionList expressionlist() throws RecognitionException {
         ExpressionList element =  null;
 
@@ -10857,8 +10857,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createExpressionList();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1705:1: (a0= expression ( (a1= ',' a2= expression ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1706:2: a0= expression ( (a1= ',' a2= expression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1705:1: (a0= expression ( (a1= ',' a2= expression ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1706:2: a0= expression ( (a1= ',' a2= expression ) )*
             {
             pushFollow(FOLLOW_expression_in_expressionlist7465);
             a0=expression();
@@ -10867,7 +10867,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("expressions"))).add(a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1707:2: ( (a1= ',' a2= expression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1707:2: ( (a1= ',' a2= expression ) )*
             loop165:
             do {
                 int alt165=2;
@@ -10880,10 +10880,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt165) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1708:3: (a1= ',' a2= expression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1708:3: (a1= ',' a2= expression )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1708:3: (a1= ',' a2= expression )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1709:4: a1= ',' a2= expression
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1708:3: (a1= ',' a2= expression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1709:4: a1= ',' a2= expression
             	    {
             	    a1=(Token)input.LT(1);
             	    match(input,24,FOLLOW_24_in_expressionlist7482); if (failed) return element;
@@ -10925,7 +10925,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start parexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1715:1: parexpression returns [ParExpression element = null] : a0= '(' a1= expression a2= ')' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1715:1: parexpression returns [ParExpression element = null] : a0= '(' a1= expression a2= ')' ;
     public final ParExpression parexpression() throws RecognitionException {
         ParExpression element =  null;
 
@@ -10938,8 +10938,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createParExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1719:1: (a0= '(' a1= expression a2= ')' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1720:2: a0= '(' a1= expression a2= ')'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1719:1: (a0= '(' a1= expression a2= ')' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1720:2: a0= '(' a1= expression a2= ')'
             {
             a0=(Token)input.LT(1);
             match(input,32,FOLLOW_32_in_parexpression7523); if (failed) return element;
@@ -10974,7 +10974,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start relationexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1725:1: relationexpression returns [RelationExpression element = null] : a0= shiftexpression ( (a1= relationoperator a2= shiftexpression ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1725:1: relationexpression returns [RelationExpression element = null] : a0= shiftexpression ( (a1= relationoperator a2= shiftexpression ) )* ;
     public final RelationExpression relationexpression() throws RecognitionException {
         RelationExpression element =  null;
 
@@ -10989,8 +10989,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createRelationExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1729:1: (a0= shiftexpression ( (a1= relationoperator a2= shiftexpression ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1730:2: a0= shiftexpression ( (a1= relationoperator a2= shiftexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1729:1: (a0= shiftexpression ( (a1= relationoperator a2= shiftexpression ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1730:2: a0= shiftexpression ( (a1= relationoperator a2= shiftexpression ) )*
             {
             pushFollow(FOLLOW_shiftexpression_in_relationexpression7562);
             a0=shiftexpression();
@@ -10999,7 +10999,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("shiftExpression"))).add(a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1731:2: ( (a1= relationoperator a2= shiftexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1731:2: ( (a1= relationoperator a2= shiftexpression ) )*
             loop166:
             do {
                 int alt166=2;
@@ -11021,10 +11021,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt166) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1732:3: (a1= relationoperator a2= shiftexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1732:3: (a1= relationoperator a2= shiftexpression )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1732:3: (a1= relationoperator a2= shiftexpression )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1733:4: a1= relationoperator a2= shiftexpression
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1732:3: (a1= relationoperator a2= shiftexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1733:4: a1= relationoperator a2= shiftexpression
             	    {
             	    pushFollow(FOLLOW_relationoperator_in_relationexpression7579);
             	    a1=relationoperator();
@@ -11068,7 +11068,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start shiftexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1739:1: shiftexpression returns [ShiftExpression element = null] : a0= additiveexpression ( (a1= shiftoperator a2= additiveexpression ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1739:1: shiftexpression returns [ShiftExpression element = null] : a0= additiveexpression ( (a1= shiftoperator a2= additiveexpression ) )* ;
     public final ShiftExpression shiftexpression() throws RecognitionException {
         ShiftExpression element =  null;
 
@@ -11083,8 +11083,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createShiftExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1743:1: (a0= additiveexpression ( (a1= shiftoperator a2= additiveexpression ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1744:2: a0= additiveexpression ( (a1= shiftoperator a2= additiveexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1743:1: (a0= additiveexpression ( (a1= shiftoperator a2= additiveexpression ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1744:2: a0= additiveexpression ( (a1= shiftoperator a2= additiveexpression ) )*
             {
             pushFollow(FOLLOW_additiveexpression_in_shiftexpression7620);
             a0=additiveexpression();
@@ -11093,7 +11093,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("additiveExpression"))).add(a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1745:2: ( (a1= shiftoperator a2= additiveexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1745:2: ( (a1= shiftoperator a2= additiveexpression ) )*
             loop167:
             do {
                 int alt167=2;
@@ -11121,10 +11121,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt167) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1746:3: (a1= shiftoperator a2= additiveexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1746:3: (a1= shiftoperator a2= additiveexpression )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1746:3: (a1= shiftoperator a2= additiveexpression )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1747:4: a1= shiftoperator a2= additiveexpression
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1746:3: (a1= shiftoperator a2= additiveexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1747:4: a1= shiftoperator a2= additiveexpression
             	    {
             	    pushFollow(FOLLOW_shiftoperator_in_shiftexpression7637);
             	    a1=shiftoperator();
@@ -11168,7 +11168,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start additiveexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1753:1: additiveexpression returns [AdditiveExpression element = null] : a0= multiplicativeexpression ( (a1= additiveoperator a2= multiplicativeexpression ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1753:1: additiveexpression returns [AdditiveExpression element = null] : a0= multiplicativeexpression ( (a1= additiveoperator a2= multiplicativeexpression ) )* ;
     public final AdditiveExpression additiveexpression() throws RecognitionException {
         AdditiveExpression element =  null;
 
@@ -11183,8 +11183,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAdditiveExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1757:1: (a0= multiplicativeexpression ( (a1= additiveoperator a2= multiplicativeexpression ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1758:2: a0= multiplicativeexpression ( (a1= additiveoperator a2= multiplicativeexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1757:1: (a0= multiplicativeexpression ( (a1= additiveoperator a2= multiplicativeexpression ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1758:2: a0= multiplicativeexpression ( (a1= additiveoperator a2= multiplicativeexpression ) )*
             {
             pushFollow(FOLLOW_multiplicativeexpression_in_additiveexpression7678);
             a0=multiplicativeexpression();
@@ -11193,7 +11193,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("multiplicativeExpression"))).add(a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1759:2: ( (a1= additiveoperator a2= multiplicativeexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1759:2: ( (a1= additiveoperator a2= multiplicativeexpression ) )*
             loop168:
             do {
                 int alt168=2;
@@ -11206,10 +11206,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt168) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1760:3: (a1= additiveoperator a2= multiplicativeexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1760:3: (a1= additiveoperator a2= multiplicativeexpression )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1760:3: (a1= additiveoperator a2= multiplicativeexpression )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1761:4: a1= additiveoperator a2= multiplicativeexpression
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1760:3: (a1= additiveoperator a2= multiplicativeexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1761:4: a1= additiveoperator a2= multiplicativeexpression
             	    {
             	    pushFollow(FOLLOW_additiveoperator_in_additiveexpression7695);
             	    a1=additiveoperator();
@@ -11253,7 +11253,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start multiplicativeexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1767:1: multiplicativeexpression returns [MultiplicativeExpression element = null] : a0= unaryexpression ( (a1= multiplicativeoperator a2= unaryexpression ) )* ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1767:1: multiplicativeexpression returns [MultiplicativeExpression element = null] : a0= unaryexpression ( (a1= multiplicativeoperator a2= unaryexpression ) )* ;
     public final MultiplicativeExpression multiplicativeexpression() throws RecognitionException {
         MultiplicativeExpression element =  null;
 
@@ -11268,8 +11268,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createMultiplicativeExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1771:1: (a0= unaryexpression ( (a1= multiplicativeoperator a2= unaryexpression ) )* )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1772:2: a0= unaryexpression ( (a1= multiplicativeoperator a2= unaryexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1771:1: (a0= unaryexpression ( (a1= multiplicativeoperator a2= unaryexpression ) )* )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1772:2: a0= unaryexpression ( (a1= multiplicativeoperator a2= unaryexpression ) )*
             {
             pushFollow(FOLLOW_unaryexpression_in_multiplicativeexpression7736);
             a0=unaryexpression();
@@ -11278,7 +11278,7 @@ public class JavaParser extends EMFTextParserImpl {
             if ( backtracking==0 ) {
               ((List) element.eGet(element.eClass().getEStructuralFeature("unaryExpression"))).add(a0); copyLocalizationInfos(a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1773:2: ( (a1= multiplicativeoperator a2= unaryexpression ) )*
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1773:2: ( (a1= multiplicativeoperator a2= unaryexpression ) )*
             loop169:
             do {
                 int alt169=2;
@@ -11291,10 +11291,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                 switch (alt169) {
             	case 1 :
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1774:3: (a1= multiplicativeoperator a2= unaryexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1774:3: (a1= multiplicativeoperator a2= unaryexpression )
             	    {
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1774:3: (a1= multiplicativeoperator a2= unaryexpression )
-            	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1775:4: a1= multiplicativeoperator a2= unaryexpression
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1774:3: (a1= multiplicativeoperator a2= unaryexpression )
+            	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1775:4: a1= multiplicativeoperator a2= unaryexpression
             	    {
             	    pushFollow(FOLLOW_multiplicativeoperator_in_multiplicativeexpression7753);
             	    a1=multiplicativeoperator();
@@ -11338,7 +11338,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start unaryexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1781:1: unaryexpression returns [UnaryExpression element = null] : ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )? a3= unaryexpressionnotplusminus ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1781:1: unaryexpression returns [UnaryExpression element = null] : ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )? a3= unaryexpressionnotplusminus ;
     public final UnaryExpression unaryexpression() throws RecognitionException {
         UnaryExpression element =  null;
 
@@ -11355,10 +11355,10 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createUnaryExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1785:1: ( ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )? a3= unaryexpressionnotplusminus )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1786:2: ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )? a3= unaryexpressionnotplusminus
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1785:1: ( ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )? a3= unaryexpressionnotplusminus )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1786:2: ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )? a3= unaryexpressionnotplusminus
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1786:2: ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )?
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1786:2: ( (a0= additiveoperator | a1= plusplus | a2= minusminus ) )?
             int alt171=2;
             int LA171_0 = input.LA(1);
 
@@ -11367,9 +11367,9 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt171) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1787:3: (a0= additiveoperator | a1= plusplus | a2= minusminus )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1787:3: (a0= additiveoperator | a1= plusplus | a2= minusminus )
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1787:3: (a0= additiveoperator | a1= plusplus | a2= minusminus )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1787:3: (a0= additiveoperator | a1= plusplus | a2= minusminus )
                     int alt170=3;
                     switch ( input.LA(1) ) {
                     case ADDITIVE_OPERATOR_LITERAL:
@@ -11397,7 +11397,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt170) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1788:4: a0= additiveoperator
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1788:4: a0= additiveoperator
                             {
                             pushFollow(FOLLOW_additiveoperator_in_unaryexpression7803);
                             a0=additiveoperator();
@@ -11410,7 +11410,7 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             break;
                         case 2 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1791:4: a1= plusplus
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1791:4: a1= plusplus
                             {
                             pushFollow(FOLLOW_plusplus_in_unaryexpression7819);
                             a1=plusplus();
@@ -11423,7 +11423,7 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             break;
                         case 3 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1794:4: a2= minusminus
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1794:4: a2= minusminus
                             {
                             pushFollow(FOLLOW_minusminus_in_unaryexpression7835);
                             a2=minusminus();
@@ -11467,7 +11467,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start unaryexpressionnotplusminus
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1800:1: unaryexpressionnotplusminus returns [UnaryExpressionNotPlusMinus element = null] : ( (a0= complement | a1= negate ) a2= primary | a3= castexpression | a4= primary ( (a5= plusplus | a6= minusminus ) )? );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1800:1: unaryexpressionnotplusminus returns [UnaryExpressionNotPlusMinus element = null] : ( (a0= complement | a1= negate ) a2= primary | a3= castexpression | a4= primary ( (a5= plusplus | a6= minusminus ) )? );
     public final UnaryExpressionNotPlusMinus unaryexpressionnotplusminus() throws RecognitionException {
         UnaryExpressionNotPlusMinus element =  null;
 
@@ -11490,7 +11490,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createUnaryExpressionNotPlusMinus();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1804:1: ( (a0= complement | a1= negate ) a2= primary | a3= castexpression | a4= primary ( (a5= plusplus | a6= minusminus ) )? )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1804:1: ( (a0= complement | a1= negate ) a2= primary | a3= castexpression | a4= primary ( (a5= plusplus | a6= minusminus ) )? )
             int alt175=3;
             switch ( input.LA(1) ) {
             case 64:
@@ -11555,9 +11555,9 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt175) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1805:2: (a0= complement | a1= negate ) a2= primary
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1805:2: (a0= complement | a1= negate ) a2= primary
                     {
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1805:2: (a0= complement | a1= negate )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1805:2: (a0= complement | a1= negate )
                     int alt172=2;
                     int LA172_0 = input.LA(1);
 
@@ -11576,7 +11576,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt172) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1806:3: a0= complement
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1806:3: a0= complement
                             {
                             pushFollow(FOLLOW_complement_in_unaryexpressionnotplusminus7878);
                             a0=complement();
@@ -11589,7 +11589,7 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             break;
                         case 2 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1809:3: a1= negate
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1809:3: a1= negate
                             {
                             pushFollow(FOLLOW_negate_in_unaryexpressionnotplusminus7892);
                             a1=negate();
@@ -11615,7 +11615,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1814:2: a3= castexpression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1814:2: a3= castexpression
                     {
                     pushFollow(FOLLOW_castexpression_in_unaryexpressionnotplusminus7915);
                     a3=castexpression();
@@ -11628,7 +11628,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1817:2: a4= primary ( (a5= plusplus | a6= minusminus ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1817:2: a4= primary ( (a5= plusplus | a6= minusminus ) )?
                     {
                     pushFollow(FOLLOW_primary_in_unaryexpressionnotplusminus7927);
                     a4=primary();
@@ -11637,7 +11637,7 @@ public class JavaParser extends EMFTextParserImpl {
                     if ( backtracking==0 ) {
                       element.eSet(element.eClass().getEStructuralFeature("primary"), a4); copyLocalizationInfos(a4, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1818:2: ( (a5= plusplus | a6= minusminus ) )?
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1818:2: ( (a5= plusplus | a6= minusminus ) )?
                     int alt174=2;
                     int LA174_0 = input.LA(1);
 
@@ -11646,9 +11646,9 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     switch (alt174) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1819:3: (a5= plusplus | a6= minusminus )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1819:3: (a5= plusplus | a6= minusminus )
                             {
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1819:3: (a5= plusplus | a6= minusminus )
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1819:3: (a5= plusplus | a6= minusminus )
                             int alt173=2;
                             int LA173_0 = input.LA(1);
 
@@ -11667,7 +11667,7 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             switch (alt173) {
                                 case 1 :
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1820:4: a5= plusplus
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1820:4: a5= plusplus
                                     {
                                     pushFollow(FOLLOW_plusplus_in_unaryexpressionnotplusminus7944);
                                     a5=plusplus();
@@ -11680,7 +11680,7 @@ public class JavaParser extends EMFTextParserImpl {
                                     }
                                     break;
                                 case 2 :
-                                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1823:4: a6= minusminus
+                                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1823:4: a6= minusminus
                                     {
                                     pushFollow(FOLLOW_minusminus_in_unaryexpressionnotplusminus7960);
                                     a6=minusminus();
@@ -11719,7 +11719,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start castexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1828:1: castexpression returns [CastExpression element = null] : (a0= '(' a1= primitivetype a2= ')' a3= unaryexpression | a4= '(' (a5= type | a6= expression ) a7= ')' a8= unaryexpressionnotplusminus );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1828:1: castexpression returns [CastExpression element = null] : (a0= '(' a1= primitivetype a2= ')' a3= unaryexpression | a4= '(' (a5= type | a6= expression ) a7= ')' a8= unaryexpressionnotplusminus );
     public final CastExpression castexpression() throws RecognitionException {
         CastExpression element =  null;
 
@@ -11742,7 +11742,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createCastExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1832:1: (a0= '(' a1= primitivetype a2= ')' a3= unaryexpression | a4= '(' (a5= type | a6= expression ) a7= ')' a8= unaryexpressionnotplusminus )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1832:1: (a0= '(' a1= primitivetype a2= ')' a3= unaryexpression | a4= '(' (a5= type | a6= expression ) a7= ')' a8= unaryexpressionnotplusminus )
             int alt177=2;
             int LA177_0 = input.LA(1);
 
@@ -11772,7 +11772,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt177) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1833:2: a0= '(' a1= primitivetype a2= ')' a3= unaryexpression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1833:2: a0= '(' a1= primitivetype a2= ')' a3= unaryexpression
                     {
                     a0=(Token)input.LT(1);
                     match(input,32,FOLLOW_32_in_castexpression7991); if (failed) return element;
@@ -11802,14 +11802,14 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1839:2: a4= '(' (a5= type | a6= expression ) a7= ')' a8= unaryexpressionnotplusminus
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1839:2: a4= '(' (a5= type | a6= expression ) a7= ')' a8= unaryexpressionnotplusminus
                     {
                     a4=(Token)input.LT(1);
                     match(input,32,FOLLOW_32_in_castexpression8027); if (failed) return element;
                     if ( backtracking==0 ) {
                       copyLocalizationInfos((CommonToken)a4, element); 
                     }
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1840:2: (a5= type | a6= expression )
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1840:2: (a5= type | a6= expression )
                     int alt176=2;
                     switch ( input.LA(1) ) {
                     case 30:
@@ -11891,7 +11891,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt176) {
                         case 1 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1841:3: a5= type
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1841:3: a5= type
                             {
                             pushFollow(FOLLOW_type_in_castexpression8039);
                             a5=type();
@@ -11904,7 +11904,7 @@ public class JavaParser extends EMFTextParserImpl {
                             }
                             break;
                         case 2 :
-                            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1844:3: a6= expression
+                            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1844:3: a6= expression
                             {
                             pushFollow(FOLLOW_expression_in_castexpression8053);
                             a6=expression();
@@ -11949,7 +11949,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start primary
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1850:1: primary returns [Primary element = null] : (a0= reference | a1= literal | a2= parexpression );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1850:1: primary returns [Primary element = null] : (a0= reference | a1= literal | a2= parexpression );
     public final Primary primary() throws RecognitionException {
         Primary element =  null;
 
@@ -11964,7 +11964,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createPrimary();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1854:1: (a0= reference | a1= literal | a2= parexpression )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1854:1: (a0= reference | a1= literal | a2= parexpression )
             int alt178=3;
             switch ( input.LA(1) ) {
             case IDENTIFIER:
@@ -12013,7 +12013,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt178) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1855:2: a0= reference
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1855:2: a0= reference
                     {
                     pushFollow(FOLLOW_reference_in_primary8095);
                     a0=reference();
@@ -12026,7 +12026,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1858:2: a1= literal
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1858:2: a1= literal
                     {
                     pushFollow(FOLLOW_literal_in_primary8107);
                     a1=literal();
@@ -12039,7 +12039,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1861:2: a2= parexpression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1861:2: a2= parexpression
                     {
                     pushFollow(FOLLOW_parexpression_in_primary8119);
                     a2=parexpression();
@@ -12066,7 +12066,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start additiveoperator
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1864:1: additiveoperator returns [AdditiveOperator element = null] : a0= ADDITIVE_OPERATOR_LITERAL ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1864:1: additiveoperator returns [AdditiveOperator element = null] : a0= ADDITIVE_OPERATOR_LITERAL ;
     public final AdditiveOperator additiveoperator() throws RecognitionException {
         AdditiveOperator element =  null;
 
@@ -12076,8 +12076,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAdditiveOperator();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1868:1: (a0= ADDITIVE_OPERATOR_LITERAL )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1869:2: a0= ADDITIVE_OPERATOR_LITERAL
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1868:1: (a0= ADDITIVE_OPERATOR_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1869:2: a0= ADDITIVE_OPERATOR_LITERAL
             {
             a0=(Token)input.LT(1);
             match(input,ADDITIVE_OPERATOR_LITERAL,FOLLOW_ADDITIVE_OPERATOR_LITERAL_in_additiveoperator8142); if (failed) return element;
@@ -12100,7 +12100,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start multiplicativeoperator
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1872:1: multiplicativeoperator returns [MultiplicativeOperator element = null] : a0= MULTIPLICATIVE_OPERATOR_LITERAL ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1872:1: multiplicativeoperator returns [MultiplicativeOperator element = null] : a0= MULTIPLICATIVE_OPERATOR_LITERAL ;
     public final MultiplicativeOperator multiplicativeoperator() throws RecognitionException {
         MultiplicativeOperator element =  null;
 
@@ -12110,8 +12110,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createMultiplicativeOperator();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1876:1: (a0= MULTIPLICATIVE_OPERATOR_LITERAL )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1877:2: a0= MULTIPLICATIVE_OPERATOR_LITERAL
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1876:1: (a0= MULTIPLICATIVE_OPERATOR_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1877:2: a0= MULTIPLICATIVE_OPERATOR_LITERAL
             {
             a0=(Token)input.LT(1);
             match(input,MULTIPLICATIVE_OPERATOR_LITERAL,FOLLOW_MULTIPLICATIVE_OPERATOR_LITERAL_in_multiplicativeoperator8165); if (failed) return element;
@@ -12134,7 +12134,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start lessthan
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1880:1: lessthan returns [LessThan element = null] : a0= '<' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1880:1: lessthan returns [LessThan element = null] : a0= '<' ;
     public final LessThan lessthan() throws RecognitionException {
         LessThan element =  null;
 
@@ -12144,8 +12144,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createLessThan();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1884:1: (a0= '<' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1885:2: a0= '<'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1884:1: (a0= '<' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1885:2: a0= '<'
             {
             a0=(Token)input.LT(1);
             match(input,23,FOLLOW_23_in_lessthan8188); if (failed) return element;
@@ -12168,7 +12168,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start lessthanorequal
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1888:1: lessthanorequal returns [LessThanOrEqual element = null] : a0= '<' a1= '=' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1888:1: lessthanorequal returns [LessThanOrEqual element = null] : a0= '<' a1= '=' ;
     public final LessThanOrEqual lessthanorequal() throws RecognitionException {
         LessThanOrEqual element =  null;
 
@@ -12179,8 +12179,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createLessThanOrEqual();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1892:1: (a0= '<' a1= '=' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1893:2: a0= '<' a1= '='
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1892:1: (a0= '<' a1= '=' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1893:2: a0= '<' a1= '='
             {
             a0=(Token)input.LT(1);
             match(input,23,FOLLOW_23_in_lessthanorequal8211); if (failed) return element;
@@ -12208,7 +12208,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start greaterthan
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1897:1: greaterthan returns [GreaterThan element = null] : a0= '>' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1897:1: greaterthan returns [GreaterThan element = null] : a0= '>' ;
     public final GreaterThan greaterthan() throws RecognitionException {
         GreaterThan element =  null;
 
@@ -12218,8 +12218,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createGreaterThan();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1901:1: (a0= '>' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1902:2: a0= '>'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1901:1: (a0= '>' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1902:2: a0= '>'
             {
             a0=(Token)input.LT(1);
             match(input,25,FOLLOW_25_in_greaterthan8242); if (failed) return element;
@@ -12242,7 +12242,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start greaterthanorequal
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1905:1: greaterthanorequal returns [GreaterThanOrEqual element = null] : a0= '>' a1= '=' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1905:1: greaterthanorequal returns [GreaterThanOrEqual element = null] : a0= '>' a1= '=' ;
     public final GreaterThanOrEqual greaterthanorequal() throws RecognitionException {
         GreaterThanOrEqual element =  null;
 
@@ -12253,8 +12253,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createGreaterThanOrEqual();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1909:1: (a0= '>' a1= '=' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1910:2: a0= '>' a1= '='
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1909:1: (a0= '>' a1= '=' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1910:2: a0= '>' a1= '='
             {
             a0=(Token)input.LT(1);
             match(input,25,FOLLOW_25_in_greaterthanorequal8265); if (failed) return element;
@@ -12282,7 +12282,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start leftshift
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1914:1: leftshift returns [LeftShift element = null] : a0= '<' a1= '<' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1914:1: leftshift returns [LeftShift element = null] : a0= '<' a1= '<' ;
     public final LeftShift leftshift() throws RecognitionException {
         LeftShift element =  null;
 
@@ -12293,8 +12293,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createLeftShift();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1918:1: (a0= '<' a1= '<' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1919:2: a0= '<' a1= '<'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1918:1: (a0= '<' a1= '<' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1919:2: a0= '<' a1= '<'
             {
             a0=(Token)input.LT(1);
             match(input,23,FOLLOW_23_in_leftshift8296); if (failed) return element;
@@ -12322,7 +12322,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start rightshift
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1923:1: rightshift returns [RightShift element = null] : a0= '>' a1= '>' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1923:1: rightshift returns [RightShift element = null] : a0= '>' a1= '>' ;
     public final RightShift rightshift() throws RecognitionException {
         RightShift element =  null;
 
@@ -12333,8 +12333,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createRightShift();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1927:1: (a0= '>' a1= '>' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1928:2: a0= '>' a1= '>'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1927:1: (a0= '>' a1= '>' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1928:2: a0= '>' a1= '>'
             {
             a0=(Token)input.LT(1);
             match(input,25,FOLLOW_25_in_rightshift8327); if (failed) return element;
@@ -12362,7 +12362,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start unsignedrightshift
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1932:1: unsignedrightshift returns [UnsignedRightShift element = null] : a0= '>' a1= '>' a2= '>' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1932:1: unsignedrightshift returns [UnsignedRightShift element = null] : a0= '>' a1= '>' a2= '>' ;
     public final UnsignedRightShift unsignedrightshift() throws RecognitionException {
         UnsignedRightShift element =  null;
 
@@ -12374,8 +12374,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createUnsignedRightShift();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1936:1: (a0= '>' a1= '>' a2= '>' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1937:2: a0= '>' a1= '>' a2= '>'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1936:1: (a0= '>' a1= '>' a2= '>' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1937:2: a0= '>' a1= '>' a2= '>'
             {
             a0=(Token)input.LT(1);
             match(input,25,FOLLOW_25_in_unsignedrightshift8358); if (failed) return element;
@@ -12408,7 +12408,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start plusplus
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1942:1: plusplus returns [PlusPlus element = null] : a0= '++' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1942:1: plusplus returns [PlusPlus element = null] : a0= '++' ;
     public final PlusPlus plusplus() throws RecognitionException {
         PlusPlus element =  null;
 
@@ -12418,8 +12418,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createPlusPlus();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1946:1: (a0= '++' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1947:2: a0= '++'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1946:1: (a0= '++' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1947:2: a0= '++'
             {
             a0=(Token)input.LT(1);
             match(input,62,FOLLOW_62_in_plusplus8397); if (failed) return element;
@@ -12442,7 +12442,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start minusminus
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1950:1: minusminus returns [MinusMinus element = null] : a0= '--' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1950:1: minusminus returns [MinusMinus element = null] : a0= '--' ;
     public final MinusMinus minusminus() throws RecognitionException {
         MinusMinus element =  null;
 
@@ -12452,8 +12452,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createMinusMinus();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1954:1: (a0= '--' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1955:2: a0= '--'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1954:1: (a0= '--' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1955:2: a0= '--'
             {
             a0=(Token)input.LT(1);
             match(input,63,FOLLOW_63_in_minusminus8420); if (failed) return element;
@@ -12476,7 +12476,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start complement
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1958:1: complement returns [Complement element = null] : a0= '~' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1958:1: complement returns [Complement element = null] : a0= '~' ;
     public final Complement complement() throws RecognitionException {
         Complement element =  null;
 
@@ -12486,8 +12486,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createComplement();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1962:1: (a0= '~' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1963:2: a0= '~'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1962:1: (a0= '~' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1963:2: a0= '~'
             {
             a0=(Token)input.LT(1);
             match(input,64,FOLLOW_64_in_complement8443); if (failed) return element;
@@ -12510,7 +12510,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start negate
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1966:1: negate returns [Negate element = null] : a0= '!' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1966:1: negate returns [Negate element = null] : a0= '!' ;
     public final Negate negate() throws RecognitionException {
         Negate element =  null;
 
@@ -12520,8 +12520,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createNegate();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1970:1: (a0= '!' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1971:2: a0= '!'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1970:1: (a0= '!' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1971:2: a0= '!'
             {
             a0=(Token)input.LT(1);
             match(input,65,FOLLOW_65_in_negate8466); if (failed) return element;
@@ -12544,7 +12544,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start booleanexpression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1974:1: booleanexpression returns [BooleanExpression element = null] : a0= IDENTIFIER (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' ) a20= IDENTIFIER ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1974:1: booleanexpression returns [BooleanExpression element = null] : a0= IDENTIFIER (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' ) a20= IDENTIFIER ;
     public final BooleanExpression booleanexpression() throws RecognitionException {
         BooleanExpression element =  null;
 
@@ -12574,15 +12574,15 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createBooleanExpression();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1978:1: (a0= IDENTIFIER (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' ) a20= IDENTIFIER )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1979:2: a0= IDENTIFIER (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' ) a20= IDENTIFIER
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1978:1: (a0= IDENTIFIER (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' ) a20= IDENTIFIER )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1979:2: a0= IDENTIFIER (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' ) a20= IDENTIFIER
             {
             a0=(Token)input.LT(1);
             match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_booleanexpression8489); if (failed) return element;
             if ( backtracking==0 ) {
               TokenResolver resolvedResolver = tokenResolverFactory.createTokenResolver("IDENTIFIER");resolvedResolver.setOptions(getOptions());Object resolvedObject =resolvedResolver.resolve(a0.getText(),element.eClass().getEStructuralFeature("left"),element,getResource());if(resolvedObject==null)throw new TokenConversionException(a0,resolvedResolver.getErrorMessage());java.lang.String resolved = (java.lang.String)resolvedObject;element.eSet(element.eClass().getEStructuralFeature("left"), resolved); copyLocalizationInfos((CommonToken) a0, element); 
             }
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1980:2: (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1980:2: (a1= '=' | a2= '+=' | a3= '-=' | a4= '*=' | a5= '/=' | a6= '&=' | a7= '|=' | a8= '^=' | a9= '%=' | a10= '<' a11= '<' a12= '=' | a13= '>' a14= '>' a15= '=' | a16= '>' a17= '>' a18= '>' a19= '=' )
             int alt179=12;
             switch ( input.LA(1) ) {
             case 34:
@@ -12675,7 +12675,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt179) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1981:3: a1= '='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1981:3: a1= '='
                     {
                     a1=(Token)input.LT(1);
                     match(input,34,FOLLOW_34_in_booleanexpression8501); if (failed) return element;
@@ -12686,7 +12686,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1984:3: a2= '+='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1984:3: a2= '+='
                     {
                     a2=(Token)input.LT(1);
                     match(input,66,FOLLOW_66_in_booleanexpression8515); if (failed) return element;
@@ -12697,7 +12697,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1987:3: a3= '-='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1987:3: a3= '-='
                     {
                     a3=(Token)input.LT(1);
                     match(input,67,FOLLOW_67_in_booleanexpression8529); if (failed) return element;
@@ -12708,7 +12708,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1990:3: a4= '*='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1990:3: a4= '*='
                     {
                     a4=(Token)input.LT(1);
                     match(input,68,FOLLOW_68_in_booleanexpression8543); if (failed) return element;
@@ -12719,7 +12719,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1993:3: a5= '/='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1993:3: a5= '/='
                     {
                     a5=(Token)input.LT(1);
                     match(input,69,FOLLOW_69_in_booleanexpression8557); if (failed) return element;
@@ -12730,7 +12730,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1996:3: a6= '&='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1996:3: a6= '&='
                     {
                     a6=(Token)input.LT(1);
                     match(input,70,FOLLOW_70_in_booleanexpression8571); if (failed) return element;
@@ -12741,7 +12741,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1999:3: a7= '|='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1999:3: a7= '|='
                     {
                     a7=(Token)input.LT(1);
                     match(input,71,FOLLOW_71_in_booleanexpression8585); if (failed) return element;
@@ -12752,7 +12752,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2002:3: a8= '^='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2002:3: a8= '^='
                     {
                     a8=(Token)input.LT(1);
                     match(input,72,FOLLOW_72_in_booleanexpression8599); if (failed) return element;
@@ -12763,7 +12763,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2005:3: a9= '%='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2005:3: a9= '%='
                     {
                     a9=(Token)input.LT(1);
                     match(input,73,FOLLOW_73_in_booleanexpression8613); if (failed) return element;
@@ -12774,7 +12774,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 10 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2008:3: a10= '<' a11= '<' a12= '='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2008:3: a10= '<' a11= '<' a12= '='
                     {
                     a10=(Token)input.LT(1);
                     match(input,23,FOLLOW_23_in_booleanexpression8627); if (failed) return element;
@@ -12795,7 +12795,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 11 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2013:3: a13= '>' a14= '>' a15= '='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2013:3: a13= '>' a14= '>' a15= '='
                     {
                     a13=(Token)input.LT(1);
                     match(input,25,FOLLOW_25_in_booleanexpression8659); if (failed) return element;
@@ -12816,7 +12816,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 12 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2018:3: a16= '>' a17= '>' a18= '>' a19= '='
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2018:3: a16= '>' a17= '>' a18= '>' a19= '='
                     {
                     a16=(Token)input.LT(1);
                     match(input,25,FOLLOW_25_in_booleanexpression8691); if (failed) return element;
@@ -12865,7 +12865,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start arraydimension
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2026:1: arraydimension returns [ArrayDimension element = null] : (a0= '[' a1= ']' ) ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2026:1: arraydimension returns [ArrayDimension element = null] : (a0= '[' a1= ']' ) ;
     public final ArrayDimension arraydimension() throws RecognitionException {
         ArrayDimension element =  null;
 
@@ -12876,11 +12876,11 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createArrayDimension();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2030:1: ( (a0= '[' a1= ']' ) )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2031:2: (a0= '[' a1= ']' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2030:1: ( (a0= '[' a1= ']' ) )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2031:2: (a0= '[' a1= ']' )
             {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2031:2: (a0= '[' a1= ']' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2032:3: a0= '[' a1= ']'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2031:2: (a0= '[' a1= ']' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2032:3: a0= '[' a1= ']'
             {
             a0=(Token)input.LT(1);
             match(input,41,FOLLOW_41_in_arraydimension8756); if (failed) return element;
@@ -12911,7 +12911,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start nullliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2037:1: nullliteral returns [NullLiteral element = null] : a0= 'null' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2037:1: nullliteral returns [NullLiteral element = null] : a0= 'null' ;
     public final NullLiteral nullliteral() throws RecognitionException {
         NullLiteral element =  null;
 
@@ -12921,8 +12921,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createNullLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2041:1: (a0= 'null' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2042:2: a0= 'null'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2041:1: (a0= 'null' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2042:2: a0= 'null'
             {
             a0=(Token)input.LT(1);
             match(input,74,FOLLOW_74_in_nullliteral8791); if (failed) return element;
@@ -12945,7 +12945,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start voidliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2045:1: voidliteral returns [VoidLiteral element = null] : a0= 'void' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2045:1: voidliteral returns [VoidLiteral element = null] : a0= 'void' ;
     public final VoidLiteral voidliteral() throws RecognitionException {
         VoidLiteral element =  null;
 
@@ -12955,8 +12955,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createVoidLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2049:1: (a0= 'void' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2050:2: a0= 'void'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2049:1: (a0= 'void' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2050:2: a0= 'void'
             {
             a0=(Token)input.LT(1);
             match(input,75,FOLLOW_75_in_voidliteral8814); if (failed) return element;
@@ -12979,7 +12979,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start classliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2053:1: classliteral returns [ClassLiteral element = null] : a0= 'class' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2053:1: classliteral returns [ClassLiteral element = null] : a0= 'class' ;
     public final ClassLiteral classliteral() throws RecognitionException {
         ClassLiteral element =  null;
 
@@ -12989,8 +12989,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createClassLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2057:1: (a0= 'class' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2058:2: a0= 'class'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2057:1: (a0= 'class' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2058:2: a0= 'class'
             {
             a0=(Token)input.LT(1);
             match(input,22,FOLLOW_22_in_classliteral8837); if (failed) return element;
@@ -13013,7 +13013,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordthis
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2061:1: keywordthis returns [This element = null] : a0= 'this' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2061:1: keywordthis returns [This element = null] : a0= 'this' ;
     public final This keywordthis() throws RecognitionException {
         This element =  null;
 
@@ -13023,8 +13023,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createThis();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2065:1: (a0= 'this' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2066:2: a0= 'this'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2065:1: (a0= 'this' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2066:2: a0= 'this'
             {
             a0=(Token)input.LT(1);
             match(input,76,FOLLOW_76_in_keywordthis8860); if (failed) return element;
@@ -13047,7 +13047,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordsuper
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2069:1: keywordsuper returns [Super element = null] : a0= 'super' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2069:1: keywordsuper returns [Super element = null] : a0= 'super' ;
     public final Super keywordsuper() throws RecognitionException {
         Super element =  null;
 
@@ -13057,8 +13057,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createSuper();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2073:1: (a0= 'super' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2074:2: a0= 'super'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2073:1: (a0= 'super' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2074:2: a0= 'super'
             {
             a0=(Token)input.LT(1);
             match(input,44,FOLLOW_44_in_keywordsuper8883); if (failed) return element;
@@ -13081,7 +13081,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordpublic
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2077:1: keywordpublic returns [Public element = null] : a0= 'public' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2077:1: keywordpublic returns [Public element = null] : a0= 'public' ;
     public final Public keywordpublic() throws RecognitionException {
         Public element =  null;
 
@@ -13091,8 +13091,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createPublic();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2081:1: (a0= 'public' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2082:2: a0= 'public'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2081:1: (a0= 'public' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2082:2: a0= 'public'
             {
             a0=(Token)input.LT(1);
             match(input,77,FOLLOW_77_in_keywordpublic8906); if (failed) return element;
@@ -13115,7 +13115,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordabstract
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2085:1: keywordabstract returns [Abstract element = null] : a0= 'abstract' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2085:1: keywordabstract returns [Abstract element = null] : a0= 'abstract' ;
     public final Abstract keywordabstract() throws RecognitionException {
         Abstract element =  null;
 
@@ -13125,8 +13125,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createAbstract();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2089:1: (a0= 'abstract' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2090:2: a0= 'abstract'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2089:1: (a0= 'abstract' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2090:2: a0= 'abstract'
             {
             a0=(Token)input.LT(1);
             match(input,78,FOLLOW_78_in_keywordabstract8929); if (failed) return element;
@@ -13149,7 +13149,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordprotected
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2093:1: keywordprotected returns [Protected element = null] : a0= 'protected' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2093:1: keywordprotected returns [Protected element = null] : a0= 'protected' ;
     public final Protected keywordprotected() throws RecognitionException {
         Protected element =  null;
 
@@ -13159,8 +13159,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createProtected();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2097:1: (a0= 'protected' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2098:2: a0= 'protected'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2097:1: (a0= 'protected' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2098:2: a0= 'protected'
             {
             a0=(Token)input.LT(1);
             match(input,79,FOLLOW_79_in_keywordprotected8952); if (failed) return element;
@@ -13183,7 +13183,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordprivate
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2101:1: keywordprivate returns [Private element = null] : a0= 'private' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2101:1: keywordprivate returns [Private element = null] : a0= 'private' ;
     public final Private keywordprivate() throws RecognitionException {
         Private element =  null;
 
@@ -13193,8 +13193,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createPrivate();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2105:1: (a0= 'private' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2106:2: a0= 'private'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2105:1: (a0= 'private' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2106:2: a0= 'private'
             {
             a0=(Token)input.LT(1);
             match(input,80,FOLLOW_80_in_keywordprivate8975); if (failed) return element;
@@ -13217,7 +13217,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordfinal
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2109:1: keywordfinal returns [Final element = null] : a0= 'final' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2109:1: keywordfinal returns [Final element = null] : a0= 'final' ;
     public final Final keywordfinal() throws RecognitionException {
         Final element =  null;
 
@@ -13227,8 +13227,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createFinal();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2113:1: (a0= 'final' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2114:2: a0= 'final'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2113:1: (a0= 'final' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2114:2: a0= 'final'
             {
             a0=(Token)input.LT(1);
             match(input,81,FOLLOW_81_in_keywordfinal8998); if (failed) return element;
@@ -13251,7 +13251,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordstatic
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2117:1: keywordstatic returns [Static element = null] : a0= 'static' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2117:1: keywordstatic returns [Static element = null] : a0= 'static' ;
     public final Static keywordstatic() throws RecognitionException {
         Static element =  null;
 
@@ -13261,8 +13261,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createStatic();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2121:1: (a0= 'static' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2122:2: a0= 'static'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2121:1: (a0= 'static' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2122:2: a0= 'static'
             {
             a0=(Token)input.LT(1);
             match(input,82,FOLLOW_82_in_keywordstatic9021); if (failed) return element;
@@ -13285,7 +13285,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordnative
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2125:1: keywordnative returns [Native element = null] : a0= 'native' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2125:1: keywordnative returns [Native element = null] : a0= 'native' ;
     public final Native keywordnative() throws RecognitionException {
         Native element =  null;
 
@@ -13295,8 +13295,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createNative();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2129:1: (a0= 'native' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2130:2: a0= 'native'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2129:1: (a0= 'native' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2130:2: a0= 'native'
             {
             a0=(Token)input.LT(1);
             match(input,83,FOLLOW_83_in_keywordnative9044); if (failed) return element;
@@ -13319,7 +13319,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordsynchronized
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2133:1: keywordsynchronized returns [Synchronized element = null] : a0= 'synchronized' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2133:1: keywordsynchronized returns [Synchronized element = null] : a0= 'synchronized' ;
     public final Synchronized keywordsynchronized() throws RecognitionException {
         Synchronized element =  null;
 
@@ -13329,8 +13329,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createSynchronized();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2137:1: (a0= 'synchronized' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2138:2: a0= 'synchronized'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2137:1: (a0= 'synchronized' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2138:2: a0= 'synchronized'
             {
             a0=(Token)input.LT(1);
             match(input,52,FOLLOW_52_in_keywordsynchronized9067); if (failed) return element;
@@ -13353,7 +13353,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordtransient
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2141:1: keywordtransient returns [Transient element = null] : a0= 'transient' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2141:1: keywordtransient returns [Transient element = null] : a0= 'transient' ;
     public final Transient keywordtransient() throws RecognitionException {
         Transient element =  null;
 
@@ -13363,8 +13363,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createTransient();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2145:1: (a0= 'transient' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2146:2: a0= 'transient'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2145:1: (a0= 'transient' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2146:2: a0= 'transient'
             {
             a0=(Token)input.LT(1);
             match(input,84,FOLLOW_84_in_keywordtransient9090); if (failed) return element;
@@ -13387,7 +13387,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordvolatile
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2149:1: keywordvolatile returns [Volatile element = null] : a0= 'volatile' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2149:1: keywordvolatile returns [Volatile element = null] : a0= 'volatile' ;
     public final Volatile keywordvolatile() throws RecognitionException {
         Volatile element =  null;
 
@@ -13397,8 +13397,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createVolatile();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2153:1: (a0= 'volatile' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2154:2: a0= 'volatile'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2153:1: (a0= 'volatile' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2154:2: a0= 'volatile'
             {
             a0=(Token)input.LT(1);
             match(input,85,FOLLOW_85_in_keywordvolatile9113); if (failed) return element;
@@ -13421,7 +13421,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordstrictfp
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2157:1: keywordstrictfp returns [Strictfp element = null] : a0= 'strictfp' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2157:1: keywordstrictfp returns [Strictfp element = null] : a0= 'strictfp' ;
     public final Strictfp keywordstrictfp() throws RecognitionException {
         Strictfp element =  null;
 
@@ -13431,8 +13431,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createStrictfp();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2161:1: (a0= 'strictfp' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2162:2: a0= 'strictfp'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2161:1: (a0= 'strictfp' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2162:2: a0= 'strictfp'
             {
             a0=(Token)input.LT(1);
             match(input,86,FOLLOW_86_in_keywordstrictfp9136); if (failed) return element;
@@ -13455,7 +13455,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordboolean
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2165:1: keywordboolean returns [Boolean element = null] : a0= 'boolean' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2165:1: keywordboolean returns [Boolean element = null] : a0= 'boolean' ;
     public final Boolean keywordboolean() throws RecognitionException {
         Boolean element =  null;
 
@@ -13465,8 +13465,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createBoolean();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2169:1: (a0= 'boolean' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2170:2: a0= 'boolean'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2169:1: (a0= 'boolean' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2170:2: a0= 'boolean'
             {
             a0=(Token)input.LT(1);
             match(input,87,FOLLOW_87_in_keywordboolean9159); if (failed) return element;
@@ -13489,7 +13489,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordchar
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2173:1: keywordchar returns [Char element = null] : a0= 'char' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2173:1: keywordchar returns [Char element = null] : a0= 'char' ;
     public final Char keywordchar() throws RecognitionException {
         Char element =  null;
 
@@ -13499,8 +13499,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createChar();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2177:1: (a0= 'char' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2178:2: a0= 'char'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2177:1: (a0= 'char' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2178:2: a0= 'char'
             {
             a0=(Token)input.LT(1);
             match(input,88,FOLLOW_88_in_keywordchar9182); if (failed) return element;
@@ -13523,7 +13523,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordbyte
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2181:1: keywordbyte returns [Byte element = null] : a0= 'byte' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2181:1: keywordbyte returns [Byte element = null] : a0= 'byte' ;
     public final Byte keywordbyte() throws RecognitionException {
         Byte element =  null;
 
@@ -13533,8 +13533,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createByte();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2185:1: (a0= 'byte' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2186:2: a0= 'byte'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2185:1: (a0= 'byte' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2186:2: a0= 'byte'
             {
             a0=(Token)input.LT(1);
             match(input,89,FOLLOW_89_in_keywordbyte9205); if (failed) return element;
@@ -13557,7 +13557,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordshort
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2189:1: keywordshort returns [Short element = null] : a0= 'short' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2189:1: keywordshort returns [Short element = null] : a0= 'short' ;
     public final Short keywordshort() throws RecognitionException {
         Short element =  null;
 
@@ -13567,8 +13567,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createShort();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2193:1: (a0= 'short' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2194:2: a0= 'short'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2193:1: (a0= 'short' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2194:2: a0= 'short'
             {
             a0=(Token)input.LT(1);
             match(input,90,FOLLOW_90_in_keywordshort9228); if (failed) return element;
@@ -13591,7 +13591,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordint
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2197:1: keywordint returns [Int element = null] : a0= 'int' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2197:1: keywordint returns [Int element = null] : a0= 'int' ;
     public final Int keywordint() throws RecognitionException {
         Int element =  null;
 
@@ -13601,8 +13601,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createInt();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2201:1: (a0= 'int' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2202:2: a0= 'int'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2201:1: (a0= 'int' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2202:2: a0= 'int'
             {
             a0=(Token)input.LT(1);
             match(input,91,FOLLOW_91_in_keywordint9251); if (failed) return element;
@@ -13625,7 +13625,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordlong
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2205:1: keywordlong returns [Long element = null] : a0= 'long' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2205:1: keywordlong returns [Long element = null] : a0= 'long' ;
     public final Long keywordlong() throws RecognitionException {
         Long element =  null;
 
@@ -13635,8 +13635,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createLong();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2209:1: (a0= 'long' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2210:2: a0= 'long'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2209:1: (a0= 'long' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2210:2: a0= 'long'
             {
             a0=(Token)input.LT(1);
             match(input,92,FOLLOW_92_in_keywordlong9274); if (failed) return element;
@@ -13659,7 +13659,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keywordfloat
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2213:1: keywordfloat returns [Float element = null] : a0= 'float' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2213:1: keywordfloat returns [Float element = null] : a0= 'float' ;
     public final Float keywordfloat() throws RecognitionException {
         Float element =  null;
 
@@ -13669,8 +13669,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createFloat();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2217:1: (a0= 'float' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2218:2: a0= 'float'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2217:1: (a0= 'float' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2218:2: a0= 'float'
             {
             a0=(Token)input.LT(1);
             match(input,93,FOLLOW_93_in_keywordfloat9297); if (failed) return element;
@@ -13693,7 +13693,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start keyworddouble
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2221:1: keyworddouble returns [Double element = null] : a0= 'double' ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2221:1: keyworddouble returns [Double element = null] : a0= 'double' ;
     public final Double keyworddouble() throws RecognitionException {
         Double element =  null;
 
@@ -13703,8 +13703,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createDouble();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2225:1: (a0= 'double' )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2226:2: a0= 'double'
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2225:1: (a0= 'double' )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2226:2: a0= 'double'
             {
             a0=(Token)input.LT(1);
             match(input,94,FOLLOW_94_in_keyworddouble9320); if (failed) return element;
@@ -13727,7 +13727,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start integerliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2229:1: integerliteral returns [IntegerLiteral element = null] : (a0= DECIMAL_LITERAL | a1= HEX_LITERAL | a2= OCTAL_LITERAL );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2229:1: integerliteral returns [IntegerLiteral element = null] : (a0= DECIMAL_LITERAL | a1= HEX_LITERAL | a2= OCTAL_LITERAL );
     public final IntegerLiteral integerliteral() throws RecognitionException {
         IntegerLiteral element =  null;
 
@@ -13739,7 +13739,7 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createIntegerLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2233:1: (a0= DECIMAL_LITERAL | a1= HEX_LITERAL | a2= OCTAL_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2233:1: (a0= DECIMAL_LITERAL | a1= HEX_LITERAL | a2= OCTAL_LITERAL )
             int alt180=3;
             switch ( input.LA(1) ) {
             case DECIMAL_LITERAL:
@@ -13767,7 +13767,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt180) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2234:2: a0= DECIMAL_LITERAL
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2234:2: a0= DECIMAL_LITERAL
                     {
                     a0=(Token)input.LT(1);
                     match(input,DECIMAL_LITERAL,FOLLOW_DECIMAL_LITERAL_in_integerliteral9343); if (failed) return element;
@@ -13778,7 +13778,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2237:2: a1= HEX_LITERAL
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2237:2: a1= HEX_LITERAL
                     {
                     a1=(Token)input.LT(1);
                     match(input,HEX_LITERAL,FOLLOW_HEX_LITERAL_in_integerliteral9355); if (failed) return element;
@@ -13789,7 +13789,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2240:2: a2= OCTAL_LITERAL
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2240:2: a2= OCTAL_LITERAL
                     {
                     a2=(Token)input.LT(1);
                     match(input,OCTAL_LITERAL,FOLLOW_OCTAL_LITERAL_in_integerliteral9367); if (failed) return element;
@@ -13814,7 +13814,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start floatingpointliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2243:1: floatingpointliteral returns [FloatingPointLiteral element = null] : a0= FLOATING_POINT_LITERAL ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2243:1: floatingpointliteral returns [FloatingPointLiteral element = null] : a0= FLOATING_POINT_LITERAL ;
     public final FloatingPointLiteral floatingpointliteral() throws RecognitionException {
         FloatingPointLiteral element =  null;
 
@@ -13824,8 +13824,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createFloatingPointLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2247:1: (a0= FLOATING_POINT_LITERAL )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2248:2: a0= FLOATING_POINT_LITERAL
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2247:1: (a0= FLOATING_POINT_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2248:2: a0= FLOATING_POINT_LITERAL
             {
             a0=(Token)input.LT(1);
             match(input,FLOATING_POINT_LITERAL,FOLLOW_FLOATING_POINT_LITERAL_in_floatingpointliteral9390); if (failed) return element;
@@ -13848,7 +13848,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start characterliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2251:1: characterliteral returns [CharacterLiteral element = null] : a0= CHARACTER_LITERAL ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2251:1: characterliteral returns [CharacterLiteral element = null] : a0= CHARACTER_LITERAL ;
     public final CharacterLiteral characterliteral() throws RecognitionException {
         CharacterLiteral element =  null;
 
@@ -13858,8 +13858,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createCharacterLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2255:1: (a0= CHARACTER_LITERAL )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2256:2: a0= CHARACTER_LITERAL
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2255:1: (a0= CHARACTER_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2256:2: a0= CHARACTER_LITERAL
             {
             a0=(Token)input.LT(1);
             match(input,CHARACTER_LITERAL,FOLLOW_CHARACTER_LITERAL_in_characterliteral9413); if (failed) return element;
@@ -13882,7 +13882,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start stringliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2259:1: stringliteral returns [StringLiteral element = null] : a0= STRING_LITERAL ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2259:1: stringliteral returns [StringLiteral element = null] : a0= STRING_LITERAL ;
     public final StringLiteral stringliteral() throws RecognitionException {
         StringLiteral element =  null;
 
@@ -13892,8 +13892,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createStringLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2263:1: (a0= STRING_LITERAL )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2264:2: a0= STRING_LITERAL
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2263:1: (a0= STRING_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2264:2: a0= STRING_LITERAL
             {
             a0=(Token)input.LT(1);
             match(input,STRING_LITERAL,FOLLOW_STRING_LITERAL_in_stringliteral9436); if (failed) return element;
@@ -13916,7 +13916,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start booleanliteral
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2267:1: booleanliteral returns [BooleanLiteral element = null] : a0= BOOLEAN_LITERAL ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2267:1: booleanliteral returns [BooleanLiteral element = null] : a0= BOOLEAN_LITERAL ;
     public final BooleanLiteral booleanliteral() throws RecognitionException {
         BooleanLiteral element =  null;
 
@@ -13926,8 +13926,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createBooleanLiteral();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2271:1: (a0= BOOLEAN_LITERAL )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2272:2: a0= BOOLEAN_LITERAL
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2271:1: (a0= BOOLEAN_LITERAL )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2272:2: a0= BOOLEAN_LITERAL
             {
             a0=(Token)input.LT(1);
             match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_booleanliteral9459); if (failed) return element;
@@ -13950,7 +13950,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start singlelinecomment
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2275:1: singlelinecomment returns [SingleLineComment element = null] : a0= SL_COMMENT ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2275:1: singlelinecomment returns [SingleLineComment element = null] : a0= SL_COMMENT ;
     public final SingleLineComment singlelinecomment() throws RecognitionException {
         SingleLineComment element =  null;
 
@@ -13960,8 +13960,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createSingleLineComment();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2279:1: (a0= SL_COMMENT )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2280:2: a0= SL_COMMENT
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2279:1: (a0= SL_COMMENT )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2280:2: a0= SL_COMMENT
             {
             a0=(Token)input.LT(1);
             match(input,SL_COMMENT,FOLLOW_SL_COMMENT_in_singlelinecomment9482); if (failed) return element;
@@ -13984,7 +13984,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start multilinecomment
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2283:1: multilinecomment returns [MultiLineComment element = null] : a0= ML_COMMENT ;
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2283:1: multilinecomment returns [MultiLineComment element = null] : a0= ML_COMMENT ;
     public final MultiLineComment multilinecomment() throws RecognitionException {
         MultiLineComment element =  null;
 
@@ -13994,8 +13994,8 @@ public class JavaParser extends EMFTextParserImpl {
         	element = JavaFactory.eINSTANCE.createMultiLineComment();
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2287:1: (a0= ML_COMMENT )
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2288:2: a0= ML_COMMENT
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2287:1: (a0= ML_COMMENT )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2288:2: a0= ML_COMMENT
             {
             a0=(Token)input.LT(1);
             match(input,ML_COMMENT,FOLLOW_ML_COMMENT_in_multilinecomment9505); if (failed) return element;
@@ -14018,7 +14018,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start comment
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2291:1: comment returns [Comment element = null] : (c0= singlelinecomment | c1= multilinecomment );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2291:1: comment returns [Comment element = null] : (c0= singlelinecomment | c1= multilinecomment );
     public final Comment comment() throws RecognitionException {
         Comment element =  null;
 
@@ -14028,7 +14028,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2293:1: (c0= singlelinecomment | c1= multilinecomment )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2293:1: (c0= singlelinecomment | c1= multilinecomment )
             int alt181=2;
             int LA181_0 = input.LA(1);
 
@@ -14047,7 +14047,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt181) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2294:2: c0= singlelinecomment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2294:2: c0= singlelinecomment
                     {
                     pushFollow(FOLLOW_singlelinecomment_in_comment9524);
                     c0=singlelinecomment();
@@ -14060,7 +14060,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2295:2: c1= multilinecomment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2295:2: c1= multilinecomment
                     {
                     pushFollow(FOLLOW_multilinecomment_in_comment9534);
                     c1=multilinecomment();
@@ -14087,7 +14087,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start classifier
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2298:1: classifier returns [Classifier element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2298:1: classifier returns [Classifier element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration );
     public final Classifier classifier() throws RecognitionException {
         Classifier element =  null;
 
@@ -14101,12 +14101,12 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2300:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2300:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration )
             int alt182=4;
             alt182 = dfa182.predict(input);
             switch (alt182) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2301:2: c0= keywordclass
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2301:2: c0= keywordclass
                     {
                     pushFollow(FOLLOW_keywordclass_in_classifier9553);
                     c0=keywordclass();
@@ -14119,7 +14119,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2302:2: c1= keywordinterface
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2302:2: c1= keywordinterface
                     {
                     pushFollow(FOLLOW_keywordinterface_in_classifier9563);
                     c1=keywordinterface();
@@ -14132,7 +14132,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2303:2: c2= annotation
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2303:2: c2= annotation
                     {
                     pushFollow(FOLLOW_annotation_in_classifier9573);
                     c2=annotation();
@@ -14145,7 +14145,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2304:2: c3= enumeration
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2304:2: c3= enumeration
                     {
                     pushFollow(FOLLOW_enumeration_in_classifier9583);
                     c3=enumeration();
@@ -14172,7 +14172,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start modifier
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2307:1: modifier returns [Modifier element = null] : (c0= keywordpublic | c1= keywordabstract | c2= keywordprotected | c3= keywordprivate | c4= keywordfinal | c5= keywordstatic | c6= keywordnative | c7= keywordsynchronized | c8= keywordtransient | c9= keywordvolatile | c10= keywordstrictfp );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2307:1: modifier returns [Modifier element = null] : (c0= keywordpublic | c1= keywordabstract | c2= keywordprotected | c3= keywordprivate | c4= keywordfinal | c5= keywordstatic | c6= keywordnative | c7= keywordsynchronized | c8= keywordtransient | c9= keywordvolatile | c10= keywordstrictfp );
     public final Modifier modifier() throws RecognitionException {
         Modifier element =  null;
 
@@ -14200,7 +14200,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2309:1: (c0= keywordpublic | c1= keywordabstract | c2= keywordprotected | c3= keywordprivate | c4= keywordfinal | c5= keywordstatic | c6= keywordnative | c7= keywordsynchronized | c8= keywordtransient | c9= keywordvolatile | c10= keywordstrictfp )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2309:1: (c0= keywordpublic | c1= keywordabstract | c2= keywordprotected | c3= keywordprivate | c4= keywordfinal | c5= keywordstatic | c6= keywordnative | c7= keywordsynchronized | c8= keywordtransient | c9= keywordvolatile | c10= keywordstrictfp )
             int alt183=11;
             switch ( input.LA(1) ) {
             case 77:
@@ -14268,7 +14268,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt183) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2310:2: c0= keywordpublic
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2310:2: c0= keywordpublic
                     {
                     pushFollow(FOLLOW_keywordpublic_in_modifier9602);
                     c0=keywordpublic();
@@ -14281,7 +14281,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2311:2: c1= keywordabstract
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2311:2: c1= keywordabstract
                     {
                     pushFollow(FOLLOW_keywordabstract_in_modifier9612);
                     c1=keywordabstract();
@@ -14294,7 +14294,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2312:2: c2= keywordprotected
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2312:2: c2= keywordprotected
                     {
                     pushFollow(FOLLOW_keywordprotected_in_modifier9622);
                     c2=keywordprotected();
@@ -14307,7 +14307,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2313:2: c3= keywordprivate
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2313:2: c3= keywordprivate
                     {
                     pushFollow(FOLLOW_keywordprivate_in_modifier9632);
                     c3=keywordprivate();
@@ -14320,7 +14320,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2314:2: c4= keywordfinal
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2314:2: c4= keywordfinal
                     {
                     pushFollow(FOLLOW_keywordfinal_in_modifier9642);
                     c4=keywordfinal();
@@ -14333,7 +14333,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2315:2: c5= keywordstatic
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2315:2: c5= keywordstatic
                     {
                     pushFollow(FOLLOW_keywordstatic_in_modifier9652);
                     c5=keywordstatic();
@@ -14346,7 +14346,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2316:2: c6= keywordnative
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2316:2: c6= keywordnative
                     {
                     pushFollow(FOLLOW_keywordnative_in_modifier9662);
                     c6=keywordnative();
@@ -14359,7 +14359,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2317:2: c7= keywordsynchronized
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2317:2: c7= keywordsynchronized
                     {
                     pushFollow(FOLLOW_keywordsynchronized_in_modifier9672);
                     c7=keywordsynchronized();
@@ -14372,7 +14372,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2318:2: c8= keywordtransient
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2318:2: c8= keywordtransient
                     {
                     pushFollow(FOLLOW_keywordtransient_in_modifier9682);
                     c8=keywordtransient();
@@ -14385,7 +14385,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 10 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2319:2: c9= keywordvolatile
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2319:2: c9= keywordvolatile
                     {
                     pushFollow(FOLLOW_keywordvolatile_in_modifier9692);
                     c9=keywordvolatile();
@@ -14398,7 +14398,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 11 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2320:2: c10= keywordstrictfp
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2320:2: c10= keywordstrictfp
                     {
                     pushFollow(FOLLOW_keywordstrictfp_in_modifier9702);
                     c10=keywordstrictfp();
@@ -14425,7 +14425,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start member
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2323:1: member returns [Member element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= constructor | c6= method | c7= annotationmethod | c8= field | c9= singlelinecomment | c10= multilinecomment );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2323:1: member returns [Member element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= constructor | c6= method | c7= annotationmethod | c8= field | c9= singlelinecomment | c10= multilinecomment );
     public final Member member() throws RecognitionException {
         Member element =  null;
 
@@ -14453,7 +14453,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2325:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= constructor | c6= method | c7= annotationmethod | c8= field | c9= singlelinecomment | c10= multilinecomment )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2325:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= constructor | c6= method | c7= annotationmethod | c8= field | c9= singlelinecomment | c10= multilinecomment )
             int alt184=11;
             switch ( input.LA(1) ) {
             case 77:
@@ -15209,7 +15209,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt184) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2326:2: c0= keywordclass
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2326:2: c0= keywordclass
                     {
                     pushFollow(FOLLOW_keywordclass_in_member9721);
                     c0=keywordclass();
@@ -15222,7 +15222,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2327:2: c1= keywordinterface
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2327:2: c1= keywordinterface
                     {
                     pushFollow(FOLLOW_keywordinterface_in_member9731);
                     c1=keywordinterface();
@@ -15235,7 +15235,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2328:2: c2= annotation
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2328:2: c2= annotation
                     {
                     pushFollow(FOLLOW_annotation_in_member9741);
                     c2=annotation();
@@ -15248,7 +15248,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2329:2: c3= enumeration
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2329:2: c3= enumeration
                     {
                     pushFollow(FOLLOW_enumeration_in_member9751);
                     c3=enumeration();
@@ -15261,7 +15261,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2330:2: c4= block
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2330:2: c4= block
                     {
                     pushFollow(FOLLOW_block_in_member9761);
                     c4=block();
@@ -15274,7 +15274,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2331:2: c5= constructor
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2331:2: c5= constructor
                     {
                     pushFollow(FOLLOW_constructor_in_member9771);
                     c5=constructor();
@@ -15287,7 +15287,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2332:2: c6= method
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2332:2: c6= method
                     {
                     pushFollow(FOLLOW_method_in_member9781);
                     c6=method();
@@ -15300,7 +15300,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2333:2: c7= annotationmethod
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2333:2: c7= annotationmethod
                     {
                     pushFollow(FOLLOW_annotationmethod_in_member9791);
                     c7=annotationmethod();
@@ -15313,7 +15313,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2334:2: c8= field
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2334:2: c8= field
                     {
                     pushFollow(FOLLOW_field_in_member9801);
                     c8=field();
@@ -15326,7 +15326,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 10 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2335:2: c9= singlelinecomment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2335:2: c9= singlelinecomment
                     {
                     pushFollow(FOLLOW_singlelinecomment_in_member9811);
                     c9=singlelinecomment();
@@ -15339,7 +15339,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 11 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2336:2: c10= multilinecomment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2336:2: c10= multilinecomment
                     {
                     pushFollow(FOLLOW_multilinecomment_in_member9821);
                     c10=multilinecomment();
@@ -15366,7 +15366,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start annotationelementvalue
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2339:1: annotationelementvalue returns [AnnotationElementValue element = null] : (c0= annotationinstance | c1= annotationelementvaluearray | c2= nullliteral | c3= integerliteral | c4= floatingpointliteral | c5= characterliteral | c6= stringliteral | c7= booleanliteral );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2339:1: annotationelementvalue returns [AnnotationElementValue element = null] : (c0= annotationinstance | c1= annotationelementvaluearray | c2= nullliteral | c3= integerliteral | c4= floatingpointliteral | c5= characterliteral | c6= stringliteral | c7= booleanliteral );
     public final AnnotationElementValue annotationelementvalue() throws RecognitionException {
         AnnotationElementValue element =  null;
 
@@ -15388,7 +15388,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2341:1: (c0= annotationinstance | c1= annotationelementvaluearray | c2= nullliteral | c3= integerliteral | c4= floatingpointliteral | c5= characterliteral | c6= stringliteral | c7= booleanliteral )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2341:1: (c0= annotationinstance | c1= annotationelementvaluearray | c2= nullliteral | c3= integerliteral | c4= floatingpointliteral | c5= characterliteral | c6= stringliteral | c7= booleanliteral )
             int alt185=8;
             switch ( input.LA(1) ) {
             case 31:
@@ -15443,7 +15443,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt185) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2342:2: c0= annotationinstance
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2342:2: c0= annotationinstance
                     {
                     pushFollow(FOLLOW_annotationinstance_in_annotationelementvalue9840);
                     c0=annotationinstance();
@@ -15456,7 +15456,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2343:2: c1= annotationelementvaluearray
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2343:2: c1= annotationelementvaluearray
                     {
                     pushFollow(FOLLOW_annotationelementvaluearray_in_annotationelementvalue9850);
                     c1=annotationelementvaluearray();
@@ -15469,7 +15469,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2344:2: c2= nullliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2344:2: c2= nullliteral
                     {
                     pushFollow(FOLLOW_nullliteral_in_annotationelementvalue9860);
                     c2=nullliteral();
@@ -15482,7 +15482,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2345:2: c3= integerliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2345:2: c3= integerliteral
                     {
                     pushFollow(FOLLOW_integerliteral_in_annotationelementvalue9870);
                     c3=integerliteral();
@@ -15495,7 +15495,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2346:2: c4= floatingpointliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2346:2: c4= floatingpointliteral
                     {
                     pushFollow(FOLLOW_floatingpointliteral_in_annotationelementvalue9880);
                     c4=floatingpointliteral();
@@ -15508,7 +15508,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2347:2: c5= characterliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2347:2: c5= characterliteral
                     {
                     pushFollow(FOLLOW_characterliteral_in_annotationelementvalue9890);
                     c5=characterliteral();
@@ -15521,7 +15521,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2348:2: c6= stringliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2348:2: c6= stringliteral
                     {
                     pushFollow(FOLLOW_stringliteral_in_annotationelementvalue9900);
                     c6=stringliteral();
@@ -15534,7 +15534,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2349:2: c7= booleanliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2349:2: c7= booleanliteral
                     {
                     pushFollow(FOLLOW_booleanliteral_in_annotationelementvalue9910);
                     c7=booleanliteral();
@@ -15561,7 +15561,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start expression
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2352:1: expression returns [Expression element = null] : (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2352:1: expression returns [Expression element = null] : (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression );
     public final Expression expression() throws RecognitionException {
         Expression element =  null;
 
@@ -15575,7 +15575,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2354:1: (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2354:1: (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression )
             int alt186=4;
             switch ( input.LA(1) ) {
             case 40:
@@ -15897,7 +15897,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt186) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2355:2: c0= arrayinstantiationbyvalues
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2355:2: c0= arrayinstantiationbyvalues
                     {
                     pushFollow(FOLLOW_arrayinstantiationbyvalues_in_expression9929);
                     c0=arrayinstantiationbyvalues();
@@ -15910,7 +15910,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2356:2: c1= arrayinstantiationbysize
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2356:2: c1= arrayinstantiationbysize
                     {
                     pushFollow(FOLLOW_arrayinstantiationbysize_in_expression9939);
                     c1=arrayinstantiationbysize();
@@ -15923,7 +15923,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2357:2: c2= assignment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2357:2: c2= assignment
                     {
                     pushFollow(FOLLOW_assignment_in_expression9949);
                     c2=assignment();
@@ -15936,7 +15936,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2358:2: c3= relationexpression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2358:2: c3= relationexpression
                     {
                     pushFollow(FOLLOW_relationexpression_in_expression9959);
                     c3=relationexpression();
@@ -15963,7 +15963,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start statement
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2361:1: statement returns [Statement element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= localvariablestatement | c6= keywordassert | c7= condition | c8= forloop | c9= foreachloop | c10= whileloop | c11= dowhileloop | c12= emptystatement | c13= synchronizedblock | c14= tryblock | c15= keywordswitch | c16= keywordreturn | c17= keywordthrow | c18= keywordbreak | c19= keywordcontinue | c20= jumplabel | c21= expressionstatement | c22= singlelinecomment | c23= multilinecomment );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2361:1: statement returns [Statement element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= localvariablestatement | c6= keywordassert | c7= condition | c8= forloop | c9= foreachloop | c10= whileloop | c11= dowhileloop | c12= emptystatement | c13= synchronizedblock | c14= tryblock | c15= keywordswitch | c16= keywordreturn | c17= keywordthrow | c18= keywordbreak | c19= keywordcontinue | c20= jumplabel | c21= expressionstatement | c22= singlelinecomment | c23= multilinecomment );
     public final Statement statement() throws RecognitionException {
         Statement element =  null;
 
@@ -16017,7 +16017,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2363:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= localvariablestatement | c6= keywordassert | c7= condition | c8= forloop | c9= foreachloop | c10= whileloop | c11= dowhileloop | c12= emptystatement | c13= synchronizedblock | c14= tryblock | c15= keywordswitch | c16= keywordreturn | c17= keywordthrow | c18= keywordbreak | c19= keywordcontinue | c20= jumplabel | c21= expressionstatement | c22= singlelinecomment | c23= multilinecomment )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2363:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration | c4= block | c5= localvariablestatement | c6= keywordassert | c7= condition | c8= forloop | c9= foreachloop | c10= whileloop | c11= dowhileloop | c12= emptystatement | c13= synchronizedblock | c14= tryblock | c15= keywordswitch | c16= keywordreturn | c17= keywordthrow | c18= keywordbreak | c19= keywordcontinue | c20= jumplabel | c21= expressionstatement | c22= singlelinecomment | c23= multilinecomment )
             int alt187=24;
             switch ( input.LA(1) ) {
             case 77:
@@ -16726,7 +16726,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt187) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2364:2: c0= keywordclass
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2364:2: c0= keywordclass
                     {
                     pushFollow(FOLLOW_keywordclass_in_statement9978);
                     c0=keywordclass();
@@ -16739,7 +16739,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2365:2: c1= keywordinterface
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2365:2: c1= keywordinterface
                     {
                     pushFollow(FOLLOW_keywordinterface_in_statement9988);
                     c1=keywordinterface();
@@ -16752,7 +16752,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2366:2: c2= annotation
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2366:2: c2= annotation
                     {
                     pushFollow(FOLLOW_annotation_in_statement9998);
                     c2=annotation();
@@ -16765,7 +16765,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2367:2: c3= enumeration
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2367:2: c3= enumeration
                     {
                     pushFollow(FOLLOW_enumeration_in_statement10008);
                     c3=enumeration();
@@ -16778,7 +16778,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2368:2: c4= block
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2368:2: c4= block
                     {
                     pushFollow(FOLLOW_block_in_statement10018);
                     c4=block();
@@ -16791,7 +16791,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2369:2: c5= localvariablestatement
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2369:2: c5= localvariablestatement
                     {
                     pushFollow(FOLLOW_localvariablestatement_in_statement10028);
                     c5=localvariablestatement();
@@ -16804,7 +16804,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2370:2: c6= keywordassert
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2370:2: c6= keywordassert
                     {
                     pushFollow(FOLLOW_keywordassert_in_statement10038);
                     c6=keywordassert();
@@ -16817,7 +16817,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2371:2: c7= condition
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2371:2: c7= condition
                     {
                     pushFollow(FOLLOW_condition_in_statement10048);
                     c7=condition();
@@ -16830,7 +16830,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2372:2: c8= forloop
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2372:2: c8= forloop
                     {
                     pushFollow(FOLLOW_forloop_in_statement10058);
                     c8=forloop();
@@ -16843,7 +16843,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 10 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2373:2: c9= foreachloop
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2373:2: c9= foreachloop
                     {
                     pushFollow(FOLLOW_foreachloop_in_statement10068);
                     c9=foreachloop();
@@ -16856,7 +16856,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 11 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2374:2: c10= whileloop
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2374:2: c10= whileloop
                     {
                     pushFollow(FOLLOW_whileloop_in_statement10078);
                     c10=whileloop();
@@ -16869,7 +16869,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 12 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2375:2: c11= dowhileloop
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2375:2: c11= dowhileloop
                     {
                     pushFollow(FOLLOW_dowhileloop_in_statement10088);
                     c11=dowhileloop();
@@ -16882,7 +16882,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 13 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2376:2: c12= emptystatement
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2376:2: c12= emptystatement
                     {
                     pushFollow(FOLLOW_emptystatement_in_statement10098);
                     c12=emptystatement();
@@ -16895,7 +16895,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 14 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2377:2: c13= synchronizedblock
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2377:2: c13= synchronizedblock
                     {
                     pushFollow(FOLLOW_synchronizedblock_in_statement10108);
                     c13=synchronizedblock();
@@ -16908,7 +16908,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 15 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2378:2: c14= tryblock
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2378:2: c14= tryblock
                     {
                     pushFollow(FOLLOW_tryblock_in_statement10118);
                     c14=tryblock();
@@ -16921,7 +16921,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 16 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2379:2: c15= keywordswitch
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2379:2: c15= keywordswitch
                     {
                     pushFollow(FOLLOW_keywordswitch_in_statement10128);
                     c15=keywordswitch();
@@ -16934,7 +16934,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 17 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2380:2: c16= keywordreturn
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2380:2: c16= keywordreturn
                     {
                     pushFollow(FOLLOW_keywordreturn_in_statement10138);
                     c16=keywordreturn();
@@ -16947,7 +16947,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 18 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2381:2: c17= keywordthrow
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2381:2: c17= keywordthrow
                     {
                     pushFollow(FOLLOW_keywordthrow_in_statement10148);
                     c17=keywordthrow();
@@ -16960,7 +16960,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 19 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2382:2: c18= keywordbreak
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2382:2: c18= keywordbreak
                     {
                     pushFollow(FOLLOW_keywordbreak_in_statement10158);
                     c18=keywordbreak();
@@ -16973,7 +16973,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 20 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2383:2: c19= keywordcontinue
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2383:2: c19= keywordcontinue
                     {
                     pushFollow(FOLLOW_keywordcontinue_in_statement10168);
                     c19=keywordcontinue();
@@ -16986,7 +16986,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 21 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2384:2: c20= jumplabel
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2384:2: c20= jumplabel
                     {
                     pushFollow(FOLLOW_jumplabel_in_statement10178);
                     c20=jumplabel();
@@ -16999,7 +16999,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 22 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2385:2: c21= expressionstatement
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2385:2: c21= expressionstatement
                     {
                     pushFollow(FOLLOW_expressionstatement_in_statement10188);
                     c21=expressionstatement();
@@ -17012,7 +17012,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 23 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2386:2: c22= singlelinecomment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2386:2: c22= singlelinecomment
                     {
                     pushFollow(FOLLOW_singlelinecomment_in_statement10198);
                     c22=singlelinecomment();
@@ -17025,7 +17025,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 24 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2387:2: c23= multilinecomment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2387:2: c23= multilinecomment
                     {
                     pushFollow(FOLLOW_multilinecomment_in_statement10208);
                     c23=multilinecomment();
@@ -17052,7 +17052,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start parameter
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2390:1: parameter returns [Parameter element = null] : (c0= ordinaryparameter | c1= variablelengthparameter );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2390:1: parameter returns [Parameter element = null] : (c0= ordinaryparameter | c1= variablelengthparameter );
     public final Parameter parameter() throws RecognitionException {
         Parameter element =  null;
 
@@ -17062,12 +17062,12 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2392:1: (c0= ordinaryparameter | c1= variablelengthparameter )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2392:1: (c0= ordinaryparameter | c1= variablelengthparameter )
             int alt188=2;
             alt188 = dfa188.predict(input);
             switch (alt188) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2393:2: c0= ordinaryparameter
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2393:2: c0= ordinaryparameter
                     {
                     pushFollow(FOLLOW_ordinaryparameter_in_parameter10227);
                     c0=ordinaryparameter();
@@ -17080,7 +17080,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2394:2: c1= variablelengthparameter
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2394:2: c1= variablelengthparameter
                     {
                     pushFollow(FOLLOW_variablelengthparameter_in_parameter10237);
                     c1=variablelengthparameter();
@@ -17107,7 +17107,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start typereference
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2397:1: typereference returns [TypeReference element = null] : (c0= typereferencesequence | c1= voidliteral | c2= keywordboolean | c3= keywordchar | c4= keywordbyte | c5= keywordshort | c6= keywordint | c7= keywordlong | c8= keywordfloat | c9= keyworddouble );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2397:1: typereference returns [TypeReference element = null] : (c0= typereferencesequence | c1= voidliteral | c2= keywordboolean | c3= keywordchar | c4= keywordbyte | c5= keywordshort | c6= keywordint | c7= keywordlong | c8= keywordfloat | c9= keyworddouble );
     public final TypeReference typereference() throws RecognitionException {
         TypeReference element =  null;
 
@@ -17133,7 +17133,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2399:1: (c0= typereferencesequence | c1= voidliteral | c2= keywordboolean | c3= keywordchar | c4= keywordbyte | c5= keywordshort | c6= keywordint | c7= keywordlong | c8= keywordfloat | c9= keyworddouble )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2399:1: (c0= typereferencesequence | c1= voidliteral | c2= keywordboolean | c3= keywordchar | c4= keywordbyte | c5= keywordshort | c6= keywordint | c7= keywordlong | c8= keywordfloat | c9= keyworddouble )
             int alt189=10;
             switch ( input.LA(1) ) {
             case IDENTIFIER:
@@ -17196,7 +17196,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt189) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2400:2: c0= typereferencesequence
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2400:2: c0= typereferencesequence
                     {
                     pushFollow(FOLLOW_typereferencesequence_in_typereference10256);
                     c0=typereferencesequence();
@@ -17209,7 +17209,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2401:2: c1= voidliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2401:2: c1= voidliteral
                     {
                     pushFollow(FOLLOW_voidliteral_in_typereference10266);
                     c1=voidliteral();
@@ -17222,7 +17222,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2402:2: c2= keywordboolean
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2402:2: c2= keywordboolean
                     {
                     pushFollow(FOLLOW_keywordboolean_in_typereference10276);
                     c2=keywordboolean();
@@ -17235,7 +17235,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2403:2: c3= keywordchar
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2403:2: c3= keywordchar
                     {
                     pushFollow(FOLLOW_keywordchar_in_typereference10286);
                     c3=keywordchar();
@@ -17248,7 +17248,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2404:2: c4= keywordbyte
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2404:2: c4= keywordbyte
                     {
                     pushFollow(FOLLOW_keywordbyte_in_typereference10296);
                     c4=keywordbyte();
@@ -17261,7 +17261,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2405:2: c5= keywordshort
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2405:2: c5= keywordshort
                     {
                     pushFollow(FOLLOW_keywordshort_in_typereference10306);
                     c5=keywordshort();
@@ -17274,7 +17274,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2406:2: c6= keywordint
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2406:2: c6= keywordint
                     {
                     pushFollow(FOLLOW_keywordint_in_typereference10316);
                     c6=keywordint();
@@ -17287,7 +17287,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2407:2: c7= keywordlong
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2407:2: c7= keywordlong
                     {
                     pushFollow(FOLLOW_keywordlong_in_typereference10326);
                     c7=keywordlong();
@@ -17300,7 +17300,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2408:2: c8= keywordfloat
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2408:2: c8= keywordfloat
                     {
                     pushFollow(FOLLOW_keywordfloat_in_typereference10336);
                     c8=keywordfloat();
@@ -17313,7 +17313,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 10 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2409:2: c9= keyworddouble
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2409:2: c9= keyworddouble
                     {
                     pushFollow(FOLLOW_keyworddouble_in_typereference10346);
                     c9=keyworddouble();
@@ -17340,7 +17340,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start initialvalue
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2412:1: initialvalue returns [InitialValue element = null] : (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2412:1: initialvalue returns [InitialValue element = null] : (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression );
     public final InitialValue initialvalue() throws RecognitionException {
         InitialValue element =  null;
 
@@ -17354,7 +17354,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2414:1: (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2414:1: (c0= arrayinstantiationbyvalues | c1= arrayinstantiationbysize | c2= assignment | c3= relationexpression )
             int alt190=4;
             switch ( input.LA(1) ) {
             case 40:
@@ -17676,7 +17676,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt190) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2415:2: c0= arrayinstantiationbyvalues
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2415:2: c0= arrayinstantiationbyvalues
                     {
                     pushFollow(FOLLOW_arrayinstantiationbyvalues_in_initialvalue10365);
                     c0=arrayinstantiationbyvalues();
@@ -17689,7 +17689,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2416:2: c1= arrayinstantiationbysize
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2416:2: c1= arrayinstantiationbysize
                     {
                     pushFollow(FOLLOW_arrayinstantiationbysize_in_initialvalue10375);
                     c1=arrayinstantiationbysize();
@@ -17702,7 +17702,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2417:2: c2= assignment
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2417:2: c2= assignment
                     {
                     pushFollow(FOLLOW_assignment_in_initialvalue10385);
                     c2=assignment();
@@ -17715,7 +17715,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2418:2: c3= relationexpression
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2418:2: c3= relationexpression
                     {
                     pushFollow(FOLLOW_relationexpression_in_initialvalue10395);
                     c3=relationexpression();
@@ -17742,7 +17742,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start selfreference
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2421:1: selfreference returns [SelfReference element = null] : (c0= keywordthis | c1= keywordsuper );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2421:1: selfreference returns [SelfReference element = null] : (c0= keywordthis | c1= keywordsuper );
     public final SelfReference selfreference() throws RecognitionException {
         SelfReference element =  null;
 
@@ -17752,7 +17752,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2423:1: (c0= keywordthis | c1= keywordsuper )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2423:1: (c0= keywordthis | c1= keywordsuper )
             int alt191=2;
             int LA191_0 = input.LA(1);
 
@@ -17771,7 +17771,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt191) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2424:2: c0= keywordthis
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2424:2: c0= keywordthis
                     {
                     pushFollow(FOLLOW_keywordthis_in_selfreference10414);
                     c0=keywordthis();
@@ -17784,7 +17784,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2425:2: c1= keywordsuper
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2425:2: c1= keywordsuper
                     {
                     pushFollow(FOLLOW_keywordsuper_in_selfreference10424);
                     c1=keywordsuper();
@@ -17811,7 +17811,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start primaryreference
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2428:1: primaryreference returns [PrimaryReference element = null] : (c0= newconstructorcall | c1= explicitconstructorcall | c2= packageorclassifierormethodorvariablereference | c3= explicitgenericinvocation | c4= voidliteral | c5= classliteral | c6= keywordthis | c7= keywordsuper | c8= keywordboolean | c9= keywordchar | c10= keywordbyte | c11= keywordshort | c12= keywordint | c13= keywordlong | c14= keywordfloat | c15= keyworddouble );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2428:1: primaryreference returns [PrimaryReference element = null] : (c0= newconstructorcall | c1= explicitconstructorcall | c2= packageorclassifierormethodorvariablereference | c3= explicitgenericinvocation | c4= voidliteral | c5= classliteral | c6= keywordthis | c7= keywordsuper | c8= keywordboolean | c9= keywordchar | c10= keywordbyte | c11= keywordshort | c12= keywordint | c13= keywordlong | c14= keywordfloat | c15= keyworddouble );
     public final PrimaryReference primaryreference() throws RecognitionException {
         PrimaryReference element =  null;
 
@@ -17849,7 +17849,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2430:1: (c0= newconstructorcall | c1= explicitconstructorcall | c2= packageorclassifierormethodorvariablereference | c3= explicitgenericinvocation | c4= voidliteral | c5= classliteral | c6= keywordthis | c7= keywordsuper | c8= keywordboolean | c9= keywordchar | c10= keywordbyte | c11= keywordshort | c12= keywordint | c13= keywordlong | c14= keywordfloat | c15= keyworddouble )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2430:1: (c0= newconstructorcall | c1= explicitconstructorcall | c2= packageorclassifierormethodorvariablereference | c3= explicitgenericinvocation | c4= voidliteral | c5= classliteral | c6= keywordthis | c7= keywordsuper | c8= keywordboolean | c9= keywordchar | c10= keywordbyte | c11= keywordshort | c12= keywordint | c13= keywordlong | c14= keywordfloat | c15= keyworddouble )
             int alt192=16;
             switch ( input.LA(1) ) {
             case 40:
@@ -17996,7 +17996,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt192) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2431:2: c0= newconstructorcall
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2431:2: c0= newconstructorcall
                     {
                     pushFollow(FOLLOW_newconstructorcall_in_primaryreference10443);
                     c0=newconstructorcall();
@@ -18009,7 +18009,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2432:2: c1= explicitconstructorcall
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2432:2: c1= explicitconstructorcall
                     {
                     pushFollow(FOLLOW_explicitconstructorcall_in_primaryreference10453);
                     c1=explicitconstructorcall();
@@ -18022,7 +18022,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2433:2: c2= packageorclassifierormethodorvariablereference
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2433:2: c2= packageorclassifierormethodorvariablereference
                     {
                     pushFollow(FOLLOW_packageorclassifierormethodorvariablereference_in_primaryreference10463);
                     c2=packageorclassifierormethodorvariablereference();
@@ -18035,7 +18035,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2434:2: c3= explicitgenericinvocation
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2434:2: c3= explicitgenericinvocation
                     {
                     pushFollow(FOLLOW_explicitgenericinvocation_in_primaryreference10473);
                     c3=explicitgenericinvocation();
@@ -18048,7 +18048,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2435:2: c4= voidliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2435:2: c4= voidliteral
                     {
                     pushFollow(FOLLOW_voidliteral_in_primaryreference10483);
                     c4=voidliteral();
@@ -18061,7 +18061,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2436:2: c5= classliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2436:2: c5= classliteral
                     {
                     pushFollow(FOLLOW_classliteral_in_primaryreference10493);
                     c5=classliteral();
@@ -18074,7 +18074,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2437:2: c6= keywordthis
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2437:2: c6= keywordthis
                     {
                     pushFollow(FOLLOW_keywordthis_in_primaryreference10503);
                     c6=keywordthis();
@@ -18087,7 +18087,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2438:2: c7= keywordsuper
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2438:2: c7= keywordsuper
                     {
                     pushFollow(FOLLOW_keywordsuper_in_primaryreference10513);
                     c7=keywordsuper();
@@ -18100,7 +18100,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2439:2: c8= keywordboolean
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2439:2: c8= keywordboolean
                     {
                     pushFollow(FOLLOW_keywordboolean_in_primaryreference10523);
                     c8=keywordboolean();
@@ -18113,7 +18113,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 10 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2440:2: c9= keywordchar
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2440:2: c9= keywordchar
                     {
                     pushFollow(FOLLOW_keywordchar_in_primaryreference10533);
                     c9=keywordchar();
@@ -18126,7 +18126,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 11 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2441:2: c10= keywordbyte
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2441:2: c10= keywordbyte
                     {
                     pushFollow(FOLLOW_keywordbyte_in_primaryreference10543);
                     c10=keywordbyte();
@@ -18139,7 +18139,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 12 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2442:2: c11= keywordshort
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2442:2: c11= keywordshort
                     {
                     pushFollow(FOLLOW_keywordshort_in_primaryreference10553);
                     c11=keywordshort();
@@ -18152,7 +18152,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 13 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2443:2: c12= keywordint
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2443:2: c12= keywordint
                     {
                     pushFollow(FOLLOW_keywordint_in_primaryreference10563);
                     c12=keywordint();
@@ -18165,7 +18165,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 14 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2444:2: c13= keywordlong
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2444:2: c13= keywordlong
                     {
                     pushFollow(FOLLOW_keywordlong_in_primaryreference10573);
                     c13=keywordlong();
@@ -18178,7 +18178,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 15 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2445:2: c14= keywordfloat
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2445:2: c14= keywordfloat
                     {
                     pushFollow(FOLLOW_keywordfloat_in_primaryreference10583);
                     c14=keywordfloat();
@@ -18191,7 +18191,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 16 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2446:2: c15= keyworddouble
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2446:2: c15= keyworddouble
                     {
                     pushFollow(FOLLOW_keyworddouble_in_primaryreference10593);
                     c15=keyworddouble();
@@ -18218,7 +18218,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start typeargument
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2449:1: typeargument returns [TypeArgument element = null] : (c0= qualifiedtypeargument | c1= unknowntypeargument | c2= extendstypeargument | c3= supertypeargument );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2449:1: typeargument returns [TypeArgument element = null] : (c0= qualifiedtypeargument | c1= unknowntypeargument | c2= extendstypeargument | c3= supertypeargument );
     public final TypeArgument typeargument() throws RecognitionException {
         TypeArgument element =  null;
 
@@ -18232,7 +18232,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2451:1: (c0= qualifiedtypeargument | c1= unknowntypeargument | c2= extendstypeargument | c3= supertypeargument )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2451:1: (c0= qualifiedtypeargument | c1= unknowntypeargument | c2= extendstypeargument | c3= supertypeargument )
             int alt193=4;
             int LA193_0 = input.LA(1);
 
@@ -18241,14 +18241,14 @@ public class JavaParser extends EMFTextParserImpl {
             }
             else if ( (LA193_0==43) ) {
                 switch ( input.LA(2) ) {
-                case 26:
-                    {
-                    alt193=3;
-                    }
-                    break;
                 case 44:
                     {
                     alt193=4;
+                    }
+                    break;
+                case 26:
+                    {
+                    alt193=3;
                     }
                     break;
                 case EOF:
@@ -18276,7 +18276,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt193) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2452:2: c0= qualifiedtypeargument
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2452:2: c0= qualifiedtypeargument
                     {
                     pushFollow(FOLLOW_qualifiedtypeargument_in_typeargument10612);
                     c0=qualifiedtypeargument();
@@ -18289,7 +18289,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2453:2: c1= unknowntypeargument
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2453:2: c1= unknowntypeargument
                     {
                     pushFollow(FOLLOW_unknowntypeargument_in_typeargument10622);
                     c1=unknowntypeargument();
@@ -18302,7 +18302,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2454:2: c2= extendstypeargument
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2454:2: c2= extendstypeargument
                     {
                     pushFollow(FOLLOW_extendstypeargument_in_typeargument10632);
                     c2=extendstypeargument();
@@ -18315,7 +18315,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2455:2: c3= supertypeargument
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2455:2: c3= supertypeargument
                     {
                     pushFollow(FOLLOW_supertypeargument_in_typeargument10642);
                     c3=supertypeargument();
@@ -18342,7 +18342,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start forloopinitializer
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2458:1: forloopinitializer returns [ForLoopInitializer element = null] : (c0= localvariable | c1= expressionlist );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2458:1: forloopinitializer returns [ForLoopInitializer element = null] : (c0= localvariable | c1= expressionlist );
     public final ForLoopInitializer forloopinitializer() throws RecognitionException {
         ForLoopInitializer element =  null;
 
@@ -18352,7 +18352,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2460:1: (c0= localvariable | c1= expressionlist )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2460:1: (c0= localvariable | c1= expressionlist )
             int alt194=2;
             switch ( input.LA(1) ) {
             case 52:
@@ -18593,7 +18593,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt194) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2461:2: c0= localvariable
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2461:2: c0= localvariable
                     {
                     pushFollow(FOLLOW_localvariable_in_forloopinitializer10661);
                     c0=localvariable();
@@ -18606,7 +18606,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2462:2: c1= expressionlist
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2462:2: c1= expressionlist
                     {
                     pushFollow(FOLLOW_expressionlist_in_forloopinitializer10671);
                     c1=expressionlist();
@@ -18633,7 +18633,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start relationoperator
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2465:1: relationoperator returns [RelationOperator element = null] : (c0= lessthan | c1= lessthanorequal | c2= greaterthan | c3= greaterthanorequal );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2465:1: relationoperator returns [RelationOperator element = null] : (c0= lessthan | c1= lessthanorequal | c2= greaterthan | c3= greaterthanorequal );
     public final RelationOperator relationoperator() throws RecognitionException {
         RelationOperator element =  null;
 
@@ -18647,7 +18647,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2467:1: (c0= lessthan | c1= lessthanorequal | c2= greaterthan | c3= greaterthanorequal )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2467:1: (c0= lessthan | c1= lessthanorequal | c2= greaterthan | c3= greaterthanorequal )
             int alt195=4;
             int LA195_0 = input.LA(1);
 
@@ -18694,7 +18694,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt195) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2468:2: c0= lessthan
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2468:2: c0= lessthan
                     {
                     pushFollow(FOLLOW_lessthan_in_relationoperator10690);
                     c0=lessthan();
@@ -18707,7 +18707,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2469:2: c1= lessthanorequal
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2469:2: c1= lessthanorequal
                     {
                     pushFollow(FOLLOW_lessthanorequal_in_relationoperator10700);
                     c1=lessthanorequal();
@@ -18720,7 +18720,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2470:2: c2= greaterthan
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2470:2: c2= greaterthan
                     {
                     pushFollow(FOLLOW_greaterthan_in_relationoperator10710);
                     c2=greaterthan();
@@ -18733,7 +18733,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2471:2: c3= greaterthanorequal
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2471:2: c3= greaterthanorequal
                     {
                     pushFollow(FOLLOW_greaterthanorequal_in_relationoperator10720);
                     c3=greaterthanorequal();
@@ -18760,7 +18760,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start shiftoperator
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2474:1: shiftoperator returns [ShiftOperator element = null] : (c0= leftshift | c1= rightshift | c2= unsignedrightshift );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2474:1: shiftoperator returns [ShiftOperator element = null] : (c0= leftshift | c1= rightshift | c2= unsignedrightshift );
     public final ShiftOperator shiftoperator() throws RecognitionException {
         ShiftOperator element =  null;
 
@@ -18772,7 +18772,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2476:1: (c0= leftshift | c1= rightshift | c2= unsignedrightshift )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2476:1: (c0= leftshift | c1= rightshift | c2= unsignedrightshift )
             int alt196=3;
             int LA196_0 = input.LA(1);
 
@@ -18816,7 +18816,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
             switch (alt196) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2477:2: c0= leftshift
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2477:2: c0= leftshift
                     {
                     pushFollow(FOLLOW_leftshift_in_shiftoperator10739);
                     c0=leftshift();
@@ -18829,7 +18829,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2478:2: c1= rightshift
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2478:2: c1= rightshift
                     {
                     pushFollow(FOLLOW_rightshift_in_shiftoperator10749);
                     c1=rightshift();
@@ -18842,7 +18842,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2479:2: c2= unsignedrightshift
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2479:2: c2= unsignedrightshift
                     {
                     pushFollow(FOLLOW_unsignedrightshift_in_shiftoperator10759);
                     c2=unsignedrightshift();
@@ -18869,7 +18869,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start primitivetype
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2482:1: primitivetype returns [PrimitiveType element = null] : (c0= voidliteral | c1= keywordboolean | c2= keywordchar | c3= keywordbyte | c4= keywordshort | c5= keywordint | c6= keywordlong | c7= keywordfloat | c8= keyworddouble );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2482:1: primitivetype returns [PrimitiveType element = null] : (c0= voidliteral | c1= keywordboolean | c2= keywordchar | c3= keywordbyte | c4= keywordshort | c5= keywordint | c6= keywordlong | c7= keywordfloat | c8= keyworddouble );
     public final PrimitiveType primitivetype() throws RecognitionException {
         PrimitiveType element =  null;
 
@@ -18893,7 +18893,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2484:1: (c0= voidliteral | c1= keywordboolean | c2= keywordchar | c3= keywordbyte | c4= keywordshort | c5= keywordint | c6= keywordlong | c7= keywordfloat | c8= keyworddouble )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2484:1: (c0= voidliteral | c1= keywordboolean | c2= keywordchar | c3= keywordbyte | c4= keywordshort | c5= keywordint | c6= keywordlong | c7= keywordfloat | c8= keyworddouble )
             int alt197=9;
             switch ( input.LA(1) ) {
             case 75:
@@ -18951,7 +18951,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt197) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2485:2: c0= voidliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2485:2: c0= voidliteral
                     {
                     pushFollow(FOLLOW_voidliteral_in_primitivetype10778);
                     c0=voidliteral();
@@ -18964,7 +18964,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2486:2: c1= keywordboolean
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2486:2: c1= keywordboolean
                     {
                     pushFollow(FOLLOW_keywordboolean_in_primitivetype10788);
                     c1=keywordboolean();
@@ -18977,7 +18977,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2487:2: c2= keywordchar
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2487:2: c2= keywordchar
                     {
                     pushFollow(FOLLOW_keywordchar_in_primitivetype10798);
                     c2=keywordchar();
@@ -18990,7 +18990,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2488:2: c3= keywordbyte
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2488:2: c3= keywordbyte
                     {
                     pushFollow(FOLLOW_keywordbyte_in_primitivetype10808);
                     c3=keywordbyte();
@@ -19003,7 +19003,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2489:2: c4= keywordshort
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2489:2: c4= keywordshort
                     {
                     pushFollow(FOLLOW_keywordshort_in_primitivetype10818);
                     c4=keywordshort();
@@ -19016,7 +19016,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2490:2: c5= keywordint
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2490:2: c5= keywordint
                     {
                     pushFollow(FOLLOW_keywordint_in_primitivetype10828);
                     c5=keywordint();
@@ -19029,7 +19029,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 7 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2491:2: c6= keywordlong
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2491:2: c6= keywordlong
                     {
                     pushFollow(FOLLOW_keywordlong_in_primitivetype10838);
                     c6=keywordlong();
@@ -19042,7 +19042,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 8 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2492:2: c7= keywordfloat
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2492:2: c7= keywordfloat
                     {
                     pushFollow(FOLLOW_keywordfloat_in_primitivetype10848);
                     c7=keywordfloat();
@@ -19055,7 +19055,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 9 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2493:2: c8= keyworddouble
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2493:2: c8= keyworddouble
                     {
                     pushFollow(FOLLOW_keyworddouble_in_primitivetype10858);
                     c8=keyworddouble();
@@ -19082,7 +19082,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start type
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2496:1: type returns [Type element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2496:1: type returns [Type element = null] : (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration );
     public final Type type() throws RecognitionException {
         Type element =  null;
 
@@ -19096,12 +19096,12 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2498:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2498:1: (c0= keywordclass | c1= keywordinterface | c2= annotation | c3= enumeration )
             int alt198=4;
             alt198 = dfa198.predict(input);
             switch (alt198) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2499:2: c0= keywordclass
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2499:2: c0= keywordclass
                     {
                     pushFollow(FOLLOW_keywordclass_in_type10877);
                     c0=keywordclass();
@@ -19114,7 +19114,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2500:2: c1= keywordinterface
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2500:2: c1= keywordinterface
                     {
                     pushFollow(FOLLOW_keywordinterface_in_type10887);
                     c1=keywordinterface();
@@ -19127,7 +19127,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2501:2: c2= annotation
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2501:2: c2= annotation
                     {
                     pushFollow(FOLLOW_annotation_in_type10897);
                     c2=annotation();
@@ -19140,7 +19140,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2502:2: c3= enumeration
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2502:2: c3= enumeration
                     {
                     pushFollow(FOLLOW_enumeration_in_type10907);
                     c3=enumeration();
@@ -19167,7 +19167,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
     // $ANTLR start literal
-    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2505:1: literal returns [Literal element = null] : (c0= nullliteral | c1= integerliteral | c2= floatingpointliteral | c3= characterliteral | c4= stringliteral | c5= booleanliteral );
+    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2505:1: literal returns [Literal element = null] : (c0= nullliteral | c1= integerliteral | c2= floatingpointliteral | c3= characterliteral | c4= stringliteral | c5= booleanliteral );
     public final Literal literal() throws RecognitionException {
         Literal element =  null;
 
@@ -19185,7 +19185,7 @@ public class JavaParser extends EMFTextParserImpl {
 
 
         try {
-            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2507:1: (c0= nullliteral | c1= integerliteral | c2= floatingpointliteral | c3= characterliteral | c4= stringliteral | c5= booleanliteral )
+            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2507:1: (c0= nullliteral | c1= integerliteral | c2= floatingpointliteral | c3= characterliteral | c4= stringliteral | c5= booleanliteral )
             int alt199=6;
             switch ( input.LA(1) ) {
             case 74:
@@ -19230,7 +19230,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt199) {
                 case 1 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2508:2: c0= nullliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2508:2: c0= nullliteral
                     {
                     pushFollow(FOLLOW_nullliteral_in_literal10926);
                     c0=nullliteral();
@@ -19243,7 +19243,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 2 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2509:2: c1= integerliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2509:2: c1= integerliteral
                     {
                     pushFollow(FOLLOW_integerliteral_in_literal10936);
                     c1=integerliteral();
@@ -19256,7 +19256,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 3 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2510:2: c2= floatingpointliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2510:2: c2= floatingpointliteral
                     {
                     pushFollow(FOLLOW_floatingpointliteral_in_literal10946);
                     c2=floatingpointliteral();
@@ -19269,7 +19269,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 4 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2511:2: c3= characterliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2511:2: c3= characterliteral
                     {
                     pushFollow(FOLLOW_characterliteral_in_literal10956);
                     c3=characterliteral();
@@ -19282,7 +19282,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 5 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2512:2: c4= stringliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2512:2: c4= stringliteral
                     {
                     pushFollow(FOLLOW_stringliteral_in_literal10966);
                     c4=stringliteral();
@@ -19295,7 +19295,7 @@ public class JavaParser extends EMFTextParserImpl {
                     }
                     break;
                 case 6 :
-                    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2513:2: c5= booleanliteral
+                    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2513:2: c5= booleanliteral
                     {
                     pushFollow(FOLLOW_booleanliteral_in_literal10976);
                     c5=booleanliteral();
@@ -19322,8 +19322,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred1
     public final void synpred1_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:338:3: ( comment )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:338:3: comment
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:338:3: ( comment )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:338:3: comment
         {
         pushFollow(FOLLOW_comment_in_synpred189);
         comment();
@@ -19336,8 +19336,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred3
     public final void synpred3_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:344:3: ( comment )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:344:3: comment
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:344:3: ( comment )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:344:3: comment
         {
         pushFollow(FOLLOW_comment_in_synpred3121);
         comment();
@@ -19350,11 +19350,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred23
     public final void synpred23_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ( ';' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ( ';' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ';' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ';' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:488:7: ';'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:488:7: ';'
         {
         match(input,20,FOLLOW_20_in_synpred23973); if (failed) return ;
 
@@ -19367,17 +19367,17 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred24
     public final void synpred24_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: ( ( member ( ( ';' ) )? ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: ( member ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: ( ( member ( ( ';' ) )? ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: ( member ( ( ';' ) )? )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: ( member ( ( ';' ) )? )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:485:5: member ( ( ';' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: ( member ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:485:5: member ( ( ';' ) )?
         {
         pushFollow(FOLLOW_member_in_synpred24947);
         member();
         _fsp--;
         if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:486:5: ( ( ';' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:486:5: ( ( ';' ) )?
         int alt205=2;
         int LA205_0 = input.LA(1);
 
@@ -19386,10 +19386,10 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt205) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ';' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ';' )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ';' )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:488:7: ';'
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ';' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:488:7: ';'
                 {
                 match(input,20,FOLLOW_20_in_synpred24973); if (failed) return ;
 
@@ -19411,11 +19411,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred25
     public final void synpred25_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: ( ( ';' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: ( ( ';' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: ( ';' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: ( ';' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:496:6: ';'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:496:6: ';'
         {
         match(input,20,FOLLOW_20_in_synpred251021); if (failed) return ;
 
@@ -19428,10 +19428,10 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred26
     public final void synpred26_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:483:3: ( ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:483:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:483:3: ( ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:483:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:483:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:483:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
         int alt208=2;
         int LA208_0 = input.LA(1);
 
@@ -19450,16 +19450,16 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt208) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: ( member ( ( ';' ) )? )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: ( member ( ( ';' ) )? )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:484:4: ( member ( ( ';' ) )? )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:485:5: member ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:484:4: ( member ( ( ';' ) )? )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:485:5: member ( ( ';' ) )?
                 {
                 pushFollow(FOLLOW_member_in_synpred26947);
                 member();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:486:5: ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:486:5: ( ( ';' ) )?
                 int alt206=2;
                 int LA206_0 = input.LA(1);
 
@@ -19468,10 +19468,10 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 switch (alt206) {
                     case 1 :
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ';' )
                         {
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:487:6: ( ';' )
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:488:7: ';'
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:487:6: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:488:7: ';'
                         {
                         match(input,20,FOLLOW_20_in_synpred26973); if (failed) return ;
 
@@ -19490,9 +19490,9 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 break;
             case 2 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:494:4: ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:494:4: ( ( ';' ) )?
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:494:4: ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:494:4: ( ( ';' ) )?
                 int alt207=2;
                 int LA207_0 = input.LA(1);
 
@@ -19501,10 +19501,10 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 switch (alt207) {
                     case 1 :
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: ( ';' )
                         {
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:495:5: ( ';' )
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:496:6: ';'
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:495:5: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:496:6: ';'
                         {
                         match(input,20,FOLLOW_20_in_synpred261021); if (failed) return ;
 
@@ -19529,11 +19529,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred28
     public final void synpred28_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ( ';' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ( ';' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ';' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ';' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:522:7: ';'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:522:7: ';'
         {
         match(input,20,FOLLOW_20_in_synpred281161); if (failed) return ;
 
@@ -19546,17 +19546,17 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred29
     public final void synpred29_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: ( ( member ( ( ';' ) )? ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: ( member ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: ( ( member ( ( ';' ) )? ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: ( member ( ( ';' ) )? )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: ( member ( ( ';' ) )? )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:519:5: member ( ( ';' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: ( member ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:519:5: member ( ( ';' ) )?
         {
         pushFollow(FOLLOW_member_in_synpred291135);
         member();
         _fsp--;
         if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:520:5: ( ( ';' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:520:5: ( ( ';' ) )?
         int alt209=2;
         int LA209_0 = input.LA(1);
 
@@ -19565,10 +19565,10 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt209) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ';' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ';' )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ';' )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:522:7: ';'
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ';' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:522:7: ';'
                 {
                 match(input,20,FOLLOW_20_in_synpred291161); if (failed) return ;
 
@@ -19590,11 +19590,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred30
     public final void synpred30_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: ( ( ';' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: ( ( ';' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: ( ';' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: ( ';' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:530:6: ';'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: ( ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:530:6: ';'
         {
         match(input,20,FOLLOW_20_in_synpred301209); if (failed) return ;
 
@@ -19607,10 +19607,10 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred31
     public final void synpred31_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:517:3: ( ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:517:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:517:3: ( ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:517:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:517:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:517:3: ( ( member ( ( ';' ) )? ) | ( ( ';' ) )? )
         int alt212=2;
         int LA212_0 = input.LA(1);
 
@@ -19629,16 +19629,16 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt212) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: ( member ( ( ';' ) )? )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: ( member ( ( ';' ) )? )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:518:4: ( member ( ( ';' ) )? )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:519:5: member ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:518:4: ( member ( ( ';' ) )? )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:519:5: member ( ( ';' ) )?
                 {
                 pushFollow(FOLLOW_member_in_synpred311135);
                 member();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:520:5: ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:520:5: ( ( ';' ) )?
                 int alt210=2;
                 int LA210_0 = input.LA(1);
 
@@ -19647,10 +19647,10 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 switch (alt210) {
                     case 1 :
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ';' )
                         {
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:521:6: ( ';' )
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:522:7: ';'
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:521:6: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:522:7: ';'
                         {
                         match(input,20,FOLLOW_20_in_synpred311161); if (failed) return ;
 
@@ -19669,9 +19669,9 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 break;
             case 2 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:528:4: ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:528:4: ( ( ';' ) )?
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:528:4: ( ( ';' ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:528:4: ( ( ';' ) )?
                 int alt211=2;
                 int LA211_0 = input.LA(1);
 
@@ -19680,10 +19680,10 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 switch (alt211) {
                     case 1 :
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: ( ';' )
                         {
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:529:5: ( ';' )
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:530:6: ';'
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:529:5: ( ';' )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:530:6: ';'
                         {
                         match(input,20,FOLLOW_20_in_synpred311209); if (failed) return ;
 
@@ -19708,10 +19708,10 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred46
     public final void synpred46_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:644:3: ( ( ( ';' ( member )* ) )? )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:644:3: ( ( ';' ( member )* ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:644:3: ( ( ( ';' ( member )* ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:644:3: ( ( ';' ( member )* ) )?
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:644:3: ( ( ';' ( member )* ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:644:3: ( ( ';' ( member )* ) )?
         int alt220=2;
         int LA220_0 = input.LA(1);
 
@@ -19720,13 +19720,13 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt220) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:645:4: ( ';' ( member )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:645:4: ( ';' ( member )* )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:645:4: ( ';' ( member )* )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:646:5: ';' ( member )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:645:4: ( ';' ( member )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:646:5: ';' ( member )*
                 {
                 match(input,20,FOLLOW_20_in_synpred461855); if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:647:5: ( member )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:647:5: ( member )*
                 loop219:
                 do {
                     int alt219=2;
@@ -19739,7 +19739,7 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt219) {
                 	case 1 :
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:648:6: member
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:648:6: member
                 	    {
                 	    pushFollow(FOLLOW_member_in_synpred461873);
                 	    member();
@@ -19770,10 +19770,10 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred74
     public final void synpred74_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:780:2: ( ( annotationinstance )* ( modifier )* ( ( '<' typeparameter ( ( ',' typeparameter ) )* '>' ) )? ( typereference ( arraydimension )* ) IDENTIFIER '(' ( ( parameter ( ( ',' parameter ) )* ) )? ')' ( arraydimension )* ( ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? ) )? ( block | ';' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:780:2: ( annotationinstance )* ( modifier )* ( ( '<' typeparameter ( ( ',' typeparameter ) )* '>' ) )? ( typereference ( arraydimension )* ) IDENTIFIER '(' ( ( parameter ( ( ',' parameter ) )* ) )? ')' ( arraydimension )* ( ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? ) )? ( block | ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:780:2: ( ( annotationinstance )* ( modifier )* ( ( '<' typeparameter ( ( ',' typeparameter ) )* '>' ) )? ( typereference ( arraydimension )* ) IDENTIFIER '(' ( ( parameter ( ( ',' parameter ) )* ) )? ')' ( arraydimension )* ( ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? ) )? ( block | ';' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:780:2: ( annotationinstance )* ( modifier )* ( ( '<' typeparameter ( ( ',' typeparameter ) )* '>' ) )? ( typereference ( arraydimension )* ) IDENTIFIER '(' ( ( parameter ( ( ',' parameter ) )* ) )? ')' ( arraydimension )* ( ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? ) )? ( block | ';' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:780:2: ( annotationinstance )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:780:2: ( annotationinstance )*
         loop229:
         do {
             int alt229=2;
@@ -19786,7 +19786,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt229) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:781:3: annotationinstance
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:781:3: annotationinstance
         	    {
         	    pushFollow(FOLLOW_annotationinstance_in_synpred742587);
         	    annotationinstance();
@@ -19801,7 +19801,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
         } while (true);
 
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:783:2: ( modifier )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:783:2: ( modifier )*
         loop230:
         do {
             int alt230=2;
@@ -19814,7 +19814,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt230) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:784:3: modifier
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:784:3: modifier
         	    {
         	    pushFollow(FOLLOW_modifier_in_synpred742603);
         	    modifier();
@@ -19829,7 +19829,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
         } while (true);
 
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:786:2: ( ( '<' typeparameter ( ( ',' typeparameter ) )* '>' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:786:2: ( ( '<' typeparameter ( ( ',' typeparameter ) )* '>' ) )?
         int alt232=2;
         int LA232_0 = input.LA(1);
 
@@ -19838,17 +19838,17 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt232) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:787:3: ( '<' typeparameter ( ( ',' typeparameter ) )* '>' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:787:3: ( '<' typeparameter ( ( ',' typeparameter ) )* '>' )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:787:3: ( '<' typeparameter ( ( ',' typeparameter ) )* '>' )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:788:4: '<' typeparameter ( ( ',' typeparameter ) )* '>'
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:787:3: ( '<' typeparameter ( ( ',' typeparameter ) )* '>' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:788:4: '<' typeparameter ( ( ',' typeparameter ) )* '>'
                 {
                 match(input,23,FOLLOW_23_in_synpred742624); if (failed) return ;
                 pushFollow(FOLLOW_typeparameter_in_synpred742634);
                 typeparameter();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:790:4: ( ( ',' typeparameter ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:790:4: ( ( ',' typeparameter ) )*
                 loop231:
                 do {
                     int alt231=2;
@@ -19861,10 +19861,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt231) {
                 	case 1 :
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:791:5: ( ',' typeparameter )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:791:5: ( ',' typeparameter )
                 	    {
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:791:5: ( ',' typeparameter )
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:792:6: ',' typeparameter
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:791:5: ( ',' typeparameter )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:792:6: ',' typeparameter
                 	    {
                 	    match(input,24,FOLLOW_24_in_synpred742657); if (failed) return ;
                 	    pushFollow(FOLLOW_typeparameter_in_synpred742669);
@@ -19893,14 +19893,14 @@ public class JavaParser extends EMFTextParserImpl {
 
         }
 
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:799:2: ( typereference ( arraydimension )* )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:800:3: typereference ( arraydimension )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:799:2: ( typereference ( arraydimension )* )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:800:3: typereference ( arraydimension )*
         {
         pushFollow(FOLLOW_typereference_in_synpred742711);
         typereference();
         _fsp--;
         if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:801:3: ( arraydimension )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:801:3: ( arraydimension )*
         loop233:
         do {
             int alt233=2;
@@ -19913,7 +19913,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt233) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:802:4: arraydimension
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:802:4: arraydimension
         	    {
         	    pushFollow(FOLLOW_arraydimension_in_synpred742725);
         	    arraydimension();
@@ -19933,7 +19933,7 @@ public class JavaParser extends EMFTextParserImpl {
 
         match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred742741); if (failed) return ;
         match(input,32,FOLLOW_32_in_synpred742749); if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:807:2: ( ( parameter ( ( ',' parameter ) )* ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:807:2: ( ( parameter ( ( ',' parameter ) )* ) )?
         int alt235=2;
         int LA235_0 = input.LA(1);
 
@@ -19942,16 +19942,16 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt235) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:808:3: ( parameter ( ( ',' parameter ) )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:808:3: ( parameter ( ( ',' parameter ) )* )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:808:3: ( parameter ( ( ',' parameter ) )* )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:809:4: parameter ( ( ',' parameter ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:808:3: ( parameter ( ( ',' parameter ) )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:809:4: parameter ( ( ',' parameter ) )*
                 {
                 pushFollow(FOLLOW_parameter_in_synpred742766);
                 parameter();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:810:4: ( ( ',' parameter ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:810:4: ( ( ',' parameter ) )*
                 loop234:
                 do {
                     int alt234=2;
@@ -19964,10 +19964,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt234) {
                 	case 1 :
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:811:5: ( ',' parameter )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:811:5: ( ',' parameter )
                 	    {
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:811:5: ( ',' parameter )
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:812:6: ',' parameter
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:811:5: ( ',' parameter )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:812:6: ',' parameter
                 	    {
                 	    match(input,24,FOLLOW_24_in_synpred742789); if (failed) return ;
                 	    pushFollow(FOLLOW_parameter_in_synpred742801);
@@ -19996,7 +19996,7 @@ public class JavaParser extends EMFTextParserImpl {
         }
 
         match(input,33,FOLLOW_33_in_synpred742829); if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:819:2: ( arraydimension )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:819:2: ( arraydimension )*
         loop236:
         do {
             int alt236=2;
@@ -20009,7 +20009,7 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt236) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:820:3: arraydimension
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:820:3: arraydimension
         	    {
         	    pushFollow(FOLLOW_arraydimension_in_synpred742841);
         	    arraydimension();
@@ -20024,7 +20024,7 @@ public class JavaParser extends EMFTextParserImpl {
             }
         } while (true);
 
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:822:2: ( ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:822:2: ( ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? ) )?
         int alt238=2;
         int LA238_0 = input.LA(1);
 
@@ -20033,14 +20033,14 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt238) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:823:3: ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:823:3: ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:823:3: ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:824:4: 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:823:3: ( 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )? )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:824:4: 'throws' IDENTIFIER ( ( ',' IDENTIFIER ) )?
                 {
                 match(input,37,FOLLOW_37_in_synpred742862); if (failed) return ;
                 match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred742872); if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:826:4: ( ( ',' IDENTIFIER ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:826:4: ( ( ',' IDENTIFIER ) )?
                 int alt237=2;
                 int LA237_0 = input.LA(1);
 
@@ -20049,10 +20049,10 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 switch (alt237) {
                     case 1 :
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:827:5: ( ',' IDENTIFIER )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:827:5: ( ',' IDENTIFIER )
                         {
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:827:5: ( ',' IDENTIFIER )
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:828:6: ',' IDENTIFIER
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:827:5: ( ',' IDENTIFIER )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:828:6: ',' IDENTIFIER
                         {
                         match(input,24,FOLLOW_24_in_synpred742895); if (failed) return ;
                         match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred742907); if (failed) return ;
@@ -20074,7 +20074,7 @@ public class JavaParser extends EMFTextParserImpl {
 
         }
 
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:834:2: ( block | ';' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:834:2: ( block | ';' )
         int alt239=2;
         int LA239_0 = input.LA(1);
 
@@ -20093,7 +20093,7 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt239) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:835:3: block
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:835:3: block
                 {
                 pushFollow(FOLLOW_block_in_synpred742939);
                 block();
@@ -20103,7 +20103,7 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 break;
             case 2 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:838:3: ';'
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:838:3: ';'
                 {
                 match(input,20,FOLLOW_20_in_synpred742953); if (failed) return ;
 
@@ -20119,11 +20119,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred111
     public final void synpred111_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1081:3: ( ( ',' additionallocalvariable ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1081:3: ( ',' additionallocalvariable )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1081:3: ( ( ',' additionallocalvariable ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1081:3: ( ',' additionallocalvariable )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1081:3: ( ',' additionallocalvariable )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1082:4: ',' additionallocalvariable
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1081:3: ( ',' additionallocalvariable )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1082:4: ',' additionallocalvariable
         {
         match(input,24,FOLLOW_24_in_synpred1114298); if (failed) return ;
         pushFollow(FOLLOW_additionallocalvariable_in_synpred1114308);
@@ -20140,14 +20140,14 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred122
     public final void synpred122_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1152:3: ( ( '{' ( ( member ( ( ';' ) )? ) )* '}' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1152:3: ( '{' ( ( member ( ( ';' ) )? ) )* '}' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1152:3: ( ( '{' ( ( member ( ( ';' ) )? ) )* '}' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1152:3: ( '{' ( ( member ( ( ';' ) )? ) )* '}' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1152:3: ( '{' ( ( member ( ( ';' ) )? ) )* '}' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1153:4: '{' ( ( member ( ( ';' ) )? ) )* '}'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1152:3: ( '{' ( ( member ( ( ';' ) )? ) )* '}' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1153:4: '{' ( ( member ( ( ';' ) )? ) )* '}'
         {
         match(input,28,FOLLOW_28_in_synpred1224710); if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1154:4: ( ( member ( ( ';' ) )? ) )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1154:4: ( ( member ( ( ';' ) )? ) )*
         loop252:
         do {
             int alt252=2;
@@ -20160,16 +20160,16 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt252) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1155:5: ( member ( ( ';' ) )? )
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1155:5: ( member ( ( ';' ) )? )
         	    {
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1155:5: ( member ( ( ';' ) )? )
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1156:6: member ( ( ';' ) )?
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1155:5: ( member ( ( ';' ) )? )
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1156:6: member ( ( ';' ) )?
         	    {
         	    pushFollow(FOLLOW_member_in_synpred1224733);
         	    member();
         	    _fsp--;
         	    if (failed) return ;
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1157:6: ( ( ';' ) )?
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1157:6: ( ( ';' ) )?
         	    int alt251=2;
         	    int LA251_0 = input.LA(1);
 
@@ -20178,10 +20178,10 @@ public class JavaParser extends EMFTextParserImpl {
         	    }
         	    switch (alt251) {
         	        case 1 :
-        	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1158:7: ( ';' )
+        	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1158:7: ( ';' )
         	            {
-        	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1158:7: ( ';' )
-        	            // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1159:8: ';'
+        	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1158:7: ( ';' )
+        	            // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1159:8: ';'
         	            {
         	            match(input,20,FOLLOW_20_in_synpred1224762); if (failed) return ;
 
@@ -20216,18 +20216,18 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred138
     public final void synpred138_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1298:3: ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1298:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1298:3: ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1298:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1298:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1299:4: '<' typeargument ( ( ',' typeargument ) )* '>'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1298:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1299:4: '<' typeargument ( ( ',' typeargument ) )* '>'
         {
         match(input,23,FOLLOW_23_in_synpred1385501); if (failed) return ;
         pushFollow(FOLLOW_typeargument_in_synpred1385511);
         typeargument();
         _fsp--;
         if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1301:4: ( ( ',' typeargument ) )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1301:4: ( ( ',' typeargument ) )*
         loop258:
         do {
             int alt258=2;
@@ -20240,10 +20240,10 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt258) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1302:5: ( ',' typeargument )
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1302:5: ( ',' typeargument )
         	    {
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1302:5: ( ',' typeargument )
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1303:6: ',' typeargument
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1302:5: ( ',' typeargument )
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1303:6: ',' typeargument
         	    {
         	    match(input,24,FOLLOW_24_in_synpred1385534); if (failed) return ;
         	    pushFollow(FOLLOW_typeargument_in_synpred1385546);
@@ -20273,18 +20273,18 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred140
     public final void synpred140_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1320:4: '<' typeargument ( ( ',' typeargument ) )* '>'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1320:4: '<' typeargument ( ( ',' typeargument ) )* '>'
         {
         match(input,23,FOLLOW_23_in_synpred1405616); if (failed) return ;
         pushFollow(FOLLOW_typeargument_in_synpred1405626);
         typeargument();
         _fsp--;
         if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1322:4: ( ( ',' typeargument ) )*
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1322:4: ( ( ',' typeargument ) )*
         loop259:
         do {
             int alt259=2;
@@ -20297,10 +20297,10 @@ public class JavaParser extends EMFTextParserImpl {
 
             switch (alt259) {
         	case 1 :
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1323:5: ( ',' typeargument )
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1323:5: ( ',' typeargument )
         	    {
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1323:5: ( ',' typeargument )
-        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1324:6: ',' typeargument
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1323:5: ( ',' typeargument )
+        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1324:6: ',' typeargument
         	    {
         	    match(input,24,FOLLOW_24_in_synpred1405649); if (failed) return ;
         	    pushFollow(FOLLOW_typeargument_in_synpred1405661);
@@ -20330,14 +20330,14 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred143
     public final void synpred143_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1333:4: '(' ( ( expression ( ( ',' expression ) )* ) )? ')'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1333:4: '(' ( ( expression ( ( ',' expression ) )* ) )? ')'
         {
         match(input,32,FOLLOW_32_in_synpred1435708); if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1334:4: ( ( expression ( ( ',' expression ) )* ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1334:4: ( ( expression ( ( ',' expression ) )* ) )?
         int alt262=2;
         int LA262_0 = input.LA(1);
 
@@ -20346,16 +20346,16 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt262) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1335:5: ( expression ( ( ',' expression ) )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1335:5: ( expression ( ( ',' expression ) )* )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1335:5: ( expression ( ( ',' expression ) )* )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1336:6: expression ( ( ',' expression ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1335:5: ( expression ( ( ',' expression ) )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1336:6: expression ( ( ',' expression ) )*
                 {
                 pushFollow(FOLLOW_expression_in_synpred1435731);
                 expression();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1337:6: ( ( ',' expression ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1337:6: ( ( ',' expression ) )*
                 loop261:
                 do {
                     int alt261=2;
@@ -20368,10 +20368,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt261) {
                 	case 1 :
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1338:7: ( ',' expression )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1338:7: ( ',' expression )
                 	    {
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1338:7: ( ',' expression )
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1339:8: ',' expression
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1338:7: ( ',' expression )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1339:8: ',' expression
                 	    {
                 	    match(input,24,FOLLOW_24_in_synpred1435760); if (failed) return ;
                 	    pushFollow(FOLLOW_expression_in_synpred1435774);
@@ -20410,11 +20410,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred144
     public final void synpred144_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1317:2: ( IDENTIFIER ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )? ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )? )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1317:2: IDENTIFIER ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )? ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1317:2: ( IDENTIFIER ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )? ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )? )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1317:2: IDENTIFIER ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )? ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )?
         {
         match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_synpred1445599); if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1318:2: ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1318:2: ( ( '<' typeargument ( ( ',' typeargument ) )* '>' ) )?
         int alt264=2;
         int LA264_0 = input.LA(1);
 
@@ -20423,17 +20423,17 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt264) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1320:4: '<' typeargument ( ( ',' typeargument ) )* '>'
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1319:3: ( '<' typeargument ( ( ',' typeargument ) )* '>' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1320:4: '<' typeargument ( ( ',' typeargument ) )* '>'
                 {
                 match(input,23,FOLLOW_23_in_synpred1445616); if (failed) return ;
                 pushFollow(FOLLOW_typeargument_in_synpred1445626);
                 typeargument();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1322:4: ( ( ',' typeargument ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1322:4: ( ( ',' typeargument ) )*
                 loop263:
                 do {
                     int alt263=2;
@@ -20446,10 +20446,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt263) {
                 	case 1 :
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1323:5: ( ',' typeargument )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1323:5: ( ',' typeargument )
                 	    {
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1323:5: ( ',' typeargument )
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1324:6: ',' typeargument
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1323:5: ( ',' typeargument )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1324:6: ',' typeargument
                 	    {
                 	    match(input,24,FOLLOW_24_in_synpred1445649); if (failed) return ;
                 	    pushFollow(FOLLOW_typeargument_in_synpred1445661);
@@ -20478,7 +20478,7 @@ public class JavaParser extends EMFTextParserImpl {
 
         }
 
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1331:2: ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1331:2: ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )?
         int alt267=2;
         int LA267_0 = input.LA(1);
 
@@ -20487,13 +20487,13 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt267) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1333:4: '(' ( ( expression ( ( ',' expression ) )* ) )? ')'
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1332:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1333:4: '(' ( ( expression ( ( ',' expression ) )* ) )? ')'
                 {
                 match(input,32,FOLLOW_32_in_synpred1445708); if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1334:4: ( ( expression ( ( ',' expression ) )* ) )?
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1334:4: ( ( expression ( ( ',' expression ) )* ) )?
                 int alt266=2;
                 int LA266_0 = input.LA(1);
 
@@ -20502,16 +20502,16 @@ public class JavaParser extends EMFTextParserImpl {
                 }
                 switch (alt266) {
                     case 1 :
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1335:5: ( expression ( ( ',' expression ) )* )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1335:5: ( expression ( ( ',' expression ) )* )
                         {
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1335:5: ( expression ( ( ',' expression ) )* )
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1336:6: expression ( ( ',' expression ) )*
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1335:5: ( expression ( ( ',' expression ) )* )
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1336:6: expression ( ( ',' expression ) )*
                         {
                         pushFollow(FOLLOW_expression_in_synpred1445731);
                         expression();
                         _fsp--;
                         if (failed) return ;
-                        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1337:6: ( ( ',' expression ) )*
+                        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1337:6: ( ( ',' expression ) )*
                         loop265:
                         do {
                             int alt265=2;
@@ -20524,10 +20524,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                             switch (alt265) {
                         	case 1 :
-                        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1338:7: ( ',' expression )
+                        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1338:7: ( ',' expression )
                         	    {
-                        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1338:7: ( ',' expression )
-                        	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1339:8: ',' expression
+                        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1338:7: ( ',' expression )
+                        	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1339:8: ',' expression
                         	    {
                         	    match(input,24,FOLLOW_24_in_synpred1445760); if (failed) return ;
                         	    pushFollow(FOLLOW_expression_in_synpred1445774);
@@ -20572,14 +20572,14 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred149
     public final void synpred149_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1372:3: ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1372:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1372:3: ( ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1372:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1372:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1373:4: '(' ( ( expression ( ( ',' expression ) )* ) )? ')'
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1372:3: ( '(' ( ( expression ( ( ',' expression ) )* ) )? ')' )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1373:4: '(' ( ( expression ( ( ',' expression ) )* ) )? ')'
         {
         match(input,32,FOLLOW_32_in_synpred1495963); if (failed) return ;
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1374:4: ( ( expression ( ( ',' expression ) )* ) )?
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1374:4: ( ( expression ( ( ',' expression ) )* ) )?
         int alt271=2;
         int LA271_0 = input.LA(1);
 
@@ -20588,16 +20588,16 @@ public class JavaParser extends EMFTextParserImpl {
         }
         switch (alt271) {
             case 1 :
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1375:5: ( expression ( ( ',' expression ) )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1375:5: ( expression ( ( ',' expression ) )* )
                 {
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1375:5: ( expression ( ( ',' expression ) )* )
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1376:6: expression ( ( ',' expression ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1375:5: ( expression ( ( ',' expression ) )* )
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1376:6: expression ( ( ',' expression ) )*
                 {
                 pushFollow(FOLLOW_expression_in_synpred1495986);
                 expression();
                 _fsp--;
                 if (failed) return ;
-                // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1377:6: ( ( ',' expression ) )*
+                // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1377:6: ( ( ',' expression ) )*
                 loop270:
                 do {
                     int alt270=2;
@@ -20610,10 +20610,10 @@ public class JavaParser extends EMFTextParserImpl {
 
                     switch (alt270) {
                 	case 1 :
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1378:7: ( ',' expression )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1378:7: ( ',' expression )
                 	    {
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1378:7: ( ',' expression )
-                	    // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1379:8: ',' expression
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1378:7: ( ',' expression )
+                	    // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1379:8: ',' expression
                 	    {
                 	    match(input,24,FOLLOW_24_in_synpred1496015); if (failed) return ;
                 	    pushFollow(FOLLOW_expression_in_synpred1496029);
@@ -20652,11 +20652,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred152
     public final void synpred152_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1459:3: ( ( 'else' statement ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1459:3: ( 'else' statement )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1459:3: ( ( 'else' statement ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1459:3: ( 'else' statement )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1459:3: ( 'else' statement )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1460:4: 'else' statement
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1459:3: ( 'else' statement )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1460:4: 'else' statement
         {
         match(input,48,FOLLOW_48_in_synpred1526380); if (failed) return ;
         pushFollow(FOLLOW_statement_in_synpred1526390);
@@ -20673,11 +20673,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred166
     public final void synpred166_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1732:3: ( ( relationoperator shiftexpression ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1732:3: ( relationoperator shiftexpression )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1732:3: ( ( relationoperator shiftexpression ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1732:3: ( relationoperator shiftexpression )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1732:3: ( relationoperator shiftexpression )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1733:4: relationoperator shiftexpression
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1732:3: ( relationoperator shiftexpression )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1733:4: relationoperator shiftexpression
         {
         pushFollow(FOLLOW_relationoperator_in_synpred1667579);
         relationoperator();
@@ -20697,11 +20697,11 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred167
     public final void synpred167_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1746:3: ( ( shiftoperator additiveexpression ) )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1746:3: ( shiftoperator additiveexpression )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1746:3: ( ( shiftoperator additiveexpression ) )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1746:3: ( shiftoperator additiveexpression )
         {
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1746:3: ( shiftoperator additiveexpression )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1747:4: shiftoperator additiveexpression
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1746:3: ( shiftoperator additiveexpression )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1747:4: shiftoperator additiveexpression
         {
         pushFollow(FOLLOW_shiftoperator_in_synpred1677637);
         shiftoperator();
@@ -20721,8 +20721,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred175
     public final void synpred175_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1814:2: ( castexpression )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1814:2: castexpression
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1814:2: ( castexpression )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1814:2: castexpression
         {
         pushFollow(FOLLOW_castexpression_in_synpred1757915);
         castexpression();
@@ -20735,8 +20735,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred178
     public final void synpred178_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1833:2: ( '(' primitivetype ')' unaryexpression )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:1833:2: '(' primitivetype ')' unaryexpression
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1833:2: ( '(' primitivetype ')' unaryexpression )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:1833:2: '(' primitivetype ')' unaryexpression
         {
         match(input,32,FOLLOW_32_in_synpred1787991); if (failed) return ;
         pushFollow(FOLLOW_primitivetype_in_synpred1787999);
@@ -20755,8 +20755,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred209
     public final void synpred209_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2326:2: ( keywordclass )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2326:2: keywordclass
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2326:2: ( keywordclass )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2326:2: keywordclass
         {
         pushFollow(FOLLOW_keywordclass_in_synpred2099721);
         keywordclass();
@@ -20769,8 +20769,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred210
     public final void synpred210_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2327:2: ( keywordinterface )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2327:2: keywordinterface
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2327:2: ( keywordinterface )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2327:2: keywordinterface
         {
         pushFollow(FOLLOW_keywordinterface_in_synpred2109731);
         keywordinterface();
@@ -20783,8 +20783,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred211
     public final void synpred211_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2328:2: ( annotation )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2328:2: annotation
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2328:2: ( annotation )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2328:2: annotation
         {
         pushFollow(FOLLOW_annotation_in_synpred2119741);
         annotation();
@@ -20797,8 +20797,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred212
     public final void synpred212_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2329:2: ( enumeration )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2329:2: enumeration
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2329:2: ( enumeration )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2329:2: enumeration
         {
         pushFollow(FOLLOW_enumeration_in_synpred2129751);
         enumeration();
@@ -20811,8 +20811,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred213
     public final void synpred213_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2330:2: ( block )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2330:2: block
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2330:2: ( block )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2330:2: block
         {
         pushFollow(FOLLOW_block_in_synpred2139761);
         block();
@@ -20825,8 +20825,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred214
     public final void synpred214_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2331:2: ( constructor )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2331:2: constructor
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2331:2: ( constructor )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2331:2: constructor
         {
         pushFollow(FOLLOW_constructor_in_synpred2149771);
         constructor();
@@ -20839,8 +20839,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred215
     public final void synpred215_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2332:2: ( method )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2332:2: method
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2332:2: ( method )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2332:2: method
         {
         pushFollow(FOLLOW_method_in_synpred2159781);
         method();
@@ -20853,8 +20853,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred216
     public final void synpred216_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2333:2: ( annotationmethod )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2333:2: annotationmethod
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2333:2: ( annotationmethod )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2333:2: annotationmethod
         {
         pushFollow(FOLLOW_annotationmethod_in_synpred2169791);
         annotationmethod();
@@ -20867,8 +20867,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred217
     public final void synpred217_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2334:2: ( field )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2334:2: field
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2334:2: ( field )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2334:2: field
         {
         pushFollow(FOLLOW_field_in_synpred2179801);
         field();
@@ -20881,8 +20881,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred226
     public final void synpred226_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2355:2: ( arrayinstantiationbyvalues )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2355:2: arrayinstantiationbyvalues
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2355:2: ( arrayinstantiationbyvalues )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2355:2: arrayinstantiationbyvalues
         {
         pushFollow(FOLLOW_arrayinstantiationbyvalues_in_synpred2269929);
         arrayinstantiationbyvalues();
@@ -20895,8 +20895,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred227
     public final void synpred227_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2356:2: ( arrayinstantiationbysize )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2356:2: arrayinstantiationbysize
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2356:2: ( arrayinstantiationbysize )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2356:2: arrayinstantiationbysize
         {
         pushFollow(FOLLOW_arrayinstantiationbysize_in_synpred2279939);
         arrayinstantiationbysize();
@@ -20909,8 +20909,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred228
     public final void synpred228_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2357:2: ( assignment )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2357:2: assignment
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2357:2: ( assignment )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2357:2: assignment
         {
         pushFollow(FOLLOW_assignment_in_synpred2289949);
         assignment();
@@ -20923,8 +20923,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred229
     public final void synpred229_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2364:2: ( keywordclass )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2364:2: keywordclass
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2364:2: ( keywordclass )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2364:2: keywordclass
         {
         pushFollow(FOLLOW_keywordclass_in_synpred2299978);
         keywordclass();
@@ -20937,8 +20937,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred230
     public final void synpred230_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2365:2: ( keywordinterface )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2365:2: keywordinterface
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2365:2: ( keywordinterface )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2365:2: keywordinterface
         {
         pushFollow(FOLLOW_keywordinterface_in_synpred2309988);
         keywordinterface();
@@ -20951,8 +20951,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred231
     public final void synpred231_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2366:2: ( annotation )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2366:2: annotation
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2366:2: ( annotation )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2366:2: annotation
         {
         pushFollow(FOLLOW_annotation_in_synpred2319998);
         annotation();
@@ -20965,8 +20965,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred232
     public final void synpred232_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2367:2: ( enumeration )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2367:2: enumeration
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2367:2: ( enumeration )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2367:2: enumeration
         {
         pushFollow(FOLLOW_enumeration_in_synpred23210008);
         enumeration();
@@ -20979,8 +20979,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred233
     public final void synpred233_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2368:2: ( block )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2368:2: block
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2368:2: ( block )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2368:2: block
         {
         pushFollow(FOLLOW_block_in_synpred23310018);
         block();
@@ -20993,8 +20993,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred234
     public final void synpred234_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2369:2: ( localvariablestatement )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2369:2: localvariablestatement
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2369:2: ( localvariablestatement )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2369:2: localvariablestatement
         {
         pushFollow(FOLLOW_localvariablestatement_in_synpred23410028);
         localvariablestatement();
@@ -21007,8 +21007,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred237
     public final void synpred237_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2372:2: ( forloop )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2372:2: forloop
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2372:2: ( forloop )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2372:2: forloop
         {
         pushFollow(FOLLOW_forloop_in_synpred23710058);
         forloop();
@@ -21021,8 +21021,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred238
     public final void synpred238_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2373:2: ( foreachloop )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2373:2: foreachloop
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2373:2: ( foreachloop )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2373:2: foreachloop
         {
         pushFollow(FOLLOW_foreachloop_in_synpred23810068);
         foreachloop();
@@ -21035,8 +21035,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred239
     public final void synpred239_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2374:2: ( whileloop )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2374:2: whileloop
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2374:2: ( whileloop )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2374:2: whileloop
         {
         pushFollow(FOLLOW_whileloop_in_synpred23910078);
         whileloop();
@@ -21049,8 +21049,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred240
     public final void synpred240_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2375:2: ( dowhileloop )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2375:2: dowhileloop
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2375:2: ( dowhileloop )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2375:2: dowhileloop
         {
         pushFollow(FOLLOW_dowhileloop_in_synpred24010088);
         dowhileloop();
@@ -21063,8 +21063,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred242
     public final void synpred242_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2377:2: ( synchronizedblock )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2377:2: synchronizedblock
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2377:2: ( synchronizedblock )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2377:2: synchronizedblock
         {
         pushFollow(FOLLOW_synchronizedblock_in_synpred24210108);
         synchronizedblock();
@@ -21077,8 +21077,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred249
     public final void synpred249_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2384:2: ( jumplabel )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2384:2: jumplabel
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2384:2: ( jumplabel )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2384:2: jumplabel
         {
         pushFollow(FOLLOW_jumplabel_in_synpred24910178);
         jumplabel();
@@ -21091,8 +21091,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred250
     public final void synpred250_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2385:2: ( expressionstatement )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2385:2: expressionstatement
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2385:2: ( expressionstatement )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2385:2: expressionstatement
         {
         pushFollow(FOLLOW_expressionstatement_in_synpred25010188);
         expressionstatement();
@@ -21105,8 +21105,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred252
     public final void synpred252_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2393:2: ( ordinaryparameter )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2393:2: ordinaryparameter
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2393:2: ( ordinaryparameter )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2393:2: ordinaryparameter
         {
         pushFollow(FOLLOW_ordinaryparameter_in_synpred25210227);
         ordinaryparameter();
@@ -21119,8 +21119,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred262
     public final void synpred262_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2415:2: ( arrayinstantiationbyvalues )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2415:2: arrayinstantiationbyvalues
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2415:2: ( arrayinstantiationbyvalues )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2415:2: arrayinstantiationbyvalues
         {
         pushFollow(FOLLOW_arrayinstantiationbyvalues_in_synpred26210365);
         arrayinstantiationbyvalues();
@@ -21133,8 +21133,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred263
     public final void synpred263_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2416:2: ( arrayinstantiationbysize )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2416:2: arrayinstantiationbysize
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2416:2: ( arrayinstantiationbysize )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2416:2: arrayinstantiationbysize
         {
         pushFollow(FOLLOW_arrayinstantiationbysize_in_synpred26310375);
         arrayinstantiationbysize();
@@ -21147,8 +21147,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred264
     public final void synpred264_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2417:2: ( assignment )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2417:2: assignment
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2417:2: ( assignment )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2417:2: assignment
         {
         pushFollow(FOLLOW_assignment_in_synpred26410385);
         assignment();
@@ -21161,8 +21161,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred267
     public final void synpred267_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2432:2: ( explicitconstructorcall )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2432:2: explicitconstructorcall
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2432:2: ( explicitconstructorcall )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2432:2: explicitconstructorcall
         {
         pushFollow(FOLLOW_explicitconstructorcall_in_synpred26710453);
         explicitconstructorcall();
@@ -21175,8 +21175,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred268
     public final void synpred268_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2433:2: ( packageorclassifierormethodorvariablereference )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2433:2: packageorclassifierormethodorvariablereference
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2433:2: ( packageorclassifierormethodorvariablereference )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2433:2: packageorclassifierormethodorvariablereference
         {
         pushFollow(FOLLOW_packageorclassifierormethodorvariablereference_in_synpred26810463);
         packageorclassifierormethodorvariablereference();
@@ -21189,8 +21189,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred269
     public final void synpred269_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2434:2: ( explicitgenericinvocation )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2434:2: explicitgenericinvocation
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2434:2: ( explicitgenericinvocation )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2434:2: explicitgenericinvocation
         {
         pushFollow(FOLLOW_explicitgenericinvocation_in_synpred26910473);
         explicitgenericinvocation();
@@ -21203,8 +21203,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred272
     public final void synpred272_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2437:2: ( keywordthis )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2437:2: keywordthis
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2437:2: ( keywordthis )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2437:2: keywordthis
         {
         pushFollow(FOLLOW_keywordthis_in_synpred27210503);
         keywordthis();
@@ -21217,8 +21217,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred273
     public final void synpred273_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2438:2: ( keywordsuper )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2438:2: keywordsuper
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2438:2: ( keywordsuper )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2438:2: keywordsuper
         {
         pushFollow(FOLLOW_keywordsuper_in_synpred27310513);
         keywordsuper();
@@ -21231,8 +21231,8 @@ public class JavaParser extends EMFTextParserImpl {
 
     // $ANTLR start synpred284
     public final void synpred284_fragment() throws RecognitionException {   
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2461:2: ( localvariable )
-        // D:\\Projekte\\Eclipse Workspaces\\EMFText Java5 DEV\\org.emftext.language.java.resource.java\\src\\org\\emftext\\language\\java\\resource\\java\\Java.g:2461:2: localvariable
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2461:2: ( localvariable )
+        // /Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g:2461:2: localvariable
         {
         pushFollow(FOLLOW_localvariable_in_synpred28410661);
         localvariable();
@@ -21243,221 +21243,11 @@ public class JavaParser extends EMFTextParserImpl {
     }
     // $ANTLR end synpred284
 
-    public final boolean synpred46() {
+    public final boolean synpred25() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred46_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred122() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred122_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred212() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred212_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred213() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred213_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred210() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred210_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred211() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred211_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred216() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred216_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred252() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred252_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred217() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred217_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred214() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred214_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred215() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred215_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred250() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred250_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred167() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred167_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred166() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred166_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred74() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred74_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred111() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred111_fragment(); // can never throw exception
+            synpred25_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21481,431 +21271,11 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred31() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred31_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred30() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred30_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred152() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred152_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred262() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred262_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred226() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred226_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred264() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred264_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred227() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred227_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred263() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred263_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
     public final boolean synpred228() {
         backtracking++;
         int start = input.mark();
         try {
             synpred228_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred268() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred268_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred267() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred267_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred269() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred269_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred144() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred144_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred149() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred149_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred29() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred29_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred272() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred272_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred273() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred273_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred140() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred140_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred143() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred143_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred231() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred231_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred230() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred230_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred239() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred239_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred28() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred28_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred238() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred238_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred25() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred25_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred237() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred237_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred26() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred26_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred23() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred23_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred24() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred24_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred234() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred234_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred233() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred233_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21929,11 +21299,11 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred138() {
+    public final boolean synpred30() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred138_fragment(); // can never throw exception
+            synpred30_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21943,11 +21313,67 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred284() {
+    public final boolean synpred210() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred284_fragment(); // can never throw exception
+            synpred210_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred213() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred213_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred140() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred140_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred31() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred31_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred249() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred249_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21971,11 +21397,11 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred3() {
+    public final boolean synpred263() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred3_fragment(); // can never throw exception
+            synpred263_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -21985,11 +21411,151 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred209() {
+    public final boolean synpred212() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred209_fragment(); // can never throw exception
+            synpred212_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred268() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred268_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred272() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred272_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred167() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred167_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred214() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred214_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred166() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred166_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred284() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred284_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred273() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred273_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred74() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred74_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred252() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred252_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred122() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred122_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -22013,6 +21579,90 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
+    public final boolean synpred239() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred239_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred24() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred24_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred262() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred262_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred138() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred138_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred230() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred230_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred143() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred143_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
     public final boolean synpred242() {
         backtracking++;
         int start = input.mark();
@@ -22027,11 +21677,11 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred175() {
+    public final boolean synpred209() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred175_fragment(); // can never throw exception
+            synpred209_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -22055,11 +21705,361 @@ public class JavaParser extends EMFTextParserImpl {
         failed=false;
         return success;
     }
-    public final boolean synpred249() {
+    public final boolean synpred264() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred249_fragment(); // can never throw exception
+            synpred264_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred46() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred46_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred227() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred227_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred111() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred111_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred175() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred175_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred234() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred234_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred28() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred28_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred233() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred233_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred29() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred29_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred211() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred211_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred250() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred250_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred152() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred152_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred231() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred231_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred3() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred3_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred269() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred269_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred26() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred26_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred217() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred217_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred216() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred216_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred23() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred23_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred238() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred238_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred267() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred267_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred215() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred215_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred237() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred237_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred149() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred149_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred144() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred144_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
+    public final boolean synpred226() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred226_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -22192,9 +22192,9 @@ public class JavaParser extends EMFTextParserImpl {
             "\1\14\24\uffff\2\14",
             "",
             "\1\uffff",
-            "\2\14\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\26\10\uffff"+
-            "\2\14\4\uffff\1\2\2\uffff\1\2\1\14\7\uffff\1\14\3\uffff\1\14"+
-            "\21\uffff\4\14\10\uffff\1\17\2\14\12\uffff\10\14",
+            "\2\14\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\26\10\uffff\2"+
+            "\14\4\uffff\1\2\2\uffff\1\2\1\14\7\uffff\1\14\3\uffff\1\14\21"+
+            "\uffff\4\14\10\uffff\1\17\2\14\12\uffff\10\14",
             "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
             "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
             "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
@@ -22207,9 +22207,9 @@ public class JavaParser extends EMFTextParserImpl {
             "\1\14\3\uffff\1\14\21\uffff\4\14\10\uffff\3\14\12\uffff\10\14",
             "\2\14\14\uffff\1\14\3\uffff\3\14\6\uffff\2\14\1\31\6\uffff"+
             "\1\14\24\uffff\2\14",
-            "\2\14\1\uffff\1\33\1\34\1\35\1\36\1\37\1\40\1\41\10\uffff"+
-            "\2\14\4\uffff\1\2\2\uffff\1\2\1\14\7\uffff\1\14\3\uffff\1\14"+
-            "\21\uffff\4\14\10\uffff\1\32\2\14\12\uffff\10\14",
+            "\2\14\1\uffff\1\33\1\34\1\35\1\36\1\37\1\40\1\41\10\uffff\2"+
+            "\14\4\uffff\1\2\2\uffff\1\2\1\14\7\uffff\1\14\3\uffff\1\14\21"+
+            "\uffff\4\14\10\uffff\1\32\2\14\12\uffff\10\14",
             "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
             "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
             "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
@@ -22283,59 +22283,60 @@ public class JavaParser extends EMFTextParserImpl {
     static final String DFA149_eofS =
         "\1\2\41\uffff";
     static final String DFA149_minS =
-        "\2\4\2\uffff\11\5\1\4\1\0\10\5\1\4\1\5\1\4\10\5";
+        "\2\4\1\uffff\11\5\1\uffff\1\0\1\4\10\5\1\4\1\5\1\4\10\5";
     static final String DFA149_maxS =
-        "\2\136\2\uffff\11\77\1\136\1\0\10\77\1\136\1\77\1\136\10\77";
+        "\2\136\1\uffff\11\77\1\uffff\1\0\1\136\10\77\1\136\1\77\1\136\10"+
+        "\77";
     static final String DFA149_acceptS =
-        "\2\uffff\1\2\1\1\36\uffff";
+        "\2\uffff\1\2\11\uffff\1\1\25\uffff";
     static final String DFA149_specialS =
-        "\16\uffff\1\0\23\uffff}>";
+        "\15\uffff\1\0\24\uffff}>";
     static final String[] DFA149_transitionS = {
             "\3\2\7\uffff\2\2\2\uffff\10\2\2\uffff\4\2\1\1\4\2\4\uffff\2"+
             "\2\3\uffff\1\2\5\uffff\1\2\11\uffff\2\2\13\uffff\1\2\1\uffff"+
             "\22\2",
-            "\1\4\1\3\1\uffff\1\6\1\7\1\10\1\11\1\12\1\13\1\14\10\uffff"+
-            "\2\3\4\uffff\1\2\2\uffff\1\2\2\3\6\uffff\1\3\3\uffff\1\3\21"+
-            "\uffff\4\3\10\uffff\1\5\2\3\12\uffff\10\3",
+            "\1\13\1\14\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\10\uffff"+
+            "\2\14\4\uffff\1\2\2\uffff\1\2\2\14\6\uffff\1\14\3\uffff\1\14"+
+            "\21\uffff\4\14\10\uffff\1\3\2\14\12\uffff\10\14",
             "",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\3\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\14\uffff\1\14\3\uffff\3\14\6\uffff\2\14\1\16\6\uffff"+
+            "\1\14\24\uffff\2\14",
             "",
-            "\2\3\14\uffff\1\3\3\uffff\3\3\6\uffff\2\3\1\15\6\uffff\1\3"+
-            "\24\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\3\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\26\10\uffff\2"+
-            "\3\4\uffff\1\2\2\uffff\1\2\1\3\7\uffff\1\3\3\uffff\1\3\21\uffff"+
-            "\4\3\10\uffff\1\17\2\3\12\uffff\10\3",
             "\1\uffff",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\1\30\1\3\1\uffff\7\3\10\uffff\2\3\10\uffff\1\3\7\uffff\1"+
-            "\3\3\uffff\1\3\21\uffff\4\3\10\uffff\3\3\12\uffff\10\3",
-            "\2\3\14\uffff\1\3\3\uffff\3\3\6\uffff\2\3\1\31\6\uffff\1\3"+
-            "\24\uffff\2\3",
-            "\2\3\1\uffff\1\33\1\34\1\35\1\36\1\37\1\40\1\41\10\uffff\2"+
-            "\3\4\uffff\1\2\2\uffff\1\2\1\3\7\uffff\1\3\3\uffff\1\3\21\uffff"+
-            "\4\3\10\uffff\1\32\2\3\12\uffff\10\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3",
-            "\2\3\20\uffff\1\3\1\27\1\3\7\uffff\1\16\34\uffff\2\3"
+            "\2\14\1\uffff\1\20\1\21\1\22\1\23\1\24\1\25\1\26\10\uffff\2"+
+            "\14\4\uffff\1\2\2\uffff\1\2\1\14\7\uffff\1\14\3\uffff\1\14\21"+
+            "\uffff\4\14\10\uffff\1\17\2\14\12\uffff\10\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\1\30\1\14\1\uffff\7\14\10\uffff\2\14\10\uffff\1\14\7\uffff"+
+            "\1\14\3\uffff\1\14\21\uffff\4\14\10\uffff\3\14\12\uffff\10\14",
+            "\2\14\14\uffff\1\14\3\uffff\3\14\6\uffff\2\14\1\31\6\uffff"+
+            "\1\14\24\uffff\2\14",
+            "\2\14\1\uffff\1\33\1\34\1\35\1\36\1\37\1\40\1\41\10\uffff\2"+
+            "\14\4\uffff\1\2\2\uffff\1\2\1\14\7\uffff\1\14\3\uffff\1\14\21"+
+            "\uffff\4\14\10\uffff\1\32\2\14\12\uffff\10\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14",
+            "\2\14\20\uffff\1\14\1\27\1\14\7\uffff\1\15\34\uffff\2\14"
     };
 
     static final short[] DFA149_eot = DFA.unpackEncodedString(DFA149_eotS);
@@ -22374,18 +22375,18 @@ public class JavaParser extends EMFTextParserImpl {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA149_14 = input.LA(1);
+                        int LA149_13 = input.LA(1);
 
                          
-                        int index149_14 = input.index();
+                        int index149_13 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred149()) ) {s = 3;}
+                        if ( (synpred149()) ) {s = 12;}
 
                         else if ( (true) ) {s = 2;}
 
                          
-                        input.seek(index149_14);
+                        input.seek(index149_13);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -22482,68 +22483,68 @@ public class JavaParser extends EMFTextParserImpl {
         "\14\136\12\51\1\0\1\4\1\52\2\uffff\1\4\2\51\1\31\1\0\1\4\1\47\1"+
         "\31";
     static final String DFA188_acceptS =
-        "\31\uffff\1\1\1\2\10\uffff";
+        "\31\uffff\1\2\1\1\10\uffff";
     static final String DFA188_specialS =
         "\26\uffff\1\0\10\uffff\1\1\3\uffff}>";
     static final String[] DFA188_transitionS = {
             "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
             "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
             "\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4"+
-            "\1\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1"+
-            "\24\1\25",
-            "\1\31\16\uffff\1\27\3\uffff\1\26\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\14\57\uffff\1\10\26\uffff\1\15\1\uffff\1\1\1\2\1\3\1\4\1"+
+            "\5\1\6\1\7\1\11\1\12\1\13\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
+            "\1\25",
+            "\1\32\16\uffff\1\27\3\uffff\1\26\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
             "\1\uffff",
             "\1\34",
             "\1\35",
             "",
             "",
             "\1\36",
-            "\1\31\16\uffff\1\27\3\uffff\1\37\17\uffff\1\32\1\uffff\1\30",
-            "\1\31\22\uffff\1\33\17\uffff\1\32\1\uffff\1\30",
+            "\1\32\16\uffff\1\27\3\uffff\1\37\17\uffff\1\31\1\uffff\1\30",
+            "\1\32\22\uffff\1\33\17\uffff\1\31\1\uffff\1\30",
             "\1\40\1\41",
             "\1\uffff",
             "\1\42",
-            "\1\31\42\uffff\1\32",
+            "\1\32\42\uffff\1\31",
             "\1\40\1\41"
     };
 
@@ -22589,9 +22590,9 @@ public class JavaParser extends EMFTextParserImpl {
                         int index188_22 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred252()) ) {s = 25;}
+                        if ( (synpred252()) ) {s = 26;}
 
-                        else if ( (true) ) {s = 26;}
+                        else if ( (true) ) {s = 25;}
 
                          
                         input.seek(index188_22);
@@ -22604,9 +22605,9 @@ public class JavaParser extends EMFTextParserImpl {
                         int index188_31 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred252()) ) {s = 25;}
+                        if ( (synpred252()) ) {s = 26;}
 
-                        else if ( (true) ) {s = 26;}
+                        else if ( (true) ) {s = 25;}
 
                          
                         input.seek(index188_31);

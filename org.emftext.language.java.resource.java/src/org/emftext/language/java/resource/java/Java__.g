@@ -92,73 +92,73 @@ T92 : 'long' ;
 T93 : 'float' ;
 T94 : 'double' ;
 
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2516
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2516
 SL_COMMENT
 :
 	'//'(~('\n'|'\r'))*
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2520
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2520
 ML_COMMENT
 :
 	'/*'.*'*/'
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2524
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2524
 FLOATING_POINT_LITERAL
 :
 	('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))? |   ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('f'|'F'|'d'|'D')))
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2528
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2528
 HEX_LITERAL
 :
 	'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+('l'|'L')?
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2532
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2532
 DECIMAL_LITERAL
 :
 	('0'|'1'..'9''0'..'9'*)('l'|'L')?
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2536
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2536
 OCTAL_LITERAL
 :
 	'0'('0'..'7')+('l'|'L')?
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2540
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2540
 BOOLEAN_LITERAL
 :
 	'true'|'false'
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2544
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2544
 ADDITIVE_OPERATOR_LITERAL
 :
 	'+'|'-'
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2548
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2548
 MULTIPLICATIVE_OPERATOR_LITERAL
 :
 	'*'|'/'|'%'
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2552
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2552
 CHARACTER_LITERAL
 :
 	'\''('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\'('0'..'3')('0'..'7')('0'..'7')|'\\'('0'..'7')('0'..'7')|'\\'('0'..'7'))|~('\''|'\\'))'\''
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2556
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2556
 STRING_LITERAL
 :
 	'"'('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|'\\'('0'..'7')|~('\\'|'"'))*'"'
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2560
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2560
 IDENTIFIER
 :
 	('A'..'Z'|'a'..'z'|'0'..'9'|'_')+
 ;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2564
-LB
-:
-	('\r\n' | '\r' | '\n'){ channel=99; }
-;
-// $ANTLR src "D:\Projekte\Eclipse Workspaces\EMFText Java5 DEV\org.emftext.language.java.resource.java\src\org\emftext\language\java\resource\java\Java.g" 2568
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2564
 WS
 :
 	(' ' | '\t' | '\f'){ channel=99; }
+;
+// $ANTLR src "/Volumes/WINDOWS_HD/LocalDocuments/EclipseWorspaces/Reuseware09/org.emftext.language.java.resource.java/src/org/emftext/language/java/resource/java/Java.g" 2568
+LB
+:
+	('\r\n' | '\r' | '\n'){ channel=99; }
 ;
