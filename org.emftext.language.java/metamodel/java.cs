@@ -280,6 +280,9 @@ ExpressionList
 
 ParExpression ::= "(" expression ")" ;
 
+InstanceOfExpression
+    ::= relationExpression ("instanceof" type)? ;
+    
 RelationExpression
 	::= shiftExpression ( relationOperator shiftExpression)*;
 	
