@@ -274,12 +274,23 @@ ExpressionStatement
 	::= expression ";" 
 	;
 
-ExpressionList
-	::= expressions ("," expressions)* 
-	;
-
 ParExpression ::= "(" expression ")" ;
 
+ExpressionList
+	::= expressions ("," expressions)* ;
+
+InclusiveOrExpression
+    ::= exclusiveOrExpression ( "|" exclusiveOrExpression )* ;
+
+ExclusiveOrExpression
+    ::=   andExpression ( "^" andExpression )* ;
+
+AndExpression
+    ::=   equalityExpression ( "&" equalityExpression )* ;
+  
+EqualityExpression
+    ::= instanceOfExpression ( (equal | notEqual) instanceOfExpression )* ;
+    
 InstanceOfExpression
     ::= relationExpression ("instanceof" type)? ;
     
@@ -327,29 +338,12 @@ LeftShift 			::= "<" "<" ;
 RightShift 			::= ">" ">" ;
 UnsignedRightShift	::= ">" ">" ">" ;
 
-	
-PlusPlus ::= "++" ;
-MinusMinus ::= "--" ;
-Complement ::= "~" ;
-Negate ::= "!" ;
-
-BooleanExpression
-	::=	
-	left[]
-	( "="
-    |   "+="
-    |   "-="
-    |   "*="
-    |   "/="
-    |   "&="
-    |   "|="
-    |   "^="
-    |   "%="
-    |   "<" "<" "="
-    |   ">" ">" "="
-    |   ">" ">" ">" "=" )
-    right[]
-	;
+Equal		::= "==";	
+NotEqual	::= "!=";
+PlusPlus 	::= "++" ;
+MinusMinus 	::= "--" ;
+Complement 	::= "~" ;
+Negate 		::= "!" ;
 
 ArrayDimension ::= ("[" "]");
 

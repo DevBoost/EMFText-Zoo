@@ -333,7 +333,31 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InstanceOfExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//ForLoopInitializer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InclusiveOrExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exclusiveOrExpression"
+        upperBound="-1" eType="#//ExclusiveOrExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExclusiveOrExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="andExpression" upperBound="-1"
+        eType="#//AndExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equalityExpression" upperBound="-1"
+        eType="#//EqualityExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceOfExpression" upperBound="-1"
+        eType="#//InstanceOfExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equal" upperBound="-1"
+        eType="#//Equal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notEqual" upperBound="-1"
+        eType="#//NotEqual" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceOfExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relationExpression" eType="#//RelationExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//TypeReference"
@@ -413,27 +437,21 @@
   <eClassifiers xsi:type="ecore:EClass" name="GreaterThan" eSuperTypes="#//RelationOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="GreaterThanOrEqual" eSuperTypes="#//RelationOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="ShiftOperator" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LeftShift" eSuperTypes="#//ShiftOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RightShift" eSuperTypes="#//ShiftOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnsignedRightShift" eSuperTypes="#//ShiftOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Equal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotEqual"/>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveOperator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeOperator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LeftShift" eSuperTypes="#//ShiftOperator"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RightShift" eSuperTypes="#//ShiftOperator"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UnsignedRightShift" eSuperTypes="#//ShiftOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="PlusPlus"/>
   <eClassifiers xsi:type="ecore:EClass" name="MinusMinus"/>
   <eClassifiers xsi:type="ecore:EClass" name="Complement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Negate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//ForLoopInitializer">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-        eType="#//Expression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="right" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Modifier" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Public" eSuperTypes="#//Modifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Abstract" eSuperTypes="#//Modifier"/>
