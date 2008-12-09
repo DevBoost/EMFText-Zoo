@@ -213,8 +213,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 						throw new UnresolvedProxiesException();
 					}
 					else {
-						// TODO @jjohannes: What does this 'c' mean?
-						System.out.println("c");
 						URI proxyURI = ((InternalEObject)target).eProxyURI();
 						//TODO ??
 					}
@@ -228,8 +226,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		}
 		else {
 			//TODO what other cases?
-			// TODO @jjohannes: What does this 'X' mean?
-			System.out.println("X");
 		}
 		
 		return type;
