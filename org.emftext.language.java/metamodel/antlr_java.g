@@ -638,15 +638,17 @@ shiftOp
           $t1.getCharPositionInLine() + 1 == $t2.getCharPositionInLine() }?
     ;
 
-
+// done
 additiveExpression
     :   multiplicativeExpression ( ('+' | '-') multiplicativeExpression )*
     ;
 
+// done
 multiplicativeExpression
     :   unaryExpression ( ( '*' | '/' | '%' ) unaryExpression )*
     ;
-    
+
+// done    
 unaryExpression
     :   '+' unaryExpression
     |   '-' unaryExpression
@@ -655,6 +657,7 @@ unaryExpression
     |   unaryExpressionNotPlusMinus
     ;
 
+// done
 unaryExpressionNotPlusMinus
     :   '~' unaryExpression
     |   '!' unaryExpression
@@ -662,13 +665,15 @@ unaryExpressionNotPlusMinus
     |   primary selector* ('++'|'--')?
     ;
 
+// done
 castExpression
     :  '(' primitiveType ')' unaryExpression
-    |  '(' (type | expression) ')' unaryExpressionNotPlusMinus
+    |  '(' (type | expression) ')' unaryExpressionNotPlusMinus  //without expression, is it necessary?
     ;
 
+//done, split only in "reference", "literal" and "parExpression"
 primary
-    :   parExpression // TODO
+    :   parExpression // DONE
     |   'this' ('.' Identifier)* identifierSuffix? // DONE without the suffix 
     |   'super' superSuffix // DONE
     |   literal // DONE

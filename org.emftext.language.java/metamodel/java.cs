@@ -156,8 +156,7 @@ ExplicitConstructorCall
      ;
 
 ArrayInstantiationByValues
-	::= "new" type arrayDimensions+
-		"{" (initialValues ((",") initialValues)* (",")? )? "}"
+	::= ("new" type arrayDimensions+)? arrayInitializer
 	;
 
 ArrayInstantiationBySize 
@@ -166,6 +165,10 @@ ArrayInstantiationBySize
 		arrayDimensions*
 	;
 
+ArrayInitializer
+    ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* (",")? )? "}"    
+    ;
+    
 Reference
 	::= primary ("[" arraySelectors? "]")* (#0 "." #0 next)? 
 	;
@@ -317,7 +320,7 @@ UnaryExpressionNotPlusMinus
     ;
 CastExpression
     ::= "(" primitiveType ")" unaryExpression
-    |  	"(" (type | expression) ")" unaryExpressionNotPlusMinus
+    |  	"(" type ")" unaryExpressionNotPlusMinus
     ;
     
 Primary 
