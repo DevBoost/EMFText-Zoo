@@ -8,16 +8,26 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.language.simple_c.CompilationUnit;
 
 public class AbstractCTest extends TestCase {
+	
 	protected CompilationUnit loadResource(InputStream inputStream,
+			String fileIdentifier) throws IOException {
+		
+		CompilationUnit cUnit = tryToLoadResource(inputStream, fileIdentifier);
+		assertNotNull(cUnit);
+		assertSuccessfulParsing(cUnit.eResource());
+		return cUnit;
+	}
+
+	protected CompilationUnit tryToLoadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {
 		
 		CResourceImplTestWrapper resource = new CResourceImplTestWrapper();
 		resource.load(inputStream, Collections.EMPTY_MAP);
-		assertSuccessfulParsing(resource);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
@@ -28,7 +38,7 @@ public class AbstractCTest extends TestCase {
 		return cUnit;
 	}
 
-	private void assertSuccessfulParsing(CResourceImplTestWrapper resource) {
+	private void assertSuccessfulParsing(Resource resource) {
 		print(resource.getErrors());
 		print(resource.getWarnings());
 		assertEquals(0, resource.getErrors().size());

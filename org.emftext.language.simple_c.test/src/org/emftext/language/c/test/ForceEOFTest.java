@@ -11,8 +11,8 @@ public class ForceEOFTest extends AbstractCTest {
 
 	public void testForceEOF() {
 		try {
-			CompilationUnit unit = loadResource(new ByteArrayInputStream(TEST_INPUT_FROM_MEMORY.getBytes()), "test_input_from_memory.c");
-			assertNotNull(unit);
+			CompilationUnit unit = tryToLoadResource(new ByteArrayInputStream(TEST_INPUT_FROM_MEMORY.getBytes()), "test_input_from_memory.c");
+			assertTrue("Additional semicolon at the end should prevent successful parsing", unit.eResource().getErrors().size() > 0);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}

@@ -5,7 +5,6 @@ START CompilationUnit
 OPTIONS {
 	tokenspace = 1;
 	autofixSimpleLeftrecursion = false;
-	forceEOF = true;
 }
 
 TOKENS {
