@@ -50,6 +50,7 @@ import org.emftext.language.java.TypeParameter;
 import org.emftext.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.runtime.resource.TextDiagnostic;
 import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.TextDiagnostic.TextDiagnosticType;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -126,8 +127,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			TextResource resource, boolean ignoreSemanticErrors) {
 		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
 		if (ignoreSemanticErrors) {
-			for(Diagnostic error : resource.getErrors()) {
-				if (error.getMessage().contains("ProxyResolver")) {
+			for (Diagnostic error : resource.getErrors()) {
+				if (error instanceof TextDiagnostic && ((TextDiagnostic) error).getType() == TextDiagnosticType.RESOLVE_PROBLEM) {
 					errors.remove(error);
 				}
 			}
