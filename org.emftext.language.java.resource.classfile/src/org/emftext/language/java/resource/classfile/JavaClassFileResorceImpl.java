@@ -18,14 +18,14 @@ import org.emftext.language.java.Method;
 import org.emftext.language.java.Parameter;
 import org.emftext.language.java.TypeReferenceSequence;
 
-public class JavaClassFileResorce extends ResourceImpl {
+public class JavaClassFileResorceImpl extends ResourceImpl {
 
 	//one resource per type
 	protected JavaClass myClass;
 	
 	protected JavaFactory javaFactory = JavaFactory.eINSTANCE;
 	
-	public JavaClassFileResorce(URI uri) {
+	public JavaClassFileResorceImpl(URI uri) {
 		super(uri);
 	}
 	

@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.emftext.language.java.CompilationUnit;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.resource.java.JavaResourceImpl;
 
 
 public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factory {
@@ -27,7 +26,7 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 		if("pathmap".equals(normailzedURI.scheme())) {
 			//something wrong
 			System.out.println("Warning: " + uri + " not registered in ClassPath");
-			return new JavaResourceImpl(uri);
+			return new JavaSourcFileResourceImpl(uri);
 		}
 		
 		if(normailzedURI.fileExtension().equals("java")) {
@@ -35,10 +34,10 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 				//not yet registered in classpath
 				loadAndRegister(normailzedURI);
 			}
-			return new JavaResourceImpl(uri);
+			return new JavaSourcFileResourceImpl(uri);
 		}
 		if(normailzedURI.fileExtension().equals("class"))  {
-			return new JavaClassFileResorce(uri);
+			return new JavaClassFileResorceImpl(uri);
 		}
 		
 		throw new UnsupportedOperationException();
@@ -47,7 +46,7 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 
 	private void loadAndRegister(URI uri) {
 		//try to load and register
-		Resource tempResource = new JavaResourceImpl(uri);
+		Resource tempResource = new JavaSourcFileResourceImpl(uri);
 		try {
 			tempResource.load(null);
 		} catch (IOException e) {
