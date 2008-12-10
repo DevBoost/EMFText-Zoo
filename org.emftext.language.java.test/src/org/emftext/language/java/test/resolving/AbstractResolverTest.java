@@ -27,7 +27,7 @@ public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
-		return false;
+		return true;
 	}
 	
 	@Override
