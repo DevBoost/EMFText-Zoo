@@ -547,7 +547,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			InternalEObject nextElement = (InternalEObject) elementIt.next();
 			assertFalse("Can not reslove: " + nextElement.eProxyURI(), nextElement.eIsProxy());
 			for (EObject crElement : nextElement.eCrossReferences()) {
-				EcoreUtil.resolveAll(crElement);
+				crElement = EcoreUtil.resolve(crElement, resource);
 				assertFalse("Can not resolve: " + ((InternalEObject) crElement).eProxyURI(), crElement.eIsProxy());				
 			}
 		}
