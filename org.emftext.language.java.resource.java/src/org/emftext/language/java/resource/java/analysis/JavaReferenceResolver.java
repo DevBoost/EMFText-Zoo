@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.emftext.language.java.Assignment;
+import org.emftext.language.java.Class;
 import org.emftext.language.java.Classifier;
 import org.emftext.language.java.CompilationUnit;
 import org.emftext.language.java.Expression;
@@ -27,6 +28,7 @@ import org.emftext.language.java.PackageOrClassifierReference;
 import org.emftext.language.java.PrimaryReference;
 import org.emftext.language.java.Reference;
 import org.emftext.language.java.ReferenceableElement;
+import org.emftext.language.java.This;
 import org.emftext.language.java.Type;
 import org.emftext.language.java.TypeReference;
 import org.emftext.language.java.TypeReferenceSequence;
@@ -44,20 +46,25 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	//candidates for template methods
 	
 	protected boolean breakIfNext(EObject element, EClass typeToResolve) {
-		if (element instanceof org.emftext.language.java.Class) {
-			return false;
-		}
+		//nothing can be defined before the compilation unit (root element)
 		if (element instanceof org.emftext.language.java.CompilationUnit) {
 			return false;
 		}
+		//order of classifier declarations is arbitrary
+		if (element instanceof org.emftext.language.java.Classifier) {
+			return false;
+		}
+		//in all other cases, the order requires consideration
 		return true;
 	}
 	
 	protected boolean breakIfChild(EObject element, EClass typeToResolve)  {
+		//do not go into other classifier declarations
 		if (typeToResolve.equals(JavaPackage.Literals.METHOD) &&
-				element instanceof org.emftext.language.java.Class) {
+				element instanceof org.emftext.language.java.Classifier) {
 			return true;
 		}
+		//go not go into a new block
 		if (element instanceof org.emftext.language.java.Block) {
 			return true;
 		}
@@ -151,7 +158,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		}
 		
 		for(EObject cand : contentsList) {
-			//the reference has to be defined prior to the referencing element
+			//the reference may have to be defined prior to the referencing element
 			if(breakIfNext(container, type)) {
 				if (cand.equals(element)) {
 					break;
@@ -203,6 +210,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				TypeReference typeRef = ((TypedElement) primaryRef).getType();
 				type = getReferencedType(typeRef);
 			}
+			//element points to this
+			else if (primaryRef instanceof This) {
+				return findContainingClass(value);
+			}
 			//referenced element points to an element with a type
 			else if (primaryRef instanceof PackageOrClassifierOrMethodOrVariableReference) {
 				ReferenceableElement target = 
@@ -225,6 +236,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 		}
 		else {
+			System.out.println("");
 			//TODO what other cases?
 		}
 		
@@ -425,4 +437,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return true;
 	}
 
+	protected Class findContainingClass(EObject value) {
+		while (!(value instanceof Class) && value != null) {
+			value = value.eContainer();
+		}
+		return (Class) value;
+	}
 }
