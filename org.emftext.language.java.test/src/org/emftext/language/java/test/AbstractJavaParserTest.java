@@ -103,20 +103,25 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected static CompilationUnit parseResource(ZipFile file, ZipEntry entry, boolean ignoreSemanticErrors)
 			throws IOException {
-		return loadResource(entry.getName(), ignoreSemanticErrors); //FIXME change entry.getName to full qualified path
-
+		//FIXME change entry.getName to full qualified path
+		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()), ignoreSemanticErrors);
 	}
 
 	private static CompilationUnit loadResource(
 			String filePath, boolean ignoreSemanticErrors) throws IOException {
-		TextResource resource = (TextResource) myResourceSet.createResource(URI.createFileURI(filePath));;
+		return loadResource(URI.createFileURI(filePath), ignoreSemanticErrors);
+	}
+	
+	private static CompilationUnit loadResource(
+			URI uri, boolean ignoreSemanticErrors) throws IOException {
+		TextResource resource = (TextResource) myResourceSet.createResource(uri);
 		resource.load(Collections.EMPTY_MAP);
-		assertNoErrors(filePath, resource, ignoreSemanticErrors);
-		assertNoWarnings(filePath, resource);
+		assertNoErrors(uri.toString(), resource, ignoreSemanticErrors);
+		assertNoWarnings(uri.toString(), resource);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
-		assertTrue("File '" + filePath
+		assertTrue("File '" + uri.toString()
 				+ "' was parsed to CompilationUnit.",
 				content instanceof CompilationUnit);
 		CompilationUnit cUnit = (CompilationUnit) content;

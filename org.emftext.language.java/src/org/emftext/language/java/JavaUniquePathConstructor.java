@@ -113,7 +113,7 @@ public class JavaUniquePathConstructor {
 		}
 		
 		//TODO what other cases need to be considered here
-		
+		//TODO jjohannes reference can be null here! see bug 581
 		//TODO @mseifert why is Reference.next a list?
 		while (!reference.getNext().isEmpty()) {
 			//find the last reference

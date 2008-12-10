@@ -76,11 +76,13 @@ public class JavaClasspath {
 	}
 	
 	public void registerClassifier(String packageName, String name, URI uri) {
-		if (!packageClassifierMap.containsKey(packageName)) {
-			packageClassifierMap.put(packageName, new ArrayList<String>());
-		}
-		if (!packageClassifierMap.get(packageName).contains(name)) {
-			packageClassifierMap.get(packageName).add(name);
+		synchronized (packageClassifierMap) {
+			if (!packageClassifierMap.containsKey(packageName)) {
+				packageClassifierMap.put(packageName, new ArrayList<String>());
+			}
+			if (!packageClassifierMap.get(packageName).contains(name)) {
+				packageClassifierMap.get(packageName).add(name);
+			}
 		}
 		
 		if (uri != null) {
@@ -110,16 +112,17 @@ public class JavaClasspath {
 	public EList<Classifier> getClassifiers(String packageName, String classifierQuery) {
 		EList<Classifier> resultList = new BasicEList<Classifier>();
 		
-		if(!packageClassifierMap.containsKey(packageName)) {
-			return resultList;
-		}
-		
-		
-		for(String classifierName : packageClassifierMap.get(packageName)) {
-			if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
-				InternalEObject classifierProxy = (InternalEObject) JavaFactory.eINSTANCE.createClass();
-				classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(packageName, classifierName));
-				resultList.add((Classifier) classifierProxy);
+		synchronized (packageClassifierMap) {
+			if(!packageClassifierMap.containsKey(packageName)) {
+				return resultList;
+			}
+			
+			for (String classifierName : packageClassifierMap.get(packageName)) {
+				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
+					InternalEObject classifierProxy = (InternalEObject) JavaFactory.eINSTANCE.createClass();
+					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(packageName, classifierName));
+					resultList.add((Classifier) classifierProxy);
+				}
 			}
 		}
 		

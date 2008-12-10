@@ -30,8 +30,8 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				CompilationUnit unit = parseResource(zipFile, entry, ignoreSemanticErrors());
 				assertNotNull(unit);
 			} catch (Exception e) {
-				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
 				e.printStackTrace();
+				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
 			}
 		}
 
