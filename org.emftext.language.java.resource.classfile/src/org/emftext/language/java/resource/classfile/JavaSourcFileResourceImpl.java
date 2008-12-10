@@ -29,7 +29,8 @@ public class JavaSourcFileResourceImpl extends JavaResourceImpl {
 		if (result != null) {
 			return result;
 		} else {
-			System.out.println("");
+			// TODO jjohannes
+			//System.out.println("");
 		}
 		return result;
 	}
@@ -62,8 +63,8 @@ public class JavaSourcFileResourceImpl extends JavaResourceImpl {
 		if (javaClassifier instanceof Class) {
 			superClassifierList = getAllSuperType((Class) javaClassifier);
 		} else {
-			// TODO
-			System.out.println("");
+			// TODO jjohannes
+			//System.out.println("");
 		}
 
 		for (Classifier superClassifier : superClassifierList) {
