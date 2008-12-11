@@ -6,6 +6,7 @@ OPTIONS {
 	tokenspace = 1;
 	autofixSimpleLeftrecursion = false;
 	standardTextTokenName = IDENTIFIER;
+	overridePluginXML = false;
 }
 
 TOKENS {
