@@ -9,7 +9,6 @@ import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.emftext.language.java.Classifier;
 import org.emftext.language.java.CompilationUnit;
 import org.emftext.language.java.Field;
@@ -17,8 +16,15 @@ import org.emftext.language.java.JavaFactory;
 import org.emftext.language.java.Method;
 import org.emftext.language.java.Parameter;
 import org.emftext.language.java.TypeReferenceSequence;
+import org.emftext.language.java.resource.java.JavaResourceImpl;
 
-public class JavaClassFileResorceImpl extends ResourceImpl {
+/**
+ * Extends JavaResource to make use of proxy resolving
+ * 
+ * @author jj2
+ *
+ */
+public class JavaClassFileResorceImpl extends JavaResourceImpl {
 
 	//one resource per type
 	protected JavaClass myClass;
@@ -67,15 +73,18 @@ public class JavaClassFileResorceImpl extends ResourceImpl {
 	protected Method constructMethod(org.apache.bcel.classfile.Method method) {
 		Method emfMethod = javaFactory.createMethod();
 		emfMethod.setName(method.getName());
-		for(Attribute a : method.getAttributes()) {
-			emfMethod.getParameters().add(constructParameter(a));
+		if (!method.getName().equals("toString")) {  //TODO what is the "Code" attribute in Object.toString()
+			
+			for(Attribute a : method.getAttributes()) {
+				emfMethod.getParameters().add(constructParameter(a));
+			}
 		}
 		return emfMethod;
 	}
 	
 	protected Parameter constructParameter(Attribute attr) {
 		org.emftext.language.java.Parameter param = javaFactory.createOrdinaryParameter();
-		//
+		
 		//TODO type...
 		return param;
 	}

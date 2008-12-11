@@ -201,16 +201,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
-	public void testAnnotations() throws Exception {
-		String typename = "Annotations";
-		String filename = typename + ".java";
-		Annotation annotation = assertParsesToAnnotation(typename);
-		assertMemberCount(annotation, 10);
-
-		parseAndReprint(filename);
-	}
-
-	@Test
 	public void testAnonymousInner() throws Exception {
 		String typename = "AnonymousInner";
 		String filename = typename + ".java";

@@ -2,25 +2,9 @@ package org.emftext.language.java;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.emftext.language.java.Assignment;
-import org.emftext.language.java.Expression;
-import org.emftext.language.java.Instantiation;
-import org.emftext.language.java.Member;
-import org.emftext.language.java.Method;
-import org.emftext.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.PackageOrClassifierReference;
-import org.emftext.language.java.Parameter;
-import org.emftext.language.java.PrimaryReference;
-import org.emftext.language.java.Reference;
-import org.emftext.language.java.ReferenceableElement;
-import org.emftext.language.java.Type;
-import org.emftext.language.java.TypeReference;
-import org.emftext.language.java.TypeReferenceSequence;
-import org.emftext.language.java.TypedElement;
 
 public class JavaUniquePathConstructor {
 	
@@ -34,15 +18,9 @@ public class JavaUniquePathConstructor {
 		return proxyURI.toString().substring(JAVA_PATHMAP.length());
 	}
 	
-	protected static String getClassifierURIFragmentPart(TypeReference typeReference) {
-		Type type = null;
-		
-		if (typeReference instanceof TypeReferenceSequence) {
-			//TODO @mseifert is it okay that e.g. a ConstructorCall has a list of types?
-			PackageOrClassifierReference classifierReference = 
-				((TypeReferenceSequence) typeReference).getParts().get(0);
-			type = (Type) classifierReference.eGet(JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET, false);
-		}
+	protected static String getClassifierURIFragmentPart(TypeReferenceSequence typeReferenceSequence) {
+		Type type = (Type) typeReferenceSequence.eGet(JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET, false);
+	
 		//TODO handle primitive type individually
 		if (type != null) {
 			if (!type.eIsProxy()) {
@@ -57,11 +35,11 @@ public class JavaUniquePathConstructor {
 	}
 	
 	protected static String getClassifierURIFragmentPart(Reference reference) {
-		TypeReference typeReference = null;
+		TypeReferenceSequence typeReferenceSequence = null;
 		
 		//referenced element point to a type
 		if (reference instanceof  TypedElement) {
-			typeReference = ((TypedElement) reference).getType();
+			typeReferenceSequence = ((TypedElement) reference).getType();
 		}
 		//referenced element points to an element with a type
 		else if (reference.getPrimary() instanceof PackageOrClassifierOrMethodOrVariableReference) {
@@ -78,14 +56,14 @@ public class JavaUniquePathConstructor {
 				return proxyURI.toString();
 			}
 			if (target instanceof TypedElement) {
-				typeReference = ((TypedElement) target).getType();
+				typeReferenceSequence = ((TypedElement) target).getType();
 			}
 		}
 		else {
 			//TODO  other cases?
 		}	
 
-		return getClassifierURIFragmentPart(typeReference);
+		return getClassifierURIFragmentPart(typeReferenceSequence);
 	}
 	
 	protected static String getClassifierURIFragmentPart(Expression argument) {
@@ -124,83 +102,7 @@ public class JavaUniquePathConstructor {
 		return getClassifierURIFragmentPart(reference);
 	}
 	
-	public static String getMemberURIFragmentPart(Member member) {
 
-		String uriFragment = "@member[name='" + member.getName();
-		
-		if (member instanceof Method) {
-			//FIXME! uriFragment = uriFragment + "',parameters='";
-			for(Parameter param : ((Method) member).getParameters()) {
-				String uriFragmentPart = getClassifierURIFragmentPart(param.getType());
-				//FIXME! uriFragment = uriFragment + uriFragmentPart + " ";
-			}
-		}
-		
-		uriFragment = uriFragment + PATH_SUFIX;
-			
-		return uriFragment;
-	}
-	
-	
-	public static String getMemberURIFragmentPart(PrimaryReference reference, String id) throws UnresolvedProxiesException {
-
-		String uriFragment = "@members[name='" + id;
-		
-		EList<Expression> arguments = null;
-		
-		//referenced element point to a type
-		if (reference instanceof  Instantiation) {
-			arguments = ((Instantiation) reference).getArguments();
-		}
-		//referenced element points to an element with a type
-		else if (reference instanceof PackageOrClassifierOrMethodOrVariableReference) {
-			arguments = ((PackageOrClassifierOrMethodOrVariableReference) reference).getArguments();
-		}
-		else {
-			//TODO  other cases?
-		}
-		
-		for(Expression arg : arguments) {
-			String uriFragmentPart = getClassifierURIFragmentPart(arg);
-			if (uriFragmentPart == null) {
-				return null;
-			}
-			//FIXME join with method above! unify! resolve in resource! uriFragment = uriFragment + uriFragmentPart + " ";
-		}
-		
-		uriFragment = uriFragment + PATH_SUFIX;
-		
-		return uriFragment;
-	}
-	
-	
-	public static Member getMember(EObject container, String uriFragment) {
-		uriFragment = uriFragment.substring(
-				uriFragment.indexOf("parameters=") + "parameters=".length(), uriFragment.indexOf("]"));
-		
-		String[] parameterTypes = uriFragment.split(" ");
-		
-		for(EObject eObject : container.eContents()) {
-			if (eObject instanceof Method) {
-				Method method =  (Method) eObject;
-				if (parameterTypes.length == method.getParameters().size()) {
-					for(Parameter param : method.getParameters()) {
-						String paramType = getClassifierURIFragmentPart(param.getType());
-						if (!uriFragment.equals(paramType)) {
-							return null;
-						}
-					}
-					return method;
-				}
-			}
-		}
-		return null;
-		
-	}
-	
-	public static boolean isMemberURIFragmentPart(String uriFragment){
-		return uriFragment.contains(",parameters=");
-	}
 	
 	public static URI getClassifierResourceURI(String packageName, String name) {
 		//TODO construct different if the packageName contains Classes and name points at an inner class
