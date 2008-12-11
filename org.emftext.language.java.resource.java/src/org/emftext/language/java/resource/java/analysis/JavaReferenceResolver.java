@@ -379,7 +379,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 			fragment = fragment + "/" + fragmentPart;
 			externalProxyURI = externalProxyURI.appendFragment(fragment);
-			result.addMapping(identifier, externalProxyURI.toString());
+			result.addMapping(identifier, externalProxyURI);
 		}
 		else {
 			findTypeInImports(identifier, context, result);
@@ -399,7 +399,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			for(Iterator<InternalEObject> candIt = extProxies.basicIterator(); candIt.hasNext(); ) {
 				InternalEObject cand = candIt.next();
 				if (JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), identifier)) {
-					result.addMapping(identifier, cand.eProxyURI().toString());
+					result.addMapping(identifier, cand.eProxyURI());
 					return;
 				}
 			}
@@ -413,7 +413,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		for(Iterator<Classifier> candIt = extProxies.iterator(); candIt.hasNext(); ) {
 			InternalEObject cand = (InternalEObject) candIt.next();
 			if (JavaUniquePathConstructor.pointsAtClassifie(cand.eProxyURI(), identifier)) { 
-				result.addMapping(identifier, cand.eProxyURI().toString());
+				result.addMapping(identifier, cand.eProxyURI());
 				return;
 			}
 		}
@@ -422,7 +422,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		InternalEObject classifierProxy = (InternalEObject) JavaFactory.eINSTANCE.createClass();
 		classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(JavaUniquePathConstructor.packageName(cu), identifier));
 		
-		result.addMapping(identifier, classifierProxy.eProxyURI().toString());
+		result.addMapping(identifier, classifierProxy.eProxyURI());
 	}
 	
 	
