@@ -6,7 +6,8 @@ OPTIONS {
 	tokenspace = 1;
 	autofixSimpleLeftrecursion = false;
 	standardTextTokenName = IDENTIFIER;
-	}
+	overridePluginXML = false;
+}
 
 TOKENS {
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'))*$;
