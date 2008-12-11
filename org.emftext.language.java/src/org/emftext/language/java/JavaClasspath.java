@@ -1,5 +1,6 @@
 package org.emftext.language.java;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -30,11 +31,15 @@ public class JavaClasspath {
 	
 	public JavaClasspath() {
 		try {
-			// FIXME implement this in a platform-independent way
-			// maybe System.getProperty("sun.boot.class.path") is a
-			// useful quick fix?
-			//registerClassifierJar("/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar");
-			registerClassifierJar("C:\\Java\\JREs\\jre1.5.0_16\\lib\\rt.jar");
+			String classpath = System.getProperty("sun.boot.class.path");
+			String[] classpathEntries = classpath.split(File.pathSeparator);
+			
+			for (int idx = 0; idx < classpathEntries.length; idx++) {
+				String classpathEntry = classpathEntries[idx];
+				if (classpathEntry.endsWith("classes.jar") || classpathEntry.endsWith("rt.jar")) {
+					registerClassifierJar(classpathEntries[idx]);
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
