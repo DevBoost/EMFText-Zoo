@@ -5,9 +5,13 @@ START core.CompilationUnit
 IMPORTS {
 	core : <http://www.emftext.org/java/core>
 	comments : <http://www.emftext.org/java/comments>
+	expressions : <http://www.emftext.org/java/expressions> 
+	literals : <http://www.emftext.org/java/literals>
+	modifiers : <http://www.emftext.org/java/modifiers>
+	statements : <http://www.emftext.org/java/statements> 
 	types : <http://www.emftext.org/java/types>
 }
-
+ 
 OPTIONS {
 	tokenspace = 1;
 	autofixSimpleLeftrecursion = false;
@@ -218,61 +222,61 @@ core.SuperTypeArgument
 	::= "?" "super" superType
 	;
 
-core.Assert
+statements.Assert
 	::= "assert" expression1 (":" expression2)? ";" ;
 	
-core.Condition 
+statements.Condition 
 	::= "if" "(" expression ")" ifStatement ("else" elseStatement)? ;
 	
-core.ForLoop
+statements.ForLoop
 	::= "for" "(" init? ";" condition? ";" (updates ("," updates)* )? ")" body;
 
-core.ForEachLoop
+statements.ForEachLoop
 	::= "for" "(" next ":" collection ")" body;
 	
-core.WhileLoop
+statements.WhileLoop
 	::= "while" "(" condition ")" body;
 	
-core.DoWhileLoop	
+statements.DoWhileLoop	
 	::= "do" body "while" "(" condition ")" ";" ;
 	
-core.EmptyStatement	
+statements.EmptyStatement	
 	::= ";" ;
 	
-core.SynchronizedBlock
+statements.SynchronizedBlock
 	::= "synchronized" "(" lockExpression ")" body;
 	
-core.TryBlock
+statements.TryBlock
 	::= "try" tryBlock
 		catches* 
 		("finally" finallyBlock)?;
 
-core.CatchClause
+statements.CatchClause
 	::=	"catch" "(" parameter ")" catchBlock
 	;
 
-core.Switch
+statements.Switch
 	::= "switch" "(" variable ")" "{" cases* default? "}" ;
 	
-core.NormalSwitchCase
+statements.NormalSwitchCase
 	::= "case" condition ":" body* ;
 	
-core.DefaultSwitchCase
+statements.DefaultSwitchCase
 	::= "default" ":" body* ;
 	
-core.Return
+statements.Return
 	::= "return" expression? ";" ;
 	
-core.Throw
+statements.Throw
 	::= "throw" expression ";" ;
 	
-core.Break
+statements.Break
 	::= "break" ";" ;
 	
-core.Continue
+statements.Continue
 	::= "continue"  ";" ;
 	
-core.JumpLabel
+statements.JumpLabel
 	::= name[] ":" statement ;
 
 core.Assignment
@@ -281,7 +285,7 @@ core.Assignment
 // TODO was a subtype of Expression, but this generalization was
 // temporarily removed, because variable declarations could not
 // be distinguished from single expressions
-core.ExpressionStatement 
+statements.ExpressionStatement 
 	::= expression ";" 
 	;
 
@@ -290,43 +294,44 @@ core.ParExpression ::= "(" expression ")" ;
 core.ExpressionList
 	::= expressions ("," expressions)* ;
 
-core.InclusiveOrExpression
+expressions.InclusiveOrExpression
     ::= exclusiveOrExpression ( "|" exclusiveOrExpression )* ;
 
-core.ExclusiveOrExpression
+expressions.ExclusiveOrExpression
     ::=   andExpression ( "^" andExpression )* ;
 
-core.AndExpression
+expressions.AndExpression
     ::=   equalityExpression ( "&" equalityExpression )* ;
   
-core.EqualityExpression
+expressions.EqualityExpression
     ::= instanceOfExpression ( (equal | notEqual) instanceOfExpression )* ;
     
-core.InstanceOfExpression
+expressions.InstanceOfExpression
     ::= relationExpression ("instanceof" type)? ;
     
-core.RelationExpression
+expressions.RelationExpression
 	::= shiftExpression ( relationOperator shiftExpression)*;
 	
-core.ShiftExpression
+expressions.ShiftExpression
 	::= additiveExpression ( shiftOperator additiveExpression)*;
 
-core.AdditiveExpression
+expressions.AdditiveExpression
     ::= multiplicativeExpression ( additiveOperator multiplicativeExpression )* ;
     
-core.MultiplicativeExpression
+expressions.MultiplicativeExpression
     ::=	unaryExpression ( multiplicativeOperator unaryExpression )* ;
     
-core.UnaryExpression
+expressions.UnaryExpression
     ::= (additiveOperator | plusplus | minusminus)? unaryExpressionNotPlusMinus
     ;
     
-core.UnaryExpressionNotPlusMinus
+expressions.UnaryExpressionNotPlusMinus
 	::= (complement | negate) primary
 	|   castExpression
 	|   primary ( plusplus | minusminus)?
     ;
-core.CastExpression
+    
+expressions.CastExpression
     ::= "(" primitiveType ")" unaryExpression
     |  	"(" type ")" unaryExpressionNotPlusMinus
     ;
@@ -337,45 +342,45 @@ core.Primary
 	| parExpression
 	;    
 
-core.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
-core.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
+expressions.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
+expressions.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
 
-core.LessThan 			::= "<";
-core.LessThanOrEqual		::= "<" "=";
-core.GreaterThan			::= ">";
-core.GreaterThanOrEqual	::= ">" "=";
+expressions.LessThan 			::= "<";
+expressions.LessThanOrEqual		::= "<" "=";
+expressions.GreaterThan			::= ">";
+expressions.GreaterThanOrEqual	::= ">" "=";
 
-core.LeftShift 			::= "<" "<" ;
-core.RightShift 			::= ">" ">" ;
-core.UnsignedRightShift	::= ">" ">" ">" ;
+expressions.LeftShift 			::= "<" "<" ;
+expressions.RightShift 			::= ">" ">" ;
+expressions.UnsignedRightShift	::= ">" ">" ">" ;
 
-core.Equal		::= "==";	
-core.NotEqual	::= "!=";
-core.PlusPlus 	::= "++" ;
-core.MinusMinus 	::= "--" ;
-core.Complement 	::= "~" ;
-core.Negate 		::= "!" ;
+expressions.Equal		::= "==";	
+expressions.NotEqual	::= "!=";
+expressions.PlusPlus 	::= "++" ;
+expressions.MinusMinus 	::= "--" ;
+expressions.Complement 	::= "~" ;
+expressions.Negate 		::= "!" ;
 
 core.ArrayDimension ::= ("[" "]");
 
-core.NullLiteral ::= "null";
+literals.NullLiteral ::= "null";
 types.VoidLiteral ::= "void";
 core.ClassLiteral ::= "class";
 core.This ::= "this";
 core.Super ::= "super";
 
-core.Public ::= "public";
-core.Abstract ::= "abstract";
-core.Protected ::= "protected";
-core.Private ::= "private";
-core.Final ::= "final";
-core.Static ::= "static";
+modifiers.Public ::= "public";
+modifiers.Abstract ::= "abstract";
+modifiers.Protected ::= "protected";
+modifiers.Private ::= "private";
+modifiers.Final ::= "final";
+modifiers.Static ::= "static";
 
-core.Native ::= "native";
-core.Synchronized ::= "synchronized";
-core.Transient ::= "transient";
-core.Volatile ::= "volatile";
-core.Strictfp ::= "strictfp";
+modifiers.Native ::= "native";
+modifiers.Synchronized ::= "synchronized";
+modifiers.Transient ::= "transient";
+modifiers.Volatile ::= "volatile";
+modifiers.Strictfp ::= "strictfp";
 
 types.Boolean ::= "boolean";
 types.Char ::= "char";
@@ -386,19 +391,19 @@ types.Long ::= "long";
 types.Float ::= "float";
 types.Double ::= "double";
 
-core.IntegerLiteral 
+literals.IntegerLiteral 
 	::= value[DECIMAL_LITERAL] | value[HEX_LITERAL] | value[OCTAL_LITERAL];
 
-core.FloatingPointLiteral 
+literals.FloatingPointLiteral 
 	::= value[FLOATING_POINT_LITERAL];
 
-core.CharacterLiteral 
+literals.CharacterLiteral 
 	::= value[CHARACTER_LITERAL];
 
-core.StringLiteral 
+literals.StringLiteral 
 	::= value[STRING_LITERAL];
 
-core.BooleanLiteral 
+literals.BooleanLiteral 
 	::= value[BOOLEAN_LITERAL];
 	
 comments.SingleLineComment

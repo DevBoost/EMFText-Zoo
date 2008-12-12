@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.emftext.language.java.core.Assignment;
 import org.emftext.language.java.core.Block;
-import org.emftext.language.java.core.ExpressionStatement;
+import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.core.Member;
 import org.emftext.language.java.core.Method;
 import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
 import org.emftext.language.java.core.PrimaryReference;
-import org.emftext.language.java.core.Statement;
+import org.emftext.language.java.statements.Statement;
 import org.junit.Test;
 
 public class MethodCallsWithLocalTypeReferencesResolverTest extends AbstractResolverTest {
