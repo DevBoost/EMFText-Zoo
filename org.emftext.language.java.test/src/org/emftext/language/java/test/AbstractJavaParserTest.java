@@ -34,19 +34,19 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.text.edits.TextEdit;
-import org.emftext.language.java.Annotation;
-import org.emftext.language.java.Classifier;
-import org.emftext.language.java.CompilationUnit;
-import org.emftext.language.java.Constructor;
-import org.emftext.language.java.Enumeration;
-import org.emftext.language.java.Interface;
-import org.emftext.language.java.Member;
-import org.emftext.language.java.MemberContainer;
-import org.emftext.language.java.Method;
-import org.emftext.language.java.NamedElement;
-import org.emftext.language.java.Public;
-import org.emftext.language.java.Type;
-import org.emftext.language.java.TypeParameter;
+import org.emftext.language.java.core.Annotation;
+import org.emftext.language.java.core.Classifier;
+import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.core.Constructor;
+import org.emftext.language.java.core.Enumeration;
+import org.emftext.language.java.core.Interface;
+import org.emftext.language.java.core.Member;
+import org.emftext.language.java.core.MemberContainer;
+import org.emftext.language.java.core.Method;
+import org.emftext.language.java.core.NamedElement;
+import org.emftext.language.java.core.Public;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.core.TypeParameter;
 import org.emftext.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.runtime.resource.TextDiagnostic;
 import org.emftext.runtime.resource.TextResource;
@@ -344,8 +344,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected void assertClassTypeParameterCount(Member member,
 			int expectedNumberOfTypeArguments) {
-		assertType(member, org.emftext.language.java.Class.class);
-		org.emftext.language.java.Class clazz = (org.emftext.language.java.Class) member;
+		assertType(member, org.emftext.language.java.core.Class.class);
+		org.emftext.language.java.core.Class clazz = (org.emftext.language.java.core.Class) member;
 		List<TypeParameter> typeParameters = clazz.getTypeParameters();
 		assertEquals("Expected " + expectedNumberOfTypeArguments
 				+ " type parameter(s).", expectedNumberOfTypeArguments,
@@ -366,7 +366,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			int expectedNumberOfThrownExceptions) {
 		assertType(member, Method.class);
 		Method method = (Method) member;
-		List<Type> exceptions = method.getExceptions();
+		List<Classifier> exceptions = method.getExceptions();
 		assertEquals("Expected " + expectedNumberOfThrownExceptions
 				+ " exception(s).", expectedNumberOfThrownExceptions,
 				exceptions.size());
@@ -386,7 +386,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			int expectedNumberOfThrownExceptions) {
 		assertType(member, Constructor.class);
 		Constructor constructor = (Constructor) member;
-		List<Type> exceptions = constructor.getExceptions();
+		List<Classifier> exceptions = constructor.getExceptions();
 		assertEquals("Expected " + expectedNumberOfThrownExceptions
 				+ " exception(s).", expectedNumberOfThrownExceptions,
 				exceptions.size());
@@ -404,7 +404,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected void assertIsClass(Classifier classifier) {
 		assertType(classifier,
-				org.emftext.language.java.Class.class);
+				org.emftext.language.java.core.Class.class);
 	}
 
 	protected void assertIsInterface(Classifier classifier) {
@@ -448,10 +448,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				method.getModifiers().get(0) instanceof Public);
 	}
 
-	protected org.emftext.language.java.Class assertParsesToClass(
+	protected org.emftext.language.java.core.Class assertParsesToClass(
 			File file) throws Exception {
 		return assertParsesToType(file,
-				org.emftext.language.java.Class.class);
+				org.emftext.language.java.core.Class.class);
 	}
 
 	protected Enumeration assertParsesToEnumeration(String typename)
@@ -517,10 +517,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		return parseResource(filename, TEST_INPUT_FOLDER);
 	}
 
-	protected org.emftext.language.java.Class assertParsesToClass(
+	protected org.emftext.language.java.core.Class assertParsesToClass(
 			String typename) throws Exception {
 		return assertParsesToType(typename,
-				org.emftext.language.java.Class.class);
+				org.emftext.language.java.core.Class.class);
 	}
 
 	protected void assertMemberCount(
@@ -537,7 +537,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	protected void assertParsesToClass(String typename, int expectedMembers)
 			throws Exception, IOException, BadLocationException {
 		String filename = typename + ".java";
-		org.emftext.language.java.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 		assertEquals(typename + " should have " + expectedMembers
 				+ " member(s).", expectedMembers, clazz.getMembers().size());
 

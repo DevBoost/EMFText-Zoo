@@ -17,8 +17,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.emftext.language.java.Classifier;
-import org.emftext.language.java.JavaFactory;
+import org.emftext.language.java.core.Classifier;
+import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.core.CoreFactory;
 
 public class JavaClasspath {
 
@@ -124,7 +125,7 @@ public class JavaClasspath {
 			
 			for (String classifierName : packageClassifierMap.get(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
-					InternalEObject classifierProxy = (InternalEObject) JavaFactory.eINSTANCE.createClass();
+					InternalEObject classifierProxy = (InternalEObject) CoreFactory.eINSTANCE.createClass();
 					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(packageName, classifierName));
 					resultList.add((Classifier) classifierProxy);
 				}

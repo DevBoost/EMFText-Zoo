@@ -2,17 +2,17 @@ package org.emftext.language.java.test.resolving;
 
 import java.util.List;
 
-import org.emftext.language.java.Assignment;
-import org.emftext.language.java.Block;
-import org.emftext.language.java.ExpressionStatement;
-import org.emftext.language.java.Field;
-import org.emftext.language.java.LocalVariable;
-import org.emftext.language.java.LocalVariableStatement;
-import org.emftext.language.java.Member;
-import org.emftext.language.java.Method;
-import org.emftext.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.Reference;
-import org.emftext.language.java.Statement;
+import org.emftext.language.java.core.Assignment;
+import org.emftext.language.java.core.Block;
+import org.emftext.language.java.core.ExpressionStatement;
+import org.emftext.language.java.core.Field;
+import org.emftext.language.java.core.LocalVariable;
+import org.emftext.language.java.core.LocalVariableStatement;
+import org.emftext.language.java.core.Member;
+import org.emftext.language.java.core.Method;
+import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.core.Reference;
+import org.emftext.language.java.core.Statement;
 import org.junit.Test;
 
 public class VariableReferenceResolverTest extends AbstractResolverTest {
@@ -20,7 +20,7 @@ public class VariableReferenceResolverTest extends AbstractResolverTest {
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "VariableReferencing";
-		org.emftext.language.java.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		
 		List<Member> members = clazz.getMembers();

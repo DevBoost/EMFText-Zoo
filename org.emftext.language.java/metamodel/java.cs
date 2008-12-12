@@ -1,12 +1,19 @@
 SYNTAXDEF java
 FOR <http://www.emftext.org/java>
-START CompilationUnit
+START core.CompilationUnit
+
+IMPORTS {
+	core : <http://www.emftext.org/java/core>
+	comments : <http://www.emftext.org/java/comments>
+	types : <http://www.emftext.org/java/types>
+}
 
 OPTIONS {
 	tokenspace = 1;
 	autofixSimpleLeftrecursion = false;
 	standardTextTokenName = IDENTIFIER;
 	overridePluginXML = false;
+	generateCodeFromGeneratorModel = false;
 }
 
 TOKENS {
@@ -32,11 +39,11 @@ TOKENS {
 
 RULES {
 
-CompilationUnit 
+core.CompilationUnit 
    ::=	comments*
    		annotations*
-   		comments*
-        ("package" package[] (#0 "." #0 package[])* #0 ";" )? 
+        comments* 
+        ("package" package[] (#0 "." #0 package[])* #0 ";" )?
         !0 !0
         comments*
         ("import" imports #0 ";" !0 )*
@@ -44,103 +51,103 @@ CompilationUnit
         (classifiers !0 !0)+
 	;
 	
-Import
+core.Import
 	::= static? package[] #0 ("." #0 package[])* #0 "." #0 classifiers[];
 	
-Class
+core.Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" implements)?
         "{" (!1 members (";")?)* !0 "}"
 	;
 
-Interface
+core.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 	       ("extends" (extends ("," extends)*))? 
 	       "{" ((members (";")?) | (";")?)* "}"
 	;
 
-Annotation
+core.Annotation
 	::=	modifiers* "@" "interface" name[]
 	       "{" ((members (";")?) | (";")?)* "}"
 	;
 
-AnnotationInstance
+core.AnnotationInstance
 	::=	"@" annotation 
 		("(" (elementValue | (elementValuePairs ("," elementValuePairs)*)) ")")? 
 	;
 
-AnnotationElementValuePair
+core.AnnotationElementValuePair
 	::= key[] "=" value
 	;
 
-AnnotationElementValueArray
+core.AnnotationElementValueArray
     ::= "{" (values ("," values)*)? (",")? "}"
     ;
 
-Enumeration
+core.Enumeration
     ::= modifiers* "enum" name[] ("implements" (implements[] ("," implements[])*))? "{" (constants ("," constants)*)? (",")? ((";" members*)? | (";")?) "}"
     ;
 
-TypeParameter
+core.TypeParameter
 	::=	name[] ("extends" extendTypes ("&" extendTypes)*)?
 	;
 
-EnumConstant
+core.EnumConstant
     ::= name[] ("(" arguments ("," arguments)* ")" )? members* 
     ;
 
-Block
+core.Block
 	::=	modifiers* "{" #1 statements* #0 "}"
 	;
 
-Constructor
+core.Constructor
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
 	("throws" exceptions[] ("," exceptions[])?)? body
 	;
 
-Method
+core.Method
 	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensions*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensions*
 	("throws" exceptions[] ("," exceptions[])?)? (body | ";")
 	;
 	
-AnnotationMethod
+core.AnnotationMethod
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensions*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensions*
 	("throws" exceptions[] ("," exceptions[])?)? "default" defaultValue (body | ";")
 	;
 
-OrdinaryParameter
+core.OrdinaryParameter
 	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions*
 	;
 
-VariableLengthParameter
+core.VariableLengthParameter
 	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? "..." name[] 
 	;
 
-LocalVariable
+core.LocalVariable
 	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
-LocalVariableStatement
+core.LocalVariableStatement
 	::= variable ";" ;
 
-AdditionalLocalVariable
+core.AdditionalLocalVariable
 	::= name[] arrayDimensions* ("=" initialValue)?
 	;
 
-Field
+core.Field
 	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)*
 	;
 
-AdditionalField
+core.AdditionalField
 	::= name[] arrayDimensions* ("=" initialValue)?
 	;
 
 // INSTANTIATIONS
-NewConstructorCall 
+core.NewConstructorCall 
 	::= "new" 
 		// these are the arguments for the constructor type parameters
 		("<" typeArguments[] ("," typeArguments[])* ">")?
@@ -151,252 +158,252 @@ NewConstructorCall
 		("{" (members (";")?)* "}")?
      ;
      
-ExplicitConstructorCall 
+core.ExplicitConstructorCall 
 	::= ("<" typeArguments[] ("," typeArguments[])* ">")?
 		callTarget "(" (arguments ("," arguments)* )? ")"
      ;
 
-ArrayInstantiationByValues
+core.ArrayInstantiationByValues
 	::= ("new" type arrayDimensions+)? arrayInitializer
 	;
 
-ArrayInstantiationBySize 
+core.ArrayInstantiationBySize 
 	::= "new" type 
 		("[" sizes "]")+
 		arrayDimensions*
 	;
 
-ArrayInitializer
+core.ArrayInitializer
     ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* (",")? )? "}"    
     ;
     
-Reference
+core.Reference
 	::= primary ("[" arraySelectors? "]")* (#0 "." #0 next)? 
 	;
 	
-TypeReferenceSequence
+types.TypeReferenceSequence
 	::= parts (#0 "." #0 parts)*
 	;
 
-PackageOrClassifierReference
+core.PackageOrClassifierReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
 
-PackageOrClassifierOrMethodOrVariableReference
+core.PackageOrClassifierOrMethodOrVariableReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 		("(" (arguments ("," arguments)* )? ")")?
 	;
 
-ExplicitGenericInvocation
+core.ExplicitGenericInvocation
 	::= ("<" typeArguments ("," typeArguments)* ">")?
 		target[]
 		("(" (arguments ("," arguments)* )? ")")?
 	;
 
-QualifiedTypeArgument
+core.QualifiedTypeArgument
 	::= type
 	;
 
-UnknownTypeArgument
+core.UnknownTypeArgument
 	::= "?"
 	;
 
-ExtendsTypeArgument
+core.ExtendsTypeArgument
 	::= "?" "extends" extendTypes ("&" extendTypes)*
 	;
 
-SuperTypeArgument
+core.SuperTypeArgument
 	::= "?" "super" superType
 	;
 
-Assert
+core.Assert
 	::= "assert" expression1 (":" expression2)? ";" ;
 	
-Condition 
+core.Condition 
 	::= "if" "(" expression ")" ifStatement ("else" elseStatement)? ;
 	
-ForLoop
+core.ForLoop
 	::= "for" "(" init? ";" condition? ";" (updates ("," updates)* )? ")" body;
 
-ForEachLoop
+core.ForEachLoop
 	::= "for" "(" next ":" collection ")" body;
 	
-WhileLoop
+core.WhileLoop
 	::= "while" "(" condition ")" body;
 	
-DoWhileLoop	
+core.DoWhileLoop	
 	::= "do" body "while" "(" condition ")" ";" ;
 	
-EmptyStatement	
+core.EmptyStatement	
 	::= ";" ;
 	
-SynchronizedBlock
+core.SynchronizedBlock
 	::= "synchronized" "(" lockExpression ")" body;
 	
-TryBlock
+core.TryBlock
 	::= "try" tryBlock
 		catches* 
 		("finally" finallyBlock)?;
 
-CatchClause
+core.CatchClause
 	::=	"catch" "(" parameter ")" catchBlock
 	;
 
-Switch
+core.Switch
 	::= "switch" "(" variable ")" "{" cases* default? "}" ;
 	
-NormalSwitchCase
+core.NormalSwitchCase
 	::= "case" condition ":" body* ;
 	
-DefaultSwitchCase
+core.DefaultSwitchCase
 	::= "default" ":" body* ;
 	
-Return
+core.Return
 	::= "return" expression? ";" ;
 	
-Throw
+core.Throw
 	::= "throw" expression ";" ;
 	
-Break
+core.Break
 	::= "break" ";" ;
 	
-Continue
+core.Continue
 	::= "continue"  ";" ;
 	
-JumpLabel
+core.JumpLabel
 	::= name[] ":" statement ;
 
-Assignment
+core.Assignment
 	::= target "=" value;
 
 // TODO was a subtype of Expression, but this generalization was
 // temporarily removed, because variable declarations could not
 // be distinguished from single expressions
-ExpressionStatement 
+core.ExpressionStatement 
 	::= expression ";" 
 	;
 
-ParExpression ::= "(" expression ")" ;
+core.ParExpression ::= "(" expression ")" ;
 
-ExpressionList
+core.ExpressionList
 	::= expressions ("," expressions)* ;
 
-InclusiveOrExpression
+core.InclusiveOrExpression
     ::= exclusiveOrExpression ( "|" exclusiveOrExpression )* ;
 
-ExclusiveOrExpression
+core.ExclusiveOrExpression
     ::=   andExpression ( "^" andExpression )* ;
 
-AndExpression
+core.AndExpression
     ::=   equalityExpression ( "&" equalityExpression )* ;
   
-EqualityExpression
+core.EqualityExpression
     ::= instanceOfExpression ( (equal | notEqual) instanceOfExpression )* ;
     
-InstanceOfExpression
+core.InstanceOfExpression
     ::= relationExpression ("instanceof" type)? ;
     
-RelationExpression
+core.RelationExpression
 	::= shiftExpression ( relationOperator shiftExpression)*;
 	
-ShiftExpression
+core.ShiftExpression
 	::= additiveExpression ( shiftOperator additiveExpression)*;
 
-AdditiveExpression
+core.AdditiveExpression
     ::= multiplicativeExpression ( additiveOperator multiplicativeExpression )* ;
     
-MultiplicativeExpression
+core.MultiplicativeExpression
     ::=	unaryExpression ( multiplicativeOperator unaryExpression )* ;
     
-UnaryExpression
+core.UnaryExpression
     ::= (additiveOperator | plusplus | minusminus)? unaryExpressionNotPlusMinus
     ;
     
-UnaryExpressionNotPlusMinus
+core.UnaryExpressionNotPlusMinus
 	::= (complement | negate) primary
 	|   castExpression
 	|   primary ( plusplus | minusminus)?
     ;
-CastExpression
+core.CastExpression
     ::= "(" primitiveType ")" unaryExpression
     |  	"(" type ")" unaryExpressionNotPlusMinus
     ;
     
-Primary 
+core.Primary 
 	::=	reference
 	| literal
 	| parExpression
 	;    
 
-AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
-MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
+core.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
+core.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
 
-LessThan 			::= "<";
-LessThanOrEqual		::= "<" "=";
-GreaterThan			::= ">";
-GreaterThanOrEqual	::= ">" "=";
+core.LessThan 			::= "<";
+core.LessThanOrEqual		::= "<" "=";
+core.GreaterThan			::= ">";
+core.GreaterThanOrEqual	::= ">" "=";
 
-LeftShift 			::= "<" "<" ;
-RightShift 			::= ">" ">" ;
-UnsignedRightShift	::= ">" ">" ">" ;
+core.LeftShift 			::= "<" "<" ;
+core.RightShift 			::= ">" ">" ;
+core.UnsignedRightShift	::= ">" ">" ">" ;
 
-Equal		::= "==";	
-NotEqual	::= "!=";
-PlusPlus 	::= "++" ;
-MinusMinus 	::= "--" ;
-Complement 	::= "~" ;
-Negate 		::= "!" ;
+core.Equal		::= "==";	
+core.NotEqual	::= "!=";
+core.PlusPlus 	::= "++" ;
+core.MinusMinus 	::= "--" ;
+core.Complement 	::= "~" ;
+core.Negate 		::= "!" ;
 
-ArrayDimension ::= ("[" "]");
+core.ArrayDimension ::= ("[" "]");
 
-NullLiteral ::= "null";
-VoidLiteral ::= "void";
-ClassLiteral ::= "class";
-This ::= "this";
-Super ::= "super";
+core.NullLiteral ::= "null";
+types.VoidLiteral ::= "void";
+core.ClassLiteral ::= "class";
+core.This ::= "this";
+core.Super ::= "super";
 
-Public ::= "public";
-Abstract ::= "abstract";
-Protected ::= "protected";
-Private ::= "private";
-Final ::= "final";
-Static ::= "static";
+core.Public ::= "public";
+core.Abstract ::= "abstract";
+core.Protected ::= "protected";
+core.Private ::= "private";
+core.Final ::= "final";
+core.Static ::= "static";
 
-Native ::= "native";
-Synchronized ::= "synchronized";
-Transient ::= "transient";
-Volatile ::= "volatile";
-Strictfp ::= "strictfp";
+core.Native ::= "native";
+core.Synchronized ::= "synchronized";
+core.Transient ::= "transient";
+core.Volatile ::= "volatile";
+core.Strictfp ::= "strictfp";
 
-Boolean ::= "boolean";
-Char ::= "char";
-Byte ::= "byte";
-Short ::= "short";
-Int ::= "int";
-Long ::= "long";
-Float ::= "float";
-Double ::= "double";
+types.Boolean ::= "boolean";
+types.Char ::= "char";
+types.Byte ::= "byte";
+types.Short ::= "short";
+types.Int ::= "int";
+types.Long ::= "long";
+types.Float ::= "float";
+types.Double ::= "double";
 
-IntegerLiteral 
+core.IntegerLiteral 
 	::= value[DECIMAL_LITERAL] | value[HEX_LITERAL] | value[OCTAL_LITERAL];
 
-FloatingPointLiteral 
+core.FloatingPointLiteral 
 	::= value[FLOATING_POINT_LITERAL];
 
-CharacterLiteral 
+core.CharacterLiteral 
 	::= value[CHARACTER_LITERAL];
 
-StringLiteral 
+core.StringLiteral 
 	::= value[STRING_LITERAL];
 
-BooleanLiteral 
+core.BooleanLiteral 
 	::= value[BOOLEAN_LITERAL];
 	
-SingleLineComment
+comments.SingleLineComment
 	::= content[SL_COMMENT];
 	
-MultiLineComment
+comments.MultiLineComment
 	::= content[ML_COMMENT];
 }

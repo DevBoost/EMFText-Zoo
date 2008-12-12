@@ -6,7 +6,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
-import org.emftext.language.java.CompilationUnit;
+import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.JavaClasspath;
 
 

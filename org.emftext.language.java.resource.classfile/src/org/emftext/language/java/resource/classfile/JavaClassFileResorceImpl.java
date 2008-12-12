@@ -9,13 +9,14 @@ import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.eclipse.emf.common.util.URI;
-import org.emftext.language.java.Classifier;
-import org.emftext.language.java.CompilationUnit;
-import org.emftext.language.java.Field;
-import org.emftext.language.java.JavaFactory;
-import org.emftext.language.java.Method;
-import org.emftext.language.java.Parameter;
-import org.emftext.language.java.TypeReferenceSequence;
+import org.emftext.language.java.core.Classifier;
+import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.core.Field;
+import org.emftext.language.java.core.CoreFactory;
+import org.emftext.language.java.core.Method;
+import org.emftext.language.java.core.Parameter;
+import org.emftext.language.java.types.TypeReferenceSequence;
+import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.resource.java.JavaResourceImpl;
 
 /**
@@ -29,7 +30,8 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	//one resource per type
 	protected JavaClass myClass;
 	
-	protected JavaFactory javaFactory = JavaFactory.eINSTANCE;
+	protected CoreFactory coreFactory = CoreFactory.eINSTANCE;
+	protected TypesFactory typesFactory = TypesFactory.eINSTANCE;
 	
 	public JavaClassFileResorceImpl(URI uri) {
 		super(uri);
@@ -43,7 +45,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 			new ClassParser(inputStream, getURI().lastSegment()).parse();
 		
 		Classifier classifier = constructClassifier(myClass);
-		CompilationUnit cu = javaFactory.createCompilationUnit();
+		CompilationUnit cu = coreFactory.createCompilationUnit();
 		cu.getClassifiers().add(classifier);
 		getContents().add(cu);
 	}
@@ -55,7 +57,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	}
 
 	protected Classifier constructClassifier(JavaClass clazz) {
-		org.emftext.language.java.Class classifier = javaFactory.createClass(); //TODO This is not always a class
+		org.emftext.language.java.core.Class classifier = coreFactory.createClass(); //TODO This is not always a class
 		classifier.setName(clazz.getClassName().substring(clazz.getClassName().lastIndexOf(".") + 1));
 		
 		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
@@ -71,7 +73,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	}
 	
 	protected Method constructMethod(org.apache.bcel.classfile.Method method) {
-		Method emfMethod = javaFactory.createMethod();
+		Method emfMethod = coreFactory.createMethod();
 		emfMethod.setName(method.getName());
 		if (!method.getName().equals("toString")) {  //TODO what is the "Code" attribute in Object.toString()
 			
@@ -83,16 +85,16 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	}
 	
 	protected Parameter constructParameter(Attribute attr) {
-		org.emftext.language.java.Parameter param = javaFactory.createOrdinaryParameter();
+		org.emftext.language.java.core.Parameter param = coreFactory.createOrdinaryParameter();
 		
 		//TODO type...
 		return param;
 	}
 
 	protected Field constructField(org.apache.bcel.classfile.Field field) {
-		Field emfFieled = javaFactory.createField();
+		Field emfFieled = coreFactory.createField();
 		emfFieled.setName(field.getName());
-		TypeReferenceSequence typeRef = javaFactory.createTypeReferenceSequence();
+		TypeReferenceSequence typeRef = typesFactory.createTypeReferenceSequence();
 		//TODO create other elements of ref chain (extract in extra method and reuse for methods and parameters)
 		emfFieled.setType(typeRef);
 		return emfFieled;

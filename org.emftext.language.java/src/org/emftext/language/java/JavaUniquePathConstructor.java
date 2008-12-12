@@ -5,6 +5,18 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.emftext.language.java.core.Assignment;
+import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.core.Expression;
+import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.core.Primary;
+import org.emftext.language.java.core.Reference;
+import org.emftext.language.java.core.ReferenceableElement;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypedElement;
+import org.emftext.language.java.core.UnaryExpression;
+import org.emftext.language.java.types.TypeReference;
 
 public class JavaUniquePathConstructor {
 	
@@ -18,8 +30,8 @@ public class JavaUniquePathConstructor {
 		return proxyURI.toString().substring(JAVA_PATHMAP.length());
 	}
 	
-	protected static String getClassifierURIFragmentPart(TypeReferenceSequence typeReferenceSequence) {
-		Type type = (Type) typeReferenceSequence.eGet(JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET, false);
+	protected static String getClassifierURIFragmentPart(TypeReference typeReferenceSequence) {
+		Type type = (Type) typeReferenceSequence.eGet(CorePackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET, false);
 	
 		//TODO handle primitive type individually
 		if (type != null) {
@@ -35,17 +47,17 @@ public class JavaUniquePathConstructor {
 	}
 	
 	protected static String getClassifierURIFragmentPart(Reference reference) {
-		TypeReferenceSequence typeReferenceSequence = null;
+		TypeReference typeReference = null;
 		
 		//referenced element point to a type
 		if (reference instanceof  TypedElement) {
-			typeReferenceSequence = ((TypedElement) reference).getType();
+			typeReference = ((TypedElement) reference).getType();
 		}
 		//referenced element points to an element with a type
 		else if (reference.getPrimary() instanceof PackageOrClassifierOrMethodOrVariableReference) {
 			ReferenceableElement target = (ReferenceableElement) 
 				((PackageOrClassifierOrMethodOrVariableReference) reference.getPrimary()).eGet(
-					JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET, false);
+					CorePackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET, false);
 			
 			if (target.eIsProxy()) {
 				URI proxyURI = ((InternalEObject)target).eProxyURI();
@@ -56,14 +68,14 @@ public class JavaUniquePathConstructor {
 				return proxyURI.toString();
 			}
 			if (target instanceof TypedElement) {
-				typeReferenceSequence = ((TypedElement) target).getType();
+				typeReference = ((TypedElement) target).getType();
 			}
 		}
 		else {
 			//TODO  other cases?
 		}	
 
-		return getClassifierURIFragmentPart(typeReferenceSequence);
+		return getClassifierURIFragmentPart(typeReference);
 	}
 	
 	protected static String getClassifierURIFragmentPart(Expression argument) {
@@ -92,12 +104,8 @@ public class JavaUniquePathConstructor {
 		
 		//TODO what other cases need to be considered here
 		//TODO jjohannes reference can be null here! see bug 581
-		//TODO @mseifert why is Reference.next a list?
-		while (!reference.getNext().isEmpty()) {
-			//find the last reference
-			reference = reference.getNext().get(0);
-		}
-
+		//find the last reference
+		reference = reference.getNext();
 		
 		return getClassifierURIFragmentPart(reference);
 	}

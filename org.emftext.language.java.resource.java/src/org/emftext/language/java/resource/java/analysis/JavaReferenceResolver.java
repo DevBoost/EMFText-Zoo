@@ -8,32 +8,35 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.Annotation;
-import org.emftext.language.java.Assignment;
-import org.emftext.language.java.Class;
-import org.emftext.language.java.ClassLiteral;
-import org.emftext.language.java.Classifier;
-import org.emftext.language.java.CompilationUnit;
-import org.emftext.language.java.Expression;
-import org.emftext.language.java.Field;
-import org.emftext.language.java.Interface;
+import org.emftext.language.java.core.Annotation;
+import org.emftext.language.java.core.Assignment;
+import org.emftext.language.java.core.Class;
+import org.emftext.language.java.core.ClassLiteral;
+import org.emftext.language.java.core.Classifier;
+import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.core.Expression;
+import org.emftext.language.java.core.Field;
+import org.emftext.language.java.core.Interface;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.JavaFactory;
-import org.emftext.language.java.JavaPackage;
+import org.emftext.language.java.core.CoreFactory;
 import org.emftext.language.java.JavaUniquePathConstructor;
-import org.emftext.language.java.Member;
-import org.emftext.language.java.Method;
-import org.emftext.language.java.NamedElement;
-import org.emftext.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.PrimaryReference;
-import org.emftext.language.java.QualifiedTypeArgument;
-import org.emftext.language.java.Reference;
-import org.emftext.language.java.ReferenceableElement;
-import org.emftext.language.java.Super;
-import org.emftext.language.java.This;
-import org.emftext.language.java.Type;
-import org.emftext.language.java.TypeReferenceSequence;
-import org.emftext.language.java.TypedElement;
+import org.emftext.language.java.core.Block;
+import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.core.Member;
+import org.emftext.language.java.core.Method;
+import org.emftext.language.java.core.NamedElement;
+import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.core.PrimaryReference;
+import org.emftext.language.java.types.PrimitiveType;
+import org.emftext.language.java.core.QualifiedTypeArgument;
+import org.emftext.language.java.core.Reference;
+import org.emftext.language.java.core.ReferenceableElement;
+import org.emftext.language.java.core.Super;
+import org.emftext.language.java.core.This;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypeReferenceSequence;
+import org.emftext.language.java.types.TypedElement;
+import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.UnresolvedProxiesException;
 import org.emftext.runtime.resource.ResolveResult;
 import org.emftext.runtime.resource.TextResource;
@@ -48,11 +51,11 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	
 	protected boolean breakIfNext(EObject element, EClass typeToResolve) {
 		//nothing can be defined before the compilation unit (root element)
-		if (element instanceof org.emftext.language.java.CompilationUnit) {
+		if (element instanceof CompilationUnit) {
 			return false;
 		}
 		//order of classifier declarations is arbitrary
-		if (element instanceof org.emftext.language.java.Classifier) {
+		if (element instanceof Classifier) {
 			return false;
 		}
 		//in all other cases, the order requires consideration
@@ -61,12 +64,12 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	
 	protected boolean breakIfChild(EObject element, EClass typeToResolve)  {
 		//do not go into other classifier declarations
-		if (typeToResolve.equals(JavaPackage.Literals.METHOD) &&
-				element instanceof org.emftext.language.java.Classifier) {
+		if (typeToResolve.equals(CorePackage.Literals.METHOD) &&
+				element instanceof Classifier) {
 			return true;
 		}
 		//go not go into a new block
-		if (element instanceof org.emftext.language.java.Block) {
+		if (element instanceof Block) {
 			return true;
 		}
 		return false;
@@ -131,13 +134,13 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 					return;
 				}
 				//it hat to be target of a reference
-				if (! (reference.equals(JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)
-						|| reference.equals(JavaPackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET))) {
+				if (! (reference.equals(CorePackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)
+						|| reference.equals(CorePackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET))) {
 					return;
 				}
 				//there must be something following up
 				if (((Reference)container.eContainer()).getNext() != null) {
-					Class dummyPackageClass = JavaFactory.eINSTANCE.createClass();
+					Class dummyPackageClass = CoreFactory.eINSTANCE.createClass();
 					dummyPackageClass.setName(identifier);
 					result.addMapping(identifier, dummyPackageClass);
 				}
@@ -237,8 +240,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			PrimaryReference primaryRef = reference.getPrimary();
 			//referenced element point to a type
 			if (primaryRef instanceof TypedElement /*NewConstructorCall*/) {
-				TypeReferenceSequence typeRefSequence = ((TypedElement) primaryRef).getType();
-				type = getReferencedType(typeRefSequence);
+				TypeReference typeReference = ((TypedElement) primaryRef).getType();
+				type = getReferencedType(typeReference);
 			}
 			//element points to this
 			else if (primaryRef instanceof This) {
@@ -261,7 +264,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				}
 				
 				else if (target instanceof TypedElement) {
-					TypeReferenceSequence typeRefSequence = ((TypedElement) target).getType();
+					TypeReference typeRefSequence = ((TypedElement) target).getType();
 					type = getReferencedType(typeRefSequence);
 				}
 			}
@@ -276,17 +279,26 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return type;
 	}
 	
-	public Classifier getReferencedType(TypeReferenceSequence typeRefSequence) throws UnresolvedProxiesException {
-		Classifier type = null;
-
-		//TODO consider package names...
-		type =  typeRefSequence.getParts().get(typeRefSequence.getParts().size() -1).getTarget();
-		if (type.eIsProxy()) {
-			throw new UnresolvedProxiesException();
+	public Classifier getReferencedType(TypeReference typeReference) throws UnresolvedProxiesException {
+		if (typeReference instanceof TypeReferenceSequence) {
+			TypeReferenceSequence sequence = (TypeReferenceSequence) typeReference;
+			Classifier type = null;
+	
+			//TODO consider package names...
+			type =  sequence.getParts().get(sequence.getParts().size() -1).getTarget();
+			if (type.eIsProxy()) {
+				throw new UnresolvedProxiesException();
+			}
+			
+			return type;
+		} else if (typeReference instanceof PrimitiveType) {
+			// TODO handle references to primitive types
+			return null;
+		} else {
+			// there are no other subclasses of TypeReference
+			assert false;
+			return null;
 		}
-
-		
-		return type;
 	}
 	
 	
@@ -298,11 +310,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			if (arg instanceof Assignment) {
 				Assignment assignment = (Assignment) arg;
 				Reference reference = assignment.getTarget();
-				//TODO @mseifert why is Reference.next a list?
-				while (!reference.getNext().isEmpty()) {
-					//find the last reference
-					reference = reference.getNext().get(0);
-				}
+				//find the last reference
+				reference = reference.getNext();
 				Type type = getTypeOfReferencedElement(assignment.getTarget());
 				resultList.add(type);
 			}
@@ -338,7 +347,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				//nothing else to do
 			}
 			else if (referencedElement instanceof Method) {
-				org.emftext.language.java.Method method = (Method) referencedElement;
+				Method method = (Method) referencedElement;
 				if (context instanceof PackageOrClassifierOrMethodOrVariableReference) {
 					PackageOrClassifierOrMethodOrVariableReference reference = (PackageOrClassifierOrMethodOrVariableReference)context; 
 					EList<Type> argumentTypes = getArgumentTypes(reference);

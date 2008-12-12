@@ -2,15 +2,15 @@ package org.emftext.language.java.test.resolving;
 
 import java.util.List;
 
-import org.emftext.language.java.Assignment;
-import org.emftext.language.java.Block;
-import org.emftext.language.java.ExpressionStatement;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.Member;
-import org.emftext.language.java.Method;
-import org.emftext.language.java.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.PrimaryReference;
-import org.emftext.language.java.Statement;
+import org.emftext.language.java.core.Assignment;
+import org.emftext.language.java.core.Block;
+import org.emftext.language.java.core.ExpressionStatement;
+import org.emftext.language.java.core.Member;
+import org.emftext.language.java.core.Method;
+import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.core.PrimaryReference;
+import org.emftext.language.java.core.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "MethodCallsWithoutInheritance";
-		org.emftext.language.java.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		assertMemberCount(clazz, 4);
 		

@@ -5,7 +5,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.emftext.language.java.CompilationUnit;
+import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 import junit.framework.TestSuite;
