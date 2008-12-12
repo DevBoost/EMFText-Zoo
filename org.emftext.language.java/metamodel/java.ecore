@@ -4,11 +4,35 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="java"
     nsURI="http://www.emftext.org/java" nsPrefix="java">
   <eSubpackages name="annotations" nsURI="http://www.emftext.org/java/annotations"
-      nsPrefix="annotations"/>
+      nsPrefix="annotations">
+    <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//core/Classifier #//core/MemberContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotationInstance" eSuperTypes="#//annotations/AnnotationElementValue">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//core/Reference"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementValuePairs" upperBound="-1"
+          eType="#//annotations/AnnotationElementValuePair" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementValue" eType="#//annotations/AnnotationElementValue"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotationElementValuePair">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//core/Member"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//annotations/AnnotationElementValue"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotationElementValue" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotationElementValueArray" eSuperTypes="#//annotations/AnnotationElementValue">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+          eType="#//annotations/AnnotationElementValue" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotationMethod" eSuperTypes="#//core/Method">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValue" eType="#//annotations/AnnotationElementValue"
+          containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
   <eSubpackages name="core" nsURI="http://www.emftext.org/java/core" nsPrefix="core">
     <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//comments/Commentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-          eType="#//core/AnnotationInstance" containment="true"/>
+          eType="#//annotations/AnnotationInstance" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" upperBound="-1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
@@ -133,29 +157,6 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
           eType="#//core/QualifiedTypeArgument" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//core/Classifier #//core/MemberContainer"/>
-    <eClassifiers xsi:type="ecore:EClass" name="AnnotationInstance" eSuperTypes="#//core/AnnotationElementValue">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//core/Reference"
-          containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="elementValuePairs" upperBound="-1"
-          eType="#//core/AnnotationElementValuePair" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="elementValue" eType="#//core/AnnotationElementValue"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AnnotationElementValuePair">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//core/Member"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//core/AnnotationElementValue"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AnnotationElementValue" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="AnnotationElementValueArray" eSuperTypes="#//core/AnnotationElementValue">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-          eType="#//core/AnnotationElementValue" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AnnotationMethod" eSuperTypes="#//core/Method">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValue" eType="#//core/AnnotationElementValue"
-          containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//core/Classifier">
       <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
           eType="#//core/EnumConstant" containment="true"/>
@@ -181,13 +182,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
           eType="#//core/TypeParameter" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-          eType="#//core/AnnotationInstance" containment="true"/>
+          eType="#//annotations/AnnotationInstance" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//core/Member #//core/Initializable #//core/Variable #//core/ReferenceableElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="additionalFields" upperBound="-1"
           eType="#//core/AdditionalLocalVariable" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-          eType="#//core/AnnotationInstance" containment="true"/>
+          eType="#//annotations/AnnotationInstance" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AdditionalField" eSuperTypes="#//core/NamedElement #//core/ArrayTypable #//core/Initializable"/>
     <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#//types/TypedElement #//core/ArrayTypable #//core/TypeParametrizable #//core/Parametrizable #//core/Member #//core/ReferenceableElement">
@@ -198,7 +199,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//core/Block"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-          eType="#//core/AnnotationInstance" containment="true"/>
+          eType="#//annotations/AnnotationInstance" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//core/NamedElement #//types/TypedElement #//core/ArrayTypable #//core/ReferenceableElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
@@ -393,7 +394,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NullLiteral" eSuperTypes="#//literals/Literal"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//core/AnnotationElementValue"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//annotations/AnnotationElementValue"/>
   </eSubpackages>
   <eSubpackages name="modifiers" nsURI="http://www.emftext.org/java/modifiers" nsPrefix="modifiers">
     <eClassifiers xsi:type="ecore:EClass" name="Modifier" abstract="true"/>

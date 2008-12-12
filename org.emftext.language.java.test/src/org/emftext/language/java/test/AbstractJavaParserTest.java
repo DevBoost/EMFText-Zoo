@@ -34,7 +34,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.text.edits.TextEdit;
-import org.emftext.language.java.core.Annotation;
+import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.core.Classifier;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.core.Constructor;

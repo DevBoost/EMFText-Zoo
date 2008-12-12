@@ -3,6 +3,7 @@ FOR <http://www.emftext.org/java>
 START core.CompilationUnit
 
 IMPORTS {
+	annotations : <http://www.emftext.org/java/annotations>
 	core : <http://www.emftext.org/java/core>
 	comments : <http://www.emftext.org/java/comments>
 	expressions : <http://www.emftext.org/java/expressions> 
@@ -71,21 +72,21 @@ core.Interface
 	       "{" ((members (";")?) | (";")?)* "}"
 	;
 
-core.Annotation
+annotations.Annotation
 	::=	modifiers* "@" "interface" name[]
 	       "{" ((members (";")?) | (";")?)* "}"
 	;
 
-core.AnnotationInstance
+annotations.AnnotationInstance
 	::=	"@" annotation 
 		("(" (elementValue | (elementValuePairs ("," elementValuePairs)*)) ")")? 
 	;
 
-core.AnnotationElementValuePair
+annotations.AnnotationElementValuePair
 	::= key[] "=" value
 	;
 
-core.AnnotationElementValueArray
+annotations.AnnotationElementValueArray
     ::= "{" (values ("," values)*)? (",")? "}"
     ;
 
@@ -117,7 +118,7 @@ core.Method
 	("throws" exceptions[] ("," exceptions[])?)? (body | ";")
 	;
 	
-core.AnnotationMethod
+annotations.AnnotationMethod
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensions*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensions*
 	("throws" exceptions[] ("," exceptions[])?)? "default" defaultValue (body | ";")
