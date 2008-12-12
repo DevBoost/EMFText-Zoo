@@ -14,19 +14,9 @@ import org.emftext.language.java.core.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class MethodCallResolverTest extends AbstractResolverTest {
-	
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		
-		JavaClasspath.INSTANCE.registerClassifierJar(
-				"/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar");
-		
-	}
-	
-	
-	
+
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "MethodCalls";
