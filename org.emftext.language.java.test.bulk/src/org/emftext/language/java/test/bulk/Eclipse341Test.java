@@ -22,4 +22,9 @@ public class Eclipse341Test extends AbstractZipFileInputTest {
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;
 	}
+
+	@Override
+	protected String getTestInputFolder() {
+		return null;
+	}
 }

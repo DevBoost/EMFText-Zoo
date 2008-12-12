@@ -66,4 +66,9 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTest {
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return false;
 	}
+
+	@Override
+	protected String getTestInputFolder() {
+		return TEST_INPUT_FOLDER_NAME;
+	}
 }

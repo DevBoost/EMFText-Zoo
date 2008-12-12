@@ -39,6 +39,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		protected boolean isExcludedFromReprintTest(String filename) {
 			return true;
 		}
+
+		@Override
+		protected String getTestInputFolder() {
+			return null;
+		}
 	}
 
 	protected static void addZipFileEntriesToTestSuite(TestSuite suite,

@@ -19,13 +19,18 @@ import org.emftext.runtime.resource.TextResource;
  */
 public class LocationTest extends AbstractJavaParserTest {
 	
-	private static final String INPUT_FOLDER = "locations" + File.separator;
+	private static final String INPUT_FOLDER = "input" + File.separator + "locations" + File.separator;
 
+	@Override
+	protected String getTestInputFolder() {
+		return INPUT_FOLDER;
+	}
+	
 	@Test
 	public void testElementLocations() {
 		String typename = "Location";
 		try {
-			org.emftext.language.java.core.Class clazz = assertParsesToClass(new File(INPUT_FOLDER + typename + ".java"));
+			org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 			
 			List<Member> members = clazz.getMembers();
 			// check location of the method x

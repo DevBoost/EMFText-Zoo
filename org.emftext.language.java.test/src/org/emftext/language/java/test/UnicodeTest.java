@@ -7,7 +7,7 @@ public class UnicodeTest extends AbstractJavaParserTest {
 	@Test
 	public void testUnicodeInput() {
 		try {
-			assertParsesToClass("unicode\\Unicode");
+			assertParsesToClass("Unicode");
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -16,6 +16,11 @@ public class UnicodeTest extends AbstractJavaParserTest {
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
 		return true;
+	}
+
+	@Override
+	protected String getTestInputFolder() {
+		return "input\\unicode";
 	}
 
 }

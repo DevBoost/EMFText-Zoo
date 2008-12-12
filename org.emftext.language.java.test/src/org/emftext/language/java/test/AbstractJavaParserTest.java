@@ -9,8 +9,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -34,6 +36,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.text.edits.TextEdit;
+import org.emftext.language.java.UnicodeConverterProvider;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.core.Classifier;
 import org.emftext.language.java.core.CompilationUnit;
@@ -47,6 +50,7 @@ import org.emftext.language.java.core.NamedElement;
 import org.emftext.language.java.core.TypeParameter;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.TextDiagnostic;
 import org.emftext.runtime.resource.TextResource;
 import org.emftext.runtime.resource.TextDiagnostic.TextDiagnosticType;
@@ -69,8 +73,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
 
-	protected static final String TEST_INPUT_FOLDER = "input";
-	protected static final String TEST_INPUT_FOLDER_RESOLVING = TEST_INPUT_FOLDER + "/resolving/";
 	protected static final String TEST_OUTPUT_FOLDER = "output";
 
 	/**
@@ -114,7 +116,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	private static CompilationUnit loadResource(
 			URI uri, boolean ignoreSemanticErrors) throws IOException {
 		TextResource resource = (TextResource) myResourceSet.createResource(uri);
-		resource.load(Collections.EMPTY_MAP);
+		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource, ignoreSemanticErrors);
 		assertNoWarnings(uri.toString(), resource);
 		assertEquals("The resource should have one content element.", 1,
@@ -125,6 +127,12 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				content instanceof CompilationUnit);
 		CompilationUnit cUnit = (CompilationUnit) content;
 		return cUnit;
+	}
+
+	protected static Map<?, ?> getLoadOptions() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		return map;
 	}
 
 	private static void assertNoErrors(String fileIdentifier,
@@ -482,9 +490,11 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected <T> T assertParsesToType(String typename, Class<T> expectedType)
 			throws Exception {
-		return assertParsesToType(typename, TEST_INPUT_FOLDER,
+		return assertParsesToType(typename, getTestInputFolder(),
 				expectedType);
 	}
+
+	protected abstract String getTestInputFolder();
 
 	private <T> T assertParsesToType(File file, Class<T> expectedType)
 			throws Exception {
@@ -498,22 +508,22 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	private CompilationUnit parseResource(File file) throws Exception {
-		return parseResource(file, TEST_INPUT_FOLDER);
+		return parseResource(file, getTestInputFolder());
 	}
 
 	protected void parseAndReprint(String filename)
 			throws MalformedTreeException, IOException, BadLocationException {
-		parseAndReprint(filename, TEST_INPUT_FOLDER,
+		parseAndReprint(filename, getTestInputFolder(),
 				TEST_OUTPUT_FOLDER);
 	}
 
 	protected void parseAndReprint(File file) throws MalformedTreeException,
 			IOException, BadLocationException {
-		parseAndReprint(file, TEST_INPUT_FOLDER, TEST_OUTPUT_FOLDER);
+		parseAndReprint(file, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
 	protected CompilationUnit parseResource(String filename) throws Exception {
-		return parseResource(filename, TEST_INPUT_FOLDER);
+		return parseResource(filename, getTestInputFolder());
 	}
 
 	protected org.emftext.language.java.core.Class assertParsesToClass(

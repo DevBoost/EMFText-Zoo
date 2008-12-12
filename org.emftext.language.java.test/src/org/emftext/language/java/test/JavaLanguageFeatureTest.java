@@ -52,6 +52,8 @@ import pkg.EscapedStrings;
  */
 public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
+	protected static final String TEST_INPUT_FOLDER = "input";
+
 	// a list of files that are excluded from the reprint test, because
 	// they contain optional tokens which are lost after parsing them
 	private static final String[] FILES_EXCLUDED_FROM_REPRINT_TEST = new String[] {
@@ -191,6 +193,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		return false;
 	}
 
+	@Override
+	protected String getTestInputFolder() {
+		return TEST_INPUT_FOLDER;
+	}
+	
 	/**
 	 * This method is executed before every single test and initializes fields
 	 * typically needed by the test cases
@@ -706,20 +713,20 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testMethodCalls() throws Exception {
 		String typename = "MethodCalls";
 		String filename = typename + ".java";
-		org.emftext.language.java.core.Class clazz = assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.emftext.language.java.core.Class.class);
+		org.emftext.language.java.core.Class clazz = assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.core.Class.class);
 		assertMemberCount(clazz, 4);
 		
-		parseAndReprint(filename, TEST_INPUT_FOLDER_RESOLVING, TEST_OUTPUT_FOLDER);
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
 	@Test
 	public void testMethodCallsWithLocalTypeReferences() throws Exception {
 		String typename = "MethodCallsWithLocalTypeReferences";
 		String filename = typename + ".java";
-		org.emftext.language.java.core.Class clazz = assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.emftext.language.java.core.Class.class);
+		org.emftext.language.java.core.Class clazz = assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.core.Class.class);
 		assertMemberCount(clazz, 4);
 		
-		parseAndReprint(filename, TEST_INPUT_FOLDER_RESOLVING, TEST_OUTPUT_FOLDER);
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
 	@Test
@@ -808,7 +815,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testStaticImports() throws Exception {
 		String typename = "StaticImports";
 		String filename = typename + ".java";
-		CompilationUnit unit = parseResource(filename, TEST_INPUT_FOLDER);
+		CompilationUnit unit = parseResource(filename, getTestInputFolder());
 		List<Import> imports = unit.getImports();
 		assertEquals(2, imports.size());
 		assertNull("first import is not static", imports.get(0).getStatic());
@@ -882,15 +889,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testVariableReferencing() throws Exception {
 		String typename = "VariableReferencing";
 		String filename = typename + ".java";
-		org.emftext.language.java.core.Class clazz = assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.emftext.language.java.core.Class.class);
+		org.emftext.language.java.core.Class clazz = assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.core.Class.class);
 		assertMemberCount(clazz, 2);
 		
-		parseAndReprint(filename, TEST_INPUT_FOLDER_RESOLVING, TEST_OUTPUT_FOLDER);
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
 	@Test
 	public void testHasMissingParseReprints() throws Exception {
-		File inputFolder = new File("./" + TEST_INPUT_FOLDER);
+		File inputFolder = new File("./" + getTestInputFolder());
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder);
 		allTestFiles.removeAll(reprintedResources);
 		for (File file : allTestFiles) {
@@ -915,7 +922,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testHasMissingParses() throws CoreException,
 			MalformedTreeException, IOException, BadLocationException {
 		File inputFolder = new File("." + File.separator
-				+ TEST_INPUT_FOLDER);
+				+ getTestInputFolder());
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder);
 		allTestFiles.removeAll(parsedResources);
 		// for (final File file : allTestFiles) {

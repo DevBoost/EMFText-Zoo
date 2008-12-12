@@ -7,8 +7,10 @@ import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 
+	protected static final String TEST_INPUT_FOLDER_RESOLVING = "input/resolving/";
+
 	protected org.emftext.language.java.core.Class assertParsesToClass(String typename) throws Exception {
-		return assertParsesToType(typename, TEST_INPUT_FOLDER_RESOLVING, org.emftext.language.java.core.Class.class);
+		return assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.core.Class.class);
 	}
 	
 	protected Field assertIsField(Member member, String expectedName) {
@@ -33,5 +35,10 @@ public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 	@Override
 	protected boolean ignoreSemanticErrors() {
 		return false;
+	}
+
+	@Override
+	protected String getTestInputFolder() {
+		return TEST_INPUT_FOLDER_RESOLVING;
 	}
 }

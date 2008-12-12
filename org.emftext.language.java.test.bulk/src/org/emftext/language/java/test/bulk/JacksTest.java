@@ -24,5 +24,8 @@ public class JacksTest extends AbstractZipFileInputTest {
 		return true;
 	}
 	
-	
+	@Override
+	protected String getTestInputFolder() {
+		return null;
+	}
 }
