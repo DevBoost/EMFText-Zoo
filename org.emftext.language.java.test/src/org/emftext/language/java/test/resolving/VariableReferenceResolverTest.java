@@ -2,12 +2,12 @@ package org.emftext.language.java.test.resolving;
 
 import java.util.List;
 
-import org.emftext.language.java.core.Assignment;
+import org.emftext.language.java.expressions.Assignment;
 import org.emftext.language.java.core.Block;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.core.Field;
 import org.emftext.language.java.core.LocalVariable;
-import org.emftext.language.java.core.LocalVariableStatement;
+import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.core.Member;
 import org.emftext.language.java.core.Method;
 import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;

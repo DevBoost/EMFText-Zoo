@@ -13,7 +13,7 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.UnresolvedProxiesException;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.core.Assignment;
+import org.emftext.language.java.expressions.Assignment;
 import org.emftext.language.java.core.Block;
 import org.emftext.language.java.core.Class;
 import org.emftext.language.java.core.ClassLiteral;

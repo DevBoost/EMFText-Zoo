@@ -136,7 +136,7 @@ core.LocalVariable
 	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
-core.LocalVariableStatement
+statements.LocalVariableStatement
 	::= variable ";" ;
 
 core.AdditionalLocalVariable
@@ -280,7 +280,7 @@ statements.Continue
 statements.JumpLabel
 	::= name[] ":" statement ;
 
-core.Assignment
+expressions.Assignment
 	::= target "=" value;
 
 // TODO was a subtype of Expression, but this generalization was
@@ -290,9 +290,9 @@ statements.ExpressionStatement
 	::= expression ";" 
 	;
 
-core.ParExpression ::= "(" expression ")" ;
+expressions.ParExpression ::= "(" expression ")" ;
 
-core.ExpressionList
+expressions.ExpressionList
 	::= expressions ("," expressions)* ;
 
 expressions.InclusiveOrExpression
