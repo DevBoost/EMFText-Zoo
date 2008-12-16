@@ -3,7 +3,7 @@ FOR       <http://www.emftext.org/simple_math>
 START     Additive
 
 OPTIONS {
-	forceEOF = 1;
+	forceEOF = true;
 }
 
 TOKENS {
