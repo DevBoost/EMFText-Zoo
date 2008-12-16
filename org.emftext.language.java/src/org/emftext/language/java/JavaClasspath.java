@@ -52,7 +52,7 @@ public class JavaClasspath {
 	
 	public void registerClassifierJar(URI jarURI) throws IOException {
 			
-		ZipFile zipFile = new ZipFile(jarURI.path());
+		ZipFile zipFile = new ZipFile(jarURI.toFileString());
 		
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
