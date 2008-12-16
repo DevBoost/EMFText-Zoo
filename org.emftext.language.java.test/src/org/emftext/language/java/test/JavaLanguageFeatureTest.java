@@ -872,7 +872,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	@Test
 	public void testStatements() throws Exception {
-		assertParsesToClass("ConditionalStatements", 1);
+		assertParsesToClass("ConditionalStatements", 2);
 		assertParsesToClass("TryCatchStatements", 4);
 		assertParsesToClass("AssertStatements", 1);
 		assertParsesToClass("ThrowStatements", 1);
@@ -880,7 +880,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertParsesToClass("SwitchStatements", 7);
 		assertParsesToClass("DeclarationStatements", 1);
 		assertParsesToClass("JumpLabelStatements", 2);
-		assertParsesToClass("LoopStatements", 10);
+		assertParsesToClass("LoopStatements", 11);
 	}
 	
 	@Test
@@ -906,6 +906,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Member method = clazz.getMembers().get(0);
 		assertType(method, Constructor.class);
 
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testSynchronized() throws Exception {
+		String typename = "Synchronized";
+		String filename = typename + ".java";
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 2);
+		
 		parseAndReprint(filename);
 	}
 	

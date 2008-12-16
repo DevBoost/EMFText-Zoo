@@ -31,16 +31,25 @@ public class LoopStatements {
 		} while(condition);
 	}
 
+	{
+        do break;
+        while (condition);
+	}
+	
 	public void loops() {
 		// for
 		for (;condition;) {
 			continue;
 		}
 		
+		for (;condition;) break;
+		
 		// while
 		while (condition) {
 			break;
 		}
+		
+		while (condition) break;
 		
 		// empty statement
 		;

@@ -13,4 +13,12 @@ public class ConditionalStatements {
 			
 		}
 	}
+
+	public void conditionsWithSingleStatements() {
+		// if
+		if (true) return;
+		
+		// if/else
+		if (false) return; else return;
+	}
 }
