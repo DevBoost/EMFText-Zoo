@@ -246,15 +246,17 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		resource.setURI(URI.createFileURI(outputFileName));
 		
 		
+		if (isExcludedFromReprintTest(file.getPath())) {
+			return;
+		}
+			
 		resource.save(null);
 		
 		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
 				outputFile.exists());
 
-		if (!isExcludedFromReprintTest(file.getPath())) {
-			compareTextContents(new FileInputStream(inputFile),
+		compareTextContents(new FileInputStream(inputFile),
 					new FileInputStream(outputFile));
-		}
 	}
 
 	protected abstract boolean isExcludedFromReprintTest(String filename);
