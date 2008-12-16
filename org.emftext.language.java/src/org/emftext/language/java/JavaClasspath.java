@@ -41,7 +41,8 @@ public class JavaClasspath {
 			for (int idx = 0; idx < classpathEntries.length; idx++) {
 				String classpathEntry = classpathEntries[idx];
 				if (classpathEntry.endsWith("classes.jar") || classpathEntry.endsWith("rt.jar")) {
-					registerClassifierJar(classpathEntries[idx]);
+					URI uri = URI.createFileURI(classpathEntries[idx]);
+					registerClassifierJar(uri);
 				}
 			}
 		} catch (IOException e) {
@@ -49,10 +50,9 @@ public class JavaClasspath {
 		}
 	}
 	
-	public void registerClassifierJar(String path) throws IOException {
+	public void registerClassifierJar(URI jarURI) throws IOException {
 			
-		//String classpathURI = 
-		ZipFile zipFile = new ZipFile(path);
+		ZipFile zipFile = new ZipFile(jarURI.path());
 		
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
@@ -60,7 +60,7 @@ public class JavaClasspath {
 
 			if (entry.getName().endsWith(".class") || entry.getName().endsWith(".java")) {
 				String fullName = entry.getName();
-				String uri = "archive:file:" + path + "!/" + fullName;
+				String uri = "archive:" + jarURI.toString() + "!/" + fullName;
 				
 				fullName = fullName.replaceAll("/", "."); 
 				
