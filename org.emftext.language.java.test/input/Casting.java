@@ -1,9 +1,10 @@
 public class Casting {
 	{
 		Casting c;
-		Casting[] d = null;
+		Casting[] d = new Casting[1];
 		c = (Casting) null;
 		c = (Casting) c;
 		d = (Casting[]) d;
+		((Casting[]) d).clone();
 	}
 }
