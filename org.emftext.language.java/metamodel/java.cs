@@ -63,7 +63,7 @@ core.StaticImport
 core.Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
-        ("implements" implements)?
+        ("implements" (implements ("," implements)*))?
         "{" (!1 members (";")?)* !0 "}"
 	;
 

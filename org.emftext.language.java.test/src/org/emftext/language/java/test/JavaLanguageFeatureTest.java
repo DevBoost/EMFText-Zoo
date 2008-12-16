@@ -21,6 +21,7 @@ import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.core.Constructor;
 import org.emftext.language.java.core.Enumeration;
 import org.emftext.language.java.core.Field;
+import org.emftext.language.java.core.QualifiedTypeArgument;
 import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.statements.ForEachLoop;
@@ -757,6 +758,19 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 
+	@Test
+	public void testMultipleImplements() throws Exception {
+		String typename = "MultipleImplements";
+		String filename = typename + ".java";
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 0);
+		EList<QualifiedTypeArgument> implementedInterfaces = clazz.getImplements();
+		assertEquals(2, implementedInterfaces.size());
+
+		parseAndReprint(filename);
+	}
+
+	
 	@Test
 	public void testParametersWithModifiers() throws Exception {
 		String typename = "ParametersWithModifiers";

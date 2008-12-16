@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import org.junit.runner.notification.StoppedByUserException;
+
 import junit.framework.Test;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
@@ -42,7 +44,11 @@ public final class ThreadedTestSuite extends TestSuite {
 			Thread thread = new Thread(new Runnable() {
 
 				public void run() {
-					runTest(each, result);
+					try {
+						runTest(each, result);
+					} catch (StoppedByUserException sbue) {
+						// do nothing, just end the test
+					}
 				}
 				
 			});
