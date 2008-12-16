@@ -348,7 +348,7 @@ expressions.UnaryExpressionNotPlusMinus
     
 expressions.CastExpression
     ::= "(" primitiveType ")" unaryExpression
-    |  	"(" type ")" unaryExpressionNotPlusMinus
+    |  	"(" type arrayDimensions* ")" unaryExpressionNotPlusMinus
     ;
     
 core.Primary 

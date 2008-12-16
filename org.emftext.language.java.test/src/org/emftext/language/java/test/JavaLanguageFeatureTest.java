@@ -326,6 +326,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testCasting() throws Exception {
+		String typename = "Casting";
+		String filename = typename + ".java";
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testChainedCalls() throws Exception {
 		String typename = "ChainedCalls";
 		String filename = typename + ".java";
