@@ -509,6 +509,17 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testExpressionsAsMethodArguments() throws Exception {
+		String typename = "ExpressionsAsMethodArguments";
+		String filename = typename + ".java";
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+
+		assertMemberCount(clazz, 2);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testForEachLoop() throws Exception {
 		String typename = "ForEachLoop";
 		String filename = typename + ".java";
