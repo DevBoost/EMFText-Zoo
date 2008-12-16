@@ -101,7 +101,7 @@ public class JavaClasspath {
 	}
 	
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
-		if (!packageName.endsWith(".") && !packageName.endsWith("$")) {
+		if (!packageName.endsWith(".")) {
 			packageName = packageName + ".";
 		}
 		
@@ -113,7 +113,7 @@ public class JavaClasspath {
 		if (idx >= 0) {
 			innerName = classifierName.substring(idx + 1);
 			outerName = classifierName.substring(0, idx + 1);
-			if ("".equals(packageName)) {
+			if (".".equals(packageName)) {
 				qualifiedName = outerName;
 			}
 			else {
@@ -170,7 +170,8 @@ public class JavaClasspath {
 	 * @return
 	 */
 	public EList<Classifier> getClassifiers(String packageName, String classifierQuery) {
-		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
+		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR) &&
+				!packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
 			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
 		}
 		
