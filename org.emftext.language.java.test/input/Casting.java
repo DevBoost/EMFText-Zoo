@@ -6,5 +6,6 @@ public class Casting {
 		c = (Casting) c;
 		d = (Casting[]) d;
 		((Casting[]) d).clone();
+		c = (Casting) d[0];
 	}
 }
