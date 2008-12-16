@@ -15,8 +15,16 @@ public class JavaHEX_LITERALTokenResolver extends JavaBasedTokenResolver impleme
 
 	@Override
 	public Object resolve(String lexem, EStructuralFeature feature, EObject container, TextResource resource) {
-		Long result = Long.decode(lexem);
 		//System.out.println("JavaHEX_LITERALTokenResolver.resolve("+lexem+") : " + (result != null ? result.getClass() : "null"));
-		return result;
+		try {
+			if (lexem.endsWith("L")) {
+				lexem = lexem.substring(0, lexem.length() - 1);
+			}
+			Long result = Long.decode(lexem);
+			return result;
+		} catch (NumberFormatException nfe) {
+			System.out.println(nfe.getMessage() + " in " + resource.getURI());
+			return null;
+		}
 	}
 }

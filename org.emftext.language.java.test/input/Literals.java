@@ -4,6 +4,7 @@ public class Literals {
 		int i2 = 0x1;
 		long i3 = 010l;
 		long i4 = 007L;
+		long i5 = 0x1ffffffffffff00L;
 		double f1 = 1.5;
 		char c = 'a';
 		String s = "abc";
