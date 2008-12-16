@@ -11,7 +11,7 @@ public class ClassifierImportClassifiersReferenceResolver extends ImportReferenc
 	}
 
 	@Override
-	protected void doResolve(String identifier, EObject container, EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.ResolveResult result) {
+	protected void doResolve(String identifier, EObject container, EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
 		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }

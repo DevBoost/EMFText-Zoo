@@ -2,11 +2,11 @@ package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.runtime.resource.TokenResolver;
-import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
+public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
 	private static final char BACKSLASH = '\\';
 
 	@Override
@@ -16,7 +16,7 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, TextResource resource) {
+	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
 		// remove double quotes
 		assert lexem.charAt(0) == '"';
 		assert lexem.charAt(lexem.length() - 1) == '"';

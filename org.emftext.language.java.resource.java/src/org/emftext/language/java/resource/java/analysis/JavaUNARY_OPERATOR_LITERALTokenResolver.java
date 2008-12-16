@@ -1,12 +1,12 @@
 package org.emftext.language.java.resource.java.analysis;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.runtime.resource.TokenResolver;
-import org.emftext.runtime.resource.TextResource;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-public class JavaUNARY_OPERATOR_LITERALTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
+public class JavaUNARY_OPERATOR_LITERALTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
 	@Override
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = super.deResolve(value,feature,container);
@@ -14,7 +14,7 @@ public class JavaUNARY_OPERATOR_LITERALTokenResolver extends JavaBasedTokenResol
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, TextResource resource) {
+	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
 		return super.resolve(lexem,feature,container,resource);
 	}
 }

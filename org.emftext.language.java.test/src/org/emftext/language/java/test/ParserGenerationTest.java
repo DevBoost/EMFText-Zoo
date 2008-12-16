@@ -26,7 +26,7 @@ import org.emftext.sdk.MetamodelHelper;
 import org.emftext.sdk.codegen.IGenerator;
 import org.emftext.sdk.codegen.ResourcePackageGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
-import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.ITextResource;
 
 /**
  * This test checks whether regenerating the parser with EMFText
@@ -64,7 +64,7 @@ public class ParserGenerationTest {
 	}
 
 	private String getGrammar(URI fileURI) throws CoreException {
-		TextResource concreteSyntaxResource = (TextResource) getConcreteSyntaxResource(fileURI, options);
+		ITextResource concreteSyntaxResource = (ITextResource) getConcreteSyntaxResource(fileURI, options);
 		ConcreteSyntax concreteSyntax = getConcreteSyntax(concreteSyntaxResource);
 		IGenerator antlrGen = createANTLRGenerator(concreteSyntax);
 		InputStream grammarStream = ResourcePackageGenerator.deriveGrammar(concreteSyntaxResource, antlrGen);

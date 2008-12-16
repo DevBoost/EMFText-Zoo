@@ -53,9 +53,9 @@ import org.emftext.language.java.core.TypeParameter;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.runtime.IOptions;
-import org.emftext.runtime.resource.TextDiagnostic;
-import org.emftext.runtime.resource.TextResource;
-import org.emftext.runtime.resource.TextDiagnostic.TextDiagnosticType;
+import org.emftext.runtime.resource.ITextDiagnostic;
+import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.ITextDiagnostic.TextDiagnosticType;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -124,7 +124,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	
 	private static CompilationUnit loadResource(
 			URI uri, boolean ignoreSemanticErrors) throws IOException {
-		TextResource resource = (TextResource) myResourceSet.createResource(uri);
+		ITextResource resource = (ITextResource) myResourceSet.createResource(uri);
 		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource, ignoreSemanticErrors);
 		assertNoWarnings(uri.toString(), resource);
@@ -145,11 +145,11 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	private static void assertNoErrors(String fileIdentifier,
-			TextResource resource, boolean ignoreSemanticErrors) {
+			ITextResource resource, boolean ignoreSemanticErrors) {
 		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
 		if (ignoreSemanticErrors) {
 			for (Diagnostic error : resource.getErrors()) {
-				if (error instanceof TextDiagnostic && ((TextDiagnostic) error).getType() == TextDiagnosticType.RESOLVE_PROBLEM) {
+				if (error instanceof ITextDiagnostic && ((ITextDiagnostic) error).getType() == TextDiagnosticType.RESOLVE_PROBLEM) {
 					errors.remove(error);
 				}
 			}
@@ -160,7 +160,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	private static void assertNoWarnings(String fileIdentifier,
-			TextResource resource) {
+			ITextResource resource) {
 		EList<Diagnostic> warnings = resource.getWarnings();
 		printWarnings(fileIdentifier, warnings);
 		assertTrue("The resource should be parsed without warnings.", warnings
@@ -186,8 +186,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				+ "':\n");
 		for (Diagnostic diagnostic : errors) {
 			String text;
-			if (diagnostic instanceof TextDiagnostic) {
-				TextDiagnostic textDiagnostic = (TextDiagnostic) diagnostic;
+			if (diagnostic instanceof ITextDiagnostic) {
+				ITextDiagnostic textDiagnostic = (ITextDiagnostic) diagnostic;
 				text = textDiagnostic.getMessage() + " at ("
 						+ textDiagnostic.getLine() + ","
 						+ textDiagnostic.getColumn() + ")";

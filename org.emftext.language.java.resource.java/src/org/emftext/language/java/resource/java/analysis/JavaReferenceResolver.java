@@ -52,8 +52,8 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.VoidLiteral;
-import org.emftext.runtime.resource.ResolveResult;
-import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.IResolveResult;
+import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
 
 public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
@@ -61,7 +61,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	public static final String UNRESOLVED_REFERENCE_STRING =
 		"UNKNOWN";
 	
-	protected TextResource myResource = null;
+	protected ITextResource myResource = null;
 	
 	@Override
 	protected String doDeResolve(EObject element, EObject container,
@@ -179,8 +179,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	@Override
 	protected void doResolve(String identifier, EObject container,
 			EReference reference, int position, boolean resolveFuzzy,
-			ResolveResult result) {
-		myResource = (TextResource) container.eResource();
+			IResolveResult result) {
+		myResource = (ITextResource) container.eResource();
 		
 		try {
 			EObject targetObject = null;

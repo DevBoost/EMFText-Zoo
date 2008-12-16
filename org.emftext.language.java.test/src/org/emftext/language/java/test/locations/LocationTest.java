@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.junit.Test;
 import org.emftext.language.java.core.Member;
 import org.emftext.language.java.core.Method;
 import org.emftext.language.java.test.AbstractJavaParserTest;
-import org.emftext.runtime.resource.LocationMap;
-import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.ILocationMap;
+import org.emftext.runtime.resource.ITextResource;
+import org.junit.Test;
 
 /**
  * A test case that checks whether the generated parser creates 
@@ -47,9 +47,9 @@ public class LocationTest extends AbstractJavaParserTest {
 
 	private void assertElementLocation(EObject element, int line, int column, int charStart, int charEnd) {
 		Resource resource = element.eResource();
-		assertTrue(resource instanceof TextResource);
-		TextResource textResource = (TextResource) resource;
-		LocationMap locationMap = textResource.getLocationMap();
+		assertTrue(resource instanceof ITextResource);
+		ITextResource textResource = (ITextResource) resource;
+		ILocationMap locationMap = textResource.getLocationMap();
 		
 		assertEquals(element.eClass().getName() + ": Wrong line", line, locationMap.getLine(element));
 		assertEquals(element.eClass().getName() + ": Wrong column", column, locationMap.getColumn(element));

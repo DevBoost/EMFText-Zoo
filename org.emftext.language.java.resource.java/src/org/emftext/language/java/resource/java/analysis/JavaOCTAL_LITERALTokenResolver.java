@@ -2,11 +2,11 @@ package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.runtime.resource.TokenResolver;
-import org.emftext.runtime.resource.TextResource;
+import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-public class JavaOCTAL_LITERALTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
+public class JavaOCTAL_LITERALTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
 	@Override
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = super.deResolve(value,feature,container);
@@ -14,7 +14,7 @@ public class JavaOCTAL_LITERALTokenResolver extends JavaBasedTokenResolver imple
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, TextResource resource) {
+	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
 		if (lexem.toLowerCase().endsWith("l")) {
 			lexem = lexem.substring(0, lexem.length() - 1);
 		}

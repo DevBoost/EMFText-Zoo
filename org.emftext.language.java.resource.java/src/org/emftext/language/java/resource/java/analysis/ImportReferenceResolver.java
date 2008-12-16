@@ -13,7 +13,7 @@ import org.emftext.language.java.core.MemberContainer;
 import org.emftext.language.java.core.NamedElement;
 import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.modifiers.Static;
-import org.emftext.runtime.resource.ResolveResult;
+import org.emftext.runtime.resource.IResolveResult;
 import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
 
 public class ImportReferenceResolver extends ReferenceResolverImpl {
@@ -38,7 +38,7 @@ public class ImportReferenceResolver extends ReferenceResolverImpl {
 
 	@Override
 	protected void doResolve(String identifier, EObject container,
-			EReference reference, int position, boolean resolveFuzzy, ResolveResult result) {
+			EReference reference, int position, boolean resolveFuzzy, IResolveResult result) {
 		
 		Import theImport = (Import) container;
 		if (identifier.equals(".*")) {
