@@ -1,9 +1,15 @@
-import pkg.EscapedStrings;
-import static pkg.EscapedStrings.escapes1;
+import static pkg.EscapedStrings.*;
+import pkg.EmptyClass;
 
 public class StaticImports {
 	{
-		EscapedStrings.class.toString();
 		escapes1.toString();
+		
+		escapes2.toString();
+		
+		m1();
+		
+		new C1<StaticImports>();
+		new EmptyClass();
 	}
 }

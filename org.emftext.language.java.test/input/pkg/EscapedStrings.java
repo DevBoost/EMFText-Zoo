@@ -6,4 +6,8 @@ public class EscapedStrings {
 	public static String octal2 = "\377\388";
 	public static String escapes1 = "\b\n\t\r\n\\";
 	public static String escapes2 = "\"'\'";
+	
+	public static void m1() {};
+	
+	public static class C1 <T>{};
 }

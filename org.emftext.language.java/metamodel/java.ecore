@@ -42,13 +42,19 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="implicitImportedClassifiers"
           upperBound="-1" eType="#//core/Classifier"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Import">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Import" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
+          eType="#//core/PlainPackageOrClassifierReference" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassifierImport" eSuperTypes="#//core/Import">
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
           eType="#//core/Classifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StaticImport" eSuperTypes="#//core/Import">
       <eStructuralFeatures xsi:type="ecore:EReference" name="static" eType="#//modifiers/Static"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticMembers" upperBound="-1"
+          eType="#//core/Member"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
@@ -65,8 +71,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//core/Reference"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PackageOrClassifierReference">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//core/Classifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PackageOrClassifierReference" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//types/Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PlainPackageOrClassifierReference"
+        eSuperTypes="#//core/PackageOrClassifierReference"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterizedPackageOrClassifierReference"
+        eSuperTypes="#//core/PackageOrClassifierReference">
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
           eType="#//core/TypeArgument" containment="true"/>
     </eClassifiers>
@@ -79,7 +90,7 @@
           eType="#//expressions/Expression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExplicitGenericInvocation" eSuperTypes="#//core/PackageOrClassifierOrMethodOrVariableReference"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//core/NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//types/Type #//core/ReferenceableElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="extendTypes" upperBound="-1"
           eType="#//core/Reference" containment="true"/>
     </eClassifiers>
@@ -157,11 +168,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
           eType="#//core/QualifiedTypeArgument" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//core/Classifier">
+    <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//core/Classifier #//core/MemberContainer">
       <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
           eType="#//core/EnumConstant" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-          eType="#//core/Member" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
           eType="#//core/Classifier"/>
     </eClassifiers>
@@ -190,7 +199,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
           eType="#//annotations/AnnotationInstance" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AdditionalField" eSuperTypes="#//core/NamedElement #//core/ArrayTypable #//core/Initializable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AdditionalField" eSuperTypes="#//core/ReferenceableElement #//core/ArrayTypable #//core/Initializable"/>
     <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#//types/TypedElement #//core/ArrayTypable #//core/TypeParametrizable #//core/Parametrizable #//core/Member #//core/ReferenceableElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
           eType="#//modifiers/Modifier" containment="true"/>
@@ -214,7 +223,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="additionalLocalVariables"
           upperBound="-1" eType="#//core/AdditionalLocalVariable" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AdditionalLocalVariable" eSuperTypes="#//core/NamedElement #//core/ArrayTypable #//core/Initializable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AdditionalLocalVariable" eSuperTypes="#//core/ReferenceableElement #//core/ArrayTypable #//core/Initializable"/>
     <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//core/Member #//statements/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
           eType="#//modifiers/Modifier" containment="true"/>
@@ -235,6 +244,9 @@
     <eClassifiers xsi:type="ecore:EClass" name="Super" eSuperTypes="#//core/SelfReference"/>
     <eClassifiers xsi:type="ecore:EClass" name="ClassLiteral" eSuperTypes="#//core/PrimaryReference"/>
     <eClassifiers xsi:type="ecore:EClass" name="PackageDescriptor" eSuperTypes="#//core/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//core/PackageDescriptor"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//core/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
           eType="#//core/Classifier"/>
     </eClassifiers>
@@ -253,20 +265,6 @@
   <eSubpackages name="expressions" nsURI="http://www.emftext.org/java/expressions"
       nsPrefix="expressions">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//core/InitialValue"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalOrExpression"
-          eType="#//expressions/ConditionalOrExpression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
-          eType="#//expressions/Expression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAndExpression"
-          upperBound="-1" eType="#//expressions/ConditionalAndExpression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="inclusiveOrExpression"
-          upperBound="-1" eType="#//expressions/InclusiveOrExpression" containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InclusiveOrExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="exclusiveOrExpression"
           upperBound="-1" eType="#//expressions/ExclusiveOrExpression" containment="true"/>
@@ -384,6 +382,20 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//statements/ForLoopInitializer">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inclusiveOrExpression"
+          upperBound="-1" eType="#//expressions/InclusiveOrExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAndExpression"
+          upperBound="-1" eType="#//expressions/ConditionalAndExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalOrExpression"
+          eType="#//expressions/ConditionalOrExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
           eType="#//expressions/Expression" containment="true"/>
     </eClassifiers>
   </eSubpackages>
@@ -533,7 +545,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeReferenceSequence" eSuperTypes="#//types/TypeReference">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
-          eType="#//core/PackageOrClassifierReference" containment="true"/>
+          eType="#//core/ParameterizedPackageOrClassifierReference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//core/PrimaryReference #//types/TypeReference #//types/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="#//types/PrimitiveType"/>

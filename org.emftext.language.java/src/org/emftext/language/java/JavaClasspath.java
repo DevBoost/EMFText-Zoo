@@ -12,14 +12,17 @@ import java.util.zip.ZipFile;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emftext.language.java.core.Classifier;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.core.CoreFactory;
+import org.emftext.language.java.core.Import;
+import org.emftext.language.java.core.Member;
+import org.emftext.language.java.core.MemberContainer;
+import org.emftext.language.java.core.PackageDescriptor;
+import org.emftext.language.java.core.PackageOrClassifierReference;
 
 public class JavaClasspath {
 
@@ -57,11 +60,19 @@ public class JavaClasspath {
 
 			if (entry.getName().endsWith(".class") || entry.getName().endsWith(".java")) {
 				String fullName = entry.getName();
-				String packageName = fullName.substring(0, fullName.lastIndexOf("/")).replaceAll("/", ".");
-				String className = fullName.substring(fullName.lastIndexOf("/") + 1, fullName.lastIndexOf("."));
-				
 				String uri = "archive:file:" + path + "!/" + fullName;
 				
+				fullName = fullName.replaceAll("/", "."); 
+				
+				String packageName = "";
+				String className   = "";
+				
+				int idx = fullName.lastIndexOf(".");
+				idx = fullName.substring(0, idx).lastIndexOf(".");
+				if (idx >= 0) {
+					packageName = fullName.substring(0, idx);
+					className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
+				}				
 				registerClassifier(packageName, className, URI.createURI(uri));
 			}
 		}
@@ -70,34 +81,70 @@ public class JavaClasspath {
 
 	public void registerClassifierSource(CompilationUnit cu, URI uri) {
 		String packageName = JavaUniquePathConstructor.packageName(cu);
-		for(TreeIterator<EObject> it = cu.eAllContents(); it.hasNext(); ) {
-			EObject cand = it.next();
-			if (cand instanceof Classifier) {
-				registerClassifier(
-						packageName, ((Classifier)cand).getName(), uri);
-				it.prune();
+		
+		for(Classifier classifier : cu.getClassifiers()) {
+			registerClassifier(
+					packageName, classifier.getName(), uri);
+			registerInnerClassifiers(
+					classifier, packageName, classifier.getName(), uri);
+		}
+	}
+	
+	protected void registerInnerClassifiers(Classifier classifier, String packageName, String className, URI uri) {
+		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
+			if (innerCand instanceof Classifier) {
+				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
+				registerClassifier(packageName, newClassName, uri);
+				registerInnerClassifiers((Classifier)innerCand, packageName, newClassName, uri);
+			}
+		}
+	}
+	
+	public void registerClassifier(String packageName, String classifierName, URI uri) {
+		if (!packageName.endsWith(".")) {
+			packageName = packageName + ".";
+		}
+		
+		String innerName = classifierName;
+		String outerName = "";
+		String qualifiedName = packageName;
+		
+		int idx = classifierName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
+		if (idx >= 0) {
+			innerName = classifierName.substring(idx + 1);
+			outerName = classifierName.substring(0, idx + 1);
+			if ("".equals(packageName)) {
+				qualifiedName = outerName;
+			}
+			else {
+				qualifiedName = packageName + outerName;
 			}
 		}
 		
-	}
-	
-	public void registerClassifier(String packageName, String name, URI uri) {
 		synchronized (packageClassifierMap) {
-			if (!packageClassifierMap.containsKey(packageName)) {
-				packageClassifierMap.put(packageName, new ArrayList<String>());
+			if (!packageClassifierMap.containsKey(qualifiedName)) {
+				packageClassifierMap.put(qualifiedName, new ArrayList<String>());
 			}
-			if (!packageClassifierMap.get(packageName).contains(name)) {
-				packageClassifierMap.get(packageName).add(name);
+			if (!packageClassifierMap.get(qualifiedName).contains(innerName)) {
+				packageClassifierMap.get(qualifiedName).add(innerName);
 			}
 		}
 		
 		if (uri != null) {
+			String fullName = null;
+			if (".".equals(packageName)) {
+				fullName = classifierName;
+			}
+			else {
+				fullName = packageName + classifierName;
+			}
+			
 			URI logicalUri = 
-				JavaUniquePathConstructor.getClassifierResourceURI(packageName, name);
+				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 			
 			if (URI_MAP.containsKey(logicalUri)) {
 				//TODO where to put this warning?
-				System.out.println("[JaMoPP] WARNING: Two versions of " + packageName + "." + name + 
+				System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
 						"\n[JaMoPP]   1) " + URI_MAP.get(logicalUri) +
 						"\n[JaMoPP]   2) " + uri +
 						"\n[JaMoPP] Version 1) will be ignored!");
@@ -109,6 +156,13 @@ public class JavaClasspath {
 	
 	private EList<Classifier> javaLangPackage = null;
 	
+	
+	public EList<Classifier> getClassifiers(Import theImport, String classifierQuery) {
+		String fullQualifiedName = getQualifiedNameFromImport(theImport);
+		
+		return getClassifiers(fullQualifiedName, classifierQuery);
+	}
+	
 	/**
 	 * Constructs a list of proxies that point at the classifiers of the given package
 	 * 
@@ -116,8 +170,12 @@ public class JavaClasspath {
 	 * @return
 	 */
 	public EList<Classifier> getClassifiers(String packageName, String classifierQuery) {
-		EList<Classifier> resultList = new BasicEList<Classifier>();
+		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
+			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+		}
 		
+		EList<Classifier> resultList = new BasicEList<Classifier>();
+
 		synchronized (packageClassifierMap) {
 			if(!packageClassifierMap.containsKey(packageName)) {
 				return resultList;
@@ -126,7 +184,14 @@ public class JavaClasspath {
 			for (String classifierName : packageClassifierMap.get(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
 					InternalEObject classifierProxy = (InternalEObject) CoreFactory.eINSTANCE.createClass();
-					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(packageName, classifierName));
+					String fullName = null;
+					if ("".equals(packageName) || ".".equals(packageName)) {
+						fullName = classifierName;
+					}
+					else {
+						fullName = packageName + classifierName;
+					}
+					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullName));
 					resultList.add((Classifier) classifierProxy);
 				}
 			}
@@ -134,16 +199,51 @@ public class JavaClasspath {
 		
 		return resultList;
 	}
+	
+	public Classifier getClassifier(Import theImport) {
+		String fullQualifiedName = getQualifiedNameFromImport(theImport);
+		//cute the trailing eparator
+		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() -1);
+		
+		return getClassifier(fullQualifiedName);
+	}
 
+	private String getQualifiedNameFromImport(Import theImport) {
+		String fullQualifiedName = "";
+		for(PackageOrClassifierReference ref : theImport.getParts()) {
+			Classifier type = (Classifier) ref.getTarget();
+			if (type.eIsProxy()) {
+			 type = (Classifier) ref.getTarget();
+			}
+
+			if (type instanceof PackageDescriptor) {
+				fullQualifiedName = fullQualifiedName + type.getName() + 
+					JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+			}
+			else {
+				fullQualifiedName = fullQualifiedName + type.getName() + 
+					JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			}
+		}
+		return fullQualifiedName;
+	}
+	
+	public Classifier getClassifier(String fullQualifiedName) {
+		InternalEObject classifierProxy = (InternalEObject) CoreFactory.eINSTANCE.createClass();
+		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
+		classifierProxy.eSetProxyURI(proxyURI);
+		return (Classifier) classifierProxy;
+	}
+	
 	public EList<Classifier> getDefaultImports(String packageName) {
 		EList<Classifier> resultList = new BasicEList<Classifier>();
 		//my package
-		resultList.addAll(getClassifiers(packageName, "*"));
+		resultList.addAll(getClassifiers(packageName + ".", "*"));
 
 		//java.lang package	
 		if (javaLangPackage == null) {
 			javaLangPackage = new BasicEList<Classifier>();
-			javaLangPackage.addAll(getClassifiers("java.lang", "*"));
+			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
 		}
 		
 		resultList.addAll(javaLangPackage);

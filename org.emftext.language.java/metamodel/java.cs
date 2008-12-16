@@ -39,7 +39,8 @@ TOKENS {
 	DEFINE STRING_LITERAL $'"'('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|'\\'('0'..'7')|~('\\'|'"'))*'"'$;
 	
 	//DEFINE IDENTIFIER $('\u0024'|'\u0041'..'\u005a'|'\u005f'|'\u0061'..'\u007a'|'\u00c0'..'\u00d6'|'\u00d8'..'\u00f6'|'\u00f8'..'\u00ff'|'\u0100'..'\u1fff'|'\u3040'..'\u318f'|'\u3300'..'\u337f'|'\u3400'..'\u3d2d'|'\u4e00'..'\u9fff'|'\uf900'..'\ufaff')(('\u0024'|'\u0041'..'\u005a'|'\u005f'|'\u0061'..'\u007a'|'\u00c0'..'\u00d6'|'\u00d8'..'\u00f6'|'\u00f8'..'\u00ff'|'\u0100'..'\u1fff'|'\u3040'..'\u318f'|'\u3300'..'\u337f'|'\u3400'..'\u3d2d'|'\u4e00'..'\u9fff'|'\uf900'..'\ufaff')|('\u0030'..'\u0039'|'\u0660'..'\u0669'|'\u06f0'..'\u06f9'|'\u0966'..'\u096f'|'\u09e6'..'\u09ef'|'\u0a66'..'\u0a6f'|'\u0ae6'..'\u0aef'|'\u0b66'..'\u0b6f'|'\u0be7'..'\u0bef'|'\u0c66'..'\u0c6f'|'\u0ce6'..'\u0cef'|'\u0d66'..'\u0d6f'|'\u0e50'..'\u0e59'|'\u0ed0'..'\u0ed9'|'\u1040'..'\u1049'))+$;
-	DEFINE IDENTIFIER $('A'..'Z'|'a'..'z'|'0'..'9'|'_')+$;
+	DEFINE IDENTIFIER $('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'*')+$;
+	DEFINE IMPORT_ALL_LITERAL $'.*'$;
 }
 
 RULES {
@@ -56,9 +57,12 @@ core.CompilationUnit
         (classifiers !0 !0)+
 	;
 	
-core.Import
-	::= static? package[] #0 ("." #0 package[])* #0 "." #0 classifiers[];
-	
+core.ClassifierImport
+	::= parts #0 ("." #0 parts)* #0 (("." #0 classifiers[]) | classifiers[IMPORT_ALL_LITERAL]);
+
+core.StaticImport
+	::= static parts #0 ("." #0 parts)* #0 (("." #0 staticMembers[]) | staticMembers[IMPORT_ALL_LITERAL]);
+
 core.Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
@@ -190,11 +194,15 @@ types.TypeReferenceSequence
 	::= parts (#0 "." #0 parts)*
 	;
 
-core.PackageOrClassifierReference
+core.PlainPackageOrClassifierReference
+	::= target[] 
+	;
+	
+core.ParameterizedPackageOrClassifierReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
-
+	
 core.PackageOrClassifierOrMethodOrVariableReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?

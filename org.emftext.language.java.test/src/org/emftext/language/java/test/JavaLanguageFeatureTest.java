@@ -16,10 +16,12 @@ import org.emftext.language.java.core.Block;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
 import org.emftext.language.java.core.Classifier;
+import org.emftext.language.java.core.ClassifierImport;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.core.Constructor;
 import org.emftext.language.java.core.Enumeration;
 import org.emftext.language.java.core.Field;
+import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.core.Import;
@@ -38,7 +40,7 @@ import org.junit.Test;
 import pkg.EscapedStrings;
 
 /**
- * JUnit Test suite to test the EMFTextExit JavaModel Parser. New Tests should
+ * JUnit Test suite to test the EMFText JavaModel Parser. New Tests should
  * by added by
  * <ul>
  * <li>putting a Java Source file that contains java expressions to parse to the
@@ -307,7 +309,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "BooleanExpressions";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 4);
+		assertMemberCount(clazz, 3);
 
 		parseAndReprint(filename);
 	}
@@ -420,7 +422,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		File file = new File("pkg" + File.separator + typename + ".java");
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(file);
 		EList<Member> members = clazz.getMembers();
-		assertEquals(typename + " should have 6 members.", 6, members.size());
+		assertEquals(typename + " should have 8 members.", 8, members.size());
 
 		// iterate over all fields, get their value using reflection and
 		// compare this value with the one from the Java parser
@@ -616,6 +618,22 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 
+	@Test
+	public void testImport1() throws Exception {
+		String typename = "Import1";
+		String filename = typename + ".java";
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testImport2() throws Exception {
+		String typename = "Import2";
+		String filename = typename + ".java";
+
+		parseAndReprint(filename);
+	}
+	
 	@Test
 	public void testIOneMethod() throws Exception {
 		String typename = "IOneMethod";
@@ -818,8 +836,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		CompilationUnit unit = parseResource(filename, getTestInputFolder());
 		List<Import> imports = unit.getImports();
 		assertEquals(2, imports.size());
-		assertNull("first import is not static", imports.get(0).getStatic());
-		assertNotNull("second import is static", imports.get(1).getStatic());
+		assertTrue("first import is not static", imports.get(0) instanceof StaticImport);
+		assertTrue("second import is static", imports.get(1) instanceof ClassifierImport);
 
 		parseAndReprint(filename);
 	}
@@ -853,6 +871,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 3);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testTypeReferencingExternal() throws Exception {
+		String typename = "TypeReferencingExternal";
+		String filename = typename + ".java";
+		assertParsesToClass(typename);
 
 		parseAndReprint(filename);
 	}
@@ -893,6 +920,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertMemberCount(clazz, 2);
 		
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
+	}
+	
+	/**
+	 * This test should run after the others, when all Java sources are registerd.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testResolveProxies() throws Exception {
+		assertResolveAllProxies();
 	}
 
 	@Test

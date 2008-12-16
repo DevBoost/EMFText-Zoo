@@ -32,7 +32,7 @@ public class JavaSourcFileResourceImpl extends JavaResourceImpl {
 							new String[cu.getPackage().size()]);
 					String   file   = cu.getClassifiers().get(0).getName();
 					
-					URI subResourcURI = getURI().trimSegments(1);
+					URI subResourcURI = getURI().trimFileExtension().trimFileExtension();
 					subResourcURI = subResourcURI.appendSegments(folder);
 					subResourcURI = subResourcURI.appendSegment(file);
 					subResourcURI =  subResourcURI.appendFileExtension("java");

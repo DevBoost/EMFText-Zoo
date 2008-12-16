@@ -39,10 +39,16 @@
             ecoreFeature="ecore:EReference java.ecore#//core/CompilationUnit/implicitImportedClassifiers"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//core/Import">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java.ecore#//core/Import/package"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/Import/parts"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//core/ClassifierImport">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference java.ecore#//core/Import/classifiers"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/Import/static"/>
+            ecoreFeature="ecore:EReference java.ecore#//core/ClassifierImport/classifiers"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//core/StaticImport">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/StaticImport/static"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference java.ecore#//core/StaticImport/staticMembers"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//core/NamedElement">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute java.ecore#//core/NamedElement/name"/>
@@ -57,7 +63,10 @@
       <genClasses ecoreClass="java.ecore#//core/PackageOrClassifierReference">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference java.ecore#//core/PackageOrClassifierReference/target"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/PackageOrClassifierReference/typeArguments"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//core/PlainPackageOrClassifierReference"/>
+      <genClasses ecoreClass="java.ecore#//core/ParameterizedPackageOrClassifierReference">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/ParameterizedPackageOrClassifierReference/typeArguments"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//core/PackageOrClassifierOrMethodOrVariableReference">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -128,7 +137,6 @@
       </genClasses>
       <genClasses ecoreClass="java.ecore#//core/Enumeration">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/Enumeration/constants"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//core/Enumeration/members"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference java.ecore#//core/Enumeration/implements"/>
       </genClasses>
@@ -185,7 +193,11 @@
       <genClasses ecoreClass="java.ecore#//core/ClassLiteral"/>
       <genClasses ecoreClass="java.ecore#//core/PackageDescriptor">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference java.ecore#//core/PackageDescriptor/classifiers"/>
+            ecoreFeature="ecore:EReference java.ecore#//core/PackageDescriptor/parent"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//core/Package">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference java.ecore#//core/Package/classifiers"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Comments" basePackage="org.emftext.language.java" disposableProviderFactory="true"
@@ -202,16 +214,6 @@
     <nestedGenPackages prefix="Expressions" basePackage="org.emftext.language.java"
         disposableProviderFactory="true" ecorePackage="java.ecore#//expressions">
       <genClasses image="false" ecoreClass="java.ecore#//expressions/Expression"/>
-      <genClasses ecoreClass="java.ecore#//expressions/ConditionalExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalExpression/conditionalOrExpression"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalExpression/expression"/>
-      </genClasses>
-      <genClasses ecoreClass="java.ecore#//expressions/ConditionalOrExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalOrExpression/conditionalAndExpression"/>
-      </genClasses>
-      <genClasses ecoreClass="java.ecore#//expressions/ConditionalAndExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalAndExpression/inclusiveOrExpression"/>
-      </genClasses>
       <genClasses ecoreClass="java.ecore#//expressions/InclusiveOrExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/InclusiveOrExpression/exclusiveOrExpression"/>
       </genClasses>
@@ -296,6 +298,16 @@
       </genClasses>
       <genClasses ecoreClass="java.ecore#//expressions/ExpressionList">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ExpressionList/expressions"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//expressions/ConditionalAndExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalAndExpression/inclusiveOrExpression"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//expressions/ConditionalOrExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalOrExpression/conditionalAndExpression"/>
+      </genClasses>
+      <genClasses ecoreClass="java.ecore#//expressions/ConditionalExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalExpression/conditionalOrExpression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//expressions/ConditionalExpression/expression"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Literals" basePackage="org.emftext.language.java" disposableProviderFactory="true"

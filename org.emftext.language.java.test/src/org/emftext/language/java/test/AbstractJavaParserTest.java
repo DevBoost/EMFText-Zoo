@@ -36,6 +36,8 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.text.edits.TextEdit;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.UnicodeConverterProvider;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.core.Classifier;
@@ -69,6 +71,13 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	public AbstractJavaParserTest(String name) {
 		super(name);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"java", new JavaSourceOrClassFileResourceFactoryImpl());
+	}
+	
+	public AbstractJavaParserTest(String name, ResourceSet rs) {
+		super(name);
+		myResourceSet = rs;
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
@@ -230,7 +239,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		resource.load(null);
 		
 		if (!ignoreSemanticErrors()) {
-			assertResolveAllProxies(resource);
+			// This will not work if external resources are not yet registered (order of tests)
+			//assertResolveAllProxies(resource);
 		}
 		
 		resource.setURI(URI.createFileURI(outputFileName));
@@ -556,14 +566,49 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	protected void assertResolveAllProxies(EObject element) {
 		assertResolveAllProxies(element.eResource());
 	}
-	protected void assertResolveAllProxies(Resource resource) {
-		for(Iterator<EObject> elementIt = EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
-			InternalEObject nextElement = (InternalEObject) elementIt.next();
-			assertFalse("Can not reslove: " + nextElement.eProxyURI(), nextElement.eIsProxy());
-			for (EObject crElement : nextElement.eCrossReferences()) {
-				crElement = EcoreUtil.resolve(crElement, resource);
-				assertFalse("Can not resolve: " + ((InternalEObject) crElement).eProxyURI(), crElement.eIsProxy());				
+	
+	protected void assertResolveAllProxies() {
+		boolean failure = false;
+		for(URI uri : new ArrayList<URI>(JavaClasspath.INSTANCE.URI_MAP.keySet())) {
+			if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+				//do not load all default classfildes
+				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "java")) {
+					continue;
+				}
+				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "com.sun")) {
+					continue;
+				}
+				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "sun")) {
+					continue;
+				}
+				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "org.omg")) {
+					continue;
+				}
+				
+				Resource r = myResourceSet.getResource(uri, true);
+				assertNotNull("The resource '" + uri + "' should exist",r);
+				failure = assertResolveAllProxies(r) || failure;
+				
 			}
 		}
+		assertFalse("There are unresolved proxies", failure);
+	}
+	
+	protected boolean assertResolveAllProxies(Resource resource) {
+		boolean failure = false;
+		if (!ignoreSemanticErrors()) {
+			for(Iterator<EObject> elementIt = EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
+				InternalEObject nextElement = (InternalEObject) elementIt.next();
+				assertFalse("Can not reslove: " + nextElement.eProxyURI(), nextElement.eIsProxy());
+				for (EObject crElement : nextElement.eCrossReferences()) {
+					crElement = EcoreUtil.resolve(crElement, resource);
+					if (crElement.eIsProxy()) {
+						System.out.println("Can not resolve: " + ((InternalEObject) crElement).eProxyURI());
+						failure = true;
+					}
+				}
+			}
+		}
+		return failure;
 	}
 }
