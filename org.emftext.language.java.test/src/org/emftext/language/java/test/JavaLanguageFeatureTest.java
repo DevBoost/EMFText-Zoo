@@ -245,7 +245,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "ArrayInitializers";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 8);
+		assertMemberCount(clazz, 9);
 
 		parseAndReprint(filename);
 	}

@@ -180,7 +180,7 @@ core.ArrayInstantiationBySize
 	;
 
 core.ArrayInitializer
-    ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* (",")? )? "}"    
+    ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* )? (",")? "}"    
     ;
     
 core.Reference

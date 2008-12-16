@@ -46,4 +46,8 @@ public class ArrayInitializers {
 		variableWithCommaAtEnd.toString();
 		variableWithoutCommaAtEnd.toString();
 	}
+	
+	public void m4() {
+		int[] ia = { , };
+	}
 }
