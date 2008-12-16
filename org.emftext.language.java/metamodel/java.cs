@@ -70,7 +70,7 @@ core.Class
 core.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 	       ("extends" (extends ("," extends)*))? 
-	       "{" ((members (";")?) | (";")?)* "}"
+	       "{" (members | (";")?)* "}"
 	;
 
 annotations.Annotation

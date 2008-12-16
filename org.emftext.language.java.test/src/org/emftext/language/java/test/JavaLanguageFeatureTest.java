@@ -687,6 +687,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		parseAndReprint(filename);
 	}
+	
+	@Test
+	public void testIWithComments() throws Exception {
+		String typename = "IWithComments";
+		String filename = typename + ".java";
+		Interface interfaze = assertParsesToInterface(typename);
+		assertMemberCount(interfaze, 2);
+
+		parseAndReprint(filename);
+	}
 
 	@Test
 	public void testLiterals() throws Exception {
