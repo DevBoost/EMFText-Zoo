@@ -234,7 +234,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Arguments";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 6);
+		assertMemberCount(clazz, 5);
 
 		parseAndReprint(filename);
 	}
@@ -309,7 +309,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "BooleanExpressions";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 3);
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}
@@ -339,7 +339,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Comments";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 6);
+		assertMemberCount(clazz, 2);
 
 		parseAndReprint(filename);
 	}
@@ -703,7 +703,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "LocalVariableDeclarations";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 4);
+		assertMemberCount(clazz, 2);
 
 		parseAndReprint(filename);
 	}
