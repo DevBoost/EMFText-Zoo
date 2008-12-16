@@ -277,10 +277,10 @@ statements.Throw
 	::= "throw" expression ";" ;
 	
 statements.Break
-	::= "break" ";" ;
+	::= "break" (target[])? ";" ;
 	
 statements.Continue
-	::= "continue"  ";" ;
+	::= "continue" (target[])? ";" ;
 	
 statements.JumpLabel
 	::= name[] ":" statement ;
