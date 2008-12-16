@@ -22,6 +22,29 @@ public class SwitchStatements {
 		}
 	}
 	
+	public void switchWithExpression() {
+		switch (4 + 3) {
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public void switchWithExpression2() {
+		int i = 4;
+		switch (i + 3) {
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				break;
+		}
+	}
+	
 	public void caseWithOneStatement() {
 		switch (4) {
 			case 1:
