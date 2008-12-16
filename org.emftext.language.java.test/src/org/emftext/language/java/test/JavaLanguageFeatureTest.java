@@ -780,7 +780,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 
-	
+	@Test
+	public void testBooleanAssignments() throws Exception {
+		String typename = "BooleanAssignments";
+		String filename = typename + ".java";
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 3);
+
+		parseAndReprint(filename);
+	}
+
 	@Test
 	public void testParametersWithModifiers() throws Exception {
 		String typename = "ParametersWithModifiers";
