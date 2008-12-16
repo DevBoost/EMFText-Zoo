@@ -23,4 +23,9 @@ public class Comments {
 		// single after declaration and before assignment
 		assignment = new Comments();
 	}
+	
+	public void method3() {
+		int a = 2 + // a comment within an expression 
+			3;
+	}
 }
