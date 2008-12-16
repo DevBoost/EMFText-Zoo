@@ -307,7 +307,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "BooleanExpressions";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 3);
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}
