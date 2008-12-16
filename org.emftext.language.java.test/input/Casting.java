@@ -8,5 +8,6 @@ public class Casting {
 		d = (Casting[]) d;
 		((Casting[]) d).clone();
 		c = (Casting) d[0];
+		float f = (byte) 1;
 	}
 }
