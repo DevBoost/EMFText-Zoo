@@ -56,7 +56,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticMembers" upperBound="-1"
           eType="#//core/Member"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="#//comments/Commentable">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
@@ -252,12 +252,13 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="comments" nsURI="http://www.emftext.org/java/comments" nsPrefix="comments">
-    <eClassifiers xsi:type="ecore:EClass" name="Comment" abstract="true" eSuperTypes="#//core/Member #//statements/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="Comment" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SingleLineComment" eSuperTypes="#//comments/Comment"/>
     <eClassifiers xsi:type="ecore:EClass" name="MultiLineComment" eSuperTypes="#//comments/Comment"/>
     <eClassifiers xsi:type="ecore:EClass" name="Commentable" abstract="true">
+      <eAnnotations source="isPutEverywhere"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="comments" upperBound="-1"
           eType="#//comments/Comment" containment="true"/>
     </eClassifiers>
@@ -433,7 +434,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Strictfp" eSuperTypes="#//modifiers/Modifier"/>
   </eSubpackages>
   <eSubpackages name="statements" nsURI="http://www.emftext.org/java/statements" nsPrefix="statements">
-    <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//comments/Commentable"/>
     <eClassifiers xsi:type="ecore:EClass" name="Assert" eSuperTypes="#//statements/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression1" lowerBound="1"
           eType="#//expressions/Expression" containment="true"/>

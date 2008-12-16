@@ -46,12 +46,9 @@ TOKENS {
 RULES {
 
 core.CompilationUnit 
-   ::=	comments*
-   		annotations*
-        comments* 
+   ::=	annotations*
         ("package" package[] (#0 "." #0 package[])* #0 ";" )?
         !0 !0
-        comments*
         ("import" imports #0 ";" !0 )*
         !0
         (classifiers !0 !0)+
