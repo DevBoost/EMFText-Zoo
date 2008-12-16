@@ -10,11 +10,11 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 public class Eclipse341Test extends AbstractZipFileInputTest {
 	
-	private static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-3.4.1-platform-src-java-files.zip";
+	public static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-3.4.1-platform-src-java-files.zip";
 
 	public static Test suite() throws CoreException, IOException {
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the eclipse 3.4.1 zip file", 1000, 100);
-		addZipFileEntriesToTestSuite(suite, "./" + INPUT_FILE);
+		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the eclipse 3.4.1 zip file", 10000, 1);
+		addToTestSuite(suite, getTestsForZipFileEntries("./" + INPUT_FILE));
 		return suite;
 	}
 

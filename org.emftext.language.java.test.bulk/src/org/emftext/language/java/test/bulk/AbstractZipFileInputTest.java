@@ -1,6 +1,8 @@
 package org.emftext.language.java.test.bulk;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -8,6 +10,7 @@ import java.util.zip.ZipFile;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
@@ -46,15 +49,23 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		}
 	}
 
-	protected static void addZipFileEntriesToTestSuite(TestSuite suite,
-			String zipFilePath) throws IOException {
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath) throws IOException {
+		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 			if (entry.getName().endsWith(".java")) {
-				suite.addTest(new ParseZipFileEntryTest(zipFile, entry));
+				tests.add(new ParseZipFileEntryTest(zipFile, entry));
 			}
+		}
+		return tests;
+	}
+
+	protected static void addToTestSuite(TestSuite suite,
+			Collection<TestCase> tests) throws IOException {
+		for (TestCase test : tests) {
+			suite.addTest(test);
 		}
 	}
 }

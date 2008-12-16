@@ -11,11 +11,11 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 public class JacksTest extends AbstractZipFileInputTest {
 	
-	private static final String JACKS_INPUT_FILE = BULK_INPUT_DIR + "jacks_javac_1.6.0_07_passed.zip";
+	private static final String INPUT_FILE = BULK_INPUT_DIR + "jacks_javac_1.6.0_07_passed.zip";
 	
 	public static Test suite() throws CoreException, IOException {
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the jacks_input zip file automatically", 1000000, 1);
-		addZipFileEntriesToTestSuite(suite, "./" + JACKS_INPUT_FILE);
+		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the jacks_input zip file automatically", 10000, 1);
+		addToTestSuite(suite, getTestsForZipFileEntries("./" + INPUT_FILE));
 		return suite;
 	}
 
