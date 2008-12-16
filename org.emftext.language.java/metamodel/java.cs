@@ -286,7 +286,7 @@ statements.JumpLabel
 	::= name[] ":" statement ;
 
 expressions.Assignment
-	::= target "=" value;
+	::= target ("=" | "|=" | "&=") value;
 
 // TODO was a subtype of Expression, but this generalization was
 // temporarily removed, because variable declarations could not
