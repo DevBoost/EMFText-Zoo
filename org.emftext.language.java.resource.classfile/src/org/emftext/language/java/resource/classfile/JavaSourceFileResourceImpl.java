@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.resource.java.JavaResourceImpl;
 
-public class JavaSourcFileResourceImpl extends JavaResourceImpl {
+public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 
-	public JavaSourcFileResourceImpl(URI uri) {
+	public JavaSourceFileResourceImpl(URI uri) {
 		super(uri);
 	}
 

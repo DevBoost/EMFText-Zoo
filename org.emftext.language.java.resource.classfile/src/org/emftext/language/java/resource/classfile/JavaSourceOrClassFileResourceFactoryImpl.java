@@ -33,7 +33,7 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 			if("pathmap".equals(normailzedURI.scheme())) {
 				//something wrong
 				System.out.println("Warning: " + uri + " not registered in ClassPath");
-				return new JavaSourcFileResourceImpl(uri);
+				return new JavaSourceFileResourceImpl(uri);
 			}
 			
 			if(normailzedURI.fileExtension().equals("java")) {
@@ -41,7 +41,7 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 					//not yet registered in classpath
 					loadAndRegister(normailzedURI);
 				}
-				return new JavaSourcFileResourceImpl(uri);
+				return new JavaSourceFileResourceImpl(uri);
 			}
 			if(normailzedURI.fileExtension().equals("class"))  {
 				return new JavaClassFileResorceImpl(uri);
@@ -54,7 +54,7 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 
 	private void loadAndRegister(URI uri) {
 		//try to load and register
-		Resource tempResource = new JavaSourcFileResourceImpl(uri);
+		Resource tempResource = new JavaSourceFileResourceImpl(uri);
 		try {
 			tempResource.load(null);
 		} catch (IOException e) {
