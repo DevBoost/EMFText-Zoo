@@ -101,7 +101,7 @@ public class JavaClasspath {
 	}
 	
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
-		if (!packageName.endsWith(".")) {
+		if (!packageName.endsWith(".") && !packageName.endsWith("$")) {
 			packageName = packageName + ".";
 		}
 		
