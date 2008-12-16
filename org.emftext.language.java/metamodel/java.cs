@@ -295,6 +295,12 @@ expressions.ParExpression ::= "(" expression ")" ;
 expressions.ExpressionList
 	::= expressions ("," expressions)* ;
 
+expressions.ConditionalOrExpression
+    ::= conditionalAndExpression ( "||" conditionalAndExpression )* ;
+
+expressions.ConditionalAndExpression
+    ::= inclusiveOrExpression ( "&&" inclusiveOrExpression )* ;
+   
 expressions.InclusiveOrExpression
     ::= exclusiveOrExpression ( "|" exclusiveOrExpression )* ;
 
