@@ -475,7 +475,9 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 		
-		for(Expression arg : primaryRef.getArguments()) {
+		for(Expression argument : primaryRef.getArguments()) {
+			// TODO jjohannes: this needs to be re-implemented when the expressions are completed in the metamodel
+
 			//Assignment was removed
 			/*
 			if (arg instanceof Assignment) {
@@ -487,10 +489,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				}
 				Type type = getTypeOfReferencedElement(assignment.getTarget());
 				resultList.add(type);
-			}
-			else {
-				//TODO this needs to be checked when expressions are completed in the metamodel
-				assert(false);
 			}
 			*/
 			assert(false);
