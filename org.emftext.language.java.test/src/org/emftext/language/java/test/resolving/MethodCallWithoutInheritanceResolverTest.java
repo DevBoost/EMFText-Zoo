@@ -3,13 +3,9 @@ package org.emftext.language.java.test.resolving;
 import java.util.List;
 
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.expressions.Assignment;
 import org.emftext.language.java.core.Block;
-import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.core.Member;
 import org.emftext.language.java.core.Method;
-import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.core.PrimaryReference;
 import org.emftext.language.java.statements.Statement;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,15 +43,5 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 		assertIsCallToMethod(methodStatements2.get(3), method4);
 		
 		assertResolveAllProxies(clazz);
-	}
-
-	private void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
-		assertType(statement, ExpressionStatement.class);
-		ExpressionStatement expression = (ExpressionStatement) statement;
-		Assignment methodCallExpression = (Assignment) expression.getExpression();
-		PrimaryReference reference = methodCallExpression.getTarget().getPrimary();
-		assertType(reference, PackageOrClassifierOrMethodOrVariableReference.class);
-		PackageOrClassifierOrMethodOrVariableReference methodCall = (PackageOrClassifierOrMethodOrVariableReference) reference;
-		assertEquals(expectedCallTarget, methodCall.getTarget());
 	}
 }

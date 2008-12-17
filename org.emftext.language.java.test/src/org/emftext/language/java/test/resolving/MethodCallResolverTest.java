@@ -5,10 +5,6 @@ import java.util.List;
 import org.emftext.language.java.core.Block;
 import org.emftext.language.java.core.Member;
 import org.emftext.language.java.core.Method;
-import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.core.PrimaryReference;
-import org.emftext.language.java.expressions.Assignment;
-import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
 import org.junit.Test;
 
@@ -39,15 +35,5 @@ public class MethodCallResolverTest extends AbstractResolverTest {
 		assertIsCallToMethod(methodStatements2.get(2), method3);
 		// the last call should refer to m4, because of the signature
 		assertIsCallToMethod(methodStatements2.get(3), method4);
-	}
-
-	private void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
-		assertType(statement, ExpressionStatement.class);
-		ExpressionStatement expression = (ExpressionStatement) statement;
-		Assignment methodCallExpression = (Assignment) expression.getExpression();
-		PrimaryReference reference = methodCallExpression.getTarget().getPrimary();
-		assertType(reference, PackageOrClassifierOrMethodOrVariableReference.class);
-		PackageOrClassifierOrMethodOrVariableReference methodCall = (PackageOrClassifierOrMethodOrVariableReference) reference;
-		assertEquals(expectedCallTarget, methodCall.getTarget());
 	}
 }
