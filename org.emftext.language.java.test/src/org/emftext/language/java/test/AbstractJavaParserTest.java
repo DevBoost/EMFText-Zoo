@@ -111,7 +111,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected static CompilationUnit parseResource(ZipFile file, ZipEntry entry, boolean ignoreSemanticErrors)
 			throws IOException {
-		//FIXME change entry.getName to full qualified path
 		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()), ignoreSemanticErrors);
 	}
 
