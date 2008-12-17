@@ -296,9 +296,9 @@ expressions.ParExpression ::= "(" expression ")" ;
 
 expressions.ExpressionList
 	::= expressions ("," expressions)* ;
-
+ 
 expressions.Expression
-	::= conditionalExpression ("=" expression)? ;
+	::= conditionalExpression (assignmentOperator expression)? ;
 	
 expressions.ConditionalExpression
     ::= conditionalOrExpression ( "?" expression ":" expression )? ;
@@ -357,17 +357,34 @@ core.Primary
 	| literal
 	;    
 
+expressions.Assignment							::= "=";
+expressions.CompoundAssignmentPlus				::= "+=";
+expressions.CompoundAssignmentMinus				::= "-=";
+expressions.CompoundAssignmentMultiplication	::= "*=";
+expressions.CompoundAssignmentDivision 			::= "/=";
+expressions.CompoundAssignmentAnd				::= "&=";
+expressions.CompoundAssignmentOr				::= "|=";
+expressions.CompoundAssignmentExclusiveOr 		::= "^=";
+expressions.CompoundAssignmentModulo 			::= "%=";
+expressions.CompoundAssignmentLeftShift 		::= "<<=";
+expressions.CompoundAssignmentRightShift 		::= ">>=";
+expressions.CompoundAssignmentUnsignedRightShift::= ">>>=";
+
 expressions.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
 expressions.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
 
 expressions.LessThan 			::= "<";
-expressions.LessThanOrEqual		::= "<" "=";
+expressions.LessThanOrEqual		::= "<=";
 expressions.GreaterThan			::= ">";
-expressions.GreaterThanOrEqual	::= ">" "=";
+expressions.GreaterThanOrEqual	::= ">=";
 
-expressions.LeftShift 			::= "<" "<" ;
-expressions.RightShift 			::= ">" ">" ;
-expressions.UnsignedRightShift	::= ">" ">" ">" ;
+//TODO 
+// rightShift and generic can't be distinguished if
+// generic ends with '>>' instead of '> >'
+
+expressions.LeftShift 			::= "<<" ;
+expressions.RightShift 			::= ">>" ;
+expressions.UnsignedRightShift	::= ">>>" ;
 
 expressions.Equal		::= "==";	
 expressions.NotEqual	::= "!=";
