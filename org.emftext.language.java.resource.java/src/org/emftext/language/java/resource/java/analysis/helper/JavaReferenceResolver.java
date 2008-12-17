@@ -1,4 +1,4 @@
-package org.emftext.language.java.resource.java.analysis;
+package org.emftext.language.java.resource.java.analysis.helper;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -50,7 +50,6 @@ import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypedElement;
-import org.emftext.language.java.types.VoidLiteral;
 import org.emftext.runtime.resource.IResolveResult;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.ReferenceResolverImpl;

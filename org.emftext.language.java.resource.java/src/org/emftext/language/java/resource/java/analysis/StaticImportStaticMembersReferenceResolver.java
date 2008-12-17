@@ -2,6 +2,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.java.resource.java.analysis.helper.ImportReferenceResolver;
 
 public class StaticImportStaticMembersReferenceResolver extends ImportReferenceResolver {
 

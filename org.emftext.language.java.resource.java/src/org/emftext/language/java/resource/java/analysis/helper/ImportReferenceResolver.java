@@ -1,4 +1,4 @@
-package org.emftext.language.java.resource.java.analysis;
+package org.emftext.language.java.resource.java.analysis.helper;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
