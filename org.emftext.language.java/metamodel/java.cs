@@ -285,9 +285,6 @@ statements.Continue
 statements.JumpLabel
 	::= name[] ":" statement ;
 
-expressions.Assignment
-	::= target ("=" | "|=" | "&=") value;
-
 // TODO was a subtype of Expression, but this generalization was
 // temporarily removed, because variable declarations could not
 // be distinguished from single expressions
@@ -300,6 +297,9 @@ expressions.ParExpression ::= "(" expression ")" ;
 expressions.ExpressionList
 	::= expressions ("," expressions)* ;
 
+expressions.Expression
+	::= conditionalExpression ("=" expression)? ;
+	
 expressions.ConditionalExpression
     ::= conditionalOrExpression ( "?" expression ":" expression )? ;
     
@@ -352,9 +352,9 @@ expressions.CastExpression
     ;
     
 core.Primary 
-	::=	reference
+	::=	parExpression
+	| reference
 	| literal
-	| parExpression
 	;    
 
 expressions.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;

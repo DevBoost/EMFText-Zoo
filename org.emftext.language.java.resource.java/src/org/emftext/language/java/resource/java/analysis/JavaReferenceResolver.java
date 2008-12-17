@@ -44,7 +44,6 @@ import org.emftext.language.java.core.Super;
 import org.emftext.language.java.core.This;
 import org.emftext.language.java.core.TypeParameter;
 import org.emftext.language.java.core.Variable;
-import org.emftext.language.java.expressions.Assignment;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Type;
@@ -477,6 +476,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		EList<Type> resultList = new BasicEList<Type>();
 		
 		for(Expression arg : primaryRef.getArguments()) {
+			//Assignment was removed
+			/*
 			if (arg instanceof Assignment) {
 				Assignment assignment = (Assignment) arg;
 				Reference reference = assignment.getTarget();
@@ -491,6 +492,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				//TODO this needs to be checked when expressions are completed in the metamodel
 				assert(false);
 			}
+			*/
+			assert(false);
 		}
 		return resultList;
 	}

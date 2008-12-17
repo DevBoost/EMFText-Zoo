@@ -514,7 +514,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 
-		assertMemberCount(clazz, 2);
+		assertMemberCount(clazz, 3);
 
 		parseAndReprint(filename);
 	}
@@ -877,7 +877,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertParsesToClass("AssertStatements", 1);
 		assertParsesToClass("ThrowStatements", 1);
 		assertParsesToClass("SynchronizedStatements", 3);
-		assertParsesToClass("SwitchStatements", 8);
+		assertParsesToClass("SwitchStatements", 9);
 		assertParsesToClass("DeclarationStatements", 1);
 		assertParsesToClass("JumpLabelStatements", 4);
 		assertParsesToClass("LoopStatements", 11);

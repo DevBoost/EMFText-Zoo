@@ -265,7 +265,34 @@
   </eSubpackages>
   <eSubpackages name="expressions" nsURI="http://www.emftext.org/java/expressions"
       nsPrefix="expressions">
-    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//core/InitialValue #//comments/Commentable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//core/InitialValue #//comments/Commentable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalExpression"
+          eType="#//expressions/ConditionalExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ParExpression" eSuperTypes="#//core/PrimaryReference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//statements/ForLoopInitializer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression" eSuperTypes="#//comments/Commentable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inclusiveOrExpression"
+          upperBound="-1" eType="#//expressions/InclusiveOrExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpression" eSuperTypes="#//comments/Commentable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAndExpression"
+          upperBound="-1" eType="#//expressions/ConditionalAndExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//comments/Commentable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalOrExpression"
+          eType="#//expressions/ConditionalOrExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InclusiveOrExpression" eSuperTypes="#//comments/Commentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="exclusiveOrExpression"
           upperBound="-1" eType="#//expressions/ExclusiveOrExpression" containment="true"/>
@@ -371,34 +398,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="MinusMinus"/>
     <eClassifiers xsi:type="ecore:EClass" name="Complement"/>
     <eClassifiers xsi:type="ecore:EClass" name="Negate"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//expressions/Expression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-          eType="#//core/Reference" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
-          eType="#//expressions/Expression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ParExpression" eSuperTypes="#//core/PrimaryReference">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
-          eType="#//expressions/Expression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExpressionList" eSuperTypes="#//statements/ForLoopInitializer">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-          eType="#//expressions/Expression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression" eSuperTypes="#//comments/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="inclusiveOrExpression"
-          upperBound="-1" eType="#//expressions/InclusiveOrExpression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpression" eSuperTypes="#//comments/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAndExpression"
-          upperBound="-1" eType="#//expressions/ConditionalAndExpression" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalOrExpression"
-          eType="#//expressions/ConditionalOrExpression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
-          eType="#//expressions/Expression" containment="true"/>
-    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="literals" nsURI="http://www.emftext.org/java/literals" nsPrefix="literals">
     <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//literals/Literal">
