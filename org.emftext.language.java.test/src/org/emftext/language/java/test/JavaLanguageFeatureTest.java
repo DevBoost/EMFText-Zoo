@@ -1,5 +1,6 @@
 package org.emftext.language.java.test;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -303,6 +304,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		checkBasicEnum("BasicEnumWithCommaAndSemicolonAtTheEnd");
 		checkBasicEnum("BasicEnumWithCommaAtTheEnd");
 		checkBasicEnum("BasicEnumWithSemicolonAtTheEnd");
+	}
+	
+	@Test
+	public void testBooleanAssignments() throws Exception {
+		String typename = "BooleanAssignments";
+		String filename = typename + ".java";
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
 	}
 	
 	@Test
@@ -801,13 +812,35 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 
+	
 	@Test
-	public void testBooleanAssignments() throws Exception {
-		String typename = "BooleanAssignments";
+	public void testMultiplications() throws Exception {
+		String typename = "Multiplications";
 		String filename = typename + ".java";
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
+		assertMemberCount(clazz, 2);
 
+		EList<Member> members = clazz.getMembers();
+		
+		Field longField = (Field) members.get(1);		
+		InitialValue initValue = longField.getInitialValue();
+				
+		TreeIterator<EObject> iter = initValue.eAllContents();
+		IntegerLiteral literal1 = null;
+		IntegerLiteral literal2 = null;
+		while(iter.hasNext()){
+			Object obj = iter.next();
+			if (obj instanceof IntegerLiteral) {
+				if (literal1==null)literal1 = (IntegerLiteral)obj;
+				else literal2 = (IntegerLiteral)obj;				
+			}
+		}
+		assertNotNull("no IntegerLiteral found",literal1);
+		assertNotNull("no second IntegerLiteral found",literal2);
+		assertEquals(3, literal1.getValue());
+		assertEquals(4, literal2.getValue());
+		
+		
 		parseAndReprint(filename);
 	}
 
