@@ -452,6 +452,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 
 		if (typeReference instanceof TypeReferenceSequence) {
 			TypeReferenceSequence typeRefSequence = (TypeReferenceSequence) typeReference;
+			// TODO the next line throws NPEs!
 			type =  typeRefSequence.getParts().get(typeRefSequence.getParts().size() -1).getTarget();
 		}
 		else if(typeReference instanceof PrimitiveType) {
