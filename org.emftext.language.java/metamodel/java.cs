@@ -347,7 +347,7 @@ expressions.UnaryExpressionNotPlusMinus
     ;
     
 expressions.CastExpression
-    ::= "(" type arrayDimensions* ")" unaryExpression
+    ::= "(" typeReference arrayDimensions* ")" expression
     ;
     
 core.Primary 
