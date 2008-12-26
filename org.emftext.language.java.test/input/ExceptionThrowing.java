@@ -9,7 +9,7 @@ public class ExceptionThrowing extends Exception {
 	public void methodThatThrows() throws ExceptionThrowing {
 	}
 
-	public void methodThatThrowsMultiple() throws ExceptionThrowing, Exception {
+	public void methodThatThrowsMultiple() throws ExceptionThrowing, Exception, NullPointerException {
 	}
 
 	private static final long serialVersionUID = 1;

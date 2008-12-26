@@ -469,7 +469,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertConstructorThrowsCount(members.get(0), 1);
 		assertConstructorThrowsCount(members.get(1), 2);
 		assertMethodThrowsCount(members.get(2), 1);
-		assertMethodThrowsCount(members.get(3), 2);
+		assertMethodThrowsCount(members.get(3), 3);
 
 		parseAndReprint(filename);
 	}
