@@ -462,6 +462,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			assert(false);
 		}
 		
+		// TODO the next line throws NPEs!
 		if (type.eIsProxy()) {
 			//this may happen, when e.g. a super type is resolved. It is ok.
 			return null;
