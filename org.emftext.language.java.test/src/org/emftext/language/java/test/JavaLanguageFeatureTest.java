@@ -376,6 +376,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testCommentsBetweenCaseStatements() throws Exception {
+		String typename = "CommentsBetweenCaseStatements";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 3);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testClassWithEnumeratingFieldDeclaration() throws Exception {
 		String typename = "ClassWithEnumeratingFieldDeclaration";
 		String filename = typename + JAVA_FILE_EXTENSION;
