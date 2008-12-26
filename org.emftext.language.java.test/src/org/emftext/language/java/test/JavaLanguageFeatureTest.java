@@ -384,6 +384,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		parseAndReprint(filename);
 	}
+	
+	@Test
+	public void testCommentsBetweenReferenceSequenceParts() throws Exception {
+		String typename = "CommentsBetweenReferenceSequenceParts";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 2);
+
+		parseAndReprint(filename);
+	}	
 
 	@Test
 	public void testClassWithEnumeratingFieldDeclaration() throws Exception {
