@@ -109,19 +109,19 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		return loadResource(filename, ignoreSemanticErrors);
 	}
 
-	protected static CompilationUnit parseResource(ZipFile file, ZipEntry entry, boolean ignoreSemanticErrors)
+	protected CompilationUnit parseResource(ZipFile file, ZipEntry entry, boolean ignoreSemanticErrors)
 			throws IOException {
 		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()), ignoreSemanticErrors);
 	}
 
-	private static CompilationUnit loadResource(
+	private CompilationUnit loadResource(
 			String filePath, boolean ignoreSemanticErrors) throws IOException {
 		return loadResource(URI.createFileURI(filePath), ignoreSemanticErrors);
 	}
 	
-	private static CompilationUnit loadResource(
+	private CompilationUnit loadResource(
 			URI uri, boolean ignoreSemanticErrors) throws IOException {
-		ITextResource resource = (ITextResource) myResourceSet.createResource(uri);
+		ITextResource resource = (ITextResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource, ignoreSemanticErrors);
 		assertNoWarnings(uri.toString(), resource);
@@ -231,7 +231,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File outputFile = prepareOutputFile(outputFileName);
 		reprintedResources.add(inputFile);
 		
-		Resource resource = myResourceSet.createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
+		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
 
 		resource.load(null);
 		
@@ -584,7 +584,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 					continue;
 				}
 				
-				Resource r = myResourceSet.getResource(uri, true);
+				Resource r = getResourceSet().getResource(uri, true);
 				assertNotNull("The resource '" + uri + "' should exist",r);
 				failure = assertResolveAllProxies(r) || failure;
 				
@@ -593,6 +593,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		assertFalse("There are unresolved proxies", failure);
 	}
 	
+	protected ResourceSet getResourceSet() {
+		return myResourceSet;
+	}
+
 	protected boolean assertResolveAllProxies(Resource resource) {
 		boolean failure = false;
 		if (!ignoreSemanticErrors()) {

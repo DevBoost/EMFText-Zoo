@@ -386,6 +386,26 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 	
 	@Test
+	public void testCommentsBetweenConstructorArguments() throws Exception {
+		String typename = "CommentsBetweenConstructorArguments";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 2);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testCommentsBetweenMethodArguments() throws Exception {
+		String typename = "CommentsBetweenMethodArguments";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testCommentsBetweenReferenceSequenceParts() throws Exception {
 		String typename = "CommentsBetweenReferenceSequenceParts";
 		String filename = typename + JAVA_FILE_EXTENSION;
