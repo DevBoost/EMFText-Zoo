@@ -7,6 +7,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
@@ -27,7 +29,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			this.zipFile = zipFile;
 			this.entry = entry;
 		}
-
+		
 		public void runTest() {
 			try {
 				CompilationUnit unit = parseResource(zipFile, entry, ignoreSemanticErrors());
@@ -36,6 +38,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				e.printStackTrace();
 				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
 			}
+		}
+
+		@Override
+		protected ResourceSet getResourceSet() {
+			return new ResourceSetImpl();
 		}
 
 		@Override
