@@ -1,6 +1,4 @@
-
-
-public class MethodCalls {
+public class SimpleMethodCalls {
 
 	public void m1() {
 		m1();
@@ -10,7 +8,7 @@ public class MethodCalls {
 		m1();
 		m2();
 		m3();
-		m3(new MethodCalls());
+		m3(new SimpleMethodCalls());
 	}
 
 	public void m3() {
