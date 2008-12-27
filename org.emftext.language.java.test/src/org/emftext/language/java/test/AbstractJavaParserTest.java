@@ -51,6 +51,7 @@ import org.emftext.language.java.core.NamedElement;
 import org.emftext.language.java.core.TypeParameter;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.ITextDiagnostic.TextDiagnosticType;
@@ -382,7 +383,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			int expectedNumberOfThrownExceptions) {
 		assertType(member, Method.class);
 		Method method = (Method) member;
-		List<Classifier> exceptions = method.getExceptions();
+		List<TypeReferenceSequence> exceptions = method.getExceptions();
 		assertEquals("Expected " + expectedNumberOfThrownExceptions
 				+ " exception(s).", expectedNumberOfThrownExceptions,
 				exceptions.size());
@@ -402,7 +403,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			int expectedNumberOfThrownExceptions) {
 		assertType(member, Constructor.class);
 		Constructor constructor = (Constructor) member;
-		List<Classifier> exceptions = constructor.getExceptions();
+		List<TypeReferenceSequence> exceptions = constructor.getExceptions();
 		assertEquals("Expected " + expectedNumberOfThrownExceptions
 				+ " exception(s).", expectedNumberOfThrownExceptions,
 				exceptions.size());

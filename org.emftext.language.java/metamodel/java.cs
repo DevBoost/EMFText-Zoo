@@ -110,19 +110,19 @@ core.Block
 core.Constructor
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
-	("throws" exceptions[] ("," exceptions[])*)? body
+	("throws" exceptions ("," exceptions)*)? body
 	;
 
 core.Method
 	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensions*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensions*
-	("throws" exceptions[] ("," exceptions[])*)? (body | ";")
+	("throws" exceptions ("," exceptions)*)? (body | ";")
 	;
 	
 annotations.AnnotationMethod
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensions*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensions*
-	("throws" exceptions[] ("," exceptions[])*)? "default" defaultValue (body | ";")
+	("throws" exceptions ("," exceptions)*)? "default" defaultValue (body | ";")
 	;
 
 core.OrdinaryParameter

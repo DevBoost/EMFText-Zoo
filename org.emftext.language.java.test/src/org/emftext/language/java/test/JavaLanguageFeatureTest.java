@@ -530,7 +530,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 
-		assertMemberCount(clazz, 5);
+		assertMemberCount(clazz, 7);
 
 		List<Member> members = clazz.getMembers();
 		assertConstructorThrowsCount(members.get(0), 1);
