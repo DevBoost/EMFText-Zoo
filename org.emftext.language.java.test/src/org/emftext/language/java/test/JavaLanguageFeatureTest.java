@@ -416,6 +416,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}	
 
 	@Test
+	public void testCommentsInParExpression() throws Exception {
+		String typename = "CommentsInParExpression";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}	
+
+	@Test
 	public void testClassWithEnumeratingFieldDeclaration() throws Exception {
 		String typename = "ClassWithEnumeratingFieldDeclaration";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -718,6 +728,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Import2";
 		String filename = typename + JAVA_FILE_EXTENSION;
 
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testInstanceOfArrayType() throws Exception {
+		String typename = "InstanceOfArrayType";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+		
 		parseAndReprint(filename);
 	}
 	
