@@ -533,10 +533,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertMemberCount(clazz, 7);
 
 		List<Member> members = clazz.getMembers();
-		assertConstructorThrowsCount(members.get(0), 1);
-		assertConstructorThrowsCount(members.get(1), 2);
-		assertMethodThrowsCount(members.get(2), 1);
-		assertMethodThrowsCount(members.get(3), 3);
+		assertConstructorThrowsCount(members.get(1), 1);
+		assertConstructorThrowsCount(members.get(2), 2);
+		assertMethodThrowsCount(members.get(3), 1);
+		assertMethodThrowsCount(members.get(4), 3);
+		assertMethodThrowsCount(members.get(5), 1);
 
 		parseAndReprint(filename);
 	}

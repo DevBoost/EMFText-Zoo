@@ -322,7 +322,7 @@ expressions.EqualityExpression
     ::= instanceOfExpression ( (equal | notEqual) instanceOfExpression )* ;
     
 expressions.InstanceOfExpression
-    ::= relationExpression ("instanceof" type)? ;
+    ::= relationExpression ("instanceof" type arrayDimensions*)? ;
     
 expressions.RelationExpression
 	::= shiftExpression ( relationOperator shiftExpression)*;
