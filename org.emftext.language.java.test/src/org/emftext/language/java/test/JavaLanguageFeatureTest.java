@@ -429,6 +429,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testConditionalExpressions() throws Exception {
+		String typename = "ConditionalExpressions";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testConstructorCalls() throws Exception {
 		String typename = "ConstructorCalls";
 		String filename = typename + JAVA_FILE_EXTENSION;
