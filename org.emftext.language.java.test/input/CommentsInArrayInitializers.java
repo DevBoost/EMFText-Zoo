@@ -17,4 +17,10 @@ public class CommentsInArrayInitializers {
 				"s3"}, // comment3
 		};
 	}
+
+	protected static String[] f1 = {
+		"variable", // comment 1
+		"value", // comment 2
+		"description" // comment 3
+	};
 }

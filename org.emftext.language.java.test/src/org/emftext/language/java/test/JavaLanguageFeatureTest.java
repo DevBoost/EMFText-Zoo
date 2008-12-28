@@ -380,7 +380,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "CommentsInArrayInitializers";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 3);
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}
