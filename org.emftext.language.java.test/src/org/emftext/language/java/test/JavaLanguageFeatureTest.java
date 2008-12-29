@@ -26,7 +26,6 @@ import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.core.Import;
-import org.emftext.language.java.core.InitialValue;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.core.Interface;
 import org.emftext.language.java.core.Member;
@@ -35,6 +34,7 @@ import org.emftext.language.java.core.NamedElement;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.literals.StringLiteral;
 import org.emftext.language.java.core.VariableLengthParameter;
+import org.emftext.language.java.expressions.Expression;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,7 +89,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	private void assertIsBooleanField(Member member, boolean expectedInitValue) {
 		assertType(member, Field.class);
 		Field booleanField = (Field) member;
-		InitialValue initValueForBoolean = booleanField.getInitialValue();
+		Expression initValueForBoolean = booleanField.getInitialValue();
 
 		TreeIterator<EObject> iter = initValueForBoolean.eAllContents();
 		BooleanLiteral literal = null;
@@ -105,7 +105,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	private void assertIsCharField(Member member, char expectedInitValue) {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
-		InitialValue initValue = charField.getInitialValue();
+		Expression initValue = charField.getInitialValue();
 		
 		TreeIterator<EObject> iter = initValue.eAllContents();
 		CharacterLiteral literal = null;
@@ -121,7 +121,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	private void assertIsDoubleField(Member member, double expectedInitValue) {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
-		InitialValue initValue = charField.getInitialValue();
+		Expression initValue = charField.getInitialValue();
 		
 		TreeIterator<EObject> iter = initValue.eAllContents();
 		FloatingPointLiteral literal = null;
@@ -137,7 +137,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	private void assertIsIntegerField(Member member, long expectedInitValue) {
 		assertType(member, Field.class);
 		Field longField = (Field) member;		
-		InitialValue initValue = longField.getInitialValue();
+		Expression initValue = longField.getInitialValue();
 		
 		TreeIterator<EObject> iter = initValue.eAllContents();
 		IntegerLiteral literal = null;
@@ -156,7 +156,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertNotNull(fieldUnicode);
 		assertType(fieldUnicode, Field.class);
 		Field unicode = (Field) fieldUnicode;
-		InitialValue value = unicode.getInitialValue();
+		Expression value = unicode.getInitialValue();
 		
 		TreeIterator<EObject> iter = value.eAllContents();
 		StringLiteral literal = null;
@@ -173,7 +173,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	private void assertIsStringField(Member member, String expectedInitValue) {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
-		InitialValue initValue = charField.getInitialValue();
+		Expression initValue = charField.getInitialValue();
 		
 		TreeIterator<EObject> iter = initValue.eAllContents();
 		StringLiteral literal = null;
@@ -255,7 +255,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "ArrayInitializers";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 9);
+		assertMemberCount(clazz, 10);
 
 		parseAndReprint(filename);
 	}
@@ -747,7 +747,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "InstanceOfArrayType";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
+		assertMemberCount(clazz, 3);
 		
 		parseAndReprint(filename);
 	}
@@ -911,7 +911,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		EList<Member> members = clazz.getMembers();
 		
 		Field longField = (Field) members.get(1);		
-		InitialValue initValue = longField.getInitialValue();
+		Expression initValue = longField.getInitialValue();
 				
 		TreeIterator<EObject> iter = initValue.eAllContents();
 		IntegerLiteral literal1 = null;

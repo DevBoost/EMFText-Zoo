@@ -8,4 +8,8 @@ public class InstanceOfArrayType {
 	{
 		boolean b = new String[] {} instanceof String[];
 	}
+	
+	{
+		boolean b = new int[1] instanceof Object;
+	}
 }
