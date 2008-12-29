@@ -31,7 +31,7 @@ public final class ThreadedTestSuite extends TestSuite {
 		while (tests.hasMoreElements()) {
 			if (threads.size() > maxActiveThreads) {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -41,31 +41,42 @@ public final class ThreadedTestSuite extends TestSuite {
 			if (result.shouldStop()) {
 	  			break;
 			}
-			Thread thread = new Thread(new Runnable() {
-
+			Runnable runnable = new Runnable() {
 				public void run() {
 					try {
 						runTest(each, result);
 					} catch (StoppedByUserException sbue) {
 						// do nothing, just end the test
 					}
+					threads.remove(Thread.currentThread());
+				}
+			};
+			final Thread workerThread = new Thread(runnable);
+			threads.add(workerThread);
+			
+			Thread timeoutThread = new Thread(new Runnable() {
+
+				public void run() {
+					try {
+						Thread currentThread = Thread.currentThread();
+						currentThread.join(timeout);
+						threads.remove(workerThread);
+						if (workerThread.isAlive()) {
+							result.addError(each, new InterruptedException("Test was interrupted by timeout."));
+						}
+					}
+					catch (InterruptedException e1) {
+						threads.remove(workerThread);
+						// TODO Auto-generated catch block
+						//e1.printStackTrace();
+					}
 				}
 				
 			});
-			threads.add(thread);
-			thread.start();
-			try {
-				thread.join(timeout);
-				threads.remove(thread);
-				if (thread.isAlive()) {
-					result.addError(each, new InterruptedException("Test was interrupted by timeout."));
-				}
-			}
-			catch (InterruptedException e1) {
-				threads.remove(thread);
-				// TODO Auto-generated catch block
-				//e1.printStackTrace();
-			}
+			
+			
+			workerThread.start();
+			timeoutThread.start();
 		}
 	}
 }
