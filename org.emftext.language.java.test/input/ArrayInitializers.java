@@ -50,4 +50,8 @@ public class ArrayInitializers {
 	public void m4() {
 		int[] ia = { , };
 	}
+	
+	public void m5() {
+		int i = new int[]{1}[0];
+	}
 }

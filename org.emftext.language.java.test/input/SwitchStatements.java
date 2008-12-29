@@ -108,4 +108,11 @@ public class SwitchStatements {
 				break;
 		}
 	}
+
+	public void switchWithDefaultCaseFirst() {
+		switch (3) {
+			default: return;
+			case 0: break;
+		}
+	}
 }
