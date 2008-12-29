@@ -1103,6 +1103,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 	
 	@Test
+	public void testUsingAnnotations() throws Exception {
+		String typename = "UsingAnnotations";
+		String filename = "pkg" + File.separator + typename + JAVA_FILE_EXTENSION;
+		assertParsesToClass(new File(filename));
+		
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testUnicode() throws Exception {
 		String folder = "unicode/";
 		assertParsableAndReprintable(folder + "Unicode.java");
