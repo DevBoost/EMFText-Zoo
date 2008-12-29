@@ -1,5 +1,8 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.runtime.resource.ITextResource;
@@ -20,7 +23,11 @@ public class JavaHEX_LITERALTokenResolver extends JavaBasedTokenResolver impleme
 			if (lexem.endsWith("L")) {
 				lexem = lexem.substring(0, lexem.length() - 1);
 			}
-			Long result = Long.decode(lexem);
+			if (lexem.startsWith("0x")) {
+				lexem = lexem.substring(2);
+			}
+			BigInteger tempInteger = new BigInteger(lexem, 16);
+			Long result = tempInteger.longValue();
 			return result;
 		} catch (NumberFormatException nfe) {
 			System.out.println(nfe.getMessage() + " in " + resource.getURI());

@@ -186,9 +186,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
 	
-	private NamedElement findElementByName(
-			EList<? extends NamedElement> elements, String name) {
-		for (NamedElement next : elements) {
+	private <T extends NamedElement> T findElementByName(
+			List<T> elements, String name) {
+		for (T next : elements) {
 			if (name.equals(next.getName())) {
 				return next;
 			}
@@ -807,7 +807,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Literals";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 12);
+		assertMemberCount(clazz, 14);
 		
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
@@ -820,6 +820,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertIsStringField(members.get(7), "abc");
 		assertIsBooleanField(members.get(8), false);
 		assertIsBooleanField(members.get(9), true);
+		
+		Member maxLongField = findElementByName(members, "maxLong");
+		assertNotNull(maxLongField);
+		assertIsIntegerField(maxLongField, 0xffffffffffffffffL);
+		
 		parseAndReprint(filename);
 	}
 

@@ -37,5 +37,6 @@ public class Literals {
 	public boolean truh = true;
 	public Literals nuhl = null;
 	public float f2 = 1.5f;
+	public long maxLong = 0xffffffffffffffffL;
 	public boolean b = -0xffffffffffffffffL == ~0xffffffffffffffffL+1;
 }
