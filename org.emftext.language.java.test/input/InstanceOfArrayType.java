@@ -4,4 +4,8 @@ public class InstanceOfArrayType {
 		if (obj instanceof byte[]) {
 		}
 	}
+	
+	{
+		boolean b = new String[] {} instanceof String[];
+	}
 }
