@@ -64,13 +64,19 @@ core.Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
-        "{" (!1 members (";")?)* !0 "}"
+        "{" 
+	    	(";")?
+        	(!1 members (";")?)* !0 
+        "}"
 	;
 
 core.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
-	       ("extends" (extends ("," extends)*))? 
-	       "{" (members | (";")?)* "}"
+		("extends" (extends ("," extends)*))? 
+	    "{"
+	    	(";")?
+	    	(members (";")?)*
+		"}"
 	;
 
 core.Enumeration

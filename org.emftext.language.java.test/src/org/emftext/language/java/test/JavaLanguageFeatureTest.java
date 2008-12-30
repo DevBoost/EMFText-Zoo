@@ -366,6 +366,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testClassSemicolonOnly() throws Exception {
+		String typename = "ClassSemicolonOnly";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 0);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testComments() throws Exception {
 		String typename = "Comments";
 		String filename = typename + JAVA_FILE_EXTENSION;

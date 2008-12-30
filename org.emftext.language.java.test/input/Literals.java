@@ -5,6 +5,7 @@ public class Literals {
 		long i3 = 010l;
 		long i4 = 007L;
 		long i5 = 0x1ffffffffffff00L;
+		long i6 = 0xFFFFFFFFFFFFFFFFl;
 		double f1 = 1.5;
 		char c = 'a';
 		String s = "abc";
