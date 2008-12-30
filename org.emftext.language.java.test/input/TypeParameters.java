@@ -14,6 +14,10 @@ public class TypeParameters {
 	public Inner<? extends Inner<TypeParameters>> field3;
 	public Inner<? super TypeParameters> field4;
 	
+	public Inner<TypeParameters[]> field5;
+	public Inner<? super TypeParameters[]> field6;
+	public Inner<? extends Inner<TypeParameters>[]> field7;
+
 	public <T> void method1() {}
 	public <T extends TypeParameters> void method2() {}
 	public <T> void method4() {}

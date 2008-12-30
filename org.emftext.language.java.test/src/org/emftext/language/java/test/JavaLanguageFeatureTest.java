@@ -396,6 +396,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 	
 	@Test
+	public void testCommentsInFieldDeclaration() throws Exception {
+		String typename = "CommentsInFieldDeclaration";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testCommentsBetweenCaseStatements() throws Exception {
 		String typename = "CommentsBetweenCaseStatements";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -1088,7 +1098,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "TypeParameters";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 11);
+		assertMemberCount(clazz, 14);
 
 		parseAndReprint(filename);
 	}

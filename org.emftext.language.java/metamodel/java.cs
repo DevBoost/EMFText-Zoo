@@ -137,15 +137,15 @@ annotations.AnnotationMethod
 	;
 
 core.OrdinaryParameter
-	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions*
+	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions*
 	;
 
 core.VariableLengthParameter
-	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? "..." name[] 
+	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
 	;
 
 core.LocalVariable
-	::= modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
+	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
@@ -156,7 +156,7 @@ core.AdditionalLocalVariable
 	;
 
 core.Field
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments[] ("," typeArguments[])* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)*
+	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)*
 	;
 
 core.AdditionalField
@@ -167,16 +167,16 @@ core.AdditionalField
 core.NewConstructorCall 
 	::= "new" 
 		// these are the arguments for the constructor type parameters
-		("<" typeArguments[] ("," typeArguments[])* ">")?
+		("<" typeArguments ("," typeArguments)* ">")?
 		type 
 		// these are the arguments for the class type parameters
-		("<" classTypeArguments[] ("," classTypeArguments[])* ">")?
+		("<" classTypeArguments ("," classTypeArguments)* ">")?
 		"(" (arguments ("," arguments)* )? ")"
 		("{" (members (";")?)* "}")?
      ;
      
 core.ExplicitConstructorCall 
-	::= ("<" typeArguments[] ("," typeArguments[])* ">")?
+	::= ("<" typeArguments ("," typeArguments)* ">")?
 		callTarget "(" (arguments ("," arguments)* )? ")"
      ;
 
@@ -224,7 +224,7 @@ core.ExplicitGenericInvocation
 	;
 
 core.QualifiedTypeArgument
-	::= type
+	::= type arrayDimensions*
 	;
 
 core.UnknownTypeArgument
@@ -232,11 +232,11 @@ core.UnknownTypeArgument
 	;
 
 core.ExtendsTypeArgument
-	::= "?" "extends" extendTypes ("&" extendTypes)*
+	::= "?" "extends" extendTypes ("&" extendTypes)* arrayDimensions*
 	;
 
 core.SuperTypeArgument
-	::= "?" "super" superType
+	::= "?" "super" superType arrayDimensions*
 	;
 
 statements.Assert

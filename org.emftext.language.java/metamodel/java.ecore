@@ -77,15 +77,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="PlainPackageOrClassifierReference"
         eSuperTypes="#//core/PackageOrClassifierReference"/>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterizedPackageOrClassifierReference"
-        eSuperTypes="#//core/PackageOrClassifierReference">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
-          eType="#//core/TypeArgument" containment="true"/>
-    </eClassifiers>
+        eSuperTypes="#//core/PackageOrClassifierReference #//core/TypeArgumentable"/>
     <eClassifiers xsi:type="ecore:EClass" name="PackageOrClassifierOrMethodOrVariableReference"
-        eSuperTypes="#//core/PrimaryReference #//comments/Commentable">
+        eSuperTypes="#//core/PrimaryReference #//comments/Commentable #//core/TypeArgumentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//core/ReferenceableElement"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
-          eType="#//core/TypeArgument" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
           eType="#//expressions/Expression" containment="true"/>
     </eClassifiers>
@@ -94,7 +89,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="extendTypes" upperBound="-1"
           eType="#//core/Reference" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeArgument" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeArgument" abstract="true" eSuperTypes="#//core/ArrayTypable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeArgumentable" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
+          eType="#//core/TypeArgument" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="QualifiedTypeArgument" eSuperTypes="#//core/TypeArgument #//types/TypedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="ExtendsTypeArgument" eSuperTypes="#//core/TypeArgument">
       <eStructuralFeatures xsi:type="ecore:EReference" name="extendTypes" upperBound="-1"
@@ -121,15 +120,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="arrayDimensions" upperBound="-1"
           eType="#//core/ArrayDimension" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Instantiation" abstract="true" eSuperTypes="#//types/TypedElement #//comments/Commentable">
+    <eClassifiers xsi:type="ecore:EClass" name="Instantiation" abstract="true" eSuperTypes="#//types/TypedElement #//comments/Commentable #//core/TypeArgumentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
           eType="#//expressions/Expression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" unique="false"
-          upperBound="-1" eType="#//core/Classifier"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NewConstructorCall" eSuperTypes="#//core/Instantiation #//core/PrimaryReference #//core/MemberContainer">
       <eStructuralFeatures xsi:type="ecore:EReference" name="classTypeArguments" upperBound="-1"
-          eType="#//core/Classifier"/>
+          eType="#//core/TypeArgument" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExplicitConstructorCall" eSuperTypes="#//core/Instantiation #//core/PrimaryReference">
       <eStructuralFeatures xsi:type="ecore:EReference" name="callTarget" eType="#//core/SelfReference"
@@ -209,11 +206,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
           eType="#//annotations/AnnotationInstance" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//core/NamedElement #//types/TypedElement #//core/ArrayTypable #//core/ReferenceableElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//core/NamedElement #//types/TypedElement #//core/ArrayTypable #//core/ReferenceableElement #//core/TypeArgumentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
           eType="#//modifiers/Modifier" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
-          eType="#//core/Classifier"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true" eSuperTypes="#//core/Variable"/>
     <eClassifiers xsi:type="ecore:EClass" name="OrdinaryParameter" eSuperTypes="#//core/Parameter"/>
