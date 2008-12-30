@@ -73,6 +73,15 @@ core.Interface
 	       "{" (members | (";")?)* "}"
 	;
 
+core.Enumeration
+    ::= modifiers* "enum" name[] 
+    	("implements" (implements ("," implements)*))? 
+    	"{" 
+    		(constants ("," constants)*)? (",")? 
+    		(";" (members (";")?)*)?
+    	"}"
+    ;
+
 annotations.Annotation
 	::=	modifiers* "@" "interface" name[]
 	       "{" ((members (";")?) | (";")?)* "}"
@@ -89,10 +98,6 @@ annotations.AnnotationElementValuePair
 
 annotations.AnnotationElementValueArray
     ::= "{" (values ("," values)*)? (",")? "}"
-    ;
-
-core.Enumeration
-    ::= modifiers* "enum" name[] ("implements" (implements[] ("," implements[])*))? "{" (constants ("," constants)*)? (",")? ((";" members*)? | (";")?) "}"
     ;
 
 core.TypeParameter

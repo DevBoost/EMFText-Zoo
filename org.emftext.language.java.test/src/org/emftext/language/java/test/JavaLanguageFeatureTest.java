@@ -516,6 +516,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testEnumWithMember() throws Exception {
+		String typename = "EnumWithMember";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		Enumeration enumeration = assertParsesToEnumeration(typename);
+		assertMemberCount(enumeration, 2);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testEscapedStrings() throws Exception {
 		String typename = "EscapedStrings";
 		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);

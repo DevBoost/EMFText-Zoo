@@ -112,8 +112,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 			QualifiedTypeArgument typeArg = CoreFactory.eINSTANCE.createQualifiedTypeArgument();
 			typeArg.setType(createReferenceToClassifier(ifName));
 			if (clazz.isEnum()) { //check first, because enum is also class
-				//((Enumeration)emfClassifier).getImplements().add(typeArg); //TODO @mseifert is this correct in the metamodel ?
-				((Enumeration)emfClassifier).getImplements().add(JavaClasspath.INSTANCE.getClassifier(ifName)); 
+				((Enumeration)emfClassifier).getImplements().add(typeArg); 
 			}
 			else if (clazz.isClass()) {
 				((Class)emfClassifier).getImplements().add(typeArg);
