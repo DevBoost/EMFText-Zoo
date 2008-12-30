@@ -1041,7 +1041,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertParsesToClass("AssertStatements", 1);
 		assertParsesToClass("ThrowStatements", 1);
 		assertParsesToClass("SynchronizedStatements", 3);
-		assertParsesToClass("SwitchStatements", 9);
+		assertParsesToClass("SwitchStatements", 12);
 		assertParsesToClass("DeclarationStatements", 1);
 		assertParsesToClass("JumpLabelStatements", 4);
 		assertParsesToClass("LoopStatements", 11);

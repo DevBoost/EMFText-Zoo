@@ -111,8 +111,23 @@ public class SwitchStatements {
 
 	public void switchWithDefaultCaseFirst() {
 		switch (3) {
-			default: return;
+			default: break;
 			case 0: break;
+		}
+	}
+	
+	public void switchWithDefaultMiddle(){
+		switch (2){
+		case 0: break;
+		default : break;
+		case 1 : break;
+		}
+	}
+	
+	public void switchWithNoDefault(){
+		switch(2){
+		case 0 : break;
+		case 1 : break;
 		}
 	}
 }

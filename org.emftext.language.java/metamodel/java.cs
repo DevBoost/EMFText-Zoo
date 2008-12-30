@@ -273,7 +273,7 @@ statements.CatchClause
 	;
 
 statements.Switch
-	::= "switch" "(" variable ")" "{" cases* default? "}" ;
+	::= "switch" "(" variable ")" "{" (cases* default? cases*) "}";
 	
 statements.NormalSwitchCase
 	::= "case" condition ":" body* ;
