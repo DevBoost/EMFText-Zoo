@@ -28,22 +28,23 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 		//file
 		else {
 			//is there a physical source file behind this URI?
-			URI normailzedURI = myURIConverter.normalize(uri);
+			URI normalizedURI = myURIConverter.normalize(uri);
 
-			if("pathmap".equals(normailzedURI.scheme())) {
+			if("pathmap".equals(normalizedURI.scheme())) {
 				//something wrong
 				System.out.println("Warning: " + uri + " not registered in ClassPath");
 				return new JavaSourceFileResourceImpl(uri);
 			}
 			
-			if(normailzedURI.fileExtension().equals("java")) {
-				if(!JavaClasspath.INSTANCE.URI_MAP.values().contains(normailzedURI)) {
+			if(normalizedURI.fileExtension().equals("java")) {
+				if(!JavaClasspath.INSTANCE.URI_MAP.values().contains(normalizedURI)) {
 					//not yet registered in classpath
-					loadAndRegister(normailzedURI);
+					// TODO mseifert, jjohannes do we need the next line? all resource are parsed twice if it is enabled!?
+					//loadAndRegister(normailzedURI);
 				}
 				return new JavaSourceFileResourceImpl(uri);
 			}
-			if(normailzedURI.fileExtension().equals("class"))  {
+			if(normalizedURI.fileExtension().equals("class"))  {
 				return new JavaClassFileResorceImpl(uri);
 			}
 		}
