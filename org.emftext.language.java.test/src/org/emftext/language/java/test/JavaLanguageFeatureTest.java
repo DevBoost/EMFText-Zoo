@@ -9,32 +9,34 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.core.Block;
-import org.emftext.language.java.literals.BooleanLiteral;
-import org.emftext.language.java.literals.CharacterLiteral;
 import org.emftext.language.java.core.Classifier;
 import org.emftext.language.java.core.ClassifierImport;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.core.Constructor;
 import org.emftext.language.java.core.Enumeration;
 import org.emftext.language.java.core.Field;
-import org.emftext.language.java.core.QualifiedTypeArgument;
-import org.emftext.language.java.core.StaticImport;
-import org.emftext.language.java.literals.FloatingPointLiteral;
-import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.core.Import;
-import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.core.Interface;
 import org.emftext.language.java.core.Member;
 import org.emftext.language.java.core.Method;
 import org.emftext.language.java.core.NamedElement;
-import org.emftext.language.java.statements.Statement;
-import org.emftext.language.java.literals.StringLiteral;
+import org.emftext.language.java.core.QualifiedTypeArgument;
+import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.core.VariableLengthParameter;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.literals.BooleanLiteral;
+import org.emftext.language.java.literals.CharacterLiteral;
+import org.emftext.language.java.literals.FloatingPointLiteral;
+import org.emftext.language.java.literals.IntegerLiteral;
+import org.emftext.language.java.literals.StringLiteral;
+import org.emftext.language.java.statements.ForEachLoop;
+import org.emftext.language.java.statements.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,6 +68,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 			"BasicEnumWithCommaAndSemicolonAtTheEnd.java",
 			"BasicEnumWithSemicolonAtTheEnd.java",
 			"EmptyEnumWithSemicolon.java" };
+
+	@Override
+	protected ResourceSet getResourceSet() {
+		return new ResourceSetImpl();
+	}
 
 	private void assertParsableAndReprintable(String filename)
 		throws Exception, IOException, BadLocationException {
