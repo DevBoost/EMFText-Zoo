@@ -14,7 +14,7 @@ public class JacksTest extends AbstractZipFileInputTest {
 	private static final String INPUT_FILE = BULK_INPUT_DIR + "jacks_javac_1.6.0_07_passed.zip";
 	
 	public static Test suite() throws CoreException, IOException {
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the jacks_input zip file automatically", 10000, 1);
+		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the jacks_input zip file automatically", 5 * 60 * 1000, 8);
 		addToTestSuite(suite, getTestsForZipFileEntries("./" + INPUT_FILE));
 		return suite;
 	}
