@@ -21,4 +21,23 @@ public class ConditionalStatements {
 		// if/else
 		if (false) return; else return;
 	}
+	
+	public void ConditionsWithCascades(){
+		if(false){
+		}else{
+			if(false){
+			}else{
+				if(true){
+					return;
+				}
+			}
+		}
+	}
+	
+	public void conditionsWithElseIf(){
+		if(false){}
+		else if(false){}
+		else if (true) return;
+		
+	}
 }

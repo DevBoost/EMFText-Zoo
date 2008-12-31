@@ -1043,7 +1043,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	@Test
 	public void testStatements() throws Exception {
-		assertParsesToClass("ConditionalStatements", 2);
+		assertParsesToClass("ConditionalStatements", 4);
 		assertParsesToClass("TryCatchStatements", 4);
 		assertParsesToClass("AssertStatements", 1);
 		assertParsesToClass("ThrowStatements", 1);
