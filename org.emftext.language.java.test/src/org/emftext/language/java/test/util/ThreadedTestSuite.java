@@ -51,29 +51,23 @@ public final class ThreadedTestSuite extends TestSuite {
 					threads.remove(Thread.currentThread());
 				}
 			};
-			final Thread workerThread = new Thread(runnable);
+			final Thread workerThread = new Thread(runnable, "Worker Thread");
 			threads.add(workerThread);
 			
 			Thread timeoutThread = new Thread(new Runnable() {
 
 				public void run() {
 					try {
-						Thread currentThread = Thread.currentThread();
-						currentThread.join(timeout);
-						threads.remove(workerThread);
+						workerThread.join(timeout);
 						if (workerThread.isAlive()) {
 							result.addError(each, new InterruptedException("Test was interrupted by timeout."));
 						}
 					}
 					catch (InterruptedException e1) {
-						threads.remove(workerThread);
-						// TODO Auto-generated catch block
-						//e1.printStackTrace();
 					}
+					threads.remove(workerThread);
 				}
-				
-			});
-			
+			}, "Timeout Thread");
 			
 			workerThread.start();
 			timeoutThread.start();
