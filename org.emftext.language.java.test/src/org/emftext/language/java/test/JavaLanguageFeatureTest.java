@@ -1021,6 +1021,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testSemicolonAfterMembers() throws Exception {
+		String typename = "SemicolonAfterMembers";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 4);
+		
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
+	}
+
+	@Test
 	public void testSimpleAnnotations() throws Exception {
 		String typename = "SimpleAnnotations";
 		String filename = typename + JAVA_FILE_EXTENSION;
