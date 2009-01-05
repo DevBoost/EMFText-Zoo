@@ -654,6 +654,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 	
+	public void testLegalIdentifiers() throws Exception {
+		String typename = "LegalIdentifiers";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
 	@Test
 	public void testForEachLoop() throws Exception {
 		String typename = "ForEachLoop";
@@ -1040,6 +1050,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
+	@Test
+	public void testSemicolonAfterExpressions() throws Exception {
+		String typename = "SemicolonAfterExpressions";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+		
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
+	}
+	
 	@Test
 	public void testSimpleAnnotations() throws Exception {
 		String typename = "SimpleAnnotations";
