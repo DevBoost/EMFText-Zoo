@@ -427,7 +427,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "CommentsBetweenCatchClauses";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 3);
+		assertMemberCount(clazz, 1);
 
 		parseAndReprint(filename);
 	}
