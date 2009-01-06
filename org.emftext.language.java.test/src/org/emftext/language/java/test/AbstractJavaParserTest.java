@@ -87,8 +87,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	 * All test files that were parsed by the method parseResource(String
 	 * relativePath)
 	 */
-	protected static List<File> parsedResources = new ArrayList<File>();
-	protected static List<File> reprintedResources = new ArrayList<File>();
+	private static List<File> parsedResources = new ArrayList<File>();
+	private static List<File> reprintedResources = new ArrayList<File>();
 	
 	protected static ResourceSet myResourceSet = new ResourceSetImpl();
 
@@ -102,7 +102,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File inputFolder = new File("./" + inputFolderName);
 		File file = new File(inputFolder, inputFile.getPath());
 		assertTrue("File " + file + " should exist.", file.exists());
-		parsedResources.add(file);
+		addParsedResource(file);
 		return parseResource(file.getCanonicalPath(), ignoreSemanticErrors());
 	}
 
@@ -230,7 +230,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		String outputFileName = calculateOutputFilename(inputFile,
 				inputFolderName, outputFolderName);
 		File outputFile = prepareOutputFile(outputFileName);
-		reprintedResources.add(inputFile);
+		addReprintedResource(inputFile);
 		
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
 
@@ -614,5 +614,21 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			}
 		}
 		return failure;
+	}
+	
+	public static List<File> getParsedResources() {
+		return parsedResources;
+	}
+
+	public static List<File> getReprintedResources() {
+		return reprintedResources;
+	}
+
+	public void addParsedResource(File file) {
+		parsedResources.add(file);
+	}
+
+	public void addReprintedResource(File file) {
+		reprintedResources.add(file);
 	}
 }

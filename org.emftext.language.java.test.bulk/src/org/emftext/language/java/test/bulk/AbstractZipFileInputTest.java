@@ -1,5 +1,6 @@
 package org.emftext.language.java.test.bulk;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +22,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 	private static final class ParseZipFileEntryTest extends
 			AbstractJavaParserTest {
+
 		private final ZipFile zipFile;
 		private final ZipEntry entry;
 
@@ -53,6 +55,16 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		@Override
 		protected String getTestInputFolder() {
 			return null;
+		}
+		
+		@Override
+		public void addParsedResource(File file) {
+			// do nothing to avoid storing unneeded file objects in memory
+		}
+
+		@Override
+		public void addReprintedResource(File file) {
+			// do nothing to avoid storing unneeded file objects in memory
 		}
 	}
 
