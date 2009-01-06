@@ -1,6 +1,7 @@
 package org.emftext.language.java.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.emftext.test.ConcreteSyntaxTestHelper.createANTLRGenerator;
 import static org.emftext.test.ConcreteSyntaxTestHelper.generateANTLRGrammarToTempFile;
 import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntax;
@@ -23,7 +24,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.emftext.sdk.GenPackageByNameFinder;
 import org.emftext.sdk.MetamodelHelper;
+import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
+import org.emftext.sdk.codegen.IProblemCollector;
+import org.emftext.sdk.codegen.ResourceGenerationContext;
 import org.emftext.sdk.codegen.ResourcePackageGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.runtime.resource.ITextResource;
@@ -67,7 +71,13 @@ public class ParserGenerationTest {
 		ITextResource concreteSyntaxResource = (ITextResource) getConcreteSyntaxResource(fileURI, options);
 		ConcreteSyntax concreteSyntax = getConcreteSyntax(concreteSyntaxResource);
 		IGenerator antlrGen = createANTLRGenerator(concreteSyntax);
-		InputStream grammarStream = ResourcePackageGenerator.deriveGrammar(concreteSyntaxResource, antlrGen);
+		ResourceGenerationContext context = new ResourceGenerationContext(concreteSyntax, new IProblemCollector() {
+
+			public void addProblem(GenerationProblem problem) {
+				fail(problem.getMessage());
+			}
+		});
+		InputStream grammarStream = ResourcePackageGenerator.deriveGrammar(antlrGen, context);
 		return getContent(grammarStream);
 	}
 
