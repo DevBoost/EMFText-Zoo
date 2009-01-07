@@ -31,6 +31,8 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.ToolFactory;
+import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
@@ -266,12 +268,30 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	private static boolean compareTextContents(InputStream inputStream,
 			InputStream inputStream2) throws MalformedTreeException,
 			BadLocationException, IOException {
+		
+		ASTParser jdtParser1 = ASTParser.newParser(AST.JLS3);
+		jdtParser1.setSource(readTextContents(inputStream).toCharArray());
+		org.eclipse.jdt.core.dom.CompilationUnit result1 = 
+			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser1.createAST(null);
+
+		ASTParser jdtParser2 = ASTParser.newParser(AST.JLS3);
+		jdtParser2.setSource(readTextContents(inputStream2).toCharArray());
+		org.eclipse.jdt.core.dom.CompilationUnit result2 = 
+			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser2.createAST(null);
+		
+		/*
 		String inputFileContents = normalize(readTextContents(inputStream));
 		String firstPrintContents = normalize(readTextContents(inputStream2));
-		assertEquals(
-				"The file printed from the parser CompilationUnit equals the given inputFile",
-				inputFileContents, firstPrintContents);
-		return false;
+		*/
+
+		TalkativeASTMatcher matcher = new TalkativeASTMatcher(true);
+		boolean result = result1.subtreeMatch(matcher, result2);
+		
+		assertTrue(
+				"Reprint not equal: " + matcher.getDiff(),
+				result);
+
+		return result;
 	}
 
 	private static String calculateOutputFilename(File inputFile,
@@ -332,8 +352,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(options);
 		Document doc = new Document();
 		doc.set(code);
+
 		TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT,
 				code, 0, code.length(), 0, null);
+		
 		if (edit != null) {
 			edit.apply(doc);
 		}
@@ -505,7 +527,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	protected abstract String getTestInputFolder();
-
+	
 	private <T> T assertParsesToType(File file, Class<T> expectedType)
 			throws Exception {
 		CompilationUnit model = parseResource(file);
@@ -571,7 +593,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		boolean failure = false;
 		for(URI uri : new ArrayList<URI>(JavaClasspath.INSTANCE.URI_MAP.keySet())) {
 			if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
-				//do not load all default classfildes
+				//do not load all default classfiles
 				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "java")) {
 					continue;
 				}
