@@ -84,7 +84,13 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 								JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
 						qualifiedName = qualifiedName.replaceAll("\\$", ".");
 						
-						return qualifiedName; //we might check if an import exists before
+						if (qualifiedName.startsWith("java.lang")) {
+							//exclude default imports
+							return ((NamedElement) element).getName();
+						}
+						else {
+							return qualifiedName; //we might check if an import exists before
+						}
 					}
 				}
 			}
