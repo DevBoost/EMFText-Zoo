@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.resource.java.JavaResourceImpl;
 
@@ -15,6 +16,36 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 
 	public JavaSourceFileResourceImpl(URI uri) {
 		super(uri);
+	}
+
+	/**
+	 * Registers pathmap if not done already.
+	 */
+	public void load(Map<?, ?> options) throws IOException {
+		boolean wasLoaded = !isLoaded;
+		super.load(options);
+	    if (wasLoaded) {
+	    	register();
+	    }
+	}
+
+	private void register() {
+		URI myURI = getURI();
+		
+		//only for physical URIs
+		if("pathmap".equals(myURI.scheme())) {
+			return;
+		}
+		
+		//only for not yet registered
+		if(JavaClasspath.INSTANCE.URI_MAP.values().contains(myURI)) {
+			return;
+		}
+		
+		if (!getContents().isEmpty()) {
+			CompilationUnit cu = (CompilationUnit) getContents().get(0);
+			JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI);
+		}
 	}
 
 	@Override
