@@ -27,7 +27,7 @@ import org.emftext.sdk.MetamodelHelper;
 import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
 import org.emftext.sdk.codegen.IProblemCollector;
-import org.emftext.sdk.codegen.ResourceGenerationContext;
+import org.emftext.sdk.codegen.GenerationContext;
 import org.emftext.sdk.codegen.ResourcePackageGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.runtime.resource.ITextResource;
@@ -71,7 +71,7 @@ public class ParserGenerationTest {
 		ITextResource concreteSyntaxResource = (ITextResource) getConcreteSyntaxResource(fileURI, options);
 		ConcreteSyntax concreteSyntax = getConcreteSyntax(concreteSyntaxResource);
 		IGenerator antlrGen = createANTLRGenerator(concreteSyntax);
-		ResourceGenerationContext context = new ResourceGenerationContext(concreteSyntax, new IProblemCollector() {
+		GenerationContext context = new GenerationContext(concreteSyntax, new IProblemCollector() {
 
 			public void addProblem(GenerationProblem problem) {
 				fail(problem.getMessage());
