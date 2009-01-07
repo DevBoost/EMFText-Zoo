@@ -238,6 +238,36 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testAnnotationInstances() throws Exception {
+		String typename = "AnnotationInstances";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testAnnotationsForParameters() throws Exception {
+		String typename = "AnnotationsForParameters";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testAnnotationsForStatements() throws Exception {
+		String typename = "AnnotationsForStatements";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testAnonymousInner() throws Exception {
 		String typename = "AnonymousInner";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -1038,6 +1068,12 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertEquals("Package 'Inner' is located in a package 'pkg'", "pkg",
 				model.getPackage().get(0));
 		parseAndReprint("pkg/inner/Inner.java");
+	}
+
+	@Test
+	public void testPkg_package_info() throws Exception {
+		CompilationUnit model = parseResource("pkg/package-info.java");
+		assertNumberOfClassifiers(model, 0);
 	}
 
 	@Test
