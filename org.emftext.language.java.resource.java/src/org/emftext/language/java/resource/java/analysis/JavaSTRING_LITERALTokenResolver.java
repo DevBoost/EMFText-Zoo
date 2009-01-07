@@ -12,6 +12,7 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 	@Override
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = super.deResolve(value,feature,container);
+		result = '"' + result + '"';
 		return result;
 	}
 
