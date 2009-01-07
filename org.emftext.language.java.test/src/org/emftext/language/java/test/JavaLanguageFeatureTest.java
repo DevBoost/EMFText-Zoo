@@ -242,6 +242,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "AnnotationInstances";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 3);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testAnnotationsForInnerTypes() throws Exception {
+		String typename = "AnnotationsForInnerTypes";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
 
 		parseAndReprint(filename);
