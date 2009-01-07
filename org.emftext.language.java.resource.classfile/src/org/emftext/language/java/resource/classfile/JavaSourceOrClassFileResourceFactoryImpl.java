@@ -37,12 +37,12 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 			}
 			
 			if(normalizedURI.fileExtension().equals("java")) {
+				JavaSourceFileResourceImpl javaResource =  new JavaSourceFileResourceImpl(uri);
 				if(!JavaClasspath.INSTANCE.URI_MAP.values().contains(normalizedURI)) {
 					//not yet registered in classpath
-					// TODO mseifert, jjohannes do we need the next line? all resource are parsed twice if it is enabled!?
-					//loadAndRegister(normailzedURI);
+					loadAndRegister(javaResource, normalizedURI);
 				}
-				return new JavaSourceFileResourceImpl(uri);
+				return javaResource;
 			}
 			if(normalizedURI.fileExtension().equals("class"))  {
 				return new JavaClassFileResorceImpl(uri);
@@ -53,17 +53,15 @@ public class JavaSourceOrClassFileResourceFactoryImpl implements Resource.Factor
 	}
 
 
-	private void loadAndRegister(URI uri) {
-		//try to load and register
-		Resource tempResource = new JavaSourceFileResourceImpl(uri);
+	private void loadAndRegister(Resource javaResource, URI normalizedURI) {
 		try {
-			tempResource.load(null);
+			javaResource.load(null);
 		} catch (IOException e) {
 			//e.printStackTrace();
 		}
-		if (!tempResource.getContents().isEmpty()) {
-			CompilationUnit cu = (CompilationUnit) tempResource.getContents().get(0);
-			JavaClasspath.INSTANCE.registerClassifierSource(cu, uri);
+		if (!javaResource.getContents().isEmpty()) {
+			CompilationUnit cu = (CompilationUnit) javaResource.getContents().get(0);
+			JavaClasspath.INSTANCE.registerClassifierSource(cu, normalizedURI);
 		}
 	}
 }
