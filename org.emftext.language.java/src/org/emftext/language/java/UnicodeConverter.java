@@ -2,6 +2,7 @@ package org.emftext.language.java;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import org.emftext.runtime.InputStreamProcessor;
 
@@ -10,9 +11,13 @@ public class UnicodeConverter extends InputStreamProcessor {
 	private static final char BACKSLASH = '\\';
 
 	private InputStream inputStream;
+	private int[] stack;
+	private int stackPosition;
 
 	public UnicodeConverter(InputStream inputStream) {
 		this.inputStream = inputStream;
+		this.stack = new int[4];
+		this.stackPosition = 0;
 	}
 
 	/**
@@ -38,24 +43,33 @@ public class UnicodeConverter extends InputStreamProcessor {
 	 */
 	@Override
 	public int read() throws IOException {
+		if (!isEmpty()) {
+			int result = pop();
+			System.out.print(" POP" + result + ".");
+			return result;
+		}
 		int read = inputStream.read();
 
 		// Must have format \\uXXXX where XXXX is a hexadecimal number
 		if (read >= 0) {
-
 			char c = (char) read;
 
 			if (c == BACKSLASH) {
 				int next = inputStream.read();
 				char nextChar = (char) next;
-				switch (nextChar) {
-				case 'u': {
+				if (nextChar == 'u') {
 					// Now we found the 'u' we need to find another 4 hex digits
 					// Note: shifting left by 4 is the same as multiplying by 16
 					int v = 0; // Accumulator
+					boolean complete = true;
 					for (int j = 1; j < 5; j++) {
 						next = inputStream.read();
 						nextChar = (char) next;
+						push(next);
+						if (next < 0) {
+							complete = false;
+							break;
+						}
 						switch (nextChar) {
 						case 48: // '0'
 						case 49: // '1'
@@ -95,14 +109,43 @@ public class UnicodeConverter extends InputStreamProcessor {
 						}
 					} // for each of the 4 digits
 
-					if (v > 0) { // We got a full conversion
-						return v;
+					if (complete) { // We got a full conversion
+						pop();
+						pop();
+						pop();
+						pop();
+						//push(v);
+						byte[] bytes = new Character((char) v).toString().getBytes("UTF-8");
+						for (int b = 0; b < bytes.length; b++) {
+							push(unsignedByteToInt(bytes[b]));
+						}
+						System.out.println("UNICODE: " + Arrays.toString(bytes));
+						return pop();
 					}
-					break;
-				}
+				} else {
+					push(next);
 				}
 			}
 		}
+		System.out.print(read + ".");
 		return read;
+	}
+	
+	public static int unsignedByteToInt(byte b) {
+		return (int) b & 0xFF;
+	}
+	  
+	private boolean isEmpty() {
+		return stackPosition == 0;
+	}
+	
+	private int pop() {
+		stackPosition--;
+		return stack[stackPosition];
+	}
+	
+	private void push(int c) {
+		stack[stackPosition] = c;
+		stackPosition++;
 	}
 }
