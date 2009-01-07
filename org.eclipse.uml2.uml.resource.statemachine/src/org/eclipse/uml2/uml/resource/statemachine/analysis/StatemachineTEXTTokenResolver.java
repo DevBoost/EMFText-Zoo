@@ -1,20 +1,14 @@
 package org.eclipse.uml2.uml.resource.statemachine.analysis;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EObject;
-import org.emftext.runtime.resource.TokenResolver;
-import org.emftext.runtime.resource.TextResource;
-import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
-
-public class StatemachineTEXTTokenResolver extends JavaBasedTokenResolver implements TokenResolver{ 
+public class StatemachineTEXTTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	@Override
-	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
-		String result = super.deResolve(value,feature,container);
+	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+		java.lang.String result = super.deResolve(value, feature, container);
 		return result;
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, TextResource resource) {
+	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		return super.resolve(lexem,feature,container,resource);
 	}
 }

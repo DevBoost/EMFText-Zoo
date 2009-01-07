@@ -1,33 +1,27 @@
 package org.eclipse.uml2.uml.resource.statemachine.analysis;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.Vertex;
-import org.emftext.runtime.resource.ResolveResult;
 
 public class TransitionTargetReferenceResolver extends org.emftext.runtime.resource.impl.ReferenceResolverImpl {
 
 	@Override
-	protected String doDeResolve(EObject element, EObject container,
-			EReference reference) {
-
+	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {
 		return ((Vertex)element).getName();
 	}
 
 	@Override
-	protected void doResolve(String name, EObject container, EReference reference, int position, boolean resolveFuzzy, ResolveResult result) {
-		
+	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
 		Transition transition = (Transition) container;	
 		
 		for (Vertex targetCand: transition.getContainer().getSubvertices()) {
 			if (resolveFuzzy) {
-				if (name.startsWith(targetCand.getName())) {
-					result.addMapping(name, targetCand);
+				if (identifier.startsWith(targetCand.getName())) {
+					result.addMapping(identifier, targetCand);
 				}
 			} else {
-				if (name.equals(targetCand.getName())) {
-					result.addMapping(name, targetCand);
+				if (identifier.equals(targetCand.getName())) {
+					result.addMapping(identifier, targetCand);
 				}
 			}
 		}
