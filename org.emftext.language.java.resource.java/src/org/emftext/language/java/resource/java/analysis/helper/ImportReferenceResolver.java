@@ -28,7 +28,7 @@ public class ImportReferenceResolver extends ReferenceResolverImpl {
 				return ((NamedElement)element).getName();
 			}
 			else {
-				return ".*";
+				return "*";
 			}
 		}
 		else {

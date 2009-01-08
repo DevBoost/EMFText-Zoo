@@ -16,7 +16,6 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.UnresolvedProxiesException;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.annotations.AnnotationMethod;
 import org.emftext.language.java.core.AdditionalField;
 import org.emftext.language.java.core.AdditionalLocalVariable;
 import org.emftext.language.java.core.Block;
@@ -63,8 +62,8 @@ import org.emftext.language.java.types.Double;
 import org.emftext.language.java.types.Float;
 import org.emftext.language.java.types.Int;
 import org.emftext.language.java.types.Long;
-import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.PrimitiveType;
+import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
@@ -111,12 +110,38 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 								JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
 						qualifiedName = qualifiedName.replaceAll("\\$", ".");
 						
-						if (qualifiedName.startsWith("java.lang")) {
-							//exclude default imports
+						if (qualifiedName.startsWith("java.lang.")) {
+							//default import
 							fullID = ((NamedElement) element).getName();
 						}
 						else {
-							fullID = qualifiedName; //we might check if an import exists before
+							fullID = qualifiedName;
+							CompilationUnit cu = findContainingCompilationUnit(container);
+							String packageName = "";
+							if (fullID.contains(".")) {
+								packageName = fullID.substring(0,fullID.lastIndexOf("."));
+							}
+							
+							if (JavaUniquePathConstructor.packageName(cu).equals(packageName)) {
+								//same package
+								fullID = ((NamedElement) element).getName();
+							}
+							else for(Import imp : cu.getImports()) {
+								if(imp instanceof ClassifierImport) {
+									ClassifierImport classifierImport = (ClassifierImport) imp;
+									if (classifierImport.getClassifiers().contains(element)) {
+										//the element is imported -> simple name
+										fullID = ((NamedElement) element).getName();
+									}
+								}
+								else if (imp instanceof StaticImport) {
+									StaticImport staticImport = (StaticImport) imp;
+									if (staticImport.getStaticMembers().contains(element)) {
+										//the element is imported -> simple name
+										fullID = ((NamedElement) element).getName();
+									}
+								}
+							}
 						}
 					}
 				}
@@ -555,7 +580,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				EObject next = i.next();
 				if (next instanceof Primary) {
 					type = getTypeOfReferencedElement(
-							((Primary) next).getReference());
+							((Primary) next));
 					break;
 				}
 			}
@@ -696,6 +721,13 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			value = value.eContainer();
 		}
 		return (Class) value;
+	}
+	
+	protected CompilationUnit findContainingCompilationUnit(EObject value) {
+		while (!(value instanceof CompilationUnit) && value != null) {
+			value = value.eContainer();
+		}
+		return (CompilationUnit) value;
 	}
 
 	protected AnnotationInstance findContainingAnnotationInstance(EObject value) {
