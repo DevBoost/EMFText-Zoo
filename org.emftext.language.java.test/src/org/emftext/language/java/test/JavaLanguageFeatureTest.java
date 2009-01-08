@@ -1091,7 +1091,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "SemicolonAfterMembers";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 4);
+		assertMemberCount(clazz, 2);
 		
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}

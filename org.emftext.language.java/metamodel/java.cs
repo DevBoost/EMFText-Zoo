@@ -68,8 +68,7 @@ core.Class
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
         "{" 
-	    	(";")?
-        	(!1 members (";")?)* !0 
+        	(!1 members (";")*)* !0 (";")*
         "}"
 	;
 
@@ -77,8 +76,7 @@ core.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
-	    	(";")?
-	    	(members (";")?)*
+        	(!1 members (";")*)* !0 (";")*
 		"}"
 	;
 
@@ -159,7 +157,7 @@ core.AdditionalLocalVariable
 	;
 
 core.Field
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)*
+	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
 	;
 
 core.AdditionalField
