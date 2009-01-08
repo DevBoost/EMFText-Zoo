@@ -377,21 +377,21 @@ expressions.CompoundAssignmentAnd				::= "&=";
 expressions.CompoundAssignmentOr				::= "|=";
 expressions.CompoundAssignmentExclusiveOr 		::= "^=";
 expressions.CompoundAssignmentModulo 			::= "%=";
-expressions.CompoundAssignmentLeftShift 		::= "<" "<" "=";
-expressions.CompoundAssignmentRightShift 		::= ">" ">" "=";
-expressions.CompoundAssignmentUnsignedRightShift::= ">" ">" ">" "=";
+expressions.CompoundAssignmentLeftShift 		::= "<" #0 "<" #0 "=";
+expressions.CompoundAssignmentRightShift 		::= ">" #0 ">" #0 "=";
+expressions.CompoundAssignmentUnsignedRightShift::= ">" #0 ">" #0 ">" #0 "=";
 
 expressions.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
 expressions.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
 
 expressions.LessThan 			::= "<";
-expressions.LessThanOrEqual		::= "<" "=";
+expressions.LessThanOrEqual		::= "<" #0 "=";
 expressions.GreaterThan			::= ">";
-expressions.GreaterThanOrEqual	::= ">" "=";
+expressions.GreaterThanOrEqual	::= ">" #0 "=";
 
-expressions.LeftShift 			::= "<" "<" ;
-expressions.RightShift 			::= ">" ">" ;
-expressions.UnsignedRightShift	::= ">" ">" ">" ;
+expressions.LeftShift 			::= "<" #0 "<" ;
+expressions.RightShift 			::= ">" #0 ">" ;
+expressions.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
 
 expressions.Equal		::= "==";	
 expressions.NotEqual	::= "!=";
@@ -400,7 +400,7 @@ expressions.MinusMinus 	::= "--" ;
 expressions.Complement 	::= "~" ;
 expressions.Negate 		::= "!" ;
 
-core.ArrayDimension ::= ("[" "]");
+core.ArrayDimension ::= ("[" #0 "]");
 
 literals.NullLiteral ::= "null";
 types.VoidLiteral ::= "void";
