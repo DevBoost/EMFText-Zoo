@@ -28,11 +28,17 @@ public class JavaDECIMAL_LITERALTokenResolver extends JavaBasedTokenResolver imp
 
 
 	public static Long parseInteger(String lexem, ITextResource resource) throws NumberFormatException {
+		Long result;
 		if (lexem.toLowerCase().endsWith("l")) {
 			lexem = lexem.substring(0, lexem.length() - 1);
+			BigInteger tempInteger = new BigInteger(lexem, 16);
+			result = tempInteger.longValue();
 		}
-		BigInteger tempInteger = new BigInteger(lexem, 16);
-		Long result = tempInteger.longValue();
+		else {
+			BigInteger tempInteger = new BigInteger(lexem); //no radix!
+			result = tempInteger.longValue();
+		}
+
 		return result;
 	}
 }

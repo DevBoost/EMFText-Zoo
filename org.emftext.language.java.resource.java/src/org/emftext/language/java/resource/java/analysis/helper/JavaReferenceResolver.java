@@ -1,5 +1,7 @@
 package org.emftext.language.java.resource.java.analysis.helper;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -14,6 +16,7 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.UnresolvedProxiesException;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.annotations.AnnotationInstance;
+import org.emftext.language.java.annotations.AnnotationMethod;
 import org.emftext.language.java.core.AdditionalField;
 import org.emftext.language.java.core.AdditionalLocalVariable;
 import org.emftext.language.java.core.Block;
@@ -35,6 +38,7 @@ import org.emftext.language.java.core.NewConstructorCall;
 import org.emftext.language.java.core.PackageDescriptor;
 import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
 import org.emftext.language.java.core.PackageOrClassifierReference;
+import org.emftext.language.java.core.Primary;
 import org.emftext.language.java.core.PrimaryReference;
 import org.emftext.language.java.core.QualifiedTypeArgument;
 import org.emftext.language.java.core.Reference;
@@ -45,11 +49,28 @@ import org.emftext.language.java.core.This;
 import org.emftext.language.java.core.TypeParameter;
 import org.emftext.language.java.core.Variable;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.literals.BooleanLiteral;
+import org.emftext.language.java.literals.CharacterLiteral;
+import org.emftext.language.java.literals.FloatingPointLiteral;
+import org.emftext.language.java.literals.IntegerLiteral;
+import org.emftext.language.java.literals.Literal;
+import org.emftext.language.java.literals.NullLiteral;
+import org.emftext.language.java.literals.StringLiteral;
+import org.emftext.language.java.types.Boolean;
+import org.emftext.language.java.types.Byte;
+import org.emftext.language.java.types.Char;
+import org.emftext.language.java.types.Double;
+import org.emftext.language.java.types.Float;
+import org.emftext.language.java.types.Int;
+import org.emftext.language.java.types.Long;
+import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypedElement;
+import org.emftext.language.java.types.TypesFactory;
+import org.emftext.language.java.types.VoidLiteral;
 import org.emftext.runtime.resource.IResolveResult;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
@@ -64,6 +85,12 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	@Override
 	protected String doDeResolve(EObject element, EObject container,
 			EReference reference) {
+		
+		String fullID = UNRESOLVED_REFERENCE_STRING; 
+		
+		if (!element.eIsProxy() && (element instanceof NamedElement)) {
+			fullID = ((NamedElement) element).getName();
+		}
 		
 		/* TODO In cases where element is a classifier this method 
 		 * should inspect the context of the element to
@@ -86,22 +113,24 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 						
 						if (qualifiedName.startsWith("java.lang")) {
 							//exclude default imports
-							return ((NamedElement) element).getName();
+							fullID = ((NamedElement) element).getName();
 						}
 						else {
-							return qualifiedName; //we might check if an import exists before
+							fullID = qualifiedName; //we might check if an import exists before
 						}
 					}
 				}
 			}
 		}
 		
-		if (!element.eIsProxy() && (element instanceof NamedElement)) {
-			return ((NamedElement) element).getName();
+		if (element instanceof Method && !(element.eContainer() instanceof Annotation)) { //TODO introduce common superclass for Method and AnnotationMethod
+			Method method = (Method) element;
+			if (method.getParameters().isEmpty()) {
+				fullID += "()";
+			}
 		}
-		else {
-			return UNRESOLVED_REFERENCE_STRING; 
-		}
+		
+		return fullID;
 	}
 	
 	
@@ -385,6 +414,43 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return false;
 	}
 	
+	protected Type getTypeOfReferencedElement(Primary primary) throws UnresolvedProxiesException {
+		if (primary.getReference() != null) {
+			return getTypeOfReferencedElement(primary.getReference());
+		}
+		else if (primary.getLiteral() != null) {
+			return getTypeOfReferencedElement(primary.getLiteral());
+		}
+		
+		assert(false);
+		return null;
+	}
+	
+	protected Type getTypeOfReferencedElement(Literal literal) throws UnresolvedProxiesException {
+		TypesFactory javaTypeFactory = TypesFactory.eINSTANCE;
+		if (literal instanceof NullLiteral) {
+			return javaTypeFactory.createVoidLiteral();
+		}
+		else if (literal instanceof BooleanLiteral) {
+			return javaTypeFactory.createBoolean();
+		}
+		else if (literal instanceof FloatingPointLiteral) {
+			return javaTypeFactory.createDouble();
+		}
+		else if (literal instanceof IntegerLiteral) {
+			return javaTypeFactory.createInt();
+		}
+		else if (literal instanceof CharacterLiteral) {
+			return javaTypeFactory.createChar();
+		}
+		else if (literal instanceof StringLiteral) {
+			return JavaClasspath.INSTANCE.getClassifier("java.lang.String");
+		}
+		
+		assert(false);
+		return null;
+	}
+	
 	/**
 	 * Determines the <code>Type</code> of the reference, considering all kinds of referencing mechanisms
 	 * used in the Java metamodel.
@@ -482,23 +548,20 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 		
-		for(Expression argument : primaryRef.getArguments()) {
-			// TODO jjohannes: this needs to be re-implemented when the expressions are completed in the metamodel
-
-			//Assignment was removed
-			/*
-			if (arg instanceof Assignment) {
-				Assignment assignment = (Assignment) arg;
-				Reference reference = assignment.getTarget();
-				while (reference.getNext() != null) {
-					//find the last reference
-					reference = reference.getNext();
+		for(Expression exp : primaryRef.getArguments()) {
+			//find the reference at the end of the expression
+			Type type = null;
+			for(Iterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
+				EObject next = i.next();
+				if (next instanceof Primary) {
+					type = getTypeOfReferencedElement(
+							((Primary) next).getReference());
+					break;
 				}
-				Type type = getTypeOfReferencedElement(assignment.getTarget());
-				resultList.add(type);
 			}
-			*/
-			assert(false);
+			assert(type != null);
+			
+			resultList.add(type);
 		}
 		return resultList;
 	}
@@ -545,7 +608,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 							}
 							
 							if (!type.eIsProxy() || !argumentType.eIsProxy()) {
-								if(!type.equals(argumentType)) {
+								if(!compareTypes(type, argumentType)) {
 									result = false;
 									break;
 								}
@@ -568,6 +631,64 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 		}
 		return result;
+	}
+
+
+	protected boolean compareTypes(EObject type1,
+			EObject type2) {
+		
+		if (type1 instanceof PrimitiveType && type2 instanceof PrimitiveType) {
+			if (type1 instanceof Boolean) {
+				if (type2 instanceof Boolean) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			if (type1 instanceof Char) {
+				if (type2 instanceof Char) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			if (type1 instanceof Byte ||
+					type1 instanceof Int ||
+					type1 instanceof Short ||
+					type1 instanceof Long) {
+				if (type2 instanceof Byte ||
+						type2 instanceof Int ||
+						type2 instanceof Short ||
+						type2 instanceof Long) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			if (type1 instanceof Float ||
+					type1 instanceof Double) {
+				if (type2 instanceof Byte ||
+						type2 instanceof Float ||
+						type2 instanceof Double) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			if (type1 instanceof VoidLiteral) {
+				if (type2 instanceof VoidLiteral) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		return type1.equals(type2);
 	}
 	
 	protected Class findContainingClass(EObject value) {
