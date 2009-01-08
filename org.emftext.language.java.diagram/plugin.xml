@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <?gmfgen generated="true"?>
+      <fileTypes
+         type="text"
+         extension="java_diagram">
+      </fileTypes>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <?gmfgen generated="true"?>
+      <parser
+         type="java_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <?gmfgen generated="true"?>
+      <editor
+         id="org.emftext.language.java.diagram.part.JavaDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/CoreDiagramFile.gif"
+         extensions="java_diagram"
+         default="true"
+         class="org.emftext.language.java.diagram.part.JavaDiagramEditor"
+         matchingStrategy="org.emftext.language.java.diagram.part.JavaMatchingStrategy"
+         contributorClass="org.emftext.language.java.diagram.part.JavaDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="org.emftext.language.java.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/CoreDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="org.emftext.language.java.diagram.part.JavaCreationWizard"
+  	     id="org.emftext.language.java.diagram.part.JavaCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            adaptable="false"
+            id="org.emftext.language.java.diagram.CreateShortcut"
+            objectClass="org.emftext.language.java.diagram.edit.parts.PackageEditPart">
+         <action
+               class="org.emftext.language.java.diagram.part.JavaCreateShortcutAction"
+               enablesFor="1"
+               id="org.emftext.language.java.diagram.CreateShortcutAction"
+               label="%createShortcutActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>                      
+      <objectContribution
+            adaptable="false"
+            id="org.emftext.language.java.diagram.LoadResource"
+            objectClass="org.emftext.language.java.diagram.edit.parts.PackageEditPart">
+         <action
+               class="org.emftext.language.java.diagram.part.JavaLoadResourceAction"
+               enablesFor="1"
+               id="org.emftext.language.java.diagram.LoadResourceAction"
+               label="%loadResourceActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>           
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="org.emftext.language.java.diagram.InitDiagram"
+            nameFilter="*.java"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.emftext.language.java.diagram.part.JavaInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.emftext.language.java.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="JavaPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.java.diagram.part.JavaDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="JavaPresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.java.diagram.part.JavaDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="JavaPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.java.diagram.part.JavaDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="JavaRender">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.java.diagram.part.JavaDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider class="org.emftext.language.java.diagram.providers.JavaContributionItemProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.emftext.language.java.diagram.part.JavaDiagramEditorID">
+            <partAction menubarPath="/file/print" id="printPreviewAction"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.emftext.language.java.diagram.providers.JavaValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.emftext.language.java.diagram.part.JavaDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.emftext.language.java.diagram.providers.JavaMarkerNavigationProvider">
+         <MarkerType name="org.emftext.language.java.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Java Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.emftext.language.java.diagram.providers.JavaValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences">
+      <?gmfgen generated="true"?>
+      <initializer class="org.emftext.language.java.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages">
+      <?gmfgen generated="true"?>
+      <page
+            id="org.emftext.language.java.diagram.general"
+            name="%preference.page.title.org.emftext.language.java.diagram.general"
+            class="org.emftext.language.java.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.java.diagram.appearance"
+            name="%preference.page.title.org.emftext.language.java.diagram.appearance"
+            category="org.emftext.language.java.diagram.general"
+            class="org.emftext.language.java.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.java.diagram.connections"
+            name="%preference.page.title.org.emftext.language.java.diagram.connections"
+            category="org.emftext.language.java.diagram.general"
+            class="org.emftext.language.java.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.java.diagram.printing"
+            name="%preference.page.title.org.emftext.language.java.diagram.printing"
+            category="org.emftext.language.java.diagram.general"
+            class="org.emftext.language.java.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.java.diagram.rulersAndGrid"
+            name="%preference.page.title.org.emftext.language.java.diagram.rulersAndGrid"
+            category="org.emftext.language.java.diagram.general"
+            class="org.emftext.language.java.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.java.diagram.pathmaps"
+            name="%preference.page.title.org.emftext.language.java.diagram.pathmaps"
+            category="org.emftext.language.java.diagram.general"
+            class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="org.emftext.language.java.diagram"
+            labelProvider="org.emftext.language.java.diagram.sheet.JavaSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="org.emftext.language.java.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="org.emftext.language.java.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="org.emftext.language.java.diagram.sheet.JavaPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="org.emftext.language.java.diagram.navigator.JavaAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <?gmfgen generated="true"?>
+      <viewProvider class="org.emftext.language.java.diagram.providers.JavaViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Java"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="org.emftext.language.java.diagram.providers.JavaEditPartProvider">
+         <Priority name="Lowest"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="org.emftext.language.java.diagram.providers.JavaModelingAssistantProvider">
+         <Priority name="Lowest"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
+      <?gmfgen generated="true"?>
+      <IconProvider class="org.emftext.language.java.diagram.providers.JavaIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="org.emftext.language.java.diagram.providers.JavaParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.emftext.language.java.diagram.providers.JavaShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Package_1000"
+               name="%metatype.name.Package_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Package"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.PackageEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.CompilationUnit_2001"
+               name="%metatype.name.CompilationUnit_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompilationUnit"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.CompilationUnitEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Class_3001"
+               name="%metatype.name.Class_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Class"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.ClassEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/annotations">
+         <metamodelType
+               id="org.emftext.language.java.diagram.AnnotationMethod_3018"
+               name="%metatype.name.AnnotationMethod_3018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="AnnotationMethod"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.AnnotationMethodEditHelper">
+            <param name="semanticHint" value="3018"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <specializationType
+               id="org.emftext.language.java.diagram.Class_3019"
+               name="%metatype.name.Class_3019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.emftext.language.java.diagram.Class_3001"/>
+            <param name="semanticHint" value="3019"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Enumeration_3020"
+               name="%metatype.name.Enumeration_3020"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Enumeration"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.EnumerationEditHelper">
+            <param name="semanticHint" value="3020"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Interface_3021"
+               name="%metatype.name.Interface_3021"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Interface"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.InterfaceEditHelper">
+            <param name="semanticHint" value="3021"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Field_3022"
+               name="%metatype.name.Field_3022"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Field"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.FieldEditHelper">
+            <param name="semanticHint" value="3022"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Method_3023"
+               name="%metatype.name.Method_3023"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Method"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.MethodEditHelper">
+            <param name="semanticHint" value="3023"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/annotations">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Annotation_3024"
+               name="%metatype.name.Annotation_3024"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Annotation"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.AnnotationEditHelper">
+            <param name="semanticHint" value="3024"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.PackageDescriptor_3025"
+               name="%metatype.name.PackageDescriptor_3025"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="PackageDescriptor"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.PackageDescriptorEditHelper">
+            <param name="semanticHint" value="3025"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Constructor_3026"
+               name="%metatype.name.Constructor_3026"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Constructor"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.ConstructorEditHelper">
+            <param name="semanticHint" value="3026"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.Block_3027"
+               name="%metatype.name.Block_3027"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Block"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.BlockEditHelper">
+            <param name="semanticHint" value="3027"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <specializationType
+               id="org.emftext.language.java.diagram.Enumeration_3012"
+               name="%metatype.name.Enumeration_3012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.emftext.language.java.diagram.Enumeration_3020"/>
+            <param name="semanticHint" value="3012"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <specializationType
+               id="org.emftext.language.java.diagram.Interface_3013"
+               name="%metatype.name.Interface_3013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.emftext.language.java.diagram.Interface_3021"/>
+            <param name="semanticHint" value="3013"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/annotations">
+         <specializationType
+               id="org.emftext.language.java.diagram.Annotation_3014"
+               name="%metatype.name.Annotation_3014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.emftext.language.java.diagram.Annotation_3024"/>
+            <param name="semanticHint" value="3014"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <specializationType
+               id="org.emftext.language.java.diagram.PackageDescriptor_3015"
+               name="%metatype.name.PackageDescriptor_3015"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.emftext.language.java.diagram.PackageDescriptor_3025"/>
+            <param name="semanticHint" value="3015"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.ClassifierImport_3016"
+               name="%metatype.name.ClassifierImport_3016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ClassifierImport"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.ClassifierImportEditHelper">
+            <param name="semanticHint" value="3016"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <metamodelType
+               id="org.emftext.language.java.diagram.StaticImport_3017"
+               name="%metatype.name.StaticImport_3017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StaticImport"
+               edithelper="org.emftext.language.java.diagram.edit.helpers.StaticImportEditHelper">
+            <param name="semanticHint" value="3017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <specializationType
+               id="org.emftext.language.java.diagram.ClassifierImportClassifiers_4001"
+               name="%metatype.name.ClassifierImportClassifiers_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4001"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/java/core">
+         <specializationType
+               id="org.emftext.language.java.diagram.StaticImportStaticMembers_4002"
+               name="%metatype.name.StaticImportStaticMembers_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4002"/>
+         </specializationType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="org.emftext.language.java.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="org.emftext.language.java.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="org.emftext.language.java.diagram.TypeContext">
+         <elementType ref="org.emftext.language.java.diagram.Package_1000"/>
+         <elementType ref="org.emftext.language.java.diagram.CompilationUnit_2001"/>
+         <elementType ref="org.emftext.language.java.diagram.Class_3001"/>
+         <elementType ref="org.emftext.language.java.diagram.AnnotationMethod_3018"/>
+         <elementType ref="org.emftext.language.java.diagram.Class_3019"/>
+         <elementType ref="org.emftext.language.java.diagram.Enumeration_3020"/>
+         <elementType ref="org.emftext.language.java.diagram.Interface_3021"/>
+         <elementType ref="org.emftext.language.java.diagram.Field_3022"/>
+         <elementType ref="org.emftext.language.java.diagram.Method_3023"/>
+         <elementType ref="org.emftext.language.java.diagram.Annotation_3024"/>
+         <elementType ref="org.emftext.language.java.diagram.PackageDescriptor_3025"/>
+         <elementType ref="org.emftext.language.java.diagram.Constructor_3026"/>
+         <elementType ref="org.emftext.language.java.diagram.Block_3027"/>
+         <elementType ref="org.emftext.language.java.diagram.Enumeration_3012"/>
+         <elementType ref="org.emftext.language.java.diagram.Interface_3013"/>
+         <elementType ref="org.emftext.language.java.diagram.Annotation_3014"/>
+         <elementType ref="org.emftext.language.java.diagram.PackageDescriptor_3015"/>
+         <elementType ref="org.emftext.language.java.diagram.ClassifierImport_3016"/>
+         <elementType ref="org.emftext.language.java.diagram.StaticImport_3017"/>
+         <elementType ref="org.emftext.language.java.diagram.ClassifierImportClassifiers_4001"/>
+         <elementType ref="org.emftext.language.java.diagram.StaticImportStaticMembers_4002"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.emftext.language.java.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="org.emftext.language.java.diagram"
+           properties="isURIEditorInput"
+           class="org.emftext.language.java.diagram.part.JavaUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.emftext.language.java.diagram.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="org.emftext.language.java.diagram"
+           properties="isShortcut"
+           class="org.emftext.language.java.diagram.part.JavaShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.emftext.language.java.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="org.emftext.language.java.diagram"
+           properties="isDomainModelElement"
+           class="org.emftext.language.java.diagram.part.JavaDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="org.emftext.language.java.diagram.resourceContent"/>
+			<contentExtension pattern="org.emftext.language.java.diagram.domainResourceContent"/>
+            <contentExtension pattern="org.emftext.language.java.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="org.emftext.language.java.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="org.emftext.language.java.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="org.emftext.language.java.diagram.navigator.JavaNavigatorContentProvider" 
+            labelProvider="org.emftext.language.java.diagram.navigator.JavaNavigatorLabelProvider"
+            icon="icons/obj16/CoreDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="java_diagram"/>
+               </and>
+               <instanceof value="org.emftext.language.java.diagram.navigator.JavaAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.emftext.language.java.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="org.emftext.language.java.diagram.navigator.JavaAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.emftext.language.java.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="org.emftext.language.java.diagram.navigatorSorter" 
+               class="org.emftext.language.java.diagram.navigator.JavaNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="java_diagram"/>
+                  </and>
+                  <instanceof value="org.emftext.language.java.diagram.navigator.JavaAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="org.emftext.language.java.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="org.emftext.language.java.diagram.navigator.JavaDomainNavigatorContentProvider" 
+            labelProvider="org.emftext.language.java.diagram.navigator.JavaDomainNavigatorLabelProvider"
+            icon="icons/obj16/CoreDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="java"/>
+               </and>
+               <and>
+                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
+                  <test property="org.emftext.language.java.diagram.isDomainModelElement"/>
+               </and>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <and>
+       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
+       	       <test property="org.emftext.language.java.diagram.isDomainModelElement"/>
+       	    </and>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="org.emftext.language.java.diagram.navigatorActionProvider"
+            class="org.emftext.language.java.diagram.navigator.JavaNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="org.emftext.language.java.diagram.navigator.JavaAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.emftext.language.java.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="org.emftext.language.java.diagram.navigatorLinkHelper"
+            class="org.emftext.language.java.diagram.navigator.JavaNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="org.emftext.language.java.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="org.emftext.language.java.diagram.navigator.JavaAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="org.emftext.language.java.diagram.part.JavaDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="org.emftext.language.java.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="org.emftext.language.java.diagram.updateDiagram"
+         contextId="org.emftext.language.java.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+</plugin>
