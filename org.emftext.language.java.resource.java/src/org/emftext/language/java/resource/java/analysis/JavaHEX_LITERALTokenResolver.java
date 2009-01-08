@@ -16,13 +16,13 @@ public class JavaHEX_LITERALTokenResolver extends JavaBasedTokenResolver impleme
 
 	@Override
 	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
-		//System.out.println("JavaHEX_LITERALTokenResolver.resolve("+lexem+") : " + (result != null ? result.getClass() : "null"));
 		if (lexem.startsWith("0x")) {
 			lexem = lexem.substring(2);
 		}
 		try {
-			return JavaDECIMAL_LITERALTokenResolver.parseInteger(lexem, resource);
+			return JavaDECIMAL_LITERALTokenResolver.parseInteger(lexem, 16);
 		} catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
 			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + resource.getURI());
 			return null;
 		}

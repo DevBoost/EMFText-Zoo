@@ -6,6 +6,7 @@ public class Literals {
 		long i4 = 007L;
 		long i5 = 0x1ffffffffffff00L;
 		long i6 = 0xFFFFFFFFFFFFFFFFl;
+		long i7 = 0xBF;
 		double f1 = 1.5;
 		char c = 'a';
 		String s = "abc";
@@ -31,6 +32,10 @@ public class Literals {
 	public int i2 = 0x1;
 	public long i3 = 010l;
 	public long i4 = 000L;
+	public long i5 = 0x1ffffffffffff00L;
+	public long i6 = 0xFFFFFFFFFFFFFFFFl;
+	public long i7 = 0xFF;
+	public long i8 = 10L;
 	public double f1 = 1.5;
 	public char c = 'a';
 	public String s = "abc";

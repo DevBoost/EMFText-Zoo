@@ -140,6 +140,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 			Object obj = iter.next();
 			if (obj instanceof FloatingPointLiteral) literal = (FloatingPointLiteral)obj;
 		}
+		assertNotNull(member.getName() + " is not a double field.", literal);
 		assertType(literal, FloatingPointLiteral.class);
 		FloatingPointLiteral initLiteral = (FloatingPointLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
@@ -911,7 +912,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Literals";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 14);
+		assertMemberCount(clazz, 18);
 		
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
@@ -919,15 +920,23 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertIsIntegerField(members.get(2), 1);
 		assertIsIntegerField(members.get(3), 8);
 		assertIsIntegerField(members.get(4), 0);
-		assertIsDoubleField(members.get(5), 1.5);
-		assertIsCharField(members.get(6), 'a');
-		assertIsStringField(members.get(7), "abc");
-		assertIsBooleanField(members.get(8), false);
-		assertIsBooleanField(members.get(9), true);
+		assertIsDoubleField(members.get(9), 1.5);
+		assertIsCharField(members.get(10), 'a');
+		assertIsStringField(members.get(11), "abc");
+		assertIsBooleanField(members.get(12), false);
+		assertIsBooleanField(members.get(13), true);
 		
 		Member maxLongField = findElementByName(members, "maxLong");
 		assertNotNull(maxLongField);
 		assertIsIntegerField(maxLongField, 0xffffffffffffffffL);
+		
+		Member i7Field = findElementByName(members, "i7");
+		assertNotNull(i7Field);
+		assertIsIntegerField(i7Field, 0xffL);
+		
+		Member i8Field = findElementByName(members, "i8");
+		assertNotNull(i8Field);
+		assertIsIntegerField(i8Field, 10);
 		
 		parseAndReprint(filename);
 	}
