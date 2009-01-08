@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.core.Classifier;
+import org.emftext.language.java.core.CompilationUnit;
 import org.emftext.language.java.core.CoreFactory;
 import org.emftext.language.java.core.Package;
 
@@ -31,7 +32,15 @@ public class JavaPackageResourceImpl extends ResourceImpl {
 			EList<Classifier> classifierList = JavaClasspath.INSTANCE.getClassifiers(
 					packageName, "*");
 			
-			myPackage.getClassifiers().addAll(classifierList);
+			// TODO adapted to new package abstraction
+	
+//			for (Classifier classifier : classifierList) {
+//				if (classifier.eContainer() instanceof CompilationUnit) {
+//					myPackage.getCompilationUnits().add((CompilationUnit) classifier.eContainer());
+//				}
+//					
+//			}
+			
 			
 			getContents().add(myPackage);
 	    }
