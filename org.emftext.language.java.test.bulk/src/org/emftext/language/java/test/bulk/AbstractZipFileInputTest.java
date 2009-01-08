@@ -34,7 +34,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		
 		public void runTest() {
 			try {
-				CompilationUnit unit = parseResource(zipFile, entry, ignoreSemanticErrors());
+				CompilationUnit unit = parseResource(zipFile, entry, ignoreSemanticErrors(entry.toString()));
 				assertNotNull(unit);
 			} catch (Exception e) {
 				e.printStackTrace();
