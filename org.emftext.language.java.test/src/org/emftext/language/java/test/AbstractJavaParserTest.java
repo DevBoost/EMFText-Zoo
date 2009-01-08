@@ -1,6 +1,5 @@
 package org.emftext.language.java.test;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -30,15 +28,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.Document;
 import org.eclipse.text.edits.MalformedTreeException;
-import org.eclipse.text.edits.TextEdit;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.core.Classifier;
 import org.emftext.language.java.core.CompilationUnit;
@@ -338,35 +331,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			ex.printStackTrace();
 		}
 		return contents.toString();
-	}
-
-	private static String normalize(String code) throws MalformedTreeException,
-			BadLocationException, IOException {
-		Properties options = new Properties();
-		BufferedInputStream stream = null;
-		try {
-			stream = new BufferedInputStream(new FileInputStream(new File(
-					"./formatter.cfg")));
-			options.load(stream);
-		} finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {
-				}
-			}
-		}
-		CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(options);
-		Document doc = new Document();
-		doc.set(code);
-
-		TextEdit edit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT,
-				code, 0, code.length(), 0, null);
-		
-		if (edit != null) {
-			edit.apply(doc);
-		}
-		return doc.get();
 	}
 
 	protected static List<File> collectAllFilesRecursive(File startFolder)
