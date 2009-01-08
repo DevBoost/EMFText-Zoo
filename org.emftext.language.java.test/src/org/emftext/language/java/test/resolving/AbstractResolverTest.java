@@ -77,7 +77,7 @@ public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 	}
 	
 	@Override
-	protected boolean ignoreSemanticErrors() {
+	protected boolean ignoreSemanticErrors(String filename) {
 		return false;
 	}
 

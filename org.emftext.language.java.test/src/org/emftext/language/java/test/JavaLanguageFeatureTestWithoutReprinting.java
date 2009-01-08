@@ -6,8 +6,17 @@ package org.emftext.language.java.test;
  */
 public class JavaLanguageFeatureTestWithoutReprinting extends JavaLanguageFeatureTest {
 
+	public JavaLanguageFeatureTestWithoutReprinting() throws Exception {
+		super();
+	}
+
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
+		return true;
+	}
+	
+	@Override
+	protected boolean ignoreSemanticErrors(String filename) {
 		return true;
 	}
 }

@@ -57,6 +57,10 @@ import pkg.EscapedStrings;
  */
 public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
+	public JavaLanguageFeatureTest() throws Exception {
+		super();
+	}
+
 	private static final String JAVA_FILE_EXTENSION = ".java";
 
 	protected static final String TEST_INPUT_FOLDER = "input";
@@ -589,6 +593,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertEquals(typename + " implements two interfaces.", 2, enumeration
 				.getImplements().size());
 
+		registerInClassPath("IOneMethod" + JAVA_FILE_EXTENSION);
 		parseAndReprint(filename);
 	}
 
@@ -828,6 +833,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Import1";
 		String filename = typename + JAVA_FILE_EXTENSION;
 
+		registerInClassPath("Import2" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 	
@@ -1266,16 +1273,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertMemberCount(clazz, 2);
 		
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
-	}
-	
-	/**
-	 * This test should run after the others, when all Java sources are registerd.
-	 * 
-	 * @throws Exception
-	 */
-	@Test
-	public void testResolveProxies() throws Exception {
-		assertResolveAllProxies();
 	}
 
 	@Test

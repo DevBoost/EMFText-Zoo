@@ -140,7 +140,9 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(ArrayType node, Object other) {
-		
+		if(!super.match(node, other)) {
+			//TODO
+		}
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -290,8 +292,20 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(ImportDeclaration node, Object other) {
+		boolean result = super.match(node, other);
 		
-		return setDiff(node, other, super.match(node, other));
+		if (result == true) {
+			return true;
+		}
+		if (!(other instanceof ImportDeclaration)) {
+			return setDiff(node, other, result); 
+		}
+		//if the original was *, but only one Class to import existed
+		if(node.toString().contains(".*")) {
+			result = true;
+		}
+		
+		return true;
 	}
 
 	@Override
@@ -458,8 +472,16 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(SimpleType node, Object other) {
-		
-		return setDiff(node, other, super.match(node, other));
+		//CHANGED
+		if (other instanceof SimpleType) {
+			SimpleType o = (SimpleType) other;
+			boolean result = safeSubtreeMatch(node.getName(), o.getName());
+			return setDiff(node, other, result);
+		}
+		if (other instanceof ArrayType) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -599,7 +621,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		
 		return setDiff(node, other, super.match(node, other));
 	}
-
+	
+	
 	protected String diff = "";
 	
 	protected boolean setDiff(Object o1, Object o2, boolean result) {
