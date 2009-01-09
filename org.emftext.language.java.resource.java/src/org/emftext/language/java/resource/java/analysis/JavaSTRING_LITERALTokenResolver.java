@@ -26,7 +26,10 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 		// escape sequences: \b \t \n \f \r \" \' \\
 		// octal characters: \0 to \377
 		// unicode characters (e.g., \u0000)
-		lexem = unescapeEscapedCharacters(lexem);
+		
+		//TODO @mseifert: either implement escaping (inverse of unescapeEscapedCharacters) 
+		//     for deResolve or leave the below .
+		//lexem = unescapeEscapedCharacters(lexem);
 		
 		return lexem;
 	}

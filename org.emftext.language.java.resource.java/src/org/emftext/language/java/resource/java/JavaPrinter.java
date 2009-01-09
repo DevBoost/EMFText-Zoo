@@ -12,7 +12,7 @@ import org.emftext.language.java.expressions.UnaryExpressionNotPlusMinus;
 public class JavaPrinter extends JavaPrinterBase {
 
 	public JavaPrinter(java.io.OutputStream o, org.emftext.runtime.resource.ITextResource resource) {
-		super(o, resource);System.out.println("");
+		super(o, resource);
 	}
 	
 	public void printUnaryExpressionNotPlusMinus(UnaryExpressionNotPlusMinus element, java.lang.String outertab, java.io.PrintWriter out){

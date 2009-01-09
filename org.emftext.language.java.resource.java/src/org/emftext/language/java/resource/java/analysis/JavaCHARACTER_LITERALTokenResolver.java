@@ -10,6 +10,7 @@ public class JavaCHARACTER_LITERALTokenResolver extends JavaBasedTokenResolver i
 	@Override
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = super.deResolve(value,feature,container);
+		result = '\'' + result + '\'';
 		return result;
 	}
 
