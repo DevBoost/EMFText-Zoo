@@ -18,6 +18,7 @@ import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
@@ -811,6 +812,13 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		} else if (javaClassifier instanceof Annotation) {
 			//nothing
 			//Annotations do not have super classes
+		} else if (javaClassifier instanceof Enumeration) {
+			//enumerations inherit from java.lang.Enum
+			Class enumClass = (Class) EcoreUtil.resolve(
+					JavaClasspath.INSTANCE.getClassifier("java.lang.Enum"), myResource);
+			superClassifierList.add(enumClass);
+			collectAllSuperClassifiers(enumClass, superClassifierList);
+			
 		} else {
 			//there are no other kinds of classifiers 
 			assert(false);
