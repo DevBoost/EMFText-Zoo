@@ -12,6 +12,8 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.containers.ContainersFactory;
 
+// TODO Jendrik: check if this class is needed any more 
+// or is better replaced by CustomPkgResourceImpl.java
 public class JavaPackageResourceImpl extends ResourceImpl {
 
 	protected Package myPackage = null;
