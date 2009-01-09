@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
-import org.emftext.language.java.core.CorePackage;
 import org.emftext.language.java.diagram.edit.parts.AnnotationEditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationMethodEditPart;
 import org.emftext.language.java.diagram.edit.parts.BlockEditPart;
@@ -23,6 +22,7 @@ import org.emftext.language.java.diagram.edit.parts.PackageDescriptorEditPart;
 import org.emftext.language.java.diagram.part.JavaDiagramUpdater;
 import org.emftext.language.java.diagram.part.JavaNodeDescriptor;
 import org.emftext.language.java.diagram.part.JavaVisualIDRegistry;
+import org.emftext.language.java.members.MembersPackage;
 
 /**
  * @generated
@@ -42,7 +42,7 @@ public class EnumerationEnumerationMembersCompartmentCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = JavaDiagramUpdater
-				.getEnumerationEnumerationMembersCompartment_7005SemanticChildren(
+				.getEnumerationEnumerationMembersCompartment_7015SemanticChildren(
 						viewObject).iterator(); it.hasNext();) {
 			result.add(((JavaNodeDescriptor) it.next()).getModelElement());
 		}
@@ -85,7 +85,7 @@ public class EnumerationEnumerationMembersCompartmentCanonicalEditPolicy extends
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(CorePackage.eINSTANCE
+			myFeaturesToSynchronize.add(MembersPackage.eINSTANCE
 					.getMemberContainer_Members());
 		}
 		return myFeaturesToSynchronize;

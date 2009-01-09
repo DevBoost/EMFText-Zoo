@@ -463,107 +463,107 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Class_3001_incominglinks;
+	public static String NavigatorGroupName_Class_3030_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_AnnotationMethod_3018_incominglinks;
+	public static String NavigatorGroupName_AnnotationMethod_3031_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Class_3019_incominglinks;
+	public static String NavigatorGroupName_Class_3032_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Enumeration_3020_incominglinks;
+	public static String NavigatorGroupName_Enumeration_3033_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Interface_3021_incominglinks;
+	public static String NavigatorGroupName_Interface_3034_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Field_3022_incominglinks;
+	public static String NavigatorGroupName_Field_3035_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Method_3023_incominglinks;
+	public static String NavigatorGroupName_Method_3036_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Annotation_3024_incominglinks;
+	public static String NavigatorGroupName_Annotation_3037_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_PackageDescriptor_3025_incominglinks;
+	public static String NavigatorGroupName_PackageDescriptor_3038_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Constructor_3026_incominglinks;
+	public static String NavigatorGroupName_Constructor_3039_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Block_3027_incominglinks;
+	public static String NavigatorGroupName_Block_3040_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Enumeration_3012_incominglinks;
+	public static String NavigatorGroupName_Enumeration_3041_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Interface_3013_incominglinks;
+	public static String NavigatorGroupName_Interface_3042_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Annotation_3014_incominglinks;
+	public static String NavigatorGroupName_Annotation_3043_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_PackageDescriptor_3015_incominglinks;
+	public static String NavigatorGroupName_PackageDescriptor_3044_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_ClassifierImport_3016_outgoinglinks;
+	public static String NavigatorGroupName_ClassifierImport_3045_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_StaticImport_3017_outgoinglinks;
+	public static String NavigatorGroupName_StaticImport_3046_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_ClassifierImportClassifiers_4001_target;
+	public static String NavigatorGroupName_ClassifierImportClassifiers_4003_target;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_ClassifierImportClassifiers_4001_source;
+	public static String NavigatorGroupName_ClassifierImportClassifiers_4003_source;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_StaticImportStaticMembers_4002_target;
+	public static String NavigatorGroupName_StaticImportStaticMembers_4004_target;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_StaticImportStaticMembers_4002_source;
+	public static String NavigatorGroupName_StaticImportStaticMembers_4004_source;
 
 	/**
 	 * @generated

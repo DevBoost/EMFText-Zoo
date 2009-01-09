@@ -58,7 +58,7 @@ public class PackageDescriptorName2EditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 5015;
+	public static final int VISUAL_ID = 5045;
 
 	/**
 	 * @generated
@@ -306,7 +306,7 @@ public class PackageDescriptorName2EditPart extends CompartmentEditPart
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
 			IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-					JavaElementTypes.PackageDescriptor_3015,
+					JavaElementTypes.PackageDescriptor_3044,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

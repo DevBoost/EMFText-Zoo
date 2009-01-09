@@ -2,7 +2,7 @@ package org.emftext.language.java;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.containers.CompilationUnit;
 
 public class JavaUniquePathConstructor {
 	

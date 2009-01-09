@@ -15,14 +15,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.CompilationUnit;
-import org.emftext.language.java.core.CoreFactory;
-import org.emftext.language.java.core.Import;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.MemberContainer;
-import org.emftext.language.java.core.PackageDescriptor;
-import org.emftext.language.java.core.PackageOrClassifierReference;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ClassifiersFactory;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.PackageDescriptor;
+import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.references.PackageOrClassifierReference;
 
 public class JavaClasspath {
 
@@ -184,7 +184,7 @@ public class JavaClasspath {
 			
 			for (String classifierName : packageClassifierMap.get(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
-					InternalEObject classifierProxy = (InternalEObject) CoreFactory.eINSTANCE.createClass();
+					InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 					String fullName = null;
 					if ("".equals(packageName) || ".".equals(packageName)) {
 						fullName = classifierName;
@@ -230,7 +230,7 @@ public class JavaClasspath {
 	}
 	
 	public Classifier getClassifier(String fullQualifiedName) {
-		InternalEObject classifierProxy = (InternalEObject) CoreFactory.eINSTANCE.createClass();
+		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
 		return (Classifier) classifierProxy;

@@ -19,7 +19,7 @@ public class StaticImportStaticMembersEditPart extends ConnectionNodeEditPart
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 4002;
+	public static final int VISUAL_ID = 4004;
 
 	/**
 	 * @generated

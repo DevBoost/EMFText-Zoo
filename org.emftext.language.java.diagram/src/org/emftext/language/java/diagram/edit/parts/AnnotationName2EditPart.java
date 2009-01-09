@@ -58,7 +58,7 @@ public class AnnotationName2EditPart extends CompartmentEditPart implements
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 5014;
+	public static final int VISUAL_ID = 5044;
 
 	/**
 	 * @generated
@@ -306,7 +306,7 @@ public class AnnotationName2EditPart extends CompartmentEditPart implements
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
 			IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-					JavaElementTypes.Annotation_3014, getParserElement(),
+					JavaElementTypes.Annotation_3043, getParserElement(),
 					parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

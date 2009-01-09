@@ -45,11 +45,11 @@ public class PackageDescriptorItemSemanticEditPolicy extends
 	 */
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (JavaElementTypes.ClassifierImportClassifiers_4001 == req
+		if (JavaElementTypes.ClassifierImportClassifiers_4003 == req
 				.getElementType()) {
 			return null;
 		}
-		if (JavaElementTypes.StaticImportStaticMembers_4002 == req
+		if (JavaElementTypes.StaticImportStaticMembers_4004 == req
 				.getElementType()) {
 			return null;
 		}
@@ -61,12 +61,12 @@ public class PackageDescriptorItemSemanticEditPolicy extends
 	 */
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (JavaElementTypes.ClassifierImportClassifiers_4001 == req
+		if (JavaElementTypes.ClassifierImportClassifiers_4003 == req
 				.getElementType()) {
 			return getGEFWrapper(new ClassifierImportClassifiersCreateCommand(
 					req, req.getSource(), req.getTarget()));
 		}
-		if (JavaElementTypes.StaticImportStaticMembers_4002 == req
+		if (JavaElementTypes.StaticImportStaticMembers_4004 == req
 				.getElementType()) {
 			return getGEFWrapper(new StaticImportStaticMembersCreateCommand(
 					req, req.getSource(), req.getTarget()));

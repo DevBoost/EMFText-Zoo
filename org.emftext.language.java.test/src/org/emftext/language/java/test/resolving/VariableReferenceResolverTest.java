@@ -2,14 +2,14 @@ package org.emftext.language.java.test.resolving;
 
 import java.util.List;
 
-import org.emftext.language.java.core.Block;
-import org.emftext.language.java.core.Field;
-import org.emftext.language.java.core.LocalVariable;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.Method;
+import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.Method;
+import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.statements.Statement;
+import org.emftext.language.java.variables.LocalVariable;
 import org.junit.Test;
 
 public class VariableReferenceResolverTest extends AbstractResolverTest {
@@ -17,7 +17,7 @@ public class VariableReferenceResolverTest extends AbstractResolverTest {
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "VariableReferencing";
-		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		
 		List<Member> members = clazz.getMembers();

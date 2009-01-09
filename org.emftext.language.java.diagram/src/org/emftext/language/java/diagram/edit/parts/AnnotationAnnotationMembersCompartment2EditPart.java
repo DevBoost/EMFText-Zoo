@@ -21,7 +21,7 @@ public class AnnotationAnnotationMembersCompartment2EditPart extends
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 7010;
+	public static final int VISUAL_ID = 7020;
 
 	/**
 	 * @generated

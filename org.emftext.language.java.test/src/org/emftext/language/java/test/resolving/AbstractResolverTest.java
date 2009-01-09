@@ -1,24 +1,24 @@
 package org.emftext.language.java.test.resolving;
 
-import org.emftext.language.java.core.Field;
-import org.emftext.language.java.core.LocalVariable;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.Method;
-import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.core.Reference;
-import org.emftext.language.java.core.ReferenceableElement;
 import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.Method;
+import org.emftext.language.java.references.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.test.AbstractJavaParserTest;
+import org.emftext.language.java.variables.LocalVariable;
 
 public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 
 	protected static final String TEST_INPUT_FOLDER_RESOLVING = "input/resolving/";
 
-	protected org.emftext.language.java.core.Class assertParsesToClass(String typename) throws Exception {
-		return assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.core.Class.class);
+	protected org.emftext.language.java.classifiers.Class assertParsesToClass(String typename) throws Exception {
+		return assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.classifiers.Class.class);
 	}
 	
 	protected Field assertIsField(Member member, String expectedName) {

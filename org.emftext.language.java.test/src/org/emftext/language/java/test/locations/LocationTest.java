@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.Method;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.Method;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 import org.emftext.runtime.resource.ILocationMap;
 import org.emftext.runtime.resource.ITextResource;
@@ -30,7 +30,7 @@ public class LocationTest extends AbstractJavaParserTest {
 	public void testElementLocations() {
 		String typename = "Location";
 		try {
-			org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+			org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 			
 			List<Member> members = clazz.getMembers();
 			// check location of the method x

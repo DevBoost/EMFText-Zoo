@@ -17,7 +17,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 import org.eclipse.ui.navigator.ICommonLabelProvider;
-import org.emftext.language.java.core.Package;
+import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.diagram.edit.parts.Annotation2EditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationEditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationMethodEditPart;
@@ -33,7 +33,6 @@ import org.emftext.language.java.diagram.edit.parts.ClassNameEditPart;
 import org.emftext.language.java.diagram.edit.parts.ClassifierImportClassifiersEditPart;
 import org.emftext.language.java.diagram.edit.parts.ClassifierImportCommentsEditPart;
 import org.emftext.language.java.diagram.edit.parts.ClassifierImportEditPart;
-import org.emftext.language.java.diagram.edit.parts.CompilationUnitCommentsEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitEditPart;
 import org.emftext.language.java.diagram.edit.parts.ConstructorEditPart;
 import org.emftext.language.java.diagram.edit.parts.ConstructorNameEditPart;
@@ -133,67 +132,67 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 		switch (JavaVisualIDRegistry.getVisualID(view)) {
 		case PackageEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Diagram?http://www.emftext.org/java/core?Package", JavaElementTypes.Package_1000); //$NON-NLS-1$
+					"Navigator?Diagram?http://www.emftext.org/java/containers?Package", JavaElementTypes.Package_1000); //$NON-NLS-1$
 		case CompilationUnitEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://www.emftext.org/java/core?CompilationUnit", JavaElementTypes.CompilationUnit_2001); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.emftext.org/java/containers?CompilationUnit", JavaElementTypes.CompilationUnit_2002); //$NON-NLS-1$
 		case ClassEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Class", JavaElementTypes.Class_3001); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Class", JavaElementTypes.Class_3030); //$NON-NLS-1$
 		case AnnotationMethodEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/annotations?AnnotationMethod", JavaElementTypes.AnnotationMethod_3018); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/annotations?AnnotationMethod", JavaElementTypes.AnnotationMethod_3031); //$NON-NLS-1$
 		case Class2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Class", JavaElementTypes.Class_3019); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Class", JavaElementTypes.Class_3032); //$NON-NLS-1$
 		case EnumerationEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Enumeration", JavaElementTypes.Enumeration_3020); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Enumeration", JavaElementTypes.Enumeration_3033); //$NON-NLS-1$
 		case InterfaceEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Interface", JavaElementTypes.Interface_3021); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Interface", JavaElementTypes.Interface_3034); //$NON-NLS-1$
 		case FieldEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Field", JavaElementTypes.Field_3022); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/members?Field", JavaElementTypes.Field_3035); //$NON-NLS-1$
 		case MethodEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Method", JavaElementTypes.Method_3023); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/members?Method", JavaElementTypes.Method_3036); //$NON-NLS-1$
 		case AnnotationEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/annotations?Annotation", JavaElementTypes.Annotation_3024); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Annotation", JavaElementTypes.Annotation_3037); //$NON-NLS-1$
 		case PackageDescriptorEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?PackageDescriptor", JavaElementTypes.PackageDescriptor_3025); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/containers?PackageDescriptor", JavaElementTypes.PackageDescriptor_3038); //$NON-NLS-1$
 		case ConstructorEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Constructor", JavaElementTypes.Constructor_3026); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/members?Constructor", JavaElementTypes.Constructor_3039); //$NON-NLS-1$
 		case BlockEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Block", JavaElementTypes.Block_3027); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/statements?Block", JavaElementTypes.Block_3040); //$NON-NLS-1$
 		case Enumeration2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Enumeration", JavaElementTypes.Enumeration_3012); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Enumeration", JavaElementTypes.Enumeration_3041); //$NON-NLS-1$
 		case Interface2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?Interface", JavaElementTypes.Interface_3013); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Interface", JavaElementTypes.Interface_3042); //$NON-NLS-1$
 		case Annotation2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/annotations?Annotation", JavaElementTypes.Annotation_3014); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/classifiers?Annotation", JavaElementTypes.Annotation_3043); //$NON-NLS-1$
 		case PackageDescriptor2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?PackageDescriptor", JavaElementTypes.PackageDescriptor_3015); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/containers?PackageDescriptor", JavaElementTypes.PackageDescriptor_3044); //$NON-NLS-1$
 		case ClassifierImportEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?ClassifierImport", JavaElementTypes.ClassifierImport_3016); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/imports?ClassifierImport", JavaElementTypes.ClassifierImport_3045); //$NON-NLS-1$
 		case StaticImportEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/java/core?StaticImport", JavaElementTypes.StaticImport_3017); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/java/imports?StaticImport", JavaElementTypes.StaticImport_3046); //$NON-NLS-1$
 		case ClassifierImportClassifiersEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://www.emftext.org/java/core?ClassifierImport?classifiers", JavaElementTypes.ClassifierImportClassifiers_4001); //$NON-NLS-1$
+					"Navigator?Link?http://www.emftext.org/java/imports?ClassifierImport?classifiers", JavaElementTypes.ClassifierImportClassifiers_4003); //$NON-NLS-1$
 		case StaticImportStaticMembersEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://www.emftext.org/java/core?StaticImport?staticMembers", JavaElementTypes.StaticImportStaticMembers_4002); //$NON-NLS-1$
+					"Navigator?Link?http://www.emftext.org/java/imports?StaticImport?staticMembers", JavaElementTypes.StaticImportStaticMembers_4004); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -257,45 +256,45 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 		case PackageEditPart.VISUAL_ID:
 			return getPackage_1000Text(view);
 		case CompilationUnitEditPart.VISUAL_ID:
-			return getCompilationUnit_2001Text(view);
+			return getCompilationUnit_2002Text(view);
 		case ClassEditPart.VISUAL_ID:
-			return getClass_3001Text(view);
+			return getClass_3030Text(view);
 		case AnnotationMethodEditPart.VISUAL_ID:
-			return getAnnotationMethod_3018Text(view);
+			return getAnnotationMethod_3031Text(view);
 		case Class2EditPart.VISUAL_ID:
-			return getClass_3019Text(view);
+			return getClass_3032Text(view);
 		case EnumerationEditPart.VISUAL_ID:
-			return getEnumeration_3020Text(view);
+			return getEnumeration_3033Text(view);
 		case InterfaceEditPart.VISUAL_ID:
-			return getInterface_3021Text(view);
+			return getInterface_3034Text(view);
 		case FieldEditPart.VISUAL_ID:
-			return getField_3022Text(view);
+			return getField_3035Text(view);
 		case MethodEditPart.VISUAL_ID:
-			return getMethod_3023Text(view);
+			return getMethod_3036Text(view);
 		case AnnotationEditPart.VISUAL_ID:
-			return getAnnotation_3024Text(view);
+			return getAnnotation_3037Text(view);
 		case PackageDescriptorEditPart.VISUAL_ID:
-			return getPackageDescriptor_3025Text(view);
+			return getPackageDescriptor_3038Text(view);
 		case ConstructorEditPart.VISUAL_ID:
-			return getConstructor_3026Text(view);
+			return getConstructor_3039Text(view);
 		case BlockEditPart.VISUAL_ID:
-			return getBlock_3027Text(view);
+			return getBlock_3040Text(view);
 		case Enumeration2EditPart.VISUAL_ID:
-			return getEnumeration_3012Text(view);
+			return getEnumeration_3041Text(view);
 		case Interface2EditPart.VISUAL_ID:
-			return getInterface_3013Text(view);
+			return getInterface_3042Text(view);
 		case Annotation2EditPart.VISUAL_ID:
-			return getAnnotation_3014Text(view);
+			return getAnnotation_3043Text(view);
 		case PackageDescriptor2EditPart.VISUAL_ID:
-			return getPackageDescriptor_3015Text(view);
+			return getPackageDescriptor_3044Text(view);
 		case ClassifierImportEditPart.VISUAL_ID:
-			return getClassifierImport_3016Text(view);
+			return getClassifierImport_3045Text(view);
 		case StaticImportEditPart.VISUAL_ID:
-			return getStaticImport_3017Text(view);
+			return getStaticImport_3046Text(view);
 		case ClassifierImportClassifiersEditPart.VISUAL_ID:
-			return getClassifierImportClassifiers_4001Text(view);
+			return getClassifierImportClassifiers_4003Text(view);
 		case StaticImportStaticMembersEditPart.VISUAL_ID:
-			return getStaticImportStaticMembers_4002Text(view);
+			return getStaticImportStaticMembers_4004Text(view);
 		}
 		return getUnknownElementText(view);
 	}
@@ -317,31 +316,16 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getCompilationUnit_2001Text(View view) {
-		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.CompilationUnit_2001,
-				(view.getElement() != null ? view.getElement() : view),
-				JavaVisualIDRegistry
-						.getType(CompilationUnitCommentsEditPart.VISUAL_ID));
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
-		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
-		} else {
-			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5018); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
-
+	private String getCompilationUnit_2002Text(View view) {
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getClass_3001Text(View view) {
+	private String getClass_3030Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Class_3001, (view.getElement() != null ? view
+				JavaElementTypes.Class_3030, (view.getElement() != null ? view
 						.getElement() : view), JavaVisualIDRegistry
 						.getType(ClassNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -351,7 +335,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5011); //$NON-NLS-1$
+					"Parser was not found for label " + 5041); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -360,9 +344,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getAnnotationMethod_3018Text(View view) {
+	private String getAnnotationMethod_3031Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.AnnotationMethod_3018,
+				JavaElementTypes.AnnotationMethod_3031,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry
 						.getType(AnnotationMethodNameEditPart.VISUAL_ID));
@@ -373,7 +357,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5019); //$NON-NLS-1$
+					"Parser was not found for label " + 5031); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -382,9 +366,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getClass_3019Text(View view) {
+	private String getClass_3032Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Class_3019, (view.getElement() != null ? view
+				JavaElementTypes.Class_3032, (view.getElement() != null ? view
 						.getElement() : view), JavaVisualIDRegistry
 						.getType(ClassName2EditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -394,7 +378,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5028); //$NON-NLS-1$
+					"Parser was not found for label " + 5040); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -403,9 +387,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getEnumeration_3020Text(View view) {
+	private String getEnumeration_3033Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Enumeration_3020,
+				JavaElementTypes.Enumeration_3033,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry.getType(EnumerationNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -415,7 +399,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5027); //$NON-NLS-1$
+					"Parser was not found for label " + 5039); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -424,9 +408,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getInterface_3021Text(View view) {
+	private String getInterface_3034Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Interface_3021,
+				JavaElementTypes.Interface_3034,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry.getType(InterfaceNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -436,7 +420,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5026); //$NON-NLS-1$
+					"Parser was not found for label " + 5038); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -445,9 +429,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getField_3022Text(View view) {
+	private String getField_3035Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Field_3022, (view.getElement() != null ? view
+				JavaElementTypes.Field_3035, (view.getElement() != null ? view
 						.getElement() : view), JavaVisualIDRegistry
 						.getType(FieldNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -457,7 +441,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5020); //$NON-NLS-1$
+					"Parser was not found for label " + 5032); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -466,9 +450,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getMethod_3023Text(View view) {
+	private String getMethod_3036Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Method_3023, (view.getElement() != null ? view
+				JavaElementTypes.Method_3036, (view.getElement() != null ? view
 						.getElement() : view), JavaVisualIDRegistry
 						.getType(MethodNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -478,7 +462,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5021); //$NON-NLS-1$
+					"Parser was not found for label " + 5033); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -487,9 +471,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getAnnotation_3024Text(View view) {
+	private String getAnnotation_3037Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Annotation_3024,
+				JavaElementTypes.Annotation_3037,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry.getType(AnnotationNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -499,7 +483,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5025); //$NON-NLS-1$
+					"Parser was not found for label " + 5037); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -508,9 +492,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getPackageDescriptor_3025Text(View view) {
+	private String getPackageDescriptor_3038Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.PackageDescriptor_3025,
+				JavaElementTypes.PackageDescriptor_3038,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry
 						.getType(PackageDescriptorNameEditPart.VISUAL_ID));
@@ -521,7 +505,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5022); //$NON-NLS-1$
+					"Parser was not found for label " + 5034); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -530,9 +514,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getConstructor_3026Text(View view) {
+	private String getConstructor_3039Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Constructor_3026,
+				JavaElementTypes.Constructor_3039,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry.getType(ConstructorNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -542,7 +526,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5023); //$NON-NLS-1$
+					"Parser was not found for label " + 5035); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -551,9 +535,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getBlock_3027Text(View view) {
+	private String getBlock_3040Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Block_3027, (view.getElement() != null ? view
+				JavaElementTypes.Block_3040, (view.getElement() != null ? view
 						.getElement() : view), JavaVisualIDRegistry
 						.getType(BlockNameEditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -563,7 +547,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5024); //$NON-NLS-1$
+					"Parser was not found for label " + 5036); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -572,9 +556,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getEnumeration_3012Text(View view) {
+	private String getEnumeration_3041Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Enumeration_3012,
+				JavaElementTypes.Enumeration_3041,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry
 						.getType(EnumerationName2EditPart.VISUAL_ID));
@@ -585,7 +569,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5012); //$NON-NLS-1$
+					"Parser was not found for label " + 5042); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -594,9 +578,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getInterface_3013Text(View view) {
+	private String getInterface_3042Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Interface_3013,
+				JavaElementTypes.Interface_3042,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry.getType(InterfaceName2EditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -606,7 +590,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5013); //$NON-NLS-1$
+					"Parser was not found for label " + 5043); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -615,9 +599,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getAnnotation_3014Text(View view) {
+	private String getAnnotation_3043Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.Annotation_3014,
+				JavaElementTypes.Annotation_3043,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry.getType(AnnotationName2EditPart.VISUAL_ID));
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -627,7 +611,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5014); //$NON-NLS-1$
+					"Parser was not found for label " + 5044); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -636,9 +620,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getPackageDescriptor_3015Text(View view) {
+	private String getPackageDescriptor_3044Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.PackageDescriptor_3015,
+				JavaElementTypes.PackageDescriptor_3044,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry
 						.getType(PackageDescriptorName2EditPart.VISUAL_ID));
@@ -649,7 +633,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5015); //$NON-NLS-1$
+					"Parser was not found for label " + 5045); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -658,9 +642,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getClassifierImport_3016Text(View view) {
+	private String getClassifierImport_3045Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.ClassifierImport_3016,
+				JavaElementTypes.ClassifierImport_3045,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry
 						.getType(ClassifierImportCommentsEditPart.VISUAL_ID));
@@ -671,7 +655,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5016); //$NON-NLS-1$
+					"Parser was not found for label " + 5046); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -680,9 +664,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getStaticImport_3017Text(View view) {
+	private String getStaticImport_3046Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.StaticImport_3017,
+				JavaElementTypes.StaticImport_3046,
 				(view.getElement() != null ? view.getElement() : view),
 				JavaVisualIDRegistry
 						.getType(StaticImportCommentsEditPart.VISUAL_ID));
@@ -693,7 +677,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5017); //$NON-NLS-1$
+					"Parser was not found for label " + 5047); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -702,9 +686,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getClassifierImportClassifiers_4001Text(View view) {
+	private String getClassifierImportClassifiers_4003Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.ClassifierImportClassifiers_4001, (view
+				JavaElementTypes.ClassifierImportClassifiers_4003, (view
 						.getElement() != null ? view.getElement() : view),
 				CommonParserHint.DESCRIPTION);
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -714,7 +698,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 6001); //$NON-NLS-1$
+					"Parser was not found for label " + 6003); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -723,9 +707,9 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getStaticImportStaticMembers_4002Text(View view) {
+	private String getStaticImportStaticMembers_4004Text(View view) {
 		IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-				JavaElementTypes.StaticImportStaticMembers_4002, (view
+				JavaElementTypes.StaticImportStaticMembers_4004, (view
 						.getElement() != null ? view.getElement() : view),
 				CommonParserHint.DESCRIPTION);
 		IParser parser = ParserService.getInstance().getParser(hintAdapter);
@@ -735,7 +719,7 @@ public class JavaNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			JavaDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 6002); //$NON-NLS-1$
+					"Parser was not found for label " + 6004); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 

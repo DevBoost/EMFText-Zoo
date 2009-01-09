@@ -6,8 +6,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.java.annotations.AnnotationsPackage;
-import org.emftext.language.java.core.CorePackage;
-import org.emftext.language.java.core.Package;
+import org.emftext.language.java.classifiers.ClassifiersPackage;
+import org.emftext.language.java.containers.ContainersPackage;
+import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.diagram.edit.parts.Annotation2EditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationAnnotationMembersCompartment2EditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationAnnotationMembersCompartmentEditPart;
@@ -28,7 +29,6 @@ import org.emftext.language.java.diagram.edit.parts.ClassifierImportClassifiersE
 import org.emftext.language.java.diagram.edit.parts.ClassifierImportClassifiersExternalLabelEditPart;
 import org.emftext.language.java.diagram.edit.parts.ClassifierImportCommentsEditPart;
 import org.emftext.language.java.diagram.edit.parts.ClassifierImportEditPart;
-import org.emftext.language.java.diagram.edit.parts.CompilationUnitCommentsEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitCompilationUnitClassifiersCompartmentEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitCompilationUnitImportsCompartmentEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitEditPart;
@@ -59,6 +59,9 @@ import org.emftext.language.java.diagram.edit.parts.StaticImportCommentsEditPart
 import org.emftext.language.java.diagram.edit.parts.StaticImportEditPart;
 import org.emftext.language.java.diagram.edit.parts.StaticImportStaticMembersEditPart;
 import org.emftext.language.java.diagram.edit.parts.StaticImportStaticMembersExternalLabelEditPart;
+import org.emftext.language.java.imports.ImportsPackage;
+import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.statements.StatementsPackage;
 
 /**
  * This registry is used to determine which type of visual object should be
@@ -135,7 +138,7 @@ public class JavaVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (CorePackage.eINSTANCE.getPackage().isSuperTypeOf(
+		if (ContainersPackage.eINSTANCE.getPackage().isSuperTypeOf(
 				domainElement.eClass())
 				&& isDiagram((Package) domainElement)) {
 			return PackageEditPart.VISUAL_ID;
@@ -169,34 +172,34 @@ public class JavaVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case CompilationUnitCompilationUnitImportsCompartmentEditPart.VISUAL_ID:
-			if (CorePackage.eINSTANCE.getClassifierImport().isSuperTypeOf(
+			if (ImportsPackage.eINSTANCE.getClassifierImport().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ClassifierImportEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getStaticImport().isSuperTypeOf(
+			if (ImportsPackage.eINSTANCE.getStaticImport().isSuperTypeOf(
 					domainElement.eClass())) {
 				return StaticImportEditPart.VISUAL_ID;
 			}
 			break;
 		case CompilationUnitCompilationUnitClassifiersCompartmentEditPart.VISUAL_ID:
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ClassEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Enumeration2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Interface2EditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Annotation2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptor2EditPart.VISUAL_ID;
 			}
 			break;
@@ -205,39 +208,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -247,39 +250,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -289,39 +292,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -331,39 +334,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -373,39 +376,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -415,39 +418,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -457,39 +460,39 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
@@ -499,45 +502,45 @@ public class JavaVisualIDRegistry {
 					.isSuperTypeOf(domainElement.eClass())) {
 				return AnnotationMethodEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getClass_().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getClass_().isSuperTypeOf(
 					domainElement.eClass())) {
 				return Class2EditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getEnumeration().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getEnumeration().isSuperTypeOf(
 					domainElement.eClass())) {
 				return EnumerationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getInterface().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getInterface().isSuperTypeOf(
 					domainElement.eClass())) {
 				return InterfaceEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getField().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getField().isSuperTypeOf(
 					domainElement.eClass())) {
 				return FieldEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getMethod().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getMethod().isSuperTypeOf(
 					domainElement.eClass())) {
 				return MethodEditPart.VISUAL_ID;
 			}
-			if (AnnotationsPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
+			if (ClassifiersPackage.eINSTANCE.getAnnotation().isSuperTypeOf(
 					domainElement.eClass())) {
 				return AnnotationEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getPackageDescriptor().isSuperTypeOf(
-					domainElement.eClass())) {
+			if (ContainersPackage.eINSTANCE.getPackageDescriptor()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return PackageDescriptorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getConstructor().isSuperTypeOf(
+			if (MembersPackage.eINSTANCE.getConstructor().isSuperTypeOf(
 					domainElement.eClass())) {
 				return ConstructorEditPart.VISUAL_ID;
 			}
-			if (CorePackage.eINSTANCE.getBlock().isSuperTypeOf(
+			if (StatementsPackage.eINSTANCE.getBlock().isSuperTypeOf(
 					domainElement.eClass())) {
 				return BlockEditPart.VISUAL_ID;
 			}
 			break;
 		case PackageEditPart.VISUAL_ID:
-			if (CorePackage.eINSTANCE.getCompilationUnit().isSuperTypeOf(
+			if (ContainersPackage.eINSTANCE.getCompilationUnit().isSuperTypeOf(
 					domainElement.eClass())) {
 				return CompilationUnitEditPart.VISUAL_ID;
 			}
@@ -569,9 +572,6 @@ public class JavaVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case CompilationUnitEditPart.VISUAL_ID:
-			if (CompilationUnitCommentsEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
 			if (CompilationUnitCompilationUnitImportsCompartmentEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}

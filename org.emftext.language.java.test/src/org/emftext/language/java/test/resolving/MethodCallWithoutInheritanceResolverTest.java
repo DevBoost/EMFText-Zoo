@@ -3,9 +3,9 @@ package org.emftext.language.java.test.resolving;
 import java.util.List;
 
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.core.Block;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.Method;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.Method;
+import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.Statement;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 	@Test
 	public void testReferencing() throws Exception {
 		String typename = "MethodCallsWithoutInheritance";
-		org.emftext.language.java.core.Class clazz = assertParsesToClass(typename);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertNotNull(clazz);
 		assertMemberCount(clazz, 4);
 		

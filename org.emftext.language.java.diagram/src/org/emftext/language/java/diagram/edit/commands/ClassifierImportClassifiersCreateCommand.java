@@ -7,9 +7,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.ClassifierImport;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.diagram.edit.policies.JavaBaseItemSemanticEditPolicy;
+import org.emftext.language.java.imports.ClassifierImport;
 
 /**
  * @generated
@@ -55,7 +55,7 @@ public class ClassifierImportClassifiersCreateCommand extends
 		}
 		// target may be null here but it's possible to check constraint
 		return JavaBaseItemSemanticEditPolicy.LinkConstraints
-				.canCreateClassifierImportClassifiers_4001(getSource(),
+				.canCreateClassifierImportClassifiers_4003(getSource(),
 						getTarget());
 	}
 

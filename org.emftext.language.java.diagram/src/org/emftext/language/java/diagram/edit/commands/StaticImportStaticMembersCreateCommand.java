@@ -7,9 +7,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.diagram.edit.policies.JavaBaseItemSemanticEditPolicy;
+import org.emftext.language.java.imports.StaticImport;
+import org.emftext.language.java.members.Member;
 
 /**
  * @generated
@@ -54,7 +54,7 @@ public class StaticImportStaticMembersCreateCommand extends EditElementCommand {
 		}
 		// target may be null here but it's possible to check constraint
 		return JavaBaseItemSemanticEditPolicy.LinkConstraints
-				.canCreateStaticImportStaticMembers_4002(getSource(),
+				.canCreateStaticImportStaticMembers_4004(getSource(),
 						getTarget());
 	}
 

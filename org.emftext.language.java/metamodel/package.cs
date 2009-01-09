@@ -1,9 +1,9 @@
 SYNTAXDEF pkg
 FOR <http://www.emftext.org/java>
-START core.Package
+START containers.Package
 
 IMPORTS {
-	core : <http://www.emftext.org/java/core>
+	containers : <http://www.emftext.org/java/containers>
 }
  
 OPTIONS {
@@ -27,6 +27,6 @@ TOKENS {
 
 RULES {
 
-core.Package 
+containers.Package 
    ::=	"package";
 }

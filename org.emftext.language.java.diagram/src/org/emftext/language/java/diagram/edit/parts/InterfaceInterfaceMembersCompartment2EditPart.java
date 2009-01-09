@@ -23,7 +23,7 @@ public class InterfaceInterfaceMembersCompartment2EditPart extends
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 7009;
+	public static final int VISUAL_ID = 7019;
 
 	/**
 	 * @generated

@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
-import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.diagram.edit.parts.Annotation2EditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationEditPart;
 import org.emftext.language.java.diagram.edit.parts.AnnotationMethodEditPart;
@@ -109,7 +109,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(CorePackage.eINSTANCE
+			myFeaturesToSynchronize.add(ContainersPackage.eINSTANCE
 					.getPackage_CompilationUnits());
 		}
 		return myFeaturesToSynchronize;
@@ -238,7 +238,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case CompilationUnitEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getCompilationUnit_2001ContainedLinks(view));
+						.getCompilationUnit_2002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -249,7 +249,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case ClassEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getClass_3001ContainedLinks(view));
+						.getClass_3030ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -260,7 +260,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case AnnotationMethodEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getAnnotationMethod_3018ContainedLinks(view));
+						.getAnnotationMethod_3031ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -271,7 +271,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case Class2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getClass_3019ContainedLinks(view));
+						.getClass_3032ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -282,7 +282,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case EnumerationEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getEnumeration_3020ContainedLinks(view));
+						.getEnumeration_3033ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -293,7 +293,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case InterfaceEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getInterface_3021ContainedLinks(view));
+						.getInterface_3034ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -304,7 +304,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case FieldEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getField_3022ContainedLinks(view));
+						.getField_3035ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -315,7 +315,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case MethodEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getMethod_3023ContainedLinks(view));
+						.getMethod_3036ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -326,7 +326,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case AnnotationEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getAnnotation_3024ContainedLinks(view));
+						.getAnnotation_3037ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -337,7 +337,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case PackageDescriptorEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getPackageDescriptor_3025ContainedLinks(view));
+						.getPackageDescriptor_3038ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -348,7 +348,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case ConstructorEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getConstructor_3026ContainedLinks(view));
+						.getConstructor_3039ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -359,7 +359,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case BlockEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getBlock_3027ContainedLinks(view));
+						.getBlock_3040ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -370,7 +370,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case Enumeration2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getEnumeration_3012ContainedLinks(view));
+						.getEnumeration_3041ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -381,7 +381,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case Interface2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getInterface_3013ContainedLinks(view));
+						.getInterface_3042ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -392,7 +392,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case Annotation2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getAnnotation_3014ContainedLinks(view));
+						.getAnnotation_3043ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -403,7 +403,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case PackageDescriptor2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getPackageDescriptor_3015ContainedLinks(view));
+						.getPackageDescriptor_3044ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -414,7 +414,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case ClassifierImportEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getClassifierImport_3016ContainedLinks(view));
+						.getClassifierImport_3045ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -425,7 +425,7 @@ public class PackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case StaticImportEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(JavaDiagramUpdater
-						.getStaticImport_3017ContainedLinks(view));
+						.getStaticImport_3046ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$

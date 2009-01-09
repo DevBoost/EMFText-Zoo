@@ -335,7 +335,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case ClassEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Class_3001_incominglinks,
+					Messages.NavigatorGroupName_Class_3030_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -417,7 +417,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case AnnotationMethodEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_AnnotationMethod_3018_incominglinks,
+					Messages.NavigatorGroupName_AnnotationMethod_3031_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -433,7 +433,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case Class2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Class_3019_incominglinks,
+					Messages.NavigatorGroupName_Class_3032_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -515,7 +515,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case EnumerationEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Enumeration_3020_incominglinks,
+					Messages.NavigatorGroupName_Enumeration_3033_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -597,7 +597,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case InterfaceEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Interface_3021_incominglinks,
+					Messages.NavigatorGroupName_Interface_3034_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -679,7 +679,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case FieldEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Field_3022_incominglinks,
+					Messages.NavigatorGroupName_Field_3035_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -695,7 +695,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case MethodEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Method_3023_incominglinks,
+					Messages.NavigatorGroupName_Method_3036_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -711,7 +711,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case AnnotationEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Annotation_3024_incominglinks,
+					Messages.NavigatorGroupName_Annotation_3037_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -793,7 +793,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case PackageDescriptorEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_PackageDescriptor_3025_incominglinks,
+					Messages.NavigatorGroupName_PackageDescriptor_3038_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -814,7 +814,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case ConstructorEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Constructor_3026_incominglinks,
+					Messages.NavigatorGroupName_Constructor_3039_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -830,7 +830,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case BlockEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Block_3027_incominglinks,
+					Messages.NavigatorGroupName_Block_3040_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -846,7 +846,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case Enumeration2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Enumeration_3012_incominglinks,
+					Messages.NavigatorGroupName_Enumeration_3041_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -928,7 +928,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case Interface2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Interface_3013_incominglinks,
+					Messages.NavigatorGroupName_Interface_3042_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -1010,7 +1010,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case Annotation2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_Annotation_3014_incominglinks,
+					Messages.NavigatorGroupName_Annotation_3043_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -1092,7 +1092,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case PackageDescriptor2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup incominglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_PackageDescriptor_3015_incominglinks,
+					Messages.NavigatorGroupName_PackageDescriptor_3044_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view),
@@ -1113,7 +1113,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case ClassifierImportEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup outgoinglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_ClassifierImport_3016_outgoinglinks,
+					Messages.NavigatorGroupName_ClassifierImport_3045_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getOutgoingLinksByType(Collections
 					.singleton(view),
@@ -1129,7 +1129,7 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case StaticImportEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup outgoinglinks = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_StaticImport_3017_outgoinglinks,
+					Messages.NavigatorGroupName_StaticImport_3046_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getOutgoingLinksByType(Collections
 					.singleton(view),
@@ -1145,10 +1145,10 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case ClassifierImportClassifiersEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup target = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_ClassifierImportClassifiers_4001_target,
+					Messages.NavigatorGroupName_ClassifierImportClassifiers_4003_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			JavaNavigatorGroup source = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_ClassifierImportClassifiers_4001_source,
+					Messages.NavigatorGroupName_ClassifierImportClassifiers_4003_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getLinksTargetByType(Collections
 					.singleton(view), ClassEditPart.VISUAL_ID);
@@ -1206,10 +1206,10 @@ public class JavaNavigatorContentProvider implements ICommonContentProvider {
 		case StaticImportStaticMembersEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			JavaNavigatorGroup target = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_StaticImportStaticMembers_4002_target,
+					Messages.NavigatorGroupName_StaticImportStaticMembers_4004_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			JavaNavigatorGroup source = new JavaNavigatorGroup(
-					Messages.NavigatorGroupName_StaticImportStaticMembers_4002_source,
+					Messages.NavigatorGroupName_StaticImportStaticMembers_4004_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getLinksTargetByType(Collections
 					.singleton(view), ClassEditPart.VISUAL_ID);

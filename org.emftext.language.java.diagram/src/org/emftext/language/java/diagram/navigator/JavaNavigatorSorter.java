@@ -11,12 +11,12 @@ public class JavaNavigatorSorter extends ViewerSorter {
 	/**
 	 * @generated
 	 */
-	private static final int GROUP_CATEGORY = 7012;
+	private static final int GROUP_CATEGORY = 7022;
 
 	/**
 	 * @generated
 	 */
-	private static final int SHORTCUTS_CATEGORY = 7011;
+	private static final int SHORTCUTS_CATEGORY = 7021;
 
 	/**
 	 * @generated

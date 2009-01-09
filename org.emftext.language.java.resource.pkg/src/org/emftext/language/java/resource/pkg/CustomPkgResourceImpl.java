@@ -9,12 +9,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.core.CompilationUnit;
-import org.emftext.language.java.core.Package;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.resource.java.JavaTreeAnalyser;
 import org.emftext.runtime.resource.IReferenceResolver;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.language.java.containers.Package;
 
 public class CustomPkgResourceImpl extends org.emftext.runtime.resource.impl.TextResourceImpl {
 	private org.emftext.runtime.resource.IReferenceResolver analyser;
@@ -83,7 +82,7 @@ public class CustomPkgResourceImpl extends org.emftext.runtime.resource.impl.Tex
 				e.printStackTrace();
 				
 			}
-			
+				
 			thisPackage.getCompilationUnits().addAll(units);			
 			root = null;
 		}

@@ -31,7 +31,7 @@ public class ClassifierImportEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3016;
+	public static final int VISUAL_ID = 3045;
 
 	/**
 	 * @generated

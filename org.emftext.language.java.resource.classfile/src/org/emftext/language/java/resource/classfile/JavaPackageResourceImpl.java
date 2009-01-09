@@ -8,10 +8,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.CompilationUnit;
-import org.emftext.language.java.core.CoreFactory;
-import org.emftext.language.java.core.Package;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.containers.ContainersFactory;
 
 public class JavaPackageResourceImpl extends ResourceImpl {
 
@@ -24,7 +23,7 @@ public class JavaPackageResourceImpl extends ResourceImpl {
 	@Override
 	public void load(Map<?, ?> options) throws IOException {
 	    if (!isLoaded) {
-			myPackage = CoreFactory.eINSTANCE.createPackage();
+			myPackage = ContainersFactory.eINSTANCE.createPackage();
 			
 			String packageName = getURI().trimFileExtension().toString().substring(
 					JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP.length());

@@ -14,48 +14,48 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.UnresolvedProxiesException;
-import org.emftext.language.java.annotations.Annotation;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.core.AdditionalField;
-import org.emftext.language.java.core.AdditionalLocalVariable;
-import org.emftext.language.java.core.Block;
-import org.emftext.language.java.core.Class;
-import org.emftext.language.java.core.ClassLiteral;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.ClassifierImport;
-import org.emftext.language.java.core.CompilationUnit;
-import org.emftext.language.java.core.CoreFactory;
-import org.emftext.language.java.core.CorePackage;
-import org.emftext.language.java.core.ExplicitGenericInvocation;
-import org.emftext.language.java.core.Field;
-import org.emftext.language.java.core.Import;
-import org.emftext.language.java.core.Interface;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.MemberContainer;
-import org.emftext.language.java.core.Method;
-import org.emftext.language.java.core.NamedElement;
-import org.emftext.language.java.core.NewConstructorCall;
-import org.emftext.language.java.core.PackageDescriptor;
-import org.emftext.language.java.core.PackageOrClassifierOrMethodOrVariableReference;
-import org.emftext.language.java.core.PackageOrClassifierReference;
-import org.emftext.language.java.core.Primary;
-import org.emftext.language.java.core.PrimaryReference;
-import org.emftext.language.java.core.QualifiedTypeArgument;
-import org.emftext.language.java.core.Reference;
-import org.emftext.language.java.core.ReferenceableElement;
-import org.emftext.language.java.core.StaticImport;
-import org.emftext.language.java.core.Super;
-import org.emftext.language.java.core.This;
-import org.emftext.language.java.core.TypeParameter;
-import org.emftext.language.java.core.Variable;
+import org.emftext.language.java.classifiers.Annotation;
+import org.emftext.language.java.classifiers.Class;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.ContainersFactory;
+import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.generics.TypeParameter;
+import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.StaticImport;
+import org.emftext.language.java.instantiations.ExplicitGenericInvocation;
+import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
+import org.emftext.language.java.literals.ClassLiteral;
 import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.literals.Literal;
+import org.emftext.language.java.literals.LiteralsFactory;
 import org.emftext.language.java.literals.NullLiteral;
 import org.emftext.language.java.literals.StringLiteral;
+import org.emftext.language.java.literals.Super;
+import org.emftext.language.java.literals.This;
+import org.emftext.language.java.literals.VoidLiteral;
+import org.emftext.language.java.members.AdditionalField;
+import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.members.Method;
+import org.emftext.language.java.references.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.references.PackageOrClassifierReference;
+import org.emftext.language.java.references.Primary;
+import org.emftext.language.java.references.PrimaryReference;
+import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
 import org.emftext.language.java.types.Char;
@@ -70,10 +70,13 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.types.VoidLiteral;
+import org.emftext.language.java.variables.AdditionalLocalVariable;
+import org.emftext.language.java.variables.Variable;
 import org.emftext.runtime.resource.IResolveResult;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
+
+
 
 public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 
@@ -329,11 +332,11 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				//it hat to be target of a reference: there are two referencing possibilities
 				// (1)
 				if (reference.equals(
-						CorePackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET)) {
+						ReferencesPackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET)) {
 					Reference ref = ((Reference)container.eContainer());
 					//there must be something (a classifier reference) following up
 					if (ref.getNext() != null) {
-						PackageDescriptor packageDescriptor = CoreFactory.eINSTANCE.createPackageDescriptor();
+						PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
 						packageDescriptor.setName(identifier);
 						result.addMapping(identifier, packageDescriptor);
 						
@@ -352,7 +355,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				}
 				// (2)
 				else if (reference.equals(
-						CorePackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)) {
+						ReferencesPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)) {
 					EList<?> parts = null;
 					if (container.eContainer() instanceof TypeReferenceSequence) {
 						TypeReferenceSequence refSequence = ((TypeReferenceSequence)container.eContainer());
@@ -367,7 +370,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 					}
 					int pos = parts.indexOf(container);
 					
-					PackageDescriptor packageDescriptor = CoreFactory.eINSTANCE.createPackageDescriptor();
+					PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
 					packageDescriptor.setName(identifier);
 					result.addMapping(identifier, packageDescriptor);
 					
@@ -471,7 +474,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	protected Type getTypeOfReferencedElement(Literal literal) throws UnresolvedProxiesException {
 		TypesFactory javaTypeFactory = TypesFactory.eINSTANCE;
 		if (literal instanceof NullLiteral) {
-			return javaTypeFactory.createVoidLiteral();
+			return LiteralsFactory.eINSTANCE.createVoidLiteral();
 		}
 		else if (literal instanceof BooleanLiteral) {
 			return javaTypeFactory.createBoolean();

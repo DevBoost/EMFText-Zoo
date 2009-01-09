@@ -31,7 +31,7 @@ public class PackageDescriptor2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3015;
+	public static final int VISUAL_ID = 3044;
 
 	/**
 	 * @generated

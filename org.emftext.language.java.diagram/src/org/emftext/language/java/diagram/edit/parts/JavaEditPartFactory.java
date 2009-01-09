@@ -34,9 +34,6 @@ public class JavaEditPartFactory implements EditPartFactory {
 			case CompilationUnitEditPart.VISUAL_ID:
 				return new CompilationUnitEditPart(view);
 
-			case CompilationUnitCommentsEditPart.VISUAL_ID:
-				return new CompilationUnitCommentsEditPart(view);
-
 			case ClassEditPart.VISUAL_ID:
 				return new ClassEditPart(view);
 

@@ -38,12 +38,12 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipReques
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.ClassifierImport;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.StaticImport;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.diagram.edit.helpers.JavaBaseEditHelper;
 import org.emftext.language.java.diagram.part.JavaVisualIDRegistry;
+import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.StaticImport;
+import org.emftext.language.java.members.Member;
 
 /**
  * @generated
@@ -348,33 +348,33 @@ public class JavaBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateClassifierImportClassifiers_4001(
+		public static boolean canCreateClassifierImportClassifiers_4003(
 				ClassifierImport source, Classifier target) {
 			if (source != null) {
 				if (source.getClassifiers().contains(target)) {
 					return false;
 				}
 			}
-			return canExistClassifierImportClassifiers_4001(source, target);
+			return canExistClassifierImportClassifiers_4003(source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateStaticImportStaticMembers_4002(
+		public static boolean canCreateStaticImportStaticMembers_4004(
 				StaticImport source, Member target) {
 			if (source != null) {
 				if (source.getStaticMembers().contains(target)) {
 					return false;
 				}
 			}
-			return canExistStaticImportStaticMembers_4002(source, target);
+			return canExistStaticImportStaticMembers_4004(source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistClassifierImportClassifiers_4001(
+		public static boolean canExistClassifierImportClassifiers_4003(
 				ClassifierImport source, Classifier target) {
 
 			return true;
@@ -383,7 +383,7 @@ public class JavaBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public static boolean canExistStaticImportStaticMembers_4002(
+		public static boolean canExistStaticImportStaticMembers_4004(
 				StaticImport source, Member target) {
 
 			return true;

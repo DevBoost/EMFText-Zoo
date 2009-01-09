@@ -19,13 +19,25 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.emftext.language.java.annotations.provider.AnnotationsItemProviderAdapterFactory;
+import org.emftext.language.java.arrays.provider.ArraysItemProviderAdapterFactory;
+import org.emftext.language.java.classifiers.provider.ClassifiersItemProviderAdapterFactory;
 import org.emftext.language.java.comments.provider.CommentsItemProviderAdapterFactory;
-import org.emftext.language.java.core.provider.CoreItemProviderAdapterFactory;
+import org.emftext.language.java.commons.provider.CommonsItemProviderAdapterFactory;
+import org.emftext.language.java.containers.provider.ContainersItemProviderAdapterFactory;
+import org.emftext.language.java.enumerations.provider.EnumerationsItemProviderAdapterFactory;
 import org.emftext.language.java.expressions.provider.ExpressionsItemProviderAdapterFactory;
+import org.emftext.language.java.generics.provider.GenericsItemProviderAdapterFactory;
+import org.emftext.language.java.imports.provider.ImportsItemProviderAdapterFactory;
+import org.emftext.language.java.instantiations.provider.InstantiationsItemProviderAdapterFactory;
 import org.emftext.language.java.literals.provider.LiteralsItemProviderAdapterFactory;
+import org.emftext.language.java.members.provider.MembersItemProviderAdapterFactory;
 import org.emftext.language.java.modifiers.provider.ModifiersItemProviderAdapterFactory;
+import org.emftext.language.java.operators.provider.OperatorsItemProviderAdapterFactory;
+import org.emftext.language.java.parameters.provider.ParametersItemProviderAdapterFactory;
+import org.emftext.language.java.references.provider.ReferencesItemProviderAdapterFactory;
 import org.emftext.language.java.statements.provider.StatementsItemProviderAdapterFactory;
 import org.emftext.language.java.types.provider.TypesItemProviderAdapterFactory;
+import org.emftext.language.java.variables.provider.VariablesItemProviderAdapterFactory;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -107,10 +119,22 @@ public class JavaDiagramEditorPlugin extends AbstractUIPlugin {
 	 */
 	protected void fillItemProviderFactories(List factories) {
 		factories.add(new AnnotationsItemProviderAdapterFactory());
-		factories.add(new CoreItemProviderAdapterFactory());
-		factories.add(new CommentsItemProviderAdapterFactory());
+		factories.add(new ImportsItemProviderAdapterFactory());
+		factories.add(new ReferencesItemProviderAdapterFactory());
+		factories.add(new GenericsItemProviderAdapterFactory());
+		factories.add(new ArraysItemProviderAdapterFactory());
+		factories.add(new ClassifiersItemProviderAdapterFactory());
+		factories.add(new EnumerationsItemProviderAdapterFactory());
+		factories.add(new ContainersItemProviderAdapterFactory());
+		factories.add(new InstantiationsItemProviderAdapterFactory());
+		factories.add(new ParametersItemProviderAdapterFactory());
+		factories.add(new VariablesItemProviderAdapterFactory());
+		factories.add(new MembersItemProviderAdapterFactory());
+		factories.add(new CommonsItemProviderAdapterFactory());
 		factories.add(new ExpressionsItemProviderAdapterFactory());
+		factories.add(new OperatorsItemProviderAdapterFactory());
 		factories.add(new LiteralsItemProviderAdapterFactory());
+		factories.add(new CommentsItemProviderAdapterFactory());
 		factories.add(new ModifiersItemProviderAdapterFactory());
 		factories.add(new StatementsItemProviderAdapterFactory());
 		factories.add(new TypesItemProviderAdapterFactory());

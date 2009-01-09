@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
-import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.diagram.edit.parts.Annotation2EditPart;
 import org.emftext.language.java.diagram.edit.parts.ClassEditPart;
 import org.emftext.language.java.diagram.edit.parts.Enumeration2EditPart;
@@ -37,7 +37,7 @@ public class CompilationUnitCompilationUnitClassifiersCompartmentCanonicalEditPo
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = JavaDiagramUpdater
-				.getCompilationUnitCompilationUnitClassifiersCompartment_7002SemanticChildren(
+				.getCompilationUnitCompilationUnitClassifiersCompartment_7012SemanticChildren(
 						viewObject).iterator(); it.hasNext();) {
 			result.add(((JavaNodeDescriptor) it.next()).getModelElement());
 		}
@@ -75,7 +75,7 @@ public class CompilationUnitCompilationUnitClassifiersCompartmentCanonicalEditPo
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(CorePackage.eINSTANCE
+			myFeaturesToSynchronize.add(ContainersPackage.eINSTANCE
 					.getCompilationUnit_Classifiers());
 		}
 		return myFeaturesToSynchronize;

@@ -6,7 +6,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.commands.DuplicateEObjectsCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DuplicateElementsRequest;
-import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.diagram.edit.commands.CompilationUnitCreateCommand;
 import org.emftext.language.java.diagram.providers.JavaElementTypes;
 
@@ -20,9 +20,9 @@ public class PackageItemSemanticEditPolicy extends
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (JavaElementTypes.CompilationUnit_2001 == req.getElementType()) {
+		if (JavaElementTypes.CompilationUnit_2002 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(CorePackage.eINSTANCE
+				req.setContainmentFeature(ContainersPackage.eINSTANCE
 						.getPackage_CompilationUnits());
 			}
 			return getGEFWrapper(new CompilationUnitCreateCommand(req));

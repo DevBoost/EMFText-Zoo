@@ -58,7 +58,7 @@ public class ClassifierImportCommentsEditPart extends CompartmentEditPart
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 5016;
+	public static final int VISUAL_ID = 5046;
 
 	/**
 	 * @generated
@@ -306,7 +306,7 @@ public class ClassifierImportCommentsEditPart extends CompartmentEditPart
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
 			IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-					JavaElementTypes.ClassifierImport_3016, getParserElement(),
+					JavaElementTypes.ClassifierImport_3045, getParserElement(),
 					parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

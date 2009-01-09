@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.resource.java.JavaResourceImpl;
 
 public class JavaSourceFileResourceImpl extends JavaResourceImpl {

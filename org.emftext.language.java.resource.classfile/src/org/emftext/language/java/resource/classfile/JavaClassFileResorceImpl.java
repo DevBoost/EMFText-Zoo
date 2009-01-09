@@ -10,18 +10,24 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
-import org.emftext.language.java.core.Class;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.CoreFactory;
-import org.emftext.language.java.core.Enumeration;
-import org.emftext.language.java.core.Field;
-import org.emftext.language.java.core.Interface;
-import org.emftext.language.java.core.MemberContainer;
-import org.emftext.language.java.core.Method;
-import org.emftext.language.java.core.NamedElement;
-import org.emftext.language.java.core.Parameter;
-import org.emftext.language.java.core.ParameterizedPackageOrClassifierReference;
-import org.emftext.language.java.core.QualifiedTypeArgument;
+import org.emftext.language.java.arrays.ArraysFactory;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.Class;
+import org.emftext.language.java.classifiers.ClassifiersFactory;
+import org.emftext.language.java.classifiers.Enumeration;
+import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.generics.GenericsFactory;
+import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.literals.LiteralsFactory;
+import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.members.MembersFactory;
+import org.emftext.language.java.members.Method;
+import org.emftext.language.java.parameters.Parameter;
+import org.emftext.language.java.parameters.ParametersFactory;
+import org.emftext.language.java.references.ParameterizedPackageOrClassifierReference;
+import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.resource.java.JavaResourceImpl;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
@@ -38,8 +44,11 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	//one resource per type
 	protected org.apache.bcel.classfile.JavaClass myClass;
 	
-	protected CoreFactory coreFactory = CoreFactory.eINSTANCE;
+	protected ClassifiersFactory qualifiersFactory = ClassifiersFactory.eINSTANCE;
+	protected MembersFactory membersFactory = MembersFactory.eINSTANCE;
 	protected TypesFactory typesFactory = TypesFactory.eINSTANCE;
+
+	private ParametersFactory parametersFactory = ParametersFactory.eINSTANCE;
 	
 	public JavaClassFileResorceImpl(URI uri) {
 		super(uri);
@@ -85,13 +94,13 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	protected Classifier constructClassifier(org.apache.bcel.classfile.JavaClass clazz) {
 		Classifier emfClassifier = null;
 		if (clazz.isEnum()) { //check first, because enum is also class
-			emfClassifier = coreFactory.createEnumeration();
+			emfClassifier = qualifiersFactory.createEnumeration();
 		}
 		else if (clazz.isClass()) {
-			emfClassifier = coreFactory.createClass();
+			emfClassifier = qualifiersFactory.createClass();
 		}
 		else if (clazz.isInterface()) {
-			emfClassifier = coreFactory.createInterface();
+			emfClassifier = qualifiersFactory.createInterface();
 		}
 		else {
 			assert(false);
@@ -99,17 +108,17 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
 		//super class
 		if (clazz.isClass() && !clazz.isEnum()) {
-			org.emftext.language.java.core.Class emfClass = 
+			org.emftext.language.java.classifiers.Class emfClass = 
 				(Class) emfClassifier;
 			if (clazz.getSuperclassName() != null) {
-				QualifiedTypeArgument typeArg = CoreFactory.eINSTANCE.createQualifiedTypeArgument();
+				QualifiedTypeArgument typeArg = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
 				typeArg.setType(createReferenceToClassifier(clazz.getSuperclassName()));
 				emfClass.setExtends(typeArg);
 			}
 		}
 		//interfaces
 		for(String ifName : clazz.getInterfaceNames()) {
-			QualifiedTypeArgument typeArg = CoreFactory.eINSTANCE.createQualifiedTypeArgument();
+			QualifiedTypeArgument typeArg = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
 			typeArg.setType(createReferenceToClassifier(ifName));
 			if (clazz.isEnum()) { //check first, because enum is also class
 				((Enumeration)emfClassifier).getImplements().add(typeArg); 
@@ -147,7 +156,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	}
 	
 	protected Method constructMethod(org.apache.bcel.classfile.Method method) {
-		Method emfMethod = coreFactory.createMethod();
+		Method emfMethod = membersFactory.createMethod();
 		emfMethod.setName(method.getName());
 		
 		for(org.apache.bcel.generic.Type argType : method.getArgumentTypes()) {
@@ -158,7 +167,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	}
 	
 	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType) {
-		Parameter emfParameter = coreFactory.createOrdinaryParameter();
+		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		TypeReference emfTypeReference = null;
 
 		String signature = attrType.getSignature();
@@ -200,13 +209,13 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	            emfTypeReference = TypesFactory.eINSTANCE.createBoolean();
 	            break;
 	        case 'V':
-	            emfTypeReference = TypesFactory.eINSTANCE.createVoidLiteral();
+	            emfTypeReference = LiteralsFactory.eINSTANCE.createVoidLiteral();
 	            break;
         }
         
         for(int i = 0; i < arrayDimension; i++) {
         	emfParameter.getArrayDimensions().add(
-        			CoreFactory.eINSTANCE.createArrayDimension());
+        			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		emfParameter.setType(emfTypeReference);
 		return emfParameter;
@@ -216,7 +225,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		TypeReferenceSequence typeRefSequence = TypesFactory.eINSTANCE.createTypeReferenceSequence();
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
 		ParameterizedPackageOrClassifierReference classifierReference = 
-			CoreFactory.eINSTANCE.createParameterizedPackageOrClassifierReference();
+			ReferencesFactory.eINSTANCE.createParameterizedPackageOrClassifierReference();
 		classifierReference.setTarget(classifier);
 		typeRefSequence.getParts().add(classifierReference);
 		return typeRefSequence;
@@ -224,7 +233,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	
 
 	protected Field constructField(org.apache.bcel.classfile.Field field) {
-		Field emfFieled = coreFactory.createField();
+		Field emfFieled = membersFactory.createField();
 		emfFieled.setName(field.getName());
 		TypeReferenceSequence typeRef = typesFactory.createTypeReferenceSequence();
 		//TODO create other elements of ref chain (extract in extra method and reuse for methods and parameters)

@@ -31,7 +31,7 @@ public class AnnotationEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3024;
+	public static final int VISUAL_ID = 3037;
 
 	/**
 	 * @generated

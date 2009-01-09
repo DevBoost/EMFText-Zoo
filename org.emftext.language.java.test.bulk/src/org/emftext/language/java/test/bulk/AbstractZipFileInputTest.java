@@ -10,7 +10,7 @@ import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.java.core.CompilationUnit;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 import junit.framework.TestCase;

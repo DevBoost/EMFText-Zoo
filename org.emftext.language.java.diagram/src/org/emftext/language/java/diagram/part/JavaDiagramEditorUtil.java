@@ -48,8 +48,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
-import org.emftext.language.java.core.CoreFactory;
-import org.emftext.language.java.core.Package;
+import org.emftext.language.java.containers.ContainersFactory;
+import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.diagram.edit.parts.PackageEditPart;
 
 /**
@@ -218,7 +218,7 @@ public class JavaDiagramEditorUtil {
 	 * @generated
 	 */
 	private static Package createInitialModel() {
-		return CoreFactory.eINSTANCE.createPackage();
+		return ContainersFactory.eINSTANCE.createPackage();
 	}
 
 	/**

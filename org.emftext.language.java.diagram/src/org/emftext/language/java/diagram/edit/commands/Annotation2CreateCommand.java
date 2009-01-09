@@ -5,7 +5,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
-import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.containers.ContainersPackage;
 
 /**
  * @generated
@@ -35,7 +35,7 @@ public class Annotation2CreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return CorePackage.eINSTANCE.getCompilationUnit();
+		return ContainersPackage.eINSTANCE.getCompilationUnit();
 	}
 
 }

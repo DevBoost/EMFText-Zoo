@@ -56,7 +56,7 @@ public class StaticImportStaticMembersExternalLabelEditPart extends
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 6002;
+	public static final int VISUAL_ID = 6004;
 
 	/**
 	 * @generated
@@ -299,7 +299,7 @@ public class StaticImportStaticMembersExternalLabelEditPart extends
 		if (parser == null) {
 			String parserHint = CommonParserHint.DESCRIPTION;
 			IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-					JavaElementTypes.StaticImportStaticMembers_4002,
+					JavaElementTypes.StaticImportStaticMembers_4004,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

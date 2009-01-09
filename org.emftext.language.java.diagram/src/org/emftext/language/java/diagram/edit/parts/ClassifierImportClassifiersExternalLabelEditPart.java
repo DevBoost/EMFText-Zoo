@@ -56,7 +56,7 @@ public class ClassifierImportClassifiersExternalLabelEditPart extends
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 6001;
+	public static final int VISUAL_ID = 6003;
 
 	/**
 	 * @generated
@@ -299,7 +299,7 @@ public class ClassifierImportClassifiersExternalLabelEditPart extends
 		if (parser == null) {
 			String parserHint = CommonParserHint.DESCRIPTION;
 			IAdaptable hintAdapter = new JavaParserProvider.HintAdapter(
-					JavaElementTypes.ClassifierImportClassifiers_4001,
+					JavaElementTypes.ClassifierImportClassifiers_4003,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

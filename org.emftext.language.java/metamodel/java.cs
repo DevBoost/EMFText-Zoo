@@ -1,12 +1,24 @@
 SYNTAXDEF java
 FOR <http://www.emftext.org/java>
-START core.CompilationUnit
+START containers.CompilationUnit
 
 IMPORTS {
 	annotations : <http://www.emftext.org/java/annotations>
-	core : <http://www.emftext.org/java/core>
+	imports : <http://www.emftext.org/java/imports>
+	references : <http://www.emftext.org/java/references>
+	generics : <http://www.emftext.org/java/generics>
+	arrays : <http://www.emftext.org/java/arrays>
+	classifiers : <http://www.emftext.org/java/classifiers>
+	enumerations : <http://www.emftext.org/java/enumerations>
+	containers : <http://www.emftext.org/java/containers>
+	instantiations : <http://www.emftext.org/java/instantiations>
+	parameters : <http://www.emftext.org/java/parameters>
+	variables : <http://www.emftext.org/java/variables>
+	members : <http://www.emftext.org/java/members>
+	commons : <http://www.emftext.org/java/commons>
 	comments : <http://www.emftext.org/java/comments>
 	expressions : <http://www.emftext.org/java/expressions> 
+	operators : <http://www.emftext.org/java/operators> 
 	literals : <http://www.emftext.org/java/literals>
 	modifiers : <http://www.emftext.org/java/modifiers>
 	statements : <http://www.emftext.org/java/statements> 
@@ -48,7 +60,7 @@ TOKENS {
 
 RULES {
 
-core.CompilationUnit 
+containers.CompilationUnit 
    ::=	("package" package[] (#0 "." #0 package[])* #0 ";" )?
         !0 !0
         ("import" imports #0 ";" !0 )*
@@ -57,13 +69,13 @@ core.CompilationUnit
         (classifiers !0 !0)+
 	;
 	
-core.ClassifierImport
+imports.ClassifierImport
 	::= parts #0 ("." #0 parts)* #0 (("." #0 classifiers[]) | classifiers[IMPORT_ALL_LITERAL]);
 
-core.StaticImport
+imports.StaticImport
 	::= static parts #0 ("." #0 parts)* #0 (("." #0 staticMembers[]) | staticMembers[IMPORT_ALL_LITERAL]);
 
-core.Class
+classifiers.Class
 	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
@@ -72,7 +84,7 @@ core.Class
         "}"
 	;
 
-core.Interface
+classifiers.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
@@ -80,7 +92,7 @@ core.Interface
 		"}"
 	;
 
-core.Enumeration
+classifiers.Enumeration
     ::= modifiers* "enum" name[] 
     	("implements" (implements ("," implements)*))? 
     	"{" 
@@ -89,7 +101,7 @@ core.Enumeration
     	"}"
     ;
 
-annotations.Annotation
+classifiers.Annotation
 	::=	modifiers* "@" "interface" name[]
 	       "{" ((members (";")?) | (";")?)* "}"
 	;
@@ -107,25 +119,25 @@ annotations.AnnotationElementValueArray
     ::= "{" (values ("," values)*)? (",")? "}"
     ;
 
-core.TypeParameter
+generics.TypeParameter
 	::=	name[] ("extends" extendTypes ("&" extendTypes)*)?
 	;
 
-core.EnumConstant
+enumerations.EnumConstant
     ::= name[] ("(" arguments ("," arguments)* ")" )? members* 
     ;
 
-core.Block
+statements.Block
 	::=	modifiers* "{" #1 statements* #0 "}"
 	;
 
-core.Constructor
+members.Constructor
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
 	("throws" exceptions ("," exceptions)*)? body
 	;
 
-core.Method
+members.Method
 	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensions*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensions*
 	("throws" exceptions ("," exceptions)*)? (body | ";")
@@ -137,35 +149,35 @@ annotations.AnnotationMethod
 	("throws" exceptions ("," exceptions)*)? "default" defaultValue (body | ";")
 	;
 
-core.OrdinaryParameter
+parameters.OrdinaryParameter
 	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions*
 	;
 
-core.VariableLengthParameter
+parameters.VariableLengthParameter
 	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
 	;
 
-core.LocalVariable
+variables.LocalVariable
 	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
 	::= variable ";" ;
 
-core.AdditionalLocalVariable
+variables.AdditionalLocalVariable
 	::= name[] arrayDimensions* ("=" initialValue)?
 	;
 
-core.Field
+members.Field
 	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
 	;
 
-core.AdditionalField
+members.AdditionalField
 	::= name[] arrayDimensions* ("=" initialValue)?
 	;
 
 // INSTANTIATIONS
-core.NewConstructorCall 
+instantiations.NewConstructorCall 
 	::= "new" 
 		// these are the arguments for the constructor type parameters
 		("<" typeArguments ("," typeArguments)* ">")?
@@ -176,26 +188,26 @@ core.NewConstructorCall
 		("{" (members (";")?)* "}")?
      ;
      
-core.ExplicitConstructorCall 
+instantiations.ExplicitConstructorCall 
 	::= ("<" typeArguments ("," typeArguments)* ">")?
 		callTarget "(" (arguments ("," arguments)* )? ")"
      ;
 
-core.ArrayInstantiationByValues
+arrays.ArrayInstantiationByValues
 	::= ("new" type arrayDimensions+)? arrayInitializer
 	;
 
-core.ArrayInstantiationBySize 
+arrays.ArrayInstantiationBySize 
 	::= "new" type 
 		("[" sizes "]")+
 		arrayDimensions*
 	;
 
-core.ArrayInitializer
+arrays.ArrayInitializer
     ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* )? (",")? "}"    
     ;
     
-core.Reference
+references.Reference
 	::= primary ("[" arraySelectors? "]")* (#0 "." #0 next)? 
 	;
 	
@@ -203,40 +215,40 @@ types.TypeReferenceSequence
 	::= parts (#0 "." #0 parts)*
 	;
 
-core.PlainPackageOrClassifierReference
+references.PlainPackageOrClassifierReference
 	::= target[] 
 	;
 	
-core.ParameterizedPackageOrClassifierReference
+references.ParameterizedPackageOrClassifierReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
 	
-core.PackageOrClassifierOrMethodOrVariableReference
+references.PackageOrClassifierOrMethodOrVariableReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 		("(" (arguments ("," arguments)* )? ")")?
 	;
 
-core.ExplicitGenericInvocation
+instantiations.ExplicitGenericInvocation
 	::= "<" typeArguments ("," typeArguments)* ">"
 		target[]
 		"(" ((arguments ("," arguments)* )?)? ")"
 	;
 
-core.QualifiedTypeArgument
+generics.QualifiedTypeArgument
 	::= type arrayDimensions*
 	;
 
-core.UnknownTypeArgument
+generics.UnknownTypeArgument
 	::= "?"
 	;
 
-core.ExtendsTypeArgument
+generics.ExtendsTypeArgument
 	::= "?" "extends" extendTypes ("&" extendTypes)* arrayDimensions*
 	;
 
-core.SuperTypeArgument
+generics.SuperTypeArgument
 	::= "?" "super" superType arrayDimensions*
 	;
 
@@ -362,7 +374,7 @@ expressions.CastExpression
     ::= "(" typeReference arrayDimensions* ")" expression
     ;
     
-core.Primary 
+references.Primary 
 	::=	
 	  reference
 	| literal
@@ -381,32 +393,32 @@ expressions.CompoundAssignmentLeftShift 		::= "<" #0 "<" #0 "=";
 expressions.CompoundAssignmentRightShift 		::= ">" #0 ">" #0 "=";
 expressions.CompoundAssignmentUnsignedRightShift::= ">" #0 ">" #0 ">" #0 "=";
 
-expressions.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
-expressions.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
+operators.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
+operators.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
 
-expressions.LessThan 			::= "<";
-expressions.LessThanOrEqual		::= "<" #0 "=";
-expressions.GreaterThan			::= ">";
-expressions.GreaterThanOrEqual	::= ">" #0 "=";
+operators.LessThan 			::= "<";
+operators.LessThanOrEqual		::= "<" #0 "=";
+operators.GreaterThan			::= ">";
+operators.GreaterThanOrEqual	::= ">" #0 "=";
 
 expressions.LeftShift 			::= "<" #0 "<" ;
 expressions.RightShift 			::= ">" #0 ">" ;
 expressions.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
 
-expressions.Equal		::= "==";	
-expressions.NotEqual	::= "!=";
-expressions.PlusPlus 	::= "++" ;
-expressions.MinusMinus 	::= "--" ;
-expressions.Complement 	::= "~" ;
-expressions.Negate 		::= "!" ;
+operators.Equal		::= "==";	
+operators.NotEqual	::= "!=";
+operators.PlusPlus 	::= "++" ;
+operators.MinusMinus 	::= "--" ;
+operators.Complement 	::= "~" ;
+operators.Negate 		::= "!" ;
 
-core.ArrayDimension ::= ("[" #0 "]");
+arrays.ArrayDimension ::= ("[" #0 "]");
 
 literals.NullLiteral ::= "null";
-types.VoidLiteral ::= "void";
-core.ClassLiteral ::= "class";
-core.This ::= "this";
-core.Super ::= "super";
+literals.VoidLiteral ::= "void";
+literals.ClassLiteral ::= "class";
+literals.This ::= "this";
+literals.Super ::= "super";
 
 modifiers.Public ::= "public";
 modifiers.Abstract ::= "abstract";

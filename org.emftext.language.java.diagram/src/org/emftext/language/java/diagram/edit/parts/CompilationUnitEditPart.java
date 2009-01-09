@@ -15,17 +15,21 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.core.edithelpers.CreateElementRequestAdapter;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.java.diagram.edit.policies.CompilationUnitItemSemanticEditPolicy;
 import org.emftext.language.java.diagram.edit.policies.OpenDiagramEditPolicy;
 import org.emftext.language.java.diagram.part.JavaVisualIDRegistry;
+import org.emftext.language.java.diagram.providers.JavaElementTypes;
 
 /**
  * @generated
@@ -35,7 +39,7 @@ public class CompilationUnitEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 2001;
+	public static final int VISUAL_ID = 2002;
 
 	/**
 	 * @generated
@@ -58,6 +62,36 @@ public class CompilationUnitEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected void createDefaultEditPolicies() {
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
+				new CreationEditPolicy() {
+					public Command getCommand(Request request) {
+						if (understandsRequest(request)) {
+							if (request instanceof CreateViewAndElementRequest) {
+								CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request)
+										.getViewAndElementDescriptor()
+										.getCreateElementRequestAdapter();
+								IElementType type = (IElementType) adapter
+										.getAdapter(IElementType.class);
+								if (type == JavaElementTypes.ClassifierImport_3045) {
+									EditPart compartmentEditPart = getChildBySemanticHint(JavaVisualIDRegistry
+											.getType(CompilationUnitCompilationUnitImportsCompartmentEditPart.VISUAL_ID));
+									return compartmentEditPart == null ? null
+											: compartmentEditPart
+													.getCommand(request);
+								}
+								if (type == JavaElementTypes.StaticImport_3046) {
+									EditPart compartmentEditPart = getChildBySemanticHint(JavaVisualIDRegistry
+											.getType(CompilationUnitCompilationUnitImportsCompartmentEditPart.VISUAL_ID));
+									return compartmentEditPart == null ? null
+											: compartmentEditPart
+													.getCommand(request);
+								}
+							}
+							return super.getCommand(request);
+						}
+						return null;
+					}
+				});
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
 				new CompilationUnitItemSemanticEditPolicy());
@@ -107,55 +141,6 @@ public class CompilationUnitEditPart extends ShapeNodeEditPart {
 	 */
 	public CompilationUnitFigure getPrimaryShape() {
 		return (CompilationUnitFigure) primaryShape;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected boolean addFixedChild(EditPart childEditPart) {
-		if (childEditPart instanceof CompilationUnitCommentsEditPart) {
-			((CompilationUnitCommentsEditPart) childEditPart)
-					.setLabel(getPrimaryShape()
-							.getFigureCompilationUnitLabelFigure());
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected boolean removeFixedChild(EditPart childEditPart) {
-
-		return false;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void addChildVisual(EditPart childEditPart, int index) {
-		if (addFixedChild(childEditPart)) {
-			return;
-		}
-		super.addChildVisual(childEditPart, -1);
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void removeChildVisual(EditPart childEditPart) {
-		if (removeFixedChild(childEditPart)) {
-			return;
-		}
-		super.removeChildVisual(childEditPart);
-	}
-
-	/**
-	 * @generated
-	 */
-	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-
-		return super.getContentPaneFor(editPart);
 	}
 
 	/**
@@ -212,14 +197,6 @@ public class CompilationUnitEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(JavaVisualIDRegistry
-				.getType(CompilationUnitCommentsEditPart.VISUAL_ID));
-	}
-
-	/**
-	 * @generated
-	 */
 	protected void handleNotificationEvent(Notification event) {
 		if (event.getNotifier() == getModel()
 				&& EcorePackage.eINSTANCE.getEModelElement_EAnnotations()
@@ -247,11 +224,11 @@ public class CompilationUnitEditPart extends ShapeNodeEditPart {
 			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(8),
 					getMapMode().DPtoLP(8)));
 			this.setLineWidth(2);
-			this.setForegroundColor(ColorConstants.white);
-			this.setBackgroundColor(ColorConstants.lightGreen);
-			this.setBorder(new MarginBorder(getMapMode().DPtoLP(10),
-					getMapMode().DPtoLP(10), getMapMode().DPtoLP(10),
-					getMapMode().DPtoLP(10)));
+			this.setForegroundColor(ColorConstants.red);
+			this.setBackgroundColor(ColorConstants.lightGray);
+			this.setBorder(new MarginBorder(getMapMode().DPtoLP(3),
+					getMapMode().DPtoLP(3), getMapMode().DPtoLP(3),
+					getMapMode().DPtoLP(3)));
 			createContents();
 		}
 
@@ -266,6 +243,11 @@ public class CompilationUnitEditPart extends ShapeNodeEditPart {
 					getMapMode().DPtoLP(10000), getMapMode().DPtoLP(50)));
 
 			this.add(fFigureCompilationUnitLabelFigure);
+
+			WrappingLabel imports0 = new WrappingLabel();
+			imports0.setText("Imports");
+
+			this.add(imports0);
 
 		}
 

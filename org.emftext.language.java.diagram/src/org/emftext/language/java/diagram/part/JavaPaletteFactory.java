@@ -65,13 +65,13 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createAnnotation1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(JavaElementTypes.Annotation_3024);
-		types.add(JavaElementTypes.Annotation_3014);
+		types.add(JavaElementTypes.Annotation_3037);
+		types.add(JavaElementTypes.Annotation_3043);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Annotation1CreationTool_title,
 				Messages.Annotation1CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Annotation_3024));
+				.getImageDescriptor(JavaElementTypes.Annotation_3037));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -81,12 +81,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createAnnotationMethod2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.AnnotationMethod_3018);
+		types.add(JavaElementTypes.AnnotationMethod_3031);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.AnnotationMethod2CreationTool_title,
 				Messages.AnnotationMethod2CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.AnnotationMethod_3018));
+				.getImageDescriptor(JavaElementTypes.AnnotationMethod_3031));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -96,12 +96,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createCompilationUnit3CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.CompilationUnit_2001);
+		types.add(JavaElementTypes.CompilationUnit_2002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.CompilationUnit3CreationTool_title,
 				Messages.CompilationUnit3CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.CompilationUnit_2001));
+				.getImageDescriptor(JavaElementTypes.CompilationUnit_2002));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -111,12 +111,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createClassifierImport4CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.ClassifierImport_3016);
+		types.add(JavaElementTypes.ClassifierImport_3045);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.ClassifierImport4CreationTool_title,
 				Messages.ClassifierImport4CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.ClassifierImport_3016));
+				.getImageDescriptor(JavaElementTypes.ClassifierImport_3045));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -126,12 +126,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createStaticImport5CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.StaticImport_3017);
+		types.add(JavaElementTypes.StaticImport_3046);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.StaticImport5CreationTool_title,
 				Messages.StaticImport5CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.StaticImport_3017));
+				.getImageDescriptor(JavaElementTypes.StaticImport_3046));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -141,13 +141,13 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createClass6CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(JavaElementTypes.Class_3001);
-		types.add(JavaElementTypes.Class_3019);
+		types.add(JavaElementTypes.Class_3030);
+		types.add(JavaElementTypes.Class_3032);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Class6CreationTool_title,
 				Messages.Class6CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Class_3001));
+				.getImageDescriptor(JavaElementTypes.Class_3030));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -157,13 +157,13 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createInterface7CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(JavaElementTypes.Interface_3021);
-		types.add(JavaElementTypes.Interface_3013);
+		types.add(JavaElementTypes.Interface_3034);
+		types.add(JavaElementTypes.Interface_3042);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Interface7CreationTool_title,
 				Messages.Interface7CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Interface_3021));
+				.getImageDescriptor(JavaElementTypes.Interface_3034));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -173,13 +173,13 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createEnumeration8CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(JavaElementTypes.Enumeration_3020);
-		types.add(JavaElementTypes.Enumeration_3012);
+		types.add(JavaElementTypes.Enumeration_3033);
+		types.add(JavaElementTypes.Enumeration_3041);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Enumeration8CreationTool_title,
 				Messages.Enumeration8CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Enumeration_3020));
+				.getImageDescriptor(JavaElementTypes.Enumeration_3033));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -189,12 +189,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createConstructor9CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.Constructor_3026);
+		types.add(JavaElementTypes.Constructor_3039);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Constructor9CreationTool_title,
 				Messages.Constructor9CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Constructor_3026));
+				.getImageDescriptor(JavaElementTypes.Constructor_3039));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -204,12 +204,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createField10CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.Field_3022);
+		types.add(JavaElementTypes.Field_3035);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Field10CreationTool_title,
 				Messages.Field10CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Field_3022));
+				.getImageDescriptor(JavaElementTypes.Field_3035));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -219,12 +219,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createMethod11CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.Method_3023);
+		types.add(JavaElementTypes.Method_3036);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Method11CreationTool_title,
 				Messages.Method11CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Method_3023));
+				.getImageDescriptor(JavaElementTypes.Method_3036));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -234,12 +234,12 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createBlock12CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.Block_3027);
+		types.add(JavaElementTypes.Block_3040);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Block12CreationTool_title,
 				Messages.Block12CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.Block_3027));
+				.getImageDescriptor(JavaElementTypes.Block_3040));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -249,13 +249,13 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createPackageDescriptor13CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(JavaElementTypes.PackageDescriptor_3025);
-		types.add(JavaElementTypes.PackageDescriptor_3015);
+		types.add(JavaElementTypes.PackageDescriptor_3038);
+		types.add(JavaElementTypes.PackageDescriptor_3044);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.PackageDescriptor13CreationTool_title,
 				Messages.PackageDescriptor13CreationTool_desc, types);
 		entry.setSmallIcon(JavaElementTypes
-				.getImageDescriptor(JavaElementTypes.PackageDescriptor_3025));
+				.getImageDescriptor(JavaElementTypes.PackageDescriptor_3038));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -265,7 +265,7 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createClassifiers1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.ClassifierImportClassifiers_4001);
+		types.add(JavaElementTypes.ClassifierImportClassifiers_4003);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.Classifiers1CreationTool_title,
 				Messages.Classifiers1CreationTool_desc, types);
@@ -283,7 +283,7 @@ public class JavaPaletteFactory {
 	 */
 	private ToolEntry createStaticMembers2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(JavaElementTypes.StaticImportStaticMembers_4002);
+		types.add(JavaElementTypes.StaticImportStaticMembers_4004);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.StaticMembers2CreationTool_title,
 				Messages.StaticMembers2CreationTool_desc, types);

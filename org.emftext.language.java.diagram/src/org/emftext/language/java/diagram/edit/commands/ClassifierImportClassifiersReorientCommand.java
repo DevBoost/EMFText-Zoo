@@ -8,9 +8,9 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipRequest;
-import org.emftext.language.java.core.Classifier;
-import org.emftext.language.java.core.ClassifierImport;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.diagram.edit.policies.JavaBaseItemSemanticEditPolicy;
+import org.emftext.language.java.imports.ClassifierImport;
 
 /**
  * @generated
@@ -74,7 +74,7 @@ public class ClassifierImportClassifiersReorientCommand extends
 			return false;
 		}
 		return JavaBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistClassifierImportClassifiers_4001(getNewSource(),
+				.canExistClassifierImportClassifiers_4003(getNewSource(),
 						getOldTarget());
 	}
 
@@ -86,7 +86,7 @@ public class ClassifierImportClassifiersReorientCommand extends
 			return false;
 		}
 		return JavaBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistClassifierImportClassifiers_4001(getOldSource(),
+				.canExistClassifierImportClassifiers_4003(getOldSource(),
 						getNewTarget());
 	}
 

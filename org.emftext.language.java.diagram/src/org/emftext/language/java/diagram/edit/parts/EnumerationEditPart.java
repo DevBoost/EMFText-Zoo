@@ -32,7 +32,7 @@ public class EnumerationEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3020;
+	public static final int VISUAL_ID = 3033;
 
 	/**
 	 * @generated

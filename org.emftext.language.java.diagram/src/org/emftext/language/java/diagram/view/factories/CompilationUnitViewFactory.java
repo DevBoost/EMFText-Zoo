@@ -13,7 +13,6 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.HintedDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.emftext.language.java.diagram.edit.parts.CompilationUnitCommentsEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitCompilationUnitClassifiersCompartmentEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitCompilationUnitImportsCompartmentEditPart;
 import org.emftext.language.java.diagram.edit.parts.CompilationUnitEditPart;
@@ -66,12 +65,6 @@ public class CompilationUnitViewFactory extends AbstractShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		getViewService().createNode(
-				eObjectAdapter,
-				view,
-				JavaVisualIDRegistry
-						.getType(CompilationUnitCommentsEditPart.VISUAL_ID),
-				ViewUtil.APPEND, true, getPreferencesHint());
 		getViewService()
 				.createNode(
 						eObjectAdapter,

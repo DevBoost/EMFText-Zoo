@@ -8,9 +8,9 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipRequest;
-import org.emftext.language.java.core.Member;
-import org.emftext.language.java.core.StaticImport;
 import org.emftext.language.java.diagram.edit.policies.JavaBaseItemSemanticEditPolicy;
+import org.emftext.language.java.imports.StaticImport;
+import org.emftext.language.java.members.Member;
 
 /**
  * @generated
@@ -74,7 +74,7 @@ public class StaticImportStaticMembersReorientCommand extends
 			return false;
 		}
 		return JavaBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistStaticImportStaticMembers_4002(getNewSource(),
+				.canExistStaticImportStaticMembers_4004(getNewSource(),
 						getOldTarget());
 	}
 
@@ -86,7 +86,7 @@ public class StaticImportStaticMembersReorientCommand extends
 			return false;
 		}
 		return JavaBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistStaticImportStaticMembers_4002(getOldSource(),
+				.canExistStaticImportStaticMembers_4004(getOldSource(),
 						getNewTarget());
 	}
 

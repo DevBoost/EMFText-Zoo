@@ -93,7 +93,7 @@ public class JavaCreationWizard extends Wizard implements INewWizard {
 		this.selection = selection;
 		setWindowTitle(Messages.JavaCreationWizardTitle);
 		setDefaultPageImageDescriptor(JavaDiagramEditorPlugin
-				.getBundledImageDescriptor("icons/wizban/NewCoreWizard.gif")); //$NON-NLS-1$
+				.getBundledImageDescriptor("icons/wizban/NewContainersWizard.gif")); //$NON-NLS-1$
 		setNeedsProgressMonitor(true);
 	}
 

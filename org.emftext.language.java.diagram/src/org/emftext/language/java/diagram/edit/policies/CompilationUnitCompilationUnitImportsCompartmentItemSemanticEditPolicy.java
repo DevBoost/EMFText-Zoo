@@ -2,7 +2,7 @@ package org.emftext.language.java.diagram.edit.policies;
 
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
-import org.emftext.language.java.core.CorePackage;
+import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.diagram.edit.commands.ClassifierImportCreateCommand;
 import org.emftext.language.java.diagram.edit.commands.StaticImportCreateCommand;
 import org.emftext.language.java.diagram.providers.JavaElementTypes;
@@ -17,16 +17,16 @@ public class CompilationUnitCompilationUnitImportsCompartmentItemSemanticEditPol
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (JavaElementTypes.ClassifierImport_3016 == req.getElementType()) {
+		if (JavaElementTypes.ClassifierImport_3045 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(CorePackage.eINSTANCE
+				req.setContainmentFeature(ContainersPackage.eINSTANCE
 						.getCompilationUnit_Imports());
 			}
 			return getGEFWrapper(new ClassifierImportCreateCommand(req));
 		}
-		if (JavaElementTypes.StaticImport_3017 == req.getElementType()) {
+		if (JavaElementTypes.StaticImport_3046 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(CorePackage.eINSTANCE
+				req.setContainmentFeature(ContainersPackage.eINSTANCE
 						.getCompilationUnit_Imports());
 			}
 			return getGEFWrapper(new StaticImportCreateCommand(req));

@@ -42,7 +42,7 @@ public class MethodItemSemanticEditPolicy extends
 	 */
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (JavaElementTypes.StaticImportStaticMembers_4002 == req
+		if (JavaElementTypes.StaticImportStaticMembers_4004 == req
 				.getElementType()) {
 			return null;
 		}
@@ -54,7 +54,7 @@ public class MethodItemSemanticEditPolicy extends
 	 */
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (JavaElementTypes.StaticImportStaticMembers_4002 == req
+		if (JavaElementTypes.StaticImportStaticMembers_4004 == req
 				.getElementType()) {
 			return getGEFWrapper(new StaticImportStaticMembersCreateCommand(
 					req, req.getSource(), req.getTarget()));
