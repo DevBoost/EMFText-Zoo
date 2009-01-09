@@ -674,6 +674,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	protected boolean compareTypes(EObject type1,
 			EObject type2) {
 		
+		//if parameter type is null, always match
+		if (type2 instanceof VoidLiteral) {
+			return true;
+		}
 		if (type1 instanceof PrimitiveType && type2 instanceof PrimitiveType) {
 			if (type1 instanceof Boolean) {
 				if (type2 instanceof Boolean) {
@@ -710,14 +714,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				if (type2 instanceof Byte ||
 						type2 instanceof Float ||
 						type2 instanceof Double) {
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-			if (type1 instanceof VoidLiteral) {
-				if (type2 instanceof VoidLiteral) {
 					return true;
 				}
 				else {
