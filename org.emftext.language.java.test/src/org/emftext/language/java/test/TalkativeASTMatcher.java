@@ -94,6 +94,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
+import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LITERALTokenResolver;
 
 
 public class TalkativeASTMatcher extends ASTMatcher {
@@ -403,8 +404,67 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(NumberLiteral node, Object other) {
+		//because of HEX conversation there might be a prefix that can be ignored
+		boolean stripPrefix = false;
+		if (other instanceof PrefixExpression) {
+			other = ((PrefixExpression)other).getOperand();
+			stripPrefix = true;
+		}
+		if (!(other instanceof NumberLiteral)) {
+			return false;
+		}
+		NumberLiteral o = (NumberLiteral) other;
+
+		String nToken = node.getToken();
+		String oToken = o.getToken();
+
+		//HEX normalization
+		if (nToken.startsWith("0x")) {
+			nToken = nToken.substring(2);
+			try {
+				nToken = JavaDECIMAL_LITERALTokenResolver.parseInteger(nToken, 16).toString();
+			} catch (NumberFormatException nfe) {
+				nfe.printStackTrace();
+			}
+		}
+		if (oToken.startsWith("0x")) {
+			oToken = oToken.substring(2);
+			try {
+				oToken = JavaDECIMAL_LITERALTokenResolver.parseInteger(oToken, 16).toString();
+			} catch (NumberFormatException nfe) {
+				nfe.printStackTrace();
+			}
+		}
 		
-		return setDiff(node, other, super.match(node, other));
+		//OCTAL normalization
+		if (nToken.toLowerCase().endsWith("l")) {
+			nToken = nToken.substring(0, nToken.length() - 1);
+			nToken = Long.decode(nToken).toString();
+		}
+		if (oToken.toLowerCase().endsWith("l")) {
+			oToken = oToken.substring(0, oToken.length() - 1);
+			oToken = Long.decode(oToken).toString();
+		}
+		
+		//strip floatingpoint suffix
+		if (nToken.endsWith("f")) {
+			nToken = nToken.substring(0, nToken.length() - 1);
+		}
+		if (oToken.endsWith("f")) {
+			oToken = oToken.substring(0, oToken.length() - 1);
+		}
+		if (nToken.endsWith("d")) {
+			nToken = nToken.substring(0, nToken.length() - 1);
+		}
+		if (oToken.endsWith("d")) {
+			oToken = oToken.substring(0, oToken.length() - 1);
+		}
+
+		if(stripPrefix) {
+			nToken = nToken.substring(1);
+		}
+		
+		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
 
 	@Override
@@ -433,7 +493,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(PrefixExpression node, Object other) {
-		
+
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -493,10 +553,20 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		return setDiff(node, other, super.match(node, other));
 	}
 
-	@Override
 	public boolean match(StringLiteral node, Object other) {
+		if (!(other instanceof StringLiteral)) {
+			return false;
+		}
+		StringLiteral o = (StringLiteral) other;
 		
-		return setDiff(node, other, super.match(node, other));
+		String nString = node.getEscapedValue();
+		String oString = o.getEscapedValue();
+		
+		//normalize escaped strings
+		nString = unescapeEscapedCharacters(nString);
+		oString = unescapeEscapedCharacters(oString);
+		
+		return setDiff(node, other, safeEquals(nString, oString));
 	}
 
 	@Override
@@ -597,13 +667,17 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(VariableDeclarationFragment node, Object other) {
-		
-		return setDiff(node, other, super.match(node, other));
+		if (!(other instanceof VariableDeclarationFragment)) {
+			return false;
+		}
+		VariableDeclarationFragment o = (VariableDeclarationFragment) other;
+		return safeSubtreeMatch(node.getName(), o.getName())
+			&& node.getExtraDimensions() == o.getExtraDimensions()
+			&& safeSubtreeMatch(node.getInitializer(), o.getInitializer());
 	}
 
 	@Override
 	public boolean match(VariableDeclarationStatement node, Object other) {
-		
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -624,7 +698,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	
 	protected boolean setDiff(Object o1, Object o2, boolean result) {
 		if (!result) {
-			diff += ("\nORIGINAL:\n");
+			diff += ("\nORIGINAL: \n");
 			diff += (o1.toString());
 			diff += ("\nREPRINT:\n");
 			diff += (o2.toString());
@@ -637,6 +711,192 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		return diff;
 	}
 	
+	private static final char BACKSLASH = '\\';
 	
+	/**
+	   * Given the input string with escaped unicode characters convert them
+	   * to their native unicode characters and return the result. This is quite
+	   * similar to the functionality found in property file handling. White space
+	   * escapes are not processed (as they are consumed by the template library).
+	   * Any bogus escape codes will remain in place.
+	   * <p>
+	   * When files are provided in another encoding, they can be converted to ascii using
+	   * the native2ascii tool (a java sdk binary). This tool will escape all the
+	   * non Latin1 ASCII characters and convert the file into Latin1 with unicode escapes.
+	   * 
+	   * This code is from http://www.antlr.org/wiki/display/ST/unicode_escapes but was
+	   * modified and extended to support other escaped characters.
+	   *
+	   * @param source
+	   *      string with unicode escapes
+	   * @return
+	   *      string with all unicode characters, all unicode escapes expanded.
+	   *
+	   * @author Caleb Lyness (modified by Mirko Seifert)
+	   */
+	private String unescapeEscapedCharacters(String source) {
+	     /* could use regular expression, but not this time... */
+	     final int srcLen = source.length();
+	     char c;
+
+	     StringBuffer buffer = new StringBuffer(srcLen);
+
+	     // Must have format \\uXXXX where XXXX is a hexadecimal number
+	     int i = 0;
+	     while (i < srcLen) {
+
+	            c = source.charAt(i++);
+
+	            if (c == BACKSLASH) {
+	                char nc = source.charAt(i);
+	                switch (nc) {
+		                case 'u' : {
+		                    // Now we found the 'u' we need to find another 4 hex digits
+		                    // Note: shifting left by 4 is the same as multiplying by 16
+		                    int v = 0; // Accumulator
+		                    for (int j=1; j < 5; j++) {
+		                        nc = source.charAt(i+j);
+		                        switch (nc)
+		                        {
+		                            case 48: // '0'
+		                            case 49: // '1'
+		                            case 50: // '2'
+		                            case 51: // '3'
+		                            case 52: // '4'
+		                            case 53: // '5'
+		                            case 54: // '6'
+		                            case 55: // '7'
+		                            case 56: // '8'
+		                            case 57: // '9'
+		                                v = ((v << 4) + nc) - 48;
+		                                break;
+	
+		                            case 97: // 'a'
+		                            case 98: // 'b'
+		                            case 99: // 'c'
+		                            case 100: // 'd'
+		                            case 101: // 'e'
+		                            case 102: // 'f'
+		                                v = ((v << 4)+10+nc)-97;
+		                                break;
+	
+		                            case 65: // 'A'
+		                            case 66: // 'B'
+		                            case 67: // 'C'
+		                            case 68: // 'D'
+		                            case 69: // 'E'
+		                            case 70: // 'F'
+		                                v = ((v << 4)+10+nc)-65;
+		                                break;
+		                            default:
+		                                // almost but no go
+		                                j = 6;  // terminate the loop
+		                                v = 0;  // clear the accumulator
+		                                break;
+		                        }
+		                    } // for each of the 4 digits
+	
+		                    if (v > 0) {      // We got a full conversion
+		                        c = (char) v;  // Use the converted char
+		                        i += 5;       // skip the numeric values
+		                    }
+			                break;
+		                }
+		        		// octal characters: \0 to \377
+		                case '0': 
+		                case '1': 
+		                case '2': 
+		                case '3': {
+		                    // Now we found the '0' we need to find up to 3 octal digits
+		                    // Note: shifting left by 3 is the same as multiplying by 8
+		                    int v = 0; // Accumulator
+		                    int j;
+		                    boolean stop = false;
+		                    for (j = 0; j < 3 && !stop; j++) {
+		                    	if (i + j < source.length()) {
+			                        nc = source.charAt(i + j);
+			                        switch (nc)
+			                        {
+			                            case 48: // '0'
+			                            case 49: // '1'
+			                            case 50: // '2'
+			                            case 51: // '3'
+			                            case 52: // '4'
+			                            case 53: // '5'
+			                            case 54: // '6'
+			                            case 55: // '7'
+			                                v = ((v << 3) + nc) - 48;
+			                                break;
+			                            default:
+			                            	// some other character
+			                                // almost but no go
+			                            	stop = true;
+			                            	// we have to go back one character, because we've read to far
+			                            	j--;
+			                                break;
+			                        }
+		                    	}
+		                    } // for each of the digits
+	
+		                    if (v >= 0) {      // We got a full conversion
+		                        c = (char) v;  // Use the converted char
+		                        i += j;       // skip the numeric values
+		                    }
+		                	break;
+		                }
+		        		// escape sequences: \b \t \n \f \r \" \' \\
+		                case BACKSLASH: {
+		                	// if the next character is a backslash we have an
+		                	// escaped backslash - not an unicode sequence
+	                		// skip the second backslash
+	                		i++;
+	                		break;
+		                }
+		                case 'b': {
+		                	c = '\b';
+	                		i++;
+	                		break;
+		                }
+		                case 't': {
+		                	c = '\t';
+	                		i++;
+	                		break;
+		                }
+		                case 'n': {
+		                	c = '\n';
+	                		i++;
+	                		break;
+		                }
+		                case 'f': {
+		                	c = '\f';
+	                		i++;
+	                		break;
+		                }
+		                case 'r': {
+		                	c = '\r';
+	                		i++;
+	                		break;
+		                }
+		                case '\"': {
+		                	c = '\"';
+	                		i++;
+	                		break;
+		                }
+		                case '\'': {
+		                	c = '\'';
+	                		i++;
+	                		break;
+		                }
+	                }
+	            }
+	            buffer.append(c);
+	        }
+			
+		// Fill in the remaining characters from the buffer
+		while (i < srcLen) {
+			buffer.append(source.charAt(i++));
+		}		
+		return buffer.toString();
+	}
 	
 }

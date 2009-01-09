@@ -76,7 +76,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 	
 	protected void registerInClassPath(String file) throws Exception {
-		File inputFolder = new File("." + File.separator + TEST_OUTPUT_FOLDER);
+		File inputFolder = new File("." + File.separator + getTestInputFolder());
 		File inputFile = new File(inputFolder + File.separator + file);
 
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));

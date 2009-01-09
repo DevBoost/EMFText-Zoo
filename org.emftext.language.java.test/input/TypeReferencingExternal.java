@@ -39,6 +39,7 @@ public class TypeReferencingExternal {
 		variable7.notify();
 		
 		variable8 = BigDecimalLayoutForm.SCIENTIFIC;
+		//this should be parsed to the method "ordinal()" and not the (private) local field "ordinal"
 		variable8.ordinal();
 	}
 }
