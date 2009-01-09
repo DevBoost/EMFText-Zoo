@@ -25,12 +25,12 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.generics.ExplicitGenericMethodCall;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticImport;
-import org.emftext.language.java.instantiations.ExplicitGenericInvocation;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
@@ -50,7 +50,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.ElementReference;
-import org.emftext.language.java.references.MethodReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.PackageOrClassifierReference;
 import org.emftext.language.java.references.Primary;
 import org.emftext.language.java.references.PrimaryReference;
@@ -156,7 +156,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		
 		if (element instanceof Method && 
 				!(element.eContainer() instanceof Annotation) &&
-				!(container instanceof ExplicitGenericInvocation) ) { 
+				!(container instanceof ExplicitGenericMethodCall) ) { 
 			
 			//? introduce common superclass for Method and AnnotationMethod
 			Method method = (Method) element;
@@ -606,7 +606,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	}
 	
 	
-	protected EList<Type> getArgumentTypes(MethodReference primaryRef) throws UnresolvedProxiesException {
+	protected EList<Type> getArgumentTypes(MethodCall primaryRef) throws UnresolvedProxiesException {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 		Class stringClass = (Class) EcoreUtil.resolve(
@@ -669,8 +669,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			else if (referencedElement instanceof Method) {
 				//in case of Methods the parameter types need to be checked
 				Method method = (Method) referencedElement;
-				if (context instanceof MethodReference) {
-					MethodReference reference = (MethodReference) context;
+				if (context instanceof MethodCall) {
+					MethodCall reference = (MethodCall) context;
 					EList<Type> argumentTypes = getArgumentTypes(reference);
 					if (method.getParameters().size() == argumentTypes.size()) {
 						for (int i = 0; i < argumentTypes.size(); i++) {

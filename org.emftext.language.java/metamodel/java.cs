@@ -16,7 +16,6 @@ IMPORTS {
 	variables : <http://www.emftext.org/java/variables>
 	members : <http://www.emftext.org/java/members>
 	commons : <http://www.emftext.org/java/commons>
-	comments : <http://www.emftext.org/java/comments>
 	expressions : <http://www.emftext.org/java/expressions> 
 	operators : <http://www.emftext.org/java/operators> 
 	literals : <http://www.emftext.org/java/literals>
@@ -225,20 +224,20 @@ references.ParameterizedPackageOrClassifierReference
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
 	
-references.MethodReference
+references.MethodCall
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 		"(" (arguments ("," arguments)* )? ")"
 	;
 
-// ATTENTION: This definition must reside after the definition for references.MethodReference!
+// ATTENTION: This definition must reside after the definition for references.MethodCall!
 // Otherwise method calls can not be parsed, because the ANTLR backtracking does not work here. 
 references.PackageOrClassifierOrVariableReference
 	::= target[]
 	;
 
 // TODO move to generics package
-instantiations.ExplicitGenericInvocation
+generics.ExplicitGenericMethodCall
 	::= "<" typeArguments ("," typeArguments)* ">"
 		target[]
 		"(" (arguments ("," arguments)* )? ")"
@@ -388,18 +387,18 @@ references.Primary
 	| literal
 	;    
 
-expressions.Assignment							::= "=";
-expressions.CompoundAssignmentPlus				::= "+=";
-expressions.CompoundAssignmentMinus				::= "-=";
-expressions.CompoundAssignmentMultiplication	::= "*=";
-expressions.CompoundAssignmentDivision 			::= "/=";
-expressions.CompoundAssignmentAnd				::= "&=";
-expressions.CompoundAssignmentOr				::= "|=";
-expressions.CompoundAssignmentExclusiveOr 		::= "^=";
-expressions.CompoundAssignmentModulo 			::= "%=";
-expressions.CompoundAssignmentLeftShift 		::= "<" #0 "<" #0 "=";
-expressions.CompoundAssignmentRightShift 		::= ">" #0 ">" #0 "=";
-expressions.CompoundAssignmentUnsignedRightShift::= ">" #0 ">" #0 ">" #0 "=";
+operators.Assignment                           ::= "=";
+operators.CompoundAssignmentPlus               ::= "+=";
+operators.CompoundAssignmentMinus              ::= "-=";
+operators.CompoundAssignmentMultiplication     ::= "*=";
+operators.CompoundAssignmentDivision           ::= "/=";
+operators.CompoundAssignmentAnd                ::= "&=";
+operators.CompoundAssignmentOr                 ::= "|=";
+operators.CompoundAssignmentExclusiveOr        ::= "^=";
+operators.CompoundAssignmentModulo             ::= "%=";
+operators.CompoundAssignmentLeftShift          ::= "<" #0 "<" #0 "=";
+operators.CompoundAssignmentRightShift         ::= ">" #0 ">" #0 "=";
+operators.CompoundAssignmentUnsignedRightShift ::= ">" #0 ">" #0 ">" #0 "=";
 
 operators.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
 operators.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
@@ -409,9 +408,9 @@ operators.LessThanOrEqual		::= "<" #0 "=";
 operators.GreaterThan			::= ">";
 operators.GreaterThanOrEqual	::= ">" #0 "=";
 
-expressions.LeftShift 			::= "<" #0 "<" ;
-expressions.RightShift 			::= ">" #0 ">" ;
-expressions.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
+operators.LeftShift 			::= "<" #0 "<" ;
+operators.RightShift 			::= ">" #0 ">" ;
+operators.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
 
 operators.Equal		::= "==";	
 operators.NotEqual	::= "!=";
