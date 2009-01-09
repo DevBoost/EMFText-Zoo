@@ -23,7 +23,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'))*$ COLLECT IN comments;
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'))* ('\n'|'\r')$ COLLECT IN comments;
 	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
 
 	DEFINE FLOATING_POINT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))? |   ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('f'|'F'|'d'|'D')))$;
@@ -43,7 +43,7 @@ TOKENS {
 	DEFINE IDENTIFIER $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'_'|'0'..'9')*$;
 	DEFINE IMPORT_ALL_LITERAL $'.*'$;
 	
-	PREDEFINED WS COLLECT IN whitespaces;
+	//PREDEFINED WS COLLECT IN whitespaces;
 }
 
 RULES {
