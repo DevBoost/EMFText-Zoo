@@ -270,7 +270,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				if (idx > 0) {
 					previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
 				}
-
 			}
 			//similar as before... could be unified in metamodel
 			if (scopeCand instanceof Import) {
@@ -286,7 +285,18 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 			//inside annotation instance 
 			else if (annotationInstance != null && annotationInstance != scopeCand.eContainer() /*not the AnnotationInstance itself*/) {
-				previousType = getTypeOfReferencedElement(annotationInstance.getAnnotation());
+				TypeReference typeReference = annotationInstance.getAnnotation();
+				if (typeReference instanceof TypeReferenceSequence) {
+					//chained reference: scope given by previous element may be a type and may define a new scope
+					TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)typeReference;
+					int idx = typeRefSequence.getParts().indexOf(container);
+					if (idx > 0) {
+						previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
+					}
+				} else {
+					// TODO
+					throw new RuntimeException("Not implemented yet");
+				}
 			}
 			//no previouseType, search local
 			if (!definitlyPackage) {
