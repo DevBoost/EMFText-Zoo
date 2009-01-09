@@ -151,29 +151,8 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		emfMethod.setName(method.getName());
 		
 		for(org.apache.bcel.generic.Type argType : method.getArgumentTypes()) {
-			constructParameter(argType);
-		}
-		
-		for(org.apache.bcel.classfile.Attribute a : method.getAttributes()) {
-			if (a instanceof org.apache.bcel.classfile.Signature) {
-				//TODO
-			}
-			else if (a instanceof org.apache.bcel.classfile.ExceptionTable) {
-				//do nothing
-			}
-			else if (a instanceof org.apache.bcel.classfile.Code) {
-				//do nothing
-			}
-			else if (a instanceof org.apache.bcel.classfile.Deprecated) {
-				//do nothing
-			}
-			else if (a instanceof org.apache.bcel.classfile.Unknown) {
-				//do nothing
-			}
-			else {
-				assert(false);
-			}
-		
+			emfMethod.getParameters().add(
+					constructParameter(argType));
 		}
 		return emfMethod;
 	}
@@ -182,7 +161,14 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		Parameter emfParameter = coreFactory.createOrdinaryParameter();
 		TypeReference emfTypeReference = null;
 
-        switch (attrType.getSignature().charAt(0)) {
+		String signature = attrType.getSignature();
+		int arrayDimension = 0;
+		while(signature.startsWith("[")) {
+			signature = signature.substring(1);
+			arrayDimension++;
+		}
+		
+        switch (signature.charAt(0)) {
 	        case 'B':
 	            emfTypeReference = TypesFactory.eINSTANCE.createByte();
 	            break;
@@ -203,8 +189,9 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	            break;
 	        case 'L': { 
 	        	// Full class name
-	            String fullClassName = Utility.signatureToString(attrType.getSignature(),false);
+	            String fullClassName = Utility.signatureToString(signature,false);
 	        	emfTypeReference = createReferenceToClassifier(fullClassName);
+	        	break;
 	        }
 	        case 'S':
 	            emfTypeReference = TypesFactory.eINSTANCE.createShort();
@@ -212,14 +199,15 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	        case 'Z':
 	            emfTypeReference = TypesFactory.eINSTANCE.createBoolean();
 	            break;
-	        case '[': { // TODO Array declaration
-	            break;
-	        }
 	        case 'V':
 	            emfTypeReference = TypesFactory.eINSTANCE.createVoidLiteral();
 	            break;
         }
         
+        for(int i = 0; i < arrayDimension; i++) {
+        	emfParameter.getArrayDimensions().add(
+        			CoreFactory.eINSTANCE.createArrayDimension());
+        }
 		emfParameter.setType(emfTypeReference);
 		return emfParameter;
 	}
