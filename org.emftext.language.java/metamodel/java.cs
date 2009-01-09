@@ -219,9 +219,9 @@ core.PackageOrClassifierOrMethodOrVariableReference
 	;
 
 core.ExplicitGenericInvocation
-	::= ("<" typeArguments ("," typeArguments)* ">")?
+	::= "<" typeArguments ("," typeArguments)* ">"
 		target[]
-		("(" (arguments ("," arguments)* )? ")")?
+		"(" ((arguments ("," arguments)* )?)? ")"
 	;
 
 core.QualifiedTypeArgument
