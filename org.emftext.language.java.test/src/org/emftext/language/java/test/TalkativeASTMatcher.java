@@ -140,9 +140,6 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(ArrayType node, Object other) {
-		if(!super.match(node, other)) {
-			//TODO
-		}
 		return setDiff(node, other, super.match(node, other));
 	}
 

@@ -828,13 +828,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		parseAndReprint(filename);
 	}
-
+	
 	@Test
 	public void testImport1() throws Exception {
 		String typename = "Import1";
 		String filename = typename + JAVA_FILE_EXTENSION;
 
 		registerInClassPath("Import2" + JAVA_FILE_EXTENSION);
+		
+		CompilationUnit model = parseResource(filename);
+		assertNumberOfClassifiers(model, 1);
 		
 		parseAndReprint(filename);
 	}
@@ -844,6 +847,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Import2";
 		String filename = typename + JAVA_FILE_EXTENSION;
 
+		CompilationUnit model = parseResource(filename);
+		assertNumberOfClassifiers(model, 1);
+		
 		parseAndReprint(filename);
 	}
 	
@@ -1100,6 +1106,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testPkg_package_info() throws Exception {
 		CompilationUnit model = parseResource("pkg/package-info.java");
 		assertNumberOfClassifiers(model, 0);
+		parseAndReprint("pkg/package-info.java");
+	}
+	
+	@Test
+	public void testPkg_PackageAnnotation() throws Exception {
+		CompilationUnit model = parseResource("pkg/PackageAnnotation.java");
+		assertNumberOfClassifiers(model, 1);
+		parseAndReprint("pkg/PackageAnnotation.java");
 	}
 
 	@Test
