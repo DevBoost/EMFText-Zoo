@@ -15,18 +15,18 @@ public class JavaPrinter extends JavaPrinterBase {
 		super(o, resource);
 	}
 	
-	public void printUnaryExpressionNotPlusMinus(UnaryExpressionNotPlusMinus element, java.lang.String outertab, java.io.PrintWriter out){
-		
+	@Override
+	public void print_org_emftext_language_java_expressions_UnaryExpressionNotPlusMinus(UnaryExpressionNotPlusMinus element, java.lang.String outertab, java.io.PrintWriter out){
 		if (element.getNegate() != null) {
-			super.printNegate(element.getNegate(), outertab, out);
-			super.printPrimary(element.getPrimary(), outertab, out);
+			super.print_org_emftext_language_java_operators_Negate(element.getNegate(), outertab, out);
+			super.print_org_emftext_language_java_references_Primary(element.getPrimary(), outertab, out);
 		}
 		else if (element.getComplement() != null) {
-			super.printComplement(element.getComplement(), outertab, out);
-			super.printPrimary(element.getPrimary(), outertab, out);
+			super.print_org_emftext_language_java_operators_Complement(element.getComplement(), outertab, out);
+			super.print_org_emftext_language_java_references_Primary(element.getPrimary(), outertab, out);
 		}
 		else {
-			super.printUnaryExpressionNotPlusMinus(element, outertab, out);
+			super.print_org_emftext_language_java_expressions_UnaryExpressionNotPlusMinus(element, outertab, out);
 		}
 	}
 

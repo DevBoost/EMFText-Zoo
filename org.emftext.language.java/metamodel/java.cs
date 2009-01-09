@@ -31,6 +31,7 @@ OPTIONS {
 	//backtracking = false;
 	standardTextTokenName = IDENTIFIER;
 	overridePluginXML = false;
+	overridePrinter = false;
 	generateCodeFromGeneratorModel = false;
 }
 
