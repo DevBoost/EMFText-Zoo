@@ -317,17 +317,19 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 						CorePackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET)) {
 					Reference ref = ((Reference)container.eContainer());
 					//there must be something (a classifier reference) following up
-					PackageDescriptor packageDescriptor = CoreFactory.eINSTANCE.createPackageDescriptor();
-					packageDescriptor.setName(identifier);
-					result.addMapping(identifier, packageDescriptor);
-					
-					if(ref.eContainer() instanceof Reference) {
-						ref = (Reference) ref.eContainer();
-						if (ref.getPrimary() instanceof PackageOrClassifierOrMethodOrVariableReference) {
-							PackageOrClassifierOrMethodOrVariableReference primaryRef = 
-								(PackageOrClassifierOrMethodOrVariableReference) ref.getPrimary();
-							if(primaryRef.getTarget() instanceof PackageDescriptor) {
-								packageDescriptor.setParent((PackageDescriptor) primaryRef.getTarget());
+					if (ref.getNext() != null) {
+						PackageDescriptor packageDescriptor = CoreFactory.eINSTANCE.createPackageDescriptor();
+						packageDescriptor.setName(identifier);
+						result.addMapping(identifier, packageDescriptor);
+						
+						if(ref.eContainer() instanceof Reference) {
+							ref = (Reference) ref.eContainer();
+							if (ref.getPrimary() instanceof PackageOrClassifierOrMethodOrVariableReference) {
+								PackageOrClassifierOrMethodOrVariableReference primaryRef = 
+									(PackageOrClassifierOrMethodOrVariableReference) ref.getPrimary();
+								if(primaryRef.getTarget() instanceof PackageDescriptor) {
+									packageDescriptor.setParent((PackageDescriptor) primaryRef.getTarget());
+								}
 							}
 						}
 					}
