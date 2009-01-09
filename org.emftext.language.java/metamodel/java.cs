@@ -159,7 +159,7 @@ parameters.VariableLengthParameter
 	;
 
 variables.LocalVariable
-	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
+	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
@@ -170,7 +170,7 @@ variables.AdditionalLocalVariable
 	;
 
 members.Field
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
+	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
 	;
 
 members.AdditionalField
