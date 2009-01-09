@@ -387,18 +387,18 @@ references.Primary
 	| literal
 	;    
 
-operators.Assignment                           ::= "=";
-operators.CompoundAssignmentPlus               ::= "+=";
-operators.CompoundAssignmentMinus              ::= "-=";
-operators.CompoundAssignmentMultiplication     ::= "*=";
-operators.CompoundAssignmentDivision           ::= "/=";
-operators.CompoundAssignmentAnd                ::= "&=";
-operators.CompoundAssignmentOr                 ::= "|=";
-operators.CompoundAssignmentExclusiveOr        ::= "^=";
-operators.CompoundAssignmentModulo             ::= "%=";
-operators.CompoundAssignmentLeftShift          ::= "<" #0 "<" #0 "=";
-operators.CompoundAssignmentRightShift         ::= ">" #0 ">" #0 "=";
-operators.CompoundAssignmentUnsignedRightShift ::= ">" #0 ">" #0 ">" #0 "=";
+operators.Assignment                   ::= "=";
+operators.AssignmentPlus               ::= "+=";
+operators.AssignmentMinus              ::= "-=";
+operators.AssignmentMultiplication     ::= "*=";
+operators.AssignmentDivision           ::= "/=";
+operators.AssignmentAnd                ::= "&=";
+operators.AssignmentOr                 ::= "|=";
+operators.AssignmentExclusiveOr        ::= "^=";
+operators.AssignmentModulo             ::= "%=";
+operators.AssignmentLeftShift          ::= "<" #0 "<" #0 "=";
+operators.AssignmentRightShift         ::= ">" #0 ">" #0 "=";
+operators.AssignmentUnsignedRightShift ::= ">" #0 ">" #0 ">" #0 "=";
 
 operators.AdditiveOperator		::= value[ADDITIVE_OPERATOR_LITERAL] ;
 operators.MultiplicativeOperator	::= value[MULTIPLICATIVE_OPERATOR_LITERAL] ;
