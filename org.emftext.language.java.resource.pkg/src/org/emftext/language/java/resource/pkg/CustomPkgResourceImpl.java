@@ -41,8 +41,8 @@ public class CustomPkgResourceImpl extends org.emftext.runtime.resource.impl.Tex
 		
 		Object inputStreamPreProcessorProvider = loadOptions.get(org.emftext.runtime.IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
 		if (inputStreamPreProcessorProvider != null) {
-			if (inputStreamPreProcessorProvider instanceof org.emftext.runtime.InputStreamProcessorProvider) {
-				actualInputStream = ((org.emftext.runtime.InputStreamProcessorProvider) inputStreamPreProcessorProvider).getInputStreamProcessor(inputStream);
+			if (inputStreamPreProcessorProvider instanceof org.emftext.runtime.IInputStreamProcessorProvider) {
+				actualInputStream = ((org.emftext.runtime.IInputStreamProcessorProvider) inputStreamPreProcessorProvider).getInputStreamProcessor(inputStream);
 			}
 		}
 		org.emftext.runtime.resource.ITextParser p = new PkgParser(new org.antlr.runtime.CommonTokenStream(new PkgLexer(new org.antlr.runtime.ANTLRInputStream(actualInputStream))));
