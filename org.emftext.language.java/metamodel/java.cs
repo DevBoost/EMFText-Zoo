@@ -225,16 +225,23 @@ references.ParameterizedPackageOrClassifierReference
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
 	
-references.PackageOrClassifierOrMethodOrVariableReference
+references.MethodReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
-		("(" (arguments ("," arguments)* )? ")")?
+		"(" (arguments ("," arguments)* )? ")"
 	;
 
+// ATTENTION: This definition must reside after the definition for references.MethodReference!
+// Otherwise method calls can not be parsed, because the ANTLR backtracking does not work here. 
+references.PackageOrClassifierOrVariableReference
+	::= target[]
+	;
+
+// TODO move to generics package
 instantiations.ExplicitGenericInvocation
 	::= "<" typeArguments ("," typeArguments)* ">"
 		target[]
-		"(" ((arguments ("," arguments)* )?)? ")"
+		"(" (arguments ("," arguments)* )? ")"
 	;
 
 generics.QualifiedTypeArgument

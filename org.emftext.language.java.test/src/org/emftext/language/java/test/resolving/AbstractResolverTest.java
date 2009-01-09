@@ -5,7 +5,7 @@ import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.references.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.statements.ExpressionStatement;
@@ -66,9 +66,9 @@ public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 		getUnaryExpression().get(0).
 		getUnaryExpressionNotPlusMinus().getPrimary().getReference();
 		
-		assertType(reference.getPrimary(), PackageOrClassifierOrMethodOrVariableReference.class);
-		PackageOrClassifierOrMethodOrVariableReference methodCall = (PackageOrClassifierOrMethodOrVariableReference) reference.getPrimary();
-		assertEquals(expectedReferenceTarget, methodCall.getTarget());
+		assertType(reference.getPrimary(), ElementReference.class);
+		ElementReference elementReference = (ElementReference) reference.getPrimary();
+		assertEquals(expectedReferenceTarget, elementReference.getTarget());
 	}
 
 	@Override

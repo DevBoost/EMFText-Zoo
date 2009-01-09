@@ -49,7 +49,8 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.references.PackageOrClassifierOrMethodOrVariableReference;
+import org.emftext.language.java.references.ElementReference;
+import org.emftext.language.java.references.MethodReference;
 import org.emftext.language.java.references.PackageOrClassifierReference;
 import org.emftext.language.java.references.Primary;
 import org.emftext.language.java.references.PrimaryReference;
@@ -330,10 +331,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				if(!firstLetter.toLowerCase().equals(firstLetter)) {
 					return;
 				}
-				//it hat to be target of a reference: there are two referencing possibilities
+				//it has to be target of a reference: there are two referencing possibilities
 				// (1)
 				if (reference.equals(
-						ReferencesPackage.Literals.PACKAGE_OR_CLASSIFIER_OR_METHOD_OR_VARIABLE_REFERENCE__TARGET)) {
+						ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET)) {
 					Reference ref = ((Reference)container.eContainer());
 					//there must be something (a classifier reference) following up
 					if (ref.getNext() != null) {
@@ -343,9 +344,9 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 						
 						if(ref.eContainer() instanceof Reference) {
 							ref = (Reference) ref.eContainer();
-							if (ref.getPrimary() instanceof PackageOrClassifierOrMethodOrVariableReference) {
-								PackageOrClassifierOrMethodOrVariableReference primaryRef = 
-									(PackageOrClassifierOrMethodOrVariableReference) ref.getPrimary();
+							if (ref.getPrimary() instanceof ElementReference) {
+								ElementReference primaryRef = 
+									(ElementReference) ref.getPrimary();
 								if(primaryRef.getTarget() instanceof PackageDescriptor) {
 									packageDescriptor.setParent((PackageDescriptor) primaryRef.getTarget());
 								}
@@ -530,9 +531,9 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			return getSuperType(getClassObjectModelElement());
 		}
 		//referenced element points to an element with a type
-		else if (primaryRef instanceof PackageOrClassifierOrMethodOrVariableReference) {
+		else if (primaryRef instanceof ElementReference) {
 			ReferenceableElement target = 
-				(ReferenceableElement) ((PackageOrClassifierOrMethodOrVariableReference) primaryRef).getTarget();
+				(ReferenceableElement) ((ElementReference) primaryRef).getTarget();
 			if (target.eIsProxy()) {
 				throw new UnresolvedProxiesException();
 			}
@@ -605,7 +606,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	}
 	
 	
-	protected EList<Type> getArgumentTypes(PackageOrClassifierOrMethodOrVariableReference primaryRef) throws UnresolvedProxiesException {
+	protected EList<Type> getArgumentTypes(MethodReference primaryRef) throws UnresolvedProxiesException {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 		Class stringClass = (Class) EcoreUtil.resolve(
@@ -668,8 +669,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			else if (referencedElement instanceof Method) {
 				//in case of Methods the parameter types need to be checked
 				Method method = (Method) referencedElement;
-				if (context instanceof PackageOrClassifierOrMethodOrVariableReference) {
-					PackageOrClassifierOrMethodOrVariableReference reference = (PackageOrClassifierOrMethodOrVariableReference)context; 
+				if (context instanceof MethodReference) {
+					MethodReference reference = (MethodReference) context;
 					EList<Type> argumentTypes = getArgumentTypes(reference);
 					if (method.getParameters().size() == argumentTypes.size()) {
 						for (int i = 0; i < argumentTypes.size(); i++) {
