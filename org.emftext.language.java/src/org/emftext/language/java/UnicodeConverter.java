@@ -2,7 +2,6 @@ package org.emftext.language.java;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 import org.emftext.runtime.InputStreamProcessor;
 
@@ -45,12 +44,11 @@ public class UnicodeConverter extends InputStreamProcessor {
 	public int read() throws IOException {
 		if (!isEmpty()) {
 			int result = pop();
-			System.out.print(" POP" + result + ".");
 			return result;
 		}
 		int read = inputStream.read();
 
-		// Must have format \\uXXXX where XXXX is a hexadecimal number
+		// Must have format \\uXXXX where XXXX is a hex number
 		if (read >= 0) {
 			char c = (char) read;
 
@@ -114,12 +112,7 @@ public class UnicodeConverter extends InputStreamProcessor {
 						pop();
 						pop();
 						pop();
-						//push(v);
-						byte[] bytes = new Character((char) v).toString().getBytes("UTF-8");
-						for (int b = 0; b < bytes.length; b++) {
-							push(unsignedByteToInt(bytes[b]));
-						}
-						System.out.println("UNICODE: " + Arrays.toString(bytes));
+						push(v);
 						return pop();
 					}
 				} else {
@@ -127,7 +120,6 @@ public class UnicodeConverter extends InputStreamProcessor {
 				}
 			}
 		}
-		System.out.print(read + ".");
 		return read;
 	}
 	

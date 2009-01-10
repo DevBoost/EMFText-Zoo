@@ -10,6 +10,12 @@ import org.junit.Test;
 public class UnicodeConverterTest {
 	
 	@Test
+	public void testUnsignedByteToInt() {
+		assertEquals(255, UnicodeConverter.unsignedByteToInt((byte) 0xFF));
+		assertEquals(1, UnicodeConverter.unsignedByteToInt((byte) 0x01));
+	}
+	
+	@Test
 	public void testConversion() throws IOException {
 		assertConversion("\u0001\u0101", "\\u0001\\u0101");
 		assertConversion("\u0001\uFfFf", "\\u0001\\uFfFf");
@@ -23,7 +29,6 @@ public class UnicodeConverterTest {
 		int next;
 		while ((next = converter.read()) >= 0) {
 			char nextChar = (char) next;
-			System.out.println("assertConversion() " + next);
 			result += nextChar;
 		}
 		assertEquals(expectedOutput, result);

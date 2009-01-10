@@ -32,6 +32,7 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
+import org.emftext.language.java.UnicodeConverterProvider;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.Enumeration;
@@ -46,6 +47,7 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.classfile.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.language.java.types.TypeReferenceSequence;
+import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.ITextDiagnostic.TextDiagnosticType;
@@ -140,7 +142,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected static Map<?, ?> getLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// TODO mseifert: map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		return map;
 	}
 
