@@ -929,7 +929,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Literals";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 18);
+		assertMemberCount(clazz, 19);
 		
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values

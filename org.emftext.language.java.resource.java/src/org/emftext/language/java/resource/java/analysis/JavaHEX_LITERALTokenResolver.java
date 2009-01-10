@@ -16,7 +16,7 @@ public class JavaHEX_LITERALTokenResolver extends JavaBasedTokenResolver impleme
 
 	@Override
 	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
-		if (lexem.startsWith("0x")) {
+		if (lexem.toLowerCase().startsWith("0x")) {
 			lexem = lexem.substring(2);
 		}
 		try {

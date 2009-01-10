@@ -45,4 +45,5 @@ public class Literals {
 	public float f2 = 1.5f;
 	public long maxLong = 0xffffffffffffffffL;
 	public boolean b = -0xffffffffffffffffL == ~0xffffffffffffffffL+1;
+	public long i9 = 0X00FF00FF;
 }
