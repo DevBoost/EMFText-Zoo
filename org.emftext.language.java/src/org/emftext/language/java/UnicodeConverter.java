@@ -5,6 +5,16 @@ import java.io.InputStream;
 
 import org.emftext.runtime.InputStreamProcessor;
 
+/**
+ * A UnicodeConverter can read an input stream and convert
+ * unicode escape sequences (backslash + uXXXX) to actual
+ * unicode characters. Each escaped unicode sequence (6 bytes)
+ * is replaced by the respective unicode character (2 bytes).
+ * 
+ * TODO mseifert: information about replaced sequences must be 
+ * passed to the LocationMap or parser to make sure that the 
+ * positions of elements found in the stream are correct.
+ */
 public class UnicodeConverter extends InputStreamProcessor {
 
 	private static final char BACKSLASH = '\\';
