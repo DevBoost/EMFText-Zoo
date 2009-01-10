@@ -70,9 +70,15 @@ public class UnicodeConverter extends InputStreamProcessor {
 					// Note: shifting left by 4 is the same as multiplying by 16
 					int v = 0; // Accumulator
 					boolean complete = true;
-					for (int j = 1; j < 5; j++) {
+					int j = 0;
+					while (j < 4) {
 						next = inputStream.read();
 						nextChar = (char) next;
+						if (nextChar == 'u') {
+							// ignore more u characters
+							continue;
+						}
+						j++;
 						push(next);
 						if (next < 0) {
 							complete = false;
@@ -111,7 +117,6 @@ public class UnicodeConverter extends InputStreamProcessor {
 							break;
 						default:
 							// almost but no go
-							j = 6; // terminate the loop
 							v = 0; // clear the accumulator
 							break;
 						}
@@ -122,8 +127,7 @@ public class UnicodeConverter extends InputStreamProcessor {
 						pop();
 						pop();
 						pop();
-						push(v);
-						return pop();
+						return v;
 					}
 				} else {
 					push(next);

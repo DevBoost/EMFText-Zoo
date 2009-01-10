@@ -17,6 +17,7 @@ public class UnicodeConverterTest {
 	
 	@Test
 	public void testConversion() throws IOException {
+		assertConversion("\uabcd", "\\uuuuuuuuuuabcd");
 		assertConversion("\u0001\u0101", "\\u0001\\u0101");
 		assertConversion("\u0001\uFfFf", "\\u0001\\uFfFf");
 		assertConversion("\\\\u0000\\\\uFfFf", "\\\\u0000\\\\uFfFf");
