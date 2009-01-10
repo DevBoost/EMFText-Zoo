@@ -29,7 +29,8 @@ public final class ThreadedTestSuite extends TestSuite {
 		Enumeration<Test> tests = tests();
 		
 		while (tests.hasMoreElements()) {
-			if (threads.size() > maxActiveThreads) {
+			assert threads.size() <= maxActiveThreads;
+			if (threads.size() >= maxActiveThreads) {
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
@@ -45,7 +46,7 @@ public final class ThreadedTestSuite extends TestSuite {
 				public void run() {
 					try {
 						runTest(each, result);
-					} catch (StoppedByUserException sbue) {
+					} catch (Exception sbue) {
 						// do nothing, just end the test
 					}
 					threads.remove(Thread.currentThread());
@@ -59,11 +60,16 @@ public final class ThreadedTestSuite extends TestSuite {
 				public void run() {
 					try {
 						workerThread.join(timeout);
-						if (workerThread.isAlive()) {
+						boolean wasStillAlive = workerThread.isAlive();
+						workerThread.interrupt();
+						while (workerThread.isAlive()) {
+							Thread.sleep(100);
+						}
+						if (wasStillAlive) {
 							result.addError(each, new InterruptedException("Test was interrupted by timeout."));
 						}
 					}
-					catch (InterruptedException e1) {
+					catch (Exception e1) {
 					}
 					threads.remove(workerThread);
 				}
