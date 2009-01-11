@@ -454,6 +454,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testCommentsAtEOF() throws Exception {
+		String typename = "CommentsAtEOF";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 3);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testCommentsInArrayInitializers() throws Exception {
 		String typename = "CommentsInArrayInitializers";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -1285,6 +1295,12 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testUnicode() throws Exception {
 		String folder = "unicode/";
 		assertParsableAndReprintable(folder + "Unicode.java");
+	}
+
+	@Test
+	public void testUnicodeIdentifiers() throws Exception {
+		String folder = "unicode/";
+		assertParsableAndReprintable(folder + "UnicodeIdentifiers.java");
 	}
 
 	@Test
