@@ -23,15 +23,14 @@ public class IdentifierRegexGenerator {
 	}
 
 	private static void iterate(Check check) {
-		boolean isFirst = true;
+		boolean needsOption = false;
 		boolean wasTrue = false;
 		int lastChar = 0;
 		for (int x = 0; x <= 0xFFFF; x++) {
 			if (check.check(x)) {
 				if (!wasTrue) {
-					if (!isFirst) {
+					if (needsOption) {
 						System.out.print("|");
-						isFirst = false;
 					}
 					System.out.print("'\\u" + format(Integer.toHexString(x)) + "'");
 					lastChar = x;
@@ -39,10 +38,9 @@ public class IdentifierRegexGenerator {
 				wasTrue = true;
 			} else {
 				if (wasTrue) {
+					needsOption = true;
 					if (x - 1 != lastChar) {
 						System.out.print("..'\\u" + format(Integer.toHexString(x - 1)) + "'");
-					} else {
-						System.out.print("|");
 					}
 				}
 				wasTrue = false;
