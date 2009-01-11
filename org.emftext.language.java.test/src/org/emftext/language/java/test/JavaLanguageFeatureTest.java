@@ -438,6 +438,12 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testControlZ() throws Exception {
+		String folder = "unicode/";
+		assertParsableAndReprintable(folder + "ControlZ.java");
+	}
+
+	@Test
 	public void testComments() throws Exception {
 		String typename = "Comments";
 		String filename = typename + JAVA_FILE_EXTENSION;

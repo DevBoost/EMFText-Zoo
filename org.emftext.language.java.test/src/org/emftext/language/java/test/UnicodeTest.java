@@ -7,6 +7,7 @@ public class UnicodeTest extends AbstractJavaParserTest {
 	@Test
 	public void testUnicodeInput() {
 		try {
+			assertParsesToClass("ControlZ");
 			assertParsesToClass("Unicode");
 		} catch (Exception e) {
 			fail(e.getMessage());

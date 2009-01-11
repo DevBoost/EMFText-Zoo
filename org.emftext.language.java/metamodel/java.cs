@@ -67,6 +67,7 @@ containers.CompilationUnit
         !0
    		annotations*
         (classifiers !0 !0)+
+        ("\u001a")?
 	;
 	
 imports.ClassifierImport
