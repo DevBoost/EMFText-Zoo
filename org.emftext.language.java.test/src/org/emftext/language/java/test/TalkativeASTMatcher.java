@@ -464,6 +464,14 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			nToken = nToken.substring(1);
 		}
 		
+		//to e.g. normalize 0. -> 0.0
+		if (nToken.endsWith(".")) {
+			nToken = nToken + "0";
+		}
+		if (oToken.endsWith(".")) {
+			oToken = oToken + "0";
+		}
+		
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
 

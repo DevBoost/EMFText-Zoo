@@ -35,7 +35,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		public void runTest() {
 			try {
 				CompilationUnit unit = parseResource(zipFile, entry, ignoreSemanticErrors(entry.toString()));
+				
 				assertNotNull(unit);
+				
+				parseAndReprint(zipFile, entry, "output/" + zipFile.getName());
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
@@ -49,6 +53,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 		@Override
 		protected boolean isExcludedFromReprintTest(String filename) {
+			return true;
+		}
+		
+		@Override
+		protected boolean ignoreSemanticErrors(String filename) {
 			return true;
 		}
 

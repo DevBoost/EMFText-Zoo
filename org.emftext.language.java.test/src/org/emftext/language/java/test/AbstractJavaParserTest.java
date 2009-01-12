@@ -1,6 +1,7 @@
 package org.emftext.language.java.test;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -201,20 +202,36 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		System.out.println(buffer.toString());
 	}
 
-	protected void parseAndReprint(ZipFile zip, ZipEntry entry,
+	protected void parseAndReprint(ZipFile file, ZipEntry entry,
 			String outputFolderName) throws Exception {
 		String entryName = entry.getName();
 		String outputFileName = "./" + outputFolderName + File.separator
 				+ entryName;
 		File outputFile = prepareOutputFile(outputFileName);
-		/* FIXME! parseAndReprint(zip.getInputStream(entry), new FileOutputStream(
-				outputFile)); */
+		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName());
+		
+		Resource resource = getResourceSet().createResource(archiveURI);
+		resource.load(null);
+		
+		if (!ignoreSemanticErrors(entry.getName())) {
+			// This will not work if external resources are not yet registered (order of tests)
+			assertResolveAllProxies(resource);
+		}
+		
+		if (isExcludedFromReprintTest(entry.getName())) {
+			return;
+		}
+		
+		//addReprintedResource(inputFile);
+		resource.setURI(URI.createFileURI(outputFileName));	
+		resource.save(null);
+		
 		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
 				outputFile.exists());
-		if (!isExcludedFromReprintTest(entryName)) {
-			compareTextContents(zip.getInputStream(entry), new FileInputStream(
-					outputFile));
-		}
+
+		compareTextContents(file.getInputStream(entry),
+					new FileInputStream(outputFile));
+
 	}
 
 	protected void parseAndReprint(String filename, String inputFolderName,
@@ -234,10 +251,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		String outputFileName = calculateOutputFilename(inputFile,
 				inputFolderName, outputFolderName);
 		File outputFile = prepareOutputFile(outputFileName);
-		addReprintedResource(inputFile);
 		
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
-
 		resource.load(null);
 		
 		if (!ignoreSemanticErrors(file.getPath())) {
@@ -245,13 +260,12 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			assertResolveAllProxies(resource);
 		}
 		
-		resource.setURI(URI.createFileURI(outputFileName));
-		
-		
 		if (isExcludedFromReprintTest(file.getPath())) {
 			return;
 		}
-			
+		
+		addReprintedResource(inputFile);
+		resource.setURI(URI.createFileURI(outputFileName));	
 		resource.save(null);
 		
 		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",

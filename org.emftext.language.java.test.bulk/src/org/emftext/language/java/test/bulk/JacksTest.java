@@ -21,7 +21,7 @@ public class JacksTest extends AbstractZipFileInputTest {
 
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
-		return true;
+		return false;
 	}
 	
 	@Override
