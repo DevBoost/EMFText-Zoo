@@ -4,24 +4,24 @@ START containers.CompilationUnit
 
 IMPORTS {
 	annotations : <http://www.emftext.org/java/annotations>
-	imports : <http://www.emftext.org/java/imports>
-	references : <http://www.emftext.org/java/references>
-	generics : <http://www.emftext.org/java/generics>
 	arrays : <http://www.emftext.org/java/arrays>
 	classifiers : <http://www.emftext.org/java/classifiers>
-	enumerations : <http://www.emftext.org/java/enumerations>
-	containers : <http://www.emftext.org/java/containers>
-	instantiations : <http://www.emftext.org/java/instantiations>
-	parameters : <http://www.emftext.org/java/parameters>
-	variables : <http://www.emftext.org/java/variables>
-	members : <http://www.emftext.org/java/members>
 	commons : <http://www.emftext.org/java/commons>
+	containers : <http://www.emftext.org/java/containers>
+	enumerations : <http://www.emftext.org/java/enumerations>
 	expressions : <http://www.emftext.org/java/expressions> 
-	operators : <http://www.emftext.org/java/operators> 
+	generics : <http://www.emftext.org/java/generics>
+	imports : <http://www.emftext.org/java/imports>
+	instantiations : <http://www.emftext.org/java/instantiations>
 	literals : <http://www.emftext.org/java/literals>
+	members : <http://www.emftext.org/java/members>
 	modifiers : <http://www.emftext.org/java/modifiers>
+	operators : <http://www.emftext.org/java/operators> 
+	parameters : <http://www.emftext.org/java/parameters>
+	references : <http://www.emftext.org/java/references>
 	statements : <http://www.emftext.org/java/statements> 
 	types : <http://www.emftext.org/java/types>
+	variables : <http://www.emftext.org/java/variables>
 }
  
 OPTIONS {
