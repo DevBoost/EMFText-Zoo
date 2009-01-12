@@ -158,6 +158,16 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		Method emfMethod = membersFactory.createMethod();
 		emfMethod.setName(method.getName());
 		
+		String signature = method.getReturnType().getSignature();
+		TypeReference typeRef = createReferenceToType(signature);
+		emfMethod.setType(typeRef);
+		
+		int arrayDimension = getArrayDimension(signature);
+        for(int i = 0; i < arrayDimension; i++) {
+        	emfMethod.getArrayDimensions().add(
+        			ArraysFactory.eINSTANCE.createArrayDimension());
+        }
+		
 		for(org.apache.bcel.generic.Type argType : method.getArgumentTypes()) {
 			emfMethod.getParameters().add(
 					constructParameter(argType));
@@ -167,9 +177,38 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	
 	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType) {
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
-		TypeReference emfTypeReference = null;
-
 		String signature = attrType.getSignature();
+		TypeReference emfTypeReference = createReferenceToType(signature);
+		emfParameter.setType(emfTypeReference);
+		
+        int arrayDimension = getArrayDimension(signature);
+        for(int i = 0; i < arrayDimension; i++) {
+        	emfParameter.getArrayDimensions().add(
+        			ArraysFactory.eINSTANCE.createArrayDimension());
+        }
+		
+		return emfParameter;
+	}
+	
+	protected Field constructField(org.apache.bcel.classfile.Field field) {
+		Field emfField = membersFactory.createField();
+		emfField.setName(field.getName());
+		String signature = field.getType().getSignature();
+		TypeReference typeRef = createReferenceToType(signature);
+		emfField.setType(typeRef);
+		
+		int arrayDimension = getArrayDimension(signature);
+        for(int i = 0; i < arrayDimension; i++) {
+        	emfField.getArrayDimensions().add(
+        			ArraysFactory.eINSTANCE.createArrayDimension());
+        }
+		
+		return emfField;
+	}
+
+	private TypeReference createReferenceToType(String signature) { 
+		TypeReference emfTypeReference = null;
+		
 		int arrayDimension = 0;
 		while(signature.startsWith("[")) {
 			signature = signature.substring(1);
@@ -211,15 +250,14 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	            emfTypeReference = TypesFactory.eINSTANCE.createVoid();
 	            break;
         }
-        
-        for(int i = 0; i < arrayDimension; i++) {
-        	emfParameter.getArrayDimensions().add(
-        			ArraysFactory.eINSTANCE.createArrayDimension());
-        }
-		emfParameter.setType(emfTypeReference);
-		return emfParameter;
-	}
 
+        if (emfTypeReference == null) {
+        	System.out.println("!!!");
+        }
+        
+        return emfTypeReference;
+	}
+	
 	private TypeReference createReferenceToClassifier(String fullClassifierName) { 
 		TypeReferenceSequence typeRefSequence = TypesFactory.eINSTANCE.createTypeReferenceSequence();
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
@@ -230,14 +268,13 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		return typeRefSequence;
 	}
 	
-
-	protected Field constructField(org.apache.bcel.classfile.Field field) {
-		Field emfFieled = membersFactory.createField();
-		emfFieled.setName(field.getName());
-		TypeReferenceSequence typeRef = typesFactory.createTypeReferenceSequence();
-		//TODO create other elements of ref chain (extract in extra method and reuse for methods and parameters)
-		emfFieled.setType(typeRef);
-		return emfFieled;
+	private int getArrayDimension(String signature) {
+		int arrayDimension = 0;
+		while(signature.startsWith("[")) {
+			signature = signature.substring(1);
+			arrayDimension++;
+		}
+		return arrayDimension;
 	}
 	
 }
