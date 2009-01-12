@@ -8,6 +8,12 @@ public class Casting {
 		d = (Casting[]) d;
 		d = (Casting[]) d.clone();
 		((Casting[]) d).clone();
+		try {
+			((Casting[]) d)[0].clone();
+		} catch (CloneNotSupportedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		c = (Casting) d[0];
 		float f = (byte) 1;
 		d = (Casting[]) new Casting[2];

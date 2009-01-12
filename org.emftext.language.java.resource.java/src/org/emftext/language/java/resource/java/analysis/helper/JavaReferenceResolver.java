@@ -25,6 +25,7 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.generics.ExplicitGenericMethodCall;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
@@ -34,29 +35,26 @@ import org.emftext.language.java.imports.StaticImport;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
-import org.emftext.language.java.literals.ClassLiteral;
 import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.literals.Literal;
-import org.emftext.language.java.literals.LiteralsFactory;
 import org.emftext.language.java.literals.NullLiteral;
-import org.emftext.language.java.literals.StringLiteral;
 import org.emftext.language.java.literals.Super;
 import org.emftext.language.java.literals.This;
-import org.emftext.language.java.literals.VoidLiteral;
 import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.references.ElementReference;
-import org.emftext.language.java.references.MethodCall;
+import org.emftext.language.java.references.ArgumentList;
+import org.emftext.language.java.references.ClassReference;
+import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.PackageOrClassifierReference;
-import org.emftext.language.java.references.Primary;
-import org.emftext.language.java.references.PrimaryReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.references.SelfReference;
+import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
@@ -72,6 +70,7 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
+import org.emftext.language.java.types.Void;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.Variable;
 import org.emftext.runtime.resource.IResolveResult;
@@ -334,7 +333,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				//it has to be target of a reference: there are two referencing possibilities
 				// (1)
 				if (reference.equals(
-						ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET)) {
+						ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
 					Reference ref = ((Reference)container.eContainer());
 					//there must be something (a classifier reference) following up
 					if (ref.getNext() != null) {
@@ -344,11 +343,11 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 						
 						if(ref.eContainer() instanceof Reference) {
 							ref = (Reference) ref.eContainer();
-							if (ref.getPrimary() instanceof ElementReference) {
-								ElementReference primaryRef = 
-									(ElementReference) ref.getPrimary();
-								if(primaryRef.getTarget() instanceof PackageDescriptor) {
-									packageDescriptor.setParent((PackageDescriptor) primaryRef.getTarget());
+							if (ref instanceof IdentifierReference) {
+								IdentifierReference identifierReference = 
+									(IdentifierReference) ref;
+								if(identifierReference.getTarget() instanceof PackageDescriptor) {
+									packageDescriptor.setParent((PackageDescriptor) identifierReference.getTarget());
 								}
 							}
 						}
@@ -461,22 +460,18 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return false;
 	}
 	
-	protected Type getTypeOfReferencedElement(Primary primary) throws UnresolvedProxiesException {
-		if (primary.getReference() != null) {
-			return getTypeOfReferencedElement(primary.getReference());
-		}
-		else if (primary.getLiteral() != null) {
-			return getTypeOfReferencedElement(primary.getLiteral());
-		}
-		
-		assert(false);
-		return null;
-	}
-	
+	/**
+	 * Determines the <code>Type</code> of the reference, considering all kinds of referencing mechanisms
+	 * used in the Java metamodel.
+	 * 
+	 * @param reference
+	 * @return the determined type
+	 * @throws UnresolvedProxiesException
+	 */
 	protected Type getTypeOfReferencedElement(Literal literal) throws UnresolvedProxiesException {
 		TypesFactory javaTypeFactory = TypesFactory.eINSTANCE;
 		if (literal instanceof NullLiteral) {
-			return LiteralsFactory.eINSTANCE.createVoidLiteral();
+			return javaTypeFactory.createVoid();
 		}
 		else if (literal instanceof BooleanLiteral) {
 			return javaTypeFactory.createBoolean();
@@ -489,11 +484,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		}
 		else if (literal instanceof CharacterLiteral) {
 			return javaTypeFactory.createChar();
-		}
-		else if (literal instanceof StringLiteral) {
-			Class stringClass = (Class) EcoreUtil.resolve(
-					JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
-			return stringClass;
 		}
 		
 		assert(false);
@@ -511,29 +501,29 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	protected Type getTypeOfReferencedElement(Reference reference) throws UnresolvedProxiesException {
 		Type type = null;
 
-		PrimaryReference primaryRef = reference.getPrimary();
-
 		//referenced element point to a type
-		if (primaryRef instanceof TypedElement /*NewConstructorCall*/) {
-			TypeReference typeRef = ((TypedElement) primaryRef).getType();
+		if (reference instanceof TypedElement) {
+			TypeReference typeRef = ((TypedElement) reference).getType();
 			type = getReferencedType(typeRef);
 		}
-		//element points to this
-		else if (primaryRef instanceof This) {
-			return findContainingClass(reference);
-		}
-		//element points to super
-		else if(primaryRef instanceof Super) {
-			return getSuperType(findContainingClass(reference));
+		//element points to this or super
+		else if (reference instanceof SelfReference) {
+			if (((SelfReference) reference).getSelf() instanceof This) {
+				return findContainingClass(reference);
+			}
+			else if (((SelfReference) reference).getSelf() instanceof Super) {
+				return getSuperType(findContainingClass(reference));
+			}
+
 		}
 		//element points to the object's class object
-		else if(primaryRef instanceof ClassLiteral) {
+		else if(reference instanceof ClassReference) {
 			return getSuperType(getClassObjectModelElement());
 		}
 		//referenced element points to an element with a type
-		else if (primaryRef instanceof ElementReference) {
+		else if (reference instanceof IdentifierReference) {
 			ReferenceableElement target = 
-				(ReferenceableElement) ((ElementReference) primaryRef).getTarget();
+				(ReferenceableElement) ((IdentifierReference) reference).getTarget();
 			if (target.eIsProxy()) {
 				throw new UnresolvedProxiesException();
 			}
@@ -546,8 +536,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				return (Type) target;
 			}
 		}
-		//String literal may also appear as reference
-		else if (primaryRef instanceof StringLiteral) {
+		//Strings may also appear as reference
+		else if (reference instanceof StringReference) {
 			Class stringClass = (Class) EcoreUtil.resolve(
 					JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
 			return stringClass;
@@ -606,20 +596,30 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	}
 	
 	
-	protected EList<Type> getArgumentTypes(MethodCall primaryRef) throws UnresolvedProxiesException {
+	protected EList<Type> getArgumentTypes(ArgumentList argList) throws UnresolvedProxiesException {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 		Class stringClass = (Class) EcoreUtil.resolve(
 				JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
 		
-		for(Expression exp : primaryRef.getArguments()) {
+		for(Expression exp : argList.getArguments()) {
 			//find the reference at the end of the expression
 			Type type = null;
 			for(Iterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 				EObject next = i.next();
-				if (next instanceof Primary) {
-					Type nextType = getTypeOfReferencedElement(
-							((Primary) next));
+				if (next instanceof PrimaryExpression) {
+					
+					Type nextType;
+					
+					if (next instanceof Literal) {
+						nextType = getTypeOfReferencedElement(
+								((Literal) next));
+					}
+					else {
+						nextType = getTypeOfReferencedElement(
+								((Reference) next));
+					}
+					
 					if (type == null) {
 						type = nextType;
 					}
@@ -643,7 +643,12 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	protected boolean isReferencedElement(String id, EObject context, EObject referencedElement) throws UnresolvedProxiesException {
 		boolean result = false;
 		
-		if(referencedElement instanceof ReferenceableElement) {
+		boolean isMethodCall = false;
+		if(context instanceof IdentifierReference) {
+			isMethodCall = ((IdentifierReference) context).getArgumentList() != null;
+		}
+		
+		if(!isMethodCall && referencedElement instanceof ReferenceableElement) {
 			result = id.equals(((NamedElement) referencedElement).getName());
 			if (!result) {
 				return false;
@@ -666,12 +671,14 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			else if (referencedElement instanceof TypeParameter) {
 				//nothing else to do
 			}
-			else if (referencedElement instanceof Method) {
+		}
+		else {
+			if (referencedElement instanceof Method) {
 				//in case of Methods the parameter types need to be checked
 				Method method = (Method) referencedElement;
-				if (context instanceof MethodCall) {
-					MethodCall reference = (MethodCall) context;
-					EList<Type> argumentTypes = getArgumentTypes(reference);
+				if (context instanceof IdentifierReference) {
+					IdentifierReference reference = (IdentifierReference) context;
+					EList<Type> argumentTypes = getArgumentTypes(reference.getArgumentList());
 					if (method.getParameters().size() == argumentTypes.size()) {
 						for (int i = 0; i < argumentTypes.size(); i++) {
 							InternalEObject type = (InternalEObject) getReferencedType(method.getParameters().get(i).getType());
@@ -711,7 +718,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			EObject type2) throws UnresolvedProxiesException {
 		
 		//if parameter type is void, always match
-		if (type2 instanceof VoidLiteral) {
+		if (type2 instanceof Void) {
 			return true;
 		}
 		if (type1 instanceof PrimitiveType && type2 instanceof PrimitiveType) {

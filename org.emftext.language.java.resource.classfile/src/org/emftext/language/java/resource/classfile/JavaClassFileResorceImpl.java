@@ -11,15 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.arrays.ArraysFactory;
-import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.Class;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
-import org.emftext.language.java.literals.LiteralsFactory;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
@@ -209,7 +208,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	            emfTypeReference = TypesFactory.eINSTANCE.createBoolean();
 	            break;
 	        case 'V':
-	            emfTypeReference = LiteralsFactory.eINSTANCE.createVoidLiteral();
+	            emfTypeReference = TypesFactory.eINSTANCE.createVoid();
 	            break;
         }
         

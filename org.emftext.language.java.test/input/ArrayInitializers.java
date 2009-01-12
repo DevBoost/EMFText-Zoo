@@ -52,6 +52,8 @@ public class ArrayInitializers {
 	}
 	
 	public void m5() {
-		int i = new int[]{1}[0];
+		new int[]{1}[0] = 1;
+		int[][][] f = new int[1][][].clone();
+		int i2 = new int[]{1}[0];
 	}
 }

@@ -28,12 +28,12 @@ import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
 import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
-import org.emftext.language.java.literals.StringLiteral;
 import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.VariableLengthParameter;
+import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
@@ -171,13 +171,13 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Expression value = unicode.getInitialValue();
 		
 		TreeIterator<EObject> iter = value.eAllContents();
-		StringLiteral literal = null;
+		StringReference literal = null;
 		while(iter.hasNext()){
 			Object obj = iter.next();
-			if (obj instanceof StringLiteral) literal = (StringLiteral)obj;
+			if (obj instanceof StringReference) literal = (StringReference)obj;
 		}
-		assertType(literal, StringLiteral.class);
-		StringLiteral stringValue = (StringLiteral) literal;
+		assertType(literal, StringReference.class);
+		StringReference stringValue = (StringReference) literal;
 		assertEquals("Unescaped value expected for field \"" + name + "\".",
 				expectedValue, stringValue.getValue());
 	}
@@ -188,13 +188,13 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Expression initValue = charField.getInitialValue();
 		
 		TreeIterator<EObject> iter = initValue.eAllContents();
-		StringLiteral literal = null;
+		StringReference literal = null;
 		while(iter.hasNext()){
 			Object obj = iter.next();
-			if (obj instanceof StringLiteral) literal = (StringLiteral)obj;
+			if (obj instanceof StringReference) literal = (StringReference)obj;
 		}
-		assertType(literal, StringLiteral.class);
-		StringLiteral initLiteral = (StringLiteral) literal;
+		assertType(literal, StringReference.class);
+		StringReference initLiteral = (StringReference) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
 	

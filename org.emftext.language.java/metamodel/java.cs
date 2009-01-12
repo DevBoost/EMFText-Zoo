@@ -85,7 +85,13 @@ classifiers.Class
         	(!1 members (";")*)* !0 (";")*
         "}"
 	;
-
+    
+classifiers.AnnonymousClass
+	::= "{" 
+			(!1 members (";")*)* !0 (";")* 
+		"}"
+	;
+	
 classifiers.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
@@ -187,31 +193,31 @@ instantiations.NewConstructorCall
 		// these are the arguments for the class type parameters
 		("<" classTypeArguments ("," classTypeArguments)* ">")?
 		"(" (arguments ("," arguments)* )? ")"
-		("{" (members (";")?)* "}")?
+		annonymousClass?
+		(#0 "." #0 next)? 
      ;
      
 instantiations.ExplicitConstructorCall 
 	::= ("<" typeArguments ("," typeArguments)* ">")?
 		callTarget "(" (arguments ("," arguments)* )? ")"
+		(#0 "." #0 next)? 
      ;
 
 arrays.ArrayInstantiationByValues
 	::= ("new" type arrayDimensions+)? arrayInitializer
+		("[" arraySelectors? "]")* (#0 "." #0 next)? 
 	;
 
 arrays.ArrayInstantiationBySize 
 	::= "new" type 
 		("[" sizes "]")+
 		arrayDimensions*
+		(#0 "." #0 next)?
 	;
 
 arrays.ArrayInitializer
     ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* )? (",")? "}"    
     ;
-    
-references.Reference
-	::= primary ("[" arraySelectors? "]")* (#0 "." #0 next)? 
-	;
 	
 types.TypeReferenceSequence
 	::= parts (#0 "." #0 parts)*
@@ -226,23 +232,39 @@ references.ParameterizedPackageOrClassifierReference
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
 	
-references.MethodCall
-	::= target[] 
-		("<" typeArguments ("," typeArguments)* ">")?
-		"(" (arguments ("," arguments)* )? ")"
-	;
 
 // ATTENTION: This definition must reside after the definition for references.MethodCall!
 // Otherwise method calls can not be parsed, because the ANTLR backtracking does not work here. 
-references.PackageOrClassifierOrVariableReference
-	::= target[]
+references.IdentifierReference
+	::= ("<" classTypeArguments ("," classTypeArguments)* ">")?
+	    target[]
+		("<" typeArguments ("," typeArguments)* ">")?
+		argumentList?
+		("[" arraySelectors? "]")* (#0 "." #0 next)? 
+	;
+	
+references.ClassReference ::= "class"
+		(#0 "." #0 next)? 
 	;
 
-// TODO move to generics package
-generics.ExplicitGenericMethodCall
-	::= "<" typeArguments ("," typeArguments)* ">"
-		target[]
-		"(" (arguments ("," arguments)* )? ")"
+references.SelfReference ::= self
+		(#0 "." #0 next)? 
+	;
+	
+references.PrimitiveTypeReference ::= type
+		("[" arraySelectors? "]")* (#0 "." #0 next)? 
+	;
+			
+literals.This ::= "this";
+literals.Super ::= "super";
+	
+references.StringReference 
+	::= value[STRING_LITERAL]
+		(#0 "." #0 next)? 
+	;
+
+references.ArgumentList
+	::= "(" (arguments ("," arguments)* )? ")"
 	;
 
 generics.QualifiedTypeArgument
@@ -325,7 +347,7 @@ statements.ExpressionStatement
 	::= expression ";" 
 	;
 
-expressions.ParExpression ::= "(" expression ")" ;
+expressions.ParExpression ::= "(" expression ")" ("[" arraySelectors? "]")* (#0 "." #0 next)?  ;
 
 expressions.ExpressionList
 	::= expressions ("," expressions)* ;
@@ -374,20 +396,14 @@ expressions.UnaryExpression
     ;
     
 expressions.UnaryExpressionNotPlusMinus
-	::= (complement | negate) primary
+	::= (complement | negate) primaryExpression
 	|   castExpression
-	|   primary ( plusplus | minusminus)?
+	|   primaryExpression ( plusplus | minusminus)?
     ;
     
 expressions.CastExpression
     ::= "(" typeReference arrayDimensions* ")" expression
     ;
-    
-references.Primary 
-	::=	
-	  reference
-	| literal
-	;    
 
 operators.Assignment                   ::= "=";
 operators.AssignmentPlus               ::= "+=";
@@ -424,10 +440,6 @@ operators.Negate 		::= "!" ;
 arrays.ArrayDimension ::= ("[" #0 "]");
 
 literals.NullLiteral ::= "null";
-literals.VoidLiteral ::= "void";
-literals.ClassLiteral ::= "class";
-literals.This ::= "this";
-literals.Super ::= "super";
 
 modifiers.Public ::= "public";
 modifiers.Abstract ::= "abstract";
@@ -442,6 +454,7 @@ modifiers.Transient ::= "transient";
 modifiers.Volatile ::= "volatile";
 modifiers.Strictfp ::= "strictfp";
 
+types.Void ::= "void";
 types.Boolean ::= "boolean";
 types.Char ::= "char";
 types.Byte ::= "byte";
@@ -460,15 +473,7 @@ literals.FloatingPointLiteral
 literals.CharacterLiteral 
 	::= value[CHARACTER_LITERAL];
 
-literals.StringLiteral 
-	::= value[STRING_LITERAL];
-
 literals.BooleanLiteral 
 	::= value[BOOLEAN_LITERAL];
 	
-//comments.SingleLineComment
-//	::= content[SL_COMMENT];
-	
-//comments.MultiLineComment
-//	::= content[ML_COMMENT];
 }

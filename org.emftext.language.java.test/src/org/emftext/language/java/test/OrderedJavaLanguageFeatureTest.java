@@ -13,17 +13,20 @@ public class OrderedJavaLanguageFeatureTest {
 				return true;
 			}
 		};
+		
+		//test.testUsingAnnotations();
+		
 		test.testEmptyClass();
 		test.testBooleanExpressions();
-		/*
+		
 		test.testEmptyEnum();
 		test.testBlocks();
 		test.testArguments();
 		test.testSuperKeyword();
 		test.testBasicEnums();
-		test.testPrimitiveTypeArrays();
+		//test.testPrimitiveTypeArrays();
 		test.testTypeReferencing();
-		*/
+		
 		//test.testHasMissingParses();
 	}
 }
