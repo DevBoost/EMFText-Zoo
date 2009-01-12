@@ -1,7 +1,8 @@
 
 public enum EnumImplementingTwoInterfaces implements EmptyInterface, IOneMethod {
-	A,
+	A,B,
 	;
-
+	//some semicolons
+	;;;;
 	public void someMethod() {}
 }

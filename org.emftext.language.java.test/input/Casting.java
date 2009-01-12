@@ -17,5 +17,7 @@ public class Casting {
 		c = (Casting) d[0];
 		float f = (byte) 1;
 		d = (Casting[]) new Casting[2];
+		
+		{}
 	}
 }

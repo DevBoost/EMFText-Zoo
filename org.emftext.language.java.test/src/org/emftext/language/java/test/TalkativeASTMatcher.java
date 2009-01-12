@@ -419,7 +419,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		String oToken = o.getToken();
 
 		//HEX normalization
-		if (nToken.startsWith("0x")) {
+		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
 			nToken = nToken.substring(2);
 			try {
 				nToken = JavaDECIMAL_LITERALTokenResolver.parseInteger(nToken, 16).toString();
@@ -427,7 +427,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 				nfe.printStackTrace();
 			}
 		}
-		if (oToken.startsWith("0x")) {
+		if (oToken.startsWith("0x") || oToken.startsWith("0X")) {
 			oToken = oToken.substring(2);
 			try {
 				oToken = JavaDECIMAL_LITERALTokenResolver.parseInteger(oToken, 16).toString();
@@ -530,7 +530,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	@Override
 	public boolean match(SimpleType node, Object other) {
 		//CHANGED
-		if (other instanceof SimpleType) {
+		/*if (other instanceof SimpleType) {
 			SimpleType o = (SimpleType) other;
 			boolean result = safeSubtreeMatch(node.getName(), o.getName());
 			return setDiff(node, other, result);
@@ -538,7 +538,9 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (other instanceof ArrayType) {
 			return true;
 		}
-		return false;
+		return false;*/
+		
+		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
