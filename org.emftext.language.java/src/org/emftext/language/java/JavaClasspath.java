@@ -212,18 +212,20 @@ public class JavaClasspath {
 	private String getQualifiedNameFromImport(Import theImport) {
 		String fullQualifiedName = "";
 		for(PackageOrClassifierReference ref : theImport.getParts()) {
-			Classifier type = (Classifier) ref.getTarget();
-			if (type.eIsProxy()) {
-			 type = (Classifier) ref.getTarget();
-			}
-
-			if (type instanceof PackageDescriptor) {
-				fullQualifiedName = fullQualifiedName + type.getName() + 
-					JavaUniquePathConstructor.PACKAGE_SEPARATOR;
-			}
-			else {
-				fullQualifiedName = fullQualifiedName + type.getName() + 
-					JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			if (!ref.getTarget().eIsProxy()) {
+				Classifier type = (Classifier) ref.getTarget();
+				if (type.eIsProxy()) {
+				 type = (Classifier) ref.getTarget();
+				}
+	
+				if (type instanceof PackageDescriptor) {
+					fullQualifiedName = fullQualifiedName + type.getName() + 
+						JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+				}
+				else {
+					fullQualifiedName = fullQualifiedName + type.getName() + 
+						JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+				}
 			}
 		}
 		return fullQualifiedName;
