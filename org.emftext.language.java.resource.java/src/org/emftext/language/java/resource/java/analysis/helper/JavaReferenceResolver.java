@@ -229,6 +229,9 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			if (container instanceof Classifier) {
 				contentsList.addAll(getAllMemebers((Classifier) container));
 			}
+			else {
+				//TODO class / this / super...
+			}
 			//TODO Arrays have the additional member field "length"
 		}
 
