@@ -26,7 +26,6 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.PrimaryExpression;
-import org.emftext.language.java.generics.ExplicitGenericMethodCall;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -153,17 +152,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 		}
 		
-		if (element instanceof Method && 
-				!(element.eContainer() instanceof Annotation) &&
-				!(container instanceof ExplicitGenericMethodCall) ) { 
-			
-			//? introduce common superclass for Method and AnnotationMethod
-			Method method = (Method) element;
-			if (method.getParameters().isEmpty()) {
-				fullID += "()";
-			}
-		}
-		
 		return fullID;
 	}
 	
@@ -233,9 +221,14 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			
 			contentsList.addAll(JavaClasspath.INSTANCE.getClassifiers(fullPackageName + ".", "*"));
 		}
-		else if (container instanceof Classifier) {
+		else if (container instanceof Type) {
 			//consider upper types --> can be optimized
-			contentsList.addAll(getAllMemebers((Classifier) container));
+			if (container instanceof PrimitiveType) {
+				contentsList.addAll(getAllMemebers((PrimitiveType) container));
+			}
+			if (container instanceof Classifier) {
+				contentsList.addAll(getAllMemebers((Classifier) container));
+			}
 		}
 
 	}
@@ -251,39 +244,38 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		
 		try {
 			EObject targetObject = null;
-
-			EObject scopeCand  = container.eContainer();
+			EObject containerContainer  = container.eContainer();
 			
 			Type previousType = null;
 			AnnotationInstance annotationInstance = findContainingAnnotationInstance(container);
 			boolean definitlyPackage = false;
 			
 			//navigate through constructor calls
-			if (scopeCand.eContainer() instanceof NewConstructorCall) {
-				EObject previouseRef = scopeCand.eContainer().eContainer().eContainer();
+			if (containerContainer.eContainer() instanceof NewConstructorCall) {
+				EObject previouseRef = containerContainer.eContainer().eContainer();
 				if (previouseRef instanceof Reference) {
 					previousType = getTypeOfReferencedElement((Reference)previouseRef);
 				}
 			}
 			
 			//chained reference (1)
-			if (scopeCand instanceof Reference && scopeCand.eContainer() instanceof Reference) {
+			if (container instanceof Reference && containerContainer instanceof Reference) {
 				//chained reference: scope given by previous element may be a type and may define a new scope
-				previousType = getTypeOfReferencedElement((Reference)scopeCand.eContainer());
+				previousType = getTypeOfReferencedElement((Reference)containerContainer);
 			}
 			//chained reference (2)
-			if (scopeCand instanceof TypeReferenceSequence) {
+			if (containerContainer instanceof TypeReferenceSequence) {
 				//chained reference: scope given by previous element may be a type and may define a new scope
-				TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)scopeCand;
+				TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)containerContainer;
 				int idx = typeRefSequence.getParts().indexOf(container);
 				if (idx > 0) {
 					previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
 				}
 			}
 			//similar as before... could be unified in metamodel
-			if (scopeCand instanceof Import) {
+			if (containerContainer instanceof Import) {
 				//chained reference: scope given by previous element may be a type and may define a new scope
-				Import theImport = (Import)scopeCand;
+				Import theImport = (Import)containerContainer;
 				int idx = theImport.getParts().indexOf(container);
 				if (idx > 0) {
 					previousType = theImport.getParts().get(idx - 1).getTarget();
@@ -293,7 +285,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				}
 			}
 			//inside annotation instance 
-			else if (annotationInstance != null && annotationInstance != scopeCand.eContainer() /*not the AnnotationInstance itself*/) {
+			else if (annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
 				TypeReference typeReference = annotationInstance.getAnnotation();
 				if (typeReference instanceof TypeReferenceSequence) {
 					//chained reference: scope given by previous element may be a type and may define a new scope
@@ -334,7 +326,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				// (1)
 				if (reference.equals(
 						ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
-					Reference ref = ((Reference)container.eContainer());
+					Reference ref = (Reference)container;
 					//there must be something (a classifier reference) following up
 					if (ref.getNext() != null) {
 						PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
@@ -648,66 +640,68 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			isMethodCall = ((IdentifierReference) context).getArgumentList() != null;
 		}
 		
-		if(!isMethodCall && referencedElement instanceof ReferenceableElement) {
+		if (referencedElement instanceof ReferenceableElement) {
 			result = id.equals(((NamedElement) referencedElement).getName());
-			if (!result) {
-				return false;
+			if(!isMethodCall) {
+				if (!result) {
+					return false;
+				}
+				if (referencedElement instanceof Classifier) {
+					//nothing else to do
+				}
+				else if (referencedElement instanceof Field) {
+					//nothing else to do
+				}
+				else if (referencedElement instanceof AdditionalField) {
+					//nothing else to do
+				}
+				else if (referencedElement instanceof Variable) {
+					//nothing else to do (includes LocalVariable and Parameter)
+				}
+				else if (referencedElement instanceof AdditionalLocalVariable) {
+					//nothing else to do
+				}
+				else if (referencedElement instanceof TypeParameter) {
+					//nothing else to do
+				}
 			}
-			if (referencedElement instanceof Classifier) {
-				//nothing else to do
-			}
-			else if (referencedElement instanceof Field) {
-				//nothing else to do
-			}
-			else if (referencedElement instanceof AdditionalField) {
-				//nothing else to do
-			}
-			else if (referencedElement instanceof Variable) {
-				//nothing else to do (includes LocalVariable and Parameter)
-			}
-			else if (referencedElement instanceof AdditionalLocalVariable) {
-				//nothing else to do
-			}
-			else if (referencedElement instanceof TypeParameter) {
-				//nothing else to do
-			}
-		}
-		else {
-			if (referencedElement instanceof Method) {
-				//in case of Methods the parameter types need to be checked
-				Method method = (Method) referencedElement;
-				if (context instanceof IdentifierReference) {
-					IdentifierReference reference = (IdentifierReference) context;
-					EList<Type> argumentTypes = getArgumentTypes(reference.getArgumentList());
-					if (method.getParameters().size() == argumentTypes.size()) {
-						for (int i = 0; i < argumentTypes.size(); i++) {
-							InternalEObject type = (InternalEObject) getReferencedType(method.getParameters().get(i).getType());
-							InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
-							if (argumentType == null) {
-								break;
-							}
-							
-							if (!type.eIsProxy() || !argumentType.eIsProxy()) {
-								if(!compareTypes(type, argumentType)) {
-									result = false;
+			else {
+				if (referencedElement instanceof Method) {
+					//in case of Methods the parameter types need to be checked
+					Method method = (Method) referencedElement;
+					if (context instanceof IdentifierReference) {
+						IdentifierReference reference = (IdentifierReference) context;
+						EList<Type> argumentTypes = getArgumentTypes(reference.getArgumentList());
+						if (method.getParameters().size() == argumentTypes.size()) {
+							for (int i = 0; i < argumentTypes.size(); i++) {
+								InternalEObject type = (InternalEObject) getReferencedType(method.getParameters().get(i).getType());
+								InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
+								if (argumentType == null) {
 									break;
 								}
-							}
-							else {
-								if (!argumentType.eProxyURI().equals(type.eProxyURI())) {
-									result = false;
-									break;
+								
+								if (!type.eIsProxy() || !argumentType.eIsProxy()) {
+									if(!compareTypes(type, argumentType)) {
+										result = false;
+										break;
+									}
+								}
+								else {
+									if (!argumentType.eProxyURI().equals(type.eProxyURI())) {
+										result = false;
+										break;
+									}
 								}
 							}
 						}
+						else {
+							result = false;
+						}
 					}
-					else {
-						result = false;
-					}
+				} 
+				else {
+					assert(false);
 				}
-			} 
-			else {
-				assert(false);
 			}
 		}
 		return result;
@@ -792,6 +786,42 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return (AnnotationInstance) value;
 	}
 	
+	protected EList<Member> getAllMemebers(PrimitiveType primitiveType) throws UnresolvedProxiesException {
+		Classifier javaClassifier = null;
+		//automatic wrapping of primitive types
+		if (primitiveType instanceof Boolean) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Boolean");
+		}
+		if (primitiveType instanceof Byte) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Byte");
+		}
+		if (primitiveType instanceof Char) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Char");
+		}
+		if (primitiveType instanceof Double) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Double");
+		}
+		if (primitiveType instanceof Float) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Float");
+		}
+		if (primitiveType instanceof Int) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Integer");
+		}
+		if (primitiveType instanceof Long) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Long");
+		}
+		if (primitiveType instanceof Short) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Short");
+		}
+		if (primitiveType instanceof Void) {
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Void");
+		}	
+		
+		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
+		
+		return getAllMemebers(javaClassifier);
+	}
+	
 	protected EList<Member> getAllMemebers(Classifier javaClassifier) throws UnresolvedProxiesException {
 		EList<Member> memberList = new BasicEList<Member>();
 		for (Classifier superClassifier : getAllSuperTypes(javaClassifier)) {
@@ -803,8 +833,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				assert(false);
 			}
 		}
-		
-		
 		return memberList;
 	}
 	
