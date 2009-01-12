@@ -82,13 +82,13 @@ classifiers.Class
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
         "{" 
-        	(!1 members (";")*)* !0 (";")*
+        	(";")* (!1 members (";")*)* !0
         "}"
 	;
     
 classifiers.AnnonymousClass
 	::= "{" 
-			(!1 members (";")*)* !0 (";")* 
+			(";")* (!1 members (";")*)* !0
 		"}"
 	;
 	
@@ -96,7 +96,7 @@ classifiers.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
-        	(!1 members (";")*)* !0 (";")*
+        	(";")* (!1 members (";")*)* !0
 		"}"
 	;
 
@@ -104,14 +104,16 @@ classifiers.Enumeration
     ::= modifiers* "enum" name[] 
     	("implements" (implements ("," implements)*))? 
     	"{" 
-    		(constants ("," constants)*)? (",")? 
-    		(";" (members (";")?)*)?
+    		(!1 constants ("," !1 constants)*)? (",")? 
+    		(";" (";")* (!1 members (";")*)* !0)?
     	"}"
     ;
 
 classifiers.Annotation
 	::=	modifiers* "@" "interface" name[]
-	       "{" ((members (";")?) | (";")?)* "}"
+	    "{" 
+	    	(";")* (!1 members (";")*)* !0
+	    "}"
 	;
 
 annotations.AnnotationInstance
@@ -147,18 +149,18 @@ members.Constructor
 
 members.Method
 	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensions*) name[]  
-	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensions*
+	"(" #0 (parameters ("," parameters)* )? #0 ")" additionalArrayDimensions*
 	("throws" exceptions ("," exceptions)*)? (body | ";")
 	;
 	
 annotations.AnnotationMethod
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensions*) name[]  
-	"(" (parameters ("," parameters)* )? ")" arrayDimensions*
+	"(" (parameters ("," parameters)* )? ")" additionalArrayDimensions*
 	("throws" exceptions ("," exceptions)*)? "default" defaultValue (body | ";")
 	;
 
 parameters.OrdinaryParameter
-	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensions*
+	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] additionalArrayDimensions*
 	;
 
 parameters.VariableLengthParameter
@@ -173,7 +175,7 @@ statements.LocalVariableStatement
 	::= variable ";" ;
 
 variables.AdditionalLocalVariable
-	::= name[] arrayDimensions* ("=" initialValue)?
+	::= name[] additionalArrayDimensions* ("=" initialValue)?
 	;
 
 members.Field
@@ -181,7 +183,7 @@ members.Field
 	;
 
 members.AdditionalField
-	::= name[] arrayDimensions* ("=" initialValue)?
+	::= name[] additionalArrayDimensions* ("=" initialValue)?
 	;
 
 // INSTANTIATIONS
@@ -205,7 +207,7 @@ instantiations.ExplicitConstructorCall
 
 arrays.ArrayInstantiationByValues
 	::= ("new" type arrayDimensions+)? arrayInitializer
-		("[" arraySelectors? "]")* (#0 "." #0 next)? 
+		arraySelectors* (#0 "." #0 next)? 
 	;
 
 arrays.ArrayInstantiationBySize 
@@ -218,7 +220,11 @@ arrays.ArrayInstantiationBySize
 arrays.ArrayInitializer
     ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* )? (",")? "}"    
     ;
-	
+
+arrays.ArraySelector
+	::= "[" expression? "]"
+	;
+
 types.TypeReferenceSequence
 	::= parts (#0 "." #0 parts)*
 	;
@@ -240,7 +246,7 @@ references.IdentifierReference
 	    target[]
 		("<" typeArguments ("," typeArguments)* ">")?
 		argumentList?
-		("[" arraySelectors? "]")* (#0 "." #0 next)? 
+		arraySelectors* (#0 "." #0 next)? 
 	;
 	
 references.ClassReference ::= "class"
@@ -252,7 +258,7 @@ references.SelfReference ::= self
 	;
 	
 references.PrimitiveTypeReference ::= type
-		("[" arraySelectors? "]")* (#0 "." #0 next)? 
+		arraySelectors* (#0 "." #0 next)? 
 	;
 			
 literals.This ::= "this";
@@ -347,7 +353,7 @@ statements.ExpressionStatement
 	::= expression ";" 
 	;
 
-expressions.ParExpression ::= "(" expression ")" ("[" arraySelectors? "]")* (#0 "." #0 next)?  ;
+expressions.ParExpression ::= "(" expression ")" arraySelectors* (#0 "." #0 next)?  ;
 
 expressions.ExpressionList
 	::= expressions ("," expressions)* ;
