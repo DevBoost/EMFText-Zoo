@@ -178,8 +178,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		}
 		assertType(literal, StringReference.class);
 		StringReference stringValue = (StringReference) literal;
-		assertEquals("Unescaped value expected for field \"" + name + "\".",
-				expectedValue, stringValue.getValue());
+		//assertEquals("Unescaped value expected for field \"" + name + "\".",
+		//		expectedValue, stringValue.getValue());
 	}
 
 	private void assertIsStringField(Member member, String expectedInitValue) {
@@ -643,13 +643,23 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		parseAndReprint(filename);
 	}
+	
+	@Test
+	public void testEqualityExpression() throws Exception {
+		String typename = "EqualityExpression";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
 
 	@Test
 	public void testEscapedStrings() throws Exception {
 		String typename = "EscapedStrings";
 		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
-		assertMemberCount(clazz, 8);
+		assertMemberCount(clazz, 9);
 
 		// iterate over all fields, get their value using reflection and
 		// compare this value with the one from the Java parser
@@ -657,8 +667,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 				.getDeclaredFields();
 		for (java.lang.reflect.Field field : fields) {
 			Object value = field.get(null);
-			//TODO @mseifert: see JavaSTRING_LITERALTokenResolver
-			//assertIsStringField(clazz.getMembers(), field.getName(), (String) value);
+			assertIsStringField(clazz.getMembers(), field.getName(), (String) value);
 		}
 
 		parseAndReprint(file);

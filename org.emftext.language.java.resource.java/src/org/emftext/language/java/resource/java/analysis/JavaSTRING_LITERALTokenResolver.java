@@ -12,6 +12,10 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 	@Override
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
 		String result = super.deResolve(value,feature,container);
+		
+		//escape escapes
+		result = escapeEscapedCharacters(result);
+		
 		result = '"' + result + '"';
 		return result;
 	}
@@ -29,7 +33,7 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 		
 		//TODO @mseifert: either implement escaping (inverse of unescapeEscapedCharacters) 
 		//     for deResolve or leave the below .
-		//lexem = unescapeEscapedCharacters(lexem);
+		lexem = unescapeEscapedCharacters(lexem);
 		
 		return lexem;
 	}
@@ -218,5 +222,19 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 			buffer.append(source.charAt(i++));
 		}		
 		return buffer.toString();
+	}
+	
+	private String escapeEscapedCharacters(String source) {
+		
+		source = source.replaceAll("\\\\", "\\\\\\\\");
+		source = source.replaceAll("\\\b", "\\\\b");
+		source = source.replaceAll("\\\t", "\\\\t");
+		source = source.replaceAll("\\\n", "\\\\n");
+		source = source.replaceAll("\\\f", "\\\\f");
+		source = source.replaceAll("\\\r", "\\\\r");
+		source = source.replaceAll("\"", "\\\\\"");
+		source = source.replaceAll("\'", "\\\\\'");
+
+		return source;
 	}
 }

@@ -384,7 +384,7 @@ expressions.AndExpression
     ;
   
 expressions.EqualityExpression
-    ::= instanceOfExpression ( (equal | notEqual) instanceOfExpression )* 
+    ::= instanceOfExpression ( equality instanceOfExpression )* 
     ;
     
 expressions.InstanceOfExpression

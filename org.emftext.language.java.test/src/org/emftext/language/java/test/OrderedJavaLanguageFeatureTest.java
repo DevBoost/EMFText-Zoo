@@ -10,23 +10,21 @@ public class OrderedJavaLanguageFeatureTest {
 
 			@Override
 			protected boolean isExcludedFromReprintTest(String filename) {
-				return true;
+				return false;
 			}
 		};
 		
-		test.testUnicode();
-		test.testVariableReferencing();
+		test.testEscapedStrings();
 		
-		test.testEmptyClass();
-		test.testBooleanExpressions();
-		
-		test.testEmptyEnum();
-		test.testBlocks();
-		test.testArguments();
-		test.testSuperKeyword();
-		test.testBasicEnums();
-		//test.testPrimitiveTypeArrays();
-		test.testTypeReferencing();
+//		test.testEmptyClass();
+//		test.testBooleanExpressions();
+//		test.testEmptyEnum();
+//		test.testBlocks();
+//		test.testArguments();
+//		test.testSuperKeyword();
+//		test.testBasicEnums();
+//		test.testPrimitiveTypeArrays();
+//		test.testTypeReferencing();
 		
 		//test.testHasMissingParses();
 	}
