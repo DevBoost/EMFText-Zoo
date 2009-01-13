@@ -432,7 +432,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "ClassSemicolonOnly";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 0);
+		assertMemberCount(clazz, 1);
 
 		parseAndReprint(filename);
 	}
@@ -905,7 +905,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "ISemicolonOnly";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		Interface interfaze = assertParsesToInterface(typename);
-		assertMemberCount(interfaze, 0);
+		assertMemberCount(interfaze, 1 /*One empty member*/);
 
 		parseAndReprint(filename);
 	}
@@ -1148,7 +1148,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "SemicolonAfterMembers";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 2);
+		assertMemberCount(clazz, 2 + 4 /* + 4 empty */);
 		
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
