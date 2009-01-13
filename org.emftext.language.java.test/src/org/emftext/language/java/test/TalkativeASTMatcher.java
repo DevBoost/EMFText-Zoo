@@ -473,8 +473,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			oToken = Long.decode(oToken).toString();
 		}
 		
-		nToken = "" + Double.parseDouble(nToken);
-		oToken = "" + Double.parseDouble(oToken);
+		nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
+		oToken = "" + Double.parseDouble(oToken.replace("- ", "-"));
 
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
