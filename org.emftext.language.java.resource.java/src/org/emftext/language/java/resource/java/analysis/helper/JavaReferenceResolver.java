@@ -172,10 +172,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		if (element instanceof Classifier) {
 			return false;
 		}
-		//local variables might be used within themseves
-		if (element instanceof LocalVariableStatement) {
-			return false;
-		}
 		//in all other cases, the order requires consideration
 		return true;
 	}
@@ -484,6 +480,11 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	}
 
 	protected EObject find(String id, EObject context, EObject element,  EObject container, EClass type) throws UnresolvedProxiesException {
+		//try the container
+		if (isReferencedElement(id, context, container)) {
+			return container;
+		}
+		
 		EList<EObject> contentsList = new BasicEList<EObject>();
 		contentsList.addAll(getOrderedContents(container));
 		cosiderAddittionalScope(container, contentsList);
