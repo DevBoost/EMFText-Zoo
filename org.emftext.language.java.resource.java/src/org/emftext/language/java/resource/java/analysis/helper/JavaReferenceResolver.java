@@ -284,7 +284,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			//navigate through constructor calls: The constructor itself
 			if (containerContainer.eContainer() instanceof NewConstructorCall) {
 				EObject previouseRef = containerContainer.eContainer().eContainer();
-				if (previouseRef instanceof Reference) {
+				if ((previouseRef instanceof Reference) && !(previouseRef instanceof NewConstructorCall /*There might be an anonymous class*/)) {
 					previousType = getTypeOfReferencedElement((Reference)previouseRef);
 				}
 			}
