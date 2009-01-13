@@ -7,6 +7,11 @@ public class Literals {
 		long i5 = 0x1ffffffffffff00L;
 		long i6 = 0xFFFFFFFFFFFFFFFFl;
 		long i7 = 0xBF;
+		
+		double x = 0xffffffffe0000000L;
+		double y = 0x8000000000000000L;
+		double z = 0xfffe00L;
+		
 		double f1 = 1.5;
 		char c = 'a';
 		String s = "abc";

@@ -416,18 +416,18 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	@Override
 	public boolean match(NumberLiteral node, Object other) {
 		//because of HEX conversation there might be a prefix that can be ignored
-		boolean stripPrefix = false;
+		String oToken = null;
+		
 		if (other instanceof PrefixExpression) {
-			other = ((PrefixExpression)other).getOperand();
-			stripPrefix = true;
+			oToken = ((PrefixExpression)other).toString();
 		}
-		if (!(other instanceof NumberLiteral)) {
-			return false;
+		else if (other instanceof NumberLiteral) {
+			oToken = ((NumberLiteral)other).getToken();
 		}
-		NumberLiteral o = (NumberLiteral) other;
-
+		else {
+			return setDiff(node, other, false);
+		}
 		String nToken = node.getToken();
-		String oToken = o.getToken();
 
 		//HEX normalization
 		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
