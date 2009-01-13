@@ -415,7 +415,6 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(NumberLiteral node, Object other) {
-		//because of HEX conversation there might be a prefix that can be ignored
 		String oToken = null;
 		
 		if (other instanceof PrefixExpression) {
@@ -429,6 +428,10 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		}
 		String nToken = node.getToken();
 
+		return setDiff(node, other, numberMatch(nToken, oToken));
+	}
+	
+	protected boolean numberMatch(String nToken, String oToken) {
 		//HEX normalization
 		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
 			nToken = nToken.substring(2);
@@ -475,8 +478,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		
 		nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
 		oToken = "" + Double.parseDouble(oToken.replace("- ", "-"));
-
-		return setDiff(node, other, safeEquals(nToken, oToken));
+		
+		return safeEquals(nToken, oToken);
 	}
 
 	@Override
@@ -505,8 +508,16 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(PrefixExpression node, Object other) {
-
-		return setDiff(node, other, super.match(node, other));
+		
+		if (other instanceof NumberLiteral) {
+			String nToken = node.toString();
+			String oToken = ((NumberLiteral)other).getToken();
+			return setDiff(node, other, numberMatch(nToken, oToken));
+		}
+		else {
+			return setDiff(node, other, super.match(node, other));
+		}
+		
 	}
 
 	@Override

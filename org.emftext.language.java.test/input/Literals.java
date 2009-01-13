@@ -1,5 +1,7 @@
 public class Literals {
 	public void method () {
+		double a = -0x80000000;
+		
 		int i1 = 3;
 		int i2 = 0x1;
 		long i3 = 010l;
