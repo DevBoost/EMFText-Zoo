@@ -1,7 +1,6 @@
 package org.emftext.language.java.test;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -84,7 +83,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File inputFile = new File(inputFolder + File.separator + file);
 
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
-		resource.load(null); //load and register
+		resource.load(getLoadOptions()); //load and register
 	}
 
 	protected static final String TEST_OUTPUT_FOLDER = "output";
@@ -212,7 +211,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName());
 		
 		Resource resource = getResourceSet().createResource(archiveURI);
-		resource.load(null);
+		resource.load(getLoadOptions());
 		
 		if (!ignoreSemanticErrors(entry.getName())) {
 			// This will not work if external resources are not yet registered (order of tests)
