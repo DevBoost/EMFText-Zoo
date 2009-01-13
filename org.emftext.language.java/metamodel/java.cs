@@ -78,13 +78,13 @@ classifiers.Class
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
         "{" 
-        	(";")* (!1 members (";")*)* !0
+        	(!1 members)* !0
         "}"
 	;
     
 classifiers.AnnonymousClass
 	::= "{" 
-			(";")* (!1 members (";")*)* !0
+			(!1 members)* !0
 		"}"
 	;
 	
@@ -92,7 +92,7 @@ classifiers.Interface
 	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
-        	(";")* (!1 members (";")*)* !0
+        	(!1 members)* !0
 		"}"
 	;
 
@@ -101,14 +101,14 @@ classifiers.Enumeration
     	("implements" (implements ("," implements)*))? 
     	"{" 
     		(!1 constants ("," !1 constants)*)? (",")? 
-    		(";" (";")* (!1 members (";")*)* !0)?
+    		(";" (!1 members)* !0)?
     	"}"
     ;
 
 classifiers.Annotation
 	::=	modifiers* "@" "interface" name[]
 	    "{" 
-	    	(";")* (!1 members (";")*)* !0
+	    	(!1 members)* !0
 	    "}"
 	;
 
@@ -130,7 +130,7 @@ generics.TypeParameter
 	;
 
 enumerations.EnumConstant
-    ::= name[] ("(" arguments ("," arguments)* ")" )? members* 
+    ::= name[] ("(" arguments ("," arguments)* ")" )? body? 
     ;
 
 statements.Block
@@ -180,6 +180,10 @@ members.Field
 
 members.AdditionalField
 	::= name[] additionalArrayDimensions* ("=" initialValue)?
+	;
+	
+members.EmptyMember
+	::= ";"
 	;
 
 // INSTANTIATIONS
