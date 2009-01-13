@@ -1,6 +1,4 @@
 package org.emftext.language.c_sharp.resource.cs;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 
 public class CsResourceImpl extends org.emftext.runtime.resource.impl.TextResourceImpl {
 	private org.emftext.runtime.resource.IReferenceResolver analyser;
@@ -10,7 +8,7 @@ public class CsResourceImpl extends org.emftext.runtime.resource.impl.TextResour
 		super();
 	}
 
-	public CsResourceImpl(URI uri) {
+	public CsResourceImpl(org.eclipse.emf.common.util.URI uri) {
 		super(uri);
 	}
 
@@ -19,14 +17,14 @@ public class CsResourceImpl extends org.emftext.runtime.resource.impl.TextResour
 		java.io.InputStream actualInputStream = inputStream;
 		Object inputStreamPreProcessorProvider = loadOptions.get(org.emftext.runtime.IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
 		if (inputStreamPreProcessorProvider != null) {
-			if (inputStreamPreProcessorProvider instanceof org.emftext.runtime.InputStreamProcessorProvider) {
-				actualInputStream = ((org.emftext.runtime.InputStreamProcessorProvider) inputStreamPreProcessorProvider).getInputStreamProcessor(inputStream);
+			if (inputStreamPreProcessorProvider instanceof org.emftext.runtime.IInputStreamProcessorProvider) {
+				actualInputStream = ((org.emftext.runtime.IInputStreamProcessorProvider) inputStreamPreProcessorProvider).getInputStreamProcessor(inputStream);
 			}
 		}
 		org.emftext.runtime.resource.ITextParser p = new CsParser(new org.antlr.runtime.CommonTokenStream(new CsLexer(new org.antlr.runtime.ANTLRInputStream(actualInputStream))));
 		p.setResource(this);
 		p.setOptions(loadOptions);
-		EObject root = p.parse();
+		org.eclipse.emf.ecore.EObject root = p.parse();
 		while (root != null) {
 			getContents().add(root);
 			root = null;
@@ -39,7 +37,7 @@ public class CsResourceImpl extends org.emftext.runtime.resource.impl.TextResour
 
 	protected void doSave(java.io.OutputStream outputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		org.emftext.runtime.resource.ITextPrinter p = new CsPrinter(outputStream, this);
-		for(EObject root : getContents()) {
+		for(org.eclipse.emf.ecore.EObject root : getContents()) {
 			p.print(root);
 		}
 	}
