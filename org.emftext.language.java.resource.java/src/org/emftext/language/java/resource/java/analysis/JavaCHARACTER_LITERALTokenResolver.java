@@ -23,7 +23,7 @@ public class JavaCHARACTER_LITERALTokenResolver extends JavaBasedTokenResolver i
 		assert lexem.charAt(0) == '\'';
 		assert lexem.charAt(lexem.length() - 1) == '\'';
 		lexem = lexem.substring(1, lexem.length() - 1);
-		lexem = CharacterEscaper.unescapeEscapedCharacters(lexem);
+		//lexem = CharacterEscaper.unescapeEscapedCharacters(lexem);
 		Character result = Character.valueOf(lexem.charAt(0));
 		//System.out.println("JavaCHARACTER_LITERALTokenResolver.resolve("+lexem+") : " + (result != null ? result.getClass() : "null"));
 		return result;

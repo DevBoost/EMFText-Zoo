@@ -660,6 +660,14 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			for(Iterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 				EObject next = i.next();
 				if (next instanceof PrimaryExpression) {
+					if (next instanceof Reference) {
+						Reference ref = (Reference) next;
+						//navigate down references
+						while(ref.getNext() != null) {
+							ref = ref.getNext();
+						}
+						next = ref;
+					}
 					
 					Type nextType;
 					
@@ -702,6 +710,11 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		
 		if (referencedElement instanceof ReferenceableElement) {
 			result = id.equals(((NamedElement) referencedElement).getName());
+			
+			if (!result) {
+				return false;
+			}
+			
 			if(!isMethodCall) {
 				if (!result) {
 					return false;

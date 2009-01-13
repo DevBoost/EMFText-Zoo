@@ -195,8 +195,18 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(CharacterLiteral node, Object other) {
+		if (!(other instanceof CharacterLiteral)) {
+			return false;
+		}
+		CharacterLiteral o = (CharacterLiteral) other;
 		
-		return setDiff(node, other, super.match(node, other));
+		String nToken = node.getEscapedValue();
+		String oToken = o.getEscapedValue();
+		
+		nToken =  Character.valueOf(nToken.charAt(1)).toString();
+		oToken =  Character.valueOf(oToken.charAt(1)).toString();
+		
+		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
 
 	@Override
@@ -481,12 +491,24 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			nToken = nToken.substring(1);
 		}
 		
+		//to normalize xxExx -> xxexx
+		nToken = nToken.toLowerCase();
+		oToken = oToken.toLowerCase();
+		
 		//to e.g. normalize .0 or 0 or 0. -> 0.0
 		if (!nToken.contains(".")) {
-			nToken = nToken + ".";
+			if (nToken.contains("e")) {
+				nToken = nToken.replace("e", ".0e");
+			} else {
+				nToken = nToken + ".0";
+			}
 		}
 		if (!oToken.contains(".")) {
-			oToken = oToken + ".";
+			if (oToken.contains("e")) {
+				oToken = oToken.replace("e", ".0e");
+			} else {
+				oToken = oToken + ".0";
+			}
 		}
 		if (nToken.endsWith(".")) {
 			nToken = nToken + "0";
@@ -501,9 +523,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			oToken = "0" + oToken;
 		}
 		
-		//to normalize xxExx -> xxexx
-		nToken = nToken.toLowerCase();
-		oToken = oToken.toLowerCase();
+
 		
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}

@@ -408,7 +408,7 @@ expressions.MultiplicativeExpression
     ;
     
 expressions.UnaryExpression
-    ::= (additiveOperator | plusplus | minusminus)? unaryExpressionNotPlusMinus
+    ::= (additiveOperator | plusplus | minusminus)? #0 unaryExpressionNotPlusMinus
     ;
     
 expressions.UnaryExpressionNotPlusMinus
