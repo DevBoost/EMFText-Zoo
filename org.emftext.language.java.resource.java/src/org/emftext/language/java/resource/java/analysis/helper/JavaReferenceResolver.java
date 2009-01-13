@@ -457,39 +457,40 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
 		
 		Type type = null;
-		for(Iterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
+		for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
+			Type nextType = null;
+			if (next instanceof CastExpression) {
+				nextType = getReferencedType(((CastExpression)next).getTypeReference());
+				i.prune();
+			}
 			if (next instanceof PrimaryExpression) {
+
 				if (next instanceof Reference) {
 					Reference ref = (Reference) next;
 					//navigate down references
 					while(ref.getNext() != null) {
 						ref = ref.getNext();
 					}
-					next = ref;
+					if (ref instanceof Literal) {
+						nextType = getTypeOfReferencedElement(
+								((Literal) ref));
+					}
+					else {
+						nextType = getTypeOfReferencedElement(
+								((Reference) ref));
+					}
+					i.prune();
 				}
-				
-				Type nextType;
-				
-				if (next instanceof Literal) {
-					nextType = getTypeOfReferencedElement(
-							((Literal) next));
-				}
-				else {
-					nextType = getTypeOfReferencedElement(
-							((Reference) next));
-				}
-				
-				if (type == null) {
-					type = nextType;
-				}
+
+			}
+			if (nextType != null) {
+				type = nextType;
 				//in the special case that this is an expression with
 				//some string included, everything is converted to string
-				else if (stringClass.equals(nextType)) {
-					type = nextType;
+				if (stringClass.equals(type)) {
 					break;
 				}
-				
 			}
 		}
 		assert(type != null);
