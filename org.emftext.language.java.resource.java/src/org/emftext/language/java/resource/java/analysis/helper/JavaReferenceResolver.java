@@ -344,17 +344,9 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				}
 			}
 			
-			//might be a cast
+			//might be an explicit or implicit cast
 			if (containerContainer instanceof ParExpression) {
-				ParExpression parExpression = (ParExpression) containerContainer;
-				for(Iterator<EObject> i = parExpression.getExpression().eAllContents(); i.hasNext(); ) {
-					EObject next = i.next();
-					if (next instanceof CastExpression) {
-						CastExpression castExpression = (CastExpression) next;
-						previousType = getReferencedType(castExpression.getTypeReference());
-						break;
-					}
-				}
+				previousType = getTypeOfExpression(((ParExpression) containerContainer).getExpression());
 			}
 			
 			//inside annotation instance 
@@ -457,6 +449,52 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			assert(false);
 			// do nothing
 		}
+	}
+
+
+	protected Type getTypeOfExpression(Expression exp) throws UnresolvedProxiesException {
+		Class stringClass = (Class) EcoreUtil.resolve(
+				JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
+		
+		Type type = null;
+		for(Iterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
+			EObject next = i.next();
+			if (next instanceof PrimaryExpression) {
+				if (next instanceof Reference) {
+					Reference ref = (Reference) next;
+					//navigate down references
+					while(ref.getNext() != null) {
+						ref = ref.getNext();
+					}
+					next = ref;
+				}
+				
+				Type nextType;
+				
+				if (next instanceof Literal) {
+					nextType = getTypeOfReferencedElement(
+							((Literal) next));
+				}
+				else {
+					nextType = getTypeOfReferencedElement(
+							((Reference) next));
+				}
+				
+				if (type == null) {
+					type = nextType;
+				}
+				//in the special case that this is an expression with
+				//some string included, everything is converted to string
+				else if (stringClass.equals(nextType)) {
+					type = nextType;
+					break;
+				}
+				
+			}
+		}
+		assert(type != null);
+
+		return type;
 	}
 	
 	protected EObject findScoped(String identifier, EObject context, EObject endOfScopeElement,
@@ -671,49 +709,11 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	protected EList<Type> getArgumentTypes(ArgumentList argList) throws UnresolvedProxiesException {
 		
 		EList<Type> resultList = new BasicEList<Type>();
-		Class stringClass = (Class) EcoreUtil.resolve(
-				JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
+
 		
 		for(Expression exp : argList.getArguments()) {
 			//find the reference at the end of the expression
-			Type type = null;
-			for(Iterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
-				EObject next = i.next();
-				if (next instanceof PrimaryExpression) {
-					if (next instanceof Reference) {
-						Reference ref = (Reference) next;
-						//navigate down references
-						while(ref.getNext() != null) {
-							ref = ref.getNext();
-						}
-						next = ref;
-					}
-					
-					Type nextType;
-					
-					if (next instanceof Literal) {
-						nextType = getTypeOfReferencedElement(
-								((Literal) next));
-					}
-					else {
-						nextType = getTypeOfReferencedElement(
-								((Reference) next));
-					}
-					
-					if (type == null) {
-						type = nextType;
-					}
-					//in the special case that this is an expression with
-					//some string included, everything is converted to string
-					else if (stringClass.equals(nextType)) {
-						type = nextType;
-						break;
-					}
-					
-				}
-			}
-			assert(type != null);
-			
+			Type type = getTypeOfExpression(exp);
 			resultList.add(type);
 		}
 		return resultList;
