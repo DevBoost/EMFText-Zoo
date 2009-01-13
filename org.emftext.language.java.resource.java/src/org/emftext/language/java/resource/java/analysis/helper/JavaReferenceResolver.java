@@ -47,6 +47,7 @@ import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.ArgumentList;
 import org.emftext.language.java.references.ClassReference;
@@ -198,6 +199,8 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return container.eContents();
 	}
 	
+	protected Field STANDARD_ARRAY_LENGTH_FIELD = null;
+
 	protected void cosiderAddittionalScope(EObject container,
 			EList<EObject> contentsList) throws UnresolvedProxiesException {
 		//consider imports and default imports
@@ -247,7 +250,17 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			else {
 				//PARAMETER TYPE
 			}
-			//TODO Arrays have the additional member field "length"
+			//TODO 
+			//Arrays have the additional member field "length"
+			//We always add a field to the very end since we do not know if we have an array or not
+			if (STANDARD_ARRAY_LENGTH_FIELD == null) {
+				//init
+				STANDARD_ARRAY_LENGTH_FIELD = MembersFactory.eINSTANCE.createField();
+				STANDARD_ARRAY_LENGTH_FIELD.setName("length");
+				STANDARD_ARRAY_LENGTH_FIELD.setType(
+						TypesFactory.eINSTANCE.createInt());
+			}
+			contentsList.add(STANDARD_ARRAY_LENGTH_FIELD);
 		}
 	}
 	
@@ -559,7 +572,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		}
 		//element points to the object's class object
 		else if(reference instanceof ClassReference) {
-			return getClassObjectModelElement();
+			return getClassClassModelElement();
 		}
 		//referenced element points to an element with a type
 		else if (reference instanceof IdentifierReference) {
@@ -880,6 +893,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				assert(false);
 			}
 		}
+		
+		//add all members of object, since they are also available on each interface
+		memberList.addAll(getObjectModelElement().getMembers());
+		
 		return memberList;
 	}
 	
@@ -924,8 +941,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			superClass = (Class) getReferencedType(subClass.getExtends().getType());
 		} 
 		if (superClass == null ) {
-			superClass = (Class) JavaClasspath.INSTANCE.getClassifiers(
-					"java.lang.", "Object").get(0);
+			superClass = getObjectModelElement();
 		}
 		superClass = (Class) EcoreUtil.resolve(superClass, myResource);
 		return superClass;
@@ -982,11 +998,18 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 	 * Finds the model element representing <code>java.lang.Class</code>.
 	 * @return class object model element
 	 */
-	protected Class getClassObjectModelElement() {
-		Class classObject = (Class) JavaClasspath.INSTANCE.getClassifier(
+	protected Class getClassClassModelElement() {
+		Class classClass = (Class) JavaClasspath.INSTANCE.getClassifier(
 				"java.lang.Class");
-		classObject = (Class) EcoreUtil.resolve(classObject, myResource);
-		return classObject;
+		classClass = (Class) EcoreUtil.resolve(classClass, myResource);
+		return classClass;
+	}
+	
+	protected Class getObjectModelElement() {
+		Class objectClass = (Class) JavaClasspath.INSTANCE.getClassifier(
+				"java.lang.Object");
+		objectClass = (Class) EcoreUtil.resolve(objectClass, myResource);
+		return objectClass;
 	}
 
 }
