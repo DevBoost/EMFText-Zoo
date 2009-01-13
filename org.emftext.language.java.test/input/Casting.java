@@ -8,6 +8,9 @@ public class Casting {
 		d = (Casting[]) d;
 		d = (Casting[]) d.clone();
 		((Casting[]) d).clone();
+		Casting c2 = new Casting2();
+		Casting c3 = ((Casting2) c2).m();
+		((Casting2)c3).m().toString();
 		try {
 			((Casting[]) d)[0].clone();
 		} catch (CloneNotSupportedException e1) {
@@ -19,5 +22,11 @@ public class Casting {
 		d = (Casting[]) new Casting[2];
 		
 		{}
+	}
+	
+	public class Casting2 extends Casting {
+		public Casting m() {
+			return new Casting2();
+		}
 	}
 }

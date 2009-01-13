@@ -435,6 +435,22 @@ public class TalkativeASTMatcher extends ASTMatcher {
 				nfe.printStackTrace();
 			}
 		}
+		if (nToken.startsWith("-0x") || nToken.startsWith("-0X")) {
+			nToken = nToken.substring(3);
+			try {
+				nToken = "-" + JavaDECIMAL_LITERALTokenResolver.parseInteger(nToken, 16).toString();
+			} catch (NumberFormatException nfe) {
+				nfe.printStackTrace();
+			}
+		}
+		if (oToken.startsWith("-0x") || oToken.startsWith("-0X")) {
+			oToken = oToken.substring(3);
+			try {
+				oToken = "-" + JavaDECIMAL_LITERALTokenResolver.parseInteger(oToken, 16).toString();
+			} catch (NumberFormatException nfe) {
+				nfe.printStackTrace();
+			}
+		}
 		
 		//OCTAL normalization
 		if (nToken.toLowerCase().endsWith("l")) {
@@ -447,16 +463,16 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		}
 		
 		//strip floatingpoint suffix
-		if (nToken.endsWith("f")) {
+		if (nToken.toLowerCase().endsWith("f")) {
 			nToken = nToken.substring(0, nToken.length() - 1);
 		}
-		if (oToken.endsWith("f")) {
+		if (oToken.toLowerCase().endsWith("f")) {
 			oToken = oToken.substring(0, oToken.length() - 1);
 		}
-		if (nToken.endsWith("d")) {
+		if (nToken.toLowerCase().endsWith("d")) {
 			nToken = nToken.substring(0, nToken.length() - 1);
 		}
-		if (oToken.endsWith("d")) {
+		if (oToken.toLowerCase().endsWith("d")) {
 			oToken = oToken.substring(0, oToken.length() - 1);
 		}
 
@@ -464,13 +480,29 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			nToken = nToken.substring(1);
 		}
 		
-		//to e.g. normalize 0. -> 0.0
+		//to e.g. normalize .0 or 0 or 0. -> 0.0
+		if (!nToken.contains(".")) {
+			nToken = nToken + ".";
+		}
+		if (!oToken.contains(".")) {
+			oToken = oToken + ".";
+		}
 		if (nToken.endsWith(".")) {
 			nToken = nToken + "0";
 		}
 		if (oToken.endsWith(".")) {
 			oToken = oToken + "0";
 		}
+		if (nToken.startsWith(".")) {
+			nToken = "0" + nToken;
+		}
+		if (oToken.startsWith(".")) {
+			oToken = "0" + oToken;
+		}
+		
+		//to normalize xxExx -> xxexx
+		nToken = nToken.toLowerCase();
+		oToken = oToken.toLowerCase();
 		
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
@@ -677,13 +709,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(VariableDeclarationFragment node, Object other) {
-		if (!(other instanceof VariableDeclarationFragment)) {
-			return false;
-		}
-		VariableDeclarationFragment o = (VariableDeclarationFragment) other;
-		return safeSubtreeMatch(node.getName(), o.getName())
-			&& node.getExtraDimensions() == o.getExtraDimensions()
-			&& safeSubtreeMatch(node.getInitializer(), o.getInitializer());
+
+		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override

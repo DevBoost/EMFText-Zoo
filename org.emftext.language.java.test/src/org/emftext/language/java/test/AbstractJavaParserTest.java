@@ -33,6 +33,7 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
+import org.emftext.language.java.UnicodeConverter;
 import org.emftext.language.java.UnicodeConverterProvider;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
@@ -253,7 +254,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File outputFile = prepareOutputFile(outputFileName);
 		
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
-		resource.load(null);
+		resource.load(getLoadOptions());
 		
 		if (!ignoreSemanticErrors(file.getPath())) {
 			// This will not work if external resources are not yet registered (order of tests)
@@ -284,6 +285,9 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	private static boolean compareTextContents(InputStream inputStream,
 			InputStream inputStream2) throws MalformedTreeException,
 			BadLocationException, IOException {
+		
+		//converter unicode
+		inputStream = new UnicodeConverter(inputStream);
 		
 		ASTParser jdtParser1 = ASTParser.newParser(AST.JLS3);
 		jdtParser1.setSource(readTextContents(inputStream).toCharArray());

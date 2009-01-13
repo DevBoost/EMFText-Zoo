@@ -23,5 +23,9 @@ public class VariableReferencing {
 		}
 		var = new VariableReferencing();
 		var.method();
+			
+		int i = new VariableReferencing() {
+			public int x = 0;
+		}.x;
 	}
 }

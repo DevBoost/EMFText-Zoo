@@ -14,7 +14,8 @@ public class OrderedJavaLanguageFeatureTest {
 			}
 		};
 		
-		//test.testUsingAnnotations();
+		test.testUnicode();
+		test.testVariableReferencing();
 		
 		test.testEmptyClass();
 		test.testBooleanExpressions();
