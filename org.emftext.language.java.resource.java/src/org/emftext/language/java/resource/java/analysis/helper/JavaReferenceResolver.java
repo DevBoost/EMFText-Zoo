@@ -186,7 +186,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		return false;
 	}
 	
-	protected EList<EObject> getOrderedContents(EObject container) {
+	protected EList<EObject> getOrderedContents(EObject container) throws UnresolvedProxiesException {
 		if (container instanceof NewConstructorCall) {
 			NewConstructorCall ncc = (NewConstructorCall) container;
 			if (ncc.getAnnonymousClass() != null) {
@@ -249,17 +249,6 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 			//TODO Arrays have the additional member field "length"
 		}
-		else if (container instanceof NewConstructorCall) {
-			NewConstructorCall ncc = (NewConstructorCall) container;
-			Type superType= getReferencedType(ncc.getType());
-			if (container instanceof PrimitiveType) {
-				contentsList.addAll(getAllMemebers((PrimitiveType) superType));
-			}
-			if (container instanceof Classifier) {
-				contentsList.addAll(getAllMemebers((Classifier) superType));
-			}
-		}
-
 	}
 	
 	
@@ -323,7 +312,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 					previousType = theImport.getParts().get(idx - 1).getTarget();
 				}
 				else {
-					definitlyPackage = true; //to avoid searching for this which would lead to recursive import resolution attempst
+					definitlyPackage = true; //to avoid searching for this which would lead to recursive import resolution attempts
 				}
 			}
 			//might be a cast
@@ -345,7 +334,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				if (typeReference instanceof TypeReferenceSequence) {
 					//chained reference: scope given by previous element may be a type and may define a new scope
 					TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)typeReference;
-					int idx = typeRefSequence.getParts().size();
+					int idx = typeRefSequence.getParts().size(); System.out.println("");
 					if (idx > 0) {
 						previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
 					}

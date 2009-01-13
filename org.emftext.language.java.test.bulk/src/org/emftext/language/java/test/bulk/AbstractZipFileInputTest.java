@@ -53,12 +53,12 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 		@Override
 		protected boolean isExcludedFromReprintTest(String filename) {
-			return true;
+			return false;
 		}
 		
 		@Override
 		protected boolean ignoreSemanticErrors(String filename) {
-			return true;
+			return false;
 		}
 
 		@Override
