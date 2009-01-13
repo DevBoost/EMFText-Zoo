@@ -23,10 +23,10 @@ IMPORTS {
 	types : <http://www.emftext.org/java/types>
 	variables : <http://www.emftext.org/java/variables>
 }
- 
+
 OPTIONS {
 	tokenspace = 1;
-	standardTextTokenName = IDENTIFIER;
+	defaultTokenName = IDENTIFIER;
 	overridePluginXML = false;
 	overridePrinter = false;
 	generateCodeFromGeneratorModel = false;
