@@ -117,16 +117,17 @@ classifiers.Annotation
 
 annotations.AnnotationInstance
 	::=	"@" annotation 
-		("(" (elementValue | (elementValuePairs ("," elementValuePairs)*)) ")")? 
+		("("( 
+		    (elementValuePairs ("," elementValuePairs)*) |
+		    (singleElementValue) | 
+		    ("{" (elementValues ("," elementValues)*)? (",")? "}")
+		    
+		)")")? 
 	;
 
 annotations.AnnotationElementValuePair
-	::= key[] "=" value
+	::= key "=" value
 	;
-
-annotations.AnnotationElementValueArray
-    ::= "{" (values ("," values)*)? (",")? "}"
-    ;
 
 generics.TypeParameter
 	::=	name[] ("extends" extendTypes ("&" extendTypes)*)?
