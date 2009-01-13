@@ -287,7 +287,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "AnnotationsForAnnotations";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
+		assertMemberCount(clazz, 2);
 
 		parseAndReprint(filename);
 	}

@@ -1,4 +1,5 @@
 @Annotations(t1 = 0, t2 = 1)
+@SuppressWarnings(value = "")
 public @interface Annotations {
 	
 	public int t2();

@@ -315,6 +315,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 					definitlyPackage = true; //to avoid searching for this which would lead to recursive import resolution attempts
 				}
 			}
+			
 			//might be a cast
 			if (containerContainer instanceof ParExpression) {
 				ParExpression parExpression = (ParExpression) containerContainer;
@@ -329,15 +330,15 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			}
 			
 			//inside annotation instance 
-			else if (annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
+			else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
 				TypeReference typeReference = annotationInstance.getAnnotation();
 				if (typeReference instanceof TypeReferenceSequence) {
 					//chained reference: scope given by previous element may be a type and may define a new scope
 					TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)typeReference;
-					int idx = typeRefSequence.getParts().size(); System.out.println("");
+					int idx = typeRefSequence.getParts().size(); 
 					if (idx > 0) {
 						previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
-					}
+					} 
 				} else {
 					// TODO
 					throw new RuntimeException("Not implemented yet");
@@ -351,6 +352,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 				}
 				else {
 					targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
+					if (targetObject == null && annotationInstance != null && container instanceof Reference) {
+						//possibly type reference 
+						targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
+					}
 				}
 			}
 			

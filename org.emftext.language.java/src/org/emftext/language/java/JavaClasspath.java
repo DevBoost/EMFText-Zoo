@@ -101,6 +101,10 @@ public class JavaClasspath {
 	}
 	
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
+		if (classifierName == null || classifierName.equals("") || uri == null) {
+			return;
+		}
+		
 		if (!packageName.endsWith(".")) {
 			packageName = packageName + ".";
 		}
