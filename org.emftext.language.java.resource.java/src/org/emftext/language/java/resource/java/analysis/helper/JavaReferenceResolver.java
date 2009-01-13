@@ -15,8 +15,8 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.UnresolvedProxiesException;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.classifiers.AnnonymousClass;
 import org.emftext.language.java.classifiers.Annotation;
+import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.Enumeration;
@@ -280,7 +280,7 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			if (container instanceof Reference && containerContainer instanceof Reference) {
 				//do not leave the local scope in case of anonymous class declarations
 				if (containerContainer instanceof NewConstructorCall) {
-					AnnonymousClass annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
+					AnonymousClass annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
 					if (annonymousClass == null) {
 						//chained reference: scope given by previous element may be a type and may define a new scope
 						previousType = getTypeOfReferencedElement((Reference)containerContainer);

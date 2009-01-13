@@ -62,7 +62,6 @@ containers.CompilationUnit
         !0 !0
         ("import" imports #0 ";" !0 )*
         !0
-   		annotations*
         (classifiers !0 !0)+
         ("\u001a")?
 	;
@@ -74,7 +73,8 @@ imports.StaticImport
 	::= static parts #0 ("." #0 parts)* #0 (("." #0 staticMembers[]) | staticMembers[IMPORT_ALL_LITERAL]);
 
 classifiers.Class
-	::=	modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
+	::=	annotations*
+	    modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
         "{" 
@@ -82,14 +82,15 @@ classifiers.Class
         "}"
 	;
     
-classifiers.AnnonymousClass
+classifiers.AnonymousClass
 	::= "{" 
 			(!1 members)* !0
 		"}"
 	;
 	
 classifiers.Interface
-	::=	modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
+	::=	annotations*
+	    modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
         	(!1 members)* !0
@@ -97,7 +98,8 @@ classifiers.Interface
 	;
 
 classifiers.Enumeration
-    ::= modifiers* "enum" name[] 
+    ::= annotations*
+        modifiers* "enum" name[] 
     	("implements" (implements ("," implements)*))? 
     	"{" 
     		(!1 constants ("," !1 constants)*)? (",")? 
@@ -106,7 +108,8 @@ classifiers.Enumeration
     ;
 
 classifiers.Annotation
-	::=	modifiers* "@" "interface" name[]
+	::=	annotations*
+	    modifiers* "@" "interface" name[]
 	    "{" 
 	    	(!1 members)* !0
 	    "}"
@@ -130,7 +133,7 @@ generics.TypeParameter
 	;
 
 enumerations.EnumConstant
-    ::= name[] ("(" arguments ("," arguments)* ")" )? body? 
+    ::= annotations* name[] ("(" arguments ("," arguments)* ")" )? body? 
     ;
 
 statements.Block
@@ -156,15 +159,15 @@ annotations.AnnotationMethod
 	;
 
 parameters.OrdinaryParameter
-	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] additionalArrayDimensions*
+	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] additionalArrayDimensions*
 	;
 
 parameters.VariableLengthParameter
-	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
+	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
 	;
 
 variables.LocalVariable
-	::= modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
+	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement

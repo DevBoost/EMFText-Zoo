@@ -257,7 +257,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "AnnotationsForInnerTypes";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
+		assertMemberCount(clazz, 4);
 
 		parseAndReprint(filename);
 	}
@@ -267,7 +267,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "AnnotationsForParameters";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 1);
+		assertMemberCount(clazz, 3);
 
 		parseAndReprint(filename);
 	}
@@ -288,6 +288,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testAnnotationsForEnums() throws Exception {
+		String typename = "AnnotationsForEnums";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Enumeration eenum = assertParsesToEnumeration(typename);
+		assertMemberCount(eenum, 0);
 
 		parseAndReprint(filename);
 	}
