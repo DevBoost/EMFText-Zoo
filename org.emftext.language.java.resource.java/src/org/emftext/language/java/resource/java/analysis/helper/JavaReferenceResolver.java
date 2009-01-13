@@ -472,16 +472,17 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 					while(ref.getNext() != null) {
 						ref = ref.getNext();
 					}
-					if (ref instanceof Literal) {
-						nextType = getTypeOfReferencedElement(
-								((Literal) ref));
-					}
-					else {
-						nextType = getTypeOfReferencedElement(
-								((Reference) ref));
-					}
-					i.prune();
+					next = ref;
 				}
+				if (next instanceof Literal) {
+					nextType = getTypeOfReferencedElement(
+							((Literal) next));
+				}
+				else {
+					nextType = getTypeOfReferencedElement(
+							((Reference) next));
+				}
+				i.prune();
 
 			}
 			if (nextType != null) {
@@ -621,11 +622,16 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		}
 		//element points to this or super
 		else if (reference instanceof SelfReference) {
-			if (((SelfReference) reference).getSelf() instanceof This) {
-				return findContainingClass(reference);
+			if (reference.eContainer() instanceof Reference) {
+				return getTypeOfReferencedElement((Reference)reference.eContainer());
 			}
-			else if (((SelfReference) reference).getSelf() instanceof Super) {
-				return getSuperType(findContainingClass(reference));
+			else {
+				if (((SelfReference) reference).getSelf() instanceof This) {
+					return findContainingClass(reference);
+				}
+				else if (((SelfReference) reference).getSelf() instanceof Super) {
+					return getSuperType(findContainingClass(reference));
+				}
 			}
 
 		}
