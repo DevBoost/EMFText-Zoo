@@ -59,6 +59,7 @@ import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
+import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
 import org.emftext.language.java.types.Char;
@@ -169,6 +170,10 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 		}
 		//order of classifier declarations is arbitrary
 		if (element instanceof Classifier) {
+			return false;
+		}
+		//local variables might be used within themseves
+		if (element instanceof LocalVariableStatement) {
 			return false;
 		}
 		//in all other cases, the order requires consideration
@@ -284,8 +289,22 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			//navigate through constructor calls: The constructor itself
 			if (containerContainer.eContainer() instanceof NewConstructorCall) {
 				EObject previouseRef = containerContainer.eContainer().eContainer();
-				if ((previouseRef instanceof Reference) && !(previouseRef instanceof NewConstructorCall /*There might be an anonymous class*/)) {
-					previousType = getTypeOfReferencedElement((Reference)previouseRef);
+				if (previouseRef instanceof Reference) {
+					/*There might be an anonymous class*/
+					if (previouseRef instanceof NewConstructorCall) {
+						NewConstructorCall prevCall = (NewConstructorCall) previouseRef;
+						if (prevCall.getAnnonymousClass() != null) {
+							//
+						}
+						else {
+							previousType = getTypeOfReferencedElement((Reference)previouseRef);
+						}
+					}
+					else {
+						previousType = getTypeOfReferencedElement((Reference)previouseRef);
+					}
+					
+
 				}
 			}
 			

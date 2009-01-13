@@ -14,7 +14,7 @@ public class OrderedJavaLanguageFeatureTest {
 			}
 		};
 		
-		test.testEscapedStrings();
+		test.testEqualityExpression();
 		
 //		test.testEmptyClass();
 //		test.testBooleanExpressions();
