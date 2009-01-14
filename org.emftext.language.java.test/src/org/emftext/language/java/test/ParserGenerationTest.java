@@ -28,7 +28,7 @@ import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
 import org.emftext.sdk.codegen.IProblemCollector;
 import org.emftext.sdk.codegen.GenerationContext;
-import org.emftext.sdk.codegen.ResourcePackageGenerator;
+import org.emftext.sdk.codegen.ResourcePluginGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.runtime.resource.ITextResource;
 
@@ -77,7 +77,7 @@ public class ParserGenerationTest {
 				fail(problem.getMessage());
 			}
 		});
-		InputStream grammarStream = ResourcePackageGenerator.deriveGrammar(antlrGen, context);
+		InputStream grammarStream = ResourcePluginGenerator.deriveGrammar(antlrGen, context);
 		return getContent(grammarStream);
 	}
 
