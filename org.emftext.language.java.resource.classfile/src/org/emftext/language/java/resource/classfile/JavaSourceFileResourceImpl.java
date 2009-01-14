@@ -46,6 +46,7 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 			//could also be a package-info.java without CU
 			if(getContents().get(0) instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) getContents().get(0);
+				cu.setName(myURI.lastSegment());
 				JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI);
 			}
 		}
