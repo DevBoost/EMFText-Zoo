@@ -17,43 +17,43 @@ import org.emftext.runtime.InputStreamProcessor;
  */
 public class UnicodeConverter extends InputStreamProcessor {
 
+	// we use -2 instead of -1, because -1 is EOF
+	private static final int EMPTY_LOOK_AHEAD_CHARACTER = -2;
+
 	private static final char BACKSLASH = '\\';
 
+	/**
+	 * The original input stream.
+	 */
 	private InputStream inputStream;
-	private int[] stack;
-	private int stackPosition;
+	
+	/**
+	 * Holds the character that is read from the original
+	 * stream if a backslash is found. This character is 
+	 * returned upon the next call to read().
+	 */
+	private int lookAheadCharacter;
 
+	/**
+	 * Creates a new UnicodeConverter that reads from the given
+	 * stream.
+	 * 
+	 * @param inputStream the original stream to read from
+	 */
 	public UnicodeConverter(InputStream inputStream) {
 		this.inputStream = inputStream;
-		this.stack = new int[4];
-		this.stackPosition = 0;
+		this.lookAheadCharacter = EMPTY_LOOK_AHEAD_CHARACTER;
 	}
 
 	/**
-	 * Given the input string with escaped unicode characters convert them to
-	 * their native unicode characters and return the result. This is quite
-	 * similar to the functionality found in property file handling. White space
-	 * escapes are not processed (as they are consumed by the template library).
-	 * Any bogus escape codes will remain in place.
-	 * <p>
-	 * When files are provided in another encoding, they can be converted to
-	 * ascii using the native2ascii tool (a java sdk binary). This tool will
-	 * escape all the non Latin1 ASCII characters and convert the file into
-	 * Latin1 with unicode escapes.
-	 * 
-	 * This code is from http://www.antlr.org/wiki/display/ST/unicode_escapes
-	 * but was modified and extended to support other escaped characters.
-	 * 
-	 * @param source
-	 *            string with unicode escapes
-	 * @return string with all unicode characters, all unicode escapes expanded.
-	 * 
-	 * @author Caleb Lyness (modified by Mirko Seifert)
+	 * Reads one character from the stream. Escaped unicode characters are
+	 * converted to real characters (i.e., one integer value).
 	 */
 	@Override
 	public int read() throws IOException {
-		if (!isEmpty()) {
-			int result = pop();
+		if (lookAheadCharacter >= 0) {
+			int result = lookAheadCharacter;
+			lookAheadCharacter = EMPTY_LOOK_AHEAD_CHARACTER;
 			return result;
 		}
 		int read = inputStream.read();
@@ -79,7 +79,6 @@ public class UnicodeConverter extends InputStreamProcessor {
 							continue;
 						}
 						j++;
-						push(next);
 						if (next < 0) {
 							complete = false;
 							break;
@@ -116,21 +115,18 @@ public class UnicodeConverter extends InputStreamProcessor {
 							v = ((v << 4) + 10 + nextChar) - 65;
 							break;
 						default:
-							// almost but no go
+							// this case can never happen if the unicode
+							// escape sequences are correct
 							v = 0; // clear the accumulator
 							break;
 						}
 					} // for each of the 4 digits
 
 					if (complete) { // We got a full conversion
-						pop();
-						pop();
-						pop();
-						pop();
 						return v;
 					}
 				} else {
-					push(next);
+					lookAheadCharacter = next;
 				}
 			}
 		}
@@ -139,19 +135,5 @@ public class UnicodeConverter extends InputStreamProcessor {
 	
 	public static int unsignedByteToInt(byte b) {
 		return (int) b & 0xFF;
-	}
-	  
-	private boolean isEmpty() {
-		return stackPosition == 0;
-	}
-	
-	private int pop() {
-		stackPosition--;
-		return stack[stackPosition];
-	}
-	
-	private void push(int c) {
-		stack[stackPosition] = c;
-		stackPosition++;
 	}
 }
