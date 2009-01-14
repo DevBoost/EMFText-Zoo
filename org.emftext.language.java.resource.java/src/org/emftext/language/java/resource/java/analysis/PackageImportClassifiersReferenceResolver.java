@@ -6,7 +6,7 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.imports.PackageImport;
 
-public class PackageImportClassifiersReferenceResolver extends org.emftext.runtime.resource.impl.ReferenceResolverImpl {
+public class PackageImportClassifiersReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
 
 	@Override
 	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {

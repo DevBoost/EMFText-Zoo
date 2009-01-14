@@ -8,7 +8,7 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.runtime.resource.IResolveResult;
 
-public class ClassifierImportClassifierReferenceResolver extends org.emftext.runtime.resource.impl.ReferenceResolverImpl {
+public class ClassifierImportClassifierReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
 
 	@Override
 	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {

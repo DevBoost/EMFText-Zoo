@@ -10,7 +10,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.modifiers.Static;
 
-public class StaticMemberImportStaticMemberReferenceResolver extends org.emftext.runtime.resource.impl.ReferenceResolverImpl {
+public class StaticMemberImportStaticMemberReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
 
 	@Override
 	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {

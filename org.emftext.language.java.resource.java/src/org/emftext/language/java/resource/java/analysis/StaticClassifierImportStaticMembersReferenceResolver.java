@@ -9,7 +9,7 @@ import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 
-public class StaticClassifierImportStaticMembersReferenceResolver extends org.emftext.runtime.resource.impl.ReferenceResolverImpl {
+public class StaticClassifierImportStaticMembersReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
 
 	@Override
 	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {

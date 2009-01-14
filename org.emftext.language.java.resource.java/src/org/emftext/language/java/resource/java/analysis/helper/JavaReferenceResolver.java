@@ -33,7 +33,6 @@ import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.PackageImport;
 import org.emftext.language.java.imports.StaticClassifierImport;
-import org.emftext.language.java.imports.StaticImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.literals.BooleanLiteral;
@@ -79,11 +78,11 @@ import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.Variable;
 import org.emftext.runtime.resource.IResolveResult;
 import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.impl.ReferenceResolverImpl;
+import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 
 
-public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
+public abstract class JavaReferenceResolver extends AbstractReferenceResolver {
 
 	public static final String UNRESOLVED_REFERENCE_STRING =
 		"UNKNOWN";
