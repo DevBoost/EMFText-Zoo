@@ -1,7 +1,5 @@
 package org.emftext.language.java.resource.java.analysis.helper;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -33,7 +31,10 @@ import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.PackageImport;
+import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticImport;
+import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
@@ -59,7 +60,6 @@ import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
-import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
 import org.emftext.language.java.types.Char;
@@ -138,13 +138,27 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 							else for(Import imp : cu.getImports()) {
 								if(imp instanceof ClassifierImport) {
 									ClassifierImport classifierImport = (ClassifierImport) imp;
-									if (classifierImport.getClassifiers().contains(element)) {
+									if (element.equals(classifierImport.getClassifier())) {
 										//the element is imported -> simple name
 										fullID = ((NamedElement) element).getName();
 									}
 								}
-								else if (imp instanceof StaticImport) {
-									StaticImport staticImport = (StaticImport) imp;
+								else if(imp instanceof PackageImport) {
+									PackageImport packageImport = (PackageImport) imp;
+									if (packageImport.getClassifiers().contains(element)) {
+										//the element is imported -> simple name
+										fullID = ((NamedElement) element).getName();
+									}
+								}
+								else if (imp instanceof StaticMemberImport) {
+									StaticMemberImport staticImport = (StaticMemberImport) imp;
+									if (element.equals(staticImport.getStaticMember())) {
+										//the element is imported -> simple name
+										fullID = ((NamedElement) element).getName();
+									}
+								}
+								else if (imp instanceof StaticClassifierImport) {
+									StaticClassifierImport staticImport = (StaticClassifierImport) imp;
 									if (staticImport.getStaticMembers().contains(element)) {
 										//the element is imported -> simple name
 										fullID = ((NamedElement) element).getName();
@@ -210,13 +224,23 @@ public abstract class JavaReferenceResolver extends ReferenceResolverImpl {
 			
 			for(Import explicitImport : cu.getImports()) {
 				if (explicitImport instanceof ClassifierImport) {
-					EList<Classifier> explicitImports = 
-						((ClassifierImport)explicitImport).getClassifiers();
-					contentsList.addAll(explicitImports);
+					Classifier classifierImport = 
+						((ClassifierImport)explicitImport).getClassifier();
+					contentsList.add(classifierImport);
 				}
-				else if (explicitImport instanceof StaticImport) {
+				else if (explicitImport instanceof PackageImport) {
+					EList<Classifier> packageImports = 
+						((PackageImport)explicitImport).getClassifiers();
+					contentsList.addAll(packageImports);
+				}
+				else if (explicitImport instanceof StaticMemberImport) {
+					Member staticMember = 
+						((StaticMemberImport)explicitImport).getStaticMember();
+					contentsList.add(staticMember);
+				}
+				else if (explicitImport instanceof StaticClassifierImport) {
 					EList<Member> staticMembers = 
-						((StaticImport)explicitImport).getStaticMembers();
+						((StaticClassifierImport)explicitImport).getStaticMembers();
 					contentsList.addAll(staticMembers);
 				}
 				else {
