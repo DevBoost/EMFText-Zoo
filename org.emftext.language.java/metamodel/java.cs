@@ -26,7 +26,7 @@ IMPORTS {
 
 OPTIONS {
 	tokenspace = 1;
-	standardTextTokenName = IDENTIFIER;
+	defaultTokenName = IDENTIFIER;
 	overridePluginXML = false;
 	overridePrinter = false;
 	generateCodeFromGeneratorModel = false;
