@@ -22,6 +22,7 @@ public class UnicodeConverterTest {
 		assertConversion("\u0001\uFfFf", "\\u0001\\uFfFf");
 		assertConversion("\\\\u0000\\\\uFfFf", "\\\\u0000\\\\uFfFf");
 		assertConversion("\\377\\388", "\\377\\388");
+		assertConversion("\u202a", "\\u202a");
 	}
 
 	private void assertConversion(String expectedOutput, String input) throws IOException {
@@ -29,6 +30,7 @@ public class UnicodeConverterTest {
 		String result = "";
 		int next;
 		while ((next = converter.read()) >= 0) {
+			System.out.println("UnicodeConverterTest.assertConversion() next = " + next);
 			char nextChar = (char) next;
 			result += nextChar;
 		}
