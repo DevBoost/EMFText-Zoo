@@ -19,7 +19,6 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.PackageDescriptor;
-import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
