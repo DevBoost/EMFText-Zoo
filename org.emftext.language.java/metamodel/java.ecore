@@ -104,10 +104,12 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="containers" nsURI="http://www.emftext.org/java/containers" nsPrefix="containers">
-    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//commons/NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//commons/NamedElement #//annotations/Annotatable">
       <eAnnotations source="gmf.diagram"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
           eType="#//containers/CompilationUnit" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentPackage" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//commons/Commentable">
       <eAnnotations source="gmf.node">
@@ -322,14 +324,31 @@
           eType="#//references/PlainPackageOrClassifierReference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ClassifierImport" eSuperTypes="#//imports/Import">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" lowerBound="1"
+          eType="#//classifiers/Classifier">
+        <eAnnotations source="gmf.link"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PackageImport" eSuperTypes="#//imports/Import">
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
           eType="#//classifiers/Classifier">
         <eAnnotations source="gmf.link"/>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="StaticImport" eSuperTypes="#//imports/Import">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="static" eType="#_Wo2Yv9z1Ed2bJ_pQViWxFg"
-          containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StaticImport" abstract="true" eSuperTypes="#//imports/Import">
+      <eAnnotations source="gmf.node">
+        <details key="label" value="comments"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="static" lowerBound="1"
+          eType="#_Wo2Yv9z1Ed2bJ_pQViWxFg" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StaticMemberImport" eSuperTypes="#//imports/StaticImport">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticMember" lowerBound="1"
+          eType="#//members/Member">
+        <eAnnotations source="gmf.link"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StaticClassifierImport" eSuperTypes="#//imports/StaticImport">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticMembers" upperBound="-1"
           eType="#//members/Member">
         <eAnnotations source="gmf.link"/>
@@ -463,12 +482,15 @@
     <eClassifiers xsi:type="ecore:EClass" name="LessThanOrEqual" eSuperTypes="#//operators/RelationOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="GreaterThan" eSuperTypes="#//operators/RelationOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="GreaterThanOrEqual" eSuperTypes="#//operators/RelationOperator"/>
-    <eClassifiers xsi:type="ecore:EClass" name="AdditiveOperator" eSuperTypes="#//operators/Operator">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeOperator" eSuperTypes="#//operators/Operator">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AdditiveOperator" abstract="true"
+        eSuperTypes="#//operators/Operator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//operators/AdditiveOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//operators/AdditiveOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeOperator" abstract="true"
+        eSuperTypes="#//operators/Operator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="#//operators/MultiplicativeOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//operators/MultiplicativeOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Remainder" eSuperTypes="#//operators/MultiplicativeOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="PlusPlus" eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="MinusMinus" eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Complement" eSuperTypes="#//operators/Operator"/>

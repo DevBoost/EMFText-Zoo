@@ -19,6 +19,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.PackageDescriptor;
+import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
@@ -161,10 +162,11 @@ public class JavaClasspath {
 	private EList<Classifier> javaLangPackage = null;
 	
 	
-	public EList<Classifier> getClassifiers(Import theImport, String classifierQuery) {
+	public EList<Classifier> getClassifiers(Import theImport, String packageName) {
 		String fullQualifiedName = getQualifiedNameFromImport(theImport);
+		fullQualifiedName = fullQualifiedName + packageName;
 		
-		return getClassifiers(fullQualifiedName, classifierQuery);
+		return getClassifiers(fullQualifiedName, "*");
 	}
 	
 	/**
@@ -205,10 +207,28 @@ public class JavaClasspath {
 		return resultList;
 	}
 	
+	/**
+	 * 
+	 * @param theImport that points directly at the classifier
+	 * @return
+	 */
 	public Classifier getClassifier(Import theImport) {
 		String fullQualifiedName = getQualifiedNameFromImport(theImport);
-		//cute the trailing eparator
+		//cut the trailing separator
 		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() -1);
+		
+		return getClassifier(fullQualifiedName);
+	}
+	
+	/**
+	 * 
+	 * @param theImport that points at the package
+	 * @param classifierName the name of the classifier in the given package
+	 * @return
+	 */
+	public Classifier getClassifier(Import theImport, String classifierName) {
+		String fullQualifiedName = getQualifiedNameFromImport(theImport);
+		fullQualifiedName = fullQualifiedName + classifierName;
 		
 		return getClassifier(fullQualifiedName);
 	}
@@ -219,7 +239,7 @@ public class JavaClasspath {
 			if (!ref.getTarget().eIsProxy()) {
 				Classifier type = (Classifier) ref.getTarget();
 				if (type.eIsProxy()) {
-				 type = (Classifier) ref.getTarget();
+					type = (Classifier) ref.getTarget();
 				}
 	
 				if (type instanceof PackageDescriptor) {
@@ -232,6 +252,7 @@ public class JavaClasspath {
 				}
 			}
 		}
+		
 		return fullQualifiedName;
 	}
 	
