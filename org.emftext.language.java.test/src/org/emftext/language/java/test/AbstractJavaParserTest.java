@@ -17,6 +17,7 @@ import java.util.zip.ZipFile;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.internal.resources.AliasManager.AddToCollectionDoit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -51,7 +52,6 @@ import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.ITextDiagnostic.TextDiagnosticType;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -108,28 +108,24 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		File file = new File(inputFolder, inputFile.getPath());
 		assertTrue("File " + file + " should exist.", file.exists());
 		addParsedResource(file);
-		return parseResource(file.getCanonicalPath(), ignoreSemanticErrors(file.getPath()));
+		return loadResource(file.getCanonicalPath());
 	}
 
-	protected CompilationUnit parseResource(String filename, boolean ignoreSemanticErrors) throws IOException {
-		return loadResource(filename, ignoreSemanticErrors);
-	}
-
-	protected CompilationUnit parseResource(ZipFile file, ZipEntry entry, boolean ignoreSemanticErrors)
+	protected CompilationUnit parseResource(ZipFile file, ZipEntry entry)
 			throws IOException {
-		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()), ignoreSemanticErrors);
+		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()));
 	}
 
 	private CompilationUnit loadResource(
-			String filePath, boolean ignoreSemanticErrors) throws IOException {
-		return loadResource(URI.createFileURI(filePath), ignoreSemanticErrors);
+			String filePath) throws IOException {
+		return loadResource(URI.createFileURI(filePath));
 	}
 	
 	private CompilationUnit loadResource(
-			URI uri, boolean ignoreSemanticErrors) throws IOException {
+			URI uri) throws IOException {
 		ITextResource resource = (ITextResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
-		assertNoErrors(uri.toString(), resource, ignoreSemanticErrors);
+		assertNoErrors(uri.toString(), resource);
 		assertNoWarnings(uri.toString(), resource);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
@@ -148,15 +144,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	private static void assertNoErrors(String fileIdentifier,
-			ITextResource resource, boolean ignoreSemanticErrors) {
+			ITextResource resource) {
 		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
-		if (ignoreSemanticErrors) {
-			for (Diagnostic error : resource.getErrors()) {
-				if (error instanceof ITextDiagnostic && ((ITextDiagnostic) error).getType() == TextDiagnosticType.RESOLVE_PROBLEM) {
-					errors.remove(error);
-				}
-			}
-		}
 		printErrors(fileIdentifier, errors);
 		assertTrue("The resource should be parsed without errors.", errors
 				.size() == 0);
@@ -254,6 +243,9 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
 		resource.load(getLoadOptions());
+		
+		assertNoErrors(resource.getURI().toString(), (ITextResource) resource);
+		addParsedResource(inputFile);
 		
 		if (!ignoreSemanticErrors(file.getPath())) {
 			// This will not work if external resources are not yet registered (order of tests)
@@ -638,10 +630,14 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	public void addParsedResource(File file) {
-		parsedResources.add(file);
+		if (!parsedResources.contains(file)) {
+			parsedResources.add(file);
+		}
 	}
 
 	public void addReprintedResource(File file) {
-		reprintedResources.add(file);
+		if(!reprintedResources.contains(file)) {
+			reprintedResources.add(file);
+		}
 	}
 }

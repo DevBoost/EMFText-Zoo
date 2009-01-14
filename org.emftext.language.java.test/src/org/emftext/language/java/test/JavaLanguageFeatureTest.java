@@ -67,11 +67,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	// a list of files that are excluded from the reprint test, because
 	// they contain optional tokens which are lost after parsing them
-	private static final String[] FILES_EXCLUDED_FROM_REPRINT_TEST = new String[] {
-			"BasicEnumWithCommaAtTheEnd.java",
-			"BasicEnumWithCommaAndSemicolonAtTheEnd.java",
-			"BasicEnumWithSemicolonAtTheEnd.java",
-			"EmptyEnumWithSemicolon.java" };
+	private static final String[] FILES_EXCLUDED_FROM_REPRINT_TEST = new String[] {};
 
 	@Override
 	protected ResourceSet getResourceSet() {
@@ -1147,19 +1143,17 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 				model.getPackage().get(0));
 		parseAndReprint("pkg/inner/Inner.java");
 	}
-
-	@Test
-	public void testPkg_package_info() throws Exception {
-		CompilationUnit model = parseResource("pkg/package-info.java");
-		assertNumberOfClassifiers(model, 0);
-		parseAndReprint("pkg/package-info.java");
-	}
 	
 	@Test
 	public void testPkg_PackageAnnotation() throws Exception {
 		CompilationUnit model = parseResource("pkg/PackageAnnotation.java");
 		assertNumberOfClassifiers(model, 1);
 		parseAndReprint("pkg/PackageAnnotation.java");
+	}
+	
+	@Test
+	public void testPkg_package_info() throws Exception {
+		parseAndReprint("pkg/package-info.java");
 	}
 
 	@Test

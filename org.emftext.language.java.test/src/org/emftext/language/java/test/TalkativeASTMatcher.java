@@ -301,20 +301,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(ImportDeclaration node, Object other) {
-		boolean result = super.match(node, other);
 		
-		if (result == true) {
-			return true;
-		}
-		if (!(other instanceof ImportDeclaration)) {
-			return setDiff(node, other, result); 
-		}
-		//if the original was *, but only one Class to import existed
-		if(node.toString().contains(".*")) {
-			result = true;
-		}
-		
-		return true;
+		return setDiff(node, other, super.match(node, other));
 	}
 
 	@Override
