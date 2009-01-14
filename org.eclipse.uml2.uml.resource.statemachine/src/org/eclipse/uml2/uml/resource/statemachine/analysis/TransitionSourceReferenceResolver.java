@@ -3,7 +3,7 @@ package org.eclipse.uml2.uml.resource.statemachine.analysis;
 import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.Vertex;
 
-public class TransitionSourceReferenceResolver extends org.emftext.runtime.resource.impl.ReferenceResolverImpl {
+public class TransitionSourceReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
 
 	@Override
 	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {
