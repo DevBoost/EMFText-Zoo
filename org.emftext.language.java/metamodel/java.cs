@@ -29,6 +29,7 @@ OPTIONS {
 	defaultTokenName = IDENTIFIER;
 	overridePluginXML = false;
 	overridePrinter = false;
+	overrideManifest = false;
 	generateCodeFromGeneratorModel = false;
 }
 
