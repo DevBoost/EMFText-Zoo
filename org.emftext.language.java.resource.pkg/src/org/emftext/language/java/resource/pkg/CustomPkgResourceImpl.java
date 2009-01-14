@@ -1,15 +1,19 @@
 package org.emftext.language.java.resource.pkg;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.resource.java.JavaTreeAnalyser;
 import org.emftext.runtime.resource.IReferenceResolver;
 import org.emftext.runtime.resource.ITextResource;
@@ -17,6 +21,7 @@ import org.emftext.language.java.containers.Package;
 
 public class CustomPkgResourceImpl extends org.emftext.runtime.resource.impl.TextResourceImpl {
 	private org.emftext.runtime.resource.IReferenceResolver analyser;
+	private Map<Object, Object> loadOptions;
 
 
 	public CustomPkgResourceImpl() {
@@ -28,16 +33,11 @@ public class CustomPkgResourceImpl extends org.emftext.runtime.resource.impl.Tex
 	}
 
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
-		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
+		loadOptions = addDefaultLoadOptions(options);
 		java.io.InputStream actualInputStream = inputStream;
 		
 		IContainer container = WorkspaceSynchronizer.getFile(this).getParent();
-		IResource[] members;
-		List<CompilationUnit> units = new ArrayList<CompilationUnit>();
-		
-		
-		
-		
+			
 		Object inputStreamPreProcessorProvider = loadOptions.get(org.emftext.runtime.IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER);
 		if (inputStreamPreProcessorProvider != null) {
 			if (inputStreamPreProcessorProvider instanceof org.emftext.runtime.IInputStreamProcessorProvider) {
@@ -53,47 +53,57 @@ public class CustomPkgResourceImpl extends org.emftext.runtime.resource.impl.Tex
 			getContents().add(thisPackage);
 			
 			try {
-				members = container.members();
-				for (IResource resource : members) {
-					if (resource instanceof IFile) {
-						IFile file = (IFile) resource;
-						if (file.getFileExtension().equals("java")) {
-							//URI fileUri = URI.createFileURI( file.getFullPath().toString());
-							URI resourceUri = URI.createURI("platform:/resource" + file.getFullPath().toString());
-							
-							ITextResource textResource = (ITextResource) getResourceSet().createResource(resourceUri);
-							textResource.load(options);
-						
-							if (!textResource.getContents().isEmpty()) {
-								CompilationUnit cUnit = (CompilationUnit) textResource.getContents().get(0);
-								//only for not yet registered
-//								if(!JavaClasspath.INSTANCE.URI_MAP.values().contains(resourceUri)) {
-//									JavaClasspath.INSTANCE.registerClassifierSource(cUnit, resourceUri);
-//								}
-								units.add(cUnit);
-								System.out.println("Loaded: " + file + ": " + cUnit);
-							}
-							
-						}
-					}
-				}
-			
+				collectSubunits(container, thisPackage);
 			} catch (CoreException e) {
 				e.printStackTrace();
 				
 			}
 				
-			thisPackage.getCompilationUnits().addAll(units);			
+			//thisPackage.getCompilationUnits().addAll(units);			
 			root = null;
 		}
 
-		
-		
-		
 		IReferenceResolver treeAnalyser = getTreeAnalyser();
 
 		treeAnalyser.setOptions(loadOptions);
 		
+	}
+
+	private void collectSubunits(IContainer container, Package thisPackage) throws CoreException, IOException {
+		IResource[] members = container.members();
+		for (IResource resource : members) {
+			if (resource instanceof IFile) {
+				IFile file = (IFile) resource;
+				if (file.getFileExtension().equals("java")) {
+					//URI fileUri = URI.createFileURI( file.getFullPath().toString());
+					URI resourceUri = URI.createURI("platform:/resource" + file.getFullPath().toString());
+					
+					ITextResource textResource = (ITextResource) getResourceSet().createResource(resourceUri);
+					textResource.load(loadOptions);
+				
+					if (!textResource.getContents().isEmpty()) {
+						CompilationUnit cUnit = (CompilationUnit) textResource.getContents().get(0);
+						//only for not yet registered
+//						if(!JavaClasspath.INSTANCE.URI_MAP.values().contains(resourceUri)) {
+//							JavaClasspath.INSTANCE.registerClassifierSource(cUnit, resourceUri);
+//						}
+						thisPackage.getCompilationUnits().add(cUnit);
+						System.out.println("Loaded: " + file + ": " + cUnit);
+					}
+					
+				}
+			} else if (resource instanceof IFolder) {
+				IFolder folder = (IFolder) resource;
+				
+				Package pkg = ContainersFactory.eINSTANCE.createPackage();
+				pkg.setName(folder.getName());
+				
+				thisPackage.getSubpackages().add(pkg);
+				
+				collectSubunits(folder, pkg);
+				
+			}
+		}
 	}
 
 	protected void doSave(java.io.OutputStream outputStream, java.util.Map<?,?> options) throws java.io.IOException {
