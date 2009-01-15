@@ -1,4 +1,4 @@
-package de .tudresden .contact_management ; 
+package de .tudresden .contact_management .impl ; 
 
 
 class Relationship { 
