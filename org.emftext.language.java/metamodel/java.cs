@@ -250,8 +250,6 @@ references.ParameterizedPackageOrClassifierReference
 	;
 	
 
-// ATTENTION: This definition must reside after the definition for references.MethodCall!
-// Otherwise method calls can not be parsed, because the ANTLR backtracking does not work here. 
 references.IdentifierReference
 	::= ("<" classTypeArguments ("," classTypeArguments)* ">")?
 	    target[]
