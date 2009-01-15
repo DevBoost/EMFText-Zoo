@@ -1,0 +1,120 @@
+--@atlcompiler atl2006 
+module uml2java;
+create OUT : java from  IN : uml, LANG : java, UTIL : java;
+
+helper context uml!Element def : getCorrectType() : OclAny = 
+	 if (self.type = OclUndefined)  then OclUndefined else
+	 if (self.type.name = 'String') then
+	   if   java!Package.allInstances()->collect(e | e.compilationUnits)->flatten()->collect(e | e.classifiers)->flatten()->select(e | e.name = 'String')->size() = 1
+	   then java!Package.allInstances()->collect(e | e.compilationUnits)->flatten()->collect(e | e.classifiers)->flatten()->select(e | e.name = 'String')->at(1)
+	   else OclUndefined endif
+     else	 	
+	 self.type 
+	 endif endif;
+
+helper def : getList() : java!Class = 
+	java!Package.allInstances()->collect(e | e.compilationUnits)->flatten()->collect(e | e.classifiers)->flatten()->select(e | e.name = 'LinkedList')->at(1);
+
+rule Class {
+	from i : uml!Class 
+	to o : java!Class (
+		name <- i.name,
+		members <- i.ownedAttribute
+		              ->union(i.ownedOperation)
+		              ->union(
+		              	 i.package.packagedElement
+						   ->select(e | e.oclIsTypeOf(uml!Association))
+						   ->select(e | e.memberEnd->select(end | end.type = i)->size() > 0)
+						   ->collect(e | e.memberEnd)->flatten()->select(end | end.type <> i)
+					  ),
+		"extends" <-  if i.generalization->size() > 0 then typeParam
+					  else OclUndefined endif
+	),
+    cu : java!CompilationUnit (
+    	package <- i.package.name.split('\\.'),
+		classifiers <- Sequence{o}
+	),
+	typeParam : java!QualifiedTypeArgument(
+		type <- typeRefSequenceInner
+	),
+	typeRefSequenceInner : java!TypeReferenceSequence (
+		parts <- Sequence{typeRefInner}
+	),
+	typeRefInner : java!ParameterizedPackageOrClassifierReference (
+		target <- if i.generalization->size() > 0
+			then i.generalization->at(1).general
+			else OclUndefined
+			endif
+	)
+}
+
+rule  Attribute {
+	from i : uml!Property
+	to o : java!Field (
+		name <- i.name,
+		type <- typeRefSequence,
+		modifiers <- protected
+	),
+	typeRefSequence : java!TypeReferenceSequence (
+		parts <- Sequence{typeRef}
+	),
+	typeRef : java!ParameterizedPackageOrClassifierReference (
+		target <- if (i.upper = 1) then
+					i.getCorrectType()
+				else
+					thisModule.getList()
+				endif,
+		typeArguments <- if (i.upper = 1) then
+					Sequence{}
+				else
+					Sequence{typeParam}
+				endif
+	),
+	typeParam : java!QualifiedTypeArgument(
+		type <- typeRefSequenceInner
+	),
+	typeRefSequenceInner : java!TypeReferenceSequence (
+		parts <- Sequence{typeRefInner}
+	),
+	typeRefInner : java!ParameterizedPackageOrClassifierReference (
+		target <- i.getCorrectType()
+	),
+	protected : java!Protected(
+	)
+}
+
+rule Operation {
+	from i : uml!Operation
+	to o : java!Method (
+		name <- i.name,
+		type <- if i.getCorrectType() = OclUndefined then
+					voidType
+				  else
+				  	typeRefSequence
+				  endif,
+		body <- body,
+		modifiers <- Sequence{public} --TODO inspect visibility defined in UML
+	),
+	--return type
+	typeRefSequence : java!TypeReferenceSequence (
+		parts <- Sequence{typeRef}
+	),
+	typeRef : java!ParameterizedPackageOrClassifierReference (
+		target <- i.getCorrectType()
+	),
+	voidType : java!Void (
+	),
+	-- empty body with slot
+	body : java!Block ( 
+	--	statements <- Sequence{slot}
+	--),
+	--slot : java!StatementSlot (
+	--	pointName <- i.name, 
+	--	portName <- i.class.package.name
+	),
+	public : java!Public (
+	)
+	
+}
+
+
