@@ -12,7 +12,7 @@ OPTIONS {
 	//backtracking = false;
 	overridePluginXML = false;
 	overrideManifest = false;
-	generateCodeFromGeneratorModel = true;
+	generateCodeFromGeneratorModel = false;
 }
 
 TOKENS {
