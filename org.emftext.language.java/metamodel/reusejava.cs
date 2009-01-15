@@ -65,6 +65,7 @@ TOKENS {
 RULES {
 
 MemberSlot::= "<" "<" name[] ">" ">"  ";" ;	
+StatementPrototype ::= ">" ">" name[] ":" statement;	
 
 containers.Package
    ::=  annotations* "package" (parentPackage[] #0 "." #0 )* name[] #0 ";"
