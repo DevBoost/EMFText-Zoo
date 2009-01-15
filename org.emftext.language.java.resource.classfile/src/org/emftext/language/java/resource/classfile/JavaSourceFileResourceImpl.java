@@ -36,6 +36,17 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 		super.doLoad(inputStream, options);
 	    register();
 	}
+	
+	protected void doUnload() {
+		if (!getContents().isEmpty()) {
+			if(getContents().get(0) instanceof Package) {
+				getContents().clear();
+			}
+			else {
+				super.doUnload();
+			}
+		}
+	}
 
 	private void register() throws IOException {
 		URI myURI = getURI();
