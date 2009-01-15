@@ -1,0 +1,15 @@
+compositionsystem ReuseJava {
+	
+	fragment role ReuseableStatement {
+		dynamic port MemberSlot;
+		dynamic port Statement;
+	}
+	
+	fragment role EmptyMethodBody {
+		dynamic port Member;
+		dynamic port Hook;
+	}
+	
+	configuration EmptyMethodBody.Member --> ReuseableStatement.MemberSlot;
+	contribution  ReuseableStatement.Statement --> EmptyMethodBody.Hook;
+}
