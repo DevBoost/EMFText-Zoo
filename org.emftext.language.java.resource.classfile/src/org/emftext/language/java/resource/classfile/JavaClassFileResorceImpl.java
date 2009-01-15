@@ -164,7 +164,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfMethod.getArrayDimensions().add(
+        	emfMethod.getArrayDimensionsBefore().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
@@ -183,7 +183,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
         int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfParameter.getArrayDimensions().add(
+        	emfParameter.getArrayDimensionsBefore().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
@@ -199,7 +199,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfField.getArrayDimensions().add(
+        	emfField.getArrayDimensionsBefore().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
