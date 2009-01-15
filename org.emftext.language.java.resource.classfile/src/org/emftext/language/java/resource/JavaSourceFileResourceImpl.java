@@ -1,4 +1,4 @@
-package org.emftext.language.java.resource.classfile;
+package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.io.OutputStream;

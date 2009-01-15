@@ -1,4 +1,4 @@
-package org.emftext.language.java.resource.classfile;
+package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.util.Map;
@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.Classifier;
-import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.containers.ContainersFactory;
+import org.emftext.language.java.containers.Package;
 
 // TODO Jendrik: check if this class is needed any more 
 // or is better replaced by CustomPkgResourceImpl.java

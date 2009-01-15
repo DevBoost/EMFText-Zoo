@@ -1,4 +1,4 @@
-package org.emftext.language.java;
+package org.emftext.language.java.resource.java.analysis.helper;
 
 public class UnresolvedProxiesException extends Exception {
 

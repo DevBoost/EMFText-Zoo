@@ -1,4 +1,4 @@
-package org.emftext.language.java.resource.classfile;
+package org.emftext.language.java.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;

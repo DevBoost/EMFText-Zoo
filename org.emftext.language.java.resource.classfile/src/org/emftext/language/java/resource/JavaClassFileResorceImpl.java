@@ -1,4 +1,4 @@
-package org.emftext.language.java.resource.classfile;
+package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -164,7 +164,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfMethod.getArrayDimensionsBefore().add(
+        	emfMethod.getArrayDimensions().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
@@ -183,7 +183,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
         int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfParameter.getArrayDimensionsBefore().add(
+        	emfParameter.getArrayDimensions().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
@@ -199,7 +199,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfField.getArrayDimensionsBefore().add(
+        	emfField.getArrayDimensions().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
 import org.junit.Test;
 
 public class UnicodeConverterTest {

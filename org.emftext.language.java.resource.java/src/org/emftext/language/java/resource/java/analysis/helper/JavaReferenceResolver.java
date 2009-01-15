@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
-import org.emftext.language.java.UnresolvedProxiesException;
 import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
