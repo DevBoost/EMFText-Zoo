@@ -22,7 +22,7 @@ import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
-import org.emftext.language.java.references.PackageOrClassifierReference;
+import org.emftext.language.java.types.PackageOrClassifierReference;
 
 public class JavaClasspath {
 

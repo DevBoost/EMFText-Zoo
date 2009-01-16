@@ -25,9 +25,8 @@ import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
-import org.emftext.language.java.references.ParameterizedPackageOrClassifierReference;
-import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.resource.java.JavaResourceImpl;
+import org.emftext.language.java.types.ParameterizedPackageOrClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypesFactory;
@@ -260,7 +259,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		TypeReferenceSequence typeRefSequence = TypesFactory.eINSTANCE.createTypeReferenceSequence();
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
 		ParameterizedPackageOrClassifierReference classifierReference = 
-			ReferencesFactory.eINSTANCE.createParameterizedPackageOrClassifierReference();
+			TypesFactory.eINSTANCE.createParameterizedPackageOrClassifierReference();
 		classifierReference.setTarget(classifier);
 		typeRefSequence.getParts().add(classifierReference);
 		return typeRefSequence;

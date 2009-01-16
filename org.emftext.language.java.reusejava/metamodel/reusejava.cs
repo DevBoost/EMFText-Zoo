@@ -253,11 +253,11 @@ types.TypeReferenceSequence
 	::= parts (#0 "." #0 parts)*
 	;
 
-references.PlainPackageOrClassifierReference
+types.PlainPackageOrClassifierReference
 	::= target[] 
 	;
 	
-references.ParameterizedPackageOrClassifierReference
+types.ParameterizedPackageOrClassifierReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 	;

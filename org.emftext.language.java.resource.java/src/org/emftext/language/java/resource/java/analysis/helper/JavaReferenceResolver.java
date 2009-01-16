@@ -51,7 +51,6 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.ArgumentList;
 import org.emftext.language.java.references.ClassReference;
 import org.emftext.language.java.references.IdentifierReference;
-import org.emftext.language.java.references.PackageOrClassifierReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
@@ -65,6 +64,7 @@ import org.emftext.language.java.types.Double;
 import org.emftext.language.java.types.Float;
 import org.emftext.language.java.types.Int;
 import org.emftext.language.java.types.Long;
+import org.emftext.language.java.types.PackageOrClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.Type;
@@ -72,6 +72,7 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
+import org.emftext.language.java.types.TypesPackage;
 import org.emftext.language.java.types.Void;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.Variable;
@@ -439,7 +440,7 @@ public abstract class JavaReferenceResolver extends AbstractReferenceResolver {
 				}
 				// (2)
 				else if (reference.equals(
-						ReferencesPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)) {
+						TypesPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)) {
 					EList<?> parts = null;
 					if (container.eContainer() instanceof TypeReferenceSequence) {
 						TypeReferenceSequence refSequence = ((TypeReferenceSequence)container.eContainer());
