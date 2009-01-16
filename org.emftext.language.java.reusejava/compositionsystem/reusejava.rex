@@ -11,9 +11,15 @@ for    <http://www.emftext.org/java/containers>
  			statements::Block.statements is hook if $statements->isEmpty() and eContainer().oclIsTypeOf(members::Method)$ {
  			    port expr = $eContainer().oclAsType(members::Method).name$
  			}
-		} 
-    }
-
+		}
+		binding PackageName {
+			CompilationUnit.package is value hook {
+ 			    port expr = $'package'$
+ 				point expr = $'package'$
+ 			}
+		}
+	}
+	
 	binding ReuseableStatement {
 		binding MemberSlot {
   			reusejava::MemberSlot is slot {
