@@ -208,11 +208,9 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 
 	private TypeReference createReferenceToType(String signature) { 
 		TypeReference emfTypeReference = null;
-		
-		int arrayDimension = 0;
+
 		while(signature.startsWith("[")) {
 			signature = signature.substring(1);
-			arrayDimension++;
 		}
 		
         switch (signature.charAt(0)) {
