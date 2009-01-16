@@ -168,42 +168,42 @@ members.Constructor
 	;
 
 members.Method
-	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensions*) name[]  
-	"(" #0 (parameters ("," parameters)* )? #0 ")" additionalArrayDimensions*
+	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
+	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? (body | ";")
 	;
 	
 annotations.AnnotationMethod
-	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensions*) name[]  
-	"(" (parameters ("," parameters)* )? ")" additionalArrayDimensions*
+	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
+	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? "default" defaultValue (body | ";")
 	;
 
 parameters.OrdinaryParameter
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] additionalArrayDimensions*
+	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter*
 	;
 
 parameters.VariableLengthParameter
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
+	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
 	;
 
 variables.LocalVariable
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
+	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
 	::= variable ";" ;
 
 variables.AdditionalLocalVariable
-	::= name[] additionalArrayDimensions* ("=" initialValue)?
+	::= name[] arrayDimensionsAfter* ("=" initialValue)?
 	;
 
 members.Field
-	::= annotations* modifiers* type arrayDimensions* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
+	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
 	;
 
 members.AdditionalField
-	::= name[] additionalArrayDimensions* ("=" initialValue)?
+	::= name[] arrayDimensionsAfter* ("=" initialValue)?
 	;
 	
 members.EmptyMember
@@ -230,14 +230,14 @@ instantiations.ExplicitConstructorCall
      ;
 
 arrays.ArrayInstantiationByValues
-	::= ("new" type arrayDimensions+)? arrayInitializer
+	::= ("new" type arrayDimensionsBefore+)? arrayInitializer
 		arraySelectors* (#0 "." #0 next)? 
 	;
 
 arrays.ArrayInstantiationBySize 
 	::= "new" type 
 		("[" sizes "]")+
-		arrayDimensions*
+		arrayDimensionsBefore*
 		(#0 "." #0 next)?
 	;
 
@@ -263,8 +263,6 @@ references.ParameterizedPackageOrClassifierReference
 	;
 	
 
-// ATTENTION: This definition must reside after the definition for references.MethodCall!
-// Otherwise method calls can not be parsed, because the ANTLR backtracking does not work here. 
 references.IdentifierReference
 	::= ("<" classTypeArguments ("," classTypeArguments)* ">")?
 	    target[]
@@ -298,7 +296,7 @@ references.ArgumentList
 	;
 
 generics.QualifiedTypeArgument
-	::= type arrayDimensions*
+	::= type arrayDimensionsBefore*
 	;
 
 generics.UnknownTypeArgument
@@ -306,11 +304,11 @@ generics.UnknownTypeArgument
 	;
 
 generics.ExtendsTypeArgument
-	::= "?" "extends" extendTypes ("&" extendTypes)* arrayDimensions*
+	::= "?" "extends" extendTypes ("&" extendTypes)* arrayDimensionsBefore*
 	;
 
 generics.SuperTypeArgument
-	::= "?" "super" superType arrayDimensions*
+	::= "?" "super" superType arrayDimensionsBefore*
 	;
 
 statements.Assert
@@ -408,7 +406,7 @@ expressions.EqualityExpression
     ;
     
 expressions.InstanceOfExpression
-    ::= relationExpression ("instanceof" type arrayDimensions*)? 
+    ::= relationExpression ("instanceof" type arrayDimensionsBefore*)? 
     ;
     
 expressions.RelationExpression
@@ -438,7 +436,7 @@ expressions.UnaryExpressionNotPlusMinus
     ;
     
 expressions.CastExpression
-    ::= "(" typeReference arrayDimensions* ")" expression
+    ::= "(" typeReference arrayDimensionsBefore* ")" expression
     ;
 
 operators.Assignment                   ::= "=";
