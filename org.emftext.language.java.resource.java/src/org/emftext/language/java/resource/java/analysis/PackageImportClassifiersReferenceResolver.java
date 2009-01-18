@@ -6,10 +6,10 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.imports.PackageImport;
 
-public class PackageImportClassifiersReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
+public class PackageImportClassifiersReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<PackageImport> {
 
 	@Override
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {
+	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, PackageImport container, org.eclipse.emf.ecore.EReference reference) {
 		EList<?> classifierList = ((EList<?>)container.eGet(reference));
 		
 		if (classifierList.get(0).equals(element)) {
@@ -25,8 +25,7 @@ public class PackageImportClassifiersReferenceResolver extends org.emftext.runti
 	}
 
 	@Override
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
-		PackageImport theImport = (PackageImport) container;
+	protected void doResolve(java.lang.String identifier, PackageImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
 		
 		EList<Classifier> importedClassifiers =  
 			JavaClasspath.INSTANCE.getClassifiers(theImport, identifier);

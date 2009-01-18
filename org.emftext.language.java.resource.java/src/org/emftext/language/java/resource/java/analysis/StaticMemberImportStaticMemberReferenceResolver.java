@@ -6,19 +6,20 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
+import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.modifiers.Static;
 
-public class StaticMemberImportStaticMemberReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
+public class StaticMemberImportStaticMemberReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<StaticMemberImport> {
 
 	@Override
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {
+	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
 		return ((NamedElement)element).getName();
 	}
 
 	@Override
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
+	protected void doResolve(java.lang.String identifier, StaticMemberImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
 		StaticClassifierImport theImport = (StaticClassifierImport) container;
 		
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(theImport);

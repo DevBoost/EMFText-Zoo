@@ -9,10 +9,10 @@ import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 
-public class StaticClassifierImportStaticMembersReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver {
+public class StaticClassifierImportStaticMembersReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<StaticClassifierImport> {
 
 	@Override
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference) {
+	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, StaticClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
 		EList<?> classifierList = ((EList<?>)container.eGet(reference));
 		
 		if (classifierList.get(0).equals(element)) {
@@ -24,11 +24,10 @@ public class StaticClassifierImportStaticMembersReferenceResolver extends org.em
 	}
 
 	@Override
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
-		StaticClassifierImport theImport = (StaticClassifierImport) container;
+	protected void doResolve(java.lang.String identifier, StaticClassifierImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
 		
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(theImport, identifier);
-		classifier = (Classifier) EcoreUtil.resolve(classifier, container.eResource());
+		classifier = (Classifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null) {
 			for(Member member : ((MemberContainer)classifier).getMembers()) {
 				result.addMapping(identifier, member);

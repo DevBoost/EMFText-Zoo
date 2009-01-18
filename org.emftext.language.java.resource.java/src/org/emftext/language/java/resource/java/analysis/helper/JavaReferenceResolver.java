@@ -82,7 +82,7 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 
 
-public abstract class JavaReferenceResolver extends AbstractReferenceResolver {
+public abstract class JavaReferenceResolver<T extends EObject> extends AbstractReferenceResolver<T> {
 
 	public static final String UNRESOLVED_REFERENCE_STRING =
 		"UNKNOWN";
@@ -90,7 +90,7 @@ public abstract class JavaReferenceResolver extends AbstractReferenceResolver {
 	protected ITextResource myResource = null;
 	
 	@Override
-	protected String doDeResolve(EObject element, EObject container,
+	protected String doDeResolve(EObject element, T container,
 			EReference reference) {
 		
 		String fullID = UNRESOLVED_REFERENCE_STRING; 
@@ -292,7 +292,7 @@ public abstract class JavaReferenceResolver extends AbstractReferenceResolver {
 	//-------------
 
 	@Override
-	protected void doResolve(String identifier, EObject container,
+	protected void doResolve(String identifier, T container,
 			EReference reference, int position, boolean resolveFuzzy,
 			IResolveResult result) {
 		myResource = (ITextResource) container.eResource();
