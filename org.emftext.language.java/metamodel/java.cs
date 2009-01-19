@@ -1,6 +1,6 @@
 SYNTAXDEF java
 FOR <http://www.emftext.org/java>
-START containers.CompilationUnit, containers.Package
+START containers.CompilationUnit, containers.Package, containers.EmptyModel
 
 IMPORTS {
 	annotations : <http://www.emftext.org/java/annotations>
@@ -34,7 +34,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'))* ('\n'|'\r')$ COLLECT IN comments;
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
 	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
 
 	DEFINE FLOATING_POINT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))? |   ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('f'|'F'|'d'|'D')))$;
@@ -54,8 +54,13 @@ TOKENS {
 
 RULES {
 
+containers.EmptyModel ::= ("import" imports #0 ";" !0 )* (";")*
+   ;
+
 containers.Package
-   ::=  annotations* "package" (parentPackage[] #0 "." #0 )* name[] #0 ";"
+   ::=  annotations* "package" (package[] #0 "." #0 )* name[] #0 ";"
+        !0 !0
+        ("import" imports #0 ";" !0 )* (";")*
    ;
    
 containers.CompilationUnit 
@@ -141,7 +146,7 @@ generics.TypeParameter
 	;
 
 enumerations.EnumConstant
-    ::= annotations* name[] ("(" arguments ("," arguments)* ")" )? body? 
+    ::= annotations* name[] ("(" arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* ")" )? body? 
     ;
 
 statements.Block
@@ -163,7 +168,7 @@ members.Method
 annotations.AnnotationMethod
 	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? "default" defaultValue (body | ";")
+	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression (body | ";")
 	;
 
 parameters.OrdinaryParameter
@@ -175,22 +180,22 @@ parameters.VariableLengthParameter
 	;
 
 variables.LocalVariable
-	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalLocalVariables)*
+	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
 	::= variable ";" ;
 
 variables.AdditionalLocalVariable
-	::= name[] arrayDimensionsAfter* ("=" initialValue)?
+	::= name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
 	;
 
 members.Field
-	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue)? ("," additionalFields)* ";"
+	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] localArrayDimensions* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
 	;
 
 members.AdditionalField
-	::= name[] arrayDimensionsAfter* ("=" initialValue)?
+	::= name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
 	;
 	
 members.EmptyMember
@@ -205,14 +210,14 @@ instantiations.NewConstructorCall
 		type 
 		// these are the arguments for the class type parameters
 		("<" classTypeArguments ("," classTypeArguments)* ">")?
-		"(" (arguments ("," arguments)* )? ")"
+		"(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
 		annonymousClass?
 		(#0 "." #0 next)? 
      ;
      
 instantiations.ExplicitConstructorCall 
 	::= ("<" typeArguments ("," typeArguments)* ">")?
-		callTarget "(" (arguments ("," arguments)* )? ")"
+		callTarget "(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
 		(#0 "." #0 next)? 
      ;
 
@@ -223,17 +228,17 @@ arrays.ArrayInstantiationByValues
 
 arrays.ArrayInstantiationBySize 
 	::= "new" type 
-		("[" sizes "]")+
+		("[" sizes:expressions.AssignmentExpression "]")+
 		arrayDimensionsBefore*
 		(#0 "." #0 next)?
 	;
 
 arrays.ArrayInitializer
-    ::= "{" ( (arrayInitializers | initialValues) ("," (arrayInitializers | initialValues) )* )? (",")? "}"    
+    ::= "{" ( (arrayInitializers | initialValues:expressions.AssignmentExpression) ("," (arrayInitializers | initialValues:expressions.AssignmentExpression) )* )? (",")? "}"    
     ;
 
 arrays.ArraySelector
-	::= "[" expression? "]"
+	::= "[" expression:expressions.AssignmentExpression? "]"
 	;
 
 types.TypeReferenceSequence
@@ -279,7 +284,7 @@ references.StringReference
 	;
 
 references.ArgumentList
-	::= "(" (arguments ("," arguments)* )? ")"
+	::= "(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
 	;
 
 generics.QualifiedTypeArgument
@@ -299,28 +304,28 @@ generics.SuperTypeArgument
 	;
 
 statements.Assert
-	::= "assert" expression1 (":" expression2)? ";" ;
+	::= "assert" expression1:expressions.AssignmentExpression (":" expression2:expressions.AssignmentExpression)? ";" ;
 	
 statements.Condition 
-	::= "if" "(" expression ")" ifStatement ("else" elseStatement)? ;
+	::= "if" "(" expression:expressions.AssignmentExpression ")" ifStatement ("else" elseStatement)? ;
 	
 statements.ForLoop
-	::= "for" "(" init? ";" condition? ";" (updates ("," updates)* )? ")" body;
+	::= "for" "(" init? ";" condition:expressions.AssignmentExpression? ";" (updates:expressions.AssignmentExpression ("," updates:expressions.AssignmentExpression)* )? ")" body;
 
 statements.ForEachLoop
-	::= "for" "(" next ":" collection ")" body;
+	::= "for" "(" next ":" collection:expressions.AssignmentExpression ")" body;
 	
 statements.WhileLoop
-	::= "while" "(" condition ")" body;
+	::= "while" "(" condition:expressions.AssignmentExpression ")" body;
 	
 statements.DoWhileLoop	
-	::= "do" body "while" "(" condition ")" ";" ;
+	::= "do" body "while" "(" condition:expressions.AssignmentExpression ")" ";" ;
 	
 statements.EmptyStatement	
 	::= ";" ;
 	
 statements.SynchronizedBlock
-	::= "synchronized" "(" lockExpression ")" body;
+	::= "synchronized" "(" lockExpression:expressions.AssignmentExpression ")" body;
 	
 statements.TryBlock
 	::= "try" tryBlock
@@ -332,19 +337,19 @@ statements.CatchClause
 	;
 
 statements.Switch
-	::= "switch" "(" variable ")" "{" (cases*) "}";
+	::= "switch" "(" variable:expressions.AssignmentExpression ")" "{" (cases*) "}";
 	
 statements.NormalSwitchCase
-	::= "case" condition ":" body* ;
+	::= "case" condition:expressions.AssignmentExpression ":" body* ;
 	
 statements.DefaultSwitchCase
 	::= "default" ":" body* ;
 	
 statements.Return
-	::= "return" expression? ";" ;
+	::= "return" expression:expressions.AssignmentExpression? ";" ;
 	
 statements.Throw
-	::= "throw" expression ";" ;
+	::= "throw" expression:expressions.AssignmentExpression ";" ;
 	
 statements.Break
 	::= "break" (target[])? ";" ;
@@ -356,75 +361,84 @@ statements.JumpLabel
 	::= name[] ":" statement ;
 
 statements.ExpressionStatement 
-	::= expression ";" 
+	::= expression:expressions.AssignmentExpression ";" 
 	;
 
-expressions.ParExpression ::= "(" expression ")" arraySelectors* (#0 "." #0 next)?  ;
-
 expressions.ExpressionList
-	::= expressions ("," expressions)* ;
+    ::= expressions:expressions.AssignmentExpression ("," expressions:expressions.AssignmentExpression)*
+    ;
  
-expressions.Expression
-	::= conditionalExpression (assignmentOperator expression)? ;
-	
+expressions.AssignmentExpression
+	::= child:expressions.ConditionalExpression (assignmentOperator expression:expressions.AssignmentExpression)?
+    ;
+    	
 expressions.ConditionalExpression
-    ::= conditionalOrExpression ( "?" expression ":" expression )? ;
+    ::= child:expressions.ConditionalOrExpression ("?" expressionIf:expressions.AssignmentExpression ":" expressionElse:expressions.AssignmentExpression)?
+    ;
     
 expressions.ConditionalOrExpression
-    ::= conditionalAndExpression ( "||" conditionalAndExpression )* ;
-
+    ::= children:expressions.ConditionalAndExpression ( "||" children:expressions.ConditionalAndExpression )*
+    ;
+    
 expressions.ConditionalAndExpression
-    ::= inclusiveOrExpression ( "&&" inclusiveOrExpression )* ;
-   
+    ::= children:expressions.InclusiveOrExpression ( "&&" children:expressions.InclusiveOrExpression )*
+    ;
+       
 expressions.InclusiveOrExpression
-    ::= exclusiveOrExpression ( "|" exclusiveOrExpression )* 
+    ::= children:expressions.ExclusiveOrExpression ( "|" children:expressions.ExclusiveOrExpression )*
     ;
 
 expressions.ExclusiveOrExpression
-    ::= andExpression ( "^" andExpression )* 
+    ::= children:expressions.AndExpression ( "^" children:expressions.AndExpression )*
     ;
 
 expressions.AndExpression
-    ::= equalityExpression ( "&" equalityExpression )* 
+    ::= children:expressions.EqualityExpression ( "&" children:expressions.EqualityExpression )*
     ;
   
 expressions.EqualityExpression
-    ::= instanceOfExpression ( equality instanceOfExpression )* 
+    ::= children:expressions.InstanceOfExpression ( equalityOperators children:expressions.InstanceOfExpression )*
     ;
     
 expressions.InstanceOfExpression
-    ::= relationExpression ("instanceof" type arrayDimensionsBefore*)? 
+    ::= child:expressions.RelationExpression ("instanceof" type arrayDimensionsBefore*)?
     ;
     
 expressions.RelationExpression
-	::= shiftExpression ( relationOperator shiftExpression)*
+	::= children:expressions.ShiftExpression ( relationOperators children:expressions.ShiftExpression)*
 	;
 	
 expressions.ShiftExpression
-	::= additiveExpression ( shiftOperator additiveExpression)*
+	::= children:expressions.AdditiveExpression ( shiftOperators children:expressions.AdditiveExpression)*
 	;
 
 expressions.AdditiveExpression
-    ::= multiplicativeExpression ( additiveOperator multiplicativeExpression )*
+    ::= children:expressions.MultiplicativeExpression ( additiveOperators children:expressions.MultiplicativeExpression )*
     ;
     
 expressions.MultiplicativeExpression
-    ::=	unaryExpression ( multiplicativeOperator unaryExpression )*
+    ::=	children:expressions.UnaryExpression ( multiplicativeOperators children:expressions.UnaryExpression )*
     ;
     
 expressions.UnaryExpression
-    ::= (additiveOperator | plusplus | minusminus)? #0 unaryExpressionNotPlusMinus
+    ::= operators* child:expressions.UnaryModificationExpression
     ;
-    
-expressions.UnaryExpressionNotPlusMinus
-	::= (complement | negate) primaryExpression
-	|   castExpression
-	|   primaryExpression ( plusplus | minusminus)?
-    ;
-    
+
+expressions.SuffixUnaryModificationExpression
+	::= child (#0 operator)?
+	;
+	
+expressions.PrefixUnaryModificationExpression
+	::= (operator #0)? child
+	;
+
 expressions.CastExpression
-    ::= "(" typeReference arrayDimensionsBefore* ")" expression
+    ::= "(" typeReference arrayDimensionsBefore* ")" child:expressions.AssignmentExpression
     ;
+        
+expressions.NestedExpression ::= "(" expression:expressions.AssignmentExpression ")"  arraySelectors* (#0 "." #0 next)? 
+    ;
+
 
 operators.Assignment                   ::= "=";
 operators.AssignmentPlus               ::= "+=";

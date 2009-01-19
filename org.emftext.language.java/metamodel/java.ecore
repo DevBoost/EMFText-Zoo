@@ -104,34 +104,31 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="containers" nsURI="http://www.emftext.org/java/containers" nsPrefix="containers">
-    <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//commons/NamedElement">
-      <eAnnotations source="gmf.node">
-        <details key="label" value="comments"/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-          eType="#_Wosms9z1Ed2bJ_pQViWxFg" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eClassifiers xsi:type="ecore:EClass" name="JavaRoot" eSuperTypes="#//commons/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
           eType="#//imports/Import" containment="true">
         <eAnnotations source="gmf.compartment"/>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//containers/JavaRoot">
+      <eAnnotations source="gmf.node">
+        <details key="label" value="comments"/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
           eType="#//classifiers/Classifier" containment="true" eKeys="#//commons/NamedElement/name">
         <eAnnotations source="gmf.compartment"/>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="implicitImportedClassifiers"
-          upperBound="-1" eType="#//classifiers/Classifier"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//commons/NamedElement #//annotations/Annotatable">
+    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//containers/JavaRoot #//annotations/Annotatable">
       <eAnnotations source="gmf.diagram"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
           eType="#//containers/CompilationUnit" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentPackage" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="subpackages" upperBound="-1"
           eType="#//containers/Package" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EmptyModel" eSuperTypes="#//containers/JavaRoot"/>
     <eClassifiers xsi:type="ecore:EClass" name="PackageDescriptor" eSuperTypes="#//classifiers/Classifier">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//containers/PackageDescriptor"/>
     </eClassifiers>
@@ -147,146 +144,171 @@
   </eSubpackages>
   <eSubpackages xmi:id="_Wo2YC9z1Ed2bJ_pQViWxFg" name="expressions" nsURI="http://www.emftext.org/java/expressions"
       nsPrefix="expressions">
-    <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"
-        eSuperTypes="#//commons/Commentable"/>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YQtz1Ed2bJ_pQViWxFg" name="AdditiveExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YRNz1Ed2bJ_pQViWxFg"
-          name="multiplicativeExpression" upperBound="-1" eType="#_Wo2YRtz1Ed2bJ_pQViWxFg"
-          containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YRdz1Ed2bJ_pQViWxFg"
-          name="additiveOperator" upperBound="-1" eType="#//operators/AdditiveOperator"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YLdz1Ed2bJ_pQViWxFg" name="AndExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YL9z1Ed2bJ_pQViWxFg"
-          name="equalityExpression" upperBound="-1" eType="#_Wo2YMNz1Ed2bJ_pQViWxFg"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YWdz1Ed2bJ_pQViWxFg" name="CastExpression"
-        eSuperTypes="#//arrays/ArrayTypable #//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YXNz1Ed2bJ_pQViWxFg"
-          name="typeReference" eType="#_Wo2ZPdz1Ed2bJ_pQViWxFg" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YXdz1Ed2bJ_pQViWxFg"
-          name="expression" eType="#_Wo2YStz1Ed2bJ_pQViWxFg" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YGtz1Ed2bJ_pQViWxFg" name="ConditionalAndExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YHNz1Ed2bJ_pQViWxFg"
-          name="inclusiveOrExpression" upperBound="-1" eType="#_Wo2YJ9z1Ed2bJ_pQViWxFg"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YIdz1Ed2bJ_pQViWxFg" name="ConditionalExpression"
-        eSuperTypes="#//annotations/AnnotationValue #//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YI9z1Ed2bJ_pQViWxFg"
-          name="conditionalOrExpression" eType="#_Wo2YHdz1Ed2bJ_pQViWxFg" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YJdz1Ed2bJ_pQViWxFg"
-          name="expression" upperBound="-1" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YHdz1Ed2bJ_pQViWxFg" name="ConditionalOrExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YH9z1Ed2bJ_pQViWxFg"
-          name="conditionalAndExpression" upperBound="-1" eType="#_Wo2YGtz1Ed2bJ_pQViWxFg"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YMNz1Ed2bJ_pQViWxFg" name="EqualityExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YM9z1Ed2bJ_pQViWxFg"
-          name="equality" upperBound="-1" eType="#//operators/EqualityOperator" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YMtz1Ed2bJ_pQViWxFg"
-          name="instanceOfExpression" upperBound="-1" eType="#_Wo2YNdz1Ed2bJ_pQViWxFg"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YKtz1Ed2bJ_pQViWxFg" name="ExclusiveOrExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YLNz1Ed2bJ_pQViWxFg"
-          name="andExpression" upperBound="-1" eType="#_Wo2YLdz1Ed2bJ_pQViWxFg" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YDNz1Ed2bJ_pQViWxFg" name="Expression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YDtz1Ed2bJ_pQViWxFg"
-          name="conditionalExpression" eType="#_Wo2YIdz1Ed2bJ_pQViWxFg" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YD9z1Ed2bJ_pQViWxFg"
-          name="expression" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YEdz1Ed2bJ_pQViWxFg"
-          name="assignmentOperator" eType="#//operators/AssignmentOperator" containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YF9z1Ed2bJ_pQViWxFg" name="ExpressionList"
         eSuperTypes="#_Wo2Y9tz1Ed2bJ_pQViWxFg">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YGNz1Ed2bJ_pQViWxFg"
           name="expressions" upperBound="-1" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YDNz1Ed2bJ_pQViWxFg" name="Expression"
+        eSuperTypes="#//commons/Commentable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpression" eSuperTypes="#_Wo2YDNz1Ed2bJ_pQViWxFg">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="child" lowerBound="1"
+          eType="#//expressions/AssignmentExpressionChild" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assignmentOperator" lowerBound="1"
+          eType="#//operators/AssignmentOperator" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpressionChild" abstract="true"
+        eSuperTypes="#_Wo2YDNz1Ed2bJ_pQViWxFg"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YIdz1Ed2bJ_pQViWxFg" name="ConditionalExpression"
+        eSuperTypes="#//annotations/AnnotationValue #//expressions/AssignmentExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YI9z1Ed2bJ_pQViWxFg"
+          name="child" eType="#//expressions/ConditionalExpressionChild" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YJdz1Ed2bJ_pQViWxFg"
+          name="expressionIf" lowerBound="1" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expressionElse" lowerBound="1"
+          eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/AssignmentExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YHdz1Ed2bJ_pQViWxFg" name="ConditionalOrExpression"
+        eSuperTypes="#//expressions/ConditionalExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YH9z1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/ConditionalOrExpressionChild"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ConditionalExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YGtz1Ed2bJ_pQViWxFg" name="ConditionalAndExpression"
+        eSuperTypes="#//expressions/ConditionalOrExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YHNz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/ConditionalAndExpressionChild"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ConditionalOrExpressionChild"/>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YJ9z1Ed2bJ_pQViWxFg" name="InclusiveOrExpression"
-        eSuperTypes="#//commons/Commentable">
+        eSuperTypes="#//expressions/ConditionalAndExpressionChild">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YKdz1Ed2bJ_pQViWxFg"
-          name="exclusiveOrExpression" upperBound="-1" eType="#_Wo2YKtz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/InclusiveOrExpressionChild"
           containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InclusiveOrExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ConditionalAndExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExclusiveOrExpression" eSuperTypes="#//expressions/InclusiveOrExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" lowerBound="1"
+          upperBound="-1" eType="#//expressions/ExclusiveOrExpressionChild" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExclusiveOrExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/InclusiveOrExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YLdz1Ed2bJ_pQViWxFg" name="AndExpression"
+        eSuperTypes="#//expressions/ExclusiveOrExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YL9z1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/AndExpressionChild"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AndExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ExclusiveOrExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YMNz1Ed2bJ_pQViWxFg" name="EqualityExpression"
+        eSuperTypes="#//expressions/AndExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YM9z1Ed2bJ_pQViWxFg"
+          name="equalityOperators" lowerBound="1" upperBound="-1" eType="#//operators/EqualityOperator"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YMtz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/EqualityExpressionChild"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EqualityExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/AndExpressionChild"/>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YNdz1Ed2bJ_pQViWxFg" name="InstanceOfExpression"
-        eSuperTypes="#//commons/Commentable #//arrays/ArrayTypable">
+        eSuperTypes="#//arrays/ArrayTypable #//expressions/EqualityExpressionChild">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YONz1Ed2bJ_pQViWxFg"
-          name="relationExpression" eType="#_Wo2YOtz1Ed2bJ_pQViWxFg" containment="true"/>
+          name="child" lowerBound="1" eType="#//expressions/InstanceOfExpressionChild"
+          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YOdz1Ed2bJ_pQViWxFg"
-          name="type" eType="#_Wo2ZPdz1Ed2bJ_pQViWxFg" containment="true"/>
+          name="type" lowerBound="1" eType="#_Wo2ZPdz1Ed2bJ_pQViWxFg" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YRtz1Ed2bJ_pQViWxFg" name="MultiplicativeExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YSNz1Ed2bJ_pQViWxFg"
-          name="unaryExpression" upperBound="-1" eType="#_Wo2YStz1Ed2bJ_pQViWxFg"
-          containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YSdz1Ed2bJ_pQViWxFg"
-          name="multiplicativeOperator" upperBound="-1" eType="#//operators/MultiplicativeOperator"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YEtz1Ed2bJ_pQViWxFg" name="ParExpression"
-        eSuperTypes="#//references/Reference">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YFdz1Ed2bJ_pQViWxFg"
-          name="expression" lowerBound="1" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InstanceOfExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/EqualityExpressionChild"/>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YOtz1Ed2bJ_pQViWxFg" name="RelationExpression"
-        eSuperTypes="#//commons/Commentable">
+        eSuperTypes="#//expressions/InstanceOfExpressionChild">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YPNz1Ed2bJ_pQViWxFg"
-          name="shiftExpression" upperBound="-1" eType="#_Wo2YPtz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/RelationExpressionChild"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YPdz1Ed2bJ_pQViWxFg"
-          name="relationOperator" upperBound="-1" eType="#//operators/RelationOperator"
+          name="relationOperators" lowerBound="1" upperBound="-1" eType="#//operators/RelationOperator"
           containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RelationExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/InstanceOfExpressionChild"/>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YPtz1Ed2bJ_pQViWxFg" name="ShiftExpression"
-        eSuperTypes="#//commons/Commentable">
+        eSuperTypes="#//expressions/RelationExpressionChild">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YQNz1Ed2bJ_pQViWxFg"
-          name="additiveExpression" upperBound="-1" eType="#_Wo2YQtz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/ShiftExpressionChild"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YQdz1Ed2bJ_pQViWxFg"
-          name="shiftOperator" upperBound="-1" eType="#//operators/ShiftOperator"
+          name="shiftOperators" lowerBound="1" upperBound="-1" eType="#//operators/ShiftOperator"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YStz1Ed2bJ_pQViWxFg" name="UnaryExpression"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YTNz1Ed2bJ_pQViWxFg"
-          name="additiveOperator" eType="#//operators/AdditiveOperator" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YTdz1Ed2bJ_pQViWxFg"
-          name="plusplus" eType="#//operators/PlusPlus" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YTtz1Ed2bJ_pQViWxFg"
-          name="minusminus" eType="#//operators/MinusMinus" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YT9z1Ed2bJ_pQViWxFg"
-          name="unaryExpressionNotPlusMinus" eType="#_Wo2YUNz1Ed2bJ_pQViWxFg" containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ShiftExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/RelationExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YQtz1Ed2bJ_pQViWxFg" name="AdditiveExpression"
+        eSuperTypes="#//expressions/ShiftExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YRNz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/AdditiveExpressionChild"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YRdz1Ed2bJ_pQViWxFg"
+          name="additiveOperators" lowerBound="1" upperBound="-1" eType="#//operators/AdditiveOperator"
+          containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YUNz1Ed2bJ_pQViWxFg" name="UnaryExpressionNotPlusMinus"
-        eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YUtz1Ed2bJ_pQViWxFg"
-          name="primaryExpression" eType="#//expressions/PrimaryExpression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YVNz1Ed2bJ_pQViWxFg"
-          name="castExpression" eType="#_Wo2YWdz1Ed2bJ_pQViWxFg" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YVdz1Ed2bJ_pQViWxFg"
-          name="complement" eType="#//operators/Complement" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YVtz1Ed2bJ_pQViWxFg"
-          name="negate" eType="#//operators/Negate" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YV9z1Ed2bJ_pQViWxFg"
-          name="plusplus" eType="#//operators/PlusPlus" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YWNz1Ed2bJ_pQViWxFg"
-          name="minusminus" eType="#//operators/MinusMinus" containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ShiftExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YRtz1Ed2bJ_pQViWxFg" name="MultiplicativeExpression"
+        eSuperTypes="#//expressions/AdditiveExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YSNz1Ed2bJ_pQViWxFg"
+          name="children" lowerBound="1" upperBound="-1" eType="#//expressions/MultiplicativeExpressionChild"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YSdz1Ed2bJ_pQViWxFg"
+          name="multiplicativeOperators" lowerBound="1" upperBound="-1" eType="#//operators/MultiplicativeOperator"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/AdditiveExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YStz1Ed2bJ_pQViWxFg" name="UnaryExpression"
+        eSuperTypes="#//expressions/MultiplicativeExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YTNz1Ed2bJ_pQViWxFg"
+          name="operators" lowerBound="1" upperBound="-1" eType="#//operators/UnaryOperator"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YT9z1Ed2bJ_pQViWxFg"
+          name="child" lowerBound="1" eType="#//expressions/UnaryExpressionChild"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/MultiplicativeExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryModificationExpression" abstract="true"
+        eSuperTypes="#//expressions/UnaryExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="child" lowerBound="1"
+          eType="#//expressions/PrimaryExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+          eType="#//operators/UnaryModificationOperator" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrefixUnaryModificationExpression"
+        eSuperTypes="#//expressions/UnaryModificationExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SuffixUnaryModificationExpression"
+        eSuperTypes="#//expressions/UnaryModificationExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"
+        eSuperTypes="#//expressions/UnaryExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2YWdz1Ed2bJ_pQViWxFg" name="CastExpression"
+        eSuperTypes="#//arrays/ArrayTypable #//expressions/PrimaryExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YXNz1Ed2bJ_pQViWxFg"
+          name="typeReference" lowerBound="1" eType="#_Wo2ZPdz1Ed2bJ_pQViWxFg" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2YXdz1Ed2bJ_pQViWxFg"
+          name="child" lowerBound="1" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NestedExpression" eSuperTypes="#//references/Reference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="generics" nsURI="http://www.emftext.org/java/generics" nsPrefix="generics">
@@ -478,9 +500,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="AdditiveOperator" abstract="true"
         eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentOperator" abstract="true"
-        eSuperTypes="#//operators/Operator">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eClassifiers>
+        eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="EqualityOperator" abstract="true"
         eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeOperator" abstract="true"
@@ -489,6 +509,7 @@
         eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="ShiftOperator" abstract="true" eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="UnaryOperator" abstract="true" eSuperTypes="#//operators/Operator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryModificationOperator" eSuperTypes="#//operators/Operator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//operators/AssignmentOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentAnd" eSuperTypes="#//operators/AssignmentOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentDivision" eSuperTypes="#//operators/AssignmentOperator"/>
@@ -507,15 +528,15 @@
     <eClassifiers xsi:type="ecore:EClass" name="GreaterThanOrEqual" eSuperTypes="#//operators/RelationOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="LessThan" eSuperTypes="#//operators/RelationOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="LessThanOrEqual" eSuperTypes="#//operators/RelationOperator"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//operators/AdditiveOperator"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//operators/AdditiveOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//operators/AdditiveOperator #//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//operators/AdditiveOperator #//operators/UnaryOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//operators/MultiplicativeOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="#//operators/MultiplicativeOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Remainder" eSuperTypes="#//operators/MultiplicativeOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Complement" eSuperTypes="#//operators/UnaryOperator"/>
-    <eClassifiers xsi:type="ecore:EClass" name="MinusMinus" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MinusMinus" eSuperTypes="#//operators/UnaryModificationOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="Negate" eSuperTypes="#//operators/UnaryOperator"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PlusPlus" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PlusPlus" eSuperTypes="#//operators/UnaryModificationOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="LeftShift" eSuperTypes="#//operators/ShiftOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="RightShift" eSuperTypes="#//operators/ShiftOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="UnsignedRightShift" eSuperTypes="#//operators/ShiftOperator"/>
@@ -570,8 +591,6 @@
         abstract="true" eSuperTypes="#//commons/Commentable"/>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2Y4tz1Ed2bJ_pQViWxFg" name="SwitchCase"
         abstract="true" eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2Y5Nz1Ed2bJ_pQViWxFg"
-          name="condition" lowerBound="1" eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2Y5tz1Ed2bJ_pQViWxFg"
           name="body" upperBound="-1" eType="#_Wo2YzNz1Ed2bJ_pQViWxFg" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2Y6Nz1Ed2bJ_pQViWxFg"
@@ -659,7 +678,10 @@
           name="variable" eType="#//variables/LocalVariable" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2Y6dz1Ed2bJ_pQViWxFg" name="NormalSwitchCase"
-        eSuperTypes="#_Wo2Y4tz1Ed2bJ_pQViWxFg"/>
+        eSuperTypes="#_Wo2Y4tz1Ed2bJ_pQViWxFg">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+          eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2ZG9z1Ed2bJ_pQViWxFg" name="Return"
         eSuperTypes="#_Wo2YzNz1Ed2bJ_pQViWxFg">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_Wo2ZHdz1Ed2bJ_pQViWxFg"

@@ -129,8 +129,8 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 				IFolder folder = (IFolder) resource;
 				
 				Package pkg = ContainersFactory.eINSTANCE.createPackage();
-				pkg.getParentPackage().addAll(thisPackage.getParentPackage());
-				pkg.getParentPackage().add(thisPackage.getName());
+				pkg.getPackage().addAll(thisPackage.getPackage());
+				pkg.getPackage().add(thisPackage.getName());
 				pkg.setName(folder.getName());
 				thisPackage.getSubpackages().add(pkg);
 				collectSubunits(folder, pkg);
@@ -141,8 +141,8 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 	
 	private String packageName(Package aPackage) {
 		String name = "";
-		for(int i=0; i < aPackage.getParentPackage().size(); i++) {
-			name += aPackage.getParentPackage().get(i) + ".";
+		for(int i=0; i < aPackage.getPackage().size(); i++) {
+			name += aPackage.getPackage().get(i) + ".";
 		}
 		name += aPackage.getName();
 		return name;
