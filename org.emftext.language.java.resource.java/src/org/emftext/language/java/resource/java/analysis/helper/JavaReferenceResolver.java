@@ -24,7 +24,7 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.expressions.CastExpression;
 import org.emftext.language.java.expressions.Expression;
-import org.emftext.language.java.expressions.ParExpression;
+import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
@@ -368,8 +368,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			
 			//might be an explicit or implicit cast
-			if (containerContainer instanceof ParExpression) {
-				previousType = getTypeOfExpression(((ParExpression) containerContainer).getExpression());
+			if (containerContainer instanceof NestedExpression) {
+				previousType = getTypeOfExpression(((NestedExpression) containerContainer).getExpression());
 			}
 			
 			//inside annotation instance 
