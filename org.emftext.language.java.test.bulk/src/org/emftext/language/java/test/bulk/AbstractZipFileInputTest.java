@@ -8,13 +8,13 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.test.AbstractJavaParserTest;
-
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.containers.JavaRoot;
+import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
@@ -34,7 +34,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		
 		public void runTest() {
 			try {
-				CompilationUnit unit = parseResource(zipFile, entry);
+				JavaRoot unit = parseResource(zipFile, entry);
 				
 				assertNotNull(unit);
 				
@@ -53,12 +53,12 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 		@Override
 		protected boolean isExcludedFromReprintTest(String filename) {
-			return false;
+			return true;
 		}
 		
 		@Override
 		protected boolean ignoreSemanticErrors(String filename) {
-			return false;
+			return true;
 		}
 
 		@Override
