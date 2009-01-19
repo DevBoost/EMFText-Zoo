@@ -483,10 +483,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
 			Type nextType = null;
-			if (next instanceof CastExpression) {
-				nextType = getReferencedType(((CastExpression)next).getTypeReference());
-				i.prune();
-			}
+
 			if (next instanceof PrimaryExpression) {
 
 				if (next instanceof Reference) {
@@ -500,6 +497,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				if (next instanceof Literal) {
 					nextType = getTypeOfReferencedElement(
 							((Literal) next));
+				}
+				else if (next instanceof CastExpression) {
+					nextType = getReferencedType(
+							((CastExpression)next).getTypeReference());
 				}
 				else {
 					nextType = getTypeOfReferencedElement(
