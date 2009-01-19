@@ -12,6 +12,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationInstance;
+import org.emftext.language.java.arrays.ArrayInitializer;
+import org.emftext.language.java.arrays.ArrayInstantiationBySize;
+import org.emftext.language.java.arrays.ArrayInstantiationByValues;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -33,6 +36,7 @@ import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.PackageImport;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
+import org.emftext.language.java.instantiations.Instantiation;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
@@ -201,7 +205,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return false;
 	}
 	
-	protected EList<EObject> getOrderedContents(EObject container) throws UnresolvedProxiesException {
+	protected EList<EObject> getOrderedContents(EObject container) {
 		if (container instanceof NewConstructorCall) {
 			NewConstructorCall ncc = (NewConstructorCall) container;
 			if (ncc.getAnnonymousClass() != null) {
@@ -216,7 +220,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected Field STANDARD_ARRAY_LENGTH_FIELD = null;
 
 	protected void cosiderAddittionalScope(EObject container,
-			EList<EObject> contentsList) throws UnresolvedProxiesException {
+			EList<EObject> contentsList) {
 		//consider imports and default imports
 		if (container instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) container;
@@ -296,191 +300,217 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			EReference reference, int position, boolean resolveFuzzy,
 			IResolveResult result) {
 		myResource = (ITextResource) container.eResource();
+
+		EObject targetObject = null;
+		EObject containerContainer  = container.eContainer();
 		
-		try {
-			EObject targetObject = null;
-			EObject containerContainer  = container.eContainer();
-			
-			Type previousType = null;
-			AnnotationInstance annotationInstance = findContainingAnnotationInstance(container);
-			boolean definitlyPackage = false;
-			
-			//navigate through constructor calls: The constructor itself
-			if (containerContainer.eContainer() instanceof NewConstructorCall) {
-				EObject previouseRef = containerContainer.eContainer().eContainer();
-				if (previouseRef instanceof Reference) {
-					/*There might be an anonymous class*/
-					if (previouseRef instanceof NewConstructorCall) {
-						NewConstructorCall prevCall = (NewConstructorCall) previouseRef;
-						if (prevCall.getAnnonymousClass() != null) {
-							//
-						}
-						else {
-							previousType = getTypeOfReferencedElement((Reference)previouseRef);
-						}
+		Type previousType = null;
+		AnnotationInstance annotationInstance = findContainingAnnotationInstance(container);
+		boolean definitlyPackage = false;
+		
+		//navigate through constructor calls: The constructor itself
+		if (containerContainer.eContainer() instanceof Instantiation) {
+			EObject previouseRef = containerContainer.eContainer().eContainer();
+			if (previouseRef instanceof Reference) {
+				/*There might be an anonymous class*/
+				if (previouseRef instanceof NewConstructorCall) {
+					NewConstructorCall prevCall = (NewConstructorCall) previouseRef;
+					if (prevCall.getAnnonymousClass() != null) {
+						//
 					}
 					else {
 						previousType = getTypeOfReferencedElement((Reference)previouseRef);
 					}
-					
+				}
+				else {
+					previousType = getTypeOfReferencedElement((Reference)previouseRef);
+				}
+				
 
-				}
 			}
-			
-			//chained reference (1)
-			if (container instanceof Reference && containerContainer instanceof Reference) {
-				//do not leave the local scope in case of anonymous class declarations
+		}
+		
+		//chained reference (1)
+		if (container instanceof Reference && containerContainer instanceof Reference
+				&& !(containerContainer instanceof ArrayInstantiationBySize)
+				&& !(containerContainer instanceof ArrayInstantiationByValues)) {
+			//do not leave the local scope in case of anonymous class declarations
+			if (containerContainer instanceof Instantiation) {
+				AnonymousClass annonymousClass = null;
 				if (containerContainer instanceof NewConstructorCall) {
-					AnonymousClass annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
-					if (annonymousClass == null) {
-						//chained reference: scope given by previous element may be a type and may define a new scope
-						previousType = getTypeOfReferencedElement((Reference)containerContainer);
-					}
-					else {
-						//container = annonymousClass;
-					}
+					annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
 				}
-				else {	
+				if (annonymousClass == null) {
 					//chained reference: scope given by previous element may be a type and may define a new scope
 					previousType = getTypeOfReferencedElement((Reference)containerContainer);
 				}
-			}
-			//chained reference (2)
-			if (containerContainer instanceof TypeReferenceSequence) {
-				//chained reference: scope given by previous element may be a type and may define a new scope
-				TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)containerContainer;
-				int idx = typeRefSequence.getParts().indexOf(container);
-				if (idx > 0) {
-					previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
-				}
-			}
-			//similar as before... could be unified in metamodel
-			if (containerContainer instanceof Import) {
-				//chained reference: scope given by previous element may be a type and may define a new scope
-				Import theImport = (Import)containerContainer;
-				int idx = theImport.getParts().indexOf(container);
-				if (idx > 0) {
-					previousType = theImport.getParts().get(idx - 1).getTarget();
-				}
 				else {
-					definitlyPackage = true; //to avoid searching for this which would lead to recursive import resolution attempts
+					//container = annonymousClass;
 				}
 			}
-			
-			//might be an explicit or implicit cast
-			if (containerContainer instanceof NestedExpression) {
-				previousType = getTypeOfExpression(((NestedExpression) containerContainer).getExpression());
+			else {	
+				//chained reference: scope given by previous element may be a type and may define a new scope
+				previousType = getTypeOfReferencedElement((Reference)containerContainer);
 			}
-			
-			//inside annotation instance 
-			else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
-				TypeReference typeReference = annotationInstance.getAnnotation();
-				if (typeReference instanceof TypeReferenceSequence) {
-					//chained reference: scope given by previous element may be a type and may define a new scope
-					TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)typeReference;
-					int idx = typeRefSequence.getParts().size(); 
-					if (idx > 0) {
-						previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
-					} 
-				} else {
-					// TODO
-					throw new RuntimeException("Not implemented yet");
-				}
+		}
+		//chained reference (2)
+		if (containerContainer instanceof TypeReferenceSequence) {
+			//chained reference: scope given by previous element may be a type and may define a new scope
+			TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)containerContainer;
+			int idx = typeRefSequence.getParts().indexOf(container);
+			if (idx > 0) {
+				previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
 			}
-			//no previouseType, search local
-			if (!definitlyPackage) {
-				if (previousType == null) {
-					//reference in scope of the current compilation unit
-					targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
-				}
-				else {
-					targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
-					if (targetObject == null && annotationInstance != null && container instanceof Reference) {
-						//possibly type reference 
-						targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
-					}
-				}
-			}
-			
-			
-			if (targetObject != null) {
-				result.addMapping(identifier, targetObject);
+		}
+		//similar as before... could be unified in metamodel
+		if (containerContainer instanceof Import) {
+			//chained reference: scope given by previous element may be a type and may define a new scope
+			Import theImport = (Import)containerContainer;
+			int idx = theImport.getParts().indexOf(container);
+			if (idx > 0) {
+				previousType = theImport.getParts().get(idx - 1).getTarget();
 			}
 			else {
-				//in cases we reference something that is probably a package
-				
-				//it should start with a lower letter
-				String firstLetter = identifier.substring(0,1);
-				if(!firstLetter.toLowerCase().equals(firstLetter)) {
-					return;
+				definitlyPackage = true; //to avoid searching for this which would lead to recursive import resolution attempts
+			}
+		}
+		
+		//might be an explicit or implicit cast
+		if (containerContainer instanceof NestedExpression) {
+			previousType = getTypeOfExpression(((NestedExpression) containerContainer).getExpression());
+		}
+		
+		//inside annotation instance 
+		else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
+			TypeReference typeReference = annotationInstance.getAnnotation();
+			if (typeReference instanceof TypeReferenceSequence) {
+				//chained reference: scope given by previous element may be a type and may define a new scope
+				TypeReferenceSequence typeRefSequence = (TypeReferenceSequence)typeReference;
+				int idx = typeRefSequence.getParts().size(); 
+				if (idx > 0) {
+					previousType = typeRefSequence.getParts().get(idx - 1).getTarget();
+				} 
+			} else {
+				// TODO
+				throw new RuntimeException("Not implemented yet");
+			}
+		}
+		//no previouseType, search local
+		if (!definitlyPackage) {
+			if (previousType == null) {
+				//reference in scope of the current compilation unit
+				targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
+			}
+			else {
+				targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
+				if (targetObject == null && annotationInstance != null && container instanceof Reference) {
+					//possibly type reference 
+					targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
 				}
-				//it has to be target of a reference: there are two referencing possibilities
-				// (1)
-				if (reference.equals(
-						ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
-					Reference ref = (Reference)container;
-					//there must be something (a classifier reference) following up
-					if (ref.getNext() != null) {
-						PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
-						packageDescriptor.setName(identifier);
-						result.addMapping(identifier, packageDescriptor);
-						
-						if(ref.eContainer() instanceof Reference) {
-							ref = (Reference) ref.eContainer();
-							if (ref instanceof IdentifierReference) {
-								IdentifierReference identifierReference = 
-									(IdentifierReference) ref;
-								if(identifierReference.getTarget() instanceof PackageDescriptor) {
-									packageDescriptor.setParent((PackageDescriptor) identifierReference.getTarget());
-								}
-							}
-						}
-					}
-					
-				}
-				// (2)
-				else if (reference.equals(
-						TypesPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)) {
-					EList<?> parts = null;
-					if (container.eContainer() instanceof TypeReferenceSequence) {
-						TypeReferenceSequence refSequence = ((TypeReferenceSequence)container.eContainer());
-						parts = refSequence.getParts();
-					}
-					else if (container.eContainer() instanceof Import) {
-						Import theImport = ((Import)container.eContainer());
-						parts = theImport.getParts();
-					}
-					else {
-						assert(false);
-					}
-					int pos = parts.indexOf(container);
-					
+			}
+		}
+		
+		
+		if (targetObject != null) {
+			result.addMapping(identifier, targetObject);
+		}
+		else {
+			//in cases we reference something that is probably a package
+			
+			//it should start with a lower letter
+			String firstLetter = identifier.substring(0,1);
+			if(!firstLetter.toLowerCase().equals(firstLetter)) {
+				return;
+			}
+			//it has to be target of a reference: there are two referencing possibilities
+			// (1)
+			if (reference.equals(
+					ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
+				Reference ref = (Reference)container;
+				//there must be something (a classifier reference) following up
+				if (ref.getNext() != null) {
 					PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
 					packageDescriptor.setName(identifier);
 					result.addMapping(identifier, packageDescriptor);
 					
-					if (pos > 0) {
-						Type parent = ((PackageOrClassifierReference)parts.get(pos - 1)).getTarget();
-						if (parent instanceof PackageDescriptor ) {
-							packageDescriptor.setParent((PackageDescriptor) parent);
+					if(ref.eContainer() instanceof Reference) {
+						ref = (Reference) ref.eContainer();
+						if (ref instanceof IdentifierReference) {
+							IdentifierReference identifierReference = 
+								(IdentifierReference) ref;
+							if(identifierReference.getTarget() instanceof PackageDescriptor) {
+								packageDescriptor.setParent((PackageDescriptor) identifierReference.getTarget());
+							}
 						}
 					}
-					
 				}
+				
 			}
-		} catch (UnresolvedProxiesException e) {
-			assert(false);
-			// do nothing
+			// (2)
+			else if (reference.equals(
+					TypesPackage.Literals.PACKAGE_OR_CLASSIFIER_REFERENCE__TARGET)) {
+				EList<?> parts = null;
+				if (container.eContainer() instanceof TypeReferenceSequence) {
+					TypeReferenceSequence refSequence = ((TypeReferenceSequence)container.eContainer());
+					parts = refSequence.getParts();
+				}
+				else if (container.eContainer() instanceof Import) {
+					Import theImport = ((Import)container.eContainer());
+					parts = theImport.getParts();
+				}
+				else {
+					assert(false);
+				}
+				int pos = parts.indexOf(container);
+				
+				PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
+				packageDescriptor.setName(identifier);
+				result.addMapping(identifier, packageDescriptor);
+				
+				if (pos > 0) {
+					Type parent = ((PackageOrClassifierReference)parts.get(pos - 1)).getTarget();
+					if (parent instanceof PackageDescriptor ) {
+						packageDescriptor.setParent((PackageDescriptor) parent);
+					}
+				}
+				
+			}
 		}
-	}
+}
 
 
-	protected Type getTypeOfExpression(Expression exp) throws UnresolvedProxiesException {
+	protected Type getTypeOfExpression(Expression exp) {
 		Class stringClass = (Class) EcoreUtil.resolve(
 				JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
 		
 		Type type = null;
-		for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
+
+		if (exp instanceof PrimaryExpression) {
+			//simple case
+			if (exp instanceof Reference) {
+				Reference ref = (Reference) exp;
+				//navigate down references
+				while(ref.getNext() != null) {
+					ref = ref.getNext();
+				}
+				exp = ref;
+			}
+			
+			if (exp instanceof Literal) {
+				return getTypeOfReferencedElement(
+						((Literal) exp));
+			}
+			else if (exp instanceof CastExpression) {
+				return getReferencedType(
+						((CastExpression)exp).getTypeReference());
+			}
+			else {
+				return getTypeOfReferencedElement(
+						((Reference) exp));
+			}
+			
+		}
+		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
 			Type nextType = null;
 
@@ -524,7 +554,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 	
 	protected EObject findScoped(String identifier, EObject context, EObject endOfScopeElement,
-			EClass type) throws UnresolvedProxiesException {
+			EClass type) {
 		
 		EObject container = endOfScopeElement.eContainer();
 		
@@ -543,7 +573,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return findScoped(identifier, context, container, type);
 	}
 
-	protected EObject find(String id, EObject context, EObject element,  EObject container, EClass type) throws UnresolvedProxiesException {
+	protected EObject find(String id, EObject context, EObject element,  EObject container, EClass type) {
 		//try the container
 		if (isReferencedElement(id, context, container)) {
 			return container;
@@ -606,7 +636,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @return the determined type
 	 * @throws UnresolvedProxiesException
 	 */
-	protected Type getTypeOfReferencedElement(Literal literal) throws UnresolvedProxiesException {
+	protected Type getTypeOfReferencedElement(Literal literal) {
 		TypesFactory javaTypeFactory = TypesFactory.eINSTANCE;
 		if (literal instanceof NullLiteral) {
 			return javaTypeFactory.createVoid();
@@ -636,7 +666,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @return the determined type
 	 * @throws UnresolvedProxiesException
 	 */
-	protected Type getTypeOfReferencedElement(Reference reference) throws UnresolvedProxiesException {
+	protected Type getTypeOfReferencedElement(Reference reference) {
 		Type type = null;
 
 		//referenced element point to a type
@@ -668,9 +698,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			ReferenceableElement target = 
 				(ReferenceableElement) ((IdentifierReference) reference).getTarget();
 			if (target.eIsProxy()) {
-				throw new UnresolvedProxiesException();
+				type = null;
 			}
-			
 			else if (target instanceof TypedElement) {
 				TypeReference typeRef = ((TypedElement) target).getType();
 				type = getReferencedType(typeRef);
@@ -701,7 +730,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @return the type
 	 * @throws UnresolvedProxiesException
 	 */
-	protected Type getReferencedType(TypeReference typeReference) throws UnresolvedProxiesException {
+	protected Type getReferencedType(TypeReference typeReference) {
 		/*
 		 * TODO this method needs to investigate the context of typeReferene to check
 		 * additional constrains. E.g., if the typeReference is used to define a 
@@ -721,7 +750,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			assert(false);
 		}
 
-		if (type.eIsProxy()) {
+		if (type != null && type.eIsProxy()) {
 			//this may happen, when e.g. a super type is resolved. It is ok.
 			return null;
 		}
@@ -737,7 +766,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 	
 	
-	protected EList<Type> getArgumentTypes(ArgumentList argList) throws UnresolvedProxiesException {
+	protected EList<Type> getArgumentTypes(ArgumentList argList) {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 
@@ -751,7 +780,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 	
 	
-	protected boolean isReferencedElement(String id, EObject context, EObject referencedElement) throws UnresolvedProxiesException {
+	protected boolean isReferencedElement(String id, EObject context, EObject referencedElement) {
 		boolean result = false;
 		
 		boolean isMethodCall = false;
@@ -833,7 +862,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 
 
 	protected boolean compareTypes(EObject type1,
-			EObject type2) throws UnresolvedProxiesException {
+			EObject type2) {
 		
 		//if parameter type is void, always match
 		if (type2 instanceof Void) {
@@ -910,7 +939,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return (AnnotationInstance) value;
 	}
 	
-	protected EList<Member> getAllMemebers(PrimitiveType primitiveType) throws UnresolvedProxiesException {
+	protected EList<Member> getAllMemebers(PrimitiveType primitiveType) {
 		Classifier javaClassifier = null;
 		//automatic wrapping of primitive types
 		if (primitiveType instanceof Boolean) {
@@ -946,7 +975,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return getAllMemebers(javaClassifier);
 	}
 	
-	protected EList<Member> getAllMemebers(Classifier javaClassifier) throws UnresolvedProxiesException {
+	protected EList<Member> getAllMemebers(Classifier javaClassifier) {
 		EList<Member> memberList = new BasicEList<Member>();
 		for (Classifier superClassifier : getAllSuperTypes(javaClassifier)) {
 			if (superClassifier instanceof MemberContainer /*Class and Interface*/) {
@@ -964,7 +993,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return memberList;
 	}
 	
-	protected EList<Classifier> getAllSuperTypes(Classifier javaClassifier) throws UnresolvedProxiesException {
+	protected EList<Classifier> getAllSuperTypes(Classifier javaClassifier) {
 		EList<Classifier> superClassifierList = new BasicEList<Classifier>();
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 		if (javaClassifier instanceof Class) {
@@ -999,7 +1028,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @return the superclasses
 	 * @throws UnresolvedProxiesException
 	 */
-	protected Class getSuperType(Class subClass) throws UnresolvedProxiesException {
+	protected Class getSuperType(Class subClass) {
 		Class superClass = null;
 		if (subClass.getExtends() != null) {
 			superClass = (Class) getReferencedType(subClass.getExtends().getType());
@@ -1021,7 +1050,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 */
 	private void collectAllSuperClassifiers( Class javaClass, 
 			EList<Classifier> resultClassifierList)
-			throws UnresolvedProxiesException {
+			{
 		//collects all superclasses
 		Class superClass = javaClass;
 		while (!superClass.eIsProxy() && !superClass.getName().equals("Object")) {
@@ -1039,10 +1068,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * 
 	 * @param interfaceReferences a list of references to interfaces
 	 * @param resultInterfaceList the list with the reuslt
-	 * @throws UnresolvedProxiesException 
+	 * @
 	 */
 	protected void collectAllSuperInterfaces(EList<QualifiedTypeArgument> interfaceReferences,
-		EList<Classifier> resultInterfaceList) throws UnresolvedProxiesException {
+		EList<Classifier> resultInterfaceList) {
 	
 		for (QualifiedTypeArgument typeArg : interfaceReferences) {
 			Type type = getReferencedType(typeArg.getType());
