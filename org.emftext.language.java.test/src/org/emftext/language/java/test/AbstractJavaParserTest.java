@@ -39,6 +39,7 @@ import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Member;
@@ -97,12 +98,12 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	
 	protected static ResourceSet myResourceSet = new ResourceSetImpl();
 
-	protected CompilationUnit parseResource(String filename,
+	protected JavaRoot parseResource(String filename,
 			String inputFolderName) throws Exception {
 		return parseResource(new File(filename), inputFolderName);
 	}
 
-	protected CompilationUnit parseResource(File inputFile,
+	protected JavaRoot parseResource(File inputFile,
 			String inputFolderName) throws IOException {
 		File inputFolder = new File("./" + inputFolderName);
 		File file = new File(inputFolder, inputFile.getPath());
@@ -111,30 +112,31 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		return loadResource(file.getCanonicalPath());
 	}
 
-	protected CompilationUnit parseResource(ZipFile file, ZipEntry entry)
+	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
 			throws IOException {
 		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()));
 	}
 
-	private CompilationUnit loadResource(
+	private JavaRoot loadResource(
 			String filePath) throws IOException {
 		return loadResource(URI.createFileURI(filePath));
 	}
 	
-	private CompilationUnit loadResource(
+	private JavaRoot loadResource(
 			URI uri) throws IOException {
 		ITextResource resource = (ITextResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource);
 		assertNoWarnings(uri.toString(), resource);
-		assertEquals("The resource should have one content element.", 1,
-				resource.getContents().size());
+		/* Below is not true, because the file can also be completely empty :)
+		 * assertEquals("The resource should have one content element.", 1,
+				resource.getContents().size());*/
 		EObject content = resource.getContents().get(0);
 		assertTrue("File '" + uri.toString()
 				+ "' was parsed to CompilationUnit.",
-				content instanceof CompilationUnit);
-		CompilationUnit cUnit = (CompilationUnit) content;
-		return cUnit;
+				content instanceof JavaRoot);
+		JavaRoot root = (JavaRoot) content;
+		return root;
 	}
 
 	protected static Map<?, ?> getLoadOptions() {
@@ -493,13 +495,20 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	protected <T> T assertParsesToType(String typename, String folder,
 			Class<T> expectedType) throws Exception {
 		String filename = typename + ".java";
-		CompilationUnit model = parseResource(filename, folder);
-		assertNumberOfClassifiers(model, 1);
-
-		Classifier declaration = model.getClassifiers().get(0);
-		assertClassifierName(declaration, typename);
-		assertType(declaration, expectedType);
-		return expectedType.cast(declaration);
+		JavaRoot model = parseResource(filename, folder);
+		if (model instanceof CompilationUnit) {
+			CompilationUnit cu = (CompilationUnit) model;
+			assertNumberOfClassifiers(cu, 1);
+	
+			Classifier declaration = cu.getClassifiers().get(0);
+			assertClassifierName(declaration, typename);
+			assertType(declaration, expectedType);
+			return expectedType.cast(declaration);
+		}
+		else {
+			return null;
+		}
+		
 	}
 
 	protected <T> T assertParsesToType(String typename, Class<T> expectedType)
@@ -512,16 +521,22 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	
 	private <T> T assertParsesToType(File file, Class<T> expectedType)
 			throws Exception {
-		CompilationUnit model = parseResource(file);
 
-		assertNumberOfClassifiers(model, 1);
+		JavaRoot model = parseResource(file);
+		if (model instanceof CompilationUnit) {
+			CompilationUnit cu = (CompilationUnit) model;
+			assertNumberOfClassifiers(cu, 1);
 
-		Classifier declaration = model.getClassifiers().get(0);
-		assertType(declaration, expectedType);
-		return expectedType.cast(declaration);
+			Classifier declaration = cu.getClassifiers().get(0);
+			assertType(declaration, expectedType);
+			return expectedType.cast(declaration);
+		}
+		else {
+			return null;
+		}
 	}
 
-	private CompilationUnit parseResource(File file) throws Exception {
+	private JavaRoot parseResource(File file) throws Exception {
 		return parseResource(file, getTestInputFolder());
 	}
 	
@@ -536,7 +551,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		parseAndReprint(file, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
-	protected CompilationUnit parseResource(String filename) throws Exception {
+	protected JavaRoot parseResource(String filename) throws Exception {
 		return parseResource(filename, getTestInputFolder());
 	}
 

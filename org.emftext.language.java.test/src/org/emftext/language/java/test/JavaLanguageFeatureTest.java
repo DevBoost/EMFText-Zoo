@@ -76,7 +76,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	private void assertParsableAndReprintable(String filename)
 		throws Exception, IOException, BadLocationException {
-		CompilationUnit unit = parseResource(filename);
+		CompilationUnit unit = (CompilationUnit) parseResource(filename);
 		assertNotNull(unit);
 		
 		parseAndReprint(filename);
@@ -84,7 +84,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	private void assertParsesToEnumAndReprints(final String typeName) throws Exception {
 		String filename = typeName + JAVA_FILE_EXTENSION;
-		CompilationUnit model = parseResource(filename);
+		CompilationUnit model = (CompilationUnit) parseResource(filename);
 		assertNumberOfClassifiers(model, 1);
 		Classifier declaration = model.getClassifiers().get(0);
 		assertClassifierName(declaration, typeName);
@@ -878,7 +878,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		registerInClassPath("Import2" + JAVA_FILE_EXTENSION);
 		
-		CompilationUnit model = parseResource(filename);
+		CompilationUnit model = (CompilationUnit) parseResource(filename);
 		assertNumberOfClassifiers(model, 1);
 		
 		parseAndReprint(filename);
@@ -889,7 +889,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Import2";
 		String filename = typename + JAVA_FILE_EXTENSION;
 
-		CompilationUnit model = parseResource(filename);
+		CompilationUnit model = (CompilationUnit) parseResource(filename);
 		assertNumberOfClassifiers(model, 1);
 		
 		parseAndReprint(filename);
@@ -1120,7 +1120,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	
 	@Test
 	public void testPkg_EmptyClass() throws Exception {
-		CompilationUnit model = parseResource("pkg/EmptyClass.java");
+		CompilationUnit model = (CompilationUnit) parseResource("pkg/EmptyClass.java");
 		assertNumberOfClassifiers(model, 1);
 		Classifier declaraction = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'EmptyClass'",
@@ -1132,7 +1132,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	@Test
 	public void testPkg_inner_EmptyClass() throws Exception {
-		CompilationUnit model = parseResource("pkg/inner/Inner.java");
+		CompilationUnit model = (CompilationUnit) parseResource("pkg/inner/Inner.java");
 		assertNumberOfClassifiers(model, 1);
 		Classifier declaraction = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'Inner'", "Inner",
@@ -1146,7 +1146,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	
 	@Test
 	public void testPkg_PackageAnnotation() throws Exception {
-		CompilationUnit model = parseResource("pkg/PackageAnnotation.java");
+		CompilationUnit model = (CompilationUnit) parseResource("pkg/PackageAnnotation.java");
 		assertNumberOfClassifiers(model, 1);
 		parseAndReprint("pkg/PackageAnnotation.java");
 	}
@@ -1214,7 +1214,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	public void testStaticImports() throws Exception {
 		String typename = "StaticImports";
 		String filename = typename + JAVA_FILE_EXTENSION;
-		CompilationUnit unit = parseResource(filename, getTestInputFolder());
+		CompilationUnit unit = (CompilationUnit) parseResource(filename, getTestInputFolder());
 		List<Import> imports = unit.getImports();
 		assertEquals(2, imports.size());
 		assertTrue("first import is not static", imports.get(0) instanceof StaticImport);
