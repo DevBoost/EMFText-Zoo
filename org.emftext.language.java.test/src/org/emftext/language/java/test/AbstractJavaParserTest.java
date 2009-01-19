@@ -47,6 +47,7 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.language.java.resource.java.analysis.helper.ExpressionSimplifier;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
 import org.emftext.language.java.types.TypeReferenceSequence;
@@ -142,6 +143,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	protected static Map<?, ?> getLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new ExpressionSimplifier());
 		return map;
 	}
 

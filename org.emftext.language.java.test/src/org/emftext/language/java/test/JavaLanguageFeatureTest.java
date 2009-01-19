@@ -98,12 +98,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Field booleanField = (Field) member;
 		Expression initValueForBoolean = booleanField.getInitialValue();
 
-		TreeIterator<EObject> iter = initValueForBoolean.eAllContents();
-		BooleanLiteral literal = null;
-		while(iter.hasNext()){
-			Object obj = iter.next();
-			if (obj instanceof BooleanLiteral) literal = (BooleanLiteral)obj;
-		}
+		BooleanLiteral literal = (BooleanLiteral)initValueForBoolean;
+
 		assertType(literal, BooleanLiteral.class);
 		BooleanLiteral initLiteralForBoolean = (BooleanLiteral) literal;
 		assertEquals(expectedInitValue, initLiteralForBoolean.isValue());
@@ -113,13 +109,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(member, Field.class);
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
+
+		CharacterLiteral literal = (CharacterLiteral)initValue;
 		
-		TreeIterator<EObject> iter = initValue.eAllContents();
-		CharacterLiteral literal = null;
-		while(iter.hasNext()){
-			Object obj = iter.next();
-			if (obj instanceof CharacterLiteral) literal = (CharacterLiteral)obj;
-		}
 		assertType(literal, CharacterLiteral.class);
 		CharacterLiteral initLiteral = (CharacterLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
@@ -130,12 +122,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
 		
-		TreeIterator<EObject> iter = initValue.eAllContents();
-		FloatingPointLiteral literal = null;
-		while(iter.hasNext()){
-			Object obj = iter.next();
-			if (obj instanceof FloatingPointLiteral) literal = (FloatingPointLiteral)obj;
-		}
+		FloatingPointLiteral literal = (FloatingPointLiteral)initValue;
+		
 		assertNotNull(member.getName() + " is not a double field.", literal);
 		assertType(literal, FloatingPointLiteral.class);
 		FloatingPointLiteral initLiteral = (FloatingPointLiteral) literal;
@@ -147,12 +135,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Field longField = (Field) member;		
 		Expression initValue = longField.getInitialValue();
 		
-		TreeIterator<EObject> iter = initValue.eAllContents();
-		IntegerLiteral literal = null;
-		while(iter.hasNext()){
-			Object obj = iter.next();
-			if (obj instanceof IntegerLiteral) literal = (IntegerLiteral)obj;
-		}
+		IntegerLiteral literal = (IntegerLiteral)initValue;
+
 		assertType(literal, IntegerLiteral.class);
 		IntegerLiteral initLiteralForBoolean = (IntegerLiteral) literal;
 		assertEquals(expectedInitValue, initLiteralForBoolean.getValue());
@@ -165,13 +149,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertType(fieldUnicode, Field.class);
 		Field unicode = (Field) fieldUnicode;
 		Expression value = unicode.getInitialValue();
-		
-		TreeIterator<EObject> iter = value.eAllContents();
-		StringReference literal = null;
-		while(iter.hasNext()){
-			Object obj = iter.next();
-			if (obj instanceof StringReference) literal = (StringReference)obj;
-		}
+
+		StringReference literal = (StringReference)value;
+
 		assertType(literal, StringReference.class);
 		StringReference stringValue = (StringReference) literal;
 		//assertEquals("Unescaped value expected for field \"" + name + "\".",
@@ -183,12 +163,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
 		
-		TreeIterator<EObject> iter = initValue.eAllContents();
-		StringReference literal = null;
-		while(iter.hasNext()){
-			Object obj = iter.next();
-			if (obj instanceof StringReference) literal = (StringReference)obj;
-		}
+		StringReference literal = (StringReference)initValue;
+		
 		assertType(literal, StringReference.class);
 		StringReference initLiteral = (StringReference) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
