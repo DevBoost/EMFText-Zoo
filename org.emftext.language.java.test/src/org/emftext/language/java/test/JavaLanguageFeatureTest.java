@@ -464,7 +464,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "CommentsAtEOF";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 3);
+		assertMemberCount(clazz, 0);
 
 		parseAndReprint(filename);
 	}
