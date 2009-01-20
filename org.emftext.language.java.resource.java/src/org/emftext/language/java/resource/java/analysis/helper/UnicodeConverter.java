@@ -9,7 +9,8 @@ import org.emftext.runtime.InputStreamProcessor;
  * A UnicodeConverter can read an input stream and convert
  * unicode escape sequences (backslash + uXXXX) to actual
  * unicode characters. Each escaped unicode sequence (6 bytes)
- * is replaced by the respective unicode character (2 bytes).
+ * is replaced by the respective UTF-8 byte sequence (1 to 4 
+ * bytes).
  * 
  * TODO mseifert: information about replaced sequences must be 
  * passed to the LocationMap or parser to make sure that the 
@@ -17,8 +18,8 @@ import org.emftext.runtime.InputStreamProcessor;
  */
 public class UnicodeConverter extends InputStreamProcessor {
 
-	// we use -2 instead of -1, because -1 is EOF
-	private static final int EMPTY_LOOK_AHEAD_CHARACTER = -2;
+	private int[] stack = new int[4];
+	private int stackPosition = -1;
 
 	private static final char BACKSLASH = '\\';
 
@@ -28,13 +29,6 @@ public class UnicodeConverter extends InputStreamProcessor {
 	private InputStream inputStream;
 	
 	/**
-	 * Holds the character that is read from the original
-	 * stream if a backslash is found. This character is 
-	 * returned upon the next call to read().
-	 */
-	private int lookAheadCharacter;
-
-	/**
 	 * Creates a new UnicodeConverter that reads from the given
 	 * stream.
 	 * 
@@ -42,18 +36,16 @@ public class UnicodeConverter extends InputStreamProcessor {
 	 */
 	public UnicodeConverter(InputStream inputStream) {
 		this.inputStream = inputStream;
-		this.lookAheadCharacter = EMPTY_LOOK_AHEAD_CHARACTER;
 	}
 
 	/**
 	 * Reads one character from the stream. Escaped unicode characters are
-	 * converted to real characters (i.e., one integer value).
+	 * converted to UTF-8 byte sequences (i.e., up to four bytes).
 	 */
 	@Override
 	public int read() throws IOException {
-		if (lookAheadCharacter >= 0) {
-			int result = lookAheadCharacter;
-			lookAheadCharacter = EMPTY_LOOK_AHEAD_CHARACTER;
+		if (!stackIsEmpty()) {
+			int result = pop();
 			return result;
 		}
 		int read = inputStream.read();
@@ -61,7 +53,6 @@ public class UnicodeConverter extends InputStreamProcessor {
 		// Must have format \\uXXXX where XXXX is a hex number
 		if (read >= 0) {
 			char c = (char) read;
-
 			if (c == BACKSLASH) {
 				int next = inputStream.read();
 				char nextChar = (char) next;
@@ -123,17 +114,132 @@ public class UnicodeConverter extends InputStreamProcessor {
 					} // for each of the 4 digits
 
 					if (complete) { // We got a full conversion
-						return v;
+						return encodePushAndReturn(v);
 					}
 				} else {
-					lookAheadCharacter = next;
+					// was: lookAheadCharacter = next;
+					encodePush(next);
 				}
+			} else {
+				return encodePushAndReturn(read);
 			}
 		}
+		// do not encode negative numbers, because they signal EOF
 		return read;
 	}
 	
+	private int encodePushAndReturn(int next) {
+		byte[] encoded = encode(next);
+		// we must add the bytes backwards because we use a stack
+		// we do not push the first byte since it is returned immediately
+		for (int i = encoded.length - 1; i >= 1; i--) {
+			push(unsignedByteToInt(encoded[i]));
+		}
+		return unsignedByteToInt(encoded[0]);
+	}
+
+	private void encodePush(int next) {
+		byte[] encoded = encode(next);
+		// we must add the bytes backwards because we use a stack
+		for (int i = encoded.length - 1; i >= 0; i--) {
+			push(unsignedByteToInt(encoded[i]));
+		}
+	}
+
+	private int pop() {
+		assert stackPosition >= 0;
+		int result = stack[stackPosition];
+		stackPosition--;
+		return result;
+	}
+
+	private void push(int aByte) {
+		stackPosition++;
+		assert stackPosition < stack.length;
+		stack[stackPosition] = aByte;
+	}
+
+	private boolean stackIsEmpty() {
+		return stackPosition < 0;
+	}
+
 	public static int unsignedByteToInt(byte b) {
 		return (int) b & 0xFF;
+	}
+
+	public static byte[] encode(int ch) {
+		//return encode(new int[]{ch});
+		int bytesNeeded = 0;
+		if (ch < 0x80) {
+			++bytesNeeded;
+		} else if (ch < 0x0800) {
+			bytesNeeded += 2;
+		} else if (ch < 0x10000) {
+			bytesNeeded += 3;
+		} else {
+			bytesNeeded += 4;
+		}
+		// allocate a byte[] of the necessary size
+		byte[] utf8 = new byte[bytesNeeded];
+		// do the conversion from character code points to utf-8
+		int bytes = 0;
+		if (ch < 0x80) {
+			utf8[bytes++] = (byte) ch;
+		} else if (ch < 0x0800) {
+			utf8[bytes++] = (byte) (ch >> 6 | 0xC0);
+			utf8[bytes++] = (byte) (ch & 0x3F | 0x80);
+		} else if (ch < 0x10000) {
+			utf8[bytes++] = (byte) (ch >> 12 | 0xE0);
+			utf8[bytes++] = (byte) (ch >> 6 & 0x3F | 0x80);
+			utf8[bytes++] = (byte) (ch & 0x3F | 0x80);
+		} else {
+			utf8[bytes++] = (byte) (ch >> 18 | 0xF0);
+			utf8[bytes++] = (byte) (ch >> 12 & 0x3F | 0x80);
+			utf8[bytes++] = (byte) (ch >> 6 & 0x3F | 0x80);
+			utf8[bytes++] = (byte) (ch & 0x3F | 0x80);
+		}
+		return utf8;
+	}
+	
+	public static byte[] encode(int[] ch) {
+		// determine how many bytes are needed for the complete conversion
+		int bytesNeeded = 0;
+		for (int i = 0; i < ch.length; i++) {
+			if (ch[i] < 0x80) {
+				++bytesNeeded;
+			} else if (ch[i] < 0x0800) {
+				bytesNeeded += 2;
+			} else if (ch[i] < 0x10000) {
+				bytesNeeded += 3;
+			} else {
+				bytesNeeded += 4;
+			}
+		}
+		// allocate a byte[] of the necessary size
+		byte[] utf8 = new byte[bytesNeeded];
+		// do the conversion from character code points to utf-8
+		for (int i = 0, bytes = 0; i < ch.length; i++) {
+			if (ch[i] < 0x80) {
+				utf8[bytes++] = (byte) ch[i];
+			} else if (ch[i] < 0x0800) {
+				utf8[bytes++] = (byte) (ch[i] >> 6 | 0xC0);
+				utf8[bytes++] = (byte) (ch[i] & 0x3F | 0x80);
+			} else if (ch[i] < 0x10000) {
+				utf8[bytes++] = (byte) (ch[i] >> 12 | 0xE0);
+				utf8[bytes++] = (byte) (ch[i] >> 6 & 0x3F | 0x80);
+				utf8[bytes++] = (byte) (ch[i] & 0x3F | 0x80);
+			} else {
+				utf8[bytes++] = (byte) (ch[i] >> 18 | 0xF0);
+				utf8[bytes++] = (byte) (ch[i] >> 12 & 0x3F | 0x80);
+				utf8[bytes++] = (byte) (ch[i] >> 6 & 0x3F | 0x80);
+				utf8[bytes++] = (byte) (ch[i] & 0x3F | 0x80);
+			}
+		}
+		return utf8;
+	}
+
+	@Override
+	public String getOutputEncoding() {
+		return "UTF-8";
 	}
 }
