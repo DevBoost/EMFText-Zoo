@@ -27,7 +27,7 @@ public class JavaUniquePathConstructor {
 		URI logicalUri = getJavaFileResourceURI(fullQualifiedName);
 		
 		String classesPart = fullQualifiedName;
-		int idx = fullQualifiedName.lastIndexOf(".");
+		int idx = fullQualifiedName.lastIndexOf(PACKAGE_SEPARATOR);
 		if (idx >= 0) {
 			classesPart = classesPart.substring(idx + 1);
 		}
@@ -47,6 +47,20 @@ public class JavaUniquePathConstructor {
 		logicalUri = logicalUri.appendFragment(
 				uriFragment);
 		return logicalUri;
+	}
+	
+	public static String getSimpleClassName(String fullQualifiedName) {
+		int idx1 = fullQualifiedName.lastIndexOf(PACKAGE_SEPARATOR);
+		int idx2 = fullQualifiedName.lastIndexOf(CLASSIFIER_SEPARATOR);
+		if (idx1 == -1 && idx2 == -1) {
+			return fullQualifiedName;
+		}
+		if (idx1 > idx2) {
+			return fullQualifiedName.substring(idx1 + 1);
+		}
+		else {
+			return fullQualifiedName.substring(idx2 + 1);
+		}
 	}
 	
 	public static boolean pointsAtClassifie(URI proxyURI, String classifierName) {

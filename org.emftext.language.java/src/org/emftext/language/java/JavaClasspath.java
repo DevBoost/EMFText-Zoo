@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.containers.CompilationUnit;
@@ -190,14 +191,16 @@ public class JavaClasspath {
 			for (String classifierName : packageClassifierMap.get(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
 					InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
-					String fullName = null;
+					String fullQualifiedName = null;
 					if ("".equals(packageName) || ".".equals(packageName)) {
-						fullName = classifierName;
+						fullQualifiedName = classifierName;
 					}
 					else {
-						fullName = packageName + classifierName;
+						fullQualifiedName = packageName + classifierName;
 					}
-					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullName));
+					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullQualifiedName));
+					//set also the name to reason about it without resolving the proxy
+					((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
 					resultList.add((Classifier) classifierProxy);
 				}
 			}
@@ -259,6 +262,8 @@ public class JavaClasspath {
 		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
+		//set also the name to reason about it without resolving the proxy
+		((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
 		return (Classifier) classifierProxy;
 	}
 	
