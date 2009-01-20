@@ -594,8 +594,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 
 	protected EObject find(String id, EObject context, EObject element,  EObject container, EClass type) {
 		//try the container
-		if (isReferencedElement(id, context, container)) {
-			return container;
+		if(hasCorrectType(container, type)) {
+			if (isReferencedElement(id, context, container)) {
+				return container;
+			}
 		}
 		
 		EList<EObject> contentsList = new BasicEList<EObject>();
