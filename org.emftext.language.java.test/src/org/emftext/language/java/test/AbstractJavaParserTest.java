@@ -17,7 +17,6 @@ import java.util.zip.ZipFile;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.internal.resources.AliasManager.AddToCollectionDoit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -129,9 +128,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource);
 		assertNoWarnings(uri.toString(), resource);
-		/* Below is not true, because the file can also be completely empty :)
-		 * assertEquals("The resource should have one content element.", 1,
-				resource.getContents().size());*/
+		assertEquals("The resource should have one content element.", 1,
+				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
 		assertTrue("File '" + uri.toString()
 				+ "' was parsed to CompilationUnit.",
