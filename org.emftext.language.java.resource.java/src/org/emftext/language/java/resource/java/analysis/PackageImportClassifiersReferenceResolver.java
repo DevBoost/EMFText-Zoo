@@ -14,7 +14,7 @@ public class PackageImportClassifiersReferenceResolver extends org.emftext.runti
 		
 		if (classifierList.get(0).equals(element)) {
 			URI uri = element.eResource().getURI();
-			String[] fullName = uri.lastSegment().split("\\.");
+			String[] fullName = uri.lastSegment().split("\\.|$");
 			String packageName = fullName[fullName.length - 3];
 			
 			return packageName;
