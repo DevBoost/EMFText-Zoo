@@ -24,6 +24,7 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.PackageDescriptor;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.CastExpression;
+import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.PrimaryExpression;
@@ -328,14 +329,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			EObject previouseRef = containerContainer.eContainer().eContainer();
 			if (previouseRef instanceof Reference) {
 				if (previouseRef instanceof NewConstructorCall) {
-					/*There might be an anonymous class*/
-					NewConstructorCall prevCall = (NewConstructorCall) previouseRef;
-					if (prevCall.getAnnonymousClass() != null) {
-						//
-					}
-					else {
-						previousType = getTypeOfReferencedElement((Reference)previouseRef);
-					}
+					previousType = getTypeOfReferencedElement((Reference)previouseRef);
 				}
 				else {
 					previousType = getTypeOfReferencedElement((Reference)previouseRef);
@@ -531,6 +525,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		else if (exp instanceof AssignmentExpression) {
 			type = getTypeOfExpression(((AssignmentExpression) exp).getChild());
+		}
+		else if (exp instanceof ConditionalExpression &&
+				((ConditionalExpression)exp).getExpressionIf() != null) {
+			
+			type = getTypeOfExpression(((ConditionalExpression)exp).getExpressionIf());
 		}
 		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
