@@ -15,7 +15,7 @@ public class JacksTest extends AbstractZipFileInputTest {
 	
 	public static Test suite() throws CoreException, IOException {
 		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the jacks_input zip file automatically", 5 * 60 * 1000, 8);
-		addToTestSuite(suite, getTestsForZipFileEntries("./" + INPUT_FILE));
+		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE));
 		return suite;
 	}
 

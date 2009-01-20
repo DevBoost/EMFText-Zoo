@@ -114,7 +114,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
 			throws IOException {
-		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()));
+		return loadResource(URI.createURI("archive:file:" + new File(file.getName()).getCanonicalPath() + "!/" + entry.getName()));
 	}
 
 	private JavaRoot loadResource(
@@ -197,9 +197,9 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			String outputFolderName) throws Exception {
 		String entryName = entry.getName();
 		String outputFileName = "./" + outputFolderName + File.separator
-				+ entryName.replaceAll(" ", "\\%20");
+				+ entryName;
 		File outputFile = prepareOutputFile(outputFileName);
-		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName());
+		URI archiveURI = URI.createURI("archive:file:" + new File(file.getName()).getCanonicalPath() + "!/" + entry.getName());
 		
 		Resource resource = getResourceSet().createResource(archiveURI);
 		resource.load(getLoadOptions());
@@ -619,7 +619,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected boolean assertResolveAllProxies(Resource resource) {
 		boolean failure = false;
-		String msg="";
+		String msg="x2x";
 		
 		for(Iterator<EObject> elementIt = EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
 			InternalEObject nextElement = (InternalEObject) elementIt.next();

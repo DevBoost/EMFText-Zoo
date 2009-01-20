@@ -11,8 +11,10 @@ import java.util.zip.ZipFile;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
@@ -53,12 +55,12 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 		@Override
 		protected boolean isExcludedFromReprintTest(String filename) {
-			return true;
+			return false;
 		}
 		
 		@Override
 		protected boolean ignoreSemanticErrors(String filename) {
-			return true;
+			return false;
 		}
 
 		@Override
@@ -87,6 +89,9 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				tests.add(new ParseZipFileEntryTest(zipFile, entry));
 			}
 		}
+		
+		JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(new File(zipFilePath).getAbsolutePath()));
+				
 		return tests;
 	}
 
