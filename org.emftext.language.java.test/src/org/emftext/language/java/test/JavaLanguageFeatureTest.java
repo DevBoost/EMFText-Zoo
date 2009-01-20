@@ -19,6 +19,7 @@ import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -76,7 +77,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 	private void assertParsableAndReprintable(String filename)
 		throws Exception, IOException, BadLocationException {
-		CompilationUnit unit = (CompilationUnit) parseResource(filename);
+		JavaRoot root = parseResource(filename);
+		assertType(root, CompilationUnit.class);
+		CompilationUnit unit = (CompilationUnit) root;
 		assertNotNull(unit);
 		
 		parseAndReprint(filename);
