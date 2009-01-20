@@ -44,6 +44,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				
 				parseAndReprint(zipFile, entry, "output/" + zipFile.getName());
 				
+				//TODO put somewhere suitable 
+				//for JacksTest: remove java.java from classpath!
+				if (entry.getName().equals("java.java")) {
+					JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
