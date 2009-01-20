@@ -187,6 +187,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (element instanceof Classifier) {
 			return false;
 		}
+		//do not break after the body of an anonymous class
+		if (element instanceof AnonymousClass) {
+			return false;
+		}
 		//in all other cases, the order requires consideration
 		return true;
 	}
@@ -288,6 +292,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			contentsList.add(STANDARD_ARRAY_LENGTH_FIELD);
 		}
+		
+		if (container instanceof AnonymousClass) {
+			NewConstructorCall newCC = (NewConstructorCall) container.eContainer();
+			Type type = getReferencedType(newCC.getType());
+			if (type instanceof Classifier) {
+				if (type instanceof MemberContainer) {
+					contentsList.addAll(((MemberContainer)type).getMembers());
+				}
+				contentsList.addAll(getAllMemebers((Classifier) type));
+			}
+		}
 	}
 	
 	
@@ -309,11 +324,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		boolean definitlyPackage = false;
 		
 		//navigate through constructor calls: The constructor itself
-		if (containerContainer.eContainer() instanceof Instantiation) {
+		if (containerContainer.eContainer() instanceof NewConstructorCall && containerContainer.eContainingFeature().equals(TypesPackage.Literals.TYPED_ELEMENT__TYPE)) {
 			EObject previouseRef = containerContainer.eContainer().eContainer();
 			if (previouseRef instanceof Reference) {
-				/*There might be an anonymous class*/
 				if (previouseRef instanceof NewConstructorCall) {
+					/*There might be an anonymous class*/
 					NewConstructorCall prevCall = (NewConstructorCall) previouseRef;
 					if (prevCall.getAnnonymousClass() != null) {
 						//
@@ -325,10 +340,26 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				else {
 					previousType = getTypeOfReferencedElement((Reference)previouseRef);
 				}
-				
-
 			}
 		}
+		
+		//in the special case that we have a NestedExpression that contains only(!) a NewConstructorCall with a possible anonymous class, we discard the NestedExpression
+		if (containerContainer instanceof NestedExpression) {
+			NestedExpression nextNested = (NestedExpression) containerContainer;
+			while (true) {		
+				if (nextNested.getExpression() instanceof NewConstructorCall) {
+					containerContainer = nextNested.getExpression();
+					break;
+				}
+				else if (nextNested.getExpression() instanceof NestedExpression) {
+					nextNested = (NestedExpression) nextNested.getExpression();
+				}
+				else {
+					break;
+				}
+			}
+		}
+		
 		
 		//consider inner classes
 		if (containerContainer instanceof NewConstructorCall && container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
