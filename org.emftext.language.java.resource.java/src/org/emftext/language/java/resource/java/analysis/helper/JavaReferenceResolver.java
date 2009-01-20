@@ -318,7 +318,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						//
 					}
 					else {
-						//previousType = getTypeOfReferencedElement((Reference)previouseRef);
+						previousType = getTypeOfReferencedElement((Reference)previouseRef);
 					}
 				}
 				else {
@@ -341,7 +341,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 				if (annonymousClass == null) {
 					//chained reference: scope given by previous element may be a type and may define a new scope
-					previousType = getTypeOfReferencedElement((Reference)containerContainer);
+					
 				}
 				else {
 					//container = annonymousClass;
