@@ -114,7 +114,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
 			throws IOException {
-		return loadResource(URI.createURI("archive:file:///" + new File(file.getName()).getCanonicalPath() + "!/" + entry.getName()));
+		return loadResource(URI.createURI("archive:file://" + new File(file.getName()).getCanonicalPath() + "!/" + entry.getName()));
 	}
 
 	private JavaRoot loadResource(
@@ -199,7 +199,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		String outputFileName = "./" + outputFolderName + File.separator
 				+ entryName;
 		File outputFile = prepareOutputFile(outputFileName);
-		URI archiveURI = URI.createURI("archive:file:///" + new File(file.getName()).getCanonicalPath() + "!/" + entry.getName());
+		URI archiveURI = URI.createURI("archive:file://" + new File(file.getName()).getCanonicalPath() + "!/" + entry.getName());
 		
 		Resource resource = getResourceSet().createResource(archiveURI);
 		resource.load(getLoadOptions());
@@ -296,6 +296,8 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		String inputFileContents = normalize(readTextContents(inputStream));
 		String firstPrintContents = normalize(readTextContents(inputStream2));
 		*/
+		
+		
 
 		TalkativeASTMatcher matcher = new TalkativeASTMatcher(true);
 		boolean result = result1.subtreeMatch(matcher, result2);
@@ -619,7 +621,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected boolean assertResolveAllProxies(Resource resource) {
 		boolean failure = false;
-		String msg="x2x";
+		String msg="";
 		
 		for(Iterator<EObject> elementIt = EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
 			InternalEObject nextElement = (InternalEObject) elementIt.next();

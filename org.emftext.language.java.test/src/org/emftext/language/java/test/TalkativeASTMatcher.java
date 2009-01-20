@@ -199,12 +199,14 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			return false;
 		}
 		CharacterLiteral o = (CharacterLiteral) other;
-		
-		String nToken = node.getEscapedValue();
 		String oToken = o.getEscapedValue();
 		
+		
+		//correctly escape the node
+		String nToken = node.getEscapedValue();
 		nToken =  Character.valueOf(nToken.charAt(1)).toString();
-		oToken =  Character.valueOf(oToken.charAt(1)).toString();
+		nToken = CharacterEscaper.escapeEscapedCharacters(nToken);
+		nToken = "'" + nToken + "'";
 		
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
@@ -325,7 +327,6 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(Javadoc node, Object other) {
-		
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -642,6 +643,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		
 		return setDiff(node, other, super.match(node, other));
 	}
+
 
 	@Override
 	public boolean match(TypeDeclaration node, Object other) {
