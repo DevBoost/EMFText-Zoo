@@ -12,8 +12,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.arrays.ArrayInstantiationBySize;
-import org.emftext.language.java.arrays.ArrayInstantiationByValues;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -24,6 +22,7 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.PackageDescriptor;
+import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.CastExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
@@ -304,7 +303,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		EObject containerContainer  = container.eContainer();
 		
 		Type previousType = null;
+		
 		AnnotationInstance annotationInstance = findContainingAnnotationInstance(container);
+		AnonymousClass annonymousClass = null;
 		boolean definitlyPackage = false;
 		
 		//navigate through constructor calls: The constructor itself
@@ -329,26 +330,20 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 		}
 		
+		//consider inner classes
+		if (containerContainer instanceof NewConstructorCall && container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+			TypeReference typeReference = ((NewConstructorCall)containerContainer).getType();
+			previousType = getReferencedType(typeReference);
+			annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
+		}
+		
 		//chained reference (1)
-		if (container instanceof Reference && containerContainer instanceof Reference
-				&& !(containerContainer instanceof ArrayInstantiationBySize)
-				&& !(containerContainer instanceof ArrayInstantiationByValues)) {
+		if (container instanceof Reference && container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			//do not leave the local scope in case of anonymous class declarations
 			if (containerContainer instanceof Instantiation) {
-				AnonymousClass annonymousClass = null;
-				if (containerContainer instanceof NewConstructorCall) {
-					annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
-				}
-				if (annonymousClass == null) {
-					//chained reference: scope given by previous element may be a type and may define a new scope
-					
-				}
-				else {
-					//container = annonymousClass;
-				}
+				//
 			}
 			else {	
-				//chained reference: scope given by previous element may be a type and may define a new scope
 				previousType = getTypeOfReferencedElement((Reference)containerContainer);
 			}
 		}
@@ -374,11 +369,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 		}
 		
-		//might be an explicit or implicit cast
-		if (containerContainer instanceof NestedExpression) {
-			previousType = getTypeOfExpression(((NestedExpression) containerContainer).getExpression());
-		}
-		
 		//inside annotation instance 
 		else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
 			TypeReference typeReference = annotationInstance.getAnnotation();
@@ -401,10 +391,15 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
 			}
 			else {
-				targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
-				if (targetObject == null && annotationInstance != null && container instanceof Reference) {
-					//possibly type reference 
-					targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
+				if (annonymousClass != null) {
+					targetObject = find(identifier, container, null, annonymousClass, reference.getEReferenceType());
+				}
+				if (targetObject == null) {
+					targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
+					if (targetObject == null && annotationInstance != null && container instanceof Reference) {
+						//possibly type reference 
+						targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
+					}
 				}
 			}
 		}
@@ -484,30 +479,27 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		Type type = null;
 
-		if (exp instanceof PrimaryExpression) {
-			//simple case
-			if (exp instanceof Reference) {
-				Reference ref = (Reference) exp;
-				//navigate down references
-				while(ref.getNext() != null) {
-					ref = ref.getNext();
-				}
-				exp = ref;
+		if (exp instanceof Reference) {
+			Reference ref = (Reference) exp;
+			//navigate down references
+			while(ref.getNext() != null) {
+				ref = ref.getNext();
 			}
-			
-			if (exp instanceof Literal) {
-				return getTypeOfReferencedElement(
-						((Literal) exp));
-			}
-			else if (exp instanceof CastExpression) {
-				return getReferencedType(
-						((CastExpression)exp).getTypeReference());
-			}
-			else {
-				return getTypeOfReferencedElement(
-						((Reference) exp));
-			}
-			
+			type = getTypeOfReferencedElement(ref);
+		}
+		else if (exp instanceof NestedExpression) {
+			type = getTypeOfExpression(((NestedExpression) exp).getExpression());
+		}
+		else if (exp instanceof Literal) {
+			type = getTypeOfReferencedElement(
+					((Literal) exp));
+		}
+		else if (exp instanceof CastExpression) {
+			type = getReferencedType(
+					((CastExpression)exp).getTypeReference());
+		}
+		else if (exp instanceof AssignmentExpression) {
+			type = getTypeOfExpression(((AssignmentExpression) exp).getChild());
 		}
 		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
@@ -582,9 +574,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		contentsList.addAll(getOrderedContents(container));
 		cosiderAddittionalScope(container, contentsList);
 		for(EObject cand : contentsList) {
-			if (cand.eIsProxy()) {
-				cand = EcoreUtil.resolve(cand, myResource);
-			}
+
 			//the reference may have to be defined prior to the referencing element
 			if(breakIfNext(container, type)) {
 				if (cand.equals(element)) {
@@ -600,6 +590,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				continue;
 			}
 			//consider also children
+			
+			if (cand.eIsProxy()) {
+				//now we need to look inside classifiers
+				cand = EcoreUtil.resolve(cand, myResource);
+			}
+			
 			for(TreeIterator<EObject> it = cand.eAllContents(); it.hasNext(); ) {
 				EObject subCand = it.next();
 				if(hasCorrectType(subCand, type)) {
@@ -712,6 +708,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			Class stringClass = (Class) EcoreUtil.resolve(
 					JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource);
 			return stringClass;
+		}
+		else if (reference instanceof NestedExpression) {
+			type = getTypeOfExpression(((NestedExpression) reference).getExpression());
 		}
 		else {
 			assert(false);
