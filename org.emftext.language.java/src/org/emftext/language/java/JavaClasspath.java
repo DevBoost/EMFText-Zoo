@@ -19,11 +19,12 @@ import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.PackageDescriptor;
+import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.types.PackageOrClassifierReference;
+import org.emftext.language.java.types.Type;
 
 public class JavaClasspath {
 
@@ -246,18 +247,21 @@ public class JavaClasspath {
 		String fullQualifiedName = "";
 		for(PackageOrClassifierReference ref : theImport.getParts()) {
 			if (!ref.getTarget().eIsProxy()) {
-				Classifier type = (Classifier) ref.getTarget();
+				Type type = ref.getTarget();
 				if (type.eIsProxy()) {
-					type = (Classifier) ref.getTarget();
+					type = ref.getTarget();
 				}
 	
-				if (type instanceof PackageDescriptor) {
-					fullQualifiedName = fullQualifiedName + type.getName() + 
+				if (type instanceof Package) {
+					fullQualifiedName = fullQualifiedName + ((Package) type).getName() + 
 						JavaUniquePathConstructor.PACKAGE_SEPARATOR;
 				}
-				else {
-					fullQualifiedName = fullQualifiedName + type.getName() + 
+				else if (type instanceof Classifier) {
+					fullQualifiedName = fullQualifiedName + ((Classifier) type).getName() + 
 						JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+				}
+				else {
+					assert(false);
 				}
 			}
 		}
@@ -288,6 +292,51 @@ public class JavaClasspath {
 		resultList.addAll(javaLangPackage);
 		
 		return resultList;
+	}
+
+	public void unRegisterClassifier(String packageName, String classifierName) {
+		if (classifierName == null || classifierName.equals("")) {
+			return;
+		}
+		
+		if (!packageName.endsWith(".")) {
+			packageName = packageName + ".";
+		}
+		
+		String innerName = classifierName;
+		String outerName = "";
+		String qualifiedName = packageName;
+		
+		int idx = classifierName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
+		if (idx >= 0) {
+			innerName = classifierName.substring(idx + 1);
+			outerName = classifierName.substring(0, idx + 1);
+			if (".".equals(packageName)) {
+				qualifiedName = outerName;
+			}
+			else {
+				qualifiedName = packageName + outerName;
+			}
+		}
+		
+		synchronized (packageClassifierMap) {
+			if (packageClassifierMap.containsKey(qualifiedName)) {
+				packageClassifierMap.get(qualifiedName).remove(innerName);
+			}
+		}
+		
+		String fullName = null;
+		if (".".equals(packageName)) {
+			fullName = classifierName;
+		}
+		else {
+			fullName = packageName + classifierName;
+		}
+			
+		URI logicalUri = 
+			JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
+		
+		URI_MAP.remove(logicalUri);
 	}
 
 }

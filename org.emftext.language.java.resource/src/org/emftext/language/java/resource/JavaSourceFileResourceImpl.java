@@ -14,9 +14,11 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
@@ -29,15 +31,26 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 		super(uri);
 	}
 
-	/**
-	 * Registers pathmap if not done already.
-	 */
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		super.doLoad(inputStream, options);
 		if (getContents().isEmpty() && getErrors().isEmpty()) {
 			contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 		}
 	    register();
+	}
+	
+	@Override
+	public void load(Map<?, ?> options) throws IOException {
+    	URIConverter uriConverter = getURIConverter();
+    	URI normalizedURI = uriConverter.normalize(uri);
+		if(normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
+			if (!isLoaded) {
+				loadPackageFromClasspath();
+			}
+		}
+		else {
+			super.load(options);
+		}
 	}
 	
 	protected void doUnload() {
@@ -51,6 +64,23 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 		}
 	}
 
+	private void loadPackageFromClasspath() {
+		Package thePackage = ContainersFactory.eINSTANCE.createPackage();
+		String packageName = getURI().trimFileExtension().toString().substring(
+				JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP.length());
+		String[] packageNaemParts = packageName.split("\\.");
+		for(int i = 0; i < packageNaemParts.length; i++) {
+			if(i < packageNaemParts.length - 1) {
+				thePackage.getPackage().add(packageNaemParts[i]);
+			}
+			else {
+				thePackage.setName(packageNaemParts[i]);
+			}
+		}
+		populatePackage(thePackage);
+		getContents().add(thePackage);
+	}
+	
 	private void register() throws IOException {
 		URI myURI = getURI();
 		

@@ -58,7 +58,8 @@ containers.EmptyModel ::= ("import" imports #0 ";" !0 )* (";")*
    ;
 
 containers.Package
-   ::=  annotations* "package" (package[] #0 "." #0 )* name[] #0 ";"
+   ::=  annotations* "package" (package[] #0 "." #0 )* name[] #0 ";" 
+        (";")? //TODO this is required to let T7312 of JacksTest pass... not sure if this is correct or if it should be * instead of ?
         !0 !0
         ("import" imports #0 ";" !0 )* (";")*
    ;

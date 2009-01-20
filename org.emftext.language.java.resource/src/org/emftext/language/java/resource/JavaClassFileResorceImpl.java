@@ -19,6 +19,7 @@ import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
@@ -34,7 +35,6 @@ import org.emftext.language.java.types.TypesFactory;
 /**
  * Extends JavaResource to make use of proxy resolving
  * 
- * @author jj2
  *
  */
 public class JavaClassFileResorceImpl extends JavaResourceImpl {
@@ -129,15 +129,15 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 			}
 		}
 		
-		String className = clazz.getClassName().substring( + 1);
+		String className = clazz.getClassName();
 		int idx = clazz.getClassName().lastIndexOf("$");
 		if (idx >= 0) {
-			className = className.substring(idx);
+			className = className.substring(idx + 1);
 		}
 		else {
 			idx = clazz.getClassName().lastIndexOf(".");
 			if (idx >= 0) {
-				className = className.substring(idx);
+				className = className.substring(idx + 1);
 			}
 		}
 		
@@ -149,7 +149,7 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
 			((MemberContainer) emfClassifier).getMembers().add(constructMethod(method));
 		}
-		
+
 		return emfClassifier;
 	}
 	
@@ -248,10 +248,6 @@ public class JavaClassFileResorceImpl extends JavaResourceImpl {
 	            break;
         }
 
-        if (emfTypeReference == null) {
-        	System.out.println("!!!");
-        }
-        
         return emfTypeReference;
 	}
 	

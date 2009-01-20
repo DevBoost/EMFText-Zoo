@@ -21,7 +21,7 @@ import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
-import org.emftext.language.java.containers.PackageDescriptor;
+import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.CastExpression;
 import org.emftext.language.java.expressions.ConditionalExpression;
@@ -259,10 +259,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			contentsList.addAll(defaultImports);
 		}
 		//consider qualified package names
-		if (container instanceof PackageDescriptor) {
-			PackageDescriptor packageDescriptor = (PackageDescriptor) container;
+		if (container instanceof Package) {
+			Package packageDescriptor = (Package) container;
 			String fullPackageName = packageDescriptor.getName();
-			PackageDescriptor parent = packageDescriptor.getParent();
+			Package parent = packageDescriptor.getParent();
 			while(parent != null) {
 				fullPackageName = parent.getName() + "." + fullPackageName;
 				parent = parent.getParent();
@@ -325,7 +325,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		boolean definitlyPackage = false;
 		
 		//navigate through constructor calls: The constructor itself
-		if (containerContainer.eContainer() instanceof NewConstructorCall && containerContainer.eContainingFeature().equals(TypesPackage.Literals.TYPED_ELEMENT__TYPE)) {
+		if (containerContainer.eContainer() instanceof NewConstructorCall 
+				&& containerContainer.eContainingFeature().equals(TypesPackage.Literals.TYPED_ELEMENT__TYPE)
+				&& containerContainer.eContainer().eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			EObject previouseRef = containerContainer.eContainer().eContainer();
 			if (previouseRef instanceof Reference) {
 				if (previouseRef instanceof NewConstructorCall) {
@@ -446,7 +448,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				Reference ref = (Reference)container;
 				//there must be something (a classifier reference) following up
 				if (ref.getNext() != null) {
-					PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
+					Package packageDescriptor = ContainersFactory.eINSTANCE.createPackage();
 					packageDescriptor.setName(identifier);
 					result.addMapping(identifier, packageDescriptor);
 					
@@ -455,8 +457,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						if (ref instanceof IdentifierReference) {
 							IdentifierReference identifierReference = 
 								(IdentifierReference) ref;
-							if(identifierReference.getTarget() instanceof PackageDescriptor) {
-								packageDescriptor.setParent((PackageDescriptor) identifierReference.getTarget());
+							if(identifierReference.getTarget() instanceof Package) {
+								packageDescriptor.setParent((Package) identifierReference.getTarget());
 							}
 						}
 					}
@@ -480,14 +482,14 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 				int pos = parts.indexOf(container);
 				
-				PackageDescriptor packageDescriptor = ContainersFactory.eINSTANCE.createPackageDescriptor();
+				Package packageDescriptor = ContainersFactory.eINSTANCE.createPackage();
 				packageDescriptor.setName(identifier);
 				result.addMapping(identifier, packageDescriptor);
 				
 				if (pos > 0) {
 					Type parent = ((PackageOrClassifierReference)parts.get(pos - 1)).getTarget();
-					if (parent instanceof PackageDescriptor ) {
-						packageDescriptor.setParent((PackageDescriptor) parent);
+					if (parent instanceof Package ) {
+						packageDescriptor.setParent((Package) parent);
 					}
 				}
 				
@@ -701,7 +703,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		//element points to this or super
 		else if (reference instanceof SelfReference) {
-			if (reference.eContainer() instanceof Reference) {
+			if (reference.eContainer() instanceof Reference && reference.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 				return getTypeOfReferencedElement((Reference)reference.eContainer());
 			}
 			else {

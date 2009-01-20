@@ -14,9 +14,23 @@ public class PackageImportClassifiersReferenceResolver extends org.emftext.runti
 		
 		if (classifierList.get(0).equals(element)) {
 			URI uri = element.eResource().getURI();
-			String[] fullName = uri.lastSegment().split("\\.|$");
-			String packageName = fullName[fullName.length - 3];
-			
+			String packageName = uri.trimFileExtension().lastSegment();
+			int idx1 = packageName.lastIndexOf("$");
+			int idx2 = packageName.lastIndexOf(".");
+			if (idx1 != -1) {
+				packageName = packageName.substring(0,idx1);
+			}
+			else if (idx2 != -1) {
+				packageName = packageName.substring(0,idx2);
+			}
+			idx1 = packageName.lastIndexOf("$");
+			idx2 = packageName.lastIndexOf(".");
+			if (idx1 != -1) {
+				packageName = packageName.substring(idx1 + 1);
+			}
+			else if (idx2 != -1) {
+				packageName = packageName.substring(idx2 + 1);
+			}
 			return packageName;
 		}
 		else {
