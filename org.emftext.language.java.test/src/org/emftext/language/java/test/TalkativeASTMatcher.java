@@ -454,13 +454,18 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			}
 		}
 		
-		//OCTAL normalization
 		if (nToken.toLowerCase().endsWith("l")) {
 			nToken = nToken.substring(0, nToken.length() - 1);
-			nToken = Long.decode(nToken).toString();
 		}
 		if (oToken.toLowerCase().endsWith("l")) {
 			oToken = oToken.substring(0, oToken.length() - 1);
+		}
+		
+		//OCTAL normalization
+		if (nToken.matches("0[0-9]+")) {
+			nToken = Long.decode(nToken).toString();
+		}
+		if (oToken.matches("0[0-9]+")) {
 			oToken = Long.decode(oToken).toString();
 		}
 		
@@ -540,16 +545,6 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(SimpleType node, Object other) {
-		//CHANGED
-		/*if (other instanceof SimpleType) {
-			SimpleType o = (SimpleType) other;
-			boolean result = safeSubtreeMatch(node.getName(), o.getName());
-			return setDiff(node, other, result);
-		}
-		if (other instanceof ArrayType) {
-			return true;
-		}
-		return false;*/
 		
 		return setDiff(node, other, super.match(node, other));
 	}

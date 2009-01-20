@@ -197,7 +197,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			String outputFolderName) throws Exception {
 		String entryName = entry.getName();
 		String outputFileName = "./" + outputFolderName + File.separator
-				+ entryName;
+				+ entryName.replaceAll(" ", "\\%20");
 		File outputFile = prepareOutputFile(outputFileName);
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName());
 		
