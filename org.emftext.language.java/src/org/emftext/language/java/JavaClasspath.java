@@ -164,9 +164,16 @@ public class JavaClasspath {
 	
 	public EList<Classifier> getClassifiers(Import theImport, String packageName) {
 		String fullQualifiedName = getQualifiedNameFromImport(theImport);
-		fullQualifiedName = fullQualifiedName + packageName;
 		
-		return getClassifiers(fullQualifiedName, "*");
+		String fullQualifiedPackageName = fullQualifiedName + packageName + ".";
+		EList<Classifier> result = getClassifiers(fullQualifiedPackageName, "*");
+		
+		if (result.isEmpty()) {
+			//try as "Class" because the "package" can indeed be a "class"
+			String fullQualifiedClassPackageName = fullQualifiedName + packageName + "$";
+			result = getClassifiers(fullQualifiedClassPackageName, "*");
+		}
+		return result;
 	}
 	
 	/**
