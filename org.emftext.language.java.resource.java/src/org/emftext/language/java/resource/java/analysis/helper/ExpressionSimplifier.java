@@ -12,8 +12,6 @@ import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.ITextResource;
 
-import com.sun.javadoc.AnnotationValue;
-
 public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePostProcessorProvider {
 
 	private static final ExpressionSimplifier theSimplifier = new ExpressionSimplifier();

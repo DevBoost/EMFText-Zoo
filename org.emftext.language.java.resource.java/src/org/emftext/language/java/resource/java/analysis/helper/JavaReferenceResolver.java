@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.arrays.ArrayInitializer;
 import org.emftext.language.java.arrays.ArrayInstantiationBySize;
 import org.emftext.language.java.arrays.ArrayInstantiationByValues;
 import org.emftext.language.java.classifiers.Annotation;
@@ -319,7 +318,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						//
 					}
 					else {
-						previousType = getTypeOfReferencedElement((Reference)previouseRef);
+						//previousType = getTypeOfReferencedElement((Reference)previouseRef);
 					}
 				}
 				else {
