@@ -14,7 +14,7 @@ public class SunJDKTest extends AbstractZipFileInputTest {
 	
 	public static Test suite() throws CoreException, IOException {
 		TestSuite suite = new ThreadedTestSuite("Suite testing all files in sun jdk 1.6.0_07 zip file automatically", 5 * 60 * 1000, 8);
-		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE));
+		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE, true));
 		return suite;
 	}
 

@@ -14,7 +14,7 @@ public class Tomcat6Test extends AbstractZipFileInputTest {
 	
 	public static Test suite() throws CoreException, IOException {
 		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the tomcat 6 zip file", 5 * 60 * 1000, 40);
-		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE));
+		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE, true));
 		return suite;
 	}
 

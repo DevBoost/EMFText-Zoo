@@ -27,11 +27,13 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 		private final ZipFile zipFile;
 		private final ZipEntry entry;
+		private final boolean excludeFromReprint;
 
-		private ParseZipFileEntryTest(ZipFile zipFile, ZipEntry entry) {
+		private ParseZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
 			super("Parse " + entry.getName());
 			this.zipFile = zipFile;
 			this.entry = entry;
+			this.excludeFromReprint = excludeFromReprint;
 		}
 		
 		public void runTest() {
@@ -55,7 +57,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 		@Override
 		protected boolean isExcludedFromReprintTest(String filename) {
-			return false;
+			return excludeFromReprint;
 		}
 		
 		@Override
@@ -79,14 +81,14 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		}
 	}
 
-	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath) throws IOException {
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException {
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 			if (entry.getName().endsWith(".java")) {
-				tests.add(new ParseZipFileEntryTest(zipFile, entry));
+				tests.add(new ParseZipFileEntryTest(zipFile, entry, excludeFromReprint));
 			}
 		}
 		

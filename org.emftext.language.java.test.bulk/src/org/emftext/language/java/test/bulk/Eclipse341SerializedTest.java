@@ -11,7 +11,7 @@ public class Eclipse341SerializedTest extends AbstractZipFileInputTest {
 	
 	public void testSerialized() {
 		try {
-			Collection<TestCase> tests = getTestsForZipFileEntries(Eclipse341Test.INPUT_FILE);
+			Collection<TestCase> tests = getTestsForZipFileEntries(Eclipse341Test.INPUT_FILE, true);
 			int count = 1;
 			int failed = 0;
 			for (TestCase test : tests) {
