@@ -157,6 +157,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		assertType(literal, StringReference.class);
 		StringReference stringValue = (StringReference) literal;
+		// TODO jjohannes: why is this code commented out?
 		//assertEquals("Unescaped value expected for field \"" + name + "\".",
 		//		expectedValue, stringValue.getValue());
 	}
