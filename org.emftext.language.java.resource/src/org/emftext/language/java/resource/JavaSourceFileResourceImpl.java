@@ -34,6 +34,9 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 	 */
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
 		super.doLoad(inputStream, options);
+		if (getContents().isEmpty() && getErrors().isEmpty()) {
+			contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
+		}
 	    register();
 	}
 	
