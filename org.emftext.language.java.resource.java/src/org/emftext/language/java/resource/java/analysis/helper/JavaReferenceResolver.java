@@ -321,7 +321,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		Type previousType = null;
 		
 		AnnotationInstance annotationInstance = findContainingAnnotationInstance(container);
-		AnonymousClass annonymousClass = null;
+		AnonymousClass anonymousClass = null;
 		boolean definitlyPackage = false;
 		
 		//navigate through constructor calls: The constructor itself
@@ -329,11 +329,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			EObject previouseRef = containerContainer.eContainer().eContainer();
 			if (previouseRef instanceof Reference) {
 				if (previouseRef instanceof NewConstructorCall) {
-					previousType = getTypeOfReferencedElement((Reference)previouseRef);
+					anonymousClass = ((NewConstructorCall) previouseRef).getAnnonymousClass();
 				}
-				else {
-					previousType = getTypeOfReferencedElement((Reference)previouseRef);
-				}
+				previousType = getTypeOfReferencedElement((Reference)previouseRef);
 			}
 		}
 		
@@ -359,7 +357,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (containerContainer instanceof NewConstructorCall && container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			TypeReference typeReference = ((NewConstructorCall)containerContainer).getType();
 			previousType = getReferencedType(typeReference);
-			annonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
+			anonymousClass = ((NewConstructorCall) containerContainer).getAnnonymousClass();
 		}
 		
 		//chained reference (1)
@@ -416,8 +414,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
 			}
 			else {
-				if (annonymousClass != null) {
-					targetObject = find(identifier, container, null, annonymousClass, reference.getEReferenceType());
+				if (anonymousClass != null) {
+					targetObject = find(identifier, container, null, anonymousClass, reference.getEReferenceType());
 				}
 				if (targetObject == null) {
 					targetObject = find(identifier, container, null, previousType, reference.getEReferenceType());
