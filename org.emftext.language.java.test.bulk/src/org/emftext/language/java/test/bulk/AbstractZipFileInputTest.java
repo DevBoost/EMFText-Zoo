@@ -94,14 +94,41 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			ZipEntry entry = entries.nextElement();
 			if (entry.getName().endsWith(".java")) {
 				tests.add(new ParseZipFileEntryTest(zipFile, entry, excludeFromReprint));
+				
+				String fullName = entry.getName();
+				fullName = shortenPathUntil(fullName, "org/");
+				fullName = shortenPathUntil(fullName, "com/");
+				
+				fullName = fullName.replaceAll("/", "."); 
+				
+				String packageName = "";
+				String className   = "";
+				
+				int idx = fullName.lastIndexOf(".");
+				idx = fullName.substring(0, idx).lastIndexOf(".");
+				if (idx >= 0) {
+					packageName = fullName.substring(0, idx);
+					className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
+				}	
+				
+				URI uri = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFilePath + "!/" + entry.getName());
+				
+				JavaClasspath.INSTANCE.registerClassifier(packageName, className, uri);
 			}
 		}
 		
-		JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(new File(zipFilePath).getAbsolutePath()));
-				
 		return tests;
 	}
 
+	private static String shortenPathUntil(String path, String root) {
+		int idx = path.indexOf(root);
+		if (idx != -1) {
+			return path.substring(idx);
+		}
+		return path;
+	}
+	
+	
 	protected static void addToTestSuite(TestSuite suite,
 			Collection<TestCase> tests) throws IOException {
 		for (TestCase test : tests) {

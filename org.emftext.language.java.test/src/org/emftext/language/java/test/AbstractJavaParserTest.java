@@ -114,7 +114,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
 			throws IOException {
-		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName()));
+		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName()));
 	}
 
 	private JavaRoot loadResource(
@@ -199,7 +199,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		String outputFileName = "./" + outputFolderName + File.separator
 				+ entryName;
 		File outputFile = prepareOutputFile(outputFileName);
-		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName() + "!/" + entry.getName());
+		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
 		
 		Resource resource = getResourceSet().createResource(archiveURI);
 		resource.load(getLoadOptions());
