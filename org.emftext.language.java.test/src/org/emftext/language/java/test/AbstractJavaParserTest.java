@@ -72,13 +72,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
 	
-	public AbstractJavaParserTest(String name, ResourceSet rs) {
-		super(name);
-		myResourceSet = rs;
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"java", new JavaSourceOrClassFileResourceFactoryImpl());
-	}
-	
 	protected void registerInClassPath(String file) throws Exception {
 		File inputFolder = new File("." + File.separator + getTestInputFolder());
 		File inputFile = new File(inputFolder + File.separator + file);
@@ -95,8 +88,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	 */
 	private static List<File> parsedResources = new ArrayList<File>();
 	private static List<File> reprintedResources = new ArrayList<File>();
-	
-	protected static ResourceSet myResourceSet = new ResourceSetImpl();
 
 	protected JavaRoot parseResource(String filename,
 			String inputFolderName) throws Exception {
@@ -616,7 +607,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}*/
 	
 	protected ResourceSet getResourceSet() {
-		return myResourceSet;
+		return new ResourceSetImpl();
 	}
 
 	protected boolean assertResolveAllProxies(Resource resource) {
