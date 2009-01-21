@@ -45,8 +45,11 @@ public class PackageImportClassifiersReferenceResolver extends org.emftext.runti
 		EList<Classifier> importedClassifiers =  
 			JavaClasspath.INSTANCE.getClassifiers(theImport, identifier);
 
-		for (Classifier classifier : importedClassifiers) {
-			result.addMapping(identifier, EcoreUtil.resolve(classifier, theImport.eResource()));
+		for (Classifier importedClassifier : importedClassifiers) {
+			importedClassifier = (Classifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
+			if (!importedClassifier.eIsProxy()) {
+				result.addMapping(identifier, importedClassifier);
+			}
 		}
 	}
 }

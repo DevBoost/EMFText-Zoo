@@ -20,9 +20,11 @@ public class ClassifierImportClassifierReferenceResolver extends org.emftext.run
 			EReference reference, int position, boolean resolveFuzzy, IResolveResult result) {
 		
 		Classifier importedClassifier = JavaClasspath.INSTANCE.getClassifier(theImport, identifier);
-		
 		if (importedClassifier != null) {
-			result.addMapping(identifier, EcoreUtil.resolve(importedClassifier, theImport.eResource()));
+			importedClassifier = (Classifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
+			if (!importedClassifier.eIsProxy()) {
+				result.addMapping(identifier, importedClassifier);
+			}
 		}
 	}
 }
