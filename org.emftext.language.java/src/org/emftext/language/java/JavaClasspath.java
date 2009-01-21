@@ -127,36 +127,36 @@ public class JavaClasspath {
 			}
 		}
 		
-		synchronized (packageClassifierMap) {
+		synchronized (this) {
 			if (!packageClassifierMap.containsKey(qualifiedName)) {
 				packageClassifierMap.put(qualifiedName, new ArrayList<String>());
 			}
 			if (!packageClassifierMap.get(qualifiedName).contains(innerName)) {
 				packageClassifierMap.get(qualifiedName).add(innerName);
 			}
-		}
-		
-		if (uri != null) {
-			String fullName = null;
-			if (".".equals(packageName)) {
-				fullName = classifierName;
-			}
-			else {
-				fullName = packageName + classifierName;
-			}
 			
-			URI logicalUri = 
-				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
-			
-			if (URI_MAP.containsKey(logicalUri)) {
-				//TODO where to put this warning?
-				System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
-						"\n[JaMoPP]   1) " + URI_MAP.get(logicalUri) +
-						"\n[JaMoPP]   2) " + uri +
-						"\n[JaMoPP] Version 1) will be ignored!");
+			if (uri != null) {
+				String fullName = null;
+				if (".".equals(packageName)) {
+					fullName = classifierName;
+				}
+				else {
+					fullName = packageName + classifierName;
+				}
+				
+				URI logicalUri = 
+					JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
+				
+				if (URI_MAP.containsKey(logicalUri)) {
+					//TODO where to put this warning?
+					System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
+							"\n[JaMoPP]   1) " + URI_MAP.get(logicalUri) +
+							"\n[JaMoPP]   2) " + uri +
+							"\n[JaMoPP] Version 1) will be ignored!");
+				}
+				
+				URI_MAP.put(logicalUri, uri);
 			}
-			
-			URI_MAP.put(logicalUri, uri);
 		}
 	}
 	
@@ -191,7 +191,7 @@ public class JavaClasspath {
 		
 		EList<Classifier> resultList = new BasicEList<Classifier>();
 
-		synchronized (packageClassifierMap) {
+		synchronized (this) {
 			if(!packageClassifierMap.containsKey(packageName)) {
 				return resultList;
 			}
@@ -319,24 +319,24 @@ public class JavaClasspath {
 			}
 		}
 		
-		synchronized (packageClassifierMap) {
+		synchronized (this) {
 			if (packageClassifierMap.containsKey(qualifiedName)) {
 				packageClassifierMap.get(qualifiedName).remove(innerName);
 			}
-		}
-		
-		String fullName = null;
-		if (".".equals(packageName)) {
-			fullName = classifierName;
-		}
-		else {
-			fullName = packageName + classifierName;
-		}
 			
-		URI logicalUri = 
-			JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
-		
-		URI_MAP.remove(logicalUri);
+			String fullName = null;
+			if (".".equals(packageName)) {
+				fullName = classifierName;
+			}
+			else {
+				fullName = packageName + classifierName;
+			}
+				
+			URI logicalUri = 
+				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
+			
+			URI_MAP.remove(logicalUri);
+		}
 	}
 
 }
