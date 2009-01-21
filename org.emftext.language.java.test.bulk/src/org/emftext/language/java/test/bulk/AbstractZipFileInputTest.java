@@ -67,7 +67,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		
 		@Override
 		protected boolean ignoreSemanticErrors(String filename) {
-			return false;
+			return excludeFromReprint;
 		}
 
 		@Override
@@ -95,25 +95,27 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			if (entry.getName().endsWith(".java")) {
 				tests.add(new ParseZipFileEntryTest(zipFile, entry, excludeFromReprint));
 				
-				String fullName = entry.getName();
-				fullName = shortenPathUntil(fullName, "org/");
-				fullName = shortenPathUntil(fullName, "com/");
-				
-				fullName = fullName.replaceAll("/", "."); 
-				
-				String packageName = "";
-				String className   = "";
-				
-				int idx = fullName.lastIndexOf(".");
-				idx = fullName.substring(0, idx).lastIndexOf(".");
-				if (idx >= 0) {
-					packageName = fullName.substring(0, idx);
-					className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
-				}	
-				
-				URI uri = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFilePath + "!/" + entry.getName());
-				
-				JavaClasspath.INSTANCE.registerClassifier(packageName, className, uri);
+				if(!excludeFromReprint) {
+					String fullName = entry.getName();
+					fullName = shortenPathUntil(fullName, "org/");
+					fullName = shortenPathUntil(fullName, "com/");
+					
+					fullName = fullName.replaceAll("/", "."); 
+					
+					String packageName = "";
+					String className   = "";
+					
+					int idx = fullName.lastIndexOf(".");
+					idx = fullName.substring(0, idx).lastIndexOf(".");
+					if (idx >= 0) {
+						packageName = fullName.substring(0, idx);
+						className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
+					}	
+					URI uri = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFilePath + "!/" + entry.getName());
+					
+					JavaClasspath.INSTANCE.registerClassifier(packageName, className, uri);
+				}
+
 			}
 		}
 		
