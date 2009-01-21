@@ -237,7 +237,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				else if (explicitImport instanceof PackageImport) {
 					EList<Classifier> packageImports = 
 						((PackageImport)explicitImport).getClassifiers();
-					contentsList.addAll(packageImports);
+					//TODO not using a new BasicElist sometimes produces a ConcurrentModificationException; clarify why
+					for(Classifier next : new BasicEList<Classifier>(packageImports)) {
+						contentsList.add(next);
+					}
+				
 				}
 				else if (explicitImport instanceof StaticMemberImport) {
 					Member staticMember = 
@@ -606,7 +610,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		contentsList.addAll(getOrderedContents(container));
 		cosiderAddittionalScope(container, contentsList);
 		for(EObject cand : contentsList) {
-
+			if (cand == null) {
+				//TODO clarify how this happens
+				continue;
+			}
 			//the reference may have to be defined prior to the referencing element
 			if(breakIfNext(container, type)) {
 				if (cand.equals(element)) {
@@ -863,17 +870,23 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 									break;
 								}
 								
-								if (!type.eIsProxy() || !argumentType.eIsProxy()) {
-									if(!compareTypes(type, argumentType)) {
-										result = false;
-										break;
+								if (type != null && argumentType != null) {
+									if (!type.eIsProxy() || !argumentType.eIsProxy()) {
+										if(!compareTypes(type, argumentType)) {
+											result = false;
+											break;
+										}
+									}
+									else {
+										if (!argumentType.eProxyURI().equals(type.eProxyURI())) {
+											result = false;
+											break;
+										}
 									}
 								}
 								else {
-									if (!argumentType.eProxyURI().equals(type.eProxyURI())) {
-										result = false;
-										break;
-									}
+									result = false;
+									break;
 								}
 							}
 						}

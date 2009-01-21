@@ -2,6 +2,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.imports.PackageImport;
@@ -45,7 +46,7 @@ public class PackageImportClassifiersReferenceResolver extends org.emftext.runti
 			JavaClasspath.INSTANCE.getClassifiers(theImport, identifier);
 
 		for (Classifier classifier : importedClassifiers) {
-			result.addMapping(identifier, classifier);
+			result.addMapping(identifier, EcoreUtil.resolve(classifier, theImport.eResource()));
 		}
 	}
 }

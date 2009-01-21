@@ -1,6 +1,7 @@
 package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.commons.NamedElement;
@@ -21,7 +22,7 @@ public class ClassifierImportClassifierReferenceResolver extends org.emftext.run
 		Classifier importedClassifier = JavaClasspath.INSTANCE.getClassifier(theImport, identifier);
 		
 		if (importedClassifier != null) {
-			result.addMapping(identifier, importedClassifier);
+			result.addMapping(identifier, EcoreUtil.resolve(importedClassifier, theImport.eResource()));
 		}
 	}
 }
