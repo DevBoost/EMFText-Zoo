@@ -46,10 +46,8 @@ public class PackageImportClassifiersReferenceResolver extends org.emftext.runti
 			JavaClasspath.INSTANCE.getClassifiers(theImport, identifier);
 
 		for (Classifier importedClassifier : importedClassifiers) {
-			importedClassifier = (Classifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
-			if (!importedClassifier.eIsProxy()) {
-				result.addMapping(identifier, importedClassifier);
-			}
+			//importedClassifier = (Classifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
+			result.addMapping(identifier, importedClassifier);
 		}
 	}
 }

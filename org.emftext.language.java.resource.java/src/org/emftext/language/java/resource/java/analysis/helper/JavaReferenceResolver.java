@@ -1,5 +1,7 @@
 package org.emftext.language.java.resource.java.analysis.helper;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -9,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationInstance;
@@ -238,8 +241,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					EList<Classifier> packageImports = 
 						((PackageImport)explicitImport).getClassifiers();
 					//TODO not using a new BasicElist sometimes produces a ConcurrentModificationException; clarify why
-					for(Classifier next : new BasicEList<Classifier>(packageImports)) {
-						contentsList.add(next);
+					Iterator<Classifier> basicIt = ((InternalEList<Classifier>)packageImports).basicIterator();
+					while(basicIt.hasNext()) {
+						contentsList.add(basicIt.next());
 					}
 				
 				}
