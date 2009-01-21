@@ -69,7 +69,7 @@ containers.CompilationUnit
         !0 !0
         ("import" imports #0 ";" !0 )*
         !0
-        (classifiers !0 !0)+
+        (classifiers (";")* !0 !0)+
         ("\u001a")?
 	;
 	
