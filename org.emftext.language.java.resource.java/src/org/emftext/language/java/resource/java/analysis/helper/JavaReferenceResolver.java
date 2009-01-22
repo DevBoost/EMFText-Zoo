@@ -24,12 +24,15 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.CastExpression;
+import org.emftext.language.java.expressions.ConditionalAndExpression;
 import org.emftext.language.java.expressions.ConditionalExpression;
+import org.emftext.language.java.expressions.ConditionalOrExpression;
 import org.emftext.language.java.expressions.EqualityExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.InstanceOfExpression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.PrimaryExpression;
+import org.emftext.language.java.expressions.RelationExpression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -206,6 +209,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected boolean breakIfChild(EObject element, EClass typeToResolve)  {
 		//do not go into other classifier declarations
 		if (element instanceof Classifier) {
+			return true;
+		}
+		//do not look into parameters or contents of other methods
+		if (element instanceof Method) {
 			return true;
 		}
 		//go not go into a new block
@@ -544,6 +551,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			type = getTypeOfExpression(((ConditionalExpression)exp).getExpressionIf());
 		}
 		else if (exp instanceof EqualityExpression ||
+				exp instanceof RelationExpression ||
+				exp instanceof ConditionalOrExpression ||
+				exp instanceof ConditionalAndExpression ||
 				exp instanceof InstanceOfExpression ) {
 			type = (TypesFactory.eINSTANCE.createBoolean());
 		}

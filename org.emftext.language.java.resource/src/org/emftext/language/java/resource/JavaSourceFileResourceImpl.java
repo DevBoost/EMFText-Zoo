@@ -91,12 +91,7 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 		if("pathmap".equals(myURI.scheme())) {
 			return;
 		}
-		
-		//only for not yet registered
-		if(JavaClasspath.INSTANCE.URI_MAP.values().contains(myURI)) {
-			return;
-		}
-		
+
 		if (!getContents().isEmpty()) {
 			EObject root = getContents().get(0);
 			//could also be a package-info.java without CU
