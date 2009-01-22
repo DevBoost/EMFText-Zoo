@@ -1122,9 +1122,18 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			superClass = getSuperType(superClass);
 			resultClassifierList.add(superClass);
 		}
+		
+		EList<Classifier> onlyClasses = new BasicEList<Classifier>(resultClassifierList);
+		
 		//collect all implemented interfaces
 		collectAllSuperInterfaces(
 				javaClass.getImplements(), resultClassifierList);
+		for(Classifier superClassifier : onlyClasses) {
+			if (superClassifier instanceof Class) {
+			collectAllSuperInterfaces(
+					((Class)superClassifier).getImplements(), resultClassifierList);
+			}
+		}
 	}
 
 	/**
