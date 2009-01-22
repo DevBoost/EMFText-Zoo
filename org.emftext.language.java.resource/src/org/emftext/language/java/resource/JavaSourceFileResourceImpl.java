@@ -48,6 +48,9 @@ public class JavaSourceFileResourceImpl extends JavaResourceImpl {
 				loadPackageFromClasspath();
 			}
 		}
+		else if(normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+			//do nothing. class not available.
+		}
 		else {
 			super.load(options);
 		}
