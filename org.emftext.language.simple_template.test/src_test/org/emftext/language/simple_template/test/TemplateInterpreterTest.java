@@ -17,7 +17,7 @@ import org.emftext.language.simple_template.interpreter.SimpleTemplateInterprete
 import org.emftext.language.simple_template.interpreter.SimpleTemplateInterpreterImpl;
 import org.junit.Test;
 import org.emftext.language.simple_template.Template;
-import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplateResourceImpl;
+import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplateResource;
 
 public class TemplateInterpreterTest {
 	
@@ -50,7 +50,7 @@ public class TemplateInterpreterTest {
 	private Resource load(String templateFile) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;
 		InputStream inputStream = new FileInputStream(templateFile);
-		SimpletemplateResourceImpl resource = new SimpletemplateResourceImpl();
+		SimpletemplateResource resource = new SimpletemplateResource();
 		resource.load(inputStream, options);
 		inputStream.close();
 		return resource;
