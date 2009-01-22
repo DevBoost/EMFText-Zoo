@@ -22,17 +22,23 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.expressions.AdditiveExpression;
+import org.emftext.language.java.expressions.AndExpression;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.CastExpression;
 import org.emftext.language.java.expressions.ConditionalAndExpression;
 import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.ConditionalOrExpression;
 import org.emftext.language.java.expressions.EqualityExpression;
+import org.emftext.language.java.expressions.ExclusiveOrExpression;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.InclusiveOrExpression;
 import org.emftext.language.java.expressions.InstanceOfExpression;
+import org.emftext.language.java.expressions.MultiplicativeExpression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.RelationExpression;
+import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -555,7 +561,15 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				exp instanceof ConditionalOrExpression ||
 				exp instanceof ConditionalAndExpression ||
 				exp instanceof InstanceOfExpression ) {
-			type = (TypesFactory.eINSTANCE.createBoolean());
+			type = TypesFactory.eINSTANCE.createBoolean();
+		}
+		else if (exp instanceof AdditiveExpression ||
+				exp instanceof MultiplicativeExpression ||
+				exp instanceof InclusiveOrExpression ||
+				exp instanceof ExclusiveOrExpression ||
+				exp instanceof AndExpression ||
+				exp instanceof ShiftExpression ) {
+			type = TypesFactory.eINSTANCE.createInt();
 		}
 		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
@@ -965,6 +979,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					moreGeneral instanceof Short ||
 					moreGeneral instanceof Long ||
 					moreGeneral instanceof Char ||
+					moreGeneral instanceof Float ||
+					moreGeneral instanceof Double ||
 					moreGeneral.equals(objectClass)) {
 				return true;
 			}
@@ -972,11 +988,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				return false;
 			}
 		}
-		if (lessGeneral instanceof Byte ||
-				lessGeneral instanceof Float ||
+		if (lessGeneral instanceof Float ||
 				lessGeneral instanceof Double) {
-			if (moreGeneral instanceof Byte ||
-					moreGeneral instanceof Float ||
+			if (moreGeneral instanceof Float ||
 					moreGeneral instanceof Double ||
 					moreGeneral.equals(objectClass)) {
 				return true;
