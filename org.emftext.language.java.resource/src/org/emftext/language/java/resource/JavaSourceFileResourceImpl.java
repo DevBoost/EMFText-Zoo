@@ -23,9 +23,9 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
-import org.emftext.language.java.resource.java.JavaResourceImpl;
+import org.emftext.language.java.resource.java.JavaResource;
 
-public class JavaSourceFileResourceImpl extends JavaResourceImpl {
+public class JavaSourceFileResourceImpl extends JavaResource {
 
 	public JavaSourceFileResourceImpl(URI uri) {
 		super(uri);

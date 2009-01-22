@@ -19,14 +19,13 @@ import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
-import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
-import org.emftext.language.java.resource.java.JavaResourceImpl;
+import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.types.ParameterizedPackageOrClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypeReferenceSequence;
@@ -37,7 +36,7 @@ import org.emftext.language.java.types.TypesFactory;
  * 
  *
  */
-public class JavaClassFileResorceImpl extends JavaResourceImpl {
+public class JavaClassFileResorceImpl extends JavaResource {
 
 	//one resource per type
 	protected org.apache.bcel.classfile.JavaClass myClass;
