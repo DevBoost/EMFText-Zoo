@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -86,7 +88,9 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		}
 	}
 
-	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException {
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
+		registerLibs();
+		
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -118,10 +122,19 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 			}
 		}
-		
 		return tests;
 	}
-
+	
+	private static void registerLibs() throws IOException, CoreException  {
+		File libFolder = new File("." + File.separator
+				+ "lib");
+		List<File> allLibFiles = collectAllFilesRecursive(libFolder);
+		
+		for(File lib : allLibFiles) {
+			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()));
+		}
+	}
+	
 	private static String shortenPathUntil(String path, String root) {
 		int idx = path.indexOf(root);
 		if (idx != -1) {

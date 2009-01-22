@@ -346,7 +346,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		List<File> allFiles = new ArrayList<File>();
 		for (File member : startFolder.listFiles()) {
 			if (member.isFile()) {
-				if (member.getName().endsWith("java")) {
+				if (member.getName().endsWith("java") || member.getName().endsWith("jar")) {
 					allFiles.add(member);
 				}
 			} else if (member.isDirectory()) {

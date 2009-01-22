@@ -3,13 +3,15 @@ package org.emftext.language.java.test.bulk;
 import java.io.IOException;
 import java.util.Collection;
 
+import org.eclipse.core.runtime.CoreException;
+
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
 public class Eclipse341SerializedTest extends AbstractZipFileInputTest {
 
 	
-	public void testSerialized() {
+	public void testSerialized() throws CoreException {
 		try {
 			Collection<TestCase> tests = getTestsForZipFileEntries(Eclipse341Test.INPUT_FILE, true);
 			int count = 1;
