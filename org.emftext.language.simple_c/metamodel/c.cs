@@ -3,8 +3,8 @@ FOR <http://www.emftext.org/simple_c>
 START CompilationUnit
 
 OPTIONS {
-	tokenspace = 1;
-	autofixSimpleLeftrecursion = false;
+	tokenspace = "1";
+	autofixSimpleLeftrecursion = "false";
 }
 
 TOKENS {
