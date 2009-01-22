@@ -22,7 +22,9 @@ public class ClassifierImportClassifierReferenceResolver extends org.emftext.run
 		Classifier importedClassifier = JavaClasspath.INSTANCE.getClassifier(theImport, identifier);
 		if (importedClassifier != null) {
 			importedClassifier = (Classifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
-			result.addMapping(identifier, importedClassifier);
+			if (!importedClassifier.eIsProxy()) {
+				result.addMapping(identifier, importedClassifier);
+			}
 		}
 	}
 }

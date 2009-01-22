@@ -917,8 +917,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 
 
-	protected boolean compareTypes(EObject type1,
-			EObject type2) {
+	protected boolean compareTypes(EObject type1, //super
+			EObject type2) { //type
 		
 		//if parameter type is void, always match
 		if (type2 instanceof Void) {
@@ -1042,10 +1042,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				assert(false);
 			}
 		}
-		
-		//add all members of object, since they are also available on each interface
-		memberList.addAll(getObjectModelElement().getMembers());
-		
 		return memberList;
 	}
 	
@@ -1140,6 +1136,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				//A superinterface of an interface has to be an interface
 				assert(false);
 			}
+		}
+		if (interfaceReferences.isEmpty()) {
+			//object is also supertype of all interfaces
+			resultInterfaceList.add(getObjectModelElement());
 		}
 	}
 	
