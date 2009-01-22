@@ -9,9 +9,9 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.simple_c.resource.c.CResourceImpl;
+import org.emftext.language.simple_c.resource.c.CResource;
 
-public class CResourceImplTestWrapper extends CResourceImpl {
+public class CResourceImplTestWrapper extends CResource {
 	
 	public void load(File cFile) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;
