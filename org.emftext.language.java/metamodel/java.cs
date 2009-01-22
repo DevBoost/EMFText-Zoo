@@ -28,7 +28,6 @@ OPTIONS {
 	tokenspace = 1;
 	defaultTokenName = IDENTIFIER;
 	overridePluginXML = false;
-	overridePrinter = false;
 	overrideManifest = false;
 	generateCodeFromGeneratorModel = false;
 }
@@ -68,6 +67,7 @@ containers.CompilationUnit
    ::=	("package" package[] (#0 "." #0 package[])* #0 ";" )?
         !0 !0
         ("import" imports #0 ";" !0 )*
+        (";" !0)*
         !0
         (classifiers (";")* !0 !0)+
         ("\u001a")?
