@@ -2,9 +2,11 @@ SYNTAXDEF cs
 FOR <http://www.emftext.org/c_sharp>
 START CompilationUnit
 
+IMPORTS {
+}
 OPTIONS {
 	tokenspace = 1;
-	autofixSimpleLeftrecursion = false;
+	//autofixSimpleLeftrecursion = false;
 }
 
 TOKENS {
