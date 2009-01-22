@@ -939,47 +939,53 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected boolean compareTypes(EObject moreGeneral,
 			EObject lessGeneral) { //type
 		
+		Class objectClass = getObjectModelElement();
+		
 		//if parameter type is void, always match
 		if (lessGeneral instanceof Void) {
 			return true;
 		}
-		if (moreGeneral instanceof PrimitiveType && lessGeneral instanceof PrimitiveType) {
-			if (moreGeneral instanceof Boolean) {
-				if (lessGeneral instanceof Boolean) {
-					return true;
-				}
-				else {
-					return false;
-				}
+
+		if (lessGeneral instanceof Boolean) {
+			if (moreGeneral instanceof Boolean ||
+					moreGeneral.equals(objectClass)) {
+				return true;
 			}
+			else {
+				return false;
+			}
+		}
+		if (lessGeneral instanceof Byte ||
+				lessGeneral instanceof Int ||
+				lessGeneral instanceof Short ||
+				lessGeneral instanceof Long ||
+				lessGeneral instanceof Char) {
 			if (moreGeneral instanceof Byte ||
 					moreGeneral instanceof Int ||
 					moreGeneral instanceof Short ||
 					moreGeneral instanceof Long ||
-					moreGeneral instanceof Char) {
-				if (lessGeneral instanceof Byte ||
-						lessGeneral instanceof Int ||
-						lessGeneral instanceof Short ||
-						lessGeneral instanceof Long ||
-						lessGeneral instanceof Char) {
-					return true;
-				}
-				else {
-					return false;
-				}
+					moreGeneral instanceof Char ||
+					moreGeneral.equals(objectClass)) {
+				return true;
 			}
-			if (moreGeneral instanceof Float ||
-					moreGeneral instanceof Double) {
-				if (lessGeneral instanceof Byte ||
-						lessGeneral instanceof Float ||
-						lessGeneral instanceof Double) {
-					return true;
-				}
-				else {
-					return false;
-				}
+			else {
+				return false;
 			}
 		}
+		if (lessGeneral instanceof Byte ||
+				lessGeneral instanceof Float ||
+				lessGeneral instanceof Double) {
+			if (moreGeneral instanceof Byte ||
+					moreGeneral instanceof Float ||
+					moreGeneral instanceof Double ||
+					moreGeneral.equals(objectClass)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
 		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier) {
 			return moreGeneral.equals(lessGeneral) ||
 				getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral);
