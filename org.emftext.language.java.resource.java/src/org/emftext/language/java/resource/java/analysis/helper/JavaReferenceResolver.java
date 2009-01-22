@@ -756,7 +756,16 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if (target.eIsProxy()) {
 				type = null;
 			}
-			else if (target instanceof TypedElement) {
+			
+			//Navigate through AdditionalLocalVariable or Field
+			if(target instanceof AdditionalLocalVariable) {
+				target = (ReferenceableElement) target.eContainer();
+			}
+			if(target instanceof AdditionalField) {
+				target = (ReferenceableElement) target.eContainer();
+			}
+			
+			if (target instanceof TypedElement) {
 				TypeReference typeRef = ((TypedElement) target).getType();
 				type = getReferencedType(typeRef);
 			}
