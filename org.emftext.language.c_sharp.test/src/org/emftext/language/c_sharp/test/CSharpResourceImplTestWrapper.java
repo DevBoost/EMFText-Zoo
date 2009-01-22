@@ -9,9 +9,9 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.c_sharp.resource.cs.CsResourceImpl;
+import org.emftext.language.c_sharp.resource.cs.CsResource;
 
-public class CSharpResourceImplTestWrapper extends CsResourceImpl {
+public class CSharpResourceImplTestWrapper extends CsResource {
 	
 	public void load(File cFile) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;
