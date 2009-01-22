@@ -77,7 +77,7 @@ imports.ClassifierImport
 	::= (parts #0 "." #0 )+ #0 classifier[];
 	
 imports.PackageImport
-	::= (parts #0 "." #0 )* classifiers[] #0 "." #0 "*";
+	::= (parts #0 "." #0 )* #0 "*";
 
 imports.StaticMemberImport
 	::= static (parts #0 "." #0 )+ #0 staticMember[];

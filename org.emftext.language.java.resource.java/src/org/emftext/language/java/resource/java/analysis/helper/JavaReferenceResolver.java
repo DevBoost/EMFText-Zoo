@@ -1,7 +1,5 @@
 package org.emftext.language.java.resource.java.analysis.helper;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -11,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationInstance;
@@ -28,7 +25,9 @@ import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.CastExpression;
 import org.emftext.language.java.expressions.ConditionalExpression;
+import org.emftext.language.java.expressions.EqualityExpression;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.InstanceOfExpression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
@@ -148,12 +147,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 										fullID = ((NamedElement) element).getName();
 									}
 								}
-								else if(imp instanceof PackageImport) {
-									PackageImport packageImport = (PackageImport) imp;
-									if (packageImport.getClassifiers().contains(element)) {
-										//the element is imported -> simple name
-										fullID = ((NamedElement) element).getName();
+								if(imp instanceof PackageImport) {
+									String name = ((NamedElement) element).getName();
+									EList<Classifier> importedClassifiers =  
+										JavaClasspath.INSTANCE.getClassifiers(imp);
+									for(Classifier classifierProxy : importedClassifiers) {
+										if (name.equals(classifierProxy.getName())) {
+											fullID = name;
+											break;
+										}
 									}
+									
 								}
 								else if (imp instanceof StaticMemberImport) {
 									StaticMemberImport staticImport = (StaticMemberImport) imp;
@@ -238,13 +242,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					contentsList.add(classifierImport);
 				}
 				else if (explicitImport instanceof PackageImport) {
-					EList<Classifier> packageImports = 
-						((PackageImport)explicitImport).getClassifiers();
-					//TODO not using a new BasicElist sometimes produces a ConcurrentModificationException; clarify why
-					Iterator<Classifier> basicIt = ((InternalEList<Classifier>)packageImports).basicIterator();
-					while(basicIt.hasNext()) {
-						contentsList.add(basicIt.next());
-					}
+					EList<Classifier> importedClassifiers =  
+						JavaClasspath.INSTANCE.getClassifiers(explicitImport);
+					contentsList.addAll(importedClassifiers);
 				
 				}
 				else if (explicitImport instanceof StaticMemberImport) {
@@ -439,6 +439,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		
 		if (targetObject != null) {
+			//Now we can (and have to) resolve class proxies
+			if (targetObject.eIsProxy()) {
+				targetObject = EcoreUtil.resolve(targetObject, myResource);
+			}
 			result.addMapping(identifier, targetObject);
 		}
 		else {
@@ -538,6 +542,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				((ConditionalExpression)exp).getExpressionIf() != null) {
 			
 			type = getTypeOfExpression(((ConditionalExpression)exp).getExpressionIf());
+		}
+		else if (exp instanceof EqualityExpression ||
+				exp instanceof InstanceOfExpression ) {
+			type = (TypesFactory.eINSTANCE.createBoolean());
 		}
 		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
@@ -860,7 +868,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 			}
 			else {
-				if (referencedElement instanceof Method) {
+				if (referencedElement instanceof Method && 
+						id.equals(((Method) referencedElement).getName())) {
 					//in case of Methods the parameter types need to be checked
 					Method method = (Method) referencedElement;
 					if (context instanceof IdentifierReference) {
