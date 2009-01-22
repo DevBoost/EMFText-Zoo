@@ -25,11 +25,11 @@ IMPORTS {
 }
 
 OPTIONS {
-	tokenspace = 1;
-	defaultTokenName = IDENTIFIER;
-	overridePluginXML = false;
-	overrideManifest = false;
-	generateCodeFromGeneratorModel = false;
+	tokenspace = "1";
+	defaultTokenName = "IDENTIFIER";
+	overridePluginXML = "false";
+	overrideManifest = "false";
+	generateCodeFromGeneratorModel = "false";
 }
 
 TOKENS {
