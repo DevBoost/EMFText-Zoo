@@ -917,49 +917,43 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 
 
-	protected boolean compareTypes(EObject type1, //super
-			EObject type2) { //type
+	protected boolean compareTypes(EObject moreGeneral,
+			EObject lessGeneral) { //type
 		
 		//if parameter type is void, always match
-		if (type2 instanceof Void) {
+		if (lessGeneral instanceof Void) {
 			return true;
 		}
-		if (type1 instanceof PrimitiveType && type2 instanceof PrimitiveType) {
-			if (type1 instanceof Boolean) {
-				if (type2 instanceof Boolean) {
+		if (moreGeneral instanceof PrimitiveType && lessGeneral instanceof PrimitiveType) {
+			if (moreGeneral instanceof Boolean) {
+				if (lessGeneral instanceof Boolean) {
 					return true;
 				}
 				else {
 					return false;
 				}
 			}
-			if (type1 instanceof Char) {
-				if (type2 instanceof Char) {
+			if (moreGeneral instanceof Byte ||
+					moreGeneral instanceof Int ||
+					moreGeneral instanceof Short ||
+					moreGeneral instanceof Long ||
+					moreGeneral instanceof Char) {
+				if (lessGeneral instanceof Byte ||
+						lessGeneral instanceof Int ||
+						lessGeneral instanceof Short ||
+						lessGeneral instanceof Long ||
+						lessGeneral instanceof Char) {
 					return true;
 				}
 				else {
 					return false;
 				}
 			}
-			if (type1 instanceof Byte ||
-					type1 instanceof Int ||
-					type1 instanceof Short ||
-					type1 instanceof Long) {
-				if (type2 instanceof Byte ||
-						type2 instanceof Int ||
-						type2 instanceof Short ||
-						type2 instanceof Long) {
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-			if (type1 instanceof Float ||
-					type1 instanceof Double) {
-				if (type2 instanceof Byte ||
-						type2 instanceof Float ||
-						type2 instanceof Double) {
+			if (moreGeneral instanceof Float ||
+					moreGeneral instanceof Double) {
+				if (lessGeneral instanceof Byte ||
+						lessGeneral instanceof Float ||
+						lessGeneral instanceof Double) {
 					return true;
 				}
 				else {
@@ -967,9 +961,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 			}
 		}
-		if (type1 instanceof Classifier && type2 instanceof Classifier) {
-			return type1.equals(type2) ||
-				getAllSuperTypes((Classifier)type2).contains(type1);
+		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier) {
+			return moreGeneral.equals(lessGeneral) ||
+				getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral);
 		}
 		return false;
 	}
