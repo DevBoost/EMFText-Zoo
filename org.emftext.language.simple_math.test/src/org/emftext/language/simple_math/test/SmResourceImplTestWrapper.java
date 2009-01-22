@@ -9,9 +9,9 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.simple_math.resource.sm.SmResourceImpl;
+import org.emftext.language.simple_math.resource.sm.SmResource;
 
-public class SmResourceImplTestWrapper extends SmResourceImpl {
+public class SmResourceImplTestWrapper extends SmResource {
 	
 	public void load(File cFile) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;
