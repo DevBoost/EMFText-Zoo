@@ -101,8 +101,15 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				
 				if(!excludeFromReprint) {
 					String fullName = entry.getName();
-					fullName = shortenPathUntil(fullName, "org/");
-					fullName = shortenPathUntil(fullName, "com/");
+					fullName = shortenPathUntil(fullName, "org/",true);
+					fullName = shortenPathUntil(fullName, "com/",true);
+					
+					fullName = shortenPathUntil(fullName, "WEB-INF/classes/", false);
+					fullName = shortenPathUntil(fullName, "Clock2.java", true);
+					//TODO move this somewhere else
+					if (zipFilePath.contains("apache-tomcat")) {
+						fullName = shortenPathUntil(fullName, "java/",false);
+					}
 					
 					fullName = fullName.replaceAll("/", "."); 
 					
@@ -135,10 +142,15 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		}
 	}
 	
-	private static String shortenPathUntil(String path, String root) {
+	private static String shortenPathUntil(String path, String root, boolean isBeginning) {
 		int idx = path.indexOf(root);
 		if (idx != -1) {
-			return path.substring(idx);
+			if (isBeginning) {
+				return path.substring(idx);
+			}
+			else {
+				return path.substring(idx + root.length());
+			}
 		}
 		return path;
 	}
