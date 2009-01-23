@@ -41,7 +41,7 @@ comment:
     delimited-comment
     
 single-line-comment:
-    "//"   input-character * ?
+    '//'   input-character *
 
 input-character:
     Any Unicode character except a new-line-character
@@ -57,7 +57,7 @@ delimited-comment:
 
 delimited-comment-character:
     not-asterisk
-    *   not-slash
+    '*'   not-slash
     
 not-asterisk:
     Any Unicode character except *
@@ -79,14 +79,14 @@ token:
 C.1.5 Unicode character escape sequences
 
 unicode-escape-sequence:
-    \u   hex-digit   hex-digit   hex-digit   hex-digit
-    \U   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit
+    '\u'   hex-digit   hex-digit   hex-digit   hex-digit
+    '\U'   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit
 
 C.1.6 Identifiers
 
 identifier:
     available-identifier
-    @   identifier-or-keyword
+    '@'   identifier-or-keyword
     
 available-identifier:
     An identifier-or-keyword that is not a keyword
@@ -96,7 +96,7 @@ identifier-or-keyword:
     
 identifier-start-character:
     letter-character
-    _ (the underscore character U+005F) 
+    '_' (the underscore character U+005F) 
     
 identifier-part-character:
     letter-character
@@ -147,8 +147,8 @@ literal:
     null-literal
     
 boolean-literal:
-    true
-    false
+    'true'
+    'false'
     
 integer-literal:
     decimal-integer-literal
@@ -164,21 +164,21 @@ integer-type-suffix: one of
     U u L l UL Ul uL ul LU Lu lU lu
     
 hexadecimal-integer-literal:
-    0x   hex-digit *   integer-type-suffix ?
-    0X   hex-digit *   integer-type-suffix ?
+    '0x'   hex-digit *   integer-type-suffix ?
+    '0X'   hex-digit *   integer-type-suffix ?
 
 hex-digit: one of
     0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f
     
 real-literal:
-    decimal-digit *   .   decimal-digit *   exponent-part ?   real-type-suffix ?
-    .   decimal-digit *   exponent-part ?   real-type-suffix ?
+    decimal-digit *   '.'   decimal-digit *   exponent-part ?   real-type-suffix ?
+    '.'   decimal-digit *   exponent-part ?   real-type-suffix ?
     decimal-digit *   exponent-part   real-type-suffix ?
     decimal-digit *   real-type-suffix
     
 exponent-part:
-    e   sign ?   decimal-digit *
-    E   sign ?   decimal-digit *
+    'e'   sign ?   decimal-digit *
+    'E'   sign ?   decimal-digit *
     
 sign: one of
     + -
@@ -187,7 +187,7 @@ real-type-suffix: one of
     F f D d M m
     
 character-literal:
-    '   character   '
+   '''   character   ''' //also '
     
 character:
     single-character
@@ -202,14 +202,14 @@ simple-escape-sequence: one of
     \' \" \\ \0 \a \b \f \n \r \t \v
     
 hexadecimal-escape-sequence:
-    \x   hex-digit   hex-digit ?   hex-digit ?   hex-digit ?
+    '\x'   hex-digit   hex-digit ?   hex-digit ?   hex-digit ?
     
 string-literal:
     regular-string-literal
     verbatim-string-literal
     
 regular-string-literal:
-    "   regular-string-literal-character * ?   "
+    '"'   regular-string-literal-character *   '"'
 
 regular-string-literal-character:
     single-regular-string-literal-character
@@ -221,7 +221,7 @@ single-regular-string-literal-character:
     Any character except " (U+0022), \ (U+005C), and new-line-character
     
 verbatim-string-literal:
-    @"   verbatim-string-literal-character *   "
+    '@"'   verbatim-string-literal-character *   '"'
     
 verbatim-string-literal-character:
     single-verbatim-string-literal-character
@@ -231,10 +231,10 @@ single-verbatim-string-literal-character:
     any character except "
     
 quote-escape-sequence:
-    ""
+    '""'
     
 null-literal:
-    null
+    'null'
 
 C.1.9 Operators and punctuators
 
@@ -265,45 +265,45 @@ pp-expression:
     
 pp-or-expression:
     pp-and-expression
-    pp-or-expression   whitespace ?   ||   whitespace ?   pp-and-expression
+    pp-or-expression   whitespace ?   '||'   whitespace ?   pp-and-expression
 
 pp-and-expression:
     pp-equality-expression
-    pp-and-expression   whitespace ?   &&   whitespace ?   pp-equality-expression
+    pp-and-expression   whitespace ?   '&&'   whitespace ?   pp-equality-expression
 
 pp-equality-expression:
     pp-unary-expression
-    pp-equality-expression   whitespace ?   ==   whitespace ?   pp-unary-expression
-    pp-equality-expression   whitespace ?   !=   whitespace ?   pp-unary-expression
+    pp-equality-expression   whitespace ?   '=='   whitespace ?   pp-unary-expression
+    pp-equality-expression   whitespace ?   '!='   whitespace ?   pp-unary-expression
  
 pp-unary-expression:
     pp-primary-expression
-    !   whitespace ?   pp-unary-expression
+    '!'   whitespace ?   pp-unary-expression
  
 pp-primary-expression:
-    true
-    false
+    'true'
+    'false'
     conditional-symbol
-    (   whitespace ?   pp-expression   whitespace ?   )
+    '('   whitespace ?   pp-expression   whitespace ?   ')'
     
 pp-declaration:
-    whitespace ?   #   whitespace ?   define   whitespace   conditional-symbol   pp-new-line
-    whitespace ?   #   whitespace ?   undef   whitespace   conditional-symbol   pp-new-line
+    whitespace ?   '#'   whitespace ?   define   whitespace   conditional-symbol   pp-new-line
+    whitespace ?   '#'   whitespace ?   undef   whitespace   conditional-symbol   pp-new-line
 
 pp-conditional:
     pp-if-section   pp-elif-section *   pp-else-section ?   pp-endif
 
 pp-if-section:
-    whitespace ?   #   whitespace ?   if   whitespace   pp-expression   pp-new-line   conditional-section ?
+    whitespace ?   '#'   whitespace ?   'if'   whitespace   pp-expression   pp-new-line   conditional-section ?
  
 pp-elif-section:
-    whitespace ?   #   whitespace ?   elif   whitespace   pp-expression   pp-new-line   conditional-section ?
+    whitespace ?   '#'   whitespace ?   'elif'   whitespace   pp-expression   pp-new-line   conditional-section ?
     
 pp-else-section:
-    whitespace ?   #   whitespace ?   else   pp-new-line   conditional-section ?
+    whitespace ?   '#'   whitespace ?   'else'   pp-new-line   conditional-section ?
     
 pp-endif:
-    whitespace ?   #   whitespace ?   endif   pp-new-line
+    whitespace ?   '#'   whitespace ?   'endif'   pp-new-line
 
 conditional-section:
     input-section
@@ -317,25 +317,25 @@ skipped-characters:
     whitespace ?   not-number-sign   input-character *
     
 not-number-sign:
-    Any input-character except #
+    Any input-character except '#'
     
 pp-line:
-    whitespace ?   #   whitespace ?   line   whitespace   line-indicator   pp-new-line
+    whitespace ?   '#'   whitespace ?   line   whitespace   line-indicator   pp-new-line
     
 line-indicator:
     decimal-digit *   whitespace   file-name
     decimal-digit *
-    default
+    'default'
     
 file-name:
-    "   file-name-character *   "
+    '"'   file-name-character *   '"'
     
 file-name-character:
     Any input-character except "
     
 pp-diagnostic:
-    whitespace ?   #   whitespace ?   error   pp-message
-    whitespace ?   #   whitespace ?   warning   pp-message
+    whitespace ?   '#'   whitespace ?   error   pp-message
+    whitespace ?   '#'   whitespace ?   warning   pp-message
     
 pp-message:
     new-line
@@ -345,10 +345,10 @@ pp-region:
     pp-start-region   conditional-section ?   pp-end-region
     
 pp-start-region:
-    whitespace ?   #   whitespace ?   region   pp-message
+    whitespace ?   '#'   whitespace ?   region   pp-message
     
 pp-end-region:
-    whitespace ?   #   whitespace ?   endregion   pp-message
+    whitespace ?   '#'   whitespace ?   endregion   pp-message
     
 
 C.2 Syntactic grammar
@@ -356,27 +356,37 @@ C.2 Syntactic grammar
 C.2.1 Basic concepts
 
 namespace-or-type-name:
-    identifier (. namespace-or-type-name)? //Klammern nicht im Syntax 
+    identifier ( '.' namespace-or-type-name) ? 
+
 
 C.2.2 Types
 
 type:
     value-type
     reference-type
+    pointer-type
+    
+pointer-type:
+    type   '*'
+    'void'   '*'
     
 value-type:
     struct-type
     enum-type
+    
 struct-type:
     namespace-or-type-name //Reihenfolge müsste hier beachtet werden, also simple-type zuerst
     simple-type
+    
 simple-type:
     numeric-type
-    bool
+    'bool'
+    
 numeric-type:
     integral-type
     floating-point-type
-    decimal
+    'decimal'
+    
 integral-type:
     sbyte
     byte
@@ -387,9 +397,11 @@ integral-type:
     long
     ulong
     char
+    
 floating-point-type:
     float
     double
+    
 enum-type:
     namespace-or-type-name
    
@@ -398,10 +410,11 @@ reference-type:		//Reihenfolgebeachten, auf Überflüssigkeiten prüfen
     interface-type
     array-type
     delegate-type
+    
 class-type: 		//Reihenfolgebeachten
     namespace-or-type-name
-    object
-    string			//sinnvoll? da schon in namespace-or-type-name
+    'object'
+    'string'			
     
 interface-type:
     namespace-or-type-name
@@ -418,24 +431,25 @@ variable-reference:
 C.2.4 Expressions
 
 argument-list:
-    argument ( ,   argument) * //Klammern nicht in Syntax
+    argument ( ','   argument) * 
      
 argument:		//Reihenfolge beachten 
     expression
-    ref   variable-reference
-    out   variable-reference
+    'ref'   variable-reference
+    'out'   variable-reference
     
 primary-expression:
     primary-no-array-creation-expression
     array-creation-expression
+    
 primary-no-array-creation-expression:
     literal
-    simple-name
+    identifier
     parenthesized-expression
     member-access
     invocation-expression
     element-access
-    this-access
+    'this'
     base-access
     post-increment-expression
     post-decrement-expression
@@ -445,116 +459,144 @@ primary-no-array-creation-expression:
     sizeof-expression
     checked-expression
     unchecked-expression
-simple-name:
-    identifier
+    pointer-member-access
+    pointer-element-access
+    sizeof-expression
+    
+    
+pointer-indirection-expression:
+    '*'   unary-expression
+    
+pointer-member-access:		//achtung: Linksrekursiv, -> identifier  muss eventuell ausgelagert werden 
+    primary-expression   '->'   identifier
+    
+pointer-element-access: 	//achtung: Linksrekursiv, '[' expression ] muss eventuell ausgelagert werden 
+    primary-no-array-creation-expression   '['   expression   ]
+    
+addressof-expression:
+    '&'   unary-expression
+    
+sizeof-expression:
+    'sizeof'   (   type   )
+    
+    
+  
 parenthesized-expression:
-    (   expression   )
+    '('   expression   ')'
+    
 member-access:
-    primary-expression   .   identifier
-    predefined-type   .   identifier
+    primary-expression   '.'   identifier
+    predefined-type   '.'   identifier
+    
 predefined-type: one of
     bool byte char decimal double float int long
     object sbyte short string uint ulong ushort
+    
 invocation-expression:
-    primary-expression   (   argument-list ?   )
+    primary-expression   '('   argument-list ?   ')'
+
 element-access:
-    primary-no-array-creation-expression   [   expression-list   ]
+    primary-no-array-creation-expression   '['   expression-list   '']''
+    
 expression-list:
-    expression
-    expression-list   ,   expression
-this-access:
-    this
+    expression ( ','   expression )*
+      
 base-access:
-    base   .   identifier
-    base   [   expression-list   ]
+    'base'   '.'   identifier
+    'base'   '['   expression-list   ']'
+    
 post-increment-expression:
-    primary-expression   ++
+    primary-expression   '++'
+    
 post-decrement-expression:
-    primary-expression   --
+    primary-expression   '--'
+    
 object-creation-expression:
-    new   type   (   argument-list ?   )
+    'new'   type   '('   argument-list ?   ')'
+    
 array-creation-expression:
-    new   type   [   expression-list   ]   rank-specifier *   array-initializer ?
-    new   array-type   array-initializer
+    'new'   type   '['   expression-list   ']'   rank-specifier *   array-initializer ?
+    'new'   array-type   array-initializer
+    
 delegate-creation-expression:
-    new   delegate-type   (   expression   )
+    'new'   delegate-type   (   expression   )
+
 typeof-expression:
-    typeof   (   type   )
-    typeof   (   void   )
+    'typeof'   '('   type   ')'
+    'typeof'   '('   'void'   ')'
+    
 checked-expression:
-    checked   (   expression   )
+    'checked'   '('   expression   ')'
+
 unchecked-expression:
-    unchecked   (   expression   )
+    'unchecked'   '('   expression   ')'
+    
 unary-expression:
     primary-expression
-    +   unary-expression
-    -   unary-expression
-    !   unary-expression
-    ~   unary-expression
-    *   unary-expression
+    '+'   unary-expression
+    '-'   unary-expression
+    '!'   unary-expression
+    '~'   unary-expression
+    '*'   unary-expression
     pre-increment-expression
     pre-decrement-expression
     cast-expression
+    pointer-indirection-expression
+    addressof-expression
+    
 pre-increment-expression:
-    ++   unary-expression
+    '++'   unary-expression
+    
 pre-decrement-expression:
-    --   unary-expression
+    '--'   unary-expression
+    
 cast-expression:
-    (   type   )   unary-expression
+    '('   type   ')'   unary-expression
+    
 multiplicative-expression:
-    unary-expression
-    multiplicative-expression   *   unary-expression
-    multiplicative-expression   /   unary-expression
-    multiplicative-expression   %   unary-expression
+    unary-expression   ( ( '*' | '/' | '%' )   unary-expression )*
+    
 additive-expression:
-    multiplicative-expression
-    additive-expression   +   multiplicative-expression
-    additive-expression   -   multiplicative-expression
+    multiplicative-expression ( ( '+' | '-' ) multiplicative-expression
+
 shift-expression:
-    additive-expression
-    shift-expression   <<   additive-expression
-    shift-expression   >>   additive-expression
+    additive-expression ( ( '<<' | '>>' | '%' )   additive-expression )?
+
 relational-expression:
-    shift-expression
-    relational-expression   <   shift-expression
-    relational-expression   >   shift-expression
-    relational-expression   <=   shift-expression
-    relational-expression   >=   shift-expression
-    relational-expression   is   type
-    relational-expression   as   type
+    shift-expression (( 'is' | 'as' ) type )? ( ( '<' | '>' | '<=' | '>=' )   shift-expression (( 'is' | 'as' ) type )? )* 
+	//(( is | as ) type )? muss weiter unterschieden werden
+    
 equality-expression:
-    relational-expression
-    equality-expression   ==   relational-expression
-    equality-expression   !=   relational-expression
+    relational-expression   (('==' | '!=')   relational-expression)*
+   
 and-expression:
-    equality-expression
-    and-expression   &   equality-expression
+    equality-expression   ('&'   equality-expression)*
+    
 exclusive-or-expression:
-    and-expression
-    exclusive-or-expression   ^   and-expression
+    and-expression  ( '^'   and-expression )*
+    
 inclusive-or-expression:
-    exclusive-or-expression
-    inclusive-or-expression   |   exclusive-or-expression
+    exclusive-or-expression   ('|'   exclusive-or-expression)*
+    
 conditional-and-expression:
-    inclusive-or-expression
-    conditional-and-expression   &&   inclusive-or-expression
+    inclusive-and-expression   ('&&'   inclusive-or-expression)*
+    
 conditional-or-expression:
-    conditional-and-expression
-    conditional-or-expression   ||   conditional-and-expression
+    conditional-and-expression   ('||'   conditional-and-expression)*
+    
 conditional-expression:
-    conditional-or-expression
-    conditional-or-expression   ?   expression   :   expression
+    conditional-or-expression  ( '?'   expression   ':'   expression ) ?
+    
 assignment:
     unary-expression   assignment-operator   expression
+    
 assignment-operator: one of
     =   +=   -=   *=   /=   %=   &=   |=   ^=   <<=   >>=
+    
 expression:
     conditional-expression
     assignment
-constant-expression:
-    expression
-boolean-expression:
-    expression
+
 
 C.2.5 Statements
 
@@ -562,8 +604,9 @@ statement:
     labeled-statement
     declaration-statement
     embedded-statement
+    
 embedded-statement:
-    block
+    ( 'unsafe' ) ?  block
     empty-statement
     expression-statement
     selection-statement
@@ -574,38 +617,46 @@ embedded-statement:
     unchecked-statement
     lock-statement
     using-statement
+	fixed-statement
+    
 block:
-    {   statement-list ?   }
+    '{'   statement-list ?   '}'
+    
 statement-list:
-    statement
-    statement-list   statement
+    statement *
+
 empty-statement:
-    ;
+    ';'
+    
 labeled-statement:
-    identifier   :   statement
+    identifier  ':'   statement
+    
 declaration-statement:
-    local-variable-declaration   ;
-    local-constant-declaration   ;
+    local-variable-declaration   ';'
+    local-constant-declaration   ';'
+    
 local-variable-declaration:
-    type   local-variable-declarators
-local-variable-declarators:
-    local-variable-declarator
-    local-variable-declarators   ,   local-variable-declarator
+    type   local-variable-declarator +
+    
 local-variable-declarator:
-    identifier
-    identifier   =   local-variable-initializer
+    identifier ( '='   local-variable-initializer) ? 
+    
 local-variable-initializer:
     expression
     array-initializer
+    
 local-constant-declaration:
-    const   type   constant-declarators
+    'const'   type   constant-declarators
+    
 constant-declarators:
-    constant-declarator
-    constant-declarators   ,   constant-declarator
+    constant-declarator ( ','   constant-declarator)*
+
 constant-declarator:
-    identifier   =   constant-expression
+    identifier   =   expression
+    
 expression-statement:
-    statement-expression   ;
+    statement-expression   ';'
+    
 statement-expression:
     invocation-expression
     object-creation-expression
@@ -614,125 +665,155 @@ statement-expression:
     post-decrement-expression
     pre-increment-expression
     pre-decrement-expression
+    
 selection-statement:
     if-statement
     switch-statement
+    
 if-statement:
-    if   (   boolean-expression   )   embedded-statement
-    if   (   boolean-expression   )   embedded-statement   else   embedded-statement
-boolean-expression:
-    expression
+    'if'   '('   expression   ')'   embedded-statement	( 'else'   embedded-statement ) ?
+    
+    
 switch-statement:
-    switch   (   expression   )   switch-block
+    'switch'   '('   expression   ')'   switch-block
+    
 switch-block:
-    {   switch-sections ?   }
-switch-sections:
-    switch-section
-    switch-sections   switch-section
+    '{'   switch-section *   '}'
+    
 switch-section:
-    switch-labels   statement-list
-switch-labels:
-    switch-label
-    switch-labels   switch-label
+    switch-label *   statement-list
+
 switch-label:
-    case   constant-expression   :
-    default   :
+    'case'   expression  ':'
+    'default'  ':'
+    
 iteration-statement:
     while-statement
     do-statement
     for-statement
     foreach-statement
+    
 while-statement:
-    while   (   boolean-expression   )   embedded-statement
+    'while'   '('   expression   ')'   embedded-statement
+    
 do-statement:
-    do   embedded-statement   while   (   boolean-expression   )   ;
+    'do'   embedded-statement   'while'   '('   expression   ')'   ';'
+    
 for-statement:
-    for   (   for-initializer ?   ;   for-condition ?   ;   for-iterator ?   )   embedded-statement
+    'for'   '('   for-initializer ?   ';'   expression ?   ';'   statement-expression-list ?   ')'   embedded-statement
+    
 for-initializer:
     local-variable-declaration
     statement-expression-list
-for-condition:
-    boolean-expression
-for-iterator:
-    statement-expression-list
+    
 statement-expression-list:
-    statement-expression
-    statement-expression-list   ,   statement-expression
+    statement-expression (  ','   statement-expression )*  
+    
 foreach-statement:
-    foreach   (   type   identifier   in   expression   )   embedded-statement
+    'foreach'   '('   type   identifier   'in'   expression   ')'   embedded-statement
+    
 jump-statement:
     break-statement
     continue-statement
     goto-statement
     return-statement
     throw-statement
+    
 break-statement:
-    break   ;
+    'break'   ';'
+    
 continue-statement:
-    continue   ;
+    'continue'   ';'
+    
 goto-statement:
-    goto   identifier   ;
-    goto   case   constant-expression   ;
-    goto   default   ;
+    'goto'   identifier   ';'
+    'goto'   'case'   expression   ';'
+    'goto'   'default'   ';'
+    
 return-statement:
-    return   expression ?   ;
+    'return'   expression ?   ';'
+    
 throw-statement:
-    throw   expression ?   ;
+    'throw'   expression ?   ';'
+    
 try-statement:
-    try   block   catch-clauses
-    try   block   finally-clause
-    try   block   catch-clauses   finally-clause
+    'try'   block   catch-clauses
+    'try'   block   finally-clause
+    'try'   block   catch-clauses   finally-clause
+    
 catch-clauses:
-    specific-catch-clauses   general-catch-clause ?
-    specific-catch-clauses ?   general-catch-clause
-specific-catch-clauses:
-    specific-catch-clause
-    specific-catch-clauses   specific-catch-clause
+    specific-catch-clauses +   general-catch-clause ?
+    specific-catch-clauses *   general-catch-clause
+    
 specific-catch-clause:
-    catch   (   class-type   identifier ?   )   block
+    'catch'   '('   class-type   identifier ?   ')'   block
+    
 general-catch-clause:
-    catch   block
+    'catch'   block
+    
 finally-clause:
-    finally   block
+    'finally'   block
+    
 checked-statement:
-    checked   block
+    'checked'   block
+    
 unchecked-statement:
-    unchecked   block
+    'unchecked'   block
+    
 lock-statement:
-    lock   (   expression   )   embedded-statement
+    'lock'   '('   expression   ')'   embedded-statement
+    
 using-statement:
-    using   (    resource-acquisition   )    embedded-statement
+    'using'   '('    resource-acquisition   ')'    embedded-statement
+    
 resource-acquisition:
     local-variable-declaration
     expression
 
+fixed-statement:
+    'fixed'   '('   pointer-type   fixed-pointer-declarators   ')'   embedded-statement
+    
+fixed-pointer-declarators:
+    fixed-pointer-declarator ( ','   fixed-pointer-declarator)*
+ 
+fixed-pointer-declarator:
+    identifier   =   fixed-pointer-initializer
+    
+fixed-pointer-initializer:
+    &   variable-reference
+    expression
+    
+    
+
 C.2.6 Namespaces
 
 compilation-unit:
-    using-directives ?   global-attributes ?   namespace-member-declarations ?
+    using-directive *   global-attribute *   namespace-member-declarations *
+    
 namespace-declaration:
-    namespace   qualified-identifier   namespace-body   ; ?
+    'namespace'   qualified-identifier   namespace-body   ( ';' ) ?
+    
 qualified-identifier:
-    identifier
-    qualified-identifier   .   identifier
+    identifier ('.'   identifier)*
+
 namespace-body:
-    {   using-directives ?   namespace-member-declarations ?   }
-using-directives:
-    using-directive
-    using-directives   using-directive
+    '{'   using-directive *   namespace-member-declaration *   '}'
+    
 using-directive:
     using-alias-directive
     using-namespace-directive
+    
 using-alias-directive:
-    using   identifier   =   namespace-or-type-name   ;
+    'using'   identifier   '='   namespace-or-type-name   ';'
+    
 using-namespace-directive:
-    using   namespace-or-type-name   ;
-namespace-member-declarations:
-    namespace-member-declaration
-    namespace-member-declarations   namespace-member-declaration
+    'using'   namespace-or-type-name   ';'
+    
+    
 namespace-member-declaration:
     namespace-declaration
     type-declaration
+    
 type-declaration:
     class-declaration
     struct-declaration
@@ -740,33 +821,34 @@ type-declaration:
     enum-declaration
     delegate-declaration
 
+
+
 C.2.7 Classes
 
 class-declaration:
-    attributes ?   class-modifiers ?   class   identifier   class-base ?   class-body   ; ?
-class-modifiers:
-    class-modifier
-    class-modifiers   class-modifier
+    attribute *   class-modifier *   'class'   identifier   class-base ?   class-body   ( ';' ) ?
+    
 class-modifier:
-    new
-    public
-    protected
-    internal
-    private
-    abstract
-    sealed
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'abstract'
+    'sealed'
+    'unsafe'
+    
 class-base:
-    :   class-type
-    :   interface-type-list
-    :   class-type   ,   interface-type-list
+   ':'   class-type
+   ':'   interface-type-list
+   ':'   class-type   ','   interface-type-list
+    
 interface-type-list:
-    interface-type
-    interface-type-list   ,   interface-type
+    interface-type (','   interface-type)*
+    
 class-body:
-    {   class-member-declarations ?   }
-class-member-declarations:
-    class-member-declaration
-    class-member-declarations   class-member-declaration
+    '{'   class-member-declaration *  '}'
+    
 class-member-declaration:
     constant-declaration
     field-declaration
@@ -779,241 +861,243 @@ class-member-declaration:
     destructor-declaration
     static-constructor-declaration
     type-declaration
+    
 constant-declaration:
-    attributes ?   constant-modifiers ?   const   type   constant-declarators   ;
-constant-modifiers:
-    constant-modifier
-    constant-modifiers   constant-modifier
+    attribute *   constant-modifier *   'const'   type   constant-declarators   ';'
+    
 constant-modifier:
-    new
-    public
-    protected
-    internal
-    private
-constant-declarators:
-    constant-declarator
-    constant-declarators   ,   constant-declarator
-constant-declarator:
-    identifier   =   constant-expression
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+
 field-declaration:
-    attributes ?   field-modifiers ?   type   variable-declarators   ;
-field-modifiers:
-    field-modifier
-    field-modifiers   field-modifier
+    attribute *   field-modifier *   type   variable-declarators   ';'
+    
 field-modifier:
-    new
-    public
-    protected
-    internal
-    private
-    static
-    readonly
-    volatile
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'static'
+    'readonly'
+    'volatile'
+    'unsafe'
+    
 variable-declarators:
-    variable-declarator
-    variable-declarators   ,   variable-declarator
+    variable-declarator (  ','   variable-declarator)*
+    
 variable-declarator:
-    identifier
-    identifier   =   variable-initializer
+    identifier  ( '='   variable-initializer) ?
+    
 variable-initializer:
     expression
     array-initializer
+    
 method-declaration:
-    method-header   method-body
+    method-header   block
+    
 method-header:
-    attributes ?   method-modifiers ?   return-type   member-name   (   formal-parameter-list ?   )
-method-modifiers:
-    method-modifier
-    method-modifiers   method-modifier
+    attribute *   method-modifier *   return-type   member-name   (   formal-parameter-list ?   )
+
 method-modifier:
-    new
-    public
-    protected
-    internal
-    private
-    static
-    virtual
-    sealed
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'static'
+    'virtual'
+    'sealed'
     override
-    abstract
-    extern
+    'abstract'
+    'extern'
+    'unsafe'
+    
 return-type:
     type
-    void
+    'void'
+    
 member-name:
-    identifier
-    interface-type   .   identifier
-method-body:
-    block
-    ;
+
+    ( interface-type   '.') ?   identifier
+    
 formal-parameter-list:
     fixed-parameters
-    fixed-parameters   ,   parameter-array
+    fixed-parameters   ','   parameter-array
     parameter-array
+    
 fixed-parameters:
-    fixed-parameter
-    fixed-parameters   ,   fixed-parameter
+    fixed-parameter  ( ','   fixed-parameter)*
+ 
 fixed-parameter:
-    attributes ?   parameter-modifier ?   type   identifier
+    attribute *   parameter-modifier ?   type   identifier
+    
 parameter-modifier:
-    ref
-    out
+    'ref'
+    'out'
+    
 parameter-array:
-    attributes ?   params   array-type   identifier
+    attribute *   'params'   array-type   identifier
+    
 property-declaration:
-    attributes ?   property-modifiers ?   type   member-name   {   accessor-declarations   }
-property-modifiers:
-    property-modifier
-    property-modifiers   property-modifier
+    attribute *   property-modifier *   type   member-name   '{'   accessor-declarations   '}'
+
 property-modifier:
-    new
-    public
-    protected
-    internal
-    private
-    static
-    virtual
-    sealed
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'static'
+    'virtual'
+    'sealed'
     override
-    abstract
-    extern
+    'abstract'
+    'extern'
+    'unsafe'
+    
 member-name:
-    identifier
-    interface-type   .   identifier
-accessor-declarations:
+    (interface-type   '.') ?   identifier
+    
+accessor-declarations: 		//soll accessor-declaration+(abstract) beinhalten
     get-accessor-declaration   set-accessor-declaration ?
     set-accessor-declaration   get-accessor-declaration ?
-get-accessor-declaration:
-    attributes ?   get   accessor-body
-set-accessor-declaration:
-    attributes ?   set   accessor-body
-accessor-body:
-    block
-    ;
+    
+get-accessor-declaration:	//Ableitung von accessor-declaration
+    attribute *   'get'   block
+    
+set-accessor-declaration:	//Ableitung von accessor-declaration
+    attribute *   'set'   block
+    
 event-declaration:
-    attributes ?   event-modifiers ?   event   type   variable-declarators   ;
-    attributes ?   event-modifiers ?   event   type   member-name   {   event-accessor-declarations   }
-event-modifiers:
-    event-modifier
-    event-modifiers   event-modifier
+    attribute *   event-modifier *   'event'   type   variable-declarators   ';'
+    attribute *   event-modifier *   'event'   type   member-name   '{'   event-accessor-declarations   '}'
+    
 event-modifier:
-    new
-    public
-    protected
-    internal
-    private
-    static
-    virtual
-    sealed
-    override
-    abstract
-    extern
-event-accessor-declarations:
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'static'
+    'virtual'
+    'sealed'
+    'override'
+    'abstract'
+    'extern'
+    'unsafe'
+    
+event-accessor-declarations: 	//soll event-accessor-declaration(abstract) 2mal beinhalten
     add-accessor-declaration   remove-accessor-declaration
     remove-accessor-declaration   add-accessor-declaration
-add-accessor-declaration:
-    attributes ?   add   block
-remove-accessor-declaration:
-    attributes ?   remove   block
+    
+add-accessor-declaration:		//Ableitung von event-accessor-declaration
+    attribute *   add   block
+    
+remove-accessor-declaration:	//Ableitung von event-accessor-declaration
+    attribute *   remove   block
+    
 indexer-declaration:
-    attributes ?   indexer-modifiers ?   indexer-declarator   {   accessor-declarations   }
-indexer-modifiers:
-    indexer-modifier
-    indexer-modifiers   indexer-modifier
+    attribute *   indexer-modifiers *   indexer-declarator   '{'   accessor-declarations   '}'
+    
 indexer-modifier:
-    new
-    public
-    protected
-    internal
-    private
-    virtual
-    sealed
-    override
-    abstract
-    extern
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'virtual'
+    'sealed'
+    'override'
+    'abstract'
+    'extern'
+    'unsafe'
+    
 indexer-declarator:
-    type   this   [   formal-parameter-list   ]
-    type   interface-type   .   this   [   formal-parameter-list   ]
+    type   (interface-type   '.') 'this'   '['   formal-parameter-list   ']'
+    
 operator-declaration:
-    attributes ?   operator-modifiers   operator-declarator   operator-body
-operator-modifiers:
-    operator-modifier
-    operator-modifiers   operator-modifier
+    attribute *   operator-modifier +   operator-declarator   block
+    
 operator-modifier:
-    public
-    static
-    extern
+    'public'
+    'static'
+    'extern'
+    'unsafe'
+    
 operator-declarator:
     unary-operator-declarator
     binary-operator-declarator
     conversion-operator-declarator
+    
 unary-operator-declarator:
-    type   operator   overloadable-unary-operator   (   type   identifier   )
+    type   'operator'   overloadable-unary-operator   '('   type   identifier   ')'
+    
 overloadable-unary-operator: one of
     +   -   !   ~   ++   --   true   false
+    
 binary-operator-declarator:
-    type   operator   overloadable-binary-operator   (   type   identifier   ,   type   identifier   )
+    type   'operator'   overloadable-binary-operator   '('   type   identifier   ','   type   identifier   ')'
+    
 overloadable-binary-operator: one of
     +   -   *   /   %   &   |   ^   <<   >>   ==   !=   >   <   >=   <=
+    
 conversion-operator-declarator:
-    implicit   operator   type   (   type   identifier   )
-    explicit   operator   type   (   type   identifier   )
-operator-body:
-    block
-    ;
+    ( 'implicit' | 'explicit' )  'operator'   type   '('   type   identifier   ')'
+    
 constructor-declaration:
-    attributes ?   constructor-modifiers ?   constructor-declarator   constructor-body
-constructor-modifiers:
-    constructor-modifier
-    constructor-modifiers   constructor-modifier
+    attribute *   constructor-modifier *   constructor-declarator   block
+    
 constructor-modifier:
-    public
-    protected
-    internal
-    private
-    extern
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'extern'
+    'unsafe'
+    
 constructor-declarator:
-    identifier   (   formal-parameter-list ?   )   constructor-initializer ?
+    identifier   '('   formal-parameter-list ?   ')'   constructor-initializer ?
+    
 constructor-initializer:
-    :   base   (   argument-list ?   )
-    :   this   (   argument-list ?   )
-constructor-body:
-    block
-    ;
+   ':'   ( 'base' | 'this' )   '('   argument-list ?   ')'
+
 static-constructor-declaration:
-    attributes ?   static-constructor-modifiers   identifier   (   )   static-constructor-body
+    attribute *   static-constructor-modifiers   identifier   '('  ')'   block
+    
 static-constructor-modifiers
-    extern ? static
-    static extern ?
-static-constructor-body:
-    block
-    ;
+	extern ?   unsafe ?   static
+    unsafe ?   extern ?   static
+    extern ?   static   unsafe ?
+    unsafe ?    static   extern ?
+    static   extern ?   unsafeop
+    static   unsafe ?   extern ?
+    
 destructor-declaration:
-    attributes ?   extern ?   ~   identifier   (   )    destructor-body
-destructor-body:
-    block
-    ;
+    attribute *   'extern' ?   'unsafe' ?   ~   identifier   '('   ')'    block
+    attribute *   'unsafe' ?   'extern' ?   ~   identifier   '('   ')'    block
+
+
 
 C.2.8 Structs
 
 struct-declaration:
-    attributes ?   struct-modifiers ?   struct   identifier   struct-interfaces ?   struct-body   ; ?
-struct-modifiers:
-    struct-modifier
-    struct-modifiers   struct-modifier
+    attribute *   struct-modifier *   'struct'   identifier   interface-type-list ?   struct-body   ( ';' ) ?
+
 struct-modifier:
-    new
-    public
-    protected
-    internal
-    private
-struct-interfaces:
-    :   interface-type-list
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    'unsafe'
+    
 struct-body:
-    {   struct-member-declarations ?   }
-struct-member-declarations:
-    struct-member-declaration
-    struct-member-declarations   struct-member-declaration
+    '{'   struct-member-declaration *   '}'
+    
 struct-member-declaration:
     constant-declaration
     field-declaration
@@ -1026,256 +1110,148 @@ struct-member-declaration:
     static-constructor-declaration
     type-declaration
 
+
+
 C.2.9 Arrays
 
 array-type:
     type   rank-specifier +
 
 rank-specifier:
-    [   dim-separator *   ]
-dim-separator:
-    ,
+    '['  (',') *   ']'
     
 array-initializer:
-    {   variable-initializer-list ?   }
-    {   variable-initializer-list   ,   }
+    '{'   variable-initializer-list ?   '}'
+    '{'   variable-initializer-list   ','   '}'
+    
 variable-initializer-list:
-    variable-initializer
-    variable-initializer-list   ,   variable-initializer
+    variable-initializer ( ','   variable-initializer) *
+
 variable-initializer:
     expression
     array-initializer
+    stackalloc-initializer
+    
+stackalloc-initializer:
+    'stackalloc'   type   '['   expression   ']'
 
+
+    
 C.2.10 Interfaces
 
 interface-declaration:
-    attributes ?   interface-modifiers ?   interface   identifier   interface-base ?   interface-body   ; ?
-interface-modifiers:
-    interface-modifier
-    interface-modifiers   interface-modifier
+    attribute *   interface-modifier *   'interface'   identifier   interface-type-list ?   interface-body   ( ';') ?
+    
 interface-modifier:
-    new
-    public
-    protected
-    internal
-    private
-interface-base:
-    :   interface-type-list
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+	'unsafe'
+	
 interface-body:
-    {   interface-member-declarations ?   }
-interface-member-declarations:
-    interface-member-declaration
-    interface-member-declarations   interface-member-declaration
+    '{'   interface-member-declaration *  '}'
+
 interface-member-declaration:
     interface-method-declaration
     interface-property-declaration
     interface-event-declaration
     interface-indexer-declaration
+    
 interface-method-declaration:
-    attributes ?   new ?   return-type   identifier   (   formal-parameter-list ?   )   ;
+    attribute *   'new' ?   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
+    
 interface-property-declaration:
-    attributes ?   new ?   type   identifier   {   interface-accessors   }
+    attribute *   'new' ?   type   identifier   '{'   interface-accessors   '}'
+    
 interface-accessors:
-    attributes ?   get   ;
-    attributes ?   set   ;
-    attributes ?   get   ;   attributes ?   set   ;
-    attributes ?   set   ;   attributes ?   get   ;
+    attribute *   get   ';'   ( attribute *   set   ';' )?
+    attribute *   set   ';'   ( attribute *   get   ';' )?
+    
 interface-event-declaration:
-    attributes ?   new ?   event   type   identifier   ;
+    attribute *   'new' ?   'event'   type   identifier   ';'
+    
 interface-indexer-declaration:
-    attributes ?   new ?   type   this   [   formal-parameter-list   ]   {   interface-accessors   }
+    attribute *   'new' ?   type   'this'   '['   formal-parameter-list   ']'   '{'   interface-accessors   '}'
+
+
 
 C.2.11 Enums
 
 enum-declaration:
-    attributes ?   enum-modifiers ?   enum   identifier   enum-base ?   enum-body   ; ?
-enum-base:
-    :   integral-type
+    attribute *   enum-modifier *   'enum'   identifier   integral-type ?   enum-body  ( ';' ) ?
+    
 enum-body:
-    {   enum-member-declarations ?   }
-    {   enum-member-declarations   ,   }
-enum-modifiers:
-    enum-modifier
-    enum-modifiers   enum-modifier
+    '{'   enum-member-declarations ?   '}'
+    '{'   enum-member-declarations   ','   '}'
+    
 enum-modifier:
-    new
-    public
-    protected
-    internal
-    private
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+    
 enum-member-declarations:
-    enum-member-declaration
-    enum-member-declarations   ,   enum-member-declaration
+    enum-member-declaration  ( ','   enum-member-declaration) ?
+    
 enum-member-declaration:
-    attributes ?   identifier
-    attributes ?   identifier   =   constant-expression
+    attribute *   identifier (  '='   expression ) ?
+
+
 
 C.2.12 Delegates
 
 delegate-declaration:
-    attributes ?   delegate-modifiers ?   delegate   return-type   identifier   (   formal-parameter-list ?   )   ;
-delegate-modifiers:
-    delegate-modifier
-    delegate-modifiers   delegate-modifier
+    attribute *   delegate-modifier *   'delegate'   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
+    
 delegate-modifier:
-    new
-    public
-    protected
-    internal
-    private
-
+    'new'
+    'public'
+    'protected'
+    'internal'
+    'private'
+	'unsafe'
+	
+	
+	
 C.2.13 Attributes
+    
+global-attribute:
 
-global-attributes:
-    global-attribute-sections
-global-attribute-sections:
-    global-attribute-section
-    global-attribute-sections global-attribute-section
-global-attribute-section:
-    [   global-attribute-target-specifier   attribute-list   ]
-    [   global-attribute-target-specifier   attribute-list   ,]
-global-attribute-target-specifier:
-    global-attribute-target   :
+    '['   global-attribute-target  ':'   attribute-list   ( ',' )? ']'
+    
 global-attribute-target:
     assembly
     module
-attributes:
-    attribute-sections
-attribute-sections:
-    attribute-section
-    attribute-sections   attribute-section
-attribute-section:
-    [   attribute-target-specifier ?   attribute-list   ]
-    [   attribute-target-specifier ?   attribute-list   ,   ]
-attribute-target-specifier:
-    attribute-target   :
+    
+attribute:
+    '['   ( attribute-target  ':' )?   attribute-list   ( ',' )?   ']'
+    
 attribute-target:
     field
-    event
+    'event'
     method
-    param
-    property
-    return
+    param			//Schreibfehler? params?
+    property		//keine Ahnung was genau gemeint ist
+    'return'
     type
+
 attribute-list:
-    attribute
-    attribute-list   ,   attribute
+    attribute ( ','   attribute)*
+       
 attribute:
-    attribute-name   attribute-arguments ?
-attribute-name:
-    namespace-or-type-name
+    namespace-or-type-name  attribute-arguments ?
+    
 attribute-arguments:
-    (   positional-argument-list ?   )
-    (   positional-argument-list   ,   named-argument-list   )
-    (   named-argument-list   )
-positional-argument-list:
-    positional-argument
-    positional-argument-list   ,   positional-argument
-positional-argument:
-    attribute-argument-expression
+   	'('   expression-list ?   ')'
+	'('   expression-list   ','   named-argument-list   ')'
+	'('   named-argument-list   ')'
+    
 named-argument-list:
-    named-argument
-    named-argument-list   ,   named-argument
+    named-argument ( ','   named-argument )*
+    
 named-argument:
-    identifier   =   attribute-argument-expression
-attribute-argument-expression:
-    expression
-
-C.3 Grammar extensions for unsafe code
-
-class-modifier:
-    ...
-    unsafe
-struct-modifier:
-    ...
-    unsafe
-interface-modifier:
-    ...
-    unsafe
-delegate-modifier:
-    ...
-    unsafe
-field-modifier:
-    ...
-    unsafe
-method-modifier:
-    ...
-    unsafe
-property-modifier:
-    ...
-    unsafe
-event-modifier:
-    ...
-    unsafe
-indexer-modifier:
-    ...
-    unsafe
-operator-modifier:
-    ...
-    unsafe
-constructor-modifier:
-    ...
-    unsafe
-destructor-declaration:
-    attributes ?   extern ?   unsafe ?   ~   identifier   (   )    destructor-body
-    attributes ?   unsafe ?   extern ?   ~   identifier   (   )    destructor-body
-static-constructor-modifiers:
-    extern ?   unsafe ?   static
-    unsafe ?   extern ?   static
-    extern ?   static   unsafe ?
-    unsafe ?    static   extern ?
-    static   extern ?   unsafeop
-    static   unsafe ?   extern ?
-embedded-statement:
-    ...
-    unsafe-statement
-unsafe-statement:
-    unsafe   block
-type:
-    value-type
-    reference-type
-    pointer-type
-pointer-type:
-    unmanaged-type   *
-    void   *
-unmanaged-type:
-    type
-primary-no-array-creation-expression:
-    ...
-    pointer-member-access
-    pointer-element-access
-    sizeof-expression
-unary-expression:
-    ...
-    pointer-indirection-expression
-    addressof-expression
-pointer-indirection-expression:
-    *   unary-expression
-pointer-member-access:
-    primary-expression   ->   identifier
-pointer-element-access:
-    primary-no-array-creation-expression   [   expression   ]
-addressof-expression:
-    &   unary-expression
-sizeof-expression:
-    sizeof   (   unmanaged-type   )
-embedded-statement:
-    ...
-    fixed-statement
-fixed-statement:
-    fixed   (   pointer-type   fixed-pointer-declarators   )   embedded-statement
-fixed-pointer-declarators:
-    fixed-pointer-declarator
-    fixed-pointer-declarators   ,   fixed-pointer-declarator
-fixed-pointer-declarator:
-    identifier   =   fixed-pointer-initializer
-fixed-pointer-initializer:
-    &   variable-reference
-    expression
-variable-initializer:
-    expression
-    array-initializer
-    stackalloc-initializer
-stackalloc-initializer:
-    stackalloc   unmanaged-type   [   expression   ]
+    identifier   =   expression    
 
