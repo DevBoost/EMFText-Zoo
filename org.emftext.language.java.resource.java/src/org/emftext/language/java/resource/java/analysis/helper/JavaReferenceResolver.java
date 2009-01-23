@@ -569,6 +569,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				exp instanceof ExclusiveOrExpression ||
 				exp instanceof AndExpression ||
 				exp instanceof ShiftExpression ) {
+			
+			if (exp instanceof AdditiveExpression) {
+				AdditiveExpression additiveExpression = (AdditiveExpression) exp;
+				for(Expression subExp : additiveExpression.getChildren()) {
+					if (getTypeOfExpression(subExp).equals(stringClass)) {
+						//special case: string concatenation
+						return stringClass;
+					}
+				}
+			}
+			
 			type = TypesFactory.eINSTANCE.createInt();
 		}
 		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
