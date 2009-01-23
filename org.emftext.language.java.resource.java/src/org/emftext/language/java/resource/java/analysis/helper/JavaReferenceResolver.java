@@ -22,6 +22,7 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.enumerations.EnumConstant;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.AndExpression;
 import org.emftext.language.java.expressions.AssignmentExpression;
@@ -40,6 +41,7 @@ import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.RelationExpression;
 import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
@@ -79,6 +81,7 @@ import org.emftext.language.java.types.Float;
 import org.emftext.language.java.types.Int;
 import org.emftext.language.java.types.Long;
 import org.emftext.language.java.types.PackageOrClassifierReference;
+import org.emftext.language.java.types.ParameterizedPackageOrClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.Type;
@@ -793,6 +796,28 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if (target instanceof TypedElement) {
 				TypeReference typeRef = ((TypedElement) target).getType();
 				type = getReferencedType(typeRef);
+				if(reference.eContainer() instanceof IdentifierReference) {
+					ReferenceableElement prevRef = ((IdentifierReference) reference.eContainer()).getTarget();
+					
+					if (prevRef instanceof TypedElement) {
+						TypeReference prevType = ((TypedElement) prevRef).getType();
+						if (prevType instanceof TypeReferenceSequence) {
+							TypeReferenceSequence typeRefSequence = (TypeReferenceSequence) prevType;
+							if (typeRefSequence != null) {
+								ParameterizedPackageOrClassifierReference part = typeRefSequence.getParts().get(typeRefSequence.getParts().size() -1);
+								if (!part.getTypeArguments().isEmpty()) {
+									//naive implementation for using type arguments as return types
+									if (type.equals(getObjectModelElement())) {
+										TypeArgument arg = part.getTypeArguments().get(0);
+										if (arg instanceof QualifiedTypeArgument) {
+											type = getReferencedType(((QualifiedTypeArgument) arg).getType());
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 			else if (target instanceof Type /*e.g. Annotation*/ ) {
 				return (Type) target;
@@ -909,6 +934,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 				else if (referencedElement instanceof TypeParameter) {
 					//nothing else to do
+				}
+				else if (referencedElement instanceof EnumConstant) {
+					//nothing else to do
+				}
+				else {
+					return false;
 				}
 			}
 			else {
