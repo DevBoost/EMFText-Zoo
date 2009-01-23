@@ -6,16 +6,12 @@ This appendix contains summaries of the lexical and syntactic grammars found in 
 C.1 Lexical grammar
 
 input:
-    input-section ?
+    input-section *
+    
 input-section:
-    input-section-part
-    input-section   input-section-part
-input-section-part:
-    input-elements ?   new-line
+    input-element *   new-line
     pp-directive
-input-elements:
-    input-element
-    input-elements   input-element
+    
 input-element:
     whitespace
     comment
@@ -43,28 +39,29 @@ C.1.3 Comments
 comment:
     single-line-comment
     delimited-comment
+    
 single-line-comment:
-    //   input-characters ?
-input-characters:
-    input-character
-    input-characters   input-character
+    "//"   input-character * ?
+
 input-character:
     Any Unicode character except a new-line-character
+    
 new-line-character:
     Carriage return character (U+000D)
     Line feed character (U+000A)
     Line separator character (U+2028)
     Paragraph separator character (U+2029)
+    
 delimited-comment:
-    /*   delimited-comment-characters ?   */
-delimited-comment-characters:
-    delimited-comment-character
-    delimited-comment-characters   delimited-comment-character
+    /*   delimited-comment-character *   */
+
 delimited-comment-character:
     not-asterisk
     *   not-slash
+    
 not-asterisk:
     Any Unicode character except *
+    
 not-slash:
     Any Unicode character except /
 
@@ -83,29 +80,31 @@ C.1.5 Unicode character escape sequences
 
 unicode-escape-sequence:
     \u   hex-digit   hex-digit   hex-digit   hex-digit
-    \U   hex-digit   hex-digit   hex-digit hex-digit   hex-digit   hex-digit   hex-digit   hex-digit
+    \U   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit
 
 C.1.6 Identifiers
 
 identifier:
     available-identifier
     @   identifier-or-keyword
+    
 available-identifier:
     An identifier-or-keyword that is not a keyword
+    
 identifier-or-keyword:
-    identifier-start-character   identifier-part-characters ?
+    identifier-start-character   identifier-part-character *
+    
 identifier-start-character:
     letter-character
     _ (the underscore character U+005F) 
-identifier-part-characters:
-    identifier-part-character
-    identifier-part-characters   identifier-part-character
+    
 identifier-part-character:
     letter-character
     decimal-digit-character
     connecting-character
     combining-character
     formatting-character
+    
 letter-character:
     A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl
     A unicode-escape-sequence representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl
@@ -146,81 +145,94 @@ literal:
     character-literal
     string-literal
     null-literal
+    
 boolean-literal:
     true
     false
+    
 integer-literal:
     decimal-integer-literal
     hexadecimal-integer-literal
+    
 decimal-integer-literal:
-    decimal-digits   integer-type-suffix ?
-decimal-digits:
-    decimal-digit
-    decimal-digits   decimal-digit
+    decimal-digit *   integer-type-suffix ?
+    
 decimal-digit: one of
     0 1 2 3 4 5 6 7 8 9
+    
 integer-type-suffix: one of
     U u L l UL Ul uL ul LU Lu lU lu
+    
 hexadecimal-integer-literal:
-    0x   hex-digits   integer-type-suffix ?
-    0X   hex-digits   integer-type-suffix ?
-hex-digits:
-    hex-digit
-    hex-digits   hex-digit
+    0x   hex-digit *   integer-type-suffix ?
+    0X   hex-digit *   integer-type-suffix ?
+
 hex-digit: one of
     0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f
+    
 real-literal:
-    decimal-digits   .   decimal-digits   exponent-part ?   real-type-suffix ?
-    .   decimal-digits   exponent-part ?   real-type-suffix ?
-    decimal-digits   exponent-part   real-type-suffix ?
-    decimal-digits   real-type-suffix
+    decimal-digit *   .   decimal-digit *   exponent-part ?   real-type-suffix ?
+    .   decimal-digit *   exponent-part ?   real-type-suffix ?
+    decimal-digit *   exponent-part   real-type-suffix ?
+    decimal-digit *   real-type-suffix
+    
 exponent-part:
-    e   sign ?   decimal-digits
-    E   sign ?   decimal-digits
+    e   sign ?   decimal-digit *
+    E   sign ?   decimal-digit *
+    
 sign: one of
     + -
+    
 real-type-suffix: one of
     F f D d M m
+    
 character-literal:
     '   character   '
+    
 character:
     single-character
     simple-escape-sequence
     hexadecimal-escape-sequence
     unicode-escape-sequence
+    
 single-character:
     Any character except ' (U+0027), \ (U+005C), and new-line-character
+    
 simple-escape-sequence: one of
     \' \" \\ \0 \a \b \f \n \r \t \v
+    
 hexadecimal-escape-sequence:
     \x   hex-digit   hex-digit ?   hex-digit ?   hex-digit ?
+    
 string-literal:
     regular-string-literal
     verbatim-string-literal
+    
 regular-string-literal:
-    "   regular-string-literal-characters ?   "
-regular-string-literal-characters:
-    regular-string-literal-character
-    regular-string-literal-characters   regular-string-literal-character
+    "   regular-string-literal-character * ?   "
+
 regular-string-literal-character:
     single-regular-string-literal-character
     simple-escape-sequence
     hexadecimal-escape-sequence
     unicode-escape-sequence
+    
 single-regular-string-literal-character:
     Any character except " (U+0022), \ (U+005C), and new-line-character
+    
 verbatim-string-literal:
-    @"   verbatim -string-literal-characters ?   "
-verbatim-string-literal-characters:
-    verbatim-string-literal-character
-    verbatim-string-literal-characters   verbatim-string-literal-character
+    @"   verbatim-string-literal-character *   "
+    
 verbatim-string-literal-character:
     single-verbatim-string-literal-character
     quote-escape-sequence
+    
 single-verbatim-string-literal-character:
     any character except "
+    
 quote-escape-sequence:
     ""
+    
 null-literal:
     null
 
@@ -241,106 +253,122 @@ pp-directive:
     pp-line
     pp-diagnostic
     pp-region
+    
 pp-new-line:
     whitespace ?   single-line-comment ?   new-line
+
 conditional-symbol:
     Any identifier-or-keyword except true or false
+
 pp-expression:
     whitespace ?   pp-or-expression   whitespace ?
+    
 pp-or-expression:
     pp-and-expression
     pp-or-expression   whitespace ?   ||   whitespace ?   pp-and-expression
+
 pp-and-expression:
     pp-equality-expression
     pp-and-expression   whitespace ?   &&   whitespace ?   pp-equality-expression
+
 pp-equality-expression:
     pp-unary-expression
     pp-equality-expression   whitespace ?   ==   whitespace ?   pp-unary-expression
     pp-equality-expression   whitespace ?   !=   whitespace ?   pp-unary-expression
+ 
 pp-unary-expression:
     pp-primary-expression
     !   whitespace ?   pp-unary-expression
+ 
 pp-primary-expression:
     true
     false
     conditional-symbol
     (   whitespace ?   pp-expression   whitespace ?   )
+    
 pp-declaration:
     whitespace ?   #   whitespace ?   define   whitespace   conditional-symbol   pp-new-line
     whitespace ?   #   whitespace ?   undef   whitespace   conditional-symbol   pp-new-line
+
 pp-conditional:
-    pp-if-section   pp-elif-sections ?   pp-else-section ?   pp-endif
+    pp-if-section   pp-elif-section *   pp-else-section ?   pp-endif
+
 pp-if-section:
     whitespace ?   #   whitespace ?   if   whitespace   pp-expression   pp-new-line   conditional-section ?
-pp-elif-sections:
-    pp-elif-section
-    pp-elif-sections   pp-elif-section
+ 
 pp-elif-section:
     whitespace ?   #   whitespace ?   elif   whitespace   pp-expression   pp-new-line   conditional-section ?
+    
 pp-else-section:
     whitespace ?   #   whitespace ?   else   pp-new-line   conditional-section ?
+    
 pp-endif:
     whitespace ?   #   whitespace ?   endif   pp-new-line
+
 conditional-section:
     input-section
-    skipped-section
+    skipped-section +
+    
 skipped-section:
-    skipped-section-part
-    skipped-section   skipped-section-part
-skipped-section-part:
     skipped-characters ?   new-line
     pp-directive
+    
 skipped-characters:
-    whitespace ?   not-number-sign   input-characters ?
+    whitespace ?   not-number-sign   input-character *
+    
 not-number-sign:
     Any input-character except #
+    
 pp-line:
     whitespace ?   #   whitespace ?   line   whitespace   line-indicator   pp-new-line
+    
 line-indicator:
-    decimal-digits   whitespace   file-name
-    decimal-digits
+    decimal-digit *   whitespace   file-name
+    decimal-digit *
     default
+    
 file-name:
-    "   file-name-characters   "
-file-name-characters:
-    file-name-character
-    file-name-characters   file-name-character
+    "   file-name-character *   "
+    
 file-name-character:
     Any input-character except "
+    
 pp-diagnostic:
     whitespace ?   #   whitespace ?   error   pp-message
     whitespace ?   #   whitespace ?   warning   pp-message
+    
 pp-message:
     new-line
-    whitespace   input-characters ?   new-line
+    whitespace   input-character *   new-line
+    
 pp-region:
     pp-start-region   conditional-section ?   pp-end-region
+    
 pp-start-region:
     whitespace ?   #   whitespace ?   region   pp-message
+    
 pp-end-region:
     whitespace ?   #   whitespace ?   endregion   pp-message
+    
 
 C.2 Syntactic grammar
+
 C.2.1 Basic concepts
 
-namespace-name:
-    namespace-or-type-name
-type-name:
-    namespace-or-type-name
 namespace-or-type-name:
-    identifier
-    namespace-or-type-name   .   identifier
+    identifier (. namespace-or-type-name)? //Klammern nicht im Syntax 
 
 C.2.2 Types
 
 type:
     value-type
     reference-type
+    
 value-type:
     struct-type
     enum-type
 struct-type:
-    type-name
+    namespace-or-type-name //Reihenfolge müsste hier beachtet werden, also simple-type zuerst
     simple-type
 simple-type:
     numeric-type
@@ -363,32 +391,24 @@ floating-point-type:
     float
     double
 enum-type:
-    type-name
-reference-type:
+    namespace-or-type-name
+   
+reference-type:		//Reihenfolgebeachten, auf Überflüssigkeiten prüfen
     class-type
     interface-type
     array-type
     delegate-type
-class-type:
-    type-name
+class-type: 		//Reihenfolgebeachten
+    namespace-or-type-name
     object
-    string
+    string			//sinnvoll? da schon in namespace-or-type-name
+    
 interface-type:
-    type-name
-array-type:
-    non-array-type   rank-specifiers
-non-array-type:
-    type
-rank-specifiers:
-    rank-specifier
-    rank-specifiers   rank-specifier
-rank-specifier:
-    [   dim-separators ?   ]
-dim-separators:
-    ,
-    dim-separators   ,
+    namespace-or-type-name
+    
+
 delegate-type:
-    type-name
+    namespace-or-type-name
 
 C.2.3 Variables
 
@@ -398,12 +418,13 @@ variable-reference:
 C.2.4 Expressions
 
 argument-list:
-    argument
-    argument-list   ,   argument
-argument:
+    argument ( ,   argument) * //Klammern nicht in Syntax
+     
+argument:		//Reihenfolge beachten 
     expression
     ref   variable-reference
     out   variable-reference
+    
 primary-expression:
     primary-no-array-creation-expression
     array-creation-expression
@@ -453,7 +474,7 @@ post-decrement-expression:
 object-creation-expression:
     new   type   (   argument-list ?   )
 array-creation-expression:
-    new   non-array-type   [   expression-list   ]   rank-specifiers ?   array-initializer ?
+    new   type   [   expression-list   ]   rank-specifier *   array-initializer ?
     new   array-type   array-initializer
 delegate-creation-expression:
     new   delegate-type   (   expression   )
@@ -488,7 +509,7 @@ multiplicative-expression:
 additive-expression:
     multiplicative-expression
     additive-expression   +   multiplicative-expression
-    additive-expression   �   multiplicative-expression
+    additive-expression   -   multiplicative-expression
 shift-expression:
     additive-expression
     shift-expression   <<   additive-expression
@@ -705,7 +726,7 @@ using-directive:
 using-alias-directive:
     using   identifier   =   namespace-or-type-name   ;
 using-namespace-directive:
-    using   namespace-name   ;
+    using   namespace-or-type-name   ;
 namespace-member-declarations:
     namespace-member-declaration
     namespace-member-declarations   namespace-member-declaration
@@ -1008,17 +1029,13 @@ struct-member-declaration:
 C.2.9 Arrays
 
 array-type:
-    non-array-type   rank-specifiers
-non-array-type:
-    type
-rank-specifiers:
-    rank-specifier
-    rank-specifiers   rank-specifier
+    type   rank-specifier +
+
 rank-specifier:
-    [   dim-separators ?   ]
-dim-separators:
+    [   dim-separator *   ]
+dim-separator:
     ,
-    dim-separators   ,
+    
 array-initializer:
     {   variable-initializer-list ?   }
     {   variable-initializer-list   ,   }
@@ -1146,7 +1163,7 @@ attribute-list:
 attribute:
     attribute-name   attribute-arguments ?
 attribute-name:
-    type-name
+    namespace-or-type-name
 attribute-arguments:
     (   positional-argument-list ?   )
     (   positional-argument-list   ,   named-argument-list   )
