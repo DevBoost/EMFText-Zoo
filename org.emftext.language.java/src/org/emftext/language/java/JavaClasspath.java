@@ -147,12 +147,14 @@ public class JavaClasspath {
 				URI logicalUri = 
 					JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 				
-				if (URI_MAP.containsKey(logicalUri)) {
+				URI existinMapping = URI_MAP.get(logicalUri);
+				
+				if (existinMapping != null && !uri.equals(existinMapping)) {
 					//TODO where to put this warning?
-					System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
+					/*System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
 							"\n[JaMoPP]   1) " + URI_MAP.get(logicalUri) +
 							"\n[JaMoPP]   2) " + uri +
-							"\n[JaMoPP] Version 1) will be ignored!");
+							"\n[JaMoPP] Version 1) will be ignored!");*/
 				}
 				
 				URI_MAP.put(logicalUri, uri);
@@ -249,9 +251,6 @@ public class JavaClasspath {
 		for(PackageOrClassifierReference ref : theImport.getParts()) {
 			if (!ref.getTarget().eIsProxy()) {
 				Type type = ref.getTarget();
-				if (type.eIsProxy()) {
-					type = ref.getTarget();
-				}
 	
 				if (type instanceof Package) {
 					fullQualifiedName = fullQualifiedName + ((Package) type).getName() + 
