@@ -82,42 +82,60 @@ unicode-escape-sequence:
     '\u'   hex-digit   hex-digit   hex-digit   hex-digit
     '\U'   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit   hex-digit
 
+
+
 C.1.6 Identifiers
 
-identifier:
+//Identifier bisher als direkte Kopie von der Java-Grammatik -->siehe NamedElement ("name[]") 
+
+//pre-done
+identifier:  
     available-identifier
     '@'   identifier-or-keyword
-    
-available-identifier:
+
+//pre-done
+available-identifier: 
     An identifier-or-keyword that is not a keyword
-    
-identifier-or-keyword:
+
+//pre-done    
+identifier-or-keyword: 
     identifier-start-character   identifier-part-character *
-    
-identifier-start-character:
+
+//pre-done  
+identifier-start-character: 
     letter-character
     '_' (the underscore character U+005F) 
-    
-identifier-part-character:
+
+//pre-done  
+identifier-part-character: 
     letter-character
     decimal-digit-character
     connecting-character
     combining-character
     formatting-character
-    
-letter-character:
+
+//pre-done
+letter-character: 
     A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl
     A unicode-escape-sequence representing a character of classes Lu, Ll, Lt, Lm, Lo, or Nl
-combining-character:
+
+//pre-done
+combining-character: 
     A Unicode character of classes Mn or Mc
     A unicode-escape-sequence representing a character of classes Mn or Mc
-decimal-digit-character:
-    A Unicode character of the class Nd
+
+//pre-done
+decimal-digit-character: 
+    A Unicode character of the class Nd 
     A unicode-escape-sequence representing a character of the class Nd
-connecting-character:
+
+//pre-done
+connecting-character: 
     A Unicode character of the class Pc
     A unicode-escape-sequence representing a character of the class Pc
-formatting-character:
+
+//pre-done
+formatting-character: 
     A Unicode character of the class Cf
     A unicode-escape-sequence representing a character of the class Cf
 
@@ -355,7 +373,7 @@ C.2 Syntactic grammar
 
 C.2.1 Basic concepts
 
-namespace-or-type-name:
+namespace-or-type-name: //done with namespaceOrTypeNameParts
     identifier ( '.' namespace-or-type-name) ? 
 
 
@@ -480,7 +498,6 @@ sizeof-expression:
     'sizeof'   (   type   )
     
     
-  
 parenthesized-expression:
     '('   expression   ')'
     
@@ -788,32 +805,39 @@ fixed-pointer-initializer:
 C.2.6 Namespaces
 
 compilation-unit:
-    using-directive *   global-attribute *   namespace-member-declarations *
-    
-namespace-declaration:
-    'namespace'   qualified-identifier   namespace-body   ( ';' ) ?
-    
-qualified-identifier:
-    identifier ('.'   identifier)*
+    using-directive *   global-attribute *   namespace-member-declaration *
 
-namespace-body:
-    '{'   using-directive *   namespace-member-declaration *   '}'
-    
-using-directive:
+//done, merge alias and namespace
+using-directive:  			
     using-alias-directive
     using-namespace-directive
-    
-using-alias-directive:
+
+//done
+using-alias-directive: 		
     'using'   identifier   '='   namespace-or-type-name   ';'
-    
-using-namespace-directive:
+
+//done 
+using-namespace-directive: 	
     'using'   namespace-or-type-name   ';'
     
-    
+//done, abstract
 namespace-member-declaration:
     namespace-declaration
     type-declaration
-    
+
+//done
+namespace-declaration:
+    'namespace'   qualified-identifier   namespace-body   ( ';' ) ?
+
+//done as namespaceOrTypeName
+qualified-identifier:
+    identifier ('.'   identifier)*
+
+//done
+namespace-body:
+    '{'   using-directive *   namespace-member-declaration *   '}'
+        
+       
 type-declaration:
     class-declaration
     struct-declaration
@@ -827,7 +851,8 @@ C.2.7 Classes
 
 class-declaration:
     attribute *   class-modifier *   'class'   identifier   class-base ?   class-body   ( ';' ) ?
-    
+
+//done in Modifier
 class-modifier:
     'new'
     'public'
@@ -864,7 +889,8 @@ class-member-declaration:
     
 constant-declaration:
     attribute *   constant-modifier *   'const'   type   constant-declarators   ';'
-    
+
+//done in Modifier
 constant-modifier:
     'new'
     'public'
@@ -874,7 +900,8 @@ constant-modifier:
 
 field-declaration:
     attribute *   field-modifier *   type   variable-declarators   ';'
-    
+
+//done in Modifier   
 field-modifier:
     'new'
     'public'
@@ -902,6 +929,7 @@ method-declaration:
 method-header:
     attribute *   method-modifier *   return-type   member-name   (   formal-parameter-list ?   )
 
+//done in Modifier
 method-modifier:
     'new'
     'public'
@@ -945,6 +973,7 @@ parameter-array:
 property-declaration:
     attribute *   property-modifier *   type   member-name   '{'   accessor-declarations   '}'
 
+//done in Modifier
 property-modifier:
     'new'
     'public'
@@ -975,7 +1004,8 @@ set-accessor-declaration:	//Ableitung von accessor-declaration
 event-declaration:
     attribute *   event-modifier *   'event'   type   variable-declarators   ';'
     attribute *   event-modifier *   'event'   type   member-name   '{'   event-accessor-declarations   '}'
-    
+
+//done in Modifier    
 event-modifier:
     'new'
     'public'
@@ -1002,7 +1032,8 @@ remove-accessor-declaration:	//Ableitung von event-accessor-declaration
     
 indexer-declaration:
     attribute *   indexer-modifiers *   indexer-declarator   '{'   accessor-declarations   '}'
-    
+
+//done in Modifier    
 indexer-modifier:
     'new'
     'public'
@@ -1021,7 +1052,8 @@ indexer-declarator:
     
 operator-declaration:
     attribute *   operator-modifier +   operator-declarator   block
-    
+
+//done in Modifier    
 operator-modifier:
     'public'
     'static'
@@ -1050,7 +1082,8 @@ conversion-operator-declarator:
     
 constructor-declaration:
     attribute *   constructor-modifier *   constructor-declarator   block
-    
+
+//done in Modifier    
 constructor-modifier:
     'public'
     'protected'
@@ -1067,7 +1100,8 @@ constructor-initializer:
 
 static-constructor-declaration:
     attribute *   static-constructor-modifiers   identifier   '('  ')'   block
-    
+
+//pre-done in Modifier, static-constructor-modifiers bekommt ein +    
 static-constructor-modifiers
 	extern ?   unsafe ?   static
     unsafe ?   extern ?   static
@@ -1087,6 +1121,7 @@ C.2.8 Structs
 struct-declaration:
     attribute *   struct-modifier *   'struct'   identifier   interface-type-list ?   struct-body   ( ';' ) ?
 
+//done in Modifier   
 struct-modifier:
     'new'
     'public'
@@ -1141,7 +1176,8 @@ C.2.10 Interfaces
 
 interface-declaration:
     attribute *   interface-modifier *   'interface'   identifier   interface-type-list ?   interface-body   ( ';') ?
-    
+
+//done in Modifier       
 interface-modifier:
     'new'
     'public'
@@ -1185,7 +1221,8 @@ enum-declaration:
 enum-body:
     '{'   enum-member-declarations ?   '}'
     '{'   enum-member-declarations   ','   '}'
-    
+
+//done in Modifier      
 enum-modifier:
     'new'
     'public'
@@ -1205,7 +1242,8 @@ C.2.12 Delegates
 
 delegate-declaration:
     attribute *   delegate-modifier *   'delegate'   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
-    
+
+//done in Modifier       
 delegate-modifier:
     'new'
     'public'
