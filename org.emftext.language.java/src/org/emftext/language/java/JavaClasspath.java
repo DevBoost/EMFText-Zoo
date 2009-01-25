@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
@@ -178,6 +179,21 @@ public class JavaClasspath {
 			result = getClassifiers(fullQualifiedClassPackageName, "*");
 		}
 		return result;
+	}
+	
+	
+	public EList<Classifier> getInternalClassifiers(Classifier container) {
+		Resource resource = container.eResource();
+		if (resource != null){
+			String uri = container.eResource().getURI().toString();
+			if (uri.startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+				String className = uri.substring(
+						JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
+				className = className.substring(0,className.length()-5) + "$";
+				return getClassifiers(className, "*");	
+			}
+		}
+		return new BasicEList<Classifier>();
 	}
 	
 	/**
