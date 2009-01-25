@@ -1119,7 +1119,7 @@ destructor-declaration:
 C.2.8 Structs
 
 struct-declaration:
-    attribute *   struct-modifier *   'struct'   identifier   interface-type-list ?   struct-body   ( ';' ) ?
+    attribute *   struct-modifier *   'struct'   identifier   interface-type-list ?   '{'   struct-member-declaration *   '}'   ( ';' ) ?
 
 //done in Modifier   
 struct-modifier:
@@ -1129,9 +1129,7 @@ struct-modifier:
     'internal'
     'private'
     'unsafe'
-    
-struct-body:
-    '{'   struct-member-declaration *   '}'
+      
     
 struct-member-declaration:
     constant-declaration
@@ -1156,12 +1154,9 @@ rank-specifier:
     '['  (',') *   ']'
     
 array-initializer:
-    '{'   variable-initializer-list ?   '}'
-    '{'   variable-initializer-list   ','   '}'
+    '{'  (variable-initializer ( ','   variable-initializer) *) ?   '}'
+    '{'   variable-initializer ( ','   variable-initializer) *   ','   '}'
     
-variable-initializer-list:
-    variable-initializer ( ','   variable-initializer) *
-
 variable-initializer:
     expression
     array-initializer
@@ -1175,7 +1170,7 @@ stackalloc-initializer:
 C.2.10 Interfaces
 
 interface-declaration:
-    attribute *   interface-modifier *   'interface'   identifier   interface-type-list ?   interface-body   ( ';') ?
+    attribute *   interface-modifier *   'interface'   identifier   interface-type-list ?   '{'   interface-member-declaration *  '}'   ( ';') ?
 
 //done in Modifier       
 interface-modifier:
@@ -1185,9 +1180,7 @@ interface-modifier:
     'internal'
     'private'
 	'unsafe'
-	
-interface-body:
-    '{'   interface-member-declaration *  '}'
+   
 
 interface-member-declaration:
     interface-method-declaration
@@ -1219,8 +1212,8 @@ enum-declaration:
     attribute *   enum-modifier *   'enum'   identifier   integral-type ?   enum-body  ( ';' ) ?
     
 enum-body:
-    '{'   enum-member-declarations ?   '}'
-    '{'   enum-member-declarations   ','   '}'
+    '{'  (enum-member-declaration  ( ','   enum-member-declaration) ?) ?   '}'
+    '{'   enum-member-declaration  ( ','   enum-member-declaration) ?   ','   '}'
 
 //done in Modifier      
 enum-modifier:
@@ -1229,9 +1222,6 @@ enum-modifier:
     'protected'
     'internal'
     'private'
-    
-enum-member-declarations:
-    enum-member-declaration  ( ','   enum-member-declaration) ?
     
 enum-member-declaration:
     attribute *   identifier (  '='   expression ) ?
@@ -1272,7 +1262,7 @@ attribute-target:
     'event'
     method
     param			//Schreibfehler? params?
-    property		//keine Ahnung was genau gemeint ist
+    property		//keine Ahnung was genau gemeint ist, property-declaration?
     'return'
     type
 
