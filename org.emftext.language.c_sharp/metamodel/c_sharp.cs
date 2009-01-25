@@ -1,13 +1,13 @@
 SYNTAXDEF cs
 FOR <http://www.emftext.org/c_sharp>
-START CompilationUnit
+START namespaces.CompilationUnit
 
 IMPORTS {
-	//namespaces : <http://www.emftext.org/c_sharp/namespaces>
+	namespaces : <http://www.emftext.org/c_sharp/namespaces>
 }
 OPTIONS {
-	tokenspace = 1;
-	defaultTokenName = IDENTIFIER;
+	tokenspace = "1";
+	defaultTokenName = "IDENTIFIER";
 	//autofixSimpleLeftrecursion = false;
 }
 
@@ -45,9 +45,10 @@ ClassOrInterfaceOrDelegateType
 	::= namespaceOrTypeName ;
 
 
-CompilationUnit 
+namespaces.CompilationUnit 
 	::= usingDirectives *  namespaceMemberDeclaration *;
 	//global-attribute *
+	
 UsingDirective
 	::= "using"   (name[]   "=")?   namespaceOrTypeName   ";" ;
 	
