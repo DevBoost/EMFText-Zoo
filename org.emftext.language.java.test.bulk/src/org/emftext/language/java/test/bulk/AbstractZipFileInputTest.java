@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -17,7 +19,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaUniquePathConstructor;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
@@ -41,11 +48,20 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		public void runTest() {
 			try {
 				JavaRoot unit = parseResource(zipFile, entry);
-				
 				assertNotNull(unit);
 				
+				Map<URI,URI> urisToRestore = new HashMap<URI, URI>();
+				
+				if (unit instanceof CompilationUnit) {
+					CompilationUnit cu = (CompilationUnit) unit;
+					remeberClassifierURIs(cu, urisToRestore);
+				}
+
 				parseAndReprint(zipFile, entry, "output/" + zipFile.getName());
 				
+				//reset to class files
+				JavaClasspath.INSTANCE.URI_MAP.putAll(urisToRestore);
+	
 				//TODO put somewhere suitable 
 				//for JacksTest: remove java.java from classpath!
 				if (entry.getName().equals("java.java")) {
@@ -54,6 +70,31 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			} catch (Exception e) {
 				e.printStackTrace();
 				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
+			}
+		}
+		
+		protected void remeberClassifierURIs(CompilationUnit cu, Map<URI,URI> urisToRestore) {
+			String packageName = JavaUniquePathConstructor.packageName(cu);
+			
+			for(Classifier classifier : cu.getClassifiers()) {
+				URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + classifier.getName());
+				URI classURI = JavaClasspath.INSTANCE.URI_MAP.get(javaURI);
+				
+				urisToRestore.put(javaURI, classURI);
+				
+				remeberInnerClassifierURIs(
+						classifier, packageName, classifier.getName(), urisToRestore);
+			}
+		}
+		
+		protected void remeberInnerClassifierURIs(Classifier classifier, String packageName, String className,  Map<URI,URI> urisToRestore) {
+			for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
+				if (innerCand instanceof Classifier) {
+					URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className + "$" + innerCand.getName());
+					URI classURI = JavaClasspath.INSTANCE.URI_MAP.get(javaURI);
+					
+					urisToRestore.put(javaURI, classURI);
+				}
 			}
 		}
 
@@ -89,8 +130,6 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 	}
 
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
-		registerLibs();
-		
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -98,63 +137,20 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			ZipEntry entry = entries.nextElement();
 			if (entry.getName().endsWith(".java")) {
 				tests.add(new ParseZipFileEntryTest(zipFile, entry, excludeFromReprint));
-				
-				if(!excludeFromReprint) {
-					String fullName = entry.getName();
-					fullName = shortenPathUntil(fullName, "org/",true);
-					fullName = shortenPathUntil(fullName, "com/",true);
-					
-					fullName = shortenPathUntil(fullName, "WEB-INF/classes/", false);
-					fullName = shortenPathUntil(fullName, "Clock2.java", true);
-					//TODO move this somewhere else
-					if (zipFilePath.contains("apache-tomcat")) {
-						fullName = shortenPathUntil(fullName, "java/",false);
-					}
-					
-					fullName = fullName.replaceAll("/", "."); 
-					
-					String packageName = "";
-					String className   = "";
-					
-					int idx = fullName.lastIndexOf(".");
-					idx = fullName.substring(0, idx).lastIndexOf(".");
-					if (idx >= 0) {
-						packageName = fullName.substring(0, idx);
-						className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
-					}	
-					URI uri = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFilePath + "!/" + entry.getName());
-					
-					JavaClasspath.INSTANCE.registerClassifier(packageName, className, uri);
-				}
-
 			}
 		}
 		return tests;
 	}
 	
-	private static void registerLibs() throws IOException, CoreException  {
+	protected static void registerLibs(String libdir) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator
-				+ "lib");
+				+ libdir);
 		List<File> allLibFiles = collectAllFilesRecursive(libFolder);
 		
 		for(File lib : allLibFiles) {
 			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()));
 		}
 	}
-	
-	private static String shortenPathUntil(String path, String root, boolean isBeginning) {
-		int idx = path.indexOf(root);
-		if (idx != -1) {
-			if (isBeginning) {
-				return path.substring(idx);
-			}
-			else {
-				return path.substring(idx + root.length());
-			}
-		}
-		return path;
-	}
-	
 	
 	protected static void addToTestSuite(TestSuite suite,
 			Collection<TestCase> tests) throws IOException {
