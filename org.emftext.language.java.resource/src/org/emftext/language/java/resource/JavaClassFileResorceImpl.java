@@ -146,13 +146,26 @@ public class JavaClassFileResorceImpl extends JavaResource {
 			((MemberContainer) emfClassifier).getMembers().add(constructField(filed));
 		}
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
-			((MemberContainer) emfClassifier).getMembers().add(constructMethod(method));
+			Method emfMethod = constructMethod(method, false);
+			((MemberContainer) emfClassifier).getMembers().add(emfMethod);
+			//If the last parameter has an array type it could also be a variable length parameter.
+			//The java compiler compiles variable length arguments down to array arguments.
+			//Then the arguments are wrapped into an array. As far as I know, there is no
+			//way to tell the difference from byte code. Therefore we create two versions
+			//of the method: one with array argument and one with variable length
+			if (!emfMethod.getParameters().isEmpty() && 
+					!emfMethod.getParameters().get(
+							emfMethod.getParameters().size()-1).getArrayDimensionsBefore().isEmpty()) {
+				
+				Method emfMethod2 = constructMethod(method, true);
+				((MemberContainer) emfClassifier).getMembers().add(emfMethod2);
+			}
 		}
 
 		return emfClassifier;
 	}
 	
-	protected Method constructMethod(org.apache.bcel.classfile.Method method) {
+	protected Method constructMethod(org.apache.bcel.classfile.Method method, boolean withVaraibleLength) {
 		Method emfMethod = membersFactory.createMethod();
 		emfMethod.setName(method.getName());
 		
@@ -166,10 +179,18 @@ public class JavaClassFileResorceImpl extends JavaResource {
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
-		for(org.apache.bcel.generic.Type argType : method.getArgumentTypes()) {
-			emfMethod.getParameters().add(
-					constructParameter(argType));
+		for(int i = 0; i < method.getArgumentTypes().length; i++) {
+			org.apache.bcel.generic.Type argType = method.getArgumentTypes()[i];
+			if (i == method.getArgumentTypes().length - 1 && withVaraibleLength) {
+				emfMethod.getParameters().add(
+						constructVariableLengthParameter(argType));	
+			}
+			else {
+				emfMethod.getParameters().add(
+						constructParameter(argType));		
+			}
 		}
+		
 		return emfMethod;
 	}
 	
@@ -185,6 +206,14 @@ public class JavaClassFileResorceImpl extends JavaResource {
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
+		return emfParameter;
+	}
+	
+	protected Parameter constructVariableLengthParameter(org.apache.bcel.generic.Type attrType) {
+		Parameter emfParameter = parametersFactory.createVariableLengthParameter();
+		String signature = attrType.getSignature();
+		TypeReference emfTypeReference = createReferenceToType(signature);
+		emfParameter.setType(emfTypeReference);
 		return emfParameter;
 	}
 	
