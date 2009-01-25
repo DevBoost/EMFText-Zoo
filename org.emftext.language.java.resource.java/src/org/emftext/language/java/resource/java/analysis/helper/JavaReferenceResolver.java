@@ -56,14 +56,14 @@ import org.emftext.language.java.literals.FloatingPointLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.literals.Literal;
 import org.emftext.language.java.literals.NullLiteral;
-import org.emftext.language.java.literals.Super;
-import org.emftext.language.java.literals.This;
 import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.parameters.Parameter;
+import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.ArgumentList;
 import org.emftext.language.java.references.ClassReference;
 import org.emftext.language.java.references.IdentifierReference;
@@ -73,6 +73,8 @@ import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
+import org.emftext.language.java.statements.ForLoop;
+import org.emftext.language.java.statements.WhileLoop;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
 import org.emftext.language.java.types.Char;
@@ -133,8 +135,14 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					if (resourceURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
 						String qualifiedName = resourceURI.trimFileExtension().toString().substring(
 								JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
-						qualifiedName = qualifiedName.replaceAll("\\$", ".");
-						
+						//inner classes directly contained in outer
+						EObject inner = element;
+						String innerName = "";
+						while(inner.eContainer() instanceof Classifier) {
+							innerName =  "$" + ((Classifier)inner).getName() + innerName;
+							inner = inner.eContainer();
+						}
+						qualifiedName = qualifiedName + innerName;
 						if (qualifiedName.startsWith("java.lang.")) {
 							//default import
 							fullID = ((NamedElement) element).getName();
@@ -146,44 +154,64 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 							if (fullID.contains(".")) {
 								packageName = fullID.substring(0,fullID.lastIndexOf("."));
 							}
-							
-							if (JavaUniquePathConstructor.packageName(cu).equals(packageName)) {
+							//fullID = fullID.replaceAll("\\$", ".");
+							if (fullID.contains("$")) {
+								//TODO full ref for inner classes, code below
+								fullID = ((NamedElement) element).getName();
+							}
+							else if (JavaUniquePathConstructor.packageName(cu).equals(packageName)) {
 								//same package
 								fullID = ((NamedElement) element).getName();
 							}
-							else for(Import imp : cu.getImports()) {
-								if(imp instanceof ClassifierImport) {
-									ClassifierImport classifierImport = (ClassifierImport) imp;
-									if (element.equals(classifierImport.getClassifier())) {
-										//the element is imported -> simple name
-										fullID = ((NamedElement) element).getName();
+							else {
+								//a inner class?
+								/*Class containersClass = findContainingClass(container);
+								if (containersClass != null) {
+									EList<Classifier> innerClasses = JavaClasspath.INSTANCE.getInternalClassifiers(containersClass);
+									for (Classifier superClass : getAllSuperTypes(containersClass)) {
+										innerClasses.addAll(
+												JavaClasspath.INSTANCE.getInternalClassifiers(superClass));
 									}
-								}
-								if(imp instanceof PackageImport) {
-									String name = ((NamedElement) element).getName();
-									EList<Classifier> importedClassifiers =  
-										JavaClasspath.INSTANCE.getClassifiers(imp);
-									for(Classifier classifierProxy : importedClassifiers) {
-										if (name.equals(classifierProxy.getName())) {
-											fullID = name;
-											break;
+									for(Classifier innerCand : innerClasses) {
+										if (element.equals(EcoreUtil.resolve(innerCand, myResource))) {
+											fullID = ((NamedElement) element).getName();
 										}
 									}
-									
-								}
-								else if (imp instanceof StaticMemberImport) {
-									StaticMemberImport staticImport = (StaticMemberImport) imp;
-									if (element.equals(staticImport.getStaticMember())) {
-										//the element is imported -> simple name
-										fullID = ((NamedElement) element).getName();
+								}*/
+								for(Import imp : cu.getImports()) {
+									if(imp instanceof ClassifierImport) {
+										ClassifierImport classifierImport = (ClassifierImport) imp;
+										if (element.equals(classifierImport.getClassifier())) {
+											//the element is imported -> simple name
+											fullID = ((NamedElement) element).getName();
+										}
 									}
-								}
-								else if (imp instanceof StaticClassifierImport) {
-									StaticClassifierImport staticImport = (StaticClassifierImport) imp;
-									if (staticImport.getStaticMembers().contains(element)) {
-										//the element is imported -> simple name
-										fullID = ((NamedElement) element).getName();
+									if(imp instanceof PackageImport) {
+										String name = ((NamedElement) element).getName();
+										EList<Classifier> importedClassifiers =  
+											JavaClasspath.INSTANCE.getClassifiers(imp);
+										for(Classifier classifierProxy : importedClassifiers) {
+											if (name.equals(classifierProxy.getName())) {
+												fullID = name;
+												break;
+											}
+										}
+										
 									}
+									else if (imp instanceof StaticMemberImport) {
+										StaticMemberImport staticImport = (StaticMemberImport) imp;
+										if (element.equals(staticImport.getStaticMember())) {
+											//the element is imported -> simple name
+											fullID = ((NamedElement) element).getName();
+										}
+									}
+									else if (imp instanceof StaticClassifierImport) {
+										StaticClassifierImport staticImport = (StaticClassifierImport) imp;
+										if (staticImport.getStaticMembers().contains(element)) {
+											//the element is imported -> simple name
+											fullID = ((NamedElement) element).getName();
+										}
+									}	
 								}
 							}
 						}
@@ -228,6 +256,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (element instanceof Block) {
 			return true;
 		}
+		//go not go into loops
+		if (element instanceof ForLoop) {
+			return true;
+		}
+		if (element instanceof WhileLoop) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -246,7 +281,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected Field STANDARD_ARRAY_LENGTH_FIELD = null;
 
 	protected void cosiderAddittionalScope(EObject container,
-			EList<EObject> contentsList) {
+			EList<EObject> contentsList, boolean lookIntoSuper) {
 		//consider imports and default imports
 		if (container instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) container;
@@ -300,7 +335,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				contentsList.addAll(getAllMemebers((PrimitiveType) container));
 			}
 			if (container instanceof Classifier) {
-				contentsList.addAll(getAllMemebers((Classifier) container));
+				if (lookIntoSuper)
+					contentsList.addAll(getAllMemebers((Classifier) container));
 			}
 			else {
 				//PARAMETER TYPE
@@ -516,6 +552,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				
 				if (pos > 0) {
 					Type parent = ((PackageOrClassifierReference)parts.get(pos - 1)).getTarget();
+					parent = (Type) EcoreUtil.resolve(parent, myResource);
 					if (parent instanceof Package ) {
 						packageDescriptor.setParent((Package) parent);
 					}
@@ -576,7 +613,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if (exp instanceof AdditiveExpression) {
 				AdditiveExpression additiveExpression = (AdditiveExpression) exp;
 				for(Expression subExp : additiveExpression.getChildren()) {
-					if (getTypeOfExpression(subExp).equals(stringClass)) {
+					if (stringClass.equals(getTypeOfExpression(subExp))) {
 						//special case: string concatenation
 						return stringClass;
 					}
@@ -658,7 +695,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		EList<EObject> contentsList = new BasicEList<EObject>();
 		contentsList.addAll(getOrderedContents(container));
-		cosiderAddittionalScope(container, contentsList);
+		//TODO this avoids when resolving a super type to consider the supertype itself as additional scope; should be structured better
+		boolean lookIntoSuper = true;
+		if (container instanceof Classifier && element instanceof QualifiedTypeArgument) {
+			lookIntoSuper = false;
+		}	
+		cosiderAddittionalScope(container, contentsList, lookIntoSuper);
 		for(EObject cand : contentsList) {
 			if (cand == null) {
 				//TODO clarify how this happens
@@ -764,12 +806,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				return getTypeOfReferencedElement((Reference)reference.eContainer());
 			}
 			else {
-				if (((SelfReference) reference).getSelf() instanceof This) {
+				//if (((SelfReference) reference).getSelf() instanceof This) {
 					return findContainingClass(reference);
-				}
-				else if (((SelfReference) reference).getSelf() instanceof Super) {
-					return getSuperType(findContainingClass(reference));
-				}
+				//}
+				// super may also reference to itself or an interface...	
+				//else if (((SelfReference) reference).getSelf() instanceof Super) {
+				//	return getSuperType(findContainingClass(reference));
+				//}
 			}
 
 		}
@@ -950,9 +993,23 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					if (context instanceof IdentifierReference) {
 						IdentifierReference reference = (IdentifierReference) context;
 						EList<Type> argumentTypes = getArgumentTypes(reference.getArgumentList());
-						if (method.getParameters().size() == argumentTypes.size()) {
+						EList<Parameter> parameters = new BasicEList<Parameter>(method.getParameters());
+						if (!parameters.isEmpty()) {
+							//in case of variable length add/remove some parameters
+							Parameter lastParameter = parameters.get(parameters.size() - 1);
+							if (lastParameter instanceof VariableLengthParameter) {
+								while(parameters.size() < argumentTypes.size()) {
+									parameters.add(lastParameter);
+								}
+								if(parameters.size() > argumentTypes.size()) {
+									parameters.remove(lastParameter);
+								}
+							}
+						}
+						
+						if (parameters.size() == argumentTypes.size()) {
 							for (int i = 0; i < argumentTypes.size(); i++) {
-								InternalEObject type = (InternalEObject) getReferencedType(method.getParameters().get(i).getType());
+								InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
 								InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
 								if (argumentType == null) {
 									break;
@@ -1108,9 +1165,14 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	
 	protected EList<Member> getAllMemebers(Classifier javaClassifier) {
 		EList<Member> memberList = new BasicEList<Member>();
+		//because inner classes are found in separate class files
+		memberList.addAll(
+				JavaClasspath.INSTANCE.getInternalClassifiers(javaClassifier));
 		for (Classifier superClassifier : getAllSuperTypes(javaClassifier)) {
 			if (superClassifier instanceof MemberContainer /*Class and Interface*/) {
 				memberList.addAll(((MemberContainer) superClassifier).getMembers());
+				memberList.addAll(
+						JavaClasspath.INSTANCE.getInternalClassifiers(superClassifier));
 			}
 			else {
 				//nothing
@@ -1158,7 +1220,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected Class getSuperType(Class subClass) {
 		Class superClass = null;
 		if (subClass.getExtends() != null) {
-			superClass = (Class) getReferencedType(subClass.getExtends().getType());
+			Type superType = getReferencedType(subClass.getExtends().getType());
+			if (superType instanceof Class) {
+				superClass = (Class) superType;
+			}
 		} 
 		if (superClass == null ) {
 			superClass = getObjectModelElement();
