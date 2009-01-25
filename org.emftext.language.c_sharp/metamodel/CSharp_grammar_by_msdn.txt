@@ -380,31 +380,36 @@ namespace-or-type-name: //done with namespaceOrTypeNameParts
 C.2.2 Types
 
 type:
-    value-type
-    reference-type
+    value-type //done
+    reference-type //done
     pointer-type
     
-pointer-type:
+pointer-type: //achtung: Linksrekursiv
     type   '*'
     'void'   '*'
-    
+
+//done, splitt in SimpleType and ReferenceType    
 value-type:
     struct-type
     enum-type
-    
+
+//done, splitt in SimpleType and ReferenceType  
 struct-type:
-    namespace-or-type-name //Reihenfolge müsste hier beachtet werden, also simple-type zuerst
+    namespace-or-type-name 
     simple-type
-    
+
+//done as abstract  
 simple-type:
     numeric-type
-    'bool'
-    
+    'bool' //done as Simpletype
+
+//done as Simpletype    
 numeric-type:
     integral-type
     floating-point-type
     'decimal'
-    
+
+//done as Simpletype    
 integral-type:
     sbyte
     byte
@@ -415,11 +420,13 @@ integral-type:
     long
     ulong
     char
-    
+
+//done as Simpletype    
 floating-point-type:
     float
     double
     
+//done in ClassOrInterfaceOrDelegateOrEnumType   
 enum-type:
     namespace-or-type-name
 
@@ -430,17 +437,17 @@ reference-type:
     array-type
     delegate-type
 
-//done in ClassOrInterfaceOrDelegateType    
+//done in ClassOrInterfaceOrDelegateOrEnumType    
 class-type: 		
     namespace-or-type-name
     'object'
     'string'			
 
-//done in ClassOrInterfaceOrDelegateType 
+//done in ClassOrInterfaceOrDelegateOrEnumType 
 interface-type:
     namespace-or-type-name
     
-//done in ClassOrInterfaceOrDelegateType
+//done in ClassOrInterfaceOrDelegateOrEnumType
 delegate-type:
     namespace-or-type-name
 
@@ -642,10 +649,7 @@ embedded-statement:
 	fixed-statement
     
 block:
-    '{'   statement-list ?   '}'
-    
-statement-list:
-    statement *
+    '{'   statement *  '}'
 
 empty-statement:
     ';'
@@ -703,7 +707,7 @@ switch-block:
     '{'   switch-section *   '}'
     
 switch-section:
-    switch-label *   statement-list
+    switch-label *   statement *
 
 switch-label:
     'case'   expression  ':'
@@ -907,7 +911,7 @@ constant-modifier:
     'private'
 
 field-declaration:
-    attribute *   field-modifier *   type   variable-declarators   ';'
+    attribute *   field-modifier *   type   variable-declarator (  ','   variable-declarator)*   ';'
 
 //done in Modifier   
 field-modifier:
@@ -921,9 +925,6 @@ field-modifier:
     'volatile'
     'unsafe'
     
-variable-declarators:
-    variable-declarator (  ','   variable-declarator)*
-    
 variable-declarator:
     identifier  ( '='   variable-initializer) ?
     
@@ -932,10 +933,7 @@ variable-initializer:
     array-initializer
     
 method-declaration:
-    method-header   block
-    
-method-header:
-    attribute *   method-modifier *   return-type   member-name   (   formal-parameter-list ?   )
+    attribute *   method-modifier *   return-type   ( interface-type   '.') ?   identifier   (   formal-parameter-list ?   )   block   
 
 //done in Modifier
 method-modifier:
@@ -952,21 +950,17 @@ method-modifier:
     'extern'
     'unsafe'
     
+//done in Method
 return-type:
     type
     'void'
     
-member-name:
-
-    ( interface-type   '.') ?   identifier
+    
     
 formal-parameter-list:
-    fixed-parameters
-    fixed-parameters   ','   parameter-array
-    parameter-array
-    
-fixed-parameters:
     fixed-parameter  ( ','   fixed-parameter)*
+    fixed-parameter  ( ','   fixed-parameter)*   ','   parameter-array
+    parameter-array  
  
 fixed-parameter:
     attribute *   parameter-modifier ?   type   identifier
@@ -979,7 +973,7 @@ parameter-array:
     attribute *   'params'   array-type   identifier
     
 property-declaration:
-    attribute *   property-modifier *   type   member-name   '{'   accessor-declarations   '}'
+    attribute *   property-modifier *   type   ( interface-type   '.') ?   identifier   '{'   accessor-declarations   '}'
 
 //done in Modifier
 property-modifier:
@@ -996,8 +990,6 @@ property-modifier:
     'extern'
     'unsafe'
     
-member-name:
-    (interface-type   '.') ?   identifier
     
 accessor-declarations: 		//soll accessor-declaration+(abstract) beinhalten
     get-accessor-declaration   set-accessor-declaration ?
@@ -1010,8 +1002,8 @@ set-accessor-declaration:	//Ableitung von accessor-declaration
     attribute *   'set'   block
     
 event-declaration:
-    attribute *   event-modifier *   'event'   type   variable-declarators   ';'
-    attribute *   event-modifier *   'event'   type   member-name   '{'   event-accessor-declarations   '}'
+    attribute *   event-modifier *   'event'   type   variable-declarator (  ','   variable-declarator)*   ';'
+    attribute *   event-modifier *   'event'   type   ( interface-type   '.') ?   identifier   '{'   event-accessor-declarations   '}'
 
 //done in Modifier    
 event-modifier:

@@ -1,9 +1,9 @@
 SYNTAXDEF cs
 FOR <http://www.emftext.org/c_sharp>
-START namespaces.CompilationUnit
+START CompilationUnit
 
 IMPORTS {
-	namespaces : <http://www.emftext.org/c_sharp/namespaces>
+	//namespaces : <http://www.emftext.org/c_sharp/namespaces>
 }
 OPTIONS {
 	tokenspace = "1";
@@ -40,13 +40,27 @@ Virtual 		 ::= "virtual" ;
 OverrideModifier ::= "override" ;
 Static			 ::= "static" ;
 
+//Simple Types
+Void 	::= "void" ;
+Decimal ::= "decimal" ;
+Bool 	::= "bool" ;
+SByte	::= "sbyte" ;
+Byte	::= "byte" ;
+Short	::= "short" ;
+UShort	::= "ushort" ;
+Int		::= "int" ;
+UInt	::= "uint" ;
+Long	::= "long" ;
+Char	::= "char" ;
+Float	::= "float" ;
+Double	::= "double" ;
 
-ClassOrInterfaceOrDelegateType
+ClassOrInterfaceOrDelegateOrEnumType
 	::= namespaceOrTypeName ;
-
-
-namespaces.CompilationUnit 
-	::= usingDirectives *  namespaceMemberDeclaration *;
+	
+	
+CompilationUnit 
+	::= usingDirectives *  namespaceMemberDeclaration * ;
 	//global-attribute *
 	
 UsingDirective
@@ -64,5 +78,12 @@ Class
 	
 ClassBase
 	::= ":" types ( "," types )* ;
-
+	
+Method
+    ::= modifiers *  returnType   ( interfaceType   ".") ?   name[]   "("      ")"  block ;
+	// attribute *  formal-parameter-list ?	
+	
+Block
+    ::= "{"   "}" ;	
+    // statement *
 }
