@@ -26,6 +26,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Unsafe" eSuperTypes="#//Modifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Virtual" eSuperTypes="#//Modifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Volatile" eSuperTypes="#//Modifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassOrInterfaceOrDelegateType" eSuperTypes="#//ReferenceType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceOrTypeName" lowerBound="1"
+        eType="#//NamespaceOrTypeName" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit">
     <eStructuralFeatures xsi:type="ecore:EReference" name="usingDirectives" upperBound="-1"
         eType="#//UsingDirective" containment="true"/>
@@ -49,12 +54,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceMemberDeclaration"
         upperBound="-1" eType="#//NamespaceMemberDeclaration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeDeclaration" abstract="true" eSuperTypes="#//NamespaceMemberDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDeclaration" abstract="true" eSuperTypes="#//NamespaceMemberDeclaration #//ClassMemberDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//TypeDeclaration #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
         eType="#//Modifier" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classBase" eType="#//ClassBase"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classMemberDeclarations"
         upperBound="-1" eType="#//ClassMemberDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassBase">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" lowerBound="1" upperBound="-1"
+        eType="#//ClassOrInterfaceOrDelegateType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassMemberDeclaration" abstract="true"/>
 </ecore:EPackage>

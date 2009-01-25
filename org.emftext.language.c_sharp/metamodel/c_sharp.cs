@@ -40,9 +40,14 @@ Virtual 		 ::= "virtual" ;
 OverrideModifier ::= "override" ;
 Static			 ::= "static" ;
 
+
+ClassOrInterfaceOrDelegateType
+	::= namespaceOrTypeName ;
+
+
 CompilationUnit 
 	::= usingDirectives *  namespaceMemberDeclaration *;
-	
+	//global-attribute *
 UsingDirective
 	::= "using"   (name[]   "=")?   namespaceOrTypeName   ";" ;
 	
@@ -53,8 +58,10 @@ NamespaceBody
 	::= "{"   usingDirectives *   namespaceMemberDeclaration *   "}" ;
 	
 Class
-    ::=    modifiers *   "class"   name[]      "{"     "}"  ( ";" ) ? ;
-	// attributes *   class-base ?   class-member-declarations *
-
+    ::= modifiers *   "class"   name[]  classBase ?    "{"  classMemberDeclarations *  "}"  ( ";" ) ? ;
+	// attributes *     
+	
+ClassBase
+	::= ":" types ( "," types )* ;
 
 }
