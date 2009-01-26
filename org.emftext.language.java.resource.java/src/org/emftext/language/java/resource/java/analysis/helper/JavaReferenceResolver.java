@@ -1110,6 +1110,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						name.equals(potentialBetterFit.getName()) &&
 						argumentTypes.size() == potentialBetterFit.getParameters().size()) {
 					
+					boolean strictMatch = true;
+					
 					for (int i = 0; i < argumentTypes.size(); i++) {
 						InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
 						InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
@@ -1119,15 +1121,15 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						
 						if (type != null && argumentType != null) {
 							if (!type.eIsProxy() || !argumentType.eIsProxy()) {
-								if(compareTypesStrict(type, argumentType)) {
+								if(!compareTypesStrict(type, argumentType)) {
 									//there is a better fit, which will be found later
-									return false;
+									strictMatch = false;
 									//TODO still need to check for "nearest subtype" here
 								}
 							}
 						}
-
 					}
+					return !strictMatch;
 				}	
 			}
 		}
