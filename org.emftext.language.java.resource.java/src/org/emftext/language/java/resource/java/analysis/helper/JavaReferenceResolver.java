@@ -1052,6 +1052,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 									break;
 								}
 							}
+							if (result) {
+								result = isBestFit(method, argumentTypes, parameters);
+							}
 						}
 						else {
 							result = false;
@@ -1066,7 +1069,86 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return result;
 	}
 
+	protected boolean isBestFit(Method m, EList<Type> argumentTypes, EList<Parameter> parameters) {
+		//TODO in a revised implementation this code might go somewhere else to avoid duplicated checks
+		String name = m.getName();
+		boolean thisIsPerfect = true;
+		for (int i = 0; i < argumentTypes.size(); i++) {
+			InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
+			InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
+			if (argumentType == null) {
+				break;
+			}
+			
+			if (type != null && argumentType != null) {
+				if (!type.eIsProxy() || !argumentType.eIsProxy()) {
+					if(!compareTypesStrict(type, argumentType)) {
+						thisIsPerfect = false;
+					}
+				}
+			}
+		}
+		
+		if(thisIsPerfect) {
+			return true;
+		}
+		
+		if (!(m.eContainer() instanceof Classifier) || !(m.eContainer() instanceof MemberContainer)) {
+			//should not happen
+			return true;
+		}
+		
+		EList<Member> completeMemberList = new BasicEList<Member>(((MemberContainer)m.eContainer()).getMembers());
+		//only add super members which are not yet added -> extend getAllMembersMethod to exclude some
+		//completeMemberList.addAll(getAllMemebers((Classifier) m.eContainer()));
+		
+		for(Member otherMember : completeMemberList) {
+			if (otherMember instanceof Method) {
+				Method potentialBetterFit = (Method) otherMember;
+				parameters = potentialBetterFit.getParameters();
+				if (!m.equals(potentialBetterFit) &&
+						name.equals(potentialBetterFit.getName()) &&
+						argumentTypes.size() == potentialBetterFit.getParameters().size()) {
+					
+					for (int i = 0; i < argumentTypes.size(); i++) {
+						InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
+						InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
+						if (argumentType == null) {
+							break;
+						}
+						
+						if (type != null && argumentType != null) {
+							if (!type.eIsProxy() || !argumentType.eIsProxy()) {
+								if(compareTypesStrict(type, argumentType)) {
+									//there is a better fit, which will be found later
+									return false;
+									//TODO still need to check for "nearest subtype" here
+								}
+							}
+						}
 
+					}
+				}	
+			}
+		}
+		return true;
+	}
+
+	protected boolean compareTypesStrict(EObject moreGeneral,
+			EObject lessGeneral) {
+		
+		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
+				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
+			
+			return true;
+		}
+		else if (moreGeneral.eClass().equals(lessGeneral.eClass())) {
+			return true;
+		}
+		
+		return false;
+	}
+			
 	protected boolean compareTypes(EObject moreGeneral,
 			EObject lessGeneral) { //type
 		
