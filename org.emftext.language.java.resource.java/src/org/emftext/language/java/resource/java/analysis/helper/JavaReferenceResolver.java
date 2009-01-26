@@ -1117,15 +1117,20 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 		}
 
-		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier) {
-			return moreGeneral.equals(lessGeneral) ||
-				getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral) ||
-				//everything can be implicitly casted to string
-				moreGeneral.equals(EcoreUtil.resolve(
-						JavaClasspath.INSTANCE.getClassifier("java.lang.String"), myResource))  ||
-				moreGeneral.equals(EcoreUtil.resolve(
+		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
+				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
+			
+			return true;
+		}
+		
+		if (moreGeneral instanceof Classifier) {
+			//everything can be implicitly casted to string
+			return moreGeneral.equals(EcoreUtil.resolve(
+						JavaClasspath.INSTANCE.getClassifier("java.lang.CharSequence"), myResource))||
+				getAllSuperTypes((Classifier)moreGeneral).contains(EcoreUtil.resolve(
 						JavaClasspath.INSTANCE.getClassifier("java.lang.CharSequence"), myResource));
 		}
+
 		return false;
 	}
 	
