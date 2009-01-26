@@ -1,5 +1,8 @@
 package org.emftext.language.java.resource.java.analysis.helper;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -275,6 +278,21 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				return result;
 			}
 		}
+		if (container instanceof MemberContainer) {
+			//fields have priority over constructor calls
+			EList<EObject> result = new BasicEList<EObject>(container.eContents());
+			Collections.sort(result, new Comparator<EObject>() {
+
+				public int compare(EObject o1, EObject o2) {
+					if (o1 instanceof Field) {
+						return -1;
+					}
+					return 1;
+				}
+
+			});
+			return result;
+		}
 		return container.eContents();
 	}
 	
@@ -503,7 +521,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			//it should start with a lower letter
 			String firstLetter = identifier.substring(0,1);
 			if(!firstLetter.toLowerCase().equals(firstLetter)) {
-				return;
+				//return;
 			}
 			//it has to be target of a reference: there are two referencing possibilities
 			// (1)
