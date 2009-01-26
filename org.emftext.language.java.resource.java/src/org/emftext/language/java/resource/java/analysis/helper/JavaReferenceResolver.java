@@ -1140,11 +1140,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			EObject lessGeneral) {
 		
 		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
-				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
+				(moreGeneral.equals(lessGeneral))) {
 			
 			return true;
 		}
-		else if (moreGeneral.eClass().equals(lessGeneral.eClass())) {
+		else if (moreGeneral instanceof PrimitiveType && lessGeneral instanceof PrimitiveType && 
+				moreGeneral.eClass().equals(lessGeneral.eClass())) {
 			return true;
 		}
 		
