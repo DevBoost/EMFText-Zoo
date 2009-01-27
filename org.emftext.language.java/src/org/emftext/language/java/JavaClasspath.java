@@ -61,7 +61,7 @@ public class JavaClasspath {
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 
-			if (entry.getName().endsWith(".class") || entry.getName().endsWith(".java")) {
+			if (entry.getName().endsWith(".class")) {
 				String fullName = entry.getName();
 				String uri = "archive:" + jarURI.toString() + "!/" + fullName;
 				
