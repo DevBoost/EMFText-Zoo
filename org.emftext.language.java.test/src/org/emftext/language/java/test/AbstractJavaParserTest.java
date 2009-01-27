@@ -311,7 +311,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	private static File prepareOutputFile(String outputFileName) {
-		File outputFile = new File(outputFileName);
+		File outputFile = new File(outputFileName.replaceAll(" ", "\\%20"));
 		File parent = outputFile.getParentFile();
 		if (!parent.exists()) {
 			parent.mkdirs();
