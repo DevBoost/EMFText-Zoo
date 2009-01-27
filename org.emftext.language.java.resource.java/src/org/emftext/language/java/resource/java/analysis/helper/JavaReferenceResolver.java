@@ -1250,7 +1250,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Byte");
 		}
 		if (primitiveType instanceof Char) {
-			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Char");
+			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Character");
 		}
 		if (primitiveType instanceof Double) {
 			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Double");
