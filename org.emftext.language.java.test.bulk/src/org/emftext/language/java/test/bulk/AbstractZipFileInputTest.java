@@ -17,6 +17,7 @@ import junit.framework.TestSuite;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
@@ -25,6 +26,9 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.resource.java.JavaLexer;
+import org.emftext.language.java.resource.java.JavaParser;
+import org.emftext.language.java.resource.java.JavaResourceImpl;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
@@ -47,10 +51,20 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		
 		public void runTest() {
 			try {
-				JavaRoot unit = parseResource(zipFile, entry);
-				assertNotNull(unit);
-				
 				Map<URI,URI> urisToRestore = new HashMap<URI, URI>();
+				
+				//we need to parse manually in order to avoid registration of the resource
+				URI sourceURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFile.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
+
+				JavaParser parser = new JavaParser(new org.antlr.runtime.CommonTokenStream(new JavaLexer(new org.antlr.runtime.ANTLRInputStream(
+						new ExtensibleURIConverterImpl().createInputStream(sourceURI)))));
+
+				JavaResourceImpl javaResource = new JavaResourceImpl();
+				javaResource.setURI(sourceURI);
+				parser.setResource(javaResource);
+				JavaRoot unit = (JavaRoot) parser.start();
+				assertNotNull(unit);
+				//--------------------------------------------------------------------------
 				
 				if (unit instanceof CompilationUnit) {
 					CompilationUnit cu = (CompilationUnit) unit;
@@ -61,7 +75,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				
 				//reset to class files
 				JavaClasspath.INSTANCE.URI_MAP.putAll(urisToRestore);
-	
+				
 				//TODO put somewhere suitable 
 				//for JacksTest: remove java.java from classpath!
 				if (entry.getName().equals("java.java")) {
