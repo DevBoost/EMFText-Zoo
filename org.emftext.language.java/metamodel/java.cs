@@ -374,7 +374,7 @@ expressions.AssignmentExpression
     ;
     	
 expressions.ConditionalExpression
-    ::= child:expressions.ConditionalOrExpression ("?" expressionIf:expressions.AssignmentExpression ":" expressionElse:expressions.AssignmentExpression)?
+    ::= child:expressions.ConditionalOrExpression ("?" expressionIf:expressions.AssignmentExpression ":" expressionElse:expressions.ConditionalExpression)?
     ;
     
 expressions.ConditionalOrExpression
@@ -432,15 +432,15 @@ expressions.SuffixUnaryModificationExpression
 expressions.PrefixUnaryModificationExpression
 	::= (operator #0)? child
 	;
-
+	
 expressions.CastExpression
-    ::= "(" typeReference arrayDimensionsBefore* ")" child:expressions.AssignmentExpression
+    ::= "(" typeReference arrayDimensionsBefore* ")" child:expressions.UnaryExpression
     ;
-        
+       
 expressions.NestedExpression ::= "(" expression:expressions.AssignmentExpression ")"  arraySelectors* (#0 "." #0 next)? 
     ;
-
-
+    
+    
 operators.Assignment                   ::= "=";
 operators.AssignmentPlus               ::= "+=";
 operators.AssignmentMinus              ::= "-=";
