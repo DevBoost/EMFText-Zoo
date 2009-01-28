@@ -30,6 +30,7 @@ OPTIONS {
 	overridePluginXML = "false";
 	overrideManifest = "false";
 	generateCodeFromGeneratorModel = "false";
+	memoize = "true";
 }
 
 TOKENS {
