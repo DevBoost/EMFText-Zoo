@@ -1106,7 +1106,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertEquals("The name of the declared class equals 'EmptyClass'",
 				"EmptyClass", declaraction.getName());
 		assertEquals("pkg.Empty is located in a package 'pkg'", "pkg", model
-				.getPackage().get(0));
+				.getNamespace().get(0));
 		parseAndReprint("pkg/EmptyClass.java");
 	}
 
@@ -1118,9 +1118,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertEquals("The name of the declared class equals 'Inner'", "Inner",
 				declaraction.getName());
 		assertEquals("pkg.inner.Inner is located in a package 'inner'",
-				"inner", model.getPackage().get(1));
+				"inner", model.getNamespace().get(1));
 		assertEquals("Package 'Inner' is located in a package 'pkg'", "pkg",
-				model.getPackage().get(0));
+				model.getNamespace().get(0));
 		parseAndReprint("pkg/inner/Inner.java");
 	}
 	

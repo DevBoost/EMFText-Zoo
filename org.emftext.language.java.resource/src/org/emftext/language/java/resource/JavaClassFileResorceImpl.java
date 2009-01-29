@@ -26,9 +26,8 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.resource.java.JavaResource;
-import org.emftext.language.java.types.ParameterizedPackageOrClassifierReference;
+import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.types.TypeReferenceSequence;
 import org.emftext.language.java.types.TypesFactory;
 
 /**
@@ -282,13 +281,11 @@ public class JavaClassFileResorceImpl extends JavaResource {
 	}
 	
 	private TypeReference createReferenceToClassifier(String fullClassifierName) { 
-		TypeReferenceSequence typeRefSequence = TypesFactory.eINSTANCE.createTypeReferenceSequence();
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
-		ParameterizedPackageOrClassifierReference classifierReference = 
-			TypesFactory.eINSTANCE.createParameterizedPackageOrClassifierReference();
+		ClassifierReference classifierReference = 
+			TypesFactory.eINSTANCE.createClassifierReference();
 		classifierReference.setTarget(classifier);
-		typeRefSequence.getParts().add(classifierReference);
-		return typeRefSequence;
+		return classifierReference;
 	}
 	
 	private int getArrayDimension(String signature) {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -19,13 +20,12 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
-import org.emftext.language.java.types.PackageOrClassifierReference;
-import org.emftext.language.java.types.Type;
 
 public class JavaClasspath {
 
@@ -163,26 +163,10 @@ public class JavaClasspath {
 		}
 	}
 	
-	private EList<Classifier> javaLangPackage = null;
+	private EList<ConcreteClassifier> javaLangPackage = null;
 	
 	
-	public EList<Classifier> getClassifiers(Import theImport) {
-		String fullQualifiedName = getQualifiedNameFromImport(theImport);
-		
-		String fullQualifiedPackageName = fullQualifiedName;
-		EList<Classifier> result = getClassifiers(fullQualifiedPackageName, "*");
-		
-		if (result.isEmpty()) {
-			//try as "Class" because the "package" can indeed be a "class"
-			String fullQualifiedClassPackageName = fullQualifiedName.substring(
-					0, fullQualifiedName.length() - 1) + "$";
-			result = getClassifiers(fullQualifiedClassPackageName, "*");
-		}
-		return result;
-	}
-	
-	
-	public EList<Classifier> getInternalClassifiers(Classifier container) {
+	public EList<ConcreteClassifier> getInternalClassifiers(Classifier container) {
 		Resource resource = container.eResource();
 		if (resource != null){
 			String uri = container.eResource().getURI().toString();
@@ -193,7 +177,7 @@ public class JavaClasspath {
 				return getClassifiers(className, "*");	
 			}
 		}
-		return new BasicEList<Classifier>();
+		return new BasicEList<ConcreteClassifier>();
 	}
 	
 	/**
@@ -202,13 +186,13 @@ public class JavaClasspath {
 	 * @param packageName
 	 * @return
 	 */
-	public EList<Classifier> getClassifiers(String packageName, String classifierQuery) {
+	public EList<ConcreteClassifier> getClassifiers(String packageName, String classifierQuery) {
 		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR) &&
 				!packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
 			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
 		}
 		
-		EList<Classifier> resultList = new BasicEList<Classifier>();
+		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
 
 		synchronized (this) {
 			if(!packageClassifierMap.containsKey(packageName)) {
@@ -228,7 +212,7 @@ public class JavaClasspath {
 					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullQualifiedName));
 					//set also the name to reason about it without resolving the proxy
 					((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
-					resultList.add((Classifier) classifierProxy);
+					resultList.add((ConcreteClassifier) classifierProxy);
 				}
 			}
 		}
@@ -238,51 +222,76 @@ public class JavaClasspath {
 	
 	/**
 	 * 
+	 * @param theImport that points at the package
+	 * @param classifierName the name of the classifier in the given package
+	 * @return
+	 */
+	public Classifier getClassifier(Import theImport, String classifierName) {
+		String containerName = getContainerNameFromNamespace(theImport, "");
+		if (containerName == null) {
+			return null;
+		}
+		
+		String fullQualifiedName = containerName + classifierName;
+		return getClassifier(fullQualifiedName);
+	}
+
+	/**
+	 * 
 	 * @param theImport that points directly at the classifier
 	 * @return
 	 */
 	public Classifier getClassifier(Import theImport) {
-		String fullQualifiedName = getQualifiedNameFromImport(theImport);
+		String fullQualifiedName = getContainerNameFromNamespace(theImport, "");
+		if (fullQualifiedName == null || fullQualifiedName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
+			return null;
+		}
 		//cut the trailing separator
 		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() -1);
 		
 		return getClassifier(fullQualifiedName);
 	}
 	
-	/**
-	 * 
-	 * @param theImport that points at the package
-	 * @param classifierName the name of the classifier in the given package
-	 * @return
-	 */
-	public Classifier getClassifier(Import theImport, String classifierName) {
-		String fullQualifiedName = getQualifiedNameFromImport(theImport);
-		fullQualifiedName = fullQualifiedName + classifierName;
+	public EList<ConcreteClassifier> getClassifiers(Import theImport) {
+		String containerName = getContainerNameFromNamespace(theImport, "");
+		if (containerName == null) {
+			return new BasicEList<ConcreteClassifier>();
+		}
 		
-		return getClassifier(fullQualifiedName);
+		EList<ConcreteClassifier> result = getClassifiers(containerName, "*");
+		return result;
 	}
-
-	private String getQualifiedNameFromImport(Import theImport) {
-		String fullQualifiedName = "";
-		for(PackageOrClassifierReference ref : theImport.getParts()) {
-			if (!ref.getTarget().eIsProxy()) {
-				Type type = ref.getTarget();
 	
-				if (type instanceof Package) {
-					fullQualifiedName = fullQualifiedName + ((Package) type).getName() + 
-						JavaUniquePathConstructor.PACKAGE_SEPARATOR;
-				}
-				else if (type instanceof Classifier) {
-					fullQualifiedName = fullQualifiedName + ((Classifier) type).getName() + 
-						JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+	public String getContainerNameFromNamespace(NamespaceAwareElement theImport, String prefix) {
+		String containerName = prefix;
+		for(Iterator<String> it = theImport.getNamespace().iterator(); it.hasNext(); ) {
+			String namespaceFragment = it.next();
+			//does it point at a classifier or a package as container?
+			String assumedPackageName    = containerName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+			String assumedClassifierName = containerName + namespaceFragment + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			
+			if (it.hasNext()) {
+				if (packageClassifierMap.containsKey(assumedClassifierName)) {
+					containerName = assumedClassifierName;
 				}
 				else {
-					assert(false);
+					//assume package
+					containerName = assumedPackageName;
+				}
+			}
+			else {
+				if (packageClassifierMap.containsKey(assumedPackageName)) {
+					//a package is always available as key
+					containerName = assumedPackageName;
+				}
+				else {
+					//assume classifier that is not key, but value in the map
+					containerName = assumedClassifierName;
 				}
 			}
 		}
 		
-		return fullQualifiedName;
+		return containerName;
 	}
 	
 	public Classifier getClassifier(String fullQualifiedName) {
@@ -294,14 +303,14 @@ public class JavaClasspath {
 		return (Classifier) classifierProxy;
 	}
 	
-	public EList<Classifier> getDefaultImports(String packageName) {
-		EList<Classifier> resultList = new BasicEList<Classifier>();
+	public EList<ConcreteClassifier> getDefaultImports(String packageName) {
+		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
 		//my package
 		resultList.addAll(getClassifiers(packageName + ".", "*"));
 
 		//java.lang package	
 		if (javaLangPackage == null) {
-			javaLangPackage = new BasicEList<Classifier>();
+			javaLangPackage = new BasicEList<ConcreteClassifier>();
 			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
 		}
 		

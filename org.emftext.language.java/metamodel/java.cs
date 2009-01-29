@@ -58,14 +58,14 @@ containers.EmptyModel ::= ("import" imports #0 ";" !0 )* (";")*
    ;
 
 containers.Package
-   ::=  annotations* "package" (package[] #0 "." #0 )* name[] #0 ";" 
+   ::=  annotations* "package" (namespace[] #0 "." #0 )* name[] #0 ";" 
         (";")? //TODO this is required to let T7312 of JacksTest pass... not sure if this is correct or if it should be * instead of ?
         !0 !0
         ("import" imports #0 ";" !0 )* (";")*
    ;
    
 containers.CompilationUnit 
-   ::=	("package" package[] (#0 "." #0 package[])* #0 ";" )?
+   ::=	("package" namespace[] (#0 "." #0 namespace[])* #0 ";" )?
         !0 !0
         ("import" imports #0 ";" !0 )*
         (";" !0)*
@@ -75,16 +75,16 @@ containers.CompilationUnit
 	;
 	
 imports.ClassifierImport
-	::= (parts #0 "." #0 )+ #0 classifier[];
+	::= (namespace[] #0 "." #0 )+ #0 classifier[];
 	
 imports.PackageImport
-	::= (parts #0 "." #0 )* #0 "*";
+	::= (namespace[] #0 "." #0 )* #0 "*";
 
 imports.StaticMemberImport
-	::= static (parts #0 "." #0 )+ #0 staticMember[];
+	::= static (namespace[] #0 "." #0 )+ #0 staticMember[];
 	
 imports.StaticClassifierImport
-	::= static (parts #0 "." #0 )* staticMembers[] #0 "." #0 "*";
+	::= static (namespace[] #0 "." #0 )* staticMembers[] #0 "." #0 "*";
 
 classifiers.Class
 	::=	annotations*
@@ -213,7 +213,7 @@ instantiations.NewConstructorCall
 		// these are the arguments for the class type parameters
 		("<" classTypeArguments ("," classTypeArguments)* ">")?
 		"(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
-		annonymousClass?
+		anonymousClass?
 		(#0 "." #0 next)? 
      ;
      
@@ -243,15 +243,11 @@ arrays.ArraySelector
 	::= "[" expression:expressions.AssignmentExpression? "]"
 	;
 
-types.TypeReferenceSequence
-	::= parts (#0 "." #0 parts)*
-	;
-
-types.PlainPackageOrClassifierReference
-	::= target[] 
+types.NamespaceClassifierReference
+	::= (namespace[]  #0 "." #0)* (classifierReferences #0 "." #0)* classifierReferences
 	;
 	
-types.ParameterizedPackageOrClassifierReference
+types.ClassifierReference
 	::= target[] 
 		("<" typeArguments ("," typeArguments)* ">")?
 	;
@@ -265,7 +261,7 @@ references.IdentifierReference
 		arraySelectors* (#0 "." #0 next)? 
 	;
 	
-references.ClassReference ::= "class"
+references.ReflectiveClassReference ::= "class"
 		(#0 "." #0 next)? 
 	;
 
@@ -433,13 +429,16 @@ expressions.SuffixUnaryModificationExpression
 expressions.PrefixUnaryModificationExpression
 	::= (operator #0)? child
 	;
-	
+
 expressions.CastExpression
     ::= "(" typeReference arrayDimensionsBefore* ")" child:expressions.UnaryExpression
     ;
-       
+    
 expressions.NestedExpression ::= "(" expression:expressions.AssignmentExpression ")"  arraySelectors* (#0 "." #0 next)? 
-    ;
+    ;	
+
+       
+
     
     
 operators.Assignment                   ::= "=";

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
-import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
@@ -74,7 +74,7 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 		String[] packageNaemParts = packageName.split("\\.");
 		for(int i = 0; i < packageNaemParts.length; i++) {
 			if(i < packageNaemParts.length - 1) {
-				thePackage.getPackage().add(packageNaemParts[i]);
+				thePackage.getNamespace().add(packageNaemParts[i]);
 			}
 			else {
 				thePackage.setName(packageNaemParts[i]);
@@ -122,10 +122,10 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 
 	private void populatePackage(Package p) {
 		String fullPackageName = packageName(p);
-		for (Classifier classifier : JavaClasspath.INSTANCE.getClassifiers(
+		for (ConcreteClassifier classifier : JavaClasspath.INSTANCE.getClassifiers(
 				fullPackageName, "*")) {
 			
-			classifier = (Classifier) EcoreUtil.resolve(classifier, this.getResourceSet());
+			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, this.getResourceSet());
 			CompilationUnit cu = (CompilationUnit)classifier.eContainer();
 			//binary resource
 			if (cu == null) {
@@ -160,8 +160,8 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 				IFolder folder = (IFolder) resource;
 				
 				Package pkg = ContainersFactory.eINSTANCE.createPackage();
-				pkg.getPackage().addAll(thisPackage.getPackage());
-				pkg.getPackage().add(thisPackage.getName());
+				pkg.getNamespace().addAll(thisPackage.getNamespace());
+				pkg.getNamespace().add(thisPackage.getName());
 				pkg.setName(folder.getName());
 				thisPackage.getSubpackages().add(pkg);
 				collectSubunits(folder, pkg);
@@ -172,8 +172,8 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 	
 	private String packageName(Package aPackage) {
 		String name = "";
-		for(int i=0; i < aPackage.getPackage().size(); i++) {
-			name += aPackage.getPackage().get(i) + ".";
+		for(int i=0; i < aPackage.getNamespace().size(); i++) {
+			name += aPackage.getNamespace().get(i) + ".";
 		}
 		name += aPackage.getName();
 		return name;
@@ -191,8 +191,8 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 						continue;
 					}
 					
-					String[] folder = cu.getPackage().toArray(
-							new String[cu.getPackage().size()]);
+					String[] folder = cu.getNamespace().toArray(
+							new String[cu.getNamespace().size()]);
 					String   file   = cu.getClassifiers().get(0).getName();
 					
 					URI subResourcURI = getURI().trimFileExtension().trimFileExtension();
