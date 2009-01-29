@@ -84,6 +84,38 @@ Method
 	// attribute *  formal-parameter-list ?	
 	
 Block
-    ::= "{"   "}" ;	
-    // statement *
+    ::= "{" statement *  "}" ;	
+    
+EmbeddedStatement
+	::= ( "unsafe" ) ?  block ; 
+	
+EmptyStatement
+	::= ";" ;
+	
+LabeledStatement
+	::= name[] ":" statement ; 
+
+DeclarationStatement
+	::= localVariableDeclaration  ";" ;
+	//| localConstantDeclaration
+LocalVariableDeclaration
+	::= type localVariableDeclarator + ;
+	
+LocalVariableDeclarator
+	::= name[] ;
+	//( "="   localVariableInitializer) ? 
+	
+//LocalVariableInitializer
+//	::= expression ;
+	// | arrayInitializer
+
+//LocalConstantDeclaration
+//	::= "const"   type   constantDeclarators ;
+	
+//ConstantDeclarators
+//	::= constantDeclarator ( ","   constantDeclarator) * ;
+	
+//ConstantDeclarator
+//	::= name[] "=" expression ;
+	
 }
