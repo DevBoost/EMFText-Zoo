@@ -10,7 +10,7 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 public class Tomcat6Test extends AbstractZipFileInputTest {
 	
-	private static final String INPUT_FILE = BULK_INPUT_DIR + "apache-tomcat-6.0.18-src-java-files.zip";
+	private static final String INPUT_FILE = BULK_INPUT_DIR + "apache-tomcat-6.0.18-src.zip";
 	
 	public static Test suite() throws CoreException, IOException {
 		registerLibs("lib/tomcat");

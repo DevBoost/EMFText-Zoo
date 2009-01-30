@@ -10,7 +10,7 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 public class Eclipse341Test extends AbstractZipFileInputTest {
 	
-	public static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-sourceBuild-srcIncluded-3.4.1.zip";
+	public static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-3.4.1-src.zip";
 
 	public static Test suite() throws CoreException, IOException {
 		registerLibs("lib/eclipse");

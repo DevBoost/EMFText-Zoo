@@ -10,7 +10,7 @@ import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 public class SunJDKTest extends AbstractZipFileInputTest {
 	
-	private static final String INPUT_FILE = BULK_INPUT_DIR + "sun_jdk_1.6.0_07.zip";
+	private static final String INPUT_FILE = BULK_INPUT_DIR + "sun_jdk_1.6.0_07-src.zip";
 	
 	public static Test suite() throws CoreException, IOException {
 		TestSuite suite = new ThreadedTestSuite("Suite testing all files in sun jdk 1.6.0_07 zip file automatically", 5 * 60 * 1000, 8);
