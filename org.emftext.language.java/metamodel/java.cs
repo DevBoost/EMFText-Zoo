@@ -46,15 +46,15 @@ TOKENS {
 	DEFINE HEX_FLOAT_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')* '.' ('0'..'9'|'a'..'f'|'A'..'F')+ (('p'|'P') ('+'|'-')? ('0'..'9')+ ('f'|'F'))?$;
 	DEFINE HEX_DOUBLE_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')* '.' ('0'..'9'|'a'..'f'|'A'..'F')+ (('p'|'P') ('+'|'-')? ('0'..'9')+ ('d'|'D')?)?$;
 	DEFINE HEX_LONG_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+('l'|'L')$;
-	DEFINE HEX_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+$;
+	DEFINE HEX_INTEGER_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+$;
 	
 	DEFINE DECIMAL_FLOAT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? ('f'|'F') | ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)?) ('f'|'F') | (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) ('f'|'F') | ('0'..'9')+ ('f'|'F'))$;
 	DEFINE DECIMAL_DOUBLE_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? ('d'|'D')? | ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)?) ('d'|'D')? | (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) ('d'|'D')? | ('0'..'9')+ ('d'|'D'))$;
 	DEFINE DECIMAL_LONG_LITERAL $('0'|'1'..'9''0'..'9'*)('l'|'L')$;
-	DEFINE DECIMAL_LITERAL $('0'|'1'..'9''0'..'9'*)$;
+	DEFINE DECIMAL_INTEGER_LITERAL $('0'|'1'..'9''0'..'9'*)$;
 	
 	DEFINE OCTAL_LONG_LITERAL $'0'('0'..'7')+('l'|'L')$;
-	DEFINE OCTAL_LITERAL $'0'('0'..'7')+$;
+	DEFINE OCTAL_INTEGER_LITERAL $'0'('0'..'7')+$;
 
 	//PREDEFINED WS COLLECT IN whitespaces;
 }
@@ -524,7 +524,7 @@ literals.DecimalFloatLiteral
 	::= value[DECIMAL_FLOAT_LITERAL];
 
 literals.DecimalIntegerLiteral 
-	::= value[DECIMAL_LITERAL];
+	::= value[DECIMAL_INTEGER_LITERAL];
 
 literals.DecimalDoubleLiteral 
 	::= value[DECIMAL_DOUBLE_LITERAL];
@@ -539,13 +539,13 @@ literals.HexDoubleLiteral
 	::= value[HEX_DOUBLE_LITERAL];
 
 literals.HexIntegerLiteral 
-	::= value[HEX_LITERAL];
+	::= value[HEX_INTEGER_LITERAL];
 
 literals.OctalLongLiteral 
 	::= value[OCTAL_LONG_LITERAL];
 
 literals.OctalIntegerLiteral 
-	::= value[OCTAL_LITERAL];
+	::= value[OCTAL_INTEGER_LITERAL];
 
 literals.CharacterLiteral 
 	::= value[CHARACTER_LITERAL];
