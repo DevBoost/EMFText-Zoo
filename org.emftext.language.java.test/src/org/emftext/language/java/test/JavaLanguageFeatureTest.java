@@ -279,6 +279,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 	
 	@Test
+	public void testAnonymousEnum() throws Exception {
+		String typename = "AnonymousEnum";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		Enumeration enumeration = assertParsesToEnumeration(typename);
+		assertMemberCount(enumeration, 1);
+
+		parseAndReprint(filename);
+	}
+
+	@Test
 	public void testAnonymousInner() throws Exception {
 		String typename = "AnonymousInner";
 		String filename = typename + JAVA_FILE_EXTENSION;

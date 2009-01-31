@@ -14,6 +14,7 @@ public class Literals {
 		double y = 0x8000000000000000L;
 		double z = 0xfffe00L;
 		
+		
 		double f1 = 1.5;
 		char c = 'a';
 		String s = "abc";
@@ -53,4 +54,11 @@ public class Literals {
 	public long maxLong = 0xffffffffffffffffL;
 	public boolean b = -0xffffffffffffffffL == ~0xffffffffffffffffL+1;
 	public long i9 = 0X00FF00FF;
+
+    public static final double DOUBLE_MAX_VALUE = 0x1.fffffffffffffP+1023; // 1.7976931348623157e+308
+    public static final double DOUBLE_MIN_NORMAL = 0x1.0p-1022; // 2.2250738585072014E-308
+    public static final double DOUBLE_MIN_VALUE = 0x0.0000000000001P-1022; // 4.9e-324
+    public static final float FLOAT_MAX_VALUE = 0x1.fffffeP+127f; // 3.4028235e+38f
+    public static final float FLOAT_MIN_NORMAL = 0x1.0p-126f; // 1.17549435E-38f
+    public static final float FLOAT_MIN_VALUE = 0x0.000002P-126f; // 1.4e-45f
 }
