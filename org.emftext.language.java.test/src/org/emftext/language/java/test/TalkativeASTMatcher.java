@@ -94,7 +94,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
-import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LITERALTokenResolver;
+import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 
 
@@ -425,7 +425,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
 			nToken = nToken.substring(2);
 			try {
-				nToken = JavaDECIMAL_LITERALTokenResolver.parseInteger(nToken, 16).toString();
+				nToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -433,7 +433,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (oToken.startsWith("0x") || oToken.startsWith("0X")) {
 			oToken = oToken.substring(2);
 			try {
-				oToken = JavaDECIMAL_LITERALTokenResolver.parseInteger(oToken, 16).toString();
+				oToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -441,7 +441,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.startsWith("-0x") || nToken.startsWith("-0X")) {
 			nToken = nToken.substring(3);
 			try {
-				nToken = "-" + JavaDECIMAL_LITERALTokenResolver.parseInteger(nToken, 16).toString();
+				nToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -449,7 +449,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (oToken.startsWith("-0x") || oToken.startsWith("-0X")) {
 			oToken = oToken.substring(3);
 			try {
-				oToken = "-" + JavaDECIMAL_LITERALTokenResolver.parseInteger(oToken, 16).toString();
+				oToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}

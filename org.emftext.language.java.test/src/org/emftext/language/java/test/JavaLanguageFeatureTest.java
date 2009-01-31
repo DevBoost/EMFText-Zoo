@@ -27,8 +27,11 @@ import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticImport;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
-import org.emftext.language.java.literals.FloatingPointLiteral;
+import org.emftext.language.java.literals.DoubleLiteral;
+import org.emftext.language.java.literals.FloatLiteral;
+import org.emftext.language.java.literals.HexIntegerLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
+import org.emftext.language.java.literals.LongLiteral;
 import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
@@ -42,6 +45,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pkg.EscapedStrings;
+import pkg.NumberLiterals;
 
 /**
  * JUnit Test suite to test the EMFText JavaModel Parser. New Tests should
@@ -125,41 +129,77 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
 		
-		FloatingPointLiteral literal = (FloatingPointLiteral)initValue;
+		DoubleLiteral literal = (DoubleLiteral) initValue;
 		
 		assertNotNull(member.getName() + " is not a double field.", literal);
-		assertType(literal, FloatingPointLiteral.class);
-		FloatingPointLiteral initLiteral = (FloatingPointLiteral) literal;
+		assertType(literal, DoubleLiteral.class);
+		DoubleLiteral initLiteral = (DoubleLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
 	}
 
-	private void assertIsIntegerField(Member member, long expectedInitValue) {
+	private void assertIsIntegerField(Member member, int expectedInitValue) {
 		assertType(member, Field.class);
 		Field longField = (Field) member;		
 		Expression initValue = longField.getInitialValue();
 		
-		IntegerLiteral literal = (IntegerLiteral)initValue;
+		IntegerLiteral literal = (IntegerLiteral) initValue;
 
 		assertType(literal, IntegerLiteral.class);
 		IntegerLiteral initLiteralForBoolean = (IntegerLiteral) literal;
 		assertEquals(expectedInitValue, initLiteralForBoolean.getValue());
 	}
 
+	private void assertIsLongField(Member member, long expectedInitValue) {
+		assertType(member, Field.class);
+		Field longField = (Field) member;		
+		Expression initValue = longField.getInitialValue();
+		
+		LongLiteral literal = (LongLiteral) initValue;
+
+		assertType(literal, LongLiteral.class);
+		LongLiteral initLiteralForBoolean = (LongLiteral) literal;
+		assertEquals(expectedInitValue, initLiteralForBoolean.getValue());
+	}
+
+	private void assertIsNumericField(EList<Member> members, String name,
+			Object expectedValue) {
+		NamedElement field = findElementByName(members, name);
+		assertNotNull(field);
+		assertType(field, Field.class);
+		Field unicode = (Field) field;
+		Expression value = unicode.getInitialValue();
+		
+		Object initValue = null;
+		if (value instanceof IntegerLiteral) {
+			initValue = ((IntegerLiteral) value).getValue();
+		}
+		if (value instanceof LongLiteral) {
+			initValue = ((LongLiteral) value).getValue();
+		}
+		if (value instanceof FloatLiteral) {
+			initValue = ((FloatLiteral) value).getValue();
+		}
+		if (value instanceof DoubleLiteral) {
+			initValue = ((DoubleLiteral) value).getValue();
+		}
+		assertNotNull("Init value for field " + name + " is null.", initValue);
+		assertEquals("Field " + name, expectedValue, initValue);
+	}
+
 	private void assertIsStringField(EList<Member> members, String name,
 			String expectedValue) {
-		NamedElement fieldUnicode = findElementByName(members, name);
-		assertNotNull(fieldUnicode);
-		assertType(fieldUnicode, Field.class);
-		Field unicode = (Field) fieldUnicode;
+		NamedElement field = findElementByName(members, name);
+		assertNotNull(field);
+		assertType(field, Field.class);
+		Field unicode = (Field) field;
 		Expression value = unicode.getInitialValue();
 
-		StringReference literal = (StringReference)value;
+		StringReference literal = (StringReference) value;
 
 		assertType(literal, StringReference.class);
 		StringReference stringValue = (StringReference) literal;
-		// TODO jjohannes: why is this code commented out?
-		//assertEquals("Unescaped value expected for field \"" + name + "\".",
-		//		expectedValue, stringValue.getValue());
+		assertEquals("Unescaped value expected for field \"" + name + "\".",
+				expectedValue, stringValue.getValue());
 	}
 
 	private void assertIsStringField(Member member, String expectedInitValue) {
@@ -955,10 +995,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
-		assertIsIntegerField(members.get(1), 3);
+		assertIsIntegerField(findElementByName(members, "i1"), 3);
 		assertIsIntegerField(members.get(2), 1);
-		assertIsIntegerField(members.get(3), 8);
-		assertIsIntegerField(members.get(4), 0);
+		assertIsLongField(members.get(3), 8);
+		assertIsLongField(members.get(4), 0);
 		assertIsDoubleField(members.get(9), 1.5);
 		assertIsCharField(members.get(10), 'a');
 		assertIsStringField(members.get(11), "abc");
@@ -967,15 +1007,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		
 		Member maxLongField = findElementByName(members, "maxLong");
 		assertNotNull(maxLongField);
-		assertIsIntegerField(maxLongField, 0xffffffffffffffffL);
+		assertIsLongField(maxLongField, 0xffffffffffffffffL);
 		
 		Member i7Field = findElementByName(members, "i7");
 		assertNotNull(i7Field);
-		assertIsIntegerField(i7Field, 0xffL);
+		assertIsIntegerField(i7Field, 0xff);
 		
 		Member i8Field = findElementByName(members, "i8");
 		assertNotNull(i8Field);
-		assertIsIntegerField(i8Field, 10);
+		assertIsLongField(i8Field, 10);
 		
 		parseAndReprint(filename);
 	}
@@ -1057,7 +1097,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		parseAndReprint(filename);
 	}
 
-	
 	@Test
 	public void testMultiplications() throws Exception {
 		String typename = "Multiplications";
@@ -1087,6 +1126,25 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		
 		
 		parseAndReprint(filename);
+	}
+
+	@Test
+	public void testNumberLiterals() throws Exception {
+		String typename = "NumberLiterals";
+		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		assertMemberCount(clazz, 43);
+		
+		// iterate over all fields, get their value using reflection and
+		// compare this value with the one from the Java parser
+		java.lang.reflect.Field[] fields = NumberLiterals.class
+				.getDeclaredFields();
+		for (java.lang.reflect.Field field : fields) {
+			Object value = field.get(null);
+			assertIsNumericField(clazz.getMembers(), field.getName(), value);
+		}
+
+		parseAndReprint(file);
 	}
 
 	@Test

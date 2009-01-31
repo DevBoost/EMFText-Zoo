@@ -1,9 +1,8 @@
 package org.emftext.language.java.resource.java.analysis;
 
-import java.math.BigInteger;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.language.java.literals.DecimalIntegerLiteral;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
@@ -17,22 +16,13 @@ public class JavaDECIMAL_LITERALTokenResolver extends JavaBasedTokenResolver imp
 
 	@Override
 	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
+		assert container instanceof DecimalIntegerLiteral;
 		try {
-			return parseInteger(lexem, 10);
+			Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 10);
+			return new Integer(result.intValue());
 		} catch (NumberFormatException nfe) {
 			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + resource.getURI());
 			return null;
 		}
-	}
-
-
-	public static Long parseInteger(String lexem, int radix) throws NumberFormatException {
-		Long result;
-		if (lexem.toLowerCase().endsWith("l")) {
-			lexem = lexem.substring(0, lexem.length() - 1);
-		}
-		BigInteger tempInteger = new BigInteger(lexem, radix);
-		result = tempInteger.longValue();
-		return result;
 	}
 }
