@@ -21,8 +21,6 @@ import org.emftext.language.java.commons.CommonsPackage;
 import org.emftext.language.java.commons.impl.CommonsPackageImpl;
 import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.containers.impl.ContainersPackageImpl;
-import org.emftext.language.java.enumerations.EnumerationsPackage;
-import org.emftext.language.java.enumerations.impl.EnumerationsPackageImpl;
 import org.emftext.language.java.expressions.ExpressionsPackage;
 import org.emftext.language.java.expressions.impl.ExpressionsPackageImpl;
 import org.emftext.language.java.generics.GenericsPackage;
@@ -126,7 +124,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 		ClassifiersPackageImpl theClassifiersPackage = (ClassifiersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassifiersPackage.eNS_URI) instanceof ClassifiersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassifiersPackage.eNS_URI) : ClassifiersPackage.eINSTANCE);
 		CommonsPackageImpl theCommonsPackage = (CommonsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI) instanceof CommonsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI) : CommonsPackage.eINSTANCE);
 		ContainersPackageImpl theContainersPackage = (ContainersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ContainersPackage.eNS_URI) instanceof ContainersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ContainersPackage.eNS_URI) : ContainersPackage.eINSTANCE);
-		EnumerationsPackageImpl theEnumerationsPackage = (EnumerationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnumerationsPackage.eNS_URI) instanceof EnumerationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnumerationsPackage.eNS_URI) : EnumerationsPackage.eINSTANCE);
 		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI) instanceof ExpressionsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI) : ExpressionsPackage.eINSTANCE);
 		GenericsPackageImpl theGenericsPackage = (GenericsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(GenericsPackage.eNS_URI) instanceof GenericsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(GenericsPackage.eNS_URI) : GenericsPackage.eINSTANCE);
 		ImportsPackageImpl theImportsPackage = (ImportsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ImportsPackage.eNS_URI) instanceof ImportsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ImportsPackage.eNS_URI) : ImportsPackage.eINSTANCE);
@@ -148,7 +145,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 		theClassifiersPackage.createPackageContents();
 		theCommonsPackage.createPackageContents();
 		theContainersPackage.createPackageContents();
-		theEnumerationsPackage.createPackageContents();
 		theExpressionsPackage.createPackageContents();
 		theGenericsPackage.createPackageContents();
 		theImportsPackage.createPackageContents();
@@ -170,7 +166,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 		theClassifiersPackage.initializePackageContents();
 		theCommonsPackage.initializePackageContents();
 		theContainersPackage.initializePackageContents();
-		theEnumerationsPackage.initializePackageContents();
 		theExpressionsPackage.initializePackageContents();
 		theGenericsPackage.initializePackageContents();
 		theImportsPackage.initializePackageContents();
@@ -260,7 +255,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 		ClassifiersPackage theClassifiersPackage = (ClassifiersPackage)EPackage.Registry.INSTANCE.getEPackage(ClassifiersPackage.eNS_URI);
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
 		ContainersPackage theContainersPackage = (ContainersPackage)EPackage.Registry.INSTANCE.getEPackage(ContainersPackage.eNS_URI);
-		EnumerationsPackage theEnumerationsPackage = (EnumerationsPackage)EPackage.Registry.INSTANCE.getEPackage(EnumerationsPackage.eNS_URI);
 		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 		GenericsPackage theGenericsPackage = (GenericsPackage)EPackage.Registry.INSTANCE.getEPackage(GenericsPackage.eNS_URI);
 		ImportsPackage theImportsPackage = (ImportsPackage)EPackage.Registry.INSTANCE.getEPackage(ImportsPackage.eNS_URI);
@@ -281,7 +275,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 		getESubpackages().add(theClassifiersPackage);
 		getESubpackages().add(theCommonsPackage);
 		getESubpackages().add(theContainersPackage);
-		getESubpackages().add(theEnumerationsPackage);
 		getESubpackages().add(theExpressionsPackage);
 		getESubpackages().add(theGenericsPackage);
 		getESubpackages().add(theImportsPackage);

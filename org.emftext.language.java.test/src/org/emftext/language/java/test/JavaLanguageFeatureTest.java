@@ -283,7 +283,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "AnonymousEnum";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		Enumeration enumeration = assertParsesToEnumeration(typename);
-		assertMemberCount(enumeration, 1);
+		// assert no members because enumeration constants are not members
+		assertMemberCount(enumeration, 0);
 
 		parseAndReprint(filename);
 	}

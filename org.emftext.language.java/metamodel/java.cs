@@ -8,7 +8,6 @@ IMPORTS {
 	classifiers : <http://www.emftext.org/java/classifiers>
 	commons : <http://www.emftext.org/java/commons>
 	containers : <http://www.emftext.org/java/containers>
-	enumerations : <http://www.emftext.org/java/enumerations>
 	expressions : <http://www.emftext.org/java/expressions>
 	generics : <http://www.emftext.org/java/generics>
 	imports : <http://www.emftext.org/java/imports>
@@ -147,8 +146,13 @@ generics.TypeParameter
 	::=	name[] ("extends" extendTypes ("&" extendTypes)*)?
 	;
 
-enumerations.EnumConstant
-    ::= annotations* name[] ("(" arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* ")" )? body? 
+members.EnumConstant
+    ::= annotations* name[] ("(" arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* ")" )?
+    	(
+	    	"{"
+	        	(!1 members)* !0
+			"}"
+		)?
     ;
 
 statements.Block
