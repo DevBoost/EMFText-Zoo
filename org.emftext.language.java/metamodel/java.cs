@@ -36,8 +36,9 @@ TOKENS {
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
 	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
 
-	DEFINE FLOATING_POINT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))? |   ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) (('f'|'F'|'d'|'D'))?) |   (('0'..'9')+ (('f'|'F'|'d'|'D')))$;
-	DEFINE HEX_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+('l'|'L')?$;
+	DEFINE FLOATING_POINT_LITERAL $('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))? | ('.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+)? (('f'|'F'|'d'|'D'))?) | (('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')+) (('f'|'F'|'d'|'D'))?) | (('0'..'9')+ (('f'|'F'|'d'|'D')))$;
+	DEFINE HEX_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')+ ('l'|'L')?$;
+	DEFINE FLOATING_POINT_HEX_LITERAL $'0'('x'|'X')('0'..'9'|'a'..'f'|'A'..'F')* '.' ('0'..'9'|'a'..'f'|'A'..'F')+ (('p'|'P') ('+'|'-')? ('0'..'9')+)? ('f'|'F'|'d'|'D')?$;
 	DEFINE DECIMAL_LITERAL $('0'|'1'..'9''0'..'9'*)('l'|'L')?$;
 	DEFINE OCTAL_LITERAL $'0'('0'..'7')+('l'|'L')?$;
 
@@ -512,7 +513,7 @@ literals.IntegerLiteral
 	::= value[DECIMAL_LITERAL] | value[HEX_LITERAL] | value[OCTAL_LITERAL];
 
 literals.FloatingPointLiteral 
-	::= value[FLOATING_POINT_LITERAL];
+	::= value[FLOATING_POINT_LITERAL] | value[FLOATING_POINT_HEX_LITERAL];
 
 literals.CharacterLiteral 
 	::= value[CHARACTER_LITERAL];
