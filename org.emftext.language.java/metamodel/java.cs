@@ -155,7 +155,7 @@ generics.TypeParameter
 	;
 
 members.EnumConstant
-    ::= annotations* name[] ("(" arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* ")" )?
+    ::= annotations* name[] ("(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)*)? ")" )?
     	(
 	    	"{"
 	        	(!1 members)* !0

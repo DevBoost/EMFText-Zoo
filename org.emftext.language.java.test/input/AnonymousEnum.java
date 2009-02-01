@@ -1,5 +1,10 @@
 public enum AnonymousEnum {
-    CONSTANT {
+    CONSTANT_WITHOUT_BRACES {
+        public void m1() {
+        }
+    },
+
+    CONSTANT_WITH_BRACES() {
         public void m1() {
         }
     };

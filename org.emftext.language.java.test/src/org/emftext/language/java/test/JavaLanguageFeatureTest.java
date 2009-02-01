@@ -337,7 +337,18 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 
 		parseAndReprint(filename);
 	}
+	
+	@Test
+	public void testAnonymousEnumWithArguments() throws Exception {
+		String typename = "AnonymousEnumWithArguments";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		Enumeration enumeration = assertParsesToEnumeration(typename);
+		// assert one member (the constructor) because enumeration constants are not members
+		assertMemberCount(enumeration, 1);
 
+		parseAndReprint(filename);
+	}
+	
 	@Test
 	public void testAnonymousInner() throws Exception {
 		String typename = "AnonymousInner";
@@ -676,6 +687,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		Enumeration enumeration = assertParsesToEnumeration(typename);
 		assertMemberCount(enumeration, 2);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testEnumWithConstructor() throws Exception {
+		String typename = "EnumWithConstructor";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		Enumeration enumeration = assertParsesToEnumeration(typename);
+		assertMemberCount(enumeration, 1);
 
 		parseAndReprint(filename);
 	}
