@@ -95,7 +95,9 @@ imports.StaticClassifierImport
 
 classifiers.Class
 	::=	annotations*
-	    modifiers* "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
+	    modifiers*
+	    annotations*  
+	    "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
         "{" 
@@ -111,7 +113,9 @@ classifiers.AnonymousClass
 	
 classifiers.Interface
 	::=	annotations*
-	    modifiers* "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
+	    modifiers* 
+	    annotations* 
+	    "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
         	(!1 members)* !0
@@ -120,7 +124,9 @@ classifiers.Interface
 
 classifiers.Enumeration
     ::= annotations*
-        modifiers* "enum" name[] 
+        modifiers*
+        annotations*
+        "enum" name[] 
     	("implements" (implements ("," implements)*))? 
     	"{" 
     		(!1 constants ("," !1 constants)*)? (",")? 
@@ -130,7 +136,9 @@ classifiers.Enumeration
 
 classifiers.Annotation
 	::=	annotations*
-	    modifiers* "@" "interface" name[]
+	    modifiers*
+	    annotations* 
+	    "@" "interface" name[]
 	    "{" 
 	    	(!1 members)* !0
 	    "}"
@@ -169,33 +177,33 @@ statements.Block
 	;
 
 members.Constructor
-	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
+	::=	annotations* modifiers* annotations* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
 	("throws" exceptions ("," exceptions)*)? body
 	;
 
 members.Method
-	::=	annotations* modifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotations* modifiers* annotations* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? (body | ";")
 	;
 	
 annotations.AnnotationMethod
-	::=	annotations* modifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotations* modifiers* annotations* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression (body | ";")
 	;
 
 parameters.OrdinaryParameter
-	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter*
+	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter*
 	;
 
 parameters.VariableLengthParameter
-	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
+	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
 	;
 
 variables.LocalVariable
-	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
+	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
@@ -206,7 +214,7 @@ variables.AdditionalLocalVariable
 	;
 
 members.Field
-	::= annotations* modifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
+	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
 	;
 
 members.AdditionalField

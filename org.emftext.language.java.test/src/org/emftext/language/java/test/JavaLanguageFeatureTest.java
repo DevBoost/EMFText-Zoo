@@ -278,11 +278,21 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 	
 	@Test
+	public void testAnnotationsForMethods() throws Exception {
+		String typename = "AnnotationsForMethods";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 6);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testAnnotationsForParameters() throws Exception {
 		String typename = "AnnotationsForParameters";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		assertMemberCount(clazz, 3);
+		assertMemberCount(clazz, 15);
 
 		parseAndReprint(filename);
 	}
