@@ -2,6 +2,7 @@ package org.emftext.language.java.test.bulk;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -154,6 +155,20 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			}
 		}
 		return tests;
+	}
+	
+	protected static Collection<URI> getURIsForZipFileEntries(String zipFilePath) throws IOException, CoreException {
+		Collection<URI> streams = new ArrayList<URI>();
+		final ZipFile zipFile = new ZipFile(zipFilePath);
+		Enumeration<? extends ZipEntry> entries = zipFile.entries();
+		while (entries.hasMoreElements()) {
+			ZipEntry entry = entries.nextElement();
+			if (entry.getName().endsWith(".java")) {
+				URI sourceURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFile.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
+				streams.add(sourceURI);
+			}
+		}
+		return streams;
 	}
 	
 	protected static void registerLibs(String libdir) throws IOException, CoreException  {

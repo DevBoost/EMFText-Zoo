@@ -26,7 +26,7 @@ public class GiganticTest extends AbstractZipFileInputTest {
 		return suite;
 	}
 
-	private static List<String> getInputZips() {
+	protected static List<String> getInputZips() {
 		List<String> result = new ArrayList<String>();
 		
 		File dir = new File(BULK_INPUT_DIR);
