@@ -1408,6 +1408,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "AbstractClassesParserKiller";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.classifiers.Class.class);
+		assertNotNull(clazz);
 		
 		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
