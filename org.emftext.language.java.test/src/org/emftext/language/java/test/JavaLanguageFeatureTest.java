@@ -252,7 +252,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "Annotations";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		Annotation annotation = assertParsesToAnnotation(typename);
-		assertMemberCount(annotation, 10);
+		assertMemberCount(annotation, 11);
 
 		parseAndReprint(filename);
 	}

@@ -27,6 +27,9 @@ public @interface Annotations {
 	@A1
 	public int t3 = 1;
 
+	@A1()
+	public int t6 = 1;
+
 	@A2({1,2,3})
 	public int t4 = 1;
 

@@ -138,12 +138,13 @@ classifiers.Annotation
 
 annotations.AnnotationInstance
 	::=	"@" annotation 
-		("("( 
-		    (elementValuePairs ("," elementValuePairs)*) |
-		    (singleElementValue) | 
-		    ("{" (elementValues ("," elementValues)*)? (",")? "}")
-		    
-		)")")? 
+		("("
+			( 
+		    	(elementValuePairs ("," elementValuePairs)*) |
+		    	(singleElementValue) | 
+		    	("{" (elementValues ("," elementValues)*)? (",")? "}")
+		    )?
+		")")? 
 	;
 
 annotations.AnnotationElementValuePair
