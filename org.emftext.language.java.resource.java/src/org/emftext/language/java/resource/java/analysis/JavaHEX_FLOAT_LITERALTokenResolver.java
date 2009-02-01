@@ -22,6 +22,10 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 
 
 	public static Double parseFloatingHex(String lexem) {
+		// todo this must completely reworked
+		return new Double(0);
+		
+		/*
 		String[] parts = lexem.split("\\.");
 		String beforePoint = parts[0];
 		if (beforePoint.length() == 0) {
@@ -30,5 +34,6 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 		// this is a hex float literal
 		// TODO here is much more to do to resolve hex floats correctly
 		return new Double(JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(beforePoint, 16));
+		*/
 	}
 }

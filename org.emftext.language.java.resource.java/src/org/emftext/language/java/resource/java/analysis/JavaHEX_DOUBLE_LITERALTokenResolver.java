@@ -12,7 +12,8 @@ public class JavaHEX_DOUBLE_LITERALTokenResolver extends org.emftext.runtime.res
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof HexDoubleLiteral;
-		assert lexem.contains(".");
+		// this assertion is wrong, because hex literals of the form 0x1P10 are also valid
+		//assert lexem.contains(".");
 		assert lexem.toLowerCase().startsWith("0x");
 		
 		lexem = lexem.substring(2);

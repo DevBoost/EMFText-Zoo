@@ -54,4 +54,7 @@ public class NumberLiterals {
 	public static double double10 = 1.D;
 	public static double double11 = 0x1.fP+1D;
 	public static double double12 = 001.D;
+	
+	public static double double13 = 0xFP1;
+	public static double double14 = 0xFP10;
 }

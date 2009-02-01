@@ -1183,7 +1183,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String typename = "NumberLiterals";
 		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
-		assertMemberCount(clazz, 43);
+		assertMemberCount(clazz, 45);
 		
 		// iterate over all fields, get their value using reflection and
 		// compare this value with the one from the Java parser
