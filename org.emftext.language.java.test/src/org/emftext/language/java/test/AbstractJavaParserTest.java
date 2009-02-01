@@ -44,6 +44,8 @@ import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
+import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.language.java.resource.java.analysis.helper.ExpressionSimplifier;
@@ -454,14 +456,26 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected void assertModifierCount(Method method,
 			int expectedNumberOfModifiers) {
+		List<Modifier> annotationsAndModifiers = getModifiers(method);
 		assertEquals("Method '" + method.getName() + "' should have "
 				+ expectedNumberOfModifiers + " modifier(s).",
-				expectedNumberOfModifiers, method.getModifiers().size());
+				expectedNumberOfModifiers, annotationsAndModifiers.size());
+	}
+
+	private List<Modifier> getModifiers(Method method) {
+		EList<AnnotationInstanceOrModifier> annotationsAndModifiers = method.getAnnotationsAndModifiers();
+		List<Modifier> modifiers = new ArrayList<Modifier>();
+		for (AnnotationInstanceOrModifier annotationInstanceOrModifier : annotationsAndModifiers) {
+			if (annotationInstanceOrModifier instanceof Modifier) {
+				modifiers.add((Modifier) annotationInstanceOrModifier);
+			}
+		}
+		return modifiers;
 	}
 
 	protected void assertIsPublic(Method method) {
 		assertTrue("Method '" + method.getName() + "' should be public.",
-				method.getModifiers().get(0) instanceof Public);
+				getModifiers(method).get(0) instanceof Public);
 	}
 
 	protected org.emftext.language.java.classifiers.Class assertParsesToClass(

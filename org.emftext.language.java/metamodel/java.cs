@@ -94,9 +94,7 @@ imports.StaticClassifierImport
 	::= static (namespace[] #0 "." #0 )* staticMembers[] #0 "." #0 "*";
 
 classifiers.Class
-	::=	annotations*
-	    modifiers*
-	    annotations*  
+	::=	annotationsAndModifiers*
 	    "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
@@ -112,9 +110,7 @@ classifiers.AnonymousClass
 	;
 	
 classifiers.Interface
-	::=	annotations*
-	    modifiers* 
-	    annotations* 
+	::=	annotationsAndModifiers*
 	    "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
@@ -123,9 +119,7 @@ classifiers.Interface
 	;
 
 classifiers.Enumeration
-    ::= annotations*
-        modifiers*
-        annotations*
+    ::= annotationsAndModifiers*
         "enum" name[] 
     	("implements" (implements ("," implements)*))? 
     	"{" 
@@ -135,9 +129,7 @@ classifiers.Enumeration
     ;
 
 classifiers.Annotation
-	::=	annotations*
-	    modifiers*
-	    annotations* 
+	::=	annotationsAndModifiers*
 	    "@" "interface" name[]
 	    "{" 
 	    	(!1 members)* !0
@@ -177,33 +169,33 @@ statements.Block
 	;
 
 members.Constructor
-	::=	annotations* modifiers* annotations* ("<" typeParameters ("," typeParameters)* ">")? name[]
+	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
 	("throws" exceptions ("," exceptions)*)? body
 	;
 
 members.Method
-	::=	annotations* modifiers* annotations* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? (body | ";")
 	;
 	
 annotations.AnnotationMethod
-	::=	annotations* modifiers* annotations* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression (body | ";")
 	;
 
 parameters.OrdinaryParameter
-	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter*
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter*
 	;
 
 parameters.VariableLengthParameter
-	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
 	;
 
 variables.LocalVariable
-	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
@@ -214,7 +206,7 @@ variables.AdditionalLocalVariable
 	;
 
 members.Field
-	::= annotations* modifiers* annotations* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
 	;
 
 members.AdditionalField

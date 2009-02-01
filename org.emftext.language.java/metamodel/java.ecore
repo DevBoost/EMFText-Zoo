@@ -5,7 +5,7 @@
     name="java" nsURI="http://www.emftext.org/java" nsPrefix="java">
   <eSubpackages xmi:id="_Wosmsdz1Ed2bJ_pQViWxFg" name="annotations" nsURI="http://www.emftext.org/java/annotations"
       nsPrefix="annotations">
-    <eClassifiers xsi:type="ecore:EClass" name="Annotatable" abstract="true" eSuperTypes="#//commons/Commentable">
+    <eClassifiers xsi:type="ecore:EClass" name="Annotable" abstract="true" eSuperTypes="#//commons/Commentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
           eType="#_Wosms9z1Ed2bJ_pQViWxFg" containment="true"/>
     </eClassifiers>
@@ -17,7 +17,7 @@
           name="value" eType="#//annotations/AnnotationValue" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wosms9z1Ed2bJ_pQViWxFg" name="AnnotationInstance"
-        eSuperTypes="#//references/Reference">
+        eSuperTypes="#//references/Reference #//modifiers/AnnotationInstanceOrModifier">
       <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_WosmtNz1Ed2bJ_pQViWxFg"
           name="annotation" eType="#_Wo2ZPdz1Ed2bJ_pQViWxFg" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="singleElementValue" eType="#//annotations/AnnotationValue"
@@ -67,7 +67,7 @@
       nsPrefix="classifiers">
     <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#_Wo2ZO9z1Ed2bJ_pQViWxFg #//references/ReferenceableElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConcreteClassifier" abstract="true"
-        eSuperTypes="#//classifiers/Classifier #//generics/TypeParametrizable #//modifiers/Modifiable #//members/MemberContainer #//members/Member #_Wo2YzNz1Ed2bJ_pQViWxFg #//annotations/Annotatable">
+        eSuperTypes="#//classifiers/Classifier #//generics/TypeParametrizable #//members/MemberContainer #//members/Member #_Wo2YzNz1Ed2bJ_pQViWxFg #//annotations/Annotable #//modifiers/AnnotableAndModifiable">
       <eAnnotations source="gmf.node">
         <details key="label" value="name"/>
       </eAnnotations>
@@ -124,7 +124,7 @@
         <eAnnotations source="gmf.compartment"/>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//containers/JavaRoot #//annotations/Annotatable #_Wo2ZO9z1Ed2bJ_pQViWxFg #//references/ReferenceableElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//containers/JavaRoot #//annotations/Annotable #_Wo2ZO9z1Ed2bJ_pQViWxFg #//references/ReferenceableElement">
       <eAnnotations source="gmf.diagram"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
           eType="#//containers/CompilationUnit" containment="true"/>
@@ -453,22 +453,22 @@
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AdditionalField" eSuperTypes="#//references/ReferenceableElement #//arrays/ArrayTypable #//instantiations/Initializable"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Constructor" eSuperTypes="#//members/Member #//modifiers/Modifiable #//parameters/Parametrizable #//members/ExceptionThrower #//annotations/Annotatable">
+    <eClassifiers xsi:type="ecore:EClass" name="Constructor" eSuperTypes="#//members/Member #//parameters/Parametrizable #//members/ExceptionThrower #//annotations/Annotable #//modifiers/AnnotableAndModifiable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
           eType="#//statements/Block" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
           eType="#//generics/TypeParameter" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyMember" eSuperTypes="#//members/Member"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//members/Member #//instantiations/Initializable #//variables/Variable #//references/ReferenceableElement #//annotations/Annotatable">
+    <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//members/Member #//instantiations/Initializable #//variables/Variable #//references/ReferenceableElement #//modifiers/AnnotableAndModifiable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="additionalFields" upperBound="-1"
           eType="#//variables/AdditionalLocalVariable" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#_Wo2ZP9z1Ed2bJ_pQViWxFg #//arrays/ArrayTypable #//generics/TypeParametrizable #//parameters/Parametrizable #//modifiers/Modifiable #//members/Member #//references/ReferenceableElement #//members/ExceptionThrower #//annotations/Annotatable">
+    <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#_Wo2ZP9z1Ed2bJ_pQViWxFg #//arrays/ArrayTypable #//generics/TypeParametrizable #//parameters/Parametrizable #//members/Member #//references/ReferenceableElement #//members/ExceptionThrower #//modifiers/AnnotableAndModifiable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//statements/Block"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="EnumConstant" eSuperTypes="#//references/ReferenceableElement #//annotations/Annotatable #//members/MemberContainer">
+    <eClassifiers xsi:type="ecore:EClass" name="EnumConstant" eSuperTypes="#//references/ReferenceableElement #//annotations/Annotable #//members/MemberContainer">
       <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
           eType="#_Wo2YDNz1Ed2bJ_pQViWxFg" containment="true"/>
     </eClassifiers>
@@ -476,7 +476,14 @@
   <eSubpackages xmi:id="_Wo2Ystz1Ed2bJ_pQViWxFg" name="modifiers" nsURI="http://www.emftext.org/java/modifiers"
       nsPrefix="modifiers">
     <eClassifiers xsi:type="ecore:EClass" xmi:id="_Wo2Ys9z1Ed2bJ_pQViWxFg" name="Modifier"
-        abstract="true" eSuperTypes="#//commons/Commentable"/>
+        abstract="true" eSuperTypes="#//modifiers/AnnotationInstanceOrModifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotationInstanceOrModifier" abstract="true"
+        eSuperTypes="#//commons/Commentable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AnnotableAndModifiable" abstract="true"
+        eSuperTypes="#//commons/Commentable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="annotationsAndModifiers"
+          upperBound="-1" eType="#//modifiers/AnnotationInstanceOrModifier" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Modifiable" eSuperTypes="#//commons/Commentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
           eType="#_Wo2Ys9z1Ed2bJ_pQViWxFg" containment="true"/>
@@ -551,7 +558,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="UnsignedRightShift" eSuperTypes="#//operators/ShiftOperator"/>
   </eSubpackages>
   <eSubpackages name="parameters" nsURI="http://www.emftext.org/java/parameters" nsPrefix="parameters">
-    <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true" eSuperTypes="#//variables/Variable #//annotations/Annotatable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true" eSuperTypes="#//variables/Variable #//modifiers/AnnotableAndModifiable"/>
     <eClassifiers xsi:type="ecore:EClass" name="Parametrizable" abstract="true" eSuperTypes="#//commons/Commentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//parameters/Parameter" containment="true"/>
@@ -775,8 +782,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="Void" eSuperTypes="#_Wo2ZR9z1Ed2bJ_pQViWxFg"/>
   </eSubpackages>
   <eSubpackages name="variables" nsURI="http://www.emftext.org/java/variables" nsPrefix="variables">
-    <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//commons/NamedElement #_Wo2ZP9z1Ed2bJ_pQViWxFg #//arrays/ArrayTypable #//references/ReferenceableElement #//generics/TypeArgumentable #//modifiers/Modifiable"/>
-    <eClassifiers xsi:type="ecore:EClass" name="LocalVariable" eSuperTypes="#//variables/Variable #//instantiations/Initializable #_Wo2Y9tz1Ed2bJ_pQViWxFg #//annotations/Annotatable">
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//commons/NamedElement #_Wo2ZP9z1Ed2bJ_pQViWxFg #//arrays/ArrayTypable #//references/ReferenceableElement #//generics/TypeArgumentable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LocalVariable" eSuperTypes="#//variables/Variable #//instantiations/Initializable #_Wo2Y9tz1Ed2bJ_pQViWxFg #//annotations/Annotable #//modifiers/AnnotableAndModifiable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="additionalLocalVariables"
           upperBound="-1" eType="#//variables/AdditionalLocalVariable" containment="true"/>
     </eClassifiers>

@@ -328,6 +328,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 	
 	@Test
+	public void testAnnotationsBetweenKeywords() throws Exception {
+		String typename = "AnnotationsBetweenKeywords";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 7);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
 	public void testAnnotationsForEnums() throws Exception {
 		String typename = "AnnotationsForEnums";
 		String filename = typename + JAVA_FILE_EXTENSION;
