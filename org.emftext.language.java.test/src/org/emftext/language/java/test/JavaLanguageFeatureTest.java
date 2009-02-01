@@ -29,7 +29,6 @@ import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
 import org.emftext.language.java.literals.DoubleLiteral;
 import org.emftext.language.java.literals.FloatLiteral;
-import org.emftext.language.java.literals.HexIntegerLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.literals.LongLiteral;
 import org.emftext.language.java.members.Constructor;
@@ -304,6 +303,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 2);
+
+		parseAndReprint(filename);
+	}
+	
+	@Test
+	public void testAnnotationsAsAnnotationArguments() throws Exception {
+		String typename = "AnnotationsAsAnnotationArguments";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 8);
 
 		parseAndReprint(filename);
 	}
