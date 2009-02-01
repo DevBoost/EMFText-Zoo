@@ -49,6 +49,7 @@ import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryIm
 import org.emftext.language.java.resource.java.analysis.helper.ExpressionSimplifier;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
+import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
@@ -381,10 +382,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			int expectedNumberOfThrownExceptions) {
 		assertType(member, Method.class);
 		Method method = (Method) member;
-		/*TODO List<TypeReferenceSequence> exceptions = method.getExceptions();
+		List<NamespaceClassifierReference> exceptions = method.getExceptions();
 		assertEquals("Expected " + expectedNumberOfThrownExceptions
 				+ " exception(s).", expectedNumberOfThrownExceptions,
-				exceptions.size());*/
+				exceptions.size());
 	}
 
 	protected void assertMethodTypeParameterCount(Member member,
@@ -401,10 +402,10 @@ public abstract class AbstractJavaParserTest extends TestCase {
 			int expectedNumberOfThrownExceptions) {
 		assertType(member, Constructor.class);
 		Constructor constructor = (Constructor) member;
-		/*TODO List<TypeReferenceSequence> exceptions = constructor.getExceptions();
+		List<NamespaceClassifierReference> exceptions = constructor.getExceptions();
 		assertEquals("Expected " + expectedNumberOfThrownExceptions
 				+ " exception(s).", expectedNumberOfThrownExceptions,
-				exceptions.size());*/
+				exceptions.size());
 	}
 
 	protected void assertConstructorTypeParameterCount(Member member,
