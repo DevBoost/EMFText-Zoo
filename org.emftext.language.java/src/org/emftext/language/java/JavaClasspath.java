@@ -54,7 +54,10 @@ public class JavaClasspath {
 	}
 	
 	public void registerClassifierJar(URI jarURI) throws IOException {
-			
+		registerClassifierJar(jarURI, URI_MAP);
+	}
+	
+	public void registerClassifierJar(URI jarURI, Map<URI, URI> localURI_MAP) throws IOException {
 		ZipFile zipFile = new ZipFile(jarURI.toFileString());
 		
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -76,11 +79,11 @@ public class JavaClasspath {
 					packageName = fullName.substring(0, idx);
 					className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
 				}				
-				registerClassifier(packageName, className, URI.createURI(uri));
+				registerClassifier(packageName, className, URI.createURI(uri), localURI_MAP);
 			}
 		}
+		
 	}
-	
 
 	public void registerClassifierSource(CompilationUnit cu, URI uri) {
 		String packageName = JavaUniquePathConstructor.packageName(cu);
@@ -104,6 +107,10 @@ public class JavaClasspath {
 	}
 	
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
+		registerClassifier(packageName, classifierName, uri, URI_MAP);
+	}
+	
+	public void registerClassifier(String packageName, String classifierName, URI uri, Map<URI, URI> localURI_MAP) {
 		if (classifierName == null || classifierName.equals("") || uri == null) {
 			return;
 		}
