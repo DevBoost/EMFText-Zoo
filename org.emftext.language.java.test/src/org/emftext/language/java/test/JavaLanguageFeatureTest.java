@@ -521,6 +521,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 	}
 
 	@Test
+	public void testCrazyUnicode() throws Exception {
+		String typename = "CrazyUnicode";
+		File file = new File("pkg" + File.separator + typename + JAVA_FILE_EXTENSION);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		assertMemberCount(clazz, 2);
+
+		parseAndReprint(file);
+	}
+
+	@Test
 	public void testComments() throws Exception {
 		String typename = "Comments";
 		String filename = typename + JAVA_FILE_EXTENSION;
