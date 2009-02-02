@@ -94,7 +94,6 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
-import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 
