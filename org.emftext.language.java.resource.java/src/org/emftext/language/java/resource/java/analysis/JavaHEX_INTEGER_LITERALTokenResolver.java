@@ -16,12 +16,6 @@ public class JavaHEX_INTEGER_LITERALTokenResolver extends org.emftext.runtime.re
 		
 		lexem = lexem.substring(2);
 		
-		try {
-			return new Integer(JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 16).intValue());
-		} catch (NumberFormatException nfe) {
-			nfe.printStackTrace();
-			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + resource.getURI());
-			return null;
-		}
+		return new Integer(JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 16, resource.getURI().toString()).intValue());
 	}
 }

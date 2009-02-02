@@ -12,7 +12,8 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof HexFloatLiteral;
-		assert lexem.contains(".");
+		// This assertion is wrong, because hex float literals must not contain a dot
+		//assert lexem.contains(".");
 		assert lexem.toLowerCase().startsWith("0x");
 		
 		lexem = lexem.substring(2);

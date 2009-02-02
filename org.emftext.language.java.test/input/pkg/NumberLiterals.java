@@ -57,4 +57,6 @@ public class NumberLiterals {
 	
 	public static double double13 = 0xFP1;
 	public static double double14 = 0xFP10;
+	
+	public static float float13 = 0xA34P-9f;
 }

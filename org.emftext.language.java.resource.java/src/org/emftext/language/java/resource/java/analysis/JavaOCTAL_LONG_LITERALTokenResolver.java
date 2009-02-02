@@ -15,7 +15,6 @@ public class JavaOCTAL_LONG_LITERALTokenResolver extends org.emftext.runtime.res
 		assert lexem.toLowerCase().endsWith("l");
 
 		lexem = lexem.substring(0, lexem.length() - 1);
-		Long result = Long.decode(lexem);
-		return result;
+		return JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, resource.getURI().toString());
 	}
 }

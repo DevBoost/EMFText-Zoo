@@ -17,18 +17,18 @@ public class JavaDECIMAL_LONG_LITERALTokenResolver extends org.emftext.runtime.r
 		assert lexem.toLowerCase().endsWith("l");
 
 		lexem = lexem.substring(0, lexem.length() - 1);
-		try {
-			Long result = parseToLong(lexem, 10);
-			return result;
-		} catch (NumberFormatException nfe) {
-			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + resource.getURI());
-			return null;
-		}
+		Long result = parseToLong(lexem, 10, resource.getURI().toString());
+		return result;
 	}
 
-	public static Long parseToLong(String lexem, int radix) throws NumberFormatException {
+	public static Long parseToLong(String lexem, int radix, String uri) throws NumberFormatException {
 		BigInteger tempInteger = new BigInteger(lexem, radix);
-		Long result = tempInteger.longValue();
-		return result;
+		try {
+			Long result = tempInteger.longValue();
+			return result;
+		} catch (NumberFormatException nfe) {
+			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + uri);
+			return null;
+		}
 	}
 }

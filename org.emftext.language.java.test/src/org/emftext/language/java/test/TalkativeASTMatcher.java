@@ -425,7 +425,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
 			nToken = nToken.substring(2);
 			try {
-				nToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16).toString();
+				nToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16, null).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -433,7 +433,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (oToken.startsWith("0x") || oToken.startsWith("0X")) {
 			oToken = oToken.substring(2);
 			try {
-				oToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16).toString();
+				oToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16, null).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -441,7 +441,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.startsWith("-0x") || nToken.startsWith("-0X")) {
 			nToken = nToken.substring(3);
 			try {
-				nToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16).toString();
+				nToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16, null).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -449,7 +449,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (oToken.startsWith("-0x") || oToken.startsWith("-0X")) {
 			oToken = oToken.substring(3);
 			try {
-				oToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16).toString();
+				oToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16, null).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
