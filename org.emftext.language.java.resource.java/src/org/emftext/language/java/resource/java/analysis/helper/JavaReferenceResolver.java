@@ -6,7 +6,6 @@ import java.util.Comparator;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -26,7 +25,6 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
-import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.AndExpression;
 import org.emftext.language.java.expressions.AssignmentExpression;
@@ -63,6 +61,7 @@ import org.emftext.language.java.literals.Literal;
 import org.emftext.language.java.literals.LongLiteral;
 import org.emftext.language.java.literals.NullLiteral;
 import org.emftext.language.java.members.AdditionalField;
+import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
@@ -123,22 +122,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			fullID = ((NamedElement) element).getName();
 		}
 
-		if (element instanceof Classifier) {
+		/* TODO implement this correctly in the future
+		 * 
+		 * if (element instanceof Classifier) {
 			if (container instanceof IdentifierReference) {
 				if (!(container.eContainer() instanceof IdentifierReference)) {
 					URI resourceURI = element.eResource().getURI();
-					while (!resourceURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
-						URI otherURI = JavaClasspath.INSTANCE.URI_MAP.get(resourceURI);
-						if (otherURI == null) {
-							break;
-						}
-						if (otherURI.equals(resourceURI)) {
-							break;
-						}
-						else {
-							resourceURI = otherURI;
-						}
-					}
 					if (!resourceURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
 						String qualifiedName = resourceURI.trimFileExtension().toString().substring(
 								JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
@@ -172,7 +161,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 							}
 							else {
 								//a inner class?
-								/*Class containersClass = findContainingClass(container);
+								Class containersClass = findContainingClass(container);
 								if (containersClass != null) {
 									EList<Classifier> innerClasses = JavaClasspath.INSTANCE.getInternalClassifiers(containersClass);
 									for (Classifier superClass : getAllSuperTypes(containersClass)) {
@@ -181,10 +170,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 									}
 									for(Classifier innerCand : innerClasses) {
 										if (element.equals(EcoreUtil.resolve(innerCand, myResource))) {
-											fullID = ((NamedElement) element).getName();
+											//TODO fullID = ((NamedElement) element).getName();
 										}
 									}
-								}*/
+								}
 								for(Import imp : cu.getImports()) {
 									if(imp instanceof ClassifierImport) {
 										ClassifierImport classifierImport = (ClassifierImport) imp;
@@ -225,7 +214,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					}
 				}
 			}
-		}
+		}*/
 		
 		return fullID;
 	}

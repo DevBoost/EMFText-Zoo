@@ -119,6 +119,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 
 	}
 
+
 	@Override
 	protected void doResolve(java.lang.String identifier, org.emftext.language.java.types.ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
 		if (container.eContainer() instanceof NamespaceClassifierReference) {
@@ -130,7 +131,6 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 			if  (!result.wasResolved()){
 				//not in local scope; try to resolve
 				Classifier target = null;
-				EList<ConcreteClassifier> candidates = new BasicEList<ConcreteClassifier>();
 				int myPos = nsClassifierReference.getClassifierReferences().indexOf(container);
 				
 				//global
@@ -154,85 +154,51 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 				}
 				
 				if (target == null) {
+					Classifier directContainer = null;
+
 					//relative
 					if (myPos > 0) {
 						//given by a previous class
-						candidates.add((ConcreteClassifier) nsClassifierReference.getClassifierReferences().get(myPos - 1).getTarget());
+						directContainer = nsClassifierReference.getClassifierReferences().get(myPos - 1).getTarget();
 					}
 					else if (!nsClassifierReference.getNamespace().isEmpty()) {
-						//scope defined by package namespace
-						//consider imports and default imports
+						//scope defined by container namespace: 
+						//this has to be a class because packages are always absolute (global), and would have been found before 
 						CompilationUnit cu = findContainingCompilationUnit(container);
-						candidates.addAll(
-								JavaClasspath.INSTANCE.getInternalClassifiers(findContainingClassifier(container)));
+						EList<ConcreteClassifier> rootContainerCandidates = new BasicEList<ConcreteClassifier>();
 						
-						for(Import explicitImport : cu.getImports()) {
-							if (explicitImport instanceof ClassifierImport) {
-								ConcreteClassifier classifierImport = 
-									((ClassifierImport)explicitImport).getClassifier();
-								candidates.add(classifierImport);
-							}
-							else if (explicitImport instanceof PackageImport) {
-								EList<ConcreteClassifier> importedClassifiers =  
-									JavaClasspath.INSTANCE.getClassifiers(explicitImport);
-								candidates.addAll(importedClassifiers);
-							
-							}
-							/*TODO take classifiers out of static imports
-							 * 
-							else if (explicitImport instanceof StaticMemberImport) {
-								Member staticMember = 
-									((StaticMemberImport)explicitImport).getStaticMember();
-								scopeCandidates.add(staticMember);
-							}
-							else if (explicitImport instanceof StaticClassifierImport) {
-								EList<Member> staticMembers = 
-									((StaticClassifierImport)explicitImport).getStaticMembers();
-								contentsList.addAll(staticMembers);
-							}*/
-
-						}
-						String packageName = JavaUniquePathConstructor.packageName(cu);
-						EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports(packageName);
-						candidates.addAll(defaultImports);
-					}
-					
-					for(ConcreteClassifier cand : candidates) {
-						if(identifier.equals(cand.getName())) {
-							cand = (ConcreteClassifier) EcoreUtil.resolve(cand, container.eResource());
-							if (!cand.eIsProxy()) {
-								target = (Classifier) cand;
-								break;								
-							}
-						}
-						for(Member m : getAllMemebers(cand)) {
-							if (m instanceof ConcreteClassifier) {
-								if(m.getName().equals(identifier)) {
-									m = (ConcreteClassifier) EcoreUtil.resolve(m, container.eResource());
-									if (!m.eIsProxy()) {
-										if (nsClassifierReference.getNamespace().isEmpty()) {
-											target = (Classifier) cand;
-											break;
-										}
-										if (cand.eResource().equals(container.eResource())) {
-											target = (Classifier) cand;
-											break;
-										}
-										else {
-											URI candUri = m.eResource().getURI();
-											String fullName = candUri.trimFileExtension().toString().substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length()) + "$";
-											String myNs = JavaClasspath.INSTANCE.getContainerNameFromNamespace(nsClassifierReference, "");
-											if (fullName.endsWith(myNs)) {
-												target = (Classifier) m;
-												break;
-											}
-										}
-									}
+						collectClassifiersInScope(
+								findContainingClassifier(container), cu, rootContainerCandidates);
+						
+						for(String nextInNS : nsClassifierReference.getNamespace()) {
+							ConcreteClassifier nextContainer = null;
+							for(ConcreteClassifier cand: rootContainerCandidates) {
+								if (nextInNS.equals(cand.getName())) {
+									nextContainer = cand;
+									break;
 								}
 							}
+							if (nextContainer == null) {
+								directContainer = null;
+								break;
+							}
+							else {
+								rootContainerCandidates = JavaClasspath.INSTANCE.getInternalClassifiers(nextContainer);
+								directContainer = nextContainer;
+							}
 						}
-						if (target != null) {
-							break;
+					}
+					
+					if (directContainer != null) {
+						for(ConcreteClassifier cand : JavaClasspath.INSTANCE.getInternalClassifiers(directContainer)) {
+							if(cand.getName().equals(identifier)) {
+								cand = (ConcreteClassifier) EcoreUtil.resolve(cand, container.eResource());
+								if (!cand.eIsProxy()) {
+									target = cand;
+									break;
+								}
+							}
+							
 						}
 					}
 				}
@@ -243,5 +209,48 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 			}			
 		}
 		
+	}
+
+
+	protected void collectClassifiersInScope(
+			Classifier containingClassifier,
+			CompilationUnit cu,
+			EList<ConcreteClassifier> rootContainerCandidates) {
+		
+		rootContainerCandidates.addAll(
+				JavaClasspath.INSTANCE.getInternalClassifiers(containingClassifier));		
+		for(Import explicitImport : cu.getImports()) {
+			if (explicitImport instanceof ClassifierImport) {
+				ConcreteClassifier classifierImport = 
+					((ClassifierImport)explicitImport).getClassifier();
+				rootContainerCandidates.add(classifierImport);
+			}
+			else if (explicitImport instanceof PackageImport) {
+				EList<ConcreteClassifier> importedClassifiers =  
+					JavaClasspath.INSTANCE.getClassifiers(explicitImport);
+				rootContainerCandidates.addAll(importedClassifiers);
+			
+			}
+			else if (explicitImport instanceof StaticMemberImport) {
+				Member staticMember = 
+					((StaticMemberImport)explicitImport).getStaticMember();
+				if (staticMember instanceof ConcreteClassifier) {
+					rootContainerCandidates.add((ConcreteClassifier) staticMember);
+				}
+			}
+			else if (explicitImport instanceof StaticClassifierImport) {
+				EList<Member> staticMembers = 
+					((StaticClassifierImport)explicitImport).getStaticMembers();
+				for(Member staticMember : staticMembers) {
+					if (staticMember instanceof ConcreteClassifier) {
+						rootContainerCandidates.add((ConcreteClassifier) staticMember);
+					}
+				}
+			}
+
+		}
+		String packageName = JavaUniquePathConstructor.packageName(cu);
+		EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports(packageName);
+		rootContainerCandidates.addAll(defaultImports);
 	}
 }
