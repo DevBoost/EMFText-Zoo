@@ -33,7 +33,6 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.Enumeration;
@@ -49,6 +48,7 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
+import org.emftext.language.java.resource.JavaSourceOrClassFileResource;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.language.java.resource.java.analysis.helper.ExpressionSimplifier;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
@@ -137,6 +137,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new ExpressionSimplifier());
+		map.put(JavaSourceOrClassFileResource.OPTION_REGISTER_LOCAL, Boolean.TRUE);
 		return map;
 	}
 
@@ -222,11 +223,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		compareTextContents(file.getInputStream(entry),
 					new FileInputStream(outputFile));
 		
-		//unregister just in case
-		if(!resource.getContents().isEmpty() && resource.getContents().get(0) instanceof CompilationUnit) {
-			CompilationUnit cu = (CompilationUnit) resource.getContents().get(0);
-			unregisterClassifierURIs(cu);
-		}
 	}
 	
 	
@@ -237,27 +233,6 @@ public abstract class AbstractJavaParserTest extends TestCase {
 		
 		for(File lib : allLibFiles) {
 			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), resourceSet.getURIConverter().getURIMap());
-		}
-	}
-
-	protected void unregisterClassifierURIs(CompilationUnit cu) {
-		String packageName = JavaUniquePathConstructor.packageName(cu);
-		
-		for(Classifier classifier : cu.getClassifiers()) {
-			URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + classifier.getName());
-			JavaClasspath.INSTANCE.URI_MAP.remove(javaURI);
-			
-			unregisterInnerClassifierURIs(
-					classifier, packageName, classifier.getName());
-		}
-	}
-	
-	protected void unregisterInnerClassifierURIs(Classifier classifier, String packageName, String className) {
-		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
-			if (innerCand instanceof Classifier) {
-				URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className + "$" + innerCand.getName());
-				JavaClasspath.INSTANCE.URI_MAP.remove(javaURI);
-			}
 		}
 	}
 
