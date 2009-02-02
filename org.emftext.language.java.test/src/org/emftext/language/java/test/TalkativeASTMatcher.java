@@ -424,7 +424,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	protected boolean numberMatch(String nToken, String oToken) {
 		//HEX normalization
 		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
-			nToken = nToken.substring(2);
+			//nToken = nToken.substring(2);
 			try {
 				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
 			} catch (NumberFormatException nfe) {
@@ -432,7 +432,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			}
 		}
 		if (oToken.startsWith("0x") || oToken.startsWith("0X")) {
-			oToken = oToken.substring(2);
+			//oToken = oToken.substring(2);
 			try {
 				oToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(oToken, null, null, null).toString();
 			} catch (NumberFormatException nfe) {
@@ -440,7 +440,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			}
 		}
 		if (nToken.startsWith("-0x") || nToken.startsWith("-0X")) {
-			nToken = nToken.substring(3);
+			nToken = nToken.substring(1);
 			try {
 				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
 				nToken = "-" + nToken;
@@ -449,7 +449,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 			}
 		}
 		if (oToken.startsWith("-0x") || oToken.startsWith("-0X")) {
-			oToken = oToken.substring(3);
+			oToken = oToken.substring(1);
 			try {
 				oToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(oToken, null, null, null).toString();
 				oToken = "-" + oToken;
