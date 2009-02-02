@@ -1,9 +1,8 @@
 SYNTAXDEF reusejava
 FOR <http://www.emftext.org/reusejava>
-START java.Containers.CompilationUnit, java.Containers.Package
+START java.Containers.CompilationUnit, java.Containers.Package, StatementUnit
 
 IMPORTS {
-	// copy all the rules from java.cs
 	java : <http://www.emftext.org/java> WITH SYNTAX java
 }
 
@@ -12,6 +11,6 @@ OPTIONS {
 }
 
 RULES {
-	MemberSlot ::= "<" "<" name[] ">" ">"  ";" ;		
-	StatementPrototype ::= ">" ">" name[] ":" statement;	
+	StatementUnit ::=            "statements" name[] "{" statements "}" ;
+	StatementVariationPoint ::=  "<" "<" name[] ">" ">"  ";" ;		
 }
