@@ -59,6 +59,11 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 					plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - "-src.zip".length());
 					
 					parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "lib/" + plainZipFileName);
+					
+					//for JacksTest: remove java.java from classpath!
+					if (entry.getName().equals("java.java")) {
+						JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
