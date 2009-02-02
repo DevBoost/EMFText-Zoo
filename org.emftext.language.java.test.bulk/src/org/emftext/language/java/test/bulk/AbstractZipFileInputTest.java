@@ -2,7 +2,6 @@ package org.emftext.language.java.test.bulk;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -29,7 +28,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.resource.java.JavaLexer;
 import org.emftext.language.java.resource.java.JavaParser;
-import org.emftext.language.java.resource.java.JavaResourceImpl;
+import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
@@ -60,7 +59,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				JavaParser parser = new JavaParser(new org.antlr.runtime.CommonTokenStream(new JavaLexer(new org.antlr.runtime.ANTLRInputStream(
 						new ExtensibleURIConverterImpl().createInputStream(sourceURI)))));
 
-				JavaResourceImpl javaResource = new JavaResourceImpl();
+				JavaResource javaResource = new JavaResource();
 				javaResource.setURI(sourceURI);
 				parser.setResource(javaResource);
 				JavaRoot unit = (JavaRoot) parser.start();
