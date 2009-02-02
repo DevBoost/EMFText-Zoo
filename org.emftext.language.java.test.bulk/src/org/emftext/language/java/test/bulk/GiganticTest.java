@@ -19,8 +19,6 @@ public class GiganticTest extends AbstractZipFileInputTest {
 		
 		List<String> inputZips = getInputZips();
 		for (String inputZip : inputZips) {
-			// TODO register libs
-			//registerLibs("lib/eclipse");
 			addToTestSuite(suite, getTestsForZipFileEntries(inputZip, true));
 		}
 		return suite;

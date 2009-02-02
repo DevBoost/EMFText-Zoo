@@ -51,64 +51,18 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		
 		public void runTest() {
 			try {
-				Map<URI,URI> urisToRestore = new HashMap<URI, URI>();
-				
-				//we need to parse manually in order to avoid registration of the resource
-				URI sourceURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + zipFile.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
-
-				JavaParser parser = new JavaParser(new org.antlr.runtime.CommonTokenStream(new JavaLexer(new org.antlr.runtime.ANTLRInputStream(
-						new ExtensibleURIConverterImpl().createInputStream(sourceURI)))));
-
-				JavaResource javaResource = new JavaResource();
-				javaResource.setURI(sourceURI);
-				parser.setResource(javaResource);
-				JavaRoot unit = (JavaRoot) parser.start();
-				assertNotNull(unit);
-				//--------------------------------------------------------------------------
-				
-				if (unit instanceof CompilationUnit) {
-					CompilationUnit cu = (CompilationUnit) unit;
-					remeberClassifierURIs(cu, urisToRestore);
+				if(isExcludedFromReprintTest(zipFile.getName())) {
+					parseResource(zipFile, entry);
 				}
-
-				parseAndReprint(zipFile, entry, "output/" + zipFile.getName());
-				
-				//reset to class files
-				JavaClasspath.INSTANCE.URI_MAP.putAll(urisToRestore);
-				
-				//TODO put somewhere suitable 
-				//for JacksTest: remove java.java from classpath!
-				if (entry.getName().equals("java.java")) {
-					JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
+				else {
+					String plainZipFileName = zipFile.getName().substring(BULK_INPUT_DIR.length());
+					plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - "-src.zip".length());
+					
+					parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "lib/" + plainZipFileName);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
-			}
-		}
-		
-		protected void remeberClassifierURIs(CompilationUnit cu, Map<URI,URI> urisToRestore) {
-			String packageName = JavaUniquePathConstructor.packageName(cu);
-			
-			for(Classifier classifier : cu.getClassifiers()) {
-				URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + classifier.getName());
-				URI classURI = JavaClasspath.INSTANCE.URI_MAP.get(javaURI);
-				
-				urisToRestore.put(javaURI, classURI);
-				
-				remeberInnerClassifierURIs(
-						classifier, packageName, classifier.getName(), urisToRestore);
-			}
-		}
-		
-		protected void remeberInnerClassifierURIs(Classifier classifier, String packageName, String className,  Map<URI,URI> urisToRestore) {
-			for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
-				if (innerCand instanceof Classifier) {
-					URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className + "$" + innerCand.getName());
-					URI classURI = JavaClasspath.INSTANCE.URI_MAP.get(javaURI);
-					
-					urisToRestore.put(javaURI, classURI);
-				}
 			}
 		}
 
@@ -168,16 +122,6 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			}
 		}
 		return streams;
-	}
-	
-	protected static void registerLibs(String libdir) throws IOException, CoreException  {
-		File libFolder = new File("." + File.separator
-				+ libdir);
-		List<File> allLibFiles = collectAllFilesRecursive(libFolder);
-		
-		for(File lib : allLibFiles) {
-			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()));
-		}
 	}
 	
 	protected static void addToTestSuite(TestSuite suite,

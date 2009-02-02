@@ -13,7 +13,6 @@ public class Eclipse341Test extends AbstractZipFileInputTest {
 	public static final String INPUT_FILE = BULK_INPUT_DIR + "eclipse-3.4.1-src.zip";
 
 	public static Test suite() throws CoreException, IOException {
-		registerLibs("lib/eclipse");
 		// run with 8 threads and wait for maximal 5 minutes
 		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the eclipse 3.4.1 zip file", 5 * 60 * 1000, 16);
 		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE, false));

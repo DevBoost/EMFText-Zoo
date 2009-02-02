@@ -32,6 +32,8 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.Enumeration;
@@ -187,14 +189,18 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	protected void parseAndReprint(ZipFile file, ZipEntry entry,
-			String outputFolderName) throws Exception {
+			String outputFolderName, String libFolderName) throws Exception {
 		String entryName = entry.getName();
 		String outputFileName = "./" + outputFolderName + File.separator
 				+ entryName;
 		File outputFile = prepareOutputFile(outputFileName);
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
 		
-		Resource resource = getResourceSet().createResource(archiveURI);
+		ResourceSet resourceSet = getResourceSet();
+		
+		registerLibs(libFolderName, resourceSet);
+		
+		Resource resource = resourceSet.createResource(archiveURI);
 		resource.load(getLoadOptions());
 		
 		if (!ignoreSemanticErrors(entry.getName())) {
@@ -215,7 +221,44 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 		compareTextContents(file.getInputStream(entry),
 					new FileInputStream(outputFile));
+		
+		//unregister just in case
+		if(!resource.getContents().isEmpty() && resource.getContents().get(0) instanceof CompilationUnit) {
+			CompilationUnit cu = (CompilationUnit) resource.getContents().get(0);
+			unregisterClassifierURIs(cu);
+		}
+	}
+	
+	
+	protected void registerLibs(String libdir, ResourceSet resourceSet) throws IOException, CoreException  {
+		File libFolder = new File("." + File.separator
+				+ libdir);
+		List<File> allLibFiles = collectAllFilesRecursive(libFolder);
+		
+		for(File lib : allLibFiles) {
+			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), resourceSet.getURIConverter().getURIMap());
+		}
+	}
 
+	protected void unregisterClassifierURIs(CompilationUnit cu) {
+		String packageName = JavaUniquePathConstructor.packageName(cu);
+		
+		for(Classifier classifier : cu.getClassifiers()) {
+			URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + classifier.getName());
+			JavaClasspath.INSTANCE.URI_MAP.remove(javaURI);
+			
+			unregisterInnerClassifierURIs(
+					classifier, packageName, classifier.getName());
+		}
+	}
+	
+	protected void unregisterInnerClassifierURIs(Classifier classifier, String packageName, String className) {
+		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
+			if (innerCand instanceof Classifier) {
+				URI javaURI  = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className + "$" + innerCand.getName());
+				JavaClasspath.INSTANCE.URI_MAP.remove(javaURI);
+			}
+		}
 	}
 
 	protected void parseAndReprint(String filename, String inputFolderName,
@@ -343,7 +386,7 @@ public abstract class AbstractJavaParserTest extends TestCase {
 
 	protected static List<File> collectAllFilesRecursive(File startFolder)
 			throws CoreException {
-		if (startFolder.isFile())
+		if (!startFolder.isDirectory())
 			return Collections.emptyList();
 		List<File> allFiles = new ArrayList<File>();
 		for (File member : startFolder.listFiles()) {

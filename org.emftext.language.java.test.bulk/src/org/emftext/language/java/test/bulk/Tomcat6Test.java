@@ -13,8 +13,7 @@ public class Tomcat6Test extends AbstractZipFileInputTest {
 	private static final String INPUT_FILE = BULK_INPUT_DIR + "apache-tomcat-6.0.18-src.zip";
 	
 	public static Test suite() throws CoreException, IOException {
-		registerLibs("lib/tomcat");
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the tomcat 6 zip file", 10 * 60 * 1000, 8);
+		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the tomcat 6 zip file", 10 * 60 * 1000, 4);
 		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE, false));
 		return suite;
 	}
