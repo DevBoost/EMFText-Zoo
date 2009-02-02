@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -17,18 +14,8 @@ import junit.framework.TestSuite;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.JavaUniquePathConstructor;
-import org.emftext.language.java.classifiers.Classifier;
-import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.JavaRoot;
-import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.MemberContainer;
-import org.emftext.language.java.resource.java.JavaLexer;
-import org.emftext.language.java.resource.java.JavaParser;
-import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
