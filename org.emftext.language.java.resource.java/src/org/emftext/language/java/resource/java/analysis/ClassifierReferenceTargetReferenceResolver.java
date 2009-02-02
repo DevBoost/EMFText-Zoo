@@ -184,13 +184,24 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 							}
 							else {
 								rootContainerCandidates = JavaClasspath.INSTANCE.getInternalClassifiers(nextContainer);
+								//add super internals
+								for(ConcreteClassifier superClass : getAllSuperTypes(nextContainer)) {
+									rootContainerCandidates.addAll(
+											JavaClasspath.INSTANCE.getInternalClassifiers(superClass));
+								}
 								directContainer = nextContainer;
 							}
 						}
 					}
 					
 					if (directContainer != null) {
-						for(ConcreteClassifier cand : JavaClasspath.INSTANCE.getInternalClassifiers(directContainer)) {
+						EList<ConcreteClassifier> allInternal = JavaClasspath.INSTANCE.getInternalClassifiers(directContainer);
+						//add super internals
+						for(ConcreteClassifier superClass : getAllSuperTypes(directContainer)) {
+							allInternal.addAll(
+									JavaClasspath.INSTANCE.getInternalClassifiers(superClass));
+						}
+						for(ConcreteClassifier cand : allInternal) {
 							if(cand.getName().equals(identifier)) {
 								cand = (ConcreteClassifier) EcoreUtil.resolve(cand, container.eResource());
 								if (!cand.eIsProxy()) {
@@ -198,7 +209,16 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 									break;
 								}
 							}
-							
+							else {
+								//try the super types
+								for(ConcreteClassifier superCand : getAllSuperTypes(cand)) {
+									superCand = (ConcreteClassifier) EcoreUtil.resolve(superCand, container.eResource());
+									if (!superCand.eIsProxy()) {
+										target = superCand;
+										break;
+									}
+								}
+							}
 						}
 					}
 				}

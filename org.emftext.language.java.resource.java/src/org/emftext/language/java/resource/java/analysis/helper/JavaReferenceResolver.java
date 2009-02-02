@@ -1294,8 +1294,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return memberList;
 	}
 	
-	protected EList<Classifier> getAllSuperTypes(Classifier javaClassifier) {
-		EList<Classifier> superClassifierList = new BasicEList<Classifier>();
+	protected EList<ConcreteClassifier> getAllSuperTypes(Classifier javaClassifier) {
+		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 		if (javaClassifier instanceof Class) {
 			Class javaClass = (Class) javaClassifier;
@@ -1353,7 +1353,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @throws UnresolvedProxiesException
 	 */
 	private void collectAllSuperClassifiers( Class javaClass, 
-			EList<Classifier> resultClassifierList)
+			EList<ConcreteClassifier> resultClassifierList)
 			{
 		//collects all superclasses
 		Class superClass = javaClass;
@@ -1362,7 +1362,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			resultClassifierList.add(superClass);
 		}
 		
-		EList<Classifier> onlyClasses = new BasicEList<Classifier>(resultClassifierList);
+		EList<ConcreteClassifier> onlyClasses = new BasicEList<ConcreteClassifier>(resultClassifierList);
 		
 		//collect all implemented interfaces
 		collectAllSuperInterfaces(
@@ -1384,7 +1384,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @
 	 */
 	protected void collectAllSuperInterfaces(EList<QualifiedTypeArgument> interfaceReferences,
-		EList<Classifier> resultInterfaceList) {
+		EList<ConcreteClassifier> resultInterfaceList) {
 	
 		for (QualifiedTypeArgument typeArg : interfaceReferences) {
 			Type type = getReferencedType(typeArg.getType());
