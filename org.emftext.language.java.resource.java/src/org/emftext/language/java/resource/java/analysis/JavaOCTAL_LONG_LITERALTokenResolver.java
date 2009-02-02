@@ -1,12 +1,17 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.LONG_SUFFIX;
+
 import org.emftext.language.java.literals.OctalLongLiteral;
 
 public class JavaOCTAL_LONG_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
-		return result;
+		assert container instanceof OctalLongLiteral;
+		assert value instanceof Long;
+
+		return OCT_PREFIX + Long.toOctalString((Long) value) + LONG_SUFFIX;
 	}
 
 	@Override

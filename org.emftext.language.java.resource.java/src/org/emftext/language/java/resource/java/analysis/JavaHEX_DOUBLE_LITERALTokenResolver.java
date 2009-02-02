@@ -1,12 +1,15 @@
 package org.emftext.language.java.resource.java.analysis;
 
 import org.emftext.language.java.literals.HexDoubleLiteral;
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.HEX_PREFIX;
 
 public class JavaHEX_DOUBLE_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
-		return result;
+		assert container instanceof HexDoubleLiteral;
+		assert value instanceof Double;
+		return Double.toHexString((Double) value);
 	}
 
 	@Override
@@ -14,7 +17,7 @@ public class JavaHEX_DOUBLE_LITERALTokenResolver extends org.emftext.runtime.res
 		assert container instanceof HexDoubleLiteral;
 		// this assertion is wrong, because hex literals of the form 0x1P10 are also valid
 		//assert lexem.contains(".");
-		assert lexem.toLowerCase().startsWith("0x");
+		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		if (lexem.toLowerCase().endsWith("d")) {
 			lexem = lexem.substring(0, lexem.length() - 1);
 		}

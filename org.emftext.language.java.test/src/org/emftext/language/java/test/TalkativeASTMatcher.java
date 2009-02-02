@@ -95,6 +95,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LONG_LITERALTokenResolver;
+import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 
 
@@ -425,7 +426,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
 			nToken = nToken.substring(2);
 			try {
-				nToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16, null).toString();
+				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -433,7 +434,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (oToken.startsWith("0x") || oToken.startsWith("0X")) {
 			oToken = oToken.substring(2);
 			try {
-				oToken = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16, null).toString();
+				oToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(oToken, null, null, null).toString();
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -441,7 +442,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.startsWith("-0x") || nToken.startsWith("-0X")) {
 			nToken = nToken.substring(3);
 			try {
-				nToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(nToken, 16, null).toString();
+				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+				nToken = "-" + nToken;
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -449,7 +451,8 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (oToken.startsWith("-0x") || oToken.startsWith("-0X")) {
 			oToken = oToken.substring(3);
 			try {
-				oToken = "-" + JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(oToken, 16, null).toString();
+				oToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(oToken, null, null, null).toString();
+				oToken = "-" + oToken;
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
