@@ -86,22 +86,26 @@ public class JavaClasspath {
 	}
 
 	public void registerClassifierSource(CompilationUnit cu, URI uri) {
+		registerClassifierSource(cu, uri, URI_MAP);
+	}
+	
+	public void registerClassifierSource(CompilationUnit cu, URI uri, Map<URI, URI> localURI_MAP) {
 		String packageName = JavaUniquePathConstructor.packageName(cu);
 		
 		for(Classifier classifier : cu.getClassifiers()) {
 			registerClassifier(
-					packageName, classifier.getName(), uri);
+					packageName, classifier.getName(), uri, localURI_MAP);
 			registerInnerClassifiers(
-					classifier, packageName, classifier.getName(), uri);
+					classifier, packageName, classifier.getName(), uri, localURI_MAP);
 		}
 	}
 	
-	protected void registerInnerClassifiers(Classifier classifier, String packageName, String className, URI uri) {
+	protected void registerInnerClassifiers(Classifier classifier, String packageName, String className, URI uri, Map<URI, URI> localURI_MAP) {
 		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
 			if (innerCand instanceof Classifier) {
 				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
-				registerClassifier(packageName, newClassName, uri);
-				registerInnerClassifiers((Classifier)innerCand, packageName, newClassName, uri);
+				registerClassifier(packageName, newClassName, uri, localURI_MAP);
+				registerInnerClassifiers((Classifier)innerCand, packageName, newClassName, uri, localURI_MAP);
 			}
 		}
 	}
@@ -155,7 +159,7 @@ public class JavaClasspath {
 				URI logicalUri = 
 					JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 				
-				URI existinMapping = URI_MAP.get(logicalUri);
+				URI existinMapping = localURI_MAP.get(logicalUri);
 				
 				if (existinMapping != null && !uri.equals(existinMapping)) {
 					//TODO where to put this warning?
@@ -165,7 +169,7 @@ public class JavaClasspath {
 							"\n[JaMoPP] Version 1) will be ignored!");*/
 				}
 				
-				URI_MAP.put(logicalUri, uri);
+				localURI_MAP.put(logicalUri, uri);
 			}
 		}
 	}
@@ -174,9 +178,18 @@ public class JavaClasspath {
 	
 	
 	public EList<ConcreteClassifier> getInternalClassifiers(Classifier container) {
-		Resource resource = container.eResource();
-		if (resource != null){
-			String uri = container.eResource().getURI().toString();
+		String uri = null;
+		if(container.eIsProxy()) {
+			uri = ((InternalEObject)container).eProxyURI().trimFragment().toString();
+		}
+		else {
+			Resource resource = container.eResource();
+			if (resource != null){
+				uri = container.eResource().getURI().toString();
+			}
+		}
+
+		if (uri != null){
 			if (uri.startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
 				String className = uri.substring(
 						JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
