@@ -76,5 +76,13 @@ public final class ThreadedTestSuite extends TestSuite {
 			workerThread.start();
 			timeoutThread.start();
 		}
+		// wait for last thread to end
+		while (threads.size() > 0) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
