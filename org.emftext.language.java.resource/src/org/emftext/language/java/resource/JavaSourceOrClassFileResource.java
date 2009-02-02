@@ -24,19 +24,42 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.resource.java.JavaResource;
+import org.emftext.runtime.resource.ILocationMap;
+import org.emftext.runtime.resource.impl.DevNullLocationMap;
 
-public class JavaSourceFileResourceImpl extends JavaResource {
-
-	public JavaSourceFileResourceImpl(URI uri) {
+public class JavaSourceOrClassFileResource extends JavaResource {
+	
+	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
+	
+	ClassFileParser classFileParser = new ClassFileParser();
+	
+	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
 	}
 
-	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
-		super.doLoad(inputStream, options);
-		if (getContents().isEmpty() && getErrors().isEmpty()) {
-			contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
+	private boolean isClassFile() {
+		//is there a physical source file behind this URI?
+		URI normalizedURI = getURIConverter().normalize(uri);
+		
+		if(normalizedURI.fileExtension().equals("class"))  {
+			return true;
 		}
-	    register();
+		return false;
+	}
+	
+	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
+		if (isClassFile()) {
+			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
+			getContents().add(cu);
+		}
+		else {
+			super.doLoad(inputStream, options);
+			if (getContents().isEmpty() && getErrors().isEmpty()) {
+				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
+			}
+			Boolean local = (Boolean) options.get(OPTION_REGISTER_LOCAL);
+		    register(Boolean.TRUE.equals(local));
+		}
 	}
 	
 	@Override
@@ -49,7 +72,8 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 			}
 		}
 		else if(normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
-			//do nothing. class not available.
+			//classes should have a physical resource
+			//System.out.println("[JaMoPP] Warning: " + uri.lastSegment() + " not registered in class path");
 		}
 		else {
 			super.load(options);
@@ -67,6 +91,28 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 		}
 	}
 
+	@Override
+	public EObject getEObject(String id) {
+		EObject result = null;
+		if (isClassFile() && 
+				id.startsWith(JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
+			
+			if (!getContents().isEmpty()) {
+				//in a class file, there is always only one classifier as root element: 
+				//id path can be ignored
+				CompilationUnit cu =  (CompilationUnit) contents.get(0);
+				return cu.getClassifiers().get(0);
+			}
+			else {
+				assert(false);
+			}
+		}
+		else {
+			result = super.getEObject(id);;
+		}
+		return result;
+	}
+	
 	private void loadPackageFromClasspath() {
 		Package thePackage = ContainersFactory.eINSTANCE.createPackage();
 		String packageName = getURI().trimFileExtension().toString().substring(
@@ -84,7 +130,7 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 		getContents().add(thePackage);
 	}
 	
-	private void register() throws IOException {
+	private void register(boolean local) throws IOException {
 		URI myURI = getURI();
 		
 		//only for physical URIs
@@ -98,7 +144,12 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 			if(root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) getContents().get(0);
 				cu.setName(myURI.lastSegment());
-				JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI);
+				if (local) {
+					JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI, getURIConverter().getURIMap());
+				}
+				else {
+					JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI);	
+				}
 			}
 			else if (root instanceof Package) {
 				//package-info.java
@@ -127,14 +178,7 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 			
 			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, this.getResourceSet());
 			CompilationUnit cu = (CompilationUnit)classifier.eContainer();
-			//binary resource
-			if (cu == null) {
-				cu = ContainersFactory.eINSTANCE.createCompilationUnit();
-				cu.getClassifiers().add(classifier);
-			}
-			
-			p.getCompilationUnits().add(
-					cu);
+			p.getCompilationUnits().add(cu);
 		}
 	}
 	
@@ -183,6 +227,11 @@ public class JavaSourceFileResourceImpl extends JavaResource {
 	@Override
 	protected void doSave(OutputStream outputStream, Map<?, ?> options)
 			throws IOException {
+		if (isClassFile()) {
+			//save not supported
+			return;
+		}
+		
 		if(getContents().size() > 1 && getResourceSet() != null) {
 			for(EObject eObject : new BasicEList<EObject>(getContents())) {
 				if (eObject instanceof CompilationUnit) {

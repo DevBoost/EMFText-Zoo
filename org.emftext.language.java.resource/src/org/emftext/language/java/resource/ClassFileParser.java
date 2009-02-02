@@ -2,21 +2,20 @@ package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.bcel.classfile.Utility;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
-import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.members.Field;
@@ -25,7 +24,6 @@ import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
-import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
@@ -35,60 +33,31 @@ import org.emftext.language.java.types.TypesFactory;
  * 
  *
  */
-public class JavaClassFileResorceImpl extends JavaResource {
-
-	//one resource per type
-	protected org.apache.bcel.classfile.JavaClass myClass;
+public class ClassFileParser {
 	
 	protected ClassifiersFactory qualifiersFactory = ClassifiersFactory.eINSTANCE;
-	protected MembersFactory membersFactory = MembersFactory.eINSTANCE;
-	protected TypesFactory typesFactory = TypesFactory.eINSTANCE;
-
-	private ParametersFactory parametersFactory = ParametersFactory.eINSTANCE;
+	protected MembersFactory     membersFactory    = MembersFactory.eINSTANCE;
+	protected TypesFactory       typesFactory      = TypesFactory.eINSTANCE;
+	protected ParametersFactory  parametersFactory = ParametersFactory.eINSTANCE;
 	
-	public JavaClassFileResorceImpl(URI uri) {
-		super(uri);
-	}
-	
-	@Override
-	protected void doLoad(InputStream inputStream, Map<?, ?> options)
+	public CompilationUnit parse(InputStream inputStream, String classFileName)
 			throws IOException {
 
-		myClass =
+		org.apache.bcel.classfile.JavaClass myClass =
 			new org.apache.bcel.classfile.ClassParser(
-					inputStream, getURI().lastSegment()).parse();
+					inputStream, classFileName).parse();
 		
-		Classifier classifier = constructClassifier(myClass);
-		getContents().add(classifier);
-	}
-
-	@Override
-	protected void doSave(OutputStream outputStream, Map<?, ?> options)
-			throws IOException {
-		// can not be saved
-	}
-
-	@Override
-	public EObject getEObject(String id) {
-		EObject result = null;
-		if (id.startsWith(JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
-			if (!getContents().isEmpty()) {
-				//in a class file, there is always only one classifier as root element: 
-				//id path can be ignored
-				return contents.get(0);
-			}
-			else {
-				assert(false);
-			}
-		}
-		else {
-			result = super.getEObject(id);;
-		}
-		return result;
+		ConcreteClassifier classifier = constructClassifier(myClass);
+		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
+		cu.setName(classFileName);
+		List<String> namespace = Arrays.asList(myClass.getPackageName().split("\\."));
+		cu.getNamespace().addAll(namespace);
+		cu.getClassifiers().add(classifier);
+		return cu;
 	}
 	
-	protected Classifier constructClassifier(org.apache.bcel.classfile.JavaClass clazz) {
-		Classifier emfClassifier = null;
+	protected ConcreteClassifier constructClassifier(org.apache.bcel.classfile.JavaClass clazz) {
+		ConcreteClassifier emfClassifier = null;
 		if (clazz.isEnum()) { //check first, because enum is also class
 			emfClassifier = qualifiersFactory.createEnumeration();
 		}
@@ -139,7 +108,7 @@ public class JavaClassFileResorceImpl extends JavaResource {
 			}
 		}
 		
-		((NamedElement)emfClassifier).setName(className);
+		emfClassifier.setName(className);
 		
 		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
 			((MemberContainer) emfClassifier).getMembers().add(constructField(filed));
