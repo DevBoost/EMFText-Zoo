@@ -15,9 +15,10 @@ public class JavaHEX_DOUBLE_LITERALTokenResolver extends org.emftext.runtime.res
 		// this assertion is wrong, because hex literals of the form 0x1P10 are also valid
 		//assert lexem.contains(".");
 		assert lexem.toLowerCase().startsWith("0x");
+		if (lexem.toLowerCase().endsWith("d")) {
+			lexem = lexem.substring(0, lexem.length() - 1);
+		}
 		
-		lexem = lexem.substring(2);
-		
-		return JavaHEX_FLOAT_LITERALTokenResolver.parseFloatingHex(lexem);
+		return Double.parseDouble(lexem);
 	}
 }

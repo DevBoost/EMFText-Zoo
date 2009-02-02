@@ -12,12 +12,8 @@ public class JavaDECIMAL_INTEGER_LITERALTokenResolver extends org.emftext.runtim
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof DecimalIntegerLiteral;
-		try {
-			Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 10, resource.getURI().toString());
-			return new Integer(result.intValue());
-		} catch (NumberFormatException nfe) {
-			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + resource.getURI());
-			return null;
-		}
+		
+		Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 10, resource);
+		return new Integer(result.intValue());
 	}
 }

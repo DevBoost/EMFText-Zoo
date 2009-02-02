@@ -12,6 +12,10 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof DecimalFloatLiteral;
-		return super.resolve(lexem,feature,container,resource);
+		assert lexem.toLowerCase().endsWith("f");
+
+		lexem = lexem.substring(0, lexem.length() - 1);
+		
+		return new Float(JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(lexem, resource).floatValue());
 	}
 }

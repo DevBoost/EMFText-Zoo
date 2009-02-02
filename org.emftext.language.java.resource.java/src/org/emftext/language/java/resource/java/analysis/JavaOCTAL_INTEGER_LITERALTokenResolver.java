@@ -13,7 +13,7 @@ public class JavaOCTAL_INTEGER_LITERALTokenResolver extends org.emftext.runtime.
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof OctalIntegerLiteral;
 		
-		Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, resource.getURI().toString());
+		Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, resource);
 		return new Integer(result.intValue());
 	}
 }

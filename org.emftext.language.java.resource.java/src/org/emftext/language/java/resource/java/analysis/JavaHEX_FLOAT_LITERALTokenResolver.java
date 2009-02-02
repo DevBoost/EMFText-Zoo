@@ -12,29 +12,12 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof HexFloatLiteral;
-		// This assertion is wrong, because hex float literals must not contain a dot
-		//assert lexem.contains(".");
+		
 		assert lexem.toLowerCase().startsWith("0x");
+		assert lexem.toLowerCase().endsWith("f");
 		
-		lexem = lexem.substring(2);
+		lexem = lexem.substring(0, lexem.length() - 1);
 		
-		return new Float(parseFloatingHex(lexem).floatValue());
-	}
-
-
-	public static Double parseFloatingHex(String lexem) {
-		// todo this must completely reworked
-		return new Double(0);
-		
-		/*
-		String[] parts = lexem.split("\\.");
-		String beforePoint = parts[0];
-		if (beforePoint.length() == 0) {
-			return new Double(0);
-		}
-		// this is a hex float literal
-		// TODO here is much more to do to resolve hex floats correctly
-		return new Double(JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(beforePoint, 16));
-		*/
+		return Float.parseFloat(lexem);
 	}
 }

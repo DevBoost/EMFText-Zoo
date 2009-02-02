@@ -18,6 +18,6 @@ public class JavaHEX_LONG_LITERALTokenResolver extends org.emftext.runtime.resou
 		lexem = lexem.substring(2);
 		lexem = lexem.substring(0, lexem.length() - 1);
 		
-		return JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 16, resource.getURI().toString());
+		return JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 16, resource);
 	}
 }

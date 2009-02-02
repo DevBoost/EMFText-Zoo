@@ -40,11 +40,11 @@ public class NumberLiterals {
 	public static float float12 = 001.F;
 
 	public static double double1 = 1d;
-	public static double double2 = 0x1d;
+	public static int int6 = 0x1d;
 	public static double double3 = 001d;
 
 	public static double double4 = 1D;
-	public static double double5 = 0x1D;
+	public static int int7 = 0x1D;
 	public static double double6 = 001D;
 
 	public static double double7 = 1.d;
