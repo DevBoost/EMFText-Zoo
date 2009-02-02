@@ -6,6 +6,7 @@ import java.util.Comparator;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -122,6 +123,110 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			fullID = ((NamedElement) element).getName();
 		}
 
+		if (element instanceof Classifier) {
+			if (container instanceof IdentifierReference) {
+				if (!(container.eContainer() instanceof IdentifierReference)) {
+					URI resourceURI = element.eResource().getURI();
+					while (!resourceURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+						URI otherURI = JavaClasspath.INSTANCE.URI_MAP.get(resourceURI);
+						if (otherURI == null) {
+							break;
+						}
+						if (otherURI.equals(resourceURI)) {
+							break;
+						}
+						else {
+							resourceURI = otherURI;
+						}
+					}
+					if (!resourceURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+						String qualifiedName = resourceURI.trimFileExtension().toString().substring(
+								JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
+						//inner classes directly contained in outer
+						EObject inner = element;
+						String innerName = "";
+						while(inner.eContainer() instanceof Classifier) {
+							innerName =  "$" + ((Classifier)inner).getName() + innerName;
+							inner = inner.eContainer();
+						}
+						qualifiedName = qualifiedName + innerName;
+						if (qualifiedName.startsWith("java.lang.")) {
+							//default import
+							fullID = ((NamedElement) element).getName();
+						}
+						else {
+							fullID = qualifiedName;
+							CompilationUnit cu = findContainingCompilationUnit(container);
+							String packageName = "";
+							if (fullID.contains(".")) {
+								packageName = fullID.substring(0,fullID.lastIndexOf("."));
+							}
+							//fullID = fullID.replaceAll("\\$", ".");
+							if (fullID.contains("$")) {
+								//TODO full ref for inner classes, code below
+								fullID = ((NamedElement) element).getName();
+							}
+							else if (JavaUniquePathConstructor.packageName(cu).equals(packageName)) {
+								//same package
+								fullID = ((NamedElement) element).getName();
+							}
+							else {
+								//a inner class?
+								/*Class containersClass = findContainingClass(container);
+								if (containersClass != null) {
+									EList<Classifier> innerClasses = JavaClasspath.INSTANCE.getInternalClassifiers(containersClass);
+									for (Classifier superClass : getAllSuperTypes(containersClass)) {
+										innerClasses.addAll(
+												JavaClasspath.INSTANCE.getInternalClassifiers(superClass));
+									}
+									for(Classifier innerCand : innerClasses) {
+										if (element.equals(EcoreUtil.resolve(innerCand, myResource))) {
+											fullID = ((NamedElement) element).getName();
+										}
+									}
+								}*/
+								for(Import imp : cu.getImports()) {
+									if(imp instanceof ClassifierImport) {
+										ClassifierImport classifierImport = (ClassifierImport) imp;
+										if (element.equals(classifierImport.getClassifier())) {
+											//the element is imported -> simple name
+											fullID = ((NamedElement) element).getName();
+										}
+									}
+									if(imp instanceof PackageImport) {
+										String name = ((NamedElement) element).getName();
+										EList<ConcreteClassifier> importedClassifiers =  
+											JavaClasspath.INSTANCE.getClassifiers(imp);
+										for(Classifier classifierProxy : importedClassifiers) {
+											if (name.equals(classifierProxy.getName())) {
+												fullID = name;
+												break;
+											}
+										}
+										
+									}
+									else if (imp instanceof StaticMemberImport) {
+										StaticMemberImport staticImport = (StaticMemberImport) imp;
+										if (element.equals(staticImport.getStaticMember())) {
+											//the element is imported -> simple name
+											fullID = ((NamedElement) element).getName();
+										}
+									}
+									else if (imp instanceof StaticClassifierImport) {
+										StaticClassifierImport staticImport = (StaticClassifierImport) imp;
+										if (staticImport.getStaticMembers().contains(element)) {
+											//the element is imported -> simple name
+											fullID = ((NamedElement) element).getName();
+										}
+									}	
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
 		return fullID;
 	}
 	
