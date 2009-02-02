@@ -19,7 +19,7 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 		assert container instanceof HexFloatLiteral;
 		
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
-		assert lexem.toLowerCase().endsWith("f");
+		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
 		
 		lexem = lexem.substring(0, lexem.length() - 1);
 		

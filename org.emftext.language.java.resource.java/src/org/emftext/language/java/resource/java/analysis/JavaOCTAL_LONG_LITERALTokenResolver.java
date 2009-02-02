@@ -17,7 +17,7 @@ public class JavaOCTAL_LONG_LITERALTokenResolver extends org.emftext.runtime.res
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof OctalLongLiteral;
-		assert lexem.toLowerCase().endsWith("l");
+		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
 
 		lexem = lexem.substring(0, lexem.length() - 1);
 		return JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, resource);

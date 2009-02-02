@@ -1,5 +1,7 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.DOUBLE_SUFFIX;
+
 import java.math.BigDecimal;
 
 import org.emftext.language.java.literals.DecimalDoubleLiteral;
@@ -18,7 +20,7 @@ public class JavaDECIMAL_DOUBLE_LITERALTokenResolver extends org.emftext.runtime
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
 		assert container instanceof DecimalDoubleLiteral;
 		
-		if (lexem.toLowerCase().endsWith("d")) {
+		if (lexem.toLowerCase().endsWith(DOUBLE_SUFFIX)) {
 			lexem = lexem.substring(0, lexem.length() - 1);
 		}
 		
