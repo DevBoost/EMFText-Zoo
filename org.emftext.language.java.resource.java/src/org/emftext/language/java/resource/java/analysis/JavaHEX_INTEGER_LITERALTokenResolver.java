@@ -7,14 +7,14 @@ public class JavaHEX_INTEGER_LITERALTokenResolver extends org.emftext.runtime.re
 	
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container instanceof HexIntegerLiteral;
+		assert container == null || container instanceof HexIntegerLiteral;
 		assert value instanceof Integer;
 		return HEX_PREFIX + Integer.toHexString((Integer) value);
 	}
 
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container instanceof HexIntegerLiteral;
+		assert container == null || container instanceof HexIntegerLiteral;
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		
 		lexem = lexem.substring(2);

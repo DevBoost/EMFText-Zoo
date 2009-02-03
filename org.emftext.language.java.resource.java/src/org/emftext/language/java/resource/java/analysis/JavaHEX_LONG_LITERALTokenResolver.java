@@ -8,14 +8,14 @@ public class JavaHEX_LONG_LITERALTokenResolver extends org.emftext.runtime.resou
 	
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container instanceof HexLongLiteral;
+		assert container == null || container instanceof HexLongLiteral;
 		assert value instanceof Long;
 		return HEX_PREFIX + Long.toHexString((Long) value) + LONG_SUFFIX;
 	}
 
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container instanceof HexLongLiteral;
+		assert container == null || container instanceof HexLongLiteral;
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
 		

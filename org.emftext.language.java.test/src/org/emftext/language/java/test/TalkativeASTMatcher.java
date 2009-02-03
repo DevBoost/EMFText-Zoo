@@ -94,6 +94,9 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
+import org.emftext.language.java.resource.java.analysis.JavaHEX_DOUBLE_LITERALTokenResolver;
+import org.emftext.language.java.resource.java.analysis.JavaHEX_FLOAT_LITERALTokenResolver;
+import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 
@@ -421,61 +424,51 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	}
 	
 	protected boolean numberMatch(String nToken, String oToken) {
+		nToken = normalizeNumberToken(nToken);
+		oToken = normalizeNumberToken(oToken);
+		return safeEquals(nToken, oToken);
+	}
+
+	private String normalizeNumberToken(String nToken) {
 		//HEX normalization
-		if (nToken.startsWith("0x") || nToken.startsWith("0X")) {
-			//nToken = nToken.substring(2);
-			try {
-				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
-			}
-		}
-		if (oToken.startsWith("0x") || oToken.startsWith("0X")) {
-			//oToken = oToken.substring(2);
-			try {
-				oToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(oToken, null, null, null).toString();
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
-			}
-		}
-		if (nToken.startsWith("-0x") || nToken.startsWith("-0X")) {
+		nToken = normalizeHexNumberToken(nToken);
+		
+		if (nToken.toLowerCase().startsWith("-0x")) {
 			nToken = nToken.substring(1);
-			try {
-				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
-				nToken = "-" + nToken;
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
-			}
-		}
-		if (oToken.startsWith("-0x") || oToken.startsWith("-0X")) {
-			oToken = oToken.substring(1);
-			try {
-				oToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(oToken, null, null, null).toString();
-				oToken = "-" + oToken;
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
-			}
+			nToken = "-" + normalizeHexNumberToken(nToken);
 		}
 		
 		if (nToken.toLowerCase().endsWith("l")) {
 			nToken = nToken.substring(0, nToken.length() - 1);
 		}
-		if (oToken.toLowerCase().endsWith("l")) {
-			oToken = oToken.substring(0, oToken.length() - 1);
+		if (nToken.toLowerCase().endsWith("d")) {
+			nToken = nToken.substring(0, nToken.length() - 1);
 		}
-		
+
 		//OCTAL normalization
 		if (nToken.matches("0[0-9]+")) {
 			nToken = Long.decode(nToken).toString();
 		}
-		if (oToken.matches("0[0-9]+")) {
-			oToken = Long.decode(oToken).toString();
+		
+		//nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
+		return nToken;
+	}
+
+	private String normalizeHexNumberToken(String nToken) {
+		try {
+			if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().endsWith("l")) {
+				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+			} else if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().contains("p") && nToken.toLowerCase().endsWith("f")) {
+				nToken = new JavaHEX_FLOAT_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+			} else if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().contains("p")) {
+				nToken = new JavaHEX_DOUBLE_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+			} else if (nToken.toLowerCase().startsWith("0x")) {
+				nToken = new JavaHEX_INTEGER_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+			}
+		} catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
 		}
-		
-		nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
-		oToken = "" + Double.parseDouble(oToken.replace("- ", "-"));
-		
-		return safeEquals(nToken, oToken);
+		return nToken;
 	}
 
 	@Override

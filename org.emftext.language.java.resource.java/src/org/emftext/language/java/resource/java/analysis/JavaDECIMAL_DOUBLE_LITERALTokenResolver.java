@@ -11,14 +11,14 @@ public class JavaDECIMAL_DOUBLE_LITERALTokenResolver extends org.emftext.runtime
 	
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container instanceof DecimalDoubleLiteral;
+		assert container == null || container instanceof DecimalDoubleLiteral;
 		assert value instanceof Double;
 		return value.toString();
 	}
 
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container instanceof DecimalDoubleLiteral;
+		assert container == null || container instanceof DecimalDoubleLiteral;
 		
 		if (lexem.toLowerCase().endsWith(DOUBLE_SUFFIX)) {
 			lexem = lexem.substring(0, lexem.length() - 1);

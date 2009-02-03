@@ -6,14 +6,14 @@ public class JavaDECIMAL_INTEGER_LITERALTokenResolver extends org.emftext.runtim
 	
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container instanceof DecimalIntegerLiteral;
+		assert container == null || container instanceof DecimalIntegerLiteral;
 		assert value instanceof Integer;
 		return value.toString();
 	}
 
 	@Override
 	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container instanceof DecimalIntegerLiteral;
+		assert container == null || container instanceof DecimalIntegerLiteral;
 		
 		Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 10, resource);
 		return new Integer(result.intValue());
