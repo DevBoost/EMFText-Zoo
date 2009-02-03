@@ -154,7 +154,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 				}
 				
 				if (target == null) {
-					ConcreteClassifier directContainer = null;
+					ConcreteClassifier directContainer = findContainingClassifier(container);
 
 					//relative
 					if (myPos > 0) {
@@ -183,9 +183,23 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 								break;
 							}
 							else {
-								rootContainerCandidates = JavaClasspath.INSTANCE.getInternalClassifiers(nextContainer);
+								rootContainerCandidates = new BasicEList<ConcreteClassifier>();
+								
+								for(Member m : nextContainer.getMembers()) {
+									if(m instanceof ConcreteClassifier) {
+										rootContainerCandidates.add((ConcreteClassifier) m);
+									}
+								}
+								
+								rootContainerCandidates.addAll(
+										JavaClasspath.INSTANCE.getInternalClassifiers(nextContainer));
 								//add super internals
 								for(ConcreteClassifier superClass : getAllSuperTypes(nextContainer)) {
+									for(Member m : superClass.getMembers()) {
+										if(m instanceof ConcreteClassifier) {
+											rootContainerCandidates.add((ConcreteClassifier) m);
+										}
+									}
 									rootContainerCandidates.addAll(
 											JavaClasspath.INSTANCE.getInternalClassifiers(superClass));
 								}
@@ -206,6 +220,11 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 						allInternal.addAll(JavaClasspath.INSTANCE.getInternalClassifiers(directContainer));
 						//add super internals
 						for(ConcreteClassifier superClass : getAllSuperTypes(directContainer)) {
+							for(Member m : superClass.getMembers()) {
+								if(m instanceof ConcreteClassifier) {
+									allInternal.add((ConcreteClassifier) m);
+								}
+							}
 							allInternal.addAll(
 									JavaClasspath.INSTANCE.getInternalClassifiers(superClass));
 						}
@@ -248,7 +267,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 		
 		ConcreteClassifier outerContainer = containingClassifier;
 		while(outerContainer != null) {
-			for(Member m : containingClassifier.getMembers()) {
+			for(Member m : outerContainer.getMembers()) {
 				if(m instanceof ConcreteClassifier) {
 					rootContainerCandidates.add((ConcreteClassifier) m);
 				}
@@ -257,9 +276,13 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 				outerContainer = (ConcreteClassifier) outerContainer.eContainer();
 			}
 			else {
+				rootContainerCandidates.add(outerContainer);
 				outerContainer = null;
 			}
 		}
+		
+		rootContainerCandidates.addAll(cu.getClassifiers());
+
 		
 		rootContainerCandidates.addAll(
 				JavaClasspath.INSTANCE.getInternalClassifiers(containingClassifier));		
