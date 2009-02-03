@@ -88,13 +88,23 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 			// do nothing to avoid storing unneeded file objects in memory
 		}
 	}
-
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
+		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null);
+	}
+	
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry) throws IOException, CoreException {
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
+			
 			ZipEntry entry = entries.nextElement();
+			if (startEntry != null && !entry.getName().endsWith(startEntry)) {
+				continue;
+			}
+			else {
+				startEntry = null;
+			}
 			if (entry.getName().endsWith(".java")) {
 				tests.add(new ParseZipFileEntryTest(zipFile, entry, excludeFromReprint));
 			}
