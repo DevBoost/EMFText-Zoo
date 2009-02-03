@@ -94,6 +94,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
+import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_DOUBLE_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_DOUBLE_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_FLOAT_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALTokenResolver;
@@ -441,15 +442,28 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (nToken.toLowerCase().endsWith("l")) {
 			nToken = nToken.substring(0, nToken.length() - 1);
 		}
-		if (nToken.toLowerCase().endsWith("d")) {
-			nToken = nToken.substring(0, nToken.length() - 1);
-		}
 
 		//OCTAL normalization
 		if (nToken.matches("0[0-9]+")) {
 			nToken = Long.decode(nToken).toString();
 		}
 		
+		//condition that indicates that this is float or double --> parse
+		if(nToken.toLowerCase().endsWith("f") || 
+				nToken.toLowerCase().endsWith("d") ||
+				nToken.toLowerCase().contains("e") ||
+				nToken.toLowerCase().contains(".")) {
+			
+			if (nToken.toLowerCase().endsWith("d")) {
+				nToken = nToken.substring(0, nToken.length() - 1);
+			}
+			if (nToken.toLowerCase().endsWith("f")) {
+				nToken = nToken.substring(0, nToken.length() - 1);
+			}
+			
+			nToken = "" + JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(nToken, null);
+			
+		}
 		//nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
 		return nToken;
 	}
