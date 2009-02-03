@@ -773,7 +773,15 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			else {
 				//if (((SelfReference) reference).getSelf() instanceof This) {
-					return findContainingClassifier(reference);
+				
+				AnonymousClass anonymousContainer = findContainingAnonymousClass(reference);
+				if (anonymousContainer != null) {
+					NewConstructorCall ncCall = (NewConstructorCall) anonymousContainer.eContainer();
+					return getReferencedType(ncCall.getType());
+				}
+				else {
+					return findContainingClassifier(reference);	
+				}
 				//}
 				// super may also reference to itself or an interface...	
 				//else if (((SelfReference) reference).getSelf() instanceof Super) {
@@ -1220,6 +1228,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			value = value.eContainer();
 		}
 		return (ConcreteClassifier) value;
+	}
+	
+	protected AnonymousClass findContainingAnonymousClass(EObject value) {
+		while (!(value instanceof AnonymousClass) && value != null) {
+			value = value.eContainer();
+		}
+		return (AnonymousClass) value;
 	}
 	
 	protected CompilationUnit findContainingCompilationUnit(EObject value) {
