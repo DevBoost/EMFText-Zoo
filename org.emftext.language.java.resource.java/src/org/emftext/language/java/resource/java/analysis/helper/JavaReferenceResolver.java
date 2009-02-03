@@ -1125,15 +1125,20 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						
 						if (type != null && argumentType != null) {
 							if (!type.eIsProxy() || !argumentType.eIsProxy()) {
-								if(!compareTypesStrict(type, argumentType)) {
+								if(compareTypesStrict(type, argumentType)) {
 									//there is a better fit, which will be found later
 									strictMatch = false;
+									continue;
 									//TODO still need to check for "nearest subtype" here
 								}
 							}
 						}
+						strictMatch = true;
+						break;
 					}
-					return !strictMatch;
+					if(!strictMatch) {
+						return false;
+					}
 				}	
 			}
 		}

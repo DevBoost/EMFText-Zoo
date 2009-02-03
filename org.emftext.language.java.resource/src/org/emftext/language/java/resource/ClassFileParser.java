@@ -116,7 +116,6 @@ public class ClassFileParser {
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
 			if(!method.isSynthetic()) {
 				Method emfMethod = constructMethod(method, false);
-				((MemberContainer) emfClassifier).getMembers().add(emfMethod);
 				//If the last parameter has an array type it could also be a variable length parameter.
 				//The java compiler compiles variable length arguments down to array arguments.
 				//Then the arguments are wrapped into an array. As far as I know, there is no
@@ -128,6 +127,9 @@ public class ClassFileParser {
 					
 					Method emfMethod2 = constructMethod(method, true);
 					((MemberContainer) emfClassifier).getMembers().add(emfMethod2);
+				}
+				else {
+					((MemberContainer) emfClassifier).getMembers().add(emfMethod);
 				}
 			}
 
