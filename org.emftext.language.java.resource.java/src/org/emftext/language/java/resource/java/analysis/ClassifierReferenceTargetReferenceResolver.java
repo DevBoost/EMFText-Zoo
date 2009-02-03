@@ -154,12 +154,12 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 				}
 				
 				if (target == null) {
-					Classifier directContainer = null;
+					ConcreteClassifier directContainer = null;
 
 					//relative
 					if (myPos > 0) {
 						//given by a previous class
-						directContainer = nsClassifierReference.getClassifierReferences().get(myPos - 1).getTarget();
+						directContainer = (ConcreteClassifier) nsClassifierReference.getClassifierReferences().get(myPos - 1).getTarget();
 					}
 					else if (!nsClassifierReference.getNamespace().isEmpty()) {
 						//scope defined by container namespace: 
@@ -195,7 +195,15 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 					}
 					
 					if (directContainer != null) {
-						EList<ConcreteClassifier> allInternal = JavaClasspath.INSTANCE.getInternalClassifiers(directContainer);
+						EList<ConcreteClassifier> allInternal = new BasicEList<ConcreteClassifier>();
+
+						for(Member m : directContainer.getMembers()) {
+							if(m instanceof ConcreteClassifier) {
+								allInternal.add((ConcreteClassifier) m);
+							}
+						}
+						
+						allInternal.addAll(JavaClasspath.INSTANCE.getInternalClassifiers(directContainer));
 						//add super internals
 						for(ConcreteClassifier superClass : getAllSuperTypes(directContainer)) {
 							allInternal.addAll(
@@ -233,9 +241,25 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 
 
 	protected void collectClassifiersInScope(
-			Classifier containingClassifier,
+			ConcreteClassifier containingClassifier,
 			CompilationUnit cu,
 			EList<ConcreteClassifier> rootContainerCandidates) {
+		
+		
+		ConcreteClassifier outerContainer = containingClassifier;
+		while(outerContainer != null) {
+			for(Member m : containingClassifier.getMembers()) {
+				if(m instanceof ConcreteClassifier) {
+					rootContainerCandidates.add((ConcreteClassifier) m);
+				}
+			}
+			if(outerContainer.eContainer() instanceof ConcreteClassifier) {
+				outerContainer = (ConcreteClassifier) outerContainer.eContainer();
+			}
+			else {
+				outerContainer = null;
+			}
+		}
 		
 		rootContainerCandidates.addAll(
 				JavaClasspath.INSTANCE.getInternalClassifiers(containingClassifier));		

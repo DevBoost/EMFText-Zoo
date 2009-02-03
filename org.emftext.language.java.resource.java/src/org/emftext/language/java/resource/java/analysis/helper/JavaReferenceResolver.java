@@ -945,15 +945,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected boolean checkClassifier(String id, EObject context, Classifier referencedElement) {
 		if (context instanceof ClassifierReference) {
 			if (context.eContainer() instanceof NamespaceClassifierReference) {
-				String ns = JavaClasspath.INSTANCE.getContainerNameFromNamespace(
-						(NamespaceClassifierReference)context.eContainer(), "");
-				if (ns != null && ns.contains(".")) {
-					//a package: outside
+				NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) context.eContainer();
+				if (!nsClassifierReference.getNamespace().isEmpty()) {
+					//done later
 					return false;
 				}
 			}			
-			
-			//TODO compare internal namespace
 			return true;
 		}
 		if (context instanceof IdentifierReference) {
