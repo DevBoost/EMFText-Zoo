@@ -64,8 +64,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if (getContents().isEmpty() && getErrors().isEmpty()) {
 				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 			}
-			Boolean local = (Boolean) options.get(OPTION_REGISTER_LOCAL);
-		    register(Boolean.TRUE.equals(local));
+			if (options != null) {
+				Boolean local = (Boolean) options.get(OPTION_REGISTER_LOCAL);
+		    	register(Boolean.TRUE.equals(local));
+			} else {
+				register(false);
+			}
 		}
 	}
 	
