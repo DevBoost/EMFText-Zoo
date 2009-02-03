@@ -330,15 +330,26 @@ public class JavaClasspath {
 	public EList<ConcreteClassifier> getDefaultImports(String packageName) {
 		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
 
+		//my package
+		EList<ConcreteClassifier> myPackage = getClassifiers(packageName + ".", "*");
+		
 		//java.lang package	
 		if (javaLangPackage == null) {
 			javaLangPackage = new BasicEList<ConcreteClassifier>();
 			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
 		}		
-		resultList.addAll(javaLangPackage);
 		
-		//my package
-		resultList.addAll(getClassifiers(packageName + ".", "*"));
+		if(packageName.equals("")) {
+			//reverse order of java.lang and default package
+			//TODO this works for tests. 
+			//Is this the desired behavior? Usually default package is not used.
+			resultList.addAll(javaLangPackage);
+			resultList.addAll(myPackage);
+		}
+		else {
+			resultList.addAll(myPackage);
+			resultList.addAll(javaLangPackage);
+		}
 
 		return resultList;
 	}
