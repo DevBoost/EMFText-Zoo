@@ -203,8 +203,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				fullPackageName, "*")) {
 			
 			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, this.getResourceSet());
-			CompilationUnit cu = (CompilationUnit)classifier.eContainer();
-			p.getCompilationUnits().add(cu);
+			if (!classifier.eIsProxy()) {
+				CompilationUnit cu = (CompilationUnit)classifier.eContainer();
+				if (cu != null) {
+					p.getCompilationUnits().add(cu);
+				}
+			}
 		}
 	}
 	
