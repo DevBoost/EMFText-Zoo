@@ -37,6 +37,10 @@ public class JavaClasspath {
 		new HashMap<String, List<String>>();
 	
 	public JavaClasspath() {
+		registerStdLib(URI_MAP);
+	}
+
+	public void registerStdLib(Map<URI, URI> localURI_MAP) {
 		try {
 			String classpath = System.getProperty("sun.boot.class.path");
 			String[] classpathEntries = classpath.split(File.pathSeparator);
@@ -45,7 +49,7 @@ public class JavaClasspath {
 				String classpathEntry = classpathEntries[idx];
 				if (classpathEntry.endsWith("classes.jar") || classpathEntry.endsWith("rt.jar")) {
 					URI uri = URI.createFileURI(classpathEntries[idx]);
-					registerClassifierJar(uri);
+					registerClassifierJar(uri, localURI_MAP);
 				}
 			}
 		} catch (IOException e) {
@@ -325,17 +329,17 @@ public class JavaClasspath {
 	
 	public EList<ConcreteClassifier> getDefaultImports(String packageName) {
 		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
-		//my package
-		resultList.addAll(getClassifiers(packageName + ".", "*"));
 
 		//java.lang package	
 		if (javaLangPackage == null) {
 			javaLangPackage = new BasicEList<ConcreteClassifier>();
 			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
-		}
-		
+		}		
 		resultList.addAll(javaLangPackage);
 		
+		//my package
+		resultList.addAll(getClassifiers(packageName + ".", "*"));
+
 		return resultList;
 	}
 
