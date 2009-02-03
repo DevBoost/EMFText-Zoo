@@ -20,14 +20,21 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.JavaResource;
-import org.emftext.runtime.resource.ILocationMap;
-import org.emftext.runtime.resource.impl.DevNullLocationMap;
 
 public class JavaSourceOrClassFileResource extends JavaResource {
+	
+//	@Override
+//	public ILocationMap getLocationMap() {
+//		return new DevNullLocationMap();
+//	}
 	
 	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
 	
@@ -108,7 +115,22 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 		}
 		else {
-			result = super.getEObject(id);;
+			result = super.getEObject(id);
+			if(!id.contains(INTERNAL_URI_FRAGMENT_PREFIX)) {
+				if(result != null && !(result instanceof ConcreteClassifier)) {
+					//may happen if members of same name exist
+					if(result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS) 
+							&& result instanceof NamedElement) {
+						String memberName = ((NamedElement)result).getName();
+						for(Member m : ((MemberContainer)result.eContainer()).getMembers()) {
+							if(memberName.equals(m.getName()) && m instanceof ConcreteClassifier) {
+								result = m;
+								return result;
+							}
+						}
+					}
+				}
+			}
 		}
 		return result;
 	}
