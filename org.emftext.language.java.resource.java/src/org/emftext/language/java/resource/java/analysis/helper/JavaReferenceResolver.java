@@ -364,7 +364,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			if (container instanceof ConcreteClassifier) {
 				if (lookIntoSuper)
-					contentsList.addAll(getAllMemebers((Classifier) container));
+					contentsList.addAll(getAllMembers((Classifier) container));
 			}
 			if (container instanceof AnonymousClass) {
 				if (lookIntoSuper)
@@ -1311,7 +1311,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 		
-		return getAllMemebers(javaClassifier);
+		return getAllMembers(javaClassifier);
 	}
 	
 	protected EList<Member> getAllMemebers(AnonymousClass anonymousClass) {
@@ -1320,11 +1320,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return new BasicEList<Member>();
 		}
 		else {
-			return getAllMemebers((Classifier)getReferencedType(ncCall.getType()));
+			return getAllMembers((Classifier)getReferencedType(ncCall.getType()));
 		}
 	}
 	
-	protected EList<Member> getAllMemebers(Classifier javaClassifier) {
+	protected EList<Member> getAllMembers(Classifier javaClassifier) {
 		EList<Member> memberList = new BasicEList<Member>();
 		//because inner classes are found in separate class files
 		memberList.addAll(
