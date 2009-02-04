@@ -385,17 +385,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			contentsList.add(STANDARD_ARRAY_LENGTH_FIELD);
 		}
-		
-		if (container instanceof AnonymousClass) {
-			NewConstructorCall newCC = (NewConstructorCall) container.eContainer();
-			Type type = getReferencedType(newCC.getType());
-			if (type instanceof Classifier) {
-				if (type instanceof MemberContainer) {
-					contentsList.addAll(((MemberContainer)type).getMembers());
-				}
-				contentsList.addAll(getAllMemebers((Classifier) type));
-			}
-		}
 	}
 	
 	
@@ -1237,6 +1226,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return true;
 		}
 		
+		if (moreGeneral instanceof Classifier && lessGeneral instanceof AnonymousClass &&
+				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((AnonymousClass)lessGeneral).contains(moreGeneral))) {
+			
+			return true;
+		}
+		
 		if (moreGeneral instanceof Classifier) {
 			//everything can be implicitly casted to string
 			return moreGeneral.equals(EcoreUtil.resolve(
@@ -1346,6 +1341,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return memberList;
 	}
 	
+	protected EList<ConcreteClassifier> getAllSuperTypes(AnonymousClass anonymousClass) {
+		NewConstructorCall ncCall = (NewConstructorCall) anonymousClass.eContainer();
+		Type superType = getReferencedType(ncCall.getType());
+		if (superType instanceof ConcreteClassifier ) {
+			return getAllSuperTypes((ConcreteClassifier)superType);
+		}
+		else {
+			return getAllSuperTypes(getObjectModelElement());
+		}
+	}
+	
 	protected EList<ConcreteClassifier> getAllSuperTypes(Classifier javaClassifier) {
 		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
@@ -1370,7 +1376,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			assert(false);
 		}
 		return superClassifierList;
-
 	}
 
 	/**
@@ -1395,6 +1400,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		superClass = (Class) EcoreUtil.resolve(superClass, myResource);
 		return superClass;
 	}
+	
 	
 	/**
 	 * Collects all superclassifiers (extended classes and implemented interfaces)
