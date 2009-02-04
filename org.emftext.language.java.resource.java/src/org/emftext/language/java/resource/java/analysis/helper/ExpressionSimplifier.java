@@ -117,16 +117,23 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							nestedExpression.setExpression(identifierReference);
 							
 							int idx = additiveExpression.getChildren().indexOf(aeChild);
-							additiveExpression.getChildren().add(idx,unaryExpression.getChild());
-							additiveExpression.getChildren().add(idx,nestedExpression);
-							additiveExpression.getChildren().remove(aeChild);
-
+							if (idx + 1 == additiveExpression.getChildren().size()) {
+								additiveExpression.getChildren().add(idx + 1,unaryExpression.getChild());
+							}
+							else {
+								additiveExpression.getChildren().add(unaryExpression.getChild());
+							}
 							if (idx == additiveExpression.getAdditiveOperators().size()) {
 								additiveExpression.getAdditiveOperators().add(OperatorsFactory.eINSTANCE.createAddition());
 							}
 							else {
 								additiveExpression.getAdditiveOperators().add(idx, OperatorsFactory.eINSTANCE.createAddition());
 							}
+							EcoreUtil.replace(castExpression, nestedExpression);
+							//additiveExpression.getChildren().add(idx,nestedExpression);
+							//additiveExpression.getChildren().remove(aeChild);
+
+
 							
 							//TODO set location map for nested expression and additive operator and identifier reference
 							
