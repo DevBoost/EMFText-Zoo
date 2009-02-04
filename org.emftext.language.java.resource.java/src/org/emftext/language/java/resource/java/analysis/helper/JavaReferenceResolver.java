@@ -498,7 +498,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			result.addMapping(identifier, targetObject);
 		}
-		else {
+		else if(previousType == null) {
 			//in this cases we  may reference something that is probably a package
 			if (reference.equals(
 					ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
@@ -779,7 +779,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				
 				AnonymousClass anonymousContainer = findContainingAnonymousClass(reference);
 				if (anonymousContainer != null) {
-					return anonymousContainer;
+					NewConstructorCall ncCall = (NewConstructorCall) anonymousContainer.eContainer();
+					return getReferencedType(ncCall.getType());
 				}
 				else {
 					return findContainingClassifier(reference);	
