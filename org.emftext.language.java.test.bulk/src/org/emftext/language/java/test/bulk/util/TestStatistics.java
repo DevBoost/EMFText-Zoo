@@ -1,4 +1,4 @@
-package org.emftext.language.java.test.bulk;
+package org.emftext.language.java.test.bulk.util;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import javancss.Javancss;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.emftext.language.java.test.bulk.GiganticTest;
 
 public class TestStatistics extends GiganticTest {
 	
