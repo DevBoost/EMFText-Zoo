@@ -297,17 +297,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (container instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) container;
 			
+			//classifier first
 			for(Import explicitImport : cu.getImports()) {
 				if (explicitImport instanceof ClassifierImport) {
 					ConcreteClassifier classifierImport = 
 						((ClassifierImport)explicitImport).getClassifier();
 					contentsList.add(classifierImport);
-				}
-				else if (explicitImport instanceof PackageImport) {
-					EList<ConcreteClassifier> importedClassifiers =  
-						JavaClasspath.INSTANCE.getClassifiers(explicitImport);
-					contentsList.addAll(importedClassifiers);
-				
 				}
 				else if (explicitImport instanceof StaticMemberImport) {
 					Member staticMember = 
@@ -319,11 +314,15 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						((StaticClassifierImport)explicitImport).getStaticMembers();
 					contentsList.addAll(staticMembers);
 				}
-				else {
-					assert(false);
+			}
+			for(Import explicitImport : cu.getImports()) {
+				if (explicitImport instanceof PackageImport) {
+					EList<ConcreteClassifier> importedClassifiers =  
+						JavaClasspath.INSTANCE.getClassifiers(explicitImport);
+					contentsList.addAll(importedClassifiers);
+				
 				}
 			}
-			
 			String packageName = JavaUniquePathConstructor.packageName(cu);
 			EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports(packageName);
 			contentsList.addAll(defaultImports);
