@@ -4,9 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.Collection;
 import java.util.List;
+
+import javancss.Javancss;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
@@ -14,8 +15,8 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 public class TestStatistics extends GiganticTest {
 	
-	private long lines = 0;
-	private long bytes = 0;
+	private long locs = 0;
+	private long ncss = 0;
 	private long count = 0;
 
 	public static void main(String[] args) throws IOException, CoreException {
@@ -31,22 +32,33 @@ public class TestStatistics extends GiganticTest {
 				count++;
 				long mod = count % 100;
 				if (mod == 0) {
-					System.out.println(count);
+					System.out.println(count + " -> (" + locs + "," + ncss + ")");
 				}
 			}
 		}
-		System.out.println("\nTestStatistics.main() lines = " + lines);
-		System.out.println("TestStatistics.main() bytes = " + bytes);
+		System.out.println("\nTestStatistics.main() LOCS = " + locs);
+		System.out.println("\nTestStatistics.main() NCSS = " + ncss);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void handle(URI next) throws IOException {
 		InputStream is = new ExtensibleURIConverterImpl().createInputStream(next);
 		// TODO Auto-generated method stub
-		LineNumberReader lnr = new LineNumberReader(new InputStreamReader(new BufferedInputStream(is, 1024 * 1024)));
-		while (lnr.readLine() != null) {
-			lines++;
+		InputStreamReader inr = new InputStreamReader(new BufferedInputStream(is, 1024 * 1024));
+		int read = -1;
+		StringBuilder content = new StringBuilder();
+		while ((read = inr.read()) >= 0) {
+			content.append((char) read);
 		}
 		is.close();
+		
+		Javancss jn = new Javancss(new java.io.StringBufferInputStream(content.toString()));
+		ncss += jn.getNcss();
+		locs += jn.getLOC();
+		Throwable lastError = jn.getLastError();
+		if (lastError != null) {
+			System.out.println("Error parsing " + next);
+		}
 /*
 		is = new BufferedInputStream(new ExtensibleURIConverterImpl().createInputStream(next), 1024*1024);
 		while (is.read() >= 0) {
