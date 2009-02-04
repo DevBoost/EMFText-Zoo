@@ -348,6 +348,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				if (lookIntoSuper)
 					contentsList.addAll(getAllMemebers((Classifier) container));
 			}
+			if (container instanceof AnonymousClass) {
+				if (lookIntoSuper)
+					contentsList.addAll(getAllMemebers((AnonymousClass) container));
+			}
 			else {
 				//PARAMETER TYPE
 			}
@@ -775,8 +779,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				
 				AnonymousClass anonymousContainer = findContainingAnonymousClass(reference);
 				if (anonymousContainer != null) {
-					NewConstructorCall ncCall = (NewConstructorCall) anonymousContainer.eContainer();
-					return getReferencedType(ncCall.getType());
+					return anonymousContainer;
 				}
 				else {
 					return findContainingClassifier(reference);	
@@ -1235,8 +1238,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 	
 	protected AnonymousClass findContainingAnonymousClass(EObject value) {
-		while (!(value instanceof AnonymousClass) && value != null) {
+		while (!(value instanceof AnonymousClass) 
+				&& !(value instanceof ConcreteClassifier) //do not jump over other classifiers 
+				&&value != null) {
 			value = value.eContainer();
+		}
+		if (!(value instanceof AnonymousClass)) {
+			return null;
 		}
 		return (AnonymousClass) value;
 	}
@@ -1289,6 +1297,16 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 		
 		return getAllMemebers(javaClassifier);
+	}
+	
+	protected EList<Member> getAllMemebers(AnonymousClass anonymousClass) {
+		NewConstructorCall ncCall = (NewConstructorCall) anonymousClass.eContainer();
+		if (ncCall == null) {
+			return new BasicEList<Member>();
+		}
+		else {
+			return getAllMemebers((Classifier)getReferencedType(ncCall.getType()));
+		}
 	}
 	
 	protected EList<Member> getAllMemebers(Classifier javaClassifier) {
