@@ -13,81 +13,12 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 
 	protected final static String BULK_INPUT_DIR = "input/";
 
-	private static final class ParseZipFileEntryTest extends
-			AbstractJavaParserTest {
-
-		private final ZipFile zipFile;
-		private final ZipEntry entry;
-		private final boolean excludeFromReprint;
-
-		private ParseZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
-			super("Parse " + entry.getName());
-			this.zipFile = zipFile;
-			this.entry = entry;
-			this.excludeFromReprint = excludeFromReprint;
-		}
-		
-		public void runTest() {
-			try {
-				if(isExcludedFromReprintTest(zipFile.getName())) {
-					parseResource(zipFile, entry);
-				}
-				else {
-					String plainZipFileName = zipFile.getName().substring(BULK_INPUT_DIR.length());
-					plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - "-src.zip".length());
-					
-					parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "lib/" + plainZipFileName);
-					
-					//for JacksTest: remove java.java from classpath!
-					if (entry.getName().equals("java.java")) {
-						JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
-			}
-		}
-
-		@Override
-		protected ResourceSet getResourceSet() {
-			return new ResourceSetImpl();
-		}
-
-		@Override
-		protected boolean isExcludedFromReprintTest(String filename) {
-			return excludeFromReprint;
-		}
-		
-		@Override
-		protected boolean ignoreSemanticErrors(String filename) {
-			return excludeFromReprint;
-		}
-
-		@Override
-		protected String getTestInputFolder() {
-			return null;
-		}
-		
-		@Override
-		public void addParsedResource(File file) {
-			// do nothing to avoid storing unneeded file objects in memory
-		}
-
-		@Override
-		public void addReprintedResource(File file) {
-			// do nothing to avoid storing unneeded file objects in memory
-		}
-	}
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
 		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null);
 	}
@@ -106,7 +37,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				startEntry = null;
 			}
 			if (entry.getName().endsWith(".java")) {
-				tests.add(new ParseZipFileEntryTest(zipFile, entry, excludeFromReprint));
+				tests.add(new ZipFileEntryTest(zipFile, entry, excludeFromReprint));
 			}
 		}
 		return tests;
