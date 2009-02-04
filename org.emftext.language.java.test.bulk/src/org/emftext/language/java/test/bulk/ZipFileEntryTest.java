@@ -1,6 +1,9 @@
 package org.emftext.language.java.test.bulk;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -12,14 +15,9 @@ import org.emftext.language.java.test.AbstractJavaParserTest;
 public class ZipFileEntryTest extends AbstractJavaParserTest {
 
 	private final ZipFile zipFile;
-	private final ZipEntry entry;
+	private final List<ZipEntry> entries = new ArrayList<ZipEntry>();
 	private final boolean excludeFromReprint;
-	private ResourceSet resourceSet;
 
-	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
-		this(zipFile, entry, excludeFromReprint, null);
-	}
-	
 	/**
 	 * Creates a new test for the given entry in a ZIP file. If a resource set is given
 	 * it will be used. Otherwise a new one will be created.
@@ -29,29 +27,29 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 	 * @param excludeFromReprint
 	 * @param resourceSet
 	 */
-	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint, ResourceSet resourceSet) {
+	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
-		this.entry = entry;
 		this.excludeFromReprint = excludeFromReprint;
-		this.resourceSet = resourceSet;
+		addZipEntry(entry);
+	}
+	
+	public void addZipEntry(ZipEntry entry) {
+		entries.add(entry);
 	}
 	
 	public void runTest() {
 		try {
 			if(isExcludedFromReprintTest(zipFile.getName())) {
-				parseResource(zipFile, entry);
+				parseAllEntries();
 			}
 			else {
-				String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
-				plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - "-src.zip".length());
-				
-				parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "lib/" + plainZipFileName);
-				
-				//for JacksTest: remove java.java from classpath!
-				if (entry.getName().equals("java.java")) {
-					JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
+				// if there is more entries that must be printed
+				// together we have to parse them before
+				if (entries.size() > 1) {
+					parseAllEntries();
 				}
+				parseAndReprintAllEntries();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,15 +57,33 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 		}
 	}
 
+	private void parseAndReprintEntry(ZipEntry entry) throws Exception {
+		String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
+		plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - "-src.zip".length());
+		
+		parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "lib/" + plainZipFileName);
+		
+		//for JacksTest: remove java.java from classpath!
+		if (entry.getName().equals("java.java")) {
+			JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
+		}
+	}
+
+	private void parseAllEntries() throws IOException {
+		for (ZipEntry entry : entries) {
+			parseResource(zipFile, entry);
+		}
+	}
+
+	private void parseAndReprintAllEntries() throws Exception {
+		for (ZipEntry entry : entries) {
+			parseAndReprintEntry(entry);
+		}
+	}
+
 	@Override
 	protected ResourceSet getResourceSet() {
-		if (resourceSet == null) {
-			return new ResourceSetImpl();
-		} else {
-			ResourceSet result = resourceSet;
-			resourceSet = null;
-			return result;
-		}
+		return new ResourceSetImpl();
 	}
 
 	@Override

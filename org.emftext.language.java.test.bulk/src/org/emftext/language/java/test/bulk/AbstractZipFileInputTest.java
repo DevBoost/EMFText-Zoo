@@ -15,8 +15,6 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
@@ -32,7 +30,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		
-		Map<String, ResourceSet> foldersToResourceSets = new HashMap<String, ResourceSet>();
+		Map<String, ZipFileEntryTest> foldersToTests = new HashMap<String, ZipFileEntryTest>();
 		while (entries.hasMoreElements()) {
 			
 			ZipEntry entry = entries.nextElement();
@@ -44,17 +42,20 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				startEntry = null;
 			}
 			if (entryName.endsWith(".java")) {
-				ResourceSet resourceSet = null;
+				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint);
 				// TODO put this somewhere else
 				if (zipFilePath.endsWith("jdt_test_files-src.zip")) {
 					String fileName = entryName.replaceFirst(".*/.*/", "");
 					String folderName = entryName.substring(0, entryName.length() - fileName.length());
-					if (!foldersToResourceSets.containsKey(folderName)) {
-						foldersToResourceSets.put(folderName, new ResourceSetImpl());
+					if (!foldersToTests.containsKey(folderName)) {
+						foldersToTests.put(folderName, newTest);
+						tests.add(newTest);
+					} else {
+						foldersToTests.get(folderName).addZipEntry(entry);
 					}
-					resourceSet = foldersToResourceSets.get(folderName);
+				} else {
+					tests.add(newTest);
 				}
-				tests.add(new ZipFileEntryTest(zipFile, entry, excludeFromReprint, resourceSet));
 			}
 		}
 		return tests;
