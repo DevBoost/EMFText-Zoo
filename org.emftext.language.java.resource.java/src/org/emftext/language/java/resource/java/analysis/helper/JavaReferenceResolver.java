@@ -1227,10 +1227,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		
 		if (moreGeneral instanceof Classifier && lessGeneral instanceof AnonymousClass &&
-				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((AnonymousClass)lessGeneral).contains(moreGeneral))) {
+				getAllSuperTypes((AnonymousClass)lessGeneral).contains(moreGeneral)) {
 			
 			return true;
 		}
+		
+		
 		
 		if (moreGeneral instanceof Classifier) {
 			//everything can be implicitly casted to string
@@ -1344,12 +1346,16 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected EList<ConcreteClassifier> getAllSuperTypes(AnonymousClass anonymousClass) {
 		NewConstructorCall ncCall = (NewConstructorCall) anonymousClass.eContainer();
 		Type superType = getReferencedType(ncCall.getType());
+		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
+		
 		if (superType instanceof ConcreteClassifier ) {
-			return getAllSuperTypes((ConcreteClassifier)superType);
+			superClassifierList.add((ConcreteClassifier) superType);
+			superClassifierList.addAll(getAllSuperTypes((ConcreteClassifier)superType));
 		}
 		else {
-			return getAllSuperTypes(getObjectModelElement());
+			superClassifierList.add(getObjectModelElement());
 		}
+		return superClassifierList;
 	}
 	
 	protected EList<ConcreteClassifier> getAllSuperTypes(Classifier javaClassifier) {
