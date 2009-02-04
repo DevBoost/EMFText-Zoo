@@ -797,8 +797,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				
 				AnonymousClass anonymousContainer = findContainingAnonymousClass(reference);
 				if (anonymousContainer != null) {
-					NewConstructorCall ncCall = (NewConstructorCall) anonymousContainer.eContainer();
-					return getReferencedType(ncCall.getType());
+					return anonymousContainer;
 				}
 				else {
 					return findContainingClassifier(reference);	
