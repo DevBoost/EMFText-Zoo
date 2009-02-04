@@ -31,10 +31,12 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
 		this.excludeFromReprint = excludeFromReprint;
-		addZipEntry(entry);
+		//addZipEntry(entry);
+		entries.add(entry);
 	}
 	
 	public void addZipEntry(ZipEntry entry) {
+		System.out.println(hashCode() + " addZipEntry() " + entry.getName());
 		entries.add(entry);
 	}
 	
