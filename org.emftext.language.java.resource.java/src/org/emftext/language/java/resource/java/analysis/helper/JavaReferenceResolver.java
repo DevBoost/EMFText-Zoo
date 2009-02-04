@@ -61,6 +61,7 @@ import org.emftext.language.java.literals.Literal;
 import org.emftext.language.java.literals.LongLiteral;
 import org.emftext.language.java.literals.NullLiteral;
 import org.emftext.language.java.members.AdditionalField;
+import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
@@ -248,6 +249,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (element instanceof Method) {
 			return true;
 		}
+		if (element instanceof Constructor) {
+			return true;
+		}
 		//go not go into a new block
 		if (element instanceof Block) {
 			return true;
@@ -296,8 +300,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		//consider imports and default imports
 		if (container instanceof CompilationUnit) {
 			CompilationUnit cu = (CompilationUnit) container;
-			
-			//classifier first
+
+			//explicit classifier imports first
 			for(Import explicitImport : cu.getImports()) {
 				if (explicitImport instanceof ClassifierImport) {
 					ConcreteClassifier classifierImport = 
@@ -315,6 +319,16 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					contentsList.addAll(staticMembers);
 				}
 			}
+			
+			String packageName = JavaUniquePathConstructor.packageName(cu);
+			//classes in the same package
+			if(!packageName.equals("")) {
+				//put at the end when default package is used
+				//TODO this works for tests. 
+				//Is this the desired behavior? Usually default package is not used.
+				contentsList.addAll(JavaClasspath.INSTANCE.getClassifiers(packageName + ".", "*"));
+			}
+
 			for(Import explicitImport : cu.getImports()) {
 				if (explicitImport instanceof PackageImport) {
 					EList<ConcreteClassifier> importedClassifiers =  
@@ -323,9 +337,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				
 				}
 			}
-			String packageName = JavaUniquePathConstructor.packageName(cu);
-			EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports(packageName);
+
+			EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports();
 			contentsList.addAll(defaultImports);
+			if(packageName.equals("")) {
+				contentsList.addAll(JavaClasspath.INSTANCE.getClassifiers(packageName + ".", "*"));
+			}
+			
 		}
 		//consider qualified package names
 		if (container instanceof Package) {
@@ -498,7 +516,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}
 			result.addMapping(identifier, targetObject);
 		}
-		else if(previousType == null) {
+		else {
 			//in this cases we  may reference something that is probably a package
 			if (reference.equals(
 					ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {

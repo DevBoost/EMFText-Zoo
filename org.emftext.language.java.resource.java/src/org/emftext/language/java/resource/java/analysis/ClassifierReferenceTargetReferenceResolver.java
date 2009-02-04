@@ -263,8 +263,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 			ConcreteClassifier containingClassifier,
 			CompilationUnit cu,
 			EList<ConcreteClassifier> rootContainerCandidates) {
-		
-		
+
 		ConcreteClassifier outerContainer = containingClassifier;
 		while(outerContainer != null) {
 			for(Member m : outerContainer.getMembers()) {
@@ -283,20 +282,15 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 		
 		rootContainerCandidates.addAll(cu.getClassifiers());
 
-		
 		rootContainerCandidates.addAll(
-				JavaClasspath.INSTANCE.getInternalClassifiers(containingClassifier));		
+				JavaClasspath.INSTANCE.getInternalClassifiers(containingClassifier));	
+		
+		//explicit classifier imports first
 		for(Import explicitImport : cu.getImports()) {
 			if (explicitImport instanceof ClassifierImport) {
 				ConcreteClassifier classifierImport = 
 					((ClassifierImport)explicitImport).getClassifier();
 				rootContainerCandidates.add(classifierImport);
-			}
-			else if (explicitImport instanceof PackageImport) {
-				EList<ConcreteClassifier> importedClassifiers =  
-					JavaClasspath.INSTANCE.getClassifiers(explicitImport);
-				rootContainerCandidates.addAll(importedClassifiers);
-			
 			}
 			else if (explicitImport instanceof StaticMemberImport) {
 				Member staticMember = 
@@ -314,10 +308,30 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 					}
 				}
 			}
-
 		}
+		
 		String packageName = JavaUniquePathConstructor.packageName(cu);
-		EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports(packageName);
+		//classes in the same package
+		if(!packageName.equals("")) {
+			//put at the end when default package is used
+			//TODO this works for tests. 
+			//Is this the desired behavior? Usually default package is not used.
+			rootContainerCandidates.addAll(JavaClasspath.INSTANCE.getClassifiers(packageName + ".", "*"));
+		}
+
+		for(Import explicitImport : cu.getImports()) {
+			if (explicitImport instanceof PackageImport) {
+				EList<ConcreteClassifier> importedClassifiers =  
+					JavaClasspath.INSTANCE.getClassifiers(explicitImport);
+				rootContainerCandidates.addAll(importedClassifiers);
+			
+			}
+		}
+
+		EList<ConcreteClassifier> defaultImports = JavaClasspath.INSTANCE.getDefaultImports();
 		rootContainerCandidates.addAll(defaultImports);
+		if(packageName.equals("")) {
+			rootContainerCandidates.addAll(JavaClasspath.INSTANCE.getClassifiers(packageName + ".", "*"));
+		}
 	}
 }
