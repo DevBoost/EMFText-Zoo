@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.emftext.language.java.test.bulk;
 
 import java.io.File;
@@ -12,18 +9,32 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 
-final class ZipFileEntryTest extends
-		AbstractJavaParserTest {
+public class ZipFileEntryTest extends AbstractJavaParserTest {
 
 	private final ZipFile zipFile;
 	private final ZipEntry entry;
 	private final boolean excludeFromReprint;
+	private ResourceSet resourceSet;
 
 	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
-		super("Parse " + entry.getName());
+		this(zipFile, entry, excludeFromReprint, null);
+	}
+	
+	/**
+	 * Creates a new test for the given entry in a ZIP file. If a resource set is given
+	 * it will be used. Otherwise a new one will be created.
+	 * 
+	 * @param zipFile
+	 * @param entry
+	 * @param excludeFromReprint
+	 * @param resourceSet
+	 */
+	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint, ResourceSet resourceSet) {
+		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
 		this.entry = entry;
 		this.excludeFromReprint = excludeFromReprint;
+		this.resourceSet = resourceSet;
 	}
 	
 	public void runTest() {
@@ -50,7 +61,13 @@ final class ZipFileEntryTest extends
 
 	@Override
 	protected ResourceSet getResourceSet() {
-		return new ResourceSetImpl();
+		if (resourceSet == null) {
+			return new ResourceSetImpl();
+		} else {
+			ResourceSet result = resourceSet;
+			resourceSet = null;
+			return result;
+		}
 	}
 
 	@Override
