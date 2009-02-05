@@ -5,7 +5,10 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.bcel.classfile.Attribute;
 import org.apache.bcel.classfile.Utility;
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.classifiers.Class;
@@ -18,6 +21,7 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
@@ -112,7 +116,7 @@ public class ClassFileParser {
 		}
 		
 		emfClassifier.setName(className);
-		
+ 		
 		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
 			((MemberContainer) emfClassifier).getMembers().add(constructField(filed));
 		}
@@ -137,6 +141,14 @@ public class ClassFileParser {
 			}
 
 		}
+	
+		for(Attribute a : clazz.getAttributes()){
+			String signature = a.toString();
+			if(signature.startsWith("Signature(")) {
+				EList<TypeParameter> tpList = constructTypeParameters(signature);
+				emfClassifier.getTypeParameters().addAll(tpList);
+			}
+		}
 		
 		if(clazz.getClassName().equals("java.lang.annotation.Annotation")) {
 			Method valueMethod = MembersFactory.eINSTANCE.createMethod();
@@ -154,7 +166,21 @@ public class ClassFileParser {
 		emfMethod.setName(method.getName());
 		
 		String signature = method.getReturnType().getSignature();
-		TypeReference typeRef = createReferenceToType(signature);
+		String plainSignature = "";
+		
+		for(Attribute a : method.getAttributes()){
+			String s = a.toString();
+			if(s.startsWith("Signature(")) {
+				plainSignature = s;
+			}
+		}
+		
+		TypeReference typeRef = constructReturnTypeParameters(plainSignature);
+		if(typeRef == null) {
+			//real type
+			typeRef= createReferenceToType(signature);
+		}
+
 		emfMethod.setType(typeRef);
 		
 		int arrayDimension = getArrayDimension(signature);
@@ -172,6 +198,18 @@ public class ClassFileParser {
 			else {
 				emfMethod.getParameters().add(
 						constructParameter(argType));		
+			}
+		}
+		
+		EList<TypeParameter> tpList = constructMethodTypeParameters(plainSignature);
+		for(int i = 0; i<tpList.size(); i++) {
+			TypeParameter typeParameter = tpList.get(i);
+			if(typeParameter != null) {
+				TypeReference typeReference = emfMethod.getParameters().get(i).getType();
+				if(typeReference instanceof ClassifierReference) {
+					//replace with parameter there is one
+					((ClassifierReference) typeReference).setTarget(typeParameter);
+				}
 			}
 		}
 		
@@ -216,6 +254,92 @@ public class ClassFileParser {
 		
 		return emfField;
 	}
+	
+	protected ClassifierReference constructReturnTypeParameters(String signature) {
+		int idx = signature.indexOf(")T");
+		if(idx == -1) {
+			return null;
+		}
+		signature = signature.substring(idx + 2);
+		
+		idx = signature.indexOf(";");
+		String name = signature.substring(0,idx);
+		
+		TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
+		typeParameter.setName(name);
+		
+		ClassifierReference classifierReference = 
+			TypesFactory.eINSTANCE.createClassifierReference();
+		classifierReference.setTarget(typeParameter);
+		
+		return classifierReference;
+	}
+	
+	protected EList<TypeParameter> constructMethodTypeParameters(String signature) {
+		EList<TypeParameter> result = new BasicEList<TypeParameter>();
+
+		//cut away all the inner type arguments
+		while(signature.contains("<")) {
+			int idx = signature.indexOf("<");
+			String start = signature.substring(0, idx);
+			String end = signature.substring(idx + 1);
+			int bracketCount = 1;
+			while (bracketCount > 0) {
+				if(end.startsWith("<")) {
+					bracketCount++;
+				}
+				if(end.startsWith(">")) {
+					bracketCount--;
+				}
+				end = end.substring(1,end.length());
+			}
+			signature = start + end;
+		}
+		
+		int idx1 = signature.indexOf("((");
+		int idx2 = signature.indexOf(")");
+		
+		if(idx1 == -1 || idx2 == -1) {
+			return result;
+		}
+		
+		signature = signature.substring(idx1, idx2);
+		
+		while(signature.contains(";")) {
+			int idx = signature.indexOf(";");
+			if (signature.startsWith("T")) {
+				String name = signature.substring(1,idx);
+				TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
+				typeParameter.setName(name);
+				result.add(typeParameter);
+			}
+			else {
+				result.add(null);
+			}
+			
+			signature = signature.substring(signature.indexOf(";") + 1);
+		}
+		
+		return result;
+	}
+	
+	protected EList<TypeParameter> constructTypeParameters(String signature) {
+		EList<TypeParameter> result = new BasicEList<TypeParameter>();
+		signature = signature.substring(signature.indexOf("<") + 1);
+		
+		while(signature.contains(":")) {
+			int idx = signature.indexOf(":");
+			String name = signature.substring(0,idx);
+			TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
+			typeParameter.setName(name);
+			result.add(typeParameter);
+			
+			signature = signature.substring(signature.indexOf(";") + 1);
+		}
+		
+		return result;
+	}
+
 
 	private TypeReference createReferenceToType(String signature) { 
 		TypeReference emfTypeReference = null;
