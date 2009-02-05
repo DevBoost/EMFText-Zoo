@@ -80,6 +80,8 @@ import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForLoop;
+import org.emftext.language.java.statements.NormalSwitchCase;
+import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.statements.WhileLoop;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
@@ -236,6 +238,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (element instanceof AnonymousClass) {
 			return false;
 		}
+		//e.g. when resolving a type parameter
+		if (element instanceof Method) {
+			return false;
+		}
 		//in all other cases, the order requires consideration
 		return true;
 	}
@@ -360,11 +366,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		else if (container instanceof Type) {
 			//consider upper types --> can be optimized
 			if (container instanceof PrimitiveType) {
-				contentsList.addAll(getAllMemebers((PrimitiveType) container));
+				contentsList.addAll(getAllMembers((PrimitiveType) container));
 			}
 			if (container instanceof ConcreteClassifier) {
 				if (lookIntoSuper)
-					contentsList.addAll(getAllMembers((Classifier) container));
+					contentsList.addAll(getAllMemebers((Classifier) container));
 			}
 			if (container instanceof AnonymousClass) {
 				if (lookIntoSuper)
@@ -384,6 +390,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						TypesFactory.eINSTANCE.createInt());
 			}
 			contentsList.add(STANDARD_ARRAY_LENGTH_FIELD);
+		}
+		
+		if (container instanceof AnonymousClass) {
+			NewConstructorCall newCC = (NewConstructorCall) container.eContainer();
+			Type type = getReferencedType(newCC.getType());
+			if (type instanceof Classifier) {
+				if (type instanceof MemberContainer) {
+					contentsList.addAll(((MemberContainer)type).getMembers());
+				}
+				contentsList.addAll(getAllMemebers((Classifier) type));
+			}
 		}
 	}
 	
@@ -476,6 +493,16 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 			} 
 		}
+		
+		if (previousType == null && containerContainer instanceof NormalSwitchCase) {
+			Switch switchStatement = (Switch) containerContainer.eContainer();
+			Type type = getTypeOfExpression(switchStatement.getVariable());
+			if (type instanceof Enumeration) {
+				//special scoping for switching enumerations
+				previousType = type;
+			}
+		}
+		
 		
 		//2) search in scope
 		if (previousType == null) {
@@ -818,7 +845,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if(target instanceof AdditionalField) {
 				target = (ReferenceableElement) target.eContainer();
 			}
-			
+			if(target instanceof EnumConstant) {
+				//TODO is int the correct type here?
+				type = TypesFactory.eINSTANCE.createInt(); 
+			}			
 			if (target instanceof TypedElement) {
 				TypeReference typeRef = ((TypedElement) target).getType();
 				type = getReferencedType(typeRef);
@@ -831,7 +861,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 							ClassifierReference classifierReference = convertToClassifierReference(prevType);
 							if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty()) {
 								//naive implementation for using type arguments as return types
-								if (type.equals(getObjectModelElement())) {
+								if (getObjectModelElement().equals(type)) {
 									TypeArgument arg = classifierReference.getTypeArguments().get(0);
 									if (arg instanceof QualifiedTypeArgument) {
 										type = getReferencedType(((QualifiedTypeArgument) arg).getType());
@@ -1278,7 +1308,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return (AnnotationInstance) value;
 	}
 	
-	protected EList<Member> getAllMemebers(PrimitiveType primitiveType) {
+	protected EList<Member> getAllMembers(PrimitiveType primitiveType) {
 		Classifier javaClassifier = null;
 		//automatic wrapping of primitive types
 		if (primitiveType instanceof Boolean) {
@@ -1311,7 +1341,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 		
-		return getAllMembers(javaClassifier);
+		return getAllMemebers(javaClassifier);
 	}
 	
 	protected EList<Member> getAllMemebers(AnonymousClass anonymousClass) {
@@ -1320,11 +1350,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return new BasicEList<Member>();
 		}
 		else {
-			return getAllMembers((Classifier)getReferencedType(ncCall.getType()));
+			return getAllMemebers((Classifier)getReferencedType(ncCall.getType()));
 		}
 	}
 	
-	protected EList<Member> getAllMembers(Classifier javaClassifier) {
+	protected EList<Member> getAllMemebers(Classifier javaClassifier) {
 		EList<Member> memberList = new BasicEList<Member>();
 		//because inner classes are found in separate class files
 		memberList.addAll(

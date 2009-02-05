@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,6 +21,7 @@ import org.emftext.language.java.expressions.UnaryExpression;
 import org.emftext.language.java.operators.Addition;
 import org.emftext.language.java.operators.OperatorsFactory;
 import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.types.NamespaceClassifierReference;
@@ -99,10 +101,64 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 					if (unaryExpression.getOperators().size() == 1 && 
 							unaryExpression.getOperators().get(0) instanceof Addition) {
 						//try to resolve the cast
-						EObject proxy = (EObject) ((NamespaceClassifierReference)castExpression.getTypeReference()
-								).getClassifierReferences().get(0).eGet(TypesPackage.Literals.CLASSIFIER_REFERENCE__TARGET, false);
+						NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getTypeReference();
+						EObject proxy = (EObject) nsClassifierReference
+								.getClassifierReferences().get(0).eGet(TypesPackage.Literals.CLASSIFIER_REFERENCE__TARGET, false);
 						EObject resolved = EcoreUtil.resolve(proxy, castExpression.eResource());
-						if (!(resolved instanceof PrimitiveType)) {				
+
+						if (!(resolved instanceof PrimitiveType)) {
+							
+							IdentifierReference mainIdReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
+							mainIdReference.eSet(
+									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET, proxy);
+							String id = ((InternalEObject)proxy).eProxyURI().fragment();
+							id = id.substring(ITextResource.INTERNAL_URI_FRAGMENT_PREFIX.length());
+							id = id.substring(id.indexOf("_") + 1);
+							
+							((ITextResource)resource).registerContextDependentProxy(
+									mainIdReference,
+									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET,
+									id,
+									proxy);
+							
+							IdentifierReference rootIdRef = mainIdReference;
+							IdentifierReference prevIdRef = null;
+							
+							//namespace needs to be converted into reference chain
+							for(String nsPart : nsClassifierReference.getNamespace()) {
+								IdentifierReference idRef = ReferencesFactory.eINSTANCE.createIdentifierReference();
+								InternalEObject newProxy = (InternalEObject) EcoreUtil.copy(proxy);
+								
+								String newFragment = newProxy.eProxyURI().fragment();
+								newFragment = newFragment.substring(0,newFragment.indexOf("_") + 1) + nsPart;
+								
+								URI newURI = newProxy.eProxyURI().trimFragment().appendFragment(newFragment);
+								newProxy.eSetProxyURI(newURI);
+								
+								idRef.setTarget((ReferenceableElement) newProxy);
+								
+								((ITextResource)resource).registerContextDependentProxy(
+										idRef,
+										ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET,
+										nsPart,
+										newProxy);
+								
+								String proxyURI = newProxy.eProxyURI().toString();
+								proxyURI = proxyURI.substring(0,proxyURI.lastIndexOf("_"));
+								
+								if(prevIdRef != null) {
+									prevIdRef.setNext(idRef);
+								}
+								else {
+									rootIdRef = idRef;
+								}
+								prevIdRef = idRef;
+							}
+							
+							if (prevIdRef != null) {
+								prevIdRef.setNext(mainIdReference);
+							}
+							
 							//find the containing additive expression to modify it 
 							EObject aeChild = castExpression.eContainer();
 							while(!(aeChild.eContainer() instanceof AdditiveExpression)) {
@@ -111,10 +167,8 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							AdditiveExpression additiveExpression = (AdditiveExpression) aeChild.eContainer();
 							
 							NestedExpression nestedExpression = ExpressionsFactory.eINSTANCE.createNestedExpression();
-							IdentifierReference identifierReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
-							identifierReference.eSet(
-									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET, proxy);
-							nestedExpression.setExpression(identifierReference);
+
+							nestedExpression.setExpression(rootIdRef);
 							
 							int idx = additiveExpression.getChildren().indexOf(aeChild);
 							if (idx + 1 == additiveExpression.getChildren().size()) {
@@ -132,20 +186,8 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							EcoreUtil.replace(castExpression, nestedExpression);
 							//additiveExpression.getChildren().add(idx,nestedExpression);
 							//additiveExpression.getChildren().remove(aeChild);
-
-
 							
 							//TODO set location map for nested expression and additive operator and identifier reference
-							
-							String id = ((InternalEObject)proxy).eProxyURI().fragment();
-							id = id.substring(ITextResource.INTERNAL_URI_FRAGMENT_PREFIX.length());
-							id = id.substring(id.indexOf("_") + 1);
-							
-							((ITextResource)resource).registerContextDependentProxy(
-									identifierReference,
-									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET,
-									id,
-									proxy);
 						}
 					}
 				}
