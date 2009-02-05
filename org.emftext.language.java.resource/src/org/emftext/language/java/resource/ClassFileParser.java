@@ -116,13 +116,21 @@ public class ClassFileParser {
 		}
 		
 		emfClassifier.setName(className);
- 		
+ 			
+		for(Attribute a : clazz.getAttributes()){
+			String signature = a.toString();
+			if(signature.startsWith("Signature(")) {
+				EList<TypeParameter> tpList = constructTypeParameters(signature);
+				emfClassifier.getTypeParameters().addAll(tpList);
+			}
+		}
+	
 		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
 			((MemberContainer) emfClassifier).getMembers().add(constructField(filed));
 		}
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
 			if(!method.isSynthetic()) {
-				Method emfMethod = constructMethod(method, false);
+				Method emfMethod = constructMethod(method, emfClassifier, false);
 				//If the last parameter has an array type it could also be a variable length parameter.
 				//The java compiler compiles variable length arguments down to array arguments.
 				//Then the arguments are wrapped into an array. As far as I know, there is no
@@ -132,7 +140,7 @@ public class ClassFileParser {
 						!emfMethod.getParameters().get(
 								emfMethod.getParameters().size()-1).getArrayDimensionsBefore().isEmpty()) {
 					
-					Method emfMethod2 = constructMethod(method, true);
+					Method emfMethod2 = constructMethod(method, emfClassifier, true);
 					((MemberContainer) emfClassifier).getMembers().add(emfMethod2);
 				}
 				else {
@@ -141,15 +149,7 @@ public class ClassFileParser {
 			}
 
 		}
-	
-		for(Attribute a : clazz.getAttributes()){
-			String signature = a.toString();
-			if(signature.startsWith("Signature(")) {
-				EList<TypeParameter> tpList = constructTypeParameters(signature);
-				emfClassifier.getTypeParameters().addAll(tpList);
-			}
-		}
-		
+
 		if(clazz.getClassName().equals("java.lang.annotation.Annotation")) {
 			Method valueMethod = MembersFactory.eINSTANCE.createMethod();
 			valueMethod.setName("value");
@@ -161,7 +161,7 @@ public class ClassFileParser {
 		return emfClassifier;
 	}
 	
-	protected Method constructMethod(org.apache.bcel.classfile.Method method, boolean withVaraibleLength) {
+	protected Method constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
 		Method emfMethod = membersFactory.createMethod();
 		emfMethod.setName(method.getName());
 		
@@ -175,10 +175,11 @@ public class ClassFileParser {
 			}
 		}
 		
-		TypeReference typeRef = constructReturnTypeParameters(plainSignature);
-		if(typeRef == null) {
-			//real type
-			typeRef= createReferenceToType(signature);
+		TypeReference typeRef = createReferenceToType(signature);
+		TypeReference typeParamRef = constructReturnTypeParameterReference(plainSignature, emfClassifier);
+		if(typeParamRef != null) {
+			((TypeParameter)((ClassifierReference)typeParamRef).getTarget()).getExtendTypes().add(typeRef);
+			typeRef = typeParamRef;
 		}
 
 		emfMethod.setType(typeRef);
@@ -201,13 +202,14 @@ public class ClassFileParser {
 			}
 		}
 		
-		EList<TypeParameter> tpList = constructMethodTypeParameters(plainSignature);
+		EList<TypeParameter> tpList = constructMethodTypeParameterReferences(plainSignature, emfClassifier);
 		for(int i = 0; i<tpList.size(); i++) {
 			TypeParameter typeParameter = tpList.get(i);
 			if(typeParameter != null) {
 				TypeReference typeReference = emfMethod.getParameters().get(i).getType();
 				if(typeReference instanceof ClassifierReference) {
 					//replace with parameter there is one
+					typeParameter.getExtendTypes().add(typeReference);
 					((ClassifierReference) typeReference).setTarget(typeParameter);
 				}
 			}
@@ -255,7 +257,7 @@ public class ClassFileParser {
 		return emfField;
 	}
 	
-	protected ClassifierReference constructReturnTypeParameters(String signature) {
+	protected ClassifierReference constructReturnTypeParameterReference(String signature, ConcreteClassifier emfClassifier) {
 		int idx = signature.indexOf(")T");
 		if(idx == -1) {
 			return null;
@@ -265,8 +267,18 @@ public class ClassFileParser {
 		idx = signature.indexOf(";");
 		String name = signature.substring(0,idx);
 		
-		TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
-		typeParameter.setName(name);
+		TypeParameter typeParameter =  null;
+		for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+			if(cand.getName().equals(name)) {
+				typeParameter = cand;
+			}
+		}
+		
+		if(typeParameter == null) {
+			//FIXME this happens, because type parameter can also be declared on methods.
+			//These also need to be contructed and can then be referred here!
+			return null;
+		}
 		
 		ClassifierReference classifierReference = 
 			TypesFactory.eINSTANCE.createClassifierReference();
@@ -275,7 +287,7 @@ public class ClassFileParser {
 		return classifierReference;
 	}
 	
-	protected EList<TypeParameter> constructMethodTypeParameters(String signature) {
+	protected EList<TypeParameter> constructMethodTypeParameterReferences(String signature, ConcreteClassifier emfClassifier) {
 		EList<TypeParameter> result = new BasicEList<TypeParameter>();
 
 		//cut away all the inner type arguments
@@ -309,8 +321,12 @@ public class ClassFileParser {
 			int idx = signature.indexOf(";");
 			if (signature.startsWith("T")) {
 				String name = signature.substring(1,idx);
-				TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
-				typeParameter.setName(name);
+				TypeParameter typeParameter = null;
+				for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+					if(cand.getName().equals(name)) {
+						typeParameter = cand;
+					}
+				}
 				result.add(typeParameter);
 			}
 			else {
