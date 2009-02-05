@@ -238,7 +238,6 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 							}
 							else {
 								//try the super types
-								//try the super types
 								for(ConcreteClassifier superCand : getAllSuperTypes(cand)) {
 									if(superCand.getName().equals(identifier)) {
 										superCand = (ConcreteClassifier) EcoreUtil.resolve(superCand, container.eResource());
