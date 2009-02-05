@@ -395,7 +395,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		if (container instanceof AnonymousClass) {
 			NewConstructorCall newCC = (NewConstructorCall) container.eContainer();
-			Type type = getReferencedType(newCC.getType());
+			Type type = getReferencedType(newCC.getType(),null);
 			if (type instanceof Classifier) {
 				if (type instanceof MemberContainer) {
 					contentsList.addAll(((MemberContainer)type).getMembers());
@@ -425,7 +425,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		//type reference (2)
 		if (containerContainer instanceof TypeReference && !(containerContainer.eContainer() instanceof QualifiedTypeArgument)) {
 			//chained reference: scope given by previous element may be a type and may define a new scope
-			previousType = getReferencedType((TypeReference) containerContainer);
+			previousType = getReferencedType((TypeReference) containerContainer, null);
 		}
 		
 		//---- SPECIAL CASES ----
@@ -466,7 +466,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		//consider inner classes
 		if (containerContainer instanceof NewConstructorCall && container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			TypeReference typeReference = ((NewConstructorCall)containerContainer).getType();
-			previousType = getReferencedType(typeReference);
+			previousType = getReferencedType(typeReference, null);
 			anonymousClass = ((NewConstructorCall) containerContainer).getAnonymousClass();
 		}
 		
@@ -512,6 +512,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		else {
 			//we have another scope to search in
+			if(previousType instanceof TypeParameter) {
+				previousType = getReferencedType(((TypeParameter)previousType).getExtendTypes().get(0), null);
+			}
+			
 			if (anonymousClass != null) {
 				targetObject = find(identifier, container, null, anonymousClass, reference.getEReferenceType());
 			}
@@ -538,7 +542,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
 				Reference ref = (Reference)container;
 				//there must be something (a classifier reference) following up
-				if (ref.getNext() != null) {
+				if (ref.getNext() != null && ref.getArgumentList() == null) {
 					Package packageDescriptor = ContainersFactory.eINSTANCE.createPackage();
 					packageDescriptor.setName(identifier);
 					result.addMapping(identifier, packageDescriptor);
@@ -583,7 +587,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		else if (exp instanceof CastExpression) {
 			type = getReferencedType(
-					((CastExpression)exp).getTypeReference());
+					((CastExpression)exp).getTypeReference(), null);
 		}
 		else if (exp instanceof AssignmentExpression) {
 			type = getTypeOfExpression(((AssignmentExpression) exp).getChild());
@@ -639,7 +643,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 				else if (next instanceof CastExpression) {
 					nextType = getReferencedType(
-							((CastExpression)next).getTypeReference());
+							((CastExpression)next).getTypeReference(), null);
 				}
 				else {
 					nextType = getTypeOfReferencedElement(
@@ -801,7 +805,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		//referenced element point to a type
 		if (reference instanceof TypedElement) {
 			TypeReference typeRef = ((TypedElement) reference).getType();
-			type = getReferencedType(typeRef);
+			type = getReferencedType(typeRef, reference);
 		}
 		//element points to this or super
 		else if (reference instanceof SelfReference) {
@@ -845,42 +849,16 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if(target instanceof AdditionalField) {
 				target = (ReferenceableElement) target.eContainer();
 			}
-			
 			if (target instanceof TypedElement) {
 				TypeReference typeRef = ((TypedElement) target).getType();
-				type = getReferencedType(typeRef);
-	
-				if(reference.eContainer() instanceof IdentifierReference && type instanceof TypeParameter) {
-					ReferenceableElement prevRef = ((IdentifierReference) reference.eContainer()).getTarget();
-					if (prevRef instanceof TypedElement) {
-						TypeReference prevTypeReference = ((TypedElement) prevRef).getType();
-						if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
-							ClassifierReference classifierReference = convertToClassifierReference(prevTypeReference);
-							Type prevType = getReferencedType(classifierReference);
-							if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
-								ConcreteClassifier prevClassifier = (ConcreteClassifier) prevType;
-								int typeArgIndex = 0;
-								for(int i = 0; i<prevClassifier.getTypeParameters().size(); i++) {
-									if(prevClassifier.getTypeParameters().get(i).getName().equals(((TypeParameter)type).getName())) {
-										typeArgIndex = i;
-										break;
-									}
-								}
-								
-								TypeArgument arg = classifierReference.getTypeArguments().get(typeArgIndex);
-								if (arg instanceof QualifiedTypeArgument) {
-									type = getReferencedType(((QualifiedTypeArgument) arg).getType());
-								}
-								
-								
-							}
-						}
-					}
-				}
+				type = getReferencedType(typeRef, reference);
 			}
 			else if (target instanceof Type /*e.g. Annotation*/ ) {
 				return (Type) target;
 			}
+			else if(target instanceof EnumConstant) {
+				type = (Enumeration)target.eContainer();
+			}	
 		}
 		//Strings may also appear as reference
 		else if (reference instanceof StringReference) {
@@ -907,7 +885,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @return the type
 	 * @throws UnresolvedProxiesException
 	 */
-	protected Type getReferencedType(TypeReference typeReference) {
+	protected Type getReferencedType(TypeReference typeReference, Reference reference) {
 		/*
 		 * TODO this method needs to investigate the context of typeReferene to check
 		 * additional constrains. E.g., if the typeReference is used to define a 
@@ -943,6 +921,38 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				//	JavaClasspath.INSTANCE.getClassifier("java.lang.Object"), myResource);
 		}
 
+		type = findTypeForParameter(reference, type);
+		
+		return type;
+	}
+
+
+	protected Type findTypeForParameter(Reference reference, Type type) {
+		if(reference != null && reference.eContainer() instanceof IdentifierReference && type instanceof TypeParameter) {
+			ReferenceableElement prevRef = ((IdentifierReference) reference.eContainer()).getTarget();
+			if (prevRef instanceof TypedElement) {
+				TypeReference prevTypeReference = ((TypedElement) prevRef).getType();
+				if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
+					ClassifierReference classifierReference = convertToClassifierReference(prevTypeReference);
+					Type prevType = getReferencedType(classifierReference, (IdentifierReference) reference.eContainer());
+					if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
+						ConcreteClassifier prevClassifier = (ConcreteClassifier) prevType;
+						int typeArgIndex = 0;
+						for(int i = 0; i<prevClassifier.getTypeParameters().size(); i++) {
+							if(prevClassifier.getTypeParameters().get(i).getName().equals(((TypeParameter)type).getName())) {
+								typeArgIndex = i;
+								break;
+							}
+						}
+						
+						TypeArgument arg = classifierReference.getTypeArguments().get(typeArgIndex);
+						if (arg instanceof QualifiedTypeArgument) {
+							type = getReferencedType(((QualifiedTypeArgument) arg).getType(), null);
+						}
+					}
+				}
+			}
+		}
 		return type;
 	}
 	
@@ -1075,7 +1085,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						if (parameters.size() == argumentTypes.size()) {
 							result = true;
 							for (int i = 0; i < argumentTypes.size(); i++) {
-								InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
+								InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType(), (Reference) context);
 								InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
 								if (argumentType == null) {
 									result = false;
@@ -1102,7 +1112,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 								}
 							}
 							if (result) {
-								result = isBestFit(method, argumentTypes, parameters);
+								result = isBestFit(method, argumentTypes, parameters, (Reference) context);
 							}
 						}
 						else {
@@ -1118,12 +1128,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return result;
 	}
 
-	protected boolean isBestFit(Method m, EList<Type> argumentTypes, EList<Parameter> parameters) {
+	protected boolean isBestFit(Method m, EList<Type> argumentTypes, EList<Parameter> parameters, Reference context) {
 		//TODO in a revised implementation this code might go somewhere else to avoid duplicated checks
 		String name = m.getName();
 		boolean thisIsPerfect = true;
 		for (int i = 0; i < argumentTypes.size(); i++) {
-			InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
+			InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType(), context);
 			InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
 			if (argumentType == null) {
 				break;
@@ -1162,7 +1172,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					boolean strictMatch = true;
 					
 					for (int i = 0; i < argumentTypes.size(); i++) {
-						InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType());
+						InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType(), context);
 						InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
 						if (argumentType == null) {
 							break;
@@ -1215,7 +1225,19 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (lessGeneral instanceof Void) {
 			return true;
 		}
+		
+		if(lessGeneral instanceof TypeParameter || moreGeneral instanceof TypeParameter ) {
+			return true;
+		}
 
+		if(moreGeneral instanceof PrimitiveType) {
+			moreGeneral = wrapPrimitives((PrimitiveType) moreGeneral);
+		}
+		if(lessGeneral instanceof PrimitiveType) {
+			lessGeneral = wrapPrimitives((PrimitiveType) lessGeneral);
+		}
+		
+		/*
 		if (lessGeneral instanceof Boolean) {
 			if (moreGeneral instanceof Boolean ||
 					moreGeneral.equals(objectClass)) {
@@ -1255,6 +1277,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				return false;
 			}
 		}
+		*/
+
+			
 
 		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
 				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
@@ -1315,8 +1340,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 	
 	protected EList<Member> getAllMembers(PrimitiveType primitiveType) {
+		Classifier javaClassifier = wrapPrimitives(primitiveType);	
+		
+		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
+		
+		return getAllMembers(javaClassifier);
+	}
+
+
+	protected Classifier wrapPrimitives(PrimitiveType primitiveType) {
 		Classifier javaClassifier = null;
-		//automatic wrapping of primitive types
+		
 		if (primitiveType instanceof Boolean) {
 			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Boolean");
 		}
@@ -1343,11 +1377,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		if (primitiveType instanceof Void) {
 			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Void");
-		}	
-		
-		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
-		
-		return getAllMembers(javaClassifier);
+		}
+		return (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 	}
 	
 	protected EList<Member> getAllMemebers(AnonymousClass anonymousClass) {
@@ -1356,7 +1387,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return new BasicEList<Member>();
 		}
 		else {
-			return getAllMembers((Classifier)getReferencedType(ncCall.getType()));
+			return getAllMembers((Classifier)getReferencedType(ncCall.getType(), null));
 		}
 	}
 	
@@ -1381,7 +1412,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	
 	protected EList<ConcreteClassifier> getAllSuperTypes(AnonymousClass anonymousClass) {
 		NewConstructorCall ncCall = (NewConstructorCall) anonymousClass.eContainer();
-		Type superType = getReferencedType(ncCall.getType());
+		Type superType = getReferencedType(ncCall.getType(), null);
 		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
 		
 		if (superType instanceof ConcreteClassifier ) {
@@ -1431,7 +1462,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected Class getSuperType(Class subClass) {
 		Class superClass = null;
 		if (subClass.getExtends() != null) {
-			Type superType = getReferencedType(subClass.getExtends().getType());
+			Type superType = getReferencedType(subClass.getExtends().getType(), null);
 			if (superType instanceof Class) {
 				superClass = (Class) superType;
 			}
@@ -1487,7 +1518,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		EList<ConcreteClassifier> resultInterfaceList) {
 	
 		for (QualifiedTypeArgument typeArg : interfaceReferences) {
-			Type type = getReferencedType(typeArg.getType());
+			Type type = getReferencedType(typeArg.getType(), null);
 			if (type instanceof Interface) {
 				Interface superInterface = (Interface) type;
 				resultInterfaceList.add(superInterface);
