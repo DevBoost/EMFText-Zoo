@@ -67,6 +67,9 @@ public class ClassFileParser {
 		else if (clazz.isInterface()) {
 			emfClassifier = qualifiersFactory.createInterface();
 		}
+		else if (clazz.isAnnotation()) {
+			emfClassifier = qualifiersFactory.createAnnotation();
+		}
 		else {
 			assert(false);
 		}
@@ -134,6 +137,15 @@ public class ClassFileParser {
 			}
 
 		}
+		
+		if(clazz.getClassName().equals("java.lang.annotation.Annotation")) {
+			Method valueMethod = MembersFactory.eINSTANCE.createMethod();
+			valueMethod.setName("value");
+			valueMethod.setType(createReferenceToClassifier("java.lang.String"));
+			emfClassifier.getMembers().add(valueMethod);
+			
+		}
+		
 		return emfClassifier;
 	}
 	
