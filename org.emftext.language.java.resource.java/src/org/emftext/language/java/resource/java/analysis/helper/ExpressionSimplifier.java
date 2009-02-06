@@ -125,7 +125,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							IdentifierReference prevIdRef = null;
 							
 							//namespace needs to be converted into reference chain
-							for(String nsPart : nsClassifierReference.getNamespace()) {
+							for(String nsPart : nsClassifierReference.getNamespaces()) {
 								IdentifierReference idRef = ReferencesFactory.eINSTANCE.createIdentifierReference();
 								InternalEObject newProxy = (InternalEObject) EcoreUtil.copy(proxy);
 								

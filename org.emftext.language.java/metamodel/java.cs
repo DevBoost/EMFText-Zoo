@@ -65,16 +65,16 @@ containers.EmptyModel ::= ("import" imports #0 ";" !0 )* (";")*
    ;
 
 containers.Package
-   ::=  annotations* "package" (namespace[] #0 "." #0 )* name[] #0 ";" 
+   ::=  annotations* "package" (namespaces[] #0 "." #0 )* name[] #0 ";" 
         (";")? //TODO this is required to let T7312 of JacksTest pass... not sure if this is correct or if it should be * instead of ?
         !0 !0
         ("import" imports #0 ";" !0 )* (";")*
    ;
    
 containers.CompilationUnit 
-   ::=	("package" namespace[] (#0 "." #0 namespace[])* #0 ";" )?
+   ::=	("package" namespaces[] (#0 "." #0 namespaces[])* #0 ";" )?
         !0 !0
-        ("import" imports #0 ";" !0 )*
+        (imports !0 )*
         (";" !0)*
         !0
         (classifiers (";")* !0 !0)+
@@ -82,16 +82,16 @@ containers.CompilationUnit
 	;
 	
 imports.ClassifierImport
-	::= (namespace[] #0 "." #0 )+ #0 classifier[];
+	::= "import" (namespaces[] #0 "." #0 )+ #0 classifier[] #0 ";";
 	
 imports.PackageImport
-	::= (namespace[] #0 "." #0 )* #0 "*";
+	::= "import" (namespaces[] #0 "." #0 )+ #0 "*" #0 ";";
 
 imports.StaticMemberImport
-	::= static (namespace[] #0 "." #0 )+ #0 staticMember[];
+	::= "import" static (namespaces[] #0 "." #0 )+ #0 staticMember[] #0 ";";
 	
 imports.StaticClassifierImport
-	::= static (namespace[] #0 "." #0 )* staticMembers[] #0 "." #0 "*";
+	::= "import" static (namespaces[] #0 "." #0 )* staticMembers[] #0 "." #0 "*" #0 ";";
 
 classifiers.Class
 	::=	annotationsAndModifiers*
@@ -257,7 +257,7 @@ arrays.ArraySelector
 	;
 
 types.NamespaceClassifierReference
-	::= (namespace[]  #0 "." #0)* (classifierReferences #0 "." #0)* classifierReferences
+	::= (namespaces[]  #0 "." #0)* (classifierReferences #0 "." #0)* classifierReferences
 	;
 	
 types.ClassifierReference

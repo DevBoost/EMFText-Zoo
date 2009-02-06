@@ -55,7 +55,7 @@ public class ClassFileParser {
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 		cu.setName(classFileName);
 		List<String> namespace = Arrays.asList(myClass.getPackageName().split("\\."));
-		cu.getNamespace().addAll(namespace);
+		cu.getNamespaces().addAll(namespace);
 		cu.getClassifiers().add(classifier);
 		return cu;
 	}

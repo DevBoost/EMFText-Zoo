@@ -1008,7 +1008,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (context instanceof ClassifierReference) {
 			if (context.eContainer() instanceof NamespaceClassifierReference) {
 				NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) context.eContainer();
-				if (!nsClassifierReference.getNamespace().isEmpty()) {
+				if (!nsClassifierReference.getNamespaces().isEmpty()) {
 					//done later
 					return false;
 				}

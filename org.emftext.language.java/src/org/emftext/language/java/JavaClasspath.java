@@ -288,7 +288,7 @@ public class JavaClasspath {
 	
 	public String getContainerNameFromNamespace(NamespaceAwareElement theImport, String prefix) {
 		String containerName = prefix;
-		for(Iterator<String> it = theImport.getNamespace().iterator(); it.hasNext(); ) {
+		for(Iterator<String> it = theImport.getNamespaces().iterator(); it.hasNext(); ) {
 			String namespaceFragment = it.next();
 			//does it point at a classifier or a package as container?
 			String assumedPackageName    = containerName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;

@@ -146,7 +146,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		String[] packageNaemParts = packageName.split("\\.");
 		for(int i = 0; i < packageNaemParts.length; i++) {
 			if(i < packageNaemParts.length - 1) {
-				thePackage.getNamespace().add(packageNaemParts[i]);
+				thePackage.getNamespaces().add(packageNaemParts[i]);
 			}
 			else {
 				thePackage.setName(packageNaemParts[i]);
@@ -234,8 +234,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				IFolder folder = (IFolder) resource;
 				
 				Package pkg = ContainersFactory.eINSTANCE.createPackage();
-				pkg.getNamespace().addAll(thisPackage.getNamespace());
-				pkg.getNamespace().add(thisPackage.getName());
+				pkg.getNamespaces().addAll(thisPackage.getNamespaces());
+				pkg.getNamespaces().add(thisPackage.getName());
 				pkg.setName(folder.getName());
 				thisPackage.getSubpackages().add(pkg);
 				collectSubunits(folder, pkg);
@@ -246,8 +246,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	
 	private String packageName(Package aPackage) {
 		String name = "";
-		for(int i=0; i < aPackage.getNamespace().size(); i++) {
-			name += aPackage.getNamespace().get(i) + ".";
+		for(int i=0; i < aPackage.getNamespaces().size(); i++) {
+			name += aPackage.getNamespaces().get(i) + ".";
 		}
 		name += aPackage.getName();
 		return name;
@@ -270,8 +270,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 						continue;
 					}
 					
-					String[] folder = cu.getNamespace().toArray(
-							new String[cu.getNamespace().size()]);
+					String[] folder = cu.getNamespaces().toArray(
+							new String[cu.getNamespaces().size()]);
 					String   file   = cu.getClassifiers().get(0).getName();
 					
 					URI subResourcURI = getURI().trimFileExtension().trimFileExtension();

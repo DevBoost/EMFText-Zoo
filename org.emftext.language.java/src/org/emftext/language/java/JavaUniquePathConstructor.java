@@ -73,7 +73,7 @@ public class JavaUniquePathConstructor {
 	}
 
 	public static String packageName(CompilationUnit cu) {
-		EList<String> packageNameSegements = cu.getNamespace();
+		EList<String> packageNameSegements = cu.getNamespaces();
 		String packageName = packageName(packageNameSegements);
 		
 		if (packageName == null) {

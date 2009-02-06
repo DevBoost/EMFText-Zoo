@@ -161,7 +161,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 						//given by a previous class
 						directContainer = (ConcreteClassifier) nsClassifierReference.getClassifierReferences().get(myPos - 1).getTarget();
 					}
-					else if (!nsClassifierReference.getNamespace().isEmpty()) {
+					else if (!nsClassifierReference.getNamespaces().isEmpty()) {
 						//scope defined by container namespace: 
 						//this has to be a class because packages are always absolute (global), and would have been found before 
 						CompilationUnit cu = findContainingCompilationUnit(container);
@@ -170,7 +170,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 						collectClassifiersInScope(
 								findContainingClassifier(container), cu, rootContainerCandidates);
 						
-						for(String nextInNS : nsClassifierReference.getNamespace()) {
+						for(String nextInNS : nsClassifierReference.getNamespaces()) {
 							ConcreteClassifier nextContainer = null;
 							for(ConcreteClassifier cand: rootContainerCandidates) {
 								if (nextInNS.equals(cand.getName())) {
