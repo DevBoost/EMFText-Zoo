@@ -175,8 +175,10 @@ public class ClassFileParser {
 			}
 		}
 		
+		emfMethod.getTypeParameters().addAll(constructTypeParameters(plainSignature));
+		
 		TypeReference typeRef = createReferenceToType(signature);
-		TypeReference typeParamRef = constructReturnTypeParameterReference(plainSignature, emfClassifier);
+		TypeReference typeParamRef = constructReturnTypeParameterReference(plainSignature, emfMethod, emfClassifier);
 		if(typeParamRef != null) {
 			((TypeParameter)((ClassifierReference)typeParamRef).getTarget()).getExtendTypes().add(typeRef);
 			typeRef = typeParamRef;
@@ -202,7 +204,7 @@ public class ClassFileParser {
 			}
 		}
 		
-		EList<TypeParameter> tpList = constructMethodTypeParameterReferences(plainSignature, emfClassifier);
+		EList<TypeParameter> tpList = constructMethodTypeParameterReferences(plainSignature, emfMethod, emfClassifier);
 		for(int i = 0; i<tpList.size(); i++) {
 			TypeParameter typeParameter = tpList.get(i);
 			if(typeParameter != null) {
@@ -257,7 +259,7 @@ public class ClassFileParser {
 		return emfField;
 	}
 	
-	protected ClassifierReference constructReturnTypeParameterReference(String signature, ConcreteClassifier emfClassifier) {
+	protected ClassifierReference constructReturnTypeParameterReference(String signature, Method method, ConcreteClassifier emfClassifier) {
 		int idx = signature.indexOf(")T");
 		if(idx == -1) {
 			return null;
@@ -268,9 +270,16 @@ public class ClassFileParser {
 		String name = signature.substring(0,idx);
 		
 		TypeParameter typeParameter =  null;
-		for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+		for(TypeParameter cand : method.getTypeParameters()) {
 			if(cand.getName().equals(name)) {
 				typeParameter = cand;
+			}
+		}
+		if (typeParameter == null) {
+			for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+				if(cand.getName().equals(name)) {
+					typeParameter = cand;
+				}
 			}
 		}
 		
@@ -287,9 +296,21 @@ public class ClassFileParser {
 		return classifierReference;
 	}
 	
-	protected EList<TypeParameter> constructMethodTypeParameterReferences(String signature, ConcreteClassifier emfClassifier) {
+	protected EList<TypeParameter> constructMethodTypeParameterReferences(String signature, Method method, ConcreteClassifier emfClassifier) {
 		EList<TypeParameter> result = new BasicEList<TypeParameter>();
-
+		
+		int idx1 = signature.indexOf("((");
+		if (idx1 == -1) {
+			idx1 = signature.indexOf(">(");	
+		}
+		int idx2 = signature.indexOf(")");
+		
+		if(idx1 == -1 || idx2 == -1) {
+			return result;
+		}
+		
+		signature = signature.substring(idx1 + 2, idx2);
+		
 		//cut away all the inner type arguments
 		while(signature.contains("<")) {
 			int idx = signature.indexOf("<");
@@ -308,24 +329,27 @@ public class ClassFileParser {
 			signature = start + end;
 		}
 		
-		int idx1 = signature.indexOf("((");
-		int idx2 = signature.indexOf(")");
-		
-		if(idx1 == -1 || idx2 == -1) {
-			return result;
-		}
-		
-		signature = signature.substring(idx1, idx2);
-		
 		while(signature.contains(";")) {
 			int idx = signature.indexOf(";");
 			if (signature.startsWith("T")) {
 				String name = signature.substring(1,idx);
 				TypeParameter typeParameter = null;
-				for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+				for(TypeParameter cand : method.getTypeParameters()) {
 					if(cand.getName().equals(name)) {
 						typeParameter = cand;
 					}
+				}
+				if (typeParameter == null) {
+					for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+						if(cand.getName().equals(name)) {
+							typeParameter = cand;
+						}
+					}
+				}
+				if(typeParameter == null) {
+					//FIXME this happens, because type parameter can also be declared on methods.
+					//These also need to be contructed and can then be referred here!
+					return null;
 				}
 				result.add(typeParameter);
 			}
@@ -341,16 +365,35 @@ public class ClassFileParser {
 	
 	protected EList<TypeParameter> constructTypeParameters(String signature) {
 		EList<TypeParameter> result = new BasicEList<TypeParameter>();
+		if(signature.contains("((") || !signature.contains("<")) {
+			//method without parameter
+			return result;
+		}
 		signature = signature.substring(signature.indexOf("<") + 1);
+		int endIdx = signature.indexOf(">(");
+		if (endIdx > 0) {
+			signature = signature.substring(0,endIdx);
+		}
 		
 		while(signature.contains(":")) {
 			int idx = signature.indexOf(":");
 			String name = signature.substring(0,idx);
-			TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
-			typeParameter.setName(name);
-			result.add(typeParameter);
+			if (!name.equals("")) {
+				TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
+				typeParameter.setName(name);
+				result.add(typeParameter);				
+			}
+			signature = signature.substring(idx + 1);
 			
-			signature = signature.substring(signature.indexOf(";") + 1);
+			int sepIdx = signature.indexOf(";");
+			int colonIdx = signature.indexOf(":");
+			while(sepIdx < colonIdx && sepIdx > 0) {
+				signature = signature.substring(sepIdx + 1);
+				sepIdx = signature.indexOf(";");
+				colonIdx = signature.indexOf(":");
+			}
+			
+			
 		}
 		
 		return result;

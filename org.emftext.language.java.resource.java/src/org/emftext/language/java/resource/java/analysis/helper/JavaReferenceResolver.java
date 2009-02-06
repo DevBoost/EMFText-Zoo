@@ -377,8 +377,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				if (lookIntoSuper)
 					contentsList.addAll(getAllMemebers((AnonymousClass) container));
 			}
-			else {
-				//PARAMETER TYPE
+			if (container instanceof TypeParameter) {
+				if (lookIntoSuper) {
+					contentsList.addAll(getAllMembers((Classifier) container));
+				}
 			}
 			//TODO 
 			//Arrays have the additional member field "length"
@@ -511,11 +513,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			targetObject = findScoped(identifier, container, container, reference.getEReferenceType());
 		}
 		else {
-			//we have another scope to search in
-			if(previousType instanceof TypeParameter) {
-				previousType = getReferencedType(((TypeParameter)previousType).getExtendTypes().get(0), null);
-			}
-			
 			if (anonymousClass != null) {
 				targetObject = find(identifier, container, null, anonymousClass, reference.getEReferenceType());
 			}
@@ -939,6 +936,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						ConcreteClassifier prevClassifier = (ConcreteClassifier) prevType;
 						int typeArgIndex = 0;
 						for(int i = 0; i<prevClassifier.getTypeParameters().size(); i++) {
+							//I think it has to be like this, because there is interference between type parameter declared at methods,
+							//and the onex declared at classes....
 							if(prevClassifier.getTypeParameters().get(i).getName().equals(((TypeParameter)type).getName())) {
 								typeArgIndex = i;
 								break;
@@ -1444,7 +1443,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			superClassifierList.add(enumClass);
 			collectAllSuperClassifiers(enumClass, superClassifierList);
 			
-		} else {
+		} else if (javaClassifier instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) javaClassifier;
+			collectAllSuperClassifiers(typeParameter, superClassifierList);
+		}
+		else {
 			//there are no other kinds of classifiers 
 			assert(false);
 		}
@@ -1506,6 +1509,28 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 	}
 
+	private void collectAllSuperClassifiers( TypeParameter typeParameter, 
+			EList<ConcreteClassifier> resultClassifierList)
+			{
+		
+		for(TypeReference typeRef : typeParameter.getExtendTypes()) {
+			Type type = (Classifier) getReferencedType(typeRef, null);
+			if (type instanceof Interface) {
+				Interface superInterface = (Interface) type;
+				resultClassifierList.add(superInterface);
+				collectAllSuperInterfaces(superInterface.getExtends(), resultClassifierList);
+			}
+			if (type instanceof Class) {
+				Class superClass = (Class) type;
+				resultClassifierList.add(superClass);
+				collectAllSuperClassifiers(superClass, resultClassifierList);
+			}
+			if (type instanceof TypeParameter) {
+				TypeParameter superTypeParameter = (TypeParameter) type;
+				collectAllSuperClassifiers(superTypeParameter, resultClassifierList);
+			}
+		}
+	}
 	/**
 	 * Recursively collects all interfaces and their superinterfaces
 	 * referenced by the given list of references to interfaces.
