@@ -45,6 +45,7 @@ import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
+import org.emftext.language.java.generics.TypeParametrizable;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.PackageImport;
@@ -925,33 +926,51 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 
 
 	protected Type findTypeForParameter(Reference reference, Type type) {
-		if(reference != null && reference.eContainer() instanceof IdentifierReference && type instanceof TypeParameter) {
-			ReferenceableElement prevRef = ((IdentifierReference) reference.eContainer()).getTarget();
-			if (prevRef instanceof TypedElement) {
-				TypeReference prevTypeReference = ((TypedElement) prevRef).getType();
-				if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
-					ClassifierReference classifierReference = convertToClassifierReference(prevTypeReference);
-					Type prevType = getReferencedType(classifierReference, (IdentifierReference) reference.eContainer());
-					if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
-						ConcreteClassifier prevClassifier = (ConcreteClassifier) prevType;
-						int typeArgIndex = 0;
-						for(int i = 0; i<prevClassifier.getTypeParameters().size(); i++) {
-							//I think it has to be like this, because there is interference between type parameter declared at methods,
-							//and the onex declared at classes....
-							if(prevClassifier.getTypeParameters().get(i).getName().equals(((TypeParameter)type).getName())) {
-								typeArgIndex = i;
-								break;
+		if(!(type instanceof TypeParameter)) {
+			return type;
+		}
+		
+		TypeParameter typeParameter = (TypeParameter) type;
+		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) typeParameter.eContainer();
+		int typeParameterIndex = -1;
+		if (typeParameterDeclarator instanceof ConcreteClassifier) {
+			typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(typeParameter);
+			if(reference != null && reference.eContainer() instanceof IdentifierReference) {
+				ReferenceableElement prevRef = ((IdentifierReference) reference.eContainer()).getTarget();
+				if (prevRef instanceof TypedElement) {
+					TypeReference prevTypeReference = ((TypedElement) prevRef).getType();
+					if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
+						ClassifierReference classifierReference = convertToClassifierReference(prevTypeReference);
+						Type prevType = getReferencedType(classifierReference, (IdentifierReference) reference.eContainer());
+						if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
+							TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
+							if (arg instanceof QualifiedTypeArgument) {
+								type = getReferencedType(((QualifiedTypeArgument) arg).getType(), null);
 							}
-						}
-						
-						TypeArgument arg = classifierReference.getTypeArguments().get(typeArgIndex);
-						if (arg instanceof QualifiedTypeArgument) {
-							type = getReferencedType(((QualifiedTypeArgument) arg).getType(), null);
 						}
 					}
 				}
 			}
 		}
+		
+		if (typeParameterDeclarator instanceof Method) {
+			Method method = (Method) typeParameterDeclarator;
+			for(int i = 0; i < method.getParameters().size(); i++) {
+				Type parameterType = convertToClassifierReference(method.getParameters().get(i).getType()).getTarget();
+				if(typeParameter.equals(parameterType)) {
+					typeParameterIndex = i;
+					break;
+				}
+			}
+			if (reference instanceof IdentifierReference) {
+				ArgumentList argumentList = ((IdentifierReference)reference).getArgumentList();
+				if (typeParameterIndex != -1 && typeParameterIndex < argumentList.getArguments().size()) {
+					Expression arg = argumentList.getArguments().get(typeParameterIndex);
+					type = getTypeOfExpression(arg);
+				}
+			}
+		}
+		
 		return type;
 	}
 	
@@ -1229,14 +1248,19 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return true;
 		}
 
-		if(moreGeneral instanceof PrimitiveType) {
-			moreGeneral = wrapPrimitives((PrimitiveType) moreGeneral);
+		if (moreGeneral instanceof ConcreteClassifier) {
+			PrimitiveType primitiveType = unWrapPrimitives((ConcreteClassifier) moreGeneral);
+			if(primitiveType != null) {
+				moreGeneral = primitiveType;
+			}
 		}
-		if(lessGeneral instanceof PrimitiveType) {
-			lessGeneral = wrapPrimitives((PrimitiveType) lessGeneral);
+		if (lessGeneral instanceof ConcreteClassifier) {
+			PrimitiveType primitiveType = unWrapPrimitives((ConcreteClassifier) lessGeneral);
+			if(primitiveType != null) {
+				lessGeneral = primitiveType;
+			}
 		}
-		
-		/*
+
 		if (lessGeneral instanceof Boolean) {
 			if (moreGeneral instanceof Boolean ||
 					moreGeneral.equals(objectClass)) {
@@ -1276,9 +1300,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				return false;
 			}
 		}
-		*/
-
-			
 
 		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
 				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
@@ -1346,7 +1367,38 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return getAllMembers(javaClassifier);
 	}
 
-
+	protected EObject resolve(EObject element) {
+		return EcoreUtil.resolve(element, myResource);
+	}
+	
+	protected PrimitiveType unWrapPrimitives(ConcreteClassifier primitiveTypeAsClass) {	
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Boolean")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createBoolean();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Byte")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createByte();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Character")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createChar();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Float")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createFloat();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Integer")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createInt();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Long")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createLong();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Short")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createShort();
+		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Void")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createVoid();
+		}
+		return null;
+	}
+	
 	protected Classifier wrapPrimitives(PrimitiveType primitiveType) {
 		Classifier javaClassifier = null;
 		

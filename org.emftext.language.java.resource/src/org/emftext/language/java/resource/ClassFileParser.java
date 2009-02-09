@@ -174,7 +174,6 @@ public class ClassFileParser {
 				plainSignature = s;
 			}
 		}
-		
 		emfMethod.getTypeParameters().addAll(constructTypeParameters(plainSignature));
 		
 		TypeReference typeRef = createReferenceToType(signature);
@@ -204,15 +203,15 @@ public class ClassFileParser {
 			}
 		}
 		
-		EList<TypeParameter> tpList = constructMethodTypeParameterReferences(plainSignature, emfMethod, emfClassifier);
+		EList<TypeReference> tpList = constructMethodTypeParameterReferences(plainSignature, emfMethod, emfClassifier);
 		for(int i = 0; i<tpList.size(); i++) {
-			TypeParameter typeParameter = tpList.get(i);
-			if(typeParameter != null) {
+			TypeReference typeParameterReference = tpList.get(i);
+			if(typeParameterReference != null) {
 				TypeReference typeReference = emfMethod.getParameters().get(i).getType();
 				if(typeReference instanceof ClassifierReference) {
 					//replace with parameter there is one
-					typeParameter.getExtendTypes().add(typeReference);
-					((ClassifierReference) typeReference).setTarget(typeParameter);
+					((TypeParameter)((ClassifierReference)typeParameterReference).getTarget()).getExtendTypes().add(typeReference);
+					emfMethod.getParameters().get(i).setType(typeParameterReference);
 				}
 			}
 		}
@@ -296,8 +295,8 @@ public class ClassFileParser {
 		return classifierReference;
 	}
 	
-	protected EList<TypeParameter> constructMethodTypeParameterReferences(String signature, Method method, ConcreteClassifier emfClassifier) {
-		EList<TypeParameter> result = new BasicEList<TypeParameter>();
+	protected EList<TypeReference> constructMethodTypeParameterReferences(String signature, Method method, ConcreteClassifier emfClassifier) {
+		EList<TypeReference> result = new BasicEList<TypeReference>();
 		
 		int idx1 = signature.indexOf("((");
 		if (idx1 == -1) {
@@ -351,7 +350,12 @@ public class ClassFileParser {
 					//These also need to be contructed and can then be referred here!
 					return null;
 				}
-				result.add(typeParameter);
+				
+				ClassifierReference classifierReference = 
+					TypesFactory.eINSTANCE.createClassifierReference();
+				classifierReference.setTarget(typeParameter);
+				
+				result.add(classifierReference);
 			}
 			else {
 				result.add(null);

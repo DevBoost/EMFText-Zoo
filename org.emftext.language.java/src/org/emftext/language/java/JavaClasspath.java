@@ -182,6 +182,10 @@ public class JavaClasspath {
 	
 	
 	public EList<ConcreteClassifier> getInternalClassifiers(Classifier container) {
+		if(container == null) {
+			return new BasicEList<ConcreteClassifier>();
+		}
+		
 		String uri = null;
 		if(container.eIsProxy()) {
 			uri = ((InternalEObject)container).eProxyURI().trimFragment().toString();
