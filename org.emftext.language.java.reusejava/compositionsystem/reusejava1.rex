@@ -1,14 +1,6 @@
 reuseextension ReuseJava
-for    <http://www.emftext.org/java/containers>
+for    <http://www.emftext.org/reusejava>
 {
-	binding StatementVP {
-		binding VP {
-  			reusejava::StatementVP is hook {
-    			port expr = $name$ 
-    		}
-    	}
-	}
-	
 	binding ReuseableStatement {
 		binding Statements {
   			reusejava::StatementUnit.statements is prototype {
