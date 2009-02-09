@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationInstance;
+import org.emftext.language.java.annotations.AnnotationMethod;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -70,6 +71,7 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
+import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.ArgumentList;
 import org.emftext.language.java.references.IdentifierReference;
@@ -114,7 +116,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	public static final String UNRESOLVED_REFERENCE_STRING =
 		"UNKNOWN";
 	
-	protected ITextResource myResource = null;
+	protected ITextResource myResource = null; java.lang.Enum e;
 	
 	@Override
 	protected String doDeResolve(EObject element, T container,
@@ -316,9 +318,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					contentsList.add(classifierImport);
 				}
 				else if (explicitImport instanceof StaticMemberImport) {
-					Member staticMember = 
-						((StaticMemberImport)explicitImport).getStaticMember();
-					contentsList.add(staticMember);
+					contentsList.addAll(((StaticMemberImport)explicitImport).getStaticMembers());
 				}
 				else if (explicitImport instanceof StaticClassifierImport) {
 					EList<Member> staticMembers = 
@@ -490,12 +490,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		//inside annotation instance 
 		else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
 			TypeReference typeReference = annotationInstance.getAnnotation();
-			if (containerContainer instanceof ClassifierReference || containerContainer instanceof NamespaceClassifierReference) {
-				ClassifierReference classifierReference = convertToClassifierReference(typeReference);
-				if (classifierReference != null) {
-					previousType = classifierReference.getTarget();
-				}
-			} 
+			previousType = getReferencedType(typeReference, null); 
 		}
 		
 		if (previousType == null && containerContainer instanceof NormalSwitchCase) {
@@ -956,17 +951,19 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (typeParameterDeclarator instanceof Method) {
 			Method method = (Method) typeParameterDeclarator;
 			for(int i = 0; i < method.getParameters().size(); i++) {
-				Type parameterType = convertToClassifierReference(method.getParameters().get(i).getType()).getTarget();
-				if(typeParameter.equals(parameterType)) {
+				ClassifierReference classifierReference = convertToClassifierReference(method.getParameters().get(i).getType());
+				if(classifierReference != null && typeParameter.equals(classifierReference.getTarget())) {
 					typeParameterIndex = i;
 					break;
 				}
 			}
 			if (reference instanceof IdentifierReference) {
 				ArgumentList argumentList = ((IdentifierReference)reference).getArgumentList();
-				if (typeParameterIndex != -1 && typeParameterIndex < argumentList.getArguments().size()) {
-					Expression arg = argumentList.getArguments().get(typeParameterIndex);
-					type = getTypeOfExpression(arg);
+				if (argumentList != null /*if method call*/)  {
+					if (typeParameterIndex != -1 && typeParameterIndex < argumentList.getArguments().size()) {
+						Expression arg = argumentList.getArguments().get(typeParameterIndex);
+						type = getTypeOfExpression(arg);
+					}
 				}
 			}
 		}
@@ -1072,6 +1069,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					result = true;
 				}
 				else if (referencableElement instanceof EnumConstant) {
+					//nothing else to do
+					result = true;
+				}
+				else if (referencableElement instanceof AnnotationMethod) {
 					//nothing else to do
 					result = true;
 				}
@@ -1248,6 +1249,37 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return true;
 		}
 
+		//first complex type compare
+		if (lessGeneral instanceof PrimitiveType) {
+			lessGeneral = wrapPrimitives((PrimitiveType) lessGeneral);
+		}
+		if (moreGeneral instanceof PrimitiveType) {
+			moreGeneral = wrapPrimitives((PrimitiveType) moreGeneral);
+		}
+		
+		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
+				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
+			
+			return true;
+		}
+		
+		if (moreGeneral instanceof Classifier && lessGeneral instanceof AnonymousClass &&
+				getAllSuperTypes((AnonymousClass)lessGeneral).contains(moreGeneral)) {
+			
+			return true;
+		}
+		
+		if (moreGeneral instanceof Classifier) {
+			//everything can be implicitly casted to string
+			if(moreGeneral.equals(EcoreUtil.resolve(
+						JavaClasspath.INSTANCE.getClassifier("java.lang.CharSequence"), myResource))||
+				getAllSuperTypes((Classifier)moreGeneral).contains(EcoreUtil.resolve(
+						JavaClasspath.INSTANCE.getClassifier("java.lang.CharSequence"), myResource))) {
+				return true;
+			}
+		}
+		
+		//specifics for primitive types
 		if (moreGeneral instanceof ConcreteClassifier) {
 			PrimitiveType primitiveType = unWrapPrimitives((ConcreteClassifier) moreGeneral);
 			if(primitiveType != null) {
@@ -1299,28 +1331,6 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			else {
 				return false;
 			}
-		}
-
-		if (moreGeneral instanceof Classifier && lessGeneral instanceof Classifier &&
-				(moreGeneral.equals(lessGeneral) || getAllSuperTypes((Classifier)lessGeneral).contains(moreGeneral))) {
-			
-			return true;
-		}
-		
-		if (moreGeneral instanceof Classifier && lessGeneral instanceof AnonymousClass &&
-				getAllSuperTypes((AnonymousClass)lessGeneral).contains(moreGeneral)) {
-			
-			return true;
-		}
-		
-		
-		
-		if (moreGeneral instanceof Classifier) {
-			//everything can be implicitly casted to string
-			return moreGeneral.equals(EcoreUtil.resolve(
-						JavaClasspath.INSTANCE.getClassifier("java.lang.CharSequence"), myResource))||
-				getAllSuperTypes((Classifier)moreGeneral).contains(EcoreUtil.resolve(
-						JavaClasspath.INSTANCE.getClassifier("java.lang.CharSequence"), myResource));
 		}
 
 		return false;
@@ -1458,6 +1468,32 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				assert(false);
 			}
 		}
+		
+		if(javaClassifier instanceof Enumeration)  {
+			//add the default Enum methods. Might also go into a post processor...
+			Method valuesMethod = MembersFactory.eINSTANCE.createMethod();
+			valuesMethod.setName("values");
+			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
+			type.setTarget(javaClassifier);
+			valuesMethod.setType(type);
+			
+			Method valueOfMethod = MembersFactory.eINSTANCE.createMethod();
+			valueOfMethod.setName("valueOf");
+			type = TypesFactory.eINSTANCE.createClassifierReference();
+			type.setTarget(javaClassifier);
+			valueOfMethod.setType(type);
+			
+			Parameter strParameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
+			strParameter.setName("str");
+			type = TypesFactory.eINSTANCE.createClassifierReference();
+			type.setTarget(JavaClasspath.INSTANCE.getClassifier("java.lang.String"));
+			strParameter.setType(type);
+			
+			valueOfMethod.getParameters().add(strParameter);
+			
+			memberList.add(valuesMethod);
+			memberList.add(valueOfMethod);
+		}
 		return memberList;
 	}
 	
@@ -1478,6 +1514,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	
 	protected EList<ConcreteClassifier> getAllSuperTypes(Classifier javaClassifier) {
 		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
+		if(javaClassifier == null) {
+			return superClassifierList;
+		}
 		javaClassifier = (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
 		if (javaClassifier instanceof Class) {
 			Class javaClass = (Class) javaClassifier;
@@ -1486,8 +1525,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			Interface javaInterface = (Interface) javaClassifier;
 			collectAllSuperInterfaces(javaInterface.getExtends(), superClassifierList);
 		} else if (javaClassifier instanceof Annotation) {
-			//nothing
-			//Annotations do not have super classes
+			superClassifierList.add(getObjectModelElement());
 		} else if (javaClassifier instanceof Enumeration) {
 			//enumerations inherit from java.lang.Enum
 			Class enumClass = (Class) EcoreUtil.resolve(

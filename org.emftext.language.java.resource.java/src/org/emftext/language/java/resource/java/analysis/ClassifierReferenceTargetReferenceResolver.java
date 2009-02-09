@@ -97,7 +97,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 							}
 							else if (imp instanceof StaticMemberImport) {
 								StaticMemberImport staticImport = (StaticMemberImport) imp;
-								if (element.equals(staticImport.getStaticMember())) {
+								if (staticImport.getStaticMembers().contains(element)) {
 									//the element is imported -> simple name
 									fullID = ((NamedElement) element).getName();
 								}
@@ -295,10 +295,12 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 				rootContainerCandidates.add(classifierImport);
 			}
 			else if (explicitImport instanceof StaticMemberImport) {
-				Member staticMember = 
-					((StaticMemberImport)explicitImport).getStaticMember();
-				if (staticMember instanceof ConcreteClassifier) {
-					rootContainerCandidates.add((ConcreteClassifier) staticMember);
+				EList<Member> staticMembers = 
+					((StaticMemberImport)explicitImport).getStaticMembers();
+				for(Member staticMember : staticMembers) {
+					if (staticMember instanceof ConcreteClassifier) {
+						rootContainerCandidates.add((ConcreteClassifier) staticMember);
+					}
 				}
 			}
 			else if (explicitImport instanceof StaticClassifierImport) {
