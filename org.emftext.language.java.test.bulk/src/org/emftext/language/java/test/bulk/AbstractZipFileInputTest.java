@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -22,10 +24,10 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 	protected final static String BULK_INPUT_DIR = "input/";
 
 	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint) throws IOException, CoreException {
-		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null);
+		return getTestsForZipFileEntries(zipFilePath, excludeFromReprint, null, Collections.<String>emptyList());
 	}
 	
-	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry) throws IOException, CoreException {
+	protected static Collection<TestCase> getTestsForZipFileEntries(String zipFilePath, boolean excludeFromReprint, String startEntry, List<String> ignoreList) throws IOException, CoreException {
 		Collection<TestCase> tests = new ArrayList<TestCase>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -42,7 +44,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 				startEntry = null;
 			}
 			if (entryName.endsWith(".java")) {
-				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint);
+				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, ignoreList);
 				// TODO put this somewhere else
 				if (zipFilePath.endsWith("jdt_test_files-src.zip")) {
 					int pos = entryName.indexOf("/");
@@ -63,7 +65,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
 		}
 		return tests;
 	}
-	
+
 	protected static Collection<URI> getURIsForZipFileEntries(String zipFilePath) throws IOException, CoreException {
 		Collection<URI> streams = new ArrayList<URI>();
 		final ZipFile zipFile = new ZipFile(zipFilePath);

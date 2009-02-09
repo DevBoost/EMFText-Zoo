@@ -3,6 +3,7 @@ package org.emftext.language.java.test.bulk;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -17,7 +18,12 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 	private final ZipFile zipFile;
 	private final List<ZipEntry> entries = new ArrayList<ZipEntry>();
 	private final boolean excludeFromReprint;
+	
+	private final List<String> ignoreList;
 
+	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
+		this(zipFile, entry, excludeFromReprint, Collections.<String>emptyList());
+	}
 	/**
 	 * Creates a new test for the given entry in a ZIP file. If a resource set is given
 	 * it will be used. Otherwise a new one will be created.
@@ -27,10 +33,11 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 	 * @param excludeFromReprint
 	 * @param resourceSet
 	 */
-	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
+	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint, List<String> ignoreList) {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
 		this.excludeFromReprint = excludeFromReprint;
+		this.ignoreList = ignoreList;
 		//addZipEntry(entry);
 		entries.add(entry);
 	}
@@ -90,11 +97,17 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
+		if(ignoreList.contains(filename)) {
+			return true;
+		}
 		return excludeFromReprint;
 	}
 	
 	@Override
 	protected boolean ignoreSemanticErrors(String filename) {
+		if(ignoreList.contains(filename)) {
+			return true;
+		}
 		return excludeFromReprint;
 	}
 
