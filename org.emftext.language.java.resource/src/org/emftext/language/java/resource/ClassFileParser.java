@@ -10,7 +10,9 @@ import org.apache.bcel.classfile.Utility;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.annotations.AnnotationsFactory;
 import org.emftext.language.java.arrays.ArraysFactory;
+import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
@@ -43,6 +45,7 @@ public class ClassFileParser {
 	protected MembersFactory     membersFactory    = MembersFactory.eINSTANCE;
 	protected TypesFactory       typesFactory      = TypesFactory.eINSTANCE;
 	protected ParametersFactory  parametersFactory = ParametersFactory.eINSTANCE;
+	protected AnnotationsFactory annotationsFactory = AnnotationsFactory.eINSTANCE;
 	
 	public CompilationUnit parse(InputStream inputStream, String classFileName)
 			throws IOException {
@@ -65,14 +68,14 @@ public class ClassFileParser {
 		if (clazz.isEnum()) { //check first, because enum is also class
 			emfClassifier = qualifiersFactory.createEnumeration();
 		}
+		else if (clazz.isAnnotation()) {
+			emfClassifier = qualifiersFactory.createAnnotation();
+		}
 		else if (clazz.isClass()) {
 			emfClassifier = qualifiersFactory.createClass();
 		}
 		else if (clazz.isInterface()) {
 			emfClassifier = qualifiersFactory.createInterface();
-		}
-		else if (clazz.isAnnotation()) {
-			emfClassifier = qualifiersFactory.createAnnotation();
 		}
 		else {
 			assert(false);
@@ -94,6 +97,14 @@ public class ClassFileParser {
 			typeArg.setType(createReferenceToClassifier(ifName));
 			if (clazz.isEnum()) { //check first, because enum is also class
 				((Enumeration)emfClassifier).getImplements().add(typeArg); 
+			}
+			else if (clazz.isAnnotation()) {
+				//this triggers when ifName = java.lang.annotations.Annotation
+				Method valueMethod = MembersFactory.eINSTANCE.createMethod();
+				valueMethod.setName("value");
+				valueMethod.setType(createReferenceToClassifier("java.lang.String"));
+				emfClassifier.getMembers().add(valueMethod);
+				((Annotation)emfClassifier).getMembers().add(valueMethod);
 			}
 			else if (clazz.isClass()) {
 				((Class)emfClassifier).getImplements().add(typeArg);
@@ -149,20 +160,18 @@ public class ClassFileParser {
 			}
 
 		}
-
-		if(clazz.getClassName().equals("java.lang.annotation.Annotation")) {
-			Method valueMethod = MembersFactory.eINSTANCE.createMethod();
-			valueMethod.setName("value");
-			valueMethod.setType(createReferenceToClassifier("java.lang.String"));
-			emfClassifier.getMembers().add(valueMethod);
-			
-		}
 		
 		return emfClassifier;
 	}
 	
 	protected Method constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
-		Method emfMethod = membersFactory.createMethod();
+		Method emfMethod = null;
+		if(emfClassifier instanceof Annotation) {
+			emfMethod = annotationsFactory .createAnnotationMethod();
+		}
+		else {
+			emfMethod = membersFactory.createMethod();
+		}
 		emfMethod.setName(method.getName());
 		
 		String signature = method.getReturnType().getSignature();
@@ -171,6 +180,7 @@ public class ClassFileParser {
 		for(Attribute a : method.getAttributes()){
 			String s = a.toString();
 			if(s.startsWith("Signature(")) {
+				s = s.replaceAll("\\[", "");
 				plainSignature = s;
 			}
 		}
@@ -183,6 +193,7 @@ public class ClassFileParser {
 			typeRef = typeParamRef;
 		}
 
+		//FIXME Type Arguments!
 		emfMethod.setType(typeRef);
 		
 		int arrayDimension = getArrayDimension(signature);
@@ -223,6 +234,7 @@ public class ClassFileParser {
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
+		//FIXME Type Arguments!
 		emfParameter.setType(emfTypeReference);
 		
         int arrayDimension = getArrayDimension(signature);
@@ -283,8 +295,6 @@ public class ClassFileParser {
 		}
 		
 		if(typeParameter == null) {
-			//FIXME this happens, because type parameter can also be declared on methods.
-			//These also need to be contructed and can then be referred here!
 			return null;
 		}
 		
@@ -346,8 +356,6 @@ public class ClassFileParser {
 					}
 				}
 				if(typeParameter == null) {
-					//FIXME this happens, because type parameter can also be declared on methods.
-					//These also need to be contructed and can then be referred here!
 					return null;
 				}
 				
@@ -449,6 +457,15 @@ public class ClassFileParser {
 
         return emfTypeReference;
 	}
+	
+	
+	/* FIXME type arguments have to be recursively constructed. Can't BECEL do thta for us?
+	
+	 protected constructTypeArguments(String s) { 
+	 
+		QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
+		typeArgument.setType(value) ...
+	}*/
 	
 	private TypeReference createReferenceToClassifier(String fullClassifierName) { 
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
