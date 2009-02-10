@@ -40,7 +40,7 @@ import org.emftext.language.java.types.TypesFactory;
  * 
  *
  */
-public class ClassFileParser {
+public class ClassFileModelLoader {
 	
 	protected ClassifiersFactory qualifiersFactory = ClassifiersFactory.eINSTANCE;
 	protected MembersFactory     membersFactory    = MembersFactory.eINSTANCE;
