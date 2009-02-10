@@ -614,7 +614,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 			}
 			
-			type = TypesFactory.eINSTANCE.createInt();
+			Expression subExp = ((EList<Expression>) exp.eGet(exp.eClass().getEStructuralFeature("children"))).get(0);
+			return getTypeOfExpression(subExp);
 		}
 		else for(TreeIterator<EObject> i = exp.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
@@ -958,11 +959,12 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 			}
 			if (reference instanceof IdentifierReference) {
-				ArgumentList argumentList = ((IdentifierReference)reference).getArgumentList();
-				if (argumentList != null /*if method call*/)  {
-					if (typeParameterIndex != -1 && typeParameterIndex < argumentList.getArguments().size()) {
-						Expression arg = argumentList.getArguments().get(typeParameterIndex);
-						type = getTypeOfExpression(arg);
+				IdentifierReference idReference = (IdentifierReference)reference;
+
+				if (typeParameterIndex != -1 && typeParameterIndex < idReference.getTypeArguments().size()) {
+					TypeArgument typeArgument = idReference.getTypeArguments().get(typeParameterIndex);
+					if(typeArgument instanceof QualifiedTypeArgument) {
+						type = getReferencedType(((QualifiedTypeArgument)typeArgument).getType(), null);
 					}
 				}
 			}
@@ -1088,15 +1090,18 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						IdentifierReference reference = (IdentifierReference) context;
 						EList<Type> argumentTypes = getArgumentTypes(reference.getArgumentList());
 						EList<Parameter> parameters = new BasicEList<Parameter>(method.getParameters());
+						boolean adjustedParameterCount = false;
 						if (!parameters.isEmpty()) {
 							//in case of variable length add/remove some parameters
 							Parameter lastParameter = parameters.get(parameters.size() - 1);
 							if (lastParameter instanceof VariableLengthParameter) {
 								while(parameters.size() < argumentTypes.size()) {
 									parameters.add(lastParameter);
+									adjustedParameterCount=true;
 								}
 								if(parameters.size() > argumentTypes.size()) {
 									parameters.remove(lastParameter);
+									adjustedParameterCount=true;
 								}
 							}
 						}
@@ -1131,7 +1136,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 								}
 							}
 							if (result) {
-								result = isBestFit(method, argumentTypes, parameters, (Reference) context);
+								result = isBestFit(method, argumentTypes, parameters, (Reference) context, adjustedParameterCount);
 							}
 						}
 						else {
@@ -1147,10 +1152,15 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return result;
 	}
 
-	protected boolean isBestFit(Method m, EList<Type> argumentTypes, EList<Parameter> parameters, Reference context) {
+	protected boolean isBestFit(Method m, EList<Type> argumentTypes, EList<Parameter> parameters, Reference context, boolean adjustedParameterCount) {
 		//TODO in a revised implementation this code might go somewhere else to avoid duplicated checks
 		String name = m.getName();
 		boolean thisIsPerfect = true;
+		
+		if(adjustedParameterCount) {
+			thisIsPerfect = false;
+		}
+		
 		for (int i = 0; i < argumentTypes.size(); i++) {
 			InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType(), context);
 			InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
@@ -1188,29 +1198,29 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 						name.equals(potentialBetterFit.getName()) &&
 						argumentTypes.size() == potentialBetterFit.getParameters().size()) {
 					
-					boolean strictMatch = true;
+					//if this stays true, there is a better fit, which will be found later
+					boolean isBetterFit = true;
 					
 					for (int i = 0; i < argumentTypes.size(); i++) {
 						InternalEObject type = (InternalEObject) getReferencedType(parameters.get(i).getType(), context);
 						InternalEObject argumentType = (InternalEObject) argumentTypes.get(i);
 						if (argumentType == null) {
+							isBetterFit = false;
 							break;
 						}
 						
 						if (type != null && argumentType != null) {
 							if (!type.eIsProxy() || !argumentType.eIsProxy()) {
 								if(compareTypesStrict(type, argumentType)) {
-									//there is a better fit, which will be found later
-									strictMatch = false;
 									continue;
 									//TODO still need to check for "nearest subtype" here
 								}
 							}
 						}
-						strictMatch = true;
+						isBetterFit = false;
 						break;
 					}
-					if(!strictMatch) {
+					if(isBetterFit) {
 						return false;
 					}
 				}	
