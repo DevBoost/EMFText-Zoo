@@ -3,7 +3,6 @@ package org.emftext.language.java.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.bcel.classfile.Attribute;

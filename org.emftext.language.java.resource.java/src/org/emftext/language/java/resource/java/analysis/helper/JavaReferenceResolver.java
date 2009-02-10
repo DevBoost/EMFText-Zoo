@@ -116,7 +116,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	public static final String UNRESOLVED_REFERENCE_STRING =
 		"UNKNOWN";
 	
-	protected ITextResource myResource = null; java.lang.Enum e;
+	protected ITextResource myResource = null;
 	
 	@Override
 	protected String doDeResolve(EObject element, T container,
