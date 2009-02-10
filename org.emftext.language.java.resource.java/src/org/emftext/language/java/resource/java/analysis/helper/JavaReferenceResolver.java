@@ -1394,6 +1394,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Float")).equals(primitiveTypeAsClass)) {
 			return TypesFactory.eINSTANCE.createFloat();
 		}
+		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Double")).equals(primitiveTypeAsClass)) {
+			return TypesFactory.eINSTANCE.createDouble();
+		}
 		if (resolve(JavaClasspath.INSTANCE.getClassifier("java.lang.Integer")).equals(primitiveTypeAsClass)) {
 			return TypesFactory.eINSTANCE.createInt();
 		}
