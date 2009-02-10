@@ -3,6 +3,7 @@ package org.emftext.language.java.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.bcel.classfile.Attribute;
@@ -24,6 +25,7 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
+import org.emftext.language.java.generics.UnknownTypeArgument;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
@@ -182,6 +184,7 @@ public class ClassFileParser {
 			if(s.startsWith("Signature(")) {
 				s = s.replaceAll("\\[", "");
 				plainSignature = s;
+				break;
 			}
 		}
 		emfMethod.getTypeParameters().addAll(constructTypeParameters(plainSignature));
@@ -193,7 +196,6 @@ public class ClassFileParser {
 			typeRef = typeParamRef;
 		}
 
-		//FIXME Type Arguments!
 		emfMethod.setType(typeRef);
 		
 		int arrayDimension = getArrayDimension(signature);
@@ -227,6 +229,27 @@ public class ClassFileParser {
 			}
 		}
 		
+		if(!"".equals(plainSignature) && !(emfClassifier instanceof Enumeration)) {
+			if(typeRef instanceof ClassifierReference) {
+				String returnSignature = plainSignature.substring(0, plainSignature.lastIndexOf(")"));
+				returnSignature = returnSignature.substring(returnSignature.lastIndexOf(")") + 1);
+				constructTypeArguments(returnSignature, (ClassifierReference) typeRef, emfMethod, emfClassifier);
+			}
+
+			
+			String argumentSignature = plainSignature.substring(plainSignature.lastIndexOf("(") + 1, plainSignature.indexOf(")"));
+			for(Parameter parameter : emfMethod.getParameters()) {
+				TypeReference parameterTypeRef = parameter.getType();
+				if(parameterTypeRef instanceof ClassifierReference) {
+					argumentSignature = constructTypeArguments(argumentSignature, (ClassifierReference) parameterTypeRef, emfMethod, emfClassifier);
+				}
+				else {
+					argumentSignature = constructTypeArguments(argumentSignature, null, emfMethod, emfClassifier);
+				}
+			}
+				
+		}
+		
 		return emfMethod;
 	}
 	
@@ -234,7 +257,6 @@ public class ClassFileParser {
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
-		//FIXME Type Arguments!
 		emfParameter.setType(emfTypeReference);
 		
         int arrayDimension = getArrayDimension(signature);
@@ -268,6 +290,32 @@ public class ClassFileParser {
         }
 		
 		return emfField;
+	}
+	
+	protected ClassifierReference constructTypeParameterReference(String name, Method method, ConcreteClassifier emfClassifier) {
+		TypeParameter typeParameter =  null;
+		for(TypeParameter cand : method.getTypeParameters()) {
+			if(cand.getName().equals(name)) {
+				typeParameter = cand;
+			}
+		}
+		if (typeParameter == null) {
+			for(TypeParameter cand : emfClassifier.getTypeParameters()) {
+				if(cand.getName().equals(name)) {
+					typeParameter = cand;
+				}
+			}
+		}
+		
+		if(typeParameter == null) {
+			return null;
+		}
+		
+		ClassifierReference classifierReference = 
+			TypesFactory.eINSTANCE.createClassifierReference();
+		classifierReference.setTarget(typeParameter);
+		
+		return classifierReference;
 	}
 	
 	protected ClassifierReference constructReturnTypeParameterReference(String signature, Method method, ConcreteClassifier emfClassifier) {
@@ -458,16 +506,100 @@ public class ClassFileParser {
         return emfTypeReference;
 	}
 	
-	
-	/* FIXME type arguments have to be recursively constructed. Can't BECEL do thta for us?
-	
-	 protected constructTypeArguments(String s) { 
+	protected String constructTypeArguments(String s, ClassifierReference typeRef, Method method, ConcreteClassifier emfClassifier) { 
 	 
-		QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-		typeArgument.setType(value) ...
-	}*/
+
+		
+		char[] charArray = s.toCharArray();
+		int bracketCount = 0;
+		int begin = 0, end = 0;
+		
+		if(charArray[0] != 'L' && 
+				charArray[0] != 'T' &&
+				charArray[0] != '+' &&
+				charArray[0] != '-' ){
+			return s.substring(1);
+		}
+		
+		for(int i = 0; i < charArray.length; i++) {
+			char next = charArray[i];
+
+			
+			if(next == ';' && bracketCount == 0) {
+				return s.substring(i + 1);
+			}
+			if(next == '<') {
+				if (bracketCount == 0) {
+					begin = i + 1;
+					if(charArray[begin] == '+' || charArray[begin] == '-') {
+						begin = begin + 1;
+					}
+				}
+				bracketCount++;
+			}
+			if(next == '>') {
+				bracketCount--;
+				if (bracketCount == 0) {
+					end = i - 1;
+					int internalBracketCount = 0;
+					int followUpArgumentIdx = -1;
+					int internalBegin = begin, internalEnd = end;
+					
+					for(int j = begin; j <  end + 1; j++) {
+						char internalNext = charArray[j];
+						if(internalNext == '<') {
+							internalBracketCount++;
+							followUpArgumentIdx = j;
+						}
+						if(internalNext == '>') {
+							internalBracketCount--;
+						}
+						if((internalNext == ';') && internalBracketCount == 0) {
+							internalEnd = j;
+							
+							if(charArray[internalBegin] == '*' || charArray[internalBegin] == '?') {
+								UnknownTypeArgument typeArgument = GenericsFactory.eINSTANCE.createUnknownTypeArgument();
+								typeRef.getTypeArguments().add(typeArgument);
+							}
+							else {
+								String fullName = s.substring(internalBegin + 1, internalEnd);
+								if(followUpArgumentIdx != -1) {
+									fullName = s.substring(internalBegin + 1, followUpArgumentIdx);
+								}
+								
+								ClassifierReference argumentType;
+								if(charArray[internalBegin] == 'T') {
+									argumentType = constructTypeParameterReference(
+											fullName, method, emfClassifier);
+								}
+								else {
+									argumentType = (ClassifierReference) createReferenceToClassifier(fullName);
+								}
+								
+
+								QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
+								typeArgument.setType(argumentType);
+								typeRef.getTypeArguments().add(typeArgument);
+								
+								//recursive call;
+								constructTypeArguments(s.substring(internalBegin, internalEnd), argumentType, method, emfClassifier);
+							}
+							
+							internalBegin = j + 1;
+						}
+					}
+					
+					
+
+				}
+			}
+		}
+		
+		return "";
+	}
 	
 	private TypeReference createReferenceToClassifier(String fullClassifierName) { 
+		fullClassifierName = fullClassifierName.replaceAll("/", ".");
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
 		ClassifierReference classifierReference = 
 			TypesFactory.eINSTANCE.createClassifierReference();
