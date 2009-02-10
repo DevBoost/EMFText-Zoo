@@ -1540,6 +1540,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		} else if (javaClassifier instanceof Annotation) {
 			superClassifierList.add(getObjectModelElement());
 		} else if (javaClassifier instanceof Enumeration) {
+			collectAllSuperInterfaces(((Enumeration)javaClassifier).getImplements(), superClassifierList);
 			//enumerations inherit from java.lang.Enum
 			Class enumClass = (Class) EcoreUtil.resolve(
 					JavaClasspath.INSTANCE.getClassifier("java.lang.Enum"), myResource);
