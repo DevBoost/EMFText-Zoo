@@ -7,6 +7,13 @@ import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
+// TODO add conversion of supplementary unicode characters
+// These consist of two characters (high and low surrogate).
+// The high surrogate is in the range of \ud800..\udbff.
+// The low surrogate is in the range of \udc00..\udfff.
+// The supplementary unicode characters can not be converted 
+// by the InputStreamConverter, because ANTLR does not support
+// them.
 public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
 
 	@Override
