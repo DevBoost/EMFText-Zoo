@@ -29,6 +29,7 @@ import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypesPackage;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.runtime.resource.IContextDependentURIFragment;
 import org.emftext.runtime.resource.ITextResource;
 
 public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePostProcessorProvider {
@@ -112,7 +113,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							mainIdReference.eSet(
 									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET, proxy);
 							String id = ((InternalEObject)proxy).eProxyURI().fragment();
-							id = id.substring(ITextResource.INTERNAL_URI_FRAGMENT_PREFIX.length());
+							id = id.substring(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 							id = id.substring(id.indexOf("_") + 1);
 							
 							((ITextResource)resource).registerContextDependentProxy(

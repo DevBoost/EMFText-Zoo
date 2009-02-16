@@ -28,6 +28,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.JavaResource;
+import org.emftext.runtime.resource.IContextDependentURIFragment;
 
 public class JavaSourceOrClassFileResource extends JavaResource {
 	
@@ -120,7 +121,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 		else {
 			result = super.getEObject(id);
-			if(!id.contains(INTERNAL_URI_FRAGMENT_PREFIX)) {
+			if(!id.startsWith(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 				if(result != null && !(result instanceof ConcreteClassifier)) {
 					//may happen if members of same name exist
 					if(result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS) 
