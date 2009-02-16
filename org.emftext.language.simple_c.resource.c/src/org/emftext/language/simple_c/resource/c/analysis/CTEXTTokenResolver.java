@@ -8,7 +8,7 @@ public class CTEXTTokenResolver extends org.emftext.runtime.resource.impl.JavaBa
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		return super.resolve(lexem,feature,container,resource);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		super.resolve(lexem, feature, result);
 	}
 }

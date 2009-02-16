@@ -1,15 +1,9 @@
 package org.featuremapper.models.feature.resource.feature.analysis;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.ITokenResolver;
-import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
-
-public class FeatureQUOTED_34_34TokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
+public class FeatureQUOTED_34_34TokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	@Override
-	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
-		String result = super.deResolve(value,feature,container);
+	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+		java.lang.String result = super.deResolve(value, feature, container);
 		result = result.replaceAll(java.util.regex.Pattern.quote("\""),"\\\\\"");
 		result += "\"";
 		result = "\"" + result;
@@ -17,10 +11,10 @@ public class FeatureQUOTED_34_34TokenResolver extends JavaBasedTokenResolver imp
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0,lexem.length()-1);
 		lexem = lexem.replaceAll("\\\\"+java.util.regex.Pattern.quote("\""),"\"");
-		return super.resolve(lexem,feature,container,resource);
+		super.resolve(lexem, feature, result);
 	}
 }
