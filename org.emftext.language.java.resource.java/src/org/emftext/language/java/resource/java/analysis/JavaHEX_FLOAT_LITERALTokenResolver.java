@@ -5,6 +5,7 @@ import static org.emftext.language.java.resource.java.analysis.helper.LiteralCon
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.HEX_PREFIX;
 
 import org.emftext.language.java.literals.HexFloatLiteral;
+import org.emftext.language.java.literals.LiteralsPackage;
 
 public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 
@@ -16,8 +17,8 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container == null || container instanceof HexFloatLiteral;
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
 		
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().contains(HEX_EXPONENT);
@@ -25,6 +26,6 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 		
 		lexem = lexem.substring(0, lexem.length() - 1);
 		
-		return Float.parseFloat(lexem);
+		result.setResolvedToken(Float.parseFloat(lexem));
 	}
 }

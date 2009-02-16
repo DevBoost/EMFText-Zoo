@@ -121,7 +121,7 @@ public class ClassifierReferenceTargetReferenceResolver extends JavaReferenceRes
 
 
 	@Override
-	protected void doResolve(java.lang.String identifier, org.emftext.language.java.types.ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
+	protected void doResolve(java.lang.String identifier, org.emftext.language.java.types.ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
 		if (container.eContainer() instanceof NamespaceClassifierReference) {
 			NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) container.eContainer();
 

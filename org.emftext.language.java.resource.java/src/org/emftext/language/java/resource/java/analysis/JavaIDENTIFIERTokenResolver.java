@@ -2,7 +2,6 @@ package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
@@ -16,7 +15,7 @@ public class JavaIDENTIFIERTokenResolver extends JavaBasedTokenResolver implemen
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
-		return super.resolve(lexem,feature,container,resource);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		super.resolve(lexem, feature, result);
 	}
 }

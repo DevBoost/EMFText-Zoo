@@ -100,6 +100,8 @@ import org.emftext.language.java.resource.java.analysis.JavaHEX_FLOAT_LITERALTok
 import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
+import org.emftext.runtime.resource.ITokenResolveResult;
+import org.emftext.runtime.resource.impl.TokenResolveResult;
 
 
 public class TalkativeASTMatcher extends ASTMatcher {
@@ -461,8 +463,9 @@ public class TalkativeASTMatcher extends ASTMatcher {
 				nToken = nToken.substring(0, nToken.length() - 1);
 			}
 			
-			nToken = "" + JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(nToken, null);
-			
+			ITokenResolveResult result = new TokenResolveResult();
+			JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(nToken, result);
+			nToken = "" + result.getResolvedToken();
 		}
 		//nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
 		return nToken;
@@ -471,13 +474,21 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	private String normalizeHexNumberToken(String nToken) {
 		try {
 			if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().endsWith("l")) {
-				nToken = new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+				ITokenResolveResult result = new TokenResolveResult();
+				new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, result);
+				nToken = result.getResolvedToken().toString();
 			} else if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().contains("p") && nToken.toLowerCase().endsWith("f")) {
-				nToken = new JavaHEX_FLOAT_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+				ITokenResolveResult result = new TokenResolveResult();
+				new JavaHEX_FLOAT_LITERALTokenResolver().resolve(nToken, null, result);
+				nToken = result.getResolvedToken().toString();
 			} else if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().contains("p")) {
-				nToken = new JavaHEX_DOUBLE_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+				ITokenResolveResult result = new TokenResolveResult();
+				new JavaHEX_DOUBLE_LITERALTokenResolver().resolve(nToken, null, result);
+				nToken = result.getResolvedToken().toString();
 			} else if (nToken.toLowerCase().startsWith("0x")) {
-				nToken = new JavaHEX_INTEGER_LITERALTokenResolver().resolve(nToken, null, null, null).toString();
+				ITokenResolveResult result = new TokenResolveResult();
+				new JavaHEX_INTEGER_LITERALTokenResolver().resolve(nToken, null, result);
+				nToken = result.getResolvedToken().toString();
 			}
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();

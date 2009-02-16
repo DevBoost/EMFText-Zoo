@@ -11,8 +11,8 @@ public class JavaCOLLECT_commentsTokenResolver extends org.emftext.runtime.resou
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		//do nothing for now
-		return lexem;
+		result.setResolvedToken(lexem);
 	}
 }

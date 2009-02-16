@@ -1,6 +1,8 @@
 package org.emftext.language.java.resource.java.analysis;
 
 import org.emftext.language.java.literals.HexIntegerLiteral;
+import org.emftext.language.java.literals.LiteralsPackage;
+
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.HEX_PREFIX;
 
 public class JavaHEX_INTEGER_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
@@ -13,12 +15,14 @@ public class JavaHEX_INTEGER_LITERALTokenResolver extends org.emftext.runtime.re
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container == null || container instanceof HexIntegerLiteral;
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		
 		lexem = lexem.substring(2);
 		
-		return new Integer(JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 16, resource).intValue());
+		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 16, result);
+		Long longValue = (Long) result.getResolvedToken();
+		result.setResolvedToken(new Integer(longValue.intValue()));
 	}
 }

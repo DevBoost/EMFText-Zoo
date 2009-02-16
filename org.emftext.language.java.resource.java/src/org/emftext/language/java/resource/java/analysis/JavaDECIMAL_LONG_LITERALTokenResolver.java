@@ -5,7 +5,8 @@ import static org.emftext.language.java.resource.java.analysis.helper.LiteralCon
 import java.math.BigInteger;
 
 import org.emftext.language.java.literals.DecimalLongLiteral;
-import org.emftext.runtime.resource.ITextResource;
+import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.runtime.resource.ITokenResolveResult;
 
 public class JavaDECIMAL_LONG_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	@Override
@@ -16,27 +17,21 @@ public class JavaDECIMAL_LONG_LITERALTokenResolver extends org.emftext.runtime.r
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container == null || container instanceof DecimalLongLiteral;
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getLongLiteral());
 		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
 
 		lexem = lexem.substring(0, lexem.length() - 1);
-		Long result = parseToLong(lexem, 10, resource);
-		return result;
+		parseToLong(lexem, 10, result);
 	}
 
-	public static Long parseToLong(String lexem, int radix, ITextResource resource) throws NumberFormatException {
+	public static void parseToLong(String lexem, int radix, ITokenResolveResult result) throws NumberFormatException {
 		try {
 			BigInteger tempInteger = new BigInteger(lexem, radix);
-			Long result = tempInteger.longValue();
-			return result;
+			Long longValue = tempInteger.longValue();
+			result.setResolvedToken(longValue);
 		} catch (NumberFormatException nfe) {
-			String uri = "unknown resource.";
-			if (resource != null) {
-				uri = resource.getURI().toString();
-			}
-			System.out.println(nfe.getClass().getSimpleName() + ": " + nfe.getMessage() + " in " + uri);
-			return null;
+			result.setErrorMessage(nfe.getClass().getSimpleName() + ": " + nfe.getMessage());
 		}
 	}
 }

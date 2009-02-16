@@ -1,5 +1,6 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import org.emftext.language.java.literals.LiteralsPackage;
 import org.emftext.language.java.literals.OctalIntegerLiteral;
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
 
@@ -13,10 +14,13 @@ public class JavaOCTAL_INTEGER_LITERALTokenResolver extends org.emftext.runtime.
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container == null || container instanceof OctalIntegerLiteral;
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
 		
-		Long result = JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, resource);
-		return new Integer(result.intValue());
+		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, result);
+		Long longResult = (Long) result.getResolvedToken();
+		if (longResult != null) {
+			result.setResolvedToken(new Integer(longResult.intValue()));
+		}
 	}
 }

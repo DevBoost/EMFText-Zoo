@@ -24,7 +24,7 @@ public class StaticClassifierImportStaticMembersReferenceResolver extends org.em
 	}
 
 	@Override
-	protected void doResolve(java.lang.String identifier, StaticClassifierImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
+	protected void doResolve(java.lang.String identifier, StaticClassifierImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
 		
 		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(theImport, identifier);
 		classifier = (Classifier) EcoreUtil.resolve(classifier, theImport.eResource());

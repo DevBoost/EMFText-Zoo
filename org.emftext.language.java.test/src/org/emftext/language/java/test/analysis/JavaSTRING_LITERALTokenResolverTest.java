@@ -3,6 +3,8 @@ package org.emftext.language.java.test.analysis;
 import static org.junit.Assert.assertEquals;
 
 import org.emftext.language.java.resource.java.analysis.JavaSTRING_LITERALTokenResolver;
+import org.emftext.runtime.resource.ITokenResolveResult;
+import org.emftext.runtime.resource.impl.TokenResolveResult;
 import org.junit.Test;
 
 public class JavaSTRING_LITERALTokenResolverTest {
@@ -35,6 +37,8 @@ public class JavaSTRING_LITERALTokenResolverTest {
 	}
 
 	private String resolve(JavaSTRING_LITERALTokenResolver resolver, String lexem) {
-		return (String) resolver.resolve("\"" + lexem + "\"", null, null, null);
+		ITokenResolveResult result = new TokenResolveResult();
+		resolver.resolve("\"" + lexem + "\"", null, result);
+		return (String) result.getResolvedToken();
 	}
 }

@@ -105,7 +105,7 @@ import org.emftext.language.java.types.TypesPackage;
 import org.emftext.language.java.types.Void;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.Variable;
-import org.emftext.runtime.resource.IResolveResult;
+import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -414,7 +414,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	@Override
 	protected void doResolve(String identifier, T container,
 			EReference reference, int position, boolean resolveFuzzy,
-			IResolveResult result) {
+			IReferenceResolveResult result) {
 		myResource = (ITextResource) container.eResource(); 
 
 		//the element we are looking for

@@ -10,7 +10,7 @@ public class IdentifierReferenceTargetReferenceResolver extends JavaReferenceRes
 	}
 
 	@Override
-	protected void doResolve(java.lang.String identifier, IdentifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {
+	protected void doResolve(java.lang.String identifier, IdentifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
 		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }

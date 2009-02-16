@@ -3,7 +3,6 @@ package org.emftext.language.java.resource.java.analysis;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
-import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
@@ -28,7 +27,7 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 	}
 
 	@Override
-	public Object resolve(String lexem, EStructuralFeature feature, EObject container, ITextResource resource) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		// remove double quotes
 		assert lexem.charAt(0) == '"';
 		assert lexem.charAt(lexem.length() - 1) == '"';
@@ -42,6 +41,6 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 		//     for deResolve or leave the below .
 		lexem = CharacterEscaper.unescapeEscapedCharacters(lexem);
 		
-		return lexem;
+		result.setResolvedToken(lexem);
 	}
 }

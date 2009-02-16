@@ -3,6 +3,7 @@ package org.emftext.language.java.resource.java.analysis;
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.FLOAT_SUFFIX;
 
 import org.emftext.language.java.literals.DecimalFloatLiteral;
+import org.emftext.language.java.literals.LiteralsPackage;
 
 public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
@@ -14,12 +15,16 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.
 	}
 
 	@Override
-	public java.lang.Object resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container, org.emftext.runtime.resource.ITextResource resource) {
-		assert container == null || container instanceof DecimalFloatLiteral;
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
 
 		lexem = lexem.substring(0, lexem.length() - 1);
 		
-		return new Float(JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(lexem, resource).floatValue());
+		JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(lexem, result);
+		Double doubleValue = (Double) result.getResolvedToken();
+		if (doubleValue != null) {
+			result.setResolvedToken(new Float(doubleValue.floatValue()));
+		}
 	}
 }

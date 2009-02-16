@@ -10,7 +10,9 @@ import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALT
 import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_INTEGER_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_LONG_LITERALTokenResolver;
+import org.emftext.runtime.resource.ITokenResolveResult;
 import org.emftext.runtime.resource.ITokenResolver;
+import org.emftext.runtime.resource.impl.TokenResolveResult;
 
 import junit.framework.TestCase;
 
@@ -190,7 +192,9 @@ public class NumberLiteralResolverTest extends TestCase {
 	}
 
 	private Object resolve(ITokenResolver resolver, String lexem) {
-		Object result = resolver.resolve(lexem, null, null, null);
+		ITokenResolveResult resolveResult = new TokenResolveResult();
+		resolver.resolve(lexem, null, resolveResult);
+		Object result = resolveResult.getResolvedToken();
 		assertNotNull(result);
 
 		boolean isInteger = result instanceof Integer;
