@@ -15,7 +15,7 @@ public class GiganticTest extends AbstractZipFileInputTest {
 
 	public static Test suite() throws CoreException, IOException {
 		// run with 8 threads and wait for maximal 5 minutes
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files.", 5 * 60 * 1000, 1);
+		TestSuite suite = new ThreadedTestSuite("Suite testing all files.", 5 * 60 * 1000, 8);
 		
 		List<String> inputZips = getInputZips();
 		for (String inputZip : inputZips) {
@@ -32,11 +32,17 @@ public class GiganticTest extends AbstractZipFileInputTest {
 		List<String> result = new ArrayList<String>();
 		
 		File dir = new File(BULK_INPUT_DIR);
-		File[] files = dir.listFiles();
-		for (File file : files) {
-			if (file.getName().endsWith("3.0.0.M1-src.zip")) {
-				System.out.println("TheTest.getInputZips() " + file);
-				result.add(BULK_INPUT_DIR + file.getName());
+		File[] folders = dir.listFiles();
+		for (File folder : folders) {
+			if(folder.isDirectory()) {
+				for(File srcZipFile: folder.listFiles()) {
+					if (srcZipFile.getName().equals("src.zip") && folder.getName().endsWith("")) {
+						System.out.println("TheTest.getInputZips() " + folder);
+						result.add(BULK_INPUT_DIR + folder.getName() + 
+								File.separator + 
+								srcZipFile.getName());
+					}
+				}
 			}
 		}
 		return result;
@@ -44,13 +50,6 @@ public class GiganticTest extends AbstractZipFileInputTest {
 
 	public static List<String> getIgnoreList() {
 		List<String> ignoreList = new ArrayList<String>();
-		
-		//missing dependency to oracle top link
-		ignoreList.add("spring-framework-3.0.0.M1/projects/org.springframework.orm/src/main/java/org/springframework/orm/jpa/vendor/TopLinkJpaVendorAdapter.java");		
-		ignoreList.add("spring-framework-3.0.0.M1/projects/org.springframework.orm/src/main/java/org/springframework/orm/jpa/vendor/TopLinkJpaDialect.java");
-		ignoreList.add("spring-framework-3.0.0.M1/projects/org.springframework.samples.petclinic/src/main/java/org/springframework/samples/petclinic/toplink/EssentialsHSQLPlatformWithNativeSequence.java");
-
-
 		return ignoreList;
 	}
 	

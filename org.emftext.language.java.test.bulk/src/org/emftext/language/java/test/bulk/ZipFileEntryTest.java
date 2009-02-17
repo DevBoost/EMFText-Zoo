@@ -68,9 +68,9 @@ public class ZipFileEntryTest extends AbstractJavaParserTest {
 
 	private void parseAndReprintEntry(ZipEntry entry) throws Exception {
 		String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
-		plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - "-src.zip".length());
+		plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
 		
-		parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "lib/" + plainZipFileName);
+		parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "input/" + plainZipFileName);
 		
 		//for JacksTest: remove java.java from classpath!
 		if (entry.getName().equals("java.java")) {
