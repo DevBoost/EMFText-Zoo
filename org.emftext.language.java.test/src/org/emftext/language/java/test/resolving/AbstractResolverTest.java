@@ -1,14 +1,9 @@
 package org.emftext.language.java.test.resolving;
 
-import org.eclipse.ui.internal.commands.ElementReference;
-import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.Expression;
-import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.references.IdentifierReference;
-import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
@@ -53,6 +48,7 @@ public abstract class AbstractResolverTest extends AbstractJavaParserTest {
 		assertType(statement, ExpressionStatement.class);
 		ExpressionStatement expression = (ExpressionStatement) statement;
 		Expression methodCallExpression = expression.getExpression();
+		assertNotNull(methodCallExpression);
 		/*TODO fix
 		 * 
 		 * ConditionalExpression cond = (ConditionalExpression) methodCallExpression.getConditionalExpression();
