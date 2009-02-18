@@ -55,12 +55,6 @@ import org.emftext.language.java.variables.impl.VariablesPackageImpl;
  * @generated
  */
 public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass emptyEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -191,15 +185,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEmpty() {
-		return emptyEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public JavaFactory getJavaFactory() {
 		return (JavaFactory)getEFactoryInstance();
 	}
@@ -221,9 +206,6 @@ public class JavaPackageImpl extends EPackageImpl implements JavaPackage {
 	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
-
-		// Create classes and their features
-		emptyEClass = createEClass(EMPTY);
 	}
 
 	/**
