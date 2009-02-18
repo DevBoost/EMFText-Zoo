@@ -171,19 +171,19 @@ statements.Block
 members.Constructor
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
 	"(" (parameters ("," parameters)* )? ")" 
-	("throws" exceptions ("," exceptions)*)? body
+	("throws" exceptions ("," exceptions)*)? "{" statements* "}"
 	;
 
 members.Method
 	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? (body | ";")
+	("throws" exceptions ("," exceptions)*)? (("{" statements* "}") | ";")
 	;
 	
 annotations.AnnotationMethod
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression (body | ";")
+	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression (("{" statements* "}") | ";")
 	;
 
 parameters.OrdinaryParameter
@@ -224,7 +224,7 @@ instantiations.NewConstructorCall
 		("<" typeArguments ("," typeArguments)* ">")?
 		type 
 		// these are the arguments for the class type parameters
-		("<" classTypeArguments ("," classTypeArguments)* ">")?
+		("<" callTypeArguments ("," callTypeArguments)* ">")?
 		"(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
 		anonymousClass?
 		(#0 "." #0 next)? 
@@ -253,7 +253,7 @@ arrays.ArrayInitializer
     ;
 
 arrays.ArraySelector
-	::= "[" expression:expressions.AssignmentExpression? "]"
+	::= "[" position:expressions.AssignmentExpression? "]"
 	;
 
 types.NamespaceClassifierReference
@@ -266,13 +266,21 @@ types.ClassifierReference
 	;
 	
 
-references.IdentifierReference
-	::= ("<" classTypeArguments ("," classTypeArguments)* ">")?
+references.MethodCall
+	::= ("<" callTypeArguments ("," callTypeArguments)* ">")?
 	    target[]
 		("<" typeArguments ("," typeArguments)* ">")?
-		argumentList?
+		"(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
 		arraySelectors* (#0 "." #0 next)? 
 	;
+	
+references.IdentifierReference
+	::= target[]
+		("<" typeArguments ("," typeArguments)* ">")?
+		arraySelectors* (#0 "." #0 next)? 
+	;
+	
+
 	
 references.ReflectiveClassReference ::= "class"
 		(#0 "." #0 next)? 
@@ -294,10 +302,6 @@ references.StringReference
 		(#0 "." #0 next)? 
 	;
 
-references.ArgumentList
-	::= "(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)* )? ")"
-	;
-
 generics.QualifiedTypeArgument
 	::= type arrayDimensionsBefore*
 	;
@@ -315,52 +319,52 @@ generics.SuperTypeArgument
 	;
 
 statements.Assert
-	::= "assert" expression1:expressions.AssignmentExpression (":" expression2:expressions.AssignmentExpression)? ";" ;
+	::= "assert" condition:expressions.AssignmentExpression (":" errorMessage:expressions.AssignmentExpression)? ";" ;
 	
 statements.Condition 
-	::= "if" "(" expression:expressions.AssignmentExpression ")" ifStatement ("else" elseStatement)? ;
+	::= "if" "(" condition:expressions.AssignmentExpression ")" statement ("else" elseStatement)? ;
 	
 statements.ForLoop
-	::= "for" "(" init? ";" condition:expressions.AssignmentExpression? ";" (updates:expressions.AssignmentExpression ("," updates:expressions.AssignmentExpression)* )? ")" body;
+	::= "for" "(" init? ";" condition:expressions.AssignmentExpression? ";" (updates:expressions.AssignmentExpression ("," updates:expressions.AssignmentExpression)* )? ")" statement;
 
 statements.ForEachLoop
-	::= "for" "(" next ":" collection:expressions.AssignmentExpression ")" body;
+	::= "for" "(" next ":" collection:expressions.AssignmentExpression ")" statement;
 	
 statements.WhileLoop
-	::= "while" "(" condition:expressions.AssignmentExpression ")" body;
+	::= "while" "(" condition:expressions.AssignmentExpression ")" statement;
 	
 statements.DoWhileLoop	
-	::= "do" body "while" "(" condition:expressions.AssignmentExpression ")" ";" ;
+	::= "do" statement "while" "(" condition:expressions.AssignmentExpression ")" ";" ;
 	
 statements.EmptyStatement	
 	::= ";" ;
 	
 statements.SynchronizedBlock
-	::= "synchronized" "(" lockExpression:expressions.AssignmentExpression ")" body;
+	::= "synchronized" "(" lockProvider:expressions.AssignmentExpression ")" "{" statements* "}" ;
 	
 statements.TryBlock
-	::= "try" tryBlock
-		catches* 
+	::= "try" "{" statements* "}"
+		catcheBlocks* 
 		("finally" finallyBlock)?;
 
-statements.CatchClause
-	::=	"catch" "(" parameter ")" catchBlock
+statements.CatchBlock
+	::=	"catch" "(" parameter ")" "{" statements* "}"
 	;
 
 statements.Switch
 	::= "switch" "(" variable:expressions.AssignmentExpression ")" "{" (cases*) "}";
 	
 statements.NormalSwitchCase
-	::= "case" condition:expressions.AssignmentExpression ":" body* ;
+	::= "case" condition:expressions.AssignmentExpression ":" statements* ;
 	
 statements.DefaultSwitchCase
-	::= "default" ":" body* ;
+	::= "default" ":" statements* ;
 	
 statements.Return
-	::= "return" expression:expressions.AssignmentExpression? ";" ;
+	::= "return" returnValue:expressions.AssignmentExpression? ";" ;
 	
 statements.Throw
-	::= "throw" expression:expressions.AssignmentExpression ";" ;
+	::= "throw" throwable:expressions.AssignmentExpression ";" ;
 	
 statements.Break
 	::= "break" (target[])? ";" ;
@@ -380,7 +384,7 @@ expressions.ExpressionList
     ;
  
 expressions.AssignmentExpression
-	::= child:expressions.ConditionalExpression (assignmentOperator expression:expressions.AssignmentExpression)?
+	::= child:expressions.ConditionalExpression (assignmentOperator value:expressions.AssignmentExpression)?
     ;
     	
 expressions.ConditionalExpression

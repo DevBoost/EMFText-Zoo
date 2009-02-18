@@ -111,14 +111,14 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							
 							IdentifierReference mainIdReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
 							mainIdReference.eSet(
-									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET, proxy);
+									ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET, proxy);
 							String id = ((InternalEObject)proxy).eProxyURI().fragment();
 							id = id.substring(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 							id = id.substring(id.indexOf("_") + 1);
 							
 							((ITextResource)resource).registerContextDependentProxy(
 									mainIdReference,
-									ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET,
+									ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 									id,
 									proxy);
 							
@@ -140,7 +140,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 								
 								((ITextResource)resource).registerContextDependentProxy(
 										idRef,
-										ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET,
+										ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 										nsPart,
 										newProxy);
 								

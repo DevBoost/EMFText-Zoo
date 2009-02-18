@@ -26,9 +26,7 @@ public class VariableReferenceResolverTest extends AbstractResolverTest {
 		Field field = assertIsField(members.get(0), "var");
 		Method method = assertIsMethod(members.get(1), "method");
 		
-		Block methodBody = method.getBody();
-		assertNotNull(methodBody);
-		List<Statement> statements = methodBody.getStatements();
+		List<Statement> statements = method.getStatements();
 		
 		assertEquals(6, statements.size());
 		Statement statement1 = statements.get(0);

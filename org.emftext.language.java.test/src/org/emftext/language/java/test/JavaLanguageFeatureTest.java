@@ -853,8 +853,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		Member simpleForEach = clazz.getMembers().get(1);
 		assertType(simpleForEach, Method.class);
 		Method simpleForEachMethod = (Method) simpleForEach;
-		Block body = simpleForEachMethod.getBody();
-		Statement forEach = body.getStatements().get(0);
+		Statement forEach = simpleForEachMethod.getStatements().get(0);
 		assertType(forEach, ForEachLoop.class);
 		parseAndReprint(filename);
 	}

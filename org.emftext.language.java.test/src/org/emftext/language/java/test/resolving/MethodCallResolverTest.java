@@ -25,9 +25,7 @@ public class MethodCallResolverTest extends AbstractResolverTest {
 		Method method3 = assertIsMethod(members.get(2), "m3");
 		Method method4 = assertIsMethod(members.get(3), "m3");
 		
-		Block methodBody2 = method2.getBody();
-		assertNotNull(methodBody2);
-		List<Statement> methodStatements2 = methodBody2.getStatements();
+		List<Statement> methodStatements2 = method2.getStatements();
 		
 		//assertEquals(4, methodStatements2.size());
 		assertIsCallToMethod(methodStatements2.get(0), method1);

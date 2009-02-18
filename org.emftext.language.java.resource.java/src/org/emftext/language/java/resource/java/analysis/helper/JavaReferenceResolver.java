@@ -73,19 +73,21 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.parameters.VariableLengthParameter;
-import org.emftext.language.java.references.ArgumentList;
+import org.emftext.language.java.references.Argumentable;
+import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.references.ReflectiveClassReference;
 import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.references.StringReference;
-import org.emftext.language.java.statements.Block;
-import org.emftext.language.java.statements.ForLoop;
 import org.emftext.language.java.statements.NormalSwitchCase;
+import org.emftext.language.java.statements.StatementContainer;
+import org.emftext.language.java.statements.StatementListContainer;
+import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.statements.Switch;
-import org.emftext.language.java.statements.WhileLoop;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
 import org.emftext.language.java.types.Char;
@@ -249,29 +251,37 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return true;
 	}
 	
-	protected boolean breakIfChild(EObject element, EClass typeToResolve)  {
+	protected boolean breakIfChild(EObject parent, EObject child, EClass typeToResolve)  {
+		if (parent == null) {
+			return false;
+		}
+		
 		//do not go into other classifier declarations (but enums --> or better static fields of all?)
-		if (element instanceof Class || element instanceof Interface) {
+		if (parent instanceof Class || parent instanceof Interface) {
 			return true;
 		}
 		//do not look into parameters or contents of other methods
-		if (element instanceof Method) {
+		if (parent instanceof Method) {
 			return true;
 		}
-		if (element instanceof Constructor) {
+		if (parent instanceof Constructor) {
 			return true;
 		}
+		
+		if (child == null) {
+			return false;
+		}
+		
 		//go not go into a new block
-		if (element instanceof Block) {
+		if (parent instanceof StatementListContainer && child.eContainingFeature().equals(StatementsPackage.STATEMENT_LIST_CONTAINER__STATEMENTS)) {
 			return true;
 		}
+
 		//go not go into loops
-		if (element instanceof ForLoop) {
+		if (parent instanceof StatementContainer && child.eContainingFeature().equals(StatementsPackage.STATEMENT_CONTAINER__STATEMENT)) {
 			return true;
 		}
-		if (element instanceof WhileLoop) {
-			return true;
-		}
+		
 		return false;
 	}
 	
@@ -532,10 +542,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		else {
 			//in this cases we  may reference something that is probably a package
 			if (reference.equals(
-					ReferencesPackage.Literals.IDENTIFIER_REFERENCE__TARGET)) {
+					ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET)) {
 				Reference ref = (Reference)container;
 				//there must be something (a classifier reference) following up
-				if (ref.getNext() != null && ref.getArgumentList() == null) {
+				if (ref.getNext() != null && ref instanceof IdentifierReference) {
 					Package packageDescriptor = ContainersFactory.eINSTANCE.createPackage();
 					packageDescriptor.setName(identifier);
 					result.addMapping(identifier, packageDescriptor);
@@ -712,7 +722,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					return cand;
 				}
 			}
-			if (breakIfChild(cand, type)) {
+			if (breakIfChild(element, null, type)) {
 				continue;
 			}
 			//consider also children
@@ -720,18 +730,20 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if (cand.eIsProxy()) {
 				//now we need to look inside classifiers
 				cand = EcoreUtil.resolve(cand, myResource);
-			}
-			
+			}			
+
 			for(TreeIterator<EObject> it = cand.eAllContents(); it.hasNext(); ) {
 				EObject subCand = it.next();
+				if (breakIfChild(subCand.eContainer(), subCand, type)) {
+					it.prune();
+				}
+
 				if(hasCorrectType(subCand, type)) {
 					if (isReferencedElement(id, context, subCand)) {
 						return subCand;
 					}
 				}
-				if (breakIfChild(subCand, type)) {
-					it.prune();
-				}
+
 			}
 		}
 		return null;
@@ -829,9 +841,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			return getClassClassModelElement();
 		}
 		//referenced element points to an element with a type
-		else if (reference instanceof IdentifierReference) {
+		else if (reference instanceof ElementReference) {
 			ReferenceableElement target = 
-				(ReferenceableElement) ((IdentifierReference) reference).getTarget();
+				(ReferenceableElement) ((ElementReference) reference).getTarget();
 			if (target.eIsProxy()) {
 				type = null;
 			}
@@ -931,13 +943,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		int typeParameterIndex = -1;
 		if (typeParameterDeclarator instanceof ConcreteClassifier) {
 			typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(typeParameter);
-			if(reference != null && reference.eContainer() instanceof IdentifierReference) {
-				ReferenceableElement prevRef = ((IdentifierReference) reference.eContainer()).getTarget();
+			if(reference != null && reference.eContainer() instanceof ElementReference) {
+				ReferenceableElement prevRef = ((ElementReference) reference.eContainer()).getTarget();
 				if (prevRef instanceof TypedElement) {
 					TypeReference prevTypeReference = ((TypedElement) prevRef).getType();
 					if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
 						ClassifierReference classifierReference = convertToClassifierReference(prevTypeReference);
-						Type prevType = getReferencedType(classifierReference, (IdentifierReference) reference.eContainer());
+						Type prevType = getReferencedType(classifierReference, (ElementReference) reference.eContainer());
 						if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
 							TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
 							if (arg instanceof QualifiedTypeArgument) {
@@ -958,8 +970,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					break;
 				}
 			}
-			if (reference instanceof IdentifierReference) {
-				IdentifierReference idReference = (IdentifierReference)reference;
+			if (reference instanceof ElementReference) {
+				ElementReference idReference = (ElementReference)reference;
 
 				if (typeParameterIndex != -1 && typeParameterIndex < idReference.getTypeArguments().size()) {
 					TypeArgument typeArgument = idReference.getTypeArguments().get(typeParameterIndex);
@@ -991,7 +1003,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	}
 
 
-	protected EList<Type> getArgumentTypes(ArgumentList argList) {
+	protected EList<Type> getArgumentTypes(Argumentable argList) {
 		
 		EList<Type> resultList = new BasicEList<Type>();
 
@@ -1033,7 +1045,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			}			
 			return true;
 		}
-		if (context instanceof IdentifierReference) {
+		if (context instanceof ElementReference) {
 			return true;
 		}
 		return false;
@@ -1045,8 +1057,8 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 
 		if (referencableElement instanceof ReferenceableElement) {
 			boolean isMethodCall = false;
-			if(context instanceof IdentifierReference) {
-				isMethodCall = ((IdentifierReference) context).getArgumentList() != null;
+			if(context instanceof MethodCall) {
+				isMethodCall = true;
 			}
 			
 			if(!isMethodCall) {
@@ -1086,9 +1098,9 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				if (referencableElement instanceof Method) {
 					//in case of Methods the parameter types need to be checked
 					Method method = (Method) referencableElement;
-					if (context instanceof IdentifierReference) {
-						IdentifierReference reference = (IdentifierReference) context;
-						EList<Type> argumentTypes = getArgumentTypes(reference.getArgumentList());
+					if (context instanceof MethodCall) {
+						MethodCall reference = (MethodCall) context;
+						EList<Type> argumentTypes = getArgumentTypes(reference);
 						EList<Parameter> parameters = new BasicEList<Parameter>(method.getParameters());
 						boolean adjustedParameterCount = false;
 						if (!parameters.isEmpty()) {
