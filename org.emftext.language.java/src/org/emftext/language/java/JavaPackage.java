@@ -58,36 +58,6 @@ public interface JavaPackage extends EPackage {
 	JavaPackage eINSTANCE = org.emftext.language.java.impl.JavaPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.emftext.language.java.impl.EmptyImpl <em>Empty</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.emftext.language.java.impl.EmptyImpl
-	 * @see org.emftext.language.java.impl.JavaPackageImpl#getEmpty()
-	 * @generated
-	 */
-	int EMPTY = 0;
-
-	/**
-	 * The number of structural features of the '<em>Empty</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMPTY_FEATURE_COUNT = 0;
-
-
-	/**
-	 * Returns the meta object for class '{@link org.emftext.language.java.Empty <em>Empty</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Empty</em>'.
-	 * @see org.emftext.language.java.Empty
-	 * @generated
-	 */
-	EClass getEmpty();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,17 +78,6 @@ public interface JavaPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals {
-		/**
-		 * The meta object literal for the '{@link org.emftext.language.java.impl.EmptyImpl <em>Empty</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.emftext.language.java.impl.EmptyImpl
-		 * @see org.emftext.language.java.impl.JavaPackageImpl#getEmpty()
-		 * @generated
-		 */
-		EClass EMPTY = eINSTANCE.getEmpty();
-
-	}
+	interface Literals {}
 
 } //JavaPackage
