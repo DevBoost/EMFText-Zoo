@@ -3,9 +3,8 @@ package org.emftext.language.java.test.resolving;
 import java.util.List;
 
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.Method;
-import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.Statement;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,10 +25,10 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 		
 		List<Member> members = clazz.getMembers();
 		
-		Method method1 = assertIsMethod(members.get(0), "m1");
-		Method method2 = assertIsMethod(members.get(1), "m2");
-		Method method3 = assertIsMethod(members.get(2), "m3");
-		Method method4 = assertIsMethod(members.get(3), "m3");
+		ClassMethod method1 = assertIsMethod(members.get(0), "m1");
+		ClassMethod method2 = assertIsMethod(members.get(1), "m2");
+		ClassMethod method3 = assertIsMethod(members.get(2), "m3");
+		ClassMethod method4 = assertIsMethod(members.get(3), "m3");
 		
 		List<Statement> methodStatements2 = method2.getStatements();
 		

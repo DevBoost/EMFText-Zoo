@@ -30,6 +30,7 @@ import org.emftext.language.java.literals.DoubleLiteral;
 import org.emftext.language.java.literals.FloatLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.literals.LongLiteral;
+import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
@@ -851,8 +852,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		assertMemberCount(clazz, 3);
 
 		Member simpleForEach = clazz.getMembers().get(1);
-		assertType(simpleForEach, Method.class);
-		Method simpleForEachMethod = (Method) simpleForEach;
+		assertType(simpleForEach, ClassMethod.class);
+		ClassMethod simpleForEachMethod = (ClassMethod) simpleForEach;
 		Statement forEach = simpleForEachMethod.getStatements().get(0);
 		assertType(forEach, ForEachLoop.class);
 		parseAndReprint(filename);

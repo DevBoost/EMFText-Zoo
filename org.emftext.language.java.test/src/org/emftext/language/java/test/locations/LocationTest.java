@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.Method;
 import org.emftext.language.java.test.AbstractJavaParserTest;
 import org.emftext.runtime.resource.ILocationMap;
 import org.emftext.runtime.resource.ITextResource;
@@ -34,7 +34,7 @@ public class LocationTest extends AbstractJavaParserTest {
 			
 			List<Member> members = clazz.getMembers();
 			// check location of the method x
-			Method x = (Method) members.get(1);
+			ClassMethod x = (ClassMethod) members.get(1);
 			assertElementLocation(x.getStatements().get(0), 6, 2, 85, 88);
 			// check location of class
 			assertElementLocation(clazz, 3, 0, 22, 96);

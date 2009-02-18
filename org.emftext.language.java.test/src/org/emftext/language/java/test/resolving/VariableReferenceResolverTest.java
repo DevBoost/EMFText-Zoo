@@ -2,9 +2,9 @@ package org.emftext.language.java.test.resolving;
 
 import java.util.List;
 
+import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.Method;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.LocalVariableStatement;
@@ -24,7 +24,7 @@ public class VariableReferenceResolverTest extends AbstractResolverTest {
 		assertEquals(2, members.size());
 		
 		Field field = assertIsField(members.get(0), "var");
-		Method method = assertIsMethod(members.get(1), "method");
+		ClassMethod method = assertIsMethod(members.get(1), "method");
 		
 		List<Statement> statements = method.getStatements();
 		

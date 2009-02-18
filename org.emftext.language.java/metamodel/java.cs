@@ -174,16 +174,22 @@ members.Constructor
 	("throws" exceptions ("," exceptions)*)? "{" statements* "}"
 	;
 
-members.Method
+members.InterfaceMethod
 	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? (("{" statements* "}") | ";")
+	("throws" exceptions ("," exceptions)*)? ";"
+	;
+
+members.ClassMethod
+	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
+	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
+	("throws" exceptions ("," exceptions)*)? "{" statements* "}"
 	;
 	
-annotations.AnnotationMethod
+annotations.AnnotationAttribute
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression (("{" statements* "}") | ";")
+	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression ";"
 	;
 
 parameters.OrdinaryParameter

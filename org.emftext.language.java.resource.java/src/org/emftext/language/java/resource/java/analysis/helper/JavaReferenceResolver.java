@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
+import org.emftext.language.java.annotations.AnnotationAttribute;
 import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.annotations.AnnotationMethod;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -1086,7 +1086,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					//nothing else to do
 					result = true;
 				}
-				else if (referencableElement instanceof AnnotationMethod) {
+				else if (referencableElement instanceof AnnotationAttribute) {
 					//nothing else to do
 					result = true;
 				}
@@ -1496,13 +1496,13 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		if(javaClassifier instanceof Enumeration)  {
 			//add the default Enum methods. Might also go into a post processor...
-			Method valuesMethod = MembersFactory.eINSTANCE.createMethod();
+			Method valuesMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
 			valuesMethod.setName("values");
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(javaClassifier);
 			valuesMethod.setType(type);
 			
-			Method valueOfMethod = MembersFactory.eINSTANCE.createMethod();
+			Method valueOfMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
 			valueOfMethod.setName("valueOf");
 			type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(javaClassifier);

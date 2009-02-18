@@ -98,7 +98,7 @@ public class ClassFileModelLoader {
 			}
 			else if (clazz.isAnnotation()) {
 				//this triggers when ifName = java.lang.annotations.Annotation
-				Method valueMethod = MembersFactory.eINSTANCE.createMethod();
+				Method valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
 				valueMethod.setName("value");
 				valueMethod.setType(createReferenceToClassifier("java.lang.String"));
 				emfClassifier.getMembers().add(valueMethod);
@@ -165,10 +165,13 @@ public class ClassFileModelLoader {
 	protected Method constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
 		Method emfMethod = null;
 		if(emfClassifier instanceof Annotation) {
-			emfMethod = annotationsFactory .createAnnotationMethod();
+			emfMethod = annotationsFactory.createAnnotationAttribute();
+		}
+		else if(emfClassifier instanceof Interface) {
+			emfMethod = membersFactory.createInterfaceMethod();
 		}
 		else {
-			emfMethod = membersFactory.createMethod();
+			emfMethod = membersFactory.createClassMethod();
 		}
 		emfMethod.setName(method.getName());
 		
