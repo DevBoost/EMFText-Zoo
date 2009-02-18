@@ -87,15 +87,12 @@ public class ClassFileModelLoader {
 			org.emftext.language.java.classifiers.Class emfClass = 
 				(Class) emfClassifier;
 			if (clazz.getSuperclassName() != null) {
-				QualifiedTypeArgument typeArg = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-				typeArg.setType(createReferenceToClassifier(clazz.getSuperclassName()));
-				emfClass.setExtends(typeArg);
+				emfClass.setExtends(createReferenceToClassifier(clazz.getSuperclassName()));
 			}
 		}
 		//interfaces
 		for(String ifName : clazz.getInterfaceNames()) {
-			QualifiedTypeArgument typeArg = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-			typeArg.setType(createReferenceToClassifier(ifName));
+			TypeReference typeArg = createReferenceToClassifier(ifName);
 			if (clazz.isEnum()) { //check first, because enum is also class
 				((Enumeration)emfClassifier).getImplements().add(typeArg); 
 			}

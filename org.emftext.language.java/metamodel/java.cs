@@ -137,7 +137,7 @@ classifiers.Annotation
 	;
 
 annotations.AnnotationInstance
-	::=	"@" annotation 
+	::=	"@" type 
 		("("
 			( 
 		    	(elementValuePairs ("," elementValuePairs)*) |
@@ -448,7 +448,7 @@ expressions.PrefixUnaryModificationExpression
 	;
 
 expressions.CastExpression
-    ::= "(" typeReference arrayDimensionsBefore* ")" child:expressions.UnaryExpression
+    ::= "(" type arrayDimensionsBefore* ")" child:expressions.UnaryExpression
     ;
     
 expressions.NestedExpression ::= "(" expression:expressions.AssignmentExpression ")"  arraySelectors* (#0 "." #0 next)? 

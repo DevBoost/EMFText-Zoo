@@ -102,7 +102,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 					if (unaryExpression.getOperators().size() == 1 && 
 							unaryExpression.getOperators().get(0) instanceof Addition) {
 						//try to resolve the cast
-						NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getTypeReference();
+						NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getType();
 						EObject proxy = (EObject) nsClassifierReference
 								.getClassifierReferences().get(0).eGet(TypesPackage.Literals.CLASSIFIER_REFERENCE__TARGET, false);
 						EObject resolved = EcoreUtil.resolve(proxy, castExpression.eResource());

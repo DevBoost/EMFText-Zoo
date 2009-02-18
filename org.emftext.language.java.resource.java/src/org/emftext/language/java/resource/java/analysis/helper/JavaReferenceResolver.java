@@ -499,7 +499,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		
 		//inside annotation instance 
 		else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
-			TypeReference typeReference = annotationInstance.getAnnotation();
+			TypeReference typeReference = annotationInstance.getType();
 			previousType = getReferencedType(typeReference, null); 
 		}
 		
@@ -590,7 +590,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		}
 		else if (exp instanceof CastExpression) {
 			type = getReferencedType(
-					((CastExpression)exp).getTypeReference(), null);
+					((CastExpression)exp).getType(), null);
 		}
 		else if (exp instanceof AssignmentExpression) {
 			type = getTypeOfExpression(((AssignmentExpression) exp).getChild());
@@ -647,7 +647,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				}
 				else if (next instanceof CastExpression) {
 					nextType = getReferencedType(
-							((CastExpression)next).getTypeReference(), null);
+							((CastExpression)next).getType(), null);
 				}
 				else {
 					nextType = getTypeOfReferencedElement(
@@ -1581,7 +1581,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected Class getSuperType(Class subClass) {
 		Class superClass = null;
 		if (subClass.getExtends() != null) {
-			Type superType = getReferencedType(subClass.getExtends().getType(), null);
+			Type superType = getReferencedType(subClass.getExtends(), null);
 			if (superType instanceof Class) {
 				superClass = (Class) superType;
 			}
@@ -1655,11 +1655,11 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	 * @param resultInterfaceList the list with the reuslt
 	 * @
 	 */
-	protected void collectAllSuperInterfaces(EList<QualifiedTypeArgument> interfaceReferences,
+	protected void collectAllSuperInterfaces(EList<TypeReference> interfaceReferences,
 		EList<ConcreteClassifier> resultInterfaceList) {
 	
-		for (QualifiedTypeArgument typeArg : interfaceReferences) {
-			Type type = getReferencedType(typeArg.getType(), null);
+		for (TypeReference typeArg : interfaceReferences) {
+			Type type = getReferencedType(typeArg, null);
 			if (type instanceof Interface) {
 				Interface superInterface = (Interface) type;
 				resultInterfaceList.add(superInterface);

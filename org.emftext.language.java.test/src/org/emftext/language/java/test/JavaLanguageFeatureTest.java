@@ -21,7 +21,6 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.expressions.Expression;
-import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticImport;
@@ -40,6 +39,7 @@ import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
+import org.emftext.language.java.types.TypeReference;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -1150,7 +1150,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 0);
-		EList<QualifiedTypeArgument> implementedInterfaces = clazz.getImplements();
+		EList<TypeReference> implementedInterfaces = clazz.getImplements();
 		assertEquals(2, implementedInterfaces.size());
 
 		parseAndReprint(filename);
