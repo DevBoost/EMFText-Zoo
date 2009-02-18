@@ -6,7 +6,6 @@
  */
 package org.emftext.language.java.impl;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.emftext.language.java.JavaFactory;
