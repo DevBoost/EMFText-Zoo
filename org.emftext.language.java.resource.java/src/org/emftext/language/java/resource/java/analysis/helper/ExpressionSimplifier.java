@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.annotations.AnnotationElementValuePair;
+import org.emftext.language.java.annotations.AnnotationAttributeSetting;
 import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.CastExpression;
@@ -66,7 +66,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 	
 	public EObject getSingleContained(EObject parent) {
 		if (parent.eContainer() instanceof AnnotationInstance ||
-				parent.eContainer() instanceof AnnotationElementValuePair) {
+				parent.eContainer() instanceof AnnotationAttributeSetting) {
 			//special case. Might be changed in the future.
 			return null;
 		}

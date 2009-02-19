@@ -1,5 +1,5 @@
 SYNTAXDEF java
-FOR <http://www.emftext.org/java>
+FOR <http://www.emftext.org/java> <java.genmodel>
 START containers.CompilationUnit, containers.Package, containers.EmptyModel
 
 IMPORTS {
@@ -138,17 +138,18 @@ classifiers.Annotation
 
 annotations.AnnotationInstance
 	::=	"@" type 
-		("("
-			( 
-		    	(elementValuePairs ("," elementValuePairs)*) |
-		    	(singleElementValue) | 
-		    	("{" (elementValues ("," elementValues)*)? (",")? "}")
-		    )?
-		")")? 
+		( "(" (
+		  value:annotations.AnnotationAttributeSettingList,arrays.ArrayInitializer,expressions.ConditionalExpression
+		)? ")")? 
 	;
 
-annotations.AnnotationElementValuePair
-	::= key "=" value
+annotations.AnnotationAttributeSettingList
+	::= settings ("," settings)*
+	;
+	
+annotations.AnnotationAttributeSetting
+	::= attribute[] "=" 
+	    value:arrays.ArrayInitializer,expressions.ConditionalExpression
 	;
 
 generics.TypeParameter
@@ -255,7 +256,8 @@ arrays.ArrayInstantiationBySize
 	;
 
 arrays.ArrayInitializer
-    ::= "{" ( (arrayInitializers | initialValues:expressions.AssignmentExpression) ("," (arrayInitializers | initialValues:expressions.AssignmentExpression) )* )? (",")? "}"    
+    ::= "{" (initialValues:expressions.AssignmentExpression,arrays.ArrayInitializer
+            ("," initialValues:expressions.AssignmentExpression,arrays.ArrayInitializer )*)? (",")? "}"    
     ;
 
 arrays.ArraySelector
