@@ -22,13 +22,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import org.emftext.sdk.GenPackageByNameFinder;
+import org.emftext.sdk.finders.GenPackageByNameFinder;
 import org.emftext.sdk.MetamodelHelper;
 import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
 import org.emftext.sdk.codegen.IProblemCollector;
 import org.emftext.sdk.codegen.GenerationContext;
-import org.emftext.sdk.codegen.ResourcePluginGenerator;
+import org.emftext.sdk.codegen.generators.ResourcePluginGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.runtime.resource.ITextResource;
 
