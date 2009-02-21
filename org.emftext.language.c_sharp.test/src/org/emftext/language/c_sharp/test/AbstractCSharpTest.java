@@ -11,9 +11,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.language.c_sharp.CompilationUnit;
+import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
 
 public class AbstractCSharpTest extends TestCase {
-	
+		
 	protected CompilationUnit loadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {
 		
@@ -49,5 +50,10 @@ public class AbstractCSharpTest extends TestCase {
 		for (Diagnostic diagnostic : diagnostics) {
 			System.out.println(diagnostic.getMessage());
 		}
+	}
+	
+	//checks if the running os is windows
+	protected boolean checkCSharpPreconditons(){
+		return CheckCSPrecondition.checkAll();
 	}
 }
