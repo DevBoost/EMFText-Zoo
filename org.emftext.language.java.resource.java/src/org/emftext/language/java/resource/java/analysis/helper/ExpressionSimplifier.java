@@ -20,10 +20,12 @@ import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.UnaryExpression;
 import org.emftext.language.java.operators.Addition;
 import org.emftext.language.java.operators.OperatorsFactory;
+import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.resource.java.JavaReferenceResolverSwitch;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypesPackage;
@@ -116,7 +118,8 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							id = id.substring(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 							id = id.substring(id.indexOf("_") + 1);
 							
-							((ITextResource)resource).registerContextDependentProxy(
+							((ITextResource) resource).registerContextDependentProxy(
+									new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(JavaReferenceResolverSwitch.getElementReferenceTargetReferenceResolver()),
 									mainIdReference,
 									ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 									id,
@@ -138,7 +141,8 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 								
 								idRef.setTarget((ReferenceableElement) newProxy);
 								
-								((ITextResource)resource).registerContextDependentProxy(
+								((ITextResource) resource).registerContextDependentProxy(
+										new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(JavaReferenceResolverSwitch.getElementReferenceTargetReferenceResolver()),
 										idRef,
 										ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 										nsPart,
