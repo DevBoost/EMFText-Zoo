@@ -1,30 +1,14 @@
 package org.emftext.language.java.resource.java.analysis;
 
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.classifiers.Classifier;
-import org.emftext.language.java.commons.NamedElement;
-import org.emftext.language.java.imports.ClassifierImport;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-
-public class ClassifierImportClassifierReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<ClassifierImport> {
-
-	@Override
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
-		return ((NamedElement)element).getName();
+public class ClassifierImportClassifierReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.java.imports.ClassifierImport, org.emftext.language.java.classifiers.ConcreteClassifier> {
+	
+	@Override	
+	protected java.lang.String doDeResolve(org.emftext.language.java.classifiers.ConcreteClassifier element, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
+		return super.doDeResolve(element, container, reference);
 	}
-
-	@Override
-	protected void doResolve(String identifier, ClassifierImport theImport,
-			EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult result) {
-		
-		Classifier importedClassifier = JavaClasspath.INSTANCE.getClassifier(theImport, identifier);
-		if (importedClassifier != null) {
-			importedClassifier = (Classifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
-			if (!importedClassifier.eIsProxy()) {
-				result.addMapping(identifier, importedClassifier);
-			}
-		}
+	
+	@Override	
+	protected void doResolve(java.lang.String identifier, org.emftext.language.java.imports.ClassifierImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
+		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }

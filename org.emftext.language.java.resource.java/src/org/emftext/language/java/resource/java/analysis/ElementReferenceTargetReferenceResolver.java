@@ -1,12 +1,9 @@
 package org.emftext.language.java.resource.java.analysis;
 
-import org.emftext.language.java.references.ElementReference;
-import org.emftext.language.java.resource.java.analysis.helper.JavaReferenceResolver;
-
-public class ElementReferenceTargetReferenceResolver extends JavaReferenceResolver<ElementReference> {
+public class ElementReferenceTargetReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.java.references.ElementReference, org.emftext.language.java.references.ReferenceableElement> {
 	
 	@Override	
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference) {
+	protected java.lang.String doDeResolve(org.emftext.language.java.references.ReferenceableElement element, org.emftext.language.java.references.ElementReference container, org.eclipse.emf.ecore.EReference reference) {
 		return super.doDeResolve(element, container, reference);
 	}
 	

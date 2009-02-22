@@ -1,11 +1,9 @@
 package org.emftext.language.java.resource.java.analysis;
 
-import org.emftext.language.java.resource.java.analysis.helper.JavaReferenceResolver;
-
-public class JumpTargetReferenceResolver extends JavaReferenceResolver<org.emftext.language.java.statements.Jump> {
+public class JumpTargetReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.java.statements.Jump, org.emftext.language.java.statements.JumpLabel> {
 	
 	@Override	
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.emftext.language.java.statements.Jump container, org.eclipse.emf.ecore.EReference reference) {
+	protected java.lang.String doDeResolve(org.emftext.language.java.statements.JumpLabel element, org.emftext.language.java.statements.Jump container, org.eclipse.emf.ecore.EReference reference) {
 		return super.doDeResolve(element, container, reference);
 	}
 	
