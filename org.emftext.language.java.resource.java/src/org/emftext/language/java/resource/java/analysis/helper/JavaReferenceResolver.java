@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationAttribute;
+import org.emftext.language.java.annotations.AnnotationAttributeSetting;
 import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
@@ -66,6 +67,7 @@ import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
@@ -113,7 +115,7 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 
 
-public abstract class JavaReferenceResolver<T extends EObject> extends AbstractReferenceResolver<T, EObject> {
+public abstract class JavaReferenceResolver<T extends EObject, R extends EObject> extends AbstractReferenceResolver<T, R> {
 
 	public static final String UNRESOLVED_REFERENCE_STRING =
 		"UNKNOWN";
@@ -121,7 +123,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected ITextResource myResource = null;
 	
 	@Override
-	protected String doDeResolve(EObject element, T container,
+	protected String doDeResolve(R element, T container,
 			EReference reference) {
 		
 		String fullID = UNRESOLVED_REFERENCE_STRING; 
@@ -424,7 +426,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	@Override
 	protected void doResolve(String identifier, T container,
 			EReference reference, int position, boolean resolveFuzzy,
-			IReferenceResolveResult<EObject> result) {
+			IReferenceResolveResult<R> result) {
 		myResource = (ITextResource) container.eResource(); 
 
 		//the element we are looking for
@@ -498,7 +500,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 
 		
 		//inside annotation instance 
-		else if (previousType == null && annotationInstance != null && annotationInstance != containerContainer.eContainer() /*not the AnnotationInstance itself*/) {
+		else if (previousType == null && annotationInstance != null) {
 			TypeReference typeReference = annotationInstance.getType();
 			previousType = getReferencedType(typeReference, null); 
 		}
@@ -537,7 +539,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 			if (targetObject.eIsProxy()) {
 				targetObject = EcoreUtil.resolve(targetObject, myResource);
 			}
-			result.addMapping(identifier, targetObject);
+			result.addMapping(identifier, (R)targetObject);
 		}
 		else {
 			//in this cases we  may reference something that is probably a package
@@ -548,7 +550,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 				if (ref.getNext() != null && ref instanceof IdentifierReference) {
 					Package packageDescriptor = ContainersFactory.eINSTANCE.createPackage();
 					packageDescriptor.setName(identifier);
-					result.addMapping(identifier, packageDescriptor);
+					result.addMapping(identifier, (R)packageDescriptor);
 					
 					if(ref.eContainer() instanceof Reference) {
 						ref = (Reference) ref.eContainer();
@@ -1086,9 +1088,10 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 					//nothing else to do
 					result = true;
 				}
-				else if (referencableElement instanceof AnnotationAttribute) {
-					//nothing else to do
-					result = true;
+				else if (referencableElement instanceof AnnotationAttribute || referencableElement instanceof InterfaceMethod) {
+					if(context instanceof AnnotationAttributeSetting) {
+						result = true;
+					}
 				}
 				else {
 					result = false;
@@ -1434,7 +1437,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		return null;
 	}
 	
-	protected Classifier wrapPrimitives(PrimitiveType primitiveType) {
+	protected ConcreteClassifier wrapPrimitives(PrimitiveType primitiveType) {
 		Classifier javaClassifier = null;
 		
 		if (primitiveType instanceof Boolean) {
@@ -1464,7 +1467,7 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 		if (primitiveType instanceof Void) {
 			javaClassifier = JavaClasspath.INSTANCE.getClassifier("java.lang.Void");
 		}
-		return (Classifier) EcoreUtil.resolve(javaClassifier, myResource);
+		return (ConcreteClassifier) EcoreUtil.resolve(javaClassifier, myResource);
 	}
 	
 	protected EList<Member> getAllMemebers(AnonymousClass anonymousClass) {
@@ -1480,13 +1483,17 @@ public abstract class JavaReferenceResolver<T extends EObject> extends AbstractR
 	protected EList<Member> getAllMembers(Classifier javaClassifier) {
 		EList<Member> memberList = new BasicEList<Member>();
 		//because inner classes are found in separate class files
-		memberList.addAll(
-				JavaClasspath.INSTANCE.getInternalClassifiers(javaClassifier));
+		if (javaClassifier instanceof ConcreteClassifier) {
+			memberList.addAll(
+					JavaClasspath.INSTANCE.getInternalClassifiers((ConcreteClassifier) javaClassifier));
+		}
 		for (Classifier superClassifier : getAllSuperTypes(javaClassifier)) {
 			if (superClassifier instanceof MemberContainer /*Class and Interface*/) {
 				memberList.addAll(((MemberContainer) superClassifier).getMembers());
-				memberList.addAll(
-						JavaClasspath.INSTANCE.getInternalClassifiers(superClassifier));
+				if (javaClassifier instanceof ConcreteClassifier) {
+					memberList.addAll(
+							JavaClasspath.INSTANCE.getInternalClassifiers((ConcreteClassifier) superClassifier));
+				}
 			}
 			else {
 				//nothing

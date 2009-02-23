@@ -1,11 +1,11 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import org.emftext.language.java.resource.java.analysis.helper.JavaReferenceResolver;
 import org.emftext.language.java.statements.Jump;
 import org.emftext.language.java.statements.JumpLabel;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 public class JumpTargetReferenceResolver extends 
-	AbstractReferenceResolver<Jump, JumpLabel> {
+	JavaReferenceResolver<Jump, JumpLabel> {
 	
 	@Override	
 	protected java.lang.String doDeResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {

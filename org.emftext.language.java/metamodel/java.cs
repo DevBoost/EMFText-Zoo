@@ -137,14 +137,14 @@ classifiers.Annotation
 	;
 
 annotations.AnnotationInstance
-	::=	"@" type 
-		( "(" (
+	::=	"@" type
+		( "("
 		  value:annotations.AnnotationAttributeSettingList,arrays.ArrayInitializer,expressions.ConditionalExpression
-		)? ")")? 
+		")")? 
 	;
 
 annotations.AnnotationAttributeSettingList
-	::= settings ("," settings)*
+	::= (settings ("," settings)*)?
 	;
 	
 annotations.AnnotationAttributeSetting
@@ -263,7 +263,7 @@ arrays.ArrayInitializer
 arrays.ArraySelector
 	::= "[" position:expressions.AssignmentExpression? "]"
 	;
-
+	
 types.NamespaceClassifierReference
 	::= (namespaces[]  #0 "." #0)* (classifierReferences #0 "." #0)* classifierReferences
 	;

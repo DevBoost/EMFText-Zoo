@@ -2,11 +2,11 @@ package org.emftext.language.java.resource.java.analysis;
 
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.resource.java.analysis.helper.JavaReferenceResolver;
 import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 public class ElementReferenceTargetReferenceResolver extends 
-	AbstractReferenceResolver<ElementReference, ReferenceableElement> {
+	JavaReferenceResolver<ElementReference, ReferenceableElement> {
 	
 	@Override	
 	protected java.lang.String doDeResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {

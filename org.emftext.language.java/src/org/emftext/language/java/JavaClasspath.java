@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emftext.language.java.classifiers.Class;
-import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamespaceAwareElement;
@@ -96,7 +95,7 @@ public class JavaClasspath {
 	public void registerClassifierSource(CompilationUnit cu, URI uri, Map<URI, URI> localURI_MAP) {
 		String packageName = JavaUniquePathConstructor.packageName(cu);
 		
-		for(Classifier classifier : cu.getClassifiers()) {
+		for(ConcreteClassifier classifier : cu.getClassifiers()) {
 			registerClassifier(
 					packageName, classifier.getName(), uri, localURI_MAP);
 			registerInnerClassifiers(
@@ -104,12 +103,12 @@ public class JavaClasspath {
 		}
 	}
 	
-	protected void registerInnerClassifiers(Classifier classifier, String packageName, String className, URI uri, Map<URI, URI> localURI_MAP) {
+	protected void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri, Map<URI, URI> localURI_MAP) {
 		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
-			if (innerCand instanceof Classifier) {
+			if (innerCand instanceof ConcreteClassifier) {
 				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
 				registerClassifier(packageName, newClassName, uri, localURI_MAP);
-				registerInnerClassifiers((Classifier)innerCand, packageName, newClassName, uri, localURI_MAP);
+				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri, localURI_MAP);
 			}
 		}
 	}
@@ -181,7 +180,7 @@ public class JavaClasspath {
 	private EList<ConcreteClassifier> javaLangPackage = null;
 	
 	
-	public EList<ConcreteClassifier> getInternalClassifiers(Classifier container) {
+	public EList<ConcreteClassifier> getInternalClassifiers(ConcreteClassifier container) {
 		if(container == null) {
 			return new BasicEList<ConcreteClassifier>();
 		}
@@ -254,7 +253,7 @@ public class JavaClasspath {
 	 * @param classifierName the name of the classifier in the given package
 	 * @return
 	 */
-	public Classifier getClassifier(Import theImport, String classifierName) {
+	public ConcreteClassifier getClassifier(Import theImport, String classifierName) {
 		String containerName = getContainerNameFromNamespace(theImport, "");
 		if (containerName == null) {
 			return null;
@@ -269,7 +268,7 @@ public class JavaClasspath {
 	 * @param theImport that points directly at the classifier
 	 * @return
 	 */
-	public Classifier getClassifier(Import theImport) {
+	public ConcreteClassifier getClassifier(Import theImport) {
 		String fullQualifiedName = getContainerNameFromNamespace(theImport, "");
 		if (fullQualifiedName == null || fullQualifiedName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
 			return null;
@@ -322,13 +321,13 @@ public class JavaClasspath {
 		return containerName;
 	}
 	
-	public Classifier getClassifier(String fullQualifiedName) {
+	public ConcreteClassifier getClassifier(String fullQualifiedName) {
 		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
 		//set also the name to reason about it without resolving the proxy
 		((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
-		return (Classifier) classifierProxy;
+		return (ConcreteClassifier) classifierProxy;
 	}
 	
 	public EList<ConcreteClassifier> getDefaultImports() {
