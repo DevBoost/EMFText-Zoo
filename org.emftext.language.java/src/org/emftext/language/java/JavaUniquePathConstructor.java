@@ -2,6 +2,7 @@ package org.emftext.language.java;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
 
 public class JavaUniquePathConstructor {
@@ -72,8 +73,8 @@ public class JavaUniquePathConstructor {
 		return nameInProxy.equals(classifierName);
 	}
 
-	public static String packageName(CompilationUnit cu) {
-		EList<String> packageNameSegements = cu.getNamespaces();
+	public static String packageName(NamespaceAwareElement nsElement) {
+		EList<String> packageNameSegements = nsElement.getNamespaces();
 		String packageName = packageName(packageNameSegements);
 		
 		if (packageName == null) {

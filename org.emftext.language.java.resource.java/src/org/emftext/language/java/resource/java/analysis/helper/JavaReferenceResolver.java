@@ -16,6 +16,7 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationAttribute;
 import org.emftext.language.java.annotations.AnnotationAttributeSetting;
 import org.emftext.language.java.annotations.AnnotationInstance;
+import org.emftext.language.java.annotations.AnnotationsPackage;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -500,9 +501,8 @@ public abstract class JavaReferenceResolver<T extends EObject, R extends EObject
 
 		
 		//inside annotation instance 
-		else if (previousType == null && annotationInstance != null) {
-			TypeReference typeReference = annotationInstance.getType();
-			previousType = getReferencedType(typeReference, null); 
+		else if (previousType == null && annotationInstance != null && !AnnotationsPackage.Literals.ANNOTATION_INSTANCE__ANNOTATION.equals(reference)) {
+			previousType = annotationInstance.getAnnotation();
 		}
 		
 		if (previousType == null && containerContainer instanceof NormalSwitchCase) {
@@ -1041,10 +1041,17 @@ public abstract class JavaReferenceResolver<T extends EObject, R extends EObject
 			if (context.eContainer() instanceof NamespaceClassifierReference) {
 				NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) context.eContainer();
 				if (!nsClassifierReference.getNamespaces().isEmpty()) {
-					//done later
+					//done later in type resolver
 					return false;
 				}
 			}			
+			return true;
+		}
+		if (context instanceof AnnotationInstance) {
+			if(!((AnnotationInstance)context).getNamespaces().isEmpty()) {
+				//done later in type resolver
+				return false;
+			}
 			return true;
 		}
 		if (context instanceof ElementReference) {

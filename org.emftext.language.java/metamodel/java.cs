@@ -137,7 +137,7 @@ classifiers.Annotation
 	;
 
 annotations.AnnotationInstance
-	::=	"@" type
+	::=	"@" (namespaces[] #0 "." #0 )* annotation[]
 		( "("
 		  value:annotations.AnnotationAttributeSettingList,arrays.ArrayInitializer,expressions.ConditionalExpression
 		")")? 
