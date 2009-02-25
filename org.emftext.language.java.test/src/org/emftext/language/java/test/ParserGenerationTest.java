@@ -1,12 +1,12 @@
 package org.emftext.language.java.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.emftext.test.ConcreteSyntaxTestHelper.createANTLRGenerator;
 import static org.emftext.test.ConcreteSyntaxTestHelper.generateANTLRGrammarToTempFile;
 import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntax;
 import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntaxResource;
 import static org.emftext.test.ConcreteSyntaxTestHelper.registerResourceFactories;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,17 +20,17 @@ import junit.framework.Assert;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.junit.Before;
-import org.junit.Test;
-import org.emftext.sdk.finders.GenPackageByNameFinder;
+import org.emftext.runtime.resource.ITextResource;
 import org.emftext.sdk.MetamodelHelper;
+import org.emftext.sdk.codegen.GenerationContext;
 import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
 import org.emftext.sdk.codegen.IProblemCollector;
-import org.emftext.sdk.codegen.GenerationContext;
-import org.emftext.sdk.codegen.generators.ResourcePluginGenerator;
+import org.emftext.sdk.codegen.generators.ResourcePluginContentGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
-import org.emftext.runtime.resource.ITextResource;
+import org.emftext.sdk.finders.GenPackageByNameFinder;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * This test checks whether regenerating the parser with EMFText
@@ -77,7 +77,7 @@ public class ParserGenerationTest {
 				fail(problem.getMessage());
 			}
 		});
-		InputStream grammarStream = ResourcePluginGenerator.deriveGrammar(antlrGen, context);
+		InputStream grammarStream = ResourcePluginContentGenerator.deriveGrammar(antlrGen, context);
 		return getContent(grammarStream);
 	}
 
