@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -57,6 +56,7 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.impl.TextResourceHelper;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -644,12 +644,13 @@ public abstract class AbstractJavaParserTest extends TestCase {
 	}
 
 	protected boolean assertResolveAllProxies(Resource resource) {
+		List<EObject> unresolvedProxies = new TextResourceHelper().findUnresolvedProxies(resource);
 		boolean failure = false;
 		String msg="";
 		
-		for(Iterator<EObject> elementIt = EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
-			InternalEObject nextElement = (InternalEObject) elementIt.next();
-			assertFalse("Can not reslove: " + nextElement.eProxyURI(), nextElement.eIsProxy());
+		for (EObject next : unresolvedProxies) {
+			InternalEObject nextElement = (InternalEObject) next;
+			assertFalse("Can not resolve: " + nextElement.eProxyURI(), nextElement.eIsProxy());
 			for (EObject crElement : nextElement.eCrossReferences()) {
 				crElement = EcoreUtil.resolve(crElement, resource);
 				if (crElement.eIsProxy()) {
