@@ -76,7 +76,23 @@ public class ParserGenerationTest {
 			public void addProblem(GenerationProblem problem) {
 				fail(problem.getMessage());
 			}
-		});
+		}) {
+
+			@Override
+			public File getPluginProjectFolder() {
+				return null;
+			}
+
+			@Override
+			public String getSyntaxProjectName() {
+				return null;
+			}
+
+			@Override
+			public String getSyntaxProjectRelativePath() {
+				return null;
+			}
+		};
 		InputStream grammarStream = ResourcePluginContentGenerator.deriveGrammar(antlrGen, context);
 		return getContent(grammarStream);
 	}
