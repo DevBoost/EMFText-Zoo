@@ -1,4 +1,4 @@
-SYNTAXDEF ecore 
+SYNTAXDEF tecore 
 FOR       <http://www.eclipse.org/emf/2002/Ecore>
 START     EPackage
 
@@ -15,7 +15,7 @@ TOKENS {
 RULES {
 	EPackage ::= "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['<', '>'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
 	
-	EClass ::= !1(abstract[T_ABSTRACT] #1)? "natural" #1 name[] #1 ("extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
+	EClass ::= !1(abstract[T_ABSTRACT] #1)? "class" #1 name[] #1 ("extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
 				("[" (eAnnotations)* "]")?
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
