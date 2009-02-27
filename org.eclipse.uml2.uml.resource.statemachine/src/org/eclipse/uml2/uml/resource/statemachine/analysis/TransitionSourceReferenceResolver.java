@@ -1,16 +1,21 @@
 package org.eclipse.uml2.uml.resource.statemachine.analysis;
 
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.Vertex;
+import org.emftext.runtime.resource.IReferenceResolveResult;
+import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-public class TransitionSourceReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.uml2.uml.Transition> {
+public class TransitionSourceReferenceResolver extends 
+	AbstractReferenceResolver<Transition, Vertex> {
 
 	@Override
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.eclipse.uml2.uml.Transition container, org.eclipse.emf.ecore.EReference reference) {
-		return ((Vertex) element).getName();
+	protected java.lang.String doDeResolve(Vertex element, org.eclipse.uml2.uml.Transition container, org.eclipse.emf.ecore.EReference reference) {
+		return element.getName();
 	}
 
 	@Override
-	protected void doResolve(java.lang.String identifier, org.eclipse.uml2.uml.Transition container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IResolveResult result) {	
+	protected void doResolve(String identifier, Transition container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Vertex> result) {	
 		
 		for (Vertex sourceCand: container.getContainer().getSubvertices()) {
 			if (resolveFuzzy) {
