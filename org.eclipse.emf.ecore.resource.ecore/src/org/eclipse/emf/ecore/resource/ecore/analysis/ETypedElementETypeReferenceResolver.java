@@ -9,6 +9,6 @@ public class ETypedElementETypeReferenceResolver extends org.emftext.runtime.res
 	
 	@Override	
 	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.ETypedElement container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
-		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
+		new EMFTypesResolver().doResolve(identifier, container.eResource(), reference, position, resolveFuzzy, result);
 	}
 }
