@@ -1,4 +1,4 @@
-SYNTAXDEF tecore 
+SYNTAXDEF ecore 
 FOR       <http://www.eclipse.org/emf/2002/Ecore>
 START     EPackage
 

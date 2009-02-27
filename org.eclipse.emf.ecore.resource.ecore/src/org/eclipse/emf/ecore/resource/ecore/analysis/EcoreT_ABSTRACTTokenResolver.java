@@ -12,7 +12,8 @@ public class EcoreT_ABSTRACTTokenResolver extends org.emftext.runtime.resource.i
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		if ("abstract".equalsIgnoreCase(lexem)) {
 			result.setResolvedToken(true);
+		} else {
+			result.setResolvedToken(false);
 		}
-		result.setResolvedToken(false);
 	}
 }

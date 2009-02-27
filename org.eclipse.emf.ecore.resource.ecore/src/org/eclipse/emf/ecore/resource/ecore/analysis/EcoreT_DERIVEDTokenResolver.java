@@ -12,7 +12,8 @@ public class EcoreT_DERIVEDTokenResolver extends org.emftext.runtime.resource.im
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		if ("derived".equalsIgnoreCase(lexem)) {
 			result.setResolvedToken(true);
+		} else {
+			result.setResolvedToken(false);
 		}
-		result.setResolvedToken(false);
 	}
 }
