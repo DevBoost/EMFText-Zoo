@@ -89,7 +89,7 @@ public class ParserGenerationTest {
 			}
 
 			@Override
-			public String getSyntaxProjectRelativePath() {
+			public String getProjectRelativePathToSyntaxFile() {
 				return null;
 			}
 		};
