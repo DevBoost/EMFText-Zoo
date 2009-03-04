@@ -13,6 +13,13 @@ OPTIONS {
 TOKENS {
 	DEFINE T_ABSTRACT $'abstract'$;
 	DEFINE T_DERIVED $'derived'$;
+	DEFINE T_VOLATILE $'volatile'$;
+	DEFINE T_UNIQUE $'unique'$;
+	DEFINE T_ORDERED $'ordered'$;
+	DEFINE T_UNSETTABLE $'unsettable'$;
+	DEFINE T_CHANGEABLE $'changeable'$;
+	DEFINE T_TRANSIENT $'transient'$;
+	DEFINE T_ID $'id'$;
 	DEFINE CONTAINMENT $'containment'$;
 }
  
@@ -24,11 +31,16 @@ RULES {
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
-	ecore.EAttribute ::= !2 (derived[T_DERIVED] #1)? "attribute" #1 eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
+	ecore.EAttribute ::= !2 (derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
+					unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|transient[T_TRANSIENT]|transient[T_ID] #1)* 
+				"attribute" #1 eType[] #1 name[] ("=" defaultValueLiteral['"','"'])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
 	ecore.EParameter ::= eType[] #1 name[];
 	
-	ecore.EReference ::= !2 (containment[CONTAINMENT] #1 )? (derived[T_DERIVED] #1)? "reference" #1 eType[] #1 name[] 
+	ecore.EReference ::= !2 (containment[CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
+							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
+							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE] #1)* 
+					"reference" #1 eType[] #1 name[] ("=" defaultValueLiteral['"','"']) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
 	ecore.EOperation ::= !2 "operation" #1 ("void" | eType[]) ( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 name[] #1 
