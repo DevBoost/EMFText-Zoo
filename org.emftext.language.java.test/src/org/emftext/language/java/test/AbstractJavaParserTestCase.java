@@ -62,15 +62,15 @@ import org.emftext.runtime.resource.impl.TextResourceHelper;
  * Abstract superclass that provides some frequently used assert and helper
  * methods.
  */
-public abstract class AbstractJavaParserTest extends TestCase {
+public abstract class AbstractJavaParserTestCase extends TestCase {
 
-	public AbstractJavaParserTest() {
+	public AbstractJavaParserTestCase() {
 		super();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
 
-	public AbstractJavaParserTest(String name) {
+	public AbstractJavaParserTestCase(String name) {
 		super(name);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());

@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.test.AbstractJavaParserTest;
+import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.runtime.resource.ILocationMap;
 import org.emftext.runtime.resource.ITextResource;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import org.junit.Test;
  * correct location information (line, position...) for the 
  * elements in a TextResource.
  */
-public class LocationTest extends AbstractJavaParserTest {
+public class LocationTest extends AbstractJavaParserTestCase {
 	
 	private static final String INPUT_FOLDER = "input" + File.separator + "locations" + File.separator;
 

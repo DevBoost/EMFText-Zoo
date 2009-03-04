@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.emftext.language.simple_c.CompilationUnit;
 
-public class ForceEOFTest extends AbstractCTest {
+public class ForceEOFTest extends AbstractCTestCase {
 	
 	private static final String TEST_INPUT_FROM_MEMORY = "int x;;";
 

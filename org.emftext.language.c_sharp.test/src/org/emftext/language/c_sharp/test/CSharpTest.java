@@ -3,7 +3,7 @@ package org.emftext.language.c_sharp.test;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSSyntaxWrapper;
 
 
-public class CSharpTest extends AbstractCSharpTest {
+public class CSharpTest extends AbstractCSharpTestCase {
 		
 	public void testAllInputCSFiles(){
 		if(checkCSharpPreconditons()){
@@ -13,7 +13,5 @@ public class CSharpTest extends AbstractCSharpTest {
 		else{
 			fail("Windows and/or .Net not installed");
 		}
-		
 	}
-	
 }

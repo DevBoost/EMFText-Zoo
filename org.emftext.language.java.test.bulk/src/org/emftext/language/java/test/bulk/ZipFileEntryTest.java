@@ -11,9 +11,9 @@ import java.util.zip.ZipFile;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.test.AbstractJavaParserTest;
+import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
-public class ZipFileEntryTest extends AbstractJavaParserTest {
+public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 
 	private final ZipFile zipFile;
 	private final List<ZipEntry> entries = new ArrayList<ZipEntry>();

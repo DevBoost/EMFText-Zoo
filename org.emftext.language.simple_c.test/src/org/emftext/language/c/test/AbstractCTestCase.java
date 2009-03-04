@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.language.simple_c.CompilationUnit;
 
-public class AbstractCTest extends TestCase {
+public class AbstractCTestCase extends TestCase {
 	
 	protected CompilationUnit loadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {

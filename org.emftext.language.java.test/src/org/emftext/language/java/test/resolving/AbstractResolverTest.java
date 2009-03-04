@@ -8,10 +8,10 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.Statement;
-import org.emftext.language.java.test.AbstractJavaParserTest;
+import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.variables.LocalVariable;
 
-public abstract class AbstractResolverTest extends AbstractJavaParserTest {
+public abstract class AbstractResolverTest extends AbstractJavaParserTestCase {
 
 	protected static final String TEST_INPUT_FOLDER_RESOLVING = "input/resolving/";
 

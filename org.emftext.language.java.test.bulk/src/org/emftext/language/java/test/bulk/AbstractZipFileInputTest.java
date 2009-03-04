@@ -17,9 +17,9 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.emftext.language.java.test.AbstractJavaParserTest;
+import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
-public abstract class AbstractZipFileInputTest extends AbstractJavaParserTest {
+public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCase {
 
 	protected final static String BULK_INPUT_DIR = "input/";
 

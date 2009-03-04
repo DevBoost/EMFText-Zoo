@@ -60,7 +60,7 @@ import pkg.NumberLiterals;
  * 
  * @author Christian Wende
  */
-public class JavaLanguageFeatureTest extends AbstractJavaParserTest {
+public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	public JavaLanguageFeatureTest() throws Exception {
 		super();

@@ -1,16 +1,17 @@
 package org.emftext.language.c_sharp.test.cssyntaxcheck;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CheckCSSyntaxWrapper {
 	
-	private final String CSSEXE="CSharpSyntaxCheck\\CheckCSSyntax.exe";
-	private final String USERDIR=System.getProperty("user.dir")+"\\";
-	private final String INPUT=USERDIR+"input\\";
-	private final String EXEPATH=USERDIR+CSSEXE;	
+	private final String CSSEXE="CSharpSyntaxCheck" + File.separator + "CheckCSSyntax.exe";
+	private final String USERDIR=System.getProperty("user.dir") + File.separator;
+	private final String INPUT=USERDIR+"input" + File.separator;
+	private final String EXEPATH=USERDIR+CSSEXE;
 	
 	public CheckCSSyntaxWrapper(){		
 		

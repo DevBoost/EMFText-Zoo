@@ -8,7 +8,7 @@ import org.emftext.language.simple_c.CompilationUnit;
 import org.emftext.language.simple_c.Definition;
 import org.emftext.language.simple_c.Variable;
 
-public class CTest extends AbstractCTest {
+public class CTest extends AbstractCTestCase {
 	
 	public void testVariables() {
 		try {

@@ -2,7 +2,7 @@ package org.emftext.language.java.test;
 
 import org.junit.Test;
 
-public class UnicodeTest extends AbstractJavaParserTest {
+public class UnicodeTest extends AbstractJavaParserTestCase {
 
 	@Test
 	public void testUnicodeInput() {
