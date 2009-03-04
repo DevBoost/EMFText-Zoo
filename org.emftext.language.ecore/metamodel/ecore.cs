@@ -6,12 +6,16 @@ IMPORTS {
 		ecore:<http://www.eclipse.org/emf/2002/Ecore>
 }
 
+OPTIONS {
+	overridePluginXML = "false";
+}
+
 TOKENS {
 	DEFINE T_ABSTRACT $'abstract'$;
 	DEFINE T_DERIVED $'derived'$;
 	DEFINE CONTAINMENT $'containment'$;
 }
-
+ 
 RULES {
 	EPackage ::= "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['<', '>'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
 	
