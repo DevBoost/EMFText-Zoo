@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 public class EMFTypesResolver {
@@ -23,6 +24,8 @@ public class EMFTypesResolver {
 				addResults(identifier, allClassifiers, resolveFuzzy, result);
 			}
 		}	
+		addResults(identifier, EcorePackage.eINSTANCE.getEClassifiers(), resolveFuzzy, result);
+		
 	}
 
 
