@@ -1,5 +1,7 @@
 package org.emftext.language.java.test;
 
+import java.io.File;
+
 import org.junit.Test;
 
 public class UnicodeTest extends AbstractJavaParserTestCase {
@@ -21,7 +23,7 @@ public class UnicodeTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected String getTestInputFolder() {
-		return "input\\unicode";
+		return "input" + File.separator + "unicode";
 	}
 
 }

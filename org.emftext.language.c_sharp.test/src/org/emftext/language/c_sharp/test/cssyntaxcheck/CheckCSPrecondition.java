@@ -3,7 +3,7 @@ package org.emftext.language.c_sharp.test.cssyntaxcheck;
 public class CheckCSPrecondition {
 
 	public static boolean checkWindowsInstalled(){
-		return true;
+		return System.getProperty("os.name").startsWith("Windows");
 	}
 	
 	public static boolean checkDotNetInstalled(){

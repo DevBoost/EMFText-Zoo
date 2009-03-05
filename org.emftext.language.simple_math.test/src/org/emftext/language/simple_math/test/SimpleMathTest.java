@@ -1,5 +1,6 @@
 package org.emftext.language.simple_math.test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +17,7 @@ public class SimpleMathTest extends TestCase {
 	
 	public void testOnePlusTwo() {
 		try {
-			Additive root = loadResource(new FileInputStream("input\\one_plus_two.sm"), "one_plus_two.sm");
+			Additive root = loadResource(new FileInputStream("input" + File.separator + "one_plus_two.sm"), "one_plus_two.sm");
 			// check left
 			NumberAtom leftAtom = root.getLeft().getLeft().getAtom();
 			assertTrue(leftAtom instanceof IntegerLiteralExp);
@@ -38,7 +39,7 @@ public class SimpleMathTest extends TestCase {
 
 	public void testBrackets() {
 		try {
-			Additive root = loadResource(new FileInputStream("input\\brackets.sm"), "brackets.sm");
+			Additive root = loadResource(new FileInputStream("input" + File.separator + "brackets.sm"), "brackets.sm");
 			assertNotNull(root);
 			// check left
 		} catch (IOException e) {

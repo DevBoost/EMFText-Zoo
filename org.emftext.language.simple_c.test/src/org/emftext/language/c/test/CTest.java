@@ -1,5 +1,6 @@
 package org.emftext.language.c.test;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +13,7 @@ public class CTest extends AbstractCTestCase {
 	
 	public void testVariables() {
 		try {
-			CompilationUnit unit = loadResource(new FileInputStream("input\\variables.c"), "variables.c");
+			CompilationUnit unit = loadResource(new FileInputStream("input" + File.separator + "variables.c"), "variables.c");
 			List<Definition> defs = unit.getDefinitions();
 			assertEquals(1, defs.size());
 			Definition firstDef = defs.get(0);
