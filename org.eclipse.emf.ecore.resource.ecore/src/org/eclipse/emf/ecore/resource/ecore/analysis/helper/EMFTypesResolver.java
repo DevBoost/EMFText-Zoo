@@ -18,7 +18,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *   - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.ecore.resource.ecore.analysis;
+package org.eclipse.emf.ecore.resource.ecore.analysis.helper;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 public class EMFTypesResolver {
 	
-	protected void doResolve(java.lang.String identifier, 
+	public void doResolve(java.lang.String identifier, 
 			Resource container, 
 			org.eclipse.emf.ecore.EReference reference, 
 			int position, 

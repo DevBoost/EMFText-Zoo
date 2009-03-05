@@ -1,5 +1,7 @@
 package org.eclipse.emf.ecore.resource.ecore.analysis;
 
+import org.eclipse.emf.ecore.resource.ecore.analysis.helper.EMFTypesResolver;
+
 public class EGenericTypeEClassifierReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EGenericType, org.eclipse.emf.ecore.EClassifier> {
 	
 	@Override	

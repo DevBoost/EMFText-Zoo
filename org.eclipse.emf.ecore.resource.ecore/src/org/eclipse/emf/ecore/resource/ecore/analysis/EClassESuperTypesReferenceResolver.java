@@ -20,6 +20,8 @@
  ******************************************************************************/
 package org.eclipse.emf.ecore.resource.ecore.analysis;
 
+import org.eclipse.emf.ecore.resource.ecore.analysis.helper.EMFTypesResolver;
+
 public class EClassESuperTypesReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EClass> {
 	
 	@Override	
