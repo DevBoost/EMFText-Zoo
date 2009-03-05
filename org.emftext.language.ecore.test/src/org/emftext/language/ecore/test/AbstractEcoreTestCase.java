@@ -1,24 +1,25 @@
 package org.emftext.language.ecore.test;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ecore.EcoreResource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class AbstractEcoreTestCase extends TestCase {
 		
-	protected EPackage loadResource(InputStream inputStream,
+	protected EPackage loadResource(String path,
 			String fileIdentifier) throws IOException {
 		
-		EcoreResource resource = tryToLoadResource(inputStream, fileIdentifier);
+		EcoreResource resource = tryToLoadResource(path, fileIdentifier);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
@@ -31,11 +32,11 @@ public class AbstractEcoreTestCase extends TestCase {
 		return ePackage;
 	}
 
-	protected EcoreResource tryToLoadResource(InputStream inputStream,
+	protected EcoreResource tryToLoadResource(String path,
 			String fileIdentifier) throws IOException {
 		
-		EcoreResourceTestWrapper resource = new EcoreResourceTestWrapper();
-		resource.load(inputStream, Collections.EMPTY_MAP);
+		ResourceSet rs = new ResourceSetImpl();
+		EcoreResource resource = (EcoreResource) rs.getResource(URI.createURI(path), true);
 		return resource;
 	}
 
