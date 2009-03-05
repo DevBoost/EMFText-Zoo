@@ -25,19 +25,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.LinkedList;
-import java.util.List;
 
-import org.eclipse.core.internal.content.TextContentDescriber;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.content.IContentDescriber;
 import org.eclipse.core.runtime.content.IContentDescription;
-import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.ITextContentDescriber;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
-import org.eclipse.emf.ecore.resource.ecore.EcoreResourceFactory;
-import org.eclipse.emf.common.util.URI;
 
 public class EMFTextContentDescriber implements IContentDescriber, ITextContentDescriber {
 	static {
@@ -53,17 +47,18 @@ public class EMFTextContentDescriber implements IContentDescriber, ITextContentD
 		registry.getExtensionToFactoryMap().remove("ecore");
 	}
 	
-	public int describe(Reader arg0, IContentDescription arg1)
-	throws IOException {
-		BufferedReader reader = new BufferedReader(arg0);
-		return checkForSimpleTextFile(reader, arg1);
+	public int describe(Reader reader, IContentDescription description)
+		throws IOException {
+		
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		return checkForSimpleTextFile(bufferedReader, description);
 	}
 	
-	public int describe(InputStream arg0, IContentDescription arg1)
+	public int describe(InputStream stream, IContentDescription description)
 		throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(arg0));
 		
-		return checkForSimpleTextFile(reader, arg1);
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
+		return checkForSimpleTextFile(bufferedReader, description);
 	}
 
 	private int checkForSimpleTextFile(BufferedReader reader, IContentDescription description) throws IOException {
@@ -88,8 +83,4 @@ public class EMFTextContentDescriber implements IContentDescriber, ITextContentD
 	public QualifiedName[] getSupportedOptions() {
 		return new QualifiedName[]{};
 	}
-
-	
-
-
 }
