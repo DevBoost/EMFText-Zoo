@@ -9,7 +9,7 @@ import org.emftext.language.java.statements.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTest {
+public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTestCase {
 	
 	@Before
 	public void setUp() {

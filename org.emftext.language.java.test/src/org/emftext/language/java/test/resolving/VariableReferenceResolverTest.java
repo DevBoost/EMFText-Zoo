@@ -12,7 +12,7 @@ import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.variables.LocalVariable;
 import org.junit.Test;
 
-public class VariableReferenceResolverTest extends AbstractResolverTest {
+public class VariableReferenceResolverTest extends AbstractResolverTestCase {
 	
 	@Test
 	public void testReferencing() throws Exception {

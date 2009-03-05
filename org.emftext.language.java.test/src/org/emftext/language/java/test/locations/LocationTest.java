@@ -39,7 +39,7 @@ public class LocationTest extends AbstractJavaParserTestCase {
 			// check location of class
 			assertElementLocation(clazz, 3, 0, 22, 96);
 			// check location of the field 'm'
-			assertElementLocation(members.get(0), 4, 1, 48, 59);
+			assertElementLocation(members.get(0), 4, 1, 48, 60);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}

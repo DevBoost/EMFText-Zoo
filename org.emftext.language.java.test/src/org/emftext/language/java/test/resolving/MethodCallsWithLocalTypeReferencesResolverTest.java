@@ -7,7 +7,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.Statement;
 import org.junit.Test;
 
-public class MethodCallsWithLocalTypeReferencesResolverTest extends AbstractResolverTest {
+public class MethodCallsWithLocalTypeReferencesResolverTest extends AbstractResolverTestCase {
 	
 	@Test
 	public void testReferencing() throws Exception {

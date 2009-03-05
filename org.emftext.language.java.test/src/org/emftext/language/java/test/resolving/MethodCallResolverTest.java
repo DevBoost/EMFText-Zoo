@@ -8,7 +8,7 @@ import org.emftext.language.java.statements.Statement;
 import org.junit.Test;
 
 
-public class MethodCallResolverTest extends AbstractResolverTest {
+public class MethodCallResolverTest extends AbstractResolverTestCase {
 
 	@Test
 	public void testReferencing() throws Exception {

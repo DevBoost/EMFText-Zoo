@@ -13,22 +13,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.runtime.resource.ITextResource;
-import org.emftext.sdk.MetamodelHelper;
 import org.emftext.sdk.codegen.GenerationContext;
 import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
 import org.emftext.sdk.codegen.IProblemCollector;
 import org.emftext.sdk.codegen.generators.ResourcePluginContentGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
-import org.emftext.sdk.finders.GenPackageByNameFinder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,25 +36,21 @@ import org.junit.Test;
  */
 public class ParserGenerationTest {
 	
-	private Map<String, Object> options;
-	
 	@Before
 	public void setUp() {
-		options = new HashMap<String, Object>();
-		options.put(MetamodelHelper.GEN_PACKAGE_FINDER_KEY, new GenPackageByNameFinder());
 		registerResourceFactories();
 	}
 	
 	@Test
 	public void testDeterministicParserGeneration() throws IOException, CoreException, InterruptedException {
-		String path = "..\\org.reuseware.emftextedit.language.java\\metamodel\\java.cs";
+		String path = ".." + File.separator + "org.emftext.language.java" + File.separator + "metamodel" + File.separator + "java.cs";
 		String absolutePath = new File(path).getAbsolutePath();
 		System.out.println(absolutePath);
 		URI fileURI = URI.createFileURI(absolutePath);
 		
-		File result1 = generateANTLRGrammarToTempFile(fileURI, options);
+		File result1 = generateANTLRGrammarToTempFile(fileURI);
 		String content1 = getContent(result1);
-		File result2 = generateANTLRGrammarToTempFile(fileURI, options);
+		File result2 = generateANTLRGrammarToTempFile(fileURI);
 		String content2 = getContent(result2);
 		assertEquals(content1, content2);
 
@@ -68,7 +60,7 @@ public class ParserGenerationTest {
 	}
 
 	private String getGrammar(URI fileURI) throws CoreException {
-		ITextResource concreteSyntaxResource = (ITextResource) getConcreteSyntaxResource(fileURI, options);
+		ITextResource concreteSyntaxResource = (ITextResource) getConcreteSyntaxResource(fileURI);
 		ConcreteSyntax concreteSyntax = getConcreteSyntax(concreteSyntaxResource);
 		IGenerator antlrGen = createANTLRGenerator(concreteSyntax);
 		GenerationContext context = new GenerationContext(concreteSyntax, new IProblemCollector() {

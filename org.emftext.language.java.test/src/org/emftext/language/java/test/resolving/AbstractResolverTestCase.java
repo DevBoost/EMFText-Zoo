@@ -1,5 +1,7 @@
 package org.emftext.language.java.test.resolving;
 
+import java.io.File;
+
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Field;
@@ -11,9 +13,9 @@ import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.variables.LocalVariable;
 
-public abstract class AbstractResolverTest extends AbstractJavaParserTestCase {
+public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCase {
 
-	protected static final String TEST_INPUT_FOLDER_RESOLVING = "input/resolving/";
+	protected static final String TEST_INPUT_FOLDER_RESOLVING = "input" + File.separator + "resolving" + File.separator;
 
 	protected org.emftext.language.java.classifiers.Class assertParsesToClass(String typename) throws Exception {
 		return assertParsesToType(typename, getTestInputFolder(), org.emftext.language.java.classifiers.Class.class);
