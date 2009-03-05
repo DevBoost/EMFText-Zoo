@@ -1,4 +1,4 @@
-SYNTAXDEF cs
+SYNTAXDEF csharp
 FOR <http://www.emftext.org/c_sharp>
 START CompilationUnit
 
