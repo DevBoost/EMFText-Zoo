@@ -49,7 +49,7 @@ public class AbstractEcoreTestCase extends TestCase {
 
 	private void print(EList<Diagnostic> diagnostics) {
 		for (Diagnostic diagnostic : diagnostics) {
-			System.out.println(diagnostic.getMessage());
+			System.out.println(diagnostic.getMessage() + " at " + diagnostic.getLine() + ":" + diagnostic.getColumn());
 		}
 	}
 }

@@ -18,7 +18,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *   - initial API and implementation
  ******************************************************************************/
-package org.eclipse.emf.ecore.resource.ecore.analysis;
+package org.eclipse.emf.ecore.resource.ecore.analysis.helper;
 
 public class BooleanAttributeResolver extends
 		org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements

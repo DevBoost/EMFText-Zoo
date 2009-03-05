@@ -18,8 +18,12 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	}
 
 	@Test
-	public void testTypeParameters() {
-		String fileName = "TypeParameters.ecore";
+	public void testGenerics() {
+		assertParse("TypeArguments.ecore");
+		assertParse("TypeParameters.ecore");
+	}
+
+	private void assertParse(String fileName) {
 		try {
 			EPackage ePackage = loadResource("input" + File.separator + fileName, fileName);
 			assertNotNull(ePackage);

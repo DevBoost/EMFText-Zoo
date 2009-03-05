@@ -1,5 +1,7 @@
 package org.eclipse.emf.ecore.resource.ecore.analysis;
 
+import org.eclipse.emf.ecore.resource.ecore.analysis.helper.BooleanAttributeResolver;
+
 public class EcoreT_INTERFACE_OR_CLASSTokenResolver extends BooleanAttributeResolver {
 	
 	@Override
