@@ -20,7 +20,7 @@ TOKENS {
 	DEFINE T_UNSETTABLE $'unsettable'$;
 	DEFINE T_CHANGEABLE $'changeable'$;
 	DEFINE T_TRANSIENT $'transient'$;
-	DEFINE T_ID $'id'$;
+	DEFINE T_ID $'iD'$;
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
 	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
 	DEFINE T_SERIALIZABLE $'serializable'$;
