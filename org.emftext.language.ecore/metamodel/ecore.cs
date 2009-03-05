@@ -8,6 +8,7 @@ IMPORTS {
 
 OPTIONS {
 	overridePluginXML = "false";
+	tokenspace = "1"; 
 }
 
 TOKENS {
@@ -21,7 +22,7 @@ TOKENS {
 	DEFINE T_TRANSIENT $'transient'$;
 	DEFINE T_ID $'id'$;
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
-	DEFINE T_INTERFACE $'interface'$;
+	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
 	DEFINE T_SERIALIZABLE $'serializable'$;
 	DEFINE CONTAINMENT $'containment'$;
 }
@@ -29,24 +30,24 @@ TOKENS {
 RULES {
 	EPackage ::= "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['<', '>'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
 	
-	EClass ::= !1(abstract[T_ABSTRACT] #1)? ("class"|interface[T_INTERFACE]) #1 name[] (#1 instanceTypeName['"','"'])? ("extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
+	EClass ::= !1(abstract[T_ABSTRACT] #1)? interface[T_INTERFACE_OR_CLASS] #1 name[] (#1 instanceTypeName['"','"'])? ("extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
 				("[" (eAnnotations)* "]")?
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
-	ecore.EAttribute ::= !2 (derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
+	ecore.EAttribute ::= !2 ( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
 					unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID] #1)* 
 				"attribute" #1 eType[] #1 name[] ("=" defaultValueLiteral['"','"'])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
 	ecore.EParameter ::= (ordered[T_ORDERED]|unique[T_UNIQUE] #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
-	ecore.EReference ::= !2 (containment[CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
+	ecore.EReference ::= !2 ( containment[CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
 							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
 							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|resolveProxies[T_RESOLVEPROXIES] #1)* 
 					"reference" #1 eType[] #1 name[] ("=" defaultValueLiteral['"','"']) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
-	ecore.EOperation ::= !2 "operation" #1 (ordered[T_ORDERED]|unique[T_UNIQUE] #1)* ("void" | eType[]) ( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 name[] #1 
+	ecore.EOperation ::= !2 "operation" #1 ( ordered[T_ORDERED]|unique[T_UNIQUE] #1)* ("void" | eType[]) ( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 name[] #1 
 						"(" (eParameters ("," #1 eParameters)* )? ")"
 						("throws" #1 eExceptions[] ("," #1 eExceptions[])*)? ";";
 	
