@@ -48,7 +48,6 @@ public class EMFTypesResolver {
 		
 	}
 
-
 	private void addResults(java.lang.String identifier, EList<EClassifier> allClassifiers, boolean resolveFuzzy,
 			org.emftext.runtime.resource.IReferenceResolveResult result) {
 		if (resolveFuzzy) {			

@@ -33,11 +33,11 @@ public class EReferenceEOppositeReferenceResolver extends org.emftext.runtime.re
 	}
 	
 	@Override	
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
+	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
 		EClass oppositeType = container.getEReferenceType();
 		if (!resolveFuzzy) {
 			EStructuralFeature opposite = oppositeType.getEStructuralFeature(identifier);
-			result.addMapping(identifier, opposite);
+			result.addMapping(identifier, (EReference) opposite);
 		} else {
 			EList<EReference> references = oppositeType.getEReferences();
 			for (EReference structuralFeature : references) {
