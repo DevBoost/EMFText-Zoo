@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.language.c_sharp.CompilationUnit;
-import org.emftext.language.c_sharp.resource.cs.CsResource;
+import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
 
 public class AbstractCSharpTestCase extends TestCase {
@@ -19,7 +19,7 @@ public class AbstractCSharpTestCase extends TestCase {
 	protected CompilationUnit loadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {
 		
-		CsResource resource = tryToLoadResource(inputStream, fileIdentifier);
+		CsharpResource resource = tryToLoadResource(inputStream, fileIdentifier);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
@@ -32,7 +32,7 @@ public class AbstractCSharpTestCase extends TestCase {
 		return cUnit;
 	}
 
-	protected CsResource tryToLoadResource(InputStream inputStream,
+	protected CsharpResource tryToLoadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {
 		
 		CSharpResourceImplTestWrapper resource = new CSharpResourceImplTestWrapper();

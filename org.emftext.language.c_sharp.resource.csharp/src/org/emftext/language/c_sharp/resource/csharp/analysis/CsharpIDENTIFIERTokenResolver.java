@@ -1,6 +1,6 @@
-package org.emftext.language.c_sharp.resource.cs.analysis;
+package org.emftext.language.c_sharp.resource.csharp.analysis;
 
-public class CsIDENTIFIERTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class CsharpIDENTIFIERTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
 	@Override	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
