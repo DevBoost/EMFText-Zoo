@@ -119,7 +119,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							id = id.substring(id.indexOf("_") + 1);
 							
 							((ITextResource) resource).registerContextDependentProxy(
-									new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(JavaReferenceResolverSwitch.getElementReferenceTargetReferenceResolver()),
+									new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 									mainIdReference,
 									ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 									id,
@@ -142,7 +142,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 								idRef.setTarget((ReferenceableElement) newProxy);
 								
 								((ITextResource) resource).registerContextDependentProxy(
-										new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(JavaReferenceResolverSwitch.getElementReferenceTargetReferenceResolver()),
+										new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 										idRef,
 										ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 										nsPart,
