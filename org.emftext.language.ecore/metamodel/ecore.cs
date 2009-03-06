@@ -9,6 +9,9 @@ OPTIONS {
 }
 
 TOKENS {
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ ;
+	DEFINE ML_COMMENT $'/*'.*'*/'$ ;
+
 	DEFINE T_ABSTRACT $'abstract'$;
 	DEFINE T_DERIVED $'derived'$;
 	DEFINE T_VOLATILE $'volatile'$;
