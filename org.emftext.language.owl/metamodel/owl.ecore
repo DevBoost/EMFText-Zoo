@@ -1,0 +1,190 @@
+package owl  owl :  "http://org.emftext/owl.ecore"  { 
+
+	abstract class IRIIdentified  { 
+			  unique ordered  changeable   attribute EString  iri  ( 1 .. 1 ) ; 
+	} 
+	
+	abstract class URIIdentified  { 
+			  unique ordered  changeable   attribute EString  uri  ( 1 .. 1 ) ; 
+	} 
+	
+	 class Annotateable  { 
+			containment    unique ordered  changeable resolveProxies reference Annotation  annotations  ( 0 .. -1 ) ; 
+	} 
+	
+	 class Ontology extends URIIdentified , Annotateable  { 
+			    unique ordered  changeable resolveProxies reference Ontology  imports  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Frame  frames  ( 0 .. -1 ) ; 
+	} 
+	
+	 class OntologyDocument  { 
+			containment    unique ordered  changeable resolveProxies reference Ontology  ontology  ( 1 .. 1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Namespace  namespace  ( 0 .. -1 ) ; 
+	} 
+	
+	 class Annotation  { 
+			  unique ordered  changeable   attribute EString  propertyIri  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EString  target  ( 1 .. 1 ) ; 
+	} 
+	
+	 class Namespace extends URIIdentified  { 
+			  unique ordered  changeable   attribute EString  prefix  ( 1 .. 1 ) ; 
+	} 
+	
+	abstract class Frame extends IRIIdentified  { 
+	} 
+	
+	 class ObjectProperty extends Frame  { 
+	} 
+	
+	 class DataProperty extends Frame  { 
+			containment    unique ordered  changeable resolveProxies reference ClassAxiom  dataPropertyAxioms  ( 0 .. -1 ) ; 
+	} 
+	
+	 class AnnotationPropertyFrame extends Frame  { 
+	} 
+	
+	 class IndividualFrame extends Frame  { 
+	} 
+	
+	 class Misc extends Frame  { 
+	} 
+	
+	 class Class extends Frame , Annotateable  { 
+			containment    unique ordered  changeable resolveProxies reference ClassAxiom  classAxioms  ( 0 .. -1 ) ; 
+	} 
+	
+	abstract class ClassAxiom  { 
+	} 
+	
+	 class SubClassOf extends ClassAxiom  { 
+			containment    unique ordered  changeable resolveProxies reference Description  description  ( 1 .. 1 ) ; 
+	} 
+	
+	 class EquivalentTo extends ClassAxiom  { 
+			containment    unique ordered  changeable resolveProxies reference Description  description  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DisjointWith extends ClassAxiom  { 
+			containment    unique ordered  changeable resolveProxies reference Description  description  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DisjointUnionWith extends ClassAxiom  { 
+			containment    unique ordered  changeable resolveProxies reference Description  description  ( 1 .. 1 ) ; 
+	} 
+	
+	 class Description  { 
+			containment    unique ordered  changeable resolveProxies reference Conjunction  conjunctions  ( 1 .. -1 ) ; 
+	} 
+	
+	 class Conjunction  { 
+			    unique ordered  changeable resolveProxies reference Class  clazz  ( 0 .. 1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Primary  primaries  ( 0 .. -1 ) ; 
+	} 
+	
+	abstract class Primary  { 
+			  unique ordered  changeable   attribute EBoolean  not  ( 1 .. 1 ) ; 
+	} 
+	
+	 class IndividualsAtomic extends Primary  { 
+			    unique ordered  changeable resolveProxies reference Individual  individuals  ( 0 .. -1 ) ; 
+	} 
+	
+	 class ClassAtomic extends Primary  { 
+			    unique ordered  changeable resolveProxies reference Class  clazz  ( 1 .. 1 ) ; 
+	} 
+	
+	 class NestedDescription extends Primary  { 
+			containment    unique ordered  changeable resolveProxies reference Description  description  ( 1 .. 1 ) ; 
+	} 
+	
+	 class Individual  { 
+	} 
+	
+	abstract class ObjectPropertyRestriction extends Primary  { 
+			    unique ordered  changeable resolveProxies reference ObjectProperty  property  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EBoolean  inverse  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertySome extends ObjectPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference Primary  primary  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertyOnly extends ObjectPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference Primary  primary  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertyValue extends ObjectPropertyRestriction  { 
+			    unique ordered  changeable resolveProxies reference Individual  individual  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertySelf extends ObjectPropertyRestriction  { 
+	} 
+	
+	 class ObjectPropertyMin extends ObjectPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference Primary  primary  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertyMax extends ObjectPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference Primary  primary  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertyExactly extends ObjectPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference Primary  primary  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
+	
+	abstract class DataPropertyRestriction extends Primary  { 
+			    unique ordered  changeable resolveProxies reference DataProperty  dataProperty  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertySome extends DataPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference DataProperty  dataPrimary  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertyOnly extends DataPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference DataProperty  dataPrimary  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertyValue extends DataPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference Literal  literal  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertyMin extends DataPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference DataProperty  dataPrimary  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertyMax extends DataPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference DataProperty  dataPrimary  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertyExactly extends DataPropertyRestriction  { 
+			containment    unique ordered  changeable resolveProxies reference DataProperty  dataPrimary  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
+	
+	abstract class DataPrimary  { 
+	} 
+	
+	abstract class Literal  { 
+	} 
+	
+	 class TypedLiteral extends Literal  { 
+			  unique ordered  changeable   attribute EString  lexicalValue  ( 1 .. 1 ) ; 
+			    unique ordered  changeable resolveProxies reference Datatype  theDatatype  ( 1 .. 1 ) ; 
+	} 
+	
+	abstract class Datatype  { 
+	} 
+	
+	 class Integer extends Datatype  { 
+	} 
+	
+	abstract class DataPropertyAxiom  { 
+	} 
+	
+} 
