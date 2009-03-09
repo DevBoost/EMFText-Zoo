@@ -12,8 +12,12 @@ TOKENS{
 	DEFINE NOT $'not'$;
 	DEFINE INVERSE $'inverse'$;
 	DEFINE INT $('0'..'9')+$;
+	DEFINE FACETKINDS $'length'|'minLength'|'maxLength'
+						|'pattern'|'langPattern'|'<='|'<'
+						|'>'|'>='$;
+	DEFINE CHARACTERISTICS $'Functional'|'InverseFunctional'|'Reflexive'
+						|'Irreflexive'|'Symmetric'|'Asymmetric'|'Transitive'$; 
 	DEFINE IRI $(('<')(~('>')|('\\''>'))*('>'))|(('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)$;
-	
 }
 
 
@@ -46,7 +50,7 @@ RULES{
 	ObjectProperty ::= "ObjectProperty:" iri[IRI] (("Annotations:" annotations+) |
 	( "Domain:" propertyDomain) |
 	( "Range:" propertyRange) | 
-	( "Characteristics:" characteristic[]) | 
+	( "Characteristics:" characteristic[CHARACTERISTICS]) | 
 	( "SubPropertyOf:" superProperties) |
 	( "EquivalentTo:" equivalentProperties) |
 	( "DisjointWith:" disjointProperties) |
@@ -112,8 +116,8 @@ RULES{
 	// DataRanges
 	DataRange ::= dataConjunctions ("or" dataConjunctions)*;
 	DataConjunction ::= dataPrimaries ("and" dataPrimaries)*; 
-	DatatypeReference ::= not[NOT]? theDatatype[IRI] (facets)*;
-	Facet ::= facetType[] literal;
+	DatatypeReference ::= not[NOT]? theDatatype[IRI] ("[" facets ("," facets)* "]")?;
+	Facet ::= facetType[FACETKINDS] literal;
 	NestedDataRange ::= not[NOT]? "(" dataRange ")";
 	DataPrimaryLiterals ::= not[NOT]? "{" literals ("," literals)* "}";
 		
