@@ -63,7 +63,7 @@ RULES {
 					#1 "{" (eLiterals)* !0 "}" 
 					!0 ; 
 
-	EEnumLiteral ::= !2 value[] #1 ":" #1 name[] #1 "=" #1 literal[]  ";";
+	EEnumLiteral ::= !2 value[] #1 ":" #1 name[] #1 "=" #1 literal['"','"']  ";";
 
 
 	EAnnotation ::= !3 #0 source['"','"'] ("{" details "}")*;
