@@ -8,7 +8,7 @@ public class OntologyImportsReferenceResolver extends org.emftext.runtime.resour
 	}
 	
 	@Override	
-	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
+	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Ontology> result) {
 		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }

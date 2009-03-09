@@ -3,7 +3,8 @@ FOR <http://org.emftext/owl.ecore> <owl.genmodel>
 START OntologyDocument
 
 OPTIONS {
-	generateCodeFromGeneratorModel = "true";
+	//generateCodeFromGeneratorModel = "true";
+	reloadGeneratorModel = "true";
 }
 
 TOKENS{
@@ -33,12 +34,57 @@ RULES{
 					frames*;
 	
 	// ONTOLOGY Class definitions and Axioms			
-	Class ::= "Class:" iri[IRI] (("Annotations:" annotations+) | classAxioms)*;
-	SubClassOf ::= "SubClassOf:" description;
-	EquivalentTo ::= "EquivalentTo:" description;
-	DisjointWith ::= "DisjointWith:" description;
-	DisjointUnionWith ::= "DisjointUnionWith:" description;
+	Class ::= "Class:" iri[IRI] (
+				("Annotations:" annotations) 
+				| ("SubClassOf:" superClassesDescriptions)
+				| ("EquivalentTo:" equivalentClassesDescriptions)
+				| ("DisjointWith:" disjointWithClassesDescriptions)
+				| ("DisjointUnionWith:" disjointUnionWithClassesDescriptions)
+			)*;
 	
+	// ONTOLOGY Property definitions and Axioms			
+	ObjectProperty ::= "ObjectProperty:" iri[IRI] (("Annotations:" annotations+) |
+	( "Domain:" propertyDomain) |
+	( "Range:" propertyRange) | 
+	( "Characteristics:" characteristic[]) | 
+	( "SubPropertyOf:" superProperties) |
+	( "EquivalentTo:" equivalentProperties) |
+	( "DisjointWith:" disjointProperties) |
+	( "InverseOf:" inverseProperties) |
+	( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains) +))*;
+	
+	
+	DataProperty ::= "DataProperty:" iri[IRI] (
+	("Annotations:" annotations) 
+	| ("Domain:" domain)
+	| ("Range:" range)
+	| ("Characteristics:" "Functional")
+	| ("SubPropertyOf:" superProperties[IRI])
+	| ("EquivalentTo:" equivalentProperties[IRI])
+	| ("DisjointWith:" disjointProperties[IRI])
+	)*;
+	
+	AnnotationProperty ::= "AnnotationProperty:" iri[IRI] (
+	("Annotations:" annotations)
+	| ("Domain:" domains[IRI])
+	| ("Range:" ranges[IRI])
+	| ("SubPropertyOf:" superAnnotationProperties[IRI])
+	)*;
+	
+	Individual ::= "Individual:" iri[IRI] (
+		("Annotations:" annotations)
+		| ("Types:" types)
+		| ("SameAs:" sameAs[IRI])
+		| ("DifferentFrom:" differentFrom[IRI])
+		| ("Facts:" facts)
+	)*;
+	
+	ObjectPropertyFact ::= not[NOT]? objectProperty[IRI] individual[IRI];
+	 
+	DataPropertyFact ::= not[NOT]? dataProperty[IRI] literal;
+	
+	// MISC Frame TODO
+	Misc ::= "Misc";
 	
 	// Descriptions
 	Description ::= conjunctions ("or" conjunctions)*;
@@ -63,7 +109,16 @@ RULES{
 	DataPropertyMax ::= not[NOT]? dataProperty[IRI] "max" value[INT] dataPrimary;
 	DataPropertyExactly ::= not[NOT]? dataProperty[IRI] "exactly" value[INT] dataPrimary;
 
-	DataProperty ::= "DataProperty:" iri[IRI] (dataPropertyAxioms)*;
+	// DataRanges
+	DataRange ::= dataConjunctions ("or" dataConjunctions)*;
+	DataConjunction ::= dataPrimaries ("and" dataPrimaries)*; 
+	DatatypeReference ::= not[NOT]? theDatatype[IRI] (facets)*;
+	Facet ::= facetType[] literal;
+	NestedDataRange ::= not[NOT]? "(" dataRange ")";
+	DataPrimaryLiterals ::= not[NOT]? "{" literals ("," literals)* "}";
+		
+	
+	// TBD
 	
 	TypedLiteral ::= lexicalValue['"','"'] "^^" theDatatype[IRI];
 	

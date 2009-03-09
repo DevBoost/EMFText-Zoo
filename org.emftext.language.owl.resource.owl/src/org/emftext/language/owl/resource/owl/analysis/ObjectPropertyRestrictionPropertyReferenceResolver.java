@@ -8,7 +8,7 @@ public class ObjectPropertyRestrictionPropertyReferenceResolver extends org.emft
 	}
 	
 	@Override	
-	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.ObjectPropertyRestriction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
+	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.ObjectPropertyRestriction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.ObjectProperty> result) {
 		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }

@@ -8,7 +8,7 @@ public class IndividualsAtomicIndividualsReferenceResolver extends org.emftext.r
 	}
 	
 	@Override	
-	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.IndividualsAtomic container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult result) {
+	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.IndividualsAtomic container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Individual> result) {
 		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }
