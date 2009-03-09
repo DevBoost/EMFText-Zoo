@@ -59,7 +59,7 @@ RULES {
 				"(" (eParameters ("," #1 eParameters)* )? ")"
 				("throws" #1 eExceptions[] ("," #1 eExceptions[])*)? ";";
 	
-	EEnum ::=  (serializable[T_SERIALIZABLE])? "enum" #1 name[] instanceTypeName['"','"']
+	EEnum ::=  (serializable[T_SERIALIZABLE])? "enum" #1 name[] instanceTypeName['"','"']?
 					#1 "{" (eLiterals)* !0 "}" 
 					!0 ; 
 
