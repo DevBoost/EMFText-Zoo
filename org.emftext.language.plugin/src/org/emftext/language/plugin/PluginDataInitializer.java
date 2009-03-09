@@ -113,7 +113,7 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 						if (getPlugin(contributor.getName(), family) == null) {
 							String contributorName = contributor.getName();
 							this.resource.addWarning("The plug-in " + contributorName + " extends the families extension point " + ep.getExtensionPointId() + " and " +
-									"should be considered as plug-in of the tool product family." , ep);
+									"should be considered as plug-in of the tool product family." , plugin);
 						}
 						
 					}
@@ -125,6 +125,9 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 	private void initialisePluginInformation(Plugin plugin, ToolProductFamily family) {
 		
 		ModelEntry entry = PluginRegistry.findEntry(plugin.getPluginId()) ;
+		if (entry == null) {
+			this.resource.addError("Plug-In was not found" , plugin);
+		}
 		IPluginModelBase model = entry.getModel();		
 		plugin.setName(model.getBundleDescription().getName());
 		plugin.setVersion(model.getBundleDescription().getVersion().toString());
