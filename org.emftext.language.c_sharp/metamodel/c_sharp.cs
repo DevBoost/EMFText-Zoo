@@ -1,9 +1,15 @@
 SYNTAXDEF csharp
 FOR <http://www.emftext.org/c_sharp>
-START CompilationUnit
+START namespaces.CompilationUnit
 
 IMPORTS {
-	//namespaces : <http://www.emftext.org/c_sharp/namespaces>
+	classes 	: <http://www.emftext.org/c_sharp/classes>
+	common 		: <http://www.emftext.org/c_sharp/common>
+	expressions : <http://www.emftext.org/c_sharp/expressions>
+	modifiers 	: <http://www.emftext.org/c_sharp/modifiers>
+	namespaces 	: <http://www.emftext.org/c_sharp/namespaces>
+	statements 	: <http://www.emftext.org/c_sharp/statements>
+	types 		: <http://www.emftext.org/c_sharp/types>
 }
 OPTIONS {
 	tokenspace = "1";
@@ -18,104 +24,104 @@ TOKENS {
 
 RULES {
 
-NamespaceOrTypeName 
+common.NamespaceOrTypeName 
 	::= parts ( "." parts) * ;
 
-NamespaceOrTypeNamePart
+common.NamespaceOrTypeNamePart
 	::= name[];
 
 //Modifiers:
-New 			 ::= "new" ;
-Public 			 ::= "public" ;
-Private 		 ::= "private" ;
-Protected 		 ::= "protected" ;
-Internal 		 ::= "internal" ;
-Abstract 		 ::= "abstract" ;
-Sealed 			 ::= "sealed" ;
-Unsafe 			 ::= "unsafe" ;
-ReadOnly 		 ::= "readonly" ;
-Volatile 		 ::= "volatile" ;
-Extern 			 ::= "extern" ;
-Virtual 		 ::= "virtual" ;
-OverrideModifier ::= "override" ;
-Static			 ::= "static" ;
+modifiers.New 			 ::= "new" ;
+modifiers.Public 			 ::= "public" ;
+modifiers.Private 		 ::= "private" ;
+modifiers.Protected 		 ::= "protected" ;
+modifiers.Internal 		 ::= "internal" ;
+modifiers.Abstract 		 ::= "abstract" ;
+modifiers.Sealed 			 ::= "sealed" ;
+modifiers.Unsafe 			 ::= "unsafe" ;
+modifiers.ReadOnly 		 ::= "readonly" ;
+modifiers.Volatile 		 ::= "volatile" ;
+modifiers.Extern 			 ::= "extern" ;
+modifiers.Virtual 		 ::= "virtual" ;
+modifiers.OverrideModifier ::= "override" ;
+modifiers.Static			 ::= "static" ;
 
 //Simple Types
-Void 	::= "void" ;
-Decimal ::= "decimal" ;
-Bool 	::= "bool" ;
-SByte	::= "sbyte" ;
-Byte	::= "byte" ;
-Short	::= "short" ;
-UShort	::= "ushort" ;
-Int		::= "int" ;
-UInt	::= "uint" ;
-Long	::= "long" ;
-Char	::= "char" ;
-Float	::= "float" ;
-Double	::= "double" ;
+types.Void 	::= "void" ;
+types.Decimal ::= "decimal" ;
+types.Bool 	::= "bool" ;
+types.SByte	::= "sbyte" ;
+types.Byte	::= "byte" ;
+types.Short	::= "short" ;
+types.UShort	::= "ushort" ;
+types.Int		::= "int" ;
+types.UInt	::= "uint" ;
+types.Long	::= "long" ;
+types.Char	::= "char" ;
+types.Float	::= "float" ;
+types.Double	::= "double" ;
 
-ClassOrInterfaceOrDelegateOrEnumType
+types.ClassOrInterfaceOrDelegateOrEnumType
 	::= namespaceOrTypeName ;
 	
 	
-CompilationUnit 
+namespaces.CompilationUnit 
 	::= usingDirectives *  namespaceMemberDeclaration * ;
 	//global-attribute *
 	
-UsingDirective
+namespaces.UsingDirective
 	::= "using"   (name[]   "=")?   namespaceOrTypeName   ";" ;
 	
-Namespace
+namespaces.Namespace
 	::= "namespace"   namespaceName   namespaceBody   ( ";" ) ? ;
 	
-NamespaceBody
+namespaces.NamespaceBody
 	::= "{"   usingDirectives *   namespaceMemberDeclaration *   "}" ;
 	
-Class
+classes.Class
     ::= modifiers *   "class"   name[]  classBase ?    "{"  classMemberDeclarations *  "}"  ( ";" ) ? ;
 	// attributes *     
 	
-ClassBase
+classes.ClassBase
 	::= ":" types ( "," types )* ;
 	
-Method
+classes.Method
     ::= modifiers *  returnType   ( interfaceType   ".") ?   name[]   "("      ")"  block ;
 	// attribute *  formal-parameter-list ?	
 	
-Block
+classes.Block
     ::= "{" statement *  "}" ;	
     
-EmbeddedStatement
+statements.EmbeddedStatement
 	::= ( "unsafe" ) ?  block ; 
 	
-EmptyStatement
+statements.EmptyStatement
 	::= ";" ;
 	
-LabeledStatement
+statements.LabeledStatement
 	::= name[] ":" statement ; 
 
-DeclarationStatement
+statements.DeclarationStatement
 	::= localVariableDeclaration  ";" ;
 	//| localConstantDeclaration
-LocalVariableDeclaration
+statements.LocalVariableDeclaration
 	::= type localVariableDeclarator + ;
 	
-LocalVariableDeclarator
+statements.LocalVariableDeclarator
 	::= name[] ;
 	//( "="   localVariableInitializer) ? 
 	
-//LocalVariableInitializer
+//statements.LocalVariableInitializer
 //	::= expression ;
 	// | arrayInitializer
 
-//LocalConstantDeclaration
+//statements.LocalConstantDeclaration
 //	::= "const"   type   constantDeclarators ;
 	
-//ConstantDeclarators
+//statements.ConstantDeclarators
 //	::= constantDeclarator ( ","   constantDeclarator) * ;
 	
-//ConstantDeclarator
+//statements.ConstantDeclarator
 //	::= name[] "=" expression ;
 	
 }

@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.emftext.language.c_sharp.CompilationUnit;
+import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
 
