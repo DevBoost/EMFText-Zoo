@@ -1,5 +1,9 @@
 SYNTAXDEF statemachine FOR <http://www.eclipse.org/uml2/2.1.0/UML> START StateMachine
 
+OPTIONS {
+  tokenspace = "1";
+}
+
 TOKENS {
 	DEFINE PSEUDOKIND $'initial'$ ;
 }
