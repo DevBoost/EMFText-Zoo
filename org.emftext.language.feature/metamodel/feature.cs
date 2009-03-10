@@ -2,6 +2,10 @@ SYNTAXDEF feature
 FOR <http://www.tudresden.de/feature>
 START FeatureModel
 
+OPTIONS {
+  tokenspace = "1";
+}
+
 TOKENS{
 		DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
 		DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
