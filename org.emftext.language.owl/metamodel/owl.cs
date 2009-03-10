@@ -3,21 +3,25 @@ FOR <http://org.emftext/owl.ecore> <owl.genmodel>
 START OntologyDocument
 
 OPTIONS {
-	//generateCodeFromGeneratorModel = "true";
+	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
-}
+} 
 
 TOKENS{
 	
 	DEFINE NOT $'not'$;
 	DEFINE INVERSE $'inverse'$;
-	DEFINE INT $('0'..'9')+$;
+	DEFINE INT $('+'|'-')?('0'..'9')+$;
+	DEFINE FLOAT $('0'..'9')+ '.' ('0'..'9')* (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+)? ('f'|'F') 
+				| ('.' ('0'..'9')+ (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+)?) ('f'|'F') 
+				| (('0'..'9')+ (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+) ('f'|'F') 
+				| ('0'..'9')+ ('f'|'F'))$;
 	DEFINE FACETKINDS $'length'|'minLength'|'maxLength'
 						|'pattern'|'langPattern'|'<='|'<'
 						|'>'|'>='$;
 	DEFINE CHARACTERISTICS $'Functional'|'InverseFunctional'|'Reflexive'
 						|'Irreflexive'|'Symmetric'|'Asymmetric'|'Transitive'$; 
-	DEFINE IRI $(('<')(~('>')|('\\''>'))*('>'))|(('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' )+)$;
+	DEFINE IRI $(('<')(~('>')|('\\''>'))*('>'))|(('A'..'Z' | ':' | 'a'..'z' | '0'..'9' | '_' | '-' )+)$;
 }
 
 
@@ -27,30 +31,34 @@ RULES{
 
 
 	
-	Annotation ::= propertyIri[IRI] target[IRI];
+	Annotation ::= "Annotations:" (propertyIri[IRI] target)?
+					(annotations ("," annotations)*)?;
 	
+	IRITarget ::= target[IRI];
+	
+	LiteralTarget ::= literal;
 	
 	Namespace ::= "Namespace:" prefix[IRI]? uri[IRI];
 	
-	Ontology ::= "Ontology:" uri[IRI]? 
-					("import" imports[IRI])* 
-					("annotations" annotations+)? 
+	Ontology ::= "Ontology:" (uri[IRI] versionIRI[IRI] ?)? 
+					("Import:" imports[IRI])* 
+					annotations* 
 					frames*;
 	
 	// ONTOLOGY Class definitions and Axioms			
 	Class ::= "Class:" iri[IRI] (
-				("Annotations:" annotations) 
-				| ("SubClassOf:" superClassesDescriptions)
-				| ("EquivalentTo:" equivalentClassesDescriptions)
-				| ("DisjointWith:" disjointWithClassesDescriptions)
-				| ("DisjointUnionWith:" disjointUnionWithClassesDescriptions)
+				(annotations) 
+				| ("SubClassOf:" (superClassesDescriptions ("," superClassesDescriptions )*)?)
+				| ("EquivalentTo:" (equivalentClassesDescriptions ("," equivalentClassesDescriptions)*)?)
+				| ("DisjointWith:" (disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )*)?)
+				| ("DisjointUnionWith:" (disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)*)?)
 			)*;
 	
 	// ONTOLOGY Property definitions and Axioms			
-	ObjectProperty ::= "ObjectProperty:" iri[IRI] (("Annotations:" annotations+) |
+	ObjectProperty ::= "ObjectProperty:" iri[IRI] ((annotations) |
 	( "Domain:" propertyDomain) |
 	( "Range:" propertyRange) | 
-	( "Characteristics:" characteristic[CHARACTERISTICS]) | 
+	( "Characteristics:" (characteristic[CHARACTERISTICS] ("," characteristic[CHARACTERISTICS])*)?) | 
 	( "SubPropertyOf:" superProperties) |
 	( "EquivalentTo:" equivalentProperties) |
 	( "DisjointWith:" disjointProperties) |
@@ -91,7 +99,7 @@ RULES{
 	Misc ::= "Misc";
 	
 	// Descriptions
-	Description ::= conjunctions ("or" conjunctions)*;
+	Description ::= (annotations)? conjunctions ("or" conjunctions)*;
 	Conjunction ::= (clazz[IRI] "that")? primaries ("and" primaries)*;								
 		
 	ClassAtomic ::= not[NOT]? clazz[IRI];
@@ -125,7 +133,15 @@ RULES{
 	// TBD
 	
 	TypedLiteral ::= lexicalValue['"','"'] "^^" theDatatype[IRI];
+	AbbreviatedXSDStringLiteral ::= value['"','"'];
+	AbbreviatedRDFTextLiteral ::= value['"','"'] "@" languageTag[IRI];
+	IntegerLiteral ::= value[INT];
+	DecimalLiteral ::= preComma[INT] "." postComma[INT];
+	FloatingPointLiteral ::= literal[FLOAT];
 	
 	Integer ::= "integer";
+	String ::= "string";
+	Float ::= "float";
+	Decimal ::= "decimal";
 	
 }

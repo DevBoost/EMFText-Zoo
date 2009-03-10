@@ -15,6 +15,7 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 	} 
 	
 	 class Ontology extends URIIdentified , Annotateable  { 
+			attribute EString versionIRI (0..1);
 			    unique ordered  changeable resolveProxies reference Ontology  imports  ( 0 .. -1 ) ; 
 			containment    unique ordered  changeable resolveProxies reference Frame  frames  ( 0 .. -1 ) ; 
 	} 
@@ -24,10 +25,22 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			containment    unique ordered  changeable resolveProxies reference Namespace  namespace  ( 0 .. -1 ) ; 
 	} 
 	
-	 class Annotation  { 
+	 class Annotation extends Annotateable { 
 			  unique ordered  changeable   attribute EString  propertyIri  ( 1 .. 1 ) ; 
-			  unique ordered  changeable   attribute EString  target  ( 1 .. 1 ) ; 
+			  containment reference Target target  ( 1 .. 1 ) ; 
 	} 
+	
+	abstract class Target {}
+	
+	class IRITarget extends Target {
+		reference IRIIdentified target (1..1) ;
+	}
+	
+	class LiteralTarget extends Target {
+		containment reference Literal literal (1..1) ;
+	}
+	
+	
 	
 	 class Namespace extends URIIdentified  { 
 			  unique ordered  changeable   attribute EString  prefix  ( 1 .. 1 ) ; 
@@ -147,7 +160,7 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 	 class Misc extends Frame  { 
 	} 
 	
-	 class Description  { 
+	 class Description extends Annotateable { 
 			containment    unique ordered  changeable resolveProxies reference Conjunction  conjunctions  ( 1 .. -1 ) ; 
 	} 
 	
@@ -248,11 +261,40 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			    unique ordered  changeable resolveProxies reference Datatype  theDatatype  ( 1 .. 1 ) ; 
 	} 
 	
+	class AbbreviatedXSDStringLiteral extends Literal {
+			attribute EString value (1..1);
+	}
+	class AbbreviatedRDFTextLiteral extends Literal {
+			attribute EString value (1..1);
+			attribute EString languageTag (1..1);
+	}
+	
+	class IntegerLiteral extends Literal {
+		attribute EInt value (1..1);
+	}
+	
+	class DecimalLiteral extends Literal {
+		attribute EInt preComma (1..1);
+		attribute EInt postComma (1..1);
+	}
+
+	class FloatingPointLiteral extends Literal {
+		attribute EFloat literal (1..1) ;
+	}
+
+	
 	abstract class Datatype  { 
 	} 
 	
 	 class Integer extends Datatype  { 
 	} 
+	 class String extends Datatype  { 
+	} 
+	 class Decimal extends Datatype  { 
+	} 
+	 class Float extends Datatype  { 
+	} 
+	
 	
 	
 	
