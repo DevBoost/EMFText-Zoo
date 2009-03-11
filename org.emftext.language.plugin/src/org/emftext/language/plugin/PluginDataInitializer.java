@@ -1,9 +1,6 @@
 package org.emftext.language.plugin;
 
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IContributor;
@@ -19,15 +16,10 @@ import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.ITextResource;
-import org.osgi.framework.Bundle;
 
 public class PluginDataInitializer implements IResourcePostProcessorProvider,
 		IResourcePostProcessor {
 
-	private static final String BUNDLE_NAME = "Bundle-Name";
-	private static final Object BUNDLE_VENDOR = "Bundle-Vendor";
-	private static final Object BUNDLE_VERSION = "Bundle-Version";
-	private static final Object REQUIRE_BUNDLE = "Require-Bundle";
 	private Map<String, ExtensionPoint> ids2eps = new HashMap<String, ExtensionPoint>();
 	private ITextResource resource;;
 
