@@ -31,8 +31,7 @@ RULES{
 
 
 	
-	Annotation ::= "Annotations:" (propertyIri[IRI] target)?
-					(annotations ("," annotations)*)?;
+	Annotation ::= "Annotations:" ( annotations? propertyIri[IRI] target ("," annotations? propertyIri[IRI] target)*)?;
 	
 	IRITarget ::= target[IRI];
 	
@@ -106,13 +105,13 @@ RULES{
 	IndividualsAtomic ::= not[NOT]? "{" individuals[IRI] ("," individuals[IRI])* "}";
 	NestedDescription ::= not[NOT]? "{" description "}";
 	
-	ObjectPropertySome ::= not[NOT]? inverse[INVERSE]? property[IRI] "some" primary;
-	ObjectPropertyOnly ::= not[NOT]? inverse[INVERSE]? property[IRI] "only" primary;
-	ObjectPropertySelf ::= not[NOT]? inverse[INVERSE]? property[IRI] "self";
-	ObjectPropertyValue ::= not[NOT]? inverse[INVERSE]? property[IRI] "value" individual[IRI];
-	ObjectPropertyMin ::= not[NOT]? inverse[INVERSE]? property[IRI] "min" value[INT] primary?;
-	ObjectPropertyMax ::= not[NOT]? inverse[INVERSE]? property[IRI] "max" value[INT] primary?;
-	ObjectPropertyExactly ::= not[NOT]? inverse[INVERSE]? property[IRI] "exactly" value[INT] primary?;
+	ObjectPropertySome ::= not[NOT]? propertyReference "some" primary;
+	ObjectPropertyOnly ::= not[NOT]? propertyReference "only" primary;
+	ObjectPropertySelf ::= not[NOT]? propertyReference "self";
+	ObjectPropertyValue ::= not[NOT]? propertyReference "value" individual[IRI];
+	ObjectPropertyMin ::= not[NOT]? propertyReference "min" value[INT] primary?;
+	ObjectPropertyMax ::= not[NOT]? propertyReference "max" value[INT] primary?;
+	ObjectPropertyExactly ::= not[NOT]? propertyReference "exactly" value[INT] primary?;
 
 	DataPropertySome ::= not[NOT]? dataProperty[IRI] "some" dataPrimary;
 	DataPropertyOnly ::= not[NOT]? dataProperty[IRI] "only" dataPrimary;
@@ -120,6 +119,8 @@ RULES{
 	DataPropertyMin ::= not[NOT]? dataProperty[IRI] "min" value[INT] dataPrimary;
 	DataPropertyMax ::= not[NOT]? dataProperty[IRI] "max" value[INT] dataPrimary;
 	DataPropertyExactly ::= not[NOT]? dataProperty[IRI] "exactly" value[INT] dataPrimary;
+
+	ObjectPropertyReference ::= inverse[INVERSE]? property[IRI];
 
 	// DataRanges
 	DataRange ::= dataConjunctions ("or" dataConjunctions)*;
@@ -139,9 +140,5 @@ RULES{
 	DecimalLiteral ::= preComma[INT] "." postComma[INT];
 	FloatingPointLiteral ::= literal[FLOAT];
 	
-	Integer ::= "integer";
-	String ::= "string";
-	Float ::= "float";
-	Decimal ::= "decimal";
-
+	Datatype ::= iri[IRI];
 }

@@ -1,0 +1,75 @@
+Namespace: <http://ex.com/owl/families#>
+Namespace: g <http://ex.com/owl2/families#>
+
+Ontology: <http://example.com/owl/families> <http://example.com/owl/families-v1>
+  Import: <http://ex.com/owl2/families.owl>
+  Annotations: creator John, 
+               Annotations: rdfs:comment "Creation Year"
+                 creationYear 2008, 
+               mainClass Person
+
+  ObjectProperty: hasWife
+    Annotations: 
+    Characteristics: Functional, InverseFunctional, Reflexive, Irreflexive, Asymmetric, Transitive
+    Domain: Annotations: rdfs:comment "General domain",
+                         creator John
+              Person, 
+            Annotations: rdfs:comment "More specific domain"
+              Man
+    Range: Person, Woman
+    SubPropertyOf: hasSpouse, loves
+    EquivalentTo: isMarriedTo 
+    DisjointWith: hates 
+    InverseOf: hasSpouse, inverse hasSpouse
+    SubPropertyChain: Annotations:  hasChild o hasParent o
+
+  DataProperty: hasAge
+    Annotations: 
+    Characteristics: Functional
+    Domain: Person 
+    Range: integer 
+    SubPropertyOf: hasVerifiedAge 
+    EquivalentTo: hasAgeInYears 
+    DisjointWith: hasSSN 
+
+  AnnotationProperty: creator
+    Annotations: 
+    Domain: Person 
+    Range: integer 
+    SubPropertyOf: initialCreator 
+
+  Datatype: NegInt
+    Annotations: 
+    EquivalentTo: integer[< 0]  
+
+  Class: Person
+    Annotations: 
+    SubClassOf: owl:Thing that hasFirstName exactly 1 and hasFirstName only string[minLength 1]  
+    SubClassOf: hasAge exactly 1 and hasAge only not NegInt
+    SubClassOf: hasGender exactly 1 and hasGender only {female , male} 
+    SubClassOf: hasSSN max 1, hasSSN min 1
+    SubClassOf: not hates Self, 
+    EquivalentTo: g:People 
+    DisjointWith: g:Rock , g:Mineral 
+    DisjointUnionOf: Annotations:  Child, Adult
+
+  Individual: John
+    Annotations: 
+    Types: Person , hasFirstName value "John" or hasFirstName value "Jack"^^xsd:string
+    Facts: hasWife Mary, not hasChild Susan, hasAge 33, hasChild _:child1
+    SameAs: Jack 
+    DifferentFrom: Susan 
+
+  Individual: _:child1
+    Annotations: 
+    Types: Person 
+    Facts: hasChild Susan 
+
+  DisjointClasses: Annotations:  g:Rock, g:Scissor, g:Paper
+  EquivalentProperties: Annotations:  hates, loathes, despises
+  DisjointProperties: Annotations:  hates, loves, indifferent
+  EquivalentProperties: Annotations:  favoriteNumber, g:favouriteNumber, g:favouriteInteger
+  DisjointProperties: Annotations:  favoriteInteger, favouriteReal
+  SameIndividual: Annotations:  John, Jack, Joe, Jim
+  DifferentIndividuals: Annotations:  John, Susan, Mary, Jill
+  HasKey: Annotations:  hasSSN Person

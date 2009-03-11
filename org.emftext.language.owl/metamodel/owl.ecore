@@ -1,7 +1,5 @@
 package owl  owl :  "http://org.emftext/owl.ecore"  { 
 
-
-
 	abstract class IRIIdentified  { 
 			  unique ordered  changeable   attribute EString  iri  ( 1 .. 1 ) ; 
 	} 
@@ -10,12 +8,12 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			  unique ordered  changeable   attribute EString  uri  ( 1 .. 1 ) ; 
 	} 
 	
-	 abstract class Annotateable  { 
+	abstract class Annotateable  { 
 			containment    unique ordered  changeable resolveProxies reference Annotation  annotations  ( 0 .. -1 ) ; 
 	} 
 	
 	 class Ontology extends URIIdentified , Annotateable  { 
-			attribute EString versionIRI (0..1);
+			  unique ordered  changeable   attribute EString  versionIRI  ( 0 .. 1 ) ; 
 			    unique ordered  changeable resolveProxies reference Ontology  imports  ( 0 .. -1 ) ; 
 			containment    unique ordered  changeable resolveProxies reference Frame  frames  ( 0 .. -1 ) ; 
 	} 
@@ -25,22 +23,21 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			containment    unique ordered  changeable resolveProxies reference Namespace  namespace  ( 0 .. -1 ) ; 
 	} 
 	
-	 class Annotation extends Annotateable { 
+	 class Annotation extends Annotateable  { 
 			  unique ordered  changeable   attribute EString  propertyIri  ( 1 .. 1 ) ; 
-			  containment reference Target target  ( 1 .. 1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Target  target  ( 1 .. 1 ) ; 
 	} 
 	
-	abstract class Target {}
+	abstract class Target  { 
+	} 
 	
-	class IRITarget extends Target {
-		reference IRIIdentified target (1..1) ;
-	}
+	 class IRITarget extends Target  { 
+			    unique ordered  changeable resolveProxies reference IRIIdentified  target  ( 1 .. 1 ) ; 
+	} 
 	
-	class LiteralTarget extends Target {
-		containment reference Literal literal (1..1) ;
-	}
-	
-	
+	 class LiteralTarget extends Target  { 
+			containment    unique ordered  changeable resolveProxies reference Literal  literal  ( 1 .. 1 ) ; 
+	} 
 	
 	 class Namespace extends URIIdentified  { 
 			  unique ordered  changeable   attribute EString  prefix  ( 1 .. 1 ) ; 
@@ -48,65 +45,21 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 	
 	abstract class Frame extends IRIIdentified  { 
 	} 
-
+	
 	 class DataProperty extends Frame , Annotateable  { 
-	 	containment reference Description domain (0..-1);
-	 	containment reference DataRange range (0..-1);
-	 	attribute Characteristic characteristic (0..1);
-	 	reference DataProperty superProperties (0..-1);
-	 	reference DataProperty equivalentProperties (0..-1);
-	 	reference DataProperty disjointProperties (0..-1);
-	 		
+			containment    unique ordered  changeable resolveProxies reference Description  domain  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference DataRange  range  ( 0 .. -1 ) ; 
+			  unique ordered  changeable   attribute Characteristic  characteristic  ( 0 .. 1 ) ; 
+			    unique ordered  changeable resolveProxies reference DataProperty  superProperties  ( 0 .. -1 ) ; 
+			    unique ordered  changeable resolveProxies reference DataProperty  equivalentProperties  ( 0 .. -1 ) ; 
+			    unique ordered  changeable resolveProxies reference DataProperty  disjointProperties  ( 0 .. -1 ) ; 
 	} 
 	
 	 class AnnotationProperty extends Frame , Annotateable  { 
-	 	reference IRIIdentified domains (0..-1);
-	 	reference IRIIdentified ranges (0..-1);
-	 	reference AnnotationProperty superAnnotationProperties (0..-1);	
+			    unique ordered  changeable resolveProxies reference IRIIdentified  domains  ( 0 .. -1 ) ; 
+			    unique ordered  changeable resolveProxies reference IRIIdentified  ranges  ( 0 .. -1 ) ; 
+			    unique ordered  changeable resolveProxies reference AnnotationProperty  superAnnotationProperties  ( 0 .. -1 ) ; 
 	} 
-	
-	
-	class DataRange {
-		containment reference DataConjunction dataConjunctions (1 .. -1);
-	}
-	
-	class DataConjunction {
-		containment reference DataPrimary dataPrimaries (1..-1);
-	}
-	
-	abstract class DataPrimary {
-		attribute EBoolean not (1..1);
-	}
-	
-	class DatatypeReference extends DataPrimary {
-		reference Datatype theDatatype (1..1);
-		containment reference Facet facets (0..-1);
-	}
-	
-	class Facet {
-		attribute FacetType facetType (1..1);
-		containment reference Literal literal (1..1);
-	}
-	
-	enum FacetType {
-		1 : LENGTH = "length";
-		2 : MIN_LENGTH = "minLength";
-		3 : MAX_LENGTH = "maxLength";
-		4 : PATTERN = "pattern";
-		5 : LANG_PATTERN = "langPattern";
-		6 : LESS_EQUALS = "<=";
-		7 : LESS = "<";
-		8 : GREATER = ">";
-		9 : GREATER_EQUALS = ">=";
-	}
-	
-	class NestedDataRange extends DataPrimary {
-		containment reference DataRange dataRange (1..1);
-	}
-	
-	class DataPrimaryLiterals extends DataPrimary {
-		containment reference Literal literals (1..-1);
-	}
 	
 	 class Class extends Frame , Annotateable  { 
 			containment    unique ordered  changeable resolveProxies reference Description  superClassesDescriptions  ( 0 .. -1 ) ; 
@@ -116,38 +69,77 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 	} 
 	
 	 class ObjectProperty extends Frame , Annotateable  { 
-	 	containment    unique ordered  changeable resolveProxies reference Description  propertyDomain  ( 0 .. -1 ) ; 
-		containment    unique ordered  changeable resolveProxies reference Description  propertyRange  ( 0 .. -1 ) ; 
-		unique ordered  changeable   attribute Characteristic  characteristics  ( 0 .. -1 ) ; 
-		containment    unique ordered  changeable resolveProxies reference ObjectProperty  superProperties  ( 0 .. -1 ) ; 
-		containment    unique ordered  changeable resolveProxies reference ObjectProperty  equivalentProperties  ( 0 .. -1 ) ; 
-		containment    unique ordered  changeable resolveProxies reference ObjectProperty  disjointProperties  ( 0 .. -1 ) ; 
-		containment    unique ordered  changeable resolveProxies reference ObjectProperty  inverseProperties  ( 0 .. -1 ) ; 
-		containment    unique ordered  changeable resolveProxies reference ObjectProperty  subPropertyChains  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Description  propertyDomain  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Description  propertyRange  ( 0 .. -1 ) ; 
+			  unique ordered  changeable   attribute Characteristic  characteristics  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference ObjectPropertyReference  superProperties  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference ObjectPropertyReference  equivalentProperties  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference ObjectPropertyReference  disjointProperties  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference ObjectPropertyReference  inverseProperties  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference ObjectPropertyReference  subPropertyChains  ( 0 .. -1 ) ; 
 	} 
 	
-	
-	 class Individual extends Frame, Annotateable { 
-		containment reference Description types (0..-1);
-		containment reference Fact facts (0..-1);
-		reference Individual sameAs (0..-1);
-		reference Individual differentFrom (0..-1);
+	 class Individual extends Frame , Annotateable  { 
+			containment    unique ordered  changeable resolveProxies reference Description  types  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Fact  facts  ( 0 .. -1 ) ; 
+			    unique ordered  changeable resolveProxies reference Individual  sameAs  ( 0 .. -1 ) ; 
+			    unique ordered  changeable resolveProxies reference Individual  differentFrom  ( 0 .. -1 ) ; 
 	} 
 	
-	abstract class Fact {
-		attribute EBoolean not (1..1);
-	}
+	 class DataRange  { 
+			containment    unique ordered  changeable resolveProxies reference DataConjunction  dataConjunctions  ( 1 .. -1 ) ; 
+	} 
 	
-	class ObjectPropertyFact extends Fact {
-		reference ObjectProperty objectProperty (1..1);
-		reference Individual individual (1..1);
-	}
+	 class DataConjunction  { 
+			containment    unique ordered  changeable resolveProxies reference DataPrimary  dataPrimaries  ( 1 .. -1 ) ; 
+	} 
 	
-	class DataPropertyFact extends Fact {
-		reference DataProperty dataProperty (1..1);
-		containment reference Literal literal (1..1);
-	}
+	abstract class DataPrimary  { 
+			  unique ordered  changeable   attribute EBoolean  not  ( 1 .. 1 ) ; 
+	} 
 	
+	 class DatatypeReference extends DataPrimary  { 
+			    unique ordered  changeable resolveProxies reference Datatype  theDatatype  ( 1 .. 1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Facet  facets  ( 0 .. -1 ) ; 
+	} 
+	
+	 class Facet  { 
+			  unique ordered  changeable   attribute FacetType  facetType  ( 1 .. 1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Literal  literal  ( 1 .. 1 ) ; 
+	} 
+	serializable enum FacetType  { 
+		1 : LENGTH = "length" ; 
+		2 : MIN_LENGTH = "minLength" ; 
+		3 : MAX_LENGTH = "maxLength" ; 
+		4 : PATTERN = "pattern" ; 
+		5 : LANG_PATTERN = "langPattern" ; 
+		6 : LESS_EQUALS = "<=" ; 
+		7 : LESS = "<" ; 
+		8 : GREATER = ">" ; 
+		9 : GREATER_EQUALS = ">=" ; 
+} 
+
+	 class NestedDataRange extends DataPrimary  { 
+			containment    unique ordered  changeable resolveProxies reference DataRange  dataRange  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPrimaryLiterals extends DataPrimary  { 
+			containment    unique ordered  changeable resolveProxies reference Literal  literals  ( 1 .. -1 ) ; 
+	} 
+	
+	abstract class Fact  { 
+			  unique ordered  changeable   attribute EBoolean  not  ( 1 .. 1 ) ; 
+	} 
+	
+	 class ObjectPropertyFact extends Fact  { 
+			    unique ordered  changeable resolveProxies reference ObjectProperty  objectProperty  ( 1 .. 1 ) ; 
+			    unique ordered  changeable resolveProxies reference Individual  individual  ( 1 .. 1 ) ; 
+	} 
+	
+	 class DataPropertyFact extends Fact  { 
+			    unique ordered  changeable resolveProxies reference DataProperty  dataProperty  ( 1 .. 1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Literal  literal  ( 1 .. 1 ) ; 
+	} 
 	serializable enum Characteristic  { 
 		1 : FUNCTIONAL = "Functional" ; 
 		2 : INVERSE_FUNCTIONAL = "InverseFunctional" ; 
@@ -156,12 +148,12 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 		5 : SYMETRIC = "Symmetric" ; 
 		6 : ASYMETRIC = "Asymmetric" ; 
 		7 : TRANSITIVE = "Transitive" ; 
-	} 
-	
+} 
+
 	 class Misc extends Frame  { 
 	} 
 	
-	 class Description extends Annotateable { 
+	 class Description extends Annotateable  { 
 			containment    unique ordered  changeable resolveProxies reference Conjunction  conjunctions  ( 1 .. -1 ) ; 
 	} 
 	
@@ -186,8 +178,11 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			containment    unique ordered  changeable resolveProxies reference Description  description  ( 1 .. 1 ) ; 
 	} 
 	
-	
 	abstract class ObjectPropertyRestriction extends Primary  { 
+			containment    unique ordered  changeable resolveProxies reference ObjectPropertyReference  propertyReference  ( 1 .. 1 ) ; 
+	} 
+	
+	class ObjectPropertyReference { 
 			    unique ordered  changeable resolveProxies reference ObjectProperty  property  ( 1 .. 1 ) ; 
 			  unique ordered  changeable   attribute EBoolean  inverse  ( 1 .. 1 ) ; 
 	} 
@@ -253,7 +248,6 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
 	} 
 	
-	
 	abstract class Literal  { 
 	} 
 	
@@ -262,41 +256,29 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			    unique ordered  changeable resolveProxies reference Datatype  theDatatype  ( 1 .. 1 ) ; 
 	} 
 	
-	class AbbreviatedXSDStringLiteral extends Literal {
-			attribute EString value (1..1);
-	}
-	class AbbreviatedRDFTextLiteral extends Literal {
-			attribute EString value (1..1);
-			attribute EString languageTag (1..1);
-	}
-	
-	class IntegerLiteral extends Literal {
-		attribute EInt value (1..1);
-	}
-	
-	class DecimalLiteral extends Literal {
-		attribute EInt preComma (1..1);
-		attribute EInt postComma (1..1);
-	}
-
-	class FloatingPointLiteral extends Literal {
-		attribute EFloat literal (1..1) ;
-	}
-
-	
-	abstract class Datatype  { 
+	 class AbbreviatedXSDStringLiteral extends Literal  { 
+			  unique ordered  changeable   attribute EString  value  ( 1 .. 1 ) ; 
 	} 
 	
-	 class Integer extends Datatype  { 
-	} 
-	 class String extends Datatype  { 
-	} 
-	 class Decimal extends Datatype  { 
-	} 
-	 class Float extends Datatype  { 
+	 class AbbreviatedRDFTextLiteral extends Literal  { 
+			  unique ordered  changeable   attribute EString  value  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EString  languageTag  ( 1 .. 1 ) ; 
 	} 
 	
+	 class IntegerLiteral extends Literal  { 
+			  unique ordered  changeable   attribute EInt  value  ( 1 .. 1 ) ; 
+	} 
 	
+	 class DecimalLiteral extends Literal  { 
+			  unique ordered  changeable   attribute EInt  preComma  ( 1 .. 1 ) ; 
+			  unique ordered  changeable   attribute EInt  postComma  ( 1 .. 1 ) ; 
+	} 
 	
+	 class FloatingPointLiteral extends Literal  { 
+			  unique ordered  changeable   attribute EFloat  literal  ( 1 .. 1 ) ; 
+	} 
+	
+	 class Datatype extends IRIIdentified  { 
+	} 
 	
 } 
