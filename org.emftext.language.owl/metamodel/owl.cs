@@ -56,35 +56,35 @@ RULES{
 	
 	// ONTOLOGY Property definitions and Axioms			
 	ObjectProperty ::= "ObjectProperty:" iri[IRI] ((annotations) |
-	( "Domain:" (propertyDomain ("," propertyDomain)*)?) |
-	( "Range:" (propertyRange ("," propertyRange)*)?) | 
-	( "Characteristics:" (characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])*)?) | 
-	( "SubPropertyOf:" (superProperties ("," superProperties)*)?) |
-	( "EquivalentTo:" (equivalentProperties ("," equivalentProperties)*)?) |
-	( "DisjointWith:" (disjointProperties ("," disjointProperties)*)?) |
-	( "InverseOf:" (inverseProperties ("," inverseProperties)*)?) |
-	( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains) +))*;
+		( "Domain:" (propertyDomain ("," propertyDomain)*)?) |
+		( "Range:" (propertyRange ("," propertyRange)*)?) | 
+		( "Characteristics:" (characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])*)?) | 
+		( "SubPropertyOf:" (superProperties ("," superProperties)*)?) |
+		( "EquivalentTo:" (equivalentProperties ("," equivalentProperties)*)?) |
+		( "DisjointWith:" (disjointProperties ("," disjointProperties)*)?) |
+		( "InverseOf:" (inverseProperties ("," inverseProperties)*)?) |
+		( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains) +))*;
 	
 	
 	DataProperty ::= "DataProperty:" iri[IRI] (
-	("Annotations:" annotations) 
-	| ("Domain:" (domain ("," domain)*))
-	| ("Range:" (range ("," range)*))
-	| ("Characteristics:" characteristic[CHARACTERISTICS])
-	| ("SubPropertyOf:" (superProperties[IRI] ("," superProperties[IRI])*))
-	| ("EquivalentTo:" (equivalentProperties[IRI] ("," equivalentProperties[IRI])*))
-	| ("DisjointWith:" (disjointProperties[IRI] ("," disjointProperties[IRI])*))
+		(annotations) 
+		| ("Domain:" (domain ("," domain)*))
+		| ("Range:" (range ("," range)*))
+		| ("Characteristics:" characteristic[CHARACTERISTICS])
+		| ("SubPropertyOf:" (superProperties[IRI] ("," superProperties[IRI])*))
+		| ("EquivalentTo:" (equivalentProperties[IRI] ("," equivalentProperties[IRI])*))
+		| ("DisjointWith:" (disjointProperties[IRI] ("," disjointProperties[IRI])*))
 	)*;
 	
 	AnnotationProperty ::= "AnnotationProperty:" iri[IRI] (
-	("Annotations:" annotations)
-	| ("Domain:" (domains[IRI] ("," domains[IRI])*))
-	| ("Range:" (ranges[IRI] ("," ranges[IRI])*))
-	| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*))
+		(annotations)
+		| ("Domain:" (domains[IRI] ("," domains[IRI])*))
+		| ("Range:" (ranges[IRI] ("," ranges[IRI])*))
+		| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*))
 	)*;
 	
 	Individual ::= "Individual:" iri[IRI] (
-		("Annotations:" annotations)
+		(annotations)
 		| ("Types:" (types ("," types)*))
 		| ("SameAs:" (sameAs[IRI] ("," sameAs[IRI])*))
 		| ("DifferentFrom:" (differentFrom[IRI] ("," differentFrom[IRI])*))
@@ -99,7 +99,7 @@ RULES{
 	Misc ::= "Misc";
 	
 	// Descriptions
-	Description ::= (annotations)? conjunctions ("or" conjunctions)*;
+	Description ::= (annotations ("," annotations)*)? conjunctions ("or" conjunctions)*;
 	Conjunction ::= (clazz[IRI] "that")? primaries ("and" primaries)*;								
 		
 	ClassAtomic ::= not[NOT]? clazz[IRI];
@@ -130,7 +130,7 @@ RULES{
 	DataPrimaryLiterals ::= not[NOT]? "{" literals ("," literals)* "}";
 		
 	
-	// TBD
+	// Literals
 	
 	TypedLiteral ::= lexicalValue['"','"'] "^^" theDatatype[IRI];
 	AbbreviatedXSDStringLiteral ::= value['"','"'];
@@ -143,5 +143,5 @@ RULES{
 	String ::= "string";
 	Float ::= "float";
 	Decimal ::= "decimal";
-	
+
 }
