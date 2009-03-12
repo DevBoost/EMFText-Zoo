@@ -50,7 +50,7 @@ RULES{
 				| ("SubClassOf:" (superClassesDescriptions ("," superClassesDescriptions )*)?)
 				| ("EquivalentTo:" (equivalentClassesDescriptions ("," equivalentClassesDescriptions)*)?)
 				| ("DisjointWith:" (disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )*)?)
-				| ("DisjointUnionWith:" (disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)*)?)
+				| ("DisjointUnionOf:" (disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)*)?)
 			)*;
 	
 	// ONTOLOGY Property definitions and Axioms			
@@ -89,22 +89,37 @@ RULES{
 		| ("DifferentFrom:" (differentFrom[IRI] ("," differentFrom[IRI])*))
 		| ("Facts:" (facts ("," facts)*))
 	)*;
-	
+
+	Datatype ::= "Datatype:" iri[IRI] (
+		(annotations) ("EquivalentTo:" dataRange)? (annotations)
+	)*;
+
 	ObjectPropertyFact ::= not[NOT]? objectProperty[IRI] individual[IRI];
 	 
 	DataPropertyFact ::= not[NOT]? dataProperty[IRI] literal;
 	
 	// MISC Frame TODO
-	Misc ::= "Misc";
+	EquivalentClasses ::= "EquivalentClasses:" annotations descriptions ("," descriptions)+;
+	DisjointClasses ::= "DisjointClasses:" annotations descriptions ("," descriptions)+;
+	EquivalentProperties ::= "EquivalentProperties:" annotations objectProperties[IRI] ("," objectProperties[IRI])+;
+	DisjointProperties ::= "DisjointProperties:" annotations objectProperties[IRI] ("," objectProperties[IRI])+;  
+	SameIndividuals ::= "SameIndividual:" annotations individuals[IRI] ("," individuals[IRI])+;
+	DifferentIndividuals ::= "DifferentIndividuals:" annotations individuals[IRI] ("," individuals[IRI])+;
+	HasKey ::=  "HasKey:" description annotations ( objectPropertyReference | dataProperty[IRI] )+;
 	
 	// Descriptions
 	Description ::= (annotations ("," annotations)*)? conjunctions ("or" conjunctions)*;
 	Conjunction ::= (clazz[IRI] "that")? primaries ("and" primaries)*;								
 		
-	ClassAtomic ::= not[NOT]? clazz[IRI];
-	IndividualsAtomic ::= not[NOT]? "{" individuals[IRI] ("," individuals[IRI])* "}";
-	NestedDescription ::= not[NOT]? "{" description "}";
 	
+	DataPropertySome ::= not[NOT]? dataProperty[IRI] "some" dataPrimary;
+	DataPropertyOnly ::= not[NOT]? dataProperty[IRI] "only" dataPrimary;
+	DataPropertyValue ::= not[NOT]? dataProperty[IRI] "value" literal;
+	DataPropertyMin ::= not[NOT]? dataProperty[IRI] "min" value[INT] dataPrimary?;
+	DataPropertyMax ::= not[NOT]? dataProperty[IRI] "max" value[INT] dataPrimary?;
+	DataPropertyExactly ::= not[NOT]? dataProperty[IRI] "exactly" value[INT] dataPrimary?;
+
+
 	ObjectPropertySome ::= not[NOT]? propertyReference "some" primary;
 	ObjectPropertyOnly ::= not[NOT]? propertyReference "only" primary;
 	ObjectPropertySelf ::= not[NOT]? propertyReference "self";
@@ -113,13 +128,11 @@ RULES{
 	ObjectPropertyMax ::= not[NOT]? propertyReference "max" value[INT] primary?;
 	ObjectPropertyExactly ::= not[NOT]? propertyReference "exactly" value[INT] primary?;
 
-	DataPropertySome ::= not[NOT]? dataProperty[IRI] "some" dataPrimary;
-	DataPropertyOnly ::= not[NOT]? dataProperty[IRI] "only" dataPrimary;
-	DataPropertyValue ::= not[NOT]? dataProperty[IRI] "value" literal;
-	DataPropertyMin ::= not[NOT]? dataProperty[IRI] "min" value[INT] dataPrimary;
-	DataPropertyMax ::= not[NOT]? dataProperty[IRI] "max" value[INT] dataPrimary;
-	DataPropertyExactly ::= not[NOT]? dataProperty[IRI] "exactly" value[INT] dataPrimary;
 
+	ClassAtomic ::= not[NOT]? clazz[IRI];
+	IndividualsAtomic ::= not[NOT]? "{" individuals[IRI] ("," individuals[IRI])* "}";
+	NestedDescription ::= not[NOT]? "{" description "}";
+	
 	ObjectPropertyReference ::= inverse[INVERSE]? property[IRI];
 
 	// DataRanges
@@ -139,6 +152,4 @@ RULES{
 	IntegerLiteral ::= value[INT];
 	DecimalLiteral ::= preComma[INT] "." postComma[INT];
 	FloatingPointLiteral ::= literal[FLOAT];
-	
-	Datatype ::= iri[IRI];
 }

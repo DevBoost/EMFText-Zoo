@@ -21,7 +21,7 @@ Ontology: <http://example.com/owl/families> <http://example.com/owl/families-v1>
     EquivalentTo: isMarriedTo 
     DisjointWith: hates 
     InverseOf: hasSpouse, inverse hasSpouse
-    SubPropertyChain: Annotations:  hasChild o hasParent o
+    SubPropertyChain: hasChild o hasParent
 
   DataProperty: hasAge
     Annotations: 
@@ -38,32 +38,30 @@ Ontology: <http://example.com/owl/families> <http://example.com/owl/families-v1>
     Range: integer 
     SubPropertyOf: initialCreator 
 
-  Datatype: NegInt
+	Individual: _:child1
     Annotations: 
-    EquivalentTo: integer[< 0]  
-
+    Types: Person 
+    Facts: hasChild Susan 
+  
   Class: Person
     Annotations: 
-    SubClassOf: owl:Thing that hasFirstName exactly 1 and hasFirstName only string[minLength 1]  
-    SubClassOf: hasAge exactly 1 and hasAge only not NegInt
     SubClassOf: hasGender exactly 1 and hasGender only {female , male} 
+    SubClassOf: hasAge exactly 1 and hasAge only not NegInt
+   
     SubClassOf: hasSSN max 1, hasSSN min 1
-    SubClassOf: not hates Self, 
+    SubClassOf: not hates self   
+    SubClassOf: owl:Thing that hasFirstName exactly 1 and hasFirstName only string [minLength 1]  
     EquivalentTo: g:People 
     DisjointWith: g:Rock , g:Mineral 
     DisjointUnionOf: Annotations:  Child, Adult
 
-  Individual: John
-    Annotations: 
-    Types: Person , hasFirstName value "John" or hasFirstName value "Jack"^^xsd:string
-    Facts: hasWife Mary, not hasChild Susan, hasAge 33, hasChild _:child1
-    SameAs: Jack 
-    DifferentFrom: Susan 
+	Individual: John
+	    Annotations: 
+	    Types: Person , hasFirstName value "John" or hasFirstName value "Jack"^^xsd:string
+	    Facts: hasWife Mary, not hasChild Susan, hasAge 33, hasChild _:child1
+	    SameAs: Jack 
+	    DifferentFrom: Susan 
 
-  Individual: _:child1
-    Annotations: 
-    Types: Person 
-    Facts: hasChild Susan 
 
   DisjointClasses: Annotations:  g:Rock, g:Scissor, g:Paper
   EquivalentProperties: Annotations:  hates, loathes, despises
@@ -73,3 +71,8 @@ Ontology: <http://example.com/owl/families> <http://example.com/owl/families-v1>
   SameIndividual: Annotations:  John, Jack, Joe, Jim
   DifferentIndividuals: Annotations:  John, Susan, Mary, Jill
   HasKey: Annotations:  hasSSN Person
+  
+  Datatype: NegInt
+    Annotations: 
+    EquivalentTo:  integer [minLength 0] 
+  
