@@ -29,8 +29,6 @@ TOKENS{
 RULES{
 	OntologyDocument ::= namespace*  ontology;
 
-
-	
 	Annotation ::= "Annotations:" ( annotations? propertyIri[IRI] target ("," annotations? propertyIri[IRI] target)*)?;
 	
 	IRITarget ::= target[IRI];
@@ -64,7 +62,7 @@ RULES{
 		( "InverseOf:" (inverseProperties ("," inverseProperties)*)?) |
 		( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains) +))*;
 	
-	
+	// DataProperty definitions	
 	DataProperty ::= "DataProperty:" iri[IRI] (
 		(annotations) 
 		| ("Domain:" (domain ("," domain)*))
@@ -75,13 +73,15 @@ RULES{
 		| ("DisjointWith:" (disjointProperties[IRI] ("," disjointProperties[IRI])*))
 	)*;
 	
+	// Annotation Property definition
 	AnnotationProperty ::= "AnnotationProperty:" iri[IRI] (
 		(annotations)
 		| ("Domain:" (domains[IRI] ("," domains[IRI])*))
 		| ("Range:" (ranges[IRI] ("," ranges[IRI])*))
 		| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*))
 	)*;
-	
+
+	// Individual Property definition
 	Individual ::= "Individual:" iri[IRI] (
 		(annotations)
 		| ("Types:" (types ("," types)*))
@@ -90,6 +90,7 @@ RULES{
 		| ("Facts:" (facts ("," facts)*))
 	)*;
 
+	// Datatype definition
 	Datatype ::= "Datatype:" iri[IRI] (
 		(annotations) ("EquivalentTo:" dataRange)? (annotations)
 	)*;
@@ -105,35 +106,27 @@ RULES{
 	DisjointProperties ::= "DisjointProperties:" annotations objectProperties[IRI] ("," objectProperties[IRI])+;  
 	SameIndividuals ::= "SameIndividual:" annotations individuals[IRI] ("," individuals[IRI])+;
 	DifferentIndividuals ::= "DifferentIndividuals:" annotations individuals[IRI] ("," individuals[IRI])+;
-	HasKey ::=  "HasKey:" description annotations ( objectPropertyReference | dataProperty[IRI] )+;
+	HasKey ::=  "HasKey:" description annotations ( objectPropertyReferences | dataProperties[IRI] )+;
 	
 	// Descriptions
 	Description ::= (annotations ("," annotations)*)? conjunctions ("or" conjunctions)*;
 	Conjunction ::= (clazz[IRI] "that")? primaries ("and" primaries)*;								
 		
-	
-	DataPropertySome ::= not[NOT]? dataProperty[IRI] "some" dataPrimary;
-	DataPropertyOnly ::= not[NOT]? dataProperty[IRI] "only" dataPrimary;
-	DataPropertyValue ::= not[NOT]? dataProperty[IRI] "value" literal;
-	DataPropertyMin ::= not[NOT]? dataProperty[IRI] "min" value[INT] dataPrimary?;
-	DataPropertyMax ::= not[NOT]? dataProperty[IRI] "max" value[INT] dataPrimary?;
-	DataPropertyExactly ::= not[NOT]? dataProperty[IRI] "exactly" value[INT] dataPrimary?;
+	ObjectPropertySome ::= not[NOT]? inverse[INVERSE]? feature[IRI] "some" (primary|dataPrimary);
+	ObjectPropertyOnly ::= not[NOT]? inverse[INVERSE]? feature[IRI] "only" (primary|dataPrimary);
+	ObjectPropertySelf ::= not[NOT]? inverse[INVERSE]? objectProperty[IRI] "Self";
+	ObjectPropertyValue ::= not[NOT]? inverse[INVERSE]? feature[IRI] "value" (individual[IRI]|literal);
 
-
-	ObjectPropertySome ::= not[NOT]? propertyReference "some" primary;
-	ObjectPropertyOnly ::= not[NOT]? propertyReference "only" primary;
-	ObjectPropertySelf ::= not[NOT]? propertyReference "self";
-	ObjectPropertyValue ::= not[NOT]? propertyReference "value" individual[IRI];
-	ObjectPropertyMin ::= not[NOT]? propertyReference "min" value[INT] primary?;
-	ObjectPropertyMax ::= not[NOT]? propertyReference "max" value[INT] primary?;
-	ObjectPropertyExactly ::= not[NOT]? propertyReference "exactly" value[INT] primary?;
+ 	ObjectPropertyMin ::= not[NOT]? inverse[INVERSE]? feature[IRI] "min" value[INT] (primary|dataPrimary)?;
+	ObjectPropertyMax ::= not[NOT]? inverse[INVERSE]? feature[IRI] "max" value[INT] (primary|dataPrimary)?;
+	ObjectPropertyExactly ::= not[NOT]? inverse[INVERSE]? feature[IRI] "exactly" value[INT] (primary|dataPrimary)?;
 
 
 	ClassAtomic ::= not[NOT]? clazz[IRI];
 	IndividualsAtomic ::= not[NOT]? "{" individuals[IRI] ("," individuals[IRI])* "}";
-	NestedDescription ::= not[NOT]? "{" description "}";
+	NestedDescription ::= not[NOT]? "(" description ")";
 	
-	ObjectPropertyReference ::= inverse[INVERSE]? property[IRI];
+	ObjectPropertyReference ::= inverse[INVERSE]? objectProperty[IRI];
 
 	// DataRanges
 	DataRange ::= dataConjunctions ("or" dataConjunctions)*;
