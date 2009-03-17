@@ -92,8 +92,8 @@ classes.Method
 classes.Block
     ::= "{" statement *  "}" ;	
     
-//statements.SimpleEmbeddedStatement
-//	::= ( "unsafe" ) ?  block ; 
+statements.SimpleEmbeddedStatement
+	::= ( "unsafe" ) ?  block ; 
 	
 statements.EmptyStatement
 	::= ";" ;
@@ -101,23 +101,24 @@ statements.EmptyStatement
 statements.LabeledStatement
 	::= name[] ":" statement ; 
 
-statements.DeclarationStatement
-	::= localVariableDeclaration  ";" 
-		| localConstantDeclaration	";" ;
+//statements.DeclarationStatement
+//	::= localVariableDeclaration  ";" 
+//		| localConstantDeclaration	";" ;
 		
-statements.LocalVariableDeclaration
-	::= type localVariableDeclarator + ;
+//statements.LocalVariableDeclaration
+//	::= type localVariableDeclarator + ;
 	
-statements.LocalVariableDeclarator
-	::= name[] ( "="   localVariableInitializer) ? ;
+//statements.LocalVariableDeclarator
+//	::= name[] ( "="   localVariableInitializer) ? ;
 	
-statements.LocalConstantDeclaration
-	::= "const"   type  constantDeclarator ( ","   constantDeclarator ) * ;
+//statements.LocalConstantDeclaration
+//	::= "const"   type  constantDeclarator ( ","   constantDeclarator ) * ;
 	
-statements.ConstantDeclarator
-	::= name[] "=" expression ;
+//statements.ConstantDeclarator
+//	::= name[] "=" expression ;
+
 	
-statements.ExpressionStatement
-	::= statementExpression   ";" ;
+//statements.ExpressionStatement
+//	::= statementExpression   ";" ;
 	
 }
