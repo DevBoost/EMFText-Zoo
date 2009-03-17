@@ -9,9 +9,14 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
 
 public class CSharpResourceImplTestWrapper extends CsharpResource {
+	
+	public CSharpResourceImplTestWrapper(URI uri){
+		super(uri);
+	}
 	
 	public void load(File cFile) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;
