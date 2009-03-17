@@ -48,6 +48,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression"/>
     <eClassifiers xsi:type="ecore:EClass" name="Assignment"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StatementExpression" abstract="true"/>
   </eSubpackages>
   <eSubpackages name="modifiers" nsURI="http://www.emftext.org/c_sharp/modifiers"
       nsPrefix="modifiers">
@@ -107,12 +108,17 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="localConstantDeclaration"
           eType="#//statements/LocalConstantDeclaration" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="EmbeddedStatement" eSuperTypes="#//statements/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="EmbeddedStatement" abstract="true"
+        eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleEmbeddedStatement" eSuperTypes="#//statements/EmbeddedStatement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ExpressionStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionStatement" eSuperTypes="#//statements/EmbeddedStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="statementExpression"
+          eType="#//expressions/StatementExpression" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SelectionStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
     <eClassifiers xsi:type="ecore:EClass" name="IterationStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
     <eClassifiers xsi:type="ecore:EClass" name="JumpStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
@@ -132,19 +138,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableInitializer"
           eType="#//statements/LocalVariableInitializer" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LocalVariableInitializer">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
-          containment="true"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LocalVariableInitializer" abstract="true"
+        eSuperTypes="#//expressions/Expression"/>
     <eClassifiers xsi:type="ecore:EClass" name="LocalConstantDeclaration">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="constantDeclarators"
-          eType="#//statements/ConstantDeclarators" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConstantDeclarators">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="constantDeclarator" eType="#//statements/ConstantDeclarator"
-          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constantDeclarator" lowerBound="1"
+          upperBound="-1" eType="#//statements/ConstantDeclarator" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConstantDeclarator" eSuperTypes="#//common/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
