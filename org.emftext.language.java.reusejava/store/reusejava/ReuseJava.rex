@@ -1,4 +1,4 @@
-componentmodel ReuseJava implements ReuseJava
+componentmodel reusejava.ReuseJava implements reusejava.ReuseJava
 epackages    <http://www.emftext.org/java> <http://www.emftext.org/reusejava>
 rootclass    java::containers::CompilationUnit
 {
