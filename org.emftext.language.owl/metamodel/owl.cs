@@ -30,65 +30,65 @@ TOKENS{
 RULES{
 	OntologyDocument ::= namespace*  ontology;
 
-	Annotation ::= "Annotations:" ( annotations? propertyIri[IRI] target ("," annotations? propertyIri[IRI] target)*)?;
+	Annotation ::= "Annotations:" ( annotations? propertyIri[IRI] target (!1 "," annotations? propertyIri[IRI] target)*)?;
 	
 	IRITarget ::= target[IRI];
 	
 	LiteralTarget ::= literal;
 	
-	Namespace ::= "Namespace:" prefix[IRI]? uri[IRI];
+	Namespace ::= "Namespace:" prefix[IRI]? uri[IRI] !1;
 	
-	Ontology ::= "Ontology:" (uri[IRI] versionIRI[IRI] ?)? 
-					("Import:" imports[IRI])* 
+	Ontology ::= "Ontology:" (uri[IRI] versionIRI[IRI] ? !1)? 
+					("Import:" imports[IRI] !1)* 
 					annotations* 
-					frames*;
+					(frames !1)*;
 	
 	// ONTOLOGY Class definitions and Axioms			
 	Class ::= "Class:" iri[IRI] (
 				(annotations) 
-				| ("SubClassOf:" (superClassesDescriptions ("," superClassesDescriptions )*)?)
-				| ("EquivalentTo:" (equivalentClassesDescriptions ("," equivalentClassesDescriptions)*)?)
-				| ("DisjointWith:" (disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )*)?)
-				| ("DisjointUnionOf:" (disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)*)?)
+				| ("SubClassOf:" (superClassesDescriptions ("," superClassesDescriptions )*)? !1)
+				| ("EquivalentTo:" (equivalentClassesDescriptions ("," equivalentClassesDescriptions)*)? !1)
+				| ("DisjointWith:" (disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )*)? !1)
+				| ("DisjointUnionOf:" (disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)*)? !1)
 			)*;
 	
 	// ONTOLOGY Property definitions and Axioms			
 	ObjectProperty ::= "ObjectProperty:" iri[IRI] ((annotations) |
-		( "Domain:" (propertyDomain ("," propertyDomain)*)?) |
-		( "Range:" (propertyRange ("," propertyRange)*)?) | 
-		( "Characteristics:" (characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])*)?) | 
-		( "SubPropertyOf:" (superProperties ("," superProperties)*)?) |
-		( "EquivalentTo:" (equivalentProperties ("," equivalentProperties)*)?) |
-		( "DisjointWith:" (disjointProperties ("," disjointProperties)*)?) |
-		( "InverseOf:" (inverseProperties ("," inverseProperties)*)?) |
-		( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains) +))*;
+		( "Domain:" propertyDomain ("," propertyDomain)* !1) |
+		( "Range:" propertyRange ("," propertyRange)* !1) | 
+		( "Characteristics:" characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])* !1) | 
+		( "SubPropertyOf:" superProperties ("," superProperties)* !1) |
+		( "EquivalentTo:" equivalentProperties ("," equivalentProperties)* !1) |
+		( "DisjointWith:" disjointProperties ("," disjointProperties)* !1) |
+		( "InverseOf:" inverseProperties ("," inverseProperties)* !1) |
+		( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains)+ !1))*;
 	
 	// DataProperty definitions	
 	DataProperty ::= "DataProperty:" iri[IRI] (
 		(annotations) 
-		| ("Domain:" (domain ("," domain)*))
-		| ("Range:" (range ("," range)*))
-		| ("Characteristics:" characteristic[CHARACTERISTICS])
-		| ("SubPropertyOf:" (superProperties[IRI] ("," superProperties[IRI])*))
-		| ("EquivalentTo:" (equivalentProperties[IRI] ("," equivalentProperties[IRI])*))
-		| ("DisjointWith:" (disjointProperties[IRI] ("," disjointProperties[IRI])*))
+		| ("Domain:" (domain ("," domain)*)!1)
+		| ("Range:" (range ("," range)*)!1)
+		| ("Characteristics:" characteristic[CHARACTERISTICS] !1)
+		| ("SubPropertyOf:" (superProperties[IRI] ("," superProperties[IRI])*) !1)
+		| ("EquivalentTo:" (equivalentProperties[IRI] ("," equivalentProperties[IRI])*)!1)
+		| ("DisjointWith:" (disjointProperties[IRI] ("," disjointProperties[IRI])*)! 1)
 	)*;
 	
 	// Annotation Property definition
 	AnnotationProperty ::= "AnnotationProperty:" iri[IRI] (
 		(annotations)
-		| ("Domain:" (domains[IRI] ("," domains[IRI])*))
-		| ("Range:" (ranges[IRI] ("," ranges[IRI])*))
-		| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*))
+		| ("Domain:" (domains[IRI] ("," domains[IRI])*)!1)
+		| ("Range:" (ranges[IRI] ("," ranges[IRI])*)!1)
+		| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*)!1)
 	)*;
 
 	// Individual Property definition
 	Individual ::= "Individual:" iri[IRI] (
 		(annotations)
-		| ("Types:" (types ("," types)*))
-		| ("SameAs:" (sameAs[IRI] ("," sameAs[IRI])*))
-		| ("DifferentFrom:" (differentFrom[IRI] ("," differentFrom[IRI])*))
-		| ("Facts:" (facts ("," facts)*))
+		| ("Types:" (types ("," types)*)!1)
+		| ("SameAs:" (sameAs[IRI] ("," sameAs[IRI])*)!1)
+		| ("DifferentFrom:" (differentFrom[IRI] ("," differentFrom[IRI])*)!1)
+		| ("Facts:" (facts ("," facts)*)!1)
 	)*;
 
 	// Datatype definition
@@ -101,13 +101,13 @@ RULES{
 	DataPropertyFact ::= not[NOT]? dataProperty[IRI] literal;
 	
 	// MISC Frame TODO
-	EquivalentClasses ::= "EquivalentClasses:" annotations descriptions ("," descriptions)+;
-	DisjointClasses ::= "DisjointClasses:" annotations descriptions ("," descriptions)+;
-	EquivalentProperties ::= "EquivalentProperties:" annotations objectProperties[IRI] ("," objectProperties[IRI])+;
-	DisjointProperties ::= "DisjointProperties:" annotations objectProperties[IRI] ("," objectProperties[IRI])+;  
-	SameIndividuals ::= "SameIndividual:" annotations individuals[IRI] ("," individuals[IRI])+;
-	DifferentIndividuals ::= "DifferentIndividuals:" annotations individuals[IRI] ("," individuals[IRI])+;
-	HasKey ::=  "HasKey:" description annotations ( objectPropertyReferences | dataProperties[IRI] )+;
+	EquivalentClasses ::= "EquivalentClasses:" annotations? descriptions ("," descriptions)+;
+	DisjointClasses ::= "DisjointClasses:" annotations? descriptions ("," descriptions)+;
+	EquivalentProperties ::= "EquivalentProperties:" annotations? objectProperties[IRI] ("," objectProperties[IRI])+;
+	DisjointProperties ::= "DisjointProperties:" annotations? objectProperties[IRI] ("," objectProperties[IRI])+;  
+	SameIndividuals ::= "SameIndividual:" annotations? individuals[IRI] ("," individuals[IRI])+;
+	DifferentIndividuals ::= "DifferentIndividuals:" annotations? individuals[IRI] ("," individuals[IRI])+;
+	HasKey ::=  "HasKey:" description annotations? ( objectPropertyReferences | dataProperties[IRI] )+;
 	
 	// Descriptions
 	
