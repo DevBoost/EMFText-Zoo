@@ -5,6 +5,7 @@ START OntologyDocument
 OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
+	tokenspace = "1";
 } 
 
 TOKENS{
@@ -109,8 +110,9 @@ RULES{
 	HasKey ::=  "HasKey:" description annotations ( objectPropertyReferences | dataProperties[IRI] )+;
 	
 	// Descriptions
-	Description ::= (annotations ("," annotations)*)? conjunctions ("or" conjunctions)*;
-	Conjunction ::= (clazz[IRI] "that")? primaries ("and" primaries)*;								
+	
+	Disjunction ::= (annotations ("," annotations)*)? conjunctions:Conjunction ("or" conjunctions:Conjunction)*;
+	Conjunction ::= (clazz[IRI] "that")? primaries:Primary ("and" primaries:Primary)*;								
 		
 	ObjectPropertySome ::= not[NOT]? inverse[INVERSE]? feature[IRI] "some" (primary|dataPrimary);
 	ObjectPropertyOnly ::= not[NOT]? inverse[INVERSE]? feature[IRI] "only" (primary|dataPrimary);
@@ -124,7 +126,7 @@ RULES{
 
 	ClassAtomic ::= not[NOT]? clazz[IRI];
 	IndividualsAtomic ::= not[NOT]? "{" individuals[IRI] ("," individuals[IRI])* "}";
-	NestedDescription ::= not[NOT]? "(" description ")";
+	NestedDescription ::= not[NOT]? "(" description:Disjunction ")";
 	
 	ObjectPropertyReference ::= inverse[INVERSE]? objectProperty[IRI];
 

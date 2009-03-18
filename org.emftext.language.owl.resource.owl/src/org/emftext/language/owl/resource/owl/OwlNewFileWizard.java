@@ -4,6 +4,6 @@ public class OwlNewFileWizard extends org.emftext.runtime.ui.new_wizard.Abstract
 		return "owl";
 	}
 	public String getExampleContent() {
-		return "Ontology:";
+		return "Ontology: ";
 	}
 }

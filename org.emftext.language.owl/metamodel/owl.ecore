@@ -18,12 +18,12 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 			containment    unique ordered  changeable resolveProxies reference Frame  frames  ( 0 .. -1 ) ; 
 	} 
 	
-	 class OntologyDocument  { 
+	class OntologyDocument  { 
 			containment    unique ordered  changeable resolveProxies reference Ontology  ontology  ( 1 .. 1 ) ; 
 			containment    unique ordered  changeable resolveProxies reference Namespace  namespace  ( 0 .. -1 ) ; 
 	} 
 	
-	 class Annotation extends Annotateable  { 
+	class Annotation extends Annotateable  { 
 			  unique ordered  changeable   attribute EString  propertyIri  ( 1 .. -1 ) ; 
 			containment    unique ordered  changeable resolveProxies reference Target  target  ( 1 .. -1 ) ; 
 	} 
@@ -194,17 +194,20 @@ package owl  owl :  "http://org.emftext/owl.ecore"  {
 		7 : TRANSITIVE = "Transitive" ; 
 } 
 
+	abstract class Description  extends Annotateable{
+	}
+
 	
-	 class Description extends Annotateable  { 
-			containment    unique ordered  changeable resolveProxies reference Conjunction  conjunctions  ( 1 .. -1 ) ; 
+	 class Disjunction extends Description { 
+			containment    unique ordered  changeable resolveProxies reference Description conjunctions  ( 1 .. -1 ) ; 
 	} 
 	
-	 class Conjunction  { 
+	 class Conjunction extends Description { 
 			    unique ordered  changeable resolveProxies reference Class  clazz  ( 0 .. 1 ) ; 
-			containment    unique ordered  changeable resolveProxies reference Primary  primaries  ( 0 .. -1 ) ; 
+			containment    unique ordered  changeable resolveProxies reference Description  primaries  ( 0 .. -1 ) ; 
 	} 
 	
-	abstract class Primary  { 
+	abstract class Primary extends Description { 
 			  unique ordered  changeable   attribute EBoolean  not  ( 1 .. 1 ) ; 
 	} 
 	
