@@ -7,7 +7,6 @@ import org.junit.Test;
 
 public class CSharpTest extends AbstractCSharpTestCase {
 
-	private static final String CSHARP_FILE_EXTENSION = ".csharp";
 	protected static final String TEST_INPUT_FOLDER = "input";
 	
 	@Override
@@ -15,16 +14,11 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		return TEST_INPUT_FOLDER;
 	}
 	
-	@Override
-	protected String getFileExtension() {
-		return CSHARP_FILE_EXTENSION;
-	}
-	
 	@Test
 	public void testAllInputCSFiles(){
 		if(checkCSharpPreconditons()){
 			CheckCSSyntaxWrapper wrapper=new CheckCSSyntaxWrapper();
-			assertEquals(true, wrapper.checkDefaultInputDirectory());				
+			wrapper.assertAllFilesInInputDirectoryAreValid();				
 		}
 		else{
 			System.out.println("CSharp test can not run on non-Windows systems");
@@ -36,7 +30,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	@Test
 	public void testWarnings() throws Exception {
 		String typename = "testwarnings";
-		String filename = typename + CSHARP_FILE_EXTENSION;
+		String filename = typename + getFileExtension();
 		
 		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
 		

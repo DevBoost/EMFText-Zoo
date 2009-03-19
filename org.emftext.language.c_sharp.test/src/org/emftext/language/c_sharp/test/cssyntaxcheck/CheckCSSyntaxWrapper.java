@@ -2,9 +2,12 @@ package org.emftext.language.c_sharp.test.cssyntaxcheck;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+
+import junit.framework.Assert;
 
 public class CheckCSSyntaxWrapper {
 	
@@ -17,21 +20,33 @@ public class CheckCSSyntaxWrapper {
 		
 	}	
 	
-	public boolean checkDefaultInputDirectory(){
+	public void assertAllFilesInInputDirectoryAreValid() {
 		LinkedList<String> args=new LinkedList<String>();
 		args.add(INPUT);
-		return runProcess(args);
+		File inputDir = new File(INPUT);
+		File[] allFiles = inputDir.listFiles(new FileFilter() {
+
+			public boolean accept(File file) {
+				return file.getName().endsWith(".csharp");
+			}
+			
+		});
+		for (File next : allFiles) {
+			boolean success = checkFiles("", next.getName());
+			Assert.assertTrue(INPUT + next.getName() + " should be parsable.", success);
+		}
 	}
 	
 	public boolean checkFiles(String folder, String filename){
 		List<String> arg=new LinkedList<String>();
+		arg.add(filename);
 		return checkFiles(folder, arg);
 	}
 	
 	//folder relative to input folder
 	public boolean checkFiles(String folder, List<String> params){
 		LinkedList<String> args=new LinkedList<String>();
-		String completePath=INPUT+folder+"\\";
+		String completePath=INPUT + folder;
 		
 		for (String item : params) {
 			args.add(completePath+item);

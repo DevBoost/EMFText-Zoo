@@ -24,6 +24,7 @@ namespace CodeCheck
             if (args.Length == 0)
             {
                 failureCount = -1;  
+                Console.WriteLine("Too few command line arguments.");
             }
             else
             {
@@ -71,7 +72,7 @@ namespace CodeCheck
                 {
                     //is a directory
                     DirectoryInfo di = new DirectoryInfo(name);
-                    FileInfo[] csfiles = di.GetFiles("*.cs");
+                    FileInfo[] csfiles = di.GetFiles("*.csharp");
                     Console.WriteLine("Checking {0} file(s) in "+name, csfiles.Length);
                     foreach (var file in csfiles)
                     {

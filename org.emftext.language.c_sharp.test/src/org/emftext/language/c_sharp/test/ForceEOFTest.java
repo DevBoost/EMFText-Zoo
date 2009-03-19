@@ -11,10 +11,15 @@ public class ForceEOFTest extends AbstractCSharpTestCase {
 
 	public void testForceEOF() {
 		try {
-			CsharpResource resource = tryToLoadResource(new ByteArrayInputStream(TEST_INPUT_FROM_MEMORY.getBytes()), "test_input_from_memory.c");
+			CsharpResource resource = load(new ByteArrayInputStream(TEST_INPUT_FROM_MEMORY.getBytes()));
 			assertTrue("Additional semicolon at the end should prevent successful parsing", resource.getErrors().size() > 0);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
+	}
+
+	@Override
+	protected String getTestInputFolder() {
+		return null;
 	}
 }

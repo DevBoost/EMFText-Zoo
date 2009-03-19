@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -16,13 +17,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.c_sharp.namespaces.CompilationUnit;
+import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
-import org.emftext.runtime.resource.ITextResource;
 
 public abstract class AbstractCSharpTestCase extends TestCase {
 	
-	
-	
+	private static final String CSHARP_FILE_EXTENSION = ".csharp";
 
 	private void assertSuccessfulParsing(Resource resource) {
 		print(resource.getErrors());
@@ -42,7 +42,10 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		return CheckCSPrecondition.checkAll();
 	}
 	
-	protected abstract String getFileExtension();
+	protected String getFileExtension() {
+		return CSHARP_FILE_EXTENSION;
+	}
+		
 	protected abstract String getTestInputFolder();
 	
 	
@@ -52,10 +55,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 	
 	protected CompilationUnit loadResource(URI uri) throws IOException {
 		
-		CSharpResourceImplTestWrapper resource = tryToLoadResource(uri);
-		
-		//ITextResource resource = (ITextResource) getResourceSet().createResource(uri);
-		//resource.load(getLoadOptions());
+		CsharpResource resource = tryToLoadResource(uri);
 		
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
@@ -85,10 +85,13 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		return root;
 	}*/
 
-	protected CSharpResourceImplTestWrapper tryToLoadResource(URI uri) throws IOException {
+	protected CsharpResource tryToLoadResource(URI uri) throws IOException {
 		
-		CSharpResourceImplTestWrapper resource = new CSharpResourceImplTestWrapper(uri);
+		CsharpResource resource = new CsharpResource(uri);
 		resource.load(Collections.EMPTY_MAP);
+		for (Diagnostic diagnostic : resource.getErrors()) {
+			System.out.println("tryToLoadResource(" + uri + ") found error in resource " + diagnostic.getMessage() + "(" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
+		}
 		System.out.println(resource.getContents());
 		return resource;
 	}
@@ -133,5 +136,17 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 				+ expectedType.getSimpleName() + "', but was "
 				+ object.getClass().getSimpleName(), expectedType
 				.isInstance(object));
+	}
+
+	public CsharpResource load(File cFile) throws IOException {
+		return load(new FileInputStream(cFile));
+	}
+	
+	public CsharpResource load(InputStream inputStream) throws IOException {
+		Map<?, ?> options = Collections.EMPTY_MAP;
+		CsharpResource resource = new CsharpResource();
+		resource.load(inputStream, options);
+		inputStream.close();
+		return resource;
 	}
 }
