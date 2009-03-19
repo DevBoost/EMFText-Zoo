@@ -90,7 +90,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		CsharpResource resource = new CsharpResource(uri);
 		resource.load(Collections.EMPTY_MAP);
 		for (Diagnostic diagnostic : resource.getErrors()) {
-			System.out.println("tryToLoadResource(" + uri + ") found error in resource " + diagnostic.getMessage() + "(" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
+			System.out.println("tryToLoadResource(" + uri.lastSegment() + ") found error in resource " + diagnostic.getMessage() + "(" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
 		}
 		System.out.println(resource.getContents());
 		return resource;
