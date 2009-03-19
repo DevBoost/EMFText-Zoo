@@ -6,6 +6,7 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
+	memoize = "true";
 } 
 
 TOKENS{
@@ -25,8 +26,7 @@ TOKENS{
 	DEFINE IRI $(('<')(~('>')|('\\''>'))*('>'))|(('A'..'Z' | ':' | 'a'..'z' | '0'..'9' | '_' | '-' )+)$;
 }
 
-
-
+ 
 RULES{
 	OntologyDocument ::= namespace*  ontology;
 
@@ -46,22 +46,23 @@ RULES{
 	// ONTOLOGY Class definitions and Axioms			
 	Class ::= "Class:" iri[IRI] !1 (
 				(annotations !1) 
-				| ("SubClassOf:" (superClassesDescriptions ("," superClassesDescriptions )*)? !1)
-				| ("EquivalentTo:" (equivalentClassesDescriptions ("," equivalentClassesDescriptions)*)? !1)
-				| ("DisjointWith:" (disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )*)? !1)
-				| ("DisjointUnionOf:" (disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)*)? !1)
+				| ("SubClassOf:" superClassesDescriptions ("," superClassesDescriptions )* !1)
+				| ("EquivalentTo:" equivalentClassesDescriptions ("," equivalentClassesDescriptions)* !1)
+				| ("DisjointWith:" disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )* !1)
+				| ("DisjointUnionOf:" disjointUnionWithClassesDescriptions ("," disjointUnionWithClassesDescriptions)* !1)
 			)*;
 	
 	// ONTOLOGY Property definitions and Axioms			
-	ObjectProperty ::= "ObjectProperty:" iri[IRI] !1 ((annotations !1) |
-		( "Domain:" propertyDomain ("," propertyDomain)* !1) |
-		( "Range:" propertyRange ("," propertyRange)* !1) | 
-		( "Characteristics:" characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])* !1) | 
-		( "SubPropertyOf:" superProperties ("," superProperties)* !1) |
-		( "EquivalentTo:" equivalentProperties ("," equivalentProperties)* !1) |
-		( "DisjointWith:" disjointProperties ("," disjointProperties)* !1) |
-		( "InverseOf:" inverseProperties ("," inverseProperties)* !1) |
-		( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains)+ !1))*;
+	ObjectProperty ::= "ObjectProperty:" iri[IRI] !1 ((annotations !1)
+		| ( "Domain:" propertyDomain ("," propertyDomain)* !1)
+	 	| ( "Range:" propertyRange ("," propertyRange)* !1) 
+	 	| ( "Characteristics:" characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])* !1) 
+	 	| ( "SubPropertyOf:" superProperties ("," superProperties)* !1) 
+	 	| ( "EquivalentTo:" equivalentProperties ("," equivalentProperties)* !1) 
+	 	| ( "DisjointWith:" disjointProperties ("," disjointProperties)* !1) 
+	 	| ( "InverseOf:" inverseProperties ("," inverseProperties)* !1) 
+	 	| ( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains)+ !1)
+	 )*;
 	
 	// DataProperty definitions	
 	DataProperty ::= "DataProperty:" iri[IRI] !1 (
@@ -92,9 +93,9 @@ RULES{
 	)*;
 
 	// Datatype definition
-	Datatype ::= "Datatype:" iri[IRI] !1 (
+	Datatype ::= "Datatype:" iri[IRI] !1 
 		(annotations !1)? ("EquivalentTo:" dataRange !1)? (annotations !1)?
-	)*;
+	;
 
 	ObjectPropertyFact ::= not[NOT]? objectProperty[IRI] individual[IRI];
 	 
