@@ -40,12 +40,12 @@ RULES{
 	
 	Ontology ::= "Ontology:" (uri[IRI] versionIRI[IRI] ? !1)? 
 					("Import:" imports[IRI] !1)* 
-					annotations* 
-					(frames !1)*;
+					(annotations !1)* 
+					(!1 frames !1)*;
 	
 	// ONTOLOGY Class definitions and Axioms			
-	Class ::= "Class:" iri[IRI] (
-				(annotations) 
+	Class ::= "Class:" iri[IRI] !1 (
+				(annotations !1) 
 				| ("SubClassOf:" (superClassesDescriptions ("," superClassesDescriptions )*)? !1)
 				| ("EquivalentTo:" (equivalentClassesDescriptions ("," equivalentClassesDescriptions)*)? !1)
 				| ("DisjointWith:" (disjointWithClassesDescriptions ("," disjointWithClassesDescriptions )*)? !1)
@@ -53,7 +53,7 @@ RULES{
 			)*;
 	
 	// ONTOLOGY Property definitions and Axioms			
-	ObjectProperty ::= "ObjectProperty:" iri[IRI] ((annotations) |
+	ObjectProperty ::= "ObjectProperty:" iri[IRI] !1 ((annotations !1) |
 		( "Domain:" propertyDomain ("," propertyDomain)* !1) |
 		( "Range:" propertyRange ("," propertyRange)* !1) | 
 		( "Characteristics:" characteristics[CHARACTERISTICS] ("," characteristics[CHARACTERISTICS])* !1) | 
@@ -64,8 +64,8 @@ RULES{
 		( "SubPropertyChain:" subPropertyChains ("o" subPropertyChains)+ !1))*;
 	
 	// DataProperty definitions	
-	DataProperty ::= "DataProperty:" iri[IRI] (
-		(annotations) 
+	DataProperty ::= "DataProperty:" iri[IRI] !1 (
+		(annotations !1) 
 		| ("Domain:" (domain ("," domain)*)!1)
 		| ("Range:" (range ("," range)*)!1)
 		| ("Characteristics:" characteristic[CHARACTERISTICS] !1)
@@ -75,25 +75,25 @@ RULES{
 	)*;
 	
 	// Annotation Property definition
-	AnnotationProperty ::= "AnnotationProperty:" iri[IRI] (
+	AnnotationProperty ::= "AnnotationProperty:" iri[IRI] !1 (
 		(annotations)
-		| ("Domain:" (domains[IRI] ("," domains[IRI])*)!1)
-		| ("Range:" (ranges[IRI] ("," ranges[IRI])*)!1)
-		| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*)!1)
+		| ("Domain:" (domains[IRI] ("," domains[IRI])*) !1)
+		| ("Range:" (ranges[IRI] ("," ranges[IRI])*) !1)
+		| ("SubPropertyOf:" (superAnnotationProperties[IRI]("," superAnnotationProperties[IRI])*) !1)
 	)*;
 
 	// Individual Property definition
-	Individual ::= "Individual:" iri[IRI] (
+	Individual ::= "Individual:" iri[IRI] !1 (
 		(annotations)
-		| ("Types:" (types ("," types)*)!1)
-		| ("SameAs:" (sameAs[IRI] ("," sameAs[IRI])*)!1)
-		| ("DifferentFrom:" (differentFrom[IRI] ("," differentFrom[IRI])*)!1)
-		| ("Facts:" (facts ("," facts)*)!1)
+		| ("Types:" (types ("," types)*) !1)
+		| ("SameAs:" (sameAs[IRI] ("," sameAs[IRI])*) !1)
+		| ("DifferentFrom:" (differentFrom[IRI] ("," differentFrom[IRI])*) !1)
+		| ("Facts:" (facts ("," facts)*) !1)
 	)*;
 
 	// Datatype definition
-	Datatype ::= "Datatype:" iri[IRI] (
-		(annotations) ("EquivalentTo:" dataRange)? (annotations)
+	Datatype ::= "Datatype:" iri[IRI] !1 (
+		(annotations !1)? ("EquivalentTo:" dataRange !1)? (annotations !1)?
 	)*;
 
 	ObjectPropertyFact ::= not[NOT]? objectProperty[IRI] individual[IRI];
