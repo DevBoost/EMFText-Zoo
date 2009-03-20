@@ -11,7 +11,8 @@ OPTIONS {
 } 
 
 TOKENS{
-	
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 	DEFINE NOT $'not'$;
 	DEFINE INVERSE $'inverse'$;
 	DEFINE INT $('+'|'-')?('0'..'9')+$;
