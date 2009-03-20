@@ -30,6 +30,7 @@ OPTIONS {
 	overrideManifest = "false";
 	generateCodeFromGeneratorModel = "false";
 	memoize = "true";
+	usePredefinedTokens = "false";
 }
 
 TOKENS {
@@ -56,7 +57,8 @@ TOKENS {
 	DEFINE OCTAL_LONG_LITERAL $'0'('0'..'7')+('l'|'L')$;
 	DEFINE OCTAL_INTEGER_LITERAL $'0'('0'..'7')+$;
 
-	//PREDEFINED WS COLLECT IN whitespaces;
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 
 RULES {
