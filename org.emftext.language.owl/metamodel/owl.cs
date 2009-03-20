@@ -7,6 +7,7 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	memoize = "true";
+	usePredefinedTokens = "false";
 } 
 
 TOKENS{
