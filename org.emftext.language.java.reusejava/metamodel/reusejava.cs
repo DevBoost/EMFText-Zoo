@@ -8,6 +8,7 @@ IMPORTS {
 
 OPTIONS {
 	defaultTokenName = "IDENTIFIER";
+	usePredefinedTokens = "false";
 }
 
 RULES {
