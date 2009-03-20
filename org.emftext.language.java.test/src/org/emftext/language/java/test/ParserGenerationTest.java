@@ -85,7 +85,7 @@ public class ParserGenerationTest {
 				return null;
 			}
 		};
-		InputStream grammarStream = ResourcePluginContentGenerator.deriveGrammar(antlrGen, context);
+		InputStream grammarStream = new ResourcePluginContentGenerator().deriveGrammar(antlrGen, context);
 		return getContent(grammarStream);
 	}
 
