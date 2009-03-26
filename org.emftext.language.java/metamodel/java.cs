@@ -61,6 +61,13 @@ TOKENS {
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 
+TOKENSTYLES {
+	"ML_COMMENT" COLOR #008000, ITALIC;
+	"SL_COMMENT" COLOR #000080, ITALIC;
+	"STRING_LITERAL" COLOR #2A00FF;
+	"IDENTIFIER" COLOR #000000;
+}
+
 RULES {
 
 containers.EmptyModel ::= ("import" imports #0 ";" !0 )* (";")*
