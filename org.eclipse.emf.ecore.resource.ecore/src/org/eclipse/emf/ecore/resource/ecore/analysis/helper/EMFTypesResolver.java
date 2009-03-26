@@ -20,12 +20,14 @@
  ******************************************************************************/
 package org.eclipse.emf.ecore.resource.ecore.analysis.helper;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.Iterator;
+
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.runtime.resource.IReferenceResolveResult;
 
 public class EMFTypesResolver {
 	
@@ -34,36 +36,35 @@ public class EMFTypesResolver {
 			org.eclipse.emf.ecore.EReference reference, 
 			int position, 
 			boolean resolveFuzzy, 
-			org.emftext.runtime.resource.IReferenceResolveResult result) {
+			org.emftext.runtime.resource.IReferenceResolveResult<?> result) {
 		
-		EList<EObject> pkgs = container.getContents();
-
-		for (EObject pkgCandidate : pkgs) {
-			if (pkgCandidate instanceof EPackage) {
-				EList<EClassifier> allClassifiers  = ((EPackage) pkgCandidate).getEClassifiers();
-				addResults(identifier, allClassifiers, resolveFuzzy, result);
-			}
-		}	
-		addResults(identifier, EcorePackage.eINSTANCE.getEClassifiers(), resolveFuzzy, result);
+		TreeIterator<EObject> contents = container.getAllContents();
 		
+		addResults(identifier, contents, resolveFuzzy, result);
+		addResults(identifier, EcorePackage.eINSTANCE.getEClassifiers().iterator(), resolveFuzzy, result);
 	}
 
-	private void addResults(java.lang.String identifier, EList<EClassifier> allClassifiers, boolean resolveFuzzy,
-			org.emftext.runtime.resource.IReferenceResolveResult result) {
-		if (resolveFuzzy) {			
-			for (EClassifier classifier : allClassifiers) {
-				if (classifier.getName().startsWith(identifier)) {
-					result.addMapping(classifier.getName(), classifier);
-				}
-			}
-		} else {
-			for (EClassifier classifier : allClassifiers) {
-				if (classifier.getName().equals(identifier)) {
-					result.addMapping(identifier, classifier);
+	private void addResults(String identifier, Iterator<?> contents,
+			boolean resolveFuzzy, IReferenceResolveResult result) {
+		while (contents.hasNext() ) {
+			Object next = contents.next();
+			if (next instanceof EClassifier) {
+				EClassifier classifier = (EClassifier) next;
+				
+				if (resolveFuzzy) {			
+					if (classifier.getName().startsWith(identifier)) {
+						result.addMapping(classifier.getName(), classifier);
+					}
+				} else {
+					if (classifier.getName().equals(identifier)) {
+						result.addMapping(identifier, classifier);
+					}
 				}
 			}
 		}
 	}
+
+	
 }
 
 
