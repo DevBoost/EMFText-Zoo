@@ -10,16 +10,16 @@ TOKENS {
 
 RULES{	
   StateMachine  ::= "StateMachine" name[] "{" region "}" ;	
-  Region        ::= ( subvertex ";" | transition ";")*;
+  Region        ::= subvertex* "transitions" "{" transition* "}";
   
   State         ::= "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)? 
-                    "do" ":" doActivity "}";
-  Pseudostate   ::=  kind[PSEUDOKIND] "state" name[];
+                    "do" ":" doActivity "}" ";";
+  Pseudostate   ::=  kind[PSEUDOKIND] "state" name[] ";";
   FinalState    ::= "final" "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)?
-                    "do" ":" doActivity "}"; 					
+                    "do" ":" doActivity "}" ";"; 					
   
-  Transition    ::= "transition" "from" source[] "to" target[] "when" trigger 
-                    ( "do" ":" effect )?;		
+  Transition    ::= source[] "->" target[] "when" trigger 
+                    ( "do" ":" effect )? ";";		
   Trigger       ::= name['"','"'];	
   Activity      ::= name['"','"'];										
 }

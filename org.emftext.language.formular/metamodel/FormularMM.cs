@@ -2,6 +2,10 @@ SYNTAXDEF formular
 FOR <http://www.emftext.org/language/formular>
 START Formular
 
+OPTIONS {
+	overridePluginXML = "false";
+}
+
 TOKENSTYLES {
 	"TEXT" COLOR #da0000;
 	"FORMULAR" COLOR #000000, BOLD;
