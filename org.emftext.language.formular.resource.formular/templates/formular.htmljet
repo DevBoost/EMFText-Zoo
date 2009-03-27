@@ -60,10 +60,16 @@ class="HTMLFormGenerator" imports ="java.util.Iterator org.eclipse.emf.common.ut
 	<% if (frage.getAntwortTyp() instanceof Auswahl) { 
 		Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
 		for(Option option : auswahl.getOptionen()) {
-		%> 
-		 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-		 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%>)<%}%>
-		 <br>
+			if (auswahl.isMehrfach()) {%> 
+			 <input type="checkbox" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+			 <%} else { %>
+			 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+			
+			
+			 <%}%>
+			 <br>
 	<% 	 }
 	    } 
 	%>
