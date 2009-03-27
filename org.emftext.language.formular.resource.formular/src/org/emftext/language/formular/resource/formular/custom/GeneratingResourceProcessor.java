@@ -61,7 +61,6 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 			String uri = file.getLocation().toOSString();
 
 			File f = new File(uri);
-			System.out.println(f.getAbsolutePath());
 			output = new FileWriter(uri);
 			writer = new BufferedWriter(output);
 			writer.write(htmlFormGen.generate(formular));
