@@ -1,6 +1,7 @@
 package org.emftext.language.formular.resource.formular.custom;
 
 import generator.html.HTMLFormGenerator;
+import generator.html.IPhoneFormGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,19 +35,33 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 		for (EObject eobject : distinctObjects) {
 			if (eobject instanceof Formular) {
 				createHTMLForm((Formular) eobject);
+				createIPhoneForm((Formular) eobject);
+				
 			}
 		}
 
 	}
 
+	private void createIPhoneForm(Formular formular) {
+		final IPhoneFormGenerator iphoneFormGen = new IPhoneFormGenerator();
+		generateForm(formular, "iphone", iphoneFormGen);
+		
+	}
+
 	private void createHTMLForm(Formular formular) {
 		final HTMLFormGenerator htmlFormGen = new HTMLFormGenerator();
+		generateForm(formular, "html", htmlFormGen);
+	}
+
+	private void generateForm(Formular formular, String location,
+			final IGenerator generator) {
 		FileWriter output;
 		BufferedWriter writer;
 		try {
 			IFile resourcefile = WorkspaceSynchronizer.getFile(formular
 					.eResource());
-			IFolder folder = resourcefile.getProject().getFolder("output");
+			
+			IFolder folder = resourcefile.getProject().getFolder(location);
 			if (!folder.exists()) {
 				try {
 					folder.create(true, true, new NullProgressMonitor());
@@ -63,7 +78,7 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 			File f = new File(uri);
 			output = new FileWriter(uri);
 			writer = new BufferedWriter(output);
-			writer.write(htmlFormGen.generate(formular));
+			writer.write(generator.generate(formular));
 			writer.close();
 		} catch (final IOException e) {
 			e.printStackTrace();
