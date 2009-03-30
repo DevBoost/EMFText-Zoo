@@ -16,8 +16,9 @@ TOKENSTYLES {
 	"DATUM" COLOR #000000, BOLD;
 	"FREITEXT" COLOR #000000, BOLD;
 	"ZAHL" COLOR #000000, BOLD;
+	"ENTSCHEIDUNG" COLOR #000000, BOLD;
 }
-
+  
 RULES {
 	Formular ::= "FORMULAR" titel['"','"'] gruppen*;
 	Gruppe ::= "GRUPPE" name['"','"'] fragen*;
@@ -27,5 +28,5 @@ RULES {
 	Datum ::= "DATUM";
 	Freitext ::= "FREITEXT";
 	Zahl ::= "ZAHL";
-	Entscheidung ::= ( id[] ":")? "ENTSCHEIDUNG";
+	Entscheidung ::=  "ENTSCHEIDUNG" "(" option ")"; 
 }
