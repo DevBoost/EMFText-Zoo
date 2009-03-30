@@ -21,68 +21,73 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 
 <h1> Formular: <%=formular.getTitel() %></h1>
 
-<%EList<Frage> list = formular.getFragen();
-
-    for (Iterator<Frage> iterator = list.iterator(); iterator.hasNext();) {
-
-	Frage frage = iterator.next();
-
-%>
-
-<b> 
-	<%=frage.getText()%>
+<%EList<Gruppe> gruppen = formular.getGruppen();
 	
-</b>
-	<% if (frage.getErklaerung() != null) { %> <%=frage.getErklaerung()%> <% } %>
-<br>	
-	<% if (frage.getAbhaengigVon().size() > 0) { %>
-		(Nur bei: 
-		<% for(Option option : frage.getAbhaengigVon()) { %>
-			<%=option.getId() %>  
-		<%}%>
-		)
-	 
+	for (Gruppe gruppe : gruppen) {
 		
-	<% } %>
-	<br>
-
-	<% if (frage.getAntwortTyp() instanceof Freitext) { %> 
-		<input size=30></input>	
-	<% } %>
-	<% if (frage.getAntwortTyp() instanceof Datum) { %> 
-		<input size="2" maxlength="2" value="DD"/>.
-		<input size="2" maxlength="2" value="MM"/>.
-		<input size="4" maxlength="4" value="YYYY"/>	
-	<% } %>
-	<% if (frage.getAntwortTyp() instanceof Zahl) { %> 
-		<input size=10></input>	
-	<% } %>
-	<% if (frage.getAntwortTyp() instanceof Auswahl) { 
-		Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
-		for(Option option : auswahl.getOptionen()) {
-			if (auswahl.isMehrfach()) {%> 
-			 <input type="checkbox" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
-			 <%} else { %>
-			 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+		EList<Frage> list = gruppe.getFragen();
+		
+		    for (Iterator<Frage> iterator = list.iterator(); iterator.hasNext();) {
+		
+			Frage frage = iterator.next();
+		
+		%>
+		
+		<b> 
+			<%=frage.getText()%>
+			
+		</b>
+			<% if (frage.getErklaerung() != null) { %> <%=frage.getErklaerung()%> <% } %>
+		<br>	
+			<% if (frage.getAbhaengigVon().size() > 0) { %>
+				(Nur bei: 
+				<% for(Option option : frage.getAbhaengigVon()) { %>
+					<%=option.getId() %>  
+				<%}%>
+				)
+			 
+				
+			<% } %>
+			<br>
+		
+			<% if (frage.getAntwortTyp() instanceof Freitext) { %> 
+				<input size=30></input>	
+			<% } %>
+			<% if (frage.getAntwortTyp() instanceof Datum) { %> 
+				<input size="2" maxlength="2" value="DD"/>.
+				<input size="2" maxlength="2" value="MM"/>.
+				<input size="4" maxlength="4" value="YYYY"/>	
+			<% } %>
+			<% if (frage.getAntwortTyp() instanceof Zahl) { %> 
+				<input size=10></input>	
+			<% } %>
+			<% if (frage.getAntwortTyp() instanceof Auswahl) { 
+				Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
+				for(Option option : auswahl.getOptionen()) {
+					if (auswahl.isMehrfach()) {%> 
+					 <input type="checkbox" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+					 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+					 <%} else { %>
+					 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+					 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+					
+					
+					 <%}%>
+					 <br>
+			<% 	 }
+			    } 
+			%>
+			<br>
+		
 			
 			
-			 <%}%>
-			 <br>
-	<% 	 }
-	    } 
-	%>
-	<br>
-
+			
+		
+		<%
+		  }
+	}%>
+		
 	
-	
-	
-
-<% 
-}%>
-
-
 
 
 

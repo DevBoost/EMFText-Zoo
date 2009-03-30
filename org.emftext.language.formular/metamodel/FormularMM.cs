@@ -19,11 +19,13 @@ TOKENSTYLES {
 }
 
 RULES {
-	Formular ::= "FORMULAR" titel['"','"'] fragen*;
+	Formular ::= "FORMULAR" titel['"','"'] gruppen*;
+	Gruppe ::= "GRUPPE" name['"','"'] fragen*;
 	Frage ::= "FRAGE" text['"','"'] ( erklaerung['"','"'] )? ("NUR" "BEI" abhaengigVon[])? ":" antwortTyp;
 	Auswahl ::= "AUSWAHL" (mehrfach[])? "(" optionen ("," optionen)* ")";
 	Option ::= ( id[] ":")? text['"','"'];
 	Datum ::= "DATUM";
 	Freitext ::= "FREITEXT";
 	Zahl ::= "ZAHL";
+	Entscheidung ::= ( id[] ":")? "ENTSCHEIDUNG";
 }

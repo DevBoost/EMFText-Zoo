@@ -8,8 +8,7 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
-<html> 
-
+<html>
 <head> 
 	<title> <%=formular.getTitel()%> </title>
 	<link rel="stylesheet" href="WebApp/Design/Render.css" />
@@ -77,201 +76,149 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 
 <div id="iGroup">
 
-    <div class="iLayer" id="waHome" title="&Uuml;Berblick">
+    <div class="iLayer" id="waHome" title="&Uuml;berblick">
         <div class="iBlock">
             <h1>Fragebogen: <%=formular.getTitel() %></h1>
-            <p>This is the first layer. <a href="#_Next">Tap here</a> to slide to the next layer.
-               A back button will then appear in the header.</p>
+            <p>Bitte w&auml;hlen sie den Bereich des Formulars, den sie bearbeiten m&ouml;chten:</p>
             
             
             
         </div>
         
         <div class="iMenu">
-        <h3>Frage ausw&auml;hlen: </h3>
+        <h3>Bereich ausw&auml;hlen: </h3>
         	<ul class="iArrow">
-        	<%EList<Frage> list = formular.getFragen();
-        	int i = 0;
-            for (Iterator<Frage> iterator = list.iterator(); iterator.hasNext();) {
-
-            Frage frage = iterator.next();
-            i++;
-        	%>
-
-        	<li><a href="#_Frage_<%=i%>">Frage <%=i%></a></li>
-
-        	
-	        <% 
-	        }%>
-
+	        	<%
+	        	EList<Gruppe> gruppen = formular.getGruppen();
+	        	int i = 0;
+	            for (Gruppe gruppe : gruppen) {
+	        		i++;%>
+	
+	        	<li><a href="#_Gruppe_<%=i%>"><%=gruppe.getName()%></a></li>
+	        	<% 
+		        }
+		        %>
             </ul>
         </div>
-    		
-
     </div>
 
     
-	<%list = formular.getFragen();
+	<%
 	i = 0;
-    for (Iterator<Frage> iterator = list.iterator(); iterator.hasNext();) {
+    for (Gruppe gruppe : gruppen) {
+	    i++;
+		%>
 
-    Frage frage = iterator.next();
-    i++;
-	%>
-
-    <div class="iLayer" id="waFrage_<%=i%>" title="Frage <%=i%>">
-	   
-	    <div class="iPanel">
-			<div id="form-res"></div>
-				<fieldset>	<legend><%= frage.getText()%></legend>
-				
-			    	<% if (frage.getErklaerung() != null) { %> 
-			    	<p><%= frage.getErklaerung()%></p>
-			    	 <% } %>
-			    
-			    	 <% if (frage.getAbhaengigVon().size() > 0) { %>
-			 		(Nur bei: 
-			 		<% for(Option option : frage.getAbhaengigVon()) { %>
-			 			<%=option.getId() %>  
-			 		<%}%>
-			 		)
-			 	 
-			 		
-			 	<% } %>
-			
-			 	<% if (frage.getAntwortTyp() instanceof Freitext) { %> 
-			 		<ul><li><input type="text" size=30></input></li></ul>	
-			 	<% } %>
-			 	<% if (frage.getAntwortTyp() instanceof Datum) { %> 
-			 		<ul><li>
-			 		<input size="2" maxlength="2" value="DD"/>.
-			 		<input size="2" maxlength="2" value="MM"/>.
-			 		<input size="4" maxlength="4" value="YYYY"/>
-			 		</li></ul>
-			 	<% } %>
-			 	<% if (frage.getAntwortTyp() instanceof Zahl) { %> 
-			 		<ul><li>
-			 		<input size=10></input>
-			 		</li></ul>	
-			 	<% } %>
-			 	<% if (frage.getAntwortTyp() instanceof Auswahl) { 
-			 		Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
-			 		if (auswahl.isMehrfach()) {%>
-			 		<ul><li class="iCheck">bitte w&auml;hlen
-					 <%} else {%>
-					 <ul><li class="iRadio">bitte w&auml;hlen
-					 <%
-			 		}
-		 	
-			 		
-			 		for(Option option : auswahl.getOptionen()) {
-			 			if (auswahl.isMehrfach()) {%> 
-			 			 <input type="check" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-			 			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
-			 			 <%} else { %>
-			 				<label><input type="radio" name="radio" value="<%=option.getText()%>" checked="checked"/><%=option.getText()%>	 				
-			 			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
-			 			 </label>	 			
-			 			 <%}%>
-			 	<%}
-			 		%></li>
-					 </ul><%
-			 	    } 
-			 	%>
-			 	
-				</fieldset>
-				</div>
-				 <div class="iMenu">
-			       
-				<% if (iterator.hasNext() ) { %>
-				<ul class="iArrow">
-	        	<li><a href="#_Frage_<%=i+1%>">Frage <%=i+1%></a></li>
-	        	</ul>
-	        	<%} %>
-	        	</div>
-	</div>	
-    <% 
-    }
-   %>
-    
-</div>
-</div>
-
-
-<!--
-<h1> Formular: <%=formular.getTitel() %></h1>
-
-<%list = formular.getFragen();
-
-    for (Iterator<Frage> iterator = list.iterator(); iterator.hasNext();) {
-
-	Frage frage = iterator.next();
-
-%>
-
-<b> 
-	<%=frage.getText()%>
-	
-</b>
-	<% if (frage.getErklaerung() != null) { %> <%=frage.getErklaerung()%> <% } %>
-<br>	
-	<% if (frage.getAbhaengigVon().size() > 0) { %>
-		(Nur bei: 
-		<% for(Option option : frage.getAbhaengigVon()) { %>
-			<%=option.getId() %>  
-		<%}%>
-		)
-	 
-		
-	<% } %>
-	<br>
-
-	<% if (frage.getAntwortTyp() instanceof Freitext) { %> 
-		<input size=30></input>	
-	<% } %>
-	<% if (frage.getAntwortTyp() instanceof Datum) { %> 
-		<input size="2" maxlength="2" value="DD"/>.
-		<input size="2" maxlength="2" value="MM"/>.
-		<input size="4" maxlength="4" value="YYYY"/>	
-	<% } %>
-	<% if (frage.getAntwortTyp() instanceof Zahl) { %> 
-		<input size=10></input>	
-	<% } %>
-	<% if (frage.getAntwortTyp() instanceof Auswahl) { 
-		Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
-		for(Option option : auswahl.getOptionen()) {
-			if (auswahl.isMehrfach()) {%> 
-			 <input type="checkbox" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
-			 <%} else { %>
-			 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
-			
-			
-			 <%}%>
-			 <br>
-	<% 	 }
-	    } 
-	%>
-	<br>
-
-	
-	
-	
-
-<% 
-}%>
-
-
-
--->
-
-
-
-
-
+	    <div class="iLayer" id="waGruppe_<%=i%>" title="<%=gruppe.getName()%>">
+		   	    <div class="iPanel">
+					<div id="form-res"></div>
+						<fieldset>	<legend><%= gruppe.getName()%></legend>
+						<% 
+					   	for (Frage frage : gruppe.getFragen()) {
+					   	%>
+									
+					    	<% 
+					    	if (frage.getErklaerung() != null) { 
+					    	%> 
+					    		<p><%= frage.getErklaerung()%></p>
+					    	<% 
+					    	} 
+					    	%>
+					    
+					    	<% 
+					    	if (frage.getAbhaengigVon().size() > 0) { %>
+					 			(Nur bei: 
+					 			<% 
+					 			for(Option option : frage.getAbhaengigVon()) { %>
+					 				<%=option.getId() %>  
+					 			<%
+					 			}
+					 			%>
+					 			)
+					 	  	<% 
+					 	  	} 
+					    	%>
+					
+					    	<% 
+					    	if (frage.getAntwortTyp() instanceof Freitext) { %> 
+					 			<ul><li><label><%=frage.getText()%>:</label><input type="text" size=30></input></li></ul>	
+					 		<% 
+					 		} 
+					    	%>
+					 	
+					    	<% 
+					    	if (frage.getAntwortTyp() instanceof Datum) { %> 
+					 			<ul><li><label><%=frage.getText()%>:</label><br/>
+					 			<input size="2" maxlength="2" value="DD"/>.
+					 			<input size="2" maxlength="2" value="MM"/>.
+					 			<input size="4" maxlength="4" value="YYYY"/>
+					 			</li></ul>
+					 		<% 
+					 		} 
+					    	%>
+					    	<% 
+					    	if (frage.getAntwortTyp() instanceof Zahl) { %> 
+					 			<ul><li><label><%=frage.getText()%>:</label>
+					 			<input size=10></input>
+					 			</li></ul>	
+					 		<% 
+					 		} 
+					    	%>
+					    	<% 
+					    	if (frage.getAntwortTyp() instanceof Auswahl) { 
+					    		Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
+					    		if (auswahl.getOptionen().size() == 1 && ( auswahl.getOptionen().get(0) instanceof Entscheidung) ) {
+					    			Entscheidung e = (Entscheidung) auswahl.getOptionen().get(0);%>
+					    				<ul><li><input type="checkbox" name="<%=frage.getText()%>" id="<%=frage.getText()%>" class="iToggle" title="Ja|Nein" checked="checked" value="ok" /> 
+					    				<label for="<%=frage.getText()%>"><%=frage.getText()%></label>
+									<%
+					    		}					    		
+					    		else  {
+					    			if (auswahl.isMehrfach()) {%>
+					    		
+					    				<ul><li class="iCheck"><%=frage.getText()%>
+						    		<%
+						    		} else {
+						    		%>
+						    			<ul><li class="iRadio"><%=frage.getText()%>
+						    		<%
+						    		}
+					 						 		
+							 		for(Option option : auswahl.getOptionen()) {
+							 			if (auswahl.isMehrfach()) {%> 
+							 			 <input type="check" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+							 			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+							 			 <%} else { %>
+							 				<label><input type="radio" name="radio" value="<%=option.getText()%>" checked="checked"/><%=option.getText()%>	 				
+							 			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+							 			 </label>	 			
+							 			 <%}%>
+							 		<%}
+					    		}
+						 		%>	</li></ul>
+						 	<%
+					 	    } 
+					    	%>
+					 	
+						<%} %>
+			        	</fieldset>
+					</div>
+					
+					       
+						<% 
+						if (i < gruppen.size() ) { %>
+						<div class="iMenu">
+							<ul class="iArrow">
+								<li><a href="#_Gruppe_<%=i+1%>"><%=gruppen.get(i).getName()%></a></li>
+							</ul>
+						</div>
+						<% 
+				    	}
+						%>
+			</div>
+		  <%
+		  }
+		  %>
+	</div>
 </body>
-
-
-
 </html>
