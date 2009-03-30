@@ -2,6 +2,7 @@ package org.emftext.language.formular.resource.formular.custom;
 
 import generator.html.HTMLFormGenerator;
 import generator.html.IPhoneFormGenerator;
+import generator.xml.XMLFormGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,14 +30,14 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 
 	public void process(ITextResource resource) {
 		EList<EObject> contents = resource.getContents();
-
+		
 		Set<EObject> distinctObjects = new HashSet<EObject>();
 		distinctObjects.addAll(contents);
 		for (EObject eobject : distinctObjects) {
 			if (eobject instanceof Formular) {
 				createHTMLForm((Formular) eobject);
 				createIPhoneForm((Formular) eobject);
-				
+				createXMLForm((Formular)eobject);
 			}
 		}
 
@@ -44,16 +45,21 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 
 	private void createIPhoneForm(Formular formular) {
 		final IPhoneFormGenerator iphoneFormGen = new IPhoneFormGenerator();
-		generateForm(formular, "iphone", iphoneFormGen);
+		generateForm(formular, "iphone",formular.getTitel()+".html", iphoneFormGen);
 		
 	}
 
 	private void createHTMLForm(Formular formular) {
 		final HTMLFormGenerator htmlFormGen = new HTMLFormGenerator();
-		generateForm(formular, "html", htmlFormGen);
+		generateForm(formular, "html",formular.getTitel()+".html",htmlFormGen);
 	}
-
-	private void generateForm(Formular formular, String location,
+	
+	private void createXMLForm(Formular formular) {
+		XMLFormGenerator xmlFormGenerator = new XMLFormGenerator();
+		generateForm(formular, "xml",formular.getTitel()+".xml",xmlFormGenerator);
+	}
+	
+	private File generateForm(Formular formular, String location, String filename,
 			final IGenerator generator) {
 		FileWriter output;
 		BufferedWriter writer;
@@ -71,7 +77,7 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 				}
 
 			}
-			IFile file = folder.getFile("formular.html");
+			IFile file = folder.getFile(filename);
 
 			String uri = file.getLocation().toOSString();
 
@@ -80,9 +86,14 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 			writer = new BufferedWriter(output);
 			writer.write(generator.generate(formular));
 			writer.close();
+			folder.refreshLocal(IFolder.DEPTH_INFINITE,new NullProgressMonitor());
+			return f;
 		} catch (final IOException e) {
 			e.printStackTrace();
+		} catch (CoreException e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public IResourcePostProcessor getResourcePostProcessor() {
