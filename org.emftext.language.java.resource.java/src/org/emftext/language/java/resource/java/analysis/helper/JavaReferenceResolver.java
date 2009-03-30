@@ -114,8 +114,11 @@ import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-
-
+/**
+ * TODO Why does meta class ExplicitConstructorCall has a reference to Self? 
+ *      Should class Instantiation inherit from class Reference?
+ * TODO Should NamespaceClassifierReference better be called QualifiedClassifierReference?
+ */
 public abstract class JavaReferenceResolver<T extends EObject, R extends EObject> extends AbstractReferenceResolver<T, R> {
 
 	public static final String UNRESOLVED_REFERENCE_STRING =
