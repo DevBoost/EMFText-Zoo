@@ -11,16 +11,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://org.emftext.language.formular/metamodel/FormularMM.xsd schema/FormularMM.xsd">
 <% 
-	List<Gruppe> gruppen=formular.getGruppen();
-	for(Gruppe gruppe : gruppen) {
-		List<Frage> fragen=gruppe.getFragen();
+   List<Gruppe> gruppen=formular.getGruppen();
+   for(Gruppe gruppe:gruppen){%>
+	   <gruppe name="<%=gruppe.getName() %>"><%  
+	   List<Frage> fragen=gruppe.getFragen();
 	   for(Frage frage:fragen){
 			AntwortTyp typ = frage.getAntwortTyp();
-			String typName = frage.eClass().getName().toLowerCase();
+			String typName = typ.eClass().getName().toLowerCase();
 			String erklaerung = frage.getErklaerung();
 			String text = frage.getText();
-			List<Option> vorbedingungen = frage.getAbhaengigVon();
-	%>
+			List<Option> vorbedingungen = frage.getAbhaengigVon();%>
 		<<%=typName%>><% if(text!=null){%>
 			<text>
 				<%=text%>
@@ -32,11 +32,15 @@
 				<option id="<%=option.getId()%>"/><% }%>
 			</vorbedingungen><% }%>
 			<% if(typ instanceof Auswahl){ Auswahl auswahl=(Auswahl)typ;%>
-			<auswahl mehrfach="<%=auswahl.isMehrfach()%>"><% for(Option option:auswahl.getOptionen()) {%>
+			<optionen mehrfach="<%=auswahl.isMehrfach()%>"><% for(Option option:auswahl.getOptionen()) {%>
 				<option id="<%=option.getId()==null?"":option.getId() %>">
 					<%=option.getText() %>
 				</option><% }%>
-			</auswahl><% }%>
-			</<%=typName%>><% }
-	}%>
+			</optionen><% }else if(typ instanceof Entscheidung){ Entscheidung entscheidung=(Entscheidung)typ;Option option=entscheidung.getOption();%>
+				<option id="<%=option.getId()==null?"":option.getId() %>">
+					<%=option.getText() %>
+				</option><% }%>			
+			</<%=typName%>><% }%>
+	</gruppe>
+	<% }%>
 </formular>
