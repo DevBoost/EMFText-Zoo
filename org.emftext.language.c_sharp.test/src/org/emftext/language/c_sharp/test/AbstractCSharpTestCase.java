@@ -16,6 +16,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.c_sharp.common.NamedElement;
+import org.emftext.language.c_sharp.common.NamespaceOrTypeName;
+import org.emftext.language.c_sharp.common.NamespaceOrTypeNamePart;
 import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
@@ -36,7 +39,29 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 			System.out.println(diagnostic.getMessage());
 		}
 	}
-	
+
+	/*
+	protected void assertMemberCount(
+			MemberContainer container,
+			int expectedCount) {
+		String name = container.toString();
+		if (container instanceof NamedElement) {
+			name = ((NamedElement) container).getName();
+		}
+		assertEquals(name + " should have " + expectedCount
+				+ " member(s).", expectedCount, container.getMembers().size());
+	}
+	*/
+	protected void assertIdentifierName(
+			NamespaceOrTypeName identifier,
+			String expectedName) {
+		String puffer = "";
+		for(NamespaceOrTypeNamePart part: identifier.getParts()){
+			puffer += part.getName().toString() +".";
+		}
+		puffer = puffer.substring( 0, puffer.length()-1);
+		assertEquals(expectedName, puffer);		
+	}
 	//checks if the running os is windows
 	protected boolean checkCSharpPreconditons(){
 		return CheckCSPrecondition.checkAll();
@@ -92,7 +117,6 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		for (Diagnostic diagnostic : resource.getErrors()) {
 			System.out.println("tryToLoadResource(" + uri.lastSegment() + ") found error in resource " + diagnostic.getMessage() + "(" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
 		}
-		System.out.println(resource.getContents());
 		return resource;
 	}
 	

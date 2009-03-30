@@ -1,5 +1,11 @@
 package org.emftext.language.c_sharp.test;
 
+import java.util.List;
+
+import org.emftext.language.c_sharp.namespaces.CompilationUnit;
+import org.emftext.language.c_sharp.namespaces.Namespace;
+import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
+import org.emftext.language.c_sharp.namespaces.UsingDirective;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSSyntaxWrapper;
 import org.junit.Test;
 
@@ -25,6 +31,34 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		}
 	}
 	
+	@Test
+	public void testNamespace() throws Exception {
+		String typename = "Namespace";
+		String filename = typename + getFileExtension();
+		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
+		//assertMemberCount(cUnit, 2);
+		
+		List<NamespaceMemberDeclaration> nmd1 = cUnit.getNamespaceMemberDeclaration();
+		assertType(nmd1.get(1), Namespace.class);
+		List<NamespaceMemberDeclaration> nmd2 = ((Namespace)nmd1.get(1)).getNamespaceBody().getNamespaceMemberDeclaration();
+		assertType(nmd2.get(1), Namespace.class);
+		assertIdentifierName(((Namespace)nmd2.get(1)).getNamespaceName(), "Name4.Lol.Pol");
+	
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
+	public void testUsingDirective() throws Exception {
+		String typename = "UsingDirective";
+		String filename = typename + getFileExtension();
+		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
+		//assertMemberCount(cUnit, 0);
+		
+		List<UsingDirective> uds = cUnit.getUsingDirectives();
+		assertEquals("Generic", uds.get(4).getNamespaceOrTypeName().getParts().get(2).getName());
+		
+		//parseAndReprint(filename);		
+	}
 	
 	@Test
 	public void testWarnings() throws Exception {
