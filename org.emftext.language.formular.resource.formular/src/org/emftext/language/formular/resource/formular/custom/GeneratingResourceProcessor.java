@@ -2,6 +2,7 @@ package org.emftext.language.formular.resource.formular.custom;
 
 import generator.html.HTMLFormGenerator;
 import generator.html.IPhoneFormGenerator;
+import generator.html.IPhoneIndexGenerator;
 import generator.xml.XMLFormGenerator;
 
 import java.io.BufferedWriter;
@@ -46,6 +47,8 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 	private void createIPhoneForm(Formular formular) {
 		final IPhoneFormGenerator iphoneFormGen = new IPhoneFormGenerator();
 		generateForm(formular, "iphone",formular.getTitel()+".html", iphoneFormGen);
+		final IPhoneIndexGenerator iphoneIndexGen = new IPhoneIndexGenerator();
+		generateForm(formular, "iphone","index.html", iphoneIndexGen);
 		
 	}
 

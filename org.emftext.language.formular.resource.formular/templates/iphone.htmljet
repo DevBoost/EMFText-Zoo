@@ -163,17 +163,9 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 					 			</li></ul>	
 					 		<% 
 					 		} 
-					    	%>
-					    	<% 
+					    	 
 					    	if (frage.getAntwortTyp() instanceof Auswahl) { 
 					    		Auswahl auswahl = (Auswahl) frage.getAntwortTyp();
-					    		if (auswahl.getOptionen().size() == 1 && ( auswahl.getOptionen().get(0) instanceof Entscheidung) ) {
-					    			Entscheidung e = (Entscheidung) auswahl.getOptionen().get(0);%>
-					    				<ul><li><input type="checkbox" name="<%=frage.getText()%>" id="<%=frage.getText()%>" class="iToggle" title="Ja|Nein" checked="checked" value="ok" /> 
-					    				<label for="<%=frage.getText()%>"><%=frage.getText()%></label>
-									<%
-					    		}					    		
-					    		else  {
 					    			if (auswahl.isMehrfach()) {%>
 					    		
 					    				<ul><li class="iCheck"><%=frage.getText()%>
@@ -187,20 +179,27 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 							 		for(Option option : auswahl.getOptionen()) {
 							 			if (auswahl.isMehrfach()) {%> 
 							 			 <input type="check" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-							 			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+							 			 	<% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
 							 			 <%} else { %>
 							 				<label><input type="radio" name="radio" value="<%=option.getText()%>" checked="checked"/><%=option.getText()%>	 				
-							 			 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
-							 			 </label>	 			
+							 					<% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+							 					</label>	 			
 							 			 <%}%>
-							 		<%}
-					    		}
-						 		%>	</li></ul>
+							 		<%}%>
+							 		</li></ul>
+					    	
 						 	<%
 					 	    } 
-					    	%>
-					 	
-						<%} %>
+					    	
+					    	if (frage.getAntwortTyp() instanceof Entscheidung) {
+				    			Entscheidung e = (Entscheidung) frage.getAntwortTyp();%>
+				    				<ul><li><input type="checkbox" name="<%=frage.getText()%>" id="<%=frage.getText()%>" class="iToggle" title="Ja|Nein" checked="checked" value="ok" /> 
+				    				<label for="<%=frage.getText()%>"><%=frage.getText()%></label></li></ul>
+								<%
+				    		}
+					   	}
+					 			 	
+						%>
 			        	</fieldset>
 					</div>
 					
