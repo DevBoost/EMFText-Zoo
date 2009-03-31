@@ -5,6 +5,7 @@ START     EPackage
 OPTIONS {
 	overridePluginXML = "false";
 	overrideManifest = "false";
+	overrideClasspath = "false";
 	memoize = "true";
 	tokenspace = "1";
 }
