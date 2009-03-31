@@ -40,7 +40,15 @@
 		 	AntwortTyp typ = frage.getAntwortTyp();
 		 	String erklaerung = frage.getErklaerung();
 		 	String text = frage.getText();
-		 	List<Option> vorbedingungen = frage.getAbhaengigVon();%>
+		 	List<Option> vorbedingungen = frage.getAbhaengigVon();%><%
+		 	if(!vorbedingungen.isEmpty()){%>
+		<table-row>
+			<table-cell number-columns-spanned="3">
+			 	<block font-size="8pt">
+			 		Nur wenn auch <%=erzeugeFragenAdresse(vorbedingungen.get(0))%> "<%=vorbedingungen.get(0).getText()%>" gewählt wurde:
+			 	</block>
+			</table-cell>
+		</table-row><%} %>
 		<table-row>
 		<table-cell padding="2pt 2pt">
 			<block font-size="10pt" margin-left="0cm" font-family="sans-serif">
@@ -83,7 +91,9 @@
 				Option option2 = entscheidung.getOptionen().get(1);%>
 			<block text-align="left" font-size="10pt">
   				<inline border-width="thin" border-style="solid" color="white">&#160;&#160;&#160;</inline> 
-  				<inline font-size="8pt">(nur ankreuzen, wenn zutreffend)</inline> 
+  				<inline font-size="8pt"><%=option1.getText()%>&#160;</inline> 
+  				<inline border-width="thin" border-style="solid" color="white">&#160;&#160;&#160;</inline> 
+  				<inline font-size="8pt"><%=option2.getText()%></inline>
   			</block>
 		<% }else if(typ instanceof Auswahl) {
 				Auswahl auswahl= (Auswahl)typ;%>
