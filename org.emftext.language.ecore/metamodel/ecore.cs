@@ -4,9 +4,9 @@ START     EPackage
 
 OPTIONS {
 	overridePluginXML = "false";
+	overrideManifest = "false";
 	memoize = "true";
-	tokenspace = "1"; 
-	
+	tokenspace = "1";
 }
 
 TOKENS {
