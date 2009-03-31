@@ -1,19 +1,27 @@
 package org.emftext.language.formular.resource.formular.custom;
 
+import generator.fop.PSFormGenerator;
 import generator.html.HTMLFormGenerator;
 import generator.html.IPhoneFormGenerator;
 import generator.html.IPhoneIndexGenerator;
+import generator.xml.FOFormGenerator;
 import generator.xml.XMLFormGenerator;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -36,9 +44,12 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 		distinctObjects.addAll(contents);
 		for (EObject eobject : distinctObjects) {
 			if (eobject instanceof Formular) {
-				createHTMLForm((Formular) eobject);
-				createIPhoneForm((Formular) eobject);
-				createXMLForm((Formular)eobject);
+				Formular formular = (Formular)eobject;
+				createHTMLForm(formular);
+				createIPhoneForm(formular);
+				createXMLForm(formular);
+				IFile result = createFoForm(formular);
+				createPSForm(result,formular.getTitel());
 			}
 		}
 
@@ -62,15 +73,28 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 		generateForm(formular, "xml",formular.getTitel()+".xml",xmlFormGenerator);
 	}
 	
-	private File generateForm(Formular formular, String location, String filename,
+	private IFile createFoForm(Formular formular) {
+		FOFormGenerator foFormGenerator = new FOFormGenerator();
+		return generateForm(formular,"xsl-fo",formular.getTitel()+".xml",foFormGenerator);
+	}
+	
+	private IFile createPSForm(IFile foFile,String titel){
+		PSFormGenerator psFormGenerator = new PSFormGenerator();
+		return generateForm(foFile,foFile.getProject(),"ps",titel+".ps",psFormGenerator);
+
+	}
+	
+	private IFile generateForm (Formular formular, String folderName, String filename,
 			final IGenerator generator) {
-		FileWriter output;
-		BufferedWriter writer;
+		IFile resourceFile = WorkspaceSynchronizer.getFile(formular.eResource());
+		return generateForm(formular,resourceFile.getProject(),folderName,filename,generator);
+	}
+	
+	private IFile generateForm(Object argument,IProject targetProject, String folderName, String filename,
+			final IGenerator generator) {
 		try {
-			IFile resourcefile = WorkspaceSynchronizer.getFile(formular
-					.eResource());
 			
-			IFolder folder = resourcefile.getProject().getFolder(location);
+			IFolder folder = targetProject.getFolder(folderName);
 			if (!folder.exists()) {
 				try {
 					folder.create(true, true, new NullProgressMonitor());
@@ -81,18 +105,30 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 
 			}
 			IFile file = folder.getFile(filename);
+			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+			PrintStream out = new PrintStream(outStream,false);
+		
+			out.print(generator.generate(argument));
+			out.flush();
+			out.close();
+			
+			if(!file.exists()){
+				//file.setCharset("UTF-8",new NullProgressMonitor());
+				file.create(new ByteArrayInputStream(outStream.toByteArray()),false,new NullProgressMonitor());
+			}
+			else{
+				//file.setCharset("UTF-8",new NullProgressMonitor());
+				file.setContents(new ByteArrayInputStream(outStream.toByteArray()),false,true,new NullProgressMonitor());
+			}
+			//		String uri = file.getLocation().toOSString();
 
-			String uri = file.getLocation().toOSString();
-
-			File f = new File(uri);
-			output = new FileWriter(uri);
-			writer = new BufferedWriter(output);
-			writer.write(generator.generate(formular));
-			writer.close();
+		//	File f = new File(uri);
+		//	output = new FileWriter(uri);
+		//	writer = new BufferedWriter(output);
+		//	writer.write(generator.generate(formular));
+		//	writer.close();
 			folder.refreshLocal(IFolder.DEPTH_INFINITE,new NullProgressMonitor());
-			return f;
-		} catch (final IOException e) {
-			e.printStackTrace();
+			return file;
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
