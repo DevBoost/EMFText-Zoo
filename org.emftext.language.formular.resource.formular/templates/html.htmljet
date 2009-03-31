@@ -24,7 +24,9 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 <%EList<Gruppe> gruppen = formular.getGruppen();
 	
 	for (Gruppe gruppe : gruppen) {
-		
+		 %> <fieldset>
+		    <legend><%=gruppe.getName()%></legend><%
+
 		EList<Frage> list = gruppe.getFragen();
 		
 		    for (Iterator<Frage> iterator = list.iterator(); iterator.hasNext();) {
@@ -75,7 +77,22 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 					 <%}%>
 					 <br>
 			<% 	 }
-			    } 
+			}
+			if (frage.getAntwortTyp() instanceof Entscheidung) { 
+				Entscheidung entscheidung = (Entscheidung) frage.getAntwortTyp();
+				%><input type="checkbox" name="<%=frage.getText()%>" title="Ja|Nein" checked="checked" value="ok" /> 
+				<label for="<%=frage.getText()%>"><%=frage.getText()%></label>
+				<% 
+				if (entscheidung.getOptionen().get(0).getId() != null) {
+					%> (Ja: <%=entscheidung.getOptionen().get(0).getId()%> )
+				<%
+				}
+				if (entscheidung.getOptionen().get(1).getId() != null) {
+					%> (Nein: <%=entscheidung.getOptionen().get(1).getId()%> )
+				<%
+				}
+			}
+			
 			%>
 			<br>
 		
@@ -84,8 +101,9 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 			
 		
 		<%
-		  }
-	}%>
+		  }%>
+		   </fieldset>
+	<%}%>
 		
 	
 
