@@ -30,5 +30,5 @@ RULES {
 	Datum ::= "DATUM";
 	Freitext ::= "FREITEXT";
 	Zahl ::= "ZAHL";
-	Entscheidung ::=  "ENTSCHEIDUNG" ("ja:" optionen)? ("nein:" optionen)?; 
+	Entscheidung ::=  "ENTSCHEIDUNG" "(" optionen "," optionen ")"; 
 }
