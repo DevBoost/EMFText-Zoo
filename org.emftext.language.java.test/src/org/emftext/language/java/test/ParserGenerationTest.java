@@ -6,24 +6,22 @@ import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntax;
 import static org.emftext.test.ConcreteSyntaxTestHelper.getConcreteSyntaxResource;
 import static org.emftext.test.ConcreteSyntaxTestHelper.registerResourceFactories;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import junit.framework.Assert;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.runtime.resource.ITextResource;
-import org.emftext.sdk.codegen.GenerationContext;
-import org.emftext.sdk.codegen.GenerationProblem;
 import org.emftext.sdk.codegen.IGenerator;
-import org.emftext.sdk.codegen.IProblemCollector;
-import org.emftext.sdk.codegen.generators.ResourcePluginContentGenerator;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,29 +61,9 @@ public class ParserGenerationTest {
 		ITextResource concreteSyntaxResource = (ITextResource) getConcreteSyntaxResource(fileURI);
 		ConcreteSyntax concreteSyntax = getConcreteSyntax(concreteSyntaxResource);
 		IGenerator antlrGen = createANTLRGenerator(concreteSyntax);
-		GenerationContext context = new GenerationContext(concreteSyntax, new IProblemCollector() {
-
-			public void addProblem(GenerationProblem problem) {
-				fail(problem.getMessage());
-			}
-		}) {
-
-			@Override
-			public File getPluginProjectFolder() {
-				return null;
-			}
-
-			@Override
-			public String getSyntaxProjectName() {
-				return null;
-			}
-
-			@Override
-			public String getProjectRelativePathToSyntaxFile() {
-				return null;
-			}
-		};
-		InputStream grammarStream = new ResourcePluginContentGenerator().deriveGrammar(antlrGen, context);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		antlrGen.generate(new PrintWriter(out));
+		InputStream grammarStream = new ByteArrayInputStream(out.toByteArray());
 		return getContent(grammarStream);
 	}
 
