@@ -1,7 +1,7 @@
 <%@ jet package="generator.xml"
 	class="XMLFormGenerator" 
 	skeleton="generator.skeleton" 
-	imports ="java.util.Iterator java.util.List org.emftext.language.formular.*;"
+	imports ="java.util.List org.emftext.language.formular.*;"
 %>
 <% Formular formular = (Formular) argument; %>
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
@@ -36,10 +36,10 @@
 				<option id="<%=option.getId()==null?"":option.getId() %>">
 					<%=option.getText() %>
 				</option><% }%>
-			</optionen><% }else if(typ instanceof Entscheidung){ Entscheidung entscheidung=(Entscheidung)typ;Option option=entscheidung.getOption();%>
+			</optionen><% }else if(typ instanceof Entscheidung){ Entscheidung entscheidung=(Entscheidung)typ;for(Option option:entscheidung.getOptionen()){%>
 				<option id="<%=option.getId()==null?"":option.getId() %>">
 					<%=option.getText() %>
-				</option><% }%>			
+				</option><% } }%>			
 			</<%=typName%>><% }%>
 	</gruppe>
 	<% }%>
