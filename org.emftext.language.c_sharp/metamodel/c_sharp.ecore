@@ -47,8 +47,24 @@
       nsPrefix="expressions">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//expressions/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//expressions/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
+          eType="#//expressions/UnaryExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assignmentOperator" lowerBound="1"
+          eType="#//expressions/AssignmentOperator" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StatementExpression" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" eType="#//expressions/UnaryExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AssignmentOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"
+        eSuperTypes="#//expressions/UnaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimaryNoArrayCreationExpression"
+        abstract="true" eSuperTypes="#//expressions/PrimaryExpression"/>
   </eSubpackages>
   <eSubpackages name="modifiers" nsURI="http://www.emftext.org/c_sharp/modifiers"
       nsPrefix="modifiers">
@@ -174,5 +190,50 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceOrTypeName"
           lowerBound="1" eType="#//common/NamespaceOrTypeName" containment="true"/>
     </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="literals" nsURI="http://www.emftext.org/c_sharp/literals" nsPrefix="literals">
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//literals/Literal"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" abstract="true" eSuperTypes="#//literals/Literal"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecimalIntegerLiteral" eSuperTypes="#//literals/IntegerLiteral">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="decimalDigit" upperBound="-1"
+          eType="#//literals/DecimalDigit" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="integerTypeSuffix" eType="#//literals/IntegerTypeSuffix"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DecimalDigit"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSuffix"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HexadecimalIntegerLiteral" eSuperTypes="#//literals/IntegerLiteral">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="hexDigit" upperBound="-1"
+          eType="#//literals/HexDigit" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="integerTypeSuffix" eType="#//literals/IntegerTypeSuffix"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HexDigit"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//literals/Literal">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="decimalDigit" upperBound="-1"
+          eType="#//literals/DecimalDigit" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exponentPart" eType="#//literals/ExponentPart"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="realTypeSuffix" eType="#//literals/RealTypeSuffix"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExponentPart">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="decimalDigit" upperBound="-1"
+          eType="#//literals/DecimalDigit" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sign" eType="#//literals/Sign"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RealTypeSuffix"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Sign"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NullLiteral" eSuperTypes="#//literals/Literal"/>
+    <eClassifiers xsi:type="ecore:EClass" name="This" eSuperTypes="#//literals/Literal"/>
+  </eSubpackages>
+  <eSubpackages name="keywords" nsURI="http://www.emftext.org/c_sharp/keywords" nsPrefix="keywords">
+    <eClassifiers xsi:type="ecore:EClass" name="Keyword"/>
+  </eSubpackages>
+  <eSubpackages name="operatorsAndPunctuators" nsURI="http://www.emftext.org/c_sharp/operatorsAndPunctuators"
+      nsPrefix="operatorsAndPunctuators">
+    <eClassifiers xsi:type="ecore:EClass" name="OperatorOrPunctuator"/>
   </eSubpackages>
 </ecore:EPackage>

@@ -7,14 +7,20 @@ IMPORTS {
 	common 		: <http://www.emftext.org/c_sharp/common>
 	expressions : <http://www.emftext.org/c_sharp/expressions>
 	modifiers 	: <http://www.emftext.org/c_sharp/modifiers>
+	operatorsAndPunctuators : <http://www.emftext.org/c_sharp/operatorsAndPunctuators>
+	keywords 	: <http://www.emftext.org/c_sharp/keywords>
+	literals 	: <http://www.emftext.org/c_sharp/literals>
 	namespaces 	: <http://www.emftext.org/c_sharp/namespaces>
 	statements 	: <http://www.emftext.org/c_sharp/statements>
 	types 		: <http://www.emftext.org/c_sharp/types>
 }
+
 OPTIONS {
 	tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
-	//autofixSimpleLeftrecursion = false;
+	usePredefinedTokens = "false";
+	generateCodeFromGeneratorModel = "true";
+	reloadGeneratorModel = "true";
 }
 
 TOKENS {
@@ -91,7 +97,8 @@ classes.Method
 	
 classes.Block
     ::= "{" statement *  "}" ;	
-    
+
+//Statements    
 statements.SimpleEmbeddedStatement
 	::= ( "unsafe" ) ?  block ; 
 	
@@ -120,5 +127,82 @@ statements.LabeledStatement
 	
 //statements.ExpressionStatement
 //	::= statementExpression   ";" ;
+
+// Keywords
+keywords.Keyword
+	::= "abstract"|"as"|"base"|"bool"|"break"|"byte"|"case"|"catch"|"char"|"checked"|"class"|"const"|"continue"|
+		"decimal"|"default"|"delegate"|"do"|"double"|"else"|"enum"|"event"|"explicit"|"extern"|"false"|"finally"|
+		"fixed"|"float"|"for"|"foreach"|"goto"|"if"|"implicit"|"in"|"int"|"interface"|"internal"|"is"|"lock"|
+		"long"|"namespace"|"new"|"null"|"object"|"operator"|"out"|"override"|"params"|"private"|"protected"|
+		"public"|"readonly"|"ref"|"return"|"sbyte"|"sealed"|"short"|"sizeof"|"stackalloc"|"static"|"string"|
+		"struct"|"switch"|"this"|"throw"|"true"|"try"|"typeof"|"uint"|"ulong"|"unchecked"|"unsafe"|"ushort"|
+		"using"|"virtual"|"void"|"volatile"|"while" ;
+		
+		
+// Literals
+
+literals.BooleanLiteral
+	::= "true" | "false" ;
 	
+literals.DecimalIntegerLiteral
+	::= decimalDigit * integerTypeSuffix ? ;
+	
+literals.DecimalDigit
+	::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+	
+literals.IntegerTypeSuffix
+	::= "U" | "u" | "L" | "l" | "UL" | "Ul" | "uL" | "ul" | "LU" | "Lu" | "lU" | "lu";
+
+literals.HexadecimalIntegerLiteral
+	::= "0x"   hexDigit *   integerTypeSuffix ? ;
+	
+literals.HexDigit
+	::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "a" | "b" | "c" | "d" | "e" | "f" | "A" 
+		| "B" | "C" | "D" | "E" | "F" ;
+
+literals.RealLiteral
+	::= decimalDigit *   "."   decimalDigit *   exponentPart ?   realTypeSuffix ? |
+   		"."   decimalDigit *   exponentPart ?   realTypeSuffix ? |
+    	decimalDigit *   exponentPart   realTypeSuffix ? |
+    	decimalDigit *   realTypeSuffix ;
+    	
+literals.ExponentPart
+	::= "e"   sign ?   decimalDigit * |
+    	"E"   sign ?   decimalDigit * ;
+
+literals.RealTypeSuffix
+	::= "F"|"f"|"D"|"d"|"M"|"m" ;
+	
+literals.Sign
+	::= "+" | "-" ;
+	
+literals.NullLiteral
+	::= "null" ;
+	
+literals.This
+	::= "this" ;
+	
+//Operators and Punctuators
+
+operatorsAndPunctuators.OperatorOrPunctuator
+	::= "{" | "}" | "[" | "]" | "(" | ")" | "." | "," | ":" | ";" | "+" | "-" | "*" | "/" | "%" | "&" | "|" |
+		"^" | "!" | "~" | "=" | "<" | ">" | "?" | "++" | "--" | "&&" | "||" | "<<" | ">>" | "==" | "!=" |
+		"<=" | ">=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&=" | "|=" | "^=" | "<<=" | ">>=" | "->" ;
+
+//Expressions
+
+expressions.Assignment
+    ::= unaryExpression   assignmentOperator   expression;
+    
+expressions.AssignmentOperator
+	::= "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&=" | "|=" | "^=" | "<<=" | ">>=" ;
+
+
+//expressions.UnaryExpression
+//	::= "+"   unaryExpression |
+//    	"-"   unaryExpression |
+//    	"!"   unaryExpression |
+//    	"~"   unaryExpression |
+//    	"*"   unaryExpression ;
+
 }
