@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="regexp"
+    nsURI="http://www.emftext.org/language/regexp" nsPrefix="regexp">
+  <eClassifiers xsi:type="ecore:EClass" name="RegularExpression" eSuperTypes="#//Choice"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Alternative">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//Element" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementNoOptionSpec" eType="#//ElementNoOptionSpec"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementNoOptionSpec">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atom" eType="#//Atom" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suffix" eType="#//EBNFSuffix"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ebnf" eType="#//EBNF" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Atom" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EBNFSuffix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Range" eSuperTypes="#//Atom">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Terminal" eSuperTypes="#//Atom">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//Atom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="#//EBNF"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EBNF">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//Block"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Choice"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Choice" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1"
+        eType="#//Alternative" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
