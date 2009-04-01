@@ -1,9 +1,14 @@
 package org.emftext.language.formular.resource.formular.custom;
 
 import org.emftext.language.formular.*;
+
 public abstract class AbstractGenerator implements IGenerator {
 
-	public abstract String generate(Object argument);
+	public byte[] generate(Object argument) {
+		return generateString(argument).getBytes();
+	}
+	
+	public abstract String generateString(Object argument);
 	
 	protected String erzeugeFragenAdresse(Option option){
 		Frage frage = (Frage)option.eContainer().eContainer();

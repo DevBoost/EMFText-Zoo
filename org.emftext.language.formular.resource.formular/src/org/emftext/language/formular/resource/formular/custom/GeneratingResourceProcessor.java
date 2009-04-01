@@ -1,21 +1,15 @@
 package org.emftext.language.formular.resource.formular.custom;
 
-import generator.fop.PSFormGenerator;
+import generator.fop.PDFFormGenerator;
 import generator.html.HTMLFormGenerator;
 import generator.html.IPhoneFormGenerator;
 import generator.html.IPhoneIndexGenerator;
 import generator.xml.FOFormGenerator;
 import generator.xml.XMLFormGenerator;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,8 +28,6 @@ import org.emftext.runtime.resource.ITextResource;
 
 public class GeneratingResourceProcessor implements IResourcePostProcessor,
 		IResourcePostProcessorProvider {
-
-	private static String TARGETDIR = "./output/";
 
 	public void process(ITextResource resource) {
 		EList<EObject> contents = resource.getContents();
@@ -79,8 +71,8 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 	}
 	
 	private IFile createPSForm(IFile foFile,String titel){
-		PSFormGenerator psFormGenerator = new PSFormGenerator();
-		return generateForm(foFile,foFile.getProject(),"ps",titel+".ps",psFormGenerator);
+		PDFFormGenerator psFormGenerator = new PDFFormGenerator();
+		return generateForm(foFile,foFile.getProject(),"pdf",titel+".pdf",psFormGenerator);
 
 	}
 	
@@ -106,29 +98,20 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 			}
 			IFile file = folder.getFile(filename);
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-			PrintStream out = new PrintStream(outStream,false);
-		
-			out.print(generator.generate(argument));
-			out.flush();
-			out.close();
+			outStream.write(generator.generate(argument));
+			outStream.flush();
 			
 			if(!file.exists()){
-				//file.setCharset("UTF-8",new NullProgressMonitor());
 				file.create(new ByteArrayInputStream(outStream.toByteArray()),false,new NullProgressMonitor());
 			}
 			else{
-				//file.setCharset("UTF-8",new NullProgressMonitor());
 				file.setContents(new ByteArrayInputStream(outStream.toByteArray()),false,true,new NullProgressMonitor());
 			}
-			//		String uri = file.getLocation().toOSString();
 
-		//	File f = new File(uri);
-		//	output = new FileWriter(uri);
-		//	writer = new BufferedWriter(output);
-		//	writer.write(generator.generate(formular));
-		//	writer.close();
 			folder.refreshLocal(IFolder.DEPTH_INFINITE,new NullProgressMonitor());
 			return file;
+		} catch (IOException e) {
+			e.printStackTrace();
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
