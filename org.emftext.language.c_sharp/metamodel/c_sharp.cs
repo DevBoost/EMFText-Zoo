@@ -149,7 +149,12 @@ statements.LabeledStatement
 //		"struct"|"switch"|"this"|"throw"|"true"|"try"|"typeof"|"uint"|"ulong"|"unchecked"|"unsafe"|"ushort"|
 //		"using"|"virtual"|"void"|"volatile"|"while" ;
 		
-		
+keywords.Out
+	::= "out";
+
+keywords.Ref
+	::= "ref";
+			
 // Literals
 
 literals.BooleanLiteral
@@ -181,9 +186,8 @@ literals.RealLiteral
 //Expressions
 
 expressions.Argument
-	::= expression |
-		"ref" expression |
-		"out" expression ;
+	::= (out | ref) expression ;
+	
 //ref und out -Literale fehlen
 
 expressions.ArgumentList

@@ -480,7 +480,7 @@ C.2.4 Expressions
 argument-list:
     argument ( ','   argument) * 
 
-//done		Zehlike     
+//done		Zehlike/Range  (ref/out as keyword)       
 argument:		//Reihenfolge beachten 
     expression
     'ref'   variable-reference
@@ -492,23 +492,23 @@ primary-expression:
     
 primary-no-array-creation-expression:
     literal							//done		Zehlike
-    identifier
+    identifier						//done		MRange
     parenthesized-expression		//done		Zehlike
-    member-access					//done		Zehlike
-    invocation-expression			//done		Zehlike
-    element-access					//done		Zehlike
+    member-access					//linksrekursiv 	
+    invocation-expression			//linksrekursiv 
+    element-access					//linksrekursiv 
     'this'							//done as Literal
     base-access						//done		Zehlike
-    post-increment-expression		//done		Zehlike
-    post-decrement-expression		//done		Zehlike
+    post-increment-expression		//linksrekursiv 
+    post-decrement-expression		//linksrekursiv 
     object-creation-expression		//done		Zehlike
     delegate-creation-expression
     typeof-expression
     sizeof-expression
     checked-expression
     unchecked-expression
-    pointer-member-access
-    pointer-element-access
+    pointer-member-access			//linksrekursiv 
+    pointer-element-access			//linksrekursiv 
     sizeof-expression
     
     
@@ -531,20 +531,24 @@ sizeof-expression:
 parenthesized-expression:
     '('   expression   ')'
 
-//done		Zehlike, where simple-type is used as predefined-type     
+//		Zehlike, where simple-type is used as predefined-type    
+//linksrekursiv 
 member-access:
     primary-expression   '.'   identifier
     predefined-type   '.'   identifier
-    
+
+//done as simpletype 		     
 predefined-type: one of
     bool byte char decimal double float int long
     object sbyte short string uint ulong ushort
     
-//done		Zehlike
+//		Zehlike
+//linksrekursiv 
 invocation-expression:
     primary-expression   '('   argument-list ?   ')'
 
-//done		Zehlike
+//		Zehlike
+//linksrekursiv 
 element-access:
     primary-no-array-creation-expression   '['   expression-list   '']''
 
@@ -557,11 +561,11 @@ base-access:
     'base'   '.'   identifier
     'base'   '['   expression-list   ']'
 
-//done		Zehlike    
+//linksrekursiv     
 post-increment-expression:
     primary-expression   '++'
-    
-//done		Zehlike
+
+//linksrekursiv 
 post-decrement-expression:
     primary-expression   '--'
 
