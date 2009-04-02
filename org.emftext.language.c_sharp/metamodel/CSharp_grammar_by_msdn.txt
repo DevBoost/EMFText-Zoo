@@ -494,32 +494,28 @@ primary-no-array-creation-expression:
     literal							//done		Zehlike
     identifier						//done		MRange
     parenthesized-expression		//done		Zehlike
-    member-access					//linksrekursiv 	
-    invocation-expression			//linksrekursiv 
-    element-access					//linksrekursiv 
     'this'							//done as Literal
     base-access						//done		Zehlike
-    post-increment-expression		//linksrekursiv 
-    post-decrement-expression		//linksrekursiv 
     object-creation-expression		//done		Zehlike
     delegate-creation-expression
     typeof-expression
     sizeof-expression
     checked-expression
     unchecked-expression
-    pointer-member-access			//linksrekursiv 
-    pointer-element-access			//linksrekursiv 
     sizeof-expression
     
+
+//Links-Rekursions-Lösung
+primary-extended-expression-type:
+	member-access				//done
+	invocation-expression		//done
+	element-access				//done
+	post-increment-expression	//done
+	post-decrement-expression	//done
+	pointer-member-access
     
-pointer-indirection-expression:
-    '*'   unary-expression
-    
-pointer-member-access:		//achtung: Linksrekursiv, -> identifier  muss eventuell ausgelagert werden 
-    primary-expression   '->'   identifier
-    
-pointer-element-access: 	//achtung: Linksrekursiv, '[' expression ] muss eventuell ausgelagert werden 
-    primary-no-array-creation-expression   '['   expression   ]
+pointer-member-access:	
+    '->'   identifier
     
 addressof-expression:
     '&'   unary-expression
@@ -531,26 +527,23 @@ sizeof-expression:
 parenthesized-expression:
     '('   expression   ')'
 
+//done MRange
 //		Zehlike, where simple-type is used as predefined-type    
-//linksrekursiv 
 member-access:
-    primary-expression   '.'   identifier
-    predefined-type   '.'   identifier
+    (predefined-type)?  '.'  identifier
 
 //done as simpletype 		     
 predefined-type: one of
     bool byte char decimal double float int long
     object sbyte short string uint ulong ushort
-    
-//		Zehlike
-//linksrekursiv 
-invocation-expression:
-    primary-expression   '('   argument-list ?   ')'
 
-//		Zehlike
-//linksrekursiv 
+//done MRange    
+invocation-expression:
+    '('   argument-list ?   ')'
+
+//done MRange
 element-access:
-    primary-no-array-creation-expression   '['   expression-list   '']''
+	'['   expression-list   ']'
 
 //done		Zehlike    
 expression-list:
@@ -561,13 +554,13 @@ base-access:
     'base'   '.'   identifier
     'base'   '['   expression-list   ']'
 
-//linksrekursiv     
+//done MRange    
 post-increment-expression:
-    primary-expression   '++'
+     '++'
 
-//linksrekursiv 
+//done MRange
 post-decrement-expression:
-    primary-expression   '--'
+     '--'
 
 //done		Zehlike    
 object-creation-expression:
@@ -591,12 +584,13 @@ unchecked-expression:
     'unchecked'   '('   expression   ')'
     
 unary-expression:
-    primary-expression		//done		Zehlike
-    '+'   unary-expression	//done		Zehlike
-    '-'   unary-expression	//done		Zehlike
-    '!'   unary-expression	//done		Zehlike
-    '~'   unary-expression 	//done		Zehlike
-    '*'   unary-expression	//done		Zehlike
+	member-access 	//muss wegen predefined-type schon eher geprüft werden
+    primary-expression   primary-extended-expression-type *		//aus Umbau der Linksrekursion hervorgegangen
+    '+'   unary-expression	
+    '-'   unary-expression	
+    '!'   unary-expression	
+    '~'   unary-expression 	
+    '*'   unary-expression	
     pre-increment-expression
     pre-decrement-expression
     cast-expression

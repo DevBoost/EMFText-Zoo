@@ -185,54 +185,56 @@ literals.RealLiteral
 
 //Expressions
 
+expressions.ExpressionList
+	::= expression ( ","   expression )* ;
+
 expressions.Argument
 	::= (out | ref) expression ;
-	
-//ref und out -Literale fehlen
 
 expressions.ArgumentList
     ::= argument ( ","   argument)* ; 
+
+expressions.ParenthesizedExpression
+    ::= "(" expression ")" ;
+    
+expressions.MemberAccess
+    ::= (simpleType)? "."  identifier ;
+
+expressions.ElementAccess
+    ::= "[" expressionList "]" ;
+    
+expressions.InvocationExpression 
+    ::= "(" argumentList ? ")" ;
+
+expressions.PostIncrementExpression
+    ::= "++" ;
+
+expressions.PostDecrementExpression
+    ::= "--" ;
+	
+expressions.BaseAccess
+    ::= "base"   ("." identifier | "[" expressionList "]" );
+    	
+expressions.ObjectCreationExpression
+    ::= "new"   type   "("   argumentList?   ")" ;
+
+
+
+expressions.UnaryExpression
+	::= memberAccess 
+	|	primaryExpression  primaryExtendedExpressionType *
+	|	"+"   unaryExpression 
+    |	"-"   unaryExpression 
+    |	"!"   unaryExpression 
+    |	"~"   unaryExpression 
+    |	"*"   unaryExpression ;
+//Informationsverlust in den Operatoren
 
 expressions.Assignment
     ::= unaryExpression   assignmentOperator   expression;
     
 expressions.AssignmentOperator
 	::= "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&=" | "|=" | "^=" | "<<=" | ">>=" ;
-//Informationsverlust!...andere Lösung muss her
+//Informationsverlust! Operatoren müssen einzeln in klassen sein
 
-expressions.ParenthesizedExpression
-    ::= "(" expression ")" ;
-    
-expressions.MemberAccess
-    ::= (simpleType | primaryExpression) "."  identifier ;
-
-expressions.InvocationExpression 
-    ::= primaryExpression "(" argumentList ? ")" ;
-    	
-expressions.ExpressionList
-	::= expression ( ","   expression )* ;
-
-expressions.ElementAccess
-    ::= primaryNoArrayCreationExpression   "[" expressionList "]" ;
-
-expressions.BaseAccess
-    ::= "base"   ("." identifier | "[" expressionList "]" );
-    	
-expressions.PostIncrementExpression
-    ::= primaryExpression   "++" ;
-
-expressions.PostDecrementExpression
-    ::= primaryExpression   "--" ;
-
-expressions.ObjectCreationExpression
-    ::= "new"   type   "("   argumentList?   ")" ;
-    
-expressions.UnaryExpression
-	::= primaryExpression | 
-		"+"   unaryExpression |
-    	"-"   unaryExpression |
-    	"!"   unaryExpression |
-    	"~"   unaryExpression |
-    	"*"   unaryExpression ;
-//Informationsverlust in den Operatoren
 }
