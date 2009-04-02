@@ -200,16 +200,16 @@ expressions.ParenthesizedExpression
     ::= "(" expression ")" ;
     
 expressions.MemberAccess
-    ::= (simpleType | primaryExpression)   "."  identifier ;
+    ::= (simpleType | primaryExpression) "."  identifier ;
 
 expressions.InvocationExpression 
-    ::= primaryExpression   "("   argumentList ?   ")" ;
+    ::= primaryExpression "(" argumentList ? ")" ;
     	
 expressions.ExpressionList
 	::= expression ( ","   expression )* ;
 
 expressions.ElementAccess
-    ::= primaryNoArrayCreationExpression   "["   expressionList   "]" ;
+    ::= primaryNoArrayCreationExpression   "[" expressionList "]" ;
 
 expressions.BaseAccess
     ::= "base"   ("." identifier | "[" expressionList "]" );
@@ -230,5 +230,5 @@ expressions.UnaryExpression
     	"!"   unaryExpression |
     	"~"   unaryExpression |
     	"*"   unaryExpression ;
-
+//Informationsverlust in den Operatoren
 }
