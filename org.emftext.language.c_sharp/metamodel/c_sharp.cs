@@ -192,18 +192,58 @@ operatorsAndPunctuators.OperatorOrPunctuator
 
 //Expressions
 
+expressions.Argument
+	::= expression |
+		"ref" expression |
+		"out" expression ;
+
+expressions.ArgumentList
+    ::= argument ( ","   argument)* ; 
+
 expressions.Assignment
     ::= unaryExpression   assignmentOperator   expression;
     
 expressions.AssignmentOperator
 	::= "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&=" | "|=" | "^=" | "<<=" | ">>=" ;
 
+expressions.PrimaryNoArrayCreationExpression
+	::= name[];
 
-//expressions.UnaryExpression
-//	::= "+"   unaryExpression |
-//    	"-"   unaryExpression |
-//    	"!"   unaryExpression |
-//    	"~"   unaryExpression |
-//    	"*"   unaryExpression ;
+expressions.ParenthesizedExpression
+    ::= "(" expression ")" ;
+    
+expressions.MemberAccess
+    ::= primaryExpression   "."  name[] |
+    	simpleType  "."   name[] ;
+
+expressions.InvocationExpression 
+    ::= primaryExpression   "("   argumentList ?   ")" ;
+    	
+expressions.ExpressionList
+	::= expression ( ","   expression )* ;
+
+expressions.ElementAccess
+    ::= primaryNoArrayCreationExpression   "["   expressionList   "]" ;
+
+expressions.BaseAccess
+    ::= "base"   "."   name[] | 
+    	"base"   "["   expressionList   "]" ;
+    	
+expressions.PostIncrementExpression
+    ::= primaryExpression   "++" ;
+
+expressions.PostDecrementExpression
+    ::= primaryExpression   "--" ;
+
+expressions.ObjectCreationExpression
+    ::= "new"   type   "("   argumentList?   ")" ;
+    
+expressions.UnaryExpression
+	::= primaryExpression | 
+		"+"   unaryExpression |
+    	"-"   unaryExpression |
+    	"!"   unaryExpression |
+    	"~"   unaryExpression |
+    	"*"   unaryExpression ;
 
 }

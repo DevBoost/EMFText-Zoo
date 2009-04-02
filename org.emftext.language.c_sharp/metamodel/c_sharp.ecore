@@ -59,12 +59,66 @@
     <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" eType="#//expressions/UnaryExpression"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExpression" eType="#//expressions/PrimaryExpression"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"
-        eSuperTypes="#//expressions/UnaryExpression"/>
+        eSuperTypes="#//common/NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="PrimaryNoArrayCreationExpression"
-        abstract="true" eSuperTypes="#//expressions/PrimaryExpression"/>
+        eSuperTypes="#//expressions/PrimaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ParenthesizedExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MemberAccess" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExpression" eType="#//expressions/PrimaryExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="simpleType" eType="#//types/SimpleType"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementAccess" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryNoArrayCreationExpression"
+          eType="#//expressions/PrimaryNoArrayCreationExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expressionList" eType="#//expressions/ExpressionList"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionList">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BaseAccess" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expressionList" eType="#//expressions/ExpressionList"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Argument">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArgumentList">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
+          eType="#//expressions/Argument" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InvocationExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExpression" lowerBound="1"
+          eType="#//expressions/PrimaryExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="argumentList" eType="#//expressions/ArgumentList"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PostIncrementExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExpression" lowerBound="1"
+          eType="#//expressions/PrimaryExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PostDecrementExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExpression" lowerBound="1"
+          eType="#//expressions/PrimaryExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectCreationExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//types/Type" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="argumentList" eType="#//expressions/ArgumentList"
+          containment="true"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="modifiers" nsURI="http://www.emftext.org/c_sharp/modifiers"
       nsPrefix="modifiers">
