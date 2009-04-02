@@ -43,7 +43,7 @@ RULES {
 common.NamespaceOrTypeName 
 	::= parts ( "." parts) * ;
 
-common.NamespaceOrTypeNamePart
+common.Identifier
 	::= name[];
 
 //Modifiers:
@@ -196,14 +196,11 @@ expressions.AssignmentOperator
 	::= "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&=" | "|=" | "^=" | "<<=" | ">>=" ;
 //Informationsverlust!...andere Lösung muss her
 
-expressions.PrimaryNoArrayCreationExpression
-	::= name[];
-
 expressions.ParenthesizedExpression
     ::= "(" expression ")" ;
     
 expressions.MemberAccess
-    ::= (simpleType | primaryExpression)   "."  name[] ;
+    ::= (simpleType | primaryExpression)   "."  identifier ;
 
 expressions.InvocationExpression 
     ::= primaryExpression   "("   argumentList ?   ")" ;
@@ -215,8 +212,7 @@ expressions.ElementAccess
     ::= primaryNoArrayCreationExpression   "["   expressionList   "]" ;
 
 expressions.BaseAccess
-    ::= "base"   "."   name[] | 
-    	"base"   "["   expressionList   "]" ;
+    ::= "base"   ("." identifier | "[" expressionList "]" );
     	
 expressions.PostIncrementExpression
     ::= primaryExpression   "++" ;

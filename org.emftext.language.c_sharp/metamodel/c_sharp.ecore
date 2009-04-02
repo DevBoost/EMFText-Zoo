@@ -39,9 +39,9 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamespaceOrTypeName">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parts" lowerBound="1"
-          upperBound="-1" eType="#//common/NamespaceOrTypeNamePart" containment="true"/>
+          upperBound="-1" eType="#//common/Identifier" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NamespaceOrTypeNamePart" eSuperTypes="#//common/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Identifier" eSuperTypes="#//common/NamedElement #//expressions/PrimaryNoArrayCreationExpression"/>
   </eSubpackages>
   <eSubpackages name="expressions" nsURI="http://www.emftext.org/c_sharp/expressions"
       nsPrefix="expressions">
@@ -63,10 +63,9 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentOperator"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"
-        eSuperTypes="#//common/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="PrimaryNoArrayCreationExpression"
-        eSuperTypes="#//expressions/PrimaryExpression"/>
+        abstract="true" eSuperTypes="#//expressions/PrimaryExpression"/>
     <eClassifiers xsi:type="ecore:EClass" name="ParenthesizedExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           eType="#//expressions/Expression" containment="true"/>
@@ -75,6 +74,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExpression" eType="#//expressions/PrimaryExpression"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="simpleType" eType="#//types/SimpleType"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//common/Identifier"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ElementAccess" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
@@ -89,6 +90,8 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BaseAccess" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expressionList" eType="#//expressions/ExpressionList"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//common/Identifier"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Argument">
@@ -250,10 +253,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//literals/Literal">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecimalIntegerLiteral">
+    <eClassifiers xsi:type="ecore:EClass" name="DecimalIntegerLiteral" eSuperTypes="#//literals/Literal">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HexadecimalIntegerLiteral">
+    <eClassifiers xsi:type="ecore:EClass" name="HexadecimalIntegerLiteral" eSuperTypes="#//literals/Literal">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//literals/Literal">
