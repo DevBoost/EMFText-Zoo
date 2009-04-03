@@ -47,20 +47,21 @@ common.Identifier
 	::= name[];
 
 //Modifiers:
-modifiers.New 			 ::= "new" ;
-modifiers.Public 			 ::= "public" ;
-modifiers.Private 		 ::= "private" ;
-modifiers.Protected 		 ::= "protected" ;
-modifiers.Internal 		 ::= "internal" ;
-modifiers.Abstract 		 ::= "abstract" ;
-modifiers.Sealed 			 ::= "sealed" ;
-modifiers.Unsafe 			 ::= "unsafe" ;
-modifiers.ReadOnly 		 ::= "readonly" ;
-modifiers.Volatile 		 ::= "volatile" ;
-modifiers.Extern 			 ::= "extern" ;
-modifiers.Virtual 		 ::= "virtual" ;
-modifiers.OverrideModifier ::= "override" ;
-modifiers.Static			 ::= "static" ;
+modifiers.New 			::= "new" ;
+modifiers.Public 		::= "public" ;
+modifiers.Private 		::= "private" ;
+modifiers.Protected 	::= "protected" ;
+modifiers.Partial	 	::= "partial" ;
+modifiers.Internal 		::= "internal" ;
+modifiers.Abstract 		::= "abstract" ;
+modifiers.Sealed 		::= "sealed" ;
+modifiers.Unsafe 		::= "unsafe" ;
+modifiers.ReadOnly 		::= "readonly" ;
+modifiers.Volatile 		::= "volatile" ;
+modifiers.Extern 		::= "extern" ;
+modifiers.Virtual 		::= "virtual" ;
+modifiers.OverrideModifier	::= "override" ;
+modifiers.Static		::= "static" ;
 
 //Simple Types
 types.Void 	::= "void" ;

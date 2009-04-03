@@ -2,6 +2,7 @@ package org.emftext.language.c_sharp.test;
 
 import java.util.List;
 
+import org.emftext.language.c_sharp.classes.Class;
 import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.namespaces.Namespace;
 import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
@@ -32,16 +33,35 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	}
 	
 	@Test
+	public void testClass() throws Exception {
+		String typename = "Class";
+		String filename = typename + getFileExtension();
+		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
+		assertMemberCount(cUnit, 2);
+		
+		List<NamespaceMemberDeclaration> nmd = cUnit.getNamespaceMemberDeclaration();
+		assertMemberCount(nmd.get(1), 5);
+		
+		Class clazz = (Class)((Namespace)nmd.get(1)).getNamespaceBody().getNamespaceMemberDeclaration().get(2);
+		assertEquals(clazz.getName(), "Class2");
+		assertEquals(namespaceOrTypeNameToString(clazz.getClassBase().getTypes().get(0).getNamespaceOrTypeName()), "Class3");
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
 	public void testNamespace() throws Exception {
 		String typename = "Namespace";
 		String filename = typename + getFileExtension();
 		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
-		//assertMemberCount(cUnit, 2);
+		assertMemberCount(cUnit, 2);
 		
 		List<NamespaceMemberDeclaration> nmd1 = cUnit.getNamespaceMemberDeclaration();
 		assertType(nmd1.get(1), Namespace.class);
+		assertMemberCount(nmd1.get(1), 2);
+		
 		List<NamespaceMemberDeclaration> nmd2 = ((Namespace)nmd1.get(1)).getNamespaceBody().getNamespaceMemberDeclaration();
 		assertType(nmd2.get(1), Namespace.class);
+		assertMemberCount(nmd2.get(1), 1);
 		assertIdentifierName(((Namespace)nmd2.get(1)).getNamespaceName(), "Name4.Lol.Pol");
 	
 		//parseAndReprint(filename);		
@@ -52,26 +72,12 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		String typename = "UsingDirective";
 		String filename = typename + getFileExtension();
 		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
-		//assertMemberCount(cUnit, 0);
+		assertMemberCount(cUnit, 6);
 		
 		List<UsingDirective> uds = cUnit.getUsingDirectives();
 		assertEquals("Generic", uds.get(4).getNamespaceOrTypeName().getParts().get(2).getName());
 		
 		//parseAndReprint(filename);		
-	}
-	
-	@Test
-	public void testWarnings() throws Exception {
-		String typename = "testwarnings";
-		String filename = typename + getFileExtension();
-		// TODO mrange: please fix this test as we can not do a build when this
-		// test fails
-		//CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
-		
-		//org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
-		//assertMemberCount(clazz, 4);
-
-		//parseAndReprint(filename);
 	}
 	
 }

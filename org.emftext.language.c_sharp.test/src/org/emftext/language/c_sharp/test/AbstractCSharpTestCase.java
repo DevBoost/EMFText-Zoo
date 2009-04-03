@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -16,10 +17,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.c_sharp.classes.Class;
+import org.emftext.language.c_sharp.common.Identifier;
 import org.emftext.language.c_sharp.common.NamedElement;
 import org.emftext.language.c_sharp.common.NamespaceOrTypeName;
-import org.emftext.language.c_sharp.common.NamespaceOrTypeNamePart;
 import org.emftext.language.c_sharp.namespaces.CompilationUnit;
+import org.emftext.language.c_sharp.namespaces.Namespace;
+import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
 import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
 
@@ -40,28 +44,48 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		}
 	}
 
-	/*
+	
 	protected void assertMemberCount(
-			MemberContainer container,
+			EObject classtyp,
 			int expectedCount) {
-		String name = container.toString();
-		if (container instanceof NamedElement) {
-			name = ((NamedElement) container).getName();
+		String name = classtyp.toString();
+		if (classtyp instanceof NamedElement) {
+			name = ((NamedElement) classtyp).getName();
 		}
+		int count = -1;
+		
+		if (classtyp instanceof CompilationUnit) {
+			count = 0;
+			count += ((CompilationUnit)classtyp).getUsingDirectives().size();
+			count += ((CompilationUnit)classtyp).getNamespaceMemberDeclaration().size();			
+		}
+		if (classtyp instanceof Namespace) {
+			name = namespaceOrTypeNameToString(((Namespace) classtyp).getNamespaceName());
+			count = 0;
+			count += ((Namespace)classtyp).getNamespaceBody().getNamespaceMemberDeclaration().size();
+			count += ((Namespace)classtyp).getNamespaceBody().getUsingDirectives().size();
+		}
+		
 		assertEquals(name + " should have " + expectedCount
-				+ " member(s).", expectedCount, container.getMembers().size());
+				+ " member(s).", expectedCount, count);
 	}
-	*/
+	
+	protected String namespaceOrTypeNameToString(
+			NamespaceOrTypeName identifier){
+		String puffer = "";
+		for(Identifier part: identifier.getParts()){
+			puffer += part.getName().toString() +".";
+		}
+		return puffer.substring( 0, puffer.length()-1);
+	}
+	
 	protected void assertIdentifierName(
 			NamespaceOrTypeName identifier,
 			String expectedName) {
-		String puffer = "";
-		for(NamespaceOrTypeNamePart part: identifier.getParts()){
-			puffer += part.getName().toString() +".";
-		}
-		puffer = puffer.substring( 0, puffer.length()-1);
-		assertEquals(expectedName, puffer);		
+		assertEquals(expectedName, namespaceOrTypeNameToString(identifier));	
 	}
+	
+	
 	//checks if the running os is windows
 	protected boolean checkCSharpPreconditons(){
 		return CheckCSPrecondition.checkAll();
@@ -93,22 +117,6 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		assertSuccessfulParsing(cUnit.eResource());
 		return cUnit;
 	}
-	/*
-	private JavaRoot loadResource(
-			URI uri) throws IOException {
-		ITextResource resource = (ITextResource) getResourceSet().createResource(uri);
-		resource.load(getLoadOptions());
-		assertNoErrors(uri.toString(), resource);
-		assertNoWarnings(uri.toString(), resource);
-		assertEquals("The resource should have one content element.", 1,
-				resource.getContents().size());
-		EObject content = resource.getContents().get(0);
-		assertTrue("File '" + uri.toString()
-				+ "' was parsed to CompilationUnit.",
-				content instanceof JavaRoot);
-		JavaRoot root = (JavaRoot) content;
-		return root;
-	}*/
 
 	protected CsharpResource tryToLoadResource(URI uri) throws IOException {
 		
@@ -139,7 +147,26 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		//addParsedResource(file);
 		return loadResource(file.getCanonicalPath());
 	}
-
+	
+	public CsharpResource load(File cFile) throws IOException {
+		return load(new FileInputStream(cFile));
+	}
+	
+	public CsharpResource load(InputStream inputStream) throws IOException {
+		Map<?, ?> options = Collections.EMPTY_MAP;
+		CsharpResource resource = new CsharpResource();
+		resource.load(inputStream, options);
+		inputStream.close();
+		return resource;
+	}
+	
+	protected void assertType(EObject object, java.lang.Class<?> expectedType) {
+		assertTrue("The object should have type '"
+				+ expectedType.getSimpleName() + "', but was "
+				+ object.getClass().getSimpleName(), expectedType
+				.isInstance(object));
+	}
+	
 	protected CompilationUnit assertParsesToCompilationUnit(
 			String typename) throws Exception {
 		String filename = typename + getFileExtension();
@@ -155,22 +182,16 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		
 	}
 	
-	protected void assertType(EObject object, Class<?> expectedType) {
-		assertTrue("The object should have type '"
-				+ expectedType.getSimpleName() + "', but was "
-				+ object.getClass().getSimpleName(), expectedType
-				.isInstance(object));
-	}
-
-	public CsharpResource load(File cFile) throws IOException {
-		return load(new FileInputStream(cFile));
+	//parses the CompilationUnit in one Namespace to one Class
+	protected org.emftext.language.c_sharp.classes.Class assertParseToClass(
+			String typename,
+			String expectedClassName) throws Exception {
+		CompilationUnit cUnit = assertParsesToCompilationUnit(typename);
+		List<NamespaceMemberDeclaration> nmd = cUnit.getNamespaceMemberDeclaration();
+		assertMemberCount(nmd.get(0), 1);
+		return (Class)((Namespace)nmd.get(0)).getNamespaceBody().getNamespaceMemberDeclaration().get(0);
 	}
 	
-	public CsharpResource load(InputStream inputStream) throws IOException {
-		Map<?, ?> options = Collections.EMPTY_MAP;
-		CsharpResource resource = new CsharpResource();
-		resource.load(inputStream, options);
-		inputStream.close();
-		return resource;
-	}
+
+
 }
