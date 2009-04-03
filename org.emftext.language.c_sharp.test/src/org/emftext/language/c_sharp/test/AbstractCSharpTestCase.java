@@ -65,6 +65,10 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 			count += ((Namespace)classtyp).getNamespaceBody().getNamespaceMemberDeclaration().size();
 			count += ((Namespace)classtyp).getNamespaceBody().getUsingDirectives().size();
 		}
+		if (classtyp instanceof Class) {
+			count = 0;
+			count += ((Class)classtyp).getClassMemberDeclarations().size();			
+		}
 		
 		assertEquals(name + " should have " + expectedCount
 				+ " member(s).", expectedCount, count);

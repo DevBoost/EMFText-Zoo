@@ -43,8 +43,18 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		assertMemberCount(nmd.get(1), 5);
 		
 		Class clazz = (Class)((Namespace)nmd.get(1)).getNamespaceBody().getNamespaceMemberDeclaration().get(2);
-		assertEquals(clazz.getName(), "Class2");
-		assertEquals(namespaceOrTypeNameToString(clazz.getClassBase().getTypes().get(0).getNamespaceOrTypeName()), "Class3");
+		assertEquals(clazz.getName(), "Class3");
+		assertEquals(namespaceOrTypeNameToString(clazz.getClassBase().getTypes().get(0).getNamespaceOrTypeName()), "Class2");
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
+	public void testMethods() throws Exception {
+		String typename = "Methods";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");
+		
+		assertMemberCount(clazz, 3);
 		//parseAndReprint(filename);		
 	}
 	
