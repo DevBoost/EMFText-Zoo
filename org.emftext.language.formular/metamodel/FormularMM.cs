@@ -4,6 +4,9 @@ START Formular
 
 OPTIONS {
 	overridePluginXML = "false";
+	overrideClasspath = "false";
+	overrideManifest = "false";
+	overrideProjectFile = "false";
 }
 
 TOKENSTYLES {
