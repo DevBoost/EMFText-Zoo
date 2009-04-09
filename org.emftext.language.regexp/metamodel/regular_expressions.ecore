@@ -9,35 +9,35 @@
         eType="#//Element" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elementNoOptionSpec" eType="#//ElementNoOptionSpec"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ElementNoOptionSpec">
     <eStructuralFeatures xsi:type="ecore:EReference" name="atom" eType="#//Atom" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="suffix" eType="#//EBNFSuffix"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ebnf" eType="#//EBNF" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="suffix" eType="#//Multiplicity"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EBNFSuffix"/>
   <eClassifiers xsi:type="ecore:EClass" name="Range" eSuperTypes="#//Atom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Terminal" eSuperTypes="#//Atom">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Terminal" abstract="true" eSuperTypes="#//Atom"/>
   <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//Atom">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="#//EBNF"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EBNF">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//Block"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Choice"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Choice #//Atom"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1"
         eType="#//Alternative" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Multiplicity">
+    <eLiterals name="star" literal="*"/>
+    <eLiterals name="plus" value="1" literal="+"/>
+    <eLiterals name="questionMark" value="2" literal="?"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CharTerminal" eSuperTypes="#//Terminal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringTerminal" eSuperTypes="#//Terminal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dot" eSuperTypes="#//Terminal"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnum0"/>
 </ecore:EPackage>
