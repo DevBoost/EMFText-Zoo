@@ -4,10 +4,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersPackage;
 import org.emftext.language.java.references.Reference;
-
-import com.sun.javadoc.Parameter;
 
 public class ParameterDecider implements IResolutionTargetDecider {
 

@@ -7,9 +7,8 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
+import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesPackage;
-
-import com.sun.jdi.LocalVariable;
 
 public class LocalVariableDecider implements IResolutionTargetDecider {
 
