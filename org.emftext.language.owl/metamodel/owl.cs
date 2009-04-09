@@ -6,7 +6,7 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
-	memoize = "true";
+	//memoize = "true";
 	usePredefinedTokens = "false";
 } 
 
@@ -28,7 +28,7 @@ TOKENS{
 	DEFINE IRI $(('<')(~('>')|('\\''>'))*('>'))|(('A'..'Z' | ':' | 'a'..'z' | '0'..'9' | '_' | '-' )+)$;
 }
 
- 
+
 RULES{
 	OntologyDocument ::= namespace*  ontology;
 
@@ -110,7 +110,8 @@ RULES{
 	DisjointProperties ::= "DisjointProperties:" annotations? objectProperties[IRI] ("," objectProperties[IRI])+;  
 	SameIndividuals ::= "SameIndividual:" annotations? individuals[IRI] ("," individuals[IRI])+;
 	DifferentIndividuals ::= "DifferentIndividuals:" annotations? individuals[IRI] ("," individuals[IRI])+;
-	HasKey ::=  "HasKey:" description annotations? ( objectPropertyReferences | dataProperties[IRI] )+;
+	
+	HasKey ::=  "HasKey:" annotations? ( inverse[INVERSE]? feature[IRI])+;
 	
 	// Descriptions
 	
@@ -119,7 +120,7 @@ RULES{
 		
 	ObjectPropertySome ::= not[NOT]? inverse[INVERSE]? feature[IRI] "some" (primary|dataPrimary);
 	ObjectPropertyOnly ::= not[NOT]? inverse[INVERSE]? feature[IRI] "only" (primary|dataPrimary);
-	ObjectPropertySelf ::= not[NOT]? inverse[INVERSE]? objectProperty[IRI] "Self";
+	ObjectPropertySelf ::= not[NOT]? inverse[INVERSE]? objectProperty[IRI] "self";
 	ObjectPropertyValue ::= not[NOT]? inverse[INVERSE]? feature[IRI] "value" (individual[IRI]|literal);
 
  	ObjectPropertyMin ::= not[NOT]? inverse[INVERSE]? feature[IRI] "min" value[INT] (primary|dataPrimary)?;

@@ -1,89 +1,138 @@
-Namespace: <http://ex.com/owl/families#>
-Namespace: g <http://ex.com/owl2/families#>
+Namespace:  <http://ex.com/owl/families#>
+	Namespace: g <http://ex.com/owl2/families#>
 
-Ontology: <http://example.com/owl/families> <http://example.com/owl/families-v1>
-  
-  
-  
-  Annotations: creator John, 
-               Annotations: rdfs:comment "Creation Year"
-                 creationYear 2008, 
-               mainClass Person
-               
-   Datatype: integer 
+		Ontology: <http://example.com/owl/families> <http://example.com/owl/families-v1>
 
-  ObjectProperty: hasWife
-    Annotations: 
-    Characteristics: Functional, InverseFunctional, Reflexive, Irreflexive, Asymmetric, Transitive
-    Domain: Annotations: rdfs:comment "General domain",
-                         creator John
-              Person, 
-            Annotations: rdfs:comment "More specific domain"
-              Man
-    Range: Person, Woman
-    SubPropertyOf: hasSpouse, loves
-    EquivalentTo: isMarriedTo 
-    DisjointWith: hates 
-    InverseOf: hasSpouse, inverse hasSpouse
-    SubPropertyChain: hasChild o hasParent
 
-  DataProperty: hasAge
-    Annotations: 
-    Characteristics: Functional
-    Domain: Person 
-    Range: integer 
-    SubPropertyOf: hasVerifiedAge 
-    EquivalentTo: hasAgeInYears 
-    DisjointWith: hasSSN 
 
-  AnnotationProperty: creator
-    Annotations: 
-    Domain: Person 
-    Range: integer 
-    SubPropertyOf: initialCreator 
+			Annotations: creator John, 
+			Annotations: rdfs:comment "Creation Year"
+			creationYear 2008, 
+			mainClass Person
 
-	Individual: _:child1
-    Annotations: 
-    Types: Person 
-    Facts: hasChild Susan 
-  
-  Class: Person
-    Annotations: 
-    SubClassOf: hasGender exactly 1 and hasGender only {female , male} 
-    SubClassOf: hasAge exactly 1 and hasAge only not NegInt
-   
-    SubClassOf: hasSSN max 1, hasSSN min 1
-    SubClassOf: not hates self   
-    SubClassOf: owl:Thing that hasFirstName exactly 1 and hasFirstName only string [minLength 1]  
-    EquivalentTo: g:People 
-    DisjointWith: g:Rock , g:Mineral 
-    DisjointUnionOf: Annotations:  Child, Adult
+			Datatype: integer 
 
-	Individual: John
-	    Annotations: 
-	    Types: Person , hasFirstName value "John" or hasFirstName value "Jack"^^xsd:string
-	    Facts: hasWife Mary, not hasChild Susan, hasAge 33, hasChild _:child1
-	    SameAs: Jack 
-	    DifferentFrom: Susan 
+			Class: John
+			Class: Man
+			Class: Woman
 
-	Individual: Susan
-	Individual: Mary
-	Individual: Jill
-	
-		Individual: Jack
-	Individual: Joe
-	Individual: Jim
+			ObjectProperty: hasWife
+			ObjectProperty: hasSpouse
+			ObjectProperty: isMarriedTo
+			ObjectProperty: hates
+			ObjectProperty: loves
 
-  DisjointClasses: Annotations:  g:Rock, g:Scissor, g:Paper
-  EquivalentProperties: Annotations:  hates, loathes, despises
-  DisjointProperties: Annotations:  hates, loves, indifferent
-  EquivalentProperties: Annotations:  favoriteNumber, g:favouriteNumber, g:favouriteInteger
-  DisjointProperties: Annotations:  favoriteInteger, favouriteReal
-  SameIndividual: Annotations:  John, Jack, Joe, Jim
-  DifferentIndividuals: Annotations:  John, Susan, Mary, Jill
-  HasKey: Annotations:  hasSSN Person
-  
-  Datatype: NegInt
-    Annotations: 
-    EquivalentTo:  integer [minLength 0] 
-  
+			ObjectProperty: hasChild
+			ObjectProperty: hasParent
+
+
+
+
+			ObjectProperty: hasWife
+			Annotations: 
+				Characteristics: Functional, InverseFunctional, Reflexive, Irreflexive, Asymmetric, Transitive
+				Domain: Annotations: rdfs:comment "General domain",
+				creator John
+				Person, 
+				Annotations: rdfs:comment "More specific domain"
+				Man
+				Range: Person, Woman
+				SubPropertyOf: hasSpouse, loves
+				EquivalentTo: isMarriedTo 
+				DisjointWith: hates 
+				InverseOf: hasSpouse, inverse hasSpouse
+				SubPropertyChain: hasChild o hasParent
+
+				DataProperty: hasAge
+				Annotations: 
+					Characteristics: Functional
+					Domain: Person 
+					Range: integer 
+					SubPropertyOf: hasVerifiedAge 
+					EquivalentTo: hasAgeInYears 
+					DisjointWith: hasSSN 
+
+
+					DataProperty: hasVerifiedAge
+					DataProperty: hasAgeInYears
+					DataProperty: hasSSN
+
+					AnnotationProperty: initialCreator 
+
+					AnnotationProperty: creator
+					Annotations: 
+						Domain: Person 
+						Range: integer 
+						SubPropertyOf: initialCreator 
+
+						Individual: _:child1
+						Annotations: 
+							Types: Person 
+							Facts: hasChild Susan 
+
+							ObjectProperty: hasGender
+							ObjectProperty: hates
+							ObjectProperty: indifferent
+							ObjectProperty: hasFirstName
+							ObjectProperty: loathes
+							ObjectProperty: despises
+							ObjectProperty: favoriteNumber
+							ObjectProperty: g:favouriteNumber
+							ObjectProperty: g:favouriteInteger
+							ObjectProperty:  favoriteInteger
+							ObjectProperty: favouriteReal
+
+							Datatype: string
+
+							Class: g:People
+							Class: g:Rock
+							Class: g:Scissor
+							Class: g:Paper
+							Class: g:Mineral
+							Class: Adult
+							Class: Child
+
+							Class: owl:Thing
+
+							Individual: female
+							Individual: male
+							Individual: Susan
+							Class: NegInt
+							Datatype: xsd:string
+							Class: Person
+							Annotations: 
+								SubClassOf: hasGender exactly 1 and hasGender only {female , male} 
+SubClassOf: hasAge exactly 1 and hasAge only not NegInt
+SubClassOf: hasSSN max 1, hasSSN min 1
+SubClassOf: not hates self   
+SubClassOf: owl:Thing that hasFirstName exactly 1 and hasFirstName only string [minLength 1]  
+                                                                                EquivalentTo: g:People 
+                                                                                DisjointWith: g:Rock , g:Mineral 
+                                                                                DisjointUnionOf: Annotations:  Child, Adult
+ 
+                                                                                Individual: John
+                                                                                Annotations: 
+                                                                                	Types: Person , hasFirstName value "John" or hasFirstName value "Jack"^^xsd:string
+                                                                                	Facts: hasWife Mary, not hasChild Susan, hasAge 33, hasChild _:child1
+                                                                                	SameAs: Jack 
+                                                                                	DifferentFrom: Susan 
+
+                                                                                	Individual: Susan
+                                                                                	Individual: Mary
+                                                                                	Individual: Jill
+
+                                                                                	Individual: Jack
+                                                                                	Individual: Joe
+                                                                                	Individual: Jim
+
+                                                                                	DisjointClasses: Annotations:  g:Rock, g:Scissor, g:Paper
+                                                                                	EquivalentProperties: Annotations:  hates, loathes, despises
+                                                                                	DisjointProperties: Annotations:  hates, loves, indifferent
+                                                                                	EquivalentProperties: Annotations:  favoriteNumber, g:favouriteNumber, g:favouriteInteger
+                                                                                	DisjointProperties: Annotations:  favoriteInteger, favouriteReal
+                                                                                	SameIndividual: Annotations:  John, Jack, Joe, Jim
+                                                                                	DifferentIndividuals: Annotations:  John, Susan, Mary, Jill
+                                                                                	HasKey:  hasSSN 
+
+
+
