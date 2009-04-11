@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ecore.EcoreResourceFactory;
+import org.emftext.language.ecore.resource.ecore.EcoreResourceFactory;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,9 @@
 SYNTAXDEF statemachine FOR <http://www.eclipse.org/uml2/2.1.0/UML> START StateMachine
 
 OPTIONS {
-  tokenspace = "1";
+	tokenspace = "1";
+	resourcePluginID = "org.emftext.language.statemachine.resource.statemachine";
+	basePackage = "org.emftext.language.statemachine.resource.statemachine";
 }
 
 TOKENS {

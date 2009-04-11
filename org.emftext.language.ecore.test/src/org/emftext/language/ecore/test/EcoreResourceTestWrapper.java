@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.resource.ecore.EcoreResource;
+import org.emftext.language.ecore.resource.ecore.EcoreResource;
 
 public class EcoreResourceTestWrapper extends EcoreResource {
 	

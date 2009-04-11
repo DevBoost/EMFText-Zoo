@@ -3,7 +3,9 @@ FOR <http://www.tudresden.de/feature>
 START FeatureModel
 
 OPTIONS {
-  tokenspace = "1";
+	tokenspace = "1";
+	resourcePluginID = "org.emftext.language.feature.resource.feature";
+	basePackage = "org.emftext.language.feature.resource.feature";
 }
 
 TOKENS{

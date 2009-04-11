@@ -8,6 +8,8 @@ OPTIONS {
 	overrideClasspath = "false";
 	memoize = "true";
 	tokenspace = "1";
+	resourcePluginID = "org.emftext.language.ecore.resource.ecore";
+	basePackage = "org.emftext.language.ecore.resource.ecore";
 }
 
 TOKENS {
