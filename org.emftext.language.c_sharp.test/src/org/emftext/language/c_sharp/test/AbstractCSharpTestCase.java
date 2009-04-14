@@ -44,7 +44,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		}
 	}
 
-	
+	//Funktion die, je nach Klassenart, die beinhaltenden Member zählen soll
 	protected void assertMemberCount(
 			EObject classtyp,
 			int expectedCount) {
@@ -74,6 +74,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 				+ " member(s).", expectedCount, count);
 	}
 	
+	//setzt die Teile der Identifier zu einem vollständigen String zusammen
 	protected String namespaceOrTypeNameToString(
 			NamespaceOrTypeName identifier){
 		String puffer = "";
@@ -186,7 +187,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		
 	}
 	
-	//parses the CompilationUnit in one Namespace to one Class
+	//parses the CompilationUnit with one Namespace to one Class
 	protected org.emftext.language.c_sharp.classes.Class assertParseToClass(
 			String typename,
 			String expectedClassName) throws Exception {

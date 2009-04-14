@@ -3,6 +3,17 @@ package org.emftext.language.c_sharp.test;
 import java.util.List;
 
 import org.emftext.language.c_sharp.classes.Class;
+import org.emftext.language.c_sharp.classes.ClassMemberDeclaration;
+import org.emftext.language.c_sharp.classes.Method;
+import org.emftext.language.c_sharp.modifiers.Abstract;
+import org.emftext.language.c_sharp.modifiers.Extern;
+import org.emftext.language.c_sharp.modifiers.Internal;
+import org.emftext.language.c_sharp.modifiers.New;
+import org.emftext.language.c_sharp.modifiers.Private;
+import org.emftext.language.c_sharp.modifiers.Protected;
+import org.emftext.language.c_sharp.modifiers.Public;
+import org.emftext.language.c_sharp.modifiers.Static;
+import org.emftext.language.c_sharp.modifiers.Virtual;
 import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.namespaces.Namespace;
 import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
@@ -50,6 +61,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		Class clazz = (Class)((Namespace)nmd.get(1)).getNamespaceBody().getNamespaceMemberDeclaration().get(2);
 		assertEquals(clazz.getName(), "Class3");
 		assertEquals(namespaceOrTypeNameToString(clazz.getClassBase().getTypes().get(0).getNamespaceOrTypeName()), "Class2");
+		
 		//parseAndReprint(filename);		
 	}
 	
@@ -58,8 +70,38 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		String typename = "Methods";
 		String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
-		
 		assertMemberCount(clazz, 3);
+		
+		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
+		assertType(cmd.get(1), Method.class);
+		Method meth = (Method)cmd.get(1);
+		assertEquals("method2", meth.getName());
+		assertType(meth.getModifiers().get(0),Public.class);
+		
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
+	public void testModifiers() throws Exception {
+		String typename = "Modifiers";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");		
+		assertMemberCount(clazz, 9);
+		
+		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
+		for(ClassMemberDeclaration single: cmd){
+			assertType(single, Method.class);
+		}
+		assertType(((Method)cmd.get(0)).getModifiers().get(0),New.class);
+		assertType(((Method)cmd.get(1)).getModifiers().get(0),Public.class);
+		assertType(((Method)cmd.get(2)).getModifiers().get(0),Protected.class);
+		assertType(((Method)cmd.get(3)).getModifiers().get(0),Internal.class);
+		assertType(((Method)cmd.get(4)).getModifiers().get(0),Private.class);
+		assertType(((Method)cmd.get(5)).getModifiers().get(0),Static.class);
+		assertType(((Method)cmd.get(6)).getModifiers().get(1),Virtual.class);
+		assertType(((Method)cmd.get(7)).getModifiers().get(1),Abstract.class);
+		assertType(((Method)cmd.get(8)).getModifiers().get(0),Extern.class);
+		
 		//parseAndReprint(filename);		
 	}
 	
