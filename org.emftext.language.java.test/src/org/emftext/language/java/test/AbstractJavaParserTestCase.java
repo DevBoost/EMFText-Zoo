@@ -49,7 +49,6 @@ import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResource;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.analysis.helper.CastRepair;
 import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;

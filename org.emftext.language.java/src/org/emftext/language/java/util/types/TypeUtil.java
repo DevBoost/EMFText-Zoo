@@ -16,7 +16,6 @@ import org.emftext.language.java.types.Long;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.Type;
-import org.emftext.language.java.types.Void;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassUtil;

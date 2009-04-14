@@ -8,25 +8,22 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.references.IdentifierReference;
-import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.references.ReferencesPackage;
 
 public class PackageDecider extends AbstractDecider {
-
-	private IdentifierReference idReference = null; 
 	
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference crossReference) {
 
 		if (referenceContainer instanceof IdentifierReference) {
 			IdentifierReference idReference = (IdentifierReference) referenceContainer;
-			if (!(idReference.eContainer() instanceof Reference)) {
+			if (!referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 				//maybe the root package
-				this.idReference = idReference;
 				return true;			
 			}
-			if (idReference.eContainer() instanceof IdentifierReference) {
+			if (referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT) && 
+					idReference.eContainer() instanceof IdentifierReference) {
 				//maybe the next sub package
-				this.idReference = idReference;
 				return true;
 			}
 			
