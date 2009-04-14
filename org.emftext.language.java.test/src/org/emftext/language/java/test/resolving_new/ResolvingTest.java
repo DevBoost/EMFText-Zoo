@@ -24,6 +24,10 @@ import org.emftext.language.java.test.AbstractJavaParserTestCase;
  * parsed into one ResourceSet. Afterwards all references are
  * resolved and the annotations contained as comments in the
  * input files are checked.
+ * 
+ * TODO we should create an individual test for each folder
+ * so tests can run independently without causing the whole
+ * suite to fail after the first assertion fails
  */
 public class ResolvingTest extends AbstractJavaParserTestCase {
 	
