@@ -36,7 +36,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 //	public ILocationMap getLocationMap() {
 //		return new DevNullLocationMap();
 //	}
-	
+	// TODO jjohannes: add comment for this option
 	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
 	
 	ClassFileModelLoader classFileParser = new ClassFileModelLoader();
