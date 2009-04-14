@@ -10,6 +10,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.EnumConstantDecider;
 import org.emftext.language.java.resource.java.analysis.decider.FieldDecider;
@@ -46,7 +47,14 @@ public class ElementReferenceTargetReferenceResolver extends
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {
-				startingPoint = ReferenceUtil.getType(parentReference);
+				//special case: anonymous class in constructor call
+				if (parentReference instanceof NewConstructorCall &&
+						((NewConstructorCall)parentReference).getAnonymousClass() != null) {
+					startingPoint = ((NewConstructorCall)parentReference).getAnonymousClass();
+				}
+				else {
+					startingPoint = ReferenceUtil.getType(parentReference);
+				}
 			}
 		}
 		else {
