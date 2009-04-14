@@ -1416,6 +1416,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		assertParsesToClass(typename);
 
+		registerInClassPath("TypeReferencing" + JAVA_FILE_EXTENSION);
+		registerInClassPath("pkg/EmptyClass" + JAVA_FILE_EXTENSION);
+		registerInClassPath("pkg/inner/Inner" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 
