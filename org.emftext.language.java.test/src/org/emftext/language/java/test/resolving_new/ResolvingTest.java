@@ -78,7 +78,7 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 		for (String actualID : actualTargetsMap.keySet()) {
 			Object actualTarget = actualTargetsMap.get(actualID);
 			Object expectedTarget = expectedTargetsMap.get(actualID);
-			assertEquals("Target objects should match (ID " + actualID + ").", actualTarget, expectedTarget);
+			assertEquals("Target objects should match (ID " + actualID + ").", expectedTarget, actualTarget);
 		}
 		assertEquals("Number of expected and actual targets should match.", actualTargetsMap.keySet().size(), expectedTargetsMap.keySet().size());
 
