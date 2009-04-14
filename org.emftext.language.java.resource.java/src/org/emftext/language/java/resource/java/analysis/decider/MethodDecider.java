@@ -11,9 +11,11 @@ import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.members.MethodUtil;
 
-public class MethodDecider implements IResolutionTargetDecider {
+public class MethodDecider extends AbstractDecider {
 
 	protected MethodCall methodCall = null;
+	
+	protected Method lastFound = null;
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
@@ -23,12 +25,8 @@ public class MethodDecider implements IResolutionTargetDecider {
 		}
 		return false;
 	}
-	
-	public boolean continueAfterReference() {
-		return true;
-	}
 
-	public EList<? extends EObject> getAdditionalCandidates(EObject container) {
+	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof ConcreteClassifier) {
 			return ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);
 		}
@@ -39,13 +37,29 @@ public class MethodDecider implements IResolutionTargetDecider {
 		if (element instanceof Method) {
 			Method method = (Method) element;
 			if (id.equals(method.getName())) {
-				MethodUtil.isMethodForCall(method, methodCall);
+				if (lastFound == null) {
+					if (MethodUtil.isMethodForCall(method, methodCall)) {
+						lastFound = method;
+						return true;
+					}
+				}
+				else {
+					if (MethodUtil.isMethodForCall(method, lastFound, methodCall)) {
+						lastFound = method;
+						return true;
+					}
+				}
+				
 			}
 		}
 		return false;
 	}
 
-	public boolean lookInto(EObject container, EReference containingReference) {
+	public boolean isSure() {
+		return false;
+	}
+
+	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (container instanceof MemberContainer) {
 			if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
 				return  true;

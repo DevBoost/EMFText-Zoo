@@ -1,8 +1,17 @@
 package org.emftext.language.java.resource.java.analysis;
 
-import org.emftext.language.java.resource.java.analysis.helper.JavaTypeResolver;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AnnotationInstanceAnnotationReferenceResolver extends JavaTypeResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
+import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
+import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
+import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
+
+public class AnnotationInstanceAnnotationReferenceResolver extends 
+	AbstractReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
 	
 	@Override	
 	protected java.lang.String doDeResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
@@ -11,6 +20,18 @@ public class AnnotationInstanceAnnotationReferenceResolver extends JavaTypeResol
 	
 	@Override	
 	protected void doResolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
-		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
+		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
+		
+		EObject startingPoint = container;
+		
+		deciderList.add(new ConcreteClassifierDecider());
+		
+		ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
+		
+		EObject target = treeWalker.walk(startingPoint, identifier, container, reference);
+		
+		if (target != null) {
+			result.addMapping(identifier, (Classifier) target);
+		}
 	}
 }

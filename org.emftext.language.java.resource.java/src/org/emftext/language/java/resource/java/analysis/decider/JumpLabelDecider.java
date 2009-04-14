@@ -3,20 +3,22 @@ package org.emftext.language.java.resource.java.analysis.decider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
-import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.statements.JumpLabel;
 import org.emftext.language.java.statements.StatementsPackage;
-import org.emftext.language.java.variables.AdditionalLocalVariable;
-import org.emftext.language.java.variables.LocalVariable;
-import org.emftext.language.java.variables.VariablesPackage;
 
-public class LocalVariableDecider extends AbstractDecider {
+public class JumpLabelDecider extends AbstractDecider {
+
+	public boolean canFindTargetsFor(EObject referenceContainer,
+			EReference containingReference) {
+		return true;
+	}
 
 	public boolean continueAfterReference() {
 		return false;
 	}
 
 	public boolean isPossibleTarget(String id, EObject element) {
-		if (element instanceof LocalVariable || element instanceof AdditionalLocalVariable) {
+		if (element instanceof JumpLabel) {
 			NamedElement ne = (NamedElement) element;
 			return id.equals(ne.getName());
 		}
@@ -24,10 +26,10 @@ public class LocalVariableDecider extends AbstractDecider {
 	}
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
-		if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(containingReference)) {
+		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
 			return true;
 		}
-		if (VariablesPackage.Literals.LOCAL_VARIABLE__ADDITIONAL_LOCAL_VARIABLES.equals(containingReference)) {
+		if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS.equals(containingReference)) {
 			return true;
 		}
 		return false;
@@ -43,9 +45,5 @@ public class LocalVariableDecider extends AbstractDecider {
 		return false;
 	}
 
-	public boolean canFindTargetsFor(EObject referenceContainer,
-			EReference containingReference) {
-		return referenceContainer instanceof Reference;
-	}
 
 }

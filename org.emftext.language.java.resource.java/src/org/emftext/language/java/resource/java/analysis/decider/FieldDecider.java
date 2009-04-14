@@ -11,13 +11,9 @@ import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 
-public class FieldDecider implements IResolutionTargetDecider {
+public class FieldDecider extends AbstractDecider {
 
-	public boolean continueAfterReference() {
-		return true;
-	}
-
-	public EList<? extends EObject> getAdditionalCandidates(EObject container) {
+	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof ConcreteClassifier) {
 			return ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);
 		}
@@ -32,7 +28,7 @@ public class FieldDecider implements IResolutionTargetDecider {
 		return false;
 	}
 
-	public boolean lookInto(EObject container, EReference containingReference) {
+	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
 			return  true;
 		}

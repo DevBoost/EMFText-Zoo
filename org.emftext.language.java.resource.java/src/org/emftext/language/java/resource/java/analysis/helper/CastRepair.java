@@ -2,21 +2,14 @@ package org.emftext.language.java.resource.java.analysis.helper;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.annotations.AnnotationAttributeSetting;
-import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.CastExpression;
-import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.ExpressionsFactory;
 import org.emftext.language.java.expressions.NestedExpression;
-import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.UnaryExpression;
 import org.emftext.language.java.operators.Addition;
 import org.emftext.language.java.operators.OperatorsFactory;
@@ -29,72 +22,12 @@ import org.emftext.language.java.resource.java.JavaReferenceResolverSwitch;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypesPackage;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
 import org.emftext.runtime.resource.ITextResource;
 
-public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePostProcessorProvider {
+public class CastRepair {
 
-	private static final ExpressionSimplifier theSimplifier = new ExpressionSimplifier();
-	
-	public IResourcePostProcessor getResourcePostProcessor() {
-		return theSimplifier;
-	}
-	
-	public void process(ITextResource resource) {
-		repairWrongCasts(resource);
-		simplifyDown(resource.getContents());
-	}
-	
-	public void simplifyDown(EList<EObject> parentList) {
-		for(EObject child : new BasicEList<EObject>(parentList)) {
-			EObject singleContained = getSingleContained(child);
-			EObject next = singleContained;
-			while (next != null) {
-				next = getSingleContained(singleContained);
-				if (next != null) {
-					singleContained = next;
-				}
-			}
-			if (singleContained != null) {
-				EcoreUtil.replace(child, singleContained);
-				child = singleContained;
-			}
-			simplifyDown(child.eContents());
-		}
-	}
-
-	
-	public EObject getSingleContained(EObject parent) {
-		if (parent.eContainer() instanceof AnnotationInstance ||
-				parent.eContainer() instanceof AnnotationAttributeSetting) {
-			//special case. Might be changed in the future.
-			return null;
-		}
-		if (!(parent instanceof Expression)) {
-			return null;
-		}
-		//never kill a primary
-		if (parent instanceof PrimaryExpression) {
-			return null;
-		}
-		
-		EObject singleContained = null;
-		for(EObject contained : parent.eContents()) {
-			if (singleContained != null) {
-				return null;
-			}
-			singleContained = contained;
-		}
-		if (!(singleContained instanceof Expression)) {
-			return null;
-		}
-
-		return singleContained;
-	}
-
-	public void repairWrongCasts(Resource resource) {
+	public static void repairWrongCasts(ITextResource resource) {
 		for(Iterator<EObject> i = resource.getAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
 			if (next instanceof CastExpression) {
@@ -118,7 +51,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 							id = id.substring(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 							id = id.substring(id.indexOf("_") + 1);
 							
-							((ITextResource) resource).registerContextDependentProxy(
+							resource.registerContextDependentProxy(
 									new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 									mainIdReference,
 									ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
@@ -141,7 +74,7 @@ public class ExpressionSimplifier implements IResourcePostProcessor, IResourcePo
 								
 								idRef.setTarget((ReferenceableElement) newProxy);
 								
-								((ITextResource) resource).registerContextDependentProxy(
+								resource.registerContextDependentProxy(
 										new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 										idRef,
 										ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,

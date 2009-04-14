@@ -12,7 +12,7 @@ import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 
-public class InterfaceMethodDecider implements IResolutionTargetDecider {
+public class InterfaceMethodDecider extends AbstractDecider {
 
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
@@ -22,12 +22,8 @@ public class InterfaceMethodDecider implements IResolutionTargetDecider {
 		}
 		return false;
 	}
-	
-	public boolean continueAfterReference() {
-		return true;
-	}
 
-	public EList<? extends EObject> getAdditionalCandidates(EObject container) {
+	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof ConcreteClassifier) {
 			return ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);
 		}
@@ -45,7 +41,7 @@ public class InterfaceMethodDecider implements IResolutionTargetDecider {
 		return false;
 	}
 
-	public boolean lookInto(EObject container, EReference containingReference) {
+	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (container instanceof MemberContainer) {
 			if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
 				return  true;

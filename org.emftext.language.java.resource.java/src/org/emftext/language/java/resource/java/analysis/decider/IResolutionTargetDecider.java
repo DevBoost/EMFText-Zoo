@@ -6,13 +6,39 @@ import org.eclipse.emf.ecore.EReference;
 
 public interface IResolutionTargetDecider {
 	
-	boolean canFindTargetsFor(EObject referenceContainer, EReference containingReference);
+	/**
+	 * Determines if the finder is of any use for the given resolving procedure.
+	 * 
+	 * @param referenceContainer
+	 * @param containingReference
+	 * @return
+	 */
+	boolean canFindTargetsFor(EObject referenceContainer, EReference crossReference);
+	
+	/**
+	 * Determines if the decider needs to look into the given reference
+	 * 
+	 * @param container
+	 * @param containingReference
+	 * @return
+	 */
+	boolean containsCandidates(EObject container, EReference containingReference);
+	
+	boolean walkInto(EObject container, EReference containingReference);
 	
 	boolean isPossibleTarget(String id, EObject element);
 	
-	boolean lookInto(EObject container, EReference containingReference);
+	boolean isSure();
 	
 	boolean continueAfterReference();
 
-	EList<? extends EObject> getAdditionalCandidates(EObject container);
+	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) ;
+	
+	
+	
+	void activate();
+	
+	void deactivate();
+	
+	boolean isActive();
 }
