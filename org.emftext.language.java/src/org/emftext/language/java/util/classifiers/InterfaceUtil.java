@@ -22,10 +22,14 @@ public class InterfaceUtil {
 		for (TypeReference typeArg : interfaceReferences) {
 			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
 			ConcreteClassifier superInterface = (ConcreteClassifier) TypeReferenceUtil.getTarget(typeArg, null);
-			resultInterfaceList.add(superInterface);
-			if (superInterface instanceof Interface) {
-				collectAllSuperInterfaces(
-						((Interface)superInterface).getExtends(), resultInterfaceList);
+			if (superInterface != null) {
+				resultInterfaceList.add(superInterface);
+				if (superInterface instanceof Interface) {
+					collectAllSuperInterfaces(
+							((Interface)superInterface).getExtends(), resultInterfaceList);
+					collectAllSuperInterfaces(
+							((Interface)superInterface).getDefaultExtends(), resultInterfaceList);
+				}
 			}
 		}
 	}

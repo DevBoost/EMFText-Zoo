@@ -29,7 +29,7 @@ import org.emftext.language.java.util.members.MemberContainerUtil;
  * Java language specifics.
  *
  */
-public class JavaModelCompletion  {
+public class JavaModelCompletion {
 	
 	public static void complete(Resource resource) {
 		for(Iterator<EObject> contentIterator = resource.getAllContents(); contentIterator.hasNext(); ) {
@@ -53,12 +53,11 @@ public class JavaModelCompletion  {
 	 * @param javaClass
 	 */
 	public static void addDefaultSuperClass(Class javaClass) {
-		//FIXME @jjohannes this method should modify only a transient reference
-		if (javaClass.getExtends() == null) {
+		if (javaClass.getExtends() == null && javaClass.getDefaultExtends() == null) {
 			Class objectClass = JavaClasspathUtil.getObjectClass(javaClass);
 			ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 			classifierReference.setTarget(objectClass);
-			javaClass.setExtends(classifierReference);
+			javaClass.setDefaultExtends(classifierReference);
 		}
 	}
 	
@@ -69,12 +68,11 @@ public class JavaModelCompletion  {
 	 * @param javaClass
 	 */
 	public static void addDefaultSuperInterface(Interface javaInterface) {
-		//FIXME @jjohannes this method should modify only a transient reference
-		if (javaInterface.getExtends().isEmpty()) {
+		if (javaInterface.getExtends().isEmpty() && javaInterface.getDefaultExtends().isEmpty()) {
 			Class objectClass = JavaClasspathUtil.getObjectClass(javaInterface);
 			ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 			classifierReference.setTarget(objectClass);
-			javaInterface.getExtends().add(classifierReference);
+			javaInterface.getDefaultExtends().add(classifierReference);
 		}
 	}
 
@@ -85,7 +83,6 @@ public class JavaModelCompletion  {
 	 * @param enumeration the enumeration to complete
 	 */
 	public static void addMissingEnumerationMembers(Enumeration enumeration) {
-		//FIXME @jjohannes this method should modify only a transient reference
 		
 		//add the values
 		String valuesMethodName = "values";
@@ -98,7 +95,7 @@ public class JavaModelCompletion  {
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
 			valuesMethod.setType(type);
-			enumeration.getMembers().add(valuesMethod);
+			enumeration.getDefaultMembers().add(valuesMethod);
 		}
 		
 		//add the value of method
@@ -120,6 +117,7 @@ public class JavaModelCompletion  {
 			strParameter.setType(type);
 			
 			valueOfMethod.getParameters().add(strParameter);
+			enumeration.getDefaultMembers().add(valueOfMethod);
 		}
 	}
 	

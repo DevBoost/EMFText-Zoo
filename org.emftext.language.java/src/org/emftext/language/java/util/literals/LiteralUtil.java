@@ -1,5 +1,6 @@
 package org.emftext.language.java.util.literals;
 
+import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
 import org.emftext.language.java.literals.DoubleLiteral;
@@ -9,34 +10,35 @@ import org.emftext.language.java.literals.Literal;
 import org.emftext.language.java.literals.LongLiteral;
 import org.emftext.language.java.literals.NullLiteral;
 import org.emftext.language.java.types.Type;
-import org.emftext.language.java.types.TypesFactory;
+import org.emftext.language.java.util.JavaClasspathUtil;
 
 public class LiteralUtil {
 	
-	public static Type getType(Literal literal) {
-		TypesFactory javaTypeFactory = TypesFactory.eINSTANCE;
-		if (literal instanceof NullLiteral) {
-			return javaTypeFactory.createVoid();
+	public static Type getType(Literal _this) {
+		Class javaClass = null;
+		
+		if (_this instanceof NullLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Void", _this);
 		}
-		else if (literal instanceof BooleanLiteral) {
-			return javaTypeFactory.createBoolean();
+		else if (_this instanceof BooleanLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Boolean", _this);
 		}
-		else if (literal instanceof DoubleLiteral) {
-			return javaTypeFactory.createDouble();
+		else if (_this instanceof DoubleLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Double", _this);
 		}
-		else if (literal instanceof FloatLiteral) {
-			return javaTypeFactory.createFloat();
+		else if (_this instanceof FloatLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Float", _this);
 		}
-		else if (literal instanceof IntegerLiteral) {
-			return javaTypeFactory.createInt();
+		else if (_this instanceof IntegerLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Integer", _this);
 		}
-		else if (literal instanceof LongLiteral) {
-			return javaTypeFactory.createLong();
+		else if (_this instanceof LongLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Long", _this);
 		}
-		else if (literal instanceof CharacterLiteral) {
-			return javaTypeFactory.createChar();
+		else if (_this instanceof CharacterLiteral) {
+			javaClass = JavaClasspathUtil.getClass("Character", _this);
 		}
-		assert(false);
-		return null;
+
+		return javaClass;
 	}
 }

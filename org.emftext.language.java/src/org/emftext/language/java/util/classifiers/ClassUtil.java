@@ -6,6 +6,7 @@ import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.types.PrimitiveType;
+import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
@@ -24,10 +25,16 @@ public class ClassUtil {
 		
 		//collects all superclasses
 		Class superClass =  _this;
-		while (!superClass.eIsProxy() && 
+		while (superClass != null && !superClass.eIsProxy() && 
 				!superClass.equals(JavaClasspathUtil.getObjectClass(_this))) {
-			superClass = (Class) TypeReferenceUtil.getTarget(superClass.getExtends());
-			classifierList.add(superClass);
+			TypeReference superClassReference = superClass.getExtends();
+			if (superClassReference == null) {
+				superClassReference = superClass.getDefaultExtends();
+			}
+			superClass = (Class) TypeReferenceUtil.getTarget(superClassReference);
+			if (superClass != null) {
+				classifierList.add(superClass);
+			}
 		}
 		
 		EList<ConcreteClassifier> superClassList = 

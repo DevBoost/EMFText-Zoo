@@ -59,6 +59,8 @@ public class ConcreteClassifierUtil {
 			return memberList;
 		}
 		
+		memberList.addAll(_this.getDefaultMembers());
+		
 		//because inner classes are found in separate class files
 		memberList.addAll(
 				JavaClasspath.INSTANCE.getInternalClassifiers(_this));
@@ -69,6 +71,23 @@ public class ConcreteClassifierUtil {
 					JavaClasspath.INSTANCE.getInternalClassifiers(superClassifier));
 		}
 		return memberList;
+	}
+	
+	public static EList<ConcreteClassifier> getAllInnerClassifiers(ConcreteClassifier _this) {
+		EList<ConcreteClassifier> internalClassifierList = new BasicEList<ConcreteClassifier>();
+		
+		internalClassifierList.addAll(
+				JavaClasspath.INSTANCE.getInternalClassifiers(_this));
+		
+		for(ConcreteClassifier superClassifier : getAllSuperClassifiers(_this)) {
+			for(Member m : superClassifier.getMembers()) {
+				if(m instanceof ConcreteClassifier) {
+					internalClassifierList.add((ConcreteClassifier) m);
+				}
+			}
+		}
+		
+		return internalClassifierList;
 	}
 	
 }

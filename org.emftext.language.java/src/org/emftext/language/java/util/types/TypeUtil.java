@@ -44,7 +44,7 @@ public class TypeUtil {
 		
 		
 		//if I am a void, I am of every type
-		if (_this instanceof Void) {
+		if (_this.equals(JavaClasspathUtil.getClass("Void", _this))) {
 			return true;
 		}
 		
@@ -86,7 +86,7 @@ public class TypeUtil {
 				return true;
 			}
 		}
-		otherType = (Type) new Object();
+
 		//there are some specifics for primitive types not reflected in the type hierarchy
 		if (otherType instanceof Class) {
 			PrimitiveType primitiveType = ClassUtil.unWrapPrimitiveType((Class) otherType);
