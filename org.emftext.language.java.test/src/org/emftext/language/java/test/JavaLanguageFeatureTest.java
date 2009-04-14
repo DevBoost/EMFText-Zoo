@@ -76,7 +76,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected ResourceSet getResourceSet() {
-		return new ResourceSetImpl();
+		ResourceSet rs = new ResourceSetImpl();
+		rs.getLoadOptions().putAll(getLoadOptions());
+		return rs;
 	}
 
 	private void assertParsableAndReprintable(String filename)
@@ -1126,6 +1128,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testResolving() throws Exception {
 		String folder = "resolving/";
+		
+		registerInClassPath(folder + "MethodCallsWithoutInheritance.java");
+		
 		assertParsableAndReprintable(folder + "MethodCalls.java");
 		assertParsableAndReprintable(folder + "MethodCallsWithLocalTypeReferences.java");
 		assertParsableAndReprintable(folder + "MethodCallsWithoutInheritance.java");
@@ -1272,6 +1277,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	
 	@Test
 	public void testPkg_package_info() throws Exception {
+		registerInClassPath("pkg/PackageAnnotation.java");
+		
 		parseAndReprint("pkg/package-info.java");
 	}
 
@@ -1341,7 +1348,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertTrue("first import is not static", imports.get(0) instanceof StaticImport);
 		assertTrue("second import is static", imports.get(1) instanceof ClassifierImport);
 
-		registerInClassPath("EmptyClass" + JAVA_FILE_EXTENSION);
+		registerInClassPath("pkg/EmptyClass" + JAVA_FILE_EXTENSION);
+		registerInClassPath("pkg/EscapedStrings" + JAVA_FILE_EXTENSION);
 		
 		parseAndReprint(filename);
 	}
@@ -1396,6 +1404,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 3);
 
+		registerInClassPath("pkg/EmptyClass" + JAVA_FILE_EXTENSION);
+		registerInClassPath("pkg/inner/Inner" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 	
