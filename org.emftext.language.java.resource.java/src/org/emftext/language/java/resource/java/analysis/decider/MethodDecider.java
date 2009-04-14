@@ -1,9 +1,14 @@
 package org.emftext.language.java.resource.java.analysis.decider;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.StaticClassifierImport;
+import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
@@ -30,7 +35,28 @@ public class MethodDecider extends AbstractDecider {
 		if (container instanceof ConcreteClassifier) {
 			return ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);
 		}
+		
+		if(container instanceof CompilationUnit) {
+			EList<EObject> resultList = new BasicEList<EObject>();
+			addImports(container, resultList);
+			return resultList;
+		}
+		
 		return null;
+	}
+	
+	private void addImports(EObject container,
+			EList<EObject> resultList) {
+		if(container instanceof CompilationUnit) {
+			for(Import aImport : ((CompilationUnit)container).getImports()) {
+				if (aImport instanceof StaticMemberImport) {
+					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
+				}
+				else if (aImport instanceof StaticClassifierImport) {
+					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
+				}
+			}
+		}
 	}
 
 	public boolean isPossibleTarget(String id, EObject element) {

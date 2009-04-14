@@ -6,6 +6,7 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.generics.GenericsPackage;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.types.ClassifierReference;
 
 public class TypeParameterDecider extends AbstractDecider {
 
@@ -26,6 +27,7 @@ public class TypeParameterDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
-		return referenceContainer instanceof Reference;
+		return (referenceContainer instanceof Reference ||
+				referenceContainer instanceof ClassifierReference);
 	}
 }

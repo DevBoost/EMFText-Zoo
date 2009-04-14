@@ -132,10 +132,8 @@ public class ScopedTreeWalker {
 		EList<EObject> contentList = new BasicEList<EObject>();
 		
 		if(!reference.isMany()) {
-			if (!reference.equals(navOrigin)) {
-				EObject value = (EObject)container.eGet(reference);
-				contentList.add(value);
-			}
+			EObject value = (EObject)container.eGet(reference);
+			contentList.add(value);		
 		}
 		else {
 			@SuppressWarnings("unchecked")
@@ -144,7 +142,7 @@ public class ScopedTreeWalker {
 				contentList.addAll(value);
 			}
 			else {
-				contentList.addAll(value.subList(0, posInNavOrigin));
+				contentList.addAll(value.subList(0, posInNavOrigin + 1));
 			}
 		}
 		
