@@ -49,7 +49,8 @@ import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResource;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.analysis.helper.ExpressionSimplifier;
+import org.emftext.language.java.resource.java.analysis.helper.CastRepair;
+import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
 import org.emftext.language.java.types.NamespaceClassifierReference;
@@ -78,10 +79,12 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	
 	protected void registerInClassPath(String file) throws Exception {
 		File inputFolder = new File("." + File.separator + getTestInputFolder());
-		File inputFile = new File(inputFolder + File.separator + file);
+		File inputFile = new File(file);
 
-		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
-		resource.load(getLoadOptions()); //load and register
+		CompilationUnit cu = (CompilationUnit) parseResource(inputFile);
+		
+		inputFile = new File(inputFolder + File.separator + file);
+		JavaClasspath.INSTANCE.registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
 	}
 
 	protected static final String TEST_OUTPUT_FOLDER = "output";
@@ -136,7 +139,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	protected static Map<?, ?> getLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new ExpressionSimplifier());
+		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaSourceOrClassFileResource.OPTION_REGISTER_LOCAL, Boolean.TRUE);
 		return map;
 	}

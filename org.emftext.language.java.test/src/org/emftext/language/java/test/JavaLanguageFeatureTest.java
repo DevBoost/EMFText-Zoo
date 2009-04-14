@@ -344,7 +344,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Enumeration eenum = assertParsesToEnumeration(typename);
 		assertMemberCount(eenum, 0);
-
+		
 		parseAndReprint(filename);
 	}
 	
@@ -708,7 +708,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(typename + " implements two interfaces.", 2, enumeration
 				.getImplements().size());
 
+		registerInClassPath("EmptyInterface" + JAVA_FILE_EXTENSION);
 		registerInClassPath("IOneMethod" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 
@@ -798,6 +800,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		assertMemberCount(clazz, 4);
 
+		registerInClassPath("ConstructorCalls" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 
@@ -909,6 +913,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 1);
 		
+		registerInClassPath("GenericConstructors" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 
@@ -982,6 +988,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		CompilationUnit model = (CompilationUnit) parseResource(filename);
 		assertNumberOfClassifiers(model, 1);
+		
+		registerInClassPath("Import1" + JAVA_FILE_EXTENSION);
 		
 		parseAndReprint(filename);
 	}
@@ -1154,6 +1162,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		EList<TypeReference> implementedInterfaces = clazz.getImplements();
 		assertEquals(2, implementedInterfaces.size());
 
+		registerInClassPath("ISemicolonOnly" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 
@@ -1308,6 +1318,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Test
 	public void testStatements() throws Exception {
+		registerInClassPath("ConditionalStatements" + JAVA_FILE_EXTENSION);
+		
 		assertParsesToClass("ConditionalStatements", 4);
 		assertParsesToClass("TryCatchStatements", 4);
 		assertParsesToClass("AssertStatements", 1);
@@ -1329,6 +1341,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertTrue("first import is not static", imports.get(0) instanceof StaticImport);
 		assertTrue("second import is static", imports.get(1) instanceof ClassifierImport);
 
+		registerInClassPath("EmptyClass" + JAVA_FILE_EXTENSION);
+		
 		parseAndReprint(filename);
 	}
 	
