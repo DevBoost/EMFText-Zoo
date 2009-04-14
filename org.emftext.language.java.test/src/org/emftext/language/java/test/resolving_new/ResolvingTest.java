@@ -18,8 +18,17 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
+/**
+ * A test for the reference resolving mechanism. Each folder
+ * contained INPUT_FOLDER is treated as a Java project and 
+ * parsed into one ResourceSet. Afterwards all references are
+ * resolved and the annotations contained as comments in the
+ * input files are checked.
+ */
 public class ResolvingTest extends AbstractJavaParserTestCase {
 	
+	private static final String INPUT_FOLDER = "input" + File.separator + "resolving_new";
+
 	public class IgnoreSVNFilter implements FileFilter {
 
 		public boolean accept(File file) {
@@ -56,20 +65,24 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 		// resource set
 		ResourceSet set = new ResourceSetImpl();
 		parseAll(testDirectory, set);
+		
 		// resolve all references
 		EcoreUtil.resolveAll(set);
-		// TODO check whether the expected number of targets is present
 		
+		// find all commented EObjects that are sources or targets
 		Map<String, Object> actualTargetsMap = new HashMap<String, Object>();
 		Map<String, Object> expectedTargetsMap = new HashMap<String, Object>();
 		findSourcesAndTargets(set, actualTargetsMap, expectedTargetsMap);
-		// check whether the targets match the expected targets
+		
+		// check whether the actual targets match the expected targets
 		for (String actualID : actualTargetsMap.keySet()) {
 			Object actualTarget = actualTargetsMap.get(actualID);
 			Object expectedTarget = expectedTargetsMap.get(actualID);
 			assertEquals("Target objects should match (ID " + actualID + ").", actualTarget, expectedTarget);
 		}
 		assertEquals("Number of expected and actual targets should match.", actualTargetsMap.keySet().size(), expectedTargetsMap.keySet().size());
+
+		// check whether the expected number of targets is present
 		assertEquals("Number of targets should match the expected number.", actualTargetsMap.keySet().size(), size);
 	}
 
@@ -86,13 +99,11 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 					List<String> commentList = commentable.getComments();
 					String comments = collapse(commentList);
 					if (comments.length() > 0) {
-						System.out.println("found commentable " + next);
 						if (comments.contains("source:")) {
 							String[] parts = comments.split(":");
 							assertEquals("Expected three parts in comment separated by double colon (source:<id>:nameOfReference).", 3, parts.length);
 							String id = parts[1];
 							String referenceName = parts[2];
-							System.out.println("found source " + id + " -> " + referenceName);
 							EStructuralFeature feature = commentable.eClass().getEStructuralFeature(referenceName);
 							assertNotNull("Can't find feature \"" + referenceName + "\"", feature);
 							Object target = commentable.eGet(feature);
@@ -103,7 +114,6 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 							String[] parts = comments.split(":");
 							assertEquals("Expected two parts in comment separated by double colon (target:<id>).", 2, parts.length);
 							String id = parts[1];
-							System.out.println("found target " + id);
 							expectedTargetsMap.put(id, commentable);
 						}
 					}
@@ -130,7 +140,8 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 				URI uri = URI.createFileURI(file.getAbsolutePath());
 				Resource resource = set.createResource(uri);
 				try {
-					// TODO we might need to add the post processors here
+					// TODO we might need to add the post processors either here
+					// or as default load options to the resource set
 					resource.load(null);
 				} catch (IOException e) {
 					fail(e.getMessage());
@@ -143,7 +154,7 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected String getTestInputFolder() {
-		return "input" + File.separator + "resolving_new";
+		return INPUT_FOLDER;
 	}
 
 	@Override
