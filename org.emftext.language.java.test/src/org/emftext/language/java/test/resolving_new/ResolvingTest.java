@@ -68,6 +68,7 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 		// collect all java files and parse them into one
 		// resource set
 		ResourceSet set = new ResourceSetImpl();
+		set.getLoadOptions().putAll(getLoadOptions());
 		parseAll(testDirectory, set);
 		
 		// resolve all references
@@ -144,9 +145,7 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 				URI uri = URI.createFileURI(file.getAbsolutePath());
 				Resource resource = set.createResource(uri);
 				try {
-					// TODO we might need to add the post processors either here
-					// or as default load options to the resource set
-					resource.load(null);
+					resource.load(getLoadOptions());
 				} catch (IOException e) {
 					fail(e.getMessage());
 				}
