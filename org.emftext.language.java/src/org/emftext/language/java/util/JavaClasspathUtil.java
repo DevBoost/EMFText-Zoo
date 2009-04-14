@@ -4,6 +4,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Class;
+import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Interface;
 
 /**
  * Utility methods to for common class path queries.
@@ -23,6 +26,12 @@ public class JavaClasspathUtil {
 				"java.lang." + name);
 		classClass = (Class) EcoreUtil.resolve(classClass, objectContext);
 		return classClass;
+	}
+	
+	public static Interface getInterface(String name, EObject objectContext) {
+		ConcreteClassifier classClass = JavaClasspath.INSTANCE.getClassifier(
+				"java.lang." + name);
+		return (Interface) EcoreUtil.resolve(classClass, objectContext);
 	}
 	
 	/**

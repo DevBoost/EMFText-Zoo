@@ -5,6 +5,7 @@ import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
@@ -76,7 +77,7 @@ public class TypeUtil {
 		}
 		
 		//everything can be implicitly casted to CharSequence, so I match when the other type is a CharSequence
-		Class charSequenceClass = JavaClasspathUtil.getClass("CharSequence", _this);
+		Interface charSequenceClass = JavaClasspathUtil.getInterface("CharSequence", _this);
 		
 		if (otherType instanceof ConcreteClassifier) {
 			if(otherType.equals(charSequenceClass) ||

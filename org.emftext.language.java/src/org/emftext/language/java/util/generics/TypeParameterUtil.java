@@ -69,7 +69,7 @@ public class TypeParameterUtil {
 						if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
 							TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
 							if (arg instanceof QualifiedTypeArgument) {
-								_this = (TypeParameter) TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
+								return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
 							}
 						}
 					}
@@ -92,7 +92,7 @@ public class TypeParameterUtil {
 				if (typeParameterIndex != -1 && typeParameterIndex < idReference.getTypeArguments().size()) {
 					TypeArgument typeArgument = idReference.getTypeArguments().get(typeParameterIndex);
 					if(typeArgument instanceof QualifiedTypeArgument) {
-						_this = (TypeParameter) TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), null);
+						return TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), null);
 					}
 				}
 			}

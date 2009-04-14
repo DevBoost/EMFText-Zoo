@@ -80,11 +80,8 @@ public class ConcreteClassifierUtil {
 				JavaClasspath.INSTANCE.getInternalClassifiers(_this));
 		
 		for(ConcreteClassifier superClassifier : getAllSuperClassifiers(_this)) {
-			for(Member m : superClassifier.getMembers()) {
-				if(m instanceof ConcreteClassifier) {
-					internalClassifierList.add((ConcreteClassifier) m);
-				}
-			}
+			internalClassifierList.addAll(
+					JavaClasspath.INSTANCE.getInternalClassifiers(superClassifier));
 		}
 		
 		return internalClassifierList;
