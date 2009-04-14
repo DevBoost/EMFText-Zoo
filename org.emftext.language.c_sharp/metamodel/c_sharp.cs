@@ -107,7 +107,9 @@ classes.Method
 	// attribute *  formal-parameter-list ?	
 	
 classes.Block
-    ::= "{" statement *  "}" ;	
+    ::= "{" statement *  "}"
+    |	";" 
+    ;	
 
 //Statements    
 statements.SimpleEmbeddedStatement

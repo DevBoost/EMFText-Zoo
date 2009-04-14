@@ -79,18 +79,26 @@ public class CheckCSSyntaxWrapper {
 			BufferedReader brEs=new BufferedReader(es);
 			
 			String input;
+			
+			//readLine hängt sich auf vom InputStream
+			//Problem noch nicht gelöst
+			/*
 			while((input=brIs.readLine())!=null){
 				System.out.println(input);
 			}
+			*/
 			
 			while((input=brEs.readLine())!=null){
 				System.out.println(input);
 			}
+			
 			if(checker.waitFor()==0){
 				return true;
-			}		
+			}
 			checker.destroy();
+			
 		} catch (Exception e) {
+			System.out.println("Exception");
 			e.printStackTrace();
 		}			
 		return false;
