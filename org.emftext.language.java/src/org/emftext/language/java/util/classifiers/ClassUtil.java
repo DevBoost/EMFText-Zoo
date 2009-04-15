@@ -14,11 +14,11 @@ import org.emftext.language.java.util.types.TypeReferenceUtil;
 public class ClassUtil {
 	
 	/**
-	 * Recursively collects  all super types (extended classes and implemented interfaces)
+	 * Recursively collects all super types (extended classes and implemented interfaces)
 	 * of the given class.
 	 * 
-	 * @param _this the class
-	 * @param resultClassifierList the list for the result
+	 * @param _this
+	 * @param classifierList the list for the result
 	 */
 	public static void collectAllSuperClassifiers(Class _this, 
 			EList<ConcreteClassifier> classifierList) {
@@ -49,6 +49,22 @@ public class ClassUtil {
 		}
 	}
 	
+	/**
+	 * @param _this
+	 * @return the direct super class
+	 */
+	public static Class getSuperClass(Class _this) {
+		TypeReference superClassReference = _this.getExtends();
+		if (superClassReference == null) {
+			superClassReference = _this.getDefaultExtends();
+		}
+		return (Class) TypeReferenceUtil.getTarget(superClassReference);
+	}
+	
+	/**
+	 * @param _this
+	 * @return primitive type, if the class can be wrapped
+	 */
 	public static PrimitiveType unWrapPrimitiveType(Class _this) {	
 		if (JavaClasspathUtil.getClass("Boolean", _this).equals(_this)) {
 			return TypesFactory.eINSTANCE.createBoolean();
@@ -80,12 +96,6 @@ public class ClassUtil {
 		return null;
 	}
 
-	public static Class getSuperClass(Class _this) {
-		TypeReference superClassReference = _this.getExtends();
-		if (superClassReference == null) {
-			superClassReference = _this.getDefaultExtends();
-		}
-		return (Class) TypeReferenceUtil.getTarget(superClassReference);
-	}
+
 
 }

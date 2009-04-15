@@ -38,7 +38,7 @@ public class ExpressionUtil {
 	 * subtypes of Expression.
 	 * 
 	 * @param _this
-	 * @return
+	 * @return type of expression
 	 */
 	public static Type getType(Expression _this) {
 		Class stringClass = JavaClasspathUtil.getStringClass(_this);

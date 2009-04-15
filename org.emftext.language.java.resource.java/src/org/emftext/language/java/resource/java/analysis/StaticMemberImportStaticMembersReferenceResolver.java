@@ -1,11 +1,11 @@
 package org.emftext.language.java.resource.java.analysis;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -19,7 +19,7 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 	
 	@Override	
 	protected void doResolve(java.lang.String identifier, StaticMemberImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Member> result) {
-		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(theImport);
+		Classifier classifier = ImportUtil.getClassifier(theImport);
 		classifier = (Classifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null && !classifier.eIsProxy()) {
 			for(Member member : ((MemberContainer)classifier).getMembers()) {

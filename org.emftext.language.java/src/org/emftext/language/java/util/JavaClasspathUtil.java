@@ -9,15 +9,14 @@ import org.emftext.language.java.classifiers.Interface;
 
 /**
  * Utility methods to for common class path queries.
- * 
  */
 public class JavaClasspathUtil {
 	
 	/**
 	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
 	 * representing the class with the given name located in <code>java.lang</code>.
-	 * @param resourceSet the resource set in which the Class is or will be loaded
 	 * 
+     * @param objectContext a context object whose resource set is used to obtain the class model element
 	 * @return the Class
 	 */
 	public static Class getClass(String name, EObject objectContext) {
@@ -37,7 +36,7 @@ public class JavaClasspathUtil {
 	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
 	 * representing <code>java.lang.Class</code>.
 	 * 
-	 * @param resourceSet the resource set in which the Class is or will be loaded
+     * @param objectContext a context object whose resource set is used to obtain the class model element
 	 * @return the Class
 	 */
 	public static Class getClassClass(EObject objectContext)  {
@@ -48,7 +47,7 @@ public class JavaClasspathUtil {
 	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
 	 * representing <code>java.lang.Object</code>.
 	 * 
-	 * @param resourceSet the resource set in which the Class is or will be loaded
+     * @param objectContext a context object whose resource set is used to obtain the class model element
 	 * @return the Class
 	 */
 	public static Class getObjectClass(EObject objectContext)  {
@@ -59,7 +58,7 @@ public class JavaClasspathUtil {
 	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
 	 * representing <code>java.lang.String</code>.
 	 * 
-	 * @param resourceSet the resource set in which the Class is or will be loaded
+     * @param objectContext a context object whose resource set is used to obtain the class model element
 	 * @return the Class
 	 */
 	public static Class getStringClass(EObject objectContext) {

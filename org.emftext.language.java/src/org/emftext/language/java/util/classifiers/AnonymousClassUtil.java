@@ -12,6 +12,10 @@ import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class AnonymousClassUtil {
 	
+	/**
+	 * @param _this
+	 * @return a view on all members including super classifiers' members
+	 */
 	public static EList<Member> getAllMemebers(AnonymousClass _this) {
 		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
 		if (ncCall == null) {
@@ -23,6 +27,10 @@ public class AnonymousClassUtil {
 		}
 	}
 	
+	/**
+	 * @param _this
+	 * @return a view on all super classifiers
+	 */
 	public static EList<ConcreteClassifier> getAllSuperClassifiers(AnonymousClass _this) {
 		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
 		
@@ -38,6 +46,10 @@ public class AnonymousClassUtil {
 		return superClassifierList;
 	}
 	
+	/**
+	 * @param _this
+	 * @return the direct super classifier
+	 */
 	public static ConcreteClassifier getSuperClassifier(AnonymousClass _this) {
 		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
 		ConcreteClassifier superClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());

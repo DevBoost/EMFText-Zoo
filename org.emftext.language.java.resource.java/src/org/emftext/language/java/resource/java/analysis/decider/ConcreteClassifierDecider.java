@@ -24,7 +24,7 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.containers.CompilationUnitUtil;
-import org.emftext.language.java.util.imports.PackageImportUtil;
+import org.emftext.language.java.util.imports.ImportUtil;
 
 public class ConcreteClassifierDecider extends AbstractDecider {
 
@@ -65,7 +65,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			if(ncr.getNamespaces().size() > 0 && idx == 0) {
 				Classifier target = null;
 				//if the reference is qualified, the target can be directly found
-				String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(ncr, "");
+				String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(ncr);
 				target = (Classifier) EcoreUtil.resolve(
 						JavaClasspath.INSTANCE.getClassifier(containerName + identifier), container.eResource());
 				resultList.add(target);
@@ -78,7 +78,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		if (container instanceof AnnotationInstance) {
 			AnnotationInstance annotationInstance = (AnnotationInstance) container;
 			if (annotationInstance.getNamespaces().size() > 0) {
-				String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(annotationInstance, "");
+				String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(annotationInstance);
 				ConcreteClassifier target = (ConcreteClassifier) EcoreUtil.resolve(
 						JavaClasspath.INSTANCE.getClassifier(containerName + identifier), container.eResource());
 			
@@ -113,8 +113,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 			for(Import aImport : ((CompilationUnit)container).getImports()) {
 				if(aImport instanceof PackageImport) {
-					resultList.addAll(PackageImportUtil.getImportedClassifiers(
-							(PackageImport) aImport));
+					resultList.addAll(ImportUtil.getClassifierList(
+							aImport));
 				}
 			}
 		}

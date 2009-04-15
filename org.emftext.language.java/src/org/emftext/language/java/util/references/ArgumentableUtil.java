@@ -9,6 +9,10 @@ import org.emftext.language.java.util.expressions.ExpressionUtil;
 
 public class ArgumentableUtil {
 	
+	/**
+	 * @param _this
+	 * @return list of types of my arguments
+	 */
 	public static EList<Type> getArgumentTypes(Argumentable _this) {
 		EList<Type> resultList = new BasicEList<Type>();
 

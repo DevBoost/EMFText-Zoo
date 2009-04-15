@@ -22,14 +22,25 @@ import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 
+/**
+ * This class is responsible for managing an retrieving Java resources to
+ * establish inter-model references between different Java classes represented
+ * as EMF-models.
+ *
+ */
 public class JavaClasspath {
 
+	/**
+	 * Singleton instance.
+	 */
 	public static final JavaClasspath INSTANCE = new JavaClasspath();
 	
+	/**
+	 * Convenient access to <code>URIConverter.URI_MAP</code>.
+	 */
 	public final Map<URI, URI> URI_MAP = URIConverter.URI_MAP;
 
 	protected Map<String, List<String>> packageClassifierMap =
@@ -39,6 +50,15 @@ public class JavaClasspath {
 		registerStdLib(URI_MAP);
 	}
 
+	/**
+	 * Registers all classes of the Java standard library 
+	 * <code>classes.jar</code> located at 
+	 * <code>System.getProperty("sun.boot.class.path")</code>.
+	 */
+	public void registerStdLib() {
+		registerStdLib(URI_MAP);
+	}
+	
 	public void registerStdLib(Map<URI, URI> localURI_MAP) {
 		try {
 			String classpath = System.getProperty("sun.boot.class.path");
@@ -56,6 +76,13 @@ public class JavaClasspath {
 		}
 	}
 	
+	/**
+	 * Registers all class files contained in the jar file located
+	 * at the given URI.
+	 * 
+	 * @param jarURI
+	 * @throws IOException
+	 */
 	public void registerClassifierJar(URI jarURI) throws IOException {
 		registerClassifierJar(jarURI, URI_MAP);
 	}
@@ -85,17 +112,26 @@ public class JavaClasspath {
 				registerClassifier(packageName, className, URI.createURI(uri), localURI_MAP);
 			}
 		}
-		
 	}
 
-	public void registerClassifierSource(CompilationUnit cu, URI uri) {
-		registerClassifierSource(cu, uri, URI_MAP);
+	/**
+	 * Registers all classes defined in the given compilation unit.
+	 * 
+	 * @param compilationUnit
+	 * @throws IOException
+	 */
+	public void registerClassifierSource(CompilationUnit compilationUnit, URI uri) {
+		registerClassifierSource(compilationUnit, uri, URI_MAP);
 	}
 	
-	public void registerClassifierSource(CompilationUnit cu, URI uri, Map<URI, URI> localURI_MAP) {
-		String packageName = JavaUniquePathConstructor.packageName(cu);
+	public void registerClassifierSource(
+			CompilationUnit compilationUnit, 
+			URI uri, 
+			Map<URI, URI> localURI_MAP) {
 		
-		for(ConcreteClassifier classifier : cu.getClassifiers()) {
+		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
+		
+		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
 			registerClassifier(
 					packageName, classifier.getName(), uri, localURI_MAP);
 			registerInnerClassifiers(
@@ -103,16 +139,14 @@ public class JavaClasspath {
 		}
 	}
 	
-	protected void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri, Map<URI, URI> localURI_MAP) {
-		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
-			if (innerCand instanceof ConcreteClassifier) {
-				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
-				registerClassifier(packageName, newClassName, uri, localURI_MAP);
-				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri, localURI_MAP);
-			}
-		}
-	}
-	
+	/**
+	 * Registers the classifier with the given name and package that is physically
+	 * located at the given URI.
+	 * 
+	 * @param packageName
+	 * @param classifierName
+	 * @param uri
+	 */
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
 		registerClassifier(packageName, classifierName, uri, URI_MAP);
 	}
@@ -177,173 +211,23 @@ public class JavaClasspath {
 		}
 	}
 	
-	private EList<ConcreteClassifier> javaLangPackage = null;
-	
-	
-	public EList<ConcreteClassifier> getInternalClassifiers(ConcreteClassifier container) {
-		if(container == null) {
-			return new BasicEList<ConcreteClassifier>();
-		}
-		
-		String uri = null;
-		if(container.eIsProxy()) {
-			uri = ((InternalEObject)container).eProxyURI().trimFragment().toString();
-		}
-		else {
-			Resource resource = container.eResource();
-			if (resource != null){
-				uri = container.eResource().getURI().toString();
+	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri, Map<URI, URI> localURI_MAP) {
+		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
+			if (innerCand instanceof ConcreteClassifier) {
+				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
+				registerClassifier(packageName, newClassName, uri, localURI_MAP);
+				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri, localURI_MAP);
 			}
 		}
-
-		if (uri != null){
-			if (uri.startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
-				String className = uri.substring(
-						JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
-				className = className.substring(0,className.length()-5) + "$";
-				return getClassifiers(className, "*");	
-			}
-		}
-		return new BasicEList<ConcreteClassifier>();
 	}
-	
+
 	/**
-	 * Constructs a list of proxies that point at the classifiers of the given package
+	 * Removes the classifier identified by its package and name from the
+	 * class path.
 	 * 
 	 * @param packageName
-	 * @return
+	 * @param classifierName
 	 */
-	public EList<ConcreteClassifier> getClassifiers(String packageName, String classifierQuery) {
-		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR) &&
-				!packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
-			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
-		}
-		
-		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
-
-		synchronized (this) {
-			if(!packageClassifierMap.containsKey(packageName)) {
-				return resultList;
-			}
-			
-			for (String classifierName : packageClassifierMap.get(packageName)) {
-				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
-					InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
-					String fullQualifiedName = null;
-					if ("".equals(packageName) || ".".equals(packageName)) {
-						fullQualifiedName = classifierName;
-					}
-					else {
-						fullQualifiedName = packageName + classifierName;
-					}
-					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullQualifiedName));
-					//set also the name to reason about it without resolving the proxy
-					((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
-					resultList.add((ConcreteClassifier) classifierProxy);
-				}
-			}
-		}
-		
-		return resultList;
-	}
-	
-	/**
-	 * 
-	 * @param theImport that points at the package
-	 * @param classifierName the name of the classifier in the given package
-	 * @return
-	 */
-	public ConcreteClassifier getClassifier(Import theImport, String classifierName) {
-		String containerName = getContainerNameFromNamespace(theImport, "");
-		if (containerName == null) {
-			return null;
-		}
-		
-		String fullQualifiedName = containerName + classifierName;
-		return getClassifier(fullQualifiedName);
-	}
-
-	/**
-	 * 
-	 * @param theImport that points directly at the classifier
-	 * @return
-	 */
-	public ConcreteClassifier getClassifier(Import theImport) {
-		String fullQualifiedName = getContainerNameFromNamespace(theImport, "");
-		if (fullQualifiedName == null || fullQualifiedName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
-			return null;
-		}
-		//cut the trailing separator
-		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() -1);
-		
-		return getClassifier(fullQualifiedName);
-	}
-	
-	public EList<ConcreteClassifier> getClassifiers(Import theImport) {
-		String containerName = getContainerNameFromNamespace(theImport, "");
-		if (containerName == null) {
-			return new BasicEList<ConcreteClassifier>();
-		}
-		
-		EList<ConcreteClassifier> result = getClassifiers(containerName, "*");
-		return result;
-	}
-	
-	public String getContainerNameFromNamespace(NamespaceAwareElement theImport, String prefix) {
-		String containerName = prefix;
-		for(Iterator<String> it = theImport.getNamespaces().iterator(); it.hasNext(); ) {
-			String namespaceFragment = it.next();
-			//does it point at a classifier or a package as container?
-			String assumedPackageName    = containerName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
-			String assumedClassifierName = containerName + namespaceFragment + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
-			
-			if (it.hasNext()) {
-				if (packageClassifierMap.containsKey(assumedClassifierName)) {
-					containerName = assumedClassifierName;
-				}
-				else {
-					//assume package
-					containerName = assumedPackageName;
-				}
-			}
-			else {
-				if (packageClassifierMap.containsKey(assumedPackageName)) {
-					//a package is always available as key
-					containerName = assumedPackageName;
-				}
-				else {
-					//assume classifier that is not key, but value in the map
-					containerName = assumedClassifierName;
-				}
-			}
-		}
-		
-		return containerName;
-	}
-	
-	public ConcreteClassifier getClassifier(String fullQualifiedName) {
-		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
-		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
-		classifierProxy.eSetProxyURI(proxyURI);
-		//set also the name to reason about it without resolving the proxy
-		((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
-		return (ConcreteClassifier) classifierProxy;
-	}
-	
-	public EList<ConcreteClassifier> getDefaultImports() {
-		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
-		
-		//java.lang package	
-		if (javaLangPackage == null) {
-			javaLangPackage = new BasicEList<ConcreteClassifier>();
-			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
-		}		
-		
-		resultList.addAll(javaLangPackage);
-
-		return resultList;
-	}
-
 	public void unRegisterClassifier(String packageName, String classifierName) {
 		if (classifierName == null || classifierName.equals("")) {
 			return;
@@ -388,5 +272,159 @@ public class JavaClasspath {
 			URI_MAP.remove(logicalUri);
 		}
 	}
+		
+	/**
+	 * Returns all inner classifiers present in the class path defined in the 
+	 * given containing classifier.
+	 * 
+	 * @param container
+	 * @return inner classifier list
+	 */
+	public EList<ConcreteClassifier> getInnnerClassifiers(ConcreteClassifier container) {
+		if(container == null) {
+			return new BasicEList<ConcreteClassifier>();
+		}
+		
+		String uri = null;
+		if(container.eIsProxy()) {
+			uri = ((InternalEObject)container).eProxyURI().trimFragment().toString();
+		}
+		else {
+			Resource resource = container.eResource();
+			if (resource != null){
+				uri = container.eResource().getURI().toString();
+			}
+		}
 
+		if (uri != null){
+			if (uri.startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+				String className = uri.substring(
+						JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
+				className = className.substring(0,className.length()-5) + "$";
+				return getClassifiers(className, "*");	
+			}
+		}
+		return new BasicEList<ConcreteClassifier>();
+	}
+	
+	/**
+	 * Constructs a list of proxies that point at all classifiers 
+	 * of the given package present in the class path.
+	 * <p>
+	 * Each proxy will have the <code>name</code> attribute set correctly such
+	 * that name comparison can be done without resolving the proxy.
+	 * 
+	 * @param packageName
+	 * @return list of proxies
+	 */
+	public EList<ConcreteClassifier> getClassifiers(String packageName, String classifierQuery) {
+		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR) &&
+				!packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
+			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+		}
+		
+		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
+
+		synchronized (this) {
+			if(!packageClassifierMap.containsKey(packageName)) {
+				return resultList;
+			}
+			
+			for (String classifierName : packageClassifierMap.get(packageName)) {
+				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
+					InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
+					String fullQualifiedName = null;
+					if ("".equals(packageName) || ".".equals(packageName)) {
+						fullQualifiedName = classifierName;
+					}
+					else {
+						fullQualifiedName = packageName + classifierName;
+					}
+					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullQualifiedName));
+					//set also the name to reason about it without resolving the proxy
+					((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
+					resultList.add((ConcreteClassifier) classifierProxy);
+				}
+			}
+		}
+		return resultList;
+	}
+	
+	/**
+	 * Constructs a proxy pointing at the classifier identified by its 
+	 * fully qualified name.
+	 * 
+	 * @param fullQualifiedName
+	 * @return proxy element
+	 */
+	public ConcreteClassifier getClassifier(String fullQualifiedName) {
+		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
+		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
+		classifierProxy.eSetProxyURI(proxyURI);
+		//set also the name to reason about it without resolving the proxy
+		((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
+		return (ConcreteClassifier) classifierProxy;
+	}
+	
+	/**
+	 * Converts the namespaces array of the given namespace aware element into
+	 * a String representation using package (.) and class ($) delimiters. The method
+	 * uses the classpath to determine for each element of the namespace if it 
+	 * identifies a package or a class.
+	 * 
+	 * @param naElement
+	 * @return single string representation of namespace
+	 */
+	public String getContainerNameFromNamespace(NamespaceAwareElement naElement) {
+		String containerName = "";
+		for(Iterator<String> it = naElement.getNamespaces().iterator(); it.hasNext(); ) {
+			String namespaceFragment = it.next();
+			//does it point at a classifier or a package as container?
+			String assumedPackageName    = containerName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+			String assumedClassifierName = containerName + namespaceFragment + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			
+			if (it.hasNext()) {
+				if (packageClassifierMap.containsKey(assumedClassifierName)) {
+					containerName = assumedClassifierName;
+				}
+				else {
+					//assume package
+					containerName = assumedPackageName;
+				}
+			}
+			else {
+				if (packageClassifierMap.containsKey(assumedPackageName)) {
+					//a package is always available as key
+					containerName = assumedPackageName;
+				}
+				else {
+					//assume classifier that is not key, but value in the map
+					containerName = assumedClassifierName;
+				}
+			}
+		}
+		
+		return containerName;
+	}
+	
+	private EList<ConcreteClassifier> javaLangPackage = null;
+	
+	/**
+	 * Returns a list of proxies for all classes <code>java.lang.*</code>.
+	 * 
+	 * @return list of proxies 
+	 */
+	public EList<ConcreteClassifier> getDefaultImports() {
+		EList<ConcreteClassifier> resultList = new BasicEList<ConcreteClassifier>();
+		
+		//java.lang package	
+		if (javaLangPackage == null) {
+			javaLangPackage = new BasicEList<ConcreteClassifier>();
+			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
+		}		
+		
+		resultList.addAll(javaLangPackage);
+
+		return resultList;
+	}
 }

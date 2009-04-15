@@ -16,35 +16,35 @@ public class TypeReferenceUtil {
 	 * considering all concrete subclasses of <code>TypeReference</code> used
 	 * by the Java metamodel. 
 	 * 
-	 * @param typeReference the type reference 
+	 * @param _this 
 	 * @return the type
 	 */
-	public static Type getTarget(TypeReference typeReference) {
-		return getTarget(typeReference, null);
+	public static Type getTarget(TypeReference _this) {
+		return getTarget(_this, null);
 	}
 	
 	/**
 	 * Returns the type referenced by the given <code>TypeReference</code>
 	 * considering all concrete subclasses of <code>TypeReference</code> used
 	 * by the Java metamodel. If type parameters are bound in the given reference,
-	 * the bound type will be returned instead tf the parameter.
+	 * the bound type will be returned instead of the parameter.
 	 * 
-	 * @param typeReference the type reference 
+	 * @param _this
 	 * @return the type
 	 */
-	public static Type getTarget(TypeReference typeReference, Reference reference) {
+	public static Type getTarget(TypeReference _this, Reference reference) {
 		
 		Type type = null;
-		if (typeReference instanceof ClassifierReference || 
-				typeReference instanceof NamespaceClassifierReference) {
-			ClassifierReference classifierRef = ClassifierReferenceUtil.getPureClassifierReference(typeReference);
+		if (_this instanceof ClassifierReference || 
+				_this instanceof NamespaceClassifierReference) {
+			ClassifierReference classifierRef = ClassifierReferenceUtil.getPureClassifierReference(_this);
 			if (classifierRef != null) {
 				type = classifierRef.getTarget();
 			}
 		}
 
-		else if(typeReference instanceof PrimitiveType) {
-			return (PrimitiveType) typeReference;
+		else if(_this instanceof PrimitiveType) {
+			return (PrimitiveType) _this;
 		}
 		
 		//resolve parameter to real type

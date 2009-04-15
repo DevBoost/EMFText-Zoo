@@ -13,8 +13,7 @@ public class InterfaceUtil {
 	 * by the given list of references to interfaces.
 	 * 
 	 * @param interfaceReferences a list of references to interfaces
-	 * @param resultInterfaceList the list with the reuslt
-	 * @
+	 * @param resultInterfaceList the list with the result
 	 */
 	public static void collectAllSuperInterfaces(EList<TypeReference> interfaceReferences,
 		EList<ConcreteClassifier> resultInterfaceList) {

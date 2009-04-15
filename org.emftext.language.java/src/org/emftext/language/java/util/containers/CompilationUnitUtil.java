@@ -9,6 +9,10 @@ import org.emftext.language.java.containers.CompilationUnit;
 
 public class CompilationUnitUtil {
 	
+	/**
+	 * @param _this
+	 * @return all default imports (my package + <code>java.lang</code>)
+	 */
 	public static EList<ConcreteClassifier> getDefaultImports(CompilationUnit _this) {
 		EList<ConcreteClassifier> defaultImportList = new BasicEList<ConcreteClassifier>();
 		

@@ -14,6 +14,10 @@ import org.emftext.language.java.util.JavaClasspathUtil;
 
 public class LiteralUtil {
 	
+	/**
+	 * @param _this
+	 * @return type of the literal
+	 */
 	public static Type getType(Literal _this) {
 		Class javaClass = null;
 		

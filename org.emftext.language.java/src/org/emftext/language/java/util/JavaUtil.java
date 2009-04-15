@@ -6,8 +6,17 @@ import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 
+/**
+ * Convenient methods to navigate a Java model. 
+ */
 public class JavaUtil {
 
+	/**
+	 * Finds the containing classifier for the given element.
+	 * 
+	 * @param value
+	 * @return containing classifier
+	 */
 	public static ConcreteClassifier findContainingClassifier(EObject value) {
 		while (!(value instanceof ConcreteClassifier) && value != null) {
 			value = value.eContainer();
@@ -15,6 +24,12 @@ public class JavaUtil {
 		return (ConcreteClassifier) value;
 	}
 	
+	/**
+	 * Finds the containing anonymous class for the given element.
+	 * 
+	 * @param value
+	 * @return containing anonymous class 
+	 */
 	public static AnonymousClass findContainingAnonymousClass(EObject value) {
 		while (!(value instanceof AnonymousClass) 
 				&& !(value instanceof ConcreteClassifier) //do not jump over other classifiers 
@@ -27,6 +42,12 @@ public class JavaUtil {
 		return (AnonymousClass) value;
 	}
 	
+	/**
+	 * Finds the containing compilation unit for the given element.
+	 * 
+	 * @param value
+	 * @return containing compilation unit
+	 */
 	public static CompilationUnit findContainingCompilationUnit(EObject value) {
 		while (!(value instanceof CompilationUnit) && value != null) {
 			value = value.eContainer();
@@ -34,6 +55,12 @@ public class JavaUtil {
 		return (CompilationUnit) value;
 	}
 
+	/**
+	 * Finds the containing annotation instance for the given element.
+	 * 
+	 * @param value
+	 * @return containing annotation instance
+	 */
 	public static AnnotationInstance findContainingAnnotationInstance(EObject value) {
 		while (!(value instanceof AnnotationInstance) && value != null) {
 			value = value.eContainer();

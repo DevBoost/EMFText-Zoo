@@ -23,14 +23,17 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.members.MemberContainerUtil;
 
-
 /**
  * Utility class that enhances and simplifies a Java model based on
  * Java language specifics.
- *
  */
 public class JavaModelCompletion {
 	
+	/**
+	 * Main method to perform the completion for the given resource.
+	 * 
+	 * @param resource
+	 */
 	public static void complete(Resource resource) {
 		for(Iterator<EObject> contentIterator = resource.getAllContents(); contentIterator.hasNext(); ) {
 			EObject element = contentIterator.next();
@@ -48,7 +51,7 @@ public class JavaModelCompletion {
 	}
 	
 	/**
-	 * Adds <code>java.lang.Object</code> as super class if non is specified.
+	 * Adds <code>java.lang.Object</code> as default super class if non is specified.
 	 * 
 	 * @param javaClass
 	 */
@@ -77,7 +80,7 @@ public class JavaModelCompletion {
 	}
 
 	/**
-	 * Adds additional methods <code>value()</code> and <code>calueOf()</code>
+	 * Adds the additional methods <code>value()</code> and <code>calueOf()</code>
 	 * to the given enumeration.
 	 * 
 	 * @param enumeration the enumeration to complete
@@ -121,6 +124,12 @@ public class JavaModelCompletion {
 		}
 	}
 	
+	/**
+	 * Simplifies all expression in the given resource by removing empty containers
+	 * in all expression trees.
+	 * 
+	 * @param resource
+	 */
 	public static void simplifyExpressions(Resource resource) {
 		simplifyDown(resource.getContents());
 	}

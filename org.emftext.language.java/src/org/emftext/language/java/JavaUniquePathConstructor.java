@@ -4,18 +4,56 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 
+/**
+ * This provides functionality to construct unique identifier 
+ * (i.e., logical URI strings) for Java classes represented as EMF-models.
+ */
 public class JavaUniquePathConstructor {
 	
+	/**
+	 * Pathmap (URI scheme + first segment) for Java classes.
+	 */
+	public static final String JAVA_CLASSIFIER_PATHMAP = "pathmap:/javaclass/";
+	
+	/**
+	 * Pathmap (URI scheme + first segment) for Java classes.
+	 */
+	public static final String JAVA_PACKAGE_PATHMAP    = "pathmap:/javapackage/";
+	
+	/**
+	 * Start of a URI fragment part pointing at a classifier contained in a 
+	 * compilation unit.
+	 */
 	public static final String CLASSIFIERS_ROOT_PATH_PREFIX = "//@classifiers[name='";
+	
+	/**
+	 * Start of a URI fragment part pointing at a classifier contained as member in 
+	 * another classifier.
+	 */
 	public static final String CLASSIFIERS_SUB_PATH_PREFIX  = "/@members[name='";
-	public static final String CLASSIFIERS_PATH_SUFIX  = "']";
 	
-	public static final String PACKAGE_SEPARATOR = "."; 
-	public static final String CLASSIFIER_SEPARATOR   = "$";
-		
-	public static final String JAVA_CLASSIFIER_PATHMAP   = "pathmap://javaclass/";
-	public static final String JAVA_PACKAGE_PATHMAP = "pathmap://javapackage/";
+	/**
+	 * End of a URI fragment part.
+	 */
+	public static final String CLASSIFIERS_PATH_SUFIX       = "']";
 	
+	/**
+	 * Java's separator for package names (.).
+	 */
+	public static final String PACKAGE_SEPARATOR    = "."; 
+	
+	/**
+	 * Java's separator for classifier names ($).
+	 */
+	public static final String CLASSIFIER_SEPARATOR = "$";
+
+	/**
+	 * Constructs an URI from a fully qualified classifier name
+	 * pointing at the resource containing the classifier.
+	 * 
+	 * @param fullQualifiedName
+	 * @return the logical URI for the classifier
+	 */
 	public static URI getJavaFileResourceURI(String fullQualifiedName) {
 		String logicalUriString = JAVA_CLASSIFIER_PATHMAP;
 		logicalUriString = logicalUriString + fullQualifiedName + ".java";
@@ -23,6 +61,14 @@ public class JavaUniquePathConstructor {
 		return URI.createURI(logicalUriString);
 	}
 	
+	/**
+	 * Constructs an URI from a fully qualified classifier name
+	 * pointing at the file containing the classifier and the classifier
+	 * itself inside the EMF-model constructed from that resource.
+	 * 
+	 * @param fullQualifiedName
+	 * @return the logical URI for the classifier
+	 */
 	public static URI getClassifierURI(String fullQualifiedName) {
 		URI logicalUri = getJavaFileResourceURI(fullQualifiedName);
 		
@@ -49,6 +95,13 @@ public class JavaUniquePathConstructor {
 		return logicalUri;
 	}
 	
+	/**
+	 * Returns a simple name (i.e., last segment) for a given fully
+	 * qualified name
+	 * 
+	 * @param fullQualifiedName
+	 * @return simple name string
+	 */
 	public static String getSimpleClassName(String fullQualifiedName) {
 		int idx1 = fullQualifiedName.lastIndexOf(PACKAGE_SEPARATOR);
 		int idx2 = fullQualifiedName.lastIndexOf(CLASSIFIER_SEPARATOR);
@@ -62,18 +115,17 @@ public class JavaUniquePathConstructor {
 			return fullQualifiedName.substring(idx2 + 1);
 		}
 	}
-	
-	public static boolean pointsAtClassifie(URI proxyURI, String classifierName) {
-		if(!proxyURI.fragment().startsWith(CLASSIFIERS_ROOT_PATH_PREFIX)) {
-			return false;
-		}
-		String nameInProxy = proxyURI.fragment().substring(CLASSIFIERS_ROOT_PATH_PREFIX.length());
-		nameInProxy = nameInProxy.substring(0, nameInProxy.length() - CLASSIFIERS_PATH_SUFIX.length());
-		return nameInProxy.equals(classifierName);
-	}
 
-	public static String packageName(NamespaceAwareElement nsElement) {
-		EList<String> packageNameSegements = nsElement.getNamespaces();
+	/**
+	 * Constructs a single string representation of the given element's
+	 * namespace, assuming that the namespace points at a package 
+	 * (and not a classifier).
+	 * 
+	 * @param nsaElement
+	 * @return
+	 */
+	public static String packageName(NamespaceAwareElement nsaElement) {
+		EList<String> packageNameSegements = nsaElement.getNamespaces();
 		String packageName = packageName(packageNameSegements);
 		
 		if (packageName == null) {

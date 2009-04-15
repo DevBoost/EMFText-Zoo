@@ -7,6 +7,11 @@ import org.emftext.language.java.members.Method;
 
 public class MemberContainerUtil {
 	
+	/**
+	 * @param _this
+	 * @param name
+	 * @return field with the given name defined in this member container
+	 */
 	public static Field getField(MemberContainer _this, String name) {
 		for(Member member : _this.getMembers()) {
 			if (member instanceof Field && name.equals(member.getName())) {
@@ -16,6 +21,11 @@ public class MemberContainerUtil {
 		return null;
 	}
 
+	/**
+	 * @param _this
+	 * @param name
+	 * @return method with the given name defined in this member container
+	 */
 	//TODO @jjohannes add signature to parameters or remove method if not needed
 	public static Method getMethod(MemberContainer _this, String name) {
 		for(Member member : _this.getMembers()) {

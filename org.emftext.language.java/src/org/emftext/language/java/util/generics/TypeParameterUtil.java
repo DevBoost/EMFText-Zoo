@@ -24,10 +24,17 @@ import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class TypeParameterUtil {
 	
-	public static  void collectAllSuperClassifiers( TypeParameter typeParameter, 
+	/**
+	 * Recursively collects all super types 
+	 * of the given type parameter if any.
+	 * 
+	 * @param _this
+	 * @param resultClassifierList the list for the result
+	 */
+	public static  void collectAllSuperClassifiers(TypeParameter _this, 
 			EList<ConcreteClassifier> resultClassifierList) {
 		
-		for(TypeReference typeRef : typeParameter.getExtendTypes()) {
+		for(TypeReference typeRef : _this.getExtendTypes()) {
 			Type type = TypeReferenceUtil.getTarget(typeRef);
 			if (type instanceof Interface) {
 				Interface superInterface = (Interface) type;
@@ -52,7 +59,7 @@ public class TypeParameterUtil {
 	 * 
 	 * @param _this
 	 * @param reference
-	 * @return
+	 * @return bound type or parameter if not bound
 	 */
 	public static Type getBoundType(TypeParameter _this, Reference reference) {
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();

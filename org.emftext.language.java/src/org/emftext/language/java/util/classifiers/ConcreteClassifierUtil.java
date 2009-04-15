@@ -63,12 +63,12 @@ public class ConcreteClassifierUtil {
 		
 		//because inner classes are found in separate class files
 		memberList.addAll(
-				JavaClasspath.INSTANCE.getInternalClassifiers(_this));
+				JavaClasspath.INSTANCE.getInnnerClassifiers(_this));
 
 		for (ConcreteClassifier superClassifier : getAllSuperClassifiers(_this)) {
 			memberList.addAll(superClassifier.getMembers());
 			memberList.addAll(
-					JavaClasspath.INSTANCE.getInternalClassifiers(superClassifier));
+					JavaClasspath.INSTANCE.getInnnerClassifiers(superClassifier));
 		}
 		return memberList;
 	}
@@ -77,11 +77,11 @@ public class ConcreteClassifierUtil {
 		EList<ConcreteClassifier> internalClassifierList = new BasicEList<ConcreteClassifier>();
 		
 		internalClassifierList.addAll(
-				JavaClasspath.INSTANCE.getInternalClassifiers(_this));
+				JavaClasspath.INSTANCE.getInnnerClassifiers(_this));
 		
 		for(ConcreteClassifier superClassifier : getAllSuperClassifiers(_this)) {
 			internalClassifierList.addAll(
-					JavaClasspath.INSTANCE.getInternalClassifiers(superClassifier));
+					JavaClasspath.INSTANCE.getInnnerClassifiers(superClassifier));
 		}
 		
 		return internalClassifierList;

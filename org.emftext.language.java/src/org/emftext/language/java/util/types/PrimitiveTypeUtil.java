@@ -18,11 +18,19 @@ import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 
 public class PrimitiveTypeUtil {
 
+	/**
+	 * @param primitiveType
+	 * @return all members (including super type members)
+	 */
 	public static EList<Member> getAllMembers(PrimitiveType primitiveType) {
 		Class javaClass = wrapPrimitiveType(primitiveType);	
 		return ConcreteClassifierUtil.getAllMembers(javaClass);
 	}
 	
+	/**
+	 * @param _this
+	 * @return primitive type as a class representation
+	 */
 	public static Class wrapPrimitiveType(PrimitiveType _this) {
 		Class javaClass = null;
 		

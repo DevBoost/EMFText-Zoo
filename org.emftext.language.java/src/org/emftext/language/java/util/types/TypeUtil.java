@@ -24,6 +24,11 @@ import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 
 public class TypeUtil {
 	
+	/**
+	 * @param _this
+	 * @param otherType
+	 * @return if both type are equal
+	 */
 	public static boolean equalsType(EObject _this,
 			EObject otherType) {
 		
@@ -39,6 +44,11 @@ public class TypeUtil {
 		return false;
 	}
 
+	/**
+	 * @param _this
+	 * @param otherType
+	 * @return if the other type is equal to me or a super type of me
+	 */
 	public static boolean isSuperType(Type _this,
 			Type otherType) {
 		
