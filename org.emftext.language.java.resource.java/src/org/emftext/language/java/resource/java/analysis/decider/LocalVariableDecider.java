@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.statements.ForLoop;
 import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
@@ -31,6 +32,9 @@ public class LocalVariableDecider extends AbstractDecider {
 		if (VariablesPackage.Literals.LOCAL_VARIABLE__ADDITIONAL_LOCAL_VARIABLES.equals(containingReference)) {
 			return true;
 		}
+		if (StatementsPackage.Literals.FOR_LOOP__INIT.equals(containingReference)) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -47,6 +51,9 @@ public class LocalVariableDecider extends AbstractDecider {
 			if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(element.eContainmentFeature())) {
 				return true;
 			}
+		}
+		if (element instanceof ForLoop) {
+			return true;
 		}
 		return false;
 	}

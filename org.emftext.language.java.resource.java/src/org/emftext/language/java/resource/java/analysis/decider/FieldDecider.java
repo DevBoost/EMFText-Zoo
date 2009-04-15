@@ -83,6 +83,15 @@ public class FieldDecider extends AbstractDecider {
 		}
 		return false;
 	}
+	
+	public boolean walkInto(EObject element) {
+		if (element instanceof Field) {
+			if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(element.eContainmentFeature())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {

@@ -100,13 +100,10 @@ public class TypeUtil {
 		//there are some specifics for primitive types not reflected in the type hierarchy
 		if (otherType instanceof Class) {
 			PrimitiveType primitiveType = ClassUtil.unWrapPrimitiveType((Class) otherType);
-			if(primitiveType != null) {
+			if(primitiveType == null) {
 				return false;
 			}
 			otherType = primitiveType;
-		}
-		else {
-			return false;
 		}
 		
 		if (_this instanceof Class) {
@@ -115,9 +112,6 @@ public class TypeUtil {
 				return false;
 			}
 			_this = primitiveType;
-		}
-		else {
-			return false;
 		}
 
 		if (_this instanceof Boolean) {

@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
@@ -17,13 +18,15 @@ public class PackageDecider extends AbstractDecider {
 
 		if (referenceContainer instanceof IdentifierReference) {
 			IdentifierReference idReference = (IdentifierReference) referenceContainer;
+			if(idReference.getNext() == null /*a classifier must follow*/) {
+				return false;
+			}
 			if (!referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 				//maybe the root package
 				return true;			
 			}
 			if (referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT) && 
-					idReference.eContainer() instanceof IdentifierReference &&
-					idReference.getNext() != null /*a classifier must follow*/) {
+					idReference.eContainer() instanceof IdentifierReference) {
 				//maybe the next sub package
 				return true;
 			}
@@ -61,7 +64,11 @@ public class PackageDecider extends AbstractDecider {
 	}
 
 	public boolean isPossibleTarget(String id, EObject element) {
-		return element instanceof Package;
+		if (element instanceof Package) {
+			NamedElement ne = (NamedElement) element;
+			return id.equals(ne.getName());
+		}
+		return false;
 	}
 
 
