@@ -58,15 +58,15 @@ public class ScopedTreeWalker {
 		
 		for(EReference reference : containerClass.getEAllReferences()) {
 			if(reference.isContainment()) {
-				if(decider.walkInto(container, reference)) {	
-					EList<EObject> contentList = null;
-					if (decider.continueAfterReference()) {
-						contentList = getContentList(container, reference, null, -1);
-					}
-					else {
-						contentList = getContentList(container, reference, navOrigin, posInNavOrigin);
-					}
-					for(EObject element : contentList) {
+				EList<EObject> contentList = null;
+				if (decider.continueAfterReference()) {
+					contentList = getContentList(container, reference, null, -1);
+				}
+				else {
+					contentList = getContentList(container, reference, navOrigin, posInNavOrigin);
+				}
+				for(EObject element : contentList) {
+					if(decider.walkInto(element)) {
 						searchInDirectChildren(identifier, element, null, -1);
 						if(finished) {
 							return;

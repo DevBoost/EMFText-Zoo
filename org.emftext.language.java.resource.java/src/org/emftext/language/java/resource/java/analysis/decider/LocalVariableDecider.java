@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.LocalVariable;
@@ -33,12 +34,19 @@ public class LocalVariableDecider extends AbstractDecider {
 		return false;
 	}
 	
-	public boolean walkInto(EObject container, EReference containingReference) {
-		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
-			return true;
+	public boolean walkInto(EObject element) {
+		if (element instanceof LocalVariableStatement) {
+			if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(element.eContainmentFeature())) {
+				return true;
+			}
+			if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS.equals(element.eContainmentFeature())) {
+				return true;
+			}
 		}
-		if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS.equals(containingReference)) {
-			return true;
+		if (element instanceof LocalVariable) {
+			if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(element.eContainmentFeature())) {
+				return true;
+			}
 		}
 		return false;
 	}

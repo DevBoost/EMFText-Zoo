@@ -24,7 +24,7 @@ public interface IResolutionTargetDecider {
 	 */
 	boolean containsCandidates(EObject container, EReference containingReference);
 	
-	boolean walkInto(EObject container, EReference containingReference);
+	boolean walkInto(EObject element);
 	
 	boolean isPossibleTarget(String id, EObject element);
 	

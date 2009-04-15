@@ -40,16 +40,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}
 		return false;
 	}
-	
-	public boolean walkInto(EObject container, EReference containingReference) {
-		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
-			return true;
-		}
-		if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS.equals(containingReference)) {
-			return true;
-		}
-		return false;
-	}
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
