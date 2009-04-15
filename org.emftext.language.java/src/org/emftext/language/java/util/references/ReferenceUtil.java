@@ -1,7 +1,7 @@
 package org.emftext.language.java.util.references;
 
-import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.AnonymousClass;
+import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.literals.Literal;
@@ -22,11 +22,9 @@ import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
-import org.emftext.language.java.util.types.TypeUtil;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 
 public class ReferenceUtil {
