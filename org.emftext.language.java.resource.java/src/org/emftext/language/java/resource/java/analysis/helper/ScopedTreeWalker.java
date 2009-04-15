@@ -9,6 +9,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 
+/**
+ * This class can be used to traverse a model tree after parsing for reference resolving. It follows 
+ * scoping rules common to textual languages.
+ * <p>
+ * It starts at the point of the reference, walking <i>up</i> the tree but visiting, for each step up,
+ * the children of the new parent. On each visited element it applies a set of deciders with which 
+ * it is initialized.
+ * 
+ */
 public class ScopedTreeWalker {
 	
 	protected List<IResolutionTargetDecider> deciderList;
@@ -16,8 +25,47 @@ public class ScopedTreeWalker {
 	private EObject currentBestResult = null;
 	private boolean finished = false;
 	
+	/**
+	 * Initializes a new walker with a list of deciders.
+	 * 
+	 * @param deciderList
+	 */
 	public ScopedTreeWalker(List<IResolutionTargetDecider> deciderList) {
 		this.deciderList = deciderList;
+	}
+	
+	/**
+	 * Main method.
+	 * 
+	 * @param startingPoint
+	 * @param identifier
+	 * @param container
+	 * @param crossReference
+	 * @return the target if one was found.
+	 */
+	public EObject walk(EObject startingPoint, 
+			String identifier, EObject container,
+			EReference crossReference) {
+		
+		if (startingPoint == null) {
+			return null;
+		}
+		
+		//deactivate deciders not suited here at all
+		for(IResolutionTargetDecider decider : deciderList) {
+			if (!decider.canFindTargetsFor(container, crossReference)) {
+				decider.deactivate();
+			}
+		}
+		
+		doWalk(identifier, startingPoint, null, -1);
+
+		for(IResolutionTargetDecider decider : deciderList) {
+			decider.activate();
+		}
+		
+		return currentBestResult;
+		
 	}
 	
 	private void doWalk(String identifier, EObject startingPoint, EReference navOrigin, int posInNavOrigin) {
@@ -148,31 +196,4 @@ public class ScopedTreeWalker {
 		
 		return contentList;
 	}
-
-
-	public EObject walk(EObject startingPoint, 
-			String identifier, EObject container,
-			EReference crossReference) {
-		
-		if (startingPoint == null) {
-			return null;
-		}
-		
-		//deactivate deciders not suited here at all
-		for(IResolutionTargetDecider decider : deciderList) {
-			if (!decider.canFindTargetsFor(container, crossReference)) {
-				decider.deactivate();
-			}
-		}
-		
-		doWalk(identifier, startingPoint, null, -1);
-
-		for(IResolutionTargetDecider decider : deciderList) {
-			decider.activate();
-		}
-		
-		return currentBestResult;
-		
-	}
-
 }

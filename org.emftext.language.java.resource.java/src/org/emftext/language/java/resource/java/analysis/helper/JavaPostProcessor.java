@@ -10,6 +10,12 @@ import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.ITextResource;
 
+/**
+ * Post processor that performs 
+ * <i>cast repair</i> and 
+ * <i>java model completion</i>
+ * on a resource after parsing.
+ */
 public class JavaPostProcessor implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
 	
 	public Map<?, ?> getOptions() {

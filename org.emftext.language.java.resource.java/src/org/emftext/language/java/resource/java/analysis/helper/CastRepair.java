@@ -27,6 +27,12 @@ import org.emftext.runtime.resource.ITextResource;
 
 public class CastRepair {
 
+	/**
+	 * Modifies the model of the given resource by introducing nested expressions that
+	 * were mistakenly recognized as casts by the generated parser.
+	 * 
+	 * @param resource
+	 */
 	public static void repairWrongCasts(ITextResource resource) {
 		for(Iterator<EObject> i = resource.getAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
