@@ -27,11 +27,7 @@ public class ClassUtil {
 		Class superClass =  _this;
 		while (superClass != null && !superClass.eIsProxy() && 
 				!superClass.equals(JavaClasspathUtil.getObjectClass(_this))) {
-			TypeReference superClassReference = superClass.getExtends();
-			if (superClassReference == null) {
-				superClassReference = superClass.getDefaultExtends();
-			}
-			superClass = (Class) TypeReferenceUtil.getTarget(superClassReference);
+			superClass = getSuperClass(superClass);
 			if (superClass != null) {
 				classifierList.add(superClass);
 			}
@@ -82,6 +78,14 @@ public class ClassUtil {
 			return TypesFactory.eINSTANCE.createVoid();
 		}
 		return null;
+	}
+
+	public static Class getSuperClass(Class _this) {
+		TypeReference superClassReference = _this.getExtends();
+		if (superClassReference == null) {
+			superClassReference = _this.getDefaultExtends();
+		}
+		return (Class) TypeReferenceUtil.getTarget(superClassReference);
 	}
 
 }

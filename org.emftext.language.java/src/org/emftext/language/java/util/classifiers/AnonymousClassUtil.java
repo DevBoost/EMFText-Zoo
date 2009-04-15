@@ -26,9 +26,8 @@ public class AnonymousClassUtil {
 	public static EList<ConcreteClassifier> getAllSuperClassifiers(AnonymousClass _this) {
 		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
 		
-		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
-		ConcreteClassifier superClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
-
+		ConcreteClassifier superClassifier = getSuperClassifier(_this);
+		
 		if (superClassifier != null) {
 			superClassifierList.add(superClassifier);
 			superClassifierList.addAll(ConcreteClassifierUtil.getAllSuperClassifiers(superClassifier));
@@ -37,5 +36,12 @@ public class AnonymousClassUtil {
 			superClassifierList.add(JavaClasspathUtil.getObjectClass(_this));
 		}
 		return superClassifierList;
+	}
+	
+	public static ConcreteClassifier getSuperClassifier(AnonymousClass _this) {
+		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
+		ConcreteClassifier superClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
+
+		return superClassifier;
 	}
 }

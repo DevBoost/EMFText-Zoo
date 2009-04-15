@@ -1,9 +1,11 @@
 package org.emftext.language.java.util.references;
 
+import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.literals.Literal;
+import org.emftext.language.java.literals.Super;
 import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.references.ElementReference;
@@ -18,9 +20,13 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.JavaUtil;
+import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
+import org.emftext.language.java.util.classifiers.ClassUtil;
+import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
+import org.emftext.language.java.util.types.TypeUtil;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 
 public class ReferenceUtil {
@@ -47,18 +53,31 @@ public class ReferenceUtil {
 		}
 		//element points to this or super
 		else if (_this instanceof SelfReference) {
+			Type thisClass = null;
 			if (_this.eContainer() instanceof Reference && _this.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
-				return getType((Reference)_this.eContainer());
+				thisClass = getType((Reference)_this.eContainer());
 			}
 			else {
 				AnonymousClass anonymousContainer = JavaUtil.findContainingAnonymousClass(_this);
 				if (anonymousContainer != null) {
-					return anonymousContainer;
+					thisClass = anonymousContainer;
 				}
 				else {
-					return JavaUtil.findContainingClassifier(_this);	
+					thisClass = JavaUtil.findContainingClassifier(_this);	
 				}
 			}
+			
+			//find super class if "self" is "super"
+			if (((SelfReference) _this).getSelf() instanceof Super) {
+				if (thisClass instanceof Class) {
+					return ClassUtil.getSuperClass((Class)thisClass);
+				}
+				if (thisClass instanceof AnonymousClass) {
+					return AnonymousClassUtil.getSuperClassifier((AnonymousClass)thisClass);
+				}
+			}
+			
+			return thisClass;
 		}
 		//element points to the object's class object
 		else if(_this instanceof ReflectiveClassReference) {
