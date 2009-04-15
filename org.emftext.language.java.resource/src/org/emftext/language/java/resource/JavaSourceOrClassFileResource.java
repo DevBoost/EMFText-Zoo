@@ -28,6 +28,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.JavaResource;
+import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
 
 /**
@@ -71,6 +72,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		if (isClassFile()) {
 			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
 			getContents().add(cu);
+			JavaModelCompletion.complete(this);
 		}
 		else {
 			super.doLoad(inputStream, options);
