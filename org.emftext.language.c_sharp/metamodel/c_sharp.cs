@@ -244,27 +244,28 @@ operators.AssignmentLeftShift          ::= "<" #0 "<" #0 "=";
 operators.AssignmentRightShift         ::= ">" #0 ">" #0 "=";
 operators.AssignmentUnsignedRightShift ::= ">" #0 ">" #0 ">" #0 "=";
 
-//operators.Addition              ::= "+";
-//operators.Subtraction           ::= "-";
+operators.Addition              ::= "+";
+operators.Subtraction           ::= "-";
 
-//operators.Multiplication        ::= "*" ;
-//operators.Division              ::= "/" ;
-//operators.Remainder             ::= "%" ;
+operators.Multiplication        ::= "*" ;
+operators.Division              ::= "/" ;
+operators.Remainder             ::= "%" ;
 
-//operators.LessThan 			    ::= "<";
-//operators.LessThanOrEqual		::= "<" #0 "=";
-//operators.GreaterThan			::= ">";
-//operators.GreaterThanOrEqual	::= ">" #0 "=";
+operators.LessThan 			    ::= "<";
+operators.LessThanOrEqual		::= "<" #0 "=";
+operators.GreaterThan			::= ">";
+operators.GreaterThanOrEqual	::= ">" #0 "=";
 
-//operators.LeftShift 			::= "<" #0 "<" ;
-//operators.RightShift 			::= ">" #0 ">" ;
-//operators.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
+operators.LeftShift 			::= "<" #0 "<" ;
+operators.RightShift 			::= ">" #0 ">" ;
+operators.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
 
-//operators.Equal		::= "==";	
-//operators.NotEqual	::= "!=";
-//operators.PlusPlus 	::= "++" ;
-//operators.MinusMinus 	::= "--" ;
-//operators.Complement 	::= "~" ;
-//operators.Negate 		::= "!" ; 
+operators.Equal		::= "==";	
+operators.NotEqual	::= "!=";
+operators.PlusPlus 	::= "++" ;
+operators.MinusMinus 	::= "--" ;
+operators.Complement 	::= "~" ;
+operators.Negate 		::= "!" ; 
+
 
 }
