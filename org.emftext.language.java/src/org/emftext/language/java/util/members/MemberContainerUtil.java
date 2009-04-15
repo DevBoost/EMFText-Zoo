@@ -16,7 +16,7 @@ public class MemberContainerUtil {
 		return null;
 	}
 
-	//TODO add signature
+	//TODO @jjohannes add signature to parameters or remove method if not needed
 	public static Method getMethod(MemberContainer _this, String name) {
 		for(Member member : _this.getMembers()) {
 			if (member instanceof Method && name.equals(member.getName())) {

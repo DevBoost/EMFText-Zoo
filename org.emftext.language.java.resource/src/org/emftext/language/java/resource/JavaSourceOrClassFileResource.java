@@ -36,7 +36,14 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 //	public ILocationMap getLocationMap() {
 //		return new DevNullLocationMap();
 //	}
-	// TODO jjohannes: add comment for this option
+	
+	/**
+	 * If this option is set to true, each classifier loaded is registered
+	 * in the URI map of the current resource set's <code>URIConverter</code>.
+	 * <p>
+	 * If the option is set to false (default), each classifier loaded is registered
+	 * in the global <code>URIConverter.URI_MAP</code>.
+	 */
 	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
 	
 	ClassFileModelLoader classFileParser = new ClassFileModelLoader();

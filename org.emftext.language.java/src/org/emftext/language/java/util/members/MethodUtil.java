@@ -43,7 +43,8 @@ public class MethodUtil {
 			//I match, but the other does not
 			return true;
 		}
-		//we both match, I am only better if I match perfectly <- TODO this is not enough: we need to check for "nearest subtype" here		
+		//we both match, I am only better if I match perfectly <- 
+		//TODO @jjohannes this is not enough: we need to check for "nearest subtype" here		
 		return isMethodForCall(_this, methodCall, false);
 	}
 

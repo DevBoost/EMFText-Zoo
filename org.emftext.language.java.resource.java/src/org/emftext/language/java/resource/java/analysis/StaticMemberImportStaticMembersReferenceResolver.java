@@ -25,7 +25,7 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 			for(Member member : ((MemberContainer)classifier).getMembers()) {
 				if (identifier.equals(member.getName())) {
 					//for (EObject modifier : member.eContents()) {
-						//if (modifier instanceof Static) { TODO reactivate this check when the class file loader supports modifiers
+						//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
 							result.addMapping(identifier, member);
 						//}
 					//}

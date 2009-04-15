@@ -122,10 +122,8 @@ public class CastRepair {
 								additiveExpression.getAdditiveOperators().add(idx, OperatorsFactory.eINSTANCE.createAddition());
 							}
 							EcoreUtil.replace(castExpression, nestedExpression);
-							//additiveExpression.getChildren().add(idx,nestedExpression);
-							//additiveExpression.getChildren().remove(aeChild);
 							
-							//TODO set location map for nested expression and additive operator and identifier reference
+							//TODO @jjohannes set location map for nested expression and additive operator and identifier reference
 						}
 					}
 				}
