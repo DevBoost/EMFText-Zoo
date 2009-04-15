@@ -30,6 +30,11 @@ import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
 
+/**
+ * A resource that uses either the generated <code>JavaParser</code> or
+ * the <code>ClassFileModelLoader</code> for loading depending on the file
+ * extension of the resource's URI.
+ */
 public class JavaSourceOrClassFileResource extends JavaResource {
 	
 //	@Override

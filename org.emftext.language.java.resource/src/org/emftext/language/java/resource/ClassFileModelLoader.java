@@ -36,9 +36,9 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 
 /**
- * Extends JavaResource to make use of proxy resolving
+ * This class constructs a Java EMF-model from a class file using the 
+ * Byte Code Engineering Library (BCEL).
  * 
- *
  */
 public class ClassFileModelLoader {
 	
