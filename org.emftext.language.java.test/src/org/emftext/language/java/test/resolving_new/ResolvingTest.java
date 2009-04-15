@@ -107,8 +107,8 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 						if (comments.contains("source:")) {
 							String[] parts = comments.split(":");
 							assertEquals("Expected three parts in comment separated by double colon (source:<id>:nameOfReference).", 3, parts.length);
-							String id = parts[1];
-							String referenceName = parts[2];
+							String id = parts[1].trim();
+							String referenceName = parts[2].trim();
 							EStructuralFeature feature = commentable.eClass().getEStructuralFeature(referenceName);
 							assertNotNull("Can't find feature \"" + referenceName + "\"", feature);
 							Object target = commentable.eGet(feature);
@@ -118,7 +118,7 @@ public class ResolvingTest extends AbstractJavaParserTestCase {
 						if (comments.contains("target:")) {
 							String[] parts = comments.split(":");
 							assertEquals("Expected two parts in comment separated by double colon (target:<id>).", 2, parts.length);
-							String id = parts[1];
+							String id = parts[1].trim();
 							expectedTargetsMap.put(id, commentable);
 						}
 					}
