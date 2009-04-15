@@ -112,35 +112,38 @@ classes.Block
     ;	
 
 //Statements    
-statements.SimpleEmbeddedStatement
-	::= ( "unsafe" ) ?  block ; 
-//"unsafe"-Literal fehlt noch
-	
+
 statements.EmptyStatement
 	::= ";" ;
 	
+statements.SimpleEmbeddedStatement
+	::= ( unsafe ) ?  block ; 
+	
+
 statements.LabeledStatement
 	::= name[] ":" statement ; 
 
-//statements.DeclarationStatement
-//	::= localVariableDeclaration  ";" 
-//		| localConstantDeclaration	";" ;
+statements.DeclarationStatement
+	::= localVariableDeclaration  ";" 
+	|	localConstantDeclaration  ";" 
+	;
 		
-//statements.LocalVariableDeclaration
-//	::= type localVariableDeclarator + ;
+statements.LocalVariableDeclaration
+	::= type localVariableDeclarator + ;
 	
-//statements.LocalVariableDeclarator
-//	::= name[] ( "="   localVariableInitializer) ? ;
+statements.LocalVariableDeclarator
+	::= name[] ( "="   localVariableInitializer) ? ;
+//localVariableInitializer muss noch von array-initializer geerbt werden
 	
-//statements.LocalConstantDeclaration
-//	::= "const"   type  constantDeclarator ( ","   constantDeclarator ) * ;
+statements.LocalConstantDeclaration
+	::= "const"   type  constantDeclarator ( ","   constantDeclarator ) * ;
 	
-//statements.ConstantDeclarator
-//	::= name[] "=" expression ;
+statements.ConstantDeclarator
+	::= name[] "=" expression ;
 
 	
-//statements.ExpressionStatement
-//	::= statementExpression   ";" ;
+statements.ExpressionStatement
+	::= statementExpression   ";" ;
 
 
 // Keywords
