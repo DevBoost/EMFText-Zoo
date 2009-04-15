@@ -51,7 +51,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	 */
 	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
 	
-	ClassFileModelLoader classFileParser = new ClassFileModelLoader();
+	private ClassFileModelLoader classFileParser = new ClassFileModelLoader();
 	
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
