@@ -27,6 +27,7 @@ public class ConcreteClassifierUtil {
 		} else if (_this instanceof Interface) {
 			Interface javaInterface = (Interface) _this;
 			InterfaceUtil.collectAllSuperInterfaces(javaInterface.getExtends(), superClassifierList);
+			InterfaceUtil.collectAllSuperInterfaces(javaInterface.getDefaultExtends(), superClassifierList);
 		} else if (_this instanceof Annotation) {
 			superClassifierList.add(JavaClasspathUtil.getObjectClass(_this));
 		} else if (_this instanceof Enumeration) {
