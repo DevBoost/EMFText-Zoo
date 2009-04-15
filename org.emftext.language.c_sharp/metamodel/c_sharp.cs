@@ -7,7 +7,6 @@ IMPORTS {
 	common 		: <http://www.emftext.org/c_sharp/common>
 	expressions : <http://www.emftext.org/c_sharp/expressions>
 	modifiers 	: <http://www.emftext.org/c_sharp/modifiers>
-	operatorsAndPunctuators : <http://www.emftext.org/c_sharp/operatorsAndPunctuators>
 	keywords 	: <http://www.emftext.org/c_sharp/keywords>
 	literals 	: <http://www.emftext.org/c_sharp/literals>
 	namespaces 	: <http://www.emftext.org/c_sharp/namespaces>
@@ -211,7 +210,7 @@ expressions.InvocationExpression
 
 expressions.PostIncrementExpression
     ::= "++" ;
-
+//Informationsverlust PreIncrementExpression
 expressions.PostDecrementExpression
     ::= "--" ;
 	
@@ -221,7 +220,9 @@ expressions.BaseAccess
 expressions.ObjectCreationExpression
     ::= "new"   type   "("   argumentList?   ")" ;
 
-
+expressions.TypeOfExpression
+    ::= "typeof"   "("   type   ")"
+    |	"typeof"   "("   "void" ")" ;
 
 expressions.UnaryExpression
 	::= memberAccess 
@@ -236,8 +237,44 @@ expressions.UnaryExpression
 expressions.Assignment
     ::= unaryExpression   assignmentOperator   expression;
     
-expressions.AssignmentOperator
-	::= "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&=" | "|=" | "^=" | "<<=" | ">>=" ;
-//Informationsverlust! Operatoren müssen einzeln in klassen sein
+    
+
+//OPERATORS
+
+operators.Assignment                   ::= "=";
+operators.AssignmentPlus               ::= "+=";
+operators.AssignmentMinus              ::= "-=";
+operators.AssignmentMultiplication     ::= "*=";
+operators.AssignmentDivision           ::= "/=";
+operators.AssignmentAnd                ::= "&=";
+operators.AssignmentOr                 ::= "|=";
+operators.AssignmentExclusiveOr        ::= "^=";
+operators.AssignmentModulo             ::= "%=";
+operators.AssignmentLeftShift          ::= "<" #0 "<" #0 "=";
+operators.AssignmentRightShift         ::= ">" #0 ">" #0 "=";
+operators.AssignmentUnsignedRightShift ::= ">" #0 ">" #0 ">" #0 "=";
+
+//operators.Addition              ::= "+";
+//operators.Subtraction           ::= "-";
+
+//operators.Multiplication        ::= "*" ;
+//operators.Division              ::= "/" ;
+//operators.Remainder             ::= "%" ;
+
+//operators.LessThan 			    ::= "<";
+//operators.LessThanOrEqual		::= "<" #0 "=";
+//operators.GreaterThan			::= ">";
+//operators.GreaterThanOrEqual	::= ">" #0 "=";
+
+//operators.LeftShift 			::= "<" #0 "<" ;
+//operators.RightShift 			::= ">" #0 ">" ;
+//operators.UnsignedRightShift	::= ">" #0 ">" #0 ">" ;
+
+//operators.Equal		::= "==";	
+//operators.NotEqual	::= "!=";
+//operators.PlusPlus 	::= "++" ;
+//operators.MinusMinus 	::= "--" ;
+//operators.Complement 	::= "~" ;
+//operators.Negate 		::= "!" ; 
 
 }
