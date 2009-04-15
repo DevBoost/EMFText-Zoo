@@ -3,6 +3,7 @@ package org.emftext.language.owl.loading;
 import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -40,8 +41,10 @@ public class RemoteLoader {
 
 	private Ontology ontology;
 	private static OwlFactory factory = OwlFactory.eINSTANCE;
-	private static HashMap<String, Ontology> url2ontologies 
+	private static Map<String, Ontology> url2ontologies 
 						= new HashMap<String, Ontology>();
+	private Map<String, Map<String, Frame>> url2irimaps = new HashMap<String, Map<String, Frame>>();
+
 	
 	static {
 		
@@ -61,14 +64,17 @@ public class RemoteLoader {
 	
 	
 
-	public RemoteLoader(String uri) {
+	public RemoteLoader() {
+		
+	}
+		
+	public void loadOntology(String uri) {
 		ontology = url2ontologies.get(uri);
 		if (ontology == null) {
 			initialise(uri);
 		}
-		
 	}
-		
+	
 	private void initialise(String uri) {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		// Load the ontology 
@@ -140,11 +146,24 @@ public class RemoteLoader {
 	}
 
 	private IRIIdentified findEntity(String identifier, Ontology onto) {
+		Map<String, Frame> iriMap = url2irimaps.get(onto);
+		if (iriMap == null) {
+			iriMap = intialiseIriMap(onto);
+		}
+		Frame frame = iriMap.get(identifier);
+		return frame;
+	}
+
+	private Map<String, Frame> intialiseIriMap(Ontology onto) {
+		Map<String, Frame> iriMap = new HashMap<String, Frame>();
 		EList<Frame> frames = onto.getFrames();
 		for (Frame frame : frames) {
-			if(frame.getIri() != null && frame.getIri().equals(identifier)) return frame;
+			if(frame.getIri() != null ) {
+				iriMap.put(frame.getIri(), frame);
+			}	
 		}
-		return null;
+		url2irimaps.put(onto.getUri(), iriMap);
+		return iriMap;
 	}
 
 }

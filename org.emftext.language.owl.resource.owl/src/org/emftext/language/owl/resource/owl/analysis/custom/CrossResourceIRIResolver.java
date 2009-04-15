@@ -33,8 +33,11 @@ public class CrossResourceIRIResolver {
 		standardNamespaces.put("owl","http://www.w3.org/2002/07/owl#");
 		
 	}
+
+	private RemoteLoader remoteLoader;
 	
 	private CrossResourceIRIResolver() {
+		remoteLoader = new RemoteLoader();
 	}
 
 	public static CrossResourceIRIResolver theInstance() {
@@ -85,7 +88,8 @@ public class CrossResourceIRIResolver {
 	private IRIIdentified searchOntologyEntity(String iriPrefix, OntologyDocument ontologyDocument, String identifier) {
 		String uri = standardNamespaces.get(iriPrefix); 
 		if (uri != null) {
-			IRIIdentified entity = new RemoteLoader(uri).getOntologyElement(identifier);
+			remoteLoader.loadOntology(uri);
+			IRIIdentified entity = remoteLoader.getOntologyElement(identifier);
 			return entity;
 		}
 	
@@ -93,7 +97,8 @@ public class CrossResourceIRIResolver {
 		for (Namespace namespace : namespaces) {
 			if (iriPrefix.equals(namespace.getPrefix())) {
 				uri = namespace.getUri(); 
-				IRIIdentified entity = new RemoteLoader(uri).getOntologyElement(identifier);
+				remoteLoader.loadOntology(uri);
+				IRIIdentified entity = remoteLoader.getOntologyElement(identifier);
 				return entity;
 			}
 		}
