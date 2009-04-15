@@ -39,13 +39,17 @@ public class MethodUtil {
 		if (!isMethodForCall(_this, methodCall, false)) {
 			return false;
 		}
+		if (isMethodForCall(otherMethod, methodCall, true)) {
+			//the other already matches perfectly; I am not better
+			return false;
+		}
 		if (!isMethodForCall(otherMethod, methodCall, false)) {
 			//I match, but the other does not
 			return true;
 		}
 		//we both match, I am only better if I match perfectly <- 
 		//TODO @jjohannes this is not enough: we need to check for "nearest subtype" here		
-		return isMethodForCall(_this, methodCall, false);
+		return isMethodForCall(_this, methodCall, true);
 	}
 
 	private static boolean isMethodForCall(Method _this, MethodCall methodCall, boolean needsPerfectMatch) {
