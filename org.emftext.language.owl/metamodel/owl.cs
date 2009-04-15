@@ -4,6 +4,7 @@ START OntologyDocument
 
 OPTIONS {
 	generateCodeFromGeneratorModel = "true";
+	overrideManifest = "false";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	//memoize = "true";
@@ -32,7 +33,7 @@ TOKENS{
 RULES{
 	OntologyDocument ::= namespace*  ontology;
 
-	Annotation ::= "Annotations:" ( annotations? propertyIri[IRI] target (!1 "," annotations? propertyIri[IRI] target)*)?;
+	Annotation ::= "Annotations:" ( annotations? annotationProperty[IRI] target (!1 "," annotations? annotationProperty[IRI] target)*)?;
 	
 	IRITarget ::= target[IRI];
 	

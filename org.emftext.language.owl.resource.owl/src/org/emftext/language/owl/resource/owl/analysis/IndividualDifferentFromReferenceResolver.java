@@ -1,5 +1,7 @@
 package org.emftext.language.owl.resource.owl.analysis;
 
+import org.emftext.language.owl.resource.owl.analysis.custom.CrossResourceIRIResolver;
+
 public class IndividualDifferentFromReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.Individual, org.emftext.language.owl.Individual> {
 	
 	@Override	
@@ -9,6 +11,7 @@ public class IndividualDifferentFromReferenceResolver extends org.emftext.runtim
 	
 	@Override	
 	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.Individual container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Individual> result) {
+		CrossResourceIRIResolver.theInstance().doResolve(identifier, container, resolveFuzzy, result, org.emftext.language.owl.Individual.class);
 		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 }
