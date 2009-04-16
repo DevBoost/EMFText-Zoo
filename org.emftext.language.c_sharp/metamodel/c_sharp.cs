@@ -155,7 +155,19 @@ statements.SwitchSection
 statements.SwitchLabel
     ::= ( default | ( case  expression ) ) ":" ; 
     
-        
+statements.WhileStatement
+    ::= "while"   "("   expression   ")"   embeddedStatement ;   
+    
+statements.DoStatement
+    ::= "do"   embeddedStatement   "while"   "("   expression   ")"   ";"  ;
+    
+statements.ForStatement
+    ::= "for"   "("   forInitializer ?   ";"   expression ?   ";"   statementExpressionList ?   ")"   embeddedStatement ;
+
+statements.ForeachStatement
+    ::= "foreach"   "("   type   identifier   "in"   expression   ")"   embeddedStatement ;
+    
+             
 // Keywords
 
 keywords.Out
@@ -193,7 +205,9 @@ literals.RealLiteral
     	
     	
 //Expressions
-
+expressions.StatementExpressionList
+    ::= statementExpression (  ","   statementExpression )* ;
+    
 expressions.ExpressionList
 	::= expression ( ","   expression )* ;
 
