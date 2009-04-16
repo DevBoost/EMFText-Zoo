@@ -23,6 +23,7 @@ import org.emftext.language.java.resource.java.analysis.decider.PackageDecider;
 import org.emftext.language.java.resource.java.analysis.decider.ParameterDecider;
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
+import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
@@ -49,19 +50,11 @@ public class ElementReferenceTargetReferenceResolver extends
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {
-				//can be encapsulated in nested expressions
-				while (parentReference instanceof NestedExpression) {
-					Expression nestedExpression = ((NestedExpression)parentReference).getExpression();
-					if (nestedExpression instanceof Reference) {
-						parentReference = (Reference) nestedExpression;
-					}
-					else {
-						break;
-					}
+				if (parentReference instanceof NestedExpression) {
+					startingPoint = ExpressionUtil.getType(((NestedExpression)parentReference).getExpression());
 				}
-				
 				//special case: anonymous class in constructor call
-				if (parentReference instanceof NewConstructorCall &&
+				else if (parentReference instanceof NewConstructorCall &&
 						((NewConstructorCall)parentReference).getAnonymousClass() != null) {
 					startingPoint = ((NewConstructorCall)parentReference).getAnonymousClass();
 				}
