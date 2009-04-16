@@ -17,6 +17,7 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.util.references.ReferenceUtil;
+import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -61,6 +62,15 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
 				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 					startingPoint = ReferenceUtil.getType((Reference) ncc.eContainer());
+				}
+				if (ncc.eContainer() instanceof NewConstructorCall) {
+					NewConstructorCall outerNcc = (NewConstructorCall) ncc.eContainer();
+					if (outerNcc.getAnonymousClass() != null) {
+						startingPoint = outerNcc.getAnonymousClass();
+					}
+					else {
+						startingPoint = TypeReferenceUtil.getTarget(outerNcc.getType());
+					}
 				}
 			}
 			
