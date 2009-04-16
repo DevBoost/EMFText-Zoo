@@ -20,6 +20,9 @@ public class JavaClasspathUtil {
 	 * @return the Class
 	 */
 	public static Class getClass(String name, EObject objectContext) {
+		if (objectContext.eResource() == null) {
+			throw new IllegalArgumentException("object context element must have a resource");
+		}
 		Class classClass = (Class) JavaClasspath.INSTANCE.getClassifier(
 				"java.lang." + name);
 		classClass = (Class) EcoreUtil.resolve(classClass, objectContext);
@@ -27,6 +30,9 @@ public class JavaClasspathUtil {
 	}
 	
 	public static Interface getInterface(String name, EObject objectContext) {
+		if (objectContext.eResource() == null) {
+			throw new IllegalArgumentException("object context element  must have a resource");
+		}
 		ConcreteClassifier classClass = JavaClasspath.INSTANCE.getClassifier(
 				"java.lang." + name);
 		return (Interface) EcoreUtil.resolve(classClass, objectContext);

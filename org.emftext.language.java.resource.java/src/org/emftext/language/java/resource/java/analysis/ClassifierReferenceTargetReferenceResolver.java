@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.Reference;
@@ -30,6 +32,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = null;
+		EObject target = null;
 		
 		if (container.eContainer() instanceof NamespaceClassifierReference) {
 			NamespaceClassifierReference ncr = (NamespaceClassifierReference) container.eContainer();
@@ -37,29 +40,63 @@ public class ClassifierReferenceTargetReferenceResolver extends
 			if(idx > 0) {
 				startingPoint = ncr.getClassifierReferences().get(idx - 1).getTarget();
 			}
-		}
-		
-		//new constructor call can be part of reference chain
-		if (startingPoint == null && container.eContainer().eContainer() instanceof NewConstructorCall) {
-			NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
-			if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
-				startingPoint = ReferenceUtil.getType((Reference) ncc.eContainer());
+			else {
+				if(ncr.getNamespaces().size() > 0) {
+					EObject lastClassInNS = ConcreteClassifierDecider.resolveRelativeNamespace(
+							ncr, 0, container, container, reference);
+					if (lastClassInNS != null) {
+						startingPoint = lastClassInNS;
+					}
+					else {
+						//absolute class starting with package
+						target = resolveFullQualifiedTypeReferences(identifier, ncr, container);
+					}
+				}
 			}
 		}
 		
-		if (startingPoint == null) {
-			startingPoint = container;
+		if (target == null) {
+			//new constructor call can be part of reference chain
+			if (startingPoint == null && container.eContainer().eContainer() instanceof NewConstructorCall) {
+				NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
+				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+					startingPoint = ReferenceUtil.getType((Reference) ncc.eContainer());
+				}
+			}
+			
+			if (startingPoint == null) {
+				startingPoint = container;
+			}
+			
+			deciderList.add(new ConcreteClassifierDecider());
+			deciderList.add(new TypeParameterDecider());
+			
+			ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
+			
+			target = treeWalker.walk(startingPoint, identifier, container, reference);
 		}
-		
-		deciderList.add(new ConcreteClassifierDecider());
-		deciderList.add(new TypeParameterDecider());
-		
-		ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-		
-		EObject target = treeWalker.walk(startingPoint, identifier, container, reference);
 		
 		if (target != null) {
 			result.addMapping(identifier, (Classifier) target);
 		}
 	}
+	
+	private EObject resolveFullQualifiedTypeReferences(String identifier,
+			NamespaceClassifierReference ncr, EObject container) {
+		
+		int idx = ncr.getClassifierReferences().indexOf(container);
+		if(ncr.getNamespaces().size() > 0 && idx == 0) {
+			Classifier target = null;
+			//if the reference is qualified, the target can be directly found
+			String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(ncr);
+			target = (Classifier) EcoreUtil.resolve(
+					JavaClasspath.INSTANCE.getClassifier(containerName + identifier), container.eResource());
+			return target;
+		}
+		return null;
+		
+	}
+	
+
+	
 }

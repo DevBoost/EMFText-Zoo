@@ -4,9 +4,11 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
@@ -15,8 +17,12 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.MembersPackage;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
+import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 
 public class FieldDecider extends AbstractDecider {
@@ -27,7 +33,13 @@ public class FieldDecider extends AbstractDecider {
 		if (container instanceof ConcreteClassifier) {
 			EList<Member> resultList = 
 				ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);		
-			addArrayLengthFiled(resultList);
+			addArrayLengthFiled(resultList, container);
+			return resultList;
+		}
+		
+		if (container instanceof AnonymousClass) {
+			EList<Member> resultList = 
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
 			return resultList;
 		}
 		
@@ -40,14 +52,15 @@ public class FieldDecider extends AbstractDecider {
 		return null;
 	}
 
-	private void addArrayLengthFiled(EList<Member> resultList) {
+	private void addArrayLengthFiled(EList<Member> resultList, EObject objectContext) {
 		//Arrays have the additional member field "length"
 		//We always add the field since we do not know if we have an array or not
 		if (STANDARD_ARRAY_LENGTH_FIELD  == null) {
 			STANDARD_ARRAY_LENGTH_FIELD = MembersFactory.eINSTANCE.createField();
 			STANDARD_ARRAY_LENGTH_FIELD.setName("length");
-			STANDARD_ARRAY_LENGTH_FIELD.setType(
-					TypesFactory.eINSTANCE.createInt());
+			ClassifierReference typeReference = TypesFactory.eINSTANCE.createClassifierReference();
+			typeReference.setTarget(JavaClasspathUtil.getClass("Integer", objectContext));
+			STANDARD_ARRAY_LENGTH_FIELD.setType(typeReference);
 		}
 		resultList.add(STANDARD_ARRAY_LENGTH_FIELD);
 	}
@@ -61,6 +74,15 @@ public class FieldDecider extends AbstractDecider {
 				}
 				else if (aImport instanceof StaticClassifierImport) {
 					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
+				}
+				else if (aImport instanceof ClassifierImport) {
+					for (EObject member : ((ClassifierImport)aImport).getClassifier().getMembers()) {
+						//for (EObject modifier : member.eContents()) {
+							//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
+								resultList.add(member);
+							//}
+						//}
+					}
 				}
 			}
 		}
@@ -95,7 +117,7 @@ public class FieldDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
-		return referenceContainer instanceof Reference;
+		return referenceContainer instanceof Reference && !(referenceContainer instanceof MethodCall);
 	}
 
 }

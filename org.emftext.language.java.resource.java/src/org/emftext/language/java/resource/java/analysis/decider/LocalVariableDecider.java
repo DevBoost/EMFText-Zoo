@@ -7,6 +7,8 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.ForLoop;
 import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.statements.StatementsPackage;
+import org.emftext.language.java.statements.Switch;
+import org.emftext.language.java.statements.SwitchCase;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesPackage;
@@ -48,11 +50,18 @@ public class LocalVariableDecider extends AbstractDecider {
 			}
 		}
 		if (element instanceof LocalVariable) {
-			if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(element.eContainmentFeature())) {
+			if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(element.eContainmentFeature())
+					|| StatementsPackage.Literals.FOR_LOOP__INIT.equals(element.eContainmentFeature())) {
 				return true;
 			}
 		}
 		if (element instanceof ForLoop) {
+			return true;
+		}
+		if (element instanceof Switch) {
+			return true;
+		}
+		if (element instanceof SwitchCase) {
 			return true;
 		}
 		return false;

@@ -1,17 +1,19 @@
 package org.emftext.language.java.resource.java.analysis.decider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.annotations.AnnotationInstance;
-import org.emftext.language.java.classifiers.Annotation;
-import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.PackageImport;
@@ -19,9 +21,9 @@ import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
-import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.containers.CompilationUnitUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
@@ -44,49 +46,25 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		
-		handleQualifiedTypeReferences(identifier, container, resultList);
-		handleQualifiedAnnotationReferences(identifier, container, resultList);
+		if (container instanceof Package) {
+			Package p = (Package) container;
+			String packageName = JavaUniquePathConstructor.packageName(p);
+			if (packageName.equals("")) {
+				packageName = p.getName();
+			}
+			else {
+				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + p.getName();
+			}
+			
+			resultList.addAll(JavaClasspath.INSTANCE.getClassifiers(
+					packageName, "*"));
+		}
 		
 		addInnerClasses(container, resultList);
-		
 		addImports(container, resultList);
-		
 		addDefaultImports(container, resultList);
-		
-		return resultList;
-	}
 
-	private void handleQualifiedTypeReferences(String identifier,
-			EObject container, EList<EObject> resultList) {
-		
-		if (container.eContainer() instanceof NamespaceClassifierReference) {
-			NamespaceClassifierReference ncr = (NamespaceClassifierReference) container.eContainer();
-			int idx = ncr.getClassifierReferences().indexOf(container);
-			if(ncr.getNamespaces().size() > 0 && idx == 0) {
-				Classifier target = null;
-				//if the reference is qualified, the target can be directly found
-				String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(ncr);
-				target = (Classifier) EcoreUtil.resolve(
-						JavaClasspath.INSTANCE.getClassifier(containerName + identifier), container.eResource());
-				resultList.add(target);
-			}
-		}
-	}
-	
-	private void handleQualifiedAnnotationReferences(String identifier,
-			EObject container, EList<EObject> resultList) {
-		if (container instanceof AnnotationInstance) {
-			AnnotationInstance annotationInstance = (AnnotationInstance) container;
-			if (annotationInstance.getNamespaces().size() > 0) {
-				String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(annotationInstance);
-				ConcreteClassifier target = (ConcreteClassifier) EcoreUtil.resolve(
-						JavaClasspath.INSTANCE.getClassifier(containerName + identifier), container.eResource());
-			
-				if (target instanceof Annotation) {
-					resultList.add(target);
-				}
-			}
-		}
+		return resultList;
 	}
 	
 	private void addInnerClasses(EObject container,
@@ -138,8 +116,48 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference crossReference) {
+		
 		return (referenceContainer instanceof Reference ||
 				referenceContainer instanceof ClassifierReference);
+	}
+	
+	/**
+	 * This method assumes that the namespace of the given namespace aware element
+	 * is relative to the scope given by the starting point element. That is,
+	 * each element of the namespace points to a classifier, where the first element
+	 * points to a classifier awailable in the scope given by the starting point
+	 * (i.e., define locally or imported).
+	 * 
+	 * @param nsaElement
+	 * @param idx
+	 * @param startingPoint
+	 * @param referenceContainer
+	 * @param crossReference
+	 * @return the classifier to which the last part of the namespace points, or null, if any
+	 *         part of the namespace can not be resolved to a classifier in the given scope
+	 */
+	public static EObject resolveRelativeNamespace(NamespaceAwareElement nsaElement, int idx, 
+			EObject startingPoint,
+			EObject referenceContainer,
+			EReference crossReference) {
+		
+		if (idx < nsaElement.getNamespaces().size()) {
+			String identifier = nsaElement.getNamespaces().get(idx);
+			
+			List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
+			deciderList.add(new ConcreteClassifierDecider());
+			ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
+			
+			EObject target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);
+			
+			if (target != null) {
+				return resolveRelativeNamespace(nsaElement, idx + 1, target, referenceContainer, crossReference); 
+			}
+			else {
+				return null;
+			}
+		}
+		return startingPoint;
 	}
 	
 }

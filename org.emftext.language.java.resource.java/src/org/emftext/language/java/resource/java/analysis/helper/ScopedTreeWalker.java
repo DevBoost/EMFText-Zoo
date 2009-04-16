@@ -75,6 +75,11 @@ public class ScopedTreeWalker {
 			return;
 		}
 		
+		searchInAdditionalContent(identifier, startingPoint, navOrigin, posInNavOrigin);
+		if(finished) {
+			return;
+		}
+		
 		for(IResolutionTargetDecider decider : deciderList) {
 			if (decider.isActive()) {
 				walkDown(decider, identifier, startingPoint, navOrigin, posInNavOrigin);
@@ -116,20 +121,22 @@ public class ScopedTreeWalker {
 				for(EObject element : contentList) {
 					if(decider.walkInto(element)) {
 						searchInDirectChildren(identifier, element, null, -1);
-						if(finished) {
-							return;
-						}
 						//walk further down
 						walkDown(decider, identifier, element, null, -1);
-						if(finished) {
-							return;
-						}
 					}
 				}
 			}
 		}
 	}
 
+	/**
+	 * Looks for last best fit.
+	 * 
+	 * @param identifier
+	 * @param container
+	 * @param navOrigin
+	 * @param posInNavOrigin
+	 */
 	private void searchInDirectChildren(String identifier, EObject container, EReference navOrigin, int posInNavOrigin) {
 		
 		EClass containerClass = container.eClass();
@@ -149,14 +156,32 @@ public class ScopedTreeWalker {
 							for(EObject element : contentList) {
 								if(decider.isPossibleTarget(identifier, element)) {
 									currentBestResult = element;
-									if (decider.isSure()) {
-										finished = true;
-									}
 								}
 							}
+							if (currentBestResult != null && decider.isSure()) {
+								finished = true;
+								return;
+							}
+
 						}
 					}
 				}
+			}
+		}
+	}
+	
+	/**
+	 * Looks for first best fit.
+	 * 
+	 * @param identifier
+	 * @param container
+	 * @param navOrigin
+	 * @param posInNavOrigin
+	 */
+	private void searchInAdditionalContent(String identifier, EObject container, EReference navOrigin, int posInNavOrigin) {
+		
+		for(IResolutionTargetDecider decider : deciderList) {
+			if (decider.isActive()) {
 				
 				EList<? extends EObject> additionalCandidates = decider.getAdditionalCandidates(identifier, container);
 				

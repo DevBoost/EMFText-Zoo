@@ -16,14 +16,17 @@ public class AnonymousClassUtil {
 	 * @param _this
 	 * @return a view on all members including super classifiers' members
 	 */
-	public static EList<Member> getAllMemebers(AnonymousClass _this) {
+	public static EList<Member> getAllMembers(AnonymousClass _this) {
 		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
 		if (ncCall == null) {
 			return ECollections.emptyEList();
 		}
 		else {
 			ConcreteClassifier classifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
-			return ConcreteClassifierUtil.getAllMembers(classifier);
+			EList<Member> memberList = new BasicEList<Member>();
+			memberList.addAll(classifier.getMembers());
+			memberList.addAll(ConcreteClassifierUtil.getAllMembers(classifier));
+			return memberList;
 		}
 	}
 	

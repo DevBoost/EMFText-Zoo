@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.ClassifiersPackage;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.members.EnumConstant;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 
 public class EnumConstantDecider extends AbstractDecider {
@@ -26,7 +27,7 @@ public class EnumConstantDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
-		return referenceContainer instanceof Reference;
+		return referenceContainer instanceof Reference && !(referenceContainer instanceof MethodCall);
 	}
 
 }

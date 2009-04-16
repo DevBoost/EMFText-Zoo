@@ -9,6 +9,7 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesPackage;
 
 public class PackageDecider extends AbstractDecider {
@@ -18,7 +19,8 @@ public class PackageDecider extends AbstractDecider {
 
 		if (referenceContainer instanceof IdentifierReference) {
 			IdentifierReference idReference = (IdentifierReference) referenceContainer;
-			if(idReference.getNext() == null /*a classifier must follow*/) {
+			 //a classifier must follow
+			if(idReference.getNext() == null || idReference.getNext() instanceof MethodCall) {
 				return false;
 			}
 			if (!referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
@@ -47,10 +49,13 @@ public class PackageDecider extends AbstractDecider {
 		}
 		if (container instanceof Package) {
 			EList<EObject> resultList = new BasicEList<EObject>();
+			Package parentPackage = (Package) container;
 			
 			Package p = ContainersFactory.eINSTANCE.createPackage();
 			p.setName(identifier);
-			p.setParent((Package) container);
+			p.setParent(parentPackage);
+			p.getNamespaces().addAll(parentPackage.getNamespaces());
+			p.getNamespaces().add(parentPackage.getName());
 			resultList.add(p);
 			
 			return resultList;

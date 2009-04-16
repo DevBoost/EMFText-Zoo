@@ -24,7 +24,6 @@ import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.literals.Literal;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.Type;
-import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
@@ -77,7 +76,7 @@ public class ExpressionUtil {
 				_this instanceof ConditionalOrExpression ||
 				_this instanceof ConditionalAndExpression ||
 				_this instanceof InstanceOfExpression ) {
-			type = TypesFactory.eINSTANCE.createBoolean();
+			type = JavaClasspathUtil.getClass("Boolean", _this);
 		}
 		else if (_this instanceof AdditiveExpression ||
 				_this instanceof MultiplicativeExpression ||
@@ -141,7 +140,6 @@ public class ExpressionUtil {
 			}
 		}
 		assert(type != null);
-
 		return type;
 	}
 	
