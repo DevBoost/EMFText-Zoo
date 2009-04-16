@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferencesPackage;
@@ -62,14 +64,27 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
 				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 					startingPoint = ReferenceUtil.getType((Reference) ncc.eContainer());
-				}
-				if (ncc.eContainer() instanceof NewConstructorCall) {
-					NewConstructorCall outerNcc = (NewConstructorCall) ncc.eContainer();
-					if (outerNcc.getAnonymousClass() != null) {
-						startingPoint = outerNcc.getAnonymousClass();
+					
+					//a ncc can be encapsulated in nested expressions
+					EObject outerContainer = ncc.eContainer();
+					while (outerContainer instanceof NestedExpression) {
+						Expression nestedExpression = ((NestedExpression)outerContainer).getExpression();
+						if (nestedExpression instanceof Reference) {
+							outerContainer = (Reference) nestedExpression;
+						}
+						else {
+							break;
+						}
 					}
-					else {
-						startingPoint = TypeReferenceUtil.getTarget(outerNcc.getType());
+					
+					if (outerContainer instanceof NewConstructorCall) {
+						NewConstructorCall outerNcc = (NewConstructorCall) outerContainer;
+						if (outerNcc.getAnonymousClass() != null) {
+							startingPoint = outerNcc.getAnonymousClass();
+						}
+						else {
+							startingPoint = TypeReferenceUtil.getTarget(outerNcc.getType());
+						}
 					}
 				}
 			}

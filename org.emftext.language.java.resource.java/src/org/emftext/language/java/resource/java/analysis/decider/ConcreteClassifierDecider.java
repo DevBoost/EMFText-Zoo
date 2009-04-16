@@ -7,8 +7,10 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
+import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.commons.NamespaceAwareElement;
@@ -24,6 +26,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
+import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.containers.CompilationUnitUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
@@ -70,8 +73,18 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	private void addInnerClasses(EObject container,
 			EList<EObject> resultList) {
 		if(container instanceof ConcreteClassifier) {
+			//local inner classes
+			resultList.addAll(ConcreteClassifierUtil.getAllMembers(
+					(ConcreteClassifier) container));			
+			//public inner classes (possibly external)
 			resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
 					(ConcreteClassifier) container));
+		}
+		if(container instanceof AnonymousClass) {
+			resultList.addAll(AnonymousClassUtil.getAllMembers(
+					(AnonymousClass) container));	
+			resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+					AnonymousClassUtil.getSuperClassifier((AnonymousClass)container)));
 		}
 	}
 	
@@ -156,6 +169,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			else {
 				return null;
 			}
+		}
+		
+		if (startingPoint.eIsProxy()) {
+			startingPoint = EcoreUtil.resolve(startingPoint, referenceContainer);
 		}
 		return startingPoint;
 	}

@@ -10,6 +10,8 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.EnumConstantDecider;
@@ -47,6 +49,17 @@ public class ElementReferenceTargetReferenceResolver extends
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {
+				//a ncc can be encapsulated in nested expressions
+				while (parentReference instanceof NestedExpression) {
+					Expression nestedExpression = ((NestedExpression)parentReference).getExpression();
+					if (nestedExpression instanceof Reference) {
+						parentReference = (Reference) nestedExpression;
+					}
+					else {
+						break;
+					}
+				}
+				
 				//special case: anonymous class in constructor call
 				if (parentReference instanceof NewConstructorCall &&
 						((NewConstructorCall)parentReference).getAnonymousClass() != null) {

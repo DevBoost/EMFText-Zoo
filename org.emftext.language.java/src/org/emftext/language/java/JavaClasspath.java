@@ -12,10 +12,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
@@ -24,6 +25,7 @@ import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
+import org.emftext.language.java.util.JavaUtil;
 
 /**
  * This class is responsible for managing an retrieving Java resources to
@@ -272,39 +274,29 @@ public class JavaClasspath {
 			URI_MAP.remove(logicalUri);
 		}
 	}
-		
-	/**
-	 * Returns all inner classifiers present in the class path defined in the 
-	 * given containing classifier.
-	 * 
-	 * @param container
-	 * @return inner classifier list
-	 */
+	
 	public EList<ConcreteClassifier> getInnnerClassifiers(ConcreteClassifier container) {
 		if(container == null) {
-			return new BasicEList<ConcreteClassifier>();
-		}
-		
-		String uri = null;
-		if(container.eIsProxy()) {
-			uri = ((InternalEObject)container).eProxyURI().trimFragment().toString();
-		}
-		else {
-			Resource resource = container.eResource();
-			if (resource != null){
-				uri = container.eResource().getURI().toString();
-			}
+			return ECollections.emptyEList();
 		}
 
-		if (uri != null){
-			if (uri.startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
-				String className = uri.substring(
-						JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
-				className = className.substring(0,className.length()-5) + "$";
-				return getClassifiers(className, "*");	
-			}
+		String fullName = "";
+		EObject parentContainer = JavaUtil.findContainingClassifier(container.eContainer());
+		
+		while (parentContainer instanceof ConcreteClassifier) {
+			fullName = ((ConcreteClassifier)parentContainer).getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + fullName;
+			parentContainer = JavaUtil.findContainingClassifier(parentContainer.eContainer());
 		}
-		return new BasicEList<ConcreteClassifier>();
+		
+		EObject rootContainer = JavaUtil.findContainingCompilationUnit(container);
+		if (rootContainer instanceof CompilationUnit) {
+			CompilationUnit compilationUnit = (CompilationUnit) rootContainer;
+		    fullName = getContainerNameFromNamespace(compilationUnit) + fullName + 
+		    	container.getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			return getClassifiers(fullName, "*");
+		}
+		
+		return ECollections.emptyEList();
 	}
 	
 	/**
