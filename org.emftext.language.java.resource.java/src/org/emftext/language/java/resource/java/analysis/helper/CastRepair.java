@@ -116,10 +116,10 @@ public class CastRepair {
 							
 							int idx = additiveExpression.getChildren().indexOf(aeChild);
 							if (idx + 1 == additiveExpression.getChildren().size()) {
-								additiveExpression.getChildren().add(idx + 1,unaryExpression.getChild());
+								additiveExpression.getChildren().add(unaryExpression.getChild());
 							}
 							else {
-								additiveExpression.getChildren().add(unaryExpression.getChild());
+								additiveExpression.getChildren().add(idx + 1,unaryExpression.getChild());
 							}
 							if (idx == additiveExpression.getAdditiveOperators().size()) {
 								additiveExpression.getAdditiveOperators().add(OperatorsFactory.eINSTANCE.createAddition());
