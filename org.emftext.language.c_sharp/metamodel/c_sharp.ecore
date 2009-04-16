@@ -221,9 +221,9 @@
           eType="#//statements/Statement" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SwitchLabel">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="case" eType="#//keywords/Case"
-          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//keywords/Default"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="case" eType="#//keywords/Case"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
           containment="true"/>
@@ -263,8 +263,51 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ForInitializer" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="JumpStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TryStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="JumpStatement" abstract="true" eSuperTypes="#//statements/EmbeddedStatement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BreakStatement" eSuperTypes="#//statements/JumpStatement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ContinueStatement" eSuperTypes="#//statements/JumpStatement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GotoStatement" eSuperTypes="#//statements/JumpStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//keywords/Default"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="case" eType="#//keywords/Case"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//common/Identifier"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//statements/JumpStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ThrowStatement" eSuperTypes="#//statements/JumpStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TryStatement" eSuperTypes="#//statements/EmbeddedStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specificCatchClause"
+          upperBound="-1" eType="#//statements/SpecificCatchClause" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="generalCatchClause" eType="#//statements/GeneralCatchClause"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="finallyClause" eType="#//statements/FinallyClause"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SpecificCatchClause">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//common/Identifier"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GeneralCatchClause">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FinallyClause">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
+          containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CheckedStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
     <eClassifiers xsi:type="ecore:EClass" name="UncheckedStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
     <eClassifiers xsi:type="ecore:EClass" name="LockStatement" eSuperTypes="#//statements/EmbeddedStatement"/>

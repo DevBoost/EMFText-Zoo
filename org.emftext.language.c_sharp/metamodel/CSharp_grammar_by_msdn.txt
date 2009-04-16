@@ -671,8 +671,8 @@ embedded-statement:
     expression-statement	//done
     selection-statement		//done
     iteration-statement		//done
-    jump-statement
-    try-statement
+    jump-statement			//done
+    try-statement			//done
     checked-statement
     unchecked-statement
     lock-statement
@@ -735,7 +735,7 @@ statement-expression:
     assignment-expression		//done MRange
     post-increment-expression	//done MRange
     post-decrement-expression	//done MRange
-    pre-increment-expression
+    pre-increment-expression	
     pre-decrement-expression
 
 //done     
@@ -790,46 +790,57 @@ statement-expression-list:
 //done    
 foreach-statement:
     'foreach'   '('   type   identifier   'in'   expression   ')'   embedded-statement
-    
+
+//done    
 jump-statement:
     break-statement
     continue-statement
     goto-statement
     return-statement
     throw-statement
-    
+
+//done    
 break-statement:
     'break'   ';'
-    
+
+//done    
 continue-statement:
     'continue'   ';'
-    
+
+//done       
 goto-statement:
     'goto'   identifier   ';'
     'goto'   'case'   expression   ';'
     'goto'   'default'   ';'
-    
+
+//done       
 return-statement:
     'return'   expression ?   ';'
-    
+
+//done       
 throw-statement:
     'throw'   expression ?   ';'
-    
+
+//done    
 try-statement:
     'try'   block   catch-clauses
     'try'   block   finally-clause
     'try'   block   catch-clauses   finally-clause
-    
+
+//done in  try-statement   
 catch-clauses:
     specific-catch-clauses +   general-catch-clause ?
     specific-catch-clauses *   general-catch-clause
-    
+
+//pre-done	 class-type missing   
 specific-catch-clause:
     'catch'   '('   class-type   identifier ?   ')'   block
-    
+
+//done    
 general-catch-clause:
     'catch'   block
-    
+
+//done    
 finally-clause:
     'finally'   block
     

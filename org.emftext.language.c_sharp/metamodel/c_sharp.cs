@@ -166,8 +166,35 @@ statements.ForStatement
 
 statements.ForeachStatement
     ::= "foreach"   "("   type   identifier   "in"   expression   ")"   embeddedStatement ;
+
+statements.BreakStatement
+    ::= "break"   ";" ;
     
-             
+statements.ContinueStatement
+    ::= "continue"   ";" ;
+        
+statements.GotoStatement
+    ::= "goto"   ( default | case  expression | identifier )    ";" ;
+    
+statements.ReturnStatement
+    ::= "return"   expression ?   ";" ;
+    
+statements.ThrowStatement
+    ::= "throw"   expression ?   ";" ;
+
+statements.TryStatement
+    ::= "try"   block   specificCatchClause *  generalCatchClause ?  finallyClause ? ;
+    
+statements.SpecificCatchClause
+    ::= "catch"   "("        identifier ?   ")"   block ;
+    // class-type
+statements.GeneralCatchClause
+    ::= "catch"   block ;
+    
+statements.FinallyClause
+    ::= "finally"   block ;    
+    
+                 
 // Keywords
 
 keywords.Out
