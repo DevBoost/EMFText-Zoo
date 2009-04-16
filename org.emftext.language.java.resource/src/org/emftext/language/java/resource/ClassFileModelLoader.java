@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.annotations.AnnotationsFactory;
+import org.emftext.language.java.arrays.ArrayTypable;
 import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
@@ -19,20 +20,26 @@ import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
+import org.emftext.language.java.generics.TypeParametrizable;
 import org.emftext.language.java.generics.UnknownTypeArgument;
+import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
+import org.emftext.language.java.parameters.Parametrizable;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
 
 /**
@@ -135,25 +142,26 @@ public class ClassFileModelLoader {
 		}
 	
 		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
-			((MemberContainer) emfClassifier).getMembers().add(constructField(filed));
+			emfClassifier.getMembers().add(constructField(filed));
 		}
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
 			if(!method.isSynthetic()) {
-				Method emfMethod = constructMethod(method, emfClassifier, false);
+				Member emfMember = constructMethod(method, emfClassifier, false); 
 				//If the last parameter has an array type it could also be a variable length parameter.
 				//The java compiler compiles variable length arguments down to array arguments.
 				//Then the arguments are wrapped into an array. As far as I know, there is no
 				//way to tell the difference from byte code. Therefore we create two versions
 				//of the method: one with array argument and one with variable length
-				if (!emfMethod.getParameters().isEmpty() && 
-						!emfMethod.getParameters().get(
-								emfMethod.getParameters().size()-1).getArrayDimensionsBefore().isEmpty()) {
+				if (emfMember instanceof Method &&
+						!((Method)emfMember).getParameters().isEmpty() && 
+						!((Method)emfMember).getParameters().get(
+								((Method)emfMember).getParameters().size()-1).getArrayDimensionsBefore().isEmpty()) {
 					
-					Method emfMethod2 = constructMethod(method, emfClassifier, true);
-					((MemberContainer) emfClassifier).getMembers().add(emfMethod2);
+					Member emfMethod2 = constructMethod(method, emfClassifier, true);
+					emfClassifier.getMembers().add(emfMethod2);
 				}
 				else {
-					((MemberContainer) emfClassifier).getMembers().add(emfMethod);
+					emfClassifier.getMembers().add(emfMember);
 				}
 			}
 
@@ -162,7 +170,7 @@ public class ClassFileModelLoader {
 		return emfClassifier;
 	}
 	
-	protected Method constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
+	protected Member constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
 		Method emfMethod = null;
 		if(emfClassifier instanceof Annotation) {
 			emfMethod = annotationsFactory.createAnnotationAttribute();
@@ -186,7 +194,7 @@ public class ClassFileModelLoader {
 				break;
 			}
 		}
-		emfMethod.getTypeParameters().addAll(constructTypeParameters(plainSignature));
+		((TypeParametrizable) emfMethod).getTypeParameters().addAll(constructTypeParameters(plainSignature));
 		
 		TypeReference typeRef = createReferenceToType(signature);
 		TypeReference typeParamRef = constructReturnTypeParameterReference(plainSignature, emfMethod, emfClassifier);
@@ -199,7 +207,7 @@ public class ClassFileModelLoader {
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	emfMethod.getArrayDimensionsBefore().add(
+        	((ArrayTypable) emfMethod).getArrayDimensionsBefore().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		
@@ -215,7 +223,7 @@ public class ClassFileModelLoader {
 			}
 		}
 		
-		EList<TypeReference> tpList = constructMethodTypeParameterReferences(plainSignature, emfMethod, emfClassifier);
+		EList<TypeReference> tpList = constructMethodTypeParameterReferences(plainSignature, (Method) emfMethod, emfClassifier);
 		for(int i = 0; i<tpList.size(); i++) {
 			TypeReference typeParameterReference = tpList.get(i);
 			if(typeParameterReference != null) {
@@ -232,7 +240,7 @@ public class ClassFileModelLoader {
 			if(typeRef instanceof ClassifierReference) {
 				String returnSignature = plainSignature.substring(0, plainSignature.lastIndexOf(")"));
 				returnSignature = returnSignature.substring(returnSignature.lastIndexOf(")") + 1);
-				constructTypeArguments(returnSignature, (ClassifierReference) typeRef, emfMethod, emfClassifier);
+				constructTypeArguments(returnSignature, (ClassifierReference) typeRef, (TypeParametrizable) emfMethod, emfClassifier);
 			}
 
 			
@@ -249,7 +257,15 @@ public class ClassFileModelLoader {
 				
 		}
 		
-		return emfMethod;
+		if (emfMethod.getName().equals("<init>")) {
+			Constructor constructor = MembersFactory.eINSTANCE.createConstructor();
+			constructor.getTypeParameters().addAll(emfMethod.getTypeParameters());
+			constructor.getParameters().addAll(emfMethod.getParameters());
+			constructor.setName(emfClassifier.getName());
+			return constructor;
+		}
+		
+		return (Member) emfMethod;
 	}
 	
 	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType) {
@@ -291,7 +307,7 @@ public class ClassFileModelLoader {
 		return emfField;
 	}
 	
-	protected ClassifierReference constructTypeParameterReference(String name, Method method, ConcreteClassifier emfClassifier) {
+	protected ClassifierReference constructTypeParameterReference(String name, TypeParametrizable method, ConcreteClassifier emfClassifier) {
 		TypeParameter typeParameter =  null;
 		for(TypeParameter cand : method.getTypeParameters()) {
 			if(cand.getName().equals(name)) {
@@ -317,7 +333,7 @@ public class ClassFileModelLoader {
 		return classifierReference;
 	}
 	
-	protected ClassifierReference constructReturnTypeParameterReference(String signature, Method method, ConcreteClassifier emfClassifier) {
+	protected ClassifierReference constructReturnTypeParameterReference(String signature, TypeParametrizable method, ConcreteClassifier emfClassifier) {
 		int idx = signature.indexOf(")T");
 		if(idx == -1) {
 			return null;
@@ -505,7 +521,7 @@ public class ClassFileModelLoader {
         return emfTypeReference;
 	}
 	
-	protected String constructTypeArguments(String s, ClassifierReference typeRef, Method method, ConcreteClassifier emfClassifier) { 
+	protected String constructTypeArguments(String s, ClassifierReference typeRef, TypeParametrizable method, ConcreteClassifier emfClassifier) { 
 	 
 
 		
