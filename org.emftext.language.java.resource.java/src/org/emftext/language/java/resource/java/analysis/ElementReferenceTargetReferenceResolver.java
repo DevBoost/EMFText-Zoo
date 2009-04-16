@@ -55,6 +55,9 @@ public class ElementReferenceTargetReferenceResolver extends
 					if (nestedExpression instanceof Reference) {
 						parentReference = (Reference) nestedExpression;
 					}
+					else {
+						break;
+					}
 				}
 				
 				//special case: anonymous class in constructor call
