@@ -61,8 +61,10 @@ public class ClassFileModelLoader {
 		ConcreteClassifier classifier = constructClassifier(myClass);
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 		cu.setName(classFileName);
-		List<String> namespace = Arrays.asList(myClass.getPackageName().split("\\."));
-		cu.getNamespaces().addAll(namespace);
+		List<String> namespace1 = Arrays.asList(myClass.getClassName().split("\\."));
+		List<String> namespace2 = Arrays.asList(namespace1.get(namespace1.size() - 1).split("\\$"));
+		cu.getNamespaces().addAll(namespace1.subList(0, namespace1.size() - 1));
+		cu.getNamespaces().addAll(namespace2.subList(0, namespace2.size() - 1));
 		cu.getClassifiers().add(classifier);
 		return cu;
 	}

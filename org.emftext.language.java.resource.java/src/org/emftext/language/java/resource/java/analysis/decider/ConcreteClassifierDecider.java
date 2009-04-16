@@ -67,6 +67,16 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		addImports(container, resultList);
 		addDefaultImports(container, resultList);
 
+		//TODO which inner classes are exactly imported and what is their priority?
+		if(container instanceof CompilationUnit) {
+			for(Import aImport : ((CompilationUnit)container).getImports()) {
+				if(aImport instanceof ClassifierImport) {
+					resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+							((ClassifierImport)aImport).getClassifier()));
+				}
+			}
+		}
+		
 		return resultList;
 	}
 	
