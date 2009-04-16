@@ -124,8 +124,7 @@ statements.LabeledStatement
 	::= name[] ":" statement ; 
 
 statements.DeclarationStatement
-	::= localVariableDeclaration  ";" 
-	|	localConstantDeclaration  ";" 
+	::= ( localVariableDeclaration  | localConstantDeclaration )  ";" 
 	;
 		
 statements.LocalVariableDeclaration
@@ -140,12 +139,23 @@ statements.LocalConstantDeclaration
 	
 statements.ConstantDeclarator
 	::= name[] "=" expression ;
-
 	
 statements.ExpressionStatement
 	::= statementExpression   ";" ;
 
+statements.IfStatement
+    ::= "if"   "("   expression   ")"   embeddedStatement ( "else"   embeddedStatement ) ? ;
+    
+statements.SwitchStatement
+    ::= "switch"   "("   expression   ")"  "{"   switchSection *   "}" ; 
 
+statements.SwitchSection
+    ::= switchLabel *   statement * ;
+  
+statements.SwitchLabel
+    ::= ( default | ( case  expression ) ) ":" ; 
+    
+        
 // Keywords
 
 keywords.Out
@@ -153,7 +163,14 @@ keywords.Out
 
 keywords.Ref
 	::= "ref";
-			
+
+keywords.Case
+	::= "case";
+
+keywords.Default
+	::= "default";
+	
+				
 // Literals
 
 literals.BooleanLiteral
@@ -211,8 +228,7 @@ expressions.ObjectCreationExpression
     ::= "new"   type   "("   argumentList?   ")" ;
 
 expressions.TypeOfExpression
-    ::= "typeof"   "("   type   ")"
-    |	"typeof"   "("   "void" ")" ;
+    ::= "typeof"   "("   type   ")" ;
 
 expressions.UnaryExpression
 	::= memberAccess 

@@ -578,7 +578,7 @@ delegate-creation-expression:
 //done		Zehlike
 typeof-expression:
     'typeof'   '('   type   ')'
-    'typeof'   '('   'void'   ')'
+    'typeof'   '('   'void'   ')'   //remove "void" cause this is a type
     
 checked-expression:
     'checked'   '('   expression   ')'
@@ -665,12 +665,11 @@ statement:
     declaration-statement
     embedded-statement
   
-//done		Zehlike  
 embedded-statement:
     ( unsafe ) ?  block		//done in SimpleEmbeddedStatement	MRange
-    empty-statement
-    expression-statement
-    selection-statement
+    empty-statement			//done
+    expression-statement	//done
+    selection-statement		//done
     iteration-statement
     jump-statement
     try-statement
@@ -709,6 +708,7 @@ local-variable-declarator:
 
 //half-done, as abstract class, 
 //array-initializer is missing	MRange  
+//renamed in VariableInitializer (equal functions)
 local-variable-initializer:
     expression
     array-initializer
@@ -733,31 +733,31 @@ statement-expression:
     invocation-expression
     object-creation-expression
     assignment-expression		//done MRange
-    post-increment-expression
-    post-decrement-expression
+    post-increment-expression	//done MRange
+    post-decrement-expression	//done MRange
     pre-increment-expression
     pre-decrement-expression
-    
+
+//done     
 selection-statement:
     if-statement
     switch-statement
-    
+
+//done    
 if-statement:
     'if'   '('   expression   ')'   embedded-statement	( 'else'   embedded-statement ) ?
     
-    
+//done     
 switch-statement:
-    'switch'   '('   expression   ')'   switch-block
-    
-switch-block:
-    '{'   switch-section *   '}'
-    
+    'switch'   '('   expression   ')'   '{'   switch-section *   '}'
+
+//done    
 switch-section:
     switch-label *   statement *
 
+//done with "default" and "case" as seperate Model 
 switch-label:
-    'case'   expression  ':'
-    'default'  ':'
+    ( 'default' | ('case'   expression ) ) ':'
     
 iteration-statement:
     while-statement
@@ -973,7 +973,8 @@ field-modifier:
     
 variable-declarator:
     identifier  ( '='   variable-initializer) ?
-    
+
+//done MRange
 variable-initializer:
     expression
     array-initializer
