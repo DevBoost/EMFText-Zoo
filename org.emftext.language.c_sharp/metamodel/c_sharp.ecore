@@ -88,6 +88,10 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PostIncrementExpression" eSuperTypes="#//expressions/PrimaryExtendedExpressionType #//expressions/StatementExpression"/>
     <eClassifiers xsi:type="ecore:EClass" name="PostDecrementExpression" eSuperTypes="#//expressions/PrimaryExtendedExpressionType #//expressions/StatementExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PointerMemberAccess" eSuperTypes="#//expressions/PrimaryExtendedExpressionType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" lowerBound="1"
+          eType="#//common/Identifier" containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BaseAccess" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expressionList" eType="#//expressions/ExpressionList"
           containment="true"/>
@@ -113,6 +117,24 @@
           upperBound="-1" eType="#//expressions/PrimaryExtendedExpressionType" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" eType="#//expressions/UnaryExpression"
           containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="addition" lowerBound="1"
+          eType="#//operators/Addition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subtraction" lowerBound="1"
+          eType="#//operators/Subtraction" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="negate" lowerBound="1"
+          eType="#//operators/Negate" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="complement" lowerBound="1"
+          eType="#//operators/Complement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplication" lowerBound="1"
+          eType="#//operators/Multiplication" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="preIncrementExpression"
+          eType="#//expressions/PreIncrementExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="preDecrementExpression"
+          eType="#//expressions/PreDecrementExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="castExpression" eType="#//expressions/CastExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="addressOfExpression"
+          eType="#//expressions/AddressOfExpression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression"/>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpression" eSuperTypes="#//expressions/Expression #//expressions/StatementExpression">
@@ -123,8 +145,63 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           eType="#//expressions/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeOfExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeOfExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DelegateCreationExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="delegateType" lowerBound="1"
+          eType="#//types/ClassOrInterfaceOrDelegateOrEnumType" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CheckedExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UncheckedExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SizeOfExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PreIncrementExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
+          eType="#//expressions/UnaryExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PreDecrementExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
+          eType="#//expressions/UnaryExpression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CastExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" eType="#//expressions/UnaryExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AddressOfExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" eType="#//expressions/UnaryExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
+          upperBound="-1" eType="#//expressions/UnaryExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplication" eType="#//operators/Multiplication"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="division" eType="#//operators/Division"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="remainder" eType="#//operators/Remainder"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicativeExpression"
+          lowerBound="1" upperBound="-1" eType="#//expressions/MultiplicativeExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="addition" eType="#//operators/Addition"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subtraction" eType="#//operators/Subtraction"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>

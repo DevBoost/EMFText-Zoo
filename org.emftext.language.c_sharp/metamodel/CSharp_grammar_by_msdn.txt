@@ -497,12 +497,11 @@ primary-no-array-creation-expression:
     'this'							//done as Literal
     base-access						//done		Zehlike
     object-creation-expression		//done		Zehlike
-    delegate-creation-expression
-    typeof-expression
-    sizeof-expression
-    checked-expression
-    unchecked-expression
-    sizeof-expression
+    delegate-creation-expression	//done		Zehlike
+    typeof-expression				//done		Zehlike
+    checked-expression				//done		Zehlike
+    unchecked-expression			//done		Zehlike
+    sizeof-expression				//done		Zehlike
     
 
 //Links-Rekursions-Lösung
@@ -512,14 +511,17 @@ primary-extended-expression-type:
 	element-access				//done
 	post-increment-expression	//done
 	post-decrement-expression	//done
-	pointer-member-access
-    
+	pointer-member-access		//done
+ 
+//done		Zehlike   
 pointer-member-access:	
     '->'   identifier
-    
+
+//done		Zehlike    
 addressof-expression:
     '&'   unary-expression
-    
+
+//done		Zehlike    
 sizeof-expression:
     'sizeof'   (   type   )
     
@@ -571,7 +573,7 @@ array-creation-expression:
     'new'   type   '['   expression-list   ']'   rank-specifier *   array-initializer ?
     'new'   array-type   array-initializer
 
-    
+//done		Zehlike  
 delegate-creation-expression:
     'new'   delegate-type   (   expression   )
 
@@ -579,13 +581,16 @@ delegate-creation-expression:
 typeof-expression:
     'typeof'   '('   type   ')'
     'typeof'   '('   'void'   ')'   //remove "void" cause this is a type
-    
+
+//done		Zehlike   
 checked-expression:
     'checked'   '('   expression   ')'
 
+//done		Zehlike
 unchecked-expression:
     'unchecked'   '('   expression   ')'
-    
+
+//done		Zehlike    
 unary-expression:
 	member-access 	//muss wegen predefined-type schon eher geprüft werden
     primary-expression   primary-extended-expression-type *		//aus Umbau der Linksrekursion hervorgegangen
@@ -599,16 +604,20 @@ unary-expression:
     cast-expression
     pointer-indirection-expression
     addressof-expression
-    
+
+//done		Zehlike    
 pre-increment-expression:
     '++'   unary-expression
-    
+
+//done		Zehlike
 pre-decrement-expression:
     '--'   unary-expression
-    
+
+//done		Zehlike    
 cast-expression:
     '('   type   ')'   unary-expression
-    
+
+//done		Zehlike    
 multiplicative-expression:
     unary-expression   ( ( '*' | '/' | '%' )   unary-expression )*
     
@@ -647,9 +656,6 @@ conditional-expression:
 assignment-expression:
     unary-expression   assignment-operator   expression
     
-//done		Zehlike    
-assignment-operator: one of
-    =   +=   -=   *=   /=   %=   &=   |=   ^=   <<=   >>=
     
 //done		Zehlike
 expression:

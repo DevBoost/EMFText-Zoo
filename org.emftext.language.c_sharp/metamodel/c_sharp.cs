@@ -253,6 +253,9 @@ expressions.MemberAccess
 expressions.ElementAccess
     ::= "[" expressionList "]" ;
     
+expressions.PointerMemberAccess
+	::= "->"   identifier ;
+    
 expressions.InvocationExpression 
     ::= "(" argumentList ? ")" ;
 
@@ -274,16 +277,50 @@ expressions.TypeOfExpression
 expressions.UnaryExpression
 	::= memberAccess 
 	|	primaryExpression  primaryExtendedExpressionType *
-	|	"+"   unaryExpression 
-    |	"-"   unaryExpression 
-    |	"!"   unaryExpression 
-    |	"~"   unaryExpression 
-    |	"*"   unaryExpression ;
-//Informationsverlust in den Operatoren
+	|	addition		unaryExpression 
+    |	subtraction   	unaryExpression 
+    |	negate   		unaryExpression 
+    |	complement   	unaryExpression 
+    |	multiplication  unaryExpression 
+    |	preIncrementExpression 
+    |	preDecrementExpression 
+    |	castExpression 
+    |	addressOfExpression ;
+
 
 expressions.AssignmentExpression
     ::= unaryExpression   assignmentOperator   expression;
     
+expressions.DelegateCreationExpression
+	::= "new"   delegateType   "("   expression   ")" ;
+	
+expressions.CheckedExpression
+	::= "checked"   "("   expression   ")" ;
+
+expressions.UncheckedExpression
+	::= "unchecked"   "("   expression   ")" ;
+	
+expressions.SizeOfExpression
+	::= "sizeof"   "("   type   ")" ;
+	
+expressions.PreIncrementExpression
+	::= "++"   unaryExpression ;
+	
+expressions.PreDecrementExpression
+	::= "--"   unaryExpression ;
+	
+expressions.CastExpression
+	::= "("   type   ")"   unaryExpression ;
+	
+expressions.AddressOfExpression
+	::= "&"   unaryExpression ;
+
+expressions.MultiplicativeExpression
+    ::= unaryExpression   ( ( multiplication | division | remainder )   unaryExpression )* ;
+
+expressions.AdditiveExpression
+    ::= multiplicativeExpression ( ( addition | subtraction ) multiplicativeExpression )* ; 
+
     
 
 //OPERATORS
