@@ -76,22 +76,25 @@ public class MethodUtil {
 					return false;
 				}
 				
+				boolean parmetersMatch = true;
 				if (parameterType != null && argumentType != null) {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
 						if (needsPerfectMatch) {
-							return TypeUtil.equalsType(argumentType, parameterType);
+							parmetersMatch = parmetersMatch && TypeUtil.equalsType(argumentType, parameterType);
 						}
 						else {
-							return TypeUtil.isSuperType(argumentType, parameterType);
+							parmetersMatch = parmetersMatch && TypeUtil.isSuperType(argumentType, parameterType);
 						}
 					}
 					else {
 						return false;
 					}
 				}
+				
 				else {
 					return false;
 				}
+				return parmetersMatch;
 			}
 			return true;
 		}

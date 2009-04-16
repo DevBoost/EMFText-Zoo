@@ -49,14 +49,11 @@ public class ElementReferenceTargetReferenceResolver extends
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {
-				//a ncc can be encapsulated in nested expressions
+				//can be encapsulated in nested expressions
 				while (parentReference instanceof NestedExpression) {
 					Expression nestedExpression = ((NestedExpression)parentReference).getExpression();
 					if (nestedExpression instanceof Reference) {
 						parentReference = (Reference) nestedExpression;
-					}
-					else {
-						break;
 					}
 				}
 				
