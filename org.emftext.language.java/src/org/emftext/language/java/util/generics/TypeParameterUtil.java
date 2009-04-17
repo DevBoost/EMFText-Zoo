@@ -79,9 +79,11 @@ public class TypeParameterUtil {
 						ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(prevTypeReference);
 						Type prevType = TypeReferenceUtil.getTarget(classifierReference, (ElementReference) reference.eContainer());
 						if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
-							TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
-							if (arg instanceof QualifiedTypeArgument) {
-								return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
+							if (typeParameterIndex < classifierReference.getTypeArguments().size())  {
+								TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
+								if (arg instanceof QualifiedTypeArgument) {
+									return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
+								}	
 							}
 						}
 					}
@@ -101,7 +103,11 @@ public class TypeParameterUtil {
 				}
 
 				for(Expression argument : methodCall.getArguments()) {
-					Parameter parameter = method.getParameters().get(methodCall.getArguments().indexOf(argument));
+					int idx = methodCall.getArguments().indexOf(argument);
+					if (idx >= method.getParameters().size()) {
+						continue;
+					}
+					Parameter parameter = method.getParameters().get(idx);
 					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
 					
 					if (argument instanceof Reference) {
