@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ElementReference;
@@ -49,16 +50,25 @@ public class ElementReferenceTargetReferenceResolver extends
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {
+				startingPoint = ReferenceUtil.getType(parentReference);
+				
 				if (parentReference instanceof NestedExpression) {
 					startingPoint = ExpressionUtil.getType(((NestedExpression)parentReference).getExpression());
 				}
+				
 				//special case: anonymous class in constructor call
-				else if (parentReference instanceof NewConstructorCall &&
+				while (parentReference instanceof NestedExpression) {
+					Expression nestedExpression = ((NestedExpression)parentReference).getExpression();
+					if (nestedExpression instanceof Reference) {
+						parentReference = (Reference) nestedExpression;
+					}
+					else {
+						parentReference = null;
+					}
+				}
+				if (parentReference instanceof NewConstructorCall &&
 						((NewConstructorCall)parentReference).getAnonymousClass() != null) {
 					startingPoint = ((NewConstructorCall)parentReference).getAnonymousClass();
-				}
-				else {
-					startingPoint = ReferenceUtil.getType(parentReference);
 				}
 			}
 		}
