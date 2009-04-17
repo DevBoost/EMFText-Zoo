@@ -394,14 +394,16 @@ namespace-or-type-name: //done with namespaceOrTypeNameParts
 
 C.2.2 Types
 
+//done
 type:
-    value-type //done
-    reference-type //done
+    value-type 
+    reference-type 
     pointer-type
-    
+
+//done  : ( simpleType | referenceType )  ( "*" )+    
 pointer-type: //achtung: Linksrekursiv
     type   '*'
-    'void'   '*'
+    'void'   '*' //void in simple-type
 
 //done, splitt in SimpleType and ReferenceType    
 value-type:
@@ -670,15 +672,16 @@ statement:
     labeled-statement
     declaration-statement
     embedded-statement
-  
+
+//done MRange  
 embedded-statement:
-    ( unsafe ) ?  block		//done in SimpleEmbeddedStatement	MRange
-    empty-statement			//done
-    expression-statement	//done
-    selection-statement		//done
-    iteration-statement		//done
-    jump-statement			//done
-    try-statement			//done
+    ( unsafe ) ?  block		//done in SimpleEmbeddedStatement
+    empty-statement			
+    expression-statement	
+    selection-statement		
+    iteration-statement		
+    jump-statement			
+    try-statement			
     checked-statement
     unchecked-statement
     lock-statement
@@ -686,7 +689,7 @@ embedded-statement:
 	fixed-statement
 
 //done		Zehlike
-//";" added Range
+//";" added MRange
 block:
     '{'   statement *  '}'
 	';'
@@ -872,17 +875,12 @@ resource-acquisition:
     expression
 
 fixed-statement:
-    'fixed'   '('   pointer-type   fixed-pointer-declarators   ')'   embedded-statement
-    
-fixed-pointer-declarators:
-    fixed-pointer-declarator ( ','   fixed-pointer-declarator)*
- 
+    'fixed'   '('   pointer-type   fixed-pointer-declarator ( ','   fixed-pointer-declarator)*   ')'   embedded-statement
+
+//done
+// variable-reference = expression, '&' in unary-expression
 fixed-pointer-declarator:
-    identifier   =   fixed-pointer-initializer
-    
-fixed-pointer-initializer:
-    &   variable-reference
-    expression
+    identifier   =  ( '&'  variable-reference | expression )
     
     
 

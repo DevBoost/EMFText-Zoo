@@ -83,7 +83,9 @@ types.String	::= "string" ;
 
 types.ClassOrInterfaceOrDelegateOrEnumType
 	::= namespaceOrTypeName ;
-	
+
+types.PointerType
+    ::= ( simpleType | referenceType )  ( "*" )+ ;	
 	
 namespaces.CompilationUnit 
 	::= usingDirectives *  namespaceMemberDeclaration * ;
@@ -209,7 +211,11 @@ statements.LockStatement
 statements.UsingStatement
     ::= "using"   "("    resourceAcquisition   ")"    embeddedStatement ;
                      
+statements.FixedStatement
+    ::= "fixed"   "("   pointerType   fixedPointerDeclarator ( ","   fixedPointerDeclarator)*   ")"   embeddedStatement ;
 
+statements.FixedPointerDeclarator
+    ::= identifier   "="  expression ;
     	
     	
 //Expressions
