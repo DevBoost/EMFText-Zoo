@@ -28,6 +28,7 @@ import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.generics.TypeParametrizable;
 import org.emftext.language.java.generics.UnknownTypeArgument;
 import org.emftext.language.java.members.Constructor;
+import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersFactory;
@@ -134,8 +135,13 @@ public class ClassFileModelLoader {
 			}
 		}
 	
-		for(org.apache.bcel.classfile.Field filed : clazz.getFields()) {
-			emfClassifier.getMembers().add(constructField(filed));
+		for(org.apache.bcel.classfile.Field field : clazz.getFields()) {
+			if (field.isEnum() && emfClassifier instanceof Enumeration) {
+				((Enumeration)emfClassifier).getConstants().add(constructEnumConstant(field));
+			}
+			else {
+				emfClassifier.getMembers().add(constructField(field));
+			}
 		}
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
 			if(!method.isSynthetic()) {
@@ -298,6 +304,14 @@ public class ClassFileModelLoader {
         }
 		
 		return emfField;
+	}
+	
+	protected EnumConstant constructEnumConstant(
+			org.apache.bcel.classfile.Field field) {
+		
+		EnumConstant enumConstant = membersFactory.createEnumConstant();
+		enumConstant.setName(field.getName());
+		return enumConstant;
 	}
 	
 	protected ClassifierReference constructTypeParameterReference(String name, TypeParametrizable method, ConcreteClassifier emfClassifier) {
