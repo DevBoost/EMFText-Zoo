@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.containers.Package;
+import org.emftext.language.java.expressions.NestedExpression;
+import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
-import org.emftext.language.java.containers.Package;
-import org.emftext.language.java.expressions.Expression;
-import org.emftext.language.java.expressions.NestedExpression;
-import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.EnumConstantDecider;
 import org.emftext.language.java.resource.java.analysis.decider.FieldDecider;

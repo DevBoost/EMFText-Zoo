@@ -76,14 +76,14 @@ public class MethodUtil {
 					return false;
 				}
 				
-				boolean parmetersMatch = true;
+				boolean parametersMatch = true;
 				if (parameterType != null && argumentType != null) {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
 						if (needsPerfectMatch) {
-							parmetersMatch = parmetersMatch && TypeUtil.equalsType(argumentType, parameterType);
+							parametersMatch = parametersMatch && TypeUtil.equalsType(argumentType, parameterType);
 						}
 						else {
-							parmetersMatch = parmetersMatch && TypeUtil.isSuperType(argumentType, parameterType);
+							parametersMatch = parametersMatch && TypeUtil.isSuperType(argumentType, parameterType);
 						}
 					}
 					else {
@@ -94,14 +94,13 @@ public class MethodUtil {
 				else {
 					return false;
 				}
-				return parmetersMatch;
+				return parametersMatch; 
 			}
 			return true;
-		}
+		} 
 		return false;
 		
 	}
 	
-
 
 }

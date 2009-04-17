@@ -4,14 +4,18 @@ import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.generics.TypeParametrizable;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.ElementReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.references.ReflectiveClassReference;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.Type;
@@ -19,6 +23,7 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.util.classifiers.ClassUtil;
 import org.emftext.language.java.util.classifiers.InterfaceUtil;
+import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
@@ -85,21 +90,57 @@ public class TypeParameterUtil {
 		}
 		
 		if (typeParameterDeclarator instanceof Method) {
-			Method method = (Method) typeParameterDeclarator;
-			for(int i = 0; i < method.getParameters().size(); i++) {
-				ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(method.getParameters().get(i).getType());
-				if(classifierReference != null && _this.equals(classifierReference.getTarget())) {
-					typeParameterIndex = i;
-					break;
+			if (reference instanceof MethodCall) {
+				Method method = (Method) typeParameterDeclarator;
+				MethodCall methodCall = (MethodCall) reference;
+				if(method.getTypeParameters().size() == methodCall.getCallTypeArguments().size()) {
+					TypeArgument typeArgument = methodCall.getCallTypeArguments().get(method.getTypeParameters().indexOf(_this));
+					if (typeArgument instanceof QualifiedTypeArgument) {
+						return TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType()); 
+					} 
 				}
-			}
-			if (reference instanceof ElementReference) {
-				ElementReference idReference = (ElementReference)reference;
 
-				if (typeParameterIndex != -1 && typeParameterIndex < idReference.getTypeArguments().size()) {
-					TypeArgument typeArgument = idReference.getTypeArguments().get(typeParameterIndex);
-					if(typeArgument instanceof QualifiedTypeArgument) {
-						return TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), null);
+				for(Expression argument : methodCall.getArguments()) {
+					Parameter parameter = method.getParameters().get(methodCall.getArguments().indexOf(argument));
+					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
+					
+					if (argument instanceof ElementReference) {
+						ElementReference elementReference = (ElementReference) argument;
+						while (elementReference.getNext() instanceof ElementReference) {
+							elementReference = (ElementReference) elementReference.getNext();
+						}
+						if (elementReference.getTarget() instanceof TypedElement) {
+							ClassifierReference argumentType = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement)elementReference.getTarget()).getType());
+							if (parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
+								for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
+									if(typeArgument instanceof QualifiedTypeArgument) {
+										if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+											return TypeReferenceUtil.getTarget(
+													((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType());
+										}
+									}
+								}
+							}
+							if (parameterType.getTarget() instanceof TypeParameter) {
+								return argumentType.getTarget();
+							}
+						}
+						if(elementReference.getNext() instanceof ReflectiveClassReference) {
+							if (parameterType.getTypeArguments().size() == 1) {
+								for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
+									if(typeArgument instanceof QualifiedTypeArgument) {
+										if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+											return ReferenceUtil.getType(elementReference);
+										}
+									}
+								}
+							}
+						}
+					}
+					else if (argument instanceof Reference) {
+						if (parameterType.getTarget() instanceof TypeParameter) {
+							return ReferenceUtil.getType((Reference) argument);
+						}
 					}
 				}
 			}
@@ -107,4 +148,5 @@ public class TypeParameterUtil {
 		
 		return _this;
 	}
+	
 }

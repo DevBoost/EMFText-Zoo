@@ -24,8 +24,10 @@ public class AnonymousClassUtil {
 		else {
 			ConcreteClassifier classifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
 			EList<Member> memberList = new BasicEList<Member>();
-			memberList.addAll(classifier.getMembers());
-			memberList.addAll(ConcreteClassifierUtil.getAllMembers(classifier));
+			if (classifier != null) {
+				memberList.addAll(classifier.getMembers());
+				memberList.addAll(ConcreteClassifierUtil.getAllMembers(classifier));
+			}
 			return memberList;
 		}
 	}
