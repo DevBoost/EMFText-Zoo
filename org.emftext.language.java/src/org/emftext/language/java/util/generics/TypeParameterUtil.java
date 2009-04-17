@@ -104,42 +104,52 @@ public class TypeParameterUtil {
 					Parameter parameter = method.getParameters().get(methodCall.getArguments().indexOf(argument));
 					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
 					
-					if (argument instanceof ElementReference) {
-						ElementReference elementReference = (ElementReference) argument;
-						while (elementReference.getNext() instanceof ElementReference) {
-							elementReference = (ElementReference) elementReference.getNext();
+					if (argument instanceof Reference) {
+						Reference argReference = (Reference) argument;
+						
+						while (argReference.getNext() instanceof Reference &&
+								!(argReference.getNext() instanceof ReflectiveClassReference) ) {
+							argReference = argReference.getNext();
 						}
-						if (elementReference.getTarget() instanceof TypedElement) {
-							ClassifierReference argumentType = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement)elementReference.getTarget()).getType());
-							if (parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
-								for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
-									if(typeArgument instanceof QualifiedTypeArgument) {
-										if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-											return TypeReferenceUtil.getTarget(
-													((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType());
+	
+						
+						if (argReference instanceof ElementReference) {
+							ElementReference elementReference = (ElementReference) argReference;
+							while (elementReference.getNext() instanceof ElementReference) {
+								elementReference = (ElementReference) elementReference.getNext();
+							}
+							if (elementReference.getTarget() instanceof TypedElement) {
+								ClassifierReference argumentType = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement)elementReference.getTarget()).getType());
+								if (parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
+									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
+										if(typeArgument instanceof QualifiedTypeArgument) {
+											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+												return TypeReferenceUtil.getTarget(
+														((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType());
+											}
+										}
+									}
+								}
+								if (parameterType.getTarget() instanceof TypeParameter) {
+									return argumentType.getTarget();
+								}
+							}
+							if(elementReference.getNext() instanceof ReflectiveClassReference) {
+								if (parameterType.getTypeArguments().size() == 1) {
+									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
+										if(typeArgument instanceof QualifiedTypeArgument) {
+											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+												return ReferenceUtil.getType(elementReference);
+											}
 										}
 									}
 								}
 							}
+						}
+						else {
 							if (parameterType.getTarget() instanceof TypeParameter) {
-								return argumentType.getTarget();
+								return ReferenceUtil.getType((Reference) argReference);
 							}
-						}
-						if(elementReference.getNext() instanceof ReflectiveClassReference) {
-							if (parameterType.getTypeArguments().size() == 1) {
-								for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
-									if(typeArgument instanceof QualifiedTypeArgument) {
-										if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-											return ReferenceUtil.getType(elementReference);
-										}
-									}
-								}
-							}
-						}
-					}
-					else if (argument instanceof Reference) {
-						if (parameterType.getTarget() instanceof TypeParameter) {
-							return ReferenceUtil.getType((Reference) argument);
 						}
 					}
 				}
