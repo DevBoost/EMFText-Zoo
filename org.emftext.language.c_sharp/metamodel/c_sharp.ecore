@@ -372,6 +372,8 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SpecificCatchClause">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="classType" eType="#//types/ClassOrInterfaceOrDelegateOrEnumType"
+          containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//common/Identifier"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
@@ -413,6 +415,8 @@
   </eSubpackages>
   <eSubpackages name="types" nsURI="http://www.emftext.org/c_sharp/types" nsPrefix="types">
     <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassType" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true" eSuperTypes="#//types/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//types/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="Void" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Decimal" eSuperTypes="#//types/SimpleType"/>
@@ -428,9 +432,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="Char" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Float" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Double" eSuperTypes="#//types/SimpleType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true" eSuperTypes="#//types/Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//types/SimpleType #//types/ClassType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="#//types/SimpleType #//types/ClassType"/>
     <eClassifiers xsi:type="ecore:EClass" name="ClassOrInterfaceOrDelegateOrEnumType"
-        eSuperTypes="#//types/ReferenceType">
+        eSuperTypes="#//types/ReferenceType #//types/ClassType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceOrTypeName"
           lowerBound="1" eType="#//common/NamespaceOrTypeName" containment="true"/>
     </eClassifiers>

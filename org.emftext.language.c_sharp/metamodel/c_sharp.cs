@@ -64,19 +64,22 @@ modifiers.OverrideModifier	::= "override" ;
 modifiers.Static		::= "static" ;
 
 //Simple Types
-types.Void 	::= "void" ;
-types.Decimal ::= "decimal" ;
-types.Bool 	::= "bool" ;
-types.SByte	::= "sbyte" ;
-types.Byte	::= "byte" ;
-types.Short	::= "short" ;
+types.Void 		::= "void" ;
+types.Decimal 	::= "decimal" ;
+types.Bool 		::= "bool" ;
+types.SByte		::= "sbyte" ;
+types.Byte		::= "byte" ;
+types.Short		::= "short" ;
 types.UShort	::= "ushort" ;
 types.Int		::= "int" ;
-types.UInt	::= "uint" ;
-types.Long	::= "long" ;
-types.Char	::= "char" ;
-types.Float	::= "float" ;
+types.UInt		::= "uint" ;
+types.Long		::= "long" ;
+types.ULong		::= "ulong" ;
+types.Char		::= "char" ;
+types.Float		::= "float" ;
 types.Double	::= "double" ;
+types.Object	::= "object" ;
+types.String	::= "string" ;
 
 types.ClassOrInterfaceOrDelegateOrEnumType
 	::= namespaceOrTypeName ;
@@ -186,8 +189,8 @@ statements.TryStatement
     ::= "try"   block   specificCatchClause *  generalCatchClause ?  finallyClause ? ;
     
 statements.SpecificCatchClause
-    ::= "catch"   "("        identifier ?   ")"   block ;
-    // class-type
+    ::= "catch"   "("  classType    identifier ?   ")"   block ;
+     
 statements.GeneralCatchClause
     ::= "catch"   block ;
     
@@ -195,40 +198,7 @@ statements.FinallyClause
     ::= "finally"   block ;    
     
                  
-// Keywords
 
-keywords.Out
-	::= "out";
-
-keywords.Ref
-	::= "ref";
-
-keywords.Case
-	::= "case";
-
-keywords.Default
-	::= "default";
-	
-				
-// Literals
-
-literals.BooleanLiteral
-	::= value[BOOLEAN_LITERAL] ;
-	
-literals.NullLiteral
-	::= "null" ;
-	
-literals.This
-	::= "this" ;
-		
-literals.DecimalIntegerLiteral
-	::= value[DECIMAL_INTEGER_LITERAL];
-
-literals.HexadecimalIntegerLiteral
-	::= value[HEXA_DECIMAL_INTEGER_LITERAL];
-
-literals.RealLiteral
-	::= value[REAL_LITERAL];
     	
     	
 //Expressions
@@ -361,5 +331,39 @@ operators.MinusMinus 	::= "--" ;
 operators.Complement 	::= "~" ;
 operators.Negate 		::= "!" ; 
 
+// Keywords
+
+keywords.Out
+	::= "out";
+
+keywords.Ref
+	::= "ref";
+
+keywords.Case
+	::= "case";
+
+keywords.Default
+	::= "default";
+	
+				
+// Literals
+
+literals.BooleanLiteral
+	::= value[BOOLEAN_LITERAL] ;
+	
+literals.NullLiteral
+	::= "null" ;
+	
+literals.This
+	::= "this" ;
+		
+literals.DecimalIntegerLiteral
+	::= value[DECIMAL_INTEGER_LITERAL];
+
+literals.HexadecimalIntegerLiteral
+	::= value[HEXA_DECIMAL_INTEGER_LITERAL];
+
+literals.RealLiteral
+	::= value[REAL_LITERAL];
 
 }
