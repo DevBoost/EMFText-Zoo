@@ -29,7 +29,7 @@ public class ConcreteClassifierUtil {
 			InterfaceUtil.collectAllSuperInterfaces(javaInterface.getExtends(), superClassifierList);
 			InterfaceUtil.collectAllSuperInterfaces(javaInterface.getDefaultExtends(), superClassifierList);
 		} else if (_this instanceof Annotation) {
-			superClassifierList.add(JavaClasspathUtil.getObjectClass(_this));
+			superClassifierList.add(JavaClasspathUtil.getAnnotationClass(_this));
 		} else if (_this instanceof Enumeration) {
 			Enumeration enumeration = (Enumeration) _this;
 			InterfaceUtil.collectAllSuperInterfaces(enumeration.getImplements(), superClassifierList);

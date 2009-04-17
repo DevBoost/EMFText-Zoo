@@ -71,7 +71,14 @@ public class JavaClasspathUtil {
 		return getClass("String", objectContext);
 	}
 	
-
+	public static Interface getAnnotationClass(EObject objectContext) {
+		if (objectContext.eResource() == null) {
+			throw new IllegalArgumentException("object context element must have a resource");
+		}
+		Interface annotationClass = (Interface) EcoreUtil.resolve(
+				JavaClasspath.INSTANCE.getClassifier("java.lang.annotation.Annotation"), objectContext);
+		return annotationClass;
+	}
 	
 
 }

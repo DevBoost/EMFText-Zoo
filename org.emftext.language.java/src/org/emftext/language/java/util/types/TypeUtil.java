@@ -1,6 +1,7 @@
 package org.emftext.language.java.util.types;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
@@ -55,6 +56,11 @@ public class TypeUtil {
 		
 		//if I am a void, I am of every type
 		if (_this.equals(JavaClasspathUtil.getClass("Void", _this))) {
+			return true;
+		}
+		
+		//annotations
+		if(_this instanceof Annotation && otherType.equals(JavaClasspathUtil.getAnnotationClass(_this))) {
 			return true;
 		}
 		
