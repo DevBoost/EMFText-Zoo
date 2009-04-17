@@ -15,6 +15,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
@@ -28,7 +29,7 @@ import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
-import org.emftext.language.java.util.containers.CompilationUnitUtil;
+import org.emftext.language.java.util.containers.JavaRootUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 
 public class ConcreteClassifierDecider extends AbstractDecider {
@@ -100,8 +101,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	private void addImports(EObject container,
 			EList<EObject> resultList) {
-		if(container instanceof CompilationUnit) {
-			for(Import aImport : ((CompilationUnit)container).getImports()) {
+		if(container instanceof JavaRoot) {
+			for(Import aImport : ((JavaRoot)container).getImports()) {
 				if(aImport instanceof ClassifierImport) {
 					resultList.add(((ClassifierImport)aImport).getClassifier());
 				}
@@ -112,7 +113,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
 				}
 			}
-			for(Import aImport : ((CompilationUnit)container).getImports()) {
+			for(Import aImport : ((JavaRoot)container).getImports()) {
 				if(aImport instanceof PackageImport) {
 					resultList.addAll(ImportUtil.getClassifierList(
 							aImport));
@@ -123,9 +124,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	private void addDefaultImports(EObject container,
 			EList<EObject> resultList) {
-		if(container instanceof CompilationUnit) {
-			resultList.addAll(CompilationUnitUtil.getDefaultImports(
-					(CompilationUnit) container));
+		if(container instanceof JavaRoot) {
+			resultList.addAll(JavaRootUtil.getDefaultImports(
+					(JavaRoot) container));
 		}
 	}
 	

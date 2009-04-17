@@ -5,15 +5,15 @@ import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
-import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.JavaRoot;
 
-public class CompilationUnitUtil {
+public class JavaRootUtil {
 	
 	/**
 	 * @param _this
 	 * @return all default imports (my package + <code>java.lang</code>)
 	 */
-	public static EList<ConcreteClassifier> getDefaultImports(CompilationUnit _this) {
+	public static EList<ConcreteClassifier> getDefaultImports(JavaRoot _this) {
 		EList<ConcreteClassifier> defaultImportList = new BasicEList<ConcreteClassifier>();
 		
 		String packageName = JavaUniquePathConstructor.packageName(_this);
