@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.annotations.AnnotationAttributeSetting;
 import org.emftext.language.java.annotations.AnnotationInstance;
+import org.emftext.language.java.annotations.AnnotationsFactory;
+import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
@@ -46,6 +48,9 @@ public class JavaModelCompletion {
 			if (element instanceof Enumeration) {
 				addMissingEnumerationMembers((Enumeration) element);
 			}
+			if (element instanceof Annotation) {
+				addMissingAnnotationMembers((Annotation) element);
+			}
 		}
 		simplifyExpressions(resource);
 	}
@@ -79,6 +84,19 @@ public class JavaModelCompletion {
 		}
 	}
 
+	public static void addMissingAnnotationMembers(Annotation annotation) {
+		String valueMethodName = "value";
+		Method valueMethod = MemberContainerUtil.getMethod(annotation, valueMethodName);
+		if (valueMethod == null) {
+			valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
+			valueMethod.setName(valueMethodName);
+			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
+			type.setTarget(JavaClasspath.INSTANCE.getClassifier("java.lang.String"));
+			valueMethod.setType(type);
+			annotation.getDefaultMembers().add(valueMethod);
+		}
+	}
+	
 	/**
 	 * Adds the additional methods <code>value()</code> and <code>calueOf()</code>
 	 * to the given enumeration.

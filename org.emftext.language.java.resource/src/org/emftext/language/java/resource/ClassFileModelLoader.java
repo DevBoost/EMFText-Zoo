@@ -102,12 +102,7 @@ public class ClassFileModelLoader {
 				((Enumeration)emfClassifier).getImplements().add(typeArg); 
 			}
 			else if (clazz.isAnnotation()) {
-				//this triggers when ifName = java.lang.annotations.Annotation
-				Method valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
-				valueMethod.setName("value");
-				valueMethod.setType(createReferenceToClassifier("java.lang.String"));
-				emfClassifier.getMembers().add(valueMethod);
-				((Annotation)emfClassifier).getMembers().add(valueMethod);
+				//
 			}
 			else if (clazz.isClass()) {
 				((Class)emfClassifier).getImplements().add(typeArg);
