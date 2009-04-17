@@ -28,6 +28,7 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.containers.JavaRootUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
@@ -85,7 +86,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			EList<EObject> resultList) {
 		if(container instanceof ConcreteClassifier) {
 			//local inner classes
-			resultList.addAll(ConcreteClassifierUtil.getAllMembers(
+			resultList.addAll(ClassifierUtil.getAllMembers(
 					(ConcreteClassifier) container));			
 			//public inner classes (possibly external)
 			resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(

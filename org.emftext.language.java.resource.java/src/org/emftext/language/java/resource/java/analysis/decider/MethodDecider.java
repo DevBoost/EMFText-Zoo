@@ -5,7 +5,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.AnonymousClass;
-import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
@@ -17,7 +17,7 @@ import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.members.MethodUtil;
 
 public class MethodDecider extends AbstractDecider {
@@ -36,8 +36,8 @@ public class MethodDecider extends AbstractDecider {
 	}
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
-		if (container instanceof ConcreteClassifier) {
-			return ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);
+		if (container instanceof Classifier) {
+			return ClassifierUtil.getAllMembers((Classifier)container);
 		}
 		
 		if (container instanceof AnonymousClass) {

@@ -14,7 +14,7 @@ import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.Void;
 import org.emftext.language.java.util.JavaClasspathUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class PrimitiveTypeUtil {
 
@@ -24,7 +24,7 @@ public class PrimitiveTypeUtil {
 	 */
 	public static EList<Member> getAllMembers(PrimitiveType primitiveType) {
 		Class javaClass = wrapPrimitiveType(primitiveType);	
-		return ConcreteClassifierUtil.getAllMembers(javaClass);
+		return ClassifierUtil.getAllMembers(javaClass);
 	}
 	
 	/**

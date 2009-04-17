@@ -21,7 +21,7 @@ import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class TypeUtil {
 	
@@ -60,7 +60,10 @@ public class TypeUtil {
 		}
 		
 		//annotations
-		if(_this instanceof Annotation && otherType.equals(JavaClasspathUtil.getAnnotationClass(_this))) {
+		if(_this instanceof Annotation && 
+				(otherType.equals(JavaClasspathUtil.getAnnotationClass(_this)) ||
+						ClassifierUtil.getAllSuperClassifiers(
+								(ConcreteClassifier)_this).contains(JavaClasspathUtil.getAnnotationClass(_this)))) {
 			return true;
 		}
 		
@@ -80,7 +83,7 @@ public class TypeUtil {
 		//compare in type hierarchy
 		if (otherType instanceof ConcreteClassifier && _this instanceof ConcreteClassifier &&
 				(otherType.equals(_this) || 
-						ConcreteClassifierUtil.getAllSuperClassifiers(
+						ClassifierUtil.getAllSuperClassifiers(
 								(ConcreteClassifier)_this).contains(otherType))) {
 			return true;
 		}
@@ -97,7 +100,7 @@ public class TypeUtil {
 		
 		if (otherType instanceof ConcreteClassifier) {
 			if(otherType.equals(charSequenceClass) ||
-					ConcreteClassifierUtil.getAllSuperClassifiers(
+					ClassifierUtil.getAllSuperClassifiers(
 							(ConcreteClassifier)otherType).contains(charSequenceClass)) {
 				return true;
 			}

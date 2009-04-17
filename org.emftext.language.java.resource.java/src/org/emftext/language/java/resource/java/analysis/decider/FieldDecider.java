@@ -5,7 +5,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.AnonymousClass;
-import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -23,16 +23,16 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class FieldDecider extends AbstractDecider {
 
 	private static Field STANDARD_ARRAY_LENGTH_FIELD = null;
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
-		if (container instanceof ConcreteClassifier) {
+		if (container instanceof Classifier) {
 			EList<Member> resultList = 
-				ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);		
+				ClassifierUtil.getAllMembers((Classifier)container);		
 			addArrayLengthFiled(resultList, container);
 			return resultList;
 		}

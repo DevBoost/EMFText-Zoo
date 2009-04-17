@@ -26,7 +26,7 @@ public class AnonymousClassUtil {
 			EList<Member> memberList = new BasicEList<Member>();
 			if (classifier != null) {
 				memberList.addAll(classifier.getMembers());
-				memberList.addAll(ConcreteClassifierUtil.getAllMembers(classifier));
+				memberList.addAll(ClassifierUtil.getAllMembers(classifier));
 			}
 			return memberList;
 		}
@@ -43,7 +43,7 @@ public class AnonymousClassUtil {
 		
 		if (superClassifier != null) {
 			superClassifierList.add(superClassifier);
-			superClassifierList.addAll(ConcreteClassifierUtil.getAllSuperClassifiers(superClassifier));
+			superClassifierList.addAll(ClassifierUtil.getAllSuperClassifiers(superClassifier));
 		}
 		else {
 			superClassifierList.add(JavaClasspathUtil.getObjectClass(_this));

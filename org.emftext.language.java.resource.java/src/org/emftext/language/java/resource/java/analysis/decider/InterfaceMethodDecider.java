@@ -4,13 +4,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.annotations.AnnotationAttributeSetting;
-import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class InterfaceMethodDecider extends AbstractDecider {
 
@@ -24,8 +24,8 @@ public class InterfaceMethodDecider extends AbstractDecider {
 	}
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
-		if (container instanceof ConcreteClassifier) {
-			return ConcreteClassifierUtil.getAllMembers((ConcreteClassifier)container);
+		if (container instanceof Classifier) {
+			return ClassifierUtil.getAllMembers((Classifier)container);
 		}
 		return null;
 	}
