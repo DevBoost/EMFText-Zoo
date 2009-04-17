@@ -110,7 +110,7 @@ public class TypeParameterUtil {
 					Parameter parameter = method.getParameters().get(idx);
 					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
 					
-					if (argument instanceof Reference) {
+					if (parameterType != null && argument instanceof Reference) {
 						Reference argReference = (Reference) argument;
 						
 						while (argReference.getNext() instanceof Reference &&
@@ -126,7 +126,7 @@ public class TypeParameterUtil {
 							}
 							if (elementReference.getTarget() instanceof TypedElement) {
 								ClassifierReference argumentType = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement)elementReference.getTarget()).getType());
-								if (parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
+								if (argumentType != null && parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
@@ -136,7 +136,7 @@ public class TypeParameterUtil {
 										}
 									}
 								}
-								if (parameterType.getTarget() instanceof TypeParameter) {
+								if (argumentType != null && parameterType.getTarget() instanceof TypeParameter) {
 									return argumentType.getTarget();
 								}
 							}
