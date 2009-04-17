@@ -889,7 +889,7 @@ fixed-pointer-declarator:
 C.2.6 Namespaces
 
 compilation-unit:
-    using-directive *   global-attribute *   namespace-member-declaration *
+    using-directive *   global-attributes *   namespace-member-declaration *
 
 //done, merge alias and namespace
 using-directive:  			
@@ -933,8 +933,9 @@ type-declaration:
 
 C.2.7 Classes
 
+//done MRange
 class-declaration:
-    attribute *   class-modifier *   'class'   identifier   class-base ?   class-body   ( ';' ) ?
+    attributes *   class-modifier *   'class'   identifier   class-base ?   class-body   ( ';' ) ?
 
 //done in Modifier
 class-modifier:
@@ -972,10 +973,10 @@ class-member-declaration:
     constructor-declaration
     destructor-declaration
     static-constructor-declaration
-    type-declaration //done
+    type-declaration 				//done
     
 constant-declaration:
-    attribute *   constant-modifier *   'const'   type   constant-declarators   ';'
+    attributes *   constant-modifier *   'const'   type   constant-declarators   ';'
 
 //done in Modifier
 constant-modifier:
@@ -986,7 +987,7 @@ constant-modifier:
     'private'
 
 field-declaration:
-    attribute *   field-modifier *   type   variable-declarator (  ','   variable-declarator)*   ';'
+    attributes *   field-modifier *   type   variable-declarator (  ','   variable-declarator)*   ';'
 
 //done in Modifier   
 field-modifier:
@@ -1007,9 +1008,10 @@ variable-declarator:
 variable-initializer:
     expression
     array-initializer
-    
+
+//pre-done   formal-parameter-list missing
 method-declaration:
-    attribute *   method-modifier *   return-type   ( interface-type   '.') ?   identifier   (   formal-parameter-list ?   )   block   
+    attributes *   method-modifier *   return-type   ( interface-type   '.') ?   identifier   (   formal-parameter-list ?   )   block   
 
 //done in Modifier
 method-modifier:
@@ -1039,17 +1041,17 @@ formal-parameter-list:
     parameter-array  
  
 fixed-parameter:
-    attribute *   parameter-modifier ?   type   identifier
+    attributes *   parameter-modifier ?   type   identifier
     
 parameter-modifier:
     'ref'
     'out'
     
 parameter-array:
-    attribute *   'params'   array-type   identifier
+    attributes *   'params'   array-type   identifier
     
 property-declaration:
-    attribute *   property-modifier *   type   ( interface-type   '.') ?   identifier   '{'   accessor-declarations   '}'
+    attributes *   property-modifier *   type   ( interface-type   '.') ?   identifier   '{'   accessor-declarations   '}'
 
 //done in Modifier
 property-modifier:
@@ -1072,14 +1074,14 @@ accessor-declarations: 		//soll accessor-declaration+(abstract) beinhalten
     set-accessor-declaration   get-accessor-declaration ?
     
 get-accessor-declaration:	//Ableitung von accessor-declaration
-    attribute *   'get'   block
+    attributes *   'get'   block
     
 set-accessor-declaration:	//Ableitung von accessor-declaration
-    attribute *   'set'   block
+    attributes *   'set'   block
     
 event-declaration:
-    attribute *   event-modifier *   'event'   type   variable-declarator (  ','   variable-declarator)*   ';'
-    attribute *   event-modifier *   'event'   type   ( interface-type   '.') ?   identifier   '{'   event-accessor-declarations   '}'
+    attributes *   event-modifier *   'event'   type   variable-declarator (  ','   variable-declarator)*   ';'
+    attributes *   event-modifier *   'event'   type   ( interface-type   '.') ?   identifier   '{'   event-accessor-declarations   '}'
 
 //done in Modifier    
 event-modifier:
@@ -1101,13 +1103,13 @@ event-accessor-declarations: 	//soll event-accessor-declaration(abstract) 2mal b
     remove-accessor-declaration   add-accessor-declaration
     
 add-accessor-declaration:		//Ableitung von event-accessor-declaration
-    attribute *   add   block
+    attributes *   add   block
     
 remove-accessor-declaration:	//Ableitung von event-accessor-declaration
-    attribute *   remove   block
+    attributes *   remove   block
     
 indexer-declaration:
-    attribute *   indexer-modifiers *   indexer-declarator   '{'   accessor-declarations   '}'
+    attributes *   indexer-modifiers *   indexer-declarator   '{'   accessor-declarations   '}'
 
 //done in Modifier    
 indexer-modifier:
@@ -1127,7 +1129,7 @@ indexer-declarator:
     type   (interface-type   '.') 'this'   '['   formal-parameter-list   ']'
     
 operator-declaration:
-    attribute *   operator-modifier +   operator-declarator   block
+    attributes *   operator-modifier +   operator-declarator   block
 
 //done in Modifier    
 operator-modifier:
@@ -1157,7 +1159,7 @@ conversion-operator-declarator:
     ( 'implicit' | 'explicit' )  'operator'   type   '('   type   identifier   ')'
     
 constructor-declaration:
-    attribute *   constructor-modifier *   constructor-declarator   block
+    attributes *   constructor-modifier *   constructor-declarator   block
 
 //done in Modifier    
 constructor-modifier:
@@ -1175,7 +1177,7 @@ constructor-initializer:
    ':'   ( 'base' | 'this' )   '('   argument-list ?   ')'
 
 static-constructor-declaration:
-    attribute *   static-constructor-modifiers   identifier   '('  ')'   block
+    attributes *   static-constructor-modifiers   identifier   '('  ')'   block
 
 //pre-done in Modifier, static-constructor-modifiers bekommt ein +    
 static-constructor-modifiers
@@ -1187,15 +1189,15 @@ static-constructor-modifiers
     static   unsafe ?   extern ?
     
 destructor-declaration:
-    attribute *   'extern' ?   'unsafe' ?   ~   identifier   '('   ')'    block
-    attribute *   'unsafe' ?   'extern' ?   ~   identifier   '('   ')'    block
+    attributes *   'extern' ?   'unsafe' ?   ~   identifier   '('   ')'    block
+    attributes *   'unsafe' ?   'extern' ?   ~   identifier   '('   ')'    block
 
 
 
 C.2.8 Structs
 
 struct-declaration:
-    attribute *   struct-modifier *   'struct'   identifier   interface-type-list ?   '{'   struct-member-declaration *   '}'   ( ';' ) ?
+    attributes *   struct-modifier *   'struct'   identifier   interface-type-list ?   '{'   struct-member-declaration *   '}'   ( ';' ) ?
 
 //done in Modifier   
 struct-modifier:
@@ -1246,7 +1248,7 @@ stackalloc-initializer:
 C.2.10 Interfaces
 
 interface-declaration:
-    attribute *   interface-modifier *   'interface'   identifier   interface-type-list ?   '{'   interface-member-declaration *  '}'   ( ';') ?
+    attributes *   interface-modifier *   'interface'   identifier   interface-type-list ?   '{'   interface-member-declaration *  '}'   ( ';') ?
 
 //done in Modifier       
 interface-modifier:
@@ -1265,27 +1267,27 @@ interface-member-declaration:
     interface-indexer-declaration
     
 interface-method-declaration:
-    attribute *   'new' ?   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
+    attributes *   'new' ?   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
     
 interface-property-declaration:
-    attribute *   'new' ?   type   identifier   '{'   interface-accessors   '}'
+    attributes *   'new' ?   type   identifier   '{'   interface-accessors   '}'
     
 interface-accessors:
-    attribute *   get   ';'   ( attribute *   set   ';' )?
-    attribute *   set   ';'   ( attribute *   get   ';' )?
+    attributes *   get   ';'   ( attribute *   set   ';' )?
+    attributes *   set   ';'   ( attribute *   get   ';' )?
     
 interface-event-declaration:
-    attribute *   'new' ?   'event'   type   identifier   ';'
+    attributes *   'new' ?   'event'   type   identifier   ';'
     
 interface-indexer-declaration:
-    attribute *   'new' ?   type   'this'   '['   formal-parameter-list   ']'   '{'   interface-accessors   '}'
+    attributes *   'new' ?   type   'this'   '['   formal-parameter-list   ']'   '{'   interface-accessors   '}'
 
 
 
 C.2.11 Enums
 
 enum-declaration:
-    attribute *   enum-modifier *   'enum'   identifier   integral-type ?   enum-body  ( ';' ) ?
+    attributes *   enum-modifier *   'enum'   identifier   integral-type ?   enum-body  ( ';' ) ?
     
 enum-body:
     '{'  (enum-member-declaration  ( ','   enum-member-declaration) ?) ?   '}'
@@ -1300,14 +1302,14 @@ enum-modifier:
     'private'
     
 enum-member-declaration:
-    attribute *   identifier (  '='   expression ) ?
+    attributes *   identifier (  '='   expression ) ?
 
 
 
 C.2.12 Delegates
 
 delegate-declaration:
-    attribute *   delegate-modifier *   'delegate'   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
+    attributes *   delegate-modifier *   'delegate'   return-type   identifier   '('   formal-parameter-list ?   ')'   ';'
 
 //done in Modifier       
 delegate-modifier:
@@ -1323,15 +1325,14 @@ delegate-modifier:
 C.2.13 Attributes
     
 global-attributes:
-
-   ( '['   global-attribute-target  ':'   attribute-list   ( ',' )? ']' )+
+   '['   global-attribute-target  ':'   attribute ( ','   attribute)*   ( ',' )? ']'
     
 global-attribute-target:
     assembly
     module
     
 attributes:
-   ( '['   ( attribute-target  ':' )?   attribute-list   ( ',' )?   ']' )+
+   '['   ( attribute-target  ':' )?   attribute ( ','   attribute)*   ( ',' )?   ']'
     
 attribute-target:
     field
@@ -1341,9 +1342,6 @@ attribute-target:
     property		//keine Ahnung was genau gemeint ist, property-declaration?
     'return'
     type
-
-attribute-list:
-    attribute ( ','   attribute)*
        
 attribute:
     namespace-or-type-name  attribute-arguments ?

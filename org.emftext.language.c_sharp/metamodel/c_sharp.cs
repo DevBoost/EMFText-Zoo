@@ -13,6 +13,7 @@ IMPORTS {
 	literals 	: <http://www.emftext.org/c_sharp/literals>
 	keywords 	: <http://www.emftext.org/c_sharp/keywords>
 	operators 	: <http://www.emftext.org/c_sharp/operators>
+	attributes 	: <http://www.emftext.org/c_sharp/attributes>
 }
 
 OPTIONS {
@@ -88,8 +89,7 @@ types.PointerType
     ::= ( simpleType | referenceType )  ( "*" )+ ;	
 	
 namespaces.CompilationUnit 
-	::= usingDirectives *  namespaceMemberDeclaration * ;
-	//global-attribute *
+	::= usingDirectives *   globalAttributes *   namespaceMemberDeclaration * ; 
 	
 namespaces.UsingDirective
 	::= "using"   (name[]   "=")?   namespaceOrTypeName   ";" ;
@@ -101,15 +101,14 @@ namespaces.NamespaceBody
 	::= "{"   usingDirectives *   namespaceMemberDeclaration *   "}" ;
 	
 classes.Class
-    ::= modifiers *   "class"   name[]  classBase ?    "{"  classMemberDeclarations *  "}"  ( ";" ) ? ;
-	// attributes *     
+    ::= attributes * modifiers *   "class"   name[]  classBase ?    "{"  classMemberDeclarations *  "}"  ( ";" ) ? ;    
 	
 classes.ClassBase
 	::= ":" types ( "," types )* ;
 	
 classes.Method
-    ::= modifiers *  returnType   ( interfaceType   ".") ?   name[]   "("      ")"  block ;
-	// attribute *  formal-parameter-list ?	
+    ::= attributes *  modifiers *  returnType   ( interfaceType   ".") ?   name[]   "("      ")"  block ;
+	//   formal-parameter-list ?	
 	
 classes.Block
     ::= "{" statement *  "}"
@@ -308,7 +307,48 @@ expressions.MultiplicativeExpression
 expressions.AdditiveExpression
     ::= multiplicativeExpression ( ( addition | subtraction ) multiplicativeExpression )* ; 
 
+
+//Attributes
     
+attributes.GlobalAttributes
+   ::= "["   globalAttributeTarget  ":"   attribute ( ","   attribute)*   ( "," )? "]" ;
+    
+attributes.GlobalAttributeTarget
+    ::= identifier
+//    |	assembly
+//    |	module
+    ;
+//Funktionen unklar formuliert in Grammatikvorlage
+    
+attributes.Attributes
+   ::= "["   ( attributeTarget  ":" )?   attribute ( ","   attribute)*   ( "," )?   "]" ;
+    
+attributes.AttributeTarget
+    ::= event
+    |	return
+    |	type
+//    |	field
+//    |	method
+//    |	param			//Schreibfehler? params? Präprozessor?
+//    |	property		//keine Ahnung was genau gemeint ist, property-declaration?
+    ;
+//Funktionen unklar formuliert in Grammatikvorlage
+       
+attributes.Attribute
+    ::= namespaceOrTypeName  attributeArguments ? ;
+    
+attributes.AttributeArguments
+   	::= "("   expressionList ?   ")"
+	|	"("   expressionList   ","   namedArgumentList   ")"
+	|	"("   namedArgumentList   ")"
+    ;
+    
+attributes.NamedArgumentList
+    ::= namedArgument ( ","   namedArgument )* ;
+    
+attributes.NamedArgument
+    ::=  identifier   "="   expression ;   
+        
 
 //OPERATORS
 
@@ -350,18 +390,12 @@ operators.Negate 		::= "!" ;
 
 // Keywords
 
-keywords.Out
-	::= "out";
-
-keywords.Ref
-	::= "ref";
-
-keywords.Case
-	::= "case";
-
-keywords.Default
-	::= "default";
-	
+keywords.Out	::= "out";
+keywords.Ref	::= "ref";
+keywords.Case	::= "case";
+keywords.Default::= "default";
+keywords.Return	::= "return";
+keywords.Event	::= "event";	
 				
 // Literals
 
