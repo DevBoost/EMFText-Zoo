@@ -51,7 +51,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="statementExpression"
           upperBound="-1" eType="#//expressions/StatementExpression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//classes/VariableInitializer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//classes/VariableInitializer #//statements/ResourceAcquisition"/>
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionList">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
           containment="true"/>
@@ -167,11 +167,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PreIncrementExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="PreIncrementExpression" eSuperTypes="#//expressions/StatementExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
           eType="#//expressions/UnaryExpression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PreDecrementExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="PreDecrementExpression" eSuperTypes="#//expressions/StatementExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
           eType="#//expressions/UnaryExpression" containment="true"/>
     </eClassifiers>
@@ -387,12 +387,29 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CheckedStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="UncheckedStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="LockStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="UsingStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CheckedStatement" eSuperTypes="#//statements/EmbeddedStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UncheckedStatement" eSuperTypes="#//statements/EmbeddedStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//classes/Block"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LockStatement" eSuperTypes="#//statements/EmbeddedStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="embeddedStatement" eType="#//statements/EmbeddedStatement"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ResourceAcquisition" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UsingStatement" eSuperTypes="#//statements/EmbeddedStatement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resourceAcquisition"
+          eType="#//statements/ResourceAcquisition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="embeddedStatement" eType="#//statements/EmbeddedStatement"
+          containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FixedStatement" eSuperTypes="#//statements/EmbeddedStatement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="LocalVariableDeclaration" eSuperTypes="#//statements/ForInitializer">
+    <eClassifiers xsi:type="ecore:EClass" name="LocalVariableDeclaration" eSuperTypes="#//statements/ForInitializer #//statements/ResourceAcquisition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//types/Type" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableDeclarator"

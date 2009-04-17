@@ -197,7 +197,18 @@ statements.GeneralCatchClause
 statements.FinallyClause
     ::= "finally"   block ;    
     
-                 
+statements.CheckedStatement
+    ::= "checked"   block ;
+    
+statements.UncheckedStatement
+    ::= "unchecked"   block ;
+    
+statements.LockStatement
+    ::= "lock"   "("   expression   ")"   embeddedStatement ;
+    
+statements.UsingStatement
+    ::= "using"   "("    resourceAcquisition   ")"    embeddedStatement ;
+                     
 
     	
     	
