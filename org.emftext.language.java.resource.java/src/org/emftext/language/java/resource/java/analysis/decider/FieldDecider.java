@@ -29,30 +29,32 @@ public class FieldDecider extends AbstractDecider {
 
 	private static Field STANDARD_ARRAY_LENGTH_FIELD = null;
 
+	EList<Member> innerTypeSuperMembers = new BasicEList<Member>();
+	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof Classifier) {
-			EList<Member> resultList = 
-				ClassifierUtil.getAllMembers((Classifier)container);		
-			addArrayLengthFiled(resultList, container);
-			return resultList;
+			innerTypeSuperMembers.addAll(
+					ClassifierUtil.getAllMembers((Classifier)container));		
 		}
 		
 		if (container instanceof AnonymousClass) {
-			EList<Member> resultList = 
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
-			return resultList;
+			//do this after the local scope was searched
+			innerTypeSuperMembers.addAll(
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container));
 		}
 		
 		if(container instanceof CompilationUnit) {
 			EList<EObject> resultList = new BasicEList<EObject>();
 			addImports(container, resultList);
+			resultList.addAll(innerTypeSuperMembers);
+			addArrayLengthFiled(resultList, container);
 			return resultList;
 		}
 		
 		return null;
 	}
 
-	private void addArrayLengthFiled(EList<Member> resultList, EObject objectContext) {
+	private void addArrayLengthFiled(EList<EObject> resultList, EObject objectContext) {
 		//Arrays have the additional member field "length"
 		//We always add the field since we do not know if we have an array or not
 		if (STANDARD_ARRAY_LENGTH_FIELD  == null) {
