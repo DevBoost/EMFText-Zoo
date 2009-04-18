@@ -418,7 +418,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="addressOfExpression"
           eType="#//expressions/AddressOfExpression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//expressions/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
+          eType="#//expressions/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalOrExpression"
+          lowerBound="1" upperBound="-1" eType="#//expressions/ConditionalOrExpression"
+          containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpression" eSuperTypes="#//expressions/Expression #//expressions/StatementExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" lowerBound="1"
           eType="#//expressions/UnaryExpression" containment="true"/>
@@ -484,6 +490,72 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="addition" eType="#//operators/Addition"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="subtraction" eType="#//operators/Subtraction"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ShiftExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rightShift" eType="#//operators/RightShift"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="leftShift" eType="#//operators/LeftShift"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="remainder" eType="#//operators/Remainder"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="additiveExpression" eType="#//expressions/AdditiveExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="shiftExpression" lowerBound="1"
+          upperBound="-1" eType="#//expressions/ShiftExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lessThan" eType="#//operators/LessThan"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lessThanOrEqual" eType="#//operators/LessThanOrEqual"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="greaterThan" eType="#//operators/GreaterThan"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="greaterThanOrEqual" eType="#//operators/GreaterThanOrEqual"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relationalExpression"
+          lowerBound="1" upperBound="-1" eType="#//expressions/RelationalExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="equal" eType="#//operators/Equal"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="notEqual" eType="#//operators/NotEqual"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AndExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="equalityExpression" lowerBound="1"
+          upperBound="-1" eType="#//expressions/EqualityExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="and" eType="#//operators/And"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExclusiveOrExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="andExpression" lowerBound="1"
+          upperBound="-1" eType="#//expressions/AndExpression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exclusiveOr" eType="#//operators/ExclusiveOr"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InclusiveOrExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exclusiveOrExpression"
+          lowerBound="1" upperBound="-1" eType="#//expressions/ExclusiveOrExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inclusiveOr" eType="#//operators/InclusiveOr"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inclusiveOrExpression"
+          lowerBound="1" upperBound="-1" eType="#//expressions/InclusiveOrExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAnd" eType="#//operators/ConditionalAnd"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalAndExpression"
+          lowerBound="1" upperBound="-1" eType="#//expressions/ConditionalAndExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalOr" eType="#//operators/ConditionalOr"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>
@@ -611,5 +683,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="LeftShift" eSuperTypes="#//operators/ShiftOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="RightShift" eSuperTypes="#//operators/ShiftOperator"/>
     <eClassifiers xsi:type="ecore:EClass" name="UnsignedRightShift" eSuperTypes="#//operators/ShiftOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExclusiveOr" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="InclusiveOr" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAnd" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOr" eSuperTypes="#//operators/UnaryOperator"/>
   </eSubpackages>
 </ecore:EPackage>

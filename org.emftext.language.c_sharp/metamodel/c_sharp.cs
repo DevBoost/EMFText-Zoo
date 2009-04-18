@@ -306,6 +306,38 @@ expressions.MultiplicativeExpression
 
 expressions.AdditiveExpression
     ::= multiplicativeExpression ( ( addition | subtraction ) multiplicativeExpression )* ; 
+    
+//warum hier remainder?
+expressions.ShiftExpression
+	::= additiveExpression ( ( leftShift | rightShift | remainder )   additiveExpression )? ;
+
+expressions.RelationalExpression
+	::= shiftExpression (( "is" | "as" ) type )? ( ( lessThan | greaterThan | lessThanOrEqual | greaterThanOrEqual )   shiftExpression (( "is" | "as" ) type )? )* ; 
+	// TODO: (( is | as ) type )? muss weiter unterschieden werden
+
+expressions.EqualityExpression
+	::= relationalExpression   (( equal | notEqual )   relationalExpression)* ;
+	
+expressions.AndExpression
+	::= equalityExpression   (and   equalityExpression)* ;
+
+expressions.ExclusiveOrExpression
+	::= andExpression  ( exclusiveOr   andExpression )* ;
+	
+expressions.InclusiveOrExpression
+	::= exclusiveOrExpression   (inclusiveOr   exclusiveOrExpression)* ;
+	
+expressions.ConditionalAndExpression
+	::= inclusiveOrExpression   (conditionalAnd   inclusiveOrExpression)* ;
+
+expressions.ConditionalOrExpression
+	::= conditionalAndExpression   (conditionalOr   conditionalAndExpression)* ;
+	
+//genaue Unterscheidung der hier vorkommenden Operatoren?
+expressions.ConditionalExpression
+	::= conditionalOrExpression  ( "?"   expression   ":"   expression)? ;
+
+
 
 
 //Attributes
@@ -329,7 +361,7 @@ attributes.AttributeTarget
     |	type
 //    |	field
 //    |	method
-//    |	param			//Schreibfehler? params? Präprozessor?
+//    |	param			//Schreibfehler? params? Prï¿½prozessor?
 //    |	property		//keine Ahnung was genau gemeint ist, property-declaration?
     ;
 //Funktionen unklar formuliert in Grammatikvorlage
@@ -371,6 +403,12 @@ operators.Subtraction           ::= "-";
 operators.Multiplication        ::= "*" ;
 operators.Division              ::= "/" ;
 operators.Remainder             ::= "%" ;
+
+operators.And					::= "&" ;
+operators.ExclusiveOr			::= "^" ;
+operators.InclusiveOr			::= "|" ;
+operators.ConditionalAnd		::=	"&&" ;
+operators.ConditionalOr			::= "||" ;
 
 operators.LessThan 			    ::= "<";
 operators.LessThanOrEqual		::= "<" #0 "=";
