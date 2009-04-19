@@ -78,7 +78,25 @@
     <eClassifiers xsi:type="ecore:EClass" name="VariableInitializer" abstract="true"/>
   </eSubpackages>
   <eSubpackages name="structs" nsURI="http://www.emftext.org/c_sharp/structs" nsPrefix="structs"/>
-  <eSubpackages name="arrays" nsURI="http://www.emftext.org/c_sharp/arrays" nsPrefix="arrays"/>
+  <eSubpackages name="arrays" nsURI="http://www.emftext.org/c_sharp/arrays" nsPrefix="arrays">
+    <eClassifiers xsi:type="ecore:EClass" name="StackallocInitializer" eSuperTypes="#//classes/VariableInitializer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//expressions/Expression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayInitializer" eSuperTypes="#//classes/VariableInitializer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="variableInitializer"
+          upperBound="-1" eType="#//classes/VariableInitializer" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//types/ReferenceType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rankSpecifier" lowerBound="1"
+          upperBound="-1" eType="#//arrays/RankSpecifier" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RankSpecifier"/>
+  </eSubpackages>
   <eSubpackages name="interfaces" nsURI="http://www.emftext.org/c_sharp/interfaces"
       nsPrefix="interfaces"/>
   <eSubpackages name="enums" nsURI="http://www.emftext.org/c_sharp/enums" nsPrefix="enums"/>
@@ -561,7 +579,6 @@
   </eSubpackages>
   <eSubpackages name="types" nsURI="http://www.emftext.org/c_sharp/types" nsPrefix="types">
     <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ClassType" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true" eSuperTypes="#//types/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//types/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="Void" eSuperTypes="#//types/SimpleType"/>
@@ -578,10 +595,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="Char" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Float" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Double" eSuperTypes="#//types/SimpleType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//types/SimpleType #//types/ClassType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="#//types/SimpleType #//types/ClassType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="#//types/SimpleType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="ClassOrInterfaceOrDelegateOrEnumType"
-        eSuperTypes="#//types/ReferenceType #//types/ClassType">
+        eSuperTypes="#//types/ReferenceType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceOrTypeName"
           lowerBound="1" eType="#//common/NamespaceOrTypeName" containment="true"/>
     </eClassifiers>

@@ -14,6 +14,7 @@ IMPORTS {
 	keywords 	: <http://www.emftext.org/c_sharp/keywords>
 	operators 	: <http://www.emftext.org/c_sharp/operators>
 	attributes 	: <http://www.emftext.org/c_sharp/attributes>
+	arrays	 	: <http://www.emftext.org/c_sharp/arrays>
 }
 
 OPTIONS {
@@ -115,6 +116,23 @@ classes.Block
     |	";" 
     ;	
 
+//Arrays
+
+arrays.StackallocInitializer
+    ::= "stackalloc"   type   "["   expression   "]" ;
+    
+arrays.ArrayInitializer
+    ::= "{"  (variableInitializer ( ","   variableInitializer) *) ?   "}"
+    |	"{"   variableInitializer ( ","   variableInitializer) *   ","   "}"
+    ;
+
+arrays.ArrayType
+    ::= type   rankSpecifier + ;
+
+arrays.RankSpecifier
+    ::= "["  (",") *   "]" ;
+    
+            
 //Statements    
 
 statements.EmptyStatement
