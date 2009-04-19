@@ -1485,7 +1485,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	@Test
 	public void testHasMissingParseReprints() throws Exception {
 		File inputFolder = new File("./" + getTestInputFolder());
-		List<File> allTestFiles = collectAllFilesRecursive(inputFolder);
+		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
 		allTestFiles.removeAll(getReprintedResources());
 		for (File file : allTestFiles) {
 			System.out.println("Not parsed and reprinted: " + file);
@@ -1512,7 +1512,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 			MalformedTreeException, IOException, BadLocationException {
 		File inputFolder = new File("." + File.separator
 				+ getTestInputFolder());
-		List<File> allTestFiles = collectAllFilesRecursive(inputFolder);
+		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
 		allTestFiles.removeAll(getParsedResources());
 		assertEquals(
 				"All testfiles contained in input folder were covered by a test case.",

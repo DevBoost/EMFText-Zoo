@@ -22,7 +22,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 		TestSuite suite = new ThreadedTestSuite(
 		"Suite testing all files in the input directory automatically", 1000, 100);
 		File inputFolder = new File("./" + TEST_INPUT_FOLDER_NAME);
-		List<File> allTestFiles = collectAllFilesRecursive(inputFolder);
+		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, "java");
 		for (final File file : allTestFiles) {
 			addParseTest(test, suite, file);
 			addParseAndReprintTest(test, suite, file);

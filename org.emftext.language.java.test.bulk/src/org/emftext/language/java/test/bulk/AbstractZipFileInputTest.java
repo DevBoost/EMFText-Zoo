@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -32,7 +30,6 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		
-		Map<String, ZipFileEntryTest> foldersToTests = new HashMap<String, ZipFileEntryTest>();
 		while (entries.hasMoreElements()) {
 			
 			ZipEntry entry = entries.nextElement();
@@ -45,22 +42,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 			}
 			if (entryName.endsWith(".java")) {
 				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, ignoreList);
-				// TODO put this somewhere else
-				if (zipFilePath.endsWith("jdt_test_files-src.zip")) {
-					int pos = entryName.indexOf("/");
-					pos = entryName.indexOf("/", pos + 1);
-					String folderName = entryName.substring(0, pos);
-					if (!foldersToTests.containsKey(folderName)) {
-						System.out.println("adding test for folder " + folderName);
-						foldersToTests.put(folderName, newTest);
-						tests.add(newTest);
-					} else {
-						System.out.println("adding additional entry to test in " + folderName);
-						foldersToTests.get(folderName).addZipEntry(entry);
-					}
-				} else {
-					tests.add(newTest);
-				}
+				tests.add(newTest);
 			}
 		}
 		return tests;

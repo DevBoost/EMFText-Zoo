@@ -201,6 +201,24 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		
 		ResourceSet resourceSet = getResourceSet();
 		
+		// TODO put this somewhere else
+		if (file.getName().endsWith("jdt_test_files/src.zip")) {
+			URI jarURI = URI.createFileURI(new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/"));
+			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
+			JavaClasspath.INSTANCE.registerClassifierJar(jarURI, resourceSet.getURIConverter().getURIMap(), prefix);
+			/*int pos = entryName.indexOf("/");
+			pos = entryName.indexOf("/", pos + 1);
+			String folderName = entryName.substring(0, pos);
+			if (!foldersToTests.containsKey(folderName)) {
+				System.out.println("adding test for folder " + folderName);
+				foldersToTests.put(folderName, newTest);
+				tests.add(newTest);
+			} else {
+				System.out.println("adding additional entry to test in " + folderName);
+				foldersToTests.get(folderName).addZipEntry(entry);
+			}*/
+		}
+		
 		registerLibs(libFolderName, resourceSet);
 		
 		Resource resource = resourceSet.createResource(archiveURI);
@@ -231,7 +249,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	protected void registerLibs(String libdir, ResourceSet resourceSet) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator
 				+ libdir);
-		List<File> allLibFiles = collectAllFilesRecursive(libFolder);
+		List<File> allLibFiles = collectAllFilesRecursive(libFolder, "jar");
 		
 		for(File lib : allLibFiles) {
 			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), resourceSet.getURIConverter().getURIMap());
@@ -362,19 +380,19 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return contents.toString();
 	}
 
-	protected static List<File> collectAllFilesRecursive(File startFolder)
+	protected static List<File> collectAllFilesRecursive(File startFolder, String extension)
 			throws CoreException {
 		if (!startFolder.isDirectory())
 			return Collections.emptyList();
 		List<File> allFiles = new ArrayList<File>();
 		for (File member : startFolder.listFiles()) {
 			if (member.isFile()) {
-				if (member.getName().endsWith("java") || member.getName().endsWith("jar")) {
+				if (member.getName().endsWith(extension)) {
 					allFiles.add(member);
 				}
 			} else if (member.isDirectory()) {
 				if (!member.getName().equals(".svn")) {
-					allFiles.addAll(collectAllFilesRecursive(member));
+					allFiles.addAll(collectAllFilesRecursive(member, extension));
 				}
 			}
 		}
