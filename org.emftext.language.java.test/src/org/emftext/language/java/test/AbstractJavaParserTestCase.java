@@ -373,15 +373,15 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 			return Collections.emptyList();
 		List<File> allFiles = new ArrayList<File>();
 		for (File member : startFolder.listFiles()) {
-			if (member.isFile()) {
-				if (member.getName().endsWith(extension)) {
-					allFiles.add(member);
-				}
-			} else if (member.isDirectory()) {
+			if (member.isDirectory()) {
 				if (!member.getName().equals(".svn")) {
 					allFiles.addAll(collectAllFilesRecursive(member, extension));
 				}
-			}
+			} else if (member.isFile()) {
+				if (member.getName().endsWith(extension)) {
+					allFiles.add(member);
+				}
+			} 
 		}
 		return allFiles;
 	}

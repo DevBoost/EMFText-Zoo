@@ -83,12 +83,7 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 			parseAndReprintEntry(entry);
 		}
 	}
-
-	@Override
-	protected ResourceSet getResourceSet() {
-		return new ResourceSetImpl();
-	}
-
+	
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
 		if(ignoreList.contains(filename)) {
