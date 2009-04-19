@@ -3,14 +3,14 @@ package org.emftext.language.java.test;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.emftext.language.java.classifiers.Annotation;
@@ -37,10 +37,13 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.StringReference;
+import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
+import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.runtime.IOptions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,10 +78,11 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	private static final String[] FILES_EXCLUDED_FROM_REPRINT_TEST = new String[] {};
 
 	@Override
-	protected ResourceSet getResourceSet() {
-		ResourceSet rs = new ResourceSetImpl();
-		rs.getLoadOptions().putAll(getLoadOptions());
-		return rs;
+	protected Map<?, ?> getLoadOptions() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+		return map;
 	}
 
 	private void assertParsableAndReprintable(String filename)

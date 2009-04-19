@@ -47,7 +47,6 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
-import org.emftext.language.java.resource.JavaSourceOrClassFileResource;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
@@ -83,7 +82,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		CompilationUnit cu = (CompilationUnit) parseResource(inputFile);
 		
 		inputFile = new File(inputFolder + File.separator + file);
-		JavaClasspath.get().registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
+		JavaClasspath.get(cu).registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
 	}
 
 	protected static final String TEST_OUTPUT_FOLDER = "output";
@@ -135,11 +134,11 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		return root;
 	}
 
-	protected static Map<?, ?> getLoadOptions() {
+	protected Map<?, ?> getLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
-		map.put(JavaSourceOrClassFileResource.OPTION_REGISTER_LOCAL, Boolean.TRUE);
+		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		return map;
 	}
 
@@ -648,7 +647,9 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}*/
 	
 	protected ResourceSet getResourceSet() {
-		return new ResourceSetImpl();
+		ResourceSet rs = new ResourceSetImpl();
+		rs.getLoadOptions().putAll(getLoadOptions());
+		return rs;
 	}
 
 	protected boolean assertResolveAllProxies(Resource resource) {
