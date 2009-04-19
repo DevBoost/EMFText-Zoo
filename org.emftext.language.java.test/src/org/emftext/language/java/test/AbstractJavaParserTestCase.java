@@ -83,7 +83,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		CompilationUnit cu = (CompilationUnit) parseResource(inputFile);
 		
 		inputFile = new File(inputFolder + File.separator + file);
-		JavaClasspath.INSTANCE.registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
+		JavaClasspath.get().registerClassifierSource(cu, URI.createFileURI(inputFile.getCanonicalPath().toString()));
 	}
 
 	protected static final String TEST_OUTPUT_FOLDER = "output";
@@ -200,26 +200,14 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
 		
 		ResourceSet resourceSet = getResourceSet();
+		String prefix = "";
 		
 		// TODO put this somewhere else
 		if (file.getName().endsWith("jdt_test_files" + File.separator + "src.zip")) {
-			URI jarURI = URI.createURI("file:///" + new File(".").getAbsoluteFile().getCanonicalPath() +  File.separator + file.getName().replaceAll("\\\\", "/"));
-			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
-			JavaClasspath.INSTANCE.registerClassifierJar(jarURI, resourceSet.getURIConverter().getURIMap(), prefix);
-			/*int pos = entryName.indexOf("/");
-			pos = entryName.indexOf("/", pos + 1);
-			String folderName = entryName.substring(0, pos);
-			if (!foldersToTests.containsKey(folderName)) {
-				System.out.println("adding test for folder " + folderName);
-				foldersToTests.put(folderName, newTest);
-				tests.add(newTest);
-			} else {
-				System.out.println("adding additional entry to test in " + folderName);
-				foldersToTests.get(folderName).addZipEntry(entry);
-			}*/
+			prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
 		}
 		
-		registerLibs(libFolderName, resourceSet);
+		registerLibs(libFolderName, resourceSet, prefix);
 		
 		Resource resource = resourceSet.createResource(archiveURI);
 		resource.load(getLoadOptions());
@@ -246,13 +234,13 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 	
 	
-	protected void registerLibs(String libdir, ResourceSet resourceSet) throws IOException, CoreException  {
+	protected void registerLibs(String libdir, ResourceSet resourceSet, String prefix) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator
 				+ libdir);
 		List<File> allLibFiles = collectAllFilesRecursive(libFolder, "jar");
 		
 		for(File lib : allLibFiles) {
-			JavaClasspath.INSTANCE.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), resourceSet.getURIConverter().getURIMap());
+			JavaClasspath.get(resourceSet).registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), prefix);
 		}
 	}
 

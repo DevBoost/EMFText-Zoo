@@ -11,11 +11,11 @@ public class ConcreteClassifierUtil {
 		EList<ConcreteClassifier> internalClassifierList = new BasicEList<ConcreteClassifier>();
 		
 		internalClassifierList.addAll(
-				JavaClasspath.INSTANCE.getInnnerClassifiers(_this));
+				JavaClasspath.get(_this).getInnnerClassifiers(_this));
 		
 		for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
 			internalClassifierList.addAll(
-					JavaClasspath.INSTANCE.getInnnerClassifiers(superClassifier));
+					JavaClasspath.get(_this).getInnnerClassifiers(superClassifier));
 		}
 		
 		return internalClassifierList;

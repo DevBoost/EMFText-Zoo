@@ -19,17 +19,17 @@ public class JavaRootUtil {
 		String packageName = JavaUniquePathConstructor.packageName(_this);
 		
 		if(!packageName.equals("")) {
-			defaultImportList.addAll(JavaClasspath.INSTANCE.getClassifiers(
+			defaultImportList.addAll(JavaClasspath.get(_this).getClassifiers(
 					packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR, "*"));
 		}
 		
-		defaultImportList.addAll(JavaClasspath.INSTANCE.getDefaultImports());
+		defaultImportList.addAll(JavaClasspath.get(_this).getDefaultImports());
 
 		if(packageName.equals("")) {
 			//put the package behind the default imports when the default package is used
 			
 			//TODO this works for tests; Is this the desired behavior? Usually default package is not used
-			defaultImportList.addAll(JavaClasspath.INSTANCE.getClassifiers(
+			defaultImportList.addAll(JavaClasspath.get(_this).getClassifiers(
 					packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR, "*"));
 		}
 		

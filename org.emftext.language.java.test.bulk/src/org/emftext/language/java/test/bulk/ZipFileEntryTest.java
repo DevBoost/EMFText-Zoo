@@ -10,7 +10,6 @@ import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 public class ZipFileEntryTest extends AbstractJavaParserTestCase {
@@ -71,11 +70,6 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 		plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
 		
 		parseAndReprint(zipFile, entry, "output/" + plainZipFileName, "input/" + plainZipFileName);
-		
-		//for JacksTest: remove java.java from classpath!
-		if (entry.getName().equals("java.java")) {
-			JavaClasspath.INSTANCE.unRegisterClassifier("", "java");
-		}
 	}
 
 	private void parseAllEntries() throws IOException {

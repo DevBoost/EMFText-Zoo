@@ -46,11 +46,17 @@ import org.emftext.language.java.types.TypesFactory;
  */
 public class ClassFileModelLoader {
 	
+	protected JavaClasspath javaClasspath = null;
+	
 	protected ClassifiersFactory qualifiersFactory = ClassifiersFactory.eINSTANCE;
 	protected MembersFactory     membersFactory    = MembersFactory.eINSTANCE;
 	protected TypesFactory       typesFactory      = TypesFactory.eINSTANCE;
 	protected ParametersFactory  parametersFactory = ParametersFactory.eINSTANCE;
 	protected AnnotationsFactory annotationsFactory = AnnotationsFactory.eINSTANCE;
+	
+	public ClassFileModelLoader(JavaClasspath javaClasspath) {
+		this.javaClasspath = javaClasspath;
+	}
 	
 	public CompilationUnit parse(InputStream inputStream, String classFileName)
 			throws IOException {
@@ -622,7 +628,7 @@ public class ClassFileModelLoader {
 	
 	private TypeReference createReferenceToClassifier(String fullClassifierName) { 
 		fullClassifierName = fullClassifierName.replaceAll("/", ".");
-		Classifier classifier = JavaClasspath.INSTANCE.getClassifier(fullClassifierName);
+		Classifier classifier = javaClasspath.getClassifier(fullClassifierName);
 		ClassifierReference classifierReference = 
 			TypesFactory.eINSTANCE.createClassifierReference();
 		classifierReference.setTarget(classifier);

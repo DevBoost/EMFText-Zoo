@@ -11,12 +11,16 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
@@ -33,24 +37,63 @@ import org.emftext.language.java.util.JavaUtil;
  * as EMF-models.
  *
  */
-public class JavaClasspath {
+public class JavaClasspath extends AdapterImpl {
 
 	/**
 	 * Singleton instance.
 	 */
-	public static final JavaClasspath INSTANCE = new JavaClasspath();
+	public static final JavaClasspath globalClasspath = 
+		new JavaClasspath(URIConverter.URI_MAP);
 	
-	/**
-	 * Convenient access to <code>URIConverter.URI_MAP</code>.
-	 */
-	public final Map<URI, URI> URI_MAP = URIConverter.URI_MAP;
-
+	public static JavaClasspath get() {
+		return globalClasspath;
+	}
+	
+	public static JavaClasspath get(EObject objectContext) {
+		if (objectContext == null) {
+			return globalClasspath;
+		}
+		else {
+			return get(objectContext.eResource());
+		}
+	}
+	
+	public static JavaClasspath get(Resource resource) {
+		if(resource == null) {
+			return globalClasspath;
+		}
+		else {
+			return get(resource.getResourceSet());
+		}
+	}
+	
+	public static JavaClasspath get(ResourceSet resourceSet) {
+		if (resourceSet == null) {
+			return globalClasspath;
+		}
+		else {
+			for(Adapter a : resourceSet.eAdapters()) {
+				if (a instanceof JavaClasspath) {
+					return (JavaClasspath)a;
+				}
+			}
+		}
+		JavaClasspath myClasspath = new JavaClasspath(
+				resourceSet.getURIConverter().getURIMap());
+		resourceSet.eAdapters().add(myClasspath);
+		return myClasspath;
+	}
+	
+	public JavaClasspath(Map<URI, URI> uriMap) {
+		this.uriMap = uriMap;
+		registerStdLib();
+	}
+	
+	protected Map<URI, URI> uriMap = null;
 	protected Map<String, List<String>> packageClassifierMap =
 		new HashMap<String, List<String>>();
 	
-	public JavaClasspath() {
-		registerStdLib(URI_MAP);
-	}
+
 
 	/**
 	 * Registers all classes of the Java standard library 
@@ -58,10 +101,6 @@ public class JavaClasspath {
 	 * <code>System.getProperty("sun.boot.class.path")</code>.
 	 */
 	public void registerStdLib() {
-		registerStdLib(URI_MAP);
-	}
-	
-	public void registerStdLib(Map<URI, URI> localURI_MAP) {
 		try {
 			String classpath = System.getProperty("sun.boot.class.path");
 			String[] classpathEntries = classpath.split(File.pathSeparator);
@@ -70,7 +109,7 @@ public class JavaClasspath {
 				String classpathEntry = classpathEntries[idx];
 				if (classpathEntry.endsWith("classes.jar") || classpathEntry.endsWith("rt.jar")) {
 					URI uri = URI.createFileURI(classpathEntries[idx]);
-					registerClassifierJar(uri, localURI_MAP);
+					registerClassifierJar(uri);
 				}
 			}
 		} catch (IOException e) {
@@ -86,14 +125,10 @@ public class JavaClasspath {
 	 * @throws IOException
 	 */
 	public void registerClassifierJar(URI jarURI) throws IOException {
-		registerClassifierJar(jarURI, URI_MAP);
-	}
-
-	public void registerClassifierJar(URI jarURI, Map<URI, URI> localURI_MAP) throws IOException {
-		registerClassifierJar(jarURI, localURI_MAP, "");
+		registerClassifierJar(jarURI, "");
 	}
 	
-	public void registerClassifierJar(URI jarURI, Map<URI, URI> localURI_MAP, String prefix) throws IOException {
+	public void registerClassifierJar(URI jarURI, String prefix) throws IOException {
 		ZipFile zipFile = new ZipFile(jarURI.toFileString());
 		
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -120,7 +155,7 @@ public class JavaClasspath {
 				else {
 					className = fullName.substring(0, fullName.lastIndexOf("."));
 				}
-				registerClassifier(packageName, className, URI.createURI(uri), localURI_MAP);
+				registerClassifier(packageName, className, URI.createURI(uri));
 			}
 		}
 	}
@@ -132,21 +167,14 @@ public class JavaClasspath {
 	 * @throws IOException
 	 */
 	public void registerClassifierSource(CompilationUnit compilationUnit, URI uri) {
-		registerClassifierSource(compilationUnit, uri, URI_MAP);
-	}
-	
-	public void registerClassifierSource(
-			CompilationUnit compilationUnit, 
-			URI uri, 
-			Map<URI, URI> localURI_MAP) {
 		
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
 		
 		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
 			registerClassifier(
-					packageName, classifier.getName(), uri, localURI_MAP);
+					packageName, classifier.getName(), uri);
 			registerInnerClassifiers(
-					classifier, packageName, classifier.getName(), uri, localURI_MAP);
+					classifier, packageName, classifier.getName(), uri);
 		}
 	}
 	
@@ -159,10 +187,6 @@ public class JavaClasspath {
 	 * @param uri
 	 */
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
-		registerClassifier(packageName, classifierName, uri, URI_MAP);
-	}
-	
-	public void registerClassifier(String packageName, String classifierName, URI uri, Map<URI, URI> localURI_MAP) {
 		if (classifierName == null || classifierName.equals("") || uri == null) {
 			return;
 		}
@@ -207,27 +231,27 @@ public class JavaClasspath {
 				URI logicalUri = 
 					JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 				
-				URI existinMapping = localURI_MAP.get(logicalUri);
+				URI existinMapping = uriMap.get(logicalUri);
 				
 				if (existinMapping != null && !uri.equals(existinMapping)) {
 					//TODO where to put this warning?
 					/*System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
-							"\n[JaMoPP]   1) " + URI_MAP.get(logicalUri) +
+							"\n[JaMoPP]   1) " + uriMap.get(logicalUri) +
 							"\n[JaMoPP]   2) " + uri +
 							"\n[JaMoPP] Version 1) will be ignored!");*/
 				}
 				
-				localURI_MAP.put(logicalUri, uri);
+				uriMap.put(logicalUri, uri);
 			}
 		}
 	}
 	
-	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri, Map<URI, URI> localURI_MAP) {
+	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri) {
 		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
 			if (innerCand instanceof ConcreteClassifier) {
 				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
-				registerClassifier(packageName, newClassName, uri, localURI_MAP);
-				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri, localURI_MAP);
+				registerClassifier(packageName, newClassName, uri);
+				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri);
 			}
 		}
 	}
@@ -280,7 +304,7 @@ public class JavaClasspath {
 			URI logicalUri = 
 				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 			
-			URI_MAP.remove(logicalUri);
+			uriMap.remove(logicalUri);
 		}
 	}
 	

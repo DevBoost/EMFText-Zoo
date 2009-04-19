@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
@@ -35,6 +36,8 @@ import org.emftext.language.java.util.imports.ImportUtil;
 
 public class ConcreteClassifierDecider extends AbstractDecider {
 
+	protected Resource resource;
+	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
 			return true;
@@ -61,7 +64,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + p.getName();
 			}
 			
-			resultList.addAll(JavaClasspath.INSTANCE.getClassifiers(
+			resultList.addAll(JavaClasspath.get(resource).getClassifiers(
 					packageName, "*"));
 		}
 		
@@ -141,6 +144,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference crossReference) {
+		
+		resource = referenceContainer.eResource();
 		
 		return (referenceContainer instanceof Reference ||
 				referenceContainer instanceof ClassifierReference);

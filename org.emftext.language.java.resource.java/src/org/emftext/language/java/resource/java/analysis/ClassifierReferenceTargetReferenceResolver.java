@@ -113,9 +113,9 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		if(ncr.getNamespaces().size() > 0 && idx == 0) {
 			Classifier target = null;
 			//if the reference is qualified, the target can be directly found
-			String containerName = JavaClasspath.INSTANCE.getContainerNameFromNamespace(ncr);
+			String containerName = JavaClasspath.get(ncr).getContainerNameFromNamespace(ncr);
 			target = (Classifier) EcoreUtil.resolve(
-					JavaClasspath.INSTANCE.getClassifier(containerName + identifier), container.eResource());
+					JavaClasspath.get(ncr).getClassifier(containerName + identifier), container.eResource());
 			return target;
 		}
 		return null;

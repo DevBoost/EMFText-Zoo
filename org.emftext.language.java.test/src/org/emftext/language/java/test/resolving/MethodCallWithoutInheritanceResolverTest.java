@@ -2,7 +2,6 @@ package org.emftext.language.java.test.resolving;
 
 import java.util.List;
 
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.Statement;
@@ -13,7 +12,6 @@ public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTe
 	
 	@Before
 	public void setUp() {
-		JavaClasspath.INSTANCE.registerClassifier("java.lang", "Object", null);
 	}
 	
 	@Test

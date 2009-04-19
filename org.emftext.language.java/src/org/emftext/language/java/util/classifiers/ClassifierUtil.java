@@ -34,13 +34,13 @@ public class ClassifierUtil {
 			memberList.addAll(concreteClassifier.getDefaultMembers());
 			//because inner classes are found in separate class files
 			memberList.addAll(
-					JavaClasspath.INSTANCE.getInnnerClassifiers(concreteClassifier));
+					JavaClasspath.get(_this).getInnnerClassifiers(concreteClassifier));
 		}
 		
 		for (ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
 			memberList.addAll(superClassifier.getMembers());
 			memberList.addAll(
-					JavaClasspath.INSTANCE.getInnnerClassifiers(superClassifier));
+					JavaClasspath.get(_this).getInnnerClassifiers(superClassifier));
 		}
 		return memberList;
 	}

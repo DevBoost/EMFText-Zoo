@@ -52,8 +52,6 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	 */
 	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
 	
-	private ClassFileModelLoader classFileParser = new ClassFileModelLoader();
-	
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
 	}
@@ -69,7 +67,19 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	}
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
+		Boolean local = false;
+		if (options != null) {
+			local = (Boolean) options.get(OPTION_REGISTER_LOCAL);
+		}
 		if (isClassFile()) {
+			JavaClasspath javaClasspath = null;
+			if(Boolean.TRUE.equals(local)) {
+				javaClasspath = JavaClasspath.get(this);
+			}
+			else {
+				javaClasspath = JavaClasspath.get();
+			}
+			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
 			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
 			getContents().add(cu);
 			JavaModelCompletion.complete(this);
@@ -80,7 +90,6 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 			}
 			if (options != null) {
-				Boolean local = (Boolean) options.get(OPTION_REGISTER_LOCAL);
 		    	register(Boolean.TRUE.equals(local));
 			} else {
 				register(false);
@@ -186,10 +195,10 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				CompilationUnit cu = (CompilationUnit) getContents().get(0);
 				cu.setName(myURI.lastSegment());
 				if (local) {
-					JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI, getURIConverter().getURIMap());
+					JavaClasspath.get(this).registerClassifierSource(cu, myURI);
 				}
 				else {
-					JavaClasspath.INSTANCE.registerClassifierSource(cu, myURI);	
+					JavaClasspath.get().registerClassifierSource(cu, myURI);	
 				}
 			}
 			else if (root instanceof Package) {
@@ -214,7 +223,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	private void populatePackage(Package p) {
 		String fullPackageName = packageName(p);
-		for (ConcreteClassifier classifier : JavaClasspath.INSTANCE.getClassifiers(
+		for (ConcreteClassifier classifier : JavaClasspath.get(this).getClassifiers(
 				fullPackageName, "*")) {
 			
 			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, this.getResourceSet());
@@ -238,8 +247,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				if (file.getFileExtension().equals("java") && !file.getName().equals("package-info.java")) {
 					//URI fileUri = URI.createFileURI( file.getFullPath().toString());
 					URI resourceUri = URI.createURI("platform:/resource" + file.getFullPath().toString());
-					if (!JavaClasspath.INSTANCE.URI_MAP.values().contains(resourceUri)) {
-						JavaClasspath.INSTANCE.registerClassifier(
+					if (!getURIConverter().getURIMap().values().contains(resourceUri)) {
+						JavaClasspath.get(this).registerClassifier(
 								fullPackageName, 
 								file.getName().substring(0, file.getName().length() - 5), 
 								resourceUri);

@@ -23,7 +23,7 @@ public class JavaClasspathUtil {
 		if (objectContext.eResource() == null) {
 			throw new IllegalArgumentException("object context element must have a resource");
 		}
-		Class classClass = (Class) JavaClasspath.INSTANCE.getClassifier(
+		Class classClass = (Class) JavaClasspath.get(objectContext).getClassifier(
 				"java.lang." + name);
 		classClass = (Class) EcoreUtil.resolve(classClass, objectContext);
 		return classClass;
@@ -33,7 +33,7 @@ public class JavaClasspathUtil {
 		if (objectContext.eResource() == null) {
 			throw new IllegalArgumentException("object context element  must have a resource");
 		}
-		ConcreteClassifier classClass = JavaClasspath.INSTANCE.getClassifier(
+		ConcreteClassifier classClass = JavaClasspath.get(objectContext).getClassifier(
 				"java.lang." + name);
 		return (Interface) EcoreUtil.resolve(classClass, objectContext);
 	}
@@ -76,7 +76,7 @@ public class JavaClasspathUtil {
 			throw new IllegalArgumentException("object context element must have a resource");
 		}
 		Interface annotationClass = (Interface) EcoreUtil.resolve(
-				JavaClasspath.INSTANCE.getClassifier("java.lang.annotation.Annotation"), objectContext);
+				JavaClasspath.get(objectContext).getClassifier("java.lang.annotation.Annotation"), objectContext);
 		return annotationClass;
 	}
 	

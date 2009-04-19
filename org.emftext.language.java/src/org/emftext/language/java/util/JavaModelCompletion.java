@@ -91,7 +91,7 @@ public class JavaModelCompletion {
 			valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
 			valueMethod.setName(valueMethodName);
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
-			type.setTarget(JavaClasspath.INSTANCE.getClassifier("java.lang.String"));
+			type.setTarget(JavaClasspath.get(annotation).getClassifier("java.lang.String"));
 			valueMethod.setType(type);
 			annotation.getDefaultMembers().add(valueMethod);
 		}
@@ -134,7 +134,7 @@ public class JavaModelCompletion {
 			Parameter strParameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
 			strParameter.setName("str");
 			type = TypesFactory.eINSTANCE.createClassifierReference();
-			type.setTarget(JavaClasspath.INSTANCE.getClassifier("java.lang.String"));
+			type.setTarget(JavaClasspath.get(enumeration).getClassifier("java.lang.String"));
 			strParameter.setType(type);
 			
 			valueOfMethod.getParameters().add(strParameter);
