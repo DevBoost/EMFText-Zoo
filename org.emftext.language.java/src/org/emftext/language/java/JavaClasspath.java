@@ -88,18 +88,24 @@ public class JavaClasspath {
 	public void registerClassifierJar(URI jarURI) throws IOException {
 		registerClassifierJar(jarURI, URI_MAP);
 	}
-	
+
 	public void registerClassifierJar(URI jarURI, Map<URI, URI> localURI_MAP) throws IOException {
+		registerClassifierJar(jarURI, localURI_MAP, "");
+	}
+	
+	public void registerClassifierJar(URI jarURI, Map<URI, URI> localURI_MAP, String prefix) throws IOException {
 		ZipFile zipFile = new ZipFile(jarURI.toFileString());
 		
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
 
-			if (entry.getName().endsWith(".class")) {
+			if (entry.getName().endsWith(".class") && entry.getName().startsWith(prefix)) {
 				String fullName = entry.getName();
+				
 				String uri = "archive:" + jarURI.toString() + "!/" + fullName;
 				
+				fullName = fullName.substring(prefix.length());
 				fullName = fullName.replaceAll("/", "."); 
 				
 				String packageName = "";
@@ -110,7 +116,10 @@ public class JavaClasspath {
 				if (idx >= 0) {
 					packageName = fullName.substring(0, idx);
 					className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
-				}				
+				}
+				else {
+					className = fullName.substring(0, fullName.lastIndexOf("."));
+				}
 				registerClassifier(packageName, className, URI.createURI(uri), localURI_MAP);
 			}
 		}
