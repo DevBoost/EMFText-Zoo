@@ -1,17 +1,26 @@
 package org.emftext.language.java.resource.java.analysis.decider;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.ClassifiersPackage;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.expressions.AssignmentExpression;
+import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.StaticClassifierImport;
+import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
+import org.emftext.language.java.util.types.TypeReferenceUtil;
+import org.emftext.language.java.variables.LocalVariable;
 
 public class EnumConstantDecider extends AbstractDecider {
 
@@ -30,6 +39,48 @@ public class EnumConstantDecider extends AbstractDecider {
 			if (variableType instanceof Enumeration) {
 				return ((Enumeration)variableType).getConstants();	
 			}
+		}
+		if (container instanceof AssignmentExpression) {
+			AssignmentExpression assignmentExpression = (AssignmentExpression) container;
+			Type assignmentExpressionType = ExpressionUtil.getType(assignmentExpression);
+			if (assignmentExpressionType instanceof Enumeration) {
+				return ((Enumeration)assignmentExpressionType).getConstants();	
+			}
+		}
+		if (container instanceof LocalVariable) {
+			LocalVariable localVariable = (LocalVariable) container;
+			Type assignmentExpressionType = TypeReferenceUtil.getTarget(localVariable.getType());
+			if (assignmentExpressionType instanceof Enumeration) {
+				return ((Enumeration)assignmentExpressionType).getConstants();	
+			}
+		}
+		
+		EList<EObject> resultList = addImports(container);
+		
+		return resultList;
+	}
+	
+	private EList<EObject> addImports(EObject container) {
+		if(container instanceof CompilationUnit) {
+			EList<EObject> resultList = new BasicEList<EObject>();
+			for(Import aImport : ((CompilationUnit)container).getImports()) {
+				if (aImport instanceof StaticMemberImport) {
+					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
+				}
+				else if (aImport instanceof StaticClassifierImport) {
+					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
+				}
+				else if (aImport instanceof ClassifierImport) {
+					for (EObject member : ((ClassifierImport)aImport).getClassifier().getMembers()) {
+						//for (EObject modifier : member.eContents()) {
+							//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
+								resultList.add(member);
+							//}
+						//}
+					}
+				}
+			}
+			return resultList;
 		}
 		return null;
 	}
