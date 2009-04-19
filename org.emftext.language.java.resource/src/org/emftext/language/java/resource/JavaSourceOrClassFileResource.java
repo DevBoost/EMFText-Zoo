@@ -43,15 +43,6 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 //		return new DevNullLocationMap();
 //	}
 	
-	/**
-	 * If this option is set to true, each classifier loaded is registered
-	 * in the URI map of the current resource set's <code>URIConverter</code>.
-	 * <p>
-	 * If the option is set to false (default), each classifier loaded is registered
-	 * in the global <code>URIConverter.URI_MAP</code>.
-	 */
-	public static final String OPTION_REGISTER_LOCAL = "OPTION_REGISTER_LOCAL";
-	
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
 	}
@@ -67,18 +58,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	}
 	
 	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
-		Boolean local = false;
-		if (options != null) {
-			local = (Boolean) options.get(OPTION_REGISTER_LOCAL);
-		}
 		if (isClassFile()) {
-			JavaClasspath javaClasspath = null;
-			if(Boolean.TRUE.equals(local)) {
-				javaClasspath = JavaClasspath.get(this);
-			}
-			else {
-				javaClasspath = JavaClasspath.get();
-			}
+			JavaClasspath javaClasspath = JavaClasspath.get(this);
 			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
 			CompilationUnit cu = classFileParser.parse(inputStream, getURI().lastSegment());
 			getContents().add(cu);
@@ -89,11 +70,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if (getContents().isEmpty() && getErrors().isEmpty()) {
 				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 			}
-			if (options != null) {
-		    	register(Boolean.TRUE.equals(local));
-			} else {
-				register(false);
-			}
+			register();
 		}
 	}
 	
@@ -180,7 +157,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		getContents().add(thePackage);
 	}
 	
-	private void register(boolean local) throws IOException {
+	private void register() throws IOException {
 		URI myURI = getURI();
 		
 		//only for physical URIs
@@ -194,12 +171,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if(root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) getContents().get(0);
 				cu.setName(myURI.lastSegment());
-				if (local) {
-					JavaClasspath.get(this).registerClassifierSource(cu, myURI);
-				}
-				else {
-					JavaClasspath.get().registerClassifierSource(cu, myURI);	
-				}
+				JavaClasspath.get(this).registerClassifierSource(cu, myURI);	
 			}
 			else if (root instanceof Package) {
 				//package-info.java

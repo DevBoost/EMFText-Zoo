@@ -40,6 +40,15 @@ import org.emftext.language.java.util.JavaUtil;
 public class JavaClasspath extends AdapterImpl {
 
 	/**
+	 * If this option is set to true in a resource set, each classifier loaded is registered
+	 * in the URI map of the resource set's <code>URIConverter</code>.
+	 * <p>
+	 * If the option is set to false (default), each classifier loaded is registered
+	 * in the global <code>URIConverter.URI_MAP</code>.
+	 */
+	public static final String OPTION_USE_LOCAL_CLASSPATH = "OPTION_USE_LOCAL_CLASSPATH";
+	
+	/**
 	 * Singleton instance.
 	 */
 	public static final JavaClasspath globalClasspath = 
@@ -71,17 +80,21 @@ public class JavaClasspath extends AdapterImpl {
 		if (resourceSet == null) {
 			return globalClasspath;
 		}
-		else {
+		
+		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
+		if(Boolean.TRUE.equals(localClasspathOption))  {
 			for(Adapter a : resourceSet.eAdapters()) {
 				if (a instanceof JavaClasspath) {
 					return (JavaClasspath)a;
 				}
 			}
+			JavaClasspath myClasspath = new JavaClasspath(
+					resourceSet.getURIConverter().getURIMap());
+			resourceSet.eAdapters().add(myClasspath);
+			return myClasspath;
 		}
-		JavaClasspath myClasspath = new JavaClasspath(
-				resourceSet.getURIConverter().getURIMap());
-		resourceSet.eAdapters().add(myClasspath);
-		return myClasspath;
+		
+		return globalClasspath;
 	}
 	
 	public JavaClasspath(Map<URI, URI> uriMap) {
