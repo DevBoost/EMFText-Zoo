@@ -126,9 +126,7 @@ public class ResolvingTest extends TestCase {
 								assertEquals("Expected three parts in comment separated by double colon (source:<id>:nameOfReference).", 3, parts.length);
 								String id = parts[1].trim();
 								String referenceName = parts[2].trim();
-								EStructuralFeature feature = commentable.eClass().getEStructuralFeature(referenceName);
-								assertNotNull("Can't find feature \"" + referenceName + "\"", feature);
-								Object target = commentable.eGet(feature);
+								Object target = getTarget(commentable, referenceName);
 								assertNotNull(target);
 								actualTargetsMap.put(id, target);
 							}
@@ -142,6 +140,22 @@ public class ResolvingTest extends TestCase {
 					}
 				}
 			}
+		}
+
+		private Object getTarget(Commentable commentable, String referenceName) {
+			String[] references = referenceName.split("\\.");
+			EObject target = commentable;
+			for (String reference : references) {
+				if ("eContainer".equals(reference)) {
+					target = target.eContainer();
+					assertNotNull("Found null container.", target);
+				} else {
+					EStructuralFeature feature = target.eClass().getEStructuralFeature(reference);
+					assertNotNull("Can't find feature \"" + reference + "\"", feature);
+					target = (EObject) target.eGet(feature);
+				}
+			}
+			return target;
 		}
 	
 		private String collapse(List<String> commentList) {
