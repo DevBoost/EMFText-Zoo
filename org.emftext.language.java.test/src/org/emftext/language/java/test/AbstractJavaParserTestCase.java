@@ -203,7 +203,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		
 		// TODO put this somewhere else
 		if (file.getName().endsWith("jdt_test_files" + File.separator + "src.zip")) {
-			URI jarURI = URI.createFileURI(new File(".").getAbsoluteFile().getCanonicalPath() +  File.separator + file.getName().replaceAll("\\\\", "/"));
+			URI jarURI = URI.createURI("file:///" + new File(".").getAbsoluteFile().getCanonicalPath() +  File.separator + file.getName().replaceAll("\\\\", "/"));
 			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
 			JavaClasspath.INSTANCE.registerClassifierJar(jarURI, resourceSet.getURIConverter().getURIMap(), prefix);
 			/*int pos = entryName.indexOf("/");
