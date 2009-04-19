@@ -395,8 +395,14 @@ namespace-or-type-name: //done with namespaceOrTypeNameParts
 C.2.2 Types
 
 //done
+//splitt type with/without array caused of left-recursion
 type:
-    value-type 
+    non-array-type
+	array-type
+
+//done
+non-array-type:
+	value-type 
     reference-type 
     pointer-type
 
@@ -451,7 +457,6 @@ enum-type:
 reference-type:		
     class-type
     interface-type
-    array-type
     delegate-type
 
 //done in ClassOrInterfaceOrDelegateOrEnumType
@@ -713,14 +718,15 @@ labeled-statement:
 
 //done		Zehlike
 declaration-statement:
-    local-variable-declaration   ';'
+    variable-declaration   ';'
     local-constant-declaration   ';'
     
 //done		Zehlike
-local-variable-declaration:
+variable-declaration:
     type   local-variable-declarator +
    
 //done		Zehlike 
+//renamed in VariableDeclarator (equal functions) MRange
 local-variable-declarator:
     identifier ( '='   local-variable-initializer) ? 
 
@@ -799,7 +805,7 @@ for-statement:
 
 //done    
 for-initializer:
-    local-variable-declaration
+    variable-declaration
     statement-expression-list
 
 //done    
@@ -881,7 +887,7 @@ using-statement:
 
 //done     
 resource-acquisition:
-    local-variable-declaration
+    variable-declaration
     expression
 
 //done
@@ -973,9 +979,9 @@ class-body:
     '{'   class-member-declaration *  '}'
     
 class-member-declaration:
-    constant-declaration
+    constant-declaration			//done
     field-declaration
-    method-declaration
+    method-declaration				//done
     property-declaration
     event-declaration
     indexer-declaration
@@ -984,9 +990,10 @@ class-member-declaration:
     destructor-declaration
     static-constructor-declaration
     type-declaration 				//done
-    
+
+//done    
 constant-declaration:
-    attributes *   constant-modifier *   'const'   type   constant-declarators   ';'
+    attributes *   constant-modifier *   'const'   type   constant-declarator ( ','   constant-declarator)*   ';'
 
 //done in Modifier
 constant-modifier:
@@ -996,6 +1003,7 @@ constant-modifier:
     'internal'
     'private'
 
+//done  
 field-declaration:
     attributes *   field-modifier *   type   variable-declarator (  ','   variable-declarator)*   ';'
 
@@ -1010,16 +1018,17 @@ field-modifier:
     'readonly'
     'volatile'
     'unsafe'
-    
+
+//done    
 variable-declarator:
     identifier  ( '='   variable-initializer) ?
 
-//half-done MRange
+//done
 variable-initializer:
     expression
     array-initializer
 
-//pre-done   formal-parameter-list missing
+//pre-done as method   formal-parameter-list missing
 method-declaration:
     attributes *   method-modifier *   return-type   ( interface-type   '.') ?   identifier   (   formal-parameter-list ?   )   block   
 
@@ -1237,7 +1246,7 @@ C.2.9 Arrays
 
 //done
 array-type:
-    type   rank-specifier +
+    non-array-type   rank-specifier +
 
 //done
 rank-specifier:

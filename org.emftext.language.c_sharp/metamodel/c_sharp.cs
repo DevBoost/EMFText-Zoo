@@ -116,6 +116,12 @@ classes.Block
     |	";" 
     ;	
 
+classes.ConstantDeclaration
+    ::= attributes *   modifiers *   "const"   type   constantDeclarator ( ","   constantDeclarator)*   ";" ;
+
+classes.FieldDeclaration
+    ::= attributes *   modifiers *   type   variableDeclarator (  ","   variableDeclarator)*   ";" ;
+
 //Arrays
 
 arrays.StackallocInitializer
@@ -127,7 +133,7 @@ arrays.ArrayInitializer
     ;
 
 arrays.ArrayType
-    ::= type   rankSpecifier + ;
+    ::= nonArrayType   rankSpecifier + ;
 
 arrays.RankSpecifier
     ::= "["  (",") *   "]" ;
@@ -146,15 +152,14 @@ statements.LabeledStatement
 	::= name[] ":" statement ; 
 
 statements.DeclarationStatement
-	::= ( localVariableDeclaration  | localConstantDeclaration )  ";" 
+	::= ( variableDeclaration  | localConstantDeclaration )  ";" 
 	;
 		
-statements.LocalVariableDeclaration
-	::= type localVariableDeclarator + ;
+statements.VariableDeclaration
+	::= type VariableDeclarator + ;
 	
-statements.LocalVariableDeclarator
-	::= name[] ( "="   localVariableInitializer) ? ;
-//localVariableInitializer muss noch von array-initializer geerbt werden
+statements.VariableDeclarator
+	::= name[] ( "="   VariableInitializer) ? ;
 	
 statements.LocalConstantDeclaration
 	::= "const"   type  constantDeclarator ( ","   constantDeclarator ) * ;

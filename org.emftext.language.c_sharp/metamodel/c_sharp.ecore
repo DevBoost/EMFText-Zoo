@@ -76,6 +76,26 @@
           eType="#//statements/Statement" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VariableInitializer" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstantDeclaration" eSuperTypes="#//classes/ClassMemberDeclaration">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//attributes/Attributes" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
+          eType="#//modifiers/Modifier" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constantDeclarator" lowerBound="1"
+          upperBound="-1" eType="#//statements/ConstantDeclarator" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FieldDeclaration" eSuperTypes="#//classes/ClassMemberDeclaration">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//attributes/Attributes" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modifiers" upperBound="-1"
+          eType="#//modifiers/Modifier" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarator" lowerBound="1"
+          upperBound="-1" eType="#//statements/VariableDeclarator" containment="true"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="structs" nsURI="http://www.emftext.org/c_sharp/structs" nsPrefix="structs"/>
   <eSubpackages name="arrays" nsURI="http://www.emftext.org/c_sharp/arrays" nsPrefix="arrays">
@@ -89,8 +109,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="variableInitializer"
           upperBound="-1" eType="#//classes/VariableInitializer" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//types/ReferenceType">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//types/Type"
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//types/Type">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nonArrayType" eType="#//types/NonArrayType"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="rankSpecifier" lowerBound="1"
           upperBound="-1" eType="#//arrays/RankSpecifier" containment="true"/>
@@ -159,8 +179,8 @@
           eType="#//statements/Statement" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DeclarationStatement" eSuperTypes="#//statements/Statement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableDeclaration"
-          eType="#//statements/LocalVariableDeclaration" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration"
+          eType="#//statements/VariableDeclaration" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="localConstantDeclaration"
           eType="#//statements/LocalConstantDeclaration" containment="true"/>
     </eClassifiers>
@@ -323,14 +343,14 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           eType="#//expressions/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LocalVariableDeclaration" eSuperTypes="#//statements/ForInitializer #//statements/ResourceAcquisition">
+    <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//statements/ForInitializer #//statements/ResourceAcquisition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
           eType="#//types/Type" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableDeclarator"
-          lowerBound="1" eType="#//statements/LocalVariableDeclarator" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="VariableDeclarator" lowerBound="1"
+          eType="#//statements/VariableDeclarator" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LocalVariableDeclarator" eSuperTypes="#//common/NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableInitializer"
+    <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarator" eSuperTypes="#//common/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="VariableInitializer"
           eType="#//classes/VariableInitializer" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LocalConstantDeclaration">
@@ -579,7 +599,8 @@
   </eSubpackages>
   <eSubpackages name="types" nsURI="http://www.emftext.org/c_sharp/types" nsPrefix="types">
     <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true" eSuperTypes="#//types/Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NonArrayType" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true" eSuperTypes="#//types/NonArrayType"/>
     <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//types/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="Void" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Decimal" eSuperTypes="#//types/SimpleType"/>
