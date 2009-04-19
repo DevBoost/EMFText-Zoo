@@ -46,12 +46,16 @@ public class TypeParameterUtil {
 				resultClassifierList.add(superInterface);
 				InterfaceUtil.collectAllSuperInterfaces(superInterface.getExtends(), resultClassifierList);
 			}
-			if (type instanceof Class) {
+			else if (type instanceof Class) {
 				Class superClass = (Class) type;
 				resultClassifierList.add(superClass);
 				ClassUtil.collectAllSuperClassifiers(superClass, resultClassifierList);
 			}
-			if (type instanceof TypeParameter) {
+			else if (type instanceof ConcreteClassifier){
+				ConcreteClassifier superClassifier = (ConcreteClassifier) type;
+				resultClassifierList.add(superClassifier);
+			}
+			else if (type instanceof TypeParameter) {
 				TypeParameter superTypeParameter = (TypeParameter) type;
 				collectAllSuperClassifiers(superTypeParameter, resultClassifierList);
 			}
