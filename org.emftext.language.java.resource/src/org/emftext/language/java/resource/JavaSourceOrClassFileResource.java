@@ -110,7 +110,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	public EObject getEObject(String id) {
 		EObject result = null;
 		if (isClassFile() && 
-				id.startsWith(JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
+				id.startsWith("//" + JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
 			
 			if (!getContents().isEmpty()) {
 				//in a class file, there is always only one classifier as root element: 
