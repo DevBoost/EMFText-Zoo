@@ -24,13 +24,13 @@ public class JavaUniquePathConstructor {
 	 * Start of a URI fragment part pointing at a classifier contained in a 
 	 * compilation unit.
 	 */
-	public static final String CLASSIFIERS_ROOT_PATH_PREFIX = "//@classifiers[name='";
+	public static final String CLASSIFIERS_ROOT_PATH_PREFIX = "@classifiers[name='";
 	
 	/**
 	 * Start of a URI fragment part pointing at a classifier contained as member in 
 	 * another classifier.
 	 */
-	public static final String CLASSIFIERS_SUB_PATH_PREFIX  = "/@members[name='";
+	public static final String CLASSIFIERS_SUB_PATH_PREFIX  = "@members[name='";
 	
 	/**
 	 * End of a URI fragment part.
@@ -82,10 +82,10 @@ public class JavaUniquePathConstructor {
 		String uriFragment = "";
 		for(int i = 0; i < classNames.length; i++) {
 			if (i == 0) {
-				uriFragment = uriFragment + CLASSIFIERS_ROOT_PATH_PREFIX;
+				uriFragment = uriFragment + "//" + CLASSIFIERS_ROOT_PATH_PREFIX;
 			}
 			else {
-				uriFragment = uriFragment + CLASSIFIERS_SUB_PATH_PREFIX;
+				uriFragment = uriFragment + "/" + CLASSIFIERS_SUB_PATH_PREFIX;
 			}
 			uriFragment = uriFragment + classNames[i] + CLASSIFIERS_PATH_SUFIX;
 		}

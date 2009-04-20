@@ -2,6 +2,7 @@ package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IContainer;
@@ -13,6 +14,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -29,6 +31,7 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.util.JavaModelCompletion;
+import org.emftext.language.java.util.members.MemberContainerUtil;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
 
 /**
@@ -139,6 +142,34 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 		return result;
 	}
+	
+	protected EObject getEObject(List<String> uriFragmentPath) {
+		int size = uriFragmentPath.size();
+		EObject eObject = getEObjectForURIFragmentRootSegment(size == 0 ? ""
+				: uriFragmentPath.get(0));
+		for (int i = 1; i < size && eObject != null; ++i) {
+			String uriFragment = uriFragmentPath.get(i);
+			if(uriFragment.startsWith(JavaUniquePathConstructor.CLASSIFIERS_SUB_PATH_PREFIX)) {
+				//in cases of member containers look only at classifiers and not at methods or fields
+				//with possibly equal names
+				if(eObject instanceof MemberContainer) {
+					MemberContainer memberContainer = (MemberContainer) eObject;
+					String predicate = uriFragment.substring(
+							JavaUniquePathConstructor.CLASSIFIERS_SUB_PATH_PREFIX.length(),
+							uriFragment.length() - 2);
+					eObject = MemberContainerUtil.getConcreteClassifier(memberContainer, predicate);
+				}
+			}
+			else {
+				eObject = ((InternalEObject) eObject)
+						.eObjectForURIFragmentSegment(uriFragment);
+			}
+		}
+
+		return eObject;
+	}
+	
+	
 	
 	private void loadPackageFromClasspath() {
 		Package thePackage = ContainersFactory.eINSTANCE.createPackage();
