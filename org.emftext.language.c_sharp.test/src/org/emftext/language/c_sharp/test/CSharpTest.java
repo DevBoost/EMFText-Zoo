@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.emftext.language.c_sharp.classes.Class;
 import org.emftext.language.c_sharp.classes.ClassMemberDeclaration;
+import org.emftext.language.c_sharp.classes.FieldDeclaration;
 import org.emftext.language.c_sharp.classes.Method;
 import org.emftext.language.c_sharp.modifiers.Abstract;
 import org.emftext.language.c_sharp.modifiers.Extern;
@@ -19,6 +20,7 @@ import org.emftext.language.c_sharp.namespaces.Namespace;
 import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
 import org.emftext.language.c_sharp.namespaces.UsingDirective;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSSyntaxWrapper;
+import org.emftext.language.c_sharp.types.Decimal;
 import org.junit.Test;
 
 
@@ -61,6 +63,26 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		Class clazz = (Class)((Namespace)nmd.get(1)).getNamespaceBody().getNamespaceMemberDeclaration().get(2);
 		assertEquals(clazz.getName(), "Class3");
 		assertEquals(namespaceOrTypeNameToString(clazz.getClassBase().getTypes().get(0).getNamespaceOrTypeName()), "Class2");
+		
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
+	public void testLiteralsAndSimpleTypes() throws Exception {
+		String typename = "LiteralsAndSimpleTypes";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");
+		assertMemberCount(clazz, 40);
+		
+		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
+		for(int i = 0; i<40; i++)
+			assertType(cmd.get(i), FieldDeclaration.class);
+		
+		//TODO: check SimpleTypes and literals 
+		//FieldDeclaration fd = (FieldDeclaration)cmd.get(0);
+		//assertEquals("300.5m", ....);
+		//assertType(fd.getType(), Decimal.class);
+		//...
 		
 		//parseAndReprint(filename);		
 	}
