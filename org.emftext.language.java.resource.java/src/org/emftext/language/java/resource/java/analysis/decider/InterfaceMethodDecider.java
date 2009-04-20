@@ -12,6 +12,10 @@ import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
+/**
+ * To resolve annotation attributes.
+ *
+ */
 public class InterfaceMethodDecider extends AbstractDecider {
 
 

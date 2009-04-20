@@ -8,7 +8,6 @@ import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
@@ -76,15 +75,6 @@ public class FieldDecider extends AbstractDecider {
 				}
 				else if (aImport instanceof StaticClassifierImport) {
 					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
-				}
-				else if (aImport instanceof ClassifierImport) {
-					for (EObject member : ((ClassifierImport)aImport).getClassifier().getMembers()) {
-						//for (EObject modifier : member.eContents()) {
-							//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
-								resultList.add(member);
-							//}
-						//}
-					}
 				}
 			}
 		}
