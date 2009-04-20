@@ -147,13 +147,15 @@ classifiers.Annotation
 
 annotations.AnnotationInstance
 	::=	"@" (namespaces[] #0 "." #0 )* annotation[]
-		( "("
-		  value:annotations.AnnotationAttributeSettingList,arrays.ArrayInitializer,expressions.ConditionalExpression
-		")")? 
+		(parameter)? 
 	;
 
-annotations.AnnotationAttributeSettingList
-	::= (settings ("," settings)*)?
+annotations.SingleAnnotationParameter
+	::= "(" value:arrays.ArrayInitializer,expressions.ConditionalExpression ")"
+	;
+
+annotations.AnnotationParameterList
+	::= "(" (settings ("," settings)*)? ")"
 	;
 	
 annotations.AnnotationAttributeSetting
