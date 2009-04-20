@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 public class ZipFileEntryTest extends AbstractJavaParserTestCase {

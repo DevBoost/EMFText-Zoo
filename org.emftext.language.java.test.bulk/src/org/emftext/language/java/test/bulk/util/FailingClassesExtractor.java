@@ -82,7 +82,7 @@ public class FailingClassesExtractor extends GiganticTest {
 	private int count = 0;
 
 	private void doExtract() throws IOException, CoreException {
-		List<String> inputZips = getInputZips();
+		List<String> inputZips = getInputZips("");
 		for (String inputZip : inputZips) {
 			Collection<URI> streams = getURIsForZipFileEntries(inputZip);
 			for (URI next : streams) {

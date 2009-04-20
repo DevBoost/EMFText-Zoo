@@ -25,7 +25,7 @@ public class TestStatistics extends GiganticTest {
 	}
 
 	private void doCount() throws IOException, CoreException {
-		List<String> inputZips = getInputZips();
+		List<String> inputZips = getInputZips("");
 		for (String inputZip : inputZips) {
 			Collection<URI> streams = getURIsForZipFileEntries(inputZip);
 			for (URI next : streams) {

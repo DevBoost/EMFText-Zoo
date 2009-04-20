@@ -3,29 +3,18 @@ package org.emftext.language.java.test.bulk;
 import java.io.IOException;
 
 import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
-import org.emftext.language.java.test.util.ThreadedTestSuite;
 
 
 public class JacksTest extends AbstractZipFileInputTest {
 	
-	private static final String INPUT_FILE = BULK_INPUT_DIR + "jacks_javac_1.6.0_07_passed-src.zip";
+	public static final String TEST_FOLDER = "jacks_javac_1.6.0_07_passed";
+	public static final String START_ENTRY = "";
+	public static final int    THREAD_NO   = 8;
 	
 	public static Test suite() throws CoreException, IOException {
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files in the jacks_input zip file automatically", 5 * 60 * 1000, 8);
-		addToTestSuite(suite, getTestsForZipFileEntries(INPUT_FILE, false));
-		return suite;
-	}
-
-	@Override
-	protected boolean isExcludedFromReprintTest(String filename) {
-		return true;
+		return constructSuite(TEST_FOLDER, START_ENTRY, THREAD_NO);
 	}
 	
-	@Override
-	protected String getTestInputFolder() {
-		return null;
-	}
 }
