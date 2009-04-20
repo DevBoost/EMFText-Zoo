@@ -70,7 +70,7 @@ TOKENSTYLES {
 
 RULES {
 
-containers.EmptyModel ::= ("import" imports #0 ";" !0 )* (";")*
+containers.EmptyModel ::= (imports #0 ";" !0 )* (";")*
    ;
 
 containers.Package
