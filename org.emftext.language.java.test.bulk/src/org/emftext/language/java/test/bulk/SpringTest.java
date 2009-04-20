@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.CoreException;
 
 public class SpringTest extends AbstractZipFileInputTest {
 
-	public static final String TEST_FOLDER = "struts-2.1.6";
+	public static final String TEST_FOLDER = "spring-framework-3.0.0.M1";
 	public static final String START_ENTRY = "";
 	public static final int    THREAD_NO   = 8;
 	
