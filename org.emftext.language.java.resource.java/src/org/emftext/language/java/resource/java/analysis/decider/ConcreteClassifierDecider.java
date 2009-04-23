@@ -20,6 +20,7 @@ import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.PackageImport;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
@@ -105,8 +106,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	private void addImports(EObject container,
 			EList<EObject> resultList) {
-		if(container instanceof JavaRoot) {
-			for(Import aImport : ((JavaRoot)container).getImports()) {
+		if(container instanceof ImportingElement) {
+			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof ClassifierImport) {
 					resultList.add(((ClassifierImport)aImport).getClassifier());
 				}
@@ -117,7 +118,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
 				}
 			}
-			for(Import aImport : ((JavaRoot)container).getImports()) {
+			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof PackageImport) {
 					resultList.addAll(ImportUtil.getClassifierList(
 							aImport));

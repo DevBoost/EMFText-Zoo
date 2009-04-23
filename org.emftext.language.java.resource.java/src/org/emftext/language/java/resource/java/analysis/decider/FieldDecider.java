@@ -43,15 +43,14 @@ public class FieldDecider extends AbstractDecider {
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container));
 		}
 		
+		EList<EObject> resultList = new BasicEList<EObject>();
+		
+		addImports(container, resultList);
 		if(container instanceof CompilationUnit) {
-			EList<EObject> resultList = new BasicEList<EObject>();
-			addImports(container, resultList);
 			resultList.addAll(innerTypeSuperMembers);
 			addArrayLengthFiled(resultList, container);
-			return resultList;
-		}
-		
-		return null;
+		}	
+		return resultList;
 	}
 
 	private void addArrayLengthFiled(EList<EObject> resultList, EObject objectContext) {
