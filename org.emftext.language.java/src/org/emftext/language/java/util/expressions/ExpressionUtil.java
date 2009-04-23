@@ -3,6 +3,7 @@ package org.emftext.language.java.util.expressions;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.arrays.ArrayInstantiationBySize;
 import org.emftext.language.java.arrays.ArrayTypable;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.expressions.AdditiveExpression;
@@ -166,23 +167,28 @@ public class ExpressionUtil {
 	}
 	
 	public static int getArrayDimension(Expression _this) {
+		int size = 0;
+		
 		ArrayTypable arrayType = getArrayType(_this);
 		if (arrayType == null) {
 			return 0;
 		}
-		
-		int selections = 0;
 		if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
 			while (reference.getNext() != null) {
 				reference = reference.getNext();
 			}
-			selections = reference.getArraySelectors().size();
+			size -= reference.getArraySelectors().size();
 		}
 
-		return arrayType.getArrayDimensionsBefore().size()
-			+ arrayType.getArrayDimensionsAfter().size()
-			- selections;
+		if(_this instanceof ArrayInstantiationBySize) {
+			size += ((ArrayInstantiationBySize)_this).getSizes().size();
+		}
+		
+		size += arrayType.getArrayDimensionsBefore().size();
+		size += arrayType.getArrayDimensionsAfter().size();
+		
+		return size;
 	}
 
 }
