@@ -3,6 +3,7 @@ package org.emftext.language.java.util.expressions;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.arrays.ArrayTypable;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.AndExpression;
@@ -22,6 +23,7 @@ import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.RelationExpression;
 import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.literals.Literal;
+import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaClasspathUtil;
@@ -143,5 +145,23 @@ public class ExpressionUtil {
 		return type;
 	}
 	
+	public static ArrayTypable getArrayType(Expression _this) {
+		ArrayTypable arrayType = null;
+		if (_this instanceof ArrayTypable) {
+			arrayType = (ArrayTypable) _this;
+		}
+		else if (_this instanceof ElementReference) {
+			ElementReference reference = (ElementReference) _this;
+			while (reference.getNext() instanceof ElementReference) {
+				reference = (ElementReference) reference.getNext();
+			}
+			if (reference instanceof ElementReference) {
+				if (reference.getTarget() instanceof ArrayTypable) {
+					arrayType = (ArrayTypable) reference.getTarget();
+				}
+			}
+		}
+		return arrayType;
+	}
 
 }

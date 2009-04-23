@@ -2,11 +2,17 @@ package org.emftext.language.java.util.members;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.arrays.ArrayTypable;
+import org.emftext.language.java.arrays.ArraysFactory;
+import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.types.Type;
+import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
+import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.references.ArgumentableUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.util.types.TypeUtil;
@@ -54,25 +60,45 @@ public class MethodUtil {
 
 	private static boolean isMethodForCall(Method _this, MethodCall methodCall, boolean needsPerfectMatch) {
 		EList<Type> argumentTypes = ArgumentableUtil.getArgumentTypes(methodCall);
-		EList<Parameter> parameters = new BasicEList<Parameter>(_this.getParameters());
-		if (!parameters.isEmpty()) {
-			//in case of variable length add/remove some parameters
-			Parameter lastParameter = parameters.get(parameters.size() - 1);
+		EList<Parameter> parameterList = new BasicEList<Parameter>(_this.getParameters());
+
+		if (!parameterList.isEmpty()) {
+			Parameter lastParameter = parameterList.get(parameterList.size() - 1);
 			if (lastParameter instanceof VariableLengthParameter) {
-				while(parameters.size() < argumentTypes.size()) {
-					parameters.add(lastParameter);
+				Expression   lastArgument = methodCall.getArguments().get(methodCall.getArguments().size() - 1);
+				ArrayTypable lastArgumentArrayType = ExpressionUtil.getArrayType(lastArgument);
+				
+				if (parameterList.size() == argumentTypes.size() && lastArgumentArrayType != null &&
+						lastArgumentArrayType.getArrayDimensionsBefore().size() + 
+						lastArgumentArrayType.getArrayDimensionsAfter().size() == 1) {
+					//in case the last argument is an array, the VariableLengthParameter needs to be handled as array		
+					parameterList.remove(lastParameter);
+					Parameter arrayTypedParameter = (Parameter) EcoreUtil.copy(lastParameter);
+					arrayTypedParameter.getArrayDimensionsAfter().add(ArraysFactory.eINSTANCE.createArrayDimension());
+					parameterList.add(arrayTypedParameter);
 				}
-				if(parameters.size() > argumentTypes.size()) {
-					parameters.remove(lastParameter);
+				else {
+					//in case of variable length add/remove some parameters
+					while(parameterList.size() < argumentTypes.size()) {
+						parameterList.add(lastParameter);
+					}
+					if(parameterList.size() > argumentTypes.size()) {
+						parameterList.remove(lastParameter);
+					}
 				}
 			}
 		}
 		
-		if (parameters.size() == argumentTypes.size()) {
+		if (parameterList.size() == argumentTypes.size()) {
 			for (int i = 0; i < argumentTypes.size(); i++) {
-				Type parameterType = TypeReferenceUtil.getTarget(parameters.get(i).getType(), methodCall);
+				Parameter  parameter = parameterList.get(i);
+				Expression argument = methodCall.getArguments().get(i);
+				
+				Type parameterType = TypeReferenceUtil.getTarget(parameter.getType(), methodCall);
 				Type argumentType  = argumentTypes.get(i);
-				if (argumentType == null) {
+				ArrayTypable argumentArrayType = ExpressionUtil.getArrayType(argument);
+				
+				if (argumentType == null || parameterType == null) {
 					return false;
 				}
 				
@@ -80,17 +106,20 @@ public class MethodUtil {
 				if (parameterType != null && argumentType != null) {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
 						if (needsPerfectMatch) {
-							parametersMatch = parametersMatch && TypeUtil.equalsType(argumentType, parameterType);
+							parametersMatch = parametersMatch
+								&& ArrayTypeableUtil.equals(parameter, argumentArrayType)
+								&& TypeUtil.equalsType(argumentType, parameterType);
 						}
 						else {
-							parametersMatch = parametersMatch && TypeUtil.isSuperType(argumentType, parameterType);
+							parametersMatch = parametersMatch 
+								&& ArrayTypeableUtil.equals(parameter, argumentArrayType)
+								&& TypeUtil.isSuperType(argumentType, parameterType);
 						}
 					}
 					else {
 						return false;
 					}
 				}
-				
 				else {
 					return false;
 				}
@@ -101,6 +130,5 @@ public class MethodUtil {
 		return false;
 		
 	}
-	
 
 }
