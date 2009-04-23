@@ -3,13 +3,16 @@ package org.emftext.language.java.resource.register;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -54,8 +57,9 @@ public class RegisterJavaFilesAction implements IObjectActionDelegate {
 			rs.getResource(resourceUri, true);
 		}
 		if (file.getFileExtension().equals("jar")) {
-			URI resourceUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			URI resourceUri = URI.createFileURI(Platform.getLocation() + file.getFullPath().toString());
 			try {
+				Platform.getLocation();
 				JavaClasspath.get().registerClassifierJar(resourceUri);
 			} catch (IOException e) {
 				e.printStackTrace();
