@@ -25,5 +25,8 @@ public class AClass {
 		
 		a.// source:2:target
 		m(aStringArray);
+		
+		a.// source:1:target
+		m(aStringArray[1]);
 	}
 }
