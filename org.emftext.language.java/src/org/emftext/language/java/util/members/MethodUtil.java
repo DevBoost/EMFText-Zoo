@@ -58,7 +58,7 @@ public class MethodUtil {
 	}
 
 	private static boolean isMethodForCall(Method _this, MethodCall methodCall, boolean needsPerfectMatch) {
-		EList<Type> argumentTypes = ArgumentableUtil.getArgumentTypes(methodCall);
+		EList<Type> argumentTypeList = ArgumentableUtil.getArgumentTypes(methodCall);
 		EList<Parameter> parameterList = new BasicEList<Parameter>(_this.getParameters());
 		
 		EList<Type> parameterTypeList = new BasicEList<Type>();
@@ -77,8 +77,8 @@ public class MethodUtil {
 					lastArgument = methodCall.getArguments().get(methodCall.getArguments().size() - 1);
 				}
 
-				if (parameterList.size() == argumentTypes.size() && 
-						ExpressionUtil.getArrayDimension(lastArgument) == 1) {
+				if (parameterList.size() == argumentTypeList.size() && 
+						ExpressionUtil.getArrayDimension(lastArgument) > 0) {
 					//in case the last argument is an array, the VariableLengthParameter needs to be handled as array		
 					parameterList.remove(lastParameter);
 					Parameter arrayTypedParameter = (Parameter) EcoreUtil.copy(lastParameter);
@@ -87,11 +87,11 @@ public class MethodUtil {
 				}
 				else {
 					//in case of variable length add/remove some parameters
-					while(parameterList.size() < argumentTypes.size()) {
+					while(parameterList.size() < argumentTypeList.size()) {
 						parameterList.add(lastParameter);
 						parameterTypeList.add(lastParameterType);
 					}
-					if(parameterList.size() > argumentTypes.size()) {
+					if(parameterList.size() > argumentTypeList.size()) {
 						parameterList.remove(lastParameter);
 						parameterTypeList.remove(lastParameterType);
 					}
@@ -99,13 +99,13 @@ public class MethodUtil {
 			}
 		}
 		
-		if (parameterList.size() == argumentTypes.size()) { 
-			for (int i = 0; i < argumentTypes.size(); i++) {
+		if (parameterList.size() == argumentTypeList.size()) { 
+			for (int i = 0; i < argumentTypeList.size(); i++) {
 				Parameter  parameter = parameterList.get(i);
 				Expression argument = methodCall.getArguments().get(i);
 
 				Type parameterType = parameterTypeList.get(i);
-				Type argumentType  = argumentTypes.get(i);
+				Type argumentType  = argumentTypeList.get(i);
 				
 				if (argumentType == null || parameterType == null) {
 					return false;

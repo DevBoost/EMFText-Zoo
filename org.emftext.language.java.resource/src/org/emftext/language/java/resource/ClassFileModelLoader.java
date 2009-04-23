@@ -293,6 +293,13 @@ public class ClassFileModelLoader {
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
 		emfParameter.setType(emfTypeReference);
+		
+        int arrayDimension = getArrayDimension(signature) - 1;
+        for(int i = 0; i < arrayDimension; i++) {
+        	emfParameter.getArrayDimensionsBefore().add(
+        			ArraysFactory.eINSTANCE.createArrayDimension());
+        }
+
 		return emfParameter;
 	}
 	
