@@ -65,8 +65,11 @@ public class MethodUtil {
 		if (!parameterList.isEmpty()) {
 			Parameter lastParameter = parameterList.get(parameterList.size() - 1);
 			if (lastParameter instanceof VariableLengthParameter) {
-				Expression   lastArgument = methodCall.getArguments().get(methodCall.getArguments().size() - 1);
-				
+				Expression lastArgument = null;
+				if (!methodCall.getArguments().isEmpty()) {
+					lastArgument = methodCall.getArguments().get(methodCall.getArguments().size() - 1);
+				}
+
 				if (parameterList.size() == argumentTypes.size() && 
 						ExpressionUtil.getArrayDimension(lastArgument) == 1) {
 					//in case the last argument is an array, the VariableLengthParameter needs to be handled as array		
