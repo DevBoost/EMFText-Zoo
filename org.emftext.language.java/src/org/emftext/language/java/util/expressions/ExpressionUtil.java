@@ -147,7 +147,7 @@ public class ExpressionUtil {
 	
 	public static ArrayTypable getArrayType(Expression _this) {
 		ArrayTypable arrayType = null;
-		if (_this instanceof ArrayTypable) {
+		if (_this instanceof ArrayTypable && !(_this instanceof InstanceOfExpression)) {
 			arrayType = (ArrayTypable) _this;
 		}
 		else if (_this instanceof Reference) {
