@@ -22,6 +22,7 @@ import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.util.classifiers.ClassUtil;
+import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.classifiers.InterfaceUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
@@ -82,8 +83,23 @@ public class TypeParameterUtil {
 					if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
 						ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(prevTypeReference);
 						Type prevType = TypeReferenceUtil.getTarget(classifierReference, (ElementReference) reference.eContainer());
-						if (classifierReference != null && !classifierReference.getTypeArguments().isEmpty() && prevType instanceof ConcreteClassifier) {
-							if (typeParameterIndex < classifierReference.getTypeArguments().size())  {
+						if (classifierReference != null && prevType instanceof ConcreteClassifier) {
+							 if(classifierReference.getTypeArguments().isEmpty()) {
+								 //bound through inheritance?
+								 for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
+									 if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
+										 //is this an argument for the correct class?
+										 if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
+											TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
+											if (arg instanceof QualifiedTypeArgument) {
+												return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
+											}
+										 }
+
+									 }
+								 }
+							 }
+							else if (typeParameterIndex < classifierReference.getTypeArguments().size())  {
 								TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
 								if (arg instanceof QualifiedTypeArgument) {
 									return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
