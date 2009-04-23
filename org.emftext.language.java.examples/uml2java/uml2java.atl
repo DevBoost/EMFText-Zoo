@@ -48,38 +48,32 @@ rule Class {
 	)
 }
 
-rule  Attribute {
-	from i : uml!Property
-	to o : java!Field (
-		name <- i.name,
-		type <- typeRefSequence,
-		modifiers <- protected
+rule Property {
+	from umlProperty : uml!Property
+	to javaField : java!Field (
+		name <- umlProperty.name,
+		modifiers <- protected,
+		type <- type
 	),
-	typeRefSequence : java!TypeReferenceSequence (
-		parts <- Sequence{typeRef}
+		protected : java!Protected(
 	),
-	typeRef : java!ParameterizedPackageOrClassifierReference (
-		target <- if (i.upper = 1) then
-					i.getCorrectType()
+	type : java!TypeReference (
+		target <- if (umlProperty.upper = 1) then
+					umlProperty.type
 				else
-					thisModule.getList()
+					java!Package.allInstances()->select(p | p.name = 'lang')->collect(
+						p | p.compilationUnits)->flatten()->collect(
+							cu | cu.classifiers)->flatten()->select(
+								c | c.name = 'LinkedList')->at(1)
 				endif,
-		typeArguments <- if (i.upper = 1) then
+		typeArguments <- if (umlProperty.upper = 1) then
 					Sequence{}
 				else
-					Sequence{typeParam}
+					Sequence{typeArgument}
 				endif
 	),
-	typeParam : java!QualifiedTypeArgument(
-		type <- typeRefSequenceInner
-	),
-	typeRefSequenceInner : java!TypeReferenceSequence (
-		parts <- Sequence{typeRefInner}
-	),
-	typeRefInner : java!ParameterizedPackageOrClassifierReference (
-		target <- i.getCorrectType()
-	),
-	protected : java!Protected(
+	typeArgument : java!QualifiedTypeArgument(
+		target <- umlProperty.type
 	)
 }
 
