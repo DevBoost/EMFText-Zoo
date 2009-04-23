@@ -6,6 +6,8 @@ import org.emftext.language.c_sharp.classes.Class;
 import org.emftext.language.c_sharp.classes.ClassMemberDeclaration;
 import org.emftext.language.c_sharp.classes.FieldDeclaration;
 import org.emftext.language.c_sharp.classes.Method;
+import org.emftext.language.c_sharp.expressions.ConditionalExpression;
+import org.emftext.language.c_sharp.expressions.Expression;
 import org.emftext.language.c_sharp.modifiers.Abstract;
 import org.emftext.language.c_sharp.modifiers.Extern;
 import org.emftext.language.c_sharp.modifiers.Internal;
@@ -51,6 +53,18 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	}
 	
 	@Test
+	public void testArrays() throws Exception {
+		String typename = "Arrays";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");
+		assertMemberCount(clazz, 7);
+		
+		//TODO: check Arrays 
+		
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
 	public void testClass() throws Exception {
 		String typename = "Class";
 		String filename = typename + getFileExtension();
@@ -75,14 +89,20 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		assertMemberCount(clazz, 40);
 		
 		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
-		for(int i = 0; i<40; i++)
-			assertType(cmd.get(i), FieldDeclaration.class);
 		
 		//TODO: check SimpleTypes and literals 
-		//FieldDeclaration fd = (FieldDeclaration)cmd.get(0);
-		//assertEquals("300.5m", ....);
-		//assertType(fd.getType(), Decimal.class);
-		//...
+		for(int i = 0; i<40; i++){
+			assertType(cmd.get(i), FieldDeclaration.class);
+			FieldDeclaration fd = (FieldDeclaration)cmd.get(0);
+			assertType(fd.getVariableDeclarator().get(0).getVariableInitializer(), Expression.class);
+			ConditionalExpression ce = (ConditionalExpression)fd.getVariableDeclarator().get(0).getVariableInitializer();
+			//ce.getConditionalOrExpression().get(0).eAllContents()	
+			//catch:...
+			//assertEquals("300.5m", );
+			//assertType(fd.getType(), Decimal.class);
+			//...
+		}
+		
 		
 		//parseAndReprint(filename);		
 	}
@@ -143,6 +163,18 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		assertMemberCount(nmd2.get(1), 1);
 		assertIdentifierName(((Namespace)nmd2.get(1)).getNamespaceName(), "Name4.Lol.Pol");
 	
+		//parseAndReprint(filename);		
+	}
+	
+	@Test
+	public void testStackalloc() throws Exception {
+		String typename = "Stackalloc";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");
+		assertMemberCount(clazz, 1);
+		
+		//TODO: check Stackalloc 
+		
 		//parseAndReprint(filename);		
 	}
 	
