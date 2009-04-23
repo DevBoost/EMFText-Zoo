@@ -88,10 +88,12 @@ public class MethodUtil {
 				else {
 					//in case of variable length add/remove some parameters
 					while(parameterList.size() < argumentTypeList.size()) {
+						if (needsPerfectMatch) return false;
 						parameterList.add(lastParameter);
 						parameterTypeList.add(lastParameterType);
 					}
 					if(parameterList.size() > argumentTypeList.size()) {
+						if (needsPerfectMatch) return false;
 						parameterList.remove(lastParameter);
 						parameterTypeList.remove(lastParameterType);
 					}

@@ -65,6 +65,11 @@ public class TypeUtil {
 			return true;
 		}
 		
+		//if one of us is a parameter to the best of my knowledge, we might match
+		if(_this instanceof TypeParameter || otherType instanceof TypeParameter ) {
+			return true;
+		}
+		
 		//if array dimensions do not match, I am no subtype
 		if(arrayDim != otherArrayDim) {
 			return false;
@@ -75,11 +80,6 @@ public class TypeUtil {
 				(otherType.equals(JavaClasspathUtil.getAnnotationClass(_this)) ||
 						ClassifierUtil.getAllSuperClassifiers(
 								(ConcreteClassifier)_this).contains(JavaClasspathUtil.getAnnotationClass(_this)))) {
-			return true;
-		}
-		
-		//if one of us is a parameter to the best of my knowledge, we might match
-		if(_this instanceof TypeParameter || otherType instanceof TypeParameter ) {
 			return true;
 		}
 
