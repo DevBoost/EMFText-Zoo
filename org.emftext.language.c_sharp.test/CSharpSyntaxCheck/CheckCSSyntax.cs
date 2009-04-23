@@ -58,6 +58,8 @@ namespace CodeCheck
             cp.ReferencedAssemblies.Add("WindowsBase.dll");
             cp.ReferencedAssemblies.Add("PresentationCore.dll");
             cp.ReferencedAssemblies.Add("PresentationFramework.dll");
+            cp.CompilerOptions += " /unsafe ";
+
 
             compiler = new CSharpCodeProvider(options);
         }

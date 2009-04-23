@@ -2,6 +2,7 @@ package org.emftext.language.c_sharp.test;
 
 import java.util.List;
 
+import org.emftext.language.c_sharp.arrays.StackallocInitializer;
 import org.emftext.language.c_sharp.classes.Class;
 import org.emftext.language.c_sharp.classes.ClassMemberDeclaration;
 import org.emftext.language.c_sharp.classes.FieldDeclaration;
@@ -21,8 +22,10 @@ import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.namespaces.Namespace;
 import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
 import org.emftext.language.c_sharp.namespaces.UsingDirective;
+import org.emftext.language.c_sharp.statements.DeclarationStatement;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSSyntaxWrapper;
 import org.emftext.language.c_sharp.types.Decimal;
+import org.emftext.language.c_sharp.types.PointerType;
 import org.junit.Test;
 
 
@@ -173,7 +176,14 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 1);
 		
-		//TODO: check Stackalloc 
+		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
+		assertType(cmd.get(0), Method.class);
+		Method meth = (Method)cmd.get(0);
+		assertEquals("method", meth.getName());
+		assertType(meth.getBlock().getStatement().get(0), DeclarationStatement.class);
+		DeclarationStatement ds = (DeclarationStatement) meth.getBlock().getStatement().get(0);
+		assertType(ds.getVariableDeclaration().getType(), PointerType.class);
+		assertType(ds.getVariableDeclaration().getVariableDeclarator().getVariableInitializer(), StackallocInitializer.class);
 		
 		//parseAndReprint(filename);		
 	}
