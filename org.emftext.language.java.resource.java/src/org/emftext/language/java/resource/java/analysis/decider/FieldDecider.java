@@ -28,7 +28,7 @@ public class FieldDecider extends AbstractDecider {
 
 	private static Field STANDARD_ARRAY_LENGTH_FIELD = null;
 
-	EList<Member> innerTypeSuperMembers = new BasicEList<Member>();
+	private EList<Member> innerTypeSuperMembers = new BasicEList<Member>();
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof Classifier) {
