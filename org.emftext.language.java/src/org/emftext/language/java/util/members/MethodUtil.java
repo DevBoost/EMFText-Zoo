@@ -61,9 +61,17 @@ public class MethodUtil {
 	private static boolean isMethodForCall(Method _this, MethodCall methodCall, boolean needsPerfectMatch) {
 		EList<Type> argumentTypes = ArgumentableUtil.getArgumentTypes(methodCall);
 		EList<Parameter> parameterList = new BasicEList<Parameter>(_this.getParameters());
+		
+		EList<Type> parameterTypeList = new BasicEList<Type>();
+		for(Parameter parameter : parameterList)  {
+			//determine types before messing with the parameters
+			parameterTypeList.add(
+					TypeReferenceUtil.getTarget(parameter.getType(), methodCall));
+		}
 
 		if (!parameterList.isEmpty()) {
 			Parameter lastParameter = parameterList.get(parameterList.size() - 1);
+			Type lastParameterType  = parameterTypeList.get(parameterTypeList.size() - 1);;
 			if (lastParameter instanceof VariableLengthParameter) {
 				Expression lastArgument = null;
 				if (!methodCall.getArguments().isEmpty()) {
@@ -82,9 +90,11 @@ public class MethodUtil {
 					//in case of variable length add/remove some parameters
 					while(parameterList.size() < argumentTypes.size()) {
 						parameterList.add(lastParameter);
+						parameterTypeList.add(lastParameterType);
 					}
 					if(parameterList.size() > argumentTypes.size()) {
 						parameterList.remove(lastParameter);
+						parameterTypeList.remove(lastParameterType);
 					}
 				}
 			}
@@ -95,7 +105,7 @@ public class MethodUtil {
 				Parameter  parameter = parameterList.get(i);
 				Expression argument = methodCall.getArguments().get(i);
 
-				Type parameterType = TypeReferenceUtil.getTarget(parameter.getType(), methodCall);
+				Type parameterType = parameterTypeList.get(i);
 				Type argumentType  = argumentTypes.get(i);
 				
 				if (argumentType == null || parameterType == null) {
