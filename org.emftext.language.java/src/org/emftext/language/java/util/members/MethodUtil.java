@@ -66,11 +66,9 @@ public class MethodUtil {
 			Parameter lastParameter = parameterList.get(parameterList.size() - 1);
 			if (lastParameter instanceof VariableLengthParameter) {
 				Expression   lastArgument = methodCall.getArguments().get(methodCall.getArguments().size() - 1);
-				ArrayTypable lastArgumentArrayType = ExpressionUtil.getArrayType(lastArgument);
 				
-				if (parameterList.size() == argumentTypes.size() && lastArgumentArrayType != null &&
-						lastArgumentArrayType.getArrayDimensionsBefore().size() + 
-						lastArgumentArrayType.getArrayDimensionsAfter().size() == 1) {
+				if (parameterList.size() == argumentTypes.size() && 
+						ExpressionUtil.getArrayDimension(lastArgument) == 1) {
 					//in case the last argument is an array, the VariableLengthParameter needs to be handled as array		
 					parameterList.remove(lastParameter);
 					Parameter arrayTypedParameter = (Parameter) EcoreUtil.copy(lastParameter);
@@ -89,14 +87,13 @@ public class MethodUtil {
 			}
 		}
 		
-		if (parameterList.size() == argumentTypes.size()) {
+		if (parameterList.size() == argumentTypes.size()) { 
 			for (int i = 0; i < argumentTypes.size(); i++) {
 				Parameter  parameter = parameterList.get(i);
 				Expression argument = methodCall.getArguments().get(i);
-				
+
 				Type parameterType = TypeReferenceUtil.getTarget(parameter.getType(), methodCall);
 				Type argumentType  = argumentTypes.get(i);
-				ArrayTypable argumentArrayType = ExpressionUtil.getArrayType(argument);
 				
 				if (argumentType == null || parameterType == null) {
 					return false;
@@ -107,12 +104,12 @@ public class MethodUtil {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
 						if (needsPerfectMatch) {
 							parametersMatch = parametersMatch
-								&& ArrayTypeableUtil.equals(parameter, argumentArrayType)
+								&& ArrayTypeableUtil.getArrayDimension(parameter) == ExpressionUtil.getArrayDimension(argument)
 								&& TypeUtil.equalsType(argumentType, parameterType);
 						}
 						else {
 							parametersMatch = parametersMatch 
-								&& ArrayTypeableUtil.equals(parameter, argumentArrayType)
+								&& ArrayTypeableUtil.getArrayDimension(parameter) == ExpressionUtil.getArrayDimension(argument)
 								&& TypeUtil.isSuperType(argumentType, parameterType);
 						}
 					}

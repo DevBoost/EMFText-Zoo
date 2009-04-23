@@ -150,18 +150,39 @@ public class ExpressionUtil {
 		if (_this instanceof ArrayTypable) {
 			arrayType = (ArrayTypable) _this;
 		}
-		else if (_this instanceof ElementReference) {
-			ElementReference reference = (ElementReference) _this;
-			while (reference.getNext() instanceof ElementReference) {
-				reference = (ElementReference) reference.getNext();
+		else if (_this instanceof Reference) {
+			Reference reference = (Reference) _this;
+			while (reference.getNext() != null) {
+				reference = reference.getNext();
 			}
 			if (reference instanceof ElementReference) {
-				if (reference.getTarget() instanceof ArrayTypable) {
-					arrayType = (ArrayTypable) reference.getTarget();
+				ElementReference elementReference = (ElementReference) reference;
+				if (elementReference.getTarget() instanceof ArrayTypable) {
+					arrayType = (ArrayTypable) elementReference.getTarget();
 				}
 			}
 		}
 		return arrayType;
+	}
+	
+	public static int getArrayDimension(Expression _this) {
+		ArrayTypable arrayType = getArrayType(_this);
+		if (arrayType == null) {
+			return 0;
+		}
+		
+		int selections = 0;
+		if (_this instanceof Reference) {
+			Reference reference = (Reference) _this;
+			while (reference.getNext() != null) {
+				reference = reference.getNext();
+			}
+			selections = reference.getArraySelectors().size();
+		}
+
+		return arrayType.getArrayDimensionsBefore().size()
+			+ arrayType.getArrayDimensionsAfter().size()
+			- selections;
 	}
 
 }
