@@ -7,10 +7,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.ClassifiersPackage;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.commons.NamedElement;
-import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.EnumConstant;
@@ -61,9 +61,9 @@ public class EnumConstantDecider extends AbstractDecider {
 	}
 	
 	private EList<EObject> addImports(EObject container) {
-		if(container instanceof CompilationUnit) {
+		if(container instanceof ImportingElement) {
 			EList<EObject> resultList = new BasicEList<EObject>();
-			for(Import aImport : ((CompilationUnit)container).getImports()) {
+			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if (aImport instanceof StaticMemberImport) {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}

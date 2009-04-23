@@ -9,6 +9,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.AdditionalField;
@@ -68,8 +69,8 @@ public class FieldDecider extends AbstractDecider {
 	
 	private void addImports(EObject container,
 			EList<EObject> resultList) {
-		if(container instanceof CompilationUnit) {
-			for(Import aImport : ((CompilationUnit)container).getImports()) {
+		if(container instanceof ImportingElement) {
+			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if (aImport instanceof StaticMemberImport) {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
