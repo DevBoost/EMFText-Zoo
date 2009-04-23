@@ -3,7 +3,6 @@ package org.emftext.language.java.util.members;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.arrays.ArrayTypable;
 import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.Method;
@@ -117,13 +116,13 @@ public class MethodUtil {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
 						if (needsPerfectMatch) {
 							parametersMatch = parametersMatch
-								&& ArrayTypeableUtil.getArrayDimension(parameter) == ExpressionUtil.getArrayDimension(argument)
-								&& TypeUtil.equalsType(argumentType, parameterType);
+								&& TypeUtil.equalsType(argumentType, ExpressionUtil.getArrayDimension(argument),
+										parameterType, ArrayTypeableUtil.getArrayDimension(parameter));
 						}
 						else {
 							parametersMatch = parametersMatch 
-								&& ArrayTypeableUtil.getArrayDimension(parameter) == ExpressionUtil.getArrayDimension(argument)
-								&& TypeUtil.isSuperType(argumentType, parameterType);
+								&& TypeUtil.isSuperType(argumentType, ExpressionUtil.getArrayDimension(argument),
+										parameterType, ArrayTypeableUtil.getArrayDimension(parameter));
 						}
 					}
 					else {

@@ -1,6 +1,5 @@
 package org.emftext.language.java.util.types;
 
-import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -30,14 +29,16 @@ public class TypeUtil {
 	 * @param otherType
 	 * @return if both type are equal
 	 */
-	public static boolean equalsType(EObject _this,
-			EObject otherType) {
+	public static boolean equalsType(Type _this, int _thisArrayDim,
+			Type otherType, int otherArrayDim) {
 		
-		if (otherType instanceof Classifier && _this instanceof Classifier &&
+		if (_thisArrayDim == otherArrayDim &&
+				otherType instanceof Classifier && _this instanceof Classifier &&
 				(otherType.equals(_this))) {	
 			return true;
 		}
-		else if (otherType instanceof PrimitiveType && _this instanceof PrimitiveType && 
+		else if (_thisArrayDim == otherArrayDim &&
+				otherType instanceof PrimitiveType && _this instanceof PrimitiveType && 
 				otherType.eClass().equals(_this.eClass())) {
 			return true;
 		}
@@ -50,13 +51,23 @@ public class TypeUtil {
 	 * @param otherType
 	 * @return if the other type is equal to me or a super type of me
 	 */
-	public static boolean isSuperType(Type _this,
-			Type otherType) {
+	public static boolean isSuperType(Type _this, int arrayDim,
+			Type otherType, int otherArrayDim) {
 		
 		
 		//if I am a void, I am of every type
 		if (_this.equals(JavaClasspathUtil.getClass("Void", _this))) {
 			return true;
+		}
+		
+		//if the other is Object I am a subtype in any case (also array dimensions do not matter)
+		if (otherType.equals(JavaClasspathUtil.getObjectClass(_this))) {
+			return true;
+		}
+		
+		//if array dimensions do not match, I am no subtype
+		if(arrayDim != otherArrayDim) {
+			return false;
 		}
 		
 		//annotations
