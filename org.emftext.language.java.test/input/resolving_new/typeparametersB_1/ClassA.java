@@ -1,4 +1,4 @@
-package resolving_new.typeparametersB_0;
+package resolving_new.typeparametersB_1;
 
 public class ClassA {
 
