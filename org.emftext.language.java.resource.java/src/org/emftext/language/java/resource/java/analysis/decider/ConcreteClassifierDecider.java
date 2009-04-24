@@ -71,7 +71,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		
 		addInnerClasses(container, resultList);
 		addImports(container, resultList);
-		addDefaultImports(container, resultList);
 
 		//TODO which inner classes are exactly imported and what is their priority?
 		if(container instanceof CompilationUnit) {
@@ -107,6 +106,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	private void addImports(EObject container,
 			EList<EObject> resultList) {
 		if(container instanceof ImportingElement) {
+			//1) direct classifiers
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof ClassifierImport) {
 					resultList.add(((ClassifierImport)aImport).getClassifier());
@@ -118,18 +118,20 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
 				}
 			}
+			
+			//2) same package
+			resultList.addAll(JavaRootUtil.getClassifiersInSamePackage(
+					(JavaRoot) container));
+			
+			//3) other packages
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof PackageImport) {
 					resultList.addAll(ImportUtil.getClassifierList(
 							aImport));
 				}
 			}
-		}
-	}
-	
-	private void addDefaultImports(EObject container,
-			EList<EObject> resultList) {
-		if(container instanceof JavaRoot) {
+			
+			//4) java.lang
 			resultList.addAll(JavaRootUtil.getDefaultImports(
 					(JavaRoot) container));
 		}

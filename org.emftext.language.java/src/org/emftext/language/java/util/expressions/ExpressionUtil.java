@@ -24,6 +24,8 @@ import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.RelationExpression;
 import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.literals.Literal;
+import org.emftext.language.java.members.AdditionalField;
+import org.emftext.language.java.members.Field;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.Type;
@@ -31,6 +33,8 @@ import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
+import org.emftext.language.java.variables.AdditionalLocalVariable;
+import org.emftext.language.java.variables.LocalVariable;
 
 public class ExpressionUtil {
 	
@@ -160,6 +164,14 @@ public class ExpressionUtil {
 				ElementReference elementReference = (ElementReference) reference;
 				if (elementReference.getTarget() instanceof ArrayTypable) {
 					arrayType = (ArrayTypable) elementReference.getTarget();
+				}
+				if (elementReference.getTarget() instanceof AdditionalLocalVariable) {
+					AdditionalLocalVariable additionalLocalVariable = (AdditionalLocalVariable) elementReference.getTarget();
+					arrayType = (LocalVariable) additionalLocalVariable.eContainer();
+				}
+				if (elementReference.getTarget() instanceof AdditionalField) {
+					AdditionalField additionalField = (AdditionalField) elementReference.getTarget();
+					arrayType = (Field) additionalField.eContainer();
 				}
 			}
 		}

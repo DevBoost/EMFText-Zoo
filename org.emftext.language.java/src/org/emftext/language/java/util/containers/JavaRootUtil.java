@@ -11,9 +11,9 @@ public class JavaRootUtil {
 	
 	/**
 	 * @param _this
-	 * @return all default imports (my package + <code>java.lang</code>)
+	 * @return all classes in the same package imports
 	 */
-	public static EList<ConcreteClassifier> getDefaultImports(JavaRoot _this) {
+	public static EList<ConcreteClassifier> getClassifiersInSamePackage(JavaRoot _this) {
 		EList<ConcreteClassifier> defaultImportList = new BasicEList<ConcreteClassifier>();
 		
 		String packageName = JavaUniquePathConstructor.packageName(_this);
@@ -22,8 +22,6 @@ public class JavaRootUtil {
 			defaultImportList.addAll(JavaClasspath.get(_this).getClassifiers(
 					packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR, "*"));
 		}
-		
-		defaultImportList.addAll(JavaClasspath.get(_this).getDefaultImports());
 
 		if(packageName.equals("")) {
 			//put the package behind the default imports when the default package is used
@@ -34,6 +32,14 @@ public class JavaRootUtil {
 		}
 		
 		return defaultImportList;
+	}
+	
+	/**
+	 * @param _this
+	 * @return all default imports (<code>java.lang</code>)
+	 */
+	public static EList<ConcreteClassifier> getDefaultImports(JavaRoot _this) {
+		return JavaClasspath.get(_this).getDefaultImports();
 	}
 
 }
