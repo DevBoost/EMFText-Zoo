@@ -31,7 +31,6 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.JavaClasspathUtil;
-import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;

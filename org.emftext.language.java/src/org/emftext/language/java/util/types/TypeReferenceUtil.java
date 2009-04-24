@@ -49,7 +49,7 @@ public class TypeReferenceUtil {
 		
 		//resolve parameter to real type
 		if (type instanceof TypeParameter) {
-			type = TypeParameterUtil.getBoundType((TypeParameter) type, reference);
+			type = TypeParameterUtil.getBoundType((TypeParameter) type, _this, reference);
 		}
 
 		if (type != null && type.eIsProxy()) {

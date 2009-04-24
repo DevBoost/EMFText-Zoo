@@ -71,7 +71,7 @@ public class TypeParameterUtil {
 	 * @param reference
 	 * @return bound type or parameter if not bound
 	 */
-	public static Type getBoundType(TypeParameter _this, Reference reference) {
+	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		int typeParameterIndex = -1;
 		if (typeParameterDeclarator instanceof ConcreteClassifier) {
@@ -122,11 +122,9 @@ public class TypeParameterUtil {
 					} 
 				}
 
-				for(Expression argument : methodCall.getArguments()) {
-					int idx = methodCall.getArguments().indexOf(argument);
-					if (idx >= method.getParameters().size()) {
-						continue;
-					}
+				int idx = method.getParameters().indexOf(typeReference.eContainer());
+				Expression argument = methodCall.getArguments().get(idx);
+				if(idx >= 0) {
 					Parameter parameter = method.getParameters().get(idx);
 					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
 					
