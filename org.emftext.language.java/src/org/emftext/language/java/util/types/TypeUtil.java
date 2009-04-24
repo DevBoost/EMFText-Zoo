@@ -1,5 +1,6 @@
 package org.emftext.language.java.util.types;
 
+import org.emftext.language.java.arrays.ArrayTypable;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -17,7 +18,9 @@ import org.emftext.language.java.types.Long;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Short;
 import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
@@ -52,7 +55,7 @@ public class TypeUtil {
 	 * @return if the other type is equal to me or a super type of me
 	 */
 	public static boolean isSuperType(Type _this, int arrayDim,
-			Type otherType, int otherArrayDim) {
+			Type otherType, ArrayTypable otherArrayType) {
 		
 		
 		//if I am a void, I am of every type
@@ -71,8 +74,22 @@ public class TypeUtil {
 		}
 		
 		//if array dimensions do not match, I am no subtype
-		if(arrayDim != otherArrayDim) {
-			return false;
+		boolean isTypeParameter = false;		
+		if (otherArrayType instanceof TypedElement) {
+			Type type = TypeReferenceUtil.getTarget(((TypedElement)otherArrayType).getType());
+			isTypeParameter = type instanceof TypeParameter;
+		}
+		
+		int otherArrayDim = ArrayTypeableUtil.getArrayDimension(otherArrayType);
+		if (isTypeParameter) {
+			if(arrayDim < otherArrayDim) {
+				return false;
+			}
+		}
+		else {
+			if(arrayDim != otherArrayDim) {
+				return false;
+			}
 		}
 		
 		//annotations

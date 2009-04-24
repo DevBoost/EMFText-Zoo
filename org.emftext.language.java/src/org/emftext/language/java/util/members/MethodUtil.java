@@ -124,7 +124,7 @@ public class MethodUtil {
 						else {
 							parametersMatch = parametersMatch 
 								&& TypeUtil.isSuperType(argumentType, ExpressionUtil.getArrayDimension(argument),
-										parameterType, ArrayTypeableUtil.getArrayDimension(parameter));
+										parameterType, parameter);
 						}
 					}
 					else {
