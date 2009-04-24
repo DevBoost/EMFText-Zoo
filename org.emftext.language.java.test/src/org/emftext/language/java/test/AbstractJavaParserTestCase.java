@@ -372,12 +372,17 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		if (!startFolder.isDirectory())
 			return Collections.emptyList();
 		List<File> allFiles = new ArrayList<File>();
+		//add sub dirs first
 		for (File member : startFolder.listFiles()) {
 			if (member.isDirectory()) {
 				if (!member.getName().equals(".svn")) {
 					allFiles.addAll(collectAllFilesRecursive(member, extension));
 				}
-			} else if (member.isFile()) {
+			}
+		}
+		//bin.jar in the end
+		for (File member : startFolder.listFiles()) {
+			if (member.isFile()) {
 				if (member.getName().endsWith(extension)) {
 					allFiles.add(member);
 				}
