@@ -29,7 +29,6 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.Type;
-import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
@@ -153,13 +152,7 @@ public class ExpressionUtil {
 	
 	public static ArrayTypable getArrayType(Expression _this) {
 		ArrayTypable arrayType = null; 
-		if (_this instanceof CastExpression) {
-			TypeReference typeReference = ((CastExpression)_this).getType();
-			if (typeReference instanceof ArrayTypable) {
-				arrayType = (ArrayTypable)typeReference;
-			}
-		}
-		else if (_this instanceof AssignmentExpression) {
+		if (_this instanceof AssignmentExpression) {
 			arrayType = getArrayType(((AssignmentExpression) _this).getChild());
 		}
 		else if (_this instanceof ArrayTypable && !(_this instanceof InstanceOfExpression)) {
