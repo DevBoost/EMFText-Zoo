@@ -167,6 +167,12 @@ public class ExpressionUtil {
 	}
 	
 	public static int getArrayDimension(Expression _this) {
+		if (_this instanceof ConditionalExpression &&
+				((ConditionalExpression)_this).getExpressionIf() != null) {
+			
+			return getArrayDimension(((ConditionalExpression)_this).getExpressionIf());
+		}
+		
 		int size = 0;
 		
 		ArrayTypable arrayType = getArrayType(_this);
