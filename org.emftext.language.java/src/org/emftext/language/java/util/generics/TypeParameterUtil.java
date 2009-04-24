@@ -123,8 +123,8 @@ public class TypeParameterUtil {
 				}
 
 				int idx = method.getParameters().indexOf(typeReference.eContainer());
-				Expression argument = methodCall.getArguments().get(idx);
-				if(idx >= 0) {
+				if (idx < methodCall.getArguments().size() && idx >= 0) {
+					Expression argument = methodCall.getArguments().get(idx);
 					Parameter parameter = method.getParameters().get(idx);
 					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
 					
@@ -175,7 +175,7 @@ public class TypeParameterUtil {
 								return ReferenceUtil.getType((Reference) argReference);
 							}
 						}
-					}
+					}			
 				}
 			}
 		}
