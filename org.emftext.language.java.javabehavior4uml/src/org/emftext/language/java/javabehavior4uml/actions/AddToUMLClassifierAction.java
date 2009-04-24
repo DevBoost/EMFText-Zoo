@@ -82,7 +82,7 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 					//create
 					behaviorResource = rs.createResource(uri);
 					JavaMethodBehavior behavior = Javabehavior4umlFactory.eINSTANCE.createJavaMethodBehavior();
-					behavior.setSpecification(operation);
+					operation.getMethods().add(behavior);
 					ClassMethod javaMethod = MembersFactory.eINSTANCE.createClassMethod();
 					javaMethod.setName(operation.getName());
 					javaMethod.setType(TypesFactory.eINSTANCE.createVoid());

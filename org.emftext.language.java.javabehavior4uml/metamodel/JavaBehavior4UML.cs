@@ -21,8 +21,6 @@ TOKENSTYLES {
 
 RULES{
 	JavaMethodBehavior ::=	
-        specification[] #0 ";" !0
-        !0
         (imports !0 )*
         !0
         javaMethod
