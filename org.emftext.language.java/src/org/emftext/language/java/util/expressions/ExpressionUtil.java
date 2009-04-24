@@ -153,7 +153,7 @@ public class ExpressionUtil {
 	public static ArrayTypeable getArrayType(Expression _this) {
 		ArrayTypeable arrayType = null; 
 		if (_this instanceof AssignmentExpression) {
-			arrayType = getArrayType(((AssignmentExpression) _this).getChild());
+			arrayType = getArrayType(((AssignmentExpression) _this).getValue());
 		}
 		else if (_this instanceof ArrayTypeable && !(_this instanceof InstanceOfExpression)) {
 			arrayType = (ArrayTypeable) _this;
