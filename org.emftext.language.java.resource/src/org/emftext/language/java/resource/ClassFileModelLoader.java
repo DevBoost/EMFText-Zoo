@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.annotations.AnnotationsFactory;
-import org.emftext.language.java.arrays.ArrayTypable;
 import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
@@ -212,7 +211,7 @@ public class ClassFileModelLoader {
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
-        	((ArrayTypable) emfMethod).getArrayDimensionsBefore().add(
+        	emfMethod.getArrayDimensionsBefore().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
 		

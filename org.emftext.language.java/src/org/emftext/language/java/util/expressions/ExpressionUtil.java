@@ -4,7 +4,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.arrays.ArrayInstantiationBySize;
-import org.emftext.language.java.arrays.ArrayTypable;
+import org.emftext.language.java.arrays.ArrayTypeable;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.AndExpression;
@@ -150,13 +150,13 @@ public class ExpressionUtil {
 		return type;
 	}
 	
-	public static ArrayTypable getArrayType(Expression _this) {
-		ArrayTypable arrayType = null; 
+	public static ArrayTypeable getArrayType(Expression _this) {
+		ArrayTypeable arrayType = null; 
 		if (_this instanceof AssignmentExpression) {
 			arrayType = getArrayType(((AssignmentExpression) _this).getChild());
 		}
-		else if (_this instanceof ArrayTypable && !(_this instanceof InstanceOfExpression)) {
-			arrayType = (ArrayTypable) _this;
+		else if (_this instanceof ArrayTypeable && !(_this instanceof InstanceOfExpression)) {
+			arrayType = (ArrayTypeable) _this;
 		}
 		else if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
@@ -165,8 +165,8 @@ public class ExpressionUtil {
 			}
 			if (reference instanceof ElementReference) {
 				ElementReference elementReference = (ElementReference) reference;
-				if (elementReference.getTarget() instanceof ArrayTypable) {
-					arrayType = (ArrayTypable) elementReference.getTarget();
+				if (elementReference.getTarget() instanceof ArrayTypeable) {
+					arrayType = (ArrayTypeable) elementReference.getTarget();
 				}
 				if (elementReference.getTarget() instanceof AdditionalLocalVariable) {
 					AdditionalLocalVariable additionalLocalVariable = (AdditionalLocalVariable) elementReference.getTarget();
@@ -190,7 +190,7 @@ public class ExpressionUtil {
 		
 		int size = 0;
 		
-		ArrayTypable arrayType = getArrayType(_this);
+		ArrayTypeable arrayType = getArrayType(_this);
 		if (arrayType == null) {
 			return 0;
 		}

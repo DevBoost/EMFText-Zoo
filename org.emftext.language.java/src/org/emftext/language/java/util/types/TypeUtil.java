@@ -1,6 +1,6 @@
 package org.emftext.language.java.util.types;
 
-import org.emftext.language.java.arrays.ArrayTypable;
+import org.emftext.language.java.arrays.ArrayTypeable;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Class;
@@ -55,7 +55,7 @@ public class TypeUtil {
 	 * @return if the other type is equal to me or a super type of me
 	 */
 	public static boolean isSuperType(Type _this, int arrayDim,
-			Type otherType, ArrayTypable otherArrayType) {
+			Type otherType, ArrayTypeable otherArrayType) {
 		
 		
 		//if I am a void, I am of every type
