@@ -102,6 +102,7 @@ public class MethodUtil {
 		}
 		
 		if (parameterList.size() == argumentTypeList.size()) { 
+			boolean parametersMatch = true;
 			for (int i = 0; i < argumentTypeList.size(); i++) {
 				Parameter  parameter = parameterList.get(i);
 				Expression argument = methodCall.getArguments().get(i);
@@ -113,7 +114,6 @@ public class MethodUtil {
 					return false;
 				}
 				
-				boolean parametersMatch = true;
 				if (parameterType != null && argumentType != null) {
 					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
 						if (needsPerfectMatch) {
@@ -134,12 +134,10 @@ public class MethodUtil {
 				else {
 					return false;
 				}
-				return parametersMatch; 
 			}
-			return true;
+			return parametersMatch; 
 		} 
-		return false;
-		
+		return false;		
 	}
 
 }
