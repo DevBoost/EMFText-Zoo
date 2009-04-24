@@ -34,7 +34,9 @@ public class ConcreteClassifierUtil {
 
 		if (_this instanceof Class) {
 			Class javaClass = (Class) _this;
-			typeReferenceList.add(ClassifierReferenceUtil.getPureClassifierReference(javaClass.getExtends()));
+			if (javaClass.getExtends() != null) {
+				typeReferenceList.add(ClassifierReferenceUtil.getPureClassifierReference(javaClass.getExtends()));
+			}	
 			for(TypeReference interfaceReference : javaClass.getImplements()) {
 				typeReferenceList.add(ClassifierReferenceUtil.getPureClassifierReference(interfaceReference));
 			}
