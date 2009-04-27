@@ -30,6 +30,7 @@ import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
 import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
@@ -150,16 +151,21 @@ public class ExpressionUtil {
 		return type;
 	}
 	
-	public static ArrayTypeable getArrayType(Expression _this) {
-		ArrayTypeable arrayType = null; 
+	public static int getArrayDimension(Expression _this) {
+		if (_this instanceof ConditionalExpression &&
+				((ConditionalExpression)_this).getExpressionIf() != null) {
+			
+			return getArrayDimension(((ConditionalExpression)_this).getExpressionIf());
+		}
 		if (_this instanceof AssignmentExpression) {
-			arrayType = getArrayType(((AssignmentExpression) _this).getValue());
+			return getArrayDimension(((AssignmentExpression) _this).getValue());
 		}
 		else if (_this instanceof ArrayTypeable && !(_this instanceof InstanceOfExpression)) {
-			arrayType = (ArrayTypeable) _this;
+			return ArrayTypeableUtil.getArrayDimension((ArrayTypeable) _this);
 		}
 		else if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
+			ArrayTypeable arrayType = null;
 			while (reference.getNext() != null) {
 				reference = reference.getNext();
 			}
@@ -177,39 +183,20 @@ public class ExpressionUtil {
 					arrayType = (Field) additionalField.eContainer();
 				}
 			}
-		}
-		return arrayType;
-	}
-	
-	public static int getArrayDimension(Expression _this) {
-		if (_this instanceof ConditionalExpression &&
-				((ConditionalExpression)_this).getExpressionIf() != null) {
-			
-			return getArrayDimension(((ConditionalExpression)_this).getExpressionIf());
-		}
-		
-		int size = 0;
-		
-		ArrayTypeable arrayType = getArrayType(_this);
-		if (arrayType == null) {
-			return 0;
-		}
-		if (_this instanceof Reference) {
-			Reference reference = (Reference) _this;
-			while (reference.getNext() != null) {
-				reference = reference.getNext();
+			if (arrayType == null) {
+				return 0;
 			}
+			
+			int size = 0;
 			size -= reference.getArraySelectors().size();
+			if(_this instanceof ArrayInstantiationBySize) {
+				size += ((ArrayInstantiationBySize)_this).getSizes().size();
+			}
+			size += ArrayTypeableUtil.getArrayDimension(arrayType);
+			
+			return size;
 		}
-
-		if(_this instanceof ArrayInstantiationBySize) {
-			size += ((ArrayInstantiationBySize)_this).getSizes().size();
-		}
-		
-		size += arrayType.getArrayDimensionsBefore().size();
-		size += arrayType.getArrayDimensionsAfter().size();
-		
-		return size;
+		return 0;
 	}
 
 }
