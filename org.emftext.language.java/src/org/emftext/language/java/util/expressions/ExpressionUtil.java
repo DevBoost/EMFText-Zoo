@@ -152,20 +152,17 @@ public class ExpressionUtil {
 	}
 	
 	public static int getArrayDimension(Expression _this) {
+		int size = 0;
+		ArrayTypeable arrayType = null;
 		if (_this instanceof ConditionalExpression &&
-				((ConditionalExpression)_this).getExpressionIf() != null) {
-			
+				((ConditionalExpression)_this).getExpressionIf() != null) {		
 			return getArrayDimension(((ConditionalExpression)_this).getExpressionIf());
 		}
 		if (_this instanceof AssignmentExpression) {
 			return getArrayDimension(((AssignmentExpression) _this).getValue());
 		}
-		else if (_this instanceof ArrayTypeable && !(_this instanceof InstanceOfExpression)) {
-			return ArrayTypeableUtil.getArrayDimension((ArrayTypeable) _this);
-		}
 		else if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
-			ArrayTypeable arrayType = null;
 			while (reference.getNext() != null) {
 				reference = reference.getNext();
 			}
@@ -183,20 +180,21 @@ public class ExpressionUtil {
 					arrayType = (Field) additionalField.eContainer();
 				}
 			}
-			if (arrayType == null) {
-				return 0;
+			else if (_this instanceof ArrayTypeable) {
+				arrayType = (ArrayTypeable) _this;
 			}
-			
-			int size = 0;
 			size -= reference.getArraySelectors().size();
-			if(_this instanceof ArrayInstantiationBySize) {
-				size += ((ArrayInstantiationBySize)_this).getSizes().size();
-			}
-			size += ArrayTypeableUtil.getArrayDimension(arrayType);
-			
-			return size;
 		}
-		return 0;
+		else if (_this instanceof ArrayTypeable) {
+			arrayType = (ArrayTypeable) _this;
+		}
+		
+		if(_this instanceof ArrayInstantiationBySize) {
+			size += ((ArrayInstantiationBySize)_this).getSizes().size();
+		}
+		
+		size += ArrayTypeableUtil.getArrayDimension(arrayType);
+		return size;
 	}
 
 }
