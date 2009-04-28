@@ -2,8 +2,6 @@ package org.emftext.language.java.util.members;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
@@ -72,32 +70,18 @@ public class MethodUtil {
 			Parameter lastParameter = parameterList.get(parameterList.size() - 1);
 			Type lastParameterType  = parameterTypeList.get(parameterTypeList.size() - 1);;
 			if (lastParameter instanceof VariableLengthParameter) {
-				Expression lastArgument = null;
-				if (!methodCall.getArguments().isEmpty()) {
-					lastArgument = methodCall.getArguments().get(methodCall.getArguments().size() - 1);
+				//in case of variable length add/remove some parameters
+				while(parameterList.size() < argumentTypeList.size()) {
+					if (needsPerfectMatch) return false;
+					parameterList.add(lastParameter);
+					parameterTypeList.add(lastParameterType);
 				}
-
-				if (parameterList.size() == argumentTypeList.size() && 
-						ExpressionUtil.getArrayDimension(lastArgument) > 0) {
-					//in case the last argument is an array, the VariableLengthParameter needs to be handled as array		
+				if(parameterList.size() > argumentTypeList.size()) {
+					if (needsPerfectMatch) return false;
 					parameterList.remove(lastParameter);
-					Parameter arrayTypedParameter = (Parameter) EcoreUtil.copy(lastParameter);
-					arrayTypedParameter.getArrayDimensionsAfter().add(ArraysFactory.eINSTANCE.createArrayDimension());
-					parameterList.add(arrayTypedParameter);
+					parameterTypeList.remove(parameterTypeList.size() - 1);
 				}
-				else {
-					//in case of variable length add/remove some parameters
-					while(parameterList.size() < argumentTypeList.size()) {
-						if (needsPerfectMatch) return false;
-						parameterList.add(lastParameter);
-						parameterTypeList.add(lastParameterType);
-					}
-					if(parameterList.size() > argumentTypeList.size()) {
-						if (needsPerfectMatch) return false;
-						parameterList.remove(lastParameter);
-						parameterTypeList.remove(parameterTypeList.size() - 1);
-					}
-				}
+				
 			}
 		}
 		
