@@ -8,12 +8,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPage;
@@ -24,8 +26,13 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.uml2.uml.BehavioralFeature;
 import org.eclipse.uml2.uml.BehavioredClassifier;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Package;
+import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaUniquePathConstructor;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.javabehavior4uml.JavaMethodBehavior;
 import org.emftext.language.java.javabehavior4uml.Javabehavior4umlFactory;
+import org.emftext.language.java.javabehavior4uml.util.UML2JavaWrapper;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.modifiers.ModifiersFactory;
@@ -68,8 +75,11 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 	private void openBehavior(Element selectedElement) {
 
 		if (selectedElement instanceof BehavioralFeature) {
+			
 			Resource umlResource = selectedElement.eResource();
 			BehavioralFeature operation = (BehavioralFeature) selectedElement;
+
+			
 			if(umlResource != null && operation.eContainer() instanceof BehavioredClassifier) {
 				BehavioredClassifier classifier = (BehavioredClassifier) operation.eContainer();
 				URI uri = umlResource.getURI();
@@ -104,9 +114,16 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 				
 				if (editorDescriptor != null) {
 			        try {			        
-			        	page.openEditor(
+			        	IEditorPart editor = page.openEditor(
 							      new FileEditorInput(file),
 							      editorDescriptor.getId());
+			        	
+			        	if (editor instanceof IEditingDomainProvider) {
+			        		rs = ((IEditingDomainProvider)editor).getEditingDomain().getResourceSet();
+			    			registerPackage(
+			    					(Package) operation.eContainer().eContainer(), 
+			    					rs);	
+			        	}
 					} catch (PartInitException e) {
 						e.printStackTrace();
 					}
@@ -114,8 +131,22 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 				
 			}
 		}
-		
 	}
+	
+	private void registerPackage(Package umlPackage, ResourceSet resourceSet) {
+		for(CompilationUnit cu : UML2JavaWrapper.wrapPackage(umlPackage)) {
+			URI uri = JavaUniquePathConstructor.getJavaFileResourceURI(
+					JavaUniquePathConstructor.packageName(cu) + "." + cu.getClassifiers().get(0).getName());
+			
+			Resource resource = resourceSet.createResource(uri);
+			JavaClasspath.get(resourceSet).registerClassifierSource(cu, uri);
+			resource.getContents().clear();
+			resource.getContents().add(cu);
+		}
+	}
+
+
+	
 	
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
