@@ -8,6 +8,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.generics.TypeParameter;
+import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
 import org.emftext.language.java.types.Char;
@@ -79,10 +80,16 @@ public class TypeUtil {
 			Type type = TypeReferenceUtil.getTarget(((TypedElement)otherArrayType).getType());
 			isTypeParameter = type instanceof TypeParameter;
 		}
+		boolean isVariableLengthParameter = otherArrayType instanceof VariableLengthParameter;
 		
 		int otherArrayDim = ArrayTypeableUtil.getArrayDimension(otherArrayType);
 		if (isTypeParameter) {
 			if(arrayDim < otherArrayDim) {
+				return false;
+			}
+		}
+		else if (isVariableLengthParameter) {
+			if(arrayDim != otherArrayDim && arrayDim != otherArrayDim-1) {
 				return false;
 			}
 		}
