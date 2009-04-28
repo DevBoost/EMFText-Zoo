@@ -29,6 +29,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
@@ -120,8 +121,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 			
 			//2) same package
-			resultList.addAll(JavaRootUtil.getClassifiersInSamePackage(
-					(JavaRoot) container));
+			if(container instanceof JavaRoot) {
+				resultList.addAll(JavaRootUtil.getClassifiersInSamePackage(
+						(JavaRoot) container));
+			}
 			
 			//3) other packages
 			for(Import aImport : ((ImportingElement)container).getImports()) {
@@ -132,8 +135,11 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 			
 			//4) java.lang
-			resultList.addAll(JavaRootUtil.getDefaultImports(
-					(JavaRoot) container));
+			if(container instanceof JavaRoot || container.eContainer() == null) {
+				resultList.addAll(JavaUtil.getDefaultImports(
+						container));
+			}
+
 		}
 	}
 	

@@ -34,12 +34,4 @@ public class JavaRootUtil {
 		return defaultImportList;
 	}
 	
-	/**
-	 * @param _this
-	 * @return all default imports (<code>java.lang</code>)
-	 */
-	public static EList<ConcreteClassifier> getDefaultImports(JavaRoot _this) {
-		return JavaClasspath.get(_this).getDefaultImports();
-	}
-
 }
