@@ -154,7 +154,8 @@ public class ExpressionUtil {
 	public static int getArrayDimension(Expression _this) {
 		int size = 0;
 		ArrayTypeable arrayType = null;
-		if (_this instanceof NestedExpression) {
+		if (_this instanceof NestedExpression && 
+				((NestedExpression)_this).getNext() == null) {
 			return getArrayDimension(((NestedExpression) _this).getExpression());
 		}
 		if (_this instanceof ConditionalExpression &&
