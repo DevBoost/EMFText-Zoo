@@ -3,6 +3,7 @@ package org.emftext.language.java.resource.java.analysis.decider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.ForLoop;
 import org.emftext.language.java.statements.LocalVariableStatement;
@@ -69,7 +70,7 @@ public class LocalVariableDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
-		return referenceContainer instanceof Reference;
+		return referenceContainer instanceof Reference && !(referenceContainer instanceof MethodCall);
 	}
 
 }
