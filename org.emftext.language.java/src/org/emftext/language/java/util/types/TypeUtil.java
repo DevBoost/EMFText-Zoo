@@ -83,7 +83,12 @@ public class TypeUtil {
 		boolean isVariableLengthParameter = otherArrayType instanceof VariableLengthParameter;
 		
 		int otherArrayDim = ArrayTypeableUtil.getArrayDimension(otherArrayType);
-		if (isTypeParameter) {
+		if (isTypeParameter && isVariableLengthParameter) {
+			if(arrayDim != otherArrayDim && arrayDim != otherArrayDim-1 && arrayDim < otherArrayDim) {
+				return false;
+			}
+		}
+		else if (isTypeParameter) {
 			if(arrayDim < otherArrayDim) {
 				return false;
 			}
