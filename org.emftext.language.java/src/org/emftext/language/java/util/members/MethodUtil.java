@@ -95,7 +95,7 @@ public class MethodUtil {
 					if(parameterList.size() > argumentTypeList.size()) {
 						if (needsPerfectMatch) return false;
 						parameterList.remove(lastParameter);
-						parameterTypeList.remove(lastParameterType);
+						parameterTypeList.remove(parameterTypeList.size() - 1);
 					}
 				}
 			}

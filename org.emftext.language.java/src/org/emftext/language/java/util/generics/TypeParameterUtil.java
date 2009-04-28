@@ -109,6 +109,12 @@ public class TypeParameterUtil {
 					}
 				}
 			}
+			if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
+				if (reference.eContainer().eContainer() instanceof Reference) {
+					//the ".class" instantiation implicitly binds the T parameter of java.lang.Class to the class itself
+					return ReferenceUtil.getType((Reference)reference.eContainer().eContainer());
+				}
+			}
 		}
 		
 		if (typeParameterDeclarator instanceof Method) {
@@ -122,7 +128,32 @@ public class TypeParameterUtil {
 					} 
 				}
 
+				//class type paramete
 				int idx = method.getParameters().indexOf(typeReference.eContainer());
+				
+				//method type paarameter
+				if (idx == -1) {
+					for(Parameter parameter : method.getParameters()) {
+						for (TypeArgument typeArgument : parameter.getTypeArguments()) {
+							if(typeArgument instanceof QualifiedTypeArgument) {
+								if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+									idx = method.getParameters().indexOf(parameter);
+								}
+							}
+						}
+						ClassifierReference paramTypeReference = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
+						if (paramTypeReference != null) {
+							for (TypeArgument typeArgument : paramTypeReference.getTypeArguments()) {
+								if(typeArgument instanceof QualifiedTypeArgument) {
+									if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+										idx = method.getParameters().indexOf(parameter);
+									}
+								}
+							}
+						}
+					}
+				}
+				
 				if (idx < methodCall.getArguments().size() && idx >= 0) {
 					Expression argument = methodCall.getArguments().get(idx);
 					Parameter parameter = method.getParameters().get(idx);

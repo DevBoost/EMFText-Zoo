@@ -161,6 +161,9 @@ public class ExpressionUtil {
 		if (_this instanceof AssignmentExpression) {
 			return getArrayDimension(((AssignmentExpression) _this).getValue());
 		}
+		if (_this instanceof InstanceOfExpression) {
+			return 0;
+		}
 		else if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
 			while (reference.getNext() != null) {
