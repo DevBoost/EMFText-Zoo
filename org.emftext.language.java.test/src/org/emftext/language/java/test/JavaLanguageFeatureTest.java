@@ -1011,6 +1011,24 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 	
 	@Test
+	public void testJavadoc1() throws Exception {
+		String filename1 = "JavaDocCommentBlock" + JAVA_FILE_EXTENSION;
+		parseAndReprint(filename1);
+	}
+
+	@Test
+	public void testJavadoc2() throws Exception {
+		String filename2 = "JavaDocCommentInClass" + JAVA_FILE_EXTENSION;
+		parseAndReprint(filename2);
+	}
+	
+	@Test
+	public void testJavadoc3() throws Exception {
+		String filename3 = "JavaDocCommentInField" + JAVA_FILE_EXTENSION;
+		parseAndReprint(filename3);
+	}
+	
+	@Test
 	public void testIOneMethod() throws Exception {
 		String typename = "IOneMethod";
 		String filename = typename + JAVA_FILE_EXTENSION;
