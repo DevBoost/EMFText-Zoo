@@ -1,5 +1,5 @@
 SYNTAXDEF xml
-FOR <http://www.emftext.org/language/xml>
+FOR <http://www.emftext.org/language/emfxml>
 START CompactElement, OpeningElement
  
 RULES {
