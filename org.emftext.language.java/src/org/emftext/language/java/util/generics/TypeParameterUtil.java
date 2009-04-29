@@ -73,6 +73,11 @@ public class TypeParameterUtil {
 	 */
 	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
+		Reference parentReference = null;
+		if (reference != null && reference.eContainer() instanceof Reference) {
+			parentReference = (Reference) reference.eContainer();
+		}
+		
 		int typeParameterIndex = -1;
 		if (typeParameterDeclarator instanceof ConcreteClassifier) {
 			typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(_this);
@@ -92,7 +97,7 @@ public class TypeParameterUtil {
 										 if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
 											TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
 											if (arg instanceof QualifiedTypeArgument) {
-												return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
+												return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
 											}
 										 }
 
@@ -102,7 +107,7 @@ public class TypeParameterUtil {
 							else if (typeParameterIndex < classifierReference.getTypeArguments().size())  {
 								TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
 								if (arg instanceof QualifiedTypeArgument) {
-									return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null);
+									return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
 								}	
 							}
 						}
@@ -124,7 +129,7 @@ public class TypeParameterUtil {
 				if(method.getTypeParameters().size() == methodCall.getCallTypeArguments().size()) {
 					TypeArgument typeArgument = methodCall.getCallTypeArguments().get(method.getTypeParameters().indexOf(_this));
 					if (typeArgument instanceof QualifiedTypeArgument) {
-						return TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType()); 
+						return TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), parentReference); 
 					} 
 				}
 
