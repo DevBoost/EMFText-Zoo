@@ -9,6 +9,7 @@ import org.emftext.language.java.literals.Super;
 import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.references.ElementReference;
+import org.emftext.language.java.references.PrimitiveTypeReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
@@ -113,6 +114,9 @@ public class ReferenceUtil {
 		}
 		else if (_this instanceof NestedExpression) {
 			type = ExpressionUtil.getType(((NestedExpression) _this).getExpression());
+		}
+		else if (_this instanceof PrimitiveTypeReference) {
+			type = ((PrimitiveTypeReference)_this).getType();
 		}
 		else {
 			assert(false);

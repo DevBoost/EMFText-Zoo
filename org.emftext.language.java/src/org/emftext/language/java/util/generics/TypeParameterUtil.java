@@ -203,6 +203,9 @@ public class TypeParameterUtil {
 						}
 						else {
 							if (parameterType.getTarget() instanceof TypeParameter) {
+								while (argReference.getNext() instanceof Reference) {
+									argReference = argReference.getNext();
+								}
 								return ReferenceUtil.getType((Reference) argReference);
 							}
 						}
