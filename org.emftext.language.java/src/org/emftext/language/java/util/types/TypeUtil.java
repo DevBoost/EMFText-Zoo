@@ -1,5 +1,7 @@
 package org.emftext.language.java.util.types;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.arrays.ArrayTypeable;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.AnonymousClass;
@@ -67,6 +69,17 @@ public class TypeUtil {
 		//if the other is Object I am a subtype in any case (also array dimensions do not matter)
 		if (otherType.equals(JavaClasspathUtil.getObjectClass(_this))) {
 			return true;
+		}
+		
+		//String and primitives of all array dimensions are all serializable
+		if (otherType.equals(EcoreUtil.resolve(
+				JavaClasspath.get(_this).getClassifier("java.io.Serializable"), _this))) {
+			if (_this.equals(JavaClasspathUtil.getStringClass(_this))) {
+	 			return true;
+			}
+			else if (_this instanceof PrimitiveType) {
+				return true;
+			}
 		}
 		
 		//if one of us is a parameter to the best of my knowledge, we might match
