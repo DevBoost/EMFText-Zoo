@@ -1,17 +1,29 @@
 package org.emftext.language.java.metamodelprinter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaPackage;
 
+/**
+ * A printer for Ecore meta models. It counts the number of classes 
+ * (both abstract and concrete ones) and prints their names to the 
+ * console.
+ */
 public class Printer {
 	
 	public final static class NamedAndTypedFeature {
@@ -58,14 +70,52 @@ public class Printer {
 		}
 	}
 	
-	public static void main(String[] args) {
+	/**
+	 * Run this method without arguments to obtain a print for
+	 * the JaMoPP meta model. Pass a path to file to get a print
+	 * for a different .ecore file.
+	 */
+	public static void main(String[] args) throws IOException {
+		registerResourceFactories();
+		
+		List<EPackage> packages;
+		if (args.length > 0) {
+			packages = getPackages(args[0]);
+		} else {
+			JavaPackage jPackage = JavaPackage.eINSTANCE;
+			packages = jPackage.getESubpackages();
+		}
+		doCount(packages);
+	}
+
+	private static List<EPackage> getPackages(String filename) throws IOException {
+		List<EPackage> packages = new ArrayList<EPackage>();
+		ResourceSet rs = new ResourceSetImpl();
+		Resource r = rs.createResource(URI.createFileURI(filename));
+		r.load(null);
+		TreeIterator<EObject> it = r.getAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (next instanceof EPackage) {
+				System.out.println("Printer.main() adding " + next);
+				packages.add((EPackage) next);
+			}
+		}
+		return packages;
+	}
+
+	public static void registerResourceFactories() {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore",
+				new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+	}
+
+	private static void doCount(List<EPackage> packages) {
 		int abstractClasses = 0;
 		int concreteClasses = 0;
 		int packageCount = 0;
 		Map<NamedAndTypedFeature, List<EClass>> featureNamesToClasses = new HashMap<NamedAndTypedFeature, List<EClass>>();
 		
-		JavaPackage jPackage = JavaPackage.eINSTANCE;
-		EList<EPackage> packages = jPackage.getESubpackages();
 		for (EPackage nextPackage : packages) {
 			System.out.println(nextPackage.getName());
 			EList<EClassifier> classifiers = nextPackage.getEClassifiers();
