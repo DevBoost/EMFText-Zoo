@@ -2,8 +2,11 @@ package org.emftext.language.java.resource.java.analysis;
 
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.FLOAT_SUFFIX;
 
+import java.math.BigDecimal;
+
 import org.emftext.language.java.literals.DecimalFloatLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.runtime.resource.ITokenResolveResult;
 
 public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
@@ -20,11 +23,16 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
 
 		lexem = lexem.substring(0, lexem.length() - 1);
-		
-		JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(lexem, result);
-		Double doubleValue = (Double) result.getResolvedToken();
-		if (doubleValue != null) {
-			result.setResolvedToken(new Float(doubleValue.floatValue()));
+		parseToFloat(lexem, result);
+	}
+
+	public static void parseToFloat(String lexem, ITokenResolveResult result) {
+		try {
+			BigDecimal tempDecimal = new BigDecimal(lexem);
+			Float value = tempDecimal.floatValue();
+			result.setResolvedToken(value);
+		} catch (NumberFormatException nfe) {
+			result.setErrorMessage(nfe.getClass().getSimpleName() + ": " + nfe.getMessage());
 		}
 	}
 }

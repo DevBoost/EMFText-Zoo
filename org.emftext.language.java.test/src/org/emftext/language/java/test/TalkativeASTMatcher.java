@@ -95,6 +95,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_DOUBLE_LITERALTokenResolver;
+import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_FLOAT_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_DOUBLE_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_FLOAT_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALTokenResolver;
@@ -315,7 +316,55 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(InfixExpression node, Object other) {
-		
+		/*
+		String nodeLeft = node.getLeftOperand().toString();
+		String nodeRight = node.getRightOperand().toString();
+		if (nodeLeft.startsWith("0x") || nodeLeft.startsWith("-0x")) {
+			// this is a hex token
+			if (!nodeRight.startsWith("0x") && !nodeRight.startsWith("-0x")) {
+				// this is the exponent
+				Operator operator = node.getOperator();
+				if (operator == Operator.PLUS ||
+					operator == Operator.MINUS) {
+					if (other instanceof FieldAccess) {
+						///
+						String nodeString = nodeLeft + nodeRight;
+						String otherString = other.toString();
+						
+						String[] nodeParts = nodeString.split("p|P|e|E");
+						String[] otherParts = otherString.split("p|P|e|E");
+						
+						String otherLeft = otherParts[0];
+						String otherRight = otherParts[1];
+						
+						nodeLeft = nodeParts[0];
+						nodeRight = nodeParts[1];
+						
+						if (nodeLeft.endsWith(".f")) {
+							nodeLeft = nodeLeft.substring(0, nodeLeft.length() - 2) + "";
+						}
+						if (otherLeft.endsWith(".f")) {
+							otherLeft = otherLeft.substring(0, otherLeft.length() - 2) + "";
+						}
+						nodeLeft = normalizeNumberToken(nodeLeft);
+						otherLeft = normalizeNumberToken(otherLeft);
+						nodeRight = normalizeNumberToken(nodeRight);
+						otherRight = normalizeNumberToken(otherRight);
+						String normalizedNodeString = nodeLeft + nodeRight;
+						String normalizedOtherString = otherLeft + otherRight;
+						///
+						String normalizedNodeString = normalizeNumberToken(nodeLeft + operator.toString() + nodeRight);
+						String normalizedOtherString = normalizeNumberToken(other.toString());
+						if (normalizedNodeString.equalsIgnoreCase(normalizedOtherString)) {
+							return true;
+						} else {
+							System.out.println("\"" + normalizedNodeString + "\" != \"" + normalizedOtherString + "\"");
+						}
+					}
+				}
+			}
+		}
+		*/
 		return setDiff(node, other, super.match(node, other));
 	}
 
@@ -429,71 +478,91 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	protected boolean numberMatch(String nToken, String oToken) {
 		nToken = normalizeNumberToken(nToken);
 		oToken = normalizeNumberToken(oToken);
-		return safeEquals(nToken, oToken);
+		boolean equals = safeEquals(nToken, oToken);
+		return equals;
 	}
 
-	private String normalizeNumberToken(String nToken) {
-		//HEX normalization
-		nToken = normalizeHexNumberToken(nToken);
+	private String normalizeNumberToken(String token) {
+		//System.out.println("normalizeNumberToken(" + token + ")");
 		
-		if (nToken.toLowerCase().startsWith("-0x")) {
-			nToken = nToken.substring(1);
-			nToken = "-" + normalizeHexNumberToken(nToken);
+		//HEX normalization
+		token = normalizeHexNumberToken(token);
+		if (token.toLowerCase().startsWith("-0x")) {
+			token = token.substring(1);
+			token = "-" + normalizeHexNumberToken(token);
 		}
 		
-		if (nToken.toLowerCase().endsWith("l")) {
-			nToken = nToken.substring(0, nToken.length() - 1);
+		if (token.toLowerCase().endsWith("l")) {
+			token = token.substring(0, token.length() - 1);
 		}
 
 		//OCTAL normalization
-		if (nToken.matches("0[0-9]+")) {
-			nToken = Long.decode(nToken).toString();
+		if (token.matches("0[0-9]+")) {
+			token = Long.decode(token).toString();
 		}
 		
 		//condition that indicates that this is float or double --> parse
-		if(nToken.toLowerCase().endsWith("f") || 
-				nToken.toLowerCase().endsWith("d") ||
-				nToken.toLowerCase().contains("e") ||
-				nToken.toLowerCase().contains(".")) {
+		if(token.toLowerCase().endsWith("f") || 
+				token.toLowerCase().endsWith("d") ||
+				token.toLowerCase().contains("e") ||
+				token.toLowerCase().contains("p") ||
+				token.toLowerCase().contains(".")) {
 			
-			if (nToken.toLowerCase().endsWith("d")) {
-				nToken = nToken.substring(0, nToken.length() - 1);
+			if (token.toLowerCase().endsWith("f")) {
+				token = token.substring(0, token.length() - 1);
+				ITokenResolveResult result = new TokenResolveResult();
+				JavaDECIMAL_FLOAT_LITERALTokenResolver.parseToFloat(token, result);
+				token = "" + result.getResolvedToken();
+			} else {
+				// ends with 'd' or has no suffix
+				if (token.toLowerCase().endsWith("d")) {
+					token = token.substring(0, token.length() - 1);
+				}
+				ITokenResolveResult result = new TokenResolveResult();
+				JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(token, result);
+				token = "" + result.getResolvedToken();
 			}
-			if (nToken.toLowerCase().endsWith("f")) {
-				nToken = nToken.substring(0, nToken.length() - 1);
-			}
-			
-			ITokenResolveResult result = new TokenResolveResult();
-			JavaDECIMAL_DOUBLE_LITERALTokenResolver.parseToDouble(nToken, result);
-			nToken = "" + result.getResolvedToken();
 		}
-		//nToken = "" + Double.parseDouble(nToken.replace("- ", "-"));
-		return nToken;
+		if (token.startsWith("- ")) {
+			token = "-" + token.substring(2);
+		}
+		//System.out.println("TalkativeASTMatcher.normalizeNumberToken() result : " + token);
+		return token;
 	}
 
-	private String normalizeHexNumberToken(String nToken) {
+	private String normalizeHexNumberToken(String hexToken) {
 		try {
-			if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().endsWith("l")) {
+			boolean hasHexSuffix = hexToken.toLowerCase().startsWith("0x");
+			
+			boolean endWithL = hexToken.toLowerCase().endsWith("l");
+			boolean endsWithF = hexToken.toLowerCase().endsWith("f");
+
+			boolean containsP = hexToken.toLowerCase().contains("p");
+			//boolean containsE = hexToken.toLowerCase().contains("e");
+			boolean containsExp = containsP;
+			boolean containsDot = hexToken.toLowerCase().contains(".");
+
+			if (hasHexSuffix && endWithL) {
 				ITokenResolveResult result = new TokenResolveResult();
-				new JavaHEX_LONG_LITERALTokenResolver().resolve(nToken, null, result);
-				nToken = result.getResolvedToken().toString();
-			} else if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().contains("p") && nToken.toLowerCase().endsWith("f")) {
+				new JavaHEX_LONG_LITERALTokenResolver().resolve(hexToken, null, result);
+				hexToken = result.getResolvedToken().toString();
+			} else if (hasHexSuffix && (containsExp || containsDot) && endsWithF) {
 				ITokenResolveResult result = new TokenResolveResult();
-				new JavaHEX_FLOAT_LITERALTokenResolver().resolve(nToken, null, result);
-				nToken = result.getResolvedToken().toString();
-			} else if (nToken.toLowerCase().startsWith("0x") && nToken.toLowerCase().contains("p")) {
+				new JavaHEX_FLOAT_LITERALTokenResolver().resolve(hexToken, null, result);
+				hexToken = result.getResolvedToken().toString();
+			} else if (hasHexSuffix && (containsExp || containsDot)) {
 				ITokenResolveResult result = new TokenResolveResult();
-				new JavaHEX_DOUBLE_LITERALTokenResolver().resolve(nToken, null, result);
-				nToken = result.getResolvedToken().toString();
-			} else if (nToken.toLowerCase().startsWith("0x")) {
+				new JavaHEX_DOUBLE_LITERALTokenResolver().resolve(hexToken, null, result);
+				hexToken = result.getResolvedToken().toString();
+			} else if (hasHexSuffix) {
 				ITokenResolveResult result = new TokenResolveResult();
-				new JavaHEX_INTEGER_LITERALTokenResolver().resolve(nToken, null, result);
-				nToken = result.getResolvedToken().toString();
+				new JavaHEX_INTEGER_LITERALTokenResolver().resolve(hexToken, null, result);
+				hexToken = result.getResolvedToken().toString();
 			}
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();
 		}
-		return nToken;
+		return hexToken;
 	}
 
 	@Override

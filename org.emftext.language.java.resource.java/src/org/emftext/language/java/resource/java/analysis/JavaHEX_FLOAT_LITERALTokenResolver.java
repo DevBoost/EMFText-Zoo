@@ -21,7 +21,7 @@ public class JavaHEX_FLOAT_LITERALTokenResolver extends org.emftext.runtime.reso
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
 		
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
-		assert lexem.toLowerCase().contains(HEX_EXPONENT);
+		assert lexem.toLowerCase().contains(HEX_EXPONENT) || lexem.contains(".");
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
 		
 		lexem = lexem.substring(0, lexem.length() - 1);

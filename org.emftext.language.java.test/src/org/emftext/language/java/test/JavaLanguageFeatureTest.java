@@ -1243,7 +1243,25 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		parseAndReprint(file);
 	}
-
+	
+	@Test
+	public void testTempLiterals() throws Exception {
+		String typename = "TempLiterals";
+		File file = new File(typename + JAVA_FILE_EXTENSION);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		assertMemberCount(clazz, 7);
+		parseAndReprint(file);
+	}
+	
+	@Test
+	public void testRoundedLiterals() throws Exception {
+		String typename = "RoundedLiterals";
+		File file = new File(typename + JAVA_FILE_EXTENSION);
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
+		assertMemberCount(clazz, 26);
+		parseAndReprint(file);
+	}
+	
 	@Test
 	public void testParametersWithModifiers() throws Exception {
 		String typename = "ParametersWithModifiers";

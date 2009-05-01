@@ -8,9 +8,9 @@ public class JavaOCTAL_INTEGER_LITERALTokenResolver extends org.emftext.runtime.
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof OctalIntegerLiteral;
-		assert value instanceof Integer;
+		assert value instanceof Long;
 
-		return OCT_PREFIX + Integer.toOctalString((Integer) value);
+		return OCT_PREFIX + Long.toOctalString((Long) value);
 	}
 
 	@Override
@@ -18,9 +18,5 @@ public class JavaOCTAL_INTEGER_LITERALTokenResolver extends org.emftext.runtime.
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
 		
 		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, result);
-		Long longResult = (Long) result.getResolvedToken();
-		if (longResult != null) {
-			result.setResolvedToken(new Integer(longResult.intValue()));
-		}
 	}
 }
