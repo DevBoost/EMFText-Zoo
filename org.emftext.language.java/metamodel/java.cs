@@ -455,7 +455,8 @@ expressions.MultiplicativeExpression
     ;
     
 expressions.UnaryExpression
-    ::= operators* child:expressions.UnaryModificationExpression
+    ::= operators* #0 child:expressions.UnaryModificationExpression
+    // TODO why does UnaryExpression have multiple operators?
     ;
 
 expressions.SuffixUnaryModificationExpression
