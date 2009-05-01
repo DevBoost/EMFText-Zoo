@@ -29,8 +29,6 @@ TOKENSTYLES {
 
 RULES {
 	ChessGame ::= board moves*; 
-	// TODO file a bug report about ANTLR error
-	// message when using references which have a type where no CS is defined
 	Board ::= 
 		"-------------------------" !0
 		"|" rows !0
