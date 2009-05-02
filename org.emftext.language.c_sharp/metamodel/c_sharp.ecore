@@ -424,6 +424,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="argumentList" eType="#//expressions/ArgumentList"
           containment="true"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayCreationExpression" eSuperTypes="#//expressions/PrimaryExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//types/Type" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="arrayType" lowerBound="1"
+          eType="#//arrays/ArrayType" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expressionList" eType="#//expressions/ExpressionList"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rankSpecifier" upperBound="-1"
+          eType="#//arrays/RankSpecifier" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="arrayInitializer" eType="#//arrays/ArrayInitializer"
+          containment="true"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParenthesizedExpression" eSuperTypes="#//expressions/PrimaryNoArrayCreationExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
           eType="#//expressions/Expression" containment="true"/>
@@ -601,7 +613,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="NonArrayType" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ReferenceType" abstract="true" eSuperTypes="#//types/NonArrayType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//types/Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleType" abstract="true" eSuperTypes="#//types/Type #//types/NonArrayType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Void" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Decimal" eSuperTypes="#//types/SimpleType"/>
     <eClassifiers xsi:type="ecore:EClass" name="Bool" eSuperTypes="#//types/SimpleType"/>
@@ -623,7 +635,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceOrTypeName"
           lowerBound="1" eType="#//common/NamespaceOrTypeName" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="PointerType" eSuperTypes="#//types/Type">
+    <eClassifiers xsi:type="ecore:EClass" name="PointerType" eSuperTypes="#//types/Type #//types/NonArrayType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="simpleType" eType="#//types/SimpleType"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="referenceType" eType="#//types/ReferenceType"

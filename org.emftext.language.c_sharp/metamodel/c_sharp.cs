@@ -36,7 +36,7 @@ TOKENS {
 	DEFINE HEXA_DECIMAL_INTEGER_LITERAL $'0' ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')* ('U' | 'u' | 'L' | 'l' | 'UL' | 'Ul' | 'uL' | 'ul' | 'LU' | 'Lu' | 'lU' | 'lu')?$;
 	DEFINE REAL_LITERAL $('0'..'9')* ( ('.' ('0'..'9')+ (('e'|'E') ('+' | '-')? ('0'..'9')+)? ('F'|'f'|'D'|'d'|'M'|'m')? ) | ((('e'|'E') ('+' | '-')? ('0'..'9')+) ('F'|'f'|'D'|'d'|'M'|'m')? ) | ('F'|'f'|'D'|'d'|'M'|'m') )$;
 	DEFINE CHARACTER_LITERAL $'\''('\\'('0'|'a'|'b'|'t'|'n'|'f'|'r'|'v'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\''U'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\''x'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')?('0'..'9'|'a'..'f'|'A'..'F')?('0'..'9'|'a'..'f'|'A'..'F')?)|('\\'('0'..'3')('0'..'7')('0'..'7')|'\\'('0'..'7')('0'..'7')|'\\'('0'..'7'))|~('\''|'\\'))'\''$;
-	
+	DEFINE STRING_LITERAL $('"'('\\'('0'|'a'|'b'|'t'|'n'|'f'|'r'|'v'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\''U'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\''x'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')?('0'..'9'|'a'..'f'|'A'..'F')?('0'..'9'|'a'..'f'|'A'..'F')?)|('\\'('0'..'3')('0'..'7')('0'..'7')|'\\'('0'..'7')('0'..'7')|'\\'('0'..'7'))|~('"'|'\\'))* '"')|('@"' (('\\'('0'..'3')('0'..'7')('0'..'7')|'\\'('0'..'7')('0'..'7')|'\\'('0'..'7')|('""'))|~('"'))* '"')$;
 	
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
@@ -272,7 +272,7 @@ expressions.InvocationExpression
 
 expressions.PostIncrementExpression
     ::= "++" ;
-//Informationsverlust PreIncrementExpression
+
 expressions.PostDecrementExpression
     ::= "--" ;
 	
@@ -282,6 +282,10 @@ expressions.BaseAccess
 expressions.ObjectCreationExpression
     ::= "new"   type   "("   argumentList?   ")" ;
 
+expressions.ArrayCreationExpression
+    ::= "new"   type   "["   expressionList   "]"   rankSpecifier *   arrayInitializer ?
+    |	"new"   arrayType   arrayInitializer ;
+    
 expressions.TypeOfExpression
     ::= "typeof"   "("   type   ")" ;
 
@@ -297,7 +301,6 @@ expressions.UnaryExpression
     |	preDecrementExpression 
     |	castExpression 
     |	addressOfExpression ;
-
 
 expressions.AssignmentExpression
     ::= unaryExpression   assignmentOperator   expression;
@@ -483,7 +486,7 @@ literals.RealLiteral
 literals.CharacterLiteral
 	::= value[CHARACTER_LITERAL];
 	
-//literals.StringLiteral
-//	::= value[STRING_LITERAL];
+literals.StringLiteral
+	::= value[STRING_LITERAL];
 
 }
