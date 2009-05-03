@@ -16,6 +16,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
+import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -24,6 +25,7 @@ import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.PackageImport;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
+import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
@@ -40,7 +42,12 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 
 	protected Resource resource;
 	
+	private EList<ConcreteClassifier> innerTypeSuperTypeList = new BasicEList<ConcreteClassifier>();
+	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
+		if (ContainersPackage.Literals.COMPILATION_UNIT__CLASSIFIERS.equals(containingReference)) {
+			return true;
+		}
 		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
 			return true;
 		}
@@ -70,8 +77,32 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					packageName, "*"));
 		}
 		
-		addInnerClasses(container, resultList);
-		addImports(container, resultList);
+		if(container instanceof ConcreteClassifier) {
+			ConcreteClassifier concreteClassifier = (ConcreteClassifier) container;
+			//local inner classes
+			for(Member member : ClassifierUtil.getAllMembers(
+					concreteClassifier)) {
+				if(member instanceof ConcreteClassifier) {
+					innerTypeSuperTypeList.add((ConcreteClassifier) member);
+				}
+			}
+			//public inner classes (possibly external)
+			innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+					concreteClassifier));
+			
+		}
+		if(container instanceof AnonymousClass) {
+			for(Member member : AnonymousClassUtil.getAllMembers(
+					(AnonymousClass) container)) {
+				if(member instanceof ConcreteClassifier) {
+					innerTypeSuperTypeList.add((ConcreteClassifier) member);
+				}
+			}
+			innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+					AnonymousClassUtil.getSuperClassifier((AnonymousClass)container)));
+		}
+		
+		addImportsAndInnerClasses(container, resultList);
 
 		//TODO which inner classes are exactly imported and what is their priority?
 		if(container instanceof CompilationUnit) {
@@ -86,28 +117,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		return resultList;
 	}
 	
-	private void addInnerClasses(EObject container,
-			EList<EObject> resultList) {
-		if(container instanceof ConcreteClassifier) {
-			//local inner classes
-			resultList.addAll(ClassifierUtil.getAllMembers(
-					(ConcreteClassifier) container));			
-			//public inner classes (possibly external)
-			resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-					(ConcreteClassifier) container));
-		}
-		if(container instanceof AnonymousClass) {
-			resultList.addAll(AnonymousClassUtil.getAllMembers(
-					(AnonymousClass) container));	
-			resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-					AnonymousClassUtil.getSuperClassifier((AnonymousClass)container)));
-		}
-	}
-	
-	private void addImports(EObject container,
+	private void addImportsAndInnerClasses(EObject container,
 			EList<EObject> resultList) {
 		if(container instanceof ImportingElement) {
-			//1) direct classifiers
+			//1) direct classifier imports
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof ClassifierImport) {
 					resultList.add(((ClassifierImport)aImport).getClassifier());
@@ -119,27 +132,30 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
 				}
 			}
+		}	
+		//2) Inner classifiers of superclasses
+		if(container instanceof JavaRoot) {
+			resultList.addAll(innerTypeSuperTypeList);
+		}
 			
-			//2) same package
-			if(container instanceof JavaRoot) {
-				resultList.addAll(JavaRootUtil.getClassifiersInSamePackage(
-						(JavaRoot) container));
-			}
-			
-			//3) other packages
+		//3) same package
+		if(container instanceof JavaRoot) {
+			resultList.addAll(JavaRootUtil.getClassifiersInSamePackage(
+					(JavaRoot) container));
+		}
+		if(container instanceof ImportingElement) {	
+			//4) other packages
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof PackageImport) {
 					resultList.addAll(ImportUtil.getClassifierList(
 							aImport));
 				}
 			}
-			
-			//4) java.lang
-			if(container instanceof JavaRoot || container.eContainer() == null) {
-				resultList.addAll(JavaUtil.getDefaultImports(
-						container));
-			}
-
+		}	
+		//5) java.lang
+		if(container instanceof JavaRoot || container.eContainer() == null) {
+			resultList.addAll(JavaUtil.getDefaultImports(
+					container));
 		}
 	}
 	

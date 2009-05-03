@@ -5,6 +5,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.references.ReflectiveClassReference;
+import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.statements.ForLoop;
 import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.statements.StatementsPackage;
@@ -70,7 +72,20 @@ public class LocalVariableDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
-		return referenceContainer instanceof Reference && !(referenceContainer instanceof MethodCall);
+		if (referenceContainer instanceof MethodCall) {
+			return false;
+		}
+		if (!(referenceContainer instanceof Reference)) {
+			return false;
+		}
+		Reference reference = (Reference) referenceContainer;
+		if (reference.getNext() instanceof ReflectiveClassReference) {
+			return false;
+		}
+		if (reference.getNext() instanceof SelfReference) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -38,14 +38,17 @@ public class TypeUtil {
 	public static boolean equalsType(Type _this, int _thisArrayDim,
 			Type otherType, int otherArrayDim) {
 		
+		//do comparison on the classifier level
+		if (_this instanceof PrimitiveType) {
+			_this = PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType) _this);
+		}
+		if (otherType instanceof PrimitiveType) {
+			otherType = PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType) otherType);
+		}
+		
 		if (_thisArrayDim == otherArrayDim &&
 				otherType instanceof Classifier && _this instanceof Classifier &&
 				(otherType.equals(_this))) {	
-			return true;
-		}
-		else if (_thisArrayDim == otherArrayDim &&
-				otherType instanceof PrimitiveType && _this instanceof PrimitiveType && 
-				otherType.eClass().equals(_this.eClass())) {
 			return true;
 		}
 		

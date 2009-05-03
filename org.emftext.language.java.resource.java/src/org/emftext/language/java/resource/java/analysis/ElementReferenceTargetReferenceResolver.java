@@ -23,8 +23,10 @@ import org.emftext.language.java.resource.java.analysis.decider.PackageDecider;
 import org.emftext.language.java.resource.java.analysis.decider.ParameterDecider;
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
+import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
+import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -41,6 +43,7 @@ public class ElementReferenceTargetReferenceResolver extends
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = null;
+		EObject target = null;
 		
 		if(container.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			//a follow up reference: different scope
@@ -51,7 +54,12 @@ public class ElementReferenceTargetReferenceResolver extends
 			}
 			else {
 				startingPoint = ReferenceUtil.getType(parentReference);
-				
+			
+				//do not search on primitive types but their class representation
+				if (startingPoint instanceof PrimitiveType) {
+					startingPoint = PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType) startingPoint);
+				}
+
 				if (parentReference instanceof NestedExpression) {
 					startingPoint = ExpressionUtil.getType(((NestedExpression)parentReference).getExpression());
 				}
@@ -70,27 +78,29 @@ public class ElementReferenceTargetReferenceResolver extends
 						((NewConstructorCall)parentReference).getAnonymousClass() != null) {
 					startingPoint = ((NewConstructorCall)parentReference).getAnonymousClass();
 				}
+				
 			}
 		}
 		else {
 			startingPoint = container;
 		}
 		
-		deciderList.add(new EnumConstantDecider());
-		deciderList.add(new FieldDecider());
-		deciderList.add(new LocalVariableDecider());
-		deciderList.add(new ParameterDecider());
-		deciderList.add(new MethodDecider());
-		
-		deciderList.add(new ConcreteClassifierDecider());
-		deciderList.add(new TypeParameterDecider());
-		
-		deciderList.add(new PackageDecider());
-		
-		ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-		
-		
-		EObject target = treeWalker.walk(startingPoint, identifier, container, reference);
+		if (target == null) {
+			deciderList.add(new EnumConstantDecider());
+			deciderList.add(new FieldDecider());
+			deciderList.add(new LocalVariableDecider());
+			deciderList.add(new ParameterDecider());
+			deciderList.add(new MethodDecider());
+			
+			deciderList.add(new ConcreteClassifierDecider());
+			deciderList.add(new TypeParameterDecider());
+			
+			deciderList.add(new PackageDecider());
+			
+			ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
+			
+			target = treeWalker.walk(startingPoint, identifier, container, reference);
+		}
 		
 		if (target != null) {
 			result.addMapping(identifier, (ReferenceableElement) target);

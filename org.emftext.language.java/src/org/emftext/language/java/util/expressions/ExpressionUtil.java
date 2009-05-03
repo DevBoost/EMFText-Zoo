@@ -181,10 +181,14 @@ public class ExpressionUtil {
 				if (elementReference.getTarget() instanceof AdditionalLocalVariable) {
 					AdditionalLocalVariable additionalLocalVariable = (AdditionalLocalVariable) elementReference.getTarget();
 					arrayType = (LocalVariable) additionalLocalVariable.eContainer();
+					size += additionalLocalVariable.getArrayDimensionsAfter().size();
+					size -= arrayType.getArrayDimensionsAfter().size();
 				}
 				if (elementReference.getTarget() instanceof AdditionalField) {
 					AdditionalField additionalField = (AdditionalField) elementReference.getTarget();
 					arrayType = (Field) additionalField.eContainer();
+					size += additionalField.getArrayDimensionsAfter().size();
+					size -= arrayType.getArrayDimensionsAfter().size();
 				}
 			}
 			else if (_this instanceof ArrayTypeable) {
