@@ -93,24 +93,53 @@ public class ClassFileModelLoader {
 			assert(false);
 		}
 		
+		String className = clazz.getClassName();
+		int idx = clazz.getClassName().lastIndexOf("$");
+		if (idx >= 0) {
+			className = className.substring(idx + 1);
+		}
+		else {
+			idx = clazz.getClassName().lastIndexOf(".");
+			if (idx >= 0) {
+				className = className.substring(idx + 1);
+			}
+		}
+		
+		emfClassifier.setName(className);
+			
+		for(Attribute a : clazz.getAttributes()){
+			String signature = a.toString();
+			if(signature.startsWith("Signature(")) {
+				EList<TypeParameter> tpList = constructTypeParameters(signature);
+				emfClassifier.getTypeParameters().addAll(tpList);
+			}
+		}
+		
+		String typeArgumentSig = "";
+		for(Attribute a : clazz.getAttributes()){
+			String s = a.toString();
+			s = s.replaceAll("\\[", "");
+			if (s.startsWith("Signature(L")) {
+				typeArgumentSig = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
+			}
+			if (s.startsWith("Signature(<")) {
+				typeArgumentSig = s.substring(s.indexOf(";>L") + 2, s.indexOf(")"));
+			}
+		}
+		
 		//super class
 		if (clazz.isClass() && !clazz.isEnum()) {
 			org.emftext.language.java.classifiers.Class emfClass = 
 				(Class) emfClassifier;
 			if (clazz.getSuperclassName() != null) {
 				emfClass.setExtends(createReferenceToClassifier(clazz.getSuperclassName()));
-				for(Attribute a : clazz.getAttributes()){
-					String s = a.toString();
-					if (s.startsWith("Signature(")) {
-						addTypeArguments((ClassifierReference)emfClass.getExtends(), s);
-					}
-				}
-
+				typeArgumentSig = constructTypeArguments(typeArgumentSig, (ClassifierReference)emfClass.getExtends(), null, emfClassifier);
 			}
 		}
 		//interfaces
 		for(String ifName : clazz.getInterfaceNames()) {
 			TypeReference typeArg = createReferenceToClassifier(ifName);
+			typeArgumentSig = constructTypeArguments(typeArgumentSig, (ClassifierReference)typeArg, null, emfClassifier);
 			if (clazz.isEnum()) { //check first, because enum is also class
 				((Enumeration)emfClassifier).getImplements().add(typeArg); 
 			}
@@ -125,34 +154,12 @@ public class ClassFileModelLoader {
 			}
 		}
 		
-		String className = clazz.getClassName();
-		int idx = clazz.getClassName().lastIndexOf("$");
-		if (idx >= 0) {
-			className = className.substring(idx + 1);
-		}
-		else {
-			idx = clazz.getClassName().lastIndexOf(".");
-			if (idx >= 0) {
-				className = className.substring(idx + 1);
-			}
-		}
-		
-		emfClassifier.setName(className);
- 			
-		for(Attribute a : clazz.getAttributes()){
-			String signature = a.toString();
-			if(signature.startsWith("Signature(")) {
-				EList<TypeParameter> tpList = constructTypeParameters(signature);
-				emfClassifier.getTypeParameters().addAll(tpList);
-			}
-		}
-	
 		for(org.apache.bcel.classfile.Field field : clazz.getFields()) {
 			if (field.isEnum() && emfClassifier instanceof Enumeration) {
 				((Enumeration)emfClassifier).getConstants().add(constructEnumConstant(field));
 			}
 			else {
-				emfClassifier.getMembers().add(constructField(field));
+				emfClassifier.getMembers().add(constructField(field, emfClassifier));
 			}
 		}
 		for(org.apache.bcel.classfile.Method method : clazz.getMethods()) {
@@ -181,7 +188,7 @@ public class ClassFileModelLoader {
 		return emfClassifier;
 	}
 
-	protected void addTypeArguments(
+	/*protected void addTypeArguments(
 			ClassifierReference classifierReference, String s) {
 		int startIdx = s.indexOf("<L");
 		int endIdx   = s.lastIndexOf(";>");
@@ -205,7 +212,7 @@ public class ClassFileModelLoader {
 		}
 		
 
-	}
+	}*/
 	
 	protected Member constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
 		Method emfMethod = null;
@@ -335,7 +342,7 @@ public class ClassFileModelLoader {
 		return emfParameter;
 	}
 	
-	protected Field constructField(org.apache.bcel.classfile.Field field) {
+	protected Field constructField(org.apache.bcel.classfile.Field field, ConcreteClassifier emfClassifier) {
 		Field emfField = membersFactory.createField();
 		emfField.setName(field.getName());
 		String signature = field.getType().getSignature();
@@ -347,6 +354,21 @@ public class ClassFileModelLoader {
         	emfField.getArrayDimensionsBefore().add(
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
+        
+		String plainSignature = "";
+		for(Attribute a : field.getAttributes()){
+			String s = a.toString();
+			if(s.startsWith("Signature(")) {
+				s = s.replaceAll("\\[", "");
+				plainSignature = s.substring(s.indexOf("(") + 1, s.lastIndexOf(")"));
+				break;
+			}
+		}
+
+		if(!"".equals(plainSignature) && typeRef instanceof ClassifierReference) {
+			constructTypeArguments(plainSignature, (ClassifierReference) typeRef, null, emfClassifier);
+		}
+
 		
 		return emfField;
 	}
@@ -361,9 +383,11 @@ public class ClassFileModelLoader {
 	
 	protected ClassifierReference constructTypeParameterReference(String name, TypeParametrizable method, ConcreteClassifier emfClassifier) {
 		TypeParameter typeParameter =  null;
-		for(TypeParameter cand : method.getTypeParameters()) {
-			if(cand.getName().equals(name)) {
-				typeParameter = cand;
+		if (method != null) {
+			for(TypeParameter cand : method.getTypeParameters()) {
+				if(cand.getName().equals(name)) {
+					typeParameter = cand;
+				}
 			}
 		}
 		if (typeParameter == null) {
@@ -471,7 +495,7 @@ public class ClassFileModelLoader {
 					}
 				}
 				if(typeParameter == null) {
-					return null;
+					return result;
 				}
 				
 				ClassifierReference classifierReference = 
@@ -574,8 +598,9 @@ public class ClassFileModelLoader {
 	}
 	
 	protected String constructTypeArguments(String s, ClassifierReference typeRef, TypeParametrizable method, ConcreteClassifier emfClassifier) { 
-	 
-
+		if ("".equals(s) || s == null) {
+			return "";
+		}
 		
 		char[] charArray = s.toCharArray();
 		int bracketCount = 0;
@@ -584,7 +609,7 @@ public class ClassFileModelLoader {
 		if(charArray[0] != 'L' && 
 				charArray[0] != 'T' &&
 				charArray[0] != '+' &&
-				charArray[0] != '-' ){
+				charArray[0] != '-') {
 			return s.substring(1);
 		}
 		
@@ -609,10 +634,10 @@ public class ClassFileModelLoader {
 				if (bracketCount == 0) {
 					end = i - 1;
 					int internalBracketCount = 0;
-					int followUpArgumentIdx = -1;
 					int internalBegin = begin, internalEnd = end;
 					
 					for(int j = begin; j <  end + 1; j++) {
+						int followUpArgumentIdx = -1;
 						char internalNext = charArray[j];
 						if(internalNext == '<') {
 							internalBracketCount++;
