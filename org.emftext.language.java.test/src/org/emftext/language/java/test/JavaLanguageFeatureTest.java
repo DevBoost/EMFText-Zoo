@@ -2,6 +2,7 @@ package org.emftext.language.java.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -152,7 +153,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		assertType(literal, IntegerLiteral.class);
 		IntegerLiteral initLiteralForBoolean = (IntegerLiteral) literal;
-		assertEquals(expectedInitValue, initLiteralForBoolean.getValue());
+		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getValue());
 	}
 
 	private void assertIsLongField(Member member, long expectedInitValue) {
@@ -164,7 +165,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		assertType(literal, LongLiteral.class);
 		LongLiteral initLiteralForBoolean = (LongLiteral) literal;
-		assertEquals(expectedInitValue, initLiteralForBoolean.getValue());
+		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getValue());
 	}
 
 	private void assertIsNumericField(EList<Member> members, String name,
@@ -1218,8 +1219,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		}
 		assertNotNull("no IntegerLiteral found", literal1);
 		assertNotNull("no second IntegerLiteral found", literal2);
-		assertEquals(3, literal1.getValue());
-		assertEquals(4, literal2.getValue());
+		assertEquals(BigInteger.valueOf(3), literal1.getValue());
+		assertEquals(BigInteger.valueOf(4), literal2.getValue());
 		
 		
 		parseAndReprint(filename);
@@ -1238,7 +1239,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 				.getDeclaredFields();
 		for (java.lang.reflect.Field field : fields) {
 			Object value = field.get(null);
-			assertIsNumericField(clazz.getMembers(), field.getName(), value);
+			Object bigValue = value;
+			if (value instanceof Integer) {
+				bigValue = BigInteger.valueOf(((Integer) value).longValue());
+			}
+			if (value instanceof Long) {
+				bigValue = BigInteger.valueOf(((Long) value).longValue());
+			}
+			assertIsNumericField(clazz.getMembers(), field.getName(), bigValue);
 		}
 
 		parseAndReprint(file);
@@ -1249,7 +1257,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String typename = "TempLiterals";
 		File file = new File(typename + JAVA_FILE_EXTENSION);
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(file);
-		assertMemberCount(clazz, 7);
+		assertMemberCount(clazz, 9);
 		parseAndReprint(file);
 	}
 	

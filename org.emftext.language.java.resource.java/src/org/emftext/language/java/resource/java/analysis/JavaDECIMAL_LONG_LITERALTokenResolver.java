@@ -12,7 +12,7 @@ public class JavaDECIMAL_LONG_LITERALTokenResolver extends org.emftext.runtime.r
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof DecimalLongLiteral;
-		assert value instanceof Long;
+		assert value instanceof BigInteger;
 		return value.toString() + LONG_SUFFIX;
 	}
 
@@ -28,8 +28,7 @@ public class JavaDECIMAL_LONG_LITERALTokenResolver extends org.emftext.runtime.r
 	public static void parseToLong(String lexem, int radix, ITokenResolveResult result) throws NumberFormatException {
 		try {
 			BigInteger tempInteger = new BigInteger(lexem, radix);
-			Long longValue = tempInteger.longValue();
-			result.setResolvedToken(longValue);
+			result.setResolvedToken(tempInteger);
 		} catch (NumberFormatException nfe) {
 			result.setErrorMessage(nfe.getClass().getSimpleName() + ": " + nfe.getMessage());
 		}

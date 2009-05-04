@@ -1,16 +1,19 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
+
+import java.math.BigInteger;
+
 import org.emftext.language.java.literals.LiteralsPackage;
 import org.emftext.language.java.literals.OctalIntegerLiteral;
-import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
 
 public class JavaOCTAL_INTEGER_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof OctalIntegerLiteral;
-		assert value instanceof Long;
+		assert value instanceof BigInteger;
 
-		return OCT_PREFIX + Long.toOctalString((Long) value);
+		return OCT_PREFIX + ((BigInteger) value).toString(8);
 	}
 
 	@Override

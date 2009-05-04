@@ -14,9 +14,8 @@ public class OrderedJavaLanguageFeatureTest {
 			}
 		};
 		
-		test.testEqualityExpression();
-		
-//		test.testEmptyClass();
+		test.testRoundedLiterals();
+		test.testTempLiterals();
 //		test.testBooleanExpressions();
 //		test.testEmptyEnum();
 //		test.testBlocks();

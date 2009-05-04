@@ -1,5 +1,7 @@
 package org.emftext.language.java.resource.java.analysis;
 
+import java.math.BigInteger;
+
 import org.emftext.language.java.literals.HexLongLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
 
@@ -11,8 +13,8 @@ public class JavaHEX_LONG_LITERALTokenResolver extends org.emftext.runtime.resou
 	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof HexLongLiteral;
-		assert value instanceof Long;
-		return HEX_PREFIX + Long.toHexString((Long) value) + LONG_SUFFIX;
+		assert value instanceof BigInteger;
+		return HEX_PREFIX + ((BigInteger) value).toString(16) + LONG_SUFFIX;
 	}
 
 	@Override
