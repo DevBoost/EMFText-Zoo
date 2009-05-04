@@ -166,6 +166,7 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 	}
 	
 	protected void assertType(EObject object, java.lang.Class<?> expectedType) {
+		assertTrue("The object should be not empty", object!=null);
 		assertTrue("The object should have type '"
 				+ expectedType.getSimpleName() + "', but was "
 				+ object.getClass().getSimpleName(), expectedType
@@ -197,6 +198,15 @@ public abstract class AbstractCSharpTestCase extends TestCase {
 		return (Class)((Namespace)nmd.get(0)).getNamespaceBody().getNamespaceMemberDeclaration().get(0);
 	}
 	
-
+	//iterate through the Object-Tree until the first hit(type) is found
+	protected EObject isSpecialTypeOrIterate(java.lang.Class<?> type, EObject eObj){
+		if(type.isInstance(eObj)) return eObj;
+		
+		for(EObject eObjLeaf: eObj.eContents()){
+			EObject result = isSpecialTypeOrIterate(type, eObjLeaf);
+			if(type.isInstance(result)) return result;
+		}
+		return null;
+	}
 
 }
