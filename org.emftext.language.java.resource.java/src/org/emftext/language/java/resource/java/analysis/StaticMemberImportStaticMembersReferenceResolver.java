@@ -6,9 +6,8 @@ import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.references.ReferenceableElement;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
@@ -26,20 +25,13 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 		ConcreteClassifier classifier = ImportUtil.getClassifier(theImport);
 		classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null && !classifier.eIsProxy()) {
-			for(Member member : ((MemberContainer)classifier).getMembers()) {
+			for(Member member : ClassifierUtil.getAllMembers(classifier)) {
 				if (identifier.equals(member.getName()) && member instanceof ReferenceableElement) {
 					//for (EObject modifier : member.eContents()) {
 						//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
 							result.addMapping(identifier, (ReferenceableElement) member);
 						//}
 					//}
-				}
-			}
-			//inner classes in external class files
-			for(ConcreteClassifier innerClassifier : ConcreteClassifierUtil.getAllInnerClassifiers(classifier)) {
-				if (identifier.equals(innerClassifier.getName())) {
-					result.addMapping(identifier, innerClassifier);
-					return;
 				}
 			}
 			

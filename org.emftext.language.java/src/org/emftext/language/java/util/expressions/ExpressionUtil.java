@@ -48,20 +48,29 @@ public class ExpressionUtil {
 	 * @return type of expression
 	 */
 	public static Type getType(Expression _this) {
+		return getType(_this, false);
+	}
+	
+	public static Type getAlternativeType(Expression _this) {
+		return getType(_this, true);
+	}
+	
+	
+	private static Type getType(Expression _this, boolean alternative) {
 		Class stringClass = JavaClasspathUtil.getStringClass(_this);
 		
 		Type type = null;
 
-		if (_this instanceof Reference) {
+		if (_this instanceof NestedExpression) {
+			type = ExpressionUtil.getType(((NestedExpression) _this).getExpression(), alternative);
+		}
+		else if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
 			//navigate down references
 			while(reference.getNext() != null) {
 				reference = reference.getNext();
 			}
 			type = ReferenceUtil.getType(reference);
-		}
-		else if (_this instanceof NestedExpression) {
-			type = ExpressionUtil.getType(((NestedExpression) _this).getExpression());
 		}
 		else if (_this instanceof Literal) {
 			type = LiteralUtil.getType(
@@ -72,12 +81,17 @@ public class ExpressionUtil {
 					((CastExpression)_this).getType());
 		}
 		else if (_this instanceof AssignmentExpression) {
-			type = ExpressionUtil.getType(((AssignmentExpression) _this).getChild());
+			type = ExpressionUtil.getType(((AssignmentExpression) _this).getChild(), alternative);
 		}
 		else if (_this instanceof ConditionalExpression &&
 				((ConditionalExpression)_this).getExpressionIf() != null) {
+			if (alternative) {
+				type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionIf(), alternative);
+			}
+			else {
+				type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionElse(), alternative);
+			}
 			
-			type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionIf());
 		}
 		else if (_this instanceof EqualityExpression ||
 				_this instanceof RelationExpression ||
@@ -96,7 +110,7 @@ public class ExpressionUtil {
 			if (_this instanceof AdditiveExpression) {
 				AdditiveExpression additiveExpression = (AdditiveExpression) _this;
 				for(Expression subExp : additiveExpression.getChildren()) {
-					if (stringClass.equals(ExpressionUtil.getType(subExp))) {
+					if (stringClass.equals(ExpressionUtil.getType(subExp, alternative))) {
 						//special case: string concatenation
 						return stringClass;
 					}
@@ -107,7 +121,7 @@ public class ExpressionUtil {
 			Expression subExp = ((EList<Expression>) 
 					_this.eGet(_this.eClass().getEStructuralFeature("children"))).get(0);
 			
-			return ExpressionUtil.getType(subExp);
+			return ExpressionUtil.getType(subExp, alternative);
 		}
 		else for(TreeIterator<EObject> i = _this.eAllContents(); i.hasNext(); ) {
 			EObject next = i.next();

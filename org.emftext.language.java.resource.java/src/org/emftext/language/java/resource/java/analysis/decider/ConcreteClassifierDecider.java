@@ -274,6 +274,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			
 			List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 			deciderList.add(new ConcreteClassifierDecider());
+			deciderList.add(new TypeParameterDecider());
 			ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
 			
 			EObject target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);

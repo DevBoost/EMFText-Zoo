@@ -54,6 +54,7 @@ public class ElementReferenceTargetReferenceResolver extends
 	@Override	
 	protected void doResolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<ReferenceableElement> result) {
 		EObject startingPoint = null;
+		EObject alternativeStartingPoint = null;
 		EObject target = null;
 		Reference parentReference = null;
 		
@@ -66,6 +67,9 @@ public class ElementReferenceTargetReferenceResolver extends
 			}
 			else {
 				startingPoint = ReferenceUtil.getType(parentReference);
+				if (parentReference instanceof Expression) {
+					alternativeStartingPoint = ExpressionUtil.getAlternativeType(parentReference);
+				}
 			
 				//do not search on primitive types but their class representation
 				if (startingPoint instanceof PrimitiveType) {
@@ -80,7 +84,7 @@ public class ElementReferenceTargetReferenceResolver extends
 				while (parentReference instanceof NestedExpression) {
 					Expression nestedExpression = ((NestedExpression)parentReference).getExpression();
 					if (nestedExpression instanceof Reference) {
-						parentReference = (Reference) nestedExpression;
+						parentReference = (Reference) nestedExpression; 
 					}
 					else {
 						parentReference = null;
@@ -121,6 +125,10 @@ public class ElementReferenceTargetReferenceResolver extends
 		if(target == null) {
 			target = searchFromStartingPoint(identifier, container, reference,
 					startingPoint);
+		}
+		if(target == null && alternativeStartingPoint != null && !alternativeStartingPoint.equals(startingPoint)) {
+			target = searchFromStartingPoint(identifier, container, reference,
+					alternativeStartingPoint);
 		}
 		
 		if (target != null) {

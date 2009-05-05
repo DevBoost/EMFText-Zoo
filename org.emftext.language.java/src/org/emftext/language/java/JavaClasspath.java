@@ -182,10 +182,13 @@ public class JavaClasspath extends AdapterImpl {
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
 		
 		char[] nameParts = compilationUnit.getName().toCharArray();
-		for(int i= 0; i< nameParts.length - "$.class".length(); i++) {
-			if(nameParts[i] == '$') {
-				int idx = packageName.lastIndexOf(".");
-				packageName = packageName.substring(0, idx) + "$" + packageName.substring(idx + 1);
+		int endIdx = compilationUnit.getName().lastIndexOf("$");
+		if (endIdx > -1) { 
+			for(int i= 0; i< endIdx; i++) {
+				if(nameParts[i] == '$') {
+					int idx = packageName.lastIndexOf(".");
+					packageName = packageName.substring(0, idx) + "$" + packageName.substring(idx + 1);
+				}
 			}
 		}
 		
