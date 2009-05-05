@@ -461,7 +461,7 @@ public class JavaClasspath extends AdapterImpl {
 			idx = fullQualifiedName.lastIndexOf(JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 		}
 		if(idx == -1) {
-			idx = 0;
+			idx = -1;
 		}
 		String containerName = fullQualifiedName.substring(0, idx + 1);
 		String classifierName = fullQualifiedName.substring(idx + 1);
