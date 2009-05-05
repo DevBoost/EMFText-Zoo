@@ -83,9 +83,9 @@ public class TypeParameterUtil {
 			if(reference != null && parentReference != null) {
 				ClassifierReference classifierReference = null;
 				if(parentReference instanceof ElementReference) {
-					ReferenceableElement prevReferenced = ((ElementReference) reference.eContainer()).getTarget();
-					if(prevReferenced instanceof TypeReference) {
-						classifierReference = ClassifierReferenceUtil.getPureClassifierReference((TypeReference) prevReferenced);
+					ReferenceableElement prevReferenced = ((ElementReference) parentReference).getTarget();
+					if(prevReferenced instanceof TypedElement) {
+						classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) prevReferenced).getType());
 					}
 				}
 				Type prevType = ReferenceUtil.getType(parentReference);
