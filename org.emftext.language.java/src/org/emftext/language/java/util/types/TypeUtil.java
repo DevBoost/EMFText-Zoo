@@ -74,17 +74,21 @@ public class TypeUtil {
 			return true;
 		}
 		
-		//String and primitives of all array dimensions are all serializable
+		//String, primitives, and arrays are serializable
 		ConcreteClassifier serializableClass = (ConcreteClassifier) EcoreUtil.resolve(
 				JavaClasspath.get(_this).getClassifier("java.io.Serializable"), _this);
 		if (otherType.equals(serializableClass)) {
 			if (_this.equals(serializableClass)) {
 	 			return true;
 			}
-			if (_this.equals(JavaClasspathUtil.getStringClass(_this))) {
+			else if (_this.equals(JavaClasspathUtil.getStringClass(_this))) {
 	 			return true;
 			}
 			else if (_this instanceof PrimitiveType) {
+				return true;
+			}
+			else if (arrayDim > 0) {
+				//all arrays are serializable
 				return true;
 			}
 		}

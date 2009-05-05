@@ -17,7 +17,6 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReflectiveClassReference;
 import org.emftext.language.java.types.ClassifierReference;
-import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
@@ -81,37 +80,38 @@ public class TypeParameterUtil {
 		int typeParameterIndex = -1;
 		if (typeParameterDeclarator instanceof ConcreteClassifier) {
 			typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(_this);
-			if(reference != null && reference.eContainer() instanceof ElementReference) {
-				ReferenceableElement prevRef = ((ElementReference) reference.eContainer()).getTarget();
-				if (prevRef instanceof TypedElement) {
-					TypeReference prevTypeReference = ((TypedElement) prevRef).getType();
-					if (prevTypeReference instanceof TypeReference || prevTypeReference instanceof NamespaceClassifierReference) {
-						ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(prevTypeReference);
-						Type prevType = TypeReferenceUtil.getTarget(classifierReference, (ElementReference) reference.eContainer());
-						if (classifierReference != null && prevType instanceof ConcreteClassifier) {
-							 if(classifierReference.getTypeArguments().isEmpty()) {
-								 //bound through inheritance?
-								 for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
-									 if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
-										 //is this an argument for the correct class?
-										 if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
-											TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
-											if (arg instanceof QualifiedTypeArgument) {
-												return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
-											}
-										 }
+			if(reference != null && parentReference != null) {
+				ClassifierReference classifierReference = null;
+				if(parentReference instanceof ElementReference) {
+					ReferenceableElement prevReferenced = ((ElementReference) reference.eContainer()).getTarget();
+					if(prevReferenced instanceof TypeReference) {
+						classifierReference = ClassifierReferenceUtil.getPureClassifierReference((TypeReference) prevReferenced);
+					}
+				}
+				Type prevType = ReferenceUtil.getType(parentReference);
+				if (prevType instanceof ConcreteClassifier) {
+					if(classifierReference == null || classifierReference.getTypeArguments().isEmpty()) {
+						//bound through inheritance?
+						for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
+							if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
+								//is this an argument for the correct class?
+								if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
+									TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
+									if (arg instanceof QualifiedTypeArgument) {
+										return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
+									}
+								}
 
-									 }
-								 }
-							 }
-							else if (typeParameterIndex < classifierReference.getTypeArguments().size())  {
-								TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
-								if (arg instanceof QualifiedTypeArgument) {
-									return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
-								}	
 							}
 						}
 					}
+					else if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
+						TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
+						if (arg instanceof QualifiedTypeArgument) {
+							return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
+						}	
+					}
+		
 				}
 			}
 			if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
