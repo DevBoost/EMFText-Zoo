@@ -31,7 +31,6 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 					//for (EObject modifier : member.eContents()) {
 						//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
 							result.addMapping(identifier, (ReferenceableElement) member);
-							return;
 						//}
 					//}
 				}
