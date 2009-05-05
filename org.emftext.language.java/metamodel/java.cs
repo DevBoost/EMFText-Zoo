@@ -91,13 +91,13 @@ containers.CompilationUnit
 	;
 	
 imports.ClassifierImport
-	::= "import" (namespaces[] #0 "." #0 )+ #0 classifier[] #0 ";";
+	::= "import" (namespaces[] #0 "." #0 )* #0 classifier[] #0 ";";
 	
 imports.PackageImport
 	::= "import" (namespaces[] #0 "." #0 )+ #0 "*" #0 ";";
 
 imports.StaticMemberImport
-	::= "import" static (namespaces[] #0 "." #0 )+ #0 staticMembers[] #0 ";";
+	::= "import" static (namespaces[] #0 "." #0 )* #0 staticMembers[] #0 ";";
 	
 imports.StaticClassifierImport
 	::= "import" static (namespaces[] #0 "." #0 )* staticMembers[] #0 "." #0 "*" #0 ";";
