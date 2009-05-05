@@ -263,7 +263,9 @@ public class TypeParameterUtil {
 						}
 	 				}
 					//all types given by all bindings
-					result.addAll(allSuperTypes);
+					if (allSuperTypes != null) {
+						result.addAll(allSuperTypes);
+					}
 				}
 			}
 		}
