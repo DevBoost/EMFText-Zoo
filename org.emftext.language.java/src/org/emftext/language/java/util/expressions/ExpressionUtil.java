@@ -61,10 +61,7 @@ public class ExpressionUtil {
 		
 		Type type = null;
 
-		if (_this instanceof NestedExpression) {
-			type = ExpressionUtil.getType(((NestedExpression) _this).getExpression(), alternative);
-		}
-		else if (_this instanceof Reference) {
+		if (_this instanceof Reference) {
 			Reference reference = (Reference) _this;
 			//navigate down references
 			while(reference.getNext() != null) {

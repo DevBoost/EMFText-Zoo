@@ -67,8 +67,9 @@ public class ElementReferenceTargetReferenceResolver extends
 			}
 			else {
 				startingPoint = ReferenceUtil.getType(parentReference);
-				if (parentReference instanceof Expression) {
-					alternativeStartingPoint = ExpressionUtil.getAlternativeType(parentReference);
+				if (parentReference instanceof NestedExpression) {
+					alternativeStartingPoint = ExpressionUtil.getAlternativeType(
+							((NestedExpression)parentReference).getExpression());
 				}
 			
 				//do not search on primitive types but their class representation

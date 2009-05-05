@@ -103,7 +103,7 @@ public class TypeParameterUtil {
 					expressionReference = expressionReference.getNext();
 				}
 				parentReference = expressionReference;
-				prevType = ExpressionUtil.getType(nestedExpression);
+				prevType = ExpressionUtil.getType(nestedExpression.getExpression());
 			}
 		}
 		else if (reference != null && reference.eContainer() instanceof Reference) {
