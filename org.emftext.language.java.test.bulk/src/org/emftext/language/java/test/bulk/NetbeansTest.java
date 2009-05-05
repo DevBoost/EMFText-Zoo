@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.CoreException;
 
 public class NetbeansTest extends AbstractZipFileInputTest {
 
-	public static final String TEST_FOLDER = "netbeans-6.5-200811100001-ml";
+	public static final String TEST_FOLDER = "netbeans-6.5.1";
 	public static final String START_ENTRY = "";
 	public static final int    THREAD_NO   = 8;
 	
