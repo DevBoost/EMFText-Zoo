@@ -441,12 +441,6 @@ public class JavaClasspath extends AdapterImpl {
 	 * @return proxy element
 	 */
 	public ConcreteClassifier getClassifier(String fullQualifiedName) {
-		//is this name registered?
-		if (!isRegistered(fullQualifiedName)) {
-			return null;
-		}
-		
-		
 		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
