@@ -105,8 +105,6 @@ public class JavaClasspath extends AdapterImpl {
 	protected Map<URI, URI> uriMap = null;
 	protected Map<String, List<String>> packageClassifierMap =
 		new HashMap<String, List<String>>();
-	
-
 
 	/**
 	 * Registers all classes of the Java standard library 
@@ -183,6 +181,18 @@ public class JavaClasspath extends AdapterImpl {
 		
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
 		
+		char[] nameParts = compilationUnit.getName().toCharArray();
+		for(int i= 0; i< nameParts.length - "$.class".length(); i++) {
+			if(nameParts[i] == '$') {
+				int idx = packageName.lastIndexOf(".");
+				packageName = packageName.substring(0, idx) + "$" + packageName.substring(idx + 1);
+			}
+		}
+		
+		if (packageName.contains("$")) {
+			packageName = packageName + "$";
+		}
+		
 		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
 			registerClassifier(
 					packageName, classifier.getName(), uri);
@@ -200,11 +210,11 @@ public class JavaClasspath extends AdapterImpl {
 	 * @param uri
 	 */
 	public void registerClassifier(String packageName, String classifierName, URI uri) {
-		if (classifierName == null || classifierName.equals("") || uri == null) {
+		if (classifierName == null || uri == null) {
 			return;
 		}
 		
-		if (!packageName.endsWith(".")) {
+		if (!packageName.endsWith(".") && !packageName.endsWith("$")) {
 			packageName = packageName + ".";
 		}
 		
@@ -255,6 +265,26 @@ public class JavaClasspath extends AdapterImpl {
 				}
 				
 				uriMap.put(logicalUri, uri);
+				
+				String outerPackage = qualifiedName;
+				while(outerPackage.endsWith("$")) {
+					//make sure outer classes are registered;
+					//This is required when class names contain $ symbols
+					outerPackage = outerPackage.substring(0, outerPackage.length() - 1);
+					idx = outerPackage.lastIndexOf("$");
+					if (idx == -1) {
+						idx = outerPackage.lastIndexOf(".");
+					}
+					String outerClassifier = outerPackage.substring(idx + 1);
+					outerPackage = outerPackage.substring(0, idx + 1);
+					
+					if (!packageClassifierMap.containsKey(outerPackage)) {
+						packageClassifierMap.put(outerPackage, new ArrayList<String>());
+					}
+					if (!packageClassifierMap.get(outerPackage).contains(outerClassifier)) {
+						packageClassifierMap.get(outerPackage).add(outerClassifier);
+					}
+				}
 			}
 		}
 	}
@@ -334,13 +364,22 @@ public class JavaClasspath extends AdapterImpl {
 			parentContainer = JavaUtil.findContainingClassifier(parentContainer.eContainer());
 		}
 		
-		EObject rootContainer = JavaUtil.findContainingCompilationUnit(container);
-		if (rootContainer instanceof CompilationUnit) {
-			CompilationUnit compilationUnit = (CompilationUnit) rootContainer;
-		    fullName = getContainerNameFromNamespace(compilationUnit) + fullName + 
-		    	container.getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
-			return getClassifiers(fullName, "*");
+		if (container.eIsProxy()) {
+			 String uriString = ((InternalEObject)container).eProxyURI().trimFragment().toString();
+			 fullName = uriString.substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length(), 
+					 uriString.length() - ".java".length()) + "$";
+			 return getClassifiers(fullName, "*");
 		}
+		else {
+			CompilationUnit rootContainer = JavaUtil.findContainingCompilationUnit(container);
+			if (rootContainer instanceof CompilationUnit) {
+				CompilationUnit compilationUnit = (CompilationUnit) rootContainer;
+			    fullName = getContainerNameFromNamespace(compilationUnit) + fullName + 
+			    	container.getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			    return getClassifiers(fullName, "*");
+			}
+		}
+
 		
 		return ECollections.emptyEList();
 	}
@@ -356,6 +395,12 @@ public class JavaClasspath extends AdapterImpl {
 	 * @return list of proxies
 	 */
 	public EList<ConcreteClassifier> getClassifiers(String packageName, String classifierQuery) {
+		int idx = classifierQuery.lastIndexOf("$");
+		if (idx >= 0) {
+			packageName = packageName + classifierQuery.substring(0, idx + 1);
+			classifierQuery = classifierQuery.substring(idx + 1);
+		}
+		
 		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR) &&
 				!packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
 			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
@@ -396,6 +441,12 @@ public class JavaClasspath extends AdapterImpl {
 	 * @return proxy element
 	 */
 	public ConcreteClassifier getClassifier(String fullQualifiedName) {
+		//is this name registered?
+		if (!isRegistered(fullQualifiedName)) {
+			return null;
+		}
+		
+		
 		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
@@ -404,6 +455,23 @@ public class JavaClasspath extends AdapterImpl {
 		return (ConcreteClassifier) classifierProxy;
 	}
 	
+	public boolean isRegistered(String fullQualifiedName) {
+		int idx = fullQualifiedName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
+		if(idx == -1) {
+			idx = fullQualifiedName.lastIndexOf(JavaUniquePathConstructor.PACKAGE_SEPARATOR);
+		}
+		if(idx == -1) {
+			idx = 0;
+		}
+		String containerName = fullQualifiedName.substring(0, idx + 1);
+		String classifierName = fullQualifiedName.substring(idx + 1);
+		List<String> containerContent = packageClassifierMap.get(containerName);
+		if(containerContent == null) {
+			return false;
+		}
+		return containerContent.contains(classifierName);
+	}
+
 	/**
 	 * Converts the namespaces array of the given namespace aware element into
 	 * a String representation using package (.) and class ($) delimiters. The method

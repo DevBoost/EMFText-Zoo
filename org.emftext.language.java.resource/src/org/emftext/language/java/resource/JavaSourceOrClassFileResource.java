@@ -73,7 +73,6 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if (getContents().isEmpty() && getErrors().isEmpty()) {
 				contents.add(ContainersFactory.eINSTANCE.createEmptyModel());
 			}
-			register();
 		}
 	}
 	
@@ -93,6 +92,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		else {
 			super.load(options);
 		}
+		register();
 	}
 	
 	protected void doUnload() {
