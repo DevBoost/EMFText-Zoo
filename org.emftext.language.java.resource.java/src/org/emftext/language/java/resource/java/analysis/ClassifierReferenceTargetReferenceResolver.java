@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.instantiations.NewConstructorCall;
@@ -28,6 +29,12 @@ public class ClassifierReferenceTargetReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
+		if (classifier instanceof ConcreteClassifier) {
+			ConcreteClassifier concreteClassifier = (ConcreteClassifier) classifier;
+			if(concreteClassifier.getFullName() != null) {
+				return concreteClassifier.getFullName();
+			}
+		}
 		return super.doDeResolve(classifier, container, reference);
 	}	
 	@Override	

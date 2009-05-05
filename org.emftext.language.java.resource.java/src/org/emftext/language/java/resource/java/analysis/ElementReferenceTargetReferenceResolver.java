@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
@@ -35,6 +36,12 @@ public class ElementReferenceTargetReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
+		if (element instanceof ConcreteClassifier) {
+			ConcreteClassifier concreteClassifier = (ConcreteClassifier) element;
+			if(concreteClassifier.getFullName() != null) {
+				return concreteClassifier.getFullName();
+			}
+		}
 		return super.doDeResolve(element, container, reference);
 	}
 	

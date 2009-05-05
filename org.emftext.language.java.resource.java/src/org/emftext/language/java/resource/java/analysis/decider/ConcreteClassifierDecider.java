@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -13,7 +14,6 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
-import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersPackage;
@@ -79,16 +79,56 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		
 		if(container instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) container;
+			
 			//local inner classes
-			for(Member member : ClassifierUtil.getAllMembers(
-					concreteClassifier)) {
-				if(member instanceof ConcreteClassifier) {
-					innerTypeSuperTypeList.add((ConcreteClassifier) member);
+			if (!concreteClassifier.eIsProxy()) {
+				for(Member member : ClassifierUtil.getAllMembers(
+						concreteClassifier)) {
+					if(member instanceof ConcreteClassifier) {
+						innerTypeSuperTypeList.add((ConcreteClassifier) member);
+					}
 				}
+				//public inner classes (possibly external)
+				innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+						concreteClassifier));
 			}
-			//public inner classes (possibly external)
-			innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-					concreteClassifier));
+			
+			//if id contains $, treat $ as separator
+			if(identifier.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
+				String[] path = identifier.split("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
+
+				EList<ConcreteClassifier> innerClassifiers = new BasicEList<ConcreteClassifier>();
+				innerClassifiers.addAll(
+						JavaClasspath.get(resource).getInnnerClassifiers(concreteClassifier));
+				for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(concreteClassifier)) {
+					innerClassifiers.addAll(
+							JavaClasspath.get(resource).getInnnerClassifiers(superClassifier));
+				}
+				
+				outer: for(int i = 0; i < path.length; i++) {
+					for(ConcreteClassifier innerClassifier : innerClassifiers) {
+						if(path[i].equals(innerClassifier.getName())) {
+							innerClassifiers.clear();
+							innerClassifiers.addAll(
+									JavaClasspath.get(resource).getInnnerClassifiers(innerClassifier));
+							for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(innerClassifier)) {
+								innerClassifiers.addAll(
+										JavaClasspath.get(resource).getInnnerClassifiers(superClassifier));
+							}
+							concreteClassifier = innerClassifier;
+							if (i == path.length - 1) {
+								for(ConcreteClassifier innerClassifier2 : innerClassifiers) {
+									innerTypeSuperTypeList.add((ConcreteClassifier) EcoreUtil.resolve(innerClassifier2, resource));
+								}
+							}
+							continue outer;
+						}
+					}
+					return ECollections.emptyEList();
+				}
+				
+
+			}
 			
 		}
 		if(container instanceof AnonymousClass) {
@@ -161,8 +201,19 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof ConcreteClassifier) {
-			NamedElement ne = (NamedElement) element;
-			return id.equals(ne.getName());
+			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
+			if(id.equals(concreteClassifier.getName())) {
+				concreteClassifier.setFullName(id);
+				return true;
+			}
+			if(id.contains("$")) {	
+				String mainID = id.substring(id.lastIndexOf("$") + 1);
+				if( mainID.equals(concreteClassifier.getName())) {
+					//set the full id for reprint
+					concreteClassifier.setFullName(id);
+					return true;
+				}
+			}
 		}
 		return false;
 	}
