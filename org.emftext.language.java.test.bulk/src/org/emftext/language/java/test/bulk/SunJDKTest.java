@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.CoreException;
 
 public class SunJDKTest extends AbstractZipFileInputTest {
 	
-	public static final String TEST_FOLDER = "sun_jdk_1.6.0_07-src.zip";
+	public static final String TEST_FOLDER = "sun_jdk_1.5.0_16";
 	public static final String START_ENTRY = "";
 	public static final int    THREAD_NO   = 8;
 	
