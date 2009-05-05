@@ -119,9 +119,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 							}
 							concreteClassifier = innerClassifier;
 							if (i == path.length - 1) {
-								for(ConcreteClassifier innerClassifier2 : innerClassifiers) {
-									innerTypeSuperTypeList.add((ConcreteClassifier) EcoreUtil.resolve(innerClassifier2, resource));
-								}
+								innerTypeSuperTypeList.addAll(innerClassifiers);
 							}
 							continue outer;
 						}
@@ -205,15 +203,26 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
 			if(id.equals(concreteClassifier.getName())) {
+				if(concreteClassifier.eIsProxy()) {
+					concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
+				}
 				concreteClassifier.setFullName(id);
+				if(!concreteClassifier.eIsProxy()) {
+					return true;
+				}
 				return true;
 			}
 			if(id.contains("$")) {	
 				String mainID = id.substring(id.lastIndexOf("$") + 1);
 				if( mainID.equals(concreteClassifier.getName())) {
 					//set the full id for reprint
+					if(concreteClassifier.eIsProxy()) {
+						concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
+					}
 					concreteClassifier.setFullName(id);
-					return true;
+					if(!concreteClassifier.eIsProxy()) {
+						return true;
+					}
 				}
 			}
 		}
