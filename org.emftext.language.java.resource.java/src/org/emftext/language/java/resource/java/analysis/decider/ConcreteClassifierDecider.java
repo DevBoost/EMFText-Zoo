@@ -43,12 +43,14 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	protected Resource resource;
 	
 	private EList<ConcreteClassifier> innerTypeSuperTypeList = new BasicEList<ConcreteClassifier>();
+	private ConcreteClassifier baseClassifier = null;
 	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (ContainersPackage.Literals.COMPILATION_UNIT__CLASSIFIERS.equals(containingReference)) {
 			return true;
 		}
-		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
+		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)
+				&& !container.equals(baseClassifier)) {
 			return true;
 		}
 		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
@@ -222,6 +224,11 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			EReference crossReference) {
 		
 		resource = referenceContainer.eResource();
+		if(referenceContainer instanceof ClassifierReference) {
+			if (referenceContainer.eContainer().eContainer() instanceof ConcreteClassifier) {
+				baseClassifier = (ConcreteClassifier) referenceContainer.eContainer().eContainer();
+			}
+		}
 		
 		return (referenceContainer instanceof Reference ||
 				referenceContainer instanceof ClassifierReference);
