@@ -156,7 +156,8 @@ public class ExpressionUtil {
 		ArrayTypeable arrayType = null;
 		if (_this instanceof NestedExpression && 
 				((NestedExpression)_this).getNext() == null) {
-			return getArrayDimension(((NestedExpression) _this).getExpression());
+			return getArrayDimension(((NestedExpression) _this).getExpression())
+				- ((NestedExpression)_this).getArraySelectors().size();
 		}
 		if (_this instanceof ConditionalExpression &&
 				((ConditionalExpression)_this).getExpressionIf() != null) {		

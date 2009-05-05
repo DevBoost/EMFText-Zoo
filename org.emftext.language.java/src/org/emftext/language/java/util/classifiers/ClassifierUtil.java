@@ -31,6 +31,7 @@ public class ClassifierUtil {
 		
 		if (_this instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) _this;
+			memberList.addAll(concreteClassifier.getMembers());
 			memberList.addAll(concreteClassifier.getDefaultMembers());
 			//because inner classes are found in separate class files
 			memberList.addAll(
@@ -39,6 +40,7 @@ public class ClassifierUtil {
 		
 		for (ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
 			memberList.addAll(superClassifier.getMembers());
+			memberList.addAll(superClassifier.getDefaultMembers());
 			memberList.addAll(
 					JavaClasspath.get(_this).getInnnerClassifiers(superClassifier));
 		}
