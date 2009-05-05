@@ -192,7 +192,7 @@ public class JavaClasspath extends AdapterImpl {
 			}
 		}
 		
-		if (packageName.contains("$")) {
+		if (compilationUnit.getName().contains("$")) {
 			packageName = packageName + "$";
 		}
 		
@@ -360,13 +360,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 
 		String fullName = "";
-		EObject parentContainer = JavaUtil.findContainingClassifier(container.eContainer());
-		
-		while (parentContainer instanceof ConcreteClassifier) {
-			fullName = ((ConcreteClassifier)parentContainer).getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + fullName;
-			parentContainer = JavaUtil.findContainingClassifier(parentContainer.eContainer());
-		}
-		
+
 		if (container.eIsProxy()) {
 			 String uriString = ((InternalEObject)container).eProxyURI().trimFragment().toString();
 			 fullName = uriString.substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length(), 

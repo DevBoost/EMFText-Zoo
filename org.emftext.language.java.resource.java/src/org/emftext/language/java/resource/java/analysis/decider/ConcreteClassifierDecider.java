@@ -280,6 +280,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			EObject target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);
 			
 			if (target != null) {
+				if (target.eIsProxy()) {
+					target = EcoreUtil.resolve(target, referenceContainer);
+				}
 				return resolveRelativeNamespace(nsaElement, idx + 1, target, referenceContainer, crossReference); 
 			}
 			else {
@@ -287,9 +290,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 		}
 		
-		if (startingPoint.eIsProxy()) {
-			startingPoint = EcoreUtil.resolve(startingPoint, referenceContainer);
-		}
 		return startingPoint;
 	}
 	

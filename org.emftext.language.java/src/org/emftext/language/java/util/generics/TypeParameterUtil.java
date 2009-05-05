@@ -6,7 +6,9 @@ import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.generics.ExtendsTypeArgument;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeArgument;
@@ -83,14 +85,37 @@ public class TypeParameterUtil {
 		result.add(_this);
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		Reference parentReference = null;
-		if (reference != null && reference.eContainer() instanceof Reference) {
-			parentReference = (Reference) reference.eContainer();
+		Type prevType = null;
+		if (reference != null && reference.eContainer() instanceof NestedExpression) {
+			NestedExpression nestedExpression = (NestedExpression) reference.eContainer();
+			Expression expression = null;
+			if (nestedExpression.getExpression() instanceof Reference) {
+				expression = nestedExpression.getExpression();
+			}
+			else if (nestedExpression.getExpression() instanceof ConditionalExpression) {
+				expression = ((ConditionalExpression)nestedExpression.getExpression()).getExpressionIf();
+			}
+			
+			if (expression instanceof Reference) {
+				Reference expressionReference = (Reference) expression;
+				//navigate down references
+				while(expressionReference.getNext() != null) {
+					expressionReference = expressionReference.getNext();
+				}
+				parentReference = expressionReference;
+				prevType = ExpressionUtil.getType(nestedExpression);
+			}
 		}
+		else if (reference != null && reference.eContainer() instanceof Reference) {
+			parentReference = (Reference) reference.eContainer();
+			prevType = ReferenceUtil.getType(parentReference);
+		}
+		
 		
 		int typeParameterIndex = -1;
 		if (typeParameterDeclarator instanceof ConcreteClassifier) {
 			typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(_this);
-			if(reference != null && parentReference != null) {
+			if(reference != null) {
 				ClassifierReference classifierReference = null;
 				if(parentReference instanceof ElementReference) {
 					ReferenceableElement prevReferenced = ((ElementReference) parentReference).getTarget();
@@ -102,7 +127,6 @@ public class TypeParameterUtil {
 					//e.g. New Constructor Call
 					classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) parentReference).getType());
 				}
-				Type prevType = ReferenceUtil.getType(parentReference);
 				if (prevType instanceof ConcreteClassifier) {
 					//bound through inheritance?
 					for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
