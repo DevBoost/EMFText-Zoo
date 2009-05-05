@@ -1,10 +1,13 @@
 package org.emftext.language.java.util.generics;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.Class;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.generics.ExtendsTypeArgument;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
@@ -21,8 +24,10 @@ import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.util.classifiers.ClassUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.classifiers.InterfaceUtil;
+import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
@@ -62,6 +67,9 @@ public class TypeParameterUtil {
 		}
 	}
 	
+	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
+		return getAllBoundTypes(_this, typeReference, reference).get(0);
+	}
 	/**
 	 * Returns the type bound to the given parameter in the context
 	 * of the given reference.
@@ -70,7 +78,9 @@ public class TypeParameterUtil {
 	 * @param reference
 	 * @return bound type or parameter if not bound
 	 */
-	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
+	public static EList<Type> getAllBoundTypes(TypeParameter _this, TypeReference typeReference, Reference reference) {
+		EList<Type> result = new BasicEList<Type>();
+		result.add(_this);
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		Reference parentReference = null;
 		if (reference != null && reference.eContainer() instanceof Reference) {
@@ -88,28 +98,35 @@ public class TypeParameterUtil {
 						classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) prevReferenced).getType());
 					}
 				}
+				if(parentReference instanceof TypedElement) {
+					//e.g. New Constructor Call
+					classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) parentReference).getType());
+				}
 				Type prevType = ReferenceUtil.getType(parentReference);
 				if (prevType instanceof ConcreteClassifier) {
-					if(classifierReference == null || classifierReference.getTypeArguments().isEmpty()) {
-						//bound through inheritance?
-						for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
-							if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
-								//is this an argument for the correct class?
-								if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
-									TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
-									if (arg instanceof QualifiedTypeArgument) {
-										return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
-									}
+					//bound through inheritance?
+					for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
+						if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
+							//is this an argument for the correct class?
+							if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
+								TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
+								if (arg instanceof QualifiedTypeArgument) {
+									result.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
 								}
-
 							}
+
 						}
 					}
-					else if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
+					if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
 						TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
 						if (arg instanceof QualifiedTypeArgument) {
-							return TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference);
-						}	
+							result.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference));
+						}
+						if (arg instanceof ExtendsTypeArgument) {
+							for(TypeReference extendedType : ((ExtendsTypeArgument) arg).getExtendTypes()) {
+								result.add(0, TypeReferenceUtil.getTarget(extendedType, parentReference));
+							}
+						}
 					}
 		
 				}
@@ -117,7 +134,7 @@ public class TypeParameterUtil {
 			if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
 				if (reference.eContainer().eContainer() instanceof Reference) {
 					//the ".class" instantiation implicitly binds the T parameter of java.lang.Class to the class itself
-					return ReferenceUtil.getType((Reference)reference.eContainer().eContainer());
+					result.add(0, ReferenceUtil.getType((Reference)reference.eContainer().eContainer()));
 				}
 			}
 		}
@@ -129,14 +146,14 @@ public class TypeParameterUtil {
 				if(method.getTypeParameters().size() == methodCall.getCallTypeArguments().size()) {
 					TypeArgument typeArgument = methodCall.getCallTypeArguments().get(method.getTypeParameters().indexOf(_this));
 					if (typeArgument instanceof QualifiedTypeArgument) {
-						return TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), parentReference); 
+						result.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), parentReference)); 
 					} 
 				}
 
-				//class type paramete
+				//class type parameter
 				int idx = method.getParameters().indexOf(typeReference.eContainer());
 				
-				//method type paarameter
+				//method type parameter
 				if (idx == -1) {
 					for(Parameter parameter : method.getParameters()) {
 						for (TypeArgument typeArgument : parameter.getTypeArguments()) {
@@ -184,14 +201,14 @@ public class TypeParameterUtil {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-												return TypeReferenceUtil.getTarget(
-														((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType());
+												result.add(0, TypeReferenceUtil.getTarget(
+														((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType()));
 											}
 										}
 									}
 								}
 								if (argumentType != null && parameterType.getTarget() instanceof TypeParameter) {
-									return argumentType.getTarget();
+									result.add(0,argumentType.getTarget());
 								}
 							}
 							if(elementReference.getNext() instanceof ReflectiveClassReference) {
@@ -199,7 +216,7 @@ public class TypeParameterUtil {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-												return ReferenceUtil.getType(elementReference);
+												result.add(0, ReferenceUtil.getType(elementReference));
 											}
 										}
 									}
@@ -211,15 +228,47 @@ public class TypeParameterUtil {
 								while (argReference.getNext() instanceof Reference) {
 									argReference = argReference.getNext();
 								}
-								return ReferenceUtil.getType((Reference) argReference);
+								result.add(0, ReferenceUtil.getType((Reference) argReference));
 							}
 						}
 					}			
 				}
+				
+				//return type
+				if(method.equals(typeReference.eContainer())) {
+					//bound by the type of a method argument?
+					EList<Classifier> allSuperTypes = null;
+					for(Parameter parameter : method.getParameters()) {
+						if(_this.equals(TypeReferenceUtil.getTarget(parameter.getType()))) {
+							idx = method.getParameters().indexOf(parameter);
+							Classifier argumentType = (Classifier) ExpressionUtil.getType(methodCall.getArguments().get(idx));
+							if(allSuperTypes == null) {
+								allSuperTypes = new BasicEList<Classifier>();
+								allSuperTypes.add(argumentType);
+								allSuperTypes.addAll(ClassifierUtil.getAllSuperClassifiers(argumentType));
+							}
+							else {
+								allSuperTypes.add(argumentType);
+								EList<Classifier> allOtherSuperTypes = new BasicEList<Classifier>();
+								allOtherSuperTypes.add(argumentType);
+								allOtherSuperTypes.addAll(ClassifierUtil.getAllSuperClassifiers(argumentType));
+								EList<Classifier> temp = allSuperTypes;
+								allSuperTypes = new BasicEList<Classifier>();
+								for(Classifier st : allOtherSuperTypes) {
+									if(temp.contains(st)) {
+										allSuperTypes.add(st);
+									}
+								}
+							}
+						}
+	 				}
+					//all types given by all bindings
+					result.addAll(allSuperTypes);
+				}
 			}
 		}
 		
-		return _this;
+		return result;
 	}
 	
 }

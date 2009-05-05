@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.AnonymousClass;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
@@ -79,20 +80,23 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					packageName, "*"));
 		}
 		
-		if(container instanceof ConcreteClassifier) {
-			ConcreteClassifier concreteClassifier = (ConcreteClassifier) container;
+		if(container instanceof Classifier) {
+			Classifier classifier = (Classifier) container;
 			
 			//local inner classes
-			if (!concreteClassifier.eIsProxy()) {
+			if (!classifier.eIsProxy()) {
 				for(Member member : ClassifierUtil.getAllMembers(
-						concreteClassifier)) {
+						classifier)) {
 					if(member instanceof ConcreteClassifier) {
 						innerTypeSuperTypeList.add((ConcreteClassifier) member);
 					}
 				}
 				//public inner classes (possibly external)
-				innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-						concreteClassifier));
+				if (classifier instanceof ConcreteClassifier) {
+					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+							(ConcreteClassifier) classifier));
+				}
+
 			}
 			
 			//if id contains $, treat $ as separator
@@ -100,9 +104,11 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				String[] path = identifier.split("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 
 				EList<ConcreteClassifier> innerClassifiers = new BasicEList<ConcreteClassifier>();
-				innerClassifiers.addAll(
-						JavaClasspath.get(resource).getInnnerClassifiers(concreteClassifier));
-				for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(concreteClassifier)) {
+				if(classifier instanceof ConcreteClassifier) {
+					innerClassifiers.addAll(
+							JavaClasspath.get(resource).getInnnerClassifiers((ConcreteClassifier) classifier));	
+				}
+				for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(classifier)) {
 					innerClassifiers.addAll(
 							JavaClasspath.get(resource).getInnnerClassifiers(superClassifier));
 				}
@@ -117,7 +123,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 								innerClassifiers.addAll(
 										JavaClasspath.get(resource).getInnnerClassifiers(superClassifier));
 							}
-							concreteClassifier = innerClassifier;
+							classifier = innerClassifier;
 							if (i == path.length - 1) {
 								innerTypeSuperTypeList.addAll(innerClassifiers);
 							}
