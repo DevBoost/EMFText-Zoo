@@ -261,17 +261,21 @@ regular-string-literal-character:
 // unklar: "new-line-character"-rule nötig?    
 single-regular-string-literal-character:
     Any character except " (U+0022), \ (U+005C), and new-line-character
-    
+
+//done    
 verbatim-string-literal:
     '@"'   verbatim-string-literal-character *   '"'
-    
+
+//done    
 verbatim-string-literal-character:
     single-verbatim-string-literal-character
     quote-escape-sequence
-    
+
+//done    
 single-verbatim-string-literal-character:
     any character except "
-    
+
+//done    
 quote-escape-sequence:
     '""'
     
@@ -993,7 +997,7 @@ class-body:
     
 class-member-declaration:
     constant-declaration			//done
-    field-declaration
+    field-declaration				//done
     method-declaration				//done
     property-declaration
     event-declaration
@@ -1041,7 +1045,7 @@ variable-initializer:
     expression
     array-initializer
 
-//pre-done as method   formal-parameter-list missing
+//done as method 
 method-declaration:
     attributes *   method-modifier *   return-type   ( interface-type   '.') ?   identifier   (   formal-parameter-list ?   )   block   
 
@@ -1066,21 +1070,19 @@ return-type:
     'void'
     
     
-    
+//done    
 formal-parameter-list:
     fixed-parameter  ( ','   fixed-parameter)*
     fixed-parameter  ( ','   fixed-parameter)*   ','   parameter-array
     parameter-array  
- 
+
+//done     
 fixed-parameter:
-    attributes *   parameter-modifier ?   type   identifier
-    
-parameter-modifier:
-    'ref'
-    'out'
-    
+    attributes *   (ref|out) ?   type   identifier    
+
+//done        
 parameter-array:
-    attributes *   'params'   array-type   identifier
+    attributes *   params   array-type   identifier
     
 property-declaration:
     attributes *   property-modifier *   type   ( interface-type   '.') ?   identifier   '{'   accessor-declarations   '}'

@@ -110,13 +110,24 @@ classes.ClassBase
 	::= ":" types ( "," types )* ;
 	
 classes.Method
-    ::= attributes *  modifiers *  returnType   ( interfaceType   ".") ?   name[]   "("      ")"  block ;
-	//   formal-parameter-list ?	
+    ::= attributes *  modifiers *  returnType   ( interfaceType   ".") ?   name[]   "("   formalParameterList ?   ")"  block ;
 	
 classes.Block
     ::= "{" statement *  "}"
     |	";" 
     ;	
+
+classes.FormalParameterList
+    ::= fixedParameter  ( ","   fixedParameter)*
+    |	fixedParameter  ( ","   fixedParameter)*   ","   parameterArray
+    |	parameterArray
+    ;  
+ 
+classes.FixedParameter
+    ::= attributes *   (ref|out) ?   type   identifier ;
+    
+classes.ParameterArray
+    ::= attributes *   params   arrayType   identifier ;
 
 classes.ConstantDeclaration
     ::= attributes *   modifiers *   "const"   type   constantDeclarator ( ","   constantDeclarator)*   ";" ;
@@ -458,6 +469,7 @@ operators.Negate 		::= "!" ;
 
 keywords.Out	::= "out";
 keywords.Ref	::= "ref";
+keywords.Params	::= "params";
 keywords.Case	::= "case";
 keywords.Default::= "default";
 keywords.Return	::= "return";
