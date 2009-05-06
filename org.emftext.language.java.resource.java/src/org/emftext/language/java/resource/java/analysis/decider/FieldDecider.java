@@ -26,6 +26,7 @@ import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
+import org.emftext.language.java.util.imports.ImportUtil;
 
 public class FieldDecider extends AbstractDecider {
 
@@ -86,7 +87,7 @@ public class FieldDecider extends AbstractDecider {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
-					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
+					resultList.addAll(ImportUtil.getMemberList(aImport));
 				}
 			}
 		}

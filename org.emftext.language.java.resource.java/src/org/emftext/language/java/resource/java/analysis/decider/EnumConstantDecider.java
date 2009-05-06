@@ -19,6 +19,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
+import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.variables.LocalVariable;
 
@@ -68,7 +69,7 @@ public class EnumConstantDecider extends AbstractDecider {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
-					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
+					resultList.addAll(ImportUtil.getMemberList(aImport));
 				}
 				else if (aImport instanceof ClassifierImport) {
 					for (EObject member : ((ClassifierImport)aImport).getClassifier().getMembers()) {

@@ -18,6 +18,7 @@ import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
+import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.members.MethodUtil;
 
 public class MethodDecider extends AbstractDecider {
@@ -63,7 +64,7 @@ public class MethodDecider extends AbstractDecider {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
-					resultList.addAll(((StaticClassifierImport)aImport).getStaticMembers());
+					resultList.addAll(ImportUtil.getMemberList(aImport));
 				}
 			}
 		}

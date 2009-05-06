@@ -2,10 +2,13 @@ package org.emftext.language.java.util.imports;
 
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.imports.Import;
+import org.emftext.language.java.members.Member;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class ImportUtil {
 
@@ -42,7 +45,25 @@ public class ImportUtil {
 		//cut the trailing separator
 		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() - 1);
 		
-		return JavaClasspath.get(_this).getClassifier(fullQualifiedName);
+		return (ConcreteClassifier) EcoreUtil.resolve(
+				JavaClasspath.get(_this).getClassifier(fullQualifiedName), _this);
+	}
+	
+	/**
+	 * Returns all imported members assuming the import's namespace
+	 * identifies a classifier.
+	 * 
+	 * @param _this 
+	 * @return list of imported classifiers (proxies)
+	 */
+	public static EList<Member> getMemberList(Import _this) {
+		ConcreteClassifier concreteClassifier = getClassifier(_this);
+		
+		if(concreteClassifier == null || concreteClassifier.eIsProxy()) {
+			return ECollections.emptyEList();
+		}
+		
+		return ClassifierUtil.getAllMembers(concreteClassifier);
 	}
 	
 	/**
