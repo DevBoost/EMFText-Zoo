@@ -8,8 +8,8 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
@@ -34,7 +34,7 @@ public class StaticClassifierImportStaticMembersReferenceResolver extends
 		Classifier classifier = ImportUtil.getClassifier(theImport, identifier);
 		classifier = (Classifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null && !classifier.eIsProxy()) {
-			for(Member member : ((MemberContainer)classifier).getMembers()) {
+			for(Member member : ClassifierUtil.getAllMembers(classifier)) {
 				if (member instanceof ReferenceableElement) { 
 					result.addMapping(identifier, (ReferenceableElement) member);
 				}
