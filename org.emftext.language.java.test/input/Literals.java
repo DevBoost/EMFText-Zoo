@@ -54,6 +54,8 @@ public class Literals {
 	public long maxLong = 0xffffffffffffffffL;
 	public boolean b = -0xffffffffffffffffL == ~0xffffffffffffffffL+1;
 	public long i9 = 0X00FF00FF;
+	
+	public long l10 = 01233211234435456722112L;
 
     public static final double DOUBLE_MAX_VALUE = 0x1.fffffffffffffP+1023; // 1.7976931348623157e+308
     public static final double DOUBLE_MIN_NORMAL = 0x1.0p-1022; // 2.2250738585072014E-308

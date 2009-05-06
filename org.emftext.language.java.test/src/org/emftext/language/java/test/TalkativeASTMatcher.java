@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.emftext.language.java.test;
 
+import java.math.BigInteger;
+
 import org.eclipse.jdt.core.dom.ASTMatcher;
 import org.eclipse.jdt.core.dom.AnnotationTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnnotationTypeMemberDeclaration;
@@ -498,7 +500,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 		//OCTAL normalization
 		if (token.matches("0[0-9]+")) {
-			token = Long.decode(token).toString();
+			token = new BigInteger(token, 8).toString();
 		}
 		
 		//condition that indicates that this is float or double --> parse
