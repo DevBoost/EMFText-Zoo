@@ -24,6 +24,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReflectiveClassReference;
 import org.emftext.language.java.types.ClassifierReference;
+import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
@@ -34,6 +35,7 @@ import org.emftext.language.java.util.classifiers.InterfaceUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
+import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class TypeParameterUtil {
@@ -321,6 +323,9 @@ public class TypeParameterUtil {
 		else {
 			TemporalCompositeClassImpl temp = new TemporalCompositeClassImpl(_this);
 			for(Type aResult : resultList) {
+				if(aResult instanceof PrimitiveType) {
+					aResult = PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType) aResult);
+				}
 				temp.getSuperTypes().add((Classifier) aResult);
 			}
 			temp.getSuperTypes().add(_this);
