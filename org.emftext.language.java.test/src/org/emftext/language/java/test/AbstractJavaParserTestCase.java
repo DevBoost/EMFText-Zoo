@@ -29,6 +29,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.Javadoc;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.emftext.language.java.JavaClasspath;
@@ -300,31 +302,43 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		//converter unicode
 		inputStream = new UnicodeConverter(inputStream);
 		
-		ASTParser jdtParser1 = ASTParser.newParser(AST.JLS3);
-		jdtParser1.setSource(readTextContents(inputStream).toCharArray());
-		org.eclipse.jdt.core.dom.CompilationUnit result1 = 
-			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser1.createAST(null);
+		org.eclipse.jdt.core.dom.CompilationUnit unit1 = parseWithJDT(inputStream);
+		removeJavadoc(unit1);
 
-		ASTParser jdtParser2 = ASTParser.newParser(AST.JLS3);
-		jdtParser2.setSource(readTextContents(inputStream2).toCharArray());
-		org.eclipse.jdt.core.dom.CompilationUnit result2 = 
-			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser2.createAST(null);
+		org.eclipse.jdt.core.dom.CompilationUnit unit2 = parseWithJDT(inputStream2);
+		removeJavadoc(unit2);
 		
-		/*
-		String inputFileContents = normalize(readTextContents(inputStream));
-		String firstPrintContents = normalize(readTextContents(inputStream2));
-		*/
-		
-		
-
 		TalkativeASTMatcher matcher = new TalkativeASTMatcher(true);
-		boolean result = result1.subtreeMatch(matcher, result2);
+		boolean result = unit1.subtreeMatch(matcher, unit2);
 		
 		assertTrue(
 				"Reprint not equal: " + matcher.getDiff(),
 				result);
 
 		return result;
+	}
+
+	private static org.eclipse.jdt.core.dom.CompilationUnit parseWithJDT(
+			InputStream inputStream) {
+		ASTParser jdtParser1 = ASTParser.newParser(AST.JLS3);
+		jdtParser1.setSource(readTextContents(inputStream).toCharArray());
+		org.eclipse.jdt.core.dom.CompilationUnit result1 = 
+			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser1.createAST(null);
+		return result1;
+	}
+
+	private static void removeJavadoc(
+			org.eclipse.jdt.core.dom.CompilationUnit result1) {
+		final List<Javadoc> javadocNodes = new ArrayList<Javadoc>();
+		result1.accept(new ASTVisitor() {
+			public boolean visit(Javadoc node) {
+				javadocNodes.add(node);
+				return true;
+			}
+		});
+		for (Javadoc node : javadocNodes) {
+			node.delete();
+		}
 	}
 
 	private static String calculateOutputFilename(File inputFile,
