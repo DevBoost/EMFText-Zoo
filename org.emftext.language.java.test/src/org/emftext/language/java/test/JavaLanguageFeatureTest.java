@@ -156,7 +156,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getValue());
 	}
 
-	private void assertIsLongField(Member member, long expectedInitValue) {
+	private void assertIsLongField(Member member, String expectedInitValue) {
 		assertType(member, Field.class);
 		Field longField = (Field) member;		
 		Expression initValue = longField.getInitialValue();
@@ -165,7 +165,13 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 		assertType(literal, LongLiteral.class);
 		LongLiteral initLiteralForBoolean = (LongLiteral) literal;
-		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getValue());
+		BigInteger expected;
+		if (expectedInitValue.toLowerCase().startsWith("0x")) {
+			expected = new BigInteger(expectedInitValue.substring(2), 16);
+		} else {
+			expected = new BigInteger(expectedInitValue);
+		}
+		assertEquals(expected, initLiteralForBoolean.getValue());
 	}
 
 	private void assertIsNumericField(EList<Member> members, String name,
@@ -1090,8 +1096,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		// check the fields and their initialization values
 		assertIsIntegerField(findElementByName(members, "i1"), 3);
 		assertIsIntegerField(members.get(2), 1);
-		assertIsLongField(members.get(3), 8);
-		assertIsLongField(members.get(4), 0);
+		assertIsLongField(members.get(3), "8");
+		assertIsLongField(members.get(4), "0");
 		assertIsDoubleField(members.get(9), 1.5);
 		assertIsCharField(members.get(10), 'a');
 		assertIsStringField(members.get(11), "abc");
@@ -1100,7 +1106,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		
 		Member maxLongField = findElementByName(members, "maxLong");
 		assertNotNull(maxLongField);
-		assertIsLongField(maxLongField, 0xffffffffffffffffL);
+		assertIsLongField(maxLongField, "0xffffffffffffffff");
 		
 		Member i7Field = findElementByName(members, "i7");
 		assertNotNull(i7Field);
@@ -1108,7 +1114,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		
 		Member i8Field = findElementByName(members, "i8");
 		assertNotNull(i8Field);
-		assertIsLongField(i8Field, 10);
+		assertIsLongField(i8Field, "10");
 		
 		parseAndReprint(filename);
 	}
