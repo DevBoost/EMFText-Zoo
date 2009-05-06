@@ -1,13 +1,17 @@
 package org.emftext.language.java.util.imports;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Enumeration;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class ImportUtil {
@@ -56,14 +60,20 @@ public class ImportUtil {
 	 * @param _this 
 	 * @return list of imported classifiers (proxies)
 	 */
-	public static EList<Member> getMemberList(Import _this) {
+	public static EList<NamedElement> getMemberList(Import _this) {
 		ConcreteClassifier concreteClassifier = getClassifier(_this);
 		
 		if(concreteClassifier == null || concreteClassifier.eIsProxy()) {
 			return ECollections.emptyEList();
 		}
 		
-		return ClassifierUtil.getAllMembers(concreteClassifier);
+		EList<NamedElement> result = new BasicEList<NamedElement>();
+		result.addAll(ClassifierUtil.getAllMembers(concreteClassifier));
+		if (concreteClassifier instanceof Enumeration) {
+			result.addAll(((Enumeration)concreteClassifier).getConstants());
+		}
+		
+		return result;
 	}
 	
 	/**
