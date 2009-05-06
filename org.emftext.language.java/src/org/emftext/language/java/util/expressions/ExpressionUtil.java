@@ -83,10 +83,10 @@ public class ExpressionUtil {
 		else if (_this instanceof ConditionalExpression &&
 				((ConditionalExpression)_this).getExpressionIf() != null) {
 			if (alternative) {
-				type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionIf(), alternative);
+				type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionElse(), alternative);
 			}
 			else {
-				type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionElse(), alternative);
+				type = ExpressionUtil.getType(((ConditionalExpression)_this).getExpressionIf(), alternative);
 			}
 			
 		}
