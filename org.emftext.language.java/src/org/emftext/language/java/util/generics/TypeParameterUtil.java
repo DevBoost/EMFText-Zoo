@@ -2,10 +2,12 @@ package org.emftext.language.java.util.generics;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.classifiers.impl.ClassifierImpl;
 import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
@@ -35,6 +37,24 @@ import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class TypeParameterUtil {
+	public static class TemporalCompositeClassImpl extends ClassifierImpl {
+		
+		private TypeParameter creator;
+		
+		private EList<Classifier> superTypes = new BasicEList<Classifier>();
+		
+		public TemporalCompositeClassImpl(TypeParameter creator) {
+			this.creator = creator;
+		}
+
+		public Resource eResource() {
+			return creator.eResource();
+		}
+
+		public EList<Classifier> getSuperTypes() {
+			return superTypes;
+		}
+	}
 	
 	/**
 	 * Recursively collects all super types 
@@ -68,10 +88,7 @@ public class TypeParameterUtil {
 			}
 		}
 	}
-	
-	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
-		return getAllBoundTypes(_this, typeReference, reference).get(0);
-	}
+
 	/**
 	 * Returns the type bound to the given parameter in the context
 	 * of the given reference.
@@ -80,9 +97,8 @@ public class TypeParameterUtil {
 	 * @param reference
 	 * @return bound type or parameter if not bound
 	 */
-	public static EList<Type> getAllBoundTypes(TypeParameter _this, TypeReference typeReference, Reference reference) {
-		EList<Type> result = new BasicEList<Type>();
-		result.add(_this);
+	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
+		EList<Type> resultList = new BasicEList<Type>();
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		Reference parentReference = null;
 		Type prevType = null;
@@ -135,7 +151,7 @@ public class TypeParameterUtil {
 							if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
 								TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
 								if (arg instanceof QualifiedTypeArgument) {
-									result.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
+									resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
 								}
 							}
 
@@ -144,21 +160,25 @@ public class TypeParameterUtil {
 					if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
 						TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
 						if (arg instanceof QualifiedTypeArgument) {
-							result.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference));
+							resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference));
 						}
 						if (arg instanceof ExtendsTypeArgument) {
 							for(TypeReference extendedType : ((ExtendsTypeArgument) arg).getExtendTypes()) {
-								result.add(0, TypeReferenceUtil.getTarget(extendedType, parentReference));
+								resultList.add(0, TypeReferenceUtil.getTarget(extendedType, parentReference));
 							}
 						}
 					}
 		
 				}
+				else if (prevType instanceof TypeParameter) {
+					//the prev. type parameter, although unbound, may contain type restrictions through extends 
+					resultList.add(prevType);
+				}
 			}
 			if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
 				if (reference.eContainer().eContainer() instanceof Reference) {
 					//the ".class" instantiation implicitly binds the T parameter of java.lang.Class to the class itself
-					result.add(0, ReferenceUtil.getType((Reference)reference.eContainer().eContainer()));
+					resultList.add(0, ReferenceUtil.getType((Reference)reference.eContainer().eContainer()));
 				}
 			}
 		}
@@ -170,7 +190,7 @@ public class TypeParameterUtil {
 				if(method.getTypeParameters().size() == methodCall.getCallTypeArguments().size()) {
 					TypeArgument typeArgument = methodCall.getCallTypeArguments().get(method.getTypeParameters().indexOf(_this));
 					if (typeArgument instanceof QualifiedTypeArgument) {
-						result.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), parentReference)); 
+						resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument)typeArgument).getType(), parentReference)); 
 					} 
 				}
 
@@ -225,14 +245,14 @@ public class TypeParameterUtil {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-												result.add(0, TypeReferenceUtil.getTarget(
+												resultList.add(0, TypeReferenceUtil.getTarget(
 														((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType()));
 											}
 										}
 									}
 								}
 								if (argumentType != null && parameterType.getTarget() instanceof TypeParameter) {
-									result.add(0,argumentType.getTarget());
+									resultList.add(0,argumentType.getTarget());
 								}
 							}
 							if(elementReference.getNext() instanceof ReflectiveClassReference) {
@@ -240,7 +260,7 @@ public class TypeParameterUtil {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-												result.add(0, ReferenceUtil.getType(elementReference));
+												resultList.add(0, ReferenceUtil.getType(elementReference));
 											}
 										}
 									}
@@ -252,7 +272,7 @@ public class TypeParameterUtil {
 								while (argReference.getNext() instanceof Reference) {
 									argReference = argReference.getNext();
 								}
-								result.add(0, ReferenceUtil.getType((Reference) argReference));
+								resultList.add(0, ReferenceUtil.getType((Reference) argReference));
 							}
 						}
 					}			
@@ -288,13 +308,24 @@ public class TypeParameterUtil {
 	 				}
 					//all types given by all bindings
 					if (allSuperTypes != null) {
-						result.addAll(allSuperTypes);
+						resultList.addAll(allSuperTypes);
 					}
 				}
 			}
 		}
 		
-		return result;
+		if(resultList.isEmpty() || 
+				(resultList.size() == 1 && resultList.get(0).equals(_this))) {
+			return _this;
+		}
+		else {
+			TemporalCompositeClassImpl temp = new TemporalCompositeClassImpl(_this);
+			for(Type aResult : resultList) {
+				temp.getSuperTypes().add((Classifier) aResult);
+			}
+			temp.getSuperTypes().add(_this);
+			return temp;
+		}
 	}
 	
 }

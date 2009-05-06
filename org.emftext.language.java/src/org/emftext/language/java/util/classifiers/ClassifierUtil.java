@@ -73,6 +73,10 @@ public class ClassifierUtil {
 		} else if (_this instanceof TypeParameter) {
 			TypeParameter typeParameter = (TypeParameter) _this;
 			TypeParameterUtil.collectAllSuperClassifiers(typeParameter, superClassifierList);
+		} else if (_this instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+			for(Classifier superType : ((TypeParameterUtil.TemporalCompositeClassImpl)_this).getSuperTypes()) {
+				superClassifierList.addAll(getAllSuperClassifiers(superType));
+			}
 		}
 
 		return superClassifierList;

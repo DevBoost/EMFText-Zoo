@@ -10,8 +10,6 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.imports.Import;
-import org.emftext.language.java.members.Member;
-import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 public class ImportUtil {

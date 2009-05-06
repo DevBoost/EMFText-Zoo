@@ -1,5 +1,7 @@
 package org.emftext.language.java.util.types;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.arrays.ArrayTypeable;
@@ -27,6 +29,7 @@ import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
+import org.emftext.language.java.util.generics.TypeParameterUtil;
 
 public class TypeUtil {
 	
@@ -63,6 +66,33 @@ public class TypeUtil {
 	public static boolean isSuperType(Type _this, int arrayDim,
 			Type otherType, ArrayTypeable otherArrayType) {
 		
+		if (_this instanceof TypeParameterUtil.TemporalCompositeClassImpl || otherType instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+			EList<Type> thisTypeList = new BasicEList<Type>();
+			EList<Type> otherTypeList = new BasicEList<Type>();
+			if (_this instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+				thisTypeList.addAll(((TypeParameterUtil.TemporalCompositeClassImpl)_this).getSuperTypes());
+			}
+			else {
+				thisTypeList.add(_this);
+			}
+			if (otherType instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+				otherTypeList.addAll(((TypeParameterUtil.TemporalCompositeClassImpl)otherType).getSuperTypes());
+			}
+			else {
+				otherTypeList.add(_this);
+			}
+			
+			
+			for(Type oneThisType : thisTypeList) {
+				for(Type oneOtherType : otherTypeList) {
+					boolean result = isSuperType(oneThisType, arrayDim, oneOtherType, otherArrayType);
+					if (result) {
+						return true;
+					}	
+				}
+			}
+			return false;
+		}
 		
 		//if I am a void, I am of every type
 		if (_this.equals(JavaClasspathUtil.getClass("Void", _this))) {

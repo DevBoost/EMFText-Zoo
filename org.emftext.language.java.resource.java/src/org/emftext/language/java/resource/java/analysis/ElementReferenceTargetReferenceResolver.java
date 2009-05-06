@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
-import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
@@ -26,14 +26,10 @@ import org.emftext.language.java.resource.java.analysis.decider.ParameterDecider
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.PrimitiveType;
-import org.emftext.language.java.types.Type;
-import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
-import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -102,30 +98,20 @@ public class ElementReferenceTargetReferenceResolver extends
 			startingPoint = container;
 		}
 		
-		if (target == null) {
-			if(startingPoint instanceof Type && parentReference instanceof ElementReference) {
-				ReferenceableElement parentTarget = ((ElementReference)parentReference).getTarget();
-				//there might be more possible bindings
-				if(parentTarget instanceof TypedElement) {
-					TypeReference typeReference = ((TypedElement)parentTarget).getType();
-					Type type = TypeReferenceUtil.getTarget(typeReference);
-					if (type instanceof TypeParameter) {
-						List<Type> allStartingPoints = TypeParameterUtil.getAllBoundTypes((TypeParameter)type, typeReference, parentReference);
-						for(Type aStartingPoint : allStartingPoints) {
-							target = searchFromStartingPoint(identifier, container, reference,
-									aStartingPoint);
-							if(target != null) {
-								break;
-							}
-						}
+		if(target == null) {
+			if(startingPoint instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+				for(Classifier superType : ((TypeParameterUtil.TemporalCompositeClassImpl)startingPoint).getSuperTypes()) {
+					target = searchFromStartingPoint(identifier, container, reference,
+							superType);
+					if (target != null) {
+						break;
 					}
 				}
 			}
-		}
-		
-		if(target == null) {
-			target = searchFromStartingPoint(identifier, container, reference,
-					startingPoint);
+			else {
+				target = searchFromStartingPoint(identifier, container, reference,
+						startingPoint);	
+			}
 		}
 		if(target == null && alternativeStartingPoint != null && !alternativeStartingPoint.equals(startingPoint)) {
 			target = searchFromStartingPoint(identifier, container, reference,
