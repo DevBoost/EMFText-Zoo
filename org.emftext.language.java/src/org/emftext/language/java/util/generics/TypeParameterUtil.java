@@ -28,6 +28,7 @@ import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.ClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
@@ -37,6 +38,7 @@ import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
+import org.emftext.language.java.util.types.TypeUtil;
 
 public class TypeParameterUtil {
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
@@ -140,6 +142,13 @@ public class TypeParameterUtil {
 				prevTypeList.add(prevType);
 			}
 		}
+		else if (reference != null) {
+			//prev type is the containing class which can still bind by inheritance
+			ConcreteClassifier containingClassifier = JavaUtil.findContainingClassifier(reference);
+			if (containingClassifier != null) {
+				prevTypeList.add(containingClassifier);
+			}
+		}
 		
 		for(Type prevType : prevTypeList) {
 			int typeParameterIndex = -1;
@@ -187,6 +196,14 @@ public class TypeParameterUtil {
 					else if (prevType instanceof TypeParameter) {
 						//the prev. type parameter, although unbound, may contain type restrictions through extends 
 						resultList.add(prevType);
+						for(TypeReference extendedRef : ((TypeParameter) prevType).getExtendTypes()) {
+							ConcreteClassifier extended = (ConcreteClassifier )TypeReferenceUtil.getTarget(extendedRef);
+							int idx = ((TypeParametrizable)prevType.eContainer()).getTypeParameters().indexOf(prevType);
+							if (extended.getTypeParameters().size() > idx) {
+								//also add more precise bindings from extensions
+								resultList.add(extended.getTypeParameters().get(idx));
+							}
+						}
 					}
 				}
 				if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
