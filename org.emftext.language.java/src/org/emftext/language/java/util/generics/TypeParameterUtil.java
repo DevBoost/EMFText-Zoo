@@ -103,7 +103,7 @@ public class TypeParameterUtil {
 		EList<Type> resultList = new BasicEList<Type>();
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		Reference parentReference = null;
-		Type prevType = null;
+		EList<Type> prevTypeList = new BasicEList<Type>();
 		if (reference != null && reference.eContainer() instanceof NestedExpression) {
 			NestedExpression nestedExpression = (NestedExpression) reference.eContainer();
 			Expression expression = null;
@@ -121,66 +121,79 @@ public class TypeParameterUtil {
 					expressionReference = expressionReference.getNext();
 				}
 				parentReference = expressionReference;
-				prevType = ExpressionUtil.getType(nestedExpression.getExpression());
+				Type prevType = ExpressionUtil.getType(nestedExpression.getExpression());
+				if(prevType instanceof TemporalCompositeClassImpl) {
+					prevTypeList.addAll(((TemporalCompositeClassImpl)prevType).getSuperTypes());
+				}
+				else {
+					prevTypeList.add(prevType);
+				}
 			}
 		}
 		else if (reference != null && reference.eContainer() instanceof Reference) {
 			parentReference = (Reference) reference.eContainer();
-			prevType = ReferenceUtil.getType(parentReference);
+			Type prevType = ReferenceUtil.getType(parentReference);
+			if(prevType instanceof TemporalCompositeClassImpl) {
+				prevTypeList.addAll(((TemporalCompositeClassImpl)prevType).getSuperTypes());
+			}
+			else {
+				prevTypeList.add(prevType);
+			}
 		}
 		
-		
-		int typeParameterIndex = -1;
-		if (typeParameterDeclarator instanceof ConcreteClassifier) {
-			typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(_this);
-			if(reference != null) {
-				ClassifierReference classifierReference = null;
-				if(parentReference instanceof ElementReference) {
-					ReferenceableElement prevReferenced = ((ElementReference) parentReference).getTarget();
-					if(prevReferenced instanceof TypedElement) {
-						classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) prevReferenced).getType());
+		for(Type prevType : prevTypeList) {
+			int typeParameterIndex = -1;
+			if (typeParameterDeclarator instanceof ConcreteClassifier) {
+				typeParameterIndex = typeParameterDeclarator.getTypeParameters().indexOf(_this);
+				if(reference != null) {
+					ClassifierReference classifierReference = null;
+					if(parentReference instanceof ElementReference) {
+						ReferenceableElement prevReferenced = ((ElementReference) parentReference).getTarget();
+						if(prevReferenced instanceof TypedElement) {
+							classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) prevReferenced).getType());
+						}
 					}
-				}
-				if(parentReference instanceof TypedElement) {
-					//e.g. New Constructor Call
-					classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) parentReference).getType());
-				}
-				if (prevType instanceof ConcreteClassifier) {
-					//bound through inheritance?
-					for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
-						if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
-							//is this an argument for the correct class?
-							if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
-								TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
-								if (arg instanceof QualifiedTypeArgument) {
-									resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
+					if(parentReference instanceof TypedElement) {
+						//e.g. New Constructor Call
+						classifierReference = ClassifierReferenceUtil.getPureClassifierReference(((TypedElement) parentReference).getType());
+					}
+					if (prevType instanceof ConcreteClassifier) {
+						//bound through inheritance?
+						for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
+							if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
+								//is this an argument for the correct class?
+								if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
+									TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
+									if (arg instanceof QualifiedTypeArgument) {
+										resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
+									}
+								}
+	
+							}
+						}
+						if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
+							TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
+							if (arg instanceof QualifiedTypeArgument) {
+								resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference));
+							}
+							if (arg instanceof ExtendsTypeArgument) {
+								for(TypeReference extendedType : ((ExtendsTypeArgument) arg).getExtendTypes()) {
+									resultList.add(0, TypeReferenceUtil.getTarget(extendedType, parentReference));
 								}
 							}
-
 						}
+			
 					}
-					if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
-						TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
-						if (arg instanceof QualifiedTypeArgument) {
-							resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference));
-						}
-						if (arg instanceof ExtendsTypeArgument) {
-							for(TypeReference extendedType : ((ExtendsTypeArgument) arg).getExtendTypes()) {
-								resultList.add(0, TypeReferenceUtil.getTarget(extendedType, parentReference));
-							}
-						}
+					else if (prevType instanceof TypeParameter) {
+						//the prev. type parameter, although unbound, may contain type restrictions through extends 
+						resultList.add(prevType);
 					}
-		
 				}
-				else if (prevType instanceof TypeParameter) {
-					//the prev. type parameter, although unbound, may contain type restrictions through extends 
-					resultList.add(prevType);
-				}
-			}
-			if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
-				if (reference.eContainer().eContainer() instanceof Reference) {
-					//the ".class" instantiation implicitly binds the T parameter of java.lang.Class to the class itself
-					resultList.add(0, ReferenceUtil.getType((Reference)reference.eContainer().eContainer()));
+				if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
+					if (reference.eContainer().eContainer() instanceof Reference) {
+						//the ".class" instantiation implicitly binds the T parameter of java.lang.Class to the class itself
+						resultList.add(0, ReferenceUtil.getType((Reference)reference.eContainer().eContainer()));
+					}
 				}
 			}
 		}
