@@ -47,6 +47,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	private ConcreteClassifier baseClassifier = null;
 	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
+
 		if (ContainersPackage.Literals.COMPILATION_UNIT__CLASSIFIERS.equals(containingReference)) {
 			return true;
 		}
@@ -88,12 +89,12 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				for(Member member : ClassifierUtil.getAllMembers(
 						classifier)) {
 					if(member instanceof ConcreteClassifier) {
-						innerTypeSuperTypeList.add((ConcreteClassifier) member);
+						resultList.add((ConcreteClassifier) member);
 					}
 				}
 				//public inner classes (possibly external)
 				if (classifier instanceof ConcreteClassifier) {
-					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+					resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
 							(ConcreteClassifier) classifier));
 				}
 
@@ -125,15 +126,13 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 							}
 							classifier = innerClassifier;
 							if (i == path.length - 1) {
-								innerTypeSuperTypeList.addAll(innerClassifiers);
+								resultList.addAll(innerClassifiers);
 							}
 							continue outer;
 						}
 					}
 					return ECollections.emptyEList();
 				}
-				
-
 			}
 			
 		}
@@ -253,7 +252,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	 * This method assumes that the namespace of the given namespace aware element
 	 * is relative to the scope given by the starting point element. That is,
 	 * each element of the namespace points to a classifier, where the first element
-	 * points to a classifier awailable in the scope given by the starting point
+	 * points to a classifier available in the scope given by the starting point
 	 * (i.e., define locally or imported).
 	 * 
 	 * @param nsaElement
