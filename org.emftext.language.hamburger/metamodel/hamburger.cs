@@ -1,6 +1,6 @@
 SYNTAXDEF hamburger
 FOR <http://www.emftext.org/language/hamburger>
-START Hamburger
+START Menu
 
 OPTIONS {
 	reloadGeneratorModel = "true";
@@ -17,9 +17,13 @@ TOKENSTYLES {
 }
 
 RULES {
+	Menu ::= "MENU" burger fries? drink?;
 	Hamburger ::= "HAMBURGER" toppings*;
 	
 	Meat ::= weight[] "grams" "MEAT";
 	Onions ::= "ONIONS";
 	Salad ::= "SALAD";
+	
+	Fries ::= size[] "FRIES";
+	SoftDrink ::= size[] "DRINK";
 }
