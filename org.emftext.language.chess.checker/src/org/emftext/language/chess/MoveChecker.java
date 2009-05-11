@@ -1,6 +1,7 @@
 package org.emftext.language.chess;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +36,17 @@ public class MoveChecker implements IResourcePostProcessor,
 			ChessGame game = (ChessGame) next;
 			Board board = game.getBoard();
 			Board copy = (Board) EcoreUtil.copy(board);
-			analyzeMoves(chessResource, copy, game.getMoves());
+			EList<Round> rounds = game.getRounds();
+			List<Move> moves = new LinkedList<Move>();
+			
+			for (Round round : rounds) {
+				moves.addAll(round.getMoves());
+			}
+			analyzeMoves(chessResource, copy, moves);
 		}
 	}
 
-	private void analyzeMoves(CgResource resource, Board board, EList<Move> moves) {
+	private void analyzeMoves(CgResource resource, Board board, List<Move> moves) {
 		for (Move move : moves) {
 			analyzeMove(resource, board, move);
 		}

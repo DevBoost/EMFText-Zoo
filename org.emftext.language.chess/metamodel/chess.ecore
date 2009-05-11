@@ -6,8 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="ChessGame">
     <eStructuralFeatures xsi:type="ecore:EReference" name="board" lowerBound="1" eType="#//Board"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="moves" upperBound="-1"
-        eType="#//Move" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rounds" upperBound="-1"
+        eType="#//Round" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Piece">
     <eLiterals name="KING" literal="K"/>
@@ -39,6 +39,25 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromColumn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="toRow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="toColumn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="moveType" lowerBound="1"
+        eType="#//MoveType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="piece" eType="#//Piece"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="#//Event"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EmptySquare" eSuperTypes="#//Square"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="MoveType">
+    <eLiterals name="MOVE" literal="-"/>
+    <eLiterals name="CAPTURE" value="1" literal="x"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Round">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moves" upperBound="2" eType="#//Move"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Event">
+    <eLiterals name="CHESS" literal="..."/>
+    <eLiterals name="CHESSMATE" value="1" literal="#"/>
+    <eLiterals name="CHECK" value="2" literal="+"/>
+  </eClassifiers>
 </ecore:EPackage>
