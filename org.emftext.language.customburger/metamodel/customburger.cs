@@ -14,12 +14,15 @@ OPTIONS {
 }
 
 TOKENSTYLES {
+	"<%IF" COLOR #C00000, BOLD;
 	"<%FOR" COLOR #C00000, BOLD;
 	"%>" COLOR #C00000, BOLD;
 	"<%ENDFOR%>" COLOR #C00000, BOLD;
+	"<%ENDIF%>" COLOR #C00000, BOLD;
 }
 
 RULES {		
 	MenuTemplate ::= body;
+	IfRefMenuFries ::= "<%IF" condition[] "%>" body "<%ENDIF%>";
 	ForRefHamburgerToppings ::= "<%FOR" collection[] "%>" body "<%ENDFOR%>";	
 }
