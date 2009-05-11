@@ -5,9 +5,9 @@
     nsURI="http://www.emftext.org/language/hamburger" nsPrefix="hamburger">
   <eClassifiers xsi:type="ecore:EClass" name="Hamburger">
     <eStructuralFeatures xsi:type="ecore:EReference" name="toppings" upperBound="-1"
-        eType="#//Topping" containment="true"/>
+        eType="#//RefHamburgerToppings" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Topping" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Topping" abstract="true" eSuperTypes="#//RefHamburgerToppings"/>
   <eClassifiers xsi:type="ecore:EClass" name="Meat" eSuperTypes="#//Topping">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -17,13 +17,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="Menu">
     <eStructuralFeatures xsi:type="ecore:EReference" name="burger" lowerBound="1"
         eType="#//Hamburger" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fries" eType="#//Fries"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fries" eType="#//RefMenuFries"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="drink" eType="#//SoftDrink"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Fries">
+  <eClassifiers xsi:type="ecore:EClass" name="Fries" eSuperTypes="#//RefMenuFries">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" lowerBound="1" eType="#//Size"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//RefMenuFries"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SoftDrink">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" lowerBound="1" eType="#//Size"/>
@@ -34,4 +35,6 @@
     <eLiterals name="large" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EEnum0"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RefHamburgerToppings" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RefMenuFries" abstract="true"/>
 </ecore:EPackage>
