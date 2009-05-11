@@ -22,22 +22,24 @@ public class PelletReasoner implements org.emftext.language.owl.reasoning.EMFTex
 		
 		
 		try {
-
+			// prepare infrastructure
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 			ManchesterOWLSyntaxParserFactory f = new ManchesterOWLSyntaxParserFactory();
 			OWLParser parser = f.createParser(manager);
 
+			// load and parse ontology in manchester syntax
 			OWLOntologyInputSource inputSource = new StringInputSource(owlRepresentation);
 			OWLOntology ontology = manager.createOntology(URI.create("check"));
 			parser.setOWLOntologyManager(manager);
 			parser.parse(inputSource, ontology);
 
+			// load ontology in pellet 
 			Reasoner reasoner = new Reasoner(manager);
-
 			Set<OWLOntology> importsClosure = manager
 					.getImportsClosure(ontology);
 			reasoner.loadOntologies(importsClosure);
 
+			// derive inconsistent classes
 			inconsistentClasses = reasoner
 					.getInconsistentClasses();
 			return inconsistentClasses;
