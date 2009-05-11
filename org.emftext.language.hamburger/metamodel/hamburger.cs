@@ -23,7 +23,8 @@ RULES {
 	Menu ::= "MENU" burger fries? drink?;
 	Hamburger ::= "HAMBURGER" toppings*;
 	
-	Meat ::= weight[] "grams" "MEAT";
+	Meat ::= weight "grams" "MEAT";
+	MeatWeight ::= weight[];
 	Onions ::= "ONIONS";
 	Salad ::= "SALAD";
 	
