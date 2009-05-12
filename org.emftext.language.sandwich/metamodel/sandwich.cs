@@ -1,6 +1,6 @@
 SYNTAXDEF sandwich
 FOR <http://www.emftext.org/language/sandwich>
-START Menu
+START Recipe
 
 OPTIONS {
 	reloadGeneratorModel = "true";
@@ -9,26 +9,19 @@ OPTIONS {
 }
 
 TOKENSTYLES {
-	"MENU" COLOR #000000, BOLD;
-	"HAMBURGER" COLOR #A0A0A0, BOLD;
-	"MEAT" COLOR #9d3838, BOLD;
-	"TEXT" COLOR #003f9d, BOLD;
-	"grams" COLOR #003f9d, BOLD;
-	"ONIONS" COLOR #A0A000, BOLD;
-	"SALAD" COLOR #008000, BOLD;
-	"FRIES" COLOR #d2b600, BOLD;
-	"DRINK" COLOR #009bd3, BOLD;
+	"RECIPE" COLOR #000000, BOLD;
+	"TOAST" COLOR #9d3838, BOLD;
+	"ADD" COLOR #008000, BOLD;
+	"CLEAN" COLOR #009bd3, BOLD;
+
+	"TEXT" COLOR #000000;
 }
 
 RULES {
-	Menu ::= "MENU" burger fries? drink?;
-	Hamburger ::= "HAMBURGER" toppings*;
-	
-	Meat ::= weight "grams" "MEAT";
-	MeatWeight ::= weight[];
-	Onions ::= "ONIONS";
-	Salad ::= "SALAD";
-	
-	Fries ::= size[] "FRIES";
-	SoftDrink ::= size[] "DRINK";
+	Recipe ::= "RECIPE" ingredients* instructions*;
+	Ingredient ::= name;
+	IngredientName ::= value[];
+	Clean ::= "CLEAN" using[]?;
+	Add ::= "ADD" using[]?;
+	Toast ::= "TOAST" using[]?;
 }

@@ -7,6 +7,10 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 }
 
+TOKENS {
+	DEFINE T_VEGETARIAN $'vegetarian'$;
+}
+
 TOKENSTYLES {
 	"CUSTOMER" COLOR #009bd3, BOLD;
 	"WANTS" COLOR #009bd3, BOLD;
@@ -15,6 +19,6 @@ TOKENSTYLES {
 }
 
 RULES {
-	Customer ::= "CUSTOMER" name[] "WANTS" "SOMETHING" requests ("," requests)*;
-	Request ::= name[];
+	Customer ::= "CUSTOMER" name[] ("(" isVegetarian[T_VEGETARIAN] ")")? "WANTS" requests*;
+	ExtraIngredient ::= name[];
 }

@@ -1,6 +1,6 @@
 SYNTAXDEF custom_sandwich
 FOR <http://www.emftext.org/language/custom_sandwich>
-START MenuTemplate
+START RecipeTemplate
 
 IMPORTS {
 	sandwich : <http://www.emftext.org/language/sandwich> WITH SYNTAX sandwich <../../org.emftext.language.sandwich/metamodel/sandwich.cs>
@@ -25,8 +25,8 @@ TOKENSTYLES {
 }
 
 RULES {
-	MenuTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass['"','"'] "%>" body;
-	IfRefMenuFries ::= "<%IF" condition['"','"'] "%>" body "<%ENDIF%>";
-	ForRefHamburgerToppings ::= "<%FOR" collection['"','"'] "%>" body "<%ENDFOR%>";
-	PhAttMeatWeight ::= "<%=" expression['"','"'] "%>";
+	RecipeTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass['"','"'] "%>" body;
+	IfRefRecipeIngredients ::= "<%IF" condition['"','"'] "%>" body "<%ENDIF%>";
+	ForRefRecipeIngredients ::= "<%FOR" collection['"','"'] "%>" body "<%ENDFOR%>";
+	PhAttIngredientName ::= "<%=" expression['"','"'] "%>";
 }
