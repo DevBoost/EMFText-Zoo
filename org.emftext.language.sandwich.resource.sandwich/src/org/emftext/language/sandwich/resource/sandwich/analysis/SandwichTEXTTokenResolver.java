@@ -1,6 +1,6 @@
-package org.emftext.language.hamburger.resource.hamburger.analysis;
+package org.emftext.language.sandwich.resource.sandwich.analysis;
 
-public class HamburgerTEXTTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class SandwichTEXTTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
 	@Override	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {

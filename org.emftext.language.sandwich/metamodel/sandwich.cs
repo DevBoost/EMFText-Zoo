@@ -1,5 +1,5 @@
-SYNTAXDEF hamburger
-FOR <http://www.emftext.org/language/hamburger>
+SYNTAXDEF sandwich
+FOR <http://www.emftext.org/language/sandwich>
 START Menu
 
 OPTIONS {
