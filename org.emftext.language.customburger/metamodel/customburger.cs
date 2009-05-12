@@ -26,7 +26,7 @@ TOKENSTYLES {
 
 RULES {
 	MenuTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass['"','"'] "%>" body;
-	IfRefMenuFries ::= "<%IF" condition[] "%>" body "<%ENDIF%>";
-	ForRefHamburgerToppings ::= "<%FOR" collection[] "%>" body "<%ENDFOR%>";
-	PhAttMeatWeight ::= "<%=" expression[] "%>";
+	IfRefMenuFries ::= "<%IF" condition['"','"'] "%>" body "<%ENDIF%>";
+	ForRefHamburgerToppings ::= "<%FOR" collection['"','"'] "%>" body "<%ENDFOR%>";
+	PhAttMeatWeight ::= "<%=" expression['"','"'] "%>";
 }
