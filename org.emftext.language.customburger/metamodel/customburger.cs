@@ -3,7 +3,7 @@ FOR <http://www.emftext.org/language/customburger>
 START MenuTemplate
 
 IMPORTS {
-	hamburger : <http://www.emftext.org/language/hamburger> WITH SYNTAX java <../../org.emftext.language.hamburger/metamodel/hamburger.cs>
+	hamburger : <http://www.emftext.org/language/hamburger> WITH SYNTAX hamburger <../../org.emftext.language.hamburger/metamodel/hamburger.cs>
 }
 
 OPTIONS {
