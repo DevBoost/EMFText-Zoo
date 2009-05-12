@@ -5,6 +5,7 @@ START Menu
 OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
+	tokenspace = "1";
 }
 
 TOKENSTYLES {
