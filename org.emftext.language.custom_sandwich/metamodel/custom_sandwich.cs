@@ -1,9 +1,9 @@
-SYNTAXDEF customburger
-FOR <http://www.emftext.org/language/customburger>
+SYNTAXDEF custom_sandwich
+FOR <http://www.emftext.org/language/custom_sandwich>
 START MenuTemplate
 
 IMPORTS {
-	hamburger : <http://www.emftext.org/language/hamburger> WITH SYNTAX hamburger <../../org.emftext.language.hamburger/metamodel/hamburger.cs>
+	sandwich : <http://www.emftext.org/language/sandwich> WITH SYNTAX sandwich <../../org.emftext.language.sandwich/metamodel/sandwich.cs>
 }
 
 OPTIONS {

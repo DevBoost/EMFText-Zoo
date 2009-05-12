@@ -1,4 +1,4 @@
-package org.emftext.language.customburger.resource.customburger.analysis;
+package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;

@@ -1,6 +1,6 @@
-package org.emftext.language.customburger.resource.customburger.analysis;
+package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
 
-public class CustomburgerQUOTED_34_34TokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class Custom_sandwichQUOTED_34_34TokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
 	@Override	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
