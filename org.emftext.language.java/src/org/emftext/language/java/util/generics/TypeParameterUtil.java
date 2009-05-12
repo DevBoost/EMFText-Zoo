@@ -1,5 +1,7 @@
 package org.emftext.language.java.util.generics;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -38,7 +40,6 @@ import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
-import org.emftext.language.java.util.types.TypeUtil;
 
 public class TypeParameterUtil {
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
@@ -343,6 +344,13 @@ public class TypeParameterUtil {
 						resultList.addAll(allSuperTypes);
 					}
 				}
+			}
+		}
+		
+		//remove nulls
+		for(Iterator<?> it = resultList.iterator(); it.hasNext(); ) {
+			if (it.next() == null) {
+				it.remove();
 			}
 		}
 		
