@@ -84,7 +84,16 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 	}
 
 	private boolean parseExpression(EClass inputMetaClass, String expressionString) {
+		Query query = createQuery(inputMetaClass, expressionString);
+		return query != null;
+	}
 
+	public Object evaluateExpression(EClass inputMetaClass, String expressionString, EObject contextObject) {
+		Query query = createQuery(inputMetaClass, expressionString);
+		return query.evaluate(contextObject);
+	}
+
+	private Query createQuery(EClass inputMetaClass, String expressionString) {
 		OCL ocl = org.eclipse.ocl.ecore.OCL.newInstance();
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
 		
@@ -94,11 +103,9 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		try {
 			expression = helper.createQuery(expressionString);
 			Query query = ocl.createQuery(expression);
-			//Object result = query.evaluate(next);
-			return true;
+			return query;
 		} catch (ParserException e) {
-			//e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 
