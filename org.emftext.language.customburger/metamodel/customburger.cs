@@ -14,16 +14,18 @@ OPTIONS {
 }
 
 TOKENSTYLES {
+	"<%TEMPLATE INPUT=" COLOR #C00000, BOLD;
 	"<%IF" COLOR #C00000, BOLD;
 	"<%FOR" COLOR #C00000, BOLD;
 	"<%=" COLOR #C00000, BOLD;
 	"%>" COLOR #C00000, BOLD;
 	"<%ENDFOR%>" COLOR #C00000, BOLD;
 	"<%ENDIF%>" COLOR #C00000, BOLD;
+	"QUOTED_34_34" COLOR #C08000, BOLD;
 }
 
-RULES {		
-	MenuTemplate ::= body;
+RULES {
+	MenuTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass['"','"'] "%>" body;
 	IfRefMenuFries ::= "<%IF" condition[] "%>" body "<%ENDIF%>";
 	ForRefHamburgerToppings ::= "<%FOR" collection[] "%>" body "<%ENDFOR%>";
 	PhAttMeatWeight ::= "<%=" expression[] "%>";
