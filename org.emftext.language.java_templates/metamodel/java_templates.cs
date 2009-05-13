@@ -28,6 +28,7 @@ RULES {
 	IfExpression ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	IfArrayInitializationValue ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	ForArrayInitializationValue ::= "<%FOR" collection[STRING_LITERAL] "%>" body "<%ENDFOR%>";
+	ForExpression ::= "<%FOR" collection[STRING_LITERAL] "%>" body "<%ENDFOR%>";
 	IfTypeReference ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	ForTypeReference ::= "<%FOR" collection[STRING_LITERAL] "%>" body "<%ENDFOR%>";
 	IfConcreteClassifier ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
@@ -47,6 +48,9 @@ RULES {
 	IfParameter ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	ForParameter ::= "<%FOR" collection[STRING_LITERAL] "%>" body "<%ENDFOR%>";
 	IfReference ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
+	IfReferenceableElement ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
+	IfStatement ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
+	ForStatement ::= "<%FOR" collection[STRING_LITERAL] "%>" body "<%ENDFOR%>";
 	IfForLoopInitializer ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	IfSwitchCase ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	ForSwitchCase ::= "<%FOR" collection[STRING_LITERAL] "%>" body "<%ENDFOR%>";
