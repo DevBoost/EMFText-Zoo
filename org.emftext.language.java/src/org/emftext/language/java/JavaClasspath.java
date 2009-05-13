@@ -180,10 +180,13 @@ public class JavaClasspath extends AdapterImpl {
 	public void registerClassifierSource(CompilationUnit compilationUnit, URI uri) {
 		
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
-		
-		char[] nameParts = compilationUnit.getName().toCharArray();
-		int endIdx = compilationUnit.getName().lastIndexOf("$");
+
+		int endIdx = -1;
+		if(compilationUnit.getName() != null) {
+			endIdx = compilationUnit.getName().lastIndexOf("$");
+		}
 		if (endIdx > -1) { 
+			char[] nameParts = compilationUnit.getName().toCharArray();
 			for(int i= 0; i< endIdx; i++) {
 				if(nameParts[i] == '$') {
 					int idx = packageName.lastIndexOf(".");
@@ -192,7 +195,7 @@ public class JavaClasspath extends AdapterImpl {
 			}
 		}
 		
-		if (compilationUnit.getName().contains("$")) {
+		if (compilationUnit.getName() != null && compilationUnit.getName().contains("$")) {
 			packageName = packageName + "$";
 		}
 		
