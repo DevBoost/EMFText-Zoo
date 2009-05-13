@@ -9,10 +9,10 @@ package org.emftext.language.template_concepts.interpreter.exceptions;
  * @author Marcel Böhme
  * Comment created on: 15.04.2009
  */
-public class InterpreterWrapperError extends Error{
+public class InterpreterWrapperException extends Exception {
 	private static final long serialVersionUID = -5145531545251140139L;
 	
-	public InterpreterWrapperError(InterpreterException e) {
+	public InterpreterWrapperException(InterpreterException e) {
 		super(e);
 	}
 }
