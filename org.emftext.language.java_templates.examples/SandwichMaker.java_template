@@ -1,15 +1,47 @@
 <%TEMPLATE INPUT="http://www.emftext.org/language/sandwich::Recipe" %>
 
-<%IF "ingredients" %>
-	import vegetables.*;
+<%IF "ingredients->exists(i | i.oclAsType(Ingredient)->name.oclAsType(IngredientName).value = 'onion')" %>
+	import org.anic.food.*;
 <%ENDIF%>
 
-public class SandwichMaker {
+public class <%= "self" %> {
 
-	<%FOR "ingredients" %>
-		public int a;
-	<%ENDFOR%>
+	public int <%= "self" %>;
+	public class A {
+	}
 
-	public void prepare() {
+	public void prepareSandwich() {
+		
+		java.util.List<Object> ingredients = new java.util.ArrayList<Object>();
+		A x;
+		<%FOR "ingredients" %>
+		{
+			Object item = buy();
+			ingredients.add(item);
+		}
+		<%ENDFOR%>
+		
+		<%FOR "instructions" %>
+			<%IF "self.oclIsKindOf(Clean)" %>
+				doClean();
+			<%ENDIF%>
+		<%ENDFOR%>
+	}
+	
+	private void buy() {
+		java.lang.String s = new java.lang.String();
+		s.substring(1);
+		a.class;
+	}
+	
+	private void x (
+		int b,
+		<%FOR "self" %>
+			int a
+		<%ENDFOR%>
+		, int b, int c) {
+	}
+
+	private void doClean() {
 	}
 }
