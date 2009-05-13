@@ -5,6 +5,7 @@ START Customer
 OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
+	overrideManifest = "false";
 }
 
 TOKENS {
@@ -19,6 +20,8 @@ TOKENSTYLES {
 }
 
 RULES {
-	Customer ::= "CUSTOMER" name[] ("(" isVegetarian[T_VEGETARIAN] ")")? "WANTS" requests*;
-	ExtraIngredient ::= name[];
+	Customer ::= "CUSTOMER" name ("(" isVegetarian ")")? "WANTS" requests*;
+	ExtraIngredient ::= name;
+	IsVegetarian ::= value[T_VEGETARIAN];
+	Name ::= value[];
 }
