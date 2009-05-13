@@ -25,6 +25,16 @@ import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.ITextResource;
 
+/**
+ * An ExpressionChecker can be used to check and evaluate OCL queries 
+ * in templates. Examples for such queries are conditions (in IF elements),
+ * collectionSelectors (in FOR loops) and the expressions in placeholders.
+ * 
+ * TODO when check (and evaluating) the OCL queries inside of (potentially
+ * nested) loops, the context class is different. Instead of using the meta
+ * class of the input model root element, we must use the type returned by
+ * the collection that contains the expression.
+ */
 public class ExpressionChecker implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
 
 	public void process(ITextResource resource) {
