@@ -9,6 +9,7 @@ IMPORTS {
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	overrideManifest = "false";
 }
 
 TOKENSTYLES {
@@ -23,6 +24,8 @@ TOKENSTYLES {
 
 RULES {
 	JavaTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass[STRING_LITERAL] "%>" body;
+	
+	PhNamedElementName ::= "<%=" expression[STRING_LITERAL] "%>";
 	
 	IfAnnotationParameter ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
 	IfExpression ::= "<%IF" condition[STRING_LITERAL] "%>" body "<%ENDIF%>";
