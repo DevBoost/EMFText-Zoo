@@ -25,6 +25,7 @@ import org.emftext.language.template_concepts.interpreter.exceptions.Interpreter
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
 
+
 /**
  * This is the actual interpreter. It maintains a state. Thus,
  * all different parameters can be interrogated just 
@@ -65,7 +66,7 @@ public class InterpreterWState {
 		Resource tiResource = new ResourceImpl();
 		
 		//find templateBody
-		EStructuralFeature templateBodySF = template.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.CLASS_TEMPLATE_BODY);
+		EStructuralFeature templateBodySF = template.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_TEMPLATE_BODY);
 		if(templateBodySF==null) throw new TemplateMetamodelException("Template has no body");
 		EObject templateBody = (EObject)template.eGet(templateBodySF);
 		if(templateBody == null) throw new TemplateMetamodelException("Template has no body");
@@ -100,28 +101,28 @@ public class InterpreterWState {
 			if(tReferenceObject instanceof Placeholder){
 				evaluatePlaceHolder((Placeholder)tReferenceObject,tObject,tiObject);
 			} else if(tReferenceObject instanceof ForLoop){
-				//TODO evaluateForLoop(tReferenceObject,tObject,tiObject);
+				evaluateForLoop((ForLoop)tReferenceObject,tObject,tiObject);
 			} else if(tReferenceObject instanceof IfCondition){
-				//TODO evaluateIfCondition(tReferenceObject,tObject,tiObject);
+				evaluateIfCondition((IfCondition)tReferenceObject,tObject,tiObject);
 			} else {
-				//TODO evaluateTReference(tObject,tReferenceObject,tiObject,tiRootPackage);
+				evaluateTReference(tObject,tReferenceObject,tiObject,tiRootPackage);
 			}
 		}
 		
 		//Now just copy attributes which have not been treated as PlaceHolder
-		for(EAttribute tAttributeClass : tObject.eClass().getEAllAttributes()){
-			if(!treatedByPlaceholderList.contains(tAttributeClass)){
-				String attributeName = tAttributeClass.getName();
+		for(EAttribute tiAttributeClass : tiObject.eClass().getEAllAttributes()){
+			if(!treatedByPlaceholderList.contains(tiAttributeClass)){
+				String attributeName = tiAttributeClass.getName();
 				//find respective langParentAttributeClass
-				EAttribute tiAttributeClass = null;
-				for(EAttribute attClass : tiObject.eClass().getEAttributes()){
+				EAttribute tAttributeClass = null;
+				for(EAttribute attClass : tObject.eClass().getEAttributes()){
 					if(attClass.getName().matches(attributeName)){
-						tiAttributeClass = attClass;
+						tAttributeClass = attClass;
 						break;
 					}
 				}
-				if(tiAttributeClass==null){
-					throw new TemplateMetamodelException("No tiAttributeClass found for tAttributeClass " + tObject.eClass().getName()+"."+attributeName);
+				if(tAttributeClass==null){
+					throw new TemplateMetamodelException("No tAttributeClass found for tiAttributeClass " + tObject.eClass().getName()+"."+attributeName);
 				}
 				Object tAttribute = tObject.eGet(tAttributeClass);
 				//attribute-OBJECTS just need to be set. No need to transform them
@@ -135,24 +136,24 @@ public class InterpreterWState {
 			EObject tObject,EObject tiObject) throws InterpreterException{
 		
 		Object evaluatedObject = null;
-		//TODO mseifert: evaluatedObject = expressionChecker. ....
-		//TODO You probably need to convert my "context" into your ocl-context-EObject
+		//TODO mseifert: How to build eObject context and 
+		//what does inputMetaClass mean? e.g. StringBox?  
 		
 		//placeHolder extends from PlaceHolder and the tiAttributeClass
 		List<EClass> superClasses = placeHolder.eClass().getESuperTypes();
 		if(superClasses.size()!=2) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
-		EClass attributeElement = null;
+		EClass tAttributeElementClass = null;
 		for(EClass superClass : superClasses){
 			if(superClass.getName()!=Placeholder.class.getName()){
-				attributeElement = superClass;
+				tAttributeElementClass = superClass;
 			}
 		}
-		if(attributeElement==null) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
+		if(tAttributeElementClass==null) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
 		
 		//derive tiAttributeElementName
-		if(!attributeElement.getName().startsWith(TemplateMetamodelAssumptions.ATT))
+		if(!tAttributeElementClass.getName().startsWith(TemplateMetamodelAssumptions.ATT))
 			throw new InterpreterException("AttributeElements should begin with "+TemplateMetamodelAssumptions.ATT);
-		String derivedTIAttributeElementName = attributeElement.getName().substring(TemplateMetamodelAssumptions.ATT.length());
+		String derivedTIAttributeElementName = tAttributeElementClass.getName().substring(TemplateMetamodelAssumptions.ATT.length());
 		
 		//find tiAttributeElement
 		EObject tiAttributeElement = findInPackageAndInstantiate(derivedTIAttributeElementName, tiRootPackage);
@@ -164,6 +165,9 @@ public class InterpreterWState {
 		}
 		EAttribute tiAttribute = tiAttributeElement.eClass().getEAllAttributes().get(0);
 		tiAttributeElement.eSet(tiAttribute, evaluatedObject);
+		
+		//put into treatedByPlaceHolderList
+		treatedByPlaceholderList.add(tiAttribute);
 		
 		//now attach tiAttributeElement to tiObject
 		EReference tReference = (EReference)placeHolder.eContainingFeature();
@@ -177,9 +181,71 @@ public class InterpreterWState {
 		} else {
 			tiObject.eSet(tiReference,tiAttributeElement);
 		}
+	}
+	
+	private void evaluateForLoop(ForLoop forLoop,EObject tObject,EObject tiObject) throws InterpreterException{
+		//Find forBody
+		EObject forBody = (EObject)forLoop.eGet(forLoop.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_FOR_BODY));
+		if(forBody==null) throw new TemplateMetamodelException("ForLoop without body: " + forLoop);
+		//Find tiReference
+		EReference tiReference = null;
+		for(EReference ref : tiObject.eClass().getEReferences()){
+			if(forLoop.eContainingFeature().getName().matches(ref.getName())){
+				tiReference = ref;
+				break;
+			}
+		}
+		if(tiReference == null) throw new TemplateMetamodelException("For-Loop: Didn't find reference " + forLoop.eContainingFeature().getName() + " in tiObject");
 		
+		//Resolve the collection
 		
+		//TODO
+		List<Object> inputCollection = null; 
+		String varibleName = "forLoop.getVariableName()";
+		//TODO mseifert: How to build eObject context and what does inputMetaClass mean? e.g. StringBox?  
+		//TODO mseifert: How can we resolve the variable name?
 		
+		//THE FORLOOP
+		for(Object o : inputCollection){
+			if(!(o instanceof EObject)){
+				throw new TemplateException("For-loop methodCall ("+forLoop.getCollection()+") does not return a list of ModelElements but Attributes");
+			}
+			context.pushVariable(varibleName,(EObject)o);
+			//BODY
+			((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(forBody, tiRootPackage));
+			context.pullVariable(varibleName);
+		}
+	}
+	
+	private void evaluateIfCondition(IfCondition ifCondition,EObject tObject,EObject tiObject) throws InterpreterException{
+		//TODO not yet implemented
+		//else body missing?
+	}
+	
+	private void evaluateTReference(EObject tObject, EObject tReferenceObject, EObject tiObject, EPackage tiRootPackage) throws InterpreterException{
+		if(tReferenceObject==null){
+			System.err.println("tReferenceObject was null?");
+			return;
+		}
+		
+		EReference tReference = (EReference)tReferenceObject.eContainingFeature();
+		if(tReference == null) throw new InterpreterException("tReference from tObject to tReferenceObject not found in tObject");
+		
+		EReference tiReference = null;
+		for(EReference ref : tiObject.eClass().getEReferences()){
+			if(tReference.getName().matches(ref.getName())){
+				tiReference = ref;
+				break;
+			}
+		}
+		if(tiReference==null) throw new TemplateMetamodelException("tiObject Reference missing: "+tReference.getName()+" Found an object which is neither meta language nor object language");
+		
+		//tReferenceObject can also be a listMember
+		if(tReference.isMany()){
+			((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(tReferenceObject, tiRootPackage));
+		} else {
+			tiObject.eSet(tiReference, evaluate(tReferenceObject, tiRootPackage));
+		}
 	}
 	
 //	public EPackage findRootPackage(EPackage pack){
@@ -187,12 +253,6 @@ public class InterpreterWState {
 //		return pack;
 //	}
 	
-	/**
-	 * TODO make className being an EClass
-	 * @param className
-	 * @param currentPackage
-	 * @return
-	 */
 	private EObject findInPackageAndInstantiate(String className, EPackage currentPackage) throws InterpreterException{
 		try{
 			for(EClassifier tiClassifier : currentPackage.getEClassifiers()){
