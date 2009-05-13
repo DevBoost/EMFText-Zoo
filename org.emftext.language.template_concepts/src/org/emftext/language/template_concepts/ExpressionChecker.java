@@ -53,9 +53,9 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		for (EObject next : placeholders) {
 			Placeholder placeholder = (Placeholder) next;
 			String expression = placeholder.getExpression();
-			boolean ok = parseExpression(metaClass, expression);
-			if (!ok) {
-				resource.addError("The expression \"" + expression + "\" is invalid.", placeholder);
+			String error = parseExpression(metaClass, expression);
+			if (error != null) {
+				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", placeholder);
 			}
 		}
 
@@ -63,9 +63,9 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		for (EObject next : loops) {
 			ForLoop loop = (ForLoop) next;
 			String expression = loop.getCollection();
-			boolean ok = parseExpression(metaClass, expression);
-			if (!ok) {
-				resource.addError("The expression \"" + expression + "\" is invalid.", loop);
+			String error = parseExpression(metaClass, expression);
+			if (error != null) {
+				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", loop);
 			}
 		}
 
@@ -73,9 +73,9 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		for (EObject next : conditions) {
 			IfCondition condition = (IfCondition) next;
 			String expression = condition.getCondition();
-			boolean ok = parseExpression(metaClass, expression);
-			if (!ok) {
-				resource.addError("The expression \"" + expression + "\" is invalid.", condition);
+			String error = parseExpression(metaClass, expression);
+			if (error != null) {
+				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", condition);
 			}
 		}
 	}
@@ -93,17 +93,26 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		return foundObjects;
 	}
 
-	private boolean parseExpression(EClass inputMetaClass, String expressionString) {
-		Query query = createQuery(inputMetaClass, expressionString);
-		return query != null;
+	// return the error if one was found
+	private String parseExpression(EClass inputMetaClass, String expressionString) {
+		Object query = createQuery(inputMetaClass, expressionString);
+		if (query instanceof String) {
+			return (String) query;
+		} else {
+			return null;
+		}
 	}
 
 	public Object evaluateExpression(EClass inputMetaClass, String expressionString, EObject contextObject) {
-		Query query = createQuery(inputMetaClass, expressionString);
-		return query.evaluate(contextObject);
+		Object query = createQuery(inputMetaClass, expressionString);
+		if (query instanceof Query) {
+			return ((Query) query).evaluate(contextObject);
+		} else {
+			return null;
+		}
 	}
 
-	private Query createQuery(EClass inputMetaClass, String expressionString) {
+	private Object createQuery(EClass inputMetaClass, String expressionString) {
 		OCL ocl = org.eclipse.ocl.ecore.OCL.newInstance();
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
 		
@@ -115,7 +124,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			Query query = ocl.createQuery(expression);
 			return query;
 		} catch (ParserException e) {
-			return null;
+			return e.getMessage();
 		}
 	}
 
