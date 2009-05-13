@@ -18,7 +18,7 @@ public class AnnotationAttributeSettingAttributeReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(InterfaceMethod element, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+		return JavaUtil.getName(element);
 	}
 	
 	@Override	

@@ -37,6 +37,7 @@ import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
+import org.emftext.language.java.util.JavaUtil;
 
 /**
  * This class constructs a Java EMF-model from a class file using the 
@@ -66,7 +67,7 @@ public class ClassFileModelLoader {
 		
 		ConcreteClassifier classifier = constructClassifier(myClass);
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
-		cu.setName(classFileName);
+		JavaUtil.setName(cu, classFileName);
 		List<String> namespace1 = Arrays.asList(myClass.getClassName().split("\\."));
 		List<String> namespace2 = Arrays.asList(namespace1.get(namespace1.size() - 1).split("\\$"));
 		cu.getNamespaces().addAll(namespace1.subList(0, namespace1.size() - 1));
@@ -111,7 +112,7 @@ public class ClassFileModelLoader {
 			}
 		}
 		
-		emfClassifier.setName(className);
+		JavaUtil.setName(emfClassifier, className);
 			
 		for(Attribute a : clazz.getAttributes()){
 			String signature = a.toString();
@@ -231,7 +232,7 @@ public class ClassFileModelLoader {
 		else {
 			emfMethod = membersFactory.createClassMethod();
 		}
-		emfMethod.setName(method.getName());
+		JavaUtil.setName(emfMethod, method.getName());
 		
 		String signature = method.getReturnType().getSignature();
 		String plainSignature = "";
@@ -307,11 +308,11 @@ public class ClassFileModelLoader {
 				
 		}
 		
-		if (emfMethod.getName().equals("<init>")) {
+		if (JavaUtil.getName(emfMethod).equals("<init>")) {
 			Constructor constructor = MembersFactory.eINSTANCE.createConstructor();
 			constructor.getTypeParameters().addAll(emfMethod.getTypeParameters());
 			constructor.getParameters().addAll(emfMethod.getParameters());
-			constructor.setName(emfClassifier.getName());
+			JavaUtil.setName(constructor, JavaUtil.getName(emfClassifier));
 			return constructor;
 		}
 		
@@ -350,7 +351,7 @@ public class ClassFileModelLoader {
 	
 	protected Field constructField(org.apache.bcel.classfile.Field field, ConcreteClassifier emfClassifier) {
 		Field emfField = membersFactory.createField();
-		emfField.setName(field.getName());
+		JavaUtil.setName(emfField, field.getName());
 		String signature = field.getType().getSignature();
 		TypeReference typeRef = createReferenceToType(signature);
 		emfField.setType(typeRef);
@@ -383,7 +384,7 @@ public class ClassFileModelLoader {
 			org.apache.bcel.classfile.Field field) {
 		
 		EnumConstant enumConstant = membersFactory.createEnumConstant();
-		enumConstant.setName(field.getName());
+		JavaUtil.setName(enumConstant, field.getName());
 		return enumConstant;
 	}
 	
@@ -391,14 +392,14 @@ public class ClassFileModelLoader {
 		TypeParameter typeParameter =  null;
 		if (method != null) {
 			for(TypeParameter cand : method.getTypeParameters()) {
-				if(cand.getName().equals(name)) {
+				if(JavaUtil.getName(cand).equals(name)) {
 					typeParameter = cand;
 				}
 			}
 		}
 		if (typeParameter == null) {
 			for(TypeParameter cand : emfClassifier.getTypeParameters()) {
-				if(cand.getName().equals(name)) {
+				if(JavaUtil.getName(cand).equals(name)) {
 					typeParameter = cand;
 				}
 			}
@@ -427,13 +428,13 @@ public class ClassFileModelLoader {
 		
 		TypeParameter typeParameter =  null;
 		for(TypeParameter cand : method.getTypeParameters()) {
-			if(cand.getName().equals(name)) {
+			if(JavaUtil.getName(cand).equals(name)) {
 				typeParameter = cand;
 			}
 		}
 		if (typeParameter == null) {
 			for(TypeParameter cand : emfClassifier.getTypeParameters()) {
-				if(cand.getName().equals(name)) {
+				if(JavaUtil.getName(cand).equals(name)) {
 					typeParameter = cand;
 				}
 			}
@@ -489,13 +490,13 @@ public class ClassFileModelLoader {
 				String name = signature.substring(1,idx);
 				TypeParameter typeParameter = null;
 				for(TypeParameter cand : method.getTypeParameters()) {
-					if(cand.getName().equals(name)) {
+					if(JavaUtil.getName(cand).equals(name)) {
 						typeParameter = cand;
 					}
 				}
 				if (typeParameter == null) {
 					for(TypeParameter cand : emfClassifier.getTypeParameters()) {
-						if(cand.getName().equals(name)) {
+						if(JavaUtil.getName(cand).equals(name)) {
 							typeParameter = cand;
 						}
 					}
@@ -537,7 +538,7 @@ public class ClassFileModelLoader {
 			String name = signature.substring(0,idx);
 			if (!name.equals("")) {
 				TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
-				typeParameter.setName(name);
+				JavaUtil.setName(typeParameter, name);
 				result.add(typeParameter);				
 			}
 			signature = signature.substring(idx + 1);

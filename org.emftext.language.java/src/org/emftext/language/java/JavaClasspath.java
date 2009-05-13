@@ -182,11 +182,11 @@ public class JavaClasspath extends AdapterImpl {
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
 
 		int endIdx = -1;
-		if(compilationUnit.getName() != null) {
-			endIdx = compilationUnit.getName().lastIndexOf("$");
+		if(JavaUtil.getName(compilationUnit) != null) {
+			endIdx = JavaUtil.getName(compilationUnit).lastIndexOf("$");
 		}
 		if (endIdx > -1) { 
-			char[] nameParts = compilationUnit.getName().toCharArray();
+			char[] nameParts = JavaUtil.getName(compilationUnit).toCharArray();
 			for(int i= 0; i< endIdx; i++) {
 				if(nameParts[i] == '$') {
 					int idx = packageName.lastIndexOf(".");
@@ -195,15 +195,15 @@ public class JavaClasspath extends AdapterImpl {
 			}
 		}
 		
-		if (compilationUnit.getName() != null && compilationUnit.getName().contains("$")) {
+		if (JavaUtil.getName(compilationUnit) != null && JavaUtil.getName(compilationUnit).contains("$")) {
 			packageName = packageName + "$";
 		}
 		
 		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
 			registerClassifier(
-					packageName, classifier.getName(), uri);
+					packageName, JavaUtil.getName(compilationUnit), uri);
 			registerInnerClassifiers(
-					classifier, packageName, classifier.getName(), uri);
+					classifier, packageName, JavaUtil.getName(compilationUnit), uri);
 		}
 	}
 	
@@ -298,7 +298,7 @@ public class JavaClasspath extends AdapterImpl {
 	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri) {
 		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
 			if (innerCand instanceof ConcreteClassifier) {
-				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
+				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + JavaUtil.getName(innerCand);
 				registerClassifier(packageName, newClassName, uri);
 				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri);
 			}
@@ -375,7 +375,7 @@ public class JavaClasspath extends AdapterImpl {
 			if (rootContainer instanceof CompilationUnit) {
 				CompilationUnit compilationUnit = (CompilationUnit) rootContainer;
 			    fullName = getContainerNameFromNamespace(compilationUnit) + fullName + 
-			    	container.getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			    	JavaUtil.getName(container) + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
 			    return getClassifiers(fullName, "*");
 			}
 		}
@@ -425,7 +425,7 @@ public class JavaClasspath extends AdapterImpl {
 					}
 					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullQualifiedName));
 					//set also the name to reason about it without resolving the proxy
-					((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
+					JavaUtil.setName((Class)classifierProxy, JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
 					resultList.add((ConcreteClassifier) classifierProxy);
 				}
 			}
@@ -445,7 +445,7 @@ public class JavaClasspath extends AdapterImpl {
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
 		//set also the name to reason about it without resolving the proxy
-		((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
+		JavaUtil.setName((Class)classifierProxy, JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
 		return (ConcreteClassifier) classifierProxy;
 	}
 	

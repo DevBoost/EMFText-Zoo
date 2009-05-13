@@ -107,14 +107,16 @@
           upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//commons/Commentable">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="name" lowerBound="1"
+          eType="#//commons/FeatureNamedElementName" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamespaceAwareElement" abstract="true"
         eSuperTypes="#//commons/Commentable">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="namespaces" unique="false"
           upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Name" eSuperTypes="#//commons/FeatureNamedElementName #//commons/Commentable ../../org.emftext.language.primitive_types/metamodel/primitive_types.ecore#//StringObject"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureNamedElementName" abstract="true"/>
   </eSubpackages>
   <eSubpackages name="containers" nsURI="http://www.emftext.org/java/containers" nsPrefix="containers">
     <eClassifiers xsi:type="ecore:EClass" name="JavaRoot" abstract="true" eSuperTypes="#//commons/NamedElement #//commons/NamespaceAwareElement #//imports/ImportingElement"/>
@@ -123,7 +125,7 @@
         <details key="label" value="comments"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
-          eType="#//classifiers/ConcreteClassifier" containment="true" eKeys="#//commons/NamedElement/name">
+          eType="#//classifiers/ConcreteClassifier" containment="true">
         <eAnnotations source="gmf.compartment"/>
       </eStructuralFeatures>
     </eClassifiers>
@@ -450,12 +452,11 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MemberContainer" abstract="true" eSuperTypes="#//commons/Commentable">
       <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-          eType="#//members/Member" containment="true" eOpposite="#//members/Member/container"
-          eKeys="#//commons/NamedElement/name">
+          eType="#//members/Member" containment="true" eOpposite="#//members/Member/container">
         <eAnnotations source="gmf.compartment"/>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="defaultMembers" upperBound="-1"
-          eType="#//members/Member" transient="true" containment="true" eKeys="#//commons/NamedElement/name"/>
+          eType="#//members/Member" transient="true" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AdditionalField" eSuperTypes="#//references/ReferenceableElement #//arrays/ArrayTypeable #//instantiations/Initializable"/>
     <eClassifiers xsi:type="ecore:EClass" name="Constructor" eSuperTypes="#//members/Member #//statements/StatementListContainer #//parameters/Parametrizable #//generics/TypeParametrizable #//members/ExceptionThrower #//modifiers/AnnotableAndModifiable"/>

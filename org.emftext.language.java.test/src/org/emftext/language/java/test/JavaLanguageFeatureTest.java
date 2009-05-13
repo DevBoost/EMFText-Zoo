@@ -44,6 +44,7 @@ import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.IOptions;
 import org.junit.Before;
 import org.junit.Test;
@@ -138,7 +139,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		
 		DoubleLiteral literal = (DoubleLiteral) initValue;
 		
-		assertNotNull(member.getName() + " is not a double field.", literal);
+		assertNotNull(JavaUtil.getName(member) + " is not a double field.", literal);
 		assertType(literal, DoubleLiteral.class);
 		DoubleLiteral initLiteral = (DoubleLiteral) literal;
 		assertEquals(expectedInitValue, initLiteral.getValue());
@@ -230,7 +231,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	private <T extends NamedElement> T findElementByName(
 			List<T> elements, String name) {
 		for (T next : elements) {
-			if (name.equals(next.getName())) {
+			if (name.equals(JavaUtil.getName(next))) {
 				return next;
 			}
 		}
@@ -1300,9 +1301,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	public void testPkg_EmptyClass() throws Exception {
 		CompilationUnit model = (CompilationUnit) parseResource("pkg/EmptyClass.java");
 		assertNumberOfClassifiers(model, 1);
-		Classifier declaraction = model.getClassifiers().get(0);
+		Classifier declaration = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'EmptyClass'",
-				"EmptyClass", declaraction.getName());
+				"EmptyClass", JavaUtil.getName(declaration));
 		assertEquals("pkg.Empty is located in a package 'pkg'", "pkg", model
 				.getNamespaces().get(0));
 		parseAndReprint("pkg/EmptyClass.java");
@@ -1314,7 +1315,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertNumberOfClassifiers(model, 1);
 		Classifier declaraction = model.getClassifiers().get(0);
 		assertEquals("The name of the declared class equals 'Inner'", "Inner",
-				declaraction.getName());
+				JavaUtil.getName(declaraction));
 		assertEquals("pkg.inner.Inner is located in a package 'inner'",
 				"inner", model.getNamespaces().get(1));
 		assertEquals("Package 'Inner' is located in a package 'pkg'", "pkg",

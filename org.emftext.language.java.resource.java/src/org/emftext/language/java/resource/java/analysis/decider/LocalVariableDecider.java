@@ -12,6 +12,7 @@ import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.statements.SwitchCase;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesPackage;
@@ -25,7 +26,7 @@ public class LocalVariableDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof LocalVariable || element instanceof AdditionalLocalVariable) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(ne.getName());
+			return id.equals(JavaUtil.getName(ne));
 		}
 		return false;
 	}

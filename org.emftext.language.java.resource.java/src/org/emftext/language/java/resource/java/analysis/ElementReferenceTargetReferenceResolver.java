@@ -26,6 +26,7 @@ import org.emftext.language.java.resource.java.analysis.decider.ParameterDecider
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.PrimitiveType;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
@@ -44,7 +45,7 @@ public class ElementReferenceTargetReferenceResolver extends
 				return concreteClassifier.getFullName();
 			}
 		}
-		return super.doDeResolve(element, container, reference);
+		return JavaUtil.getName(element);
 	}
 	
 	@Override	

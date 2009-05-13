@@ -13,6 +13,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 public class AnnotationInstanceAnnotationReferenceResolver extends 
@@ -20,7 +21,7 @@ public class AnnotationInstanceAnnotationReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+		return JavaUtil.getName(element);
 	}
 	
 	@Override	

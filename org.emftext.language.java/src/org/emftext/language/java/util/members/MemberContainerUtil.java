@@ -5,6 +5,7 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.util.JavaUtil;
 
 public class MemberContainerUtil {
 	
@@ -15,7 +16,7 @@ public class MemberContainerUtil {
 	 */
 	public static ConcreteClassifier getConcreteClassifier(MemberContainer _this, String name) {
 		for(Member member : _this.getMembers()) {
-			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
+			if (member instanceof ConcreteClassifier && name.equals(JavaUtil.getName(member))) {
 				return (ConcreteClassifier) member;
 			}
  		}
@@ -29,7 +30,7 @@ public class MemberContainerUtil {
 	 */
 	public static Field getField(MemberContainer _this, String name) {
 		for(Member member : _this.getMembers()) {
-			if (member instanceof Field && name.equals(member.getName())) {
+			if (member instanceof Field && name.equals(JavaUtil.getName(member))) {
 				return (Field) member;
 			}
  		}
@@ -44,7 +45,7 @@ public class MemberContainerUtil {
 	//TODO @jjohannes add signature to parameters or remove method if not needed
 	public static Method getMethod(MemberContainer _this, String name) {
 		for(Member member : _this.getMembers()) {
-			if (member instanceof Method && name.equals(member.getName())) {
+			if (member instanceof Method && name.equals(JavaUtil.getName(member))) {
 				return (Method) member;
 			}
  		}

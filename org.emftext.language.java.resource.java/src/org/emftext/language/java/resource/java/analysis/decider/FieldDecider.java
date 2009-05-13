@@ -24,6 +24,7 @@ import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
@@ -35,7 +36,7 @@ public class FieldDecider extends AbstractDecider {
 	public Field getArrayLengthFiled(EObject objectContext) {
 		if (standardArrayLengthField  == null) {
 			standardArrayLengthField = MembersFactory.eINSTANCE.createField();
-			standardArrayLengthField.setName("length");
+			JavaUtil.setName(standardArrayLengthField, "length");
 			ClassifierReference typeReference = TypesFactory.eINSTANCE.createClassifierReference();
 			typeReference.setTarget(JavaClasspathUtil.getClass("Integer", objectContext));
 			standardArrayLengthField.setType(typeReference);
@@ -96,7 +97,7 @@ public class FieldDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof Field || element instanceof AdditionalField) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(ne.getName());
+			return id.equals(JavaUtil.getName(ne));
 		}
 		return false;
 	}

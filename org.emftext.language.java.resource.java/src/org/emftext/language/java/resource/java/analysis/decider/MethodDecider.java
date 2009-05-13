@@ -16,6 +16,7 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.MethodCall;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
@@ -73,7 +74,7 @@ public class MethodDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof Method) {
 			Method method = (Method) element;
-			if (id.equals(method.getName())) {
+			if (id.equals(JavaUtil.getName(method))) {
 				if (lastFound == null) {
 					if (MethodUtil.isMethodForCall(method, methodCall)) {
 						lastFound = method;

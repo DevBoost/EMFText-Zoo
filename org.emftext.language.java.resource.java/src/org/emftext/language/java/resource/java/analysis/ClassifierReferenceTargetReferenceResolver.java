@@ -19,6 +19,7 @@ import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDec
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
@@ -35,7 +36,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				return concreteClassifier.getFullName();
 			}
 		}
-		return super.doDeResolve(classifier, container, reference);
+		return JavaUtil.getName(classifier);
 	}	
 	@Override	
 	protected void doResolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Classifier> result) {

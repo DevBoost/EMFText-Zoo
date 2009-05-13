@@ -10,6 +10,7 @@ import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 /**
@@ -37,9 +38,9 @@ public class InterfaceMethodDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof InterfaceMethod) {
 			Method method = (Method) element;
-			if (id.equals(method.getName())) {
+			if (id.equals(JavaUtil.getName(method))) {
 				NamedElement ne = (NamedElement) element;
-				return id.equals(ne.getName());
+				return id.equals(JavaUtil.getName(ne));
 			}
 		}
 		return false;

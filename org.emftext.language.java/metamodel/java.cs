@@ -70,11 +70,13 @@ TOKENSTYLES {
 
 RULES {
 
+commons.Name ::= value[];
+
 containers.EmptyModel ::= (imports #0 ";" !0 )* (";")*
    ;
 
 containers.Package
-   ::=  annotations* "package" (namespaces[] #0 "." #0 )* name[] #0 ";" 
+   ::=  annotations* "package" (namespaces[] #0 "." #0 )* name #0 ";" 
         (";")? //TODO this is required to let T7312 of JacksTest pass... not sure if this is correct or if it should be * instead of ?
         !0 !0
         (imports !0 )* (";")*
@@ -104,7 +106,7 @@ imports.StaticClassifierImport
 
 classifiers.Class
 	::=	annotationsAndModifiers*
-	    "class" name[] ("<" typeParameters ("," typeParameters)* ">")?
+	    "class" name ("<" typeParameters ("," typeParameters)* ">")?
         ("extends" extends)?
         ("implements" (implements ("," implements)*))?
         "{" 
@@ -120,7 +122,7 @@ classifiers.AnonymousClass
 	
 classifiers.Interface
 	::=	annotationsAndModifiers*
-	    "interface" name[] ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
+	    "interface" name ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")?
 		("extends" (extends ("," extends)*))? 
 	    "{"
         	(!1 members)* !0
@@ -129,7 +131,7 @@ classifiers.Interface
 
 classifiers.Enumeration
     ::= annotationsAndModifiers*
-        "enum" name[] 
+        "enum" name 
     	("implements" (implements ("," implements)*))? 
     	"{" 
     		(!1 constants ("," !1 constants)*)? (",")? 
@@ -139,7 +141,7 @@ classifiers.Enumeration
 
 classifiers.Annotation
 	::=	annotationsAndModifiers*
-	    "@" "interface" name[]
+	    "@" "interface" name
 	    "{" 
 	    	(!1 members)* !0
 	    "}"
@@ -164,11 +166,11 @@ annotations.AnnotationAttributeSetting
 	;
 
 generics.TypeParameter
-	::=	name[] ("extends" extendTypes ("&" extendTypes)*)?
+	::=	name ("extends" extendTypes ("&" extendTypes)*)?
 	;
 
 members.EnumConstant
-    ::= annotations* name[] ("(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)*)? ")" )?
+    ::= annotations* name ("(" (arguments:expressions.AssignmentExpression ("," arguments:expressions.AssignmentExpression)*)? ")" )?
     	(
 	    	"{"
 	        	(!1 members)* !0
@@ -181,54 +183,54 @@ statements.Block
 	;
 
 members.Constructor
-	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? name[]
+	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? name
 	"(" (parameters ("," parameters)* )? ")" 
 	("throws" exceptions ("," exceptions)*)? "{" statements* "}"
 	;
 
 members.InterfaceMethod
-	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? ";"
 	;
 
 members.ClassMethod
-	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (type arrayDimensionsBefore*) name  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? "{" statements* "}"
 	;
 	
 annotations.AnnotationAttribute
-	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name[]  
+	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? (type arrayDimensionsBefore*) name  
 	"(" (parameters ("," parameters)* )? ")" arrayDimensionsAfter*
 	("throws" exceptions ("," exceptions)*)? "default" defaultValue:expressions.AssignmentExpression ";"
 	;
 
 parameters.OrdinaryParameter
-	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter*
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name arrayDimensionsAfter*
 	;
 
 parameters.VariableLengthParameter
-	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name[] 
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? "..." name 
 	;
 
 variables.LocalVariable
-	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalLocalVariables)*
 	;
 
 statements.LocalVariableStatement
 	::= variable ";" ;
 
 variables.AdditionalLocalVariable
-	::= name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
+	::= name arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
 	;
 
 members.Field
-	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
+	::= annotationsAndModifiers* type arrayDimensionsBefore* ("<" typeArguments ("," typeArguments)* ">")? name arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)? ("," additionalFields)* ";"
 	;
 
 members.AdditionalField
-	::= name[] arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
+	::= name arrayDimensionsAfter* ("=" initialValue:expressions.AssignmentExpression)?
 	;
 	
 members.EmptyMember
@@ -392,7 +394,7 @@ statements.Continue
 	::= "continue" (target[])? ";" ;
 	
 statements.JumpLabel
-	::= name[] ":" statement ;
+	::= name ":" statement ;
 
 statements.ExpressionStatement 
 	::= expression:expressions.AssignmentExpression ";" 

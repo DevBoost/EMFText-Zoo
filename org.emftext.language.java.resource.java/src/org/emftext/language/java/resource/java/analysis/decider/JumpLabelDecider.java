@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.statements.JumpLabel;
 import org.emftext.language.java.statements.StatementsPackage;
+import org.emftext.language.java.util.JavaUtil;
 
 public class JumpLabelDecider extends AbstractDecider {
 
@@ -20,7 +21,7 @@ public class JumpLabelDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof JumpLabel) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(ne.getName());
+			return id.equals(JavaUtil.getName(ne));
 		}
 		return false;
 	}

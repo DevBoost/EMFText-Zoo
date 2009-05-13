@@ -7,6 +7,7 @@ import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
@@ -26,7 +27,7 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 		classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null && !classifier.eIsProxy()) {
 			for(Member member : ClassifierUtil.getAllMembers(classifier)) {
-				if (identifier.equals(member.getName()) && member instanceof ReferenceableElement) {
+				if (identifier.equals(JavaUtil.getName(member)) && member instanceof ReferenceableElement) {
 					//for (EObject modifier : member.eContents()) {
 						//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
 							result.addMapping(identifier, (ReferenceableElement) member);
@@ -37,7 +38,7 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 			
 			if (classifier instanceof Enumeration) {
 				for(EnumConstant enumConstant : ((Enumeration)classifier).getConstants()) {
-					if (identifier.equals(enumConstant.getName())) {
+					if (identifier.equals(JavaUtil.getName(enumConstant))) {
 						result.addMapping(identifier, enumConstant);
 						return;
 					}

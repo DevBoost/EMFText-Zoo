@@ -11,6 +11,7 @@ import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.util.JavaUtil;
 
 public class PackageDecider extends AbstractDecider {
 	
@@ -42,7 +43,7 @@ public class PackageDecider extends AbstractDecider {
 			EList<EObject> resultList = new BasicEList<EObject>();
 			
 			Package p = ContainersFactory.eINSTANCE.createPackage();
-			p.setName(identifier);
+			JavaUtil.setName(p, identifier);
 			resultList.add(p);
 			
 			return resultList;
@@ -52,10 +53,10 @@ public class PackageDecider extends AbstractDecider {
 			Package parentPackage = (Package) container;
 			
 			Package p = ContainersFactory.eINSTANCE.createPackage();
-			p.setName(identifier);
+			JavaUtil.setName(p, identifier);
 			p.setParent(parentPackage);
 			p.getNamespaces().addAll(parentPackage.getNamespaces());
-			p.getNamespaces().add(parentPackage.getName());
+			p.getNamespaces().add(JavaUtil.getName(parentPackage));
 			resultList.add(p);
 			
 			return resultList;
@@ -71,7 +72,7 @@ public class PackageDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof Package) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(ne.getName());
+			return id.equals(JavaUtil.getName(ne));
 		}
 		return false;
 	}

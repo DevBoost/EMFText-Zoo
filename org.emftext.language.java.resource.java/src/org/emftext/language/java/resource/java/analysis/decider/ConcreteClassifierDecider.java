@@ -71,10 +71,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			Package p = (Package) container;
 			String packageName = JavaUniquePathConstructor.packageName(p);
 			if (packageName.equals("")) {
-				packageName = p.getName();
+				packageName = JavaUtil.getName(p);
 			}
 			else {
-				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + p.getName();
+				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + JavaUtil.getName(p);
 			}
 			
 			resultList.addAll(JavaClasspath.get(resource).getClassifiers(
@@ -116,7 +116,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				
 				outer: for(int i = 0; i < path.length; i++) {
 					for(ConcreteClassifier innerClassifier : innerClassifiers) {
-						if(path[i].equals(innerClassifier.getName())) {
+						if(path[i].equals(JavaUtil.getName(innerClassifier))) {
 							innerClassifiers.clear();
 							innerClassifiers.addAll(
 									JavaClasspath.get(resource).getInnnerClassifiers(innerClassifier));
@@ -207,7 +207,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
-			if(id.equals(concreteClassifier.getName())) {
+			if(id.equals(JavaUtil.getName(concreteClassifier))) {
 				if(concreteClassifier.eIsProxy()) {
 					concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
 				}
@@ -219,7 +219,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 			if(id.contains("$")) {	
 				String mainID = id.substring(id.lastIndexOf("$") + 1);
-				if( mainID.equals(concreteClassifier.getName())) {
+				if( mainID.equals(JavaUtil.getName(concreteClassifier))) {
 					//set the full id for reprint
 					if(concreteClassifier.eIsProxy()) {
 						concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);

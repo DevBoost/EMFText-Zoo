@@ -18,6 +18,7 @@ import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.types.Type;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
@@ -28,7 +29,7 @@ public class EnumConstantDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof EnumConstant) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(ne.getName());
+			return id.equals(JavaUtil.getName(ne));
 		}
 		return false;
 	}

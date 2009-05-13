@@ -89,7 +89,7 @@ public class JavaModelCompletion {
 		Method valueMethod = MemberContainerUtil.getMethod(annotation, valueMethodName);
 		if (valueMethod == null) {
 			valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
-			valueMethod.setName(valueMethodName);
+			JavaUtil.setName(valueMethod, valueMethodName);
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(JavaClasspath.get(annotation).getClassifier("java.lang.String"));
 			valueMethod.setType(type);
@@ -111,7 +111,7 @@ public class JavaModelCompletion {
 		
 		if (valuesMethod == null) {
 			valuesMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
-			valuesMethod.setName(valuesMethodName);
+			JavaUtil.setName(valuesMethod, valuesMethodName);
 			
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
@@ -125,14 +125,14 @@ public class JavaModelCompletion {
 		
 		if (valueOfMethod == null) {
 			valueOfMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
-			valueOfMethod.setName(valueOfMethodName);
+			JavaUtil.setName(valueOfMethod, valueOfMethodName);
 			
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
 			valueOfMethod.setType(type);
 			
 			Parameter strParameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
-			strParameter.setName("str");
+			JavaUtil.setName(strParameter, "str");
 			type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(JavaClasspath.get(enumeration).getClassifier("java.lang.String"));
 			strParameter.setType(type);
