@@ -30,7 +30,7 @@ import org.emftext.runtime.resource.ITextResource;
  * in templates. Examples for such queries are conditions (in IF elements),
  * collectionSelectors (in FOR loops) and the expressions in placeholders.
  * 
- * TODO when check (and evaluating) the OCL queries inside of (potentially
+ * TODO when checking (and evaluating) OCL queries inside of (potentially
  * nested) loops, the context class is different. Instead of using the meta
  * class of the input model root element, we must use the type returned by
  * the collection that contains the expression.
