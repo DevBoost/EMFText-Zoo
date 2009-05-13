@@ -10,14 +10,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.template_concepts.ExpressionChecker;
 import org.emftext.language.template_concepts.ForLoop;
 import org.emftext.language.template_concepts.IfCondition;
 import org.emftext.language.template_concepts.Placeholder;
 import org.emftext.language.template_concepts.Template;
+import org.emftext.language.template_concepts.impl.PlaceholderImpl;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
@@ -33,8 +36,10 @@ public class InterpreterWState {
 	private final Template template;
 	private final EObject rootOfParameterModel;
 	private EObject templateInstanceRoot;
+	private EPackage tiRootPackage;
 	
 	private Context context;
+	private ExpressionChecker expressionChecker;
 	
 	private List<EAttribute> treatedByPlaceholderList;
 	
@@ -43,6 +48,7 @@ public class InterpreterWState {
 		this.rootOfParameterModel = rootOfParameterModel;
 		treatedByPlaceholderList = new ArrayList<EAttribute>();
 		context = new Context();
+		expressionChecker = new ExpressionChecker();
 		
 		load();
 	}
@@ -55,7 +61,7 @@ public class InterpreterWState {
 		}
 		EClass rootElementClass = (EClass)inputMetaClass;
 		//Get root package in template instance
-		EPackage tiRootPackage = rootElementClass.getEPackage();
+		tiRootPackage = rootElementClass.getEPackage();
 		Resource tiResource = new ResourceImpl();
 		
 		//find templateBody
@@ -92,7 +98,7 @@ public class InterpreterWState {
 		
 		for(EObject tReferenceObject : tObject.eContents()){
 			if(tReferenceObject instanceof Placeholder){
-				evaluatePlaceHolder(tReferenceObject,tObject,tiObject);
+				evaluatePlaceHolder((Placeholder)tReferenceObject,tObject,tiObject);
 			} else if(tReferenceObject instanceof ForLoop){
 				//TODO evaluateForLoop(tReferenceObject,tObject,tiObject);
 			} else if(tReferenceObject instanceof IfCondition){
@@ -125,8 +131,54 @@ public class InterpreterWState {
 		return tiObject;
 	}
 	
-	private void evaluatePlaceHolder(EObject tReferenceObject,
-			EObject tObject,EObject tiObject){
+	private void evaluatePlaceHolder(Placeholder placeHolder,
+			EObject tObject,EObject tiObject) throws InterpreterException{
+		
+		Object evaluatedObject = null;
+		//TODO mseifert: evaluatedObject = expressionChecker. ....
+		//TODO You probably need to convert my "context" into your ocl-context-EObject
+		
+		//placeHolder extends from PlaceHolder and the tiAttributeClass
+		List<EClass> superClasses = placeHolder.eClass().getESuperTypes();
+		if(superClasses.size()!=2) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
+		EClass attributeElement = null;
+		for(EClass superClass : superClasses){
+			if(superClass.getName()!=Placeholder.class.getName()){
+				attributeElement = superClass;
+			}
+		}
+		if(attributeElement==null) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
+		
+		//derive tiAttributeElementName
+		if(!attributeElement.getName().startsWith(TemplateMetamodelAssumptions.ATT))
+			throw new InterpreterException("AttributeElements should begin with "+TemplateMetamodelAssumptions.ATT);
+		String derivedTIAttributeElementName = attributeElement.getName().substring(TemplateMetamodelAssumptions.ATT.length());
+		
+		//find tiAttributeElement
+		EObject tiAttributeElement = findInPackageAndInstantiate(derivedTIAttributeElementName, tiRootPackage);
+		if(tiAttributeElement==null) throw new TemplateMetamodelException("Didn't find tiAttributeElement with name: " + derivedTIAttributeElementName);
+		
+		//contains exactly one attribute
+		if(tiAttributeElement.eClass().getEAllAttributes().size()!=1){
+			throw new TemplateMetamodelException("An attributeElement only contains one attribute, but it contains " + tiAttributeElement.eClass().getEAllAttributes().size() + " attributes");
+		}
+		EAttribute tiAttribute = tiAttributeElement.eClass().getEAllAttributes().get(0);
+		tiAttributeElement.eSet(tiAttribute, evaluatedObject);
+		
+		//now attach tiAttributeElement to tiObject
+		EReference tReference = (EReference)placeHolder.eContainingFeature();
+		if(tReference==null) throw new InterpreterException("Placeholder must be contained by some container");
+		EReference tiReference = (EReference)tiObject.eClass().getEStructuralFeature(tReference.getName());
+		if(tiReference==null) throw new TemplateMetamodelException("References to placeholder and attributeElement in TI should be the same");
+		//multiplicity > 1
+		if(tiObject.eGet(tiReference) instanceof List){
+			((List)tiObject.eGet(tiReference)).add(tiAttributeElement);
+		//multiplicity <=1
+		} else {
+			tiObject.eSet(tiReference,tiAttributeElement);
+		}
+		
+		
 		
 	}
 	
