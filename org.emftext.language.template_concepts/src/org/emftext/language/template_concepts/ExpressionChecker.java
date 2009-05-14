@@ -84,7 +84,11 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 
 	public Object evaluateExpression(EClass inputMetaClass, String expressionString, EObject contextObject) {
 		if (inputMetaClass == null) {
-			System.out.println("ExpressionChecker.evaluateExpression() inputMetaClass is null");
+			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") inputMetaClass is null");
+			return null;
+		}
+		if (contextObject == null) {
+			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") contextObject is null");
 			return null;
 		}
 		Object query = createQuery(inputMetaClass, expressionString);

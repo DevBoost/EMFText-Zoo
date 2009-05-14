@@ -53,7 +53,7 @@ public class Context {
 	public void setNewVariableValue(String name, EObject o){
 		Vector<EObject> varStack = varname2ValueMap.get(name);
 		if(varStack == null){
-			System.err.println("No such variable on stack: "+name);
+			System.out.println("ERROR: No such variable on stack: "+name);
 			return;
 		}
 		if(!varStack.isEmpty()){
@@ -69,7 +69,7 @@ public class Context {
 	public EObject getVariableValue(String name) throws InterpreterException {
 		Vector<EObject> varStack = varname2ValueMap.get(name);
 		if(varStack == null){
-			System.err.println("No such variable on stack: "+name);
+			System.out.println("ERROR: No such variable on stack: "+name);
 			return null;
 		}
 		if(varStack.isEmpty()){
