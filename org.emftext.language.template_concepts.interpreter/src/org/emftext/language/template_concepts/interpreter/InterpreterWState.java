@@ -62,7 +62,10 @@ public class InterpreterWState {
 		System.out.println("Interpreter.process()");
 	
 		//Get root package in template instance
-		tiRootPackage = EPackage.Registry.INSTANCE.getEPackage(TEMPLATE_INSTANCE_METAMODEL);
+		//tiRootPackage = EPackage.Registry.INSTANCE.getEPackage(TEMPLATE_INSTANCE_METAMODEL);
+		EObject templateBody = (EObject) template.eGet(template.eClass().getEStructuralFeature("body"));
+		tiRootPackage = templateBody.eClass().getEPackage();
+		
 		Resource tiResource = new ResourceImpl();
 		
 		//find templateBody
@@ -74,6 +77,7 @@ public class InterpreterWState {
 		
 		//Can be a list
 		if(templateBodyO instanceof List){
+			// TODO this will not work
 			for(EObject rootObject : ((List<EObject>)templateBodyO)){
 				EObject toAdd = evaluate(rootObject,tiRootPackage);
 				if(toAdd!=null){
@@ -84,6 +88,7 @@ public class InterpreterWState {
 		} else {
 			EObject tiObject = evaluate((EObject)templateBodyO,tiRootPackage);
 			tiResource.getContents().add(tiObject);
+			templateInstanceRoot = tiObject;
 		}
 	}
 	
@@ -213,7 +218,7 @@ public class InterpreterWState {
 		
 		//Resolve the collection
 		
-		List<Object> inputCollection = new ArrayList<Object>();
+		List<Object> inputCollection = null;
 		try{
 			inputCollection = (List<Object>)expressionChecker.evaluateExpression(
 					null, //TODO mseifert what is the inputMetaClass for a forLoop? 
@@ -225,6 +230,10 @@ public class InterpreterWState {
 		/** Global **/
 		//String varibleName = "self"; //The only variable possible as for now
 		
+		// TODO remove this
+		if (inputCollection == null) {
+			inputCollection = new ArrayList<Object>();
+		}
 		//THE FORLOOP
 		for(Object o : inputCollection){
 			if(!(o instanceof EObject)){
@@ -286,8 +295,14 @@ public class InterpreterWState {
 					null, //TODO put correct inputMetaClass 
 					expression, //expression
 					context.getVariableValue(varibleName)); //context for only possible variable
+		// TODO remove this
 		} catch (StackOverflowError e){
 			e.printStackTrace();
+		}
+		
+		// TODO remove this
+		if (condition == null) {
+			condition = Boolean.TRUE;
 		}
 		
 		//IF-CONDITION

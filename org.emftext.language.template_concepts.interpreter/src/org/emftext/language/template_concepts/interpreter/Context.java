@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 
 
