@@ -30,12 +30,7 @@ public class Interpreter implements IOptionProvider, IResourcePostProcessorProvi
 			TemplateCall tc = (TemplateCall)resource.getContents().get(0);
 			EObject paramModel = tc.getParameterModel();
 			Template template = tc.getTarget();
-			InterpreterWState interpreterWithState;
-			try {
-				interpreterWithState = new InterpreterWState(template,paramModel);
-			} catch (InterpreterException e) {
-				throw new InterpreterWrapperException(e);
-			}
+			InterpreterWState interpreterWithState = new InterpreterWState(template,paramModel);
 			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
 			
 			// pretty print templateInstanceAST
@@ -50,6 +45,7 @@ public class Interpreter implements IOptionProvider, IResourcePostProcessorProvi
 		
 		// figure out the correct file extension for the template instance
 		String fileExtension = "unknown";
+		//TODO Find different way to resolve object language metamodel (Put into template itself)
 		String targetNamespace = templateInstanceAST.eClass().getEPackage().getNsURI();
 		Map<String, URI> syntaxes = EMFTextRuntimePlugin.getURIToConcreteSyntaxLocationMap();
 		for (String syntaxName : syntaxes.keySet()) {

@@ -1,8 +1,11 @@
 package org.emftext.language.template_concepts.interpreter;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -11,15 +14,20 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl; 
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.template_concepts.ExpressionChecker;
 import org.emftext.language.template_concepts.ForEach;
 import org.emftext.language.template_concepts.If;
 import org.emftext.language.template_concepts.Placeholder;
 import org.emftext.language.template_concepts.Template;
+import org.emftext.language.template_concepts.TemplateConcept;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
+
 
 
 /**
@@ -30,6 +38,11 @@ import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMet
  * Comment created on: 13.05.09
  */
 public class InterpreterWState {
+	
+	//TODO make relative referenced
+	private static final String TEMPLATE_INSTANCE_METAMODEL = "http://www.emftext.org/language/sandwich";
+	private String varibleName = "self"; //The only variable possible as for now
+	
 	private final Template template;
 	private final EObject rootOfParameterModel;
 	private EObject templateInstanceRoot;
@@ -52,13 +65,9 @@ public class InterpreterWState {
 	
 	private void load() throws InterpreterException{
 		System.out.println("Interpreter.process()");
-		EObject inputMetaClass = template.getInputMetaClass();
-		if(!(inputMetaClass instanceof EClass)){
-			throw new TemplateMetamodelException("inputMetaClass is no EClass");
-		}
-		EClass rootElementClass = (EClass)inputMetaClass;
+	
 		//Get root package in template instance
-		tiRootPackage = rootElementClass.getEPackage();
+		tiRootPackage = EPackage.Registry.INSTANCE.getEPackage(TEMPLATE_INSTANCE_METAMODEL);
 		Resource tiResource = new ResourceImpl();
 		
 		//find templateBody
@@ -67,14 +76,16 @@ public class InterpreterWState {
 		EObject templateBody = (EObject)template.eGet(templateBodySF);
 		if(templateBody == null) throw new TemplateMetamodelException("Template has no body");
 		
-		
+		EObject tiObject = evaluate(templateBody,tiRootPackage);
+		tiResource.getContents().add(tiObject);
 		//Add for all non template instances respective language instances
-		for(EObject rootObject : templateBody.eContents()){
-			EObject toAdd = evaluate(rootObject,tiRootPackage);
-			if(toAdd!=null){
-				tiResource.getContents().add(toAdd);
-			}
-		}
+//		for(EObject rootObject : templateBody.eContents()){
+//			System.out.println("Eval: " + rootObject.getClass());
+//			EObject toAdd = evaluate(rootObject,tiRootPackage);
+//			if(toAdd!=null){
+//				tiResource.getContents().add(toAdd);
+//			}
+//		}
 	}
 	
 	/**
@@ -94,13 +105,19 @@ public class InterpreterWState {
 		}
 		
 		for(EObject tReferenceObject : tObject.eContents()){
-			if(tReferenceObject instanceof Placeholder){
-				evaluatePlaceHolder((Placeholder)tReferenceObject,tObject,tiObject);
-			} else if(tReferenceObject instanceof ForEach){
-				evaluateForLoop((ForEach)tReferenceObject,tObject,tiObject);
-			} else if(tReferenceObject instanceof If){
-				evaluateIfCondition((If)tReferenceObject,tObject,tiObject);
+			//Evaluate TemplateConcept
+			if(tReferenceObject instanceof TemplateConcept){
+				System.out.println("TemplateConcept: "+tReferenceObject.getClass());
+				if(tReferenceObject instanceof Placeholder){
+					evaluatePlaceHolder((Placeholder)tReferenceObject,tObject,tiObject);
+				} else if(tReferenceObject instanceof ForEach){
+					evaluateForLoop((ForEach)tReferenceObject,tObject,tiObject);
+				} else if(tReferenceObject instanceof If){
+					evaluateIfCondition((If)tReferenceObject,tObject,tiObject);
+				} else throw new TemplateMetamodelException("Unkown TemplateConcept: " + tReferenceObject.getClass());
+			//Evaluate recursively
 			} else {
+				System.out.println("NO TemplateConcept: "+tReferenceObject.getClass());
 				evaluateTReference(tObject,tReferenceObject,tiObject,tiRootPackage);
 			}
 		}
@@ -111,7 +128,7 @@ public class InterpreterWState {
 				String attributeName = tiAttributeClass.getName();
 				//find respective langParentAttributeClass
 				EAttribute tAttributeClass = null;
-				for(EAttribute attClass : tObject.eClass().getEAttributes()){
+				for(EAttribute attClass : tObject.eClass().getEAllAttributes()){
 					if(attClass.getName().matches(attributeName)){
 						tAttributeClass = attClass;
 						break;
@@ -131,9 +148,10 @@ public class InterpreterWState {
 	private void evaluatePlaceHolder(Placeholder placeHolder,
 			EObject tObject,EObject tiObject) throws InterpreterException{
 		
-		Object evaluatedObject = null;
-		//TODO mseifert: How to build eObject context and 
-		//what does inputMetaClass mean? e.g. StringBox?  
+		Object evaluatedObject = expressionChecker.evaluateExpression(
+				null, //TODO mseifert what is the inputMetaClass for a forLoop? 
+				placeHolder.getExpression(), //expression
+				context.getVariableValue(varibleName)); //context for only possible variable;
 		
 		//placeHolder extends from PlaceHolder and the tiAttributeClass
 		List<EClass> superClasses = placeHolder.eClass().getESuperTypes();
@@ -195,11 +213,17 @@ public class InterpreterWState {
 		
 		//Resolve the collection
 		
-		//TODO
-		List<Object> inputCollection = null; 
-		String varibleName = "forLoop.getVariableName()";
-		//TODO mseifert: How to build eObject context and what does inputMetaClass mean? e.g. StringBox?  
-		//TODO mseifert: How can we resolve the variable name?
+		List<Object> inputCollection = new ArrayList<Object>();
+		try{
+			inputCollection = (List<Object>)expressionChecker.evaluateExpression(
+					null, //TODO mseifert what is the inputMetaClass for a forLoop? 
+					forLoop.getExpression(), //expression
+					null); //context is empty
+		} catch (StackOverflowError e){
+			e.printStackTrace();
+		}
+		/** Global **/
+		//String varibleName = "self"; //The only variable possible as for now
 		
 		//THE FORLOOP
 		for(Object o : inputCollection){
@@ -260,7 +284,7 @@ public class InterpreterWState {
 				}
 			}
 		} catch(Exception e){
-			throw new TemplateException("Couldn't instantiate " + className);
+			throw new TemplateException("Couldn't instantiate " + className,e);
 		}
 		//not found in this package search deeper
 		for(EPackage subPackage : currentPackage.getESubpackages()){
@@ -269,6 +293,8 @@ public class InterpreterWState {
 		}		
 		return null;
 	}
+	
+	
 	
 	public EObject getTemplateInstanceRoot(){
 		return templateInstanceRoot;
