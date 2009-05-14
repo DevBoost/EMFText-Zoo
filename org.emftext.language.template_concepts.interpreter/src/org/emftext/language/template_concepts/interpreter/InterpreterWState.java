@@ -78,6 +78,9 @@ public class InterpreterWState {
 		//Can be a list
 		if(templateBodyO instanceof List){
 			// TODO this will not work
+			// TODO mboehme: Why not? Is there always just one root object?
+			//What about files containing two elements (e.g. classes) next to each other.
+			//Isn't there "two roots" with the actual root(-container) being the resource itself?
 			for(EObject rootObject : ((List<EObject>)templateBodyO)){
 				EObject toAdd = evaluate(rootObject,tiRootPackage);
 				if(toAdd!=null){
@@ -153,7 +156,7 @@ public class InterpreterWState {
 			EObject tObject,EObject tiObject) throws InterpreterException{
 		
 		Object evaluatedObject = expressionChecker.evaluateExpression(
-				null, //TODO mseifert what is the inputMetaClass for a forLoop? 
+				null, //TODO mboehme: what is the inputMetaClass for a forLoop? 
 				placeHolder.getExpression(), //expression
 				context.getVariableValue(varibleName)); //context for only possible variable;
 		
@@ -218,15 +221,11 @@ public class InterpreterWState {
 		
 		//Resolve the collection
 		
-		List<Object> inputCollection = null;
-		try{
-			inputCollection = (List<Object>)expressionChecker.evaluateExpression(
-					null, //TODO mseifert what is the inputMetaClass for a forLoop? 
+		List<Object> inputCollection = (List<Object>)expressionChecker.evaluateExpression(
+					null, //TODO mboehme: what is the inputMetaClass for a forLoop? 
 					forLoop.getExpression(), //expression
 					null); //context is empty
-		} catch (StackOverflowError e){
-			e.printStackTrace();
-		}
+		
 		/** Global **/
 		//String varibleName = "self"; //The only variable possible as for now
 		
@@ -289,16 +288,11 @@ public class InterpreterWState {
 	}
 	
 	private void evaluateIf(String expression, Object ifBodyO, Object elseBodyO, EObject tObject, EObject tiObject, EReference tiReference) throws InterpreterException{
-		Boolean condition = null;
-		try{
-			condition = (Boolean)expressionChecker.evaluateExpression(
-					null, //TODO put correct inputMetaClass 
-					expression, //expression
-					context.getVariableValue(varibleName)); //context for only possible variable
-		// TODO remove this
-		} catch (StackOverflowError e){
-			e.printStackTrace();
-		}
+		Boolean condition = (Boolean)expressionChecker.evaluateExpression(
+				null, //TODO put correct inputMetaClass 
+				expression, //expression
+				context.getVariableValue(varibleName)); //context for only possible variable
+		
 		
 		// TODO remove this
 		if (condition == null) {
