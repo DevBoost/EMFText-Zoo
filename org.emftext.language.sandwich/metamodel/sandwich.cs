@@ -19,10 +19,10 @@ TOKENSTYLES {
 }
 
 RULES {
-	Recipe ::= "RECIPE" ingredients* instructions*;
+	Recipe ::= "RECIPE" ingredients* !0 instructions*;
 	Ingredient ::= name;
 	IngredientName ::= value[];
-	Clean ::= "CLEAN" using[]?;
-	Add ::= "ADD" using[]?;
-	Toast ::= "TOAST" using[]?;
+	Clean ::= "CLEAN" using[]?  !0;
+	Add ::= "ADD" using[]?  !0;
+	Toast ::= "TOAST" using[]?  !0;
 }
