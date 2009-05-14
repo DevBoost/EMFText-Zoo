@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl; 
 import org.emftext.language.template_concepts.ExpressionChecker;
@@ -61,6 +62,7 @@ public class InterpreterWithState {
 		//Get root package in template instance
 		EObject templateBody = (EObject) template.eGet(template.eClass().getEStructuralFeature("body"));
 		tiRootPackage = templateBody.eClass().getEPackage();
+		//tiRootPackage = Registry.INSTANCE.getEPackage("http://www.emftext.org/java");
 		
 		Resource tiResource = new ResourceImpl();
 		
@@ -81,14 +83,14 @@ public class InterpreterWithState {
 			// root object. I think 'tiResource' can therefore be removed. The field
 			// 'templateInstanceRoot' is sufficient.
 			for(EObject rootObject : ((List<EObject>)templateBodyO)){
-				EObject toAdd = evaluate(rootObject,tiRootPackage, currentInputMetaClass);
+				EObject toAdd = evaluate(rootObject, tiRootPackage, currentInputMetaClass);
 				if(toAdd!=null){
 					tiResource.getContents().add(toAdd);
 				}
 			}
 		//or a single element
 		} else {
-			EObject tiObject = evaluate((EObject)templateBodyO,tiRootPackage, currentInputMetaClass);
+			EObject tiObject = evaluate((EObject)templateBodyO, tiRootPackage, currentInputMetaClass);
 			tiResource.getContents().add(tiObject);
 			templateInstanceRoot = tiObject;
 		}
@@ -106,8 +108,8 @@ public class InterpreterWithState {
 		//find respective language class in this package
 		//and instantiate it as EObject
 		EObject tiObject = findInPackageAndInstantiate(className, tiRootPackage);
-		if(tiObject==null){
-			throw new InterpreterException("Didn't find respective template instance class for template class " + className);
+		if (tiObject==null) {
+			throw new InterpreterException("Didn't find respective template instance class for template class '" + className + "'");
 		}
 		
 		for(EObject tReferenceObject : tObject.eContents()){
@@ -172,8 +174,9 @@ public class InterpreterWithState {
 		if(tAttributeElementClass==null) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
 		
 		//derive tiAttributeElementName
-		if(!tAttributeElementClass.getName().startsWith(TemplateMetamodelAssumptions.FEATURE))
+		if (!tAttributeElementClass.getName().startsWith(TemplateMetamodelAssumptions.FEATURE)) {
 			throw new InterpreterException("AttributeElements should begin with "+TemplateMetamodelAssumptions.FEATURE);
+		}
 		String derivedTIAttributeElementName = tAttributeElementClass.getName().substring(TemplateMetamodelAssumptions.FEATURE.length());
 		
 		//find tiAttributeElement
@@ -267,13 +270,17 @@ public class InterpreterWithState {
 		
 		//Find tiReference
 		EReference tiReference = null;
-		for(EReference ref : tiObject.eClass().getEReferences()){
-			if(ifCondition.eContainingFeature().getName().matches(ref.getName())){
+		String featureName = ifCondition.eContainingFeature().getName();
+		EClass tiObjectType = tiObject.eClass();
+		for(EReference ref : tiObjectType.getEAllReferences()){
+			if(featureName.matches(ref.getName())){
 				tiReference = ref;
 				break;
 			}
 		}
-		if(tiReference == null) throw new TemplateMetamodelException("For-Loop: Didn't find reference " + ifCondition.eContainingFeature().getName() + " in tiObject");
+		if (tiReference == null) {
+			throw new TemplateMetamodelException("IF: Didn't find reference '" + featureName + "' in tiObject (" + tiObjectType + ")");
+		}
 		
 		evaluateIf(ifCondition.getExpression(),ifBodyO,null,tObject,tiObject,tiReference, currentInputMetaClass);
 	}
