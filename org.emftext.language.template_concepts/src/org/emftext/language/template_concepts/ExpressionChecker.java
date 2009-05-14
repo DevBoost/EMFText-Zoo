@@ -17,8 +17,6 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.helper.OCLHelper;
-import org.emftext.language.template_concepts.Placeholder;
-import org.emftext.language.template_concepts.Template;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
@@ -49,35 +47,16 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			return;
 		}
 		
-		List<EObject> placeholders = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getPlaceholder());
-		for (EObject next : placeholders) {
-			Placeholder placeholder = (Placeholder) next;
-			String expression = placeholder.getExpression();
+		List<EObject> concepts = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getTemplateConcept());
+		for (EObject next : concepts) {
+			TemplateConcept concept = (TemplateConcept) next;
+			String expression = concept.getExpression();
 			String error = parseExpression(metaClass, expression);
 			if (error != null) {
-				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", placeholder);
+				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", concept);
 			}
 		}
 
-		List<EObject> loops = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getForLoop());
-		for (EObject next : loops) {
-			ForLoop loop = (ForLoop) next;
-			String expression = loop.getCollection();
-			String error = parseExpression(metaClass, expression);
-			if (error != null) {
-				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", loop);
-			}
-		}
-
-		List<EObject> conditions = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getIfCondition());
-		for (EObject next : conditions) {
-			IfCondition condition = (IfCondition) next;
-			String expression = condition.getCondition();
-			String error = parseExpression(metaClass, expression);
-			if (error != null) {
-				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", condition);
-			}
-		}
 	}
 
 	private List<EObject> getObjectsByType(ITextResource resource, EClass metaClass) {

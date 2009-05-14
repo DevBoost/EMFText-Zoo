@@ -3,8 +3,6 @@ package org.emftext.language.template_concepts.interpreter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -14,13 +12,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.template_concepts.ExpressionChecker;
-import org.emftext.language.template_concepts.ForLoop;
-import org.emftext.language.template_concepts.IfCondition;
+import org.emftext.language.template_concepts.ForEach;
+import org.emftext.language.template_concepts.If;
 import org.emftext.language.template_concepts.Placeholder;
 import org.emftext.language.template_concepts.Template;
-import org.emftext.language.template_concepts.impl.PlaceholderImpl;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
@@ -100,10 +96,10 @@ public class InterpreterWState {
 		for(EObject tReferenceObject : tObject.eContents()){
 			if(tReferenceObject instanceof Placeholder){
 				evaluatePlaceHolder((Placeholder)tReferenceObject,tObject,tiObject);
-			} else if(tReferenceObject instanceof ForLoop){
-				evaluateForLoop((ForLoop)tReferenceObject,tObject,tiObject);
-			} else if(tReferenceObject instanceof IfCondition){
-				evaluateIfCondition((IfCondition)tReferenceObject,tObject,tiObject);
+			} else if(tReferenceObject instanceof ForEach){
+				evaluateForLoop((ForEach)tReferenceObject,tObject,tiObject);
+			} else if(tReferenceObject instanceof If){
+				evaluateIfCondition((If)tReferenceObject,tObject,tiObject);
 			} else {
 				evaluateTReference(tObject,tReferenceObject,tiObject,tiRootPackage);
 			}
@@ -183,7 +179,7 @@ public class InterpreterWState {
 		}
 	}
 	
-	private void evaluateForLoop(ForLoop forLoop,EObject tObject,EObject tiObject) throws InterpreterException{
+	private void evaluateForLoop(ForEach forLoop,EObject tObject,EObject tiObject) throws InterpreterException{
 		//Find forBody
 		EObject forBody = (EObject)forLoop.eGet(forLoop.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_FOR_BODY));
 		if(forBody==null) throw new TemplateMetamodelException("ForLoop without body: " + forLoop);
@@ -208,7 +204,7 @@ public class InterpreterWState {
 		//THE FORLOOP
 		for(Object o : inputCollection){
 			if(!(o instanceof EObject)){
-				throw new TemplateException("For-loop methodCall ("+forLoop.getCollection()+") does not return a list of ModelElements but Attributes");
+				throw new TemplateException("For-loop methodCall ("+forLoop.getExpression()+") does not return a list of ModelElements but Attributes");
 			}
 			context.pushVariable(varibleName,(EObject)o);
 			//BODY
@@ -217,7 +213,7 @@ public class InterpreterWState {
 		}
 	}
 	
-	private void evaluateIfCondition(IfCondition ifCondition,EObject tObject,EObject tiObject) throws InterpreterException{
+	private void evaluateIfCondition(If ifCondition,EObject tObject,EObject tiObject) throws InterpreterException{
 		//TODO not yet implemented
 		//else body missing?
 	}
