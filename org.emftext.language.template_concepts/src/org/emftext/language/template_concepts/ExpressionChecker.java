@@ -17,6 +17,7 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.helper.OCLHelper;
+import org.emftext.language.primitive_types.Primitive_typesPackage;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
@@ -54,9 +55,87 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			String error = parseExpression(metaClass, expression);
 			if (error != null) {
 				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", concept);
+			} else {
+				// for placeholders we must check the type
+				if (concept instanceof Placeholder) {
+					checkPlaceholderExpressionType(resource, metaClass,
+							concept, expression);
+				}
 			}
 		}
+	}
 
+	private void checkPlaceholderExpressionType(ITextResource resource,
+			EClass metaClass, TemplateConcept concept, String expression) {
+		Object queryOrError = createQuery(metaClass, expression);
+		if (queryOrError instanceof Query) {
+			Query query = (Query) queryOrError;
+			
+			// first, we need the type of the expression in the placeholder
+			Object expressionType = query.getExpression().getType();
+			//System.out.println("placeholder expression type = " + expressionType);
+
+			// then, we must figure out, from which primitive type the expression
+			// type inherits
+			Object placeHolderExpressionPrimitiveType = getPrimitiveType(expressionType);
+			//System.out.println("placeholder expression primitive type = " + placeHolderExpressionPrimitiveType);
+			
+			// now that we know about the primitive type of the expression, we
+			// must obtain the type of the target of the placeholder. therefore,
+			// we take the type of the reference that holds the placeholder
+			EClassifier placeholderReferenceType = concept.eContainingFeature().getEType();
+			//System.out.println("placeholder reference type = " + placeholderReferenceType);
+			
+			// since the type of the reference is always abstract, we must search for
+			// the one subclass that is used in the object language to hold attribute
+			// values
+			EClass boxedAttributeType = getBoxedAttributeType(placeholderReferenceType);
+			//System.out.println("placeholder boxed attribute type = " + boxedAttributeType);
+			
+			// once we have the concrete class that holds the attribute we must figure out
+			// the primitive type, i.e., the superclass from the primitive types package
+			Object placeHolderTargetPrimitiveType = getPrimitiveType(boxedAttributeType);
+			//System.out.println("placeholder target has primitive type = " + placeHolderTargetPrimitiveType);
+			
+			// now we have both the primitive type of the expression and the target of the
+			// placeholder. lets compare them...
+			if (!placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
+				resource.addError("The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")", concept);
+			}
+		} else {
+			System.out.println("Error while checking placeholder - error: " + queryOrError);
+		}
+	}
+
+	private EClass getBoxedAttributeType(EClassifier abstractReferenceType) {
+		if (!(abstractReferenceType instanceof EClass)) {
+			return null;
+		}
+		EClass typeClass = (EClass) abstractReferenceType;
+		List<EClassifier> allTypesInPackage = typeClass.getEPackage().getEClassifiers();
+		for (EClassifier subTypeCandidate : allTypesInPackage) {
+			if (subTypeCandidate instanceof EClass) {
+				EClass subClassCandidate = (EClass) subTypeCandidate;
+				if (subClassCandidate.getEAllSuperTypes().contains(abstractReferenceType)) {
+					return subClassCandidate;
+				}
+			}
+		}
+		return null;
+	}
+
+	private Object getPrimitiveType(Object type) {
+		if (!(type instanceof EClass)) {
+			return type;
+		}
+		EClass typeClass = (EClass) type;
+		List<EClass> superTypes = typeClass.getEAllSuperTypes();
+		for (EClass superType : superTypes) {
+			if (Primitive_typesPackage.eINSTANCE.getNsURI().equals(superType.getEPackage().getNsURI())) {
+				return superType;
+			}
+		}
+		return null;
 	}
 
 	private List<EObject> getObjectsByType(ITextResource resource, EClass metaClass) {
@@ -87,10 +166,12 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") inputMetaClass is null");
 			return null;
 		}
+		/*
 		if (contextObject == null) {
 			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") contextObject is null");
 			return null;
 		}
+		*/
 		Object query = createQuery(inputMetaClass, expressionString);
 		if (query instanceof Query) {
 			return ((Query) query).evaluate(contextObject);

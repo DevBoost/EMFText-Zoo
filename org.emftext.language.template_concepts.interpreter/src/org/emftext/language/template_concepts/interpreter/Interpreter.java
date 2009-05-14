@@ -30,7 +30,7 @@ public class Interpreter implements IOptionProvider, IResourcePostProcessorProvi
 			TemplateCall tc = (TemplateCall)resource.getContents().get(0);
 			EObject paramModel = tc.getParameterModel();
 			Template template = tc.getTarget();
-			InterpreterWState interpreterWithState = new InterpreterWState(template, paramModel);
+			InterpreterWithState interpreterWithState = new InterpreterWithState(template, paramModel);
 			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
 			
 			// pretty print templateInstanceAST

@@ -24,8 +24,6 @@ import org.emftext.language.template_concepts.interpreter.exceptions.Interpreter
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
 
-
-
 /**
  * This is the actual interpreter. It maintains a state. Thus,
  * all different parameters can be interrogated just 
@@ -33,10 +31,8 @@ import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMet
  * @author Marcel Böhme
  * Comment created on: 13.05.09
  */
-public class InterpreterWState {
+public class InterpreterWithState {
 	
-	//TODO make relative referenced
-	private static final String TEMPLATE_INSTANCE_METAMODEL = "http://www.emftext.org/language/sandwich";
 	private String variableName = "self"; //The only variable possible as for now
 	
 	private final Template template;
@@ -50,7 +46,7 @@ public class InterpreterWState {
 	
 	private List<EAttribute> treatedByPlaceholderList;
 	
-	public InterpreterWState(Template template, EObject rootOfParameterModel) throws InterpreterException{
+	public InterpreterWithState(Template template, EObject rootOfParameterModel) throws InterpreterException{
 		this.template = template;
 		this.rootOfParameterModel = rootOfParameterModel;
 		treatedByPlaceholderList = new ArrayList<EAttribute>();
@@ -62,10 +58,7 @@ public class InterpreterWState {
 	}
 	
 	private void load() throws InterpreterException{
-		System.out.println("Interpreter.process()");
-	
 		//Get root package in template instance
-		//tiRootPackage = EPackage.Registry.INSTANCE.getEPackage(TEMPLATE_INSTANCE_METAMODEL);
 		EObject templateBody = (EObject) template.eGet(template.eClass().getEStructuralFeature("body"));
 		tiRootPackage = templateBody.eClass().getEPackage();
 		
@@ -84,6 +77,9 @@ public class InterpreterWState {
 			// TODO mboehme: Why not? Is there always just one root object?
 			//What about files containing two elements (e.g. classes) next to each other.
 			//Isn't there "two roots" with the actual root(-container) being the resource itself?
+			// Answer: No there is never two root object. EMFText enforces exactly one
+			// root object. I think 'tiResource' can therefore be removed. The field
+			// 'templateInstanceRoot' is sufficient.
 			for(EObject rootObject : ((List<EObject>)templateBodyO)){
 				EObject toAdd = evaluate(rootObject,tiRootPackage, currentInputMetaClass);
 				if(toAdd!=null){
@@ -189,7 +185,12 @@ public class InterpreterWState {
 			throw new TemplateMetamodelException("An attributeElement only contains one attribute, but it contains " + tiAttributeElement.eClass().getEAllAttributes().size() + " attributes");
 		}
 		EAttribute tiAttribute = tiAttributeElement.eClass().getEAllAttributes().get(0);
-		tiAttributeElement.eSet(tiAttribute, evaluatedObject);
+		
+		// TODO mseifert: this is a dirty hack, but it works, since all primitive types
+		// have the attribute 'value'.
+		EObject evaluatedEObject = (EObject) evaluatedObject;
+		tiAttributeElement.eSet(tiAttribute, evaluatedEObject.eGet(evaluatedEObject.eClass().getEStructuralFeature("value")));
+		//tiAttributeElement.eSet(tiAttribute, evaluatedObject);
 		
 		//put into treatedByPlaceHolderList
 		treatedByPlaceholderList.add(tiAttribute);
