@@ -26,7 +26,7 @@ TOKENSTYLES {
 
 RULES {
 	RecipeTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass['"','"'] "%>" body;
-	IfRefRecipeIngredients ::= "<%IF" condition['"','"'] "%>" body "<%ENDIF%>";
-	ForRefRecipeIngredients ::= "<%FOR" collection['"','"'] "%>" body "<%ENDFOR%>";
+	IfRefRecipeIngredients ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
+	ForRefRecipeIngredients ::= "<%FOR" expression['"','"'] "%>" body "<%ENDFOR%>";
 	PhAttIngredientName ::= "<%=" expression['"','"'] "%>";
 }
