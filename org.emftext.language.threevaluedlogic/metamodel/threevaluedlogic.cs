@@ -10,7 +10,8 @@ OPTIONS {
 
 RULES {
 	And      ::= children:Or ("AND" children)*;
-	Or       ::= children:Negation ("OR" children)*;
-	Negation ::= "NOT" body;
+	Or       ::= (children:Negation,Nested, Constant) ("OR" children)*;
+	Negation ::= "NOT" body:Nested, Constant;
+	Nested   ::= "(" body:And ")";
 	Constant ::= value[];
 }
