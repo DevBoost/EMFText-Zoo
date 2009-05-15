@@ -30,6 +30,24 @@ TOKENS {
 	DEFINE T_SERIALIZABLE $'serializable'$;
 	DEFINE CONTAINMENT $'containment'$;
 }
+
+TOKENSTYLES {
+	"abstract" COLOR #000000, BOLD;
+	"derived" COLOR #000000, BOLD;
+	"volatile" COLOR #000000, BOLD;
+	"unique" COLOR #000000, BOLD;
+	"unsettable" COLOR #000000, BOLD;
+	"changeable" COLOR #000000, BOLD;
+	"transient" COLOR #000000, BOLD;
+	"resolveProxies" COLOR #000000, BOLD;
+	"interface" COLOR #000000, BOLD;
+	"class" COLOR #000000, BOLD;
+	"containment" COLOR #000000, BOLD;
+	"iD" COLOR #000000, BOLD;
+	"serializable" COLOR #000000, BOLD;
+	"'//'(~('\n'|'\r'|'\uffff'))*"  COLOR #00bb00, BOLD;
+	"'/*'.*'*/'"  COLOR #00bb00, BOLD;
+}
  
 RULES {
 	EPackage ::= "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['"', '"'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
