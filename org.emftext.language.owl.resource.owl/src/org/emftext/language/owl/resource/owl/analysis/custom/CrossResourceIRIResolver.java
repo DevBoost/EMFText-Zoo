@@ -1,26 +1,18 @@
 package org.emftext.language.owl.resource.owl.analysis.custom;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.owl.IRIIdentified;
 import org.emftext.language.owl.Namespace;
-import org.emftext.language.owl.Ontology;
 import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlFactory;
 import org.emftext.language.owl.OwlPackage;
 import org.emftext.language.owl.loading.RemoteLoader;
 import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.semanticweb.owl.model.OWLEntity;
-import org.semanticweb.owl.model.OWLOntology;
 
 public class CrossResourceIRIResolver {
 	
