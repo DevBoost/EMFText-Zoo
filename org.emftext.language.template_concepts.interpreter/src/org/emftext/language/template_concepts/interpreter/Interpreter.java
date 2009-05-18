@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.call.TemplateCall;
-import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterWrapperException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.runtime.EMFTextRuntimePlugin;

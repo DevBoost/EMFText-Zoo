@@ -17,7 +17,7 @@ import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.helper.OCLHelper;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitive_types.helper.PrimitiveTypesHelper;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
@@ -77,7 +77,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 
 			// then, we must figure out, from which primitive type the expression
 			// type inherits
-			Object placeHolderExpressionPrimitiveType = getPrimitiveType(expressionType);
+			Object placeHolderExpressionPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(expressionType);
 			//System.out.println("placeholder expression primitive type = " + placeHolderExpressionPrimitiveType);
 			
 			// now that we know about the primitive type of the expression, we
@@ -94,7 +94,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			
 			// once we have the concrete class that holds the attribute we must figure out
 			// the primitive type, i.e., the superclass from the primitive types package
-			Object placeHolderTargetPrimitiveType = getPrimitiveType(boxedAttributeType);
+			Object placeHolderTargetPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(boxedAttributeType);
 			//System.out.println("placeholder target has primitive type = " + placeHolderTargetPrimitiveType);
 			
 			// now we have both the primitive type of the expression and the target of the
@@ -119,20 +119,6 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 				if (subClassCandidate.getEAllSuperTypes().contains(abstractReferenceType)) {
 					return subClassCandidate;
 				}
-			}
-		}
-		return null;
-	}
-
-	private Object getPrimitiveType(Object type) {
-		if (!(type instanceof EClass)) {
-			return type;
-		}
-		EClass typeClass = (EClass) type;
-		List<EClass> superTypes = typeClass.getEAllSuperTypes();
-		for (EClass superType : superTypes) {
-			if (Primitive_typesPackage.eINSTANCE.getNsURI().equals(superType.getEPackage().getNsURI())) {
-				return superType;
 			}
 		}
 		return null;

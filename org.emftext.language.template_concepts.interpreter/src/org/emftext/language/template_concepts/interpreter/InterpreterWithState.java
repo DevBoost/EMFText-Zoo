@@ -2,8 +2,12 @@ package org.emftext.language.template_concepts.interpreter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Stack;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -11,9 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl; 
 import org.emftext.language.template_concepts.ExpressionChecker;
 import org.emftext.language.template_concepts.ForEach;
 import org.emftext.language.template_concepts.If;
@@ -21,6 +22,7 @@ import org.emftext.language.template_concepts.IfElse;
 import org.emftext.language.template_concepts.Placeholder;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.TemplateConcept;
+import org.emftext.language.template_concepts.Template_conceptsPackage;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
@@ -34,211 +36,240 @@ import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMet
  */
 public class InterpreterWithState {
 	
-	private String variableName = "self"; //The only variable possible as for now
-	
 	private final Template template;
-	private final EObject rootOfParameterModel;
-	private final EObject currentInputObject;
-	private EObject templateInstanceRoot;
-	private EPackage tiRootPackage;
 	
-	private Context context;
+	private EObject templateInstanceRoot;
+	
+	private Stack<EObject> inputObjectStack;
+	private Stack<EObject> inputMetaClassStack;
+	
 	private ExpressionChecker expressionChecker;
 	
-	private List<EAttribute> treatedByPlaceholderList;
+	private Map<EObject, EObject> templateToInstanceObjectMap;
+	private Map<EObject, EObject> instanceToTemplateObjectMap;
 	
-	public InterpreterWithState(Template template, EObject rootOfParameterModel) throws InterpreterException{
+	public InterpreterWithState(Template template, EObject inputModelRoot) throws InterpreterException{
 		this.template = template;
-		this.rootOfParameterModel = rootOfParameterModel;
-		treatedByPlaceholderList = new ArrayList<EAttribute>();
-		context = new Context();
+		
+		inputObjectStack = new Stack<EObject>();
+		inputMetaClassStack = new Stack<EObject>();
+		
+		inputObjectStack.push(inputModelRoot);
+		inputMetaClassStack.push(inputModelRoot.eClass());
+		
+		templateToInstanceObjectMap = new HashMap<EObject, EObject>();
+		instanceToTemplateObjectMap = new HashMap<EObject, EObject>();
+
 		expressionChecker = new ExpressionChecker();
-		currentInputObject = rootOfParameterModel;
 		
 		load();
 	}
 	
-	private void load() throws InterpreterException{
-		//Get root package in template instance
-		EObject templateBody = (EObject) template.eGet(template.eClass().getEStructuralFeature("body"));
-		tiRootPackage = templateBody.eClass().getEPackage();
-		//tiRootPackage = Registry.INSTANCE.getEPackage("http://www.emftext.org/java");
-		
-		Resource tiResource = new ResourceImpl();
+	private void load() throws InterpreterException {
 		
 		//find templateBody
 		EStructuralFeature templateBodySF = template.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_TEMPLATE_BODY);
-		if(templateBodySF==null) throw new TemplateMetamodelException("Template has no body");
+		if (templateBodySF == null) {
+			throw new TemplateMetamodelException("Template has no body");
+		}
 		
 		Object templateBodyO = template.eGet(templateBodySF);
-		if(templateBodyO == null) throw new TemplateMetamodelException("Template has no body");
-		EClass currentInputMetaClass = (EClass) template.getInputMetaClass();
-		//Can be a list
-		if(templateBodyO instanceof List){
-			// TODO this will not work
-			// TODO mboehme: Why not? Is there always just one root object?
-			//What about files containing two elements (e.g. classes) next to each other.
-			//Isn't there "two roots" with the actual root(-container) being the resource itself?
-			// Answer: No there is never two root object. EMFText enforces exactly one
-			// root object. I think 'tiResource' can therefore be removed. The field
-			// 'templateInstanceRoot' is sufficient.
-			for(EObject rootObject : ((List<EObject>)templateBodyO)){
-				EObject toAdd = evaluate(rootObject, tiRootPackage, currentInputMetaClass);
-				if(toAdd!=null){
-					tiResource.getContents().add(toAdd);
-				}
-			}
-		//or a single element
+		if (templateBodyO == null) {
+			throw new TemplateMetamodelException("Template has no body");
+		}
+		if (templateBodyO instanceof List) {
+			//Can be a list
+			throw new TemplateMetamodelException("Template contains multiple root elements");
 		} else {
-			EObject tiObject = evaluate((EObject)templateBodyO, tiRootPackage, currentInputMetaClass);
-			tiResource.getContents().add(tiObject);
-			templateInstanceRoot = tiObject;
+			//or a single element
+			templateInstanceRoot = evaluate((EObject) templateBodyO);
+			copyCrossReferences();
+		}
+	}
+	
+	private void copyCrossReferences() {
+		if (templateInstanceRoot == null) {
+			return;
+		}
+		// Copy cross reference
+		TreeIterator<EObject> contents = templateInstanceRoot.eAllContents();
+		while (contents.hasNext()) {
+			EObject nextTiObject = contents.next();
+			for (EReference reference : nextTiObject.eClass().getEAllReferences()) {
+				if (reference.isContainment()) {
+					continue;
+				}
+				EObject tObject = instanceToTemplateObjectMap.get(nextTiObject);
+				EObject referencedObjectInTemplate = (EObject) tObject.eGet(reference);
+				EObject referencedObjectInInstance = templateToInstanceObjectMap.get(referencedObjectInTemplate);
+				
+				//System.out.println("copy cross reference " + reference.getName() + " target = " + referencedObjectInInstance);
+				nextTiObject.eSet(reference, referencedObjectInInstance);
+			}
 		}
 	}
 	
 	/**
 	 * @param tObject eObject in the template language
-	 * @param tiPackage an ePackage in the template instance  
+	 * @param tiPackage an ePackage in the template instance
 	 * @return Returns the representative of parent in the template instance
 	 */
-	private EObject evaluate(EObject tObject, EPackage tiRootPackage, EClass currentInputMetaClass) throws InterpreterException{
-		if(tObject == null) return null;
+	private EObject evaluate(EObject tObject) throws InterpreterException{
+		if (tObject == null) {
+			return null;
+		}
 		String className = tObject.eClass().getName();
 	
 		//find respective language class in this package
 		//and instantiate it as EObject
-		EObject tiObject = findInPackageAndInstantiate(className, tiRootPackage);
-		if (tiObject==null) {
+		EObject tiObject = createObjectOfSameClass(tObject);
+		if (tiObject == null) {
 			throw new InterpreterException("Didn't find respective template instance class for template class '" + className + "'");
 		}
+		//System.out.println("Copied " + tObject + " to " + tiObject);
+		templateToInstanceObjectMap.put(tObject, tiObject);
+		instanceToTemplateObjectMap.put(tiObject, tObject);
 		
-		for(EObject tReferenceObject : tObject.eContents()){
+		for (EObject tReferenceObject : tObject.eContents()) {
 			//Evaluate TemplateConcept
-			if(tReferenceObject instanceof TemplateConcept){
-				if(tReferenceObject instanceof Placeholder){
-					evaluatePlaceHolder((Placeholder)tReferenceObject,tObject,tiObject, currentInputMetaClass);
-				} else if(tReferenceObject instanceof ForEach){
-					evaluateForLoop((ForEach)tReferenceObject,tObject,tiObject, currentInputMetaClass);
-				} else if(tReferenceObject instanceof If){
-					evaluateIfCondition((If)tReferenceObject,tObject,tiObject, currentInputMetaClass);
-				} else if(tReferenceObject instanceof IfElse){
-					evaluateIfElseCondition((IfElse)tReferenceObject,tObject,tiObject, currentInputMetaClass);
-				} else throw new TemplateMetamodelException("Unkown TemplateConcept: " + tReferenceObject.getClass());
+			if (tReferenceObject instanceof TemplateConcept) {
+				if (tReferenceObject instanceof Placeholder) {
+					evaluatePlaceHolder((Placeholder) tReferenceObject, tiObject);
+				} else if(tReferenceObject instanceof ForEach) {
+					evaluateForLoop((ForEach) tReferenceObject, tiObject);
+				} else if(tReferenceObject instanceof If) {
+					evaluateIfCondition((If) tReferenceObject, tiObject);
+				} else if(tReferenceObject instanceof IfElse) {
+					evaluateIfElseCondition((IfElse) tReferenceObject, tiObject);
+				} else {
+					throw new TemplateMetamodelException("Unkown TemplateConcept: " + tReferenceObject.getClass());
+				}
 			//Evaluate recursively
 			} else {
-				evaluateTReference(tObject,tReferenceObject,tiObject,tiRootPackage, currentInputMetaClass);
+				evaluateTReference(tObject, tReferenceObject, tiObject);
 			}
 		}
 		
 		//Now just copy attributes which have not been treated as PlaceHolder
-		for(EAttribute tiAttributeClass : tiObject.eClass().getEAllAttributes()){
-			if(!treatedByPlaceholderList.contains(tiAttributeClass)){
-				String attributeName = tiAttributeClass.getName();
-				//find respective langParentAttributeClass
-				EAttribute tAttributeClass = null;
-				for(EAttribute attClass : tObject.eClass().getEAllAttributes()){
-					if(attClass.getName().matches(attributeName)){
-						tAttributeClass = attClass;
-						break;
-					}
+		for (EAttribute tiAttributeClass : tiObject.eClass().getEAllAttributes()) {
+			String attributeName = tiAttributeClass.getName();
+			//find respective langParentAttributeClass
+			EAttribute tAttributeClass = null;
+			for (EAttribute attClass : tObject.eClass().getEAllAttributes()) {
+				if (attClass.getName().matches(attributeName)) {
+					tAttributeClass = attClass;
+					break;
 				}
-				if(tAttributeClass==null){
-					throw new TemplateMetamodelException("No tAttributeClass found for tiAttributeClass " + tObject.eClass().getName()+"."+attributeName);
-				}
-				Object tAttribute = tObject.eGet(tAttributeClass);
-				//attribute-OBJECTS just need to be set. No need to transform them
-				tiObject.eSet(tiAttributeClass, tAttribute);
 			}
+			if (tAttributeClass == null) {
+				throw new TemplateMetamodelException("No tAttributeClass found for tiAttributeClass " + tObject.eClass().getName()+"."+attributeName);
+			}
+			Object tAttribute = tObject.eGet(tAttributeClass);
+			//System.out.println("Copied attribute " + attributeName + " (" + tAttribute + ") to " + tiObject);
+			//attribute-OBJECTS just need to be set. No need to transform them
+			tiObject.eSet(tiAttributeClass, tAttribute);
 		}
+		
 		return tiObject;
 	}
 	
-	private void evaluatePlaceHolder(Placeholder placeHolder,
-			EObject tObject,EObject tiObject, EClass currentInputMetaClass) throws InterpreterException{
+	private void evaluatePlaceHolder(Placeholder placeHolder, EObject tiObject) throws InterpreterException{
 		
-		Object evaluatedObject = expressionChecker.evaluateExpression(
-				currentInputMetaClass, 
-				placeHolder.getExpression(), //expression
-				currentInputObject);
-				//context.getVariableValue(variableName)); //context for only possible variable;
+		Object evaluatedObject = evaluateExpression(placeHolder);
 		
 		//placeHolder extends from PlaceHolder and the tiAttributeClass
 		List<EClass> superClasses = placeHolder.eClass().getESuperTypes();
-		if(superClasses.size()!=2) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
+		if (superClasses.size() != 2) {
+			throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
+		}
 		EClass tAttributeElementClass = null;
-		for(EClass superClass : superClasses){
-			if(superClass.getName()!=Placeholder.class.getName()){
+		for (EClass superClass : superClasses) {
+			if (!superClass.equals(Template_conceptsPackage.eINSTANCE.getPlaceholder())) {
 				tAttributeElementClass = superClass;
 			}
 		}
-		if(tAttributeElementClass==null) throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
-		
-		//derive tiAttributeElementName
-		if (!tAttributeElementClass.getName().startsWith(TemplateMetamodelAssumptions.FEATURE)) {
-			throw new InterpreterException("AttributeElements should begin with "+TemplateMetamodelAssumptions.FEATURE);
+		if (tAttributeElementClass == null) {
+			throw new TemplateMetamodelException("The type of a concrete placeholder extends from PlaceHolder and the extended attribute");
 		}
-		String derivedTIAttributeElementName = tAttributeElementClass.getName().substring(TemplateMetamodelAssumptions.FEATURE.length());
+		
+		EClass tiConcreteAttributeClass = findSubClass(tAttributeElementClass);
 		
 		//find tiAttributeElement
-		EObject tiAttributeElement = findInPackageAndInstantiate(derivedTIAttributeElementName, tiRootPackage);
-		if(tiAttributeElement==null) throw new TemplateMetamodelException("Didn't find tiAttributeElement with name: " + derivedTIAttributeElementName);
-		
-		//contains exactly one attribute
-		if(tiAttributeElement.eClass().getEAllAttributes().size()!=1){
-			throw new TemplateMetamodelException("An attributeElement only contains one attribute, but it contains " + tiAttributeElement.eClass().getEAllAttributes().size() + " attributes");
+		EObject tiAttributeElement = createObject(tiConcreteAttributeClass);
+		if (tiAttributeElement == null) {
+			throw new TemplateMetamodelException("Couldn't create tiAttributeElement - class: " + tAttributeElementClass);
 		}
-		EAttribute tiAttribute = tiAttributeElement.eClass().getEAllAttributes().get(0);
 		
 		// TODO mseifert: this is a dirty hack, but it works, since all primitive types
 		// have the attribute 'value'.
 		EObject evaluatedEObject = (EObject) evaluatedObject;
-		tiAttributeElement.eSet(tiAttribute, evaluatedEObject.eGet(evaluatedEObject.eClass().getEStructuralFeature("value")));
-		//tiAttributeElement.eSet(tiAttribute, evaluatedObject);
-		
-		//put into treatedByPlaceHolderList
-		treatedByPlaceholderList.add(tiAttribute);
+		EClass tiAttributeElementClass = tiAttributeElement.eClass();
+		EClass evaluateEObjectClass = evaluatedEObject.eClass();
+		tiAttributeElement.eSet(tiAttributeElementClass.getEStructuralFeature("value"), evaluatedEObject.eGet(evaluateEObjectClass.getEStructuralFeature("value")));
 		
 		//now attach tiAttributeElement to tiObject
 		EReference tReference = (EReference)placeHolder.eContainingFeature();
-		if(tReference==null) throw new InterpreterException("Placeholder must be contained by some container");
+		if (tReference == null) {
+			throw new InterpreterException("Placeholder must be contained by some container");
+		}
 		EReference tiReference = (EReference)tiObject.eClass().getEStructuralFeature(tReference.getName());
-		if(tiReference==null) throw new TemplateMetamodelException("References to placeholder and attributeElement in TI should be the same");
+		if (tiReference == null) {
+			throw new TemplateMetamodelException("References to placeholder and attributeElement in TI should be the same");
+		}
 		//multiplicity > 1
-		if(tiObject.eGet(tiReference) instanceof List){
+		if (tiObject.eGet(tiReference) instanceof List) {
 			((List)tiObject.eGet(tiReference)).add(tiAttributeElement);
 		//multiplicity <=1
 		} else {
 			tiObject.eSet(tiReference,tiAttributeElement);
 		}
 	}
+
+	private EClass findSubClass(EClass abstractAttributeClass) {
+		EPackage ePackage = (EPackage) abstractAttributeClass.eContainer();
+		for (EClassifier classifier : ePackage.getEClassifiers()) {
+			if (!(classifier instanceof EClass)) {
+				continue;
+			}
+			EClass eClass = (EClass) classifier;
+			if (eClass.getEAllSuperTypes().contains(abstractAttributeClass)) {
+				return eClass;
+			}
+		}
+		return null;
+	}
+
+	private Object evaluateExpression(TemplateConcept concept) {
+		EObject peek = inputObjectStack.peek();
+		return expressionChecker.evaluateExpression(
+				peek.eClass(), 
+				concept.getExpression(), //expression
+				peek);
+	}
 	
-	private void evaluateForLoop(ForEach forLoop,EObject tObject,EObject tiObject, EClass currentInputMetaClass) throws InterpreterException{
+	private void evaluateForLoop(ForEach forLoop, EObject tiObject) throws InterpreterException{
 		//Find forBody
 		Object forBodyO = forLoop.eGet(forLoop.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_FOR_BODY));
-		if(forBodyO==null) throw new TemplateMetamodelException("ForLoop without body: " + forLoop);
+		if (forBodyO == null) {
+			throw new TemplateMetamodelException("ForLoop without body: " + forLoop);
+		}
 		
 		//Find tiReference
 		EReference tiReference = null;
-		for(EReference ref : tiObject.eClass().getEReferences()){
-			if(forLoop.eContainingFeature().getName().matches(ref.getName())){
+		for (EReference ref : tiObject.eClass().getEReferences()) {
+			if (forLoop.eContainingFeature().getName().matches(ref.getName())) {
 				tiReference = ref;
 				break;
 			}
 		}
-		if(tiReference == null) throw new TemplateMetamodelException("For-Loop: Didn't find reference " + forLoop.eContainingFeature().getName() + " in tiObject");
+		if (tiReference == null) {
+			throw new TemplateMetamodelException("For-Loop: Didn't find reference " + forLoop.eContainingFeature().getName() + " in tiObject");
+		}
 		
 		//Resolve the collection
 		
-		Collection<?> inputCollection = null;
-		try{
-			inputCollection = (Collection<?>) expressionChecker.evaluateExpression(
-					currentInputMetaClass, 
-					forLoop.getExpression(), //expression
-					currentInputObject); //context
-		// TODO remove this
-		} catch (StackOverflowError e) {
-			e.printStackTrace();
-		}
+		EObject peek = inputObjectStack.peek();
+		Collection<?> inputCollection = (Collection<?>) evaluateExpression(forLoop);
 		/** Global **/
 		//String varibleName = "self"; //The only variable possible as for now
 		
@@ -247,33 +278,38 @@ public class InterpreterWithState {
 			inputCollection = new ArrayList<Object>();
 		}
 		//THE FORLOOP
-		for(Object o : inputCollection){
-			if(!(o instanceof EObject)){
+		for (Object o : inputCollection) {
+			if (!(o instanceof EObject)) {
 				throw new TemplateException("For-loop methodCall ("+forLoop.getExpression()+") does not return a list of ModelElements but Attributes");
 			}
-			context.pushVariable(variableName,(EObject)o);
+			EObject next = (EObject) o;
+			inputObjectStack.push(next);
+			//context.pushVariable(variableName,(EObject)o);
 			//BODY (can contain multiple elements)
-			if(forBodyO instanceof List){
+			if (forBodyO instanceof List) {
 				for(EObject forBody : (List<EObject>)forBodyO){
-					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(forBody, tiRootPackage, currentInputMetaClass));
+					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(forBody));
 				}
 			} else {
-				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject)forBodyO, tiRootPackage, currentInputMetaClass));
+				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) forBodyO));
 			}
-			context.pullVariable(variableName);
+			inputObjectStack.pop();
+			//context.pullVariable(variableName);
 		}
 	}
 	
-	private void evaluateIfCondition(If ifCondition,EObject tObject,EObject tiObject, EClass currentInputMetaClass) throws InterpreterException{
+	private void evaluateIfCondition(If ifCondition, EObject tiObject) throws InterpreterException{
 		Object ifBodyO = ifCondition.eGet(ifCondition.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_IF_BODY));
-		if(ifBodyO==null) throw new TemplateMetamodelException("IfCondition without body: " + ifCondition);
+		if (ifBodyO == null) {
+			throw new TemplateMetamodelException("IfCondition without body: " + ifCondition);
+		}
 		
 		//Find tiReference
 		EReference tiReference = null;
 		String featureName = ifCondition.eContainingFeature().getName();
 		EClass tiObjectType = tiObject.eClass();
-		for(EReference ref : tiObjectType.getEAllReferences()){
-			if(featureName.matches(ref.getName())){
+		for (EReference ref : tiObjectType.getEAllReferences()) {
+			if (featureName.matches(ref.getName())) {
 				tiReference = ref;
 				break;
 			}
@@ -282,120 +318,104 @@ public class InterpreterWithState {
 			throw new TemplateMetamodelException("IF: Didn't find reference '" + featureName + "' in tiObject (" + tiObjectType + ")");
 		}
 		
-		evaluateIf(ifCondition.getExpression(),ifBodyO,null,tObject,tiObject,tiReference, currentInputMetaClass);
+		evaluateIf(ifCondition, ifBodyO, null, tiObject, tiReference);
 	}
 	
-	private void evaluateIfElseCondition(IfElse ifElseCondition,EObject tObject,EObject tiObject, EClass currentInputMetaClass) throws InterpreterException{
+	private void evaluateIfElseCondition(IfElse ifElseCondition, EObject tiObject) throws InterpreterException{
 		Object ifBodyO = ifElseCondition.eGet(ifElseCondition.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_IF_BODY));
-		if(ifBodyO==null) throw new TemplateMetamodelException("IfElseCondition without ifBody: " + ifElseCondition);
+		if (ifBodyO == null) {
+			throw new TemplateMetamodelException("IfElseCondition without ifBody: " + ifElseCondition);
+		}
 		Object elseBodyO = ifElseCondition.eGet(ifElseCondition.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_ELSE_BODY));
-		if(elseBodyO==null) throw new TemplateMetamodelException("IfElseCondition without elseBody: " + ifElseCondition);
+		if (elseBodyO == null) {
+			throw new TemplateMetamodelException("IfElseCondition without elseBody: " + ifElseCondition);
+		}
 		
 		//Find tiReference
 		EReference tiReference = null;
-		for(EReference ref : tiObject.eClass().getEReferences()){
-			if(ifElseCondition.eContainingFeature().getName().matches(ref.getName())){
+		for (EReference ref : tiObject.eClass().getEReferences()) {
+			if (ifElseCondition.eContainingFeature().getName().matches(ref.getName())) {
 				tiReference = ref;
 				break;
 			}
 		}
-		if(tiReference == null) throw new TemplateMetamodelException("For-Loop: Didn't find reference " + ifElseCondition.eContainingFeature().getName() + " in tiObject");
-		
-		evaluateIf(ifElseCondition.getExpression(),ifBodyO,elseBodyO,tObject,tiObject,tiReference, currentInputMetaClass);
-	}
-	
-	private void evaluateIf(String expression, Object ifBodyO, Object elseBodyO, EObject tObject, EObject tiObject, EReference tiReference, EClass currentInputMetaClass) throws InterpreterException{
-		Boolean condition = null;
-		condition = (Boolean)expressionChecker.evaluateExpression(
-				currentInputMetaClass, //TODO put correct inputMetaClass 
-				expression, //expression
-				currentInputObject);
-				//context.getVariableValue(variableName)); //context for only possible variable
-		
-		// TODO remove this
-		if (condition == null) {
-			condition = Boolean.TRUE;
+		if (tiReference == null) {
+			throw new TemplateMetamodelException("For-Loop: Didn't find reference " + ifElseCondition.eContainingFeature().getName() + " in tiObject");
 		}
 		
+		evaluateIf(ifElseCondition, ifBodyO, elseBodyO, tiObject, tiReference);
+	}
+	
+	private void evaluateIf(TemplateConcept ifOrIfElse, Object ifBodyO, Object elseBodyO, EObject tiObject, EReference tiReference) throws InterpreterException{
+		
+		Boolean condition = (Boolean) evaluateExpression(ifOrIfElse);
+		
 		//IF-CONDITION
-		if(condition){
+		if (condition) {
 			//ifBody
-			if(ifBodyO instanceof List){
+			if (ifBodyO instanceof List) {
 				for(EObject ifBody : (List<EObject>)ifBodyO){
-					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(ifBody, tiRootPackage, currentInputMetaClass));
+					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(ifBody));
 				}
 			} else {
-				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject)ifBodyO, tiRootPackage, currentInputMetaClass));
+				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) ifBodyO));
 			}
 		} else {
 			//elseBody (may be null)
-			if(elseBodyO!=null){
-				if(elseBodyO instanceof List){
-					for(EObject elseBody : (List<EObject>)elseBodyO){
-						((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(elseBody, tiRootPackage, currentInputMetaClass));
+			if (elseBodyO != null) {
+				if (elseBodyO instanceof List) {
+					for (EObject elseBody : (List<EObject>)elseBodyO) {
+						((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(elseBody));
 					}
 				} else {
-					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject)elseBodyO, tiRootPackage, currentInputMetaClass));
+					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) elseBodyO));
 				}
 			}
 		}
 	}
 	
-	private void evaluateTReference(EObject tObject, EObject tReferenceObject, EObject tiObject, EPackage tiRootPackage, EClass currentInputMetaClass) throws InterpreterException{
-		if(tReferenceObject==null){
+	private void evaluateTReference(EObject tObject, EObject tReferenceObject, EObject tiObject) throws InterpreterException{
+		if (tReferenceObject == null) {
 			System.err.println("tReferenceObject was null?");
 			return;
 		}
 		
-		EReference tReference = (EReference)tReferenceObject.eContainingFeature();
-		if(tReference == null) throw new InterpreterException("tReference from tObject to tReferenceObject not found in tObject");
+		EReference tReference = (EReference) tReferenceObject.eContainingFeature();
+		if (tReference == null) {
+			throw new InterpreterException("tReference from tObject to tReferenceObject not found in tObject");
+		}
 		
 		EReference tiReference = null;
-		for(EReference ref : tiObject.eClass().getEReferences()){
-			if(tReference.getName().matches(ref.getName())){
+		for (EReference ref : tiObject.eClass().getEReferences()) {
+			if (tReference.getName().matches(ref.getName())) {
 				tiReference = ref;
 				break;
 			}
 		}
-		if(tiReference==null) throw new TemplateMetamodelException("tiObject Reference missing: "+tReference.getName()+" Found an object which is neither meta language nor object language");
+		if (tiReference == null) {
+			throw new TemplateMetamodelException("tiObject Reference missing: "+tReference.getName()+" Found an object which is neither meta language nor object language");
+		}
 		
 		//tReferenceObject can also be a listMember
-		if(tReference.isMany()){
-			((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(tReferenceObject, tiRootPackage, currentInputMetaClass));
+		if (tReference.isMany()) {
+			((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(tReferenceObject));
 		} else {
-			tiObject.eSet(tiReference, evaluate(tReferenceObject, tiRootPackage, currentInputMetaClass));
+			tiObject.eSet(tiReference, evaluate(tReferenceObject));
 		}
 	}
 	
-//	public EPackage findRootPackage(EPackage pack){
-//		if(pack.getESuperPackage()!=null) return findRootPackage(pack.getESuperPackage());
-//		return pack;
-//	}
-	
-	private EObject findInPackageAndInstantiate(String className, EPackage currentPackage) throws InterpreterException{
-		try{
-			for(EClassifier tiClassifier : currentPackage.getEClassifiers()){
-				if(tiClassifier instanceof EClass){
-					EClass tiClass = (EClass)tiClassifier;
-					if(tiClass.getName().matches(className)){
-						return currentPackage.getEFactoryInstance().create(tiClass);
-					}
-				}
-			}
-		} catch(Exception e){
-			throw new TemplateException("Couldn't instantiate " + className,e);
-		}
-		//not found in this package search deeper
-		for(EPackage subPackage : currentPackage.getESubpackages()){
-			EObject toReturn = findInPackageAndInstantiate(className, subPackage);
-			if(toReturn!=null) return toReturn;
-		}		
-		return null;
+	private EObject createObjectOfSameClass(EObject original) throws InterpreterException {
+		return createObject(original.eClass());
 	}
 	
+	private EObject createObject(EClass eClass) throws InterpreterException {
+		EPackage ePackage = (EPackage) eClass.eContainer();
+		EObject newInstance = ePackage.getEFactoryInstance().create(eClass);
+		//System.out.println("createObject() created " + newInstance.getClass().getSimpleName());
+		return newInstance;
+	}
 	
-	
-	public EObject getTemplateInstanceRoot(){
+	public EObject getTemplateInstanceRoot() {
 		return templateInstanceRoot;
 	}
 }

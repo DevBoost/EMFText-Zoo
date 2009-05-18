@@ -14,7 +14,8 @@ public class InstructionUsingReferenceResolver extends org.emftext.runtime.resou
 	
 	@Override	
 	protected java.lang.String doDeResolve(org.emftext.language.sandwich.FeatureInstructionUsing element, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+		return ((IngredientName) ((Ingredient) element).getName()).getValue();
+		//return super.doDeResolve(element, container, reference);
 	}
 	
 	@Override	
