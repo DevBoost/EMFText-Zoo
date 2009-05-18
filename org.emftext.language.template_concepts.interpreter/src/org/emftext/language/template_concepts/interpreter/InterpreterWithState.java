@@ -1,6 +1,5 @@
 package org.emftext.language.template_concepts.interpreter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -220,7 +219,7 @@ public class InterpreterWithState {
 		}
 		//multiplicity > 1
 		if (tiObject.eGet(tiReference) instanceof List) {
-			((List)tiObject.eGet(tiReference)).add(tiAttributeElement);
+			castToEObjectList(tiObject.eGet(tiReference)).add(tiAttributeElement);
 		//multiplicity <=1
 		} else {
 			tiObject.eSet(tiReference,tiAttributeElement);
@@ -271,15 +270,8 @@ public class InterpreterWithState {
 		
 		//Resolve the collection
 		
-		EObject peek = inputObjectStack.peek();
 		Collection<?> inputCollection = (Collection<?>) evaluateExpression(forLoop);
-		/** Global **/
-		//String varibleName = "self"; //The only variable possible as for now
 		
-		// TODO remove this
-		if (inputCollection == null) {
-			inputCollection = new ArrayList<Object>();
-		}
 		//THE FORLOOP
 		for (Object o : inputCollection) {
 			if (!(o instanceof EObject)) {
@@ -293,11 +285,11 @@ public class InterpreterWithState {
 			}
 			//BODY (can contain multiple elements)
 			if (forBodyO instanceof List) {
-				for(EObject forBody : (List<EObject>)forBodyO){
-					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(forBody));
+				for(EObject forBody : castToEObjectList(forBodyO)){
+					castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(forBody));
 				}
 			} else {
-				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) forBodyO));
+				castToEObjectList(tiObject.eGet(tiReference)).add(evaluate((EObject) forBodyO));
 			}
 			if (variableName != null) {
 				loopVariableStack.pop();
@@ -362,24 +354,29 @@ public class InterpreterWithState {
 		if (condition) {
 			//ifBody
 			if (ifBodyO instanceof List) {
-				for(EObject ifBody : (List<EObject>)ifBodyO){
-					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(ifBody));
+				for(EObject ifBody : castToEObjectList(ifBodyO)) {
+					castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(ifBody));
 				}
 			} else {
-				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) ifBodyO));
+				castToEObjectList(tiObject.eGet(tiReference)).add(evaluate((EObject) ifBodyO));
 			}
 		} else {
 			//elseBody (may be null)
 			if (elseBodyO != null) {
 				if (elseBodyO instanceof List) {
-					for (EObject elseBody : (List<EObject>)elseBodyO) {
-						((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(elseBody));
+					for (EObject elseBody : castToEObjectList(elseBodyO)) {
+						castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(elseBody));
 					}
 				} else {
-					((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) elseBodyO));
+					castToEObjectList(tiObject.eGet(tiReference)).add(evaluate((EObject) elseBodyO));
 				}
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<EObject> castToEObjectList(Object list) {
+		return (List<EObject>) list;
 	}
 	
 	private void evaluateTReference(EObject tObject, EObject tReferenceObject, EObject tiObject) throws InterpreterException{
@@ -406,7 +403,7 @@ public class InterpreterWithState {
 		
 		//tReferenceObject can also be a listMember
 		if (tReference.isMany()) {
-			((List<EObject>)tiObject.eGet(tiReference)).add(evaluate(tReferenceObject));
+			castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(tReferenceObject));
 		} else {
 			tiObject.eSet(tiReference, evaluate(tReferenceObject));
 		}

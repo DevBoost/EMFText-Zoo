@@ -14,14 +14,12 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
-import org.eclipse.ocl.ecore.impl.VariableImpl;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
@@ -43,6 +41,8 @@ import org.emftext.runtime.resource.ITextResource;
  * the collection that contains the expression.
  * 
  * TODO adjust this checking to the one done in the interpreter
+ * 
+ * TODO clean this mess up
  */
 public class ExpressionChecker implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
 
@@ -162,15 +162,10 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") inputMetaClass is null");
 			return null;
 		}
-		/*
-		if (contextObject == null) {
-			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") contextObject is null");
-			return null;
-		}
-		*/
+
 		Object query = createQuery(inputMetaClass, variables, expressionString);
 		if (query instanceof Query) {
-			return ((Query) query).evaluate(contextObject);
+			return ((Query<EClassifier, EClass, EObject>) query).evaluate(contextObject);
 		} else {
 			return null;
 		}
@@ -188,7 +183,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			helper.setContext(inputMetaClass);
 
 			expression = helper.createQuery(expressionString);
-			Query query = ocl.createQuery(expression);
+			Query<EClassifier, EClass, EObject> query = ocl.createQuery(expression);
 			
 			addVariableValues(variables, query);
 
@@ -213,7 +208,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		}
 	}
 
-	private void addVariableValues(Map<String, EObject> variables, Query query) {
+	private void addVariableValues(Map<String, EObject> variables, Query<EClassifier, EClass, EObject> query) {
 		if (variables == null) {
 			return;
 		}
