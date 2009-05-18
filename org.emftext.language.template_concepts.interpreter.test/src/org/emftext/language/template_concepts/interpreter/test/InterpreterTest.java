@@ -24,7 +24,9 @@ public class InterpreterTest extends TestCase {
 	}
 
 	public void testSandwichInterpretation() {
+		// basic test (input model is not used)
 		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE bread butter");
+		// basic test for FOREACH loop and placeholder inside of the loop
 		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE bread i1 i2 i3 TOAST bread");
 	}
 
@@ -55,11 +57,14 @@ public class InterpreterTest extends TestCase {
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			instance.save(outputStream, null);
 			
+			// normalize output
 			String result = new String(outputStream.toByteArray());
 			result = result.replace("\n", "");
 			result = result.replace("\r", "");
 			result = result.replace("  ", " ");
 			result = result.trim();
+			
+			// compare output with expected result
 			assertEquals(expectedResult, result);
 		} catch (IOException e) {
 			fail(e.getMessage());
@@ -67,14 +72,6 @@ public class InterpreterTest extends TestCase {
 	}
 
 	private void registerResourceFactories() {
-		/*
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore",
-				new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi",
-				new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
-				*/
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"sandwich",
 				new org.emftext.language.sandwich.resource.sandwich.SandwichResourceFactory());
