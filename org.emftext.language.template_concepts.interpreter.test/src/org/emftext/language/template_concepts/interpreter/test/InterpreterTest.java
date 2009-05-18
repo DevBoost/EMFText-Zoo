@@ -24,14 +24,19 @@ public class InterpreterTest extends TestCase {
 	}
 
 	public void testSandwichInterpretation() {
+		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE bread butter");
+		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE bread i1 i2 i3 TOAST bread");
+	}
+
+	private void testInterpretation(String templateFileName, String customerFileName, String expectedResult) {
 		try {
 			ResourceSetImpl resourceSet = new ResourceSetImpl();
 	
-			Resource customerResource = resourceSet.createResource(URI.createFileURI(INPUT_FOLDER + File.separator + "customer1.customer"));
+			Resource customerResource = resourceSet.createResource(URI.createFileURI(INPUT_FOLDER + File.separator + customerFileName));
 			customerResource.load(null);
 			Customer customer = (Customer) customerResource.getContents().get(0);
 			
-			Resource templateResource = resourceSet.createResource(URI.createFileURI(INPUT_FOLDER + File.separator + "template1.custom_sandwich"));
+			Resource templateResource = resourceSet.createResource(URI.createFileURI(INPUT_FOLDER + File.separator + templateFileName));
 			templateResource.load(null);
 			Template template = (Template) templateResource.getContents().get(0);
 			
@@ -55,7 +60,7 @@ public class InterpreterTest extends TestCase {
 			result = result.replace("\r", "");
 			result = result.replace("  ", " ");
 			result = result.trim();
-			assertEquals("RECIPE bread butter", result);
+			assertEquals(expectedResult, result);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
