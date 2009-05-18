@@ -28,9 +28,9 @@ TOKENSTYLES {
 RULES {
 	RecipeTemplate ::= "<%TEMPLATE INPUT=" inputMetaClass['"','"'] "%>" body;
 	IfFeatureRecipeIngredients ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
-	ForFeatureRecipeIngredients ::= "<%FOR" expression['"','"'] "%>" body "<%ENDFOR%>";
+	ForFeatureRecipeIngredients ::= "<%FOR" (variable[] ":")? expression['"','"'] "%>" body "<%ENDFOR%>";
 	IfFeatureRecipeInstructions ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
-	ForFeatureRecipeInstructions ::= "<%FOR" expression['"','"'] "%>" body "<%ENDFOR%>";
+	ForFeatureRecipeInstructions ::= "<%FOR" (variable[] ":")? expression['"','"'] "%>" body "<%ENDFOR%>";
 	IfElseFeatureInstructionUsing ::= "<%IF" expression['"','"'] "%>" thenBody "<%ELSE%>" elseBody "<%ENDIF%>";
 	PhFeatureIngredientName ::= "<%=" expression['"','"'] "%>";
 }
