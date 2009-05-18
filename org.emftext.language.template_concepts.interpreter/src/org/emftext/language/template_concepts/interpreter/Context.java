@@ -19,7 +19,7 @@ import org.emftext.language.template_concepts.interpreter.exceptions.Interpreter
 public class Context {
 	//Logger
 	
-	private Map<String,Vector<EObject>> varname2ValueMap;
+	private Map<String, Vector<EObject>> variableValues;
 	/**
 	 * Copy context without alternating the original maps.
 	 * Keeps the maps as there were at the time of creation
@@ -27,7 +27,7 @@ public class Context {
 	 * @param varname2ValueStackMap
 	 */
 	public Context() {
-		varname2ValueMap = new HashMap<String, Vector<EObject>>();
+		variableValues = new HashMap<String, Vector<EObject>>();
 	}
 	
 	/**
@@ -36,10 +36,10 @@ public class Context {
 	 * @param o
 	 */
 	public void pushVariable(String name, EObject o){
-		Vector<EObject> varStack = varname2ValueMap.get(name);
-		if(varStack == null){
+		Vector<EObject> varStack = variableValues.get(name);
+		if (varStack == null) {
 			varStack = new Vector<EObject>();
-			varname2ValueMap.put(name, varStack);
+			variableValues.put(name, varStack);
 		}
 		varStack.add(o);
 	}
@@ -50,8 +50,8 @@ public class Context {
 	 * @param name
 	 * @param o
 	 */
-	public void setNewVariableValue(String name, EObject o){
-		Vector<EObject> varStack = varname2ValueMap.get(name);
+	public void setNewVariableValue(String name, EObject o) {
+		Vector<EObject> varStack = variableValues.get(name);
 		if(varStack == null){
 			System.out.println("ERROR: No such variable on stack: "+name);
 			return;
@@ -67,7 +67,7 @@ public class Context {
 	 * @see com.mboehme.rouTEmplate.tracing.IContext#getVariableValue(java.lang.String)
 	 */
 	public EObject getVariableValue(String name) throws InterpreterException {
-		Vector<EObject> varStack = varname2ValueMap.get(name);
+		Vector<EObject> varStack = variableValues.get(name);
 		if(varStack == null){
 			System.out.println("ERROR: No such variable on stack: "+name);
 			return null;
@@ -83,7 +83,7 @@ public class Context {
 	 * @see com.mboehme.rouTEmplate.tracing.IContext#getListOfVariables()
 	 */
 	public Set<String> getListOfVariables(){
-		return varname2ValueMap.keySet();
+		return variableValues.keySet();
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class Context {
 	 * @return
 	 */
 	public EObject pullVariable(String name){
-		Vector<EObject> varStack = varname2ValueMap.get(name);
+		Vector<EObject> varStack = variableValues.get(name);
 		if(varStack == null){
 			return null;
 		}
@@ -103,7 +103,7 @@ public class Context {
 		if(varStack.size()>1){
 			varStack.remove(o);
 		} else {
-			varname2ValueMap.remove(name);
+			variableValues.remove(name);
 		}
 		return o;
 	}

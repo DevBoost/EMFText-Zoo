@@ -42,6 +42,7 @@ public class InterpreterWithState {
 	
 	private Stack<EObject> inputObjectStack;
 	private Stack<EObject> inputMetaClassStack;
+	private LoopVariablesStack loopVariableStack;
 	
 	private ExpressionChecker expressionChecker;
 	
@@ -53,6 +54,7 @@ public class InterpreterWithState {
 		
 		inputObjectStack = new Stack<EObject>();
 		inputMetaClassStack = new Stack<EObject>();
+		loopVariableStack = new LoopVariablesStack();
 		
 		inputObjectStack.push(inputModelRoot);
 		inputMetaClassStack.push(inputModelRoot.eClass());
@@ -243,8 +245,9 @@ public class InterpreterWithState {
 		EObject peek = inputObjectStack.peek();
 		return expressionChecker.evaluateExpression(
 				peek.eClass(), 
-				concept.getExpression(), //expression
-				peek);
+				peek,
+				loopVariableStack.getTopMostVariables(),
+				concept.getExpression());
 	}
 	
 	private void evaluateForLoop(ForEach forLoop, EObject tiObject) throws InterpreterException{
@@ -284,7 +287,10 @@ public class InterpreterWithState {
 			}
 			EObject next = (EObject) o;
 			inputObjectStack.push(next);
-			//context.pushVariable(variableName,(EObject)o);
+			String variableName = forLoop.getVariable();
+			if (variableName != null) {
+				loopVariableStack.push(variableName, next);
+			}
 			//BODY (can contain multiple elements)
 			if (forBodyO instanceof List) {
 				for(EObject forBody : (List<EObject>)forBodyO){
@@ -293,8 +299,10 @@ public class InterpreterWithState {
 			} else {
 				((List<EObject>)tiObject.eGet(tiReference)).add(evaluate((EObject) forBodyO));
 			}
+			if (variableName != null) {
+				loopVariableStack.pop();
+			}
 			inputObjectStack.pop();
-			//context.pullVariable(variableName);
 		}
 	}
 	

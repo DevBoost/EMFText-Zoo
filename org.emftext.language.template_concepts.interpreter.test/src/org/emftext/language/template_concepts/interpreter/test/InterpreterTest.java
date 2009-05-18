@@ -28,6 +28,8 @@ public class InterpreterTest extends TestCase {
 		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE bread butter");
 		// basic test for FOREACH loop and placeholder inside of the loop
 		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE bread i1 i2 i3 TOAST bread");
+		// test loop variable
+		testInterpretation("template3.custom_sandwich", "customer3.customer", "RECIPE bread i1 i2 i3 TOAST bread");
 	}
 
 	private void testInterpretation(String templateFileName, String customerFileName, String expectedResult) {

@@ -8,14 +8,22 @@ import java.util.Map;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
+import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.ecore.impl.VariableImpl;
 import org.eclipse.ocl.expressions.OCLExpression;
+import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
 import org.emftext.language.primitive_types.helper.PrimitiveTypesHelper;
 import org.emftext.runtime.IOptionProvider;
@@ -33,6 +41,8 @@ import org.emftext.runtime.resource.ITextResource;
  * nested) loops, the context class is different. Instead of using the meta
  * class of the input model root element, we must use the type returned by
  * the collection that contains the expression.
+ * 
+ * TODO adjust this checking to the one done in the interpreter
  */
 public class ExpressionChecker implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
 
@@ -52,7 +62,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		for (EObject next : concepts) {
 			TemplateConcept concept = (TemplateConcept) next;
 			String expression = concept.getExpression();
-			String error = parseExpression(metaClass, expression);
+			String error = parseExpression(metaClass, null, expression);
 			if (error != null) {
 				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", concept);
 			} else {
@@ -67,7 +77,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 
 	private void checkPlaceholderExpressionType(ITextResource resource,
 			EClass metaClass, TemplateConcept concept, String expression) {
-		Object queryOrError = createQuery(metaClass, expression);
+		Object queryOrError = createQuery(metaClass, null, expression);
 		if (queryOrError instanceof Query) {
 			Query query = (Query) queryOrError;
 			
@@ -138,8 +148,8 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 	}
 
 	// return the error if one was found
-	private String parseExpression(EClass inputMetaClass, String expressionString) {
-		Object query = createQuery(inputMetaClass, expressionString);
+	private String parseExpression(EClass inputMetaClass, Map<String, EObject> variables, String expressionString) {
+		Object query = createQuery(inputMetaClass, variables, expressionString);
 		if (query instanceof String) {
 			return (String) query;
 		} else {
@@ -147,7 +157,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		}
 	}
 
-	public Object evaluateExpression(EClass inputMetaClass, String expressionString, EObject contextObject) {
+	public Object evaluateExpression(EClass inputMetaClass, EObject contextObject, Map<String, EObject> variables, String expressionString) {
 		if (inputMetaClass == null) {
 			System.out.println("evaluateExpression(" + expressionString + "," + contextObject + ") inputMetaClass is null");
 			return null;
@@ -158,7 +168,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			return null;
 		}
 		*/
-		Object query = createQuery(inputMetaClass, expressionString);
+		Object query = createQuery(inputMetaClass, variables, expressionString);
 		if (query instanceof Query) {
 			return ((Query) query).evaluate(contextObject);
 		} else {
@@ -166,19 +176,49 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		}
 	}
 
-	private Object createQuery(EClass inputMetaClass, String expressionString) {
-		OCL ocl = org.eclipse.ocl.ecore.OCL.newInstance();
-		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
+	private Object createQuery(EClass inputMetaClass, Map<String, EObject> variables, String expressionString) {
+		OCL<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
+			ocl = org.eclipse.ocl.ecore.OCL.newInstance();
 		
-		helper.setContext(inputMetaClass);
-
 		OCLExpression<EClassifier> expression;
 		try {
+			addVariables(variables, ocl);
+			
+			OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
+			helper.setContext(inputMetaClass);
+
 			expression = helper.createQuery(expressionString);
 			Query query = ocl.createQuery(expression);
+			
+			addVariableValues(variables, query);
+
 			return query;
 		} catch (ParserException e) {
 			return e.getMessage();
+		}
+	}
+
+	private void addVariables(
+			Map<String, EObject> variables,
+			OCL<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> ocl) {
+		if (variables == null) {
+			return;
+		}
+		for (String variableName : variables.keySet()) {
+			Variable<EClassifier, EParameter> v = 
+				ocl.getEnvironment().getOCLFactory().createVariable();
+			v.setName(variableName);
+			v.setType(variables.get(variableName).eClass());
+			ocl.getEnvironment().addElement(v.getName(), v, true);
+		}
+	}
+
+	private void addVariableValues(Map<String, EObject> variables, Query query) {
+		if (variables == null) {
+			return;
+		}
+		for (String variableName : variables.keySet()) {
+			query.getEvaluationEnvironment().add(variableName, variables.get(variableName));
 		}
 	}
 
