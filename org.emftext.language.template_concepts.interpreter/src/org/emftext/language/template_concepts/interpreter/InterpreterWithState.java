@@ -379,7 +379,7 @@ public class InterpreterWithState {
 		return (List<EObject>) list;
 	}
 	
-	private void evaluateTReference(EObject tObject, EObject tReferenceObject, EObject tiObject) throws InterpreterException{
+	private void evaluateTReference(EObject tObjectUnused, EObject tReferenceObject, EObject tiObject) throws InterpreterException{
 		if (tReferenceObject == null) {
 			System.err.println("tReferenceObject was null?");
 			return;
@@ -398,7 +398,7 @@ public class InterpreterWithState {
 			}
 		}
 		if (tiReference == null) {
-			throw new TemplateMetamodelException("tiObject Reference missing: "+tReference.getName()+" Found an object which is neither meta language nor object language");
+			throw new TemplateMetamodelException("tiObject Reference missing: "+tReference.getName()+" Found an object which is neither meta language nor object language: " +tiObject + " tReferenceObject=" + tReferenceObject);
 		}
 		
 		//tReferenceObject can also be a listMember

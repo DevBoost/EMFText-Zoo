@@ -9,7 +9,7 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.statements.ExpressionStatement;
-import org.emftext.language.java.statements.Statement;
+import org.emftext.language.java.statements.FeatureStatement;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.variables.LocalVariable;
 
@@ -35,19 +35,19 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 		return method;
 	}
 
-	protected void assertIsCallToMethod(Statement statement, Method expectedCallTarget) {
+	protected void assertIsCallToMethod(FeatureStatement statement, Method expectedCallTarget) {
 		assertIsReferenceTo(statement, expectedCallTarget);
 	}
 	
-	protected void assertIsReferenceToField(Statement statement, Field expectedReferenceTarget) {
+	protected void assertIsReferenceToField(FeatureStatement statement, Field expectedReferenceTarget) {
 		assertIsReferenceTo(statement, expectedReferenceTarget);
 	}
 	
-	protected void assertIsReferenceToLocalVariable(Statement statement, LocalVariable expectedReferenceTarget) {
+	protected void assertIsReferenceToLocalVariable(FeatureStatement statement, LocalVariable expectedReferenceTarget) {
 		assertIsReferenceTo(statement, expectedReferenceTarget);
 	}
 	
-	protected void assertIsReferenceTo(Statement statement, ReferenceableElement expectedReferenceTarget) {
+	protected void assertIsReferenceTo(FeatureStatement statement, ReferenceableElement expectedReferenceTarget) {
 		assertType(statement, ExpressionStatement.class);
 		ExpressionStatement expression = (ExpressionStatement) statement;
 		Expression methodCallExpression = expression.getExpression();
