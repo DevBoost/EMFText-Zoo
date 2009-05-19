@@ -202,15 +202,13 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
 		
 		ResourceSet resourceSet = getResourceSet();
-		String prefix = "";
 		
 		// TODO put this somewhere else
 		if (file.getName().endsWith("jdt_test_files" + File.separator + "src.zip")) {
-			prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
+			String prefix = entry.getName().substring(0, entry.getName().indexOf("/") + 1);
+			registerLibs(libFolderName, resourceSet, prefix);
 		}
-		
-		registerLibs(libFolderName, resourceSet, prefix);
-		
+
 		Resource resource = resourceSet.createResource(archiveURI);
 		resource.load(getLoadOptions());
 		
@@ -236,7 +234,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 	
 	
-	protected void registerLibs(String libdir, ResourceSet resourceSet, String prefix) throws IOException, CoreException  {
+	protected static void registerLibs(String libdir, ResourceSet resourceSet, String prefix) throws IOException, CoreException  {
 		File libFolder = new File("." + File.separator
 				+ libdir);
 		List<File> allLibFiles = collectAllFilesRecursive(libFolder, "jar");
