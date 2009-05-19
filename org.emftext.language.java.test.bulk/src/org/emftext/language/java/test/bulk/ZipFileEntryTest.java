@@ -3,11 +3,15 @@ package org.emftext.language.java.test.bulk;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 public class ZipFileEntryTest extends AbstractJavaParserTestCase {
@@ -15,12 +19,7 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	private final ZipFile zipFile;
 	private final List<ZipEntry> entries = new ArrayList<ZipEntry>();
 	private final boolean excludeFromReprint;
-	
-	private final List<String> ignoreList;
 
-	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint) {
-		this(zipFile, entry, excludeFromReprint, Collections.<String>emptyList());
-	}
 	/**
 	 * Creates a new test for the given entry in a ZIP file. If a resource set is given
 	 * it will be used. Otherwise a new one will be created.
@@ -30,12 +29,16 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	 * @param excludeFromReprint
 	 * @param resourceSet
 	 */
-	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint, List<String> ignoreList) {
+	public ZipFileEntryTest(ZipFile zipFile, ZipEntry entry, boolean excludeFromReprint,
+			Map<URI, URI> uriMap, Map<String, List<String>> packageClassifierMap) {
 		super("Parse " + (excludeFromReprint ? "" : "and reprint: ") + entry.getName());
 		this.zipFile = zipFile;
 		this.excludeFromReprint = excludeFromReprint;
-		this.ignoreList = ignoreList;
 		//addZipEntry(entry);
+		
+		this.uriMap = uriMap;
+		this.packageClassifierMap = packageClassifierMap;
+		
 		entries.add(entry);
 	}
 	
@@ -62,7 +65,22 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 			org.junit.Assert.fail(e.getClass() + ": " + e.getMessage());
 		}
 	}
-
+	
+	protected Map<URI, URI> uriMap = null;
+	protected Map<String, List<String>> packageClassifierMap =null; 
+	
+	protected ResourceSet getResourceSet() {
+		ResourceSet rs = new ResourceSetImpl();
+		rs.getLoadOptions().putAll(getLoadOptions());
+		JavaClasspath myClasspath = JavaClasspath.get(rs);
+		for(String p : packageClassifierMap.keySet()) {
+			myClasspath.getPackageClassifierMap().put(p, new ArrayList<String>(
+					packageClassifierMap.get(p)));
+		}
+		rs.getURIConverter().getURIMap().putAll(uriMap);
+		return rs;
+	}
+	
 	private void parseAndReprintEntry(ZipEntry entry) throws Exception {
 		String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
 		plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
@@ -84,17 +102,11 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
-		if(ignoreList.contains(filename)) {
-			return true;
-		}
 		return excludeFromReprint;
 	}
 	
 	@Override
 	protected boolean ignoreSemanticErrors(String filename) {
-		if(ignoreList.contains(filename)) {
-			return true;
-		}
 		return excludeFromReprint;
 	}
 

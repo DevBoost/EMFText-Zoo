@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -15,6 +17,9 @@ import junit.framework.TestSuite;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.test.util.ThreadedTestSuite;
 
@@ -88,6 +93,24 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		final ZipFile zipFile = new ZipFile(zipFilePath);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		
+		Map<URI, URI> uriMap = null; 
+		Map<String, List<String>> packageClassifierMap = null;
+		
+		if (!zipFilePath.endsWith("jdt_test_files" + File.separator + "src.zip")) {
+			ResourceSet dummyRS = new ResourceSetImpl();
+			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
+			String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
+			plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
+			registerLibs("input/" + plainZipFileName, dummyRS, "");
+			uriMap = dummyRS.getURIConverter().getURIMap();
+			packageClassifierMap = JavaClasspath.get(dummyRS).getPackageClassifierMap();
+		}
+		else {
+			uriMap = Collections.emptyMap();
+			packageClassifierMap = Collections.emptyMap();
+		}
+		
+		
 		while (entries.hasMoreElements()) {
 			
 			ZipEntry entry = entries.nextElement();
@@ -99,7 +122,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 				startEntry = null;
 			}
 			if (entryName.endsWith(".java")) {
-				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint);
+				ZipFileEntryTest newTest = new ZipFileEntryTest(zipFile, entry, excludeFromReprint, uriMap, packageClassifierMap);
 				tests.add(newTest);
 			}
 		}
