@@ -9,6 +9,7 @@ import org.emftext.language.java.resource.java.analysis.decider.JumpLabelDecider
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.Jump;
 import org.emftext.language.java.statements.JumpLabel;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 public class JumpTargetReferenceResolver extends 
@@ -16,7 +17,7 @@ public class JumpTargetReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+		return JavaUtil.getName(element);
 	}
 	
 	@Override	

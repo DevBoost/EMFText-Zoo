@@ -3,6 +3,7 @@ package org.emftext.language.java.resource.java.analysis;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
@@ -12,7 +13,7 @@ public class ClassifierImportClassifierReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(ConcreteClassifier element, ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+		return JavaUtil.getName(element);
 	}
 	
 	@Override	

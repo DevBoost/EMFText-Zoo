@@ -18,7 +18,7 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 	
 	@Override	
 	protected java.lang.String doDeResolve(ReferenceableElement element, StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+		return JavaUtil.getName(element);
 	}
 	
 	@Override	
