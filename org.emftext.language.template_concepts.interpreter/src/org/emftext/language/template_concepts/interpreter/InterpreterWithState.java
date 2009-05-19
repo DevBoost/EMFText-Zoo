@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.template_concepts.ExpressionChecker;
 import org.emftext.language.template_concepts.ForEach;
 import org.emftext.language.template_concepts.If;
@@ -30,6 +31,10 @@ import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMet
  * This is the actual interpreter. It maintains a state. Thus,
  * all different parameters can be interrogated just 
  * after interpretation or later on.
+ * 
+ * TODO InputModels shouldn't contain StringBox, etc. to be working
+ * TODO use EPackage of object language instead of template language to create tiObjects
+ * 
  * @author Marcel Böhme
  * Comment created on: 13.05.09
  */
@@ -88,6 +93,9 @@ public class InterpreterWithState {
 		}
 	}
 	
+	/**
+	 * mboehme: What does this do? Thought we already check *.getEAllReferences() by *.eContents()?
+	 */
 	private void copyCrossReferences() {
 		if (templateInstanceRoot == null) {
 			return;
@@ -119,6 +127,11 @@ public class InterpreterWithState {
 		if (tObject == null) {
 			return null;
 		}
+		//TODO treat cycles (if needed), but watch context! 
+		//if(templateToInstanceObjectMap.get(tObject)!=null){
+		//	return templateToInstanceObjectMap.get(tObject); (Code not watching variable context)
+	    //}
+		
 		String className = tObject.eClass().getName();
 	
 		//find respective language class in this package
@@ -128,6 +141,7 @@ public class InterpreterWithState {
 			throw new InterpreterException("Didn't find respective template instance class for template class '" + className + "'");
 		}
 		//System.out.println("Copied " + tObject + " to " + tiObject);
+		//FIXME mboehme: doesn't work! For instance in a forLoop the same tObject results in different tiObjects 
 		templateToInstanceObjectMap.put(tObject, tiObject);
 		instanceToTemplateObjectMap.put(tiObject, tObject);
 		
@@ -147,14 +161,21 @@ public class InterpreterWithState {
 				}
 			//Evaluate recursively
 			} else {
-				evaluateTReference(tObject, tReferenceObject, tiObject);
+				evaluateTReference(tReferenceObject, tiObject);
 			}
 		}
 		
 		//Now just copy attributes which have not been treated as PlaceHolder
 		for (EAttribute tiAttributeClass : tiObject.eClass().getEAllAttributes()) {
+			
+			//TODO Check if this is an instance of primitive_type (only primitive type has attributes)
+			//TODO Import primitive_type into project dependencies 
+			//AND every primitive type should inherit an abstract type: PrimitiveType
+			//if(!(tiObject instanceof PrimitiveType)) throw new TemplateMetamodelException("Attributes must be wrapped in a Primitive Type");
+			
 			String attributeName = tiAttributeClass.getName();
 			//find respective langParentAttributeClass
+						
 			EAttribute tAttributeClass = null;
 			for (EAttribute attClass : tObject.eClass().getEAllAttributes()) {
 				if (attClass.getName().matches(attributeName)) {
@@ -203,10 +224,10 @@ public class InterpreterWithState {
 		
 		// TODO mseifert: this is a dirty hack, but it works, since all primitive types
 		// have the attribute 'value'.
+		// mboehme: Should be resolved when no PrimitiveTypes are needed in inputModels anymore
 		EObject evaluatedEObject = (EObject) evaluatedObject;
-		EClass tiAttributeElementClass = tiAttributeElement.eClass();
 		EClass evaluateEObjectClass = evaluatedEObject.eClass();
-		tiAttributeElement.eSet(tiAttributeElementClass.getEStructuralFeature("value"), evaluatedEObject.eGet(evaluateEObjectClass.getEStructuralFeature("value")));
+		tiAttributeElement.eSet(tiConcreteAttributeClass.getEStructuralFeature("value"), evaluatedEObject.eGet(evaluateEObjectClass.getEStructuralFeature("value")));
 		
 		//now attach tiAttributeElement to tiObject
 		EReference tReference = (EReference)placeHolder.eContainingFeature();
@@ -215,7 +236,7 @@ public class InterpreterWithState {
 		}
 		EReference tiReference = (EReference)tiObject.eClass().getEStructuralFeature(tReference.getName());
 		if (tiReference == null) {
-			throw new TemplateMetamodelException("References to placeholder and attributeElement in TI should be the same");
+			throw new TemplateMetamodelException("References to placeholder and attributeElement in TI should have the same name");
 		}
 		//multiplicity > 1
 		if (tiObject.eGet(tiReference) instanceof List) {
@@ -225,7 +246,14 @@ public class InterpreterWithState {
 			tiObject.eSet(tiReference,tiAttributeElement);
 		}
 	}
-
+	
+	/**
+	 * Finds the subclass which extends from this attribute-wrapper, 
+	 * which is not the placeholder 
+	 * TODO Use EPackage of object language instead
+	 * @param abstractAttributeClass The attribute-wrapper
+	 * @return Returns the subclass extending from abstractAttributeClass (NOT the placeholder)
+	 */
 	private EClass findSubClass(EClass abstractAttributeClass) {
 		EPackage ePackage = (EPackage) abstractAttributeClass.eContainer();
 		for (EClassifier classifier : ePackage.getEClassifiers()) {
@@ -233,7 +261,9 @@ public class InterpreterWithState {
 				continue;
 			}
 			EClass eClass = (EClass) classifier;
-			if (eClass.getEAllSuperTypes().contains(abstractAttributeClass)) {
+			//mboehme: Bugfix: Shouldn't return eClass if it is a template concept (e.g. placeholder)
+			if (eClass.getEAllSuperTypes().contains(abstractAttributeClass)
+					&& !eClass.getEAllSuperTypes().contains(Template_conceptsPackage.eINSTANCE.getTemplateConcept())) {
 				return eClass;
 			}
 		}
@@ -269,7 +299,6 @@ public class InterpreterWithState {
 		}
 		
 		//Resolve the collection
-		
 		Collection<?> inputCollection = (Collection<?>) evaluateExpression(forLoop);
 		
 		//THE FORLOOP
@@ -284,12 +313,13 @@ public class InterpreterWithState {
 				loopVariableStack.push(variableName, next);
 			}
 			//BODY (can contain multiple elements)
+			List<EObject> tiList =castToEObjectList(tiObject.eGet(tiReference)); 
 			if (forBodyO instanceof List) {
 				for(EObject forBody : castToEObjectList(forBodyO)){
-					castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(forBody));
+					tiList.add(evaluate(forBody));
 				}
 			} else {
-				castToEObjectList(tiObject.eGet(tiReference)).add(evaluate((EObject) forBodyO));
+				tiList.add(evaluate((EObject) forBodyO));
 			}
 			if (variableName != null) {
 				loopVariableStack.pop();
@@ -349,26 +379,27 @@ public class InterpreterWithState {
 	private void evaluateIf(TemplateConcept ifOrIfElse, Object ifBodyO, Object elseBodyO, EObject tiObject, EReference tiReference) throws InterpreterException{
 		
 		Boolean condition = (Boolean) evaluateExpression(ifOrIfElse);
+		List<EObject> tiList =castToEObjectList(tiObject.eGet(tiReference));
 		
 		//IF-CONDITION
 		if (condition) {
 			//ifBody
 			if (ifBodyO instanceof List) {
 				for(EObject ifBody : castToEObjectList(ifBodyO)) {
-					castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(ifBody));
+					tiList.add(evaluate(ifBody));
 				}
 			} else {
-				castToEObjectList(tiObject.eGet(tiReference)).add(evaluate((EObject) ifBodyO));
+				tiList.add(evaluate((EObject) ifBodyO));
 			}
 		} else {
 			//elseBody (may be null)
 			if (elseBodyO != null) {
 				if (elseBodyO instanceof List) {
 					for (EObject elseBody : castToEObjectList(elseBodyO)) {
-						castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(elseBody));
+						tiList.add(evaluate(elseBody));
 					}
 				} else {
-					castToEObjectList(tiObject.eGet(tiReference)).add(evaluate((EObject) elseBodyO));
+					tiList.add(evaluate((EObject) elseBodyO));
 				}
 			}
 		}
@@ -379,7 +410,7 @@ public class InterpreterWithState {
 		return (List<EObject>) list;
 	}
 	
-	private void evaluateTReference(EObject tObjectUnused, EObject tReferenceObject, EObject tiObject) throws InterpreterException{
+	private void evaluateTReference(EObject tReferenceObject, EObject tiObject) throws InterpreterException{
 		if (tReferenceObject == null) {
 			System.err.println("tReferenceObject was null?");
 			return;
@@ -409,10 +440,14 @@ public class InterpreterWithState {
 		}
 	}
 	
+	/**
+	 * TODO: Actually tiObject should be created from object language.
+	 * Returning one is created from template language
+	 */
 	private EObject createObjectOfSameClass(EObject original) throws InterpreterException {
 		return createObject(original.eClass());
 	}
-	
+
 	private EObject createObject(EClass eClass) throws InterpreterException {
 		EPackage ePackage = (EPackage) eClass.eContainer();
 		EObject newInstance = ePackage.getEFactoryInstance().create(eClass);

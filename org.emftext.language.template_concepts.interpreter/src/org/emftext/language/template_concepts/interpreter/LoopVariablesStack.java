@@ -1,5 +1,6 @@
 package org.emftext.language.template_concepts.interpreter;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -8,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class LoopVariablesStack {
 	
-	public class LoopVariable {
+	private class LoopVariable {
 		private String name;
 		private EObject value;
 		
@@ -37,11 +38,20 @@ public class LoopVariablesStack {
 		variableStack.pop();
 	}
 
+	/**
+	 * Returns unmodifiable map of uppermost variables on stack. 
+	 * Key is variable name and value the respective value. <br>
+	 * The returned map is unmodifiable as the developer must not change this map externally 
+	 * @return Returns unmodifiable map of uppermost variables on stack.
+	 */
 	public Map<String, EObject> getTopMostVariables() {
 		Map<String, EObject> result = new HashMap<String, EObject>();
 		for (LoopVariable variable : variableStack) {
-			result.put(variable.getName(), variable.getValue());
+			//mboehme: stack is a LIFO queue. So uppermost values are first ones
+			if(result.get(variable.getName())==null){
+				result.put(variable.getName(), variable.getValue());
+			}
 		}
-		return result;
+		return Collections.unmodifiableMap(result);
 	}
 }
