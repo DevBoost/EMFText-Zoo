@@ -201,9 +201,9 @@ public class JavaClasspath extends AdapterImpl {
 		
 		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
 			registerClassifier(
-					packageName, JavaUtil.getName(compilationUnit), uri);
+					packageName, JavaUtil.getName(classifier), uri);
 			registerInnerClassifiers(
-					classifier, packageName, JavaUtil.getName(compilationUnit), uri);
+					classifier, packageName, JavaUtil.getName(classifier), uri);
 		}
 	}
 	
@@ -527,4 +527,10 @@ public class JavaClasspath extends AdapterImpl {
 
 		return resultList;
 	}
+
+	public Map<String, List<String>> getPackageClassifierMap() {
+		return packageClassifierMap;
+	}
+	
+	
 }
