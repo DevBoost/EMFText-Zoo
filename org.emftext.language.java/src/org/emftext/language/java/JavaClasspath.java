@@ -49,10 +49,20 @@ public class JavaClasspath extends AdapterImpl {
 	public static final String OPTION_USE_LOCAL_CLASSPATH = "OPTION_USE_LOCAL_CLASSPATH";
 	
 	/**
+	 * If this option is set to true (default) in a resource set, the Java standard library
+	 * (i.e., rt.jar or classes.jar) is registered automatically based on
+	 * <code>System.getProperty("sun.boot.class.path")</code>. 
+	 */
+	public static final String OPTION_REGISTER_STD_LIB = "OPTION_USE_LOCAL_CLASSPATH";
+	
+	/**
 	 * Singleton instance.
 	 */
 	public static final JavaClasspath globalClasspath = 
 		new JavaClasspath(URIConverter.URI_MAP);
+	{
+		globalClasspath.registerStdLib();
+	}
 	
 	public static JavaClasspath get() {
 		return globalClasspath;
@@ -82,6 +92,11 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		
 		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
+		Object registerStdLibOption = resourceSet.getLoadOptions().get(OPTION_REGISTER_STD_LIB);
+		if (registerStdLibOption == null) {
+			registerStdLibOption = Boolean.TRUE;
+		}
+		
 		if(Boolean.TRUE.equals(localClasspathOption))  {
 			for(Adapter a : resourceSet.eAdapters()) {
 				if (a instanceof JavaClasspath) {
@@ -91,6 +106,11 @@ public class JavaClasspath extends AdapterImpl {
 			JavaClasspath myClasspath = new JavaClasspath(
 					resourceSet.getURIConverter().getURIMap());
 			resourceSet.eAdapters().add(myClasspath);
+
+			if(Boolean.TRUE.equals(registerStdLibOption))  {
+				myClasspath.registerStdLib();
+			}
+			
 			return myClasspath;
 		}
 		
@@ -99,7 +119,6 @@ public class JavaClasspath extends AdapterImpl {
 	
 	public JavaClasspath(Map<URI, URI> uriMap) {
 		this.uriMap = uriMap;
-		registerStdLib();
 	}
 	
 	protected Map<URI, URI> uriMap = null;

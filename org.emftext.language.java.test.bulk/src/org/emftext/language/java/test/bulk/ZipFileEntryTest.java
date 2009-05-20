@@ -3,6 +3,7 @@ package org.emftext.language.java.test.bulk;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -12,7 +13,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
+import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
+import org.emftext.runtime.IOptions;
 
 public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 
@@ -68,6 +72,16 @@ public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 	
 	protected Map<URI, URI> uriMap = null;
 	protected Map<String, List<String>> packageClassifierMap =null; 
+	
+	@Override
+	protected Map<?, ?> getLoadOptions() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
+		map.put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.FALSE);
+		return map;
+	}
 	
 	protected ResourceSet getResourceSet() {
 		ResourceSet rs = new ResourceSetImpl();

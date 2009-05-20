@@ -99,6 +99,7 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 		if (!zipFilePath.endsWith("jdt_test_files" + File.separator + "src.zip")) {
 			ResourceSet dummyRS = new ResourceSetImpl();
 			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
+			dummyRS.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, Boolean.TRUE);
 			String plainZipFileName = zipFile.getName().substring(AbstractZipFileInputTest.BULK_INPUT_DIR.length());
 			plainZipFileName = plainZipFileName.substring(0, plainZipFileName.length() - File.separator.length() - "src.zip".length());
 			registerLibs("input/" + plainZipFileName, dummyRS, "");
