@@ -19,6 +19,7 @@ import org.emftext.language.java.javabehavior4uml.UMLPropertyWrapper;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.JavaUtil;
 
 public class UML2JavaWrapper {
 	
@@ -44,7 +45,7 @@ public class UML2JavaWrapper {
 	
 	public static UMLClassWrapper wrapClass(Class umlClass) {
 		UMLClassWrapper wrapper = f.createUMLClassWrapper();
-		wrapper.setName(umlClass.getName());
+		JavaUtil.setName(wrapper, umlClass.getName());
 		wrapper.setUmlClass(umlClass);
 		
 		for(Property umlProperty : umlClass.getAttributes()) {
@@ -57,7 +58,7 @@ public class UML2JavaWrapper {
 	
 	public static UMLPropertyWrapper wrapProperty(Property umlProperty) {
 		UMLPropertyWrapper wrapper = f.createUMLPropertyWrapper();
-		wrapper.setName(umlProperty.getName());
+		JavaUtil.setName(wrapper, umlProperty.getName());
 		wrapper.setUmlProperty(umlProperty);
 		
 		ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
