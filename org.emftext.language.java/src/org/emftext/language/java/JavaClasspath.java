@@ -58,9 +58,10 @@ public class JavaClasspath extends AdapterImpl {
 	/**
 	 * Singleton instance.
 	 */
-	public static final JavaClasspath globalClasspath = 
+	public static final JavaClasspath globalClasspath =
 		new JavaClasspath(URIConverter.URI_MAP);
-	{
+	
+	static {
 		globalClasspath.registerStdLib();
 	}
 	
