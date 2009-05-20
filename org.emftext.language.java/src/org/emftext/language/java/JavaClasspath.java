@@ -53,7 +53,7 @@ public class JavaClasspath extends AdapterImpl {
 	 * (i.e., rt.jar or classes.jar) is registered automatically based on
 	 * <code>System.getProperty("sun.boot.class.path")</code>. 
 	 */
-	public static final String OPTION_REGISTER_STD_LIB = "OPTION_USE_LOCAL_CLASSPATH";
+	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
 	
 	/**
 	 * Singleton instance.
