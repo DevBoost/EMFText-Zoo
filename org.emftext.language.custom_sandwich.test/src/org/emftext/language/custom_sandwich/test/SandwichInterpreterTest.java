@@ -30,4 +30,9 @@ public class SandwichInterpreterTest extends AbstractInterpreterTest {
 	protected String getInputFolder() {
 		return "input";
 	}
+
+	@Override
+	protected String getOutputFileExtension() {
+		return "sandwich";
+	}
 }

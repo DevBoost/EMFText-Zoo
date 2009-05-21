@@ -43,7 +43,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
 			
 			// pretty print templateInstanceAST
-			Resource instance = resourceSet.createResource(URI.createURI("output.sandwich"));
+			Resource instance = resourceSet.createResource(URI.createURI("output." + getOutputFileExtension()));
 			instance.getContents().add(templateInstanceAST);
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			instance.save(outputStream, null);
@@ -52,6 +52,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			String result = new String(outputStream.toByteArray());
 			result = result.replace("\n", "");
 			result = result.replace("\r", "");
+			result = result.replace("\t", "");
 			result = result.replace("  ", " ");
 			result = result.trim();
 			
@@ -62,6 +63,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 		}
 	}
 
+	protected abstract String getOutputFileExtension();
 	protected abstract String getInputFolder();
 	protected abstract void registerResourceFactories();
 }

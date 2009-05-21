@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.template_concepts.ExpressionChecker;
 import org.emftext.language.template_concepts.ForEach;
 import org.emftext.language.template_concepts.If;
@@ -108,6 +107,9 @@ public class InterpreterWithState {
 				if (reference.isContainment()) {
 					continue;
 				}
+				if (reference.isContainer()) {
+					continue;
+				}
 				EObject tObject = instanceToTemplateObjectMap.get(nextTiObject);
 				EObject referencedObjectInTemplate = (EObject) tObject.eGet(reference);
 				EObject referencedObjectInInstance = templateToInstanceObjectMap.get(referencedObjectInTemplate);
@@ -123,7 +125,7 @@ public class InterpreterWithState {
 	 * @param tiPackage an ePackage in the template instance
 	 * @return Returns the representative of parent in the template instance
 	 */
-	private EObject evaluate(EObject tObject) throws InterpreterException{
+	private EObject evaluate(EObject tObject) throws InterpreterException {
 		if (tObject == null) {
 			return null;
 		}
@@ -288,7 +290,7 @@ public class InterpreterWithState {
 		
 		//Find tiReference
 		EReference tiReference = null;
-		for (EReference ref : tiObject.eClass().getEReferences()) {
+		for (EReference ref : tiObject.eClass().getEAllReferences()) {
 			if (forLoop.eContainingFeature().getName().matches(ref.getName())) {
 				tiReference = ref;
 				break;
@@ -363,14 +365,14 @@ public class InterpreterWithState {
 		
 		//Find tiReference
 		EReference tiReference = null;
-		for (EReference ref : tiObject.eClass().getEReferences()) {
+		for (EReference ref : tiObject.eClass().getEAllReferences()) {
 			if (ifElseCondition.eContainingFeature().getName().matches(ref.getName())) {
 				tiReference = ref;
 				break;
 			}
 		}
 		if (tiReference == null) {
-			throw new TemplateMetamodelException("For-Loop: Didn't find reference " + ifElseCondition.eContainingFeature().getName() + " in tiObject");
+			throw new TemplateMetamodelException("IfElse: Didn't find reference " + ifElseCondition.eContainingFeature().getName() + " in tiObject");
 		}
 		
 		evaluateIf(ifElseCondition, ifBodyO, elseBodyO, tiObject, tiReference);
@@ -411,6 +413,7 @@ public class InterpreterWithState {
 	}
 	
 	private void evaluateTReference(EObject tReferenceObject, EObject tiObject) throws InterpreterException{
+		//System.out.println("evaluateTReference(\n\t"+tReferenceObject+",\n\t" + tiObject + "\n)");
 		if (tReferenceObject == null) {
 			System.err.println("tReferenceObject was null?");
 			return;
@@ -422,7 +425,7 @@ public class InterpreterWithState {
 		}
 		
 		EReference tiReference = null;
-		for (EReference ref : tiObject.eClass().getEReferences()) {
+		for (EReference ref : tiObject.eClass().getEAllReferences()) {
 			if (tReference.getName().matches(ref.getName())) {
 				tiReference = ref;
 				break;
@@ -433,10 +436,11 @@ public class InterpreterWithState {
 		}
 		
 		//tReferenceObject can also be a listMember
+		EObject subEvaluation = evaluate(tReferenceObject);
 		if (tReference.isMany()) {
-			castToEObjectList(tiObject.eGet(tiReference)).add(evaluate(tReferenceObject));
+			castToEObjectList(tiObject.eGet(tiReference)).add(subEvaluation);
 		} else {
-			tiObject.eSet(tiReference, evaluate(tReferenceObject));
+			tiObject.eSet(tiReference, subEvaluation);
 		}
 	}
 	

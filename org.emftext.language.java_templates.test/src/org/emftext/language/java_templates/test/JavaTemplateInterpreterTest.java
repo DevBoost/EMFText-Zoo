@@ -7,6 +7,7 @@ public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
 	public void testSandwichInterpretation() {
 		// basic test (input model is not used)
 		testInterpretation("test1.java_template", "test1.customer", "public class T1 { }");
+		testInterpretation("test2.java_template", "test2.customer", "public class T1 { public int cheese ; public int cucumbers ; }");
 	}
 
 	protected void registerResourceFactories() {
@@ -24,5 +25,10 @@ public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
 	@Override
 	protected String getInputFolder() {
 		return "input";
+	}
+
+	@Override
+	protected String getOutputFileExtension() {
+		return "java";
 	}
 }
