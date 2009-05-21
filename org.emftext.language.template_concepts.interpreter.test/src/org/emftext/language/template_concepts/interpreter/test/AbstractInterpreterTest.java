@@ -15,32 +15,21 @@ import org.emftext.language.template_concepts.interpreter.exceptions.Interpreter
 
 import junit.framework.TestCase;
 
-public class InterpreterTest extends TestCase {
-	
-	public final static String INPUT_FOLDER = "input";
+public abstract class AbstractInterpreterTest extends TestCase {
 	
 	public void setUp() {
 		registerResourceFactories();
 	}
 
-	public void testSandwichInterpretation() {
-		// basic test (input model is not used)
-		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE bread butter");
-		// basic test for FOREACH loop and placeholder inside of the loop
-		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE bread i1 i2 i3 TOAST bread");
-		// test loop variable
-		testInterpretation("template3.custom_sandwich", "customer3.customer", "RECIPE bread i1 i2 i3 TOAST bread");
-	}
-
-	private void testInterpretation(String templateFileName, String customerFileName, String expectedResult) {
+	protected void testInterpretation(String templateFileName, String customerFileName, String expectedResult) {
 		try {
 			ResourceSetImpl resourceSet = new ResourceSetImpl();
 	
-			Resource customerResource = resourceSet.createResource(URI.createFileURI(INPUT_FOLDER + File.separator + customerFileName));
+			Resource customerResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + customerFileName));
 			customerResource.load(null);
 			Customer customer = (Customer) customerResource.getContents().get(0);
 			
-			Resource templateResource = resourceSet.createResource(URI.createFileURI(INPUT_FOLDER + File.separator + templateFileName));
+			Resource templateResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + templateFileName));
 			templateResource.load(null);
 			Template template = (Template) templateResource.getContents().get(0);
 			
@@ -73,15 +62,6 @@ public class InterpreterTest extends TestCase {
 		}
 	}
 
-	private void registerResourceFactories() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"sandwich",
-				new org.emftext.language.sandwich.resource.sandwich.SandwichResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"custom_sandwich",
-				new org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResourceFactory());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"customer",
-				new org.emftext.language.customer.resource.customer.CustomerResourceFactory());
-	}
+	protected abstract String getInputFolder();
+	protected abstract void registerResourceFactories();
 }
