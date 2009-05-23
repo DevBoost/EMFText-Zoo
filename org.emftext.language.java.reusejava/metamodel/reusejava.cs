@@ -9,6 +9,7 @@ IMPORTS {
 OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
+	overrideManifest = "false";
 }
 
 RULES {
