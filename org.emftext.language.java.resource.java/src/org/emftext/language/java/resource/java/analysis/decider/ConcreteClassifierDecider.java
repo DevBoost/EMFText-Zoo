@@ -85,6 +85,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				&& !container.equals(baseClassifier)) { //not if we come down from the extends reference
 			Classifier classifier = (Classifier) container;
 			
+			//classifier itself has first priority
+			resultList.add(classifier);
+			
 			//local inner classes
 			if (!classifier.eIsProxy()) {
 				for(Member member : ClassifierUtil.getAllMembers(
