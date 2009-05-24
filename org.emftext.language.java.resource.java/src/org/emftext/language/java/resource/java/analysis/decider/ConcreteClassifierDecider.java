@@ -52,7 +52,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			return true;
 		}
 		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)
-				&& !container.equals(baseClassifier)) {
+				&& !container.equals(baseClassifier)) { //not if we come down from the extends reference
 			return true;
 		}
 		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
@@ -81,7 +81,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					packageName, "*"));
 		}
 		
-		if(container instanceof Classifier) {
+		if(container instanceof Classifier
+				&& !container.equals(baseClassifier)) { //not if we come down from the extends reference
 			Classifier classifier = (Classifier) container;
 			
 			//local inner classes
