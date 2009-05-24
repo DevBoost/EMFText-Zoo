@@ -29,7 +29,8 @@ public class PackageDecider extends AbstractDecider {
 				return true;			
 			}
 			if (referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT) && 
-					idReference.eContainer() instanceof IdentifierReference) {
+					idReference.eContainer() instanceof IdentifierReference &&
+					((IdentifierReference)idReference.eContainer()).getTarget() instanceof Package) {
 				//maybe the next sub package
 				return true;
 			}
