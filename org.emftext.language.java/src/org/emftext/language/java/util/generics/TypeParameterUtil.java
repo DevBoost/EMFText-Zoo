@@ -364,7 +364,14 @@ public class TypeParameterUtil {
 				if(aResult instanceof PrimitiveType) {
 					aResult = PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType) aResult);
 				}
-				temp.getSuperTypes().add((Classifier) aResult);
+				
+				if (aResult instanceof TemporalCompositeClassImpl) {
+					//flatten
+					temp.getSuperTypes().addAll(((TemporalCompositeClassImpl)aResult).getSuperTypes());
+				}
+				else {
+					temp.getSuperTypes().add((Classifier) aResult);	
+				}
 			}
 			temp.getSuperTypes().add(_this);
 			return temp;
