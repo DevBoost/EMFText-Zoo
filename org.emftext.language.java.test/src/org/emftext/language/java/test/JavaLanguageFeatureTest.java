@@ -22,6 +22,8 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.expressions.Expression;
+import org.emftext.language.java.expressions.RelationExpression;
+import org.emftext.language.java.expressions.ShiftExpression;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticImport;
@@ -36,6 +38,7 @@ import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.operators.LessThan;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
@@ -1230,6 +1233,22 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(BigInteger.valueOf(4), literal2.getValue());
 		
 		
+		parseAndReprint(filename);
+	}
+
+	@Test
+	public void testNoTypeArgument() throws Exception {
+		String typename = "NoTypeArgument";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 3);
+		Field b = (Field) clazz.getMembers().get(2);
+		RelationExpression exp = (RelationExpression) b.getInitialValue();
+		assertTrue(exp.getRelationOperators().size() == 1);
+		assertTrue(exp.getRelationOperators().get(0).eClass().getName(),
+				exp.getRelationOperators().get(0) instanceof LessThan);
+		assertTrue(exp.getChildren().get(1) instanceof ShiftExpression);
+
 		parseAndReprint(filename);
 	}
 
