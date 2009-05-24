@@ -17,7 +17,6 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.containers.ContainersPackage;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -27,7 +26,6 @@ import org.emftext.language.java.imports.PackageImport;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
@@ -48,13 +46,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 
-		if (ContainersPackage.Literals.COMPILATION_UNIT__CLASSIFIERS.equals(containingReference)) {
-			return true;
-		}
-		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)
-				&& !container.equals(baseClassifier)) { //not if we come down from the extends reference
-			return true;
-		}
 		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
 			return true;
 		}
@@ -97,13 +88,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					}
 				}
 				//public inner classes (possibly external)
-				if (classifier instanceof ConcreteClassifier) {
-					//only members visible have priority
-					for(Member member : ((ConcreteClassifier)classifier).getMembers()) {
-						if(member instanceof ConcreteClassifier) {
-							resultList.add((ConcreteClassifier) member);
-						}
-					}		
+				if (classifier instanceof ConcreteClassifier) {		
 					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
 							(ConcreteClassifier) classifier));
 				}

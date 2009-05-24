@@ -1,7 +1,6 @@
 package org.emftext.language.java.util.classifiers;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -17,15 +16,17 @@ public class AnonymousClassUtil {
 	 * @return a view on all members including super classifiers' members
 	 */
 	public static EList<Member> getAllMembers(AnonymousClass _this) {
+		EList<Member> memberList = new BasicEList<Member>();
+		memberList.addAll(_this.getMembers());
+		memberList.addAll(_this.getDefaultMembers());
+		
 		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
 		if (ncCall == null) {
-			return ECollections.emptyEList();
+			return memberList;
 		}
 		else {
 			ConcreteClassifier classifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
-			EList<Member> memberList = new BasicEList<Member>();
 			if (classifier != null) {
-				memberList.addAll(classifier.getMembers());
 				memberList.addAll(ClassifierUtil.getAllMembers(classifier));
 			}
 			return memberList;

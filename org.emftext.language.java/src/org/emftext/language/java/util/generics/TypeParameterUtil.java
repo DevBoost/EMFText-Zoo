@@ -24,6 +24,7 @@ import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.references.ReflectiveClassReference;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
@@ -133,7 +134,7 @@ public class TypeParameterUtil {
 				}
 			}
 		}
-		else if (reference != null && reference.eContainer() instanceof Reference) {
+		else if (reference != null && reference.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			parentReference = (Reference) reference.eContainer();
 			Type prevType = ReferenceUtil.getType(parentReference);
 			if(prevType instanceof TemporalCompositeClassImpl) {
