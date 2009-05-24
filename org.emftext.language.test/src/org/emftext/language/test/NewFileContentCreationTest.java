@@ -15,26 +15,44 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.emftext.language.chess.resource.cg.CgPrinter;
+import org.emftext.language.chess.resource.cg.CgResource;
 import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichPrinter;
+import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResource;
 import org.emftext.language.customer.resource.customer.CustomerPrinter;
+import org.emftext.language.customer.resource.customer.CustomerResource;
 import org.emftext.language.ecore.resource.ecore.EcorePrinter;
+import org.emftext.language.ecore.resource.ecore.EcoreResource;
 import org.emftext.language.emfxml.resource.xml.XmlPrinter;
+import org.emftext.language.emfxml.resource.xml.XmlResource;
 import org.emftext.language.feature.resource.feature.FeaturePrinter;
+import org.emftext.language.feature.resource.feature.FeatureResource;
 import org.emftext.language.formular.resource.formular.FormularPrinter;
+import org.emftext.language.formular.resource.formular.FormularResource;
 import org.emftext.language.java.resource.java.JavaPrinter;
+import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.regexp.resource.regexp.RegexpPrinter;
+import org.emftext.language.regexp.resource.regexp.RegexpResource;
 import org.emftext.language.simple_c.resource.c.CPrinter;
+import org.emftext.language.simple_c.resource.c.CResource;
 import org.emftext.language.simple_gui.resource.simplegui.SimpleguiPrinter;
+import org.emftext.language.simple_gui.resource.simplegui.SimpleguiResource;
 import org.emftext.language.simple_math.resource.sm.SmPrinter;
+import org.emftext.language.simple_math.resource.sm.SmResource;
 import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplatePrinter;
+import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplateResource;
 import org.emftext.language.statemachine.resource.statemachine.StatemachinePrinter;
+import org.emftext.language.statemachine.resource.statemachine.StatemachineResource;
 import org.emftext.language.template_concepts.call.resource.template_call.Template_callPrinter;
+import org.emftext.language.template_concepts.call.resource.template_call.Template_callResource;
 import org.emftext.language.textadventure.resource.tas.TasPrinter;
+import org.emftext.language.textadventure.resource.tas.TasResource;
 import org.emftext.language.threevaluedlogic.resource.tvl.TvlPrinter;
+import org.emftext.language.threevaluedlogic.resource.tvl.TvlResource;
 import org.emftext.runtime.resource.ITextPrinter;
 import org.emftext.runtime.util.MinimalModelHelper;
 import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
 import org.emftext.sdk.concretesyntax.resource.cs.CsPrinter;
+import org.emftext.sdk.concretesyntax.resource.cs.CsResource;
 
 public class NewFileContentCreationTest extends TestCase {
 
@@ -59,7 +77,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new EcorePrinter(stream, null);
+			return new EcorePrinter(stream, new EcoreResource());
 		}
 	}
 	
@@ -72,7 +90,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new CsPrinter(stream, null);
+			return new CsPrinter(stream, new CsResource());
 		}
 	}
 	
@@ -85,7 +103,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new CgPrinter(stream, null);
+			return new CgPrinter(stream, new CgResource());
 		}
 	}
 	
@@ -98,7 +116,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new Custom_sandwichPrinter(stream, null);
+			return new Custom_sandwichPrinter(stream, new Custom_sandwichResource());
 		}
 	}
 	
@@ -111,7 +129,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new CustomerPrinter(stream, null);
+			return new CustomerPrinter(stream, new CustomerResource());
 		}
 	}
 	
@@ -125,7 +143,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new XmlPrinter(stream, null);
+			return new XmlPrinter(stream, new XmlResource());
 		}
 	}
 	
@@ -138,7 +156,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new FeaturePrinter(stream, null);
+			return new FeaturePrinter(stream, new FeatureResource());
 		}
 	}
 	
@@ -151,7 +169,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new FormularPrinter(stream, null);
+			return new FormularPrinter(stream, new FormularResource());
 		}
 	}
 	
@@ -164,7 +182,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new RegexpPrinter(stream, null);
+			return new RegexpPrinter(stream, new RegexpResource());
 		}
 	}
 	
@@ -177,7 +195,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new CPrinter(stream, null);
+			return new CPrinter(stream, new CResource());
 		}
 	}
 	
@@ -190,7 +208,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new SimpleguiPrinter(stream, null);
+			return new SimpleguiPrinter(stream, new SimpleguiResource());
 		}
 	}
 	
@@ -203,7 +221,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new SmPrinter(stream, null);
+			return new SmPrinter(stream, new SmResource());
 		}
 	}
 	
@@ -216,7 +234,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new SimpletemplatePrinter(stream, null);
+			return new SimpletemplatePrinter(stream, new SimpletemplateResource());
 		}
 	}
 	
@@ -229,7 +247,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new StatemachinePrinter(stream, null);
+			return new StatemachinePrinter(stream, new StatemachineResource());
 		}
 	}
 	
@@ -242,7 +260,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new Template_callPrinter(stream, null);
+			return new Template_callPrinter(stream, new Template_callResource());
 		}
 	}
 	
@@ -255,7 +273,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new TasPrinter(stream, null);
+			return new TasPrinter(stream, new TasResource());
 		}
 	}
 	
@@ -268,7 +286,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new TvlPrinter(stream, null);
+			return new TvlPrinter(stream, new TvlResource());
 		}
 	}
 	
@@ -288,7 +306,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new JavaPrinter(stream, null);
+			return new JavaPrinter(stream, new JavaResource());
 		}
 	}
 	
@@ -311,6 +329,8 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new TextAdventureTestItem());
 		test(new ThreeValuedLogicTestItem());
 		test(new JavaTestItem());
+
+		// TODO add test items for remaining languages
 		/*
 		test(
 				new EPackage[] {org.emftext.language.java.JavaPackage.eINSTANCE,
@@ -337,7 +357,6 @@ public class NewFileContentCreationTest extends TestCase {
 				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
 		);
 		*/
-		// TODO
 		//test(org.emftext.language.c_sharp.CsharpPackage);
 	}
 
