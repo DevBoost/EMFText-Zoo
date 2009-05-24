@@ -11,8 +11,11 @@ import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.modifiers.AnnotableAndModifiable;
+import org.emftext.language.java.modifiers.Modifiable;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 
 public class ClassifierUtil {
 	
@@ -39,7 +42,25 @@ public class ClassifierUtil {
 		}
 		
 		for (ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
-			memberList.addAll(superClassifier.getMembers());
+			for(Member member : superClassifier.getMembers()) {
+				if(member instanceof Modifiable) {					
+					Modifiable modifiable = (Modifiable) member;
+
+					if(!ModifiableUtil.isPrivate(modifiable)) {
+						memberList.add(member);
+					}
+				}
+				else if(member instanceof AnnotableAndModifiable) {					
+					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
+
+					if(!ModifiableUtil.isPrivate(modifiable)) {
+						memberList.add(member);
+					}
+				}
+				else {
+					memberList.add(member);
+				}
+			}
 			memberList.addAll(superClassifier.getDefaultMembers());
 			memberList.addAll(
 					JavaClasspath.get(_this).getInnnerClassifiers(superClassifier));

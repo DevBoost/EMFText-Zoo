@@ -93,12 +93,18 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				for(Member member : ClassifierUtil.getAllMembers(
 						classifier)) {
 					if(member instanceof ConcreteClassifier) {
-						resultList.add((ConcreteClassifier) member);
+						innerTypeSuperTypeList.add((ConcreteClassifier) member);
 					}
 				}
 				//public inner classes (possibly external)
 				if (classifier instanceof ConcreteClassifier) {
-					resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+					//only members visible have priority
+					for(Member member : ((ConcreteClassifier)classifier).getMembers()) {
+						if(member instanceof ConcreteClassifier) {
+							resultList.add((ConcreteClassifier) member);
+						}
+					}		
+					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
 							(ConcreteClassifier) classifier));
 				}
 
