@@ -5,8 +5,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.commons.NamedElement;
-import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
+import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.MethodCall;
@@ -40,7 +40,7 @@ public class PackageDecider extends AbstractDecider {
 	}
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container)  {
-		if (container instanceof CompilationUnit) {
+		if (container instanceof JavaRoot && container.eResource() != null) {
 			EList<EObject> resultList = new BasicEList<EObject>();
 			
 			Package p = ContainersFactory.eINSTANCE.createPackage();
