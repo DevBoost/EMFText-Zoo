@@ -17,20 +17,10 @@ public class JavaRootUtil {
 		EList<ConcreteClassifier> defaultImportList = new BasicEList<ConcreteClassifier>();
 		
 		String packageName = JavaUniquePathConstructor.packageName(_this);
-		
-		if(!packageName.equals("")) {
-			defaultImportList.addAll(JavaClasspath.get(_this).getClassifiers(
-					packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR, "*"));
-		}
 
-		if(packageName.equals("")) {
-			//put the package behind the default imports when the default package is used
-			
-			//TODO this works for tests; Is this the desired behavior? Usually default package is not used
-			defaultImportList.addAll(JavaClasspath.get(_this).getClassifiers(
-					packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR, "*"));
-		}
-		
+		defaultImportList.addAll(JavaClasspath.get(_this).getClassifiers(
+				packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR, "*"));
+
 		return defaultImportList;
 	}
 	
