@@ -43,6 +43,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	private EList<ConcreteClassifier> innerTypeSuperTypeList = new BasicEList<ConcreteClassifier>();
 	private ConcreteClassifier baseClassifier = null;
+	private boolean insideDefiningClassifier = true;
 	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 
@@ -88,7 +89,15 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					}
 				}
 				//public inner classes (possibly external)
-				if (classifier instanceof ConcreteClassifier) {		
+				if (classifier instanceof ConcreteClassifier) {	
+					if (insideDefiningClassifier){	
+						for(Member member : ((ConcreteClassifier) classifier).getMembers()) {
+							if(member instanceof ConcreteClassifier) {
+								resultList.add((ConcreteClassifier) member);
+							}
+						}
+						insideDefiningClassifier = false;
+					}
 					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
 							(ConcreteClassifier) classifier));
 				}
