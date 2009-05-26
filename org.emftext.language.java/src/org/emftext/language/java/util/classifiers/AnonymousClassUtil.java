@@ -6,7 +6,10 @@ import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.modifiers.AnnotableAndModifiable;
+import org.emftext.language.java.modifiers.Modifiable;
 import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class AnonymousClassUtil {
@@ -27,7 +30,25 @@ public class AnonymousClassUtil {
 		else {
 			ConcreteClassifier classifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
 			if (classifier != null) {
-				memberList.addAll(ClassifierUtil.getAllMembers(classifier));
+				EList<Member> superMemberList = ClassifierUtil.getAllMembers(classifier);
+				for(Member superMember : superMemberList) {
+					//exclude private members
+					if(superMember instanceof Modifiable) {					
+						Modifiable modifiable = (Modifiable) superMember;
+						if(!ModifiableUtil.isPrivate(modifiable)) {
+							memberList.add(superMember);
+						}
+					}
+					else if(superMember instanceof AnnotableAndModifiable) {					
+						AnnotableAndModifiable modifiable = (AnnotableAndModifiable) superMember;
+						if(!ModifiableUtil.isPrivate(modifiable)) {
+							memberList.add(superMember);
+						}
+					}
+					else {
+						memberList.add(superMember);
+					}
+				}
 			}
 			return memberList;
 		}

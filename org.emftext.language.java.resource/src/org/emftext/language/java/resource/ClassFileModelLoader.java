@@ -32,6 +32,8 @@ import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.Method;
+import org.emftext.language.java.modifiers.AnnotableAndModifiable;
+import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.types.ClassifierReference;
@@ -295,6 +297,8 @@ try{
 			return constructor;
 		}
 		
+		constructModifiers(emfMethod, method);
+		
 		return (Member) emfMethod;
 	}
 	
@@ -358,14 +362,50 @@ try{
         			ArraysFactory.eINSTANCE.createArrayDimension());
         }
         
-
-
 		if(!"".equals(plainSignature) && typeRef instanceof ClassifierReference) {
 			constructTypeArguments(plainSignature, (ClassifierReference) typeRef, null, emfClassifier);
 		}
 
+		constructModifiers(emfField, field);
 		
 		return emfField;
+	}
+	
+	protected void constructModifiers(AnnotableAndModifiable emfMember, org.apache.bcel.classfile.FieldOrMethod member) {
+		ModifiersFactory f = ModifiersFactory.eINSTANCE;
+		if (member.isAbstract()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createAbstract());
+		}
+		if (member.isFinal()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createFinal());
+		}
+		if (member.isNative()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createNative());
+		}
+		if (member.isPrivate()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createPrivate());
+		}
+		if (member.isProtected()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createProtected());
+		}
+		if (member.isPublic()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createPublic());
+		}
+		if (member.isStatic()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createStatic());
+		}
+		if (member.isStrictfp()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createStrictfp());
+		}
+		if (member.isSynchronized()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createSynchronized());
+		}
+		if (member.isTransient()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createTransient());
+		}
+		if (member.isVolatile()) {
+			emfMember.getAnnotationsAndModifiers().add(f.createVolatile());
+		}
 	}
 	
 	protected EnumConstant constructEnumConstant(
