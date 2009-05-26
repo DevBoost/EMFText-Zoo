@@ -152,6 +152,9 @@ public class TypeParameterUtil {
 						parentReference = null;
 					}
 				}
+				else {
+					break;
+				}
 			}
 			if (parentReference != null) {
 				Type prevType = ReferenceUtil.getType(parentReference);
