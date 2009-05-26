@@ -733,8 +733,10 @@ try{
 								//recursive call;
 								constructTypeArguments(s.substring(internalBegin, internalEnd), argumentType, method, emfClassifier);
 							}
-							
-							internalBegin = j + 2;
+							internalBegin = j + 1;
+							if(charArray[internalBegin] == '+' || charArray[internalBegin] == '-') {
+								internalBegin++;
+							}
 						}
 					}
 					
