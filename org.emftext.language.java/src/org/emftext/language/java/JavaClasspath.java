@@ -377,20 +377,22 @@ public class JavaClasspath extends AdapterImpl {
 		if(container == null) {
 			return ECollections.emptyEList();
 		}
-
-		String fullName = "";
-
 		if (container.eIsProxy()) {
 			 String uriString = ((InternalEObject)container).eProxyURI().trimFragment().toString();
-			 fullName = uriString.substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length(), 
+			 String fullName = uriString.substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length(), 
 					 uriString.length() - ".java".length()) + "$";
 			 return getClassifiers(fullName, "*");
 		}
 		else {
-			CompilationUnit rootContainer = JavaUtil.findContainingCompilationUnit(container);
-			if (rootContainer instanceof CompilationUnit) {
-				CompilationUnit compilationUnit = (CompilationUnit) rootContainer;
-			    fullName = getContainerNameFromNamespace(compilationUnit) + fullName + 
+			String suffix = "";
+			ConcreteClassifier containingClass = container;
+			while (containingClass.eContainer() instanceof ConcreteClassifier) {
+				containingClass = (ConcreteClassifier) containingClass.eContainer();
+				suffix = JavaUtil.getName(containingClass) + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + suffix;
+			}
+			if (containingClass.eContainer() instanceof CompilationUnit) {
+				CompilationUnit compilationUnit = (CompilationUnit) containingClass.eContainer();
+			    String fullName = getContainerNameFromNamespace(compilationUnit) + suffix + 
 			    	JavaUtil.getName(container) + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
 			    return getClassifiers(fullName, "*");
 			}

@@ -2,6 +2,7 @@ package org.emftext.language.java.util.classifiers;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -24,6 +25,9 @@ public class ConcreteClassifierUtil {
 				JavaClasspath.get(_this).getInnnerClassifiers(superClassifier);
 			
 			for(ConcreteClassifier superInner : superInnerList) {
+				if (superInner.eIsProxy()) {
+					superInner = (ConcreteClassifier) EcoreUtil.resolve(superInner, _this);
+				}
 				if(!ModifiableUtil.isHidden(superInner, _this)) {
 					innerClassifierList.add(superInner);
 				}

@@ -273,13 +273,21 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		
 		if (idx < nsaElement.getNamespaces().size()) {
 			String identifier = nsaElement.getNamespaces().get(idx);
-			
-			List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
-			deciderList.add(new ConcreteClassifierDecider());
-			deciderList.add(new TypeParameterDecider());
-			ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-			
-			EObject target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);
+			EObject target = null;
+			if (idx == 0) {
+				List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
+				deciderList.add(new ConcreteClassifierDecider());
+				ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
+				
+				target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);
+			}
+			else {
+				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
+					if (identifier.equals(JavaUtil.getName(cand))) {
+						target = cand;
+					}
+				}
+			}
 			
 			if (target != null) {
 				if (target.eIsProxy()) {

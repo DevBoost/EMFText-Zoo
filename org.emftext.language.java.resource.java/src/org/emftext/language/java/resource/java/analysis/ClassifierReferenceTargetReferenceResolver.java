@@ -20,6 +20,7 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.util.JavaUtil;
+import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
@@ -44,15 +45,18 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		
 		EObject startingPoint = null;
 		EObject target = null;
+		boolean hasNamespace = false;
 		
 		if (container.eContainer() instanceof NamespaceClassifierReference) {
 			NamespaceClassifierReference ncr = (NamespaceClassifierReference) container.eContainer();
 			int idx = ncr.getClassifierReferences().indexOf(container);
 			if(idx > 0) {
+				hasNamespace = true;
 				startingPoint = ncr.getClassifierReferences().get(idx - 1).getTarget();
 			}
 			else {
 				if(ncr.getNamespaces().size() > 0) {
+					hasNamespace = true;
 					EObject lastClassInNS = ConcreteClassifierDecider.resolveRelativeNamespace(
 							ncr, 0, container, container, reference);
 					if (lastClassInNS != null) {
@@ -101,12 +105,22 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				startingPoint = container;
 			}
 			
-			deciderList.add(new ConcreteClassifierDecider());
-			deciderList.add(new TypeParameterDecider());
-			
-			ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-			
-			target = treeWalker.walk(startingPoint, identifier, container, reference);
+			if (hasNamespace) {
+				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
+					if (identifier.equals(JavaUtil.getName(cand))) {
+						target = cand;
+					}
+				}
+			}
+			else {
+				deciderList.add(new ConcreteClassifierDecider());
+				deciderList.add(new TypeParameterDecider());
+				
+				ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
+				
+				target = treeWalker.walk(startingPoint, identifier, container, reference);
+			}
+
 		}
 		
 		if (target != null) {
