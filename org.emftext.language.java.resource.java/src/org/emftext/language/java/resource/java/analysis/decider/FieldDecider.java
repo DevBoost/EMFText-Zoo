@@ -44,6 +44,7 @@ public class FieldDecider extends AbstractDecider {
 		return standardArrayLengthField;
 	}
 	
+	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
@@ -61,10 +62,10 @@ public class FieldDecider extends AbstractDecider {
 		if (container instanceof AnonymousClass) {
 			EList<Member> memberList = 
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
-			resultList.addAll(memberList);
+			innerTypeSuperMembers.addAll(memberList);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
-					resultList.addAll(((Field)member).getAdditionalFields());
+					innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
 				}
 			}
 			return resultList;
@@ -72,6 +73,7 @@ public class FieldDecider extends AbstractDecider {
 		
 		if(container instanceof CompilationUnit) {
 			addImports(container, resultList);
+			resultList.addAll(innerTypeSuperMembers);
 			addArrayLengthFiled(resultList, container);
 		}
 		

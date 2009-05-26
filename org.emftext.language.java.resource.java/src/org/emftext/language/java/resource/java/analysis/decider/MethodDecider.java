@@ -11,7 +11,6 @@ import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
-import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
@@ -36,6 +35,8 @@ public class MethodDecider extends AbstractDecider {
 		}
 		return false;
 	}
+	
+	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof Classifier) {
@@ -43,14 +44,15 @@ public class MethodDecider extends AbstractDecider {
 		}
 		
 		if (container instanceof AnonymousClass) {
-			EList<Member> resultList = 
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
-			return resultList;
+			innerTypeSuperMembers.addAll(
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container));
+			return null;
 		}
 		
 		if(container instanceof CompilationUnit) {
 			EList<EObject> resultList = new BasicEList<EObject>();
 			addImports(container, resultList);
+			resultList.addAll(innerTypeSuperMembers);
 			return resultList;
 		}
 		
