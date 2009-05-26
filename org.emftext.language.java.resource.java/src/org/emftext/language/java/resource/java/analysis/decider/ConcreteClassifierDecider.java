@@ -196,12 +196,17 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}
 		if(container instanceof ImportingElement) {	
 			//4) other packages
+			EList<EObject> packageImports = new BasicEList<EObject>();
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof PackageImport) {
-					resultList.addAll(ImportUtil.getClassifierList(
+					packageImports.addAll(ImportUtil.getClassifierList(
 							aImport));
 				}
+				
 			}
+			//the last imported package has priority over the previous
+			ECollections.reverse(packageImports);
+			resultList.addAll(packageImports);
 		}	
 		//5) java.lang
 		if(container instanceof JavaRoot || container.eContainer() == null) {
