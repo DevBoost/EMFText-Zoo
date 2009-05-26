@@ -41,7 +41,7 @@ public class AnonymousClassUtil {
 					}
 					else if(superMember instanceof AnnotableAndModifiable) {					
 						AnnotableAndModifiable modifiable = (AnnotableAndModifiable) superMember;
-						if(!ModifiableUtil.isPrivate(modifiable)) {
+						if(!ModifiableUtil.isHidden(modifiable, _this)) {
 							memberList.add(superMember);
 						}
 					}

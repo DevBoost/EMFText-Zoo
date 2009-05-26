@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.imports.Import;
@@ -45,16 +46,26 @@ public class FieldDecider extends AbstractDecider {
 	}
 	
 	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
+	private boolean insideDefiningClassifier = true;
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		if (container instanceof Classifier) {
+			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
+				for(Member member : ((ConcreteClassifier)container).getMembers()) {
+					if (member instanceof Field) {
+						resultList.add(member);
+						resultList.addAll(((Field)member).getAdditionalFields());
+					}
+				}
+				insideDefiningClassifier = false;
+			}
 			EList<Member> memberList = 
 				ClassifierUtil.getAllMembers((Classifier)container);
-			resultList.addAll(memberList);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
-					resultList.addAll(((Field)member).getAdditionalFields());
+					innerTypeSuperMembers.add(member);
+					innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
 				}
 			}
 		}
@@ -62,9 +73,9 @@ public class FieldDecider extends AbstractDecider {
 		if (container instanceof AnonymousClass) {
 			EList<Member> memberList = 
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
-			innerTypeSuperMembers.addAll(memberList);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
+					innerTypeSuperMembers.add(member);
 					innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
 				}
 			}

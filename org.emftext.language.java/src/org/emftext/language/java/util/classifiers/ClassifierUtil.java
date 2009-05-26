@@ -68,7 +68,7 @@ public class ClassifierUtil {
 				else if(member instanceof AnnotableAndModifiable) {					
 					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
 
-					if(!ModifiableUtil.isPrivate(modifiable)) {
+					if(!ModifiableUtil.isHidden(modifiable, _this)) {
 						memberList.add(member);
 					}
 					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {

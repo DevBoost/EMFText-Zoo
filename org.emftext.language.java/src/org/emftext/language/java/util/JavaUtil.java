@@ -103,4 +103,12 @@ public class JavaUtil {
 		}
 		return (AnnotationInstance) value;
 	}
+	
+	public static EList<String> findPackageName(EObject value) {
+		CompilationUnit cu = findContainingCompilationUnit(value);
+		if (cu == null) {
+			return null;
+		}
+		return cu.getNamespaces();
+	}
 }

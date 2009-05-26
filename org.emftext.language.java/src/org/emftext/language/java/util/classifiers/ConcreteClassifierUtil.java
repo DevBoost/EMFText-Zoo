@@ -8,22 +8,29 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 
 public class ConcreteClassifierUtil {
 	
 	public static EList<ConcreteClassifier> getAllInnerClassifiers(ConcreteClassifier _this) {
-		EList<ConcreteClassifier> internalClassifierList = new BasicEList<ConcreteClassifier>();
+		EList<ConcreteClassifier> innerClassifierList = new BasicEList<ConcreteClassifier>();
 		
-		internalClassifierList.addAll(
+		innerClassifierList.addAll(
 				JavaClasspath.get(_this).getInnnerClassifiers(_this));
 		
 		for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
-			internalClassifierList.addAll(
-					JavaClasspath.get(_this).getInnnerClassifiers(superClassifier));
+			EList<ConcreteClassifier> superInnerList = 
+				JavaClasspath.get(_this).getInnnerClassifiers(superClassifier);
+			
+			for(ConcreteClassifier superInner : superInnerList) {
+				if(!ModifiableUtil.isHidden(superInner, _this)) {
+					innerClassifierList.add(superInner);
+				}
+			}
 		}
 		
-		return internalClassifierList;
+		return innerClassifierList;
 	}
 	
 	public static EList<ClassifierReference> getSuperTypeReferences(ConcreteClassifier _this) {

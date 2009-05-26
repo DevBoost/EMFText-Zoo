@@ -199,6 +199,8 @@ try{
 
 		}
 		
+		constructModifiers(emfClassifier, clazz);
+		
 		return emfClassifier;
 	}
 	
@@ -371,7 +373,7 @@ try{
 		return emfField;
 	}
 	
-	protected void constructModifiers(AnnotableAndModifiable emfMember, org.apache.bcel.classfile.FieldOrMethod member) {
+	protected void constructModifiers(AnnotableAndModifiable emfMember, org.apache.bcel.classfile.AccessFlags member) {
 		ModifiersFactory f = ModifiersFactory.eINSTANCE;
 		if (member.isAbstract()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createAbstract());

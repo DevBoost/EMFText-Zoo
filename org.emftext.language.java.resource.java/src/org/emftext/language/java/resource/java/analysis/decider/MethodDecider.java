@@ -6,11 +6,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
+import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
@@ -37,26 +39,45 @@ public class MethodDecider extends AbstractDecider {
 	}
 	
 	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
-
+	private boolean insideDefiningClassifier = true;
+	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
+		EList<EObject> resultList = new BasicEList<EObject>();
 		if (container instanceof Classifier) {
-			return ClassifierUtil.getAllMembers((Classifier)container);
+			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
+				for(Member member : ((ConcreteClassifier)container).getMembers()) {
+					if (member instanceof Method) {
+						resultList.add(member);
+					}
+				}
+				insideDefiningClassifier = false;
+			}
+			EList<Member> memberList = 
+				ClassifierUtil.getAllMembers((Classifier)container);
+			for(Member member : memberList) {
+				if (member instanceof Method) {
+					innerTypeSuperMembers.add(member);
+				}
+			}
 		}
 		
 		if (container instanceof AnonymousClass) {
-			innerTypeSuperMembers.addAll(
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container));
-			return null;
-		}
-		
-		if(container instanceof CompilationUnit) {
-			EList<EObject> resultList = new BasicEList<EObject>();
-			addImports(container, resultList);
-			resultList.addAll(innerTypeSuperMembers);
+			EList<Member> memberList = 
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
+			for(Member member : memberList) {
+				if (member instanceof Method) {
+					innerTypeSuperMembers.add(member);
+				}
+			}
 			return resultList;
 		}
 		
-		return null;
+		if(container instanceof CompilationUnit) {
+			addImports(container, resultList);
+			resultList.addAll(innerTypeSuperMembers);
+		}
+		
+		return resultList;
 	}
 	
 	private void addImports(EObject container,
