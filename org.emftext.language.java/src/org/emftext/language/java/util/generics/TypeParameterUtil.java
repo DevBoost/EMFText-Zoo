@@ -2,7 +2,10 @@ package org.emftext.language.java.util.generics;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.classifiers.Class;
@@ -47,6 +50,23 @@ import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class TypeParameterUtil {
+	
+	/**
+	 * This adapter is used to attach type arguments to a type when it is passed through
+	 * several getBoundType() calls recursively. A better solution might be
+	 * to pass type references along whenever possible. 
+	 * <p>
+	 * This however will require major changes in the API.
+	 */
+	public static class TemporalTypeArgumentHolder extends AdapterImpl {
+		private EList<TypeArgument> typeArguments = new BasicEList<TypeArgument>();
+		
+		public EList<TypeArgument> getTypeArguments() {
+			return typeArguments;
+		}
+		
+	}
+	
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
 		
 		private TypeParameter creator;
@@ -215,10 +235,36 @@ public class TypeParameterUtil {
 	
 							}
 						}
-						if (classifierReference != null && typeParameterIndex < classifierReference.getTypeArguments().size())  {
-							TypeArgument arg = classifierReference.getTypeArguments().get(typeParameterIndex);
+						EList<TypeArgument> typeArgumentList;
+						TemporalTypeArgumentHolder ttah = null;
+						for(Adapter adapter : prevType.eAdapters()) {
+							if (adapter instanceof TemporalTypeArgumentHolder) {
+								ttah = (TemporalTypeArgumentHolder) adapter; 
+								prevType.eAdapters().remove(ttah);
+								break;
+							}
+						}
+						if (ttah != null) {
+							typeArgumentList = ttah.getTypeArguments();
+						}
+						else if (classifierReference != null) {
+							typeArgumentList = classifierReference.getTypeArguments();
+						}
+						else {
+							typeArgumentList = ECollections.emptyEList();
+						}
+						
+						if (typeParameterIndex < typeArgumentList.size())  {
+							TypeArgument arg = typeArgumentList.get(typeParameterIndex);
 							if (arg instanceof QualifiedTypeArgument) {
-								resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), parentReference));
+								ClassifierReference theTypeRef = ClassifierReferenceUtil.getPureClassifierReference(((QualifiedTypeArgument) arg).getType());
+								Type theType = TypeReferenceUtil.getTarget(theTypeRef, parentReference);
+								if (!theTypeRef.getTypeArguments().isEmpty()) {
+									ttah = new TemporalTypeArgumentHolder();
+									ttah.getTypeArguments().addAll(theTypeRef.getTypeArguments());
+									theType.eAdapters().add(ttah);
+								}
+								resultList.add(0, theType);
 							}
 							if (arg instanceof ExtendsTypeArgument) {
 								for(TypeReference extendedType : ((ExtendsTypeArgument) arg).getExtendTypes()) {
