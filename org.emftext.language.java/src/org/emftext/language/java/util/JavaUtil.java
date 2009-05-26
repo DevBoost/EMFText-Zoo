@@ -1,5 +1,7 @@
 package org.emftext.language.java.util;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.JavaClasspath;
@@ -104,11 +106,21 @@ public class JavaUtil {
 		return (AnnotationInstance) value;
 	}
 	
-	public static EList<String> findPackageName(EObject value) {
+	public static List<String> findPackageName(EObject value) {
 		CompilationUnit cu = findContainingCompilationUnit(value);
 		if (cu == null) {
 			return null;
 		}
-		return cu.getNamespaces();
+		
+		int idx = cu.getNamespaces().size();
+		if(JavaUtil.getName(cu) != null) {
+			char[] fullName = JavaUtil.getName(cu).toCharArray();
+			for(int i = 0; i < fullName.length; i++) {
+				if (fullName[i] == '$') {
+					idx--;
+				}
+			}
+		}
+		return cu.getNamespaces().subList(0, idx);
 	}
 }
