@@ -19,6 +19,7 @@ import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.generics.TypeParametrizable;
 import org.emftext.language.java.instantiations.NewConstructorCall;
+import org.emftext.language.java.literals.Super;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.ElementReference;
@@ -27,6 +28,7 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.references.ReflectiveClassReference;
+import org.emftext.language.java.references.SelfReference;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Type;
@@ -137,12 +139,28 @@ public class TypeParameterUtil {
 		}
 		else if (reference != null && reference.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			parentReference = (Reference) reference.eContainer();
-			Type prevType = ReferenceUtil.getType(parentReference);
-			if(prevType instanceof TemporalCompositeClassImpl) {
-				prevTypeList.addAll(((TemporalCompositeClassImpl)prevType).getSuperTypes());
+			while (parentReference instanceof SelfReference) {
+				if (((SelfReference)parentReference).getSelf() instanceof Super) {
+					if (parentReference.eContainer() instanceof Reference) {
+						parentReference = (Reference) parentReference.eContainer();
+					}
+					else {
+						ConcreteClassifier containingClassifier = JavaUtil.findContainingClassifier(reference);
+						if (containingClassifier != null) {
+							prevTypeList.add(containingClassifier);
+						}
+						parentReference = null;
+					}
+				}
 			}
-			else {
-				prevTypeList.add(prevType);
+			if (parentReference != null) {
+				Type prevType = ReferenceUtil.getType(parentReference);
+				if(prevType instanceof TemporalCompositeClassImpl) {
+					prevTypeList.addAll(((TemporalCompositeClassImpl)prevType).getSuperTypes());
+				}
+				else {
+					prevTypeList.add(prevType);
+				}
 			}
 		}
 		else if (reference != null) {
@@ -174,7 +192,9 @@ public class TypeParameterUtil {
 						for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
 							if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
 								//is this an argument for the correct class?
-								if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference))) {					 
+								if (typeParameterDeclarator.equals(TypeReferenceUtil.getTarget(superClassifierReference)) ||
+										ClassifierUtil.getAllSuperClassifiers((Classifier)TypeReferenceUtil.getTarget(superClassifierReference)).contains(
+												typeParameterDeclarator)) {					 
 									TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
 									if (arg instanceof QualifiedTypeArgument) {
 										resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
