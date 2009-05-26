@@ -1,13 +1,20 @@
 package org.emftext.language.java.util.types;
 
+import org.emftext.language.java.arrays.ArrayTypeable;
 import org.emftext.language.java.generics.TypeParameter;
+import org.emftext.language.java.references.ElementReference;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.util.JavaUtil;
+import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
+import org.emftext.language.java.util.references.ReferenceUtil;
 
 public class TypeReferenceUtil {
 
@@ -40,6 +47,23 @@ public class TypeReferenceUtil {
 			ClassifierReference classifierRef = ClassifierReferenceUtil.getPureClassifierReference(_this);
 			if (classifierRef != null) {
 				type = classifierRef.getTarget();
+			}
+			
+			if (reference instanceof MethodCall) {
+				MethodCall potentialCloneCall = (MethodCall) reference;
+				//clone returns the type of the cloned in the case of arrays
+				if ("clone".equals(JavaUtil.getName(potentialCloneCall.getTarget()))) {
+					if(potentialCloneCall.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+						if (potentialCloneCall.eContainer() instanceof ElementReference) {
+							ElementReference prevRef = (ElementReference) potentialCloneCall.eContainer();
+							if (prevRef.getTarget() instanceof ArrayTypeable && 
+									ArrayTypeableUtil.getArrayDimension((ArrayTypeable)prevRef.getTarget()) > 0) {
+								type = ReferenceUtil.getType(prevRef);
+							}
+						}
+						
+					}
+				}
 			}
 		}
 
