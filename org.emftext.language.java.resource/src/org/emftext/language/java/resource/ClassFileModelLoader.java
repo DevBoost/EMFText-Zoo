@@ -36,6 +36,7 @@ import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaUtil;
 
@@ -60,11 +61,11 @@ public class ClassFileModelLoader {
 	
 	public CompilationUnit parse(InputStream inputStream, String classFileName)
 			throws IOException {
-
+try{
+		
 		org.apache.bcel.classfile.JavaClass myClass =
 			new org.apache.bcel.classfile.ClassParser(
 					inputStream, classFileName).parse();
-		
 		ConcreteClassifier classifier = constructClassifier(myClass);
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 		JavaUtil.setName(cu, classFileName);
@@ -80,6 +81,10 @@ public class ClassFileModelLoader {
 		}
 		cu.getClassifiers().add(classifier);
 		return cu;
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return null;
 	}
 	
 	protected ConcreteClassifier constructClassifier(org.apache.bcel.classfile.JavaClass clazz) {
@@ -353,15 +358,7 @@ public class ClassFileModelLoader {
 		Field emfField = membersFactory.createField();
 		JavaUtil.setName(emfField, field.getName());
 		String signature = field.getType().getSignature();
-		TypeReference typeRef = createReferenceToType(signature);
-		emfField.setType(typeRef);
 		
-		int arrayDimension = getArrayDimension(signature);
-        for(int i = 0; i < arrayDimension; i++) {
-        	emfField.getArrayDimensionsBefore().add(
-        			ArraysFactory.eINSTANCE.createArrayDimension());
-        }
-        
 		String plainSignature = "";
 		for(Attribute a : field.getAttributes()){
 			String s = a.toString();
@@ -371,6 +368,23 @@ public class ClassFileModelLoader {
 				break;
 			}
 		}
+		
+		TypeReference typeRef = createReferenceToType(signature);
+		TypeReference typeParamRef = constructReturnTypeParameterReference(plainSignature, emfField, emfClassifier);
+		if(typeParamRef != null) {
+			((TypeParameter)((ClassifierReference)typeParamRef).getTarget()).getExtendTypes().add(typeRef);
+			typeRef = typeParamRef;
+		}
+
+		emfField.setType(typeRef);
+		
+		int arrayDimension = getArrayDimension(signature);
+        for(int i = 0; i < arrayDimension; i++) {
+        	emfField.getArrayDimensionsBefore().add(
+        			ArraysFactory.eINSTANCE.createArrayDimension());
+        }
+        
+
 
 		if(!"".equals(plainSignature) && typeRef instanceof ClassifierReference) {
 			constructTypeArguments(plainSignature, (ClassifierReference) typeRef, null, emfClassifier);
@@ -416,20 +430,31 @@ public class ClassFileModelLoader {
 		return classifierReference;
 	}
 	
-	protected ClassifierReference constructReturnTypeParameterReference(String signature, TypeParametrizable method, ConcreteClassifier emfClassifier) {
+	protected ClassifierReference constructReturnTypeParameterReference(String signature, TypedElement element, ConcreteClassifier emfClassifier) {
 		int idx = signature.indexOf(")T");
+		if(idx != -1) {
+			signature = signature.substring(idx + 2);
+		}
+		else  {
+			idx = signature.indexOf("T");
+			if (idx != 0) {
+				return null;
+			}
+			signature = signature.substring(1);
+		}
+		
+		idx = signature.indexOf(";");
 		if(idx == -1) {
 			return null;
 		}
-		signature = signature.substring(idx + 2);
-		
-		idx = signature.indexOf(";");
 		String name = signature.substring(0,idx);
 		
 		TypeParameter typeParameter =  null;
-		for(TypeParameter cand : method.getTypeParameters()) {
-			if(JavaUtil.getName(cand).equals(name)) {
-				typeParameter = cand;
+		if (element instanceof TypeParametrizable) { //methods
+			for(TypeParameter cand : ((TypeParametrizable)element).getTypeParameters()) {
+				if(JavaUtil.getName(cand).equals(name)) {
+					typeParameter = cand;
+				}
 			}
 		}
 		if (typeParameter == null) {
