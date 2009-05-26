@@ -16,7 +16,6 @@ import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamespaceAwareElement;
-import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.imports.ClassifierImport;
@@ -86,7 +85,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				for(Member member : ClassifierUtil.getAllMembers(
 						classifier)) {
 					if(member instanceof ConcreteClassifier) {
-						innerTypeSuperTypeList.add((ConcreteClassifier) member);
+						innerTypeSuperTypeList.add(0,(ConcreteClassifier) member);
 					}
 				}
 				//public inner classes (possibly external)
@@ -99,7 +98,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 						}
 						insideDefiningClassifier = false;
 					}
-					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+					innerTypeSuperTypeList.addAll(0,ConcreteClassifierUtil.getAllInnerClassifiers(
 							(ConcreteClassifier) classifier));
 				}
 
@@ -153,17 +152,6 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}
 		
 		addImportsAndInnerClasses(container, resultList);
-
-		//TODO @jjohannes: when everything works remove this code and run all tests to check what it is needed for
-		// which inner classes are exactly imported and what is their priority?
-		if(container instanceof CompilationUnit) {
-			for(Import aImport : ((CompilationUnit)container).getImports()) {
-				if(aImport instanceof ClassifierImport) {
-					resultList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-							((ClassifierImport)aImport).getClassifier()));
-				}
-			}
-		}
 		
 		return resultList;
 	}
