@@ -18,6 +18,7 @@ import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.generics.TypeArgument;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.generics.TypeParametrizable;
+import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.references.ElementReference;
@@ -258,8 +259,23 @@ public class TypeParameterUtil {
 					Expression argument = methodCall.getArguments().get(idx);
 					Parameter parameter = method.getParameters().get(idx);
 					ClassifierReference parameterType = ClassifierReferenceUtil.getPureClassifierReference(parameter.getType());
-					
-					if (parameterType != null && argument instanceof Reference) {
+					if (argument instanceof NewConstructorCall) {
+						ClassifierReference argumentType = ClassifierReferenceUtil.getPureClassifierReference(((NewConstructorCall)argument).getType());
+						if (argumentType != null && parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
+							for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
+								if(typeArgument instanceof QualifiedTypeArgument) {
+									if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+										resultList.add(0, TypeReferenceUtil.getTarget(
+												((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType()));
+									}
+								}
+							}
+						}
+						if (argumentType != null && parameterType.getTarget() instanceof TypeParameter) {
+							resultList.add(0,argumentType.getTarget());
+						}
+					}
+					else if (parameterType != null && argument instanceof Reference) {
 						Reference argReference = (Reference) argument;
 						
 						while (argReference.getNext() instanceof Reference &&
