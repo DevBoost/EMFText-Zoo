@@ -10,6 +10,7 @@ OPTIONS {
     tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
+	overrideManifest = "false";
 }
 
 TOKENSTYLES {
