@@ -12,7 +12,9 @@ import org.emftext.language.java.expressions.ExpressionsFactory;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.UnaryExpression;
 import org.emftext.language.java.operators.Addition;
+import org.emftext.language.java.operators.AdditiveOperator;
 import org.emftext.language.java.operators.OperatorsFactory;
+import org.emftext.language.java.operators.Subtraction;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
@@ -41,7 +43,7 @@ public class CastRepair {
 				if(castExpression.getChild() instanceof UnaryExpression) {
 					UnaryExpression unaryExpression = (UnaryExpression) castExpression.getChild();
 					if (unaryExpression.getOperators().size() == 1 && 
-							unaryExpression.getOperators().get(0) instanceof Addition) {
+							unaryExpression.getOperators().get(0) instanceof AdditiveOperator) {
 						//try to resolve the cast
 						NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getType();
 						EObject proxy = (EObject) nsClassifierReference
@@ -122,10 +124,10 @@ public class CastRepair {
 								additiveExpression.getChildren().add(idx + 1,unaryExpression.getChild());
 							}
 							if (idx == additiveExpression.getAdditiveOperators().size()) {
-								additiveExpression.getAdditiveOperators().add(OperatorsFactory.eINSTANCE.createAddition());
+								additiveExpression.getAdditiveOperators().add((AdditiveOperator)unaryExpression.getOperators().get(0));
 							}
 							else {
-								additiveExpression.getAdditiveOperators().add(idx, OperatorsFactory.eINSTANCE.createAddition());
+								additiveExpression.getAdditiveOperators().add((AdditiveOperator)unaryExpression.getOperators().get(0));
 							}
 							EcoreUtil.replace(castExpression, nestedExpression);
 							

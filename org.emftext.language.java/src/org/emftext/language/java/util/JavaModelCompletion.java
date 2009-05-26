@@ -86,7 +86,7 @@ public class JavaModelCompletion {
 
 	public static void addMissingAnnotationMembers(Annotation annotation) {
 		String valueMethodName = "value";
-		Method valueMethod = MemberContainerUtil.getMethod(annotation, valueMethodName);
+		Method valueMethod = MemberContainerUtil.getOnlyMethodWithName(annotation, valueMethodName);
 		if (valueMethod == null) {
 			valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
 			JavaUtil.setName(valueMethod, valueMethodName);
@@ -107,7 +107,7 @@ public class JavaModelCompletion {
 		
 		//add the values
 		String valuesMethodName = "values";
-		Method valuesMethod = MemberContainerUtil.getMethod(enumeration, valuesMethodName);
+		Method valuesMethod = MemberContainerUtil.getOnlyMethodWithName(enumeration, valuesMethodName);
 		
 		if (valuesMethod == null) {
 			valuesMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
@@ -121,7 +121,7 @@ public class JavaModelCompletion {
 		
 		//add the value of method
 		String valueOfMethodName = "valueOf";
-		Method valueOfMethod = MemberContainerUtil.getMethod(enumeration, valueOfMethodName);
+		Method valueOfMethod = MemberContainerUtil.getOnlyMethodWithName(enumeration, valueOfMethodName);
 		
 		if (valueOfMethod == null) {
 			valueOfMethod = MembersFactory.eINSTANCE.createInterfaceMethod();

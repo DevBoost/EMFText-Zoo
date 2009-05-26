@@ -81,7 +81,7 @@ public class MethodDecider extends AbstractDecider {
 						return true;
 					}
 				}
-				else {
+				else if (!lastFound.equals(method)) {
 					if (MethodUtil.isMethodForCall(method, lastFound, methodCall)) {
 						lastFound = method;
 						return true;

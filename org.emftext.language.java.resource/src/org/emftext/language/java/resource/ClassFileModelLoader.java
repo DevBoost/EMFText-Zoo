@@ -199,32 +199,6 @@ try{
 		
 		return emfClassifier;
 	}
-
-	/*protected void addTypeArguments(
-			ClassifierReference classifierReference, String s) {
-		int startIdx = s.indexOf("<L");
-		int endIdx   = s.lastIndexOf(";>");
-		if (startIdx < 0 || endIdx < 0) {
-			return;
-		}
-		s = s.substring(startIdx + 2, endIdx);
-		
-		String classifierNameList = s;
-		int idx = s.indexOf("<");
-		if (idx > 0) {
-			//TODO this is not correct when there are many type parameters
-			//that have themselves type arguments
-			classifierNameList = s.substring(0, idx);
-		}
-		for(String classifierName : classifierNameList.split(";L")) {
-			QualifiedTypeArgument typeArgumet = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-			typeArgumet.setType(createReferenceToClassifier(classifierName));
-			addTypeArguments((ClassifierReference) typeArgumet.getType(), s);
-			classifierReference.getTypeArguments().add(typeArgumet);
-		}
-		
-
-	}*/
 	
 	protected Member constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVaraibleLength) {
 		Method emfMethod = null;

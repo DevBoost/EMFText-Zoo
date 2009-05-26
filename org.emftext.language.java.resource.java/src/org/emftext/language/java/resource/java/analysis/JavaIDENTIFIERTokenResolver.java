@@ -5,7 +5,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-// TODO add conversion of supplementary unicode characters
+// TODO @mseifert: add conversion of supplementary unicode characters
 // see JavaSTRING_LITERALTokenResolver
 public class JavaIDENTIFIERTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
 	@Override

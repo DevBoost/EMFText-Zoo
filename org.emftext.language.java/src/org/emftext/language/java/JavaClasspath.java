@@ -283,11 +283,7 @@ public class JavaClasspath extends AdapterImpl {
 				URI existinMapping = uriMap.get(logicalUri);
 				
 				if (existinMapping != null && !uri.equals(existinMapping)) {
-					//TODO where to put this warning?
-					/*System.out.println("[JaMoPP] WARNING: Two versions of " + fullName + 
-							"\n[JaMoPP]   1) " + uriMap.get(logicalUri) +
-							"\n[JaMoPP]   2) " + uri +
-							"\n[JaMoPP] Version 1) will be ignored!");*/
+					//do nothing: silently replace old with new version
 				}
 				
 				uriMap.put(logicalUri, uri);

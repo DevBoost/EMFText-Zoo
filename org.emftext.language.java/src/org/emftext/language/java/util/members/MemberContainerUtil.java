@@ -40,15 +40,22 @@ public class MemberContainerUtil {
 	/**
 	 * @param _this
 	 * @param name
-	 * @return method with the given name defined in this member container
+	 * @return method with the given name defined in this member container;
+	 *         null, if there is no such method 
+	 *         or if there are multiple methods with the same name
 	 */
-	//TODO @jjohannes add signature to parameters or remove method if not needed
-	public static Method getMethod(MemberContainer _this, String name) {
+	public static Method getOnlyMethodWithName(MemberContainer _this, String name) {
+		Method found = null;
 		for(Member member : _this.getMembers()) {
 			if (member instanceof Method && name.equals(JavaUtil.getName(member))) {
-				return (Method) member;
+				if(found != null) {
+					return null;
+				}
+				else {
+					found = (Method) member;
+				}
 			}
  		}
-		return null;
+		return found;
 	}
 }

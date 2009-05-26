@@ -6,7 +6,7 @@ import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 import org.emftext.runtime.resource.ITokenResolver;
 import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-// TODO add conversion of supplementary unicode characters
+// TODO @mseifert: add conversion of supplementary unicode characters
 // These consist of two characters (high and low surrogate).
 // The high surrogate is in the range of \ud800..\udbff.
 // The low surrogate is in the range of \udc00..\udfff.
