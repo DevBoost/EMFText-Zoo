@@ -295,8 +295,16 @@ public class TypeParameterUtil {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
-												resultList.add(0, TypeReferenceUtil.getTarget(
-														((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType()));
+												int idx2 = parameterType.getTypeArguments().indexOf(typeArgument);
+												if (argumentType.getTypeArguments().get(idx2) instanceof QualifiedTypeArgument) {
+													resultList.add(0, TypeReferenceUtil.getTarget(
+															((QualifiedTypeArgument)argumentType.getTypeArguments().get(idx2)).getType()));
+												}
+												else if (argumentType.getTypeArguments().get(idx2) instanceof ExtendsTypeArgument) {
+													for(TypeReference extendedType : ((ExtendsTypeArgument) argumentType.getTypeArguments().get(idx2)).getExtendTypes()) {
+														resultList.add(0, TypeReferenceUtil.getTarget(extendedType));
+													}
+												}
 											}
 										}
 									}
