@@ -6,6 +6,7 @@ import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.types.PrimitiveType;
+import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
@@ -58,7 +59,11 @@ public class ClassUtil {
 		if (superClassReference == null) {
 			superClassReference = _this.getDefaultExtends();
 		}
-		return (Class) TypeReferenceUtil.getTarget(superClassReference);
+		Type result = TypeReferenceUtil.getTarget(superClassReference);
+		if (result instanceof Class) {
+			return (Class) result;
+		}
+		return null;
 	}
 	
 	/**
