@@ -109,6 +109,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
 					if (identifier.equals(JavaUtil.getName(cand))) {
 						target = cand;
+						break;
 					}
 				}
 			}
