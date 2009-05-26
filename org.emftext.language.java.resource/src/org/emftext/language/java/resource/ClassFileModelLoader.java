@@ -150,9 +150,15 @@ try{
 				typeArgumentSig = constructTypeArguments(typeArgumentSig, (ClassifierReference)emfClass.getExtends(), null, emfClassifier);
 			}
 		}
+		else {
+			//cut away the Object signature which is there also for interfaces
+			typeArgumentSig = constructTypeArguments(typeArgumentSig, null, null, emfClassifier);
+		}
+		
 		//interfaces
 		for(String ifName : clazz.getInterfaceNames()) {
 			TypeReference typeArg = createReferenceToClassifier(ifName);
+			
 			typeArgumentSig = constructTypeArguments(typeArgumentSig, (ClassifierReference)typeArg, null, emfClassifier);
 			if (clazz.isEnum()) { //check first, because enum is also class
 				((Enumeration)emfClassifier).getImplements().add(typeArg); 
