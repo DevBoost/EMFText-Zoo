@@ -93,7 +93,7 @@ public class TypeParameterUtil {
 	 * @param _this
 	 * @param resultClassifierList the list for the result
 	 */
-	public static  void collectAllSuperClassifiers(TypeParameter _this, 
+	public static void collectAllSuperClassifiers(TypeParameter _this, 
 			EList<ConcreteClassifier> resultClassifierList) {
 		
 		for(TypeReference typeRef : _this.getExtendTypes()) {
@@ -136,7 +136,9 @@ public class TypeParameterUtil {
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		Reference parentReference = null;
 		EList<Type> prevTypeList = new BasicEList<Type>();
-		if (reference != null && reference.eContainer() instanceof NestedExpression) {
+		if (reference != null && 
+				reference.eContainer() instanceof NestedExpression && 
+				reference.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
 			NestedExpression nestedExpression = (NestedExpression) reference.eContainer();
 			Expression expression = null;
 			if (nestedExpression.getExpression() instanceof Reference) {
@@ -196,10 +198,11 @@ public class TypeParameterUtil {
 			}
 		}
 		else if (reference != null) {
-			//prev type is the containing class which can still bind by inheritance
+			//prev type is on of the containing classes which can still bind by inheritance
 			ConcreteClassifier containingClassifier = JavaUtil.findContainingClassifier(reference);
-			if (containingClassifier != null) {
+			while (containingClassifier != null) {
 				prevTypeList.add(containingClassifier);
+				containingClassifier = JavaUtil.findContainingClassifier(containingClassifier.eContainer());
 			}
 		}
 		
