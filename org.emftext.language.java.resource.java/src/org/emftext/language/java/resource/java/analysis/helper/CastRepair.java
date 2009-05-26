@@ -40,7 +40,9 @@ public class CastRepair {
 				if(castExpression.getChild() instanceof UnaryExpression) {
 					UnaryExpression unaryExpression = (UnaryExpression) castExpression.getChild();
 					if (unaryExpression.getOperators().size() == 1 && 
-							unaryExpression.getOperators().get(0) instanceof AdditiveOperator) {
+							unaryExpression.getOperators().get(0) instanceof AdditiveOperator &&
+							castExpression.getType() instanceof NamespaceClassifierReference) {
+
 						//try to resolve the cast
 						NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getType();
 						EObject proxy = (EObject) nsClassifierReference
