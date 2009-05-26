@@ -20,6 +20,7 @@ import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
+import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.variables.LocalVariable;
@@ -40,6 +41,13 @@ public class EnumConstantDecider extends AbstractDecider {
 			Type variableType = ExpressionUtil.getType(aSwitch.getVariable());
 			if (variableType instanceof Enumeration) {
 				return ((Enumeration)variableType).getConstants();	
+			}
+			if (variableType instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+				for(Type superType : ((TypeParameterUtil.TemporalCompositeClassImpl)variableType).getSuperTypes()) {
+					if (superType instanceof Enumeration) {
+						return ((Enumeration)superType).getConstants();	
+					}
+				}
 			}
 		}
 		if (container instanceof AssignmentExpression) {
