@@ -2,6 +2,7 @@ package org.emftext.language.java.test.resolving;
 
 import java.io.File;
 
+import org.emftext.language.java.commons.Name;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Field;
@@ -24,14 +25,14 @@ public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCas
 	protected Field assertIsField(Member member, String expectedName) {
 		assertType(member, Field.class);
 		Field field = (Field) member;
-		assertEquals(expectedName, field.getName());
+		assertEquals(expectedName, ((Name) field.getName()).getValue());
 		return field;
 	}
 
 	protected ClassMethod assertIsMethod(Member member, String expectedName) {
 		assertType(member, ClassMethod.class);
 		ClassMethod method = (ClassMethod) member;
-		assertEquals(expectedName, method.getName());
+		assertEquals(expectedName, ((Name) method.getName()).getValue());
 		return method;
 	}
 
