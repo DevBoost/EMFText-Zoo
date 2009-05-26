@@ -9,6 +9,7 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 
@@ -46,15 +47,24 @@ public class ConcreteClassifierUtil {
 		if (_this instanceof Class) {
 			Class javaClass = (Class) _this;
 			if (javaClass.getExtends() != null) {
-				typeReferenceList.add(ClassifierReferenceUtil.getPureClassifierReference(javaClass.getExtends()));
+				ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(javaClass.getExtends());
+				typeReferenceList.add(classifierReference);
+				ConcreteClassifier target = (ConcreteClassifier) classifierReference.getTarget();
+				if (!target.equals(JavaClasspathUtil.getObjectClass(_this))) {
+					typeReferenceList.addAll(getSuperTypeReferences(target));
+				}
 			}	
 			for(TypeReference interfaceReference : javaClass.getImplements()) {
-				typeReferenceList.add(ClassifierReferenceUtil.getPureClassifierReference(interfaceReference));
+				ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(interfaceReference);
+				typeReferenceList.add(classifierReference);
+				typeReferenceList.addAll(getSuperTypeReferences((ConcreteClassifier) classifierReference.getTarget()));
 			}
 		} else if (_this instanceof Interface) {
 			Interface javaInterface = (Interface) _this;
 			for(TypeReference interfaceReference : javaInterface.getExtends()) {
-				typeReferenceList.add(ClassifierReferenceUtil.getPureClassifierReference(interfaceReference));
+				ClassifierReference classifierReference = ClassifierReferenceUtil.getPureClassifierReference(interfaceReference);
+				typeReferenceList.add(classifierReference);
+				typeReferenceList.addAll(getSuperTypeReferences((ConcreteClassifier) classifierReference.getTarget()));
 			}
 		}
 		return typeReferenceList;
