@@ -262,10 +262,12 @@ public class TypeParameterUtil {
 							if (arg instanceof QualifiedTypeArgument) {
 								ClassifierReference theTypeRef = ClassifierReferenceUtil.getPureClassifierReference(((QualifiedTypeArgument) arg).getType());
 								Type theType = TypeReferenceUtil.getTarget(theTypeRef, parentReference);
-								if (!theTypeRef.getTypeArguments().isEmpty()) {
-									ttah = new TemporalTypeArgumentHolder();
-									ttah.getTypeArguments().addAll(theTypeRef.getTypeArguments());
-									theType.eAdapters().add(ttah);
+								if (theType != null) {
+									if (!theTypeRef.getTypeArguments().isEmpty()) {
+										ttah = new TemporalTypeArgumentHolder();
+										ttah.getTypeArguments().addAll(theTypeRef.getTypeArguments());
+										theType.eAdapters().add(ttah);
+									}
 								}
 								resultList.add(0, theType);
 							}
