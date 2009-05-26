@@ -10,6 +10,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.classifiers.impl.ClassifierImpl;
+import org.emftext.language.java.expressions.CastExpression;
 import org.emftext.language.java.expressions.ConditionalExpression;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
@@ -44,6 +45,7 @@ import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
+import org.emftext.language.java.util.types.TypeUtil;
 
 public class TypeParameterUtil {
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
@@ -120,6 +122,7 @@ public class TypeParameterUtil {
 			else if (nestedExpression.getExpression() instanceof ConditionalExpression) {
 				expression = ((ConditionalExpression)nestedExpression.getExpression()).getExpressionIf();
 			}
+
 			
 			if (expression instanceof Reference) {
 				Reference expressionReference = (Reference) expression;
@@ -135,6 +138,9 @@ public class TypeParameterUtil {
 				else {
 					prevTypeList.add(prevType);
 				}
+			}
+			else if (nestedExpression.getExpression() instanceof CastExpression) {
+				prevTypeList.add(TypeReferenceUtil.getTarget(((CastExpression)nestedExpression.getExpression()).getType()));
 			}
 		}
 		else if (reference != null && reference.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
