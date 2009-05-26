@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -319,10 +320,16 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 	private static org.eclipse.jdt.core.dom.CompilationUnit parseWithJDT(
 			InputStream inputStream) {
-		ASTParser jdtParser1 = ASTParser.newParser(AST.JLS3);
-		jdtParser1.setSource(readTextContents(inputStream).toCharArray());
+		ASTParser jdtParser = ASTParser.newParser(AST.JLS3);
+		char[] charArray = readTextContents(inputStream).toCharArray();
+		jdtParser.setSource(charArray);
+
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+		jdtParser.setCompilerOptions(options);
+		
 		org.eclipse.jdt.core.dom.CompilationUnit result1 = 
-			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser1.createAST(null);
+			(org.eclipse.jdt.core.dom.CompilationUnit) jdtParser.createAST(null);
 		return result1;
 	}
 
