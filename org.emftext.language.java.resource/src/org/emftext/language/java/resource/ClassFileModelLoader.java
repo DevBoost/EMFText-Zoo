@@ -697,7 +697,9 @@ try{
 							
 							if(charArray[internalBegin] == '*' || charArray[internalBegin] == '?') {
 								UnknownTypeArgument typeArgument = GenericsFactory.eINSTANCE.createUnknownTypeArgument();
-								typeRef.getTypeArguments().add(typeArgument);
+								if (typeRef != null) {
+									typeRef.getTypeArguments().add(typeArgument);
+								}
 							}
 							else {
 								String fullName = s.substring(internalBegin + 1, internalEnd);
@@ -722,13 +724,15 @@ try{
 
 								QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
 								typeArgument.setType(argumentType);
-								typeRef.getTypeArguments().add(typeArgument);
+								if (typeRef != null) {
+									typeRef.getTypeArguments().add(typeArgument);
+								}
 								
 								//recursive call;
 								constructTypeArguments(s.substring(internalBegin, internalEnd), argumentType, method, emfClassifier);
 							}
 							
-							internalBegin = j + 1;
+							internalBegin = j + 2;
 						}
 					}
 					
