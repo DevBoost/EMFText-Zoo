@@ -45,7 +45,6 @@ import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
-import org.emftext.language.java.util.types.TypeUtil;
 
 public class TypeParameterUtil {
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
