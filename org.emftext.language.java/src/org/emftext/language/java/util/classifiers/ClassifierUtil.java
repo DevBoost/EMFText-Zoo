@@ -1,7 +1,9 @@
 package org.emftext.language.java.util.classifiers;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
@@ -13,9 +15,11 @@ import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.modifiers.Modifiable;
+import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
+import org.emftext.language.java.util.types.TypeReferenceUtil;
 
 public class ClassifierUtil {
 	
@@ -41,6 +45,14 @@ public class ClassifierUtil {
 					JavaClasspath.get(_this).getInnnerClassifiers(concreteClassifier));
 		}
 		
+		EList<EObject> possiblyVisibleSuperClassifier = ECollections.emptyEList();
+		if (_this instanceof TypeParameter) {
+			possiblyVisibleSuperClassifier = new BasicEList<EObject>();
+			for(TypeReference typeReference : ((TypeParameter)_this).getExtendTypes()) {
+				possiblyVisibleSuperClassifier.add(TypeReferenceUtil.getTarget(typeReference));
+			}
+		}
+		
 		for (ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
 			for(Member member : superClassifier.getMembers()) {
 				if(member instanceof Modifiable) {					
@@ -49,11 +61,17 @@ public class ClassifierUtil {
 					if(!ModifiableUtil.isPrivate(modifiable)) {
 						memberList.add(member);
 					}
+					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {
+						memberList.add(member);
+					}
 				}
 				else if(member instanceof AnnotableAndModifiable) {					
 					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
 
 					if(!ModifiableUtil.isPrivate(modifiable)) {
+						memberList.add(member);
+					}
+					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {
 						memberList.add(member);
 					}
 				}
