@@ -23,6 +23,7 @@ import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.expressions.RelationExpression;
 import org.emftext.language.java.expressions.ShiftExpression;
+import org.emftext.language.java.expressions.UnaryExpression;
 import org.emftext.language.java.literals.Literal;
 import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.Field;
@@ -117,6 +118,11 @@ public class ExpressionUtil {
 			@SuppressWarnings("unchecked")
 			Expression subExp = ((EList<Expression>) 
 					_this.eGet(_this.eClass().getEStructuralFeature("children"))).get(0);
+			
+			return ExpressionUtil.getType(subExp, alternative);
+		}
+		else if (_this instanceof UnaryExpression) {
+			Expression subExp = ((UnaryExpression)_this).getChild();
 			
 			return ExpressionUtil.getType(subExp, alternative);
 		}
