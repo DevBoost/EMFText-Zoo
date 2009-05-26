@@ -28,8 +28,14 @@ import org.emftext.language.feature.resource.feature.FeaturePrinter;
 import org.emftext.language.feature.resource.feature.FeatureResource;
 import org.emftext.language.formular.resource.formular.FormularPrinter;
 import org.emftext.language.formular.resource.formular.FormularResource;
+import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorPrinter;
+import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorResource;
 import org.emftext.language.java.resource.java.JavaPrinter;
 import org.emftext.language.java.resource.java.JavaResource;
+import org.emftext.language.java.reusejava.resource.reusejava.ReusejavaPrinter;
+import org.emftext.language.java.reusejava.resource.reusejava.ReusejavaResource;
+import org.emftext.language.java.treejava.resource.treejava.TreejavaPrinter;
+import org.emftext.language.java.treejava.resource.treejava.TreejavaResource;
 import org.emftext.language.regexp.resource.regexp.RegexpPrinter;
 import org.emftext.language.regexp.resource.regexp.RegexpResource;
 import org.emftext.language.simple_c.resource.c.CPrinter;
@@ -310,6 +316,70 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 	}
 	
+	private class JavaBehavior4UMLTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getCompilationUnit(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getEmptyModel(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
+			};
+		}
+		
+		@Override
+		public EPackage[] getAdditionalPackages() {
+			return new EPackage[] {org.emftext.language.java.JavaPackage.eINSTANCE,
+					org.emftext.language.java.javabehavior4uml.Javabehavior4umlPackage.eINSTANCE};
+		}
+
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new JavabehaviorPrinter(stream, new JavabehaviorResource());
+		}
+	}
+	
+	private class ReuseJavaTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+					org.emftext.language.java.reusejava.ReusejavaPackage.eINSTANCE.getStatementUnit(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getCompilationUnit(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getEmptyModel(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
+			};
+		}
+		
+		@Override
+		public EPackage[] getAdditionalPackages() {
+			return new EPackage[] {org.emftext.language.java.JavaPackage.eINSTANCE,
+					org.emftext.language.java.reusejava.ReusejavaPackage.eINSTANCE};
+		}
+
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new ReusejavaPrinter(stream, new ReusejavaResource());
+		}
+	}
+	
+	private class TreeJavaTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getCompilationUnit(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getEmptyModel(),
+					org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
+			};
+		}
+		
+		@Override
+		public EPackage[] getAdditionalPackages() {
+			return new EPackage[] {org.emftext.language.java.treejava.TreejavaPackage.eINSTANCE,
+					org.emftext.language.java.reusejava.ReusejavaPackage.eINSTANCE};
+		}
+
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new TreejavaPrinter(stream, new TreejavaResource());
+		}
+	}
+	
 	public void testMinimalModelCreation() {
 		test(new EcoreTestItem());
 		test(new CSTestItem());
@@ -329,34 +399,11 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new TextAdventureTestItem());
 		test(new ThreeValuedLogicTestItem());
 		test(new JavaTestItem());
+		test(new JavaBehavior4UMLTestItem());
+		test(new ReuseJavaTestItem());
+		test(new TreeJavaTestItem());
 
 		// TODO add test items for remaining languages
-		/*
-		test(
-				new EPackage[] {org.emftext.language.java.JavaPackage.eINSTANCE,
-						org.emftext.language.java.javabehavior4uml.Javabehavior4umlPackage.eINSTANCE
-				},
-				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getCompilationUnit(),
-				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getEmptyModel(),
-				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
-			);
-
-		test(new EPackage[] {org.emftext.language.java.JavaPackage.eINSTANCE},
-			org.emftext.language.java.reusejava.ReusejavaPackage.eINSTANCE.getStatementUnit(),
-			org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getCompilationUnit(),
-			org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getEmptyModel(),
-			org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
-		);
-
-		test(new EPackage[] {
-				org.emftext.language.java.JavaPackage.eINSTANCE,
-				org.emftext.language.java.treejava.TreejavaPackage.eINSTANCE
-			},
-				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getCompilationUnit(),
-				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getEmptyModel(),
-				org.emftext.language.java.containers.ContainersPackage.eINSTANCE.getPackage()
-		);
-		*/
 		//test(org.emftext.language.c_sharp.CsharpPackage);
 	}
 
