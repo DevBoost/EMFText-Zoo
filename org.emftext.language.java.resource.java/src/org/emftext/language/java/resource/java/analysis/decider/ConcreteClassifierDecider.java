@@ -26,6 +26,7 @@ import org.emftext.language.java.imports.PackageImport;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
@@ -247,6 +248,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			if (referenceContainer.eContainer().eContainer() instanceof ConcreteClassifier) {
 				baseClassifier = (ConcreteClassifier) referenceContainer.eContainer().eContainer();
 			}
+		}
+		
+		if(referenceContainer instanceof MethodCall) {
+			return false;
 		}
 		
 		return (referenceContainer instanceof Reference ||
