@@ -153,7 +153,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		
 		addImportsAndInnerClasses(container, resultList);
 
-		//TODO @jjohannes: when everything works remove this code and run all tests to check what it is nedded for
+		//TODO @jjohannes: when everything works remove this code and run all tests to check what it is needed for
 		// which inner classes are exactly imported and what is their priority?
 		if(container instanceof CompilationUnit) {
 			for(Import aImport : ((CompilationUnit)container).getImports()) {

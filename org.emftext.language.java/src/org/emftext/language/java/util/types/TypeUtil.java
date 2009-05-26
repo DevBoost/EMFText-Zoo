@@ -124,7 +124,10 @@ public class TypeUtil {
 		}
 		
 		//if one of us is a parameter to the best of my knowledge, we might match
-		if(_this instanceof TypeParameter || otherType instanceof TypeParameter ) {
+		if(_this instanceof TypeParameter || !(otherType instanceof PrimitiveType)) {
+			return true;
+		}
+		if(!(_this instanceof PrimitiveType) || otherType instanceof TypeParameter ) {
 			return true;
 		}
 		
