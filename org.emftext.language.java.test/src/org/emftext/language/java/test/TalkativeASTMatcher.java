@@ -318,55 +318,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 
 	@Override
 	public boolean match(InfixExpression node, Object other) {
-		/*
-		String nodeLeft = node.getLeftOperand().toString();
-		String nodeRight = node.getRightOperand().toString();
-		if (nodeLeft.startsWith("0x") || nodeLeft.startsWith("-0x")) {
-			// this is a hex token
-			if (!nodeRight.startsWith("0x") && !nodeRight.startsWith("-0x")) {
-				// this is the exponent
-				Operator operator = node.getOperator();
-				if (operator == Operator.PLUS ||
-					operator == Operator.MINUS) {
-					if (other instanceof FieldAccess) {
-						///
-						String nodeString = nodeLeft + nodeRight;
-						String otherString = other.toString();
-						
-						String[] nodeParts = nodeString.split("p|P|e|E");
-						String[] otherParts = otherString.split("p|P|e|E");
-						
-						String otherLeft = otherParts[0];
-						String otherRight = otherParts[1];
-						
-						nodeLeft = nodeParts[0];
-						nodeRight = nodeParts[1];
-						
-						if (nodeLeft.endsWith(".f")) {
-							nodeLeft = nodeLeft.substring(0, nodeLeft.length() - 2) + "";
-						}
-						if (otherLeft.endsWith(".f")) {
-							otherLeft = otherLeft.substring(0, otherLeft.length() - 2) + "";
-						}
-						nodeLeft = normalizeNumberToken(nodeLeft);
-						otherLeft = normalizeNumberToken(otherLeft);
-						nodeRight = normalizeNumberToken(nodeRight);
-						otherRight = normalizeNumberToken(otherRight);
-						String normalizedNodeString = nodeLeft + nodeRight;
-						String normalizedOtherString = otherLeft + otherRight;
-						///
-						String normalizedNodeString = normalizeNumberToken(nodeLeft + operator.toString() + nodeRight);
-						String normalizedOtherString = normalizeNumberToken(other.toString());
-						if (normalizedNodeString.equalsIgnoreCase(normalizedOtherString)) {
-							return true;
-						} else {
-							System.out.println("\"" + normalizedNodeString + "\" != \"" + normalizedOtherString + "\"");
-						}
-					}
-				}
-			}
-		}
-		*/
+		
 		return setDiff(node, other, super.match(node, other));
 	}
 
