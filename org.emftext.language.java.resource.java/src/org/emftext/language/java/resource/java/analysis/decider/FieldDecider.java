@@ -44,33 +44,37 @@ public class FieldDecider extends AbstractDecider {
 		return standardArrayLengthField;
 	}
 	
-	private EList<Member> innerTypeSuperMembers = new BasicEList<Member>();
-	
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
-		if (container instanceof Classifier) {
-			innerTypeSuperMembers.addAll(
-					ClassifierUtil.getAllMembers((Classifier)container));		
-		}
-		
-		if (container instanceof AnonymousClass) {
-			//do this after the local scope was searched
-			innerTypeSuperMembers.addAll(
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container));
-		}
-		
 		EList<EObject> resultList = new BasicEList<EObject>();
-		
-		addImports(container, resultList);
-		if(container instanceof CompilationUnit) {
-			resultList.addAll(innerTypeSuperMembers);
-			for(Member member : innerTypeSuperMembers) {
+		if (container instanceof Classifier) {
+			EList<Member> memberList = 
+				ClassifierUtil.getAllMembers((Classifier)container);
+			resultList.addAll(memberList);
+			for(Member member : memberList) {
 				if (member instanceof Field) {
 					resultList.addAll(((Field)member).getAdditionalFields());
 				}
 			}
+		}
+		
+		if (container instanceof AnonymousClass) {
+			EList<Member> memberList = 
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
+			resultList.addAll(memberList);
+			for(Member member : memberList) {
+				if (member instanceof Field) {
+					resultList.addAll(((Field)member).getAdditionalFields());
+				}
+			}
+			return resultList;
+		}
+		
+		if(container instanceof CompilationUnit) {
+			addImports(container, resultList);
 			addArrayLengthFiled(resultList, container);
-		}	
+		}
+		
 		return resultList;
 	}
 
