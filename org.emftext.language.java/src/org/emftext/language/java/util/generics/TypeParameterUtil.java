@@ -108,6 +108,10 @@ public class TypeParameterUtil {
 	 * @return bound type or parameter if not bound
 	 */
 	public static Type getBoundType(TypeParameter _this, TypeReference typeReference, Reference reference) {
+		if (_this == null) {
+			return null;
+		}
+
 		EList<Type> resultList = new BasicEList<Type>();
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) _this.eContainer();
 		Reference parentReference = null;
@@ -274,7 +278,7 @@ public class TypeParameterUtil {
 						if (paramTypeReference != null) {
 							for (TypeArgument typeArgument : paramTypeReference.getTypeArguments()) {
 								if(typeArgument instanceof QualifiedTypeArgument) {
-									if(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()).equals(_this)) {
+									if(_this.equals(TypeReferenceUtil.getTarget(((QualifiedTypeArgument) typeArgument).getType()))) {
 										idx = method.getParameters().indexOf(parameter);
 									}
 								}
