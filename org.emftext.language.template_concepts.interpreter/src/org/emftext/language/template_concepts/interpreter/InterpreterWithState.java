@@ -25,6 +25,7 @@ import org.emftext.language.template_concepts.Template_conceptsPackage;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
+import org.emftext.runtime.util.ListUtil;
 
 /**
  * This is the actual interpreter. It maintains a state. Thus,
@@ -51,6 +52,8 @@ public class InterpreterWithState {
 	
 	private Map<EObject, EObject> templateToInstanceObjectMap;
 	private Map<EObject, EObject> instanceToTemplateObjectMap;
+
+	private final static ListUtil listUtil = new ListUtil();
 	
 	public InterpreterWithState(Template template, EObject inputModelRoot) throws InterpreterException{
 		this.template = template;
@@ -242,7 +245,7 @@ public class InterpreterWithState {
 		}
 		//multiplicity > 1
 		if (tiObject.eGet(tiReference) instanceof List) {
-			castToEObjectList(tiObject.eGet(tiReference)).add(tiAttributeElement);
+			listUtil.castListUnchecked(tiObject.eGet(tiReference)).add(tiAttributeElement);
 		//multiplicity <=1
 		} else {
 			tiObject.eSet(tiReference,tiAttributeElement);
@@ -315,9 +318,10 @@ public class InterpreterWithState {
 				loopVariableStack.push(variableName, next);
 			}
 			//BODY (can contain multiple elements)
-			List<EObject> tiList =castToEObjectList(tiObject.eGet(tiReference)); 
+			List<EObject> tiList = listUtil.castListUnchecked(tiObject.eGet(tiReference)); 
 			if (forBodyO instanceof List) {
-				for(EObject forBody : castToEObjectList(forBodyO)){
+				List<EObject> forBodyList = listUtil.castListUnchecked(forBodyO);
+				for(EObject forBody : forBodyList){
 					tiList.add(evaluate(forBody));
 				}
 			} else {
@@ -381,13 +385,14 @@ public class InterpreterWithState {
 	private void evaluateIf(TemplateConcept ifOrIfElse, Object ifBodyO, Object elseBodyO, EObject tiObject, EReference tiReference) throws InterpreterException{
 		
 		Boolean condition = (Boolean) evaluateExpression(ifOrIfElse);
-		List<EObject> tiList =castToEObjectList(tiObject.eGet(tiReference));
+		List<EObject> tiList = listUtil.castListUnchecked(tiObject.eGet(tiReference));
 		
 		//IF-CONDITION
 		if (condition) {
 			//ifBody
 			if (ifBodyO instanceof List) {
-				for(EObject ifBody : castToEObjectList(ifBodyO)) {
+				List<EObject> ifBodyList = listUtil.castListUnchecked(ifBodyO);
+				for (EObject ifBody : ifBodyList) {
 					tiList.add(evaluate(ifBody));
 				}
 			} else {
@@ -397,7 +402,8 @@ public class InterpreterWithState {
 			//elseBody (may be null)
 			if (elseBodyO != null) {
 				if (elseBodyO instanceof List) {
-					for (EObject elseBody : castToEObjectList(elseBodyO)) {
+					List<EObject> elseBodyList = listUtil.castListUnchecked(elseBodyO);
+					for (EObject elseBody : elseBodyList) {
 						tiList.add(evaluate(elseBody));
 					}
 				} else {
@@ -407,11 +413,6 @@ public class InterpreterWithState {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<EObject> castToEObjectList(Object list) {
-		return (List<EObject>) list;
-	}
-	
 	private void evaluateTReference(EObject tReferenceObject, EObject tiObject) throws InterpreterException{
 		//System.out.println("evaluateTReference(\n\t"+tReferenceObject+",\n\t" + tiObject + "\n)");
 		if (tReferenceObject == null) {
@@ -438,7 +439,7 @@ public class InterpreterWithState {
 		//tReferenceObject can also be a listMember
 		EObject subEvaluation = evaluate(tReferenceObject);
 		if (tReference.isMany()) {
-			castToEObjectList(tiObject.eGet(tiReference)).add(subEvaluation);
+			listUtil.castListUnchecked(tiObject.eGet(tiReference)).add(subEvaluation);
 		} else {
 			tiObject.eSet(tiReference, subEvaluation);
 		}
