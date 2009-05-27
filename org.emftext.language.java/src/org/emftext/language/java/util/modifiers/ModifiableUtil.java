@@ -40,8 +40,8 @@ public class ModifiableUtil {
 			context = (Commentable) EcoreUtil.resolve(context, _this);
 		}
 		
-		ConcreteClassifier contextClassifier = JavaUtil.findContainingClassifier(context);
-		ConcreteClassifier myClassifier = JavaUtil.findContainingClassifier(_this);
+		ConcreteClassifier contextClassifier = JavaUtil.findContainingClassifier(context); 
+		ConcreteClassifier myClassifier = findOuterClassifier(_this);
 		
 		//special case: self reference to outer instance
 		if(context.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
@@ -82,6 +82,22 @@ public class ModifiableUtil {
 		return isInSuperOrOuterType(myClassifier, contextClassifier, contextClassifier);
 	}
 
+	private static ConcreteClassifier findOuterClassifier(
+			AnnotableAndModifiable child) {
+		ConcreteClassifier classifier = JavaUtil.findContainingClassifier(child.eContainer()); //eContainer() in case this is a classifier contained in another one
+		if(classifier == null) {
+			CompilationUnit cu = JavaUtil.findContainingCompilationUnit(child);
+			//maybe the outer classifier is in an extra cu
+			JavaClasspath cp = JavaClasspath.get(child);
+			classifier = (ConcreteClassifier) EcoreUtil.resolve(
+					cp.getClassifier(cp.getContainerNameFromNamespace(cu)), child);
+			if(classifier.eIsProxy())  {
+				classifier = null;
+			}
+		}
+		return classifier;
+	}
+
 	private static boolean isInSuperOrOuterType(ConcreteClassifier myClassifier,
 			ConcreteClassifier contextClassifier, EObject context) {
 		//try outer classifiers as well
@@ -89,20 +105,8 @@ public class ModifiableUtil {
 			if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
 				return false;
 			}
-			ConcreteClassifier outerClassifier = JavaUtil.findContainingClassifier(contextClassifier.eContainer());
-			if(outerClassifier == null) {
-				CompilationUnit cu = JavaUtil.findContainingCompilationUnit(contextClassifier.eContainer());
-				//maybe the outer classifier is in an extra cu
-				JavaClasspath cp = JavaClasspath.get(myClassifier);
-				contextClassifier = (ConcreteClassifier) EcoreUtil.resolve(
-						cp.getClassifier(cp.getContainerNameFromNamespace(cu)), myClassifier);
-				if(contextClassifier.eIsProxy())  {
-					contextClassifier = null;
-				}
-			}
-			else {
-				contextClassifier = outerClassifier;
-			}
+			contextClassifier = findOuterClassifier(contextClassifier);
+
 			if (contextClassifier != null && !contextClassifier.eIsProxy() && 
 					TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
 				return false;
