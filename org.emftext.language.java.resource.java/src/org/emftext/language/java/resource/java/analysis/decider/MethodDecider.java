@@ -100,8 +100,8 @@ public class MethodDecider extends AbstractDecider {
 		}
 		
 		if(container instanceof CompilationUnit) {
-			addImports(container, resultList);
 			resultList.addAll(innerTypeSuperMembers);
+			addImports(container, resultList);
 		}
 		
 		return resultList;

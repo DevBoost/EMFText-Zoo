@@ -113,8 +113,8 @@ public class FieldDecider extends AbstractDecider {
 		}
 		
 		if(container instanceof CompilationUnit) {
-			addImports(container, resultList);
 			resultList.addAll(innerTypeSuperMembers);
+			addImports(container, resultList);
 			addArrayLengthFiled(resultList, container);
 		}
 		
