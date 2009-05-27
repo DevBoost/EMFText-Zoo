@@ -10,7 +10,6 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
-import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
@@ -30,7 +29,7 @@ public class ClassifierUtil {
 	 * @param context to check protected visibility
 	 * @return member list
 	 */
-	public static EList<Member> getAllMembers(Classifier _this, Commentable context) {
+	public static EList<Member> getAllMembers(Classifier _this, EObject context) {
 		EList<Member> memberList = new BasicEList<Member>();
 		if (_this == null) {
 			return memberList;

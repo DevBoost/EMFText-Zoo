@@ -1,17 +1,24 @@
 package org.emftext.language.java.util.modifiers;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.Commentable;
+import org.emftext.language.java.literals.Self;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.Private;
 import org.emftext.language.java.modifiers.Protected;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.modifiers.Static;
+import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.references.SelfReference;
+import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
+import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeUtil;
 
 public class ModifiableUtil {
@@ -25,13 +32,28 @@ public class ModifiableUtil {
 		return false;
 	}
 
-	public static boolean isHidden(AnnotableAndModifiable _this, Commentable context) {
+	public static boolean isHidden(AnnotableAndModifiable _this, EObject context) {
 		if(context.eIsProxy()) {
 			context = (Commentable) EcoreUtil.resolve(context, _this);
 		}
 		
 		ConcreteClassifier contextClassifier = JavaUtil.findContainingClassifier(context);
 		ConcreteClassifier myClassifier = JavaUtil.findContainingClassifier(_this);
+		
+		//special case: self reference to outer instance
+		if(context.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+			if (context.eContainer() instanceof SelfReference) {
+				SelfReference selfReference = (SelfReference) context.eContainer();
+				if (selfReference.getSelf() instanceof Self) {
+					if(selfReference.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+						Type type = ReferenceUtil.getType((Reference) selfReference.eContainer());
+						if (type instanceof ConcreteClassifier) {
+							contextClassifier = (ConcreteClassifier) type;
+						}
+					}
+				}
+			}
+		}
 		
 		for(AnnotationInstanceOrModifier modifier : _this.getAnnotationsAndModifiers()) {
 			if(modifier instanceof Private) {

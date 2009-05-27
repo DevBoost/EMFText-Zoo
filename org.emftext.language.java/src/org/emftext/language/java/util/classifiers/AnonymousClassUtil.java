@@ -2,11 +2,11 @@ package org.emftext.language.java.util.classifiers;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
-import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
@@ -22,7 +22,7 @@ public class AnonymousClassUtil {
 	 * @param context to check protected visibility
 	 * @return a view on all members including super classifiers' members
 	 */
-	public static EList<Member> getAllMembers(AnonymousClass _this, Commentable context) {
+	public static EList<Member> getAllMembers(AnonymousClass _this, EObject context) {
 		EList<Member> memberList = new BasicEList<Member>();
 		memberList.addAll(_this.getMembers());
 		memberList.addAll(_this.getDefaultMembers());
