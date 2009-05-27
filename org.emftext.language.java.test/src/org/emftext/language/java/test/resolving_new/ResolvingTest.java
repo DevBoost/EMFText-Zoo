@@ -3,6 +3,7 @@ package org.emftext.language.java.test.resolving_new;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.commons.Commentable;
+import org.emftext.language.java.commons.CommonsPackage;
+import org.emftext.language.java.commons.Name;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
+import org.emftext.runtime.util.EObjectUtil;
 
 /**
  * A test for the reference resolving mechanism. Each folder
@@ -90,6 +95,7 @@ public class ResolvingTest extends TestCase {
 			
 			// resolve all references
 			EcoreUtil.resolveAll(set);
+			pushUpCommentsFromNames(set);
 			
 			// find all commented EObjects that are sources or targets
 			Map<String, Object> actualTargetsMap = new HashMap<String, Object>();
@@ -108,6 +114,20 @@ public class ResolvingTest extends TestCase {
 			assertEquals("Number of targets should match the expected number.", actualTargetsMap.keySet().size(), size);
 		}
 	
+		private void pushUpCommentsFromNames(ResourceSet set) {
+			for (Resource resource : set.getResources()) {
+				pushUpCommentsFromNames(resource);
+			}
+		}
+
+		private void pushUpCommentsFromNames(Resource resource) {
+			Collection<Name> nameObjects = EObjectUtil.getObjectsByType(resource.getAllContents(), CommonsPackage.eINSTANCE.getName_());
+			for (Name name : nameObjects) {
+				((NamedElement) name.eContainer()).getComments().addAll(name.getComments());
+				name.getComments().clear();
+			}
+		}
+
 		private void findSourcesAndTargets(ResourceSet set,
 				Map<String, Object> actualTargetsMap,
 				Map<String, Object> expectedTargetsMap) {

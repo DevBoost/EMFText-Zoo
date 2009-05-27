@@ -1,9 +1,10 @@
 package resolving_new.typeparametersA_2;
 
 public class GenericClass<
-	T // target:1
-	,
-	S // target:2
+	//	target:1
+	T,
+	// target:2
+	S 
 	> {
 
 	public void m(
