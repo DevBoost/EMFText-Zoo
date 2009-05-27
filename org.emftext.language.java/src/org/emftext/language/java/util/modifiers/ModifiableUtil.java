@@ -96,11 +96,15 @@ public class ModifiableUtil {
 				JavaClasspath cp = JavaClasspath.get(myClassifier);
 				contextClassifier = (ConcreteClassifier) EcoreUtil.resolve(
 						cp.getClassifier(cp.getContainerNameFromNamespace(cu)), myClassifier);
+				if(contextClassifier.eIsProxy())  {
+					contextClassifier = null;
+				}
 			}
 			else {
 				contextClassifier = outerClassifier;
 			}
-			if (contextClassifier != null && TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
+			if (contextClassifier != null && !contextClassifier.eIsProxy() && 
+					TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
 				return false;
 			}
 		}

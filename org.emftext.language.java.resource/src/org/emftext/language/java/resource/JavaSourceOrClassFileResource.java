@@ -34,8 +34,6 @@ import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.containers.CompilationUnitUtil;
 import org.emftext.language.java.util.members.MemberContainerUtil;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
-import org.emftext.runtime.resource.ILocationMap;
-import org.emftext.runtime.resource.impl.DevNullLocationMap;
 
 /**
  * A resource that uses either the generated <code>JavaParser</code> or
@@ -45,9 +43,9 @@ import org.emftext.runtime.resource.impl.DevNullLocationMap;
 public class JavaSourceOrClassFileResource extends JavaResource {
 	
 //	@Override
-	public ILocationMap getLocationMap() {
-		return new DevNullLocationMap();
-	}
+//	public ILocationMap getLocationMap() {
+//		return new DevNullLocationMap();
+//	}
 	
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
