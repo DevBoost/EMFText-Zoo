@@ -25,7 +25,7 @@ public class JavaPostProcessor implements IOptionProvider, IResourcePostProcesso
 	}
 
 	public void process(ITextResource resource) {
-		CastRepair.repairWrongCasts(resource);
+		JavaModelRepair.repair(resource);
 		JavaModelCompletion.complete(resource);
 	}
 
