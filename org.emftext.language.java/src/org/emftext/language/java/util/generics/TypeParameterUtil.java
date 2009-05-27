@@ -101,7 +101,7 @@ public class TypeParameterUtil {
 			if (type instanceof Interface) {
 				Interface superInterface = (Interface) type;
 				resultClassifierList.add(superInterface);
-				InterfaceUtil.collectAllSuperInterfaces(superInterface.getExtends(), resultClassifierList);
+				resultClassifierList.addAll(InterfaceUtil.getAllSuperInterfaces(superInterface.getExtends()));
 			}
 			else if (type instanceof Class) {
 				Class superClass = (Class) type;

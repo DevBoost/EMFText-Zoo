@@ -4,7 +4,6 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Classifier;
@@ -41,8 +40,7 @@ public class ClassifierUtil {
 			memberList.addAll(concreteClassifier.getMembers());
 			memberList.addAll(concreteClassifier.getDefaultMembers());
 			//because inner classes are found in separate class files
-			memberList.addAll(
-					JavaClasspath.get(_this).getInnnerClassifiers(concreteClassifier));
+			memberList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(concreteClassifier));
 		}
 		
 		EList<EObject> possiblyVisibleSuperClassifier = ECollections.emptyEList();
@@ -80,8 +78,6 @@ public class ClassifierUtil {
 				}
 			}
 			memberList.addAll(superClassifier.getDefaultMembers());
-			memberList.addAll(
-					JavaClasspath.get(_this).getInnnerClassifiers(superClassifier));
 		}
 		return memberList;
 	}
@@ -97,13 +93,13 @@ public class ClassifierUtil {
 			ClassUtil.collectAllSuperClassifiers(javaClass, superClassifierList);
 		} else if (_this instanceof Interface) {
 			Interface javaInterface = (Interface) _this;
-			InterfaceUtil.collectAllSuperInterfaces(javaInterface.getExtends(), superClassifierList);
-			InterfaceUtil.collectAllSuperInterfaces(javaInterface.getDefaultExtends(), superClassifierList);
+			superClassifierList.addAll(InterfaceUtil.getAllSuperInterfaces(javaInterface.getExtends()));
+			superClassifierList.addAll(InterfaceUtil.getAllSuperInterfaces(javaInterface.getDefaultExtends()));
 		} else if (_this instanceof Annotation) {
 			superClassifierList.add(JavaClasspathUtil.getAnnotationClass(_this));
 		} else if (_this instanceof Enumeration) {
 			Enumeration enumeration = (Enumeration) _this;
-			InterfaceUtil.collectAllSuperInterfaces(enumeration.getImplements(), superClassifierList);
+			superClassifierList.addAll(InterfaceUtil.getAllSuperInterfaces(enumeration.getImplements()));
 			//enumerations inherit from java.lang.Enum
 			Class enumClass = JavaClasspathUtil.getClass("Enum", _this);
 			superClassifierList.add(enumClass);

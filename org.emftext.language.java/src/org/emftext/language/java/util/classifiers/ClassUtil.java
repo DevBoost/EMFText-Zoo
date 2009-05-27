@@ -38,14 +38,16 @@ public class ClassUtil {
 			new BasicEList<ConcreteClassifier>(classifierList);
 		
 		//collect all implemented interfaces
-		InterfaceUtil.collectAllSuperInterfaces(
-				_this.getImplements(), classifierList);
+		classifierList.addAll(
+				InterfaceUtil.getAllSuperInterfaces(
+						_this.getImplements()));
 		
 		//collect all implemented interfaces of super classes
 		for(Classifier superClassifier : superClassList) {
 			if (superClassifier instanceof Class) {
-				InterfaceUtil.collectAllSuperInterfaces(
-					((Class)superClassifier).getImplements(), classifierList);
+				classifierList.addAll(
+						InterfaceUtil.getAllSuperInterfaces(
+								((Class)superClassifier).getImplements()));
 			}
 		}
 	}
