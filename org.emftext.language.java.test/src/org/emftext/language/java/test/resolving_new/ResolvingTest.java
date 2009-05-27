@@ -132,7 +132,7 @@ public class ResolvingTest extends TestCase {
 							}
 							if (comments.contains("target:")) {
 								String[] parts = comments.split(":");
-								assertEquals("Expected two parts in comment separated by double colon (target:<id>).", 2, parts.length);
+								assertEquals("Expected two parts in comment ("+comments+") separated by double colon (target:<id>).", 2, parts.length);
 								String id = parts[1].trim();
 								expectedTargetsMap.put(id, commentable);
 							}
