@@ -66,7 +66,7 @@ public class ImportUtil {
 		}
 		
 		EList<NamedElement> result = new BasicEList<NamedElement>();
-		result.addAll(ClassifierUtil.getAllMembers(concreteClassifier));
+		result.addAll(ClassifierUtil.getAllMembers(concreteClassifier, _this));
 		if (concreteClassifier instanceof Enumeration) {
 			result.addAll(((Enumeration)concreteClassifier).getConstants());
 		}

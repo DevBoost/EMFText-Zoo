@@ -17,7 +17,6 @@ import org.emftext.language.java.members.AdditionalField;
 import org.emftext.language.java.members.Field;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MembersFactory;
-import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReflectiveClassReference;
@@ -29,10 +28,13 @@ import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 
 public class FieldDecider extends AbstractDecider {
 
 	private Field standardArrayLengthField = null;
+	
+	private Reference fieldReference = null;
 
 	public Field getArrayLengthFiled(EObject objectContext) {
 		if (standardArrayLengthField  == null) {
@@ -47,32 +49,40 @@ public class FieldDecider extends AbstractDecider {
 	
 	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
 	private boolean insideDefiningClassifier = true;
+	private boolean isStatic = false;
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		if (container instanceof Classifier) {
 			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
-				for(Member member : ((ConcreteClassifier)container).getMembers()) {
+				EList<Member> memberList = 
+					ClassifierUtil.getAllMembers((Classifier)container, fieldReference);
+				for(Member member : memberList) {
 					if (member instanceof Field) {
-						resultList.add(member);
-						resultList.addAll(((Field)member).getAdditionalFields());
+						innerTypeSuperMembers.add(member);
+						innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
 					}
 				}
 				insideDefiningClassifier = false;
+				isStatic = ModifiableUtil.isStatic((ConcreteClassifier)container);
 			}
-			EList<Member> memberList = 
-				ClassifierUtil.getAllMembers((Classifier)container);
-			for(Member member : memberList) {
-				if (member instanceof Field) {
-					innerTypeSuperMembers.add(member);
-					innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
+			else {
+				EList<Member> memberList = 
+					ClassifierUtil.getAllMembers((Classifier)container, fieldReference);
+				for(Member member : memberList) {
+					if (member instanceof Field) {
+						if (!isStatic || ModifiableUtil.isStatic((Field)member)) {
+							innerTypeSuperMembers.add(member);
+							innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
+						}
+					}
 				}
 			}
 		}
 		
 		if (container instanceof AnonymousClass) {
 			EList<Member> memberList = 
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container, fieldReference);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
 					innerTypeSuperMembers.add(member);
@@ -120,21 +130,10 @@ public class FieldDecider extends AbstractDecider {
 	}
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
-		if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
-			return  true;
-		}
-		if (MembersPackage.Literals.FIELD__ADDITIONAL_FIELDS.equals(containingReference)) {
-			return  true;
-		}
 		return false;
 	}
 	
 	public boolean walkInto(EObject element) {
-		if (element instanceof Field) {
-			if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(element.eContainmentFeature())) {
-				return true;
-			}
-		}
 		return false;
 	}
 
@@ -153,6 +152,7 @@ public class FieldDecider extends AbstractDecider {
 		if (reference.getNext() instanceof SelfReference) {
 			return false;
 		}
+		fieldReference = (Reference) referenceContainer;
 		return true;
 	}
 

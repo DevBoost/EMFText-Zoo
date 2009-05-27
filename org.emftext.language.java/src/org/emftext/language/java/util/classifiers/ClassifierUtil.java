@@ -10,10 +10,10 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
-import org.emftext.language.java.modifiers.Modifiable;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
@@ -27,9 +27,10 @@ public class ClassifierUtil {
 	 * all members of super types (extended classes and implemented interfaces).
 	 * 
 	 * @param _this
+	 * @param context to check protected visibility
 	 * @return member list
 	 */
-	public static EList<Member> getAllMembers(Classifier _this) {
+	public static EList<Member> getAllMembers(Classifier _this, Commentable context) {
 		EList<Member> memberList = new BasicEList<Member>();
 		if (_this == null) {
 			return memberList;
@@ -53,20 +54,10 @@ public class ClassifierUtil {
 		
 		for (ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(_this)) {
 			for(Member member : superClassifier.getMembers()) {
-				if(member instanceof Modifiable) {					
-					Modifiable modifiable = (Modifiable) member;
-
-					if(!ModifiableUtil.isPrivate(modifiable)) {
-						memberList.add(member);
-					}
-					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {
-						memberList.add(member);
-					}
-				}
-				else if(member instanceof AnnotableAndModifiable) {					
+				if(member instanceof AnnotableAndModifiable) {					
 					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
 
-					if(!ModifiableUtil.isHidden(modifiable, _this)) {
+					if(!ModifiableUtil.isHidden(modifiable, context)) {
 						memberList.add(member);
 					}
 					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {

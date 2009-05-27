@@ -30,7 +30,7 @@ public class InterfaceMethodDecider extends AbstractDecider {
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof Classifier) {
-			return ClassifierUtil.getAllMembers((Classifier)container);
+			return ClassifierUtil.getAllMembers((Classifier)container, (Classifier)container);
 		}
 		return null;
 	}

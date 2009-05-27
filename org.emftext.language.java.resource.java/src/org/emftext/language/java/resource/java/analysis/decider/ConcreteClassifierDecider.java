@@ -80,30 +80,30 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			//classifier itself has first priority
 			resultList.add(classifier);
 			
-			//local inner classes
 			if (!classifier.eIsProxy()) {
 				for(Member member : ClassifierUtil.getAllMembers(
-						classifier)) {
+						classifier, classifier)) {
 					if(member instanceof ConcreteClassifier) {
 						innerTypeSuperTypeList.add((ConcreteClassifier) member);
 					}
 				}
-				//public inner classes (possibly external)
 				if (classifier instanceof ConcreteClassifier) {	
 					if (insideDefiningClassifier){	
-						for(Member member : ((ConcreteClassifier) classifier).getMembers()) {
-							if(member instanceof ConcreteClassifier) {
-								resultList.add((ConcreteClassifier) member);
-							}
-						}
+						innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
+								(ConcreteClassifier) classifier));
+						
 						insideDefiningClassifier = false;
+						//isStatic = ModifiableUtil.isStatic((ConcreteClassifier)classifier);
 					}
-					innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-							(ConcreteClassifier) classifier));
+					else {
+						EList<ConcreteClassifier> innerClassifierList = ConcreteClassifierUtil.getAllInnerClassifiers(
+								(ConcreteClassifier) classifier);
+						innerTypeSuperTypeList.addAll(innerClassifierList);
+						
+					}
 				}
-
 			}
-			
+
 			//if id contains $, treat $ as separator
 			if(identifier.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
 				String[] path = identifier.split("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
@@ -138,11 +138,11 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					return ECollections.emptyEList();
 				}
 			}
-			
 		}
+		
 		if(container instanceof AnonymousClass) {
 			for(Member member : AnonymousClassUtil.getAllMembers(
-					(AnonymousClass) container)) {
+					(AnonymousClass) container, (AnonymousClass) container)) {
 				if(member instanceof ConcreteClassifier) {
 					innerTypeSuperTypeList.add((ConcreteClassifier) member);
 				}
@@ -193,7 +193,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				
 			}
 			//the last imported package has priority over the previous
-			ECollections.reverse(packageImports);
+			//ECollections.reverse(packageImports);
 			resultList.addAll(packageImports);
 		}	
 		//5) java.lang

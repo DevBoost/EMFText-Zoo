@@ -26,7 +26,7 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 		ConcreteClassifier classifier = ImportUtil.getClassifier(theImport);
 		classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null && !classifier.eIsProxy()) {
-			for(Member member : ClassifierUtil.getAllMembers(classifier)) {
+			for(Member member : ClassifierUtil.getAllMembers(classifier, theImport)) {
 				if (identifier.equals(JavaUtil.getName(member)) && member instanceof ReferenceableElement) {
 					//for (EObject modifier : member.eContents()) {
 						//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers

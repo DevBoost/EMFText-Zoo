@@ -13,8 +13,6 @@ import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.members.MemberContainer;
-import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.util.JavaUtil;
@@ -22,6 +20,7 @@ import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.members.MethodUtil;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 
 public class MethodDecider extends AbstractDecider {
 
@@ -40,30 +39,38 @@ public class MethodDecider extends AbstractDecider {
 	
 	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
 	private boolean insideDefiningClassifier = true;
+	private boolean isStatic = false;
 	
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		if (container instanceof Classifier) {
 			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
-				for(Member member : ((ConcreteClassifier)container).getMembers()) {
+				EList<Member> memberList = 
+					ClassifierUtil.getAllMembers((Classifier)container, methodCall);
+				for(Member member : memberList) {
 					if (member instanceof Method) {
-						resultList.add(member);
+						innerTypeSuperMembers.add(member);
 					}
 				}
 				insideDefiningClassifier = false;
+				isStatic = ModifiableUtil.isStatic((ConcreteClassifier)container);
 			}
-			EList<Member> memberList = 
-				ClassifierUtil.getAllMembers((Classifier)container);
-			for(Member member : memberList) {
-				if (member instanceof Method) {
-					innerTypeSuperMembers.add(member);
+			else {
+				EList<Member> memberList = 
+					ClassifierUtil.getAllMembers((Classifier)container, methodCall);
+				for(Member member : memberList) {
+					if (member instanceof Method) {
+						if (!isStatic || ModifiableUtil.isStatic((Method)member)) {
+							innerTypeSuperMembers.add(member);
+						}
+					}
 				}
 			}
 		}
 		
 		if (container instanceof AnonymousClass) {
 			EList<Member> memberList = 
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container);
+				AnonymousClassUtil.getAllMembers((AnonymousClass)container, methodCall);
 			for(Member member : memberList) {
 				if (member instanceof Method) {
 					innerTypeSuperMembers.add(member);
@@ -121,11 +128,6 @@ public class MethodDecider extends AbstractDecider {
 	}
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
-		if (container instanceof MemberContainer) {
-			if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
-				return  true;
-			}
-		}
 		return false;
 	}
 

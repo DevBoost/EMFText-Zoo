@@ -7,7 +7,6 @@ import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersPackage;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
-import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.util.JavaUtil;
 
@@ -39,9 +38,6 @@ public class ParameterDecider extends AbstractDecider {
 	}
 	
 	public boolean walkInto(EObject element) {
-		if (element instanceof ForEachLoop) {
-			return true;
-		}
 		return false;
 	}
 

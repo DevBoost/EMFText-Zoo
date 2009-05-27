@@ -2,6 +2,7 @@ package org.emftext.language.java.util.types;
 
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.Class;
+import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.types.Boolean;
 import org.emftext.language.java.types.Byte;
@@ -19,12 +20,13 @@ import org.emftext.language.java.util.classifiers.ClassifierUtil;
 public class PrimitiveTypeUtil {
 
 	/**
-	 * @param primitiveType
+	 * @param _this
+	 * @param context to check protected visibility
 	 * @return all members (including super type members)
 	 */
-	public static EList<Member> getAllMembers(PrimitiveType primitiveType) {
-		Class javaClass = wrapPrimitiveType(primitiveType);	
-		return ClassifierUtil.getAllMembers(javaClass);
+	public static EList<Member> getAllMembers(PrimitiveType _this, Commentable context) {
+		Class javaClass = wrapPrimitiveType(_this);	
+		return ClassifierUtil.getAllMembers(javaClass, context);
 	}
 	
 	/**

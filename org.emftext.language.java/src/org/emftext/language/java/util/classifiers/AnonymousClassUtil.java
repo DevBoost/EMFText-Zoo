@@ -2,12 +2,13 @@ package org.emftext.language.java.util.classifiers;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
-import org.emftext.language.java.modifiers.Modifiable;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
@@ -16,9 +17,10 @@ public class AnonymousClassUtil {
 	
 	/**
 	 * @param _this
+	 * @param context to check protected visibility
 	 * @return a view on all members including super classifiers' members
 	 */
-	public static EList<Member> getAllMembers(AnonymousClass _this) {
+	public static EList<Member> getAllMembers(AnonymousClass _this, Commentable context) {
 		EList<Member> memberList = new BasicEList<Member>();
 		memberList.addAll(_this.getMembers());
 		memberList.addAll(_this.getDefaultMembers());
@@ -30,18 +32,15 @@ public class AnonymousClassUtil {
 		else {
 			ConcreteClassifier classifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
 			if (classifier != null) {
-				EList<Member> superMemberList = ClassifierUtil.getAllMembers(classifier);
+				EList<Member> superMemberList = ClassifierUtil.getAllMembers(classifier, context);
 				for(Member superMember : superMemberList) {
 					//exclude private members
-					if(superMember instanceof Modifiable) {					
-						Modifiable modifiable = (Modifiable) superMember;
-						if(!ModifiableUtil.isPrivate(modifiable)) {
-							memberList.add(superMember);
+					if(superMember instanceof AnnotableAndModifiable) {					
+						if (superMember.eIsProxy()) {
+							superMember = (Member) EcoreUtil.resolve(superMember, _this);
 						}
-					}
-					else if(superMember instanceof AnnotableAndModifiable) {					
 						AnnotableAndModifiable modifiable = (AnnotableAndModifiable) superMember;
-						if(!ModifiableUtil.isHidden(modifiable, _this)) {
+						if(!ModifiableUtil.isHidden(modifiable, context)) {
 							memberList.add(superMember);
 						}
 					}

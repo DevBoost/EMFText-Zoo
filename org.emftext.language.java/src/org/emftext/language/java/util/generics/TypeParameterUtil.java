@@ -224,6 +224,7 @@ public class TypeParameterUtil {
 					}
 					if (prevType instanceof ConcreteClassifier) {
 						//bound through inheritance?
+						int idx = 0;
 						for(ClassifierReference superClassifierReference : ConcreteClassifierUtil.getSuperTypeReferences((ConcreteClassifier) prevType)) {
 							if (typeParameterIndex < superClassifierReference.getTypeArguments().size())  {
 								//is this an argument for the correct class?
@@ -232,7 +233,8 @@ public class TypeParameterUtil {
 												typeParameterDeclarator)) {					 
 									TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
 									if (arg instanceof QualifiedTypeArgument) {
-										resultList.add(0, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
+										resultList.add(idx, TypeReferenceUtil.getTarget(((QualifiedTypeArgument) arg).getType(), null));
+										idx++;
 									}
 								}
 	

@@ -109,7 +109,7 @@ public class ScopedTreeWalker {
 	private void walkDown(IResolutionTargetDecider decider, String identifier, EObject container, EReference navOrigin, int posInNavOrigin) {
 		EClass containerClass = container.eClass();
 		
-		for(EReference reference : containerClass.getEAllReferences()) {
+		for(EReference reference : getReferences(containerClass)) {
 			if(reference.isContainment()) {
 				EList<EObject> contentList = null;
 				if (decider.continueAfterReference()) {
@@ -143,7 +143,7 @@ public class ScopedTreeWalker {
 		
 		for(IResolutionTargetDecider decider : deciderList) {
 			if (decider.isActive()) {
-				for(EReference reference : containerClass.getEAllReferences()) {
+				for(EReference reference : getReferences(containerClass)) {
 					if(reference.isContainment()) {
 						if(decider.containsCandidates(container, reference)) {
 							EList<EObject> contentList = null;
@@ -168,6 +168,11 @@ public class ScopedTreeWalker {
 				}
 			}
 		}
+	}
+
+	private EList<EReference> getReferences(EClass containerClass) {
+		EList<EReference> references =  containerClass.getEAllReferences();
+		return references;
 	}
 	
 	/**
