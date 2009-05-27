@@ -5,8 +5,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.instantiations.NewConstructorCall;
+import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.util.JavaClasspathUtil;
@@ -25,7 +27,10 @@ public class AnonymousClassUtil {
 		memberList.addAll(_this.getMembers());
 		memberList.addAll(_this.getDefaultMembers());
 		
-		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
+		NewConstructorCall ncCall = null;
+		if (_this.eContainer() instanceof NewConstructorCall) {
+			ncCall = (NewConstructorCall) _this.eContainer();;
+		}
 		if (ncCall == null) {
 			return memberList;
 		}
@@ -77,9 +82,17 @@ public class AnonymousClassUtil {
 	 * @return the direct super classifier
 	 */
 	public static ConcreteClassifier getSuperClassifier(AnonymousClass _this) {
-		NewConstructorCall ncCall = (NewConstructorCall) _this.eContainer();
-		ConcreteClassifier superClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
-
-		return superClassifier;
+		NewConstructorCall ncCall = null;
+		if (_this.eContainer() instanceof NewConstructorCall) {
+			ncCall = (NewConstructorCall) _this.eContainer();
+			ConcreteClassifier superClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(ncCall.getType());
+			return superClassifier;
+		}
+		else if (_this.eContainer() instanceof EnumConstant) {
+			if (_this.eContainer().eContainer() instanceof Enumeration) {
+				return (Enumeration) _this.eContainer().eContainer();
+			}
+		}
+		return null;
 	}
 }

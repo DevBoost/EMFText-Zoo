@@ -13,6 +13,7 @@ import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.modifiers.Static;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaUtil;
+import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.util.types.TypeUtil;
 
@@ -33,13 +34,9 @@ public class ModifiableUtil {
 		}
 		
 		ConcreteClassifier contextClassifier = null;
-		AnonymousClass anonymousClass =  null;//JavaUtil.findContainingAnonymousClass(context);
+		AnonymousClass anonymousClass = JavaUtil.findContainingAnonymousClass(context);
 		if (anonymousClass != null) {
-			Type type = TypeReferenceUtil.getTarget(
-					((NewConstructorCall)anonymousClass.eContainer()).getType());
-			if(type instanceof ConcreteClassifier) {
-				contextClassifier = (ConcreteClassifier)type;
-			}
+			contextClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
 		}
 		else {
 			contextClassifier = JavaUtil.findContainingClassifier(context);
@@ -48,11 +45,7 @@ public class ModifiableUtil {
 		ConcreteClassifier myClassifier = null;
 		anonymousClass = null;//JavaUtil.findContainingAnonymousClass(_this);
 		if (anonymousClass != null) {
-			Type type = TypeReferenceUtil.getTarget(
-					((NewConstructorCall)anonymousClass.eContainer()).getType());
-			if(type instanceof ConcreteClassifier) {
-				myClassifier = (ConcreteClassifier)type;
-			}
+			myClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
 		}
 		else {
 			myClassifier = JavaUtil.findContainingClassifier(_this);
