@@ -31,6 +31,9 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 			for(Member member : ClassifierUtil.getAllMembers(classifier, theImport)) {
 				if (identifier.equals(JavaUtil.getName(member)) && member instanceof ReferenceableElement) {
 					if (member instanceof AnnotableAndModifiable) {
+						if (member.eIsProxy()) {
+							member = (Member) EcoreUtil.resolve(member, theImport);
+						}
 						if(ModifiableUtil.isStatic((AnnotableAndModifiable)member)) {
 							result.addMapping(identifier, (ReferenceableElement) member);
 						}

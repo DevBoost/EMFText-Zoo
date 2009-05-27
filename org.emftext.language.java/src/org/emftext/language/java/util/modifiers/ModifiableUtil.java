@@ -31,6 +31,9 @@ public class ModifiableUtil {
 			if(modifier instanceof Static) {
 				return true;
 			}
+			if(modifier instanceof Public && _this instanceof ConcreteClassifier) {
+				return true;
+			}
 		}
 		return false;
 	}
