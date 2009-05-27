@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.Commentable;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
@@ -30,6 +31,10 @@ public class ModifiableUtil {
 	public static boolean isHidden(AnnotableAndModifiable _this, Commentable context) {
 		if(context.eIsProxy()) {
 			context = (Commentable) EcoreUtil.resolve(context, _this);
+		}
+		
+		if(JavaUtil.getName((NamedElement)_this).equals("Inner")) {
+			System.out.println("!");
 		}
 		
 		ConcreteClassifier contextClassifier = null;
