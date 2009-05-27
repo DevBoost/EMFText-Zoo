@@ -23,6 +23,11 @@ public class InterfaceUtil {
 			ConcreteClassifier superInterface = (ConcreteClassifier) TypeReferenceUtil.getTarget(typeArg, null);
 			if (superInterface != null) {
 				resultInterfaceList.add(superInterface);
+			}
+		}
+		for (TypeReference typeArg : interfaceReferences) {
+			ConcreteClassifier superInterface = (ConcreteClassifier) TypeReferenceUtil.getTarget(typeArg, null);
+			if (superInterface != null) {
 				if (superInterface instanceof Interface) {
 					collectAllSuperInterfaces(
 							((Interface)superInterface).getExtends(), resultInterfaceList);
