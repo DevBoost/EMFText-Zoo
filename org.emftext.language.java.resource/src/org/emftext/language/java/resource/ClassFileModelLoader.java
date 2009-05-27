@@ -398,6 +398,9 @@ try{
 		}
 		if (member.isPublic()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createPublic());
+			if (emfMember instanceof ConcreteClassifier) {
+				emfMember.getAnnotationsAndModifiers().add(f.createStatic());
+			}
 		}
 		if (member.isStatic()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createStatic());
