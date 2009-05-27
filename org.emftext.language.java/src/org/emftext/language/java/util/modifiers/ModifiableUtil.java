@@ -89,17 +89,22 @@ public class ModifiableUtil {
 				return false;
 			}
 			if(modifier instanceof Protected) {
+				//package visibility
+				if (JavaUtil.findPackageName(_this) != null && 
+						JavaUtil.findPackageName(_this).equals(JavaUtil.findPackageName(context))) {
+					return false;
+				}
 				return isInSuperOrOuterType(
 						myClassifier, contextClassifier, context);
 			}
 		}
-		//package visibility
+		//package visibility?
 		if (JavaUtil.findPackageName(_this) != null && 
 				JavaUtil.findPackageName(_this).equals(JavaUtil.findPackageName(context))) {
 			return false;
 		}
-		//package visibility through subclass or outer class
-		return isInSuperOrOuterType(myClassifier, contextClassifier, contextClassifier);
+
+		return true;
 	}
 
 	private static ConcreteClassifier findOuterClassifier(
