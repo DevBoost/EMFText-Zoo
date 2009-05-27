@@ -125,7 +125,7 @@ public class ModifiableUtil {
 
 	private static boolean isInSuperOrOuterType(ConcreteClassifier myClassifier,
 			ConcreteClassifier contextClassifier, EObject context) {
-		//try outer classifiers as well
+		//try outer classifiers as well 
 		while(contextClassifier instanceof Classifier) {
 			if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
 				return false;
@@ -139,11 +139,12 @@ public class ModifiableUtil {
 		}
 		//visibility through anonymous subclass
 		AnonymousClass anonymousClass = JavaUtil.findContainingAnonymousClass(context);
-		if (anonymousClass != null) {
+		while (anonymousClass != null) {
 			contextClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
 			if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
 				return false;
 			}
+			anonymousClass =  JavaUtil.findContainingAnonymousClass(anonymousClass.eContainer());
 		}
 		return true;
 	}
