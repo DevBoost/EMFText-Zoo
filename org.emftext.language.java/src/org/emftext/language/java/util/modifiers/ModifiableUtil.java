@@ -4,17 +4,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.Commentable;
-import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.Private;
 import org.emftext.language.java.modifiers.Protected;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.modifiers.Static;
-import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
-import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.util.types.TypeUtil;
 
 public class ModifiableUtil {
