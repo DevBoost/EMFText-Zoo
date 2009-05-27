@@ -33,10 +33,6 @@ public class ModifiableUtil {
 			context = (Commentable) EcoreUtil.resolve(context, _this);
 		}
 		
-		if(JavaUtil.getName((NamedElement)_this).equals("Inner")) {
-			System.out.println("!");
-		}
-		
 		ConcreteClassifier contextClassifier = null;
 		AnonymousClass anonymousClass =  null;//JavaUtil.findContainingAnonymousClass(context);
 		if (anonymousClass != null) {

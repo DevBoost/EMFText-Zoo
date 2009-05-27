@@ -30,6 +30,7 @@ import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.util.JavaUtil;
+import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 /**
  * This class is responsible for managing an retrieving Java resources to
@@ -399,7 +400,23 @@ public class JavaClasspath extends AdapterImpl {
 		}
 
 		
-		return ECollections.emptyEList();
+		//for classes declared locally inside methods that are not registered in the class path
+		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		//can not call ClassifierUtil.getAllMembers, because it will try to call this method!
+		for(Member member : container.getMembers()) {
+			if(member instanceof ConcreteClassifier) {
+				result.add((ConcreteClassifier) member);
+			}
+		}
+		for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(container)) {
+			for(Member member : superClassifier.getMembers()) {
+				if(member instanceof ConcreteClassifier) {
+					result.add((ConcreteClassifier) member);
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	/**
