@@ -180,8 +180,12 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	private void addImportsAndInnerClasses(EObject container,
 			EList<EObject> resultList) {
+		//1) Inner classifiers of superclasses
+		if(container instanceof JavaRoot) {
+			resultList.addAll(innerTypeSuperTypeList);
+		}
 		if(container instanceof ImportingElement) {
-			//1) direct classifier imports
+			//2) direct classifier imports
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof ClassifierImport) {
 					resultList.add(((ClassifierImport)aImport).getClassifier());
@@ -194,10 +198,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				}
 			}
 		}	
-		//2) Inner classifiers of superclasses
-		if(container instanceof JavaRoot) {
-			resultList.addAll(innerTypeSuperTypeList);
-		}
+
 			
 		//3) same package
 		if(container instanceof JavaRoot) {
