@@ -2,11 +2,11 @@ package resolving_new.autoboxingA_1;
 
 public class AClass {
 	
-	public void // target:1 
-	methodWithPrimitiveTypeParameter(int i) {}
+	public void methodWithPrimitiveTypeParameter // target:1
+		(int i) {}
 
 	public void callWithIntegerObjectArgument() {
-		// source:1:target
-		methodWithPrimitiveTypeParameter(new Integer(1));
+		methodWithPrimitiveTypeParameter // source:1:target
+		(new Integer(1));
 	}
 }

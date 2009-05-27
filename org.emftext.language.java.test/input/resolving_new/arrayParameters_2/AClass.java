@@ -2,31 +2,35 @@ package resolving_new.arrayParameters_2;
 
 public class AClass {
 
-	public void // target:1 
-	m(String string) {
+	public void m // target:1
+	(String string) {
 		System.out.println("m(String)");
 	}
 	
-	public void // target:2
-	m(String[] strings) {
+	public void m // target:2
+		(String[] strings) {
 		System.out.println("m(String...)");
 	}
 	
 	public static void main(String[] args) {
 		AClass a = new AClass();
 		
-		a.// source:1:target
-		m("");
+		a.
+		m // source:1:target
+		("");
 
-		a.// source:2:target
-		m(new String[] {"", ""});
+		a.
+		m // source:2:target
+		(new String[] {"", ""});
 		
 		String [] aStringArray = {"1", "3"};
 		
-		a.// source:2:target
-		m(aStringArray);
+		a.
+		m // source:2:target
+		(aStringArray);
 		
-		a.// source:1:target
-		m(aStringArray[1]);
+		a.
+		m // source:1:target
+		(aStringArray[1]);
 	}
 }

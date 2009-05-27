@@ -2,14 +2,12 @@ package resolving_new.polymorphism_2;
 
 public class Caller {
 	
-	public void 
-	// target:1
-	m(SuperClass sc) {
+	public void m // target:1
+		(SuperClass sc) {
 	}
 
-	public void 
-	// target:2
-	m(Caller c) {
+	public void m // target:2
+		(Caller c) {
 	}
 
 	public void polymorphicCalls() {

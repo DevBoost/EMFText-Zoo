@@ -4,9 +4,8 @@ import static resolving_new.staticImportB_2.Exporter.CONSTANT1;
 
 public class Importer {
 	
-	private Exporter
-	// target:2
-	CONSTANT2;
+	private Exporter CONSTANT2 // target:2
+	;
 	
 	public void useImportAndLocalField() {
 		

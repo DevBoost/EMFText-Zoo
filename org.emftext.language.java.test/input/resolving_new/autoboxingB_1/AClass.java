@@ -7,8 +7,8 @@ public class AClass {
 		System.out.println("method with parameter type int");
 	}
 
-	public void // target:1 
-	method(Integer i) {
+	public void method // target:1
+		(Integer i) {
 		System.out.println("method with parameter type Integer");
 	}
 

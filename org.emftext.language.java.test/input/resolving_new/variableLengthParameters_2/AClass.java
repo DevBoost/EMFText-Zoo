@@ -2,13 +2,13 @@ package resolving_new.variableLengthParameters_2;
 
 public class AClass {
 
-	public void // target:1 
-	m(String string) {
+	public void m // target:1
+		(String string) {
 		System.out.println("m(String)");
 	}
 	
-	public void // target:2
-	m(String... strings) {
+	public void m // target:2
+		(String... strings) {
 		System.out.println("m(String...)");
 	}
 	

@@ -2,13 +2,11 @@ package resolving_new.fields_2;
 
 public class AClass {
 
-	private AClass
-	// target:1
-	field1;
+	private AClass field1 // target:1
+	;
 	
-	private AClass 
-	// target:2
-	field2;
+	private AClass field2 // target:2
+	;
 	
 	public void m() {
 		// source:1:target

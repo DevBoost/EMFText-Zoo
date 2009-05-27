@@ -2,9 +2,8 @@ package resolving_new.superclassmethod_2;
 
 public class SubClass extends SuperClass {
 
-	public void 
-	// target:2
-	m() {
+	public void m // target:2
+	() {
 		
 	}
 

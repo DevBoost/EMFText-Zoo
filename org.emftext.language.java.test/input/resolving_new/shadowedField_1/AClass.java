@@ -5,9 +5,8 @@ public class AClass {
 	private int duplicateName;
 	
 	public void shadow() {
-		int
-		// target:1
-		duplicateName;
+		int duplicateName // target:1
+		= 0;
 		
 		// source:1:target
 		duplicateName = 0;

@@ -2,17 +2,17 @@ package resolving_new.methodParameters_4;
 
 public class LocalCalls {
 
-	public void // target:1 
-	m() {}
+	public void m // target:1
+	() {}
 	
-	public void // target:2
-	m(int a) {}
+	public void m // target:2
+	(int a) {}
 	
-	public void // target:3
-	m(int a, int b) {}
+	public void m // target:3
+	(int a, int b) {}
 	
-	public void // target:4
-	m(Object a) {}
+	public void m // target:4
+	(Object a) {}
 	
 	public void call() {
 		// source:1:target
