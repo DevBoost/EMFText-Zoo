@@ -66,6 +66,10 @@ public class TypeUtil {
 	public static boolean isSuperType(Type _this, int arrayDim,
 			Type otherType, ArrayTypeable otherArrayType) {
 		
+		if(_this == null || otherType == null) {
+			return false;
+		}
+		
 		if (_this instanceof TypeParameterUtil.TemporalCompositeClassImpl || otherType instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
 			EList<Type> thisTypeList = new BasicEList<Type>();
 			EList<Type> otherTypeList = new BasicEList<Type>();
