@@ -30,23 +30,8 @@ public class ModifiableUtil {
 			context = (Commentable) EcoreUtil.resolve(context, _this);
 		}
 		
-		ConcreteClassifier contextClassifier = null;
-		AnonymousClass anonymousClass = JavaUtil.findContainingAnonymousClass(context);
-		if (anonymousClass != null) {
-			contextClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
-		}
-		else {
-			contextClassifier = JavaUtil.findContainingClassifier(context);
-		}
-
-		ConcreteClassifier myClassifier = null;
-		anonymousClass = null;//JavaUtil.findContainingAnonymousClass(_this);
-		if (anonymousClass != null) {
-			myClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
-		}
-		else {
-			myClassifier = JavaUtil.findContainingClassifier(_this);
-		}
+		ConcreteClassifier contextClassifier = JavaUtil.findContainingClassifier(context);
+		ConcreteClassifier myClassifier = JavaUtil.findContainingClassifier(_this);
 		
 		for(AnnotationInstanceOrModifier modifier : _this.getAnnotationsAndModifiers()) {
 			if(modifier instanceof Private) {
@@ -73,6 +58,14 @@ public class ModifiableUtil {
 		//package visibility through subclass
 		if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
 			return false;
+		}
+		//package visibility through anonymous subclass
+		AnonymousClass anonymousClass = JavaUtil.findContainingAnonymousClass(context);
+		if (anonymousClass != null) {
+			contextClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
+			if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
+				return false;
+			}
 		}
 		
 		return true;
