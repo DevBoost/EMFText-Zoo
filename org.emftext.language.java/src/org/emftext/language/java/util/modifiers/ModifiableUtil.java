@@ -2,9 +2,12 @@ package org.emftext.language.java.util.modifiers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.AnonymousClass;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.Commentable;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.literals.Self;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
@@ -66,10 +69,8 @@ public class ModifiableUtil {
 				return false;
 			}
 			if(modifier instanceof Protected) {
-				if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
-					return false;
-				}
-				return true;
+				return isInSuperOrOuterType(
+						myClassifier, contextClassifier, context);
 			}
 		}
 		//package visibility
@@ -77,11 +78,33 @@ public class ModifiableUtil {
 				JavaUtil.findPackageName(_this).equals(JavaUtil.findPackageName(context))) {
 			return false;
 		}
-		//package visibility through subclass
-		if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
-			return false;
+		//package visibility through subclass or outer class
+		return isInSuperOrOuterType(myClassifier, contextClassifier, contextClassifier);
+	}
+
+	private static boolean isInSuperOrOuterType(ConcreteClassifier myClassifier,
+			ConcreteClassifier contextClassifier, EObject context) {
+		//try outer classifiers as well
+		while(contextClassifier instanceof Classifier) {
+			if (TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
+				return false;
+			}
+			ConcreteClassifier outerClassifier = JavaUtil.findContainingClassifier(contextClassifier.eContainer());
+			if(outerClassifier == null) {
+				CompilationUnit cu = JavaUtil.findContainingCompilationUnit(contextClassifier.eContainer());
+				//maybe the outer classifier is in an extra cu
+				JavaClasspath cp = JavaClasspath.get(myClassifier);
+				contextClassifier = (ConcreteClassifier) EcoreUtil.resolve(
+						cp.getClassifier(cp.getContainerNameFromNamespace(cu)), myClassifier);
+			}
+			else {
+				contextClassifier = outerClassifier;
+			}
+			if (contextClassifier != null && TypeUtil.isSuperType(contextClassifier, 0, myClassifier, null)) {
+				return false;
+			}
 		}
-		//package visibility through anonymous subclass
+		//visibility through anonymous subclass
 		AnonymousClass anonymousClass = JavaUtil.findContainingAnonymousClass(context);
 		if (anonymousClass != null) {
 			contextClassifier = AnonymousClassUtil.getSuperClassifier(anonymousClass);
@@ -89,8 +112,9 @@ public class ModifiableUtil {
 				return false;
 			}
 		}
-		
 		return true;
 	}
+	
+	
 
 }

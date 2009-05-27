@@ -14,6 +14,7 @@ import org.emftext.language.java.imports.ImportingElement;
 import org.emftext.language.java.imports.StaticClassifierImport;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.EnumConstant;
+import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.Switch;
@@ -22,6 +23,7 @@ import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.variables.LocalVariable;
 
@@ -82,11 +84,11 @@ public class EnumConstantDecider extends AbstractDecider {
 				}
 				else if (aImport instanceof ClassifierImport) {
 					for (EObject member : ((ClassifierImport)aImport).getClassifier().getMembers()) {
-						//for (EObject modifier : member.eContents()) {
-							//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
+						if (member instanceof AnnotableAndModifiable) {
+							if(ModifiableUtil.isStatic((AnnotableAndModifiable)member)) {
 								resultList.add(member);
-							//}
-						//}
+							}
+						}
 					}
 				}
 			}

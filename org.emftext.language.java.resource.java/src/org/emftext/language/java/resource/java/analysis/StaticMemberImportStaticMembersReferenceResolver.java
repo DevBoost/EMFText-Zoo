@@ -6,10 +6,12 @@ import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
+import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -28,11 +30,11 @@ public class StaticMemberImportStaticMembersReferenceResolver extends
 		if (classifier != null && !classifier.eIsProxy()) {
 			for(Member member : ClassifierUtil.getAllMembers(classifier, theImport)) {
 				if (identifier.equals(JavaUtil.getName(member)) && member instanceof ReferenceableElement) {
-					//for (EObject modifier : member.eContents()) {
-						//if (modifier instanceof Static) { TODO @jjohannes reactivate this check when the class file loader supports modifiers
+					if (member instanceof AnnotableAndModifiable) {
+						if(ModifiableUtil.isStatic((AnnotableAndModifiable)member)) {
 							result.addMapping(identifier, (ReferenceableElement) member);
-						//}
-					//}
+						}
+					}
 				}
 			}
 			

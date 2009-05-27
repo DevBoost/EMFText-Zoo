@@ -45,6 +45,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	private ConcreteClassifier baseClassifier = null;
 	private boolean insideDefiningClassifier = true;
 	
+	private EObject reference = null;
+	
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 
 		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
@@ -82,7 +84,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			
 			if (!classifier.eIsProxy()) {
 				for(Member member : ClassifierUtil.getAllMembers(
-						classifier, classifier)) {
+						classifier, reference)) {
 					if(member instanceof ConcreteClassifier) {
 						innerTypeSuperTypeList.add((ConcreteClassifier) member);
 					}
@@ -142,7 +144,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		
 		if(container instanceof AnonymousClass) {
 			for(Member member : AnonymousClassUtil.getAllMembers(
-					(AnonymousClass) container, (AnonymousClass) container)) {
+					(AnonymousClass) container, reference)) {
 				if(member instanceof ConcreteClassifier) {
 					innerTypeSuperTypeList.add((ConcreteClassifier) member);
 				}
@@ -247,6 +249,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			return false;
 		}
 		
+		reference = referenceContainer;
 		return (referenceContainer instanceof Reference ||
 				referenceContainer instanceof ClassifierReference);
 	}
