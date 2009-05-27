@@ -29,7 +29,7 @@ public class ConcreteClassifierUtil {
 				if (superInner.eIsProxy()) {
 					superInner = (ConcreteClassifier) EcoreUtil.resolve(superInner, _this);
 				}
-				if(!ModifiableUtil.isHidden(superInner, _this)) {
+				if(!superInner.eIsProxy() && !ModifiableUtil.isHidden(superInner, _this)) {
 					innerClassifierList.add(superInner);
 				}
 			}
