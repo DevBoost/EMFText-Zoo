@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
@@ -64,7 +65,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 					}
 					else {
 						//absolute class starting with package
-						target = resolveFullQualifiedTypeReferences(identifier, ncr, container);
+						target = resolveFullQualifiedTypeReferences(identifier, ncr, container, reference);
 					}
 				}
 			}
@@ -130,15 +131,31 @@ public class ClassifierReferenceTargetReferenceResolver extends
 	}
 	
 	private EObject resolveFullQualifiedTypeReferences(String identifier,
-			NamespaceClassifierReference ncr, EObject container) {
+			NamespaceClassifierReference ncr, EObject container, EReference reference) {
 		
 		int idx = ncr.getClassifierReferences().indexOf(container);
 		if(ncr.getNamespaces().size() > 0 && idx == 0) {
-			Classifier target = null;
+			EObject target = null;
 			//if the reference is qualified, the target can be directly found
 			String containerName = JavaClasspath.get(ncr).getContainerNameFromNamespace(ncr);
-			target = (Classifier) EcoreUtil.resolve(
-					JavaClasspath.get(ncr).getClassifier(containerName + identifier), container.eResource());
+			if (containerName.contains("$")) {
+				String firstClassName = containerName.substring(0, containerName.indexOf("$"));
+				ConcreteClassifier firstClass = (ConcreteClassifier) EcoreUtil.resolve(
+						JavaClasspath.get(ncr).getClassifier(firstClassName), container.eResource());
+				target = ConcreteClassifierDecider.resolveRelativeNamespace(
+						ncr, ncr.getNamespaces().indexOf(JavaUtil.getName(firstClass)) + 1, firstClass, container, reference);
+				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)target)) {
+					if (identifier.equals(JavaUtil.getName(cand))) {
+						target = cand;
+						break;
+					}
+				}
+			}
+			else {
+				target = (Classifier) EcoreUtil.resolve(
+						JavaClasspath.get(ncr).getClassifier(containerName + identifier), container.eResource());
+			}
+
 			return target;
 		}
 		return null;

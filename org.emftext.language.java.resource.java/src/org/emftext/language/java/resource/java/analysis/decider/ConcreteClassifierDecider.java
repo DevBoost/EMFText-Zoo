@@ -278,13 +278,13 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 				deciderList.add(new ConcreteClassifierDecider());
 				ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
-				
 				target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);
 			}
 			else {
 				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
 					if (identifier.equals(JavaUtil.getName(cand))) {
 						target = cand;
+						break;
 					}
 				}
 			}
