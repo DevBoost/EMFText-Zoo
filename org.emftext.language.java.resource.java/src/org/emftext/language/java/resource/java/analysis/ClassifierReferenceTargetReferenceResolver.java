@@ -11,6 +11,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
+import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferencesPackage;
@@ -20,6 +21,7 @@ import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDec
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
+import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
@@ -107,12 +109,26 @@ public class ClassifierReferenceTargetReferenceResolver extends
 			}
 			
 			if (hasNamespace) {
-				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
-					if (identifier.equals(JavaUtil.getName(cand))) {
-						target = cand;
-						break;
+				if (startingPoint instanceof ConcreteClassifier) {
+					for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
+						if (identifier.equals(JavaUtil.getName(cand))) {
+							target = cand;
+							break;
+						}
 					}
 				}
+				else if (startingPoint instanceof TypeParameter) {
+					for(TypeReference extendsClassifierReference : ((TypeParameter)startingPoint).getExtendTypes()) {
+						ConcreteClassifier extendsClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(extendsClassifierReference);
+						for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers(extendsClassifier)) {
+							if (identifier.equals(JavaUtil.getName(cand))) {
+								target = cand;
+								break;
+							}
+						}
+					}
+				}
+
 			}
 			else {
 				deciderList.add(new ConcreteClassifierDecider());

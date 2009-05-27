@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.Commentable;
-import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
