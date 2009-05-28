@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the Netbeans IDE.
+ */
 public class NetbeansTest extends AbstractZipFileInputTest {
 
 	public static final String TEST_FOLDER = "netbeans-6.5.1";

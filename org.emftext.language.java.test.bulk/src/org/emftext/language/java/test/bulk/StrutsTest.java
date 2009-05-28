@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the Struts framework.
+ */
 public class StrutsTest extends AbstractZipFileInputTest {
 
 	public static final String TEST_FOLDER = "struts-2.1.6";
@@ -35,5 +39,4 @@ public class StrutsTest extends AbstractZipFileInputTest {
 	public static Test suite() throws CoreException, IOException {
 		return constructSuite(TEST_FOLDER, START_ENTRY, THREAD_NO);
 	}
-	
 }

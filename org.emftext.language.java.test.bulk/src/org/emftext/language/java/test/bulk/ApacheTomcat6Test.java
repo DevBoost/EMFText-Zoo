@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the Apache Tomcat Web Server.
+ */
 public class ApacheTomcat6Test extends AbstractZipFileInputTest {
 	
 	public static final String TEST_FOLDER = "apache-tomcat-6.0.18";

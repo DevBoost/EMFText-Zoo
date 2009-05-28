@@ -34,6 +34,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.emftext.language.java.test.bulk.GiganticTest;
 
+/**
+ * A utility class to extract statistical information from the test
+ * sources (e.g., the total number of lines of code).
+ */
 public class TestStatistics extends GiganticTest {
 	
 	private long locs = 0;

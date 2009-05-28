@@ -26,7 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
-
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the JACKS compiler test suite.
+ */
 public class JacksTest extends AbstractZipFileInputTest {
 	
 	public static final String TEST_FOLDER = "jacks_javac_1.6.0_07_passed";

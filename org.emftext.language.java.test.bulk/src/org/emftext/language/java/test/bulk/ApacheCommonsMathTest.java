@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the Apache Commons Math library.
+ */
 public class ApacheCommonsMathTest extends AbstractZipFileInputTest {
 
 	public static final String TEST_FOLDER = "apache-commons-math-1.2";

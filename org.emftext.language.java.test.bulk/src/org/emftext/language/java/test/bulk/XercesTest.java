@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the Xerces XML parser.
+ */
 public class XercesTest extends AbstractZipFileInputTest {
 
 	public static final String TEST_FOLDER = "Xerces-J-2.9.1";

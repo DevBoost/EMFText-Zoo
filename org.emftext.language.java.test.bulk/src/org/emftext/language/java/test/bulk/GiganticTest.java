@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * all ZIP in the input folder.
+ */
 public class GiganticTest extends AbstractZipFileInputTest {
 
 	public static final String TEST_FOLDER = "";

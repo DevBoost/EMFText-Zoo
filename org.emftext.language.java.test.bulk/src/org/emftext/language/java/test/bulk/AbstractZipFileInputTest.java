@@ -42,6 +42,9 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.test.util.ThreadedTestSuite;
 
+/**
+ * An abstract super class for test that must read input from ZIP files.
+ */
 public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCase {
 
 	protected final static String BULK_INPUT_DIR = "input/";

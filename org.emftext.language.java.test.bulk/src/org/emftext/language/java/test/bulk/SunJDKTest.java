@@ -26,6 +26,10 @@ import junit.framework.Test;
 
 import org.eclipse.core.runtime.CoreException;
 
+/**
+ * Uses JaMoPP to parse and print the source files of
+ * the Sun JDK 1.5.0.
+ */
 public class SunJDKTest extends AbstractZipFileInputTest {
 	
 	public static final String TEST_FOLDER = "sun_jdk_1.5.0_16";

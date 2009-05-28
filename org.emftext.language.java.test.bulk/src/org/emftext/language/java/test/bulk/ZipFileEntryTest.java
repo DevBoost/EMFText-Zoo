@@ -38,6 +38,10 @@ import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterP
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.runtime.IOptions;
 
+/**
+ * A test that can be used to parse and print entries in a 
+ * ZIP file.
+ */
 public class ZipFileEntryTest extends AbstractJavaParserTestCase {
 
 	private final ZipFile zipFile;
