@@ -79,8 +79,8 @@ public class FieldDecider extends AbstractDecider {
 					ClassifierUtil.getAllMembers((Classifier)container, fieldReference);
 				for(Member member : memberList) {
 					if (member instanceof Field) {
-						innerTypeSuperMembers.add(member);
-						innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
+						resultList.add(member);
+						resultList.addAll(((Field)member).getAdditionalFields());
 					}
 				}
 				insideDefiningClassifier = false;

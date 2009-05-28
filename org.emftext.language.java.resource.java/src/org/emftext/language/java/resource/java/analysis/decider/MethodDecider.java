@@ -69,7 +69,7 @@ public class MethodDecider extends AbstractDecider {
 					ClassifierUtil.getAllMembers((Classifier)container, methodCall);
 				for(Member member : memberList) {
 					if (member instanceof Method) {
-						innerTypeSuperMembers.add(member);
+						resultList.add(member);
 					}
 				}
 				insideDefiningClassifier = false;
