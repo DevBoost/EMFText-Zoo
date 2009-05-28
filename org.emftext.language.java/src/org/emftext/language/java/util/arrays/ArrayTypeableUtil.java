@@ -23,6 +23,11 @@ package org.emftext.language.java.util.arrays;
 import org.emftext.language.java.arrays.ArrayTypeable;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * ArrayTypeable, but can not go there, because ArrayTypeable 
+ * is generated.
+ */
 public class ArrayTypeableUtil {
 
 	public static int getArrayDimension(ArrayTypeable _this) {

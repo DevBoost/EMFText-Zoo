@@ -37,6 +37,11 @@ import org.emftext.language.java.types.Void;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * PrimitiveType, but can not go there, because PrimitiveType
+ * is generated.
+ */
 public class PrimitiveTypeUtil {
 
 	/**

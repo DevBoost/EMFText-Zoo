@@ -24,6 +24,11 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.util.JavaUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * CompilationUnit, but can not go there, because CompilationUnit 
+ * is generated.
+ */
 public class CompilationUnitUtil {
 	
 	public static Classifier getClassifier(CompilationUnit _this, String name) {

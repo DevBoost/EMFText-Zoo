@@ -48,6 +48,11 @@ import org.emftext.language.java.util.literals.LiteralUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Reference, but can not go there, because Reference
+ * is generated.
+ */
 public class ReferenceUtil {
 	
 	/**

@@ -27,6 +27,11 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.util.JavaUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * MemberContainer, but can not go there, because MemberContainer 
+ * is generated.
+ */
 public class MemberContainerUtil {
 	
 	/**

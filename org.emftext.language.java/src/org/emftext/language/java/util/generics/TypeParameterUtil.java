@@ -69,6 +69,11 @@ import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * TypeParameter, but can not go there, because TypeParameter 
+ * is generated.
+ */
 public class TypeParameterUtil {
 	
 	/**
@@ -87,6 +92,7 @@ public class TypeParameterUtil {
 		
 	}
 	
+	// TODO jjohannes: add Javadoc
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
 		
 		private TypeParameter creator;

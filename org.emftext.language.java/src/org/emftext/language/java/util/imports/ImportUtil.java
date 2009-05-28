@@ -32,6 +32,11 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Import, but can not go there, because Import 
+ * is generated.
+ */
 public class ImportUtil {
 
 	/**

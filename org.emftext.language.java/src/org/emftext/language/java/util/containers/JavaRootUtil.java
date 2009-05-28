@@ -28,6 +28,11 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.JavaRoot;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * JavaRoot, but can not go there, because JavaRoot 
+ * is generated.
+ */
 public class JavaRootUtil {
 	
 	/**

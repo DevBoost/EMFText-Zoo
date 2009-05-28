@@ -36,6 +36,11 @@ import org.emftext.language.java.util.arrays.ArrayTypeableUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * TypeReference, but can not go there, because TypeReference
+ * is generated.
+ */
 public class TypeReferenceUtil {
 
 	/**

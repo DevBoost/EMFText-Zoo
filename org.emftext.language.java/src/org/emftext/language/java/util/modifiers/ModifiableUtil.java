@@ -45,6 +45,11 @@ import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
 import org.emftext.language.java.util.references.ReferenceUtil;
 import org.emftext.language.java.util.types.TypeUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * AnnotableAndModifiable, but can not go there, because 
+ * AnnotableAndModifiable is generated.
+ */
 public class ModifiableUtil {
 
 	public static boolean isStatic(AnnotableAndModifiable _this) {

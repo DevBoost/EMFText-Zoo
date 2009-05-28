@@ -39,6 +39,11 @@ import org.emftext.language.java.util.generics.TypeParameterUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Classifier, but can not go there, because Classifier 
+ * is generated.
+ */
 public class ClassifierUtil {
 	
 	/**

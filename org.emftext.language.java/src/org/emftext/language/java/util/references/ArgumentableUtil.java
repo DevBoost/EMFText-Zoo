@@ -27,6 +27,11 @@ import org.emftext.language.java.references.Argumentable;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Argumentable, but can not go there, because Argumentable
+ * is generated.
+ */
 public class ArgumentableUtil {
 	
 	/**

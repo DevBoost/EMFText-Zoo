@@ -33,6 +33,11 @@ import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.ClassifierReferenceUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * ConcreteClassifier, but can not go there, because ConcreteClassifier 
+ * is generated.
+ */
 public class ConcreteClassifierUtil {
 	
 	public static EList<ConcreteClassifier> getAllInnerClassifiers(ConcreteClassifier _this) {

@@ -32,6 +32,11 @@ import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.util.JavaClasspathUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Class, but can not go there, because Class 
+ * is generated.
+ */
 public class ClassUtil {
 	
 	/**

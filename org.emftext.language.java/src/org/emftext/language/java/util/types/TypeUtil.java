@@ -51,6 +51,10 @@ import org.emftext.language.java.util.classifiers.ClassUtil;
 import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.generics.TypeParameterUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Type, but can not go there, because Type is generated.
+ */
 public class TypeUtil {
 	
 	/**

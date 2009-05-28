@@ -24,6 +24,11 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * ClassifierReference, but can not go there, because ClassifierReference
+ * is generated.
+ */
 public class ClassifierReferenceUtil {
 
 	/**

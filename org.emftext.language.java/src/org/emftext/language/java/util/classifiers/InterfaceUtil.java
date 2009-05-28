@@ -27,6 +27,10 @@ import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 
+/**
+ * A utility class that provides methods that are used to figure
+ * out interface inheritance relations.
+ */
 public class InterfaceUtil {
 
 	/**

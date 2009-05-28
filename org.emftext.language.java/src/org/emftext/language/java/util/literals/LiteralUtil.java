@@ -32,6 +32,11 @@ import org.emftext.language.java.literals.NullLiteral;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaClasspathUtil;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Literal, but can not go there, because Literal 
+ * is generated.
+ */
 public class LiteralUtil {
 	
 	/**

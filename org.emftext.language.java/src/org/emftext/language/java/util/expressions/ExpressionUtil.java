@@ -58,8 +58,12 @@ import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.LocalVariable;
 
+/**
+ * A utility class that provides methods that belong to class 
+ * Expression, but can not go there, because Expression 
+ * is generated.
+ */
 public class ExpressionUtil {
-	
 
 	/**
 	 * Returns the type of the expression considering all concrete
