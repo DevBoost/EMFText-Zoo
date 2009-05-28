@@ -105,8 +105,8 @@ public class FieldDecider extends AbstractDecider {
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container, fieldReference);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
-					resultList.add(member);
-					resultList.addAll(((Field)member).getAdditionalFields());
+					innerTypeSuperMembers.add(member);
+					innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
 				}
 			}
 			return resultList;

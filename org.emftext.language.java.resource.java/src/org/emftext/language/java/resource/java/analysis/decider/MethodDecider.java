@@ -93,7 +93,7 @@ public class MethodDecider extends AbstractDecider {
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container, methodCall);
 			for(Member member : memberList) {
 				if (member instanceof Method) {
-					resultList.add(member);
+					innerTypeSuperMembers.add(member);
 				}
 			}
 			return resultList;
