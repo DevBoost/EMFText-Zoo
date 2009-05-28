@@ -67,7 +67,6 @@ public class FieldDecider extends AbstractDecider {
 		return standardArrayLengthField;
 	}
 	
-	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
 	private boolean insideDefiningClassifier = true;
 	private boolean isStatic = false;
 	
@@ -92,8 +91,8 @@ public class FieldDecider extends AbstractDecider {
 				for(Member member : memberList) {
 					if (member instanceof Field) {
 						if (!isStatic || ModifiableUtil.isStatic((Field)member)) {
-							innerTypeSuperMembers.add(member);
-							innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
+							resultList.add(member);
+							resultList.addAll(((Field)member).getAdditionalFields());
 						}
 					}
 				}
@@ -101,19 +100,20 @@ public class FieldDecider extends AbstractDecider {
 		}
 		
 		if (container instanceof AnonymousClass) {
+			resultList.addAll(((AnonymousClass)container).getMembers());
+			
 			EList<Member> memberList = 
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container, fieldReference);
 			for(Member member : memberList) {
 				if (member instanceof Field) {
-					innerTypeSuperMembers.add(member);
-					innerTypeSuperMembers.addAll(((Field)member).getAdditionalFields());
+					resultList.add(member);
+					resultList.addAll(((Field)member).getAdditionalFields());
 				}
 			}
 			return resultList;
 		}
 		
 		if(container instanceof CompilationUnit) {
-			resultList.addAll(innerTypeSuperMembers);
 			addImports(container, resultList);
 			addArrayLengthFiled(resultList, container);
 		}

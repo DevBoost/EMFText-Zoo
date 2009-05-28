@@ -418,9 +418,6 @@ try{
 		}
 		if (member.isPublic()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createPublic());
-			if (emfMember instanceof ConcreteClassifier) {
-				emfMember.getAnnotationsAndModifiers().add(f.createStatic());
-			}
 		}
 		if (member.isStatic()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createStatic());
@@ -436,6 +433,12 @@ try{
 		}
 		if (member.isVolatile()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createVolatile());
+		}
+		
+		if(!member.isPrivate()) {
+			if (emfMember instanceof ConcreteClassifier) {
+				emfMember.getAnnotationsAndModifiers().add(f.createStatic());
+			}
 		}
 	}
 	
@@ -463,6 +466,8 @@ try{
 				}
 			}
 		}
+		//TODO #767 implement here
+		
 		
 		if(typeParameter == null) {
 			return null;

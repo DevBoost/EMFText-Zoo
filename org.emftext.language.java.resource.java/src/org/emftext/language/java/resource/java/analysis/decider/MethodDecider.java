@@ -57,7 +57,6 @@ public class MethodDecider extends AbstractDecider {
 		return false;
 	}
 	
-	private EList<EObject> innerTypeSuperMembers = new BasicEList<EObject>();
 	private boolean insideDefiningClassifier = true;
 	private boolean isStatic = false;
 	
@@ -81,7 +80,7 @@ public class MethodDecider extends AbstractDecider {
 				for(Member member : memberList) {
 					if (member instanceof Method) {
 						if (!isStatic || ModifiableUtil.isStatic((Method)member)) {
-							innerTypeSuperMembers.add(member);
+							resultList.add(member);
 						}
 					}
 				}
@@ -89,18 +88,19 @@ public class MethodDecider extends AbstractDecider {
 		}
 		
 		if (container instanceof AnonymousClass) {
+			resultList.addAll(((AnonymousClass)container).getMembers());
+			
 			EList<Member> memberList = 
 				AnonymousClassUtil.getAllMembers((AnonymousClass)container, methodCall);
 			for(Member member : memberList) {
 				if (member instanceof Method) {
-					innerTypeSuperMembers.add(member);
+					resultList.add(member);
 				}
 			}
 			return resultList;
 		}
 		
 		if(container instanceof CompilationUnit) {
-			resultList.addAll(innerTypeSuperMembers);
 			addImports(container, resultList);
 		}
 		

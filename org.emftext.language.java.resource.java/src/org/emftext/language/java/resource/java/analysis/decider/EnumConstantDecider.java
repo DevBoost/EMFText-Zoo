@@ -37,7 +37,9 @@ import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
+import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.statements.Switch;
+import org.emftext.language.java.statements.SwitchCase;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.util.JavaUtil;
 import org.emftext.language.java.util.expressions.ExpressionUtil;
@@ -49,6 +51,8 @@ import org.emftext.language.java.variables.LocalVariable;
 
 public class EnumConstantDecider extends AbstractDecider {
 
+	private EObject reference = null;
+	
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof EnumConstant) {
 			NamedElement ne = (NamedElement) element;
@@ -58,7 +62,9 @@ public class EnumConstantDecider extends AbstractDecider {
 	}
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
-		if (container instanceof Switch) {
+		if (container instanceof Switch &&
+				reference.eContainmentFeature().equals(StatementsPackage.Literals.CONDITIONAL__CONDITION) &&
+				reference.eContainer() instanceof SwitchCase) {
 			Switch aSwitch = (Switch) container;
 			Type variableType = ExpressionUtil.getType(aSwitch.getVariable());
 			if (variableType instanceof Enumeration) {
@@ -127,6 +133,7 @@ public class EnumConstantDecider extends AbstractDecider {
 	
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference containingReference) {
+		reference = referenceContainer;
 		return referenceContainer instanceof Reference && !(referenceContainer instanceof MethodCall);
 	}
 
