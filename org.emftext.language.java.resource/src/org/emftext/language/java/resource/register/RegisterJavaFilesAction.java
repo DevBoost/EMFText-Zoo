@@ -38,6 +38,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.emftext.language.java.JavaClasspath;
 
+// TODO jjohannes: add Javadoc
 public class RegisterJavaFilesAction implements IObjectActionDelegate {
 
 	private ISelection selection;
