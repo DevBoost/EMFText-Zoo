@@ -26,6 +26,7 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.classifiers.Interface;
 import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.literals.Self;
@@ -47,6 +48,11 @@ import org.emftext.language.java.util.types.TypeUtil;
 public class ModifiableUtil {
 
 	public static boolean isStatic(AnnotableAndModifiable _this) {
+		//all members of an interface as static by default
+		if (_this.eContainer() instanceof Interface) {
+			return true;
+		}
+		
 		for(AnnotationInstanceOrModifier modifier : _this.getAnnotationsAndModifiers()) {
 			if(modifier instanceof Static) {
 				return true;
@@ -56,6 +62,11 @@ public class ModifiableUtil {
 	}
 
 	public static boolean isHidden(AnnotableAndModifiable _this, EObject context) {
+		//all members of an interface are public by default
+		if (_this.eContainer() instanceof Interface) {
+			return false;
+		}
+		
 		if(context.eIsProxy()) {
 			context = (Commentable) EcoreUtil.resolve(context, _this);
 		}
