@@ -92,7 +92,10 @@ public class TypeParameterUtil {
 		
 	}
 	
-	// TODO jjohannes: add Javadoc
+	/**
+	 * A temporal create classifier that combines all type restrictions
+	 * of one type parameter.
+	 */
 	public static class TemporalCompositeClassImpl extends ClassifierImpl {
 		
 		private TypeParameter creator;

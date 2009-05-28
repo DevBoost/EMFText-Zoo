@@ -14,7 +14,6 @@ public class Casting {
 		try {
 			((Casting[]) d)[0].clone();
 		} catch (CloneNotSupportedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		c = (Casting) d[0];

@@ -30,7 +30,9 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.util.JavaUtil;
 
-//TODO jjohannes: add Javadoc
+/**
+ * A decider that looks for type parameters.
+ */
 public class TypeParameterDecider extends AbstractDecider {
 
 	public boolean isPossibleTarget(String id, EObject element) {

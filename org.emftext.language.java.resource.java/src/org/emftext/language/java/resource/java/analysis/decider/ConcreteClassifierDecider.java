@@ -57,7 +57,9 @@ import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.containers.JavaRootUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 
-//TODO jjohannes: add Javadoc
+/**
+ * A decider that looks for concrete classifiers.
+ */
 public class ConcreteClassifierDecider extends AbstractDecider {
 
 	protected Resource resource;
@@ -68,6 +70,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	
 	private EObject reference = null;
 	
+	/**
+	 * @return true for statements lists
+	 */
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 
 		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
@@ -79,6 +84,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		return false;
 	}
 
+	/**
+	 * @return inner classifiers (also of super classes) and imported classifiers
+	 */
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		EList<EObject> resultList = new BasicEList<EObject>();
 		
@@ -227,6 +235,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}
 	}
 	
+	/**
+	 * @return true if the element is a concrete classifier with the correct name
+	 */
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
@@ -257,6 +268,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		return false;
 	}
 
+	/**
+	 * @return true for classifier references and references that are not method calls
+	 */
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference crossReference) {
 		

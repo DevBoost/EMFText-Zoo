@@ -32,7 +32,7 @@ public class ReferenceToInheritedMethodTest extends AbstractResolverTestCase {
 	
 	@Test
 	public void testReferencing() throws Exception {
-		// TODO jjohannes: fix this test cases and enabled them afterwards
+		// TODO fix
 		//testReferencing("MethodCallsWithoutInheritance");
 		//testReferencing("ReferenceToInheritedMethod");
 	}

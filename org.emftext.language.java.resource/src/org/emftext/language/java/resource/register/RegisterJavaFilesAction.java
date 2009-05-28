@@ -38,7 +38,10 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.emftext.language.java.JavaClasspath;
 
-// TODO jjohannes: add Javadoc
+/**
+ * This action registers all <code>java</code>, <code>class</code> and <code>jar</code> files
+ * contained in the given selection in the global JaMoPP Java classpath (see <code>JavaClasspath</code>).
+ */
 public class RegisterJavaFilesAction implements IObjectActionDelegate {
 
 	private ISelection selection;

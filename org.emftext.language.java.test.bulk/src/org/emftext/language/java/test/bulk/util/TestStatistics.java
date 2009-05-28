@@ -68,7 +68,6 @@ public class TestStatistics extends GiganticTest {
 	@SuppressWarnings("deprecation")
 	private void handle(URI next) throws IOException {
 		InputStream is = new ExtensibleURIConverterImpl().createInputStream(next);
-		// TODO Auto-generated method stub
 		InputStreamReader inr = new InputStreamReader(new BufferedInputStream(is, 1024 * 1024));
 		int read = -1;
 		StringBuilder content = new StringBuilder();

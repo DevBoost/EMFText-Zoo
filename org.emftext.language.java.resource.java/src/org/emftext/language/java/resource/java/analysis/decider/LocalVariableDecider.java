@@ -37,7 +37,9 @@ import org.emftext.language.java.variables.AdditionalLocalVariable;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.VariablesPackage;
 
-//TODO jjohannes: add Javadoc
+/**
+ * A decider that looks for local variable declarations.
+ */
 public class LocalVariableDecider extends AbstractDecider {
 
 	public boolean continueAfterReference() {

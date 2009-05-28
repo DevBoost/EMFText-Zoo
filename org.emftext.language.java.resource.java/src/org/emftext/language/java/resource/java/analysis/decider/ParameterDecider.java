@@ -30,7 +30,9 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.util.JavaUtil;
 
-//TODO jjohannes: add Javadoc
+/**
+ * A decider that looks for parameters.
+ */
 public class ParameterDecider extends AbstractDecider {
 
 	public boolean continueAfterReference() {

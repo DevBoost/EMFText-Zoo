@@ -33,7 +33,11 @@ import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.util.JavaUtil;
 
-//TODO jjohannes: add Javadoc
+/**
+ * A decider that assumes that a package is referenced if the context of the reference
+ * allows for a package reference at that position. The decider creates a package 
+ * element as additional candidate in that case.
+ */
 public class PackageDecider extends AbstractDecider {
 	
 	public boolean canFindTargetsFor(EObject referenceContainer,

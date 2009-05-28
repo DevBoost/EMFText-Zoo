@@ -27,7 +27,9 @@ import org.emftext.language.java.statements.JumpLabel;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.util.JavaUtil;
 
-//TODO jjohannes: add Javadoc
+/**
+ * A decider that looks for jump labels declared in a classifier.
+ */
 public class JumpLabelDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,
