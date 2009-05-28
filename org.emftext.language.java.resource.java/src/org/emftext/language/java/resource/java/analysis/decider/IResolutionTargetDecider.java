@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EReference;
  * is the target. A decider can also influence the traversal itself at certain points
  * to adjust the scoping rules for its needs. A decider can maintain a state for one traversal
  * process.
- *
  */
 public interface IResolutionTargetDecider {
 	

@@ -23,6 +23,7 @@ package org.emftext.language.java.resource.java.analysis.decider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+// TODO jjohannes: add Javadoc
 public abstract class AbstractDecider implements IResolutionTargetDecider {
 
 	protected boolean active = true;

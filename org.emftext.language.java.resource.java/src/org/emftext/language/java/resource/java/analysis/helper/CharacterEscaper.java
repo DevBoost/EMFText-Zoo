@@ -20,6 +20,11 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis.helper;
 
+/**
+ * A CharacterEscaper can be used to escape and unescape special characters
+ * in Java strings and character literals. Among these special characters are
+ * tabs, single and double quotes, line breaks and backslashes.
+ */
 public class CharacterEscaper {
 
 	private static final char BACKSLASH = '\\';

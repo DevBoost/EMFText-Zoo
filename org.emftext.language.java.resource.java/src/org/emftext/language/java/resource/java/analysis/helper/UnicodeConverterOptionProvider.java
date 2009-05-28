@@ -26,7 +26,11 @@ import java.util.Map;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 
-public class UnicodeConverterOption implements IOptionProvider {
+/**
+ * Add the UnicodeConverterProvider to the list of input stream pre-processor
+ * providers.
+ */
+public class UnicodeConverterOptionProvider implements IOptionProvider {
 	
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();

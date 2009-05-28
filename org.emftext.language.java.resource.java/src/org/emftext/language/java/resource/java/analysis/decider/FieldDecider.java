@@ -50,6 +50,7 @@ import org.emftext.language.java.util.classifiers.ClassifierUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
 
+//TODO jjohannes: add Javadoc
 public class FieldDecider extends AbstractDecider {
 
 	private Field standardArrayLengthField = null;

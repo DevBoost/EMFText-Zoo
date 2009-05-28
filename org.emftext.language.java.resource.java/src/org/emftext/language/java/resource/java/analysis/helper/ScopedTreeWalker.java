@@ -36,7 +36,6 @@ import org.emftext.language.java.resource.java.analysis.decider.IResolutionTarge
  * It starts at the point of the reference, walking <i>up</i> the tree but visiting, for each step up,
  * the children of the new parent. On each visited element it applies a set of deciders with which 
  * it is initialized.
- * 
  */
 public class ScopedTreeWalker {
 	

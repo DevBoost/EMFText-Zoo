@@ -35,7 +35,6 @@ import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 /**
  * To resolve annotation attributes.
- *
  */
 public class InterfaceMethodDecider extends AbstractDecider {
 

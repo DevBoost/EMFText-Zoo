@@ -42,6 +42,7 @@ import org.emftext.language.java.util.imports.ImportUtil;
 import org.emftext.language.java.util.members.MethodUtil;
 import org.emftext.language.java.util.modifiers.ModifiableUtil;
 
+//TODO jjohannes: add Javadoc
 public class MethodDecider extends AbstractDecider {
 
 	protected MethodCall methodCall = null;

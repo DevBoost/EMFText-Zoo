@@ -57,6 +57,7 @@ import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
 import org.emftext.language.java.util.containers.JavaRootUtil;
 import org.emftext.language.java.util.imports.ImportUtil;
 
+//TODO jjohannes: add Javadoc
 public class ConcreteClassifierDecider extends AbstractDecider {
 
 	protected Resource resource;

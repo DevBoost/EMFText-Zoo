@@ -49,6 +49,7 @@ import org.emftext.language.java.util.modifiers.ModifiableUtil;
 import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.language.java.variables.LocalVariable;
 
+//TODO jjohannes: add Javadoc
 public class EnumConstantDecider extends AbstractDecider {
 
 	private EObject reference = null;

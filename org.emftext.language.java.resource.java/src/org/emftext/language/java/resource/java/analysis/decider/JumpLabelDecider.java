@@ -27,6 +27,7 @@ import org.emftext.language.java.statements.JumpLabel;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.util.JavaUtil;
 
+//TODO jjohannes: add Javadoc
 public class JumpLabelDecider extends AbstractDecider {
 
 	public boolean canFindTargetsFor(EObject referenceContainer,

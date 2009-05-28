@@ -25,7 +25,13 @@ import java.io.InputStream;
 import org.emftext.runtime.InputStreamProcessor;
 import org.emftext.runtime.IInputStreamProcessorProvider;
 
+/**
+ * Provides the instances of the UnicodeConverter class to be used when
+ * reading Java source files. The UnicodeConverter convert Unicode escape
+ * sequences to real characters.
+ */
 public class UnicodeConverterProvider implements IInputStreamProcessorProvider {
+	
 	public InputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
 		return new UnicodeConverter(inputStream);
 	}

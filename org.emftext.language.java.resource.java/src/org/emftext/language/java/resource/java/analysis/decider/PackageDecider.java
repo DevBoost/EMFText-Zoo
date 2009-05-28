@@ -33,6 +33,7 @@ import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.util.JavaUtil;
 
+//TODO jjohannes: add Javadoc
 public class PackageDecider extends AbstractDecider {
 	
 	public boolean canFindTargetsFor(EObject referenceContainer,

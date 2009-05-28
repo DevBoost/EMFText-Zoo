@@ -32,9 +32,10 @@ import org.emftext.runtime.resource.ITextResource;
 
 /**
  * Post processor that performs 
- * <i>cast repair</i> and 
+ * <i>cast repair</i>,
+ * <i>expression simplification</i> and 
  * <i>java model completion</i>
- * on a resource after parsing.
+ * on a resource after parsing using the JavaModelRepairer.
  */
 public class JavaPostProcessor implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
 	
@@ -45,7 +46,7 @@ public class JavaPostProcessor implements IOptionProvider, IResourcePostProcesso
 	}
 
 	public void process(ITextResource resource) {
-		JavaModelRepair.repair(resource);
+		JavaModelRepairer.repair(resource);
 		JavaModelCompletion.complete(resource);
 	}
 

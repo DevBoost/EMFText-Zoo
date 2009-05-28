@@ -20,6 +20,9 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis.helper;
 
+/**
+ * Some string constants that appear in Java number literals.
+ */
 public class LiteralConstants {
 	public static final String HEX_PREFIX = "0x";
 	public static final String OCT_PREFIX = "0";

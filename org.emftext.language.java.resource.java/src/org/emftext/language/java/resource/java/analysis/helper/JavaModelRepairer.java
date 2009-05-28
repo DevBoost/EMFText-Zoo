@@ -50,7 +50,14 @@ import org.emftext.language.java.types.TypesPackage;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
 import org.emftext.runtime.resource.ITextResource;
 
-public class JavaModelRepair {
+/**
+ * The JavaModelRepairer can be used to fix part of Java models that
+ * are incorrectly create by the Java parser. This is mostly due to 
+ * language features which are not context free, but the JavaModelRepairer
+ * also simplifies deeply nested expression trees caused by the right 
+ * recursive structure of the Java grammar.
+ */
+public class JavaModelRepairer {
 
 	/**
 	 * Modifies the model of the given resource by introducing 
