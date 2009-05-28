@@ -59,7 +59,10 @@ public class ResolvingTest extends TestCase {
 	
 	private static final String INPUT_FOLDER = "input" + File.separator + "resolving_new";
 
-	public static class IgnoreSVNFilter implements FileFilter {
+	/**
+	 * A FileFilter that does not accept SVN metadata directories.
+	 */
+	private static class IgnoreSVNFilter implements FileFilter {
 
 		public boolean accept(File file) {
 			if (file.getName().equals(".svn")) {
@@ -82,7 +85,11 @@ public class ResolvingTest extends TestCase {
 		return suite;
 	}
 
-	public static class DirectoryTest extends AbstractJavaParserTestCase {
+	/**
+	 * A test that is instantiated for a single directory. It collects all
+	 * the files in the directory to build a classpath.
+	 */
+	private static class DirectoryTest extends AbstractJavaParserTestCase {
 
 		private File directory;
 

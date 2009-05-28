@@ -106,7 +106,13 @@ import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 import org.emftext.runtime.resource.ITokenResolveResult;
 import org.emftext.runtime.resource.impl.TokenResolveResult;
 
-
+/**
+ * An extension of the JDT ASTMatcher that prints information
+ * whenever the matching of two ASTs fails. In addition some
+ * normalizations are applied to number literals to removed
+ * redundant characters that can cause comparison failures
+ * even though the numbers are the same.
+ */
 public class TalkativeASTMatcher extends ASTMatcher {
 
 	public TalkativeASTMatcher(boolean b) {

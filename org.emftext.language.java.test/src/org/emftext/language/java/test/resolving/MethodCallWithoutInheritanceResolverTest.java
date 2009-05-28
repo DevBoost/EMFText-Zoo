@@ -28,6 +28,9 @@ import org.emftext.language.java.statements.FeatureStatement;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * A test for resolving method calls to the respective method.
+ */
 public class MethodCallWithoutInheritanceResolverTest extends AbstractResolverTestCase {
 	
 	@Before

@@ -31,6 +31,10 @@ import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.JavaClass;
 import org.eclipse.jdt.internal.compiler.ast.ASTNode;
 
+/**
+ * Tests whether the BCEL library correctly reads some problematic
+ * class files.
+ */
 public class BCELTest extends TestCase {
 
 	public void testParsingOfDuplicateFinalStaticFields() {

@@ -27,6 +27,9 @@ import org.emftext.runtime.resource.ITokenResolveResult;
 import org.emftext.runtime.resource.impl.TokenResolveResult;
 import org.junit.Test;
 
+/**
+ * Tests the JavaSTRING_LITERALTokenResolver class.
+ */
 public class JavaSTRING_LITERALTokenResolverTest {
 
 	@Test

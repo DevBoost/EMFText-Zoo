@@ -25,6 +25,9 @@ import java.io.IOException;
 import org.eclipse.jface.text.BadLocationException;
 import org.junit.Test;
 
+/**
+ * A test for resolving method calls to the respective inherited method.
+ */
 public class ReferenceToInheritedMethodTest extends AbstractResolverTestCase {
 	
 	@Test

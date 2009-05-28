@@ -27,7 +27,9 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.FeatureStatement;
 import org.junit.Test;
 
-
+/**
+ * A test for resolving method calls to the respective method.
+ */
 public class MethodCallResolverTest extends AbstractResolverTestCase {
 
 	@Test

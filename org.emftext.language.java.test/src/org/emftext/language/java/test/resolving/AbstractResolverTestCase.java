@@ -34,6 +34,11 @@ import org.emftext.language.java.statements.FeatureStatement;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 import org.emftext.language.java.variables.LocalVariable;
 
+/**
+ * An abstract super class for all test cases that check reference resolving.
+ * It provides some assert methods that can be used to check the correctness
+ * of reference targets.
+ */
 public abstract class AbstractResolverTestCase extends AbstractJavaParserTestCase {
 
 	protected static final String TEST_INPUT_FOLDER_RESOLVING = "input" + File.separator + "resolving" + File.separator;

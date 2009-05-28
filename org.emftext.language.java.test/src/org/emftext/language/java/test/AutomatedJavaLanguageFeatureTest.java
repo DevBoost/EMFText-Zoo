@@ -30,7 +30,10 @@ import junit.framework.TestSuite;
 import org.eclipse.core.runtime.CoreException;
 import org.emftext.language.java.test.util.ThreadedTestSuite;
 
-
+/**
+ * A test that read all Java files from the input directory and parses and
+ * prints them.
+ */
 public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	
 	protected static final String TEST_INPUT_FOLDER_NAME = "input";

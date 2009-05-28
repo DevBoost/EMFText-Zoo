@@ -22,6 +22,12 @@ package org.emftext.language.java.test;
 
 import org.junit.Test;
 
+/**
+ * A test that can be used to execute the test methods from the
+ * JavaLanguageFeatureTest in a specified order. This is useful
+ * when a particular test method fails and one wants to run this
+ * one first.
+ */
 public class OrderedJavaLanguageFeatureTest {
 
 	@Test

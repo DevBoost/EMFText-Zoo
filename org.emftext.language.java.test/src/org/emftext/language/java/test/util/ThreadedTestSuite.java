@@ -11,6 +11,11 @@ import junit.framework.Test;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
+/**
+ * A custom TestSuite that can be used to run test in parallel. It is 
+ * configurable by the number of threads to be used and the timeout after
+ * which thread are interrupted.
+ */
 public final class ThreadedTestSuite extends TestSuite {
 	
 	private List<Thread> threads = new ArrayList<Thread>();

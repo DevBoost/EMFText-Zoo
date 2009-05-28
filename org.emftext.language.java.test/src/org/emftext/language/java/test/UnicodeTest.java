@@ -24,6 +24,10 @@ import java.io.File;
 
 import org.junit.Test;
 
+/**
+ * A separate test case for the input files that contain Unicode escape
+ * sequences.
+ */
 public class UnicodeTest extends AbstractJavaParserTestCase {
 
 	@Test
