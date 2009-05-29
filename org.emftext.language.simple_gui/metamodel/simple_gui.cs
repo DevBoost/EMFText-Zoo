@@ -1,5 +1,5 @@
 SYNTAXDEF simplegui
-FOR <http://www.emftext.org/simple_gui>
+FOR <http://www.emftext.org/language/simple_gui>
 START Frame
 
 RULES {

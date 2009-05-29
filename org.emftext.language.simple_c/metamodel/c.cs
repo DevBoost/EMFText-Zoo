@@ -1,5 +1,5 @@
 SYNTAXDEF c
-FOR <http://www.emftext.org/simple_c>
+FOR <http://www.emftext.org/language/simple_c>
 START CompilationUnit
 
 OPTIONS {
