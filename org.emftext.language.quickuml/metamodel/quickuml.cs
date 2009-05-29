@@ -29,4 +29,6 @@ RULES {
 	Property ::= "a" name[] ":" type[] (lower[] ".." upper[])?; 
 
 	Parameter ::= "p" name[] ":" type[];
+	
+	Association ::= "a" name[] "{" ownedEnd ownedEnd "}";
 }
