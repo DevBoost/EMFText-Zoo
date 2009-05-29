@@ -28,25 +28,27 @@ TOKENS {
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
 	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
 	DEFINE T_SERIALIZABLE $'serializable'$;
-	DEFINE CONTAINMENT $'containment'$;
+	DEFINE T_CONTAINMENT $'containment'$;
 }
 
 TOKENSTYLES {
-	"abstract" COLOR #000000, BOLD;
-	"derived" COLOR #000000, BOLD;
-	"volatile" COLOR #000000, BOLD;
-	"unique" COLOR #000000, BOLD;
-	"unsettable" COLOR #000000, BOLD;
-	"changeable" COLOR #000000, BOLD;
-	"transient" COLOR #000000, BOLD;
-	"resolveProxies" COLOR #000000, BOLD;
-	"interface" COLOR #000000, BOLD;
-	"class" COLOR #000000, BOLD;
-	"containment" COLOR #000000, BOLD;
-	"iD" COLOR #000000, BOLD;
-	"serializable" COLOR #000000, BOLD;
-	"'//'(~('\n'|'\r'|'\uffff'))*"  COLOR #00bb00, BOLD;
-	"'/*'.*'*/'"  COLOR #00bb00, BOLD;
+	"TEXT" COLOR #000000;
+	
+	"T_ABSTRACT" COLOR #7F0055, BOLD;
+	"T_DERIVED" COLOR #7F0055, BOLD;
+	"T_VOLATILE" COLOR #7F0055, BOLD;
+	"T_UNIQUE" COLOR #7F0055, BOLD;
+	"T_ORDERED" COLOR #7F0055, BOLD;
+	"T_UNSETTABLE" COLOR #7F0055, BOLD;
+	"T_CHANGEABLE" COLOR #7F0055, BOLD;
+	"T_TRANSIENT" COLOR #7F0055, BOLD;
+	"T_ID" COLOR #7F0055, BOLD;
+	"T_RESOLVEPROXIES" COLOR #7F0055, BOLD;
+	"T_INTERFACE_OR_CLASS" COLOR #7F0055, BOLD;
+	"T_SERIALIZABLE" COLOR #7F0055, BOLD;
+	"T_CONTAINMENT" COLOR #7F0055, BOLD;
+	"SL_COMMENT"  COLOR #00bb00;
+	"ML_COMMENT"  COLOR #00bb00;
 }
  
 RULES {
@@ -66,7 +68,7 @@ RULES {
 	
 	EParameter ::= (ordered[T_ORDERED]|unique[T_UNIQUE] #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
-	EReference ::= !2 ( containment[CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
+	EReference ::= !2 ( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
 							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
 							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|resolveProxies[T_RESOLVEPROXIES] #1)* 
 					"reference" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"']) ?
