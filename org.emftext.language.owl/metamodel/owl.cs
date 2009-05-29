@@ -136,8 +136,8 @@ RULES{
 	ObjectPropertyReference ::= inverse[INVERSE]? objectProperty[IRI];
 
 	// DataRanges
-	DataRange ::= dataConjunctions ("or" dataConjunctions)*;
-	DataConjunction ::= dataPrimaries ("and" dataPrimaries)*; 
+	DataRange ::= dataConjunctions:DataConjunction ("or" dataConjunctions:DataConjunction)*;
+	DataConjunction ::= dataPrimaries:DataPrimary ("and" dataPrimaries:DataPrimary)*; 
 	DatatypeReference ::= not[NOT]? theDatatype[IRI] ("[" facets ("," facets)* "]")?;
 	Facet ::= facetType[FACETKINDS] literal;
 	NestedDataRange ::= not[NOT]? "(" dataRange ")";
