@@ -81,7 +81,7 @@ RULES {
 		// TODO add subsetOf, derivedFrom
 		
 	Operation ::= 
-		"operation" name[] "(" parameters ("," parameters)* ")" (":" type[]) ";";
+		"operation" name[] "(" (parameters ("," parameters)*)? ")" (":" type[]) ";";
 		
 	Parameter ::=
 		name[] ":" type[];
