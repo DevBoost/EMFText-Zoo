@@ -46,6 +46,7 @@ TOKENSTYLES {
 	"operation" COLOR #7f0055, BOLD;
 	"enumeration" COLOR #7f0055, BOLD;
 	"literal" COLOR #7f0055, BOLD;
+	"oppositeOf" COLOR #7f0055, BOLD;
 }
 
 RULES {
@@ -67,9 +68,9 @@ RULES {
 		isUnique[T_UNIQUE])*
 		":"
 		type[]
+		("oppositeOf" opposite[])?
 		";";
 		// TODO add subsetOf, derivedFrom
-		// TODO add opposite
 		
 	Attribute ::= 
 		"attribute" name[] ("[" (lower[CARDINALITY] "-")? upper[CARDINALITY] "]")? 
