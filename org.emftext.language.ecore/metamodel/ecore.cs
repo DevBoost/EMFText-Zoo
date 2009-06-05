@@ -52,29 +52,28 @@ TOKENSTYLES {
 }
  
 RULES {
-	EPackage ::= "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['"', '"'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
+	EPackage ::= (eAnnotations)* "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['"', '"'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
 	
-	EClass ::= !1(abstract[T_ABSTRACT] #1)? interface[T_INTERFACE_OR_CLASS] #1 
+	EClass ::=  !1 (eAnnotations)* (abstract[T_ABSTRACT] #1)? interface[T_INTERFACE_OR_CLASS] #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 
 				name[] 
 				(#1 instanceTypeName['"','"'])? ("extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
-				("[" (eAnnotations)* "]")?
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
-	EAttribute ::= !2 ( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
+	EAttribute ::= !2 (eAnnotations)* ( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
 					unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID] #1)* 
 				"attribute" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"'])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
-	EParameter ::= (ordered[T_ORDERED]|unique[T_UNIQUE] #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
+	EParameter ::= (eAnnotations)* (ordered[T_ORDERED]|unique[T_UNIQUE] #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
-	EReference ::= !2 ( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
+	EReference ::= !2 (eAnnotations)* ( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
 							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
 							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|resolveProxies[T_RESOLVEPROXIES] #1)* 
 					"reference" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"']) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
-	EOperation ::= !2 "operation" #1 
+	EOperation ::= !2 (eAnnotations)* "operation" #1 
 				( ordered[T_ORDERED]|unique[T_UNIQUE] #1)* 
 				("void" | eType[]) 
 				( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 
@@ -83,22 +82,22 @@ RULES {
 				"(" (eParameters ("," #1 eParameters)* )? ")"
 				("throws" #1 eExceptions[] ("," #1 eExceptions[])*)? ";";
 	
-	EEnum ::=  (serializable[T_SERIALIZABLE])? "enum" #1 name[] instanceTypeName['"','"']?
+	EEnum ::=  (eAnnotations)* (serializable[T_SERIALIZABLE])? "enum" #1 name[] instanceTypeName['"','"']?
 					#1 "{" (eLiterals)* !0 "}" 
 					!0 ; 
 
-	EEnumLiteral ::= !2 value[] #1 ":" #1 name[] #1 "=" #1 literal['"','"']  ";";
+	EEnumLiteral ::= !2 (eAnnotations)* value[] #1 ":" #1 name[] #1 "=" #1 literal['"','"']  ";";
 
 
-	EAnnotation ::= !3 #0 source['"','"'] ("{" details "}")*;
+	EAnnotation ::= !3 #0 "@" source['"','"'] ("(" details ("," details)* ")")?;
 	
-	EStringToStringMapEntry ::= key['"','"'] ":" value['"','"'];
+	EStringToStringMapEntry ::= key['"','"'] "=" value['"','"'];
 	
-	EDataType ::= (serializable[T_SERIALIZABLE])? "datatype" #1 name[] #1 instanceTypeName['"','"'];
+	EDataType ::= (eAnnotations)* (serializable[T_SERIALIZABLE])? "datatype" #1 name[] #1 instanceTypeName['"','"'];
 	
-	ETypeParameter ::= name[];
+	ETypeParameter ::= (eAnnotations)* name[];
 	
-	EGenericType ::= 
+	EGenericType ::=
 		"typed"  
 		("<" (eTypeParameter[] | "?" "extends" eUpperBound | "?" "super" eLowerBound) ">")?
 		eClassifier[] 
