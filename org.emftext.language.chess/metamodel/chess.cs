@@ -5,6 +5,7 @@ START ChessGame
 OPTIONS {
 	reloadGeneratorModel = "true";
 	usePredefinedTokens = "false";
+	overrideManifest = "false";
 }
 
 TOKENS {

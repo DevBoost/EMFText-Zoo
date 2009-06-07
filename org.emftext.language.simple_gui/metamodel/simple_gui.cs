@@ -2,6 +2,10 @@ SYNTAXDEF simplegui
 FOR <http://www.emftext.org/language/simple_gui>
 START Frame
 
+OPTIONS {
+	overrideManifest = "false";
+}
+
 RULES {
 	Frame ::= "F" "(" name[] ")" "contains" children* ";";
 	

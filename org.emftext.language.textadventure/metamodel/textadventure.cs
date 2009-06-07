@@ -5,6 +5,7 @@ START Adventure
 OPTIONS {
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
+	overrideManifest = "false";
 }
 
 TOKENS {

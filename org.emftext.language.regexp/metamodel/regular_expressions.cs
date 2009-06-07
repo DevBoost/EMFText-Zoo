@@ -5,6 +5,7 @@ START RegularExpression
 OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
+	overrideManifest = "false";
 }
 
 TOKENS {

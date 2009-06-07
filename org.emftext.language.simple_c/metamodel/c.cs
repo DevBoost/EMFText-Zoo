@@ -5,6 +5,7 @@ START CompilationUnit
 OPTIONS {
 	tokenspace = "1";
 	autofixSimpleLeftrecursion = "false";
+	overrideManifest = "false";
 }
 
 TOKENS {

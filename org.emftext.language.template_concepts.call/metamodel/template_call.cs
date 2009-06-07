@@ -5,6 +5,7 @@ START TemplateCall
 OPTIONS {
 	usePredefinedTokens = "false";
 	generateCodeFromGeneratorModel = "true";
+	overrideManifest = "false";
 }
 
 TOKENS {

@@ -4,6 +4,7 @@ START     Additive
 
 OPTIONS {
 	forceEOF = "true";
+	overrideManifest = "false";
 }
 
 TOKENS {
