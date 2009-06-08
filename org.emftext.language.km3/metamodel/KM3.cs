@@ -52,44 +52,44 @@ TOKENSTYLES {
 RULES {
 	Metamodel ::= contents*;
 	
-	Package   ::= "package" name[] "{" contents* "}";
+	Package   ::= "package" (name[] | name['"','"']) "{" contents* "}";
 	
 	Class     ::= 
-		(isAbstract[T_ABSTRACT])? "class" name[] ("extends" supertypes[] ("," supertypes[])*)?
+		(isAbstract[T_ABSTRACT])? "class" (name[] | name['"','"']) ("extends" (supertypes[] | supertypes['"','"']) ("," (supertypes[] | supertypes['"','"']))*)?
 		"{" 
 			structuralFeatures* 
 			operations* 
 		"}";
 		
 	Reference ::= 
-		"reference" name[] ("[" (lower[CARDINALITY] "-")? upper[CARDINALITY] "]")?
+		"reference" (name[] | name['"','"']) ("[" (lower[CARDINALITY] "-")? upper[CARDINALITY] "]")?
 		(isContainer[T_CONTAINER] | 
 		isOrdered[T_ORDERED] |
 		isUnique[T_UNIQUE])*
 		":"
-		type[]
-		("oppositeOf" opposite[])?
+		(type[] | type['"','"'])
+		("oppositeOf" (opposite[] | opposite['"','"']))?
 		";";
 		// TODO add subsetOf, derivedFrom
 		
 	Attribute ::= 
-		"attribute" name[] ("[" (lower[CARDINALITY] "-")? upper[CARDINALITY] "]")? 
+		"attribute" (name[] | name['"','"']) ("[" (lower[CARDINALITY] "-")? upper[CARDINALITY] "]")? 
 		(isOrdered[T_ORDERED] | 
 		isUnique[T_UNIQUE])*
 		":" 
-		type[]
+		(type[] | type['"','"'])
 		";";
 		// TODO add subsetOf, derivedFrom
 		
 	Operation ::= 
-		"operation" name[] "(" (parameters ("," parameters)*)? ")" (":" type[]) ";";
+		"operation" (name[] | name['"','"']) "(" (parameters ("," parameters)*)? ")" (":" (type[] | type['"','"'])) ";";
 		
 	Parameter ::=
-		name[] ":" type[];
+		(name[] | name['"','"']) ":" (type[] | type['"','"']);
 
-	DataType ::= "datatype" name[] ";";
+	DataType ::= "datatype" (name[] | name['"','"']) ";";
 	
-	Enumeration ::= "enumeration" name[] "{" literals* "}";
+	Enumeration ::= "enumeration" (name[] | name['"','"']) "{" literals* "}";
 	
-	EnumLiteral ::= "literal" name[] ";";	
+	EnumLiteral ::= "literal" (name[] | name['"','"']) ";";	
 }
