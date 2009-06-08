@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <?gmfgen generated="true"?>
+      <fileTypes
+         type="text"
+         extension="valueflow_diagram">
+      </fileTypes>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <?gmfgen generated="true"?>
+      <parser
+         type="valueflow_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <?gmfgen generated="true"?>
+      <editor
+         id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/ValueflowDiagramFile.gif"
+         extensions="valueflow_diagram"
+         default="true"
+         class="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditor"
+         matchingStrategy="org.emftext.language.valueflow.diagram.part.ValueflowMatchingStrategy"
+         contributorClass="org.emftext.language.valueflow.diagram.part.ValueflowDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="org.emftext.language.valueflow.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ValueflowDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="org.emftext.language.valueflow.diagram.part.ValueflowCreationWizard"
+  	     id="org.emftext.language.valueflow.diagram.part.ValueflowCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            adaptable="false"
+            id="org.emftext.language.valueflow.diagram.CreateShortcut"
+            objectClass="org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart">
+         <action
+               class="org.emftext.language.valueflow.diagram.part.ValueflowCreateShortcutAction"
+               enablesFor="1"
+               id="org.emftext.language.valueflow.diagram.CreateShortcutAction"
+               label="%createShortcutActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>                      
+      <objectContribution
+            adaptable="false"
+            id="org.emftext.language.valueflow.diagram.LoadResource"
+            objectClass="org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart">
+         <action
+               class="org.emftext.language.valueflow.diagram.part.ValueflowLoadResourceAction"
+               enablesFor="1"
+               id="org.emftext.language.valueflow.diagram.LoadResourceAction"
+               label="%loadResourceActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>           
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="org.emftext.language.valueflow.diagram.InitDiagram"
+            nameFilter="*.valueflow"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.emftext.language.valueflow.diagram.part.ValueflowInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.emftext.language.valueflow.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="ValueflowPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="ValueflowPresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="ValueflowPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="ValueflowRender">
+         <Priority name="Lowest"/>
+         <ViewId id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowContributionItemProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID">
+            <partAction menubarPath="/file/print" id="printPreviewAction"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.emftext.language.valueflow.diagram.providers.ValueflowValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowMarkerNavigationProvider">
+         <MarkerType name="org.emftext.language.valueflow.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Valueflow Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences">
+      <?gmfgen generated="true"?>
+      <initializer class="org.emftext.language.valueflow.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages">
+      <?gmfgen generated="true"?>
+      <page
+            id="org.emftext.language.valueflow.diagram.general"
+            name="%preference.page.title.org.emftext.language.valueflow.diagram.general"
+            class="org.emftext.language.valueflow.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.valueflow.diagram.appearance"
+            name="%preference.page.title.org.emftext.language.valueflow.diagram.appearance"
+            category="org.emftext.language.valueflow.diagram.general"
+            class="org.emftext.language.valueflow.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.valueflow.diagram.connections"
+            name="%preference.page.title.org.emftext.language.valueflow.diagram.connections"
+            category="org.emftext.language.valueflow.diagram.general"
+            class="org.emftext.language.valueflow.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.valueflow.diagram.printing"
+            name="%preference.page.title.org.emftext.language.valueflow.diagram.printing"
+            category="org.emftext.language.valueflow.diagram.general"
+            class="org.emftext.language.valueflow.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.valueflow.diagram.rulersAndGrid"
+            name="%preference.page.title.org.emftext.language.valueflow.diagram.rulersAndGrid"
+            category="org.emftext.language.valueflow.diagram.general"
+            class="org.emftext.language.valueflow.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+      <page
+            id="org.emftext.language.valueflow.diagram.pathmaps"
+            name="%preference.page.title.org.emftext.language.valueflow.diagram.pathmaps"
+            category="org.emftext.language.valueflow.diagram.general"
+            class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="org.emftext.language.valueflow.diagram"
+            labelProvider="org.emftext.language.valueflow.diagram.sheet.ValueflowSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="org.emftext.language.valueflow.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="org.emftext.language.valueflow.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="org.emftext.language.valueflow.diagram.sheet.ValueflowPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="org.emftext.language.valueflow.diagram.navigator.ValueflowAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <?gmfgen generated="true"?>
+      <viewProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Valueflow"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowEditPartProvider">
+         <Priority name="Lowest"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowModelingAssistantProvider">
+         <Priority name="Lowest"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
+      <?gmfgen generated="true"?>
+      <IconProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.emftext.language.valueflow.diagram.providers.ValueflowShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <metamodelType
+               id="org.emftext.language.valueflow.diagram.Model_79"
+               name="%metatype.name.Model_79"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Model"
+               edithelper="org.emftext.language.valueflow.diagram.edit.helpers.ModelEditHelper">
+            <param name="semanticHint" value="79"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <metamodelType
+               id="org.emftext.language.valueflow.diagram.Agent_1001"
+               name="%metatype.name.Agent_1001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Agent"
+               edithelper="org.emftext.language.valueflow.diagram.edit.helpers.AgentEditHelper">
+            <param name="semanticHint" value="1001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <metamodelType
+               id="org.emftext.language.valueflow.diagram.Initial_2001"
+               name="%metatype.name.Initial_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Initial"
+               edithelper="org.emftext.language.valueflow.diagram.edit.helpers.InitialEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <metamodelType
+               id="org.emftext.language.valueflow.diagram.GiveState_2002"
+               name="%metatype.name.GiveState_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GiveState"
+               edithelper="org.emftext.language.valueflow.diagram.edit.helpers.GiveStateEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <metamodelType
+               id="org.emftext.language.valueflow.diagram.TakeState_2003"
+               name="%metatype.name.TakeState_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="TakeState"
+               edithelper="org.emftext.language.valueflow.diagram.edit.helpers.TakeStateEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <specializationType
+               id="org.emftext.language.valueflow.diagram.StateNextState_3001"
+               name="%metatype.name.StateNextState_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="3001"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.emftext.org/language/valueflow">
+         <specializationType
+               id="org.emftext.language.valueflow.diagram.GiveStateGiveTo_3002"
+               name="%metatype.name.GiveStateGiveTo_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="3002"/>
+         </specializationType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="org.emftext.language.valueflow.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="org.emftext.language.valueflow.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="org.emftext.language.valueflow.diagram.TypeContext">
+         <elementType ref="org.emftext.language.valueflow.diagram.Model_79"/>
+         <elementType ref="org.emftext.language.valueflow.diagram.Agent_1001"/>
+         <elementType ref="org.emftext.language.valueflow.diagram.Initial_2001"/>
+         <elementType ref="org.emftext.language.valueflow.diagram.GiveState_2002"/>
+         <elementType ref="org.emftext.language.valueflow.diagram.TakeState_2003"/>
+         <elementType ref="org.emftext.language.valueflow.diagram.StateNextState_3001"/>
+         <elementType ref="org.emftext.language.valueflow.diagram.GiveStateGiveTo_3002"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.emftext.language.valueflow.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="org.emftext.language.valueflow.diagram"
+           properties="isURIEditorInput"
+           class="org.emftext.language.valueflow.diagram.part.ValueflowUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.emftext.language.valueflow.diagram.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="org.emftext.language.valueflow.diagram"
+           properties="isShortcut"
+           class="org.emftext.language.valueflow.diagram.part.ValueflowShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.emftext.language.valueflow.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="org.emftext.language.valueflow.diagram"
+           properties="isDomainModelElement"
+           class="org.emftext.language.valueflow.diagram.part.ValueflowDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="org.emftext.language.valueflow.diagram.resourceContent"/>
+			<contentExtension pattern="org.emftext.language.valueflow.diagram.domainResourceContent"/>
+            <contentExtension pattern="org.emftext.language.valueflow.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="org.emftext.language.valueflow.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="org.emftext.language.valueflow.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="org.emftext.language.valueflow.diagram.navigator.ValueflowNavigatorContentProvider" 
+            labelProvider="org.emftext.language.valueflow.diagram.navigator.ValueflowNavigatorLabelProvider"
+            icon="icons/obj16/ValueflowDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="valueflow_diagram"/>
+               </and>
+               <instanceof value="org.emftext.language.valueflow.diagram.navigator.ValueflowAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.emftext.language.valueflow.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="org.emftext.language.valueflow.diagram.navigator.ValueflowAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.emftext.language.valueflow.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="org.emftext.language.valueflow.diagram.navigatorSorter" 
+               class="org.emftext.language.valueflow.diagram.navigator.ValueflowNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="valueflow_diagram"/>
+                  </and>
+                  <instanceof value="org.emftext.language.valueflow.diagram.navigator.ValueflowAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="org.emftext.language.valueflow.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="org.emftext.language.valueflow.diagram.navigator.ValueflowDomainNavigatorContentProvider" 
+            labelProvider="org.emftext.language.valueflow.diagram.navigator.ValueflowDomainNavigatorLabelProvider"
+            icon="icons/obj16/ValueflowDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="valueflow"/>
+               </and>
+               <and>
+                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
+                  <test property="org.emftext.language.valueflow.diagram.isDomainModelElement"/>
+               </and>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <and>
+       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
+       	       <test property="org.emftext.language.valueflow.diagram.isDomainModelElement"/>
+       	    </and>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="org.emftext.language.valueflow.diagram.navigatorActionProvider"
+            class="org.emftext.language.valueflow.diagram.navigator.ValueflowNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="org.emftext.language.valueflow.diagram.navigator.ValueflowAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.emftext.language.valueflow.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="org.emftext.language.valueflow.diagram.navigatorLinkHelper"
+            class="org.emftext.language.valueflow.diagram.navigator.ValueflowNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="org.emftext.language.valueflow.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="org.emftext.language.valueflow.diagram.navigator.ValueflowAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="org.emftext.language.valueflow.diagram.part.ValueflowDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="org.emftext.language.valueflow.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="org.emftext.language.valueflow.diagram.updateDiagram"
+         contextId="org.emftext.language.valueflow.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+</plugin>
