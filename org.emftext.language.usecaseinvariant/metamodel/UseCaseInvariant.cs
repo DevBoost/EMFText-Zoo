@@ -5,6 +5,7 @@ START UseCaseModel
 OPTIONS {
 	reloadGeneratorModel = "true";
 	overridePluginXML = "false";
+	overrideManifest = "false";
 	tokenspace = "1";
 }
 

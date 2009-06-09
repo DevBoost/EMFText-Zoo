@@ -2,6 +2,11 @@ SYNTAXDEF valueflow
 FOR <http://www.emftext.org/language/valueflow>
 START Model
 
+OPTIONS {
+	tokenspace = "1";
+	overrideManifest = "false";
+}
+
 TOKENSTYLES {
 	"TEXT" COLOR #000000;
 }
