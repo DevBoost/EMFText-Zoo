@@ -6,6 +6,7 @@ OPTIONS {
  	resourcePluginID = "org.emftext.language.quickuml.resource.quml";
 	basePackage = "org.emftext.language.quickuml.resource.quml";
 	overrideManifest = "false";
+	tokenspace = "1";
 }
 
 TOKENSTYLES {

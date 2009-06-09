@@ -5,6 +5,7 @@ START     Additive
 OPTIONS {
 	forceEOF = "true";
 	overrideManifest = "false";
+	tokenspace = "1";
 }
 
 TOKENS {

@@ -7,6 +7,7 @@ OPTIONS {
 	memoize = "true";
 	reloadGeneratorModel = "true";
 	overrideManifest = "false";
+	tokenspace = "1";
 }
 
 RULES {

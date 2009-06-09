@@ -4,6 +4,7 @@ START Model
 
 OPTIONS {
 	usePredefinedTokens = "false";
+	tokenspace = "1";
 }
 
 TOKENS {

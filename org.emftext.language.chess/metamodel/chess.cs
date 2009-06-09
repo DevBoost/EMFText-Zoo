@@ -6,6 +6,7 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	usePredefinedTokens = "false";
 	overrideManifest = "false";
+	tokenspace = "0";
 }
 
 TOKENS {

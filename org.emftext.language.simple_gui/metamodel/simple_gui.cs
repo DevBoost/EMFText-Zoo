@@ -4,6 +4,7 @@ START Frame
 
 OPTIONS {
 	overrideManifest = "false";
+	tokenspace = "1";
 }
 
 RULES {

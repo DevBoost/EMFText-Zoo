@@ -7,6 +7,7 @@ OPTIONS {
 	overrideClasspath = "false";
 	overrideManifest = "false";
 	overrideProjectFile = "false";
+	tokenspace = "1";
 }
 
 TOKENSTYLES {

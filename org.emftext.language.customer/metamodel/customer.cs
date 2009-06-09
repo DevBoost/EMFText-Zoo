@@ -6,6 +6,7 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	overrideManifest = "false";
+	tokenspace = "1";
 }
 
 TOKENS {

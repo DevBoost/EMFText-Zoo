@@ -6,6 +6,7 @@ OPTIONS {
 	tokenspace = "1";
 	autofixSimpleLeftrecursion = "false";
 	overrideManifest = "false";
+	tokenspace = "1";
 }
 
 TOKENS {

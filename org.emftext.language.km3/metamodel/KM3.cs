@@ -10,6 +10,7 @@ OPTIONS {
 	resourcePluginID = "org.emftext.language.km3.resource.km3";
 	basePackage = "org.emftext.language.km3.resource.km3";
 	defaultTokenName ="NAME";
+	tokenspace = "1";
 }
 
 TOKENS {
