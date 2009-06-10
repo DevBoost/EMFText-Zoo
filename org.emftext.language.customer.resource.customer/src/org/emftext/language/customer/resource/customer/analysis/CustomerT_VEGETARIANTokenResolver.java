@@ -20,16 +20,28 @@
  ******************************************************************************/
 package org.emftext.language.customer.resource.customer.analysis;
 
+import org.emftext.language.customer.Customer;
+
 public class CustomerT_VEGETARIANTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
+	private static final String VEGETARIAN = "vegetarian";
+
 	@Override	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
-		return result;
+		Customer customer = (Customer) container;
+		if (customer.getIsVegetarian().isValue()) {
+			return VEGETARIAN;
+		} else {
+			return "";
+		}
 	}
 	
 	@Override	
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		super.resolve(lexem, feature, result);
+		if (VEGETARIAN.equals(lexem)) {
+			result.setResolvedToken(Boolean.TRUE);
+		} else {
+			result.setResolvedToken(Boolean.FALSE);
+		}
 	}
 }
