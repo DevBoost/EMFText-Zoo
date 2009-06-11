@@ -20,17 +20,24 @@
  ******************************************************************************/
 package org.emftext.language.ecore.resource.ecore.analysis;
 
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EOperation;
 import org.emftext.language.ecore.resource.ecore.analysis.helper.EMFTypesResolver;
 
 public class EOperationEExceptionsReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EOperation, org.eclipse.emf.ecore.EClassifier> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EClassifier element, org.eclipse.emf.ecore.EOperation container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+	private EcoreDefaultResolverDelegate<EOperation, EClassifier> delegate = new EcoreDefaultResolverDelegate<EOperation, EClassifier>();
+	
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EClassifier element, org.eclipse.emf.ecore.EOperation container, org.eclipse.emf.ecore.EReference reference) {
+		return delegate.deResolve(element, container, reference);
 	}
 	
-	@Override
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EOperation container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EOperation container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
 		new EMFTypesResolver().doResolve(identifier, container.eResource(), reference, position, resolveFuzzy, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

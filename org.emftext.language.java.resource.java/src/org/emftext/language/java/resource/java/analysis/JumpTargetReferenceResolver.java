@@ -22,6 +22,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
@@ -35,13 +36,11 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 public class JumpTargetReferenceResolver extends 
 	AbstractReferenceResolver<Jump, JumpLabel> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {
 		return JavaUtil.getName(element);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<JumpLabel> result) {
+	public void resolve(java.lang.String identifier, Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<JumpLabel> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = container;
@@ -55,5 +54,8 @@ public class JumpTargetReferenceResolver extends
 		if (target != null) {
 			result.addMapping(identifier, (JumpLabel) target);
 		}
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

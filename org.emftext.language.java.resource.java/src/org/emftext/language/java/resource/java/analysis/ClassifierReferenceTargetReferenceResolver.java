@@ -22,6 +22,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -52,8 +53,7 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 public class ClassifierReferenceTargetReferenceResolver extends 
 	AbstractReferenceResolver<ClassifierReference, Classifier> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (classifier instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) classifier;
 			if(concreteClassifier.getFullName() != null) {
@@ -62,8 +62,8 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		}
 		return JavaUtil.getName(classifier);
 	}	
-	@Override	
-	protected void doResolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Classifier> result) {
+
+	public void resolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Classifier> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = null;
@@ -198,6 +198,6 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		
 	}
 	
-
-	
+	public void setOptions(Map<?, ?> options) {
+	}
 }

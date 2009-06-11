@@ -22,6 +22,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -39,13 +40,11 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 public class AnnotationInstanceAnnotationReferenceResolver extends 
 	AbstractReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
 		return JavaUtil.getName(element);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance annotationInstance, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance annotationInstance, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		EObject startingPoint = annotationInstance;
 		EObject target =  null; 
@@ -87,5 +86,8 @@ public class AnnotationInstanceAnnotationReferenceResolver extends
 		}
 		
 		return null;
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

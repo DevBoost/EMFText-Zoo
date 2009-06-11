@@ -22,6 +22,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.classifiers.Classifier;
@@ -57,8 +58,7 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 public class ElementReferenceTargetReferenceResolver extends 
 	AbstractReferenceResolver<ElementReference, ReferenceableElement> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) element;
 			if(concreteClassifier.getFullName() != null) {
@@ -68,8 +68,7 @@ public class ElementReferenceTargetReferenceResolver extends
 		return JavaUtil.getName(element);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<ReferenceableElement> result) {
+	public void resolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<ReferenceableElement> result) {
 		EObject startingPoint = null;
 		EObject alternativeStartingPoint = null;
 		EObject target = null;
@@ -162,5 +161,8 @@ public class ElementReferenceTargetReferenceResolver extends
 		ScopedTreeWalker treeWalker = new ScopedTreeWalker(deciderList);
 		
 		return treeWalker.walk(startingPoint, identifier, container, reference);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

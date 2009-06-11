@@ -22,6 +22,7 @@ package org.emftext.language.java.resource.java.analysis;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.annotations.AnnotationAttributeSetting;
@@ -36,13 +37,11 @@ import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 public class AnnotationAttributeSettingAttributeReferenceResolver extends 
 	AbstractReferenceResolver<AnnotationAttributeSetting, InterfaceMethod> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(InterfaceMethod element, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(InterfaceMethod element, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference) {
 		return JavaUtil.getName(element);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<InterfaceMethod> result) {
+	public void resolve(java.lang.String identifier, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<InterfaceMethod> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = JavaUtil.findContainingAnnotationInstance(container).getAnnotation();
@@ -56,5 +55,8 @@ public class AnnotationAttributeSettingAttributeReferenceResolver extends
 		if (target != null) {
 			result.addMapping(identifier, (InterfaceMethod) target);
 		}
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

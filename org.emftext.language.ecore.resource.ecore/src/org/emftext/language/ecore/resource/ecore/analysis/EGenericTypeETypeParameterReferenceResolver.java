@@ -20,15 +20,23 @@
  ******************************************************************************/
 package org.emftext.language.ecore.resource.ecore.analysis;
 
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.ETypeParameter;
+
 public class EGenericTypeETypeParameterReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EGenericType, org.eclipse.emf.ecore.ETypeParameter> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.ETypeParameter element, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+	private EcoreDefaultResolverDelegate<EGenericType, ETypeParameter> delegate = new EcoreDefaultResolverDelegate<EGenericType, ETypeParameter>();
+	
+	public java.lang.String deResolve(org.eclipse.emf.ecore.ETypeParameter element, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference) {
+		return delegate.deResolve(element, container, reference);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.ETypeParameter> result) {
-		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.ETypeParameter> result) {
+		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

@@ -20,6 +20,8 @@
  ******************************************************************************/
 package org.emftext.language.sandwich.resource.sandwich.analysis;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -32,14 +34,12 @@ import org.emftext.runtime.resource.IReferenceResolveResult;
 
 public class InstructionUsingReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.sandwich.Instruction, org.emftext.language.sandwich.FeatureInstructionUsing> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.emftext.language.sandwich.FeatureInstructionUsing element, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.emftext.language.sandwich.FeatureInstructionUsing element, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference) {
 		return ((IngredientName) ((Ingredient) element).getName()).getValue();
 		//return super.doDeResolve(element, container, reference);
 	}
 	
-	@Override	
-	protected void doResolve(String identifier, Instruction container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<FeatureInstructionUsing> result) {
+	public void resolve(String identifier, Instruction container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<FeatureInstructionUsing> result) {
 		result.setErrorMessage("Ingredient " + identifier + " can not be found.");
 		TreeIterator<EObject> it = container.eResource().getAllContents();
 		while (it.hasNext()) {
@@ -58,5 +58,8 @@ public class InstructionUsingReferenceResolver extends org.emftext.runtime.resou
 				}
 			}
 		}
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

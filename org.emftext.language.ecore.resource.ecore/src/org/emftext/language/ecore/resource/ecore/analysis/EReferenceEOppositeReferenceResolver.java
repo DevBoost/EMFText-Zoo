@@ -20,6 +20,8 @@
  ******************************************************************************/
 package org.emftext.language.ecore.resource.ecore.analysis;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
@@ -27,13 +29,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public class EReferenceEOppositeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EReference, org.eclipse.emf.ecore.EReference> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EReference element, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+	private EcoreDefaultResolverDelegate<EReference, EReference> delegate = new EcoreDefaultResolverDelegate<EReference, EReference>();
+	
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EReference element, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference) {
+		return delegate.deResolve(element, container, reference);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
 		EClass oppositeType = container.getEReferenceType();
 		if (!resolveFuzzy) {
 			EStructuralFeature opposite = oppositeType.getEStructuralFeature(identifier);
@@ -47,5 +49,8 @@ public class EReferenceEOppositeReferenceResolver extends org.emftext.runtime.re
 			}
 		}
 		
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

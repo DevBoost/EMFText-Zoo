@@ -22,6 +22,7 @@ package org.emftext.language.template_concepts.call.resource.template_call.analy
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,14 +32,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class TemplateCallParameterModelReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.template_concepts.call.TemplateCall, org.eclipse.emf.ecore.EObject> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.eclipse.emf.ecore.EObject element, org.emftext.language.template_concepts.call.TemplateCall container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EObject element, org.emftext.language.template_concepts.call.TemplateCall container, org.eclipse.emf.ecore.EReference reference) {
 		// TODO
-		return super.doDeResolve(element, container, reference);
+		return null;
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, org.emftext.language.template_concepts.call.TemplateCall container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.call.TemplateCall container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
 		Resource resource = container.eResource();
 		URI uri = resource.getURI();
 		URI uriWithoutExtension = uri.trimSegments(1);
@@ -64,5 +63,8 @@ public class TemplateCallParameterModelReferenceResolver extends org.emftext.run
 		}
 		EObject target = (EObject) root;
 		result.addMapping(identifier, target);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }
