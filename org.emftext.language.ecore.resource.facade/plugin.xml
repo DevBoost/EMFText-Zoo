@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension point="org.emftext.runtime.default_load_options">
+    <provider
+          class="org.emftext.language.ecore.resource.facade.merge.EcoreModelMerger"
+          csName="facade.ecore"
+          id="org.emftext.language.ecore.resource.facade.merge.EcoreModelMerger">
+    </provider>
+   </extension>
+   
+   <extension
+       point="org.emftext.language.ecore.resource.additional_ecore_extension_parser">
+    <parser
+          class="org.emftext.language.ecore.resource.text.extension.ExtendedFacadeEcoreResourceFactory"
+          type="facade">
+    </parser>
+   </extension>
+ 
+	<extension point="org.emftext.runtime.concretesyntax">
+		<concretesyntax uri="http://www.eclipse.org/emf/2002/Ecore" csName="facade.ecore" csDefinition="org.emftext.language.ecore.resource.facade/metamodel/facade.ecore.cs">
+		</concretesyntax>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<file-association content-type="org.emftext.filetype" file-extensions="facade.ecore">
+		</file-association>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.ecore.resource.facade.FacadeEcoreNewFileWizard" id="org.emftext.language.ecore.resource.facade.FacadeEcoreNewFileWizard" name="EMFText .facade.ecore file">
+		</wizard>
+	</extension>
+	
+</plugin>
