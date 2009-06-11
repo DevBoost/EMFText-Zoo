@@ -20,7 +20,7 @@
  ******************************************************************************/
 package org.emftext.language.customer.resource.customer.analysis;
 
-import org.emftext.language.customer.Customer;
+import org.emftext.language.customer.IsVegetarian;
 
 public class CustomerT_VEGETARIANTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
@@ -28,8 +28,8 @@ public class CustomerT_VEGETARIANTokenResolver extends org.emftext.runtime.resou
 
 	@Override	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		Customer customer = (Customer) container;
-		if (customer.getIsVegetarian().isValue()) {
+		IsVegetarian isVegetarian = (IsVegetarian) container;
+		if (isVegetarian.isValue()) {
 			return VEGETARIAN;
 		} else {
 			return "";
