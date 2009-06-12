@@ -40,8 +40,10 @@ import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sand
 import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResource;
 import org.emftext.language.customer.resource.customer.CustomerPrinter;
 import org.emftext.language.customer.resource.customer.CustomerResource;
-import org.emftext.language.ecore.resource.ecore.EcorePrinter;
-import org.emftext.language.ecore.resource.ecore.EcoreResource;
+import org.emftext.language.ecore.resource.facade.FacadeEcorePrinter;
+import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
+import org.emftext.language.ecore.resource.text.TextEcorePrinter;
+import org.emftext.language.ecore.resource.text.TextEcoreResource;
 import org.emftext.language.emfxml.resource.xml.XmlPrinter;
 import org.emftext.language.emfxml.resource.xml.XmlResource;
 import org.emftext.language.feature.resource.feature.FeaturePrinter;
@@ -94,7 +96,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 	}
 	
-	private class EcoreTestItem extends AbstractTestItem {
+	private class TextEcoreTestItem extends AbstractTestItem {
 
 		public EClass[] getStartClasses() {
 			return new EClass[] {
@@ -103,7 +105,20 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public ITextPrinter getPrinter(OutputStream stream) {
-			return new EcorePrinter(stream, new EcoreResource());
+			return new TextEcorePrinter(stream, new TextEcoreResource());
+		}
+	}
+	
+	private class FacadeEcoreTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+				EcorePackage.eINSTANCE.getEPackage()
+			};
+		}
+
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new FacadeEcorePrinter(stream, new FacadeEcoreResource());
 		}
 	}
 	
@@ -401,7 +416,8 @@ public class NewFileContentCreationTest extends TestCase {
 	}
 	
 	public void testMinimalModelCreation() {
-		test(new EcoreTestItem());
+		test(new TextEcoreTestItem());
+		test(new FacadeEcoreTestItem());
 		test(new CSTestItem());
 		test(new ChessTestItem());
 		test(new CustomSandwichTestItem());
