@@ -54,19 +54,21 @@ public class EcoreResourceFactoryDegator implements Resource.Factory {
 	protected void init() {
 		if (ecoreFactories.isEmpty() && Platform.isRunning()) {
 	        IExtensionPoint csExtensionPoint = Platform.getExtensionRegistry().getExtensionPoint(EP_PARSER);
-	        IConfigurationElement[] parserPoints = csExtensionPoint.getConfigurationElements();
-	        for(int i = 0;i < parserPoints.length;i++) {
-				try {
-		        	String           type    = parserPoints[i].getAttribute("type");
-		            Resource.Factory factory =
-		            	(Resource.Factory) parserPoints[i].createExecutableExtension("class");
-		            
-		            ecoreFactories.put(type, factory);
-				} catch (CoreException e) {
-					EMFTextRuntimePlugin.logError(
-							"Error while instatiating: " + parserPoints[i].getAttribute("class"), e);
-				}
-	        }		
+	        if (csExtensionPoint != null) {
+		        IConfigurationElement[] parserPoints = csExtensionPoint.getConfigurationElements();
+		        for(int i = 0;i < parserPoints.length;i++) {
+					try {
+			        	String           type    = parserPoints[i].getAttribute("type");
+			            Resource.Factory factory =
+			            	(Resource.Factory) parserPoints[i].createExecutableExtension("class");
+			            
+			            ecoreFactories.put(type, factory);
+					} catch (CoreException e) {
+						EMFTextRuntimePlugin.logError(
+								"Error while instatiating: " + parserPoints[i].getAttribute("class"), e);
+					}
+		        }
+	        }
 		}
 	}
 	
