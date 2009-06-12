@@ -29,9 +29,9 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.ecore.resource.ecore.EcoreResource;
+import org.emftext.language.ecore.resource.text.extension.ExtendedTextEcoreResource;
 
-public class EcoreResourceTestWrapper extends EcoreResource {
+public class EcoreResourceTestWrapper extends ExtendedTextEcoreResource {
 	
 	public void load(File cFile) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;

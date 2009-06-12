@@ -25,7 +25,8 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.ecore.resource.ecore.EcoreResourceFactory;
+import org.emftext.language.ecore.resource.EcoreResourceFactoryDegator;
+import org.emftext.language.ecore.resource.text.extension.ExtendedTextEcoreResourceFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,14 +34,18 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	
 	@Before
 	public void setUp() {
+		EcoreResourceFactoryDegator factoryDelegator = new EcoreResourceFactoryDegator();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new EcoreResourceFactory());
+				"ecore", factoryDelegator);
+		factoryDelegator.getEcoreResourceFactoriesMap().put(
+				"text", new ExtendedTextEcoreResourceFactory());
 	}
 
 	@Test
 	public void testGenerics() {
-		assertParse("TypeArguments.ecore");
-		assertParse("TypeParameters.ecore");
+		assertParse("TypeArguments.text.ecore");
+		assertParse("TypeParameters.text.ecore");
+		assertParse("SomeXMI.ecore");
 	}
 
 	private void assertParse(String fileName) {

@@ -32,14 +32,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.ecore.resource.ecore.EcoreResource;
 
 public class AbstractEcoreTestCase extends TestCase {
 		
 	protected EPackage loadResource(String path,
 			String fileIdentifier) throws IOException {
 		
-		EcoreResource resource = tryToLoadResource(path, fileIdentifier);
+		Resource resource = tryToLoadResource(path, fileIdentifier);
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
@@ -52,11 +51,11 @@ public class AbstractEcoreTestCase extends TestCase {
 		return ePackage;
 	}
 
-	protected EcoreResource tryToLoadResource(String path,
+	protected Resource tryToLoadResource(String path,
 			String fileIdentifier) throws IOException {
 		
 		ResourceSet rs = new ResourceSetImpl();
-		EcoreResource resource = (EcoreResource) rs.getResource(URI.createURI(path), true);
+		Resource resource = rs.getResource(URI.createURI(path), true);
 		return resource;
 	}
 
