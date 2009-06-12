@@ -72,7 +72,7 @@ public class EcoreResourceFactoryDegator implements Resource.Factory {
 		}
 	}
 	
-	public Map<String, Resource.Factory> getEcoreFactoriesMap() {
+	public Map<String, Resource.Factory> getEcoreResourceFactoriesMap() {
 		return ecoreFactories;
 	}
 	
