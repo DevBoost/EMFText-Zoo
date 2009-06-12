@@ -79,7 +79,7 @@ import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.impl.TextResourceHelper;
+import org.emftext.runtime.util.ResourceUtil;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -698,7 +698,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 
 	protected boolean assertResolveAllProxies(Resource resource) {
-		List<EObject> unresolvedProxies = new TextResourceHelper().findUnresolvedProxies(resource);
+		List<EObject> unresolvedProxies = ResourceUtil.findUnresolvedProxies(resource);
 		boolean failure = false;
 		String msg="";
 		
