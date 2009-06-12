@@ -20,15 +20,21 @@
  ******************************************************************************/
 package org.emftext.language.owl.resource.owl.analysis;
 
+import java.util.Map;
+
 public class OntologyImportsReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology> {
 	
-	@Override	
-	protected java.lang.String doDeResolve(org.emftext.language.owl.Ontology element, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference) {
-		return super.doDeResolve(element, container, reference);
+	private OwlDefaultResolverDelegate<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology> delegate = 
+		new OwlDefaultResolverDelegate<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology>();
+		
+	public java.lang.String deResolve(org.emftext.language.owl.Ontology element, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference) {
+		return delegate.deResolve(element, container, reference);
 	}
 	
-	@Override	
-	protected void doResolve(java.lang.String identifier, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Ontology> result) {
-		super.doResolve(identifier, container, reference, position, resolveFuzzy, result);
+		
+	public void resolve(java.lang.String identifier, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Ontology> result) {
+		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
+
+    public void setOptions(Map<?, ?> options) {}
 }

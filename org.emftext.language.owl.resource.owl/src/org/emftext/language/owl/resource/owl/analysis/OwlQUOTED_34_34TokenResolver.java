@@ -22,7 +22,7 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 public class OwlQUOTED_34_34TokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
-	@Override	
+		
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = super.deResolve(value, feature, container);
 		result = result.replaceAll(java.util.regex.Pattern.quote("\""),"\\\\\"");
@@ -31,7 +31,7 @@ public class OwlQUOTED_34_34TokenResolver extends org.emftext.runtime.resource.i
 		return result;
 	}
 	
-	@Override	
+		
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0, lexem.length() - 1);
