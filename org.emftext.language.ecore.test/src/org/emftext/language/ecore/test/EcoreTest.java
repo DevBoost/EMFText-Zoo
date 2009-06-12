@@ -25,7 +25,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.ecore.resource.EcoreResourceFactoryDegator;
+import org.emftext.language.ecore.resource.EcoreResourceFactoryDelegator;
 import org.emftext.language.ecore.resource.text.extension.ExtendedTextEcoreResourceFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class EcoreTest extends AbstractEcoreTestCase {
 	
 	@Before
 	public void setUp() {
-		EcoreResourceFactoryDegator factoryDelegator = new EcoreResourceFactoryDegator();
+		EcoreResourceFactoryDelegator factoryDelegator = new EcoreResourceFactoryDelegator();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", factoryDelegator);
 		factoryDelegator.getEcoreResourceFactoriesMap().put(

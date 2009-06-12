@@ -41,7 +41,7 @@ import org.emftext.runtime.EMFTextRuntimePlugin;
  * <code>org.emftext.language.ecore.resource.EcoreResourceFactoryImpl</code>.
  *
  */
-public class EcoreResourceFactoryDegator implements Resource.Factory {
+public class EcoreResourceFactoryDelegator implements Resource.Factory {
 	
 	public static final String EP_PARSER = "org.emftext.language.ecore.resource.additional_ecore_extension_parser";
 	
@@ -88,7 +88,7 @@ public class EcoreResourceFactoryDegator implements Resource.Factory {
 		return factory;
 	}
 	
-	public EcoreResourceFactoryDegator() {
+	public EcoreResourceFactoryDelegator() {
 		init();
 	}
 	

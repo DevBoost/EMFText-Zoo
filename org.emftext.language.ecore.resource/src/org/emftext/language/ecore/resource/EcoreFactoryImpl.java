@@ -23,6 +23,6 @@ public class EcoreFactoryImpl extends
 	public EcoreFactoryImpl() {
 		super();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new EcoreResourceFactoryDegator());
+				"ecore", new EcoreResourceFactoryDelegator());
 	}
 }
