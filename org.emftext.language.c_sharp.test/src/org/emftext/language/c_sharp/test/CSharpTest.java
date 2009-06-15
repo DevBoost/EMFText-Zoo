@@ -172,6 +172,15 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		//parseAndReprint(filename);		
 	}
 	
+	/*@Test
+	public void testExpressions() throws Exception{
+		String typename = "Expressions";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");
+		//assertMemberCount(clazz, 40);
+
+	}*/
+	
 	@Test
 	public void testLiteralsAndSimpleTypes() throws Exception {
 		String typename = "LiteralsAndSimpleTypes";
@@ -453,7 +462,16 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	
 		//parseAndReprint(filename);		
 	}
-	
+	/**@Test
+	public void testOperators() throws Exception{
+		String typename = "Operators";
+		String filename = typename + getFileExtension();
+		Class clazz = assertParseToClass(typename, "Class1");
+		assertMemberCount(clazz, 17);
+
+	}
+	**/
+
 	@Test
 	public void testStackalloc() throws Exception {
 		String typename = "Stackalloc";
