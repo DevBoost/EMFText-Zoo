@@ -26,6 +26,12 @@ TOKENSTYLES {
 	"ML_COMMENT"  COLOR #00bb00;
 	
 	"T_INTERFACE_OR_CLASS" COLOR #7F0055, BOLD;
+	"annotate" COLOR #7F0055, BOLD;
+	"package" COLOR #7F0055, BOLD;
+	"attribute" COLOR #7F0055, BOLD;
+	"reference" COLOR #7F0055, BOLD;
+	"operation" COLOR #7F0055, BOLD;
+	"datatype" COLOR #7F0055, BOLD;
 }
  
 RULES {

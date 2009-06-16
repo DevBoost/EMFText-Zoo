@@ -54,6 +54,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		
 		if (annotatedResource == null) {
 			resource.addError("Ecore model not found: " + uri.toString(), ePackage);
+			return;
 		}
 		
 		for(Iterator<EObject> i = resource.getAllContents(); i.hasNext(); ) {
