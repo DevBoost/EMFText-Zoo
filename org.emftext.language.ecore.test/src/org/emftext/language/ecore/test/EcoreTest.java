@@ -48,6 +48,11 @@ public class EcoreTest extends AbstractEcoreTestCase {
 		assertParse("SomeXMI.ecore");
 	}
 
+	@Test
+	public void testImport() {
+		assertParse("import.text.ecore");
+	}
+	
 	private void assertParse(String fileName) {
 		try {
 			EPackage ePackage = loadResource("input" + File.separator + fileName, fileName);
