@@ -40,6 +40,8 @@ import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sand
 import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResource;
 import org.emftext.language.customer.resource.customer.CustomerPrinter;
 import org.emftext.language.customer.resource.customer.CustomerResource;
+import org.emftext.language.dot.resource.dot.DotPrinter;
+import org.emftext.language.dot.resource.dot.DotResource;
 import org.emftext.language.ecore.resource.facade.FacadeEcorePrinter;
 import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
 import org.emftext.language.ecore.resource.text.TextEcorePrinter;
@@ -171,6 +173,19 @@ public class NewFileContentCreationTest extends TestCase {
 
 		public ITextPrinter getPrinter(OutputStream stream) {
 			return new CustomerPrinter(stream, new CustomerResource());
+		}
+	}
+	
+	private class DotTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+				org.emftext.language.dot.DotPackage.eINSTANCE.getGraph()
+			};
+		}
+
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new DotPrinter(stream, new DotResource());
 		}
 	}
 	
@@ -422,6 +437,7 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new ChessTestItem());
 		test(new CustomSandwichTestItem());
 		test(new CustomerTestItem());
+		test(new DotTestItem());
 		test(new EmfXmlTestItem());
 		test(new FeatureTestItem());
 		test(new FormularTestItem());
