@@ -20,6 +20,7 @@
  ******************************************************************************/
 package org.emftext.language.c_sharp.test;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -28,6 +29,7 @@ import org.emftext.language.c_sharp.arrays.ArrayType;
 import org.emftext.language.c_sharp.arrays.StackallocInitializer;
 import org.emftext.language.c_sharp.classes.Class;
 import org.emftext.language.c_sharp.classes.ClassMemberDeclaration;
+import org.emftext.language.c_sharp.classes.ClassesPackage;
 import org.emftext.language.c_sharp.classes.FieldDeclaration;
 import org.emftext.language.c_sharp.classes.Method;
 import org.emftext.language.c_sharp.expressions.ArrayCreationExpression;
@@ -68,6 +70,7 @@ import org.emftext.language.c_sharp.types.Short;
 import org.emftext.language.c_sharp.types.UInt;
 import org.emftext.language.c_sharp.types.ULong;
 import org.emftext.language.c_sharp.types.UShort;
+import org.emftext.runtime.util.EObjectUtil;
 import org.junit.Test;
 
 
@@ -100,6 +103,10 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
 		assertMemberCount(clazz, 7);
+		
+		// check that there are 6 field declarations
+		Collection<Object> fieldDeclarations = EObjectUtil.getObjectsByType(clazz.eAllContents(), ClassesPackage.eINSTANCE.getFieldDeclaration());
+		assertEquals(6, fieldDeclarations.size());
 		
 		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
 		
