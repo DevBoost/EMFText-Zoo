@@ -100,7 +100,7 @@ public class EMFTypesResolver {
 		}
 		
 		addResults(identifier, eClassName, ePackage.getEClassifiers(), resolveFuzzy, result);
-		if (result.getMappings().isEmpty() && !identifier.contains("::")) {
+		if (!result.wasResolved() && !identifier.contains("::")) {
 			//try the "default" package Ecore
 			addResults(identifier, identifier, EcorePackage.eINSTANCE.getEClassifiers(), resolveFuzzy, result);
 		}
