@@ -11,8 +11,9 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	srcFolder = "src-gen";
 	overrideManifest = "false";
+	overridePluginXML = "false";
 }
 
 RULES {
-	Node ::= "@" name[] ("->" "(" children* ")" )?;
+	Node ::= "#"  type ( ">" "(" children+ ")" )?;
 }
