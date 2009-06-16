@@ -10,6 +10,7 @@ OPTIONS {
 	tokenspace = "0";
 	resourcePluginID = "org.emftext.language.ecore.resource.text";
 	basePackage = "org.emftext.language.ecore.resource.text";
+	usePredefinedTokens = "false";
 }
 
 TOKENS {
@@ -29,6 +30,11 @@ TOKENS {
 	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
 	DEFINE T_SERIALIZABLE $'serializable'$;
 	DEFINE T_CONTAINMENT $'containment'$;
+	
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
+		
+	DEFINE TEXT $('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' | '::')+$;
 }
 
 TOKENSTYLES {
@@ -49,10 +55,18 @@ TOKENSTYLES {
 	"T_CONTAINMENT" COLOR #7F0055, BOLD;
 	"SL_COMMENT"  COLOR #00bb00;
 	"ML_COMMENT"  COLOR #00bb00;
+	
+	"package" COLOR #7F0055, BOLD;
+	"attribute" COLOR #7F0055, BOLD;
+	"reference" COLOR #7F0055, BOLD;
+	"operation" COLOR #7F0055, BOLD;
+	"datatype" COLOR #7F0055, BOLD;
+	"extends" COLOR #7F0055, BOLD;
+	"opposite" COLOR #7F0055, BOLD;
 }
  
 RULES {
-	EPackage ::= (eAnnotations)* "package" #1 name[] (#1 nsPrefix[] ":")? (#1 nsURI['"', '"'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
+	EPackage ::= (eAnnotations)* "package" #1 name[] (#1 nsPrefix[])? (#1 nsURI['"', '"'])? #1 "{" !0 ( eClassifiers )* !0 eSubpackages* "}";
 	
 	EClass ::=  (eAnnotations)* !1 (abstract[T_ABSTRACT] #1)? interface[T_INTERFACE_OR_CLASS] #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 

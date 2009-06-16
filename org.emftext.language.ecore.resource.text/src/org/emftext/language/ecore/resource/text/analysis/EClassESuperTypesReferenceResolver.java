@@ -31,7 +31,7 @@ public class EClassESuperTypesReferenceResolver extends org.emftext.runtime.reso
 	}
 	
 	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EClass container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
-		new EMFTypesResolver().doResolve(identifier, container.eResource(), reference, position, resolveFuzzy, result);
+		new EMFTypesResolver().doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 
 	public void setOptions(Map<?, ?> options) {
