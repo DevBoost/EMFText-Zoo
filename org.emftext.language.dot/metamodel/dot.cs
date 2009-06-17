@@ -7,7 +7,9 @@ START Graph
 OPTIONS {
         reloadGeneratorModel = "true";
         generateCodeFromGeneratorModel = "true";
-        overrideManifest = "false";
+		overrideClasspath = "false";
+		overrideManifest = "false";
+		overrideProjectFile = "false";
         usePredefinedTokens = "false";
         tokenspace = "1";
 }
@@ -21,7 +23,6 @@ TOKENS {
 		DEFINE SUBGRAPHTYPE $ ('s'|'S') ('u'|'U') ('b'|'B') ('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H') $;
 		
 		DEFINE EDGEOP $ '->' | '--' $;
-		DEFINE COMPASS $ 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw' | 'c' | '_' $;
 		
 		DEFINE CONTEXT $ (('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) |
 		                 (('n'|'N') ('o'|'O') ('d'|'D') ('e'|'E')) |
@@ -30,7 +31,7 @@ TOKENS {
 	    DEFINE ID $ (('a'..'z'|'A'..'Z'|'_'|'\u0080'..'\u00ff')  ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'\u0080'..'\u00ff')*) |
 		            (('-')? ('.' ('0'..'9')+ ) | (('0'..'9')+ ('.' ('0'..'9')*)?)) |
 		            (('"' ('\\\"' | (~('"'|'\uffff')))* '"') ('+' ('"' ('\\\"' | (~('"'|'\uffff')))* '"'))*) |
-		            ('<' .* '>') $;                 
+		            ('<' .* '>') $;   // maybe html tag as model              
                              
 	    DEFINE SL_COMMENT $ '//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
 	    DEFINE ML_COMMENT $ '/*'.*'*/'$ COLLECT IN comments;
@@ -47,7 +48,6 @@ TOKENSTYLES {
    "STRICT" COLOR #912A72, BOLD;
    "SUBGRAPHTYPE" COLOR #912A72, BOLD;
    "EDGEOP" COLOR #912A72;
-   "COMPASS" COLOR #912A72;
    "CONTEXT" COLOR #912A72, BOLD;
    
    "ID" COLOR #000000;
@@ -84,7 +84,7 @@ RULES{
 		
 		Attribute ::= key[ID] ( "=" value[ID] )? ;
 		 
-		Port ::= ":" id[ID] (":" compass[COMPASS])? |
-		         ":" compass[COMPASS];
+		Port ::= ":" id[ID] (":" compass[])? |
+		         ":" compass[];
 		
 }
