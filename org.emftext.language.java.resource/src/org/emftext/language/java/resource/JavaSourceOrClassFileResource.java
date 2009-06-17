@@ -22,6 +22,7 @@ package org.emftext.language.java.resource;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -318,8 +319,19 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 							new String[cu.getNamespaces().size()]);
 					String   file   = JavaUtil.getName(cu.getClassifiers().get(0));
 					
-					URI subResourcURI = getURI().trimFileExtension().trimFileExtension();
-					subResourcURI = subResourcURI.appendSegments(folder);
+					URI normalizedURI = getResourceSet().getURIConverter().normalize(getURI());
+					
+					URI subResourcURI = normalizedURI.trimFileExtension().trimFileExtension();
+					
+					if (normalizedURI.segmentCount() >= folder.length + 1 &&
+						normalizedURI.segmentsList().subList(
+								normalizedURI.segmentCount() - 1 - folder.length,
+								normalizedURI.segmentCount() - 1).equals(Arrays.asList(folder))) {
+						subResourcURI = subResourcURI.trimSegments(1);
+					}
+					else {
+						subResourcURI = subResourcURI.appendSegments(folder);	
+					}
 					subResourcURI = subResourcURI.appendSegment(file);
 					subResourcURI = subResourcURI.appendFileExtension("java");
 					
