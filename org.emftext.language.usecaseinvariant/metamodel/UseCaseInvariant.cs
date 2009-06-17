@@ -10,6 +10,14 @@ OPTIONS {
 
 TOKENSTYLES {
 	"TEXT" COLOR #000000;
+	
+	"invariants" COLOR #7F0055, BOLD;
+	"actor" COLOR #7F0055, BOLD;
+	"counter" COLOR #7F0055, BOLD;
+	"set" COLOR #7F0055, BOLD;
+	"of" COLOR #7F0055, BOLD;
+	"excluding" COLOR #7F0055, BOLD;
+	"including" COLOR #7F0055, BOLD;
 }
 
 RULES {
