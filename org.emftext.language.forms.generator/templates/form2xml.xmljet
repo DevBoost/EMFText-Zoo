@@ -1,0 +1,46 @@
+<%@ jet package="generator.xml"
+	class="XMLFormGenerator" 
+	skeleton="generator.skeleton" 
+	imports ="java.util.List org.emftext.language.forms.*;"
+%>
+<% Form form = (Form) argument; %>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+
+<form titel="<%=(form.getCaption()==null?"Mein Form":form.getCaption()) %>"
+	xmlns="http://org.emftext.language.forms/metamodel/FormMM.xsd" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://org.emftext.language.forms/metamodel/FormMM.xsd schema/FormMM.xsd">
+<% 
+   List<Group> gruppen=form.getGroups();
+   for(Group gruppe:gruppen){%>
+	   <gruppe name="<%=gruppe.getName() %>"><%  
+	   List<Item> fragen=gruppe.getItems();
+	   for(Item frage:fragen){
+			ItemType typ = frage.getItemType();
+			String typName = typ.eClass().getName().toLowerCase();
+			String erklaerung = frage.getExplanation();
+			String text = frage.getText();
+			List<Option> vorbedingungen = frage.getDependentOf();%>
+		<<%=typName%>><% if(text!=null){%>
+			<text>
+				<%=text%>
+			</text><% }%><% if(erklaerung!=null){%>
+			<erklaerung>
+				<%=erklaerung%>
+			</erklaerung><% }%><% if(!vorbedingungen.isEmpty()){%>
+			<vorbedingungen><% for(Option option:vorbedingungen){%>
+				<option id="<%=option.getId()%>"/><% }%>
+			</vorbedingungen><% }%>
+			<% if(typ instanceof Choice){ Choice auswahl=(Choice)typ;%>
+			<optionen mehrfach="<%=auswahl.isMultiple()%>"><% for(Option option:auswahl.getOptions()) {%>
+				<option id="<%=option.getId()==null?"":option.getId() %>">
+					<%=option.getText() %>
+				</option><% }%>
+			</optionen><% }else if(typ instanceof Decision){ Decision entscheidung=(Decision)typ;for(Option option:entscheidung.getOptions()){%>
+				<option id="<%=option.getId()==null?"":option.getId() %>">
+					<%=option.getText() %>
+				</option><% } }%>			
+			</<%=typName%>><% }%>
+	</gruppe>
+	<% }%>
+</form>

@@ -1,0 +1,120 @@
+<%@ jet package="generator.html"
+
+class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iterator org.eclipse.emf.common.util.EList org.emftext.language.forms.*;"
+
+%>
+
+<% Form form = (Form) argument; %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html> 
+
+<head> <title> <%=form.getCaption()%> </title>
+
+
+
+
+</head>
+
+<body>
+
+<h1> Form: <%=form.getCaption() %></h1>
+
+<%EList<Group> gruppen = form.getGroups();
+	
+	for (Group gruppe : gruppen) {
+		 %> <fieldset>
+		    <legend><%=gruppe.getName()%></legend><%
+
+		EList<Item> list = gruppe.getItems();
+		
+		    for (Iterator<Item> iterator = list.iterator(); iterator.hasNext();) {
+		
+			Item frage = iterator.next();
+		
+		%>
+		
+		<b> 
+			<%=frage.getText()%>
+			
+		</b>
+			<% if (frage.getExplanation() != null) { %> <%=frage.getExplanation()%> <% } %>
+		<br>	
+			<% if (frage.getDependentOf().size() > 0) { %>
+				(Nur bei: 
+				<% for(Option option : frage.getDependentOf()) { %>
+					<%=option.getId() %>  
+				<%}%>
+				)
+			 
+				
+			<% } %>
+			<br>
+		
+			<% if (frage.getItemType() instanceof FreeText) { %> 
+				<input size=30></input>	
+			<% } %>
+			<% if (frage.getItemType() instanceof Date) { %> 
+				<input size="2" maxlength="2" value="DD"/>.
+				<input size="2" maxlength="2" value="MM"/>.
+				<input size="4" maxlength="4" value="YYYY"/>	
+			<% } %>
+			<% if (frage.getItemType() instanceof org.emftext.language.forms.Number) { %> 
+				<input size=10></input>	
+			<% } %>
+			<% if (frage.getItemType() instanceof Choice) { 
+				Choice auswahl = (Choice) frage.getItemType();
+				for(Option option : auswahl.getOptions()) {
+					if (auswahl.isMultiple()) {%> 
+					 <input type="checkbox" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+					 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+					 <%} else { %>
+					 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
+					 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+					
+					
+					 <%}%>
+					 <br>
+			<% 	 }
+			}
+			if (frage.getItemType() instanceof Decision) { 
+				Decision entscheidung = (Decision) frage.getItemType();
+				%><input type="checkbox" name="<%=frage.getText()%>" title="Ja|Nein" checked="checked" value="ok" /> 
+				<label for="<%=frage.getText()%>"><%=frage.getText()%></label>
+				<% 
+				if (entscheidung.getOptions().get(0).getId() != null) {
+					%> (Ja: <%=entscheidung.getOptions().get(0).getId()%> )
+				<%
+				}
+				if (entscheidung.getOptions().get(1).getId() != null) {
+					%> (Nein: <%=entscheidung.getOptions().get(1).getId()%> )
+				<%
+				}
+			}
+			
+			%>
+			<br>
+		
+			
+			
+			
+		
+		<%
+		  }%>
+		   </fieldset>
+	<%}%>
+		
+	
+
+
+
+
+
+
+
+</body>
+
+
+
+</html>
