@@ -50,6 +50,8 @@ import org.emftext.language.emfxml.resource.xml.XmlPrinter;
 import org.emftext.language.emfxml.resource.xml.XmlResource;
 import org.emftext.language.feature.resource.feature.FeaturePrinter;
 import org.emftext.language.feature.resource.feature.FeatureResource;
+import org.emftext.language.forms.resource.forms.FormsPrinter;
+import org.emftext.language.forms.resource.forms.FormsResource;
 import org.emftext.language.formular.resource.formular.FormularPrinter;
 import org.emftext.language.formular.resource.formular.FormularResource;
 import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorPrinter;
@@ -213,6 +215,19 @@ public class NewFileContentCreationTest extends TestCase {
 
 		public ITextPrinter getPrinter(OutputStream stream) {
 			return new FeaturePrinter(stream, new FeatureResource());
+		}
+	}
+	
+	private class FormsTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+					org.emftext.language.forms.FormsPackage.eINSTANCE.getForm()
+			};
+		}
+
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new FormsPrinter(stream, new FormsResource());
 		}
 	}
 	
@@ -440,6 +455,7 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new DotTestItem());
 		test(new EmfXmlTestItem());
 		test(new FeatureTestItem());
+		test(new FormsTestItem());
 		test(new FormularTestItem());
 		test(new RegexpTestItem());
 		test(new SimpleCTestItem());
