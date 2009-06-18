@@ -179,14 +179,16 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		//parseAndReprint(filename);		
 	}
 	
-	/*@Test
+	@Test
 	public void testExpressions() throws Exception{
 		String typename = "Expressions";
 		String filename = typename + getFileExtension();
 		Class clazz = assertParseToClass(typename, "Class1");
-		//assertMemberCount(clazz, 40);
-
-	}*/
+		assertMemberCount(clazz, 2);
+		
+		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();
+		
+	}
 	
 	@Test
 	public void testLiteralsAndSimpleTypes() throws Exception {
