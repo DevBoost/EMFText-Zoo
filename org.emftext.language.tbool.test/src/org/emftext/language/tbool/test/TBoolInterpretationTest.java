@@ -7,8 +7,8 @@ import org.emftext.language.template_concepts.interpreter.test.AbstractInterpret
 public class TBoolInterpretationTest extends AbstractInterpreterTest {
 
 	public void testInterpretation() {
-		testInterpretation("test1.tbool", "test1a.ecore", "public class MyClass { private MyClass attribute ; }");
-		testInterpretation("test1.tbool", "test1b.ecore", "public class MyClass { private MyClass attribute ; }");
+		testInterpretation("test1.tbool", "test1a.ecore", "public class MyClass { private MyClass staticAttribute ; }");
+		testInterpretation("test1.tbool", "test1b.ecore", "public class MyClass { private MyClass staticAttribute ; private MyClass generatedAttribute ; }");
 	}
 
 	protected void registerResourceFactories() {
