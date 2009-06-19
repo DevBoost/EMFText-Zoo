@@ -12,8 +12,6 @@ import org.emftext.runtime.util.EObjectUtil;
 
 public class TypedElementTypeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.bool.TypedElement, org.emftext.language.bool.TypedElementType> {
 	
-	private org.emftext.language.bool.resource.bool.analysis.BoolDefaultResolverDelegate<org.emftext.language.bool.TypedElement, org.emftext.language.bool.TypedElementType> delegate = new org.emftext.language.bool.resource.bool.analysis.BoolDefaultResolverDelegate<org.emftext.language.bool.TypedElement, org.emftext.language.bool.TypedElementType>();
-	
 	public void resolve(java.lang.String identifier, org.emftext.language.bool.TypedElement container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.bool.TypedElementType> result) {
 		TreeIterator<EObject> iterator = container.eResource().getAllContents();
 		Collection<TypedElementType> typedElements = EObjectUtil.getObjectsByType(iterator, BoolPackage.eINSTANCE.getTypedElementType());
@@ -43,7 +41,12 @@ public class TypedElementTypeReferenceResolver extends org.emftext.runtime.resou
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.bool.TypedElementType element, org.emftext.language.bool.TypedElement container, org.eclipse.emf.ecore.EReference reference) {
-		return delegate.deResolve(element, container, reference);
+		assert element instanceof org.emftext.language.bool.Class;
+		org.emftext.language.bool.Class clazz = (org.emftext.language.bool.Class) element;
+		NamedElementName nameRef = clazz.getName();
+		assert nameRef instanceof Name;
+		Name boxedName = (Name) nameRef;
+		return boxedName.getValue();
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
