@@ -339,7 +339,7 @@ public class InterpreterWithState {
 			}
 			//BODY (can contain multiple elements)
 			List<EObject> tiList = listUtil.castListUnchecked(tiObject.eGet(tiReference)); 
-			if (forBodyO instanceof List) {
+			if (forBodyO instanceof List<?>) {
 				List<EObject> forBodyList = listUtil.castListUnchecked(forBodyO);
 				for(EObject forBody : forBodyList){
 					tiList.add(evaluate(forBody));
