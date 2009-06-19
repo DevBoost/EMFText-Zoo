@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.customer.Customer;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.interpreter.InterpreterWithState;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
@@ -47,7 +46,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 	
 			Resource customerResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + customerFileName));
 			customerResource.load(null);
-			Customer customer = (Customer) customerResource.getContents().get(0);
+			EObject customer = (EObject) customerResource.getContents().get(0);
 			
 			Resource templateResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + templateFileName));
 			templateResource.load(null);
