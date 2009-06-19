@@ -10,6 +10,7 @@ IMPORTS {
 OPTIONS {
 	usePredefinedTokens = "false";
 	overrideManifest = "false";
+	generateCodeFromGeneratorModel = "true";
 }
 
 TOKENSTYLES {
@@ -26,10 +27,10 @@ TOKENSTYLES {
 
 RULES {
 	ClassTemplate ::= "<%TEMPLATE" "INPUT=" inputMetaClass['"','"'] "%>" body;
-	PhTypedElement ::= "<%=" expression['"','"'] "%>" "=%>";
+	PhTypedElement ::= "<%=" expression['"','"'] "%>";
 	IfElseTypedElement ::= "<%IF" expression['"','"'] "%>" body "<%ELSE%>" elseBody "<%ENDIF%>";
-	PhNamedElement ::= "<%=" expression['"','"'] "%>" "=%>";
+	PhNamedElement ::= "<%=" expression['"','"'] "%>";
 	IfElseNamedElement ::= "<%IF" expression['"','"'] "%>" body "<%ELSE%>" elseBody "<%ENDIF%>";
 	IfClass ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
-	ForClass ::= "<%FOR" expression['"','"'] "%>" body "<%ENDFOR%>";
+	ForClass ::= "<%FOR" expression['"','"'] "%>" body body* "<%ENDFOR%>";
 }
