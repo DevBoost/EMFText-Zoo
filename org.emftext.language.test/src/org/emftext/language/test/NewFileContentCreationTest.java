@@ -70,8 +70,6 @@ import org.emftext.language.simple_gui.resource.simplegui.SimpleguiPrinter;
 import org.emftext.language.simple_gui.resource.simplegui.SimpleguiResource;
 import org.emftext.language.simple_math.resource.sm.SmPrinter;
 import org.emftext.language.simple_math.resource.sm.SmResource;
-import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplatePrinter;
-import org.emftext.language.simple_template.resource.simpletemplate.SimpletemplateResource;
 import org.emftext.language.statemachine.resource.statemachine.StatemachinePrinter;
 import org.emftext.language.statemachine.resource.statemachine.StatemachineResource;
 import org.emftext.language.template_concepts.call.resource.template_call.Template_callPrinter;
@@ -296,19 +294,6 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 	}
 	
-	private class SimpleTemplateTestItem extends AbstractTestItem {
-
-		public EClass[] getStartClasses() {
-			return new EClass[] {
-					org.emftext.language.simple_template.Simple_templatePackage.eINSTANCE.getTemplate()
-			};
-		}
-
-		public ITextPrinter getPrinter(OutputStream stream) {
-			return new SimpletemplatePrinter(stream, new SimpletemplateResource());
-		}
-	}
-	
 	private class StatemachineTestItem extends AbstractTestItem {
 
 		public EClass[] getStartClasses() {
@@ -461,7 +446,6 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new SimpleCTestItem());
 		test(new SimpleGuiTestItem());
 		test(new SimpleMathTestItem());
-		test(new SimpleTemplateTestItem());
 		test(new StatemachineTestItem());
 		test(new TemplateCallTestItem());
 		test(new TextAdventureTestItem());
