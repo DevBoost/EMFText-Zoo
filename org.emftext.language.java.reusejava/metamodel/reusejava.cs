@@ -13,6 +13,6 @@ OPTIONS {
 }
 
 RULES {
-	StatementUnit ::=            "statements" name "{" statements "}" ;
-	StatementVariationPoint ::=  "<" "<" name ">" ">"  ";" ;		
+	StatementUnit ::=           "statements" boxedName "{" statements "}" ;
+	StatementVariationPoint ::=  "<" "<" boxedName ">" ">"  ";" ;		
 }
