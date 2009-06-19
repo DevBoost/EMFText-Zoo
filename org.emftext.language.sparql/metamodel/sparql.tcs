@@ -1,0 +1,955 @@
+-- PROLOGUE
+template Prologue 
+	:	(isDefined( basedeclaration ) ? basedeclaration )
+		(isDefined( prefixdeclaration ) ? prefixdeclaration )
+	;
+	
+template BaseDecl
+	:	"BASE"
+		iriref
+	;
+	
+template PrefixDecl
+	:	"PREFIX"
+		pnamens
+		iriref
+	;
+
+-- QUERIES
+template Query abstract;
+
+template SelectQuery 
+	:	"SELECT"
+		(isDefined( solutionsdisplay ) ? solutionsdisplay )
+		variables
+		(isDefined( datasetclause ) ? datasetclause )
+		whereclause
+		(isDefined( solutionmodifier ) ? solutionmodifier )
+	;
+	
+template ConstructQuery
+	:	"CONSTRUCT"
+		constructtemplate
+		(isDefined( datasetclause ) ? datasetclause )
+		whereclause
+		(isDefined( solutionmodifier ) ? solutionmodifier )
+	;
+	
+template DescribeQuery
+	:	"DESCRIBE"
+		describequeryvar
+		(isDefined( datasetclause ) ? datasetclause )
+		(isDefined( whereclause )? whereclause )
+		(isDefined( solutionmodifier ) ? solutionmodifier )
+	;
+
+template AskQuery
+	:	"ASK"
+		(isDefined( datasetclause ) ? datasetclause )
+		whereclause
+	;
+	
+template ConstructTemplate
+	:	"{"
+		(isDefined( constructtriples ) ? constructtriples{separator="."} ) ( _endmarker ? "." )
+		"}"
+	;
+	
+template DescribeQueryVarNE abstract;
+	
+template DescribeQueryVarOrIriNE
+	:	varoririref
+	;
+
+-- SolutionModifier
+	
+template SolutionModifier
+	:	(isDefined( orderclause ) ? orderclause )
+		(isDefined(  limitoffsetclauses ) ? limitoffsetclauses )
+	;
+
+	
+template OrderClause
+	:	"ORDER" "BY"
+		ordercondition
+	;
+	
+template OrderCondition abstract;
+	
+template OrderConditionLeftNE
+	:	( ascending = "true" ?	 "ASC"	:	"DESC" )
+		brackettedexpression
+	;	
+	
+template OrderConditionRightNE abstract;
+	
+template LimitOffsetClauses	abstract;
+	
+template LimitOffsetClausesLeftNE
+	:	limitclause
+		(isDefined( offsetclause ) ? offsetclause ) 
+	;
+	
+template LimitOffsetClausesRightNE
+	:	 offsetclause
+		 (isDefined( limitclause ) ? limitclause )
+	;
+	
+template LimitClause
+	:	"LIMIT"
+		integer	
+	;
+	
+template OffsetClause
+	:	"OFFSET"
+		integer
+	;
+
+-- DISTING / REDUCEDs
+template SolutionsDisplayNE abstract;
+	
+template DistinctNE
+	:	"DISTINCT"
+	;
+	
+template ReducedNE
+	:	"REDUCED"
+	;	
+	
+-- VAR / '*'
+template VariablesNE abstract;
+	
+template AllVariablesNE
+	:	"*"
+	;
+	
+template SomeVariablesNE
+	:	variables
+	;		
+
+	
+template VarOrIRIref abstract;
+	
+template Var abstract;
+	
+template IRIref abstract;
+	
+template PrefixedName abstract;
+	
+	
+-- DatasetClause
+template DatasetClause
+	:	"FROM"
+		graphclause
+	;
+	
+template GraphClauseNE abstract;
+	
+template DefaultGraphClause
+	:	sourceselector
+	;
+	
+template NamedGraphClause
+	:	"NAMED"
+		sourceselector
+	;
+	
+template SourceSelector
+	:	iriref
+	;
+		
+	
+-- WhereClause
+template WhereClause
+	:	( syntaxWhere ? "WHERE" )
+		 groupgraphpattern
+	;
+	
+	
+--- Graphpatterns
+template GroupGraphPattern
+	:	"{"
+		(isDefined( starttriplesblock ) ? starttriplesblock )
+		(isDefined( additionalGGPelements)  ? additionalGGPelements )
+		"}"
+	;
+	
+template TriplesBlock
+	:	triplessamesubject{separator="."} ( _endmarker ? "." )
+	;
+	
+template AdditionalGGPElement abstract;
+
+template AdditionalGGPElementGPNT
+	:	graphPatternNotTriples ( _separator ? "." ) (isDefined( triplesblock ) ? triplesblock )
+	;
+
+template AdditionalGGPElementFilter
+	:	filter ( _separator ? "." ) (isDefined( triplesblock ) ? triplesblock )
+	;
+	
+template GraphPatternNotTriples abstract;
+	
+template OptionalGraphPattern
+	:	"OPTIONAL"
+		groupgraphpattern
+	;
+	
+template GroupOrUnionGraphPattern
+	:	groupgraphpattern
+		(isDefined( uniongraphpattern ) ?uniongraphpattern )
+	;
+	
+template UnionGraphPatternNE
+	:	"UNION"
+		groupgraphpattern
+	;
+	
+template GraphGraphPattern
+	:	"GRAPH"
+		varoririref
+		groupgraphpattern
+	;
+	
+template Filter
+	:	"FILTER"
+		constraint
+	;
+	
+-- TriplesSameSubject
+
+template TriplesSameSubject abstract;
+	
+template TriplesSameSubjectLeftNE
+	:	varorterm
+		propertylistnotempty
+	;
+	
+template TriplesSameSubjectRightNE
+	:	triplesnode
+		( isDefined( propertylist ) ? propertylist )
+	;
+	
+template PropertyList
+	:	verb
+		objectlist
+		(isDefined( addpropertylistnotempty ) ? addpropertylistnotempty )
+	;
+	
+template VarOrTerm abstract;
+	
+template AdditionalPropertyList
+	:	";"
+		(isDefined( verbobjectlist)  ?verbobjectlist )
+	;
+	
+template VerbObjectListNE
+	:	verb
+		objectlist
+	;
+	
+template Verb abstract;
+	
+template VerbANE( disambiguate = "WS 'a' WS" )
+	:	"a"
+	;
+	
+template ObjectList
+	:	object
+		(isDefined( addobject ) ? addobject )
+	;
+	
+template AdditionalObjectNE
+	:	","
+		object
+	;
+	
+template Object
+	:	graphnode
+	;
+	
+template GraphNode abstract; 
+	
+template TriplesNode abstract;
+	
+template Collection
+	:	"("
+		graphnode
+		")"
+	;
+	
+template BlankNodePropertyList
+	:	"["
+		propertylistnotempty
+		"]"
+	;
+	
+template GraphTerm abstract;
+
+template BlankNode abstract;
+	
+	
+-- Constraints
+template Constraint abstract;
+	
+template BrackettedExpression
+	:	"("
+		expression
+		")"
+	;
+	
+template BuiltInCall abstract;
+	
+template StrBuiltInCallNE
+	:	"STR"
+		"("
+		expression
+		")"
+	;
+	
+template LangBuiltInCallNE
+	:	"LANG"
+		"("
+		expression
+		")"
+	;
+	
+template LangmatchesBuiltInCallNE
+	:	"LANGMATCHES"
+		"("
+		expression
+		addexpression
+		")"
+	;
+	
+template DatatypeBuiltInCallNE
+	:	"DATATYPE"
+		"("
+		expression
+		")"
+	;
+	
+template BoundBuiltInCallNE
+	:	"BOUND"
+		"("
+		var
+		")"
+	;
+	
+template SameTermBuiltInCallNE
+	:	"sameTerm"
+		"("
+		expression
+		addexpression
+		")"
+	;
+	
+template IsIRIBuiltInCallNE
+	:	"isIRI"
+		"("
+		expression
+		")"
+	;
+	
+template IsURIBuiltInCallNE
+	:	"isURI"
+		"("
+		expression
+		")"
+	;
+	
+template IsBlankBuiltInCallNE 
+	:	"isBLANK"
+		"("
+		expression
+		")"
+	;
+	
+template IsLiteralBuiltInCallNE
+	:	"isLITERAL"
+		"("
+		expression
+		")"
+	;
+	
+template RegexExpression
+	:	"REGEX"
+		"("
+		expression
+		addexpression
+		")"
+	;
+	
+template FunctionCall
+	:	iriref
+		arglist
+	;
+	
+template ArgList abstract;
+	
+template ArgListNILNE
+	:	nil
+	;
+	
+template ArgListExpressionNE
+	:	"("
+		expression
+		(isDefined( addexpression ) ? addexpression )
+		")"
+	;
+	
+
+-- Expressions
+template Expression
+	:	conditionalorexpression
+	;
+	
+template AdditionalExpressionNE
+	:	","
+		conditionalorexpression
+	;
+	
+template ConditionalOrExpression
+	:	conditionalandexpression
+		(isDefined( addconditionalandexpression )? addconditionalandexpression )
+	;
+	
+template AdditionalConditionalAndExpressionNE
+	:	"||"
+		valuelogical
+		(isDefined( addvaluelogical ) ? addvaluelogical )
+	;
+	
+template ConditionalAndExpression
+	:	valuelogical
+		(isDefined( addvaluelogical  )? addvaluelogical )
+	;
+	
+template ValueLogical
+	:	relationalexpression
+	;
+	
+template AdditionalValueLogicalNE
+	:	"&&"
+		relationalexpression
+	;
+	
+template RelationalExpression
+	:	numericexpression
+		(isDefined( addnumericexpression ) ? addnumericexpression )
+	;
+	
+template NumericExpression
+	:	additiveexpression
+	;
+	
+template AdditionalNumericExpressionNE abstract;
+	
+template EqualsNumericExpressionNE
+	:	"="
+		additiveexpression
+	;
+	
+template NotEqualNumericExpressionNE
+	:	"!="
+		additiveexpression
+	;
+	
+template SmallerNumericExpressionNE
+	:	"<"
+		additiveexpression
+	;
+	
+template BiggerNumericExpressionNE
+	:	">"
+		additiveexpression
+	;
+	
+template SmallerOrEqualNumericExpressionNE
+	:	"<="
+		additiveexpression
+	;
+	
+template BiggerOrEqualNumericExpressionNE
+	:	">="
+		additiveexpression
+	;
+	
+template AdditiveExpression
+	:	multiplicativeexpression
+		(isDefined( addmultiplicativeexpression ) ? addmultiplicativeexpression )
+	;
+	
+template MultiplicativeExpression
+	:	unaryexpression
+		(isDefined( addunaryexpression ) ? addunaryexpression )
+	;
+	
+template AdditionalMultiplicativeExpressionNE abstract;
+	
+template PlusMultiplicativeExpressionNE
+	:	"+"
+		unaryexpression
+		(isDefined( addunaryexpression  ) ? addunaryexpression )
+	;
+	
+template MinusMultiplicativeExpressionNE
+	:	"-"
+		unaryexpression
+		(isDefined( addunaryexpression ) ? addunaryexpression )
+	;
+	
+template NumericLiteralPositive abstract;
+	
+template NumericLiteralNegative abstract;
+	
+template UnaryExpression abstract;
+	
+template AdditionalUnaryExpressionNE abstract;
+	
+template TimesAdditionalUnaryExpressionNE
+	:	"*"
+		unaryexpression
+	;
+	
+template DividedByAdditionalUnaryExpressionNE
+	:	"/"
+		unaryexpression
+	;
+	
+template NotPrimaryExpressionNE
+	:	"!"
+		primaryexpression
+	;
+	
+template PlusPrimaryExpressionNE
+	:	"+"
+		primaryexpression
+	;
+	
+template MinusPrimaryExpressionNE
+	:	"-"
+		primaryexpression
+	;
+	
+template PrimaryExpression abstract;
+	
+template IRIrefOrFunction
+	:	iriref
+		(isDefined( arglist ) ? arglist )
+	;
+	
+template RDFLiteral(disambiguate="STRING | STRING '^' '^' iriref | STRING '@' STRING")
+	:	string
+		(isDefined( langtagoririrefNE ) ? langtagoririrefNE )
+	;
+	
+template LANGTAGOrIRIrefNE abstract;
+	
+template UpIRIrefNE
+	:	"^" "^"
+		iriref
+	;
+	
+template NumericLiteral abstract;
+	
+template NumericLiteralUnsigned abstract;
+	
+template BooleanLiteral abstract;
+
+
+template TrueBooleanLiteralNE
+	:	"true"
+	;
+	
+template FalseBooleanLiteralNE
+	:	"false"
+	;
+	
+	
+
+-- PRODUCTIONS FOR TERMINALS
+
+template VAR1(disambiguate="'?' STRING")
+	:	"?"
+		name
+	;
+	
+template VAR2
+	:	"$"
+		name
+	;
+
+template VARNAME
+	:	varname
+	;
+	
+template PNAME_LN( disambiguate = "NAME ':' NAME | ':' NAME" )
+	:	pname_ns
+		pn_local
+	;
+	
+template PNAME_NS
+	:	(isDefined( pn_prefix) ? pn_prefix ) 
+		":"
+	;
+	
+template IRI_REF
+	:	iri_ref
+	;
+	
+template NIL
+	:	"("
+		")"
+	;
+	
+template INTEGER
+	:	integer
+	;
+	
+template DECIMAL
+	:	decimal
+	;
+	
+template DOUBLE
+	:	double
+	;
+		
+template INTEGER_POSITIVE
+	:	"+"
+		integer
+	;
+	
+template DECIMAL_POSITIVE
+	:	"+"
+		decimal
+	;
+	
+template DOUBLE_POSITIVE
+	:	"+"
+		double
+	;
+	
+template INTEGER_NEGATIVE
+	:	"-"
+		integer
+	;
+	
+template DECIMAL_NEGATIVE
+	:	"-"
+		decimal
+	;
+	
+template DOUBLE_NEGATIVE
+	:	"-"
+		double
+	;
+	
+template BLANK_NODE_LABEL
+	:	"_:"
+		pn_local
+	;
+	
+template ANON
+	:	"["
+		"]"
+	;
+	
+template LANGTAG
+	:	"@"
+		langtag
+	;
+	
+template PN_PREFIX
+	:	pn_prefix
+	;
+	
+template PN_LOCAL
+	:	pn_local
+	;
+-- END Class templates
+
+
+--BEGIN SPARQL UPDATE
+template SparqlUpdate
+	:	updateOrManage
+	;
+	
+template UpdateOrManage abstract;
+
+template Update abstract;
+
+template Manage abstract;
+
+template Modify
+	:	"MODIFY" (isDefined( graphIri ) ? graphIri ) "DELETE" firstConstructTemplate "INSERT" secondConstructTemplate ( isDefined( whereClause ) ? whereClause ) 
+	;
+	
+template Insert
+	:	"INSERT" insertDataOrTemplate
+	;
+	
+template Delete
+	:	"DELETE" deleteDataOrTemplate
+	;
+	
+template Load
+	:	"LOAD" firstIriRef (isDefined( secondIriRef ) ? "INTO" secondIriRef )
+	;
+	
+template Clear
+	:	"CLEAR" (isDefined( graphIRI ) ? graphIRI )
+	;
+	
+template Drop
+	:	"DROP" ( silent ? "SILENT" ) graphIRI
+	;
+	
+template Create
+	:	"CREATE" ( silent ? "SILENT" ) graphIRI
+	;
+	
+template InsertDataOrTemplate abstract;
+
+template InsertData
+	:	"DATA" (isDefined( intoBlock ) ? intoBlock ) constructTemplate
+	;
+
+template InsertTemplate
+	:	(isDefined( intoBlock ) ? intoBlock ) constructTemplate  (isDefined( whereClause ) ? whereClause )
+	;	
+	
+template DeleteDataOrTemplate abstract;
+
+template DeleteData
+	:	"DATA" (isDefined( fromBlock ) ? fromBlock ) constructTemplate
+	;
+
+template DeleteTemplate
+	:	(isDefined( fromBlock ) ? fromBlock ) constructTemplate  (isDefined( whereClause ) ? whereClause )
+	;
+	
+template IntoBlockA
+	:	( into ? "INTO" ) iriRef
+	;
+	
+template FromBlockA
+	:	( from ? "FROM" ) iriRef
+	;
+	
+template GraphIRI
+	:	"GRAPH" iriRef
+	;
+	
+
+
+-- END SPARQL UPDATE
+
+-- BEGIN Special symbols
+-- Possible modifications:
+--	- Addition of new symbols.
+--	- Modification of spaces information.
+--	- Removal of unused symbols so that using these symbols results in lexical
+--	error rather than parsing error.
+	symbols {
+		lsquare		= "[";
+		rsquare		= "]"	: rightSpace;
+		excl		= "!";
+		coma		= ","	: leftNone, rightSpace;
+		lparen		= "(";
+		rparen		= ")"	: leftNone, rightSpace;
+		lcurly		= "{"	: leftSpace;
+		rcurly		= "}"	: leftNone, rightSpace;
+		semi		= ";"	: leftNone, rightSpace;
+		colon		= ":"	: leftSpace, rightSpace;
+		pipe		= "|"	: leftSpace, rightSpace;
+		sharp		= "#"	: leftSpace;
+		qmark		= "?";
+		coloncolon	= "::"	: leftNone, rightNone;
+
+		-- operator symbols
+		point		= "."	: leftNone;
+		rarrow		= "->"	: leftNone;
+		minus		= "-"	: leftSpace, rightSpace;
+		star		= "*"	: leftSpace, rightSpace;
+		slash		= "/"	: leftSpace, rightSpace;
+		plus		= "+"	: leftSpace, rightSpace;
+		eq			= "="	: leftSpace, rightSpace;
+		gt			= ">"	: leftSpace, rightSpace;
+		lt			= "<"	: leftSpace, rightSpace;
+		ge			= ">="	: leftSpace, rightSpace;
+		le			= "<="	: leftSpace, rightSpace;
+		ne			= "<>"	: leftSpace, rightSpace;
+		larrow		= "<-"	: leftSpace, rightSpace;
+	}
+-- END Special symbols
+
+-- BEGIN Operator table
+-- Defines all operators with their priority, arity, and associativity.
+-- All defined operators must be used in operator templates.
+
+-- Specify operator table(s) here if necessary.
+
+-- END Operator table
+
+
+-- BEGIN Lexer
+-- Specifies the lexical entities.
+-- Only needs modification when default lexer is not satisfactory.
+-- Generally modified along with Primitive templates.
+	token COMMENT	: endOfLine(start = "#");
+
+	lexer = "
+%options testLiterals = false;
+
+NL
+	:	(	'\\r' '\\n'
+		|	'\\n' '\\r'	//Improbable
+		|	'\\r'
+		|	'\\n'
+		)
+	{newline();}
+	;
+
+WS
+	:	(	' '
+		|	'\\t'
+		)
+	;
+
+%protected
+DIGIT
+	:	'0'..'9'
+	;
+
+%protected
+ALPHA
+	:	'a'..'z'
+	|	'A'..'Z'
+	|	'_'
+	//For Unicode compatibility (from 0000 to 00ff)
+	|	'\\u00C0' .. '\\u00D6'
+	|	'\\u00D8' .. '\\u00F6'
+	|	'\\u00F8' .. '\\u00FF'
+	;
+
+%protected
+IRI
+	:	'a'..'z'
+	|	'A'..'Z'
+	|	'_'
+	|	'/'
+	|	'.'
+	|	':'
+	|	'#'
+	|	'-'
+	//For Unicode compatibility (from 0000 to 00ff)
+	|	'\\u00C0' .. '\\u00D6'
+	|	'\\u00D8' .. '\\u00F6'
+	|	'\\u00F8' .. '\\u00FF'
+	;
+
+%protected
+SNAME
+%v2	options {
+%v2		testLiterals = true;
+%v2	}
+	:	(ALPHA) (ALPHA | DIGIT)*
+;
+
+%protected
+IRISNAME
+%v2	options {
+%v2		testLiterals = true;
+%v2	}
+	:	'<' (IRI) (IRI | DIGIT)* '>'
+;
+
+NAME
+	:	(
+%v3			SNAME
+%v2			s:SNAME {if(s.getType() != SNAME) $setType(s.getType());}
+		|	IRISNAME
+		|	'<''>'
+		|	'\"'!
+			(	ESC
+			|	'\\n' {newline();}
+			|	~('\\\\'|'\\\"'|'\\n')
+			)*
+			'\"'!
+%v3			{setText(ei.unescapeString(getText(), 1));}
+		|	'\"'!
+			(	ESC
+			|	'\\n' {newline();}
+			|	~('\\\\'|'\\\"'|'\\n')
+			)*
+			'\"'!
+%v3			{setText(ei.unescapeString(getText(), 1));}
+		)
+	;
+
+INT
+	:	(DIGIT)+
+%v2		(('.' DIGIT)=> '.' (DIGIT)+ {$setType(FLOAT);})?
+	;
+
+%v3	FLOAT	:	DIGIT+ '.' DIGIT*	;
+
+%protected
+ESC
+	:	'\\\\'!
+		(	'n' %v2{%setText(\"\\n\");}
+		|	'r' %v2{%setText(\"\\r\");}
+		|	't' %v2{%setText(\"\\t\");}
+		|	'b' %v2{%setText(\"\\b\");}
+		|	'f' %v2{%setText(\"\\f\");}
+		|	'\"' %v2{%setText(\"\\\"\");}
+		|	'\\'' %v2{%setText(\"\\'\");}
+		|	'\\\\' %v2{%setText(\"\\\\\");}
+		|	(
+				('0'..'3')
+				(
+%v2					options {
+%v2						warnWhenFollowAmbig = false;
+%v2					}
+				:	('0'..'7')
+					(
+%v2						options {
+%v2							warnWhenFollowAmbig = false;
+%v2						}
+					:	'0'..'7'
+					)?
+				)?
+			|	('4'..'7')
+				(
+%v2					options {
+%v2						warnWhenFollowAmbig = false;
+%v2					}
+				:	('0'..'7')
+				)?
+			)
+				{
+%v2					String s = %getText;
+%v2					int i;
+%v2					int ret = 0;
+%v2					String ans;
+%v2					for (i=0; i<s.length(); ++i)
+%v2						ret = ret*8 + s.charAt(i) - '0';
+%v2					ans = String.valueOf((char) ret);
+%v2					%setText(ans);
+				}
+		)
+	;
+
+STRING
+	:	'\\''!
+		(	ESC
+		|	'\\n' {newline();}
+		|	~('\\\\'|'\\''|'\\n')
+		)*
+		'\\''!
+%v3			{setText(ei.unescapeString(getText(), 1));}
+	;
+
+	";
+-- END Lexer
