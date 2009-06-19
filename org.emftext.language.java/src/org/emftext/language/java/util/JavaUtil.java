@@ -28,9 +28,6 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
-import org.emftext.language.java.commons.CommonsFactory;
-import org.emftext.language.java.commons.FeatureNamedElementName;
-import org.emftext.language.java.commons.Name;
 import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.containers.CompilationUnit;
 
@@ -40,25 +37,11 @@ import org.emftext.language.java.containers.CompilationUnit;
 public class JavaUtil {
 
 	public static String getName(NamedElement element) {
-		FeatureNamedElementName nameBox = element.getName();
-		if (nameBox == null) {
-			return null;
-		}
-		if (nameBox instanceof Name) {
-			return ((Name) nameBox).getValue(); 
-		}
-		return null;
+		return element.getName();
 	}
 	
 	public static void setName(NamedElement element, String name) {
-		FeatureNamedElementName nameBox = element.getName();
-		if (nameBox == null) {
-			nameBox = CommonsFactory.eINSTANCE.createName();
-			element.setName(nameBox);
-		}
-		if (nameBox instanceof Name) {
-			((Name) nameBox).setValue(name); 
-		}
+		element.setName(name);
 	}
 	
 	/**
