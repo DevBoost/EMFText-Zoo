@@ -42,9 +42,9 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 			<% if (frage.getExplanation() != null) { %> <%=frage.getExplanation()%> <% } %>
 		<br>	
 			<% if (frage.getDependentOf().size() > 0) { %>
-				(Nur bei: 
+				(Only if: &nbsp; 
 				<% for(Option option : frage.getDependentOf()) { %>
-					<%=option.getId() %>  
+					<%=option.getId() %> was selected for Item <%=generateItemAddress(frage) %>
 				<%}%>
 				)
 			 
@@ -68,10 +68,10 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 				for(Option option : auswahl.getOptions()) {
 					if (auswahl.isMultiple()) {%> 
 					 <input type="checkbox" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-					 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+					 <% if (option.getId() != null) {%> (mind: <%=option.getId()%> )<%}%>
 					 <%} else { %>
 					 <input type="radio" name="<%=frage.getText()%>" value="<%=option.getText()%>"> <%=option.getText()%>
-					 <% if (option.getId() != null) {%> (beachte: <%=option.getId()%> )<%}%>
+					 <% if (option.getId() != null) {%> (mind: <%=option.getId()%> )<%}%>
 					
 					
 					 <%}%>
@@ -80,7 +80,7 @@ class="HTMLFormGenerator" skeleton="generator.skeleton" imports ="java.util.Iter
 			}
 			if (frage.getItemType() instanceof Decision) { 
 				Decision entscheidung = (Decision) frage.getItemType();
-				%><input type="checkbox" name="<%=frage.getText()%>" title="Ja|Nein" checked="checked" value="ok" /> 
+				%><input type="checkbox" name="<%=frage.getText()%>" title="Yes|No" checked="checked" value="ok" /> 
 				<label for="<%=frage.getText()%>"><%=frage.getText()%></label>
 				<% 
 				if (entscheidung.getOptions().get(0).getId() != null) {
