@@ -279,9 +279,9 @@ public abstract class ASTNode implements TypeConstants, TypeIds {
 		if (!isRawMemberInvocation) {
 			if (method instanceof ParameterizedGenericMethodBinding) {
 				ParameterizedGenericMethodBinding paramMethod = (ParameterizedGenericMethodBinding) method;
-				if (paramMethod.isUnchecked || (paramMethod.isRaw && method.hasSubstitutedParameters())) {
-					rawOriginalGenericMethod = method.original();
-				}
+				//if (paramMethod.isUnchecked || (paramMethod.isRaw && method.hasSubstitutedParameters())) {
+				//	rawOriginalGenericMethod = method.original();
+				//}
 			}
 		}
 		int invocationStatus = INVOCATION_ARGUMENT_OK;
@@ -355,7 +355,7 @@ public abstract class ASTNode implements TypeConstants, TypeIds {
 		} else if (!method.isStatic() && !receiverType.isUnboundWildcard() && method.declaringClass.isRawType() && method.hasSubstitutedParameters()) {
 		    scope.problemReporter().unsafeRawInvocation((ASTNode)invocationSite, method);
 		} else if (rawOriginalGenericMethod != null) {
-		    scope.problemReporter().unsafeRawGenericMethodInvocation((ASTNode)invocationSite, method);
+		    //scope.problemReporter().unsafeRawGenericMethodInvocation((ASTNode)invocationSite, method);
 		}
 	}
 	public ASTNode concreteStatement() {
