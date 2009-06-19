@@ -21,12 +21,14 @@ TOKENSTYLES {
 	"%>" COLOR #C00000, BOLD;
 	"<%ENDFOR%>" COLOR #C00000, BOLD;
 	"<%ENDIF%>" COLOR #C00000, BOLD;
-	"SL_COMMENT" COLOR #00A000, ITALIC;
+	"COMMENT" COLOR #00A000, ITALIC;
 }
 
 RULES {
 	ClassTemplate ::= "<%TEMPLATE" "INPUT=" inputMetaClass['"','"'] "%>" body;
+	PhTypedElement ::= "<%=" expression['"','"'] "%>" "=%>";
 	IfElseTypedElement ::= "<%IF" expression['"','"'] "%>" body "<%ELSE%>" elseBody "<%ENDIF%>";
+	PhNamedElement ::= "<%=" expression['"','"'] "%>" "=%>";
 	IfElseNamedElement ::= "<%IF" expression['"','"'] "%>" body "<%ELSE%>" elseBody "<%ENDIF%>";
 	IfClass ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
 	ForClass ::= "<%FOR" expression['"','"'] "%>" body "<%ENDFOR%>";
