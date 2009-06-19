@@ -44,9 +44,11 @@ public abstract class AbstractInterpreterTest extends TestCase {
 		try {
 			ResourceSetImpl resourceSet = new ResourceSetImpl();
 	
-			Resource customerResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + customerFileName));
-			customerResource.load(null);
-			EObject customer = (EObject) customerResource.getContents().get(0);
+			String path = getInputFolder() + File.separator + customerFileName;
+			Resource resource = resourceSet.createResource(URI.createFileURI(path));
+			assertNotNull("Can't create resource for '" + path + "'- probably there is no suitable registered factory.", resource);
+			resource.load(null);
+			EObject customer = (EObject) resource.getContents().get(0);
 			
 			Resource templateResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + templateFileName));
 			templateResource.load(null);
@@ -62,7 +64,9 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
 			
 			// pretty print templateInstanceAST
-			Resource instance = resourceSet.createResource(URI.createURI("output." + getOutputFileExtension()));
+			String outputPath = "output." + getOutputFileExtension();
+			Resource instance = resourceSet.createResource(URI.createURI(outputPath));
+			assertNotNull("Can't create resource for '" + outputPath + "'- probably there is no suitable registered factory.", resource);
 			instance.getContents().add(templateInstanceAST);
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			instance.save(outputStream, null);
@@ -75,6 +79,8 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			result = result.replace("  ", " ");
 			result = result.trim();
 			
+			System.out.println("AbstractInterpreterTest.testInterpretation() expected:\n" + expectedResult);
+			System.out.println("AbstractInterpreterTest.testInterpretation() actual:\n" + result);
 			// compare output with expected result
 			assertEquals(expectedResult, result);
 		} catch (IOException e) {
