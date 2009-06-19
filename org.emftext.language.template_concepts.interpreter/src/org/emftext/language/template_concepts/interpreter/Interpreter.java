@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -43,12 +44,23 @@ public class Interpreter implements IOptionProvider, IResourcePostProcessorProvi
 
 	public void process(ITextResource resource) {
 		try {
-			if(resource==null||resource.getContents().size()==0) 
-					throw new InterpreterWrapperException(
-							new TemplateException("textResource is null or empty"));
-			TemplateCall tc = (TemplateCall)resource.getContents().get(0);
+			if (resource==null || resource.getContents().size() == 0) { 
+				throw new InterpreterWrapperException(new TemplateException("textResource is null or empty"));
+			}
+			TemplateCall tc = (TemplateCall) resource.getContents().get(0);
 			EObject paramModel = tc.getParameterModel();
 			Template template = tc.getTarget();
+
+			// TODO why is inputMetaClass an EObject and not an EClass?
+			EClass inputMetaClass = (EClass) template.getInputMetaClass();
+			
+			// the interpreter must check whether the loaded input model
+			// really confirms to the type expected by the template
+			boolean parameterModelFits = inputMetaClass.isInstance(paramModel);
+			if (!parameterModelFits) {
+				resource.addError("Input model has wrong type (expected: " + inputMetaClass.getName() + ", but was: " + paramModel.eClass().getName() + ")", template);
+				return;
+			}
 			InterpreterWithState interpreterWithState = new InterpreterWithState(template, paramModel);
 			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
 			
