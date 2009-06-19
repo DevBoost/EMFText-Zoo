@@ -5,13 +5,15 @@ public class MyClass {
 	<%FOR "eClassifiers" %>
 
 		<%IF "oclIsKindOf(EClass)" %>
-			<%FOR "self.oclAsType(EClass).eAttributes" %>
-				private MyClass attribute;
+			<%FOR "oclAsType(EClass).eAttributes" %>
+				<%IF "not(oclAsType(EAttribute).derived)" %>
+					private MyClass attribute;
+				<%ENDIF%>
 			<%ENDFOR%>
 		<%ENDIF%>
 
 		<%IF "oclIsKindOf(EClass)" %>
-			<%FOR "self.oclAsType(EClass).eStructuralFeatures" %>
+			<%FOR "oclAsType(EClass).eStructuralFeatures" %>
 				private void feature() {
 				}
 			<%ENDFOR%>
