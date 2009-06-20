@@ -18,12 +18,16 @@
  *   Software Technology Group - TU Dresden, Germany 
  *   - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter;
+package org.emftext.language.template_concepts;
 
-public class TemplateMetamodelAssumptions {
-	public static final String REFERENCE_TEMPLATE_BODY="body";
-	public static final String REFERENCE_FOR_BODY="body";
-	public static final String REFERENCE_IF_BODY="body";
-	public static final String REFERENCE_ELSE_BODY="elseBody";
+/**
+ * This class encapsulate some constants for feature names that are
+ * create when a language is extended with template concepts.
+ */
+public class TemplateMetamodelConstants {
+	public static final String REFERENCE_TEMPLATE_BODY = "body";
+	public static final String REFERENCE_FOR_BODY = "body";
+	public static final String REFERENCE_IF_BODY = "body";
+	public static final String REFERENCE_ELSE_BODY = "elseBody";
 	public static final String FEATURE = "Feature";
 }

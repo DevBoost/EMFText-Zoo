@@ -48,7 +48,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			Resource resource = resourceSet.createResource(URI.createFileURI(path));
 			assertNotNull("Can't create resource for '" + path + "'- probably there is no suitable registered factory.", resource);
 			resource.load(null);
-			EObject customer = (EObject) resource.getContents().get(0);
+			EObject inputModelRoot = (EObject) resource.getContents().get(0);
 			
 			Resource templateResource = resourceSet.createResource(URI.createFileURI(getInputFolder() + File.separator + templateFileName));
 			templateResource.load(null);
@@ -56,7 +56,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			
 			InterpreterWithState interpreterWithState;
 			try {
-				interpreterWithState = new InterpreterWithState(template, customer);
+				interpreterWithState = new InterpreterWithState(template, inputModelRoot);
 			} catch (InterpreterException e1) {
 				fail(e1.getMessage());
 				return;

@@ -42,6 +42,7 @@ import org.emftext.language.template_concepts.IfElse;
 import org.emftext.language.template_concepts.Placeholder;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.TemplateConcept;
+import org.emftext.language.template_concepts.TemplateMetamodelConstants;
 import org.emftext.language.template_concepts.Template_conceptsPackage;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
@@ -94,7 +95,7 @@ public class InterpreterWithState {
 	private void load() throws InterpreterException {
 		
 		//find templateBody
-		EStructuralFeature templateBodySF = template.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_TEMPLATE_BODY);
+		EStructuralFeature templateBodySF = template.eClass().getEStructuralFeature(TemplateMetamodelConstants.REFERENCE_TEMPLATE_BODY);
 		if (templateBodySF == null) {
 			throw new TemplateMetamodelException("Template has no body");
 		}
@@ -155,60 +156,74 @@ public class InterpreterWithState {
 		//	return templateToInstanceObjectMap.get(tObject); (Code not watching variable context)
 	    //}
 		
-		String className = tObject.eClass().getName();
 		//find respective language class in this package
 		//and instantiate it as EObject
 		EObject tiObjectCopy = createObjectOfSameClass(tObject);
 		if (tiObjectCopy == null) {
+			String className = tObject.eClass().getName();
 			throw new InterpreterException("Didn't find respective template instance class for template class '" + className + "'");
 		}
+		
 		boolean isTemplateConcept = isTemplateConcept(tiObjectCopy);
 		if (!isTemplateConcept) {
-			//throw new InterpreterException("Found template concept as instance object.");
 			copyAttributes(tObject, tiObjectCopy);
 			currentTiParent = tiObjectCopy;
 		}
+		
 		//System.out.println("Copied " + tObject + " to " + tiObject);
 		//FIXME mboehme: doesn't work! For instance in a forLoop the same tObject results in different tiObjects 
 		templateToInstanceObjectMap.put(tObject, currentTiParent);
 		instanceToTemplateObjectMap.put(currentTiParent, tObject);
 		
-		for (EObject tReferenceObject : tObject.eContents()) {
-			//Evaluate TemplateConcept
-			if (tReferenceObject instanceof TemplateConcept) {
-				if (tReferenceObject instanceof Placeholder) {
-					EObject placeholderValue = evaluatePlaceHolder((Placeholder) tReferenceObject, currentTiParent);
-					attach(currentTiParent, placeholderValue, currentTiReference);
-				} else if(tReferenceObject instanceof ForEach) {
-					evaluateForLoop((ForEach) tReferenceObject, currentTiParent, currentTiReference);
-				} else if(tReferenceObject instanceof If) {
-					EObject ifValue = evaluateIfCondition((If) tReferenceObject, currentTiParent, currentTiReference);
+		for (EObject tContentObject : tObject.eContents()) {
+			if (tContentObject == null) {
+				throw new InterpreterException("tContentObject was null?");
+			}
+			if (!isTemplateConcept) {
+				currentTiReference = tContentObject.eContainingFeature();
+				System.out.println("TI Reference := " + currentTiReference.getName());
+			}
+			// evaluate template concepts
+			if (tContentObject instanceof TemplateConcept) {
+				if (tContentObject instanceof Placeholder) {
+					EObject result = evaluatePlaceHolder((Placeholder) tContentObject, currentTiParent);
+					attach(currentTiParent, result, currentTiReference);
+				} else if (tContentObject instanceof ForEach) {
+					List<EObject> result = evaluateForLoop((ForEach) tContentObject, currentTiParent, currentTiReference);
+					attach(currentTiParent, result, currentTiReference);
+				} else if (tContentObject instanceof If) {
+					EObject result = evaluateIfCondition((If) tContentObject, currentTiParent, currentTiReference);
 					// may be null
-					if (ifValue != null) {
-						attach(currentTiParent, ifValue, currentTiReference);
+					if (result != null) {
+						attach(currentTiParent, result, currentTiReference);
 					}
-				} else if(tReferenceObject instanceof IfElse) {
-					EObject ifElseValue = evaluateIfElseCondition((IfElse) tReferenceObject, currentTiParent, currentTiReference);
-					attach(currentTiParent, ifElseValue, currentTiReference);
+				} else if (tContentObject instanceof IfElse) {
+					EObject result = evaluateIfElseCondition((IfElse) tContentObject, currentTiParent, currentTiReference);
+					attach(currentTiParent, result, currentTiReference);
 				} else {
-					throw new TemplateMetamodelException("Unkown TemplateConcept: " + tReferenceObject.getClass());
+					throw new TemplateMetamodelException("Unkown TemplateConcept: " + tContentObject.getClass());
 				}
-			//Evaluate recursively
+			// evaluate object language elements (recursively)
 			} else {
-				if (!isTemplateConcept) {
-					currentTiReference = tReferenceObject.eContainingFeature();
-				}
-				EObject tReferenceValue = evaluateTReference(tReferenceObject, currentTiParent, currentTiReference);
-				attach(currentTiParent, tReferenceValue, currentTiReference);
+				EObject subResult = evaluate(tContentObject, currentTiParent, currentTiReference);
+				attach(currentTiParent, subResult, currentTiReference);
 			}
 		}
 		
 		return currentTiParent;
 	}
 	
-	private void copyAttributes(EObject tObject, EObject tiObjectCopy) throws TemplateMetamodelException {
+	/**
+	 * Copies all attributes from 'tObject' to 'tiObject'. This method is used
+	 * to transfer the attribute value for copied object language elements.
+	 * 
+	 * @param tObject
+	 * @param tiObject
+	 * @throws TemplateMetamodelException
+	 */
+	private void copyAttributes(EObject tObject, EObject tiObject) throws TemplateMetamodelException {
 		// copy all attributes
-		for (EAttribute tiAttributeClass : tiObjectCopy.eClass().getEAllAttributes()) {
+		for (EAttribute tiAttributeClass : tiObject.eClass().getEAllAttributes()) {
 			
 			//TODO Check if this is an instance of primitive_type (only primitive type has attributes)
 			//TODO Import primitive_type into project dependencies 
@@ -219,9 +234,9 @@ public class InterpreterWithState {
 			//find respective langParentAttributeClass
 						
 			EAttribute tAttributeClass = null;
-			for (EAttribute attClass : tObject.eClass().getEAllAttributes()) {
-				if (attClass.getName().matches(attributeName)) {
-					tAttributeClass = attClass;
+			for (EAttribute attributeOfTemplateObject : tObject.eClass().getEAllAttributes()) {
+				if (attributeOfTemplateObject.getName().matches(attributeName)) {
+					tAttributeClass = attributeOfTemplateObject;
 					break;
 				}
 			}
@@ -231,7 +246,7 @@ public class InterpreterWithState {
 			Object tAttribute = tObject.eGet(tAttributeClass);
 			//System.out.println("Copied attribute " + attributeName + " (" + tAttribute + ") to " + tiObject);
 			//attribute-OBJECTS just need to be set. No need to transform them
-			tiObjectCopy.eSet(tiAttributeClass, tAttribute);
+			tiObject.eSet(tiAttributeClass, tAttribute);
 		}
 	}
 
@@ -279,12 +294,18 @@ public class InterpreterWithState {
 		EClass evaluateEObjectClass = evaluatedEObject.eClass();
 		tiAttributeElement.eSet(tiConcreteAttributeClass.getEStructuralFeature("value"), evaluatedEObject.eGet(evaluateEObjectClass.getEStructuralFeature("value")));
 		
-		//now attach tiAttributeElement to tiObject
-		/*
-		*/
 		return tiAttributeElement;
 	}
 
+	/**
+	 * Adds all 'children' to 'feature' in 'parent'.
+	 */
+	private void attach(EObject parent, List<EObject> children, EStructuralFeature feature) throws InterpreterException {
+		for (EObject child : children) {
+			attach(parent, child, feature);
+		}
+	}
+	
 	/**
 	 * Adds 'child' to 'feature' in 'parent'.
 	 */
@@ -343,7 +364,7 @@ public class InterpreterWithState {
 	 */
 	private List<EObject> evaluateForLoop(ForEach forLoop, EObject currentTiParent, EStructuralFeature currentTiReference) throws InterpreterException{
 		//Find forBody
-		Object forBodyO = forLoop.eGet(forLoop.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_FOR_BODY));
+		Object forBodyO = forLoop.eGet(forLoop.eClass().getEStructuralFeature(TemplateMetamodelConstants.REFERENCE_FOR_BODY));
 		if (forBodyO == null) {
 			throw new TemplateMetamodelException("ForLoop without body: " + forLoop);
 		}
@@ -381,7 +402,7 @@ public class InterpreterWithState {
 	}
 	
 	private EObject evaluateIfCondition(If ifCondition, EObject currentTiParent, EStructuralFeature currentTiReference) throws InterpreterException{
-		EObject ifBodyO = (EObject) ifCondition.eGet(ifCondition.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_IF_BODY));
+		EObject ifBodyO = (EObject) ifCondition.eGet(ifCondition.eClass().getEStructuralFeature(TemplateMetamodelConstants.REFERENCE_IF_BODY));
 		if (ifBodyO == null) {
 			throw new TemplateMetamodelException("IfCondition without body: " + ifCondition);
 		}
@@ -390,11 +411,11 @@ public class InterpreterWithState {
 	}
 	
 	private EObject evaluateIfElseCondition(IfElse ifElseCondition, EObject currentTiParent, EStructuralFeature currentTiReference) throws InterpreterException{
-		EObject ifBodyO = (EObject) ifElseCondition.eGet(ifElseCondition.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_IF_BODY));
+		EObject ifBodyO = (EObject) ifElseCondition.eGet(ifElseCondition.eClass().getEStructuralFeature(TemplateMetamodelConstants.REFERENCE_IF_BODY));
 		if (ifBodyO == null) {
 			throw new TemplateMetamodelException("IfElseCondition without ifBody: " + ifElseCondition);
 		}
-		EObject elseBodyO = (EObject) ifElseCondition.eGet(ifElseCondition.eClass().getEStructuralFeature(TemplateMetamodelAssumptions.REFERENCE_ELSE_BODY));
+		EObject elseBodyO = (EObject) ifElseCondition.eGet(ifElseCondition.eClass().getEStructuralFeature(TemplateMetamodelConstants.REFERENCE_ELSE_BODY));
 		if (elseBodyO == null) {
 			throw new TemplateMetamodelException("IfElseCondition without elseBody: " + ifElseCondition);
 		}
@@ -441,16 +462,6 @@ public class InterpreterWithState {
 		}
 	}
 
-	private EObject evaluateTReference(EObject tReferenceObject, EObject currentTiParent, EStructuralFeature currentTiReference) throws InterpreterException{
-		//System.out.println("evaluateTReference(\n\t"+tReferenceObject+",\n\t" + tiObject + "\n)");
-		if (tReferenceObject == null) {
-			System.err.println("tReferenceObject was null?");
-			return null;
-		}
-		EObject subEvaluation = evaluate(tReferenceObject, currentTiParent, currentTiReference);
-		return subEvaluation;
-	}
-	
 	/**
 	 * TODO: Actually tiObject should be created from object language.
 	 * Returning one is created from template language
