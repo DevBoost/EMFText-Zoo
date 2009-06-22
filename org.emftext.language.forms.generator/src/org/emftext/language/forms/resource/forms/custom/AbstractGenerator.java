@@ -25,4 +25,9 @@ public abstract class AbstractGenerator implements IGenerator {
 		return (form.getGroups().indexOf(group)+1)+suffix;
 	}
 	
+	protected String generateItemText(Option option) {
+		Item item = (Item) option.eContainer().eContainer();
+		return item.getText();
+	}
+	
 }

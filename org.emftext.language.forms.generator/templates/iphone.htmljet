@@ -71,7 +71,7 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 
 <div id="iHeader">
     <a href="#" id="waBackButton">Back</a>
-    <span id="waHeadTitle">iItem</span>
+    <span id="waHeadTitle">iForm</span>
 </div>
 
 <div id="iGroup">
@@ -127,10 +127,10 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 					    
 					    	<% 
 					    	if (frage.getDependentOf().size() > 0) { %>
-					 			(Only if: 
+					 			(Only if  
 					 			<% 
 					 			for(Option option : frage.getDependentOf()) { %>
-					 				<%=option.getId() %>  
+					 				<%=generateItemText(option) %> = <%=option.getText() %>  
 					 			<%
 					 			}
 					 			%>
@@ -193,7 +193,7 @@ class="IPhoneFormGenerator" skeleton="generator.skeleton" imports ="java.util.It
 					    	
 					    	if (frage.getItemType() instanceof Decision) {
 				    			Decision e = (Decision) frage.getItemType();%>
-				    				<ul><li><input type="checkbox" name="<%=frage.getText()%>" id="<%=frage.getText()%>" class="iToggle" title="Ja|Nein" checked="checked" value="ok" /> 
+				    				<ul><li><input type="checkbox" name="<%=frage.getText()%>" id="<%=frage.getText()%>" class="iToggle" title="Yes|No" checked="checked" value="ok" /> 
 				    				<label for="<%=frage.getText()%>"><%=frage.getText()%></label></li></ul>
 								<%
 				    		}
