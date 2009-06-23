@@ -41,14 +41,8 @@ public class TreeJavaCompiler implements IResourcePostProcessor,
 		while (changed) {
 			changed = false;
 			
-			LocalVariableStatement lastDeclaredVariable = null;
-			
 			for(Iterator<EObject> i = javaResource.getAllContents(); i.hasNext(); ) {
 				EObject next = i.next();
-				if (next instanceof LocalVariableStatement) {
-					lastDeclaredVariable = (LocalVariableStatement) next;
-				}
-				
 				if(next instanceof Node) {
 					Node node = (Node) next;
 					NewConstructorCall ncc = convertTreeToNewConstructorCallChain(node);
