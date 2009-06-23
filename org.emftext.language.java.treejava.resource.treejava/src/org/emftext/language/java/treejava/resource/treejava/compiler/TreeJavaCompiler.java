@@ -13,6 +13,7 @@ import org.emftext.language.java.instantiations.InstantiationsFactory;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
+import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.treejava.Node;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
@@ -40,8 +41,14 @@ public class TreeJavaCompiler implements IResourcePostProcessor,
 		while (changed) {
 			changed = false;
 			
+			LocalVariableStatement lastDeclaredVariable = null;
+			
 			for(Iterator<EObject> i = javaResource.getAllContents(); i.hasNext(); ) {
 				EObject next = i.next();
+				if (next instanceof LocalVariableStatement) {
+					lastDeclaredVariable = (LocalVariableStatement) next;
+				}
+				
 				if(next instanceof Node) {
 					Node node = (Node) next;
 					NewConstructorCall ncc = convertTreeToNewConstructorCallChain(node);
