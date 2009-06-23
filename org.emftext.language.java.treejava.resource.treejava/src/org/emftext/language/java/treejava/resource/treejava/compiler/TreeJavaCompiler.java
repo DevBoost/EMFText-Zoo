@@ -13,7 +13,6 @@ import org.emftext.language.java.instantiations.InstantiationsFactory;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
-import org.emftext.language.java.statements.LocalVariableStatement;
 import org.emftext.language.java.treejava.Node;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
