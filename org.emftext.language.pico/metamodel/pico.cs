@@ -21,7 +21,7 @@ RULES {
 	
 	String ::= "string";
 	
-	Nil ::= "nil";
+	NilType ::= "nil";
 	
 	Program ::= "begin" declarations statements (";" statements)* "end" ;
 	
