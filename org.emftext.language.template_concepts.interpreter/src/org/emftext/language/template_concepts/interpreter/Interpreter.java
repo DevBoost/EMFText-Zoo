@@ -38,7 +38,9 @@ import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.runtime.resource.EProblemType;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.impl.AbstractProblem;
 
 public class Interpreter implements IOptionProvider, IResourcePostProcessorProvider, IResourcePostProcessor {
 
@@ -48,17 +50,27 @@ public class Interpreter implements IOptionProvider, IResourcePostProcessorProvi
 				throw new InterpreterWrapperException(new TemplateException("textResource is null or empty"));
 			}
 			TemplateCall tc = (TemplateCall) resource.getContents().get(0);
-			EObject paramModel = tc.getParameterModel();
+			final EObject paramModel = tc.getParameterModel();
 			Template template = tc.getTarget();
 
 			// TODO why is inputMetaClass an EObject and not an EClass?
-			EClass inputMetaClass = (EClass) template.getInputMetaClass();
+			final EClass inputMetaClass = (EClass) template.getInputMetaClass();
 			
 			// the interpreter must check whether the loaded input model
 			// really confirms to the type expected by the template
 			boolean parameterModelFits = inputMetaClass.isInstance(paramModel);
 			if (!parameterModelFits) {
-				resource.addError("Input model has wrong type (expected: " + inputMetaClass.getName() + ", but was: " + paramModel.eClass().getName() + ")", template);
+				resource.addProblem(
+						new AbstractProblem() {
+							
+							public EProblemType getType() {
+								return EProblemType.ERROR;
+							}
+							
+							public String getMessage() {
+								return "Input model has wrong type (expected: " + inputMetaClass.getName() + ", but was: " + paramModel.eClass().getName() + ")";
+							}
+						}, template);
 				return;
 			}
 			InterpreterWithState interpreterWithState = new InterpreterWithState(template, paramModel);

@@ -33,7 +33,9 @@ import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.runtime.resource.EProblemType;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.impl.AbstractProblem;
 
 /**
  * This is very rough implementation of the rules to move pieces.
@@ -80,14 +82,23 @@ public class MoveChecker implements IResourcePostProcessor,
 		
 		Square fromSquare = getSquare(board, fromColumn, fromRow);
 		if (fromSquare instanceof EmptySquare) {
-			resource.addError("There is no piece at this location.", move);
+			resource.addProblem(new AbstractProblem() {
+				
+				public EProblemType getType() {
+					return EProblemType.ERROR;
+				}
+				
+				public String getMessage() {
+					return "There is no piece at this location.";
+				}
+			}, move);
 			return;
 		}
 		checkMove(resource, (NonEmptySquare) fromSquare, move, fromColumn, fromRow, toColumn, toRow);
 		movePiece(board, fromSquare, toColumn, toRow);
 	}
 
-	private void checkMove(CgResource resource, NonEmptySquare square, Move move, int fromColumn, int fromRow,
+	private void checkMove(CgResource resource, final NonEmptySquare square, Move move, int fromColumn, int fromRow,
 			int toColumn, int toRow) {
 		// TODO add rules for special moves (Castling, En Passant, Promotion)
 		Piece piece = square.getPiece();
@@ -115,7 +126,16 @@ public class MoveChecker implements IResourcePostProcessor,
 		}
 		
 		if (!isValidMove) {
-			resource.addError("This is not a legal move for a " + square.getPiece().getName() + ".", move);
+			resource.addProblem(new AbstractProblem() {
+				
+				public EProblemType getType() {
+					return EProblemType.ERROR;
+				}
+				
+				public String getMessage() {
+					return "This is not a legal move for a " + square.getPiece().getName() + ".";
+				}
+			}, move);
 		}
 	}
 

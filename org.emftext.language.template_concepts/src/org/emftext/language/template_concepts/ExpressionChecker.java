@@ -48,7 +48,9 @@ import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.runtime.resource.EProblemType;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.impl.AbstractProblem;
 
 /**
  * An ExpressionChecker can be used to check and evaluate OCL queries 
@@ -81,10 +83,20 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		List<EObject> concepts = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getTemplateConcept());
 		for (EObject next : concepts) {
 			TemplateConcept concept = (TemplateConcept) next;
-			String expression = concept.getExpression();
-			String error = parseExpression(metaClass, null, expression);
+			final String expression = concept.getExpression();
+			final String error = parseExpression(metaClass, null, expression);
 			if (error != null) {
-				resource.addError("The expression \"" + expression + "\" is invalid (" + error + ").", concept);
+				resource.addProblem(
+						new AbstractProblem() {
+							
+							public EProblemType getType() {
+								return EProblemType.ERROR;
+							}
+							
+							public String getMessage() {
+								return "The expression \"" + expression + "\" is invalid (" + error + ").";
+							}
+						}, concept);
 			} else {
 				// for placeholders we must check the type
 				if (concept instanceof Placeholder) {
@@ -107,7 +119,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 
 			// then, we must figure out, from which primitive type the expression
 			// type inherits
-			Object placeHolderExpressionPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(expressionType);
+			final Object placeHolderExpressionPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(expressionType);
 			//System.out.println("placeholder expression primitive type = " + placeHolderExpressionPrimitiveType);
 			
 			// now that we know about the primitive type of the expression, we
@@ -124,13 +136,23 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			
 			// once we have the concrete class that holds the attribute we must figure out
 			// the primitive type, i.e., the superclass from the primitive types package
-			Object placeHolderTargetPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(boxedAttributeType);
+			final Object placeHolderTargetPrimitiveType = PrimitiveTypesHelper.getPrimitiveType(boxedAttributeType);
 			//System.out.println("placeholder target has primitive type = " + placeHolderTargetPrimitiveType);
 			
 			// now we have both the primitive type of the expression and the target of the
 			// placeholder. lets compare them...
 			if (!placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
-				resource.addError("The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")", concept);
+				resource.addProblem(
+						new AbstractProblem() {
+							
+							public EProblemType getType() {
+								return EProblemType.ERROR;
+							}
+							
+							public String getMessage() {
+								return "The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")";
+							}
+						}, concept);
 			}
 		} else {
 			System.out.println("Error while checking placeholder - error: " + queryOrError);

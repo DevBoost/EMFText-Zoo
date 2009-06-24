@@ -15,7 +15,9 @@ import org.eclipse.pde.core.plugin.ModelEntry;
 import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.runtime.resource.EProblemType;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.impl.AbstractProblem;
 
 public class PluginDataInitializer implements IResourcePostProcessorProvider,
 		IResourcePostProcessor {
@@ -90,7 +92,7 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 		for (IExtensionPoint extensionPoint : extensionPoints) {
 			if (!containsExtensionPoint(plugin.getExtensionPoints(),
 					extensionPoint.getUniqueIdentifier())) {
-				ExtensionPoint ep = PluginFactory.eINSTANCE.createExtensionPoint();
+				final ExtensionPoint ep = PluginFactory.eINSTANCE.createExtensionPoint();
 				ep.setName(extensionPoint.getLabel());
 				ep.setExtensionPointId(extensionPoint.getUniqueIdentifier());
 				ep.setSchema(extensionPoint.getSchemaReference());
@@ -103,9 +105,18 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 					for (IExtension extension : pointsExtensions) {
 						IContributor contributor = extension.getContributor();
 						if (getPlugin(contributor.getName(), family) == null) {
-							String contributorName = contributor.getName();
-							this.resource.addWarning("The plug-in " + contributorName + " extends the families extension point " + ep.getExtensionPointId() + " and " +
-									"should be considered as plug-in of the tool product family." , plugin);
+							final String contributorName = contributor.getName();
+							resource.addProblem(new AbstractProblem() {
+								
+								public EProblemType getType() {
+									return EProblemType.WARNING;
+								}
+								
+								public String getMessage() {
+									return "The plug-in " + contributorName + " extends the families extension point " + ep.getExtensionPointId() + " and " +
+										"should be considered as plug-in of the tool product family.";
+								}
+							}, plugin);
 						}
 						
 					}
@@ -118,7 +129,16 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 		
 		ModelEntry entry = PluginRegistry.findEntry(plugin.getPluginId()) ;
 		if (entry == null) {
-			this.resource.addError("Plug-In was not found" , plugin);
+			resource.addProblem(new AbstractProblem() {
+				
+				public EProblemType getType() {
+					return EProblemType.ERROR;
+				}
+				
+				public String getMessage() {
+					return "Plug-In was not found";
+				}
+			}, plugin);
 		}
 		IPluginModelBase model = entry.getModel();		
 		plugin.setName(model.getBundleDescription().getName());

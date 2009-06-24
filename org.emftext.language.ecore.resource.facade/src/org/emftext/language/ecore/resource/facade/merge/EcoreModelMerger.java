@@ -16,7 +16,9 @@ import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.runtime.resource.EProblemType;
 import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.impl.AbstractProblem;
 
 public class EcoreModelMerger  implements IResourcePostProcessor,
 	IResourcePostProcessorProvider, IOptionProvider {
@@ -42,7 +44,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		uri = uri.resolve(resource.getURI());
 		
 		if (uri.equals(resource.getURI())) {
-			resource.addError("The model can not be a facade for itself. Change the URI.", ePackage);
+			addError(resource, "The model can not be a facade for itself. Change the URI.", ePackage);
 			return;
 		}
 		
@@ -53,7 +55,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		} catch (Exception e ) {}
 		
 		if (annotatedResource == null) {
-			resource.addError("Ecore model not found: " + uri.toString(), ePackage);
+			addError(resource, "Ecore model not found: " + uri.toString(), ePackage);
 			return;
 		}
 		
@@ -66,13 +68,27 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 					((ENamedElement) realElement).getEAnnotations().addAll(element.getEAnnotations());
 				}
 				else {
-					resource.addError("Element '" + element.getName() + "' not decalred", element);
+					addError(resource, "Element '" + element.getName() + "' not decalred", element);
 				}
 			}
 		}
 		
 		resource.getContents().clear();
 		resource.getContents().addAll(EcoreUtil.copyAll(annotatedResource.getContents()));
+	}
+
+	private void addError(ITextResource resource, final String message,
+			EObject cause) {
+		resource.addProblem(new AbstractProblem() {
+			
+			public EProblemType getType() {
+				return EProblemType.ERROR;
+			}
+			
+			public String getMessage() {
+				return message;
+			}
+		}, cause);
 	}
 
 	public IResourcePostProcessor getResourcePostProcessor() {
