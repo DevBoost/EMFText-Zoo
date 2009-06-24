@@ -1,5 +1,5 @@
 SYNTAXDEF quml 
-FOR <http://www.eclipse.org/uml2/2.1.0/UML>
+FOR <http://www.eclipse.org/uml2/3.0.0/UML>
 START Model
  
 OPTIONS {
