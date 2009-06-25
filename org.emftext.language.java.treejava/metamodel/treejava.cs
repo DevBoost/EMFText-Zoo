@@ -12,6 +12,7 @@ OPTIONS {
 	srcFolder = "src-gen";
 	overrideManifest = "false";
 	overridePluginXML = "false";
+	overrideClasspath = "false";
 }
 
 RULES {
