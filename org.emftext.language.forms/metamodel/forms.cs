@@ -2,6 +2,10 @@ SYNTAXDEF forms
 FOR <http://www.emftext.org/language/forms>
 START Form
 
+TOKENS {
+	DEFINE MULTIPLE $'multiple'|'MULTIPLE'$;
+}
+
 TOKENSTYLES {
 	"TEXT" COLOR #da0000;
 	"FORM" COLOR #000000, BOLD;
@@ -20,7 +24,7 @@ RULES {
 	Form ::= "FORM" caption['"','"'] groups*;
 	Group ::= "GROUP" name['"','"'] items*;
 	Item ::= "ITEM" text['"','"'] ( explanation['"','"'] )? ("ONLY" "IF" dependentOf[])? ":" itemType;
-	Choice ::= "CHOICE" (multiple[])? "(" options ("," options)* ")";
+	Choice ::= "CHOICE" (multiple[MULTIPLE])? "(" options ("," options)* ")";
 	Option ::= ( id[] ":")? text['"','"'];
 	Date ::= "DATE";
 	FreeText ::= "FREETEXT";
