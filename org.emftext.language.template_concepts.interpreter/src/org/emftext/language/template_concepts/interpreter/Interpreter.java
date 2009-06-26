@@ -20,38 +20,19 @@
  ******************************************************************************/
 package org.emftext.language.template_concepts.interpreter;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.Template;
-import org.emftext.language.template_concepts.call.TemplateCall;
-import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterWrapperException;
-import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
-import org.emftext.runtime.EMFTextRuntimePlugin;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.ITextResource;
+import org.emftext.runtime.resource.IProblem;
 import org.emftext.runtime.resource.impl.AbstractProblem;
 
-public class Interpreter implements IOptionProvider, IResourcePostProcessorProvider, IResourcePostProcessor {
+public class Interpreter {
 
-	public void process(ITextResource resource) {
+	public EObject interprete(Template template, EObject paramModel, Collection<IProblem> problems) {
 		try {
-			if (resource==null || resource.getContents().size() == 0) { 
-				throw new InterpreterWrapperException(new TemplateException("textResource is null or empty"));
-			}
-			TemplateCall tc = (TemplateCall) resource.getContents().get(0);
-			final EObject paramModel = tc.getParameterModel();
-			Template template = tc.getTarget();
 
 			// TODO why is inputMetaClass an EObject and not an EClass?
 			final EClass inputMetaClass = (EClass) template.getInputMetaClass();
@@ -60,59 +41,30 @@ public class Interpreter implements IOptionProvider, IResourcePostProcessorProvi
 			// really confirms to the type expected by the template
 			boolean parameterModelFits = inputMetaClass.isInstance(paramModel);
 			if (!parameterModelFits) {
-				resource.addProblem(
-						new AbstractProblem() {
-							
-							public EProblemType getType() {
-								return EProblemType.ERROR;
-							}
-							
-							public String getMessage() {
-								return "Input model has wrong type (expected: " + inputMetaClass.getName() + ", but was: " + paramModel.eClass().getName() + ")";
-							}
-						}, template);
-				return;
+				addError(problems, "Input model has wrong type (expected: " + inputMetaClass.getName() + ", but was: " + paramModel.eClass().getName() + ")");
+				return null;
 			}
 			InterpreterWithState interpreterWithState = new InterpreterWithState(template, paramModel);
 			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
-			
-			// pretty print templateInstanceAST
-			saveTemplateInstance(resource, templateInstanceAST);
+			return templateInstanceAST;
 		} catch (Exception e) {
 			e.printStackTrace();
+			addError(problems, e.getMessage());
+			return null;
 		}
 	}
 
-	private void saveTemplateInstance(ITextResource resource,
-			EObject templateInstanceAST) throws IOException {
-		
-		if (templateInstanceAST == null) {
-			System.out.println("Interpreter.saveTemplateInstance() AST is null.");
-			return;
-		}
-		// figure out the correct file extension for the template instance
-		String fileExtension = "unknown";
-		// TODO Find different way to resolve object language metamodel (Put into template itself)
-		String targetNamespace = templateInstanceAST.eClass().getEPackage().getNsURI();
-		Map<String, URI> syntaxes = EMFTextRuntimePlugin.getURIToConcreteSyntaxLocationMap();
-		for (String syntaxName : syntaxes.keySet()) {
-			if (syntaxName.startsWith(targetNamespace + "%%")) {
-				fileExtension = syntaxName.split("%%")[1];
-			}
-		}
-		// save it
-		Resource instance = new ResourceSetImpl().createResource(resource.getURI().trimFileExtension().appendFileExtension(fileExtension));
-		instance.getContents().add(templateInstanceAST);
-		instance.save(null);
-	}
-
-	public IResourcePostProcessor getResourcePostProcessor() {
-		return this;
-	}
-
-	public Map<?, ?> getOptions() {
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
-		return options;
+	private void addError(Collection<IProblem> problems,
+			final String message) {
+		problems.add(new AbstractProblem() {
+					
+					public EProblemType getType() {
+						return EProblemType.ERROR;
+					}
+					
+					public String getMessage() {
+						return message;
+					}
+				});
 	}
 }
