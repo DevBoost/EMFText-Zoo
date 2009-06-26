@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.call.TemplateCall;
-import org.emftext.language.template_concepts.interpreter.Interpreter;
+import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
+import org.emftext.language.template_concepts.interpreter.TemplateInterpreterFactory;
 import org.emftext.runtime.EMFTextRuntimePlugin;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
@@ -30,7 +31,7 @@ public class InterpreterExecuter implements IOptionProvider, IResourcePostProces
 		TemplateCall tc = (TemplateCall) resource.getContents().get(0);
 		final EObject parameterModel = tc.getParameterModel();
 		Template template = tc.getTarget();
-		Interpreter interpreter = new Interpreter();
+		ITemplateInterpreter interpreter = TemplateInterpreterFactory.createTemplateInterpreter();
 		Collection<IProblem> problems = new ArrayList<IProblem>();
 		EObject templateInstanceAST = interpreter.interprete(template, parameterModel, problems);
 		if (problems.size() > 0) {

@@ -18,7 +18,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *   - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter;
+package org.emftext.language.template_concepts.interpreter.impl;
 
 import java.util.Collections;
 import java.util.HashMap;

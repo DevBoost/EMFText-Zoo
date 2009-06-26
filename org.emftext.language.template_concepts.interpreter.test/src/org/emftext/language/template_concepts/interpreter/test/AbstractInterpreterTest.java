@@ -23,16 +23,18 @@ package org.emftext.language.template_concepts.interpreter.test;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+
+import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.Template;
-import org.emftext.language.template_concepts.interpreter.InterpreterWithState;
-import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
-
-import junit.framework.TestCase;
+import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
+import org.emftext.language.template_concepts.interpreter.TemplateInterpreterFactory;
+import org.emftext.runtime.resource.IProblem;
 
 public abstract class AbstractInterpreterTest extends TestCase {
 	
@@ -54,14 +56,9 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			templateResource.load(null);
 			Template template = (Template) templateResource.getContents().get(0);
 			
-			InterpreterWithState interpreterWithState;
-			try {
-				interpreterWithState = new InterpreterWithState(template, inputModelRoot);
-			} catch (InterpreterException e1) {
-				fail(e1.getMessage());
-				return;
-			}
-			EObject templateInstanceAST = interpreterWithState.getTemplateInstanceRoot();
+			ITemplateInterpreter interpreter = TemplateInterpreterFactory.createTemplateInterpreter();
+			EObject templateInstanceAST = interpreter.interprete(template, inputModelRoot, Collections.<IProblem>emptyList());
+			assertNotNull(templateInstanceAST);
 			
 			// pretty print templateInstanceAST
 			String outputPath = "output." + getOutputFileExtension();

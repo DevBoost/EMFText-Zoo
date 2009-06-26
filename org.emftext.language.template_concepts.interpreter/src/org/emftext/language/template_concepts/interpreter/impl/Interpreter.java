@@ -18,18 +18,19 @@
  *   Software Technology Group - TU Dresden, Germany 
  *   - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter;
+package org.emftext.language.template_concepts.interpreter.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.template_concepts.Template;
+import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
 import org.emftext.runtime.resource.EProblemType;
 import org.emftext.runtime.resource.IProblem;
 import org.emftext.runtime.resource.impl.AbstractProblem;
 
-public class Interpreter {
+public class Interpreter implements ITemplateInterpreter {
 
 	public EObject interprete(Template template, EObject paramModel, Collection<IProblem> problems) {
 		try {
