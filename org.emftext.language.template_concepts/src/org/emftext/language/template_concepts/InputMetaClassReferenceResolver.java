@@ -24,16 +24,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 
-public class InputMetaClassReferenceResolver 
-	//extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EObject> 
-	{
+public class InputMetaClassReferenceResolver {
 	
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EObject element, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference) {
 		EClass eClass = (EClass) element;
 		return eClass.getEPackage().getNsURI() + "::" + eClass.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
 		String[] namespaceAndClassName = identifier.split("::");
 		if (namespaceAndClassName.length == 2) {
 			String namespace = namespaceAndClassName[0];
@@ -43,7 +41,7 @@ public class InputMetaClassReferenceResolver
 				return;
 			}
 			if (classifier instanceof EClass) {
-				result.addMapping(identifier, classifier);
+				result.addMapping(identifier, (EClass) classifier);
 			}
 		}
 	}
