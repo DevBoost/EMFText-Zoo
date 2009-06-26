@@ -34,9 +34,7 @@ public class Interpreter implements ITemplateInterpreter {
 
 	public EObject interprete(Template template, EObject paramModel, Collection<IProblem> problems) {
 		try {
-
-			// TODO why is inputMetaClass an EObject and not an EClass?
-			final EClass inputMetaClass = (EClass) template.getInputMetaClass();
+			final EClass inputMetaClass = template.getInputMetaClass();
 			
 			// the interpreter must check whether the loaded input model
 			// really confirms to the type expected by the template
