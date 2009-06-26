@@ -12,11 +12,11 @@ TOKENS {
 }
 
 RULES {
-	Class  ::= visibility[] "class" name "{" members* "}";
+	Class  ::= "class" name "{" members* "}";
 
-	Field  ::= visibility[] type[] name ";";
+	Field  ::= type[] name ";";
 
-	Method ::= visibility[] "void" name "(" ")" "{" "}";
+	Method ::= "void" name "(" ")" "{" "}";
 
 	Name ::= value[];
 }
