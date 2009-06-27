@@ -32,5 +32,5 @@ RULES {
 	PhNamedElement ::= "<%=" expression['"','"'] "%>";
 	IfElseNamedElement ::= "<%IF" expression['"','"'] "%>" body "<%ELSE%>" elseBody "<%ENDIF%>";
 	IfClass ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
-	ForClass ::= "<%FOR" expression['"','"'] "%>" body body* "<%ENDFOR%>";
+	ForClass ::= "<%FOR" expression['"','"'] "%>" body+ "<%ENDFOR%>";
 }
