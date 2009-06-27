@@ -9,7 +9,6 @@ IMPORTS {
 
 OPTIONS {
 	usePredefinedTokens = "false";
-	overrideManifest = "false";
 	generateCodeFromGeneratorModel = "true";
 }
 
