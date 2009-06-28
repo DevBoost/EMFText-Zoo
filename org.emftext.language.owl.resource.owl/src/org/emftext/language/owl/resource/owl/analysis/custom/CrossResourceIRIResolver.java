@@ -100,7 +100,7 @@ public class CrossResourceIRIResolver {
 	private IRIIdentified searchOntologyEntity(String iriPrefix, OntologyDocument ontologyDocument, String identifier) {
 		String uri = standardNamespaces.get(iriPrefix); 
 		if (uri != null) {
-			remoteLoader.loadOntology(uri);
+			remoteLoader.loadOntology(uri, ontologyDocument);
 			IRIIdentified entity = remoteLoader.getOntologyElement(identifier);
 			return entity;
 		}
@@ -109,7 +109,7 @@ public class CrossResourceIRIResolver {
 		for (Namespace namespace : namespaces) {
 			if (iriPrefix.equals(namespace.getPrefix())) {
 				uri = namespace.getUri(); 
-				remoteLoader.loadOntology(uri);
+				remoteLoader.loadOntology(uri, ontologyDocument);
 				IRIIdentified entity = remoteLoader.getOntologyElement(identifier);
 				return entity;
 			}

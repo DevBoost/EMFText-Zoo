@@ -27,6 +27,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.owl.AnnotationProperty;
 import org.emftext.language.owl.Class;
 import org.emftext.language.owl.DataProperty;
@@ -36,7 +39,9 @@ import org.emftext.language.owl.IRIIdentified;
 import org.emftext.language.owl.Individual;
 import org.emftext.language.owl.ObjectProperty;
 import org.emftext.language.owl.Ontology;
+import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlFactory;
+
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.OWLClass;
 import org.semanticweb.owl.model.OWLDataProperty;
@@ -78,14 +83,64 @@ public class RemoteLoader {
 		
 	}
 		
-	public void loadOntology(String uri) {
+	public void loadOntology(String uri,  EObject container) {
 		ontology = url2ontologies.get(uri);
 		if (ontology == null) {
-			initialise(uri);
+			initialise(uri, container);
 		}
 	}
 	
-	private void initialise(String uri) {
+	public org.eclipse.emf.common.util.URI getLocationHintURI(String locationHint, EObject container) {
+		org.eclipse.emf.common.util.URI hintURI;
+		if (locationHint.contains(":")) {
+			// locationHint is an absolute path - we can use it as it is
+			hintURI = org.eclipse.emf.common.util.URI.createURI(locationHint);
+		} else {
+			// locationHint is an relative path - we must resolve it
+			org.eclipse.emf.common.util.URI containerURI = container.eResource().getURI();
+			hintURI = org.eclipse.emf.common.util.URI.createURI(locationHint).resolve(containerURI);
+		}
+		return hintURI;
+	}
+	
+	private void initialise(String uri, EObject container) {
+		if (uri.startsWith("http")) {
+			initialiseRemoteUri(uri);
+		}
+		else {
+			initialiseLocalUri(uri, container);	
+		}
+	}
+
+	private void initialiseLocalUri(String uri, EObject container) {
+		ResourceSet rs = container.eResource().getResourceSet();
+		
+		if (uri == null) {
+			return;
+		}
+		org.eclipse.emf.common.util.URI loadUri = getLocationHintURI(uri, container);
+		if ("owl".equals(loadUri.fileExtension())) {
+			Resource csResource = null;
+			
+			try {
+				csResource = rs.getResource(loadUri, true);
+			} catch (Exception e) {}
+			
+			EList<EObject> contents = null; 
+			if (csResource != null) {
+				contents = csResource.getContents();	
+			}
+			if (contents != null && contents.size() > 0) {
+				if(contents.get(0) instanceof OntologyDocument) {
+					OntologyDocument d = (OntologyDocument) contents.get(0);
+					ontology = d.getOntology();
+					url2ontologies.put(uri, ontology);
+				}
+			}
+		}
+	}
+
+	private void initialiseRemoteUri(String uri) {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		// Load the ontology 
 		try {
@@ -166,6 +221,8 @@ public class RemoteLoader {
 
 	private Map<String, Frame> intialiseIriMap(Ontology onto) {
 		Map<String, Frame> iriMap = new HashMap<String, Frame>();
+		if (onto == null) return iriMap;
+		
 		EList<Frame> frames = onto.getFrames();
 		for (Frame frame : frames) {
 			if(frame.getIri() != null ) {
