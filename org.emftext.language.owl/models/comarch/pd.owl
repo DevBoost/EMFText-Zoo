@@ -1,0 +1,149 @@
+Ontology: <com.comarch.oss.modelling.PD.owl >
+	
+	Class: Chassis 
+		
+		
+	Class: Card 
+		EquivalentTo:  { supervisor_2_2 , HS_OSM_1 , supervisor_720_1 , supervisor_720_3 , H_OSM_2 , supervisor_2_1 , supervisor_2_3 , spa_1 } 
+			
+		
+	Class: Configuration 
+		
+		
+	Class: Slot 
+		EquivalentTo:  { cisco1_slot_3 , cisco1_slot_2 , cisco1_slot_1 } 
+			
+		
+	ObjectProperty: hasSlot 
+		Domain:  Configuration 
+			Range:  Slot 
+			Characteristics: InverseFunctional 
+			
+		
+	ObjectProperty: hasConfiguration 
+		Domain:  Chassis 
+			Range:  Configuration 
+			Characteristics: InverseFunctional 
+			
+		
+	ObjectProperty: containsCard 
+		Domain:  Configuration 
+			Range:  Card 
+			Characteristics: InverseFunctional 
+			
+		
+	ObjectProperty: hasCard 
+		Domain:  Slot 
+			Range:  Card 
+			Characteristics: InverseFunctional , Functional 
+			
+		
+	DataProperty: id 
+		Domain:  Slot 
+			Characteristics: Functional 
+			
+		
+	Class: Cisco7603 
+		SubClassOf:  Chassis 
+			EquivalentTo:   hasConfiguration exactly 1  Cisco7603Configuration 
+			
+		
+	Class: Cisco7603Configuration 
+		EquivalentTo:  Configuration and   hasSlot exactly 3  Slot and  (   hasSlot some  (   hasCard some  Supervisors and   id value 1 ) ) and  (   hasSlot only  (  (  (   hasCard some  Supervisors and   id value 1 ) ) or  (  (   hasCard some  Supervisors and   id value 2 ) or  (   hasCard some  Hot_Swappable_OSM and   id value 2 ) ) or  (  (   hasCard some  Hot_Swappable_OSM and   id value 3 ) or  (   hasCard some  SPA_interface_processors and   id value 3 ) ) ) ) ,  { cisco1 } 
+			
+		
+	Class: Supervisors 
+		SubClassOf:  Card 
+			
+		
+	Class: Hot_Swappable_OSM 
+		SubClassOf:  Card 
+			
+		
+	Class: SPA_interface_processors 
+		SubClassOf:  Card 
+			
+		
+	Class: Supervisor_engine_2 
+		SubClassOf:  Supervisors 
+			EquivalentTo:  { supervisor_2_2 , supervisor_2_3 , supervisor_2_1 } 
+			
+		
+	Class: Supervisor_engine_720 
+		SubClassOf:  Supervisors 
+			EquivalentTo:  { supervisor_720_1 , supervisor_720_3 } 
+			
+		
+	Class: Hottie 
+		SubClassOf:  Hot_Swappable_OSM 
+			EquivalentTo:  { HS_OSM_1 , H_OSM_2 } 
+			
+		
+	Class: SPA_by_KM 
+		SubClassOf:  SPA_interface_processors 
+			EquivalentTo:  { spa_1 } 
+			
+		
+	DisjointClasses:  Supervisors ,  Hot_Swappable_OSM ,  SPA_interface_processors 
+		
+	DisjointClasses:  Supervisor_engine_2 ,  Supervisor_engine_720 
+		
+	Individual: supervisor_2_3 
+		Types:  Supervisor_engine_2 
+			
+		
+	Individual: supervisor_720_3 
+		Types:  Supervisor_engine_720 
+			
+		
+	Individual: supervisor_720_1 
+		Types:  Supervisor_engine_720 
+			
+		
+	Individual: HS_OSM_1 
+		Types:  Hottie 
+			
+		
+	Individual: supervisor_2_1 
+		Types:  Supervisor_engine_2 
+			
+		
+	Individual: supervisor_2_2 
+		Types:  Supervisor_engine_2 
+			
+		
+	Individual: spa_1 
+		Types:  SPA_by_KM 
+			
+		
+	Individual: H_OSM_2 
+		Types:  Hottie 
+			
+		
+	Individual: cisco1 
+		Types:  Cisco7603Configuration 
+			Facts:  hasSlot cisco1_slot_1 ,  hasSlot cisco1_slot_2 ,  hasSlot cisco1_slot_3 ,  containsCard supervisor_2_1 ,  containsCard supervisor_2_3 ,  containsCard spa_1 
+			
+		
+	Individual: cisco1_slot_2 
+		Types:  Slot 
+			Facts:  hasCard supervisor_2_3 ,  id 2 
+			
+		
+	Individual: cisco1_slot_1 
+		Types:  Slot 
+			Facts:  hasCard supervisor_2_1 ,  id 1 
+			
+		
+	Individual: cisco1_slot_3 
+		Types:  Slot 
+			Facts:  hasCard spa_1 ,  id 3 
+			
+		
+	DifferentIndividuals: supervisor_2_2 , HS_OSM_1 , supervisor_720_1 , supervisor_720_3 , H_OSM_2 , cisco1 , cisco1_slot_1 , supervisor_2_1 , cisco1_slot_2 , supervisor_2_3 , cisco1_slot_3 , spa_1 , storage 
+		
+	Individual: storage 
+		Types:  Configuration 
+			Facts:  containsCard HS_OSM_1 ,  containsCard supervisor_2_2 ,  containsCard H_OSM_2 ,  containsCard supervisor_720_1 ,  containsCard supervisor_720_3 
+			
+		
