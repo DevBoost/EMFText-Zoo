@@ -26,6 +26,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.owl.IRIIdentified;
 import org.emftext.language.owl.Namespace;
 import org.emftext.language.owl.OntologyDocument;
@@ -70,11 +71,20 @@ public class CrossResourceIRIResolver {
 		
 		IRIIdentified entity = getOntologyEntity(iriPrefix, containerObject, identifier);
 		if (entity != null) {
-			String name = entity.getIri();
-			EClass classifier = (EClass) OwlPackage.eINSTANCE.getEClassifier(c.getSimpleName());
-			r = (RESULT) OwlFactory.eINSTANCE.create(classifier);
-			r.setIri(name);
-			result.addMapping(name, r);		
+			if (entity.eIsProxy()) {
+				entity = (IRIIdentified) EcoreUtil.resolve(entity, containerObject);
+			}
+			if (entity.eResource() != null) {
+				r = (RESULT) entity;
+				result.addMapping(entity.getIri(), r);		
+			} else {
+				String name = entity.getIri();
+				EClass classifier = (EClass) OwlPackage.eINSTANCE.getEClassifier(c.getSimpleName());
+				r = (RESULT) OwlFactory.eINSTANCE.create(classifier);
+				r.setIri(name);
+				result.addMapping(name, r);		
+			}
+			
 		}
 	}
 
