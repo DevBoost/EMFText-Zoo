@@ -124,7 +124,9 @@ public class RemoteLoader {
 			
 			try {
 				csResource = rs.getResource(loadUri, true);
-			} catch (Exception e) {}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 			
 			EList<EObject> contents = null; 
 			if (csResource != null) {
