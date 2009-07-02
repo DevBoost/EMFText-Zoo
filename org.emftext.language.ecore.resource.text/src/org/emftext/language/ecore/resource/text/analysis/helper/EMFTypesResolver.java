@@ -21,9 +21,12 @@
 package org.emftext.language.ecore.resource.text.analysis.helper;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
@@ -50,7 +53,7 @@ public class EMFTypesResolver {
 		
 		EPackage ePackage = null;
 		String eClassName = identifier;
-
+		List<EClassifier> candidates = new LinkedList<EClassifier>();
 		resource = container.eResource();
 
 		if(eClassName.contains("::")) {
@@ -65,6 +68,7 @@ public class EMFTypesResolver {
 					((EPackage)rootContainer).getName().equals(packagePrefix)) {
 				//this package?
 				ePackage = (EPackage) rootContainer;
+				candidates = ePackage.getEClassifiers();
 			}
 			else {
 				//import
@@ -90,23 +94,30 @@ public class EMFTypesResolver {
 				result.setErrorMessage("Nested EPackage '" + namespaces[i] + "' not found");
 				return;
 			}
+			candidates = ePackage.getEClassifiers();
 		}
 		else {
 			EObject parent = container;
-			while (parent != null && !(parent instanceof EPackage)) {
+			while (parent.eContainer() != null /* && !(parent instanceof EPackage)*/) {
 				parent = parent.eContainer();
 			}
-			ePackage = (EPackage) parent;
+			TreeIterator<EObject> allContents = parent.eAllContents();
+			while (allContents.hasNext()) {
+				EObject object = (EObject) allContents.next();
+				if (object instanceof EClassifier) candidates.add((EClassifier) object);
+			}
 		}
 		
-		addResults(identifier, eClassName, ePackage.getEClassifiers(), resolveFuzzy, result);
+		
+
+		addResults(identifier, eClassName, candidates, resolveFuzzy, result);
 		if (!result.wasResolved() && !identifier.contains("::")) {
 			//try the "default" package Ecore
 			addResults(identifier, identifier, EcorePackage.eINSTANCE.getEClassifiers(), resolveFuzzy, result);
 		}
 	}
 
-	private void addResults(String identifier, String className, EList<EClassifier> candidates,
+	private void addResults(String identifier, String className, List<EClassifier> candidates,
 			boolean resolveFuzzy, IReferenceResolveResult result) {
 		for (EClassifier next : candidates) {
 			if (next instanceof EClassifier) {
