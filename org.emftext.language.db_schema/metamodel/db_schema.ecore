@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="db_schema"
+    nsURI="http://org.emftext/db_schema" nsPrefix="db_schema">
+  <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="#//XTable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" upperBound="-1"
+        eType="#//XColumn" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pkey" upperBound="-1" eType="#//Column"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fkey" upperBound="-1" eType="#//XFKey"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FKey" eSuperTypes="#//XFKey">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" lowerBound="1"
+        upperBound="-1" eType="#//Column"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
+        eType="#//Table"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Column" eSuperTypes="#//XColumn">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//XType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Database" eSuperTypes="#//XDatabase">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" upperBound="-1"
+        eType="#//XTable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="procedure" upperBound="-1"
+        eType="#//XProcedure" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//XType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XColumn" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XTable" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XDatabase" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XFKey" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Procedure" eSuperTypes="#//XProcedure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
+        eType="#//XParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="return" eType="#//XType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XProcedure" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//XParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//XType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XParameter" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="INTEGER" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.emftext.language.primitive_types/metamodel/primitive_types.ecore#//IntegerObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BOOLEAN" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.emftext.language.primitive_types/metamodel/primitive_types.ecore#//BooleanObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VARCHAR" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../org.emftext.language.primitive_types/metamodel/primitive_types.ecore#//StringObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XType" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//XType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
