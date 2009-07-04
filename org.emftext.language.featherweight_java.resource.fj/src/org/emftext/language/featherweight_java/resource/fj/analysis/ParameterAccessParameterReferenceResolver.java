@@ -1,5 +1,6 @@
 package org.emftext.language.featherweight_java.resource.fj.analysis;
 
+// TODO this resolver needs customization
 public class ParameterAccessParameterReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.featherweight_java.ParameterAccess, org.emftext.language.featherweight_java.Parameter> {
 	
 	private org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.ParameterAccess, org.emftext.language.featherweight_java.Parameter> delegate = new org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.ParameterAccess, org.emftext.language.featherweight_java.Parameter>();

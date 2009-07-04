@@ -1,5 +1,6 @@
 package org.emftext.language.featherweight_java.resource.fj.analysis;
 
+//TODO this resolver needs customization
 public class FieldInitialisiationFieldReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.featherweight_java.FieldInitialisiation, org.emftext.language.featherweight_java.Field> {
 	
 	private org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.FieldInitialisiation, org.emftext.language.featherweight_java.Field> delegate = new org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.FieldInitialisiation, org.emftext.language.featherweight_java.Field>();

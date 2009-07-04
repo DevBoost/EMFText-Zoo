@@ -1,11 +1,13 @@
 package org.emftext.language.featherweight_java.resource.fj.analysis;
 
+import org.emftext.language.featherweight_java.resource.fj.analysis.helper.ClassResolver;
+
 public class FieldTypeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.featherweight_java.Field, org.emftext.language.featherweight_java.Class> {
 	
-	private org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.Field, org.emftext.language.featherweight_java.Class> delegate = new org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.Field, org.emftext.language.featherweight_java.Class>();
+	private ClassResolver delegate = new ClassResolver();
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.featherweight_java.Field container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.featherweight_java.Class> result) {
-		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+		delegate.resolve(identifier, container, result);
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.featherweight_java.Class element, org.emftext.language.featherweight_java.Field container, org.eclipse.emf.ecore.EReference reference) {

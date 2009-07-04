@@ -1,5 +1,6 @@
 package org.emftext.language.featherweight_java.resource.fj.analysis;
 
+//TODO this resolver needs customization
 public class MethodCallMethodReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.featherweight_java.MethodCall, org.emftext.language.featherweight_java.Method> {
 	
 	private org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.MethodCall, org.emftext.language.featherweight_java.Method> delegate = new org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultResolverDelegate<org.emftext.language.featherweight_java.MethodCall, org.emftext.language.featherweight_java.Method>();
