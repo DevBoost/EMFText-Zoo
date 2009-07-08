@@ -11,6 +11,11 @@ TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 }
 
+TOKENSTYLES {
+	"class" COLOR #7F0055, BOLD;
+	"void" COLOR #7F0055, BOLD;
+}
+
 RULES {
 	Class  ::= "class" name "{" members* "}";
 
