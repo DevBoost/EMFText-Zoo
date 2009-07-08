@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.bool.BoolFactory;
 import org.emftext.language.bool.BoolPackage;
 import org.emftext.language.bool.FieldType;
 import org.emftext.language.bool.Name;
@@ -12,9 +13,18 @@ import org.emftext.runtime.util.EObjectUtil;
 
 public class FieldTypeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.bool.Field, org.emftext.language.bool.FieldType> {
 	
+	private static final org.emftext.language.bool.Class OBJECT = BoolFactory.eINSTANCE.createClass();
+	
+	{
+		Name name = BoolFactory.eINSTANCE.createName();
+		name.setValue("Object");
+		OBJECT.setName(name);
+	}
+
 	public void resolve(java.lang.String identifier, org.emftext.language.bool.Field container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.bool.FieldType> result) {
 		TreeIterator<EObject> iterator = container.eResource().getAllContents();
 		Collection<FieldType> typedElements = EObjectUtil.getObjectsByType(iterator, BoolPackage.eINSTANCE.getFieldType());
+		typedElements.add(OBJECT);
 		for (FieldType type : typedElements) {
 			if (!(type instanceof org.emftext.language.bool.Class)) {
 				continue;
