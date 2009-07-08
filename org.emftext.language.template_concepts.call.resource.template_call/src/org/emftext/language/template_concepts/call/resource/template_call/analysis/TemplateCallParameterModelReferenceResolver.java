@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,14 +34,14 @@ import org.emftext.language.template_concepts.call.TemplateCall;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-public class TemplateCallParameterModelReferenceResolver extends AbstractReferenceResolver<TemplateCall, EClass> {
+public class TemplateCallParameterModelReferenceResolver extends AbstractReferenceResolver<TemplateCall, EObject> {
 	
-	public java.lang.String deResolve(EClass element, TemplateCall container, EReference reference) {
+	public java.lang.String deResolve(EObject element, TemplateCall container, EReference reference) {
 		// TODO
 		return null;
 	}
 	
-	public void resolve(String identifier, TemplateCall container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<EClass> result) {
+	public void resolve(String identifier, TemplateCall container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<EObject> result) {
 		Resource resource = container.eResource();
 		URI uri = resource.getURI();
 		URI uriWithoutExtension = uri.trimSegments(1);
@@ -63,10 +62,10 @@ public class TemplateCallParameterModelReferenceResolver extends AbstractReferen
 			return;
 		}
 		EObject root = contents.get(0);
-		if (!(root instanceof EClass)) {
+		if (!(root instanceof EObject)) {
 			return;
 		}
-		EClass target = (EClass) root;
+		EObject target = (EObject) root;
 		result.addMapping(identifier, target);
 	}
 
