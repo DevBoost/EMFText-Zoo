@@ -39,6 +39,7 @@ import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
+import org.eclipse.ocl.ecore.OrderedSetType;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
@@ -80,30 +81,65 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			return;
 		}
 		
-		List<EObject> concepts = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getTemplateConcept());
-		for (EObject next : concepts) {
-			TemplateConcept concept = (TemplateConcept) next;
-			final String expression = concept.getExpression();
-			final String error = parseExpression(metaClass, null, expression);
-			if (error != null) {
-				resource.addProblem(
-						new AbstractProblem() {
-							
-							public EProblemType getType() {
-								return EProblemType.ERROR;
-							}
-							
-							public String getMessage() {
-								return "The expression \"" + expression + "\" is invalid (" + error + ").";
-							}
-						}, concept);
+		Map<String, EObject> variables = new HashMap<String, EObject>();
+		List<EObject> contents = template.eContents();
+		check(resource, metaClass, contents, variables);
+	}
+
+	private void check(ITextResource resource, EClass metaClass,
+			List<EObject> contents, Map<String, EObject> variables) {
+		for (EObject next : contents) {
+			if (next instanceof TemplateConcept) {
+				check(resource, metaClass, (TemplateConcept) next, variables);
 			} else {
-				// for placeholders we must check the type
-				if (concept instanceof Placeholder) {
-					checkPlaceholderExpressionType(resource, metaClass,
-							concept, expression);
+				check(resource, metaClass, next.eContents(), variables);
+			}
+		}
+	}
+
+	private void check(ITextResource resource, EClass metaClass,
+			TemplateConcept concept, Map<String, EObject> variables) {
+		final String expression = concept.getExpression();
+		final Object errorOrQuery = createQuery(metaClass, variables, expression);
+		if (errorOrQuery instanceof String) {
+			final String error = (String) errorOrQuery;
+			resource.addProblem(
+					new AbstractProblem() {
+						
+						public EProblemType getType() {
+							return EProblemType.ERROR;
+						}
+						
+						public String getMessage() {
+							return "The expression \"" + expression + "\" is invalid (" + error + ").";
+						}
+					}, concept);
+		} else {
+			if (concept instanceof ForEach) {
+				ForEach forEach = (ForEach) concept;
+				Query<EClassifier, EClass, EObject> query = (Query<EClassifier, EClass, EObject>) errorOrQuery;
+				EClassifier resultType = query.getExpression().getType();
+				System.out.println("result type of (" + concept.getExpression() + ") is " + resultType);
+				if (resultType instanceof OrderedSetType) {
+					OrderedSetType setType = (OrderedSetType) resultType;
+					EClassifier elementType = setType.getElementType();
+					assert elementType instanceof EClass;
+					// change the meta class
+					metaClass = (EClass) elementType;
+					String variable = forEach.getVariable();
+					if (variable != null) {
+						variables.put(variable, metaClass.getEPackage().getEFactoryInstance().create(metaClass));
+					}
+					System.out.println("element type of (" + concept.getExpression() + ") is " + elementType);
 				}
 			}
+			// for placeholders we must check the type
+			if (concept instanceof Placeholder) {
+				checkPlaceholderExpressionType(resource, metaClass,
+						concept, expression);
+			}
+			check(resource, metaClass, concept.eContents(), variables);
+			// TODO remove variables
 		}
 	}
 
@@ -213,6 +249,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		}
 	}
 
+	// TODO find a better solution to indicate errors instead of returning the error message
 	private Object createQuery(EClass inputMetaClass, Map<String, EObject> variables, String expressionString) {
 		OCL<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject>
 			ocl = org.eclipse.ocl.ecore.OCL.newInstance();
