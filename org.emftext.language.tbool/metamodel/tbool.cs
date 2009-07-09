@@ -28,7 +28,6 @@ TOKENSTYLES {
 
 RULES {
 	ClassTemplate ::= "<%TEMPLATE" "INPUT=" inputMetaClass['"','"'] "%>" body;
-	PhFieldType ::= "<%=" expression['"','"'] "%>";
 	PhNamedElementName ::= "<%=" expression['"','"'] "%>";
 	IfClassMembers ::= "<%IF" expression['"','"'] "%>" body "<%ENDIF%>";
 	ForClassMembers ::= "<%FOR" (variable[] ":")? expression['"','"'] "%>" body+ "<%ENDFOR%>";
