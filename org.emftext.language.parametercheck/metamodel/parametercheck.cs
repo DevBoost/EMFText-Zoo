@@ -16,36 +16,34 @@ TOKENS{
 }
 
 TOKENSTYLES {
-	"ParameterCheckModel" COLOR #7F0055, BOLD;
+	"method" COLOR #7F0055, BOLD;
 	"check" COLOR #7F0055, BOLD;
-	"parameterusage" COLOR #7F0055, BOLD;
-	"parameters" COLOR #7F0055, BOLD;
+	"throws" COLOR #7F0055, BOLD;
+	"true" COLOR #7F0055, BOLD;
+	"false" COLOR #7F0055, BOLD;
 	
 }
 
 RULES{
 	
-	ParameterCheckModel::= "ParameterCheckModel"  
-			"{" 
+	ParameterCheckModel::= 
 				method+ 
-				checkOrigin+
-			"}" 
 			 ;
 	
-	Method::= name[]  
-					"(" (parameter ("," parameter )*)? ")"  
-					"parameterusage"  "{" (parameterusage  ("," parameterusage)*)? "}" 
-					"check" "{" (check ("," check)* )?"}"  ;
+	Method::= "method" name[] "(" (parameter ("," parameter )*)? ")"  
+					"check" check ("," check)* ";" ;
 	
-	Parameter::=   type[] name[];
+	Parameter::=   ("!")? type[] name[];
 	
-	ParameterUsage::= parameter[]  "(" (nameAsString[]? valueAsString[]?) ")" ;
+	ParameterUsage::= parameter[]  "<" "asString" "=" asString[] ">" ;
 	
-	Check::=  name[]  "("exceptionIfTrue[] ")" 
-				"parameterusage"  "{" (parameterusage  ("," parameterusage)*)? "}" originOfCheck[]? exception ;
+	Check::=  name[]  "<" exceptionIfTrue[] ">" 
+				"(" (parameterusage  ("," parameterusage)*)? ")" exception ;
 	
-	OriginOfCheck::=  package[] ":" name[];
-	
-	Exception::=  package[] ":" name[] "parameterusage"  "{" (parameterusage  ("," parameterusage)*)? "}" ;
+	Exception::=  "throws" (package[] ":")? name[] "(" (parameterusage  ("," parameterusage)*)? ")" ;
 	
 }
+
+//questions:
+// - how to use packages in exceptions such as org.deft.repository.exception:DeftNullArgumentException (problems with dots in package)
+// - how to convert exclamation mark in parameter to ignoreInMethodDecl = true
