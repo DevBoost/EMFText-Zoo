@@ -7,6 +7,8 @@ method createChapter(Project project, String name)
 	check isNull(project)
 		throw DeftNullArgumentException(n:project)
 	check isNull(name)
-		throw DeftNullArgumentException(n:name, "chapter")
+		throw DeftNullArgumentException(n:name)
+	check !projectExists(project)
+		throw DeftInvalidArgumentException(project)
 	check chapterExists(project, name)
-		throw DeftFragmentAlreadyExistsException("chapter", name);
+		throw DeftFragmentAlreadyExistsException(project, "chapter", name);
