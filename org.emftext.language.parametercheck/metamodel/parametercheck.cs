@@ -3,7 +3,7 @@ FOR <http://deftproject.org/parametercheck>
 START ParameterCheckModel
 
 OPTIONS {
-	usePredefinedTokens = "true";
+	//usePredefinedTokens = "true";
 	srcFolder = "src-gen";
 	resourcePluginID = "org.emftext.language.parametercheck.resource.pcheck";
 	generateCodeFromGeneratorModel = "true";
@@ -12,16 +12,17 @@ OPTIONS {
 }
 
 TOKENS{
-	DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
+	DEFINE EXCLAM $'!'$;
+	DEFINE NAME_TYPE $'n' | 't'$;
+	DEFINE STRING_LITERAL $'"' ('A'..'Z' | 'a'..'z' | '0'..'9')* '"'$;
+	
 }
 
 TOKENSTYLES {
 	"method" COLOR #7F0055, BOLD;
 	"check" COLOR #7F0055, BOLD;
-	"throws" COLOR #7F0055, BOLD;
-	"true" COLOR #7F0055, BOLD;
-	"false" COLOR #7F0055, BOLD;
-	
+	"throw" COLOR #7F0055, BOLD;
 }
 
 RULES{
@@ -30,20 +31,21 @@ RULES{
 				method+ 
 			 ;
 	
-	Method::= "method" name[] "(" (parameter ("," parameter )*)? ")"  
-					"check" check ("," check)* ";" ;
+	Method ::= "method" name[] "(" (parameter ("," parameter )*)? ")"  
+					("check" check)+ ";" ;
 	
-	Parameter::=   ("!")? type[] name[];
+	Parameter ::= ignoreInMethodDecl[EXCLAM]? type[] name[]; 
 	
-	ParameterUsage::= parameter[]  "<" "asString" "=" asString[] ">" ;
+	ParameterUsage ::= (asString[NAME_TYPE] ":")? parameter[] | ParameterUsageLiteral; 
 	
-	Check::=  name[]  "<" exceptionIfTrue[] ">" 
+	ParameterUsageLiteral ::= value[STRING_LITERAL];
+	
+	Check ::= (exceptionIfTrue[EXCLAM])? name[]  
 				"(" (parameterusage  ("," parameterusage)*)? ")" exception ;
 	
-	Exception::=  "throws" (package[] ":")? name[] "(" (parameterusage  ("," parameterusage)*)? ")" ;
+	Exception::=  "throw" (package[] ":")? name[] "(" (parameterusage  ("," parameterusage)*)? ")" ;
 	
 }
 
 //questions:
 // - how to use packages in exceptions such as org.deft.repository.exception:DeftNullArgumentException (problems with dots in package)
-// - how to convert exclamation mark in parameter to ignoreInMethodDecl = true
