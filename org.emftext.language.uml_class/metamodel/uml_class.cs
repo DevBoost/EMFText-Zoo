@@ -5,15 +5,34 @@ START ClassDiagramm
 OPTIONS{
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
-    tokenspace = "1";
+    //tokenspace = "1";
     overrideManifest = "false";
 }
 
 TOKENS{
 		//DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
-		DEFINE INT $('-')?('1'..'9')('0'..'9')*|'0'$;
+		DEFINE INTEGER $('-')?('1'..'9')('0'..'9')*|'0'$;
 		//DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
 		//DEFINE BOOLEAN$('true'|'false')$;
+}
+
+TOKENSTYLES {
+    "classdiagramm" COLOR #0000CC, BOLD;
+    "ac" COLOR #0000CC, BOLD;
+    "md" COLOR #0000CC, BOLD;
+    "void" COLOR #0000CC, BOLD;
+    "class" COLOR #0000CC, BOLD;
+    "extends" COLOR #0000CC, BOLD;
+    "attribute" COLOR #0000CC, BOLD;
+    "method" COLOR #0000CC, BOLD;
+    "association" COLOR #0000CC, BOLD;
+    "->" COLOR #0000CC, BOLD;
+    ".." COLOR #0000CC, BOLD;
+    ":" COLOR #0000CC, BOLD;
+    "BOOLEAN" COLOR #0000CC, BOLD;
+    "STRING" COLOR #0000CC, BOLD;
+    "INTEGER" COLOR #0000CC, BOLD;
+    //"TEXT" COLOR #0000A0, BOLD;
 }
 
 RULES{
@@ -58,9 +77,9 @@ RULES{
 		                  "("
 		                      source[] "->" target[]
 		                      ":"
-		                      minCardinality[INT]
+		                      minCardinality[INTEGER]
 		                      ".."
-		                      maxCardinality[INT]
+		                      maxCardinality[INTEGER]
 		                  ")" ;
 		                  
 	    Boolean ::= "BOOLEAN" name[] value? ;
@@ -71,7 +90,7 @@ RULES{
         
         BooleanObject ::= value[] ;
         
-        IntegerObject ::= value[INT] ;
+        IntegerObject ::= value[INTEGER] ;
         
         StringObject ::= value[TEXT];
 		
