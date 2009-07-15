@@ -17,13 +17,18 @@ TOKENS{
 		//DEFINE ANNUMBERS $('@')('system'|'class'|'prop'|'func'|'assoc'|'param'|'type'|'!')(('1'..'9')('0'..'9')* | '0')$;
 }
 TOKENSTYLES {
-	"table" COLOR #000000, BOLD;
-	"fkeys" COLOR #000000, BOLD;
-	"column" COLOR #000000, BOLD;
-	"columns" COLOR #000000, BOLD;
-	"database" COLOR #000000, BOLD;
-	"pkeys" COLOR #000000, BOLD;
-	"reference" COLOR #000000, BOLD;
+	"table" COLOR #0000CC, BOLD;
+	"fkeys" COLOR #0000CC, BOLD;
+	"column" COLOR #0000CC, BOLD;
+	"columns" COLOR #0000CC, BOLD;
+	"database" COLOR #0000CC, BOLD;
+	"pkeys" COLOR #0000CC, BOLD;
+	"reference" COLOR #0000CC, BOLD;
+	"procedure" COLOR #0000CC, BOLD;
+	":" COLOR #0000CC, BOLD;
+	"BOOLEAN" COLOR #0000CC, BOLD;
+	"VARCHAR" COLOR #0000CC, BOLD;
+	"INTEGER" COLOR #0000CC, BOLD;
 	//"TEXT" COLOR #0000A0, BOLD;
 }
 
