@@ -20,11 +20,15 @@
  ******************************************************************************/
 package org.emftext.language.owl.loading;
 
+import java.io.File;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import javax.print.attribute.standard.Fidelity;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -91,15 +95,23 @@ public class RemoteLoader {
 	}
 	
 	public org.eclipse.emf.common.util.URI getLocationHintURI(String locationHint, EObject container) {
-		org.eclipse.emf.common.util.URI hintURI;
+		org.eclipse.emf.common.util.URI hintURI = null;
+		
 		if (locationHint.contains(":")) {
 			// locationHint is an absolute path - we can use it as it is
 			hintURI = org.eclipse.emf.common.util.URI.createURI(locationHint);
 		} else {
 			// locationHint is an relative path - we must resolve it
 			org.eclipse.emf.common.util.URI containerURI = container.eResource().getURI();
-			hintURI = org.eclipse.emf.common.util.URI.createURI(locationHint).resolve(containerURI);
-		}
+			if(containerURI.isRelative()) {
+				URI f = new File(".").getAbsoluteFile().toURI();
+				org.eclipse.emf.common.util.URI baseURI = org.eclipse.emf.common.util.URI.createURI(f.toString());
+				containerURI = containerURI.resolve(baseURI);
+			} 
+				hintURI = org.eclipse.emf.common.util.URI.createURI(locationHint).resolve(containerURI);
+					
+			}
+		
 		return hintURI;
 	}
 	
