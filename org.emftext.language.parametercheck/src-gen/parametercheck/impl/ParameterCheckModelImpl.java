@@ -39,124 +39,118 @@ import parametercheck.ParametercheckPackage;
  */
 public class ParameterCheckModelImpl extends EObjectImpl implements ParameterCheckModel {
 	/**
-   * The cached value of the '{@link #getMethod() <em>Method</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMethod() <em>Method</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see #getMethod()
-   * @generated
-   * @ordered
-   */
+	 * @see #getMethod()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Method> method;
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	protected ParameterCheckModelImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-    return ParametercheckPackage.Literals.PARAMETER_CHECK_MODEL;
-  }
+		return ParametercheckPackage.Literals.PARAMETER_CHECK_MODEL;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public EList<Method> getMethod() {
-    if (method == null)
-    {
-      method = new EObjectContainmentEList<Method>(Method.class, this, ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD);
-    }
-    return method;
-  }
+		if (method == null) {
+			method = new EObjectContainmentEList<Method>(Method.class, this, ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD);
+		}
+		return method;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-    switch (featureID)
-    {
-      case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
-        return ((InternalEList<?>)getMethod()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
+				return ((InternalEList<?>)getMethod()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-    switch (featureID)
-    {
-      case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
-        return getMethod();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
+				return getMethod();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-    switch (featureID)
-    {
-      case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
-        getMethod().clear();
-        getMethod().addAll((Collection<? extends Method>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
+				getMethod().clear();
+				getMethod().addAll((Collection<? extends Method>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-    switch (featureID)
-    {
-      case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
-        getMethod().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
+				getMethod().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-    switch (featureID)
-    {
-      case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
-        return method != null && !method.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case ParametercheckPackage.PARAMETER_CHECK_MODEL__METHOD:
+				return method != null && !method.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ParameterCheckModelImpl

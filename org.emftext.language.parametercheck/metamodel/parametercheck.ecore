@@ -12,7 +12,7 @@
         eType="#//ParameterDecl" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" lowerBound="1" upperBound="-1"
-        eType="#//Check" containment="true"/>
+        eType="#//Check" containment="true" eOpposite="#//Check/parentmethod"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterDecl">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -33,14 +33,18 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterusage" upperBound="-1"
         eType="#//ParameterUsage" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exception" lowerBound="1"
-        eType="#//Exception" containment="true"/>
+        eType="#//Exception" containment="true" eOpposite="#//Exception/parentcheck"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionIfTrue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentmethod" lowerBound="1"
+        eType="#//Method" eOpposite="#//Method/check"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Exception">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterusage" upperBound="-1"
         eType="#//ParameterUsage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentcheck" lowerBound="1"
+        eType="#//Check" eOpposite="#//Check/exception"/>
   </eClassifiers>
 </ecore:EPackage>

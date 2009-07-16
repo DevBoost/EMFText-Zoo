@@ -31,146 +31,142 @@ import parametercheck.ParametercheckPackage;
  */
 public class ParametercheckFactoryImpl extends EFactoryImpl implements ParametercheckFactory {
 	/**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public static ParametercheckFactory init() {
-    try
-    {
-      ParametercheckFactory theParametercheckFactory = (ParametercheckFactory)EPackage.Registry.INSTANCE.getEFactory("http://deftproject.org/parametercheck"); 
-      if (theParametercheckFactory != null)
-      {
-        return theParametercheckFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new ParametercheckFactoryImpl();
-  }
+		try {
+			ParametercheckFactory theParametercheckFactory = (ParametercheckFactory)EPackage.Registry.INSTANCE.getEFactory("http://deftproject.org/parametercheck"); 
+			if (theParametercheckFactory != null) {
+				return theParametercheckFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ParametercheckFactoryImpl();
+	}
 
 	/**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ParametercheckFactoryImpl() {
-    super();
-  }
+		super();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	@Override
 	public EObject create(EClass eClass) {
-    switch (eClass.getClassifierID())
-    {
-      case ParametercheckPackage.PARAMETER_CHECK_MODEL: return createParameterCheckModel();
-      case ParametercheckPackage.METHOD: return createMethod();
-      case ParametercheckPackage.PARAMETER_DECL: return createParameterDecl();
-      case ParametercheckPackage.DECLARED_PARAMETER: return createDeclaredParameter();
-      case ParametercheckPackage.LITERAL: return createLiteral();
-      case ParametercheckPackage.CHECK: return createCheck();
-      case ParametercheckPackage.EXCEPTION: return createException();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case ParametercheckPackage.PARAMETER_CHECK_MODEL: return createParameterCheckModel();
+			case ParametercheckPackage.METHOD: return createMethod();
+			case ParametercheckPackage.PARAMETER_DECL: return createParameterDecl();
+			case ParametercheckPackage.DECLARED_PARAMETER: return createDeclaredParameter();
+			case ParametercheckPackage.LITERAL: return createLiteral();
+			case ParametercheckPackage.CHECK: return createCheck();
+			case ParametercheckPackage.EXCEPTION: return createException();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ParameterCheckModel createParameterCheckModel() {
-    ParameterCheckModelImpl parameterCheckModel = new ParameterCheckModelImpl();
-    return parameterCheckModel;
-  }
+		ParameterCheckModelImpl parameterCheckModel = new ParameterCheckModelImpl();
+		return parameterCheckModel;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Method createMethod() {
-    MethodImpl method = new MethodImpl();
-    return method;
-  }
+		MethodImpl method = new MethodImpl();
+		return method;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ParameterDecl createParameterDecl() {
-    ParameterDeclImpl parameterDecl = new ParameterDeclImpl();
-    return parameterDecl;
-  }
+		ParameterDeclImpl parameterDecl = new ParameterDeclImpl();
+		return parameterDecl;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public DeclaredParameter createDeclaredParameter() {
-    DeclaredParameterImpl declaredParameter = new DeclaredParameterImpl();
-    return declaredParameter;
-  }
+		DeclaredParameterImpl declaredParameter = new DeclaredParameterImpl();
+		return declaredParameter;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Literal createLiteral() {
-    LiteralImpl literal = new LiteralImpl();
-    return literal;
-  }
+		LiteralImpl literal = new LiteralImpl();
+		return literal;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public Check createCheck() {
-    CheckImpl check = new CheckImpl();
-    return check;
-  }
+		CheckImpl check = new CheckImpl();
+		return check;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public parametercheck.Exception createException() {
-    ExceptionImpl exception = new ExceptionImpl();
-    return exception;
-  }
+		ExceptionImpl exception = new ExceptionImpl();
+		return exception;
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
 	public ParametercheckPackage getParametercheckPackage() {
-    return (ParametercheckPackage)getEPackage();
-  }
+		return (ParametercheckPackage)getEPackage();
+	}
 
 	/**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
 	@Deprecated
 	public static ParametercheckPackage getPackage() {
-    return ParametercheckPackage.eINSTANCE;
-  }
+		return ParametercheckPackage.eINSTANCE;
+	}
 
 } //ParametercheckFactoryImpl
