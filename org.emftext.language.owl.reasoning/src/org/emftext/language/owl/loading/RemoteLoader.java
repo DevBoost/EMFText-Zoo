@@ -22,13 +22,10 @@ package org.emftext.language.owl.loading;
 
 import java.io.File;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import javax.print.attribute.standard.Fidelity;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -45,7 +42,6 @@ import org.emftext.language.owl.ObjectProperty;
 import org.emftext.language.owl.Ontology;
 import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlFactory;
-
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.model.OWLClass;
 import org.semanticweb.owl.model.OWLDataProperty;
