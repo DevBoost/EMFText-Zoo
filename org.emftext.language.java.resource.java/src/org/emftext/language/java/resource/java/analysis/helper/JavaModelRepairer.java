@@ -43,6 +43,7 @@ import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.resource.java.JavaContextDependentURIFragmentFactory;
 import org.emftext.language.java.resource.java.JavaReferenceResolverSwitch;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
@@ -202,7 +203,7 @@ public class JavaModelRepairer {
 		id = id.substring(id.indexOf("_") + 1);
 		
 		resource.registerContextDependentProxy(
-				new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
+				new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 				mainIdReference,
 				ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 				id,
@@ -225,7 +226,7 @@ public class JavaModelRepairer {
 			idRef.setTarget((ReferenceableElement) newProxy);
 			
 			resource.registerContextDependentProxy(
-					new org.emftext.runtime.resource.impl.ContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
+					new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 					idRef,
 					ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET,
 					nsPart,

@@ -20,11 +20,13 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.language.java.resource.java.JavaDefaultTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 import org.emftext.runtime.resource.ITokenResolver;
-import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
 // TODO @mseifert: add conversion of supplementary unicode characters
 // These consist of two characters (high and low surrogate).
@@ -33,11 +35,12 @@ import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 // The supplementary unicode characters can not be converted 
 // by the InputStreamConverter, because ANTLR does not support
 // them.
-public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
+public class JavaSTRING_LITERALTokenResolver implements ITokenResolver{ 
 
-	@Override
+	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
+
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
-		String result = super.deResolve(value,feature,container);
+		String result = defaultResolver.deResolve(value, feature, container);
 		
 		//escape escapes
 		result = CharacterEscaper.escapeEscapedCharacters(result);
@@ -46,7 +49,6 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 		return result;
 	}
 
-	@Override
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		// remove double quotes
 		assert lexem.charAt(0) == '"';
@@ -62,5 +64,8 @@ public class JavaSTRING_LITERALTokenResolver extends JavaBasedTokenResolver impl
 		lexem = CharacterEscaper.unescapeEscapedCharacters(lexem);
 		
 		result.setResolvedToken(lexem);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

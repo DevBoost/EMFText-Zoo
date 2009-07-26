@@ -20,22 +20,25 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.language.java.resource.java.JavaDefaultTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 import org.emftext.runtime.resource.ITokenResolver;
-import org.emftext.runtime.resource.impl.JavaBasedTokenResolver;
 
-public class JavaCHARACTER_LITERALTokenResolver extends JavaBasedTokenResolver implements ITokenResolver{ 
-	@Override
+public class JavaCHARACTER_LITERALTokenResolver implements ITokenResolver{ 
+	
+	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
+
 	public String deResolve(Object value, EStructuralFeature feature, EObject container) {
-		String result = super.deResolve(value,feature,container);
+		String result = defaultResolver.deResolve(value,feature,container);
 		result = CharacterEscaper.escapeEscapedCharacters(result);
 		result = '\'' + result + '\'';
 		return result;
 	}
 
-	@Override
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		assert lexem.length() == 3;
 		// remove single quotes
@@ -44,5 +47,9 @@ public class JavaCHARACTER_LITERALTokenResolver extends JavaBasedTokenResolver i
 		lexem = lexem.substring(1, lexem.length() - 1);
 		Character character = Character.valueOf(lexem.charAt(0));
 		result.setResolvedToken(character);
+	}
+
+	public void setOptions(Map<?, ?> options) {
+		defaultResolver.setOptions(options);
 	}
 }

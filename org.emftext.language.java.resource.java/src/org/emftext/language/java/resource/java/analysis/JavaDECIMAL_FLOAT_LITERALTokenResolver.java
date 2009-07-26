@@ -23,21 +23,20 @@ package org.emftext.language.java.resource.java.analysis;
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.FLOAT_SUFFIX;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 import org.emftext.language.java.literals.DecimalFloatLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
 import org.emftext.runtime.resource.ITokenResolveResult;
 
-public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaDECIMAL_FLOAT_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
 	
-	@Override
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof DecimalFloatLiteral;
 		assert value instanceof Float;
 		return value.toString() + FLOAT_SUFFIX;
 	}
 
-	@Override
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
@@ -54,5 +53,8 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver extends org.emftext.runtime.
 		} catch (NumberFormatException nfe) {
 			result.setErrorMessage(nfe.getClass().getSimpleName() + ": " + nfe.getMessage());
 		}
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }
