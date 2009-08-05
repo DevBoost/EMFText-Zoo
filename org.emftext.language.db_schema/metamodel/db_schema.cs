@@ -4,18 +4,15 @@ START Database
 
 OPTIONS{
 	generateCodeFromGeneratorModel = "true";
- 	//resourcePluginID = "org.emftext.language.dbschema.resource.database";
-	//basePackage = "org.emftext.language.dbschema.resource.database";
-	reloadGeneratorModel = "true";
+ 	reloadGeneratorModel = "true";
     tokenspace = "1";
     overrideManifest = "false";
 }
 TOKENS{
-		//DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
+		DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 		DEFINE INTEGER $('-')?('1'..'9')('0'..'9')*|'0'$;
-		//DEFINE FLOAT $('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-		//DEFINE ANNUMBERS $('@')('system'|'class'|'prop'|'func'|'assoc'|'param'|'type'|'!')(('1'..'9')('0'..'9')* | '0')$;
 }
+
 TOKENSTYLES {
 	"table" COLOR #0000CC, BOLD;
 	"fkeys" COLOR #0000CC, BOLD;
@@ -26,31 +23,46 @@ TOKENSTYLES {
 	"reference" COLOR #0000CC, BOLD;
 	"procedure" COLOR #0000CC, BOLD;
 	":" COLOR #0000CC, BOLD;
-	"BOOLEAN" COLOR #0000CC, BOLD;
-	"VARCHAR" COLOR #0000CC, BOLD;
-	"INTEGER" COLOR #0000CC, BOLD;
-	//"TEXT" COLOR #0000A0, BOLD;
+	"BOOLEAN" COLOR #00CCCC, BOLD;
+	"VARCHAR" COLOR #00CCCC, BOLD;
+	"INTEGER" COLOR #00CCCC, BOLD;
+	
 }
 
 RULES{
 		
-		Database ::=  "database" name[] "{" type* table* procedure* "}" ;
+		Database ::=  "database" name[] "{" 
+							table* 
+							procedure* 
+					  "}" ;
 		
-		Table ::= "table" name[] "{" "fkeys" "{" (fkey ("," fkey)*)? "}" "pkeys" "{" (pkey[] ("," pkey[])*)? "}" "columns" "{" column* "}"  "}"  ;
+		Table ::= "table" name[] "{" 
+						"fkeys" "{" 
+							(fkey ("," fkey)*)? 
+						"}" 
+						"pkeys" "{" 
+							(pkey[] ("," pkey[])*)? 
+						"}" 
+						"columns" "{" 
+							column* 
+						"}"  
+					"}"  ;
 		
 		FKey ::= "reference" reference[] "column" column[] ("," column[])*  ;
 		
-		Column ::= name[] ":" type[] ;
+		Column ::= name[] ":" type ;
 		
-		Procedure ::= "procedure" name[] "(" (parameter ("," parameter)*)? ")" ":" return[]? ;
+		Procedure ::= "procedure" name[] "(" (parameter ("," parameter)*)? ")" ":" return? ;
 	
-		Parameter ::= name[] ":" type[] ;
+		Parameter ::= name[] ":" type ;
 		
-		BOOLEAN ::= "BOOLEAN" name[] value? ;
+		BOOLEAN ::= "BOOLEAN" value? ;
 		
-		VARCHAR ::= "VARCHAR" name[] value? ;
+		VARCHAR ::= "VARCHAR" value? ;
 		
-		INTEGER ::= "INTEGER" name[] value? ;
+		INTEGER ::= "INTEGER" value? ;
+		
+		Type ::= "Type" ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
 		
 		BooleanObject ::= value[] ;
 		
@@ -58,12 +70,6 @@ RULES{
 		
 		StringObject ::= value[TEXT];
 		
-	
-//		3.sprache! POSTPROCESSOR
-//		org.emftext.language.template_concepts
-//		tornado2 auscheken -> genmodel -> modelCode erstellen
-//		TransformationSetupFactory Class ! erstellt regeln
-//		trunk/tornado/plugin... textual
 		
 		
 		

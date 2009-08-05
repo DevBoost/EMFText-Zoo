@@ -5,15 +5,12 @@ START ClassDiagramm
 OPTIONS{
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
-    //tokenspace = "1";
     overrideManifest = "false";
 }
 
 TOKENS{
-		//DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
+		DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 		DEFINE INTEGER $('-')?('1'..'9')('0'..'9')*|'0'$;
-		//DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-		//DEFINE BOOLEAN$('true'|'false')$;
 }
 
 TOKENSTYLES {
@@ -29,10 +26,10 @@ TOKENSTYLES {
     "->" COLOR #0000CC, BOLD;
     ".." COLOR #0000CC, BOLD;
     ":" COLOR #0000CC, BOLD;
-    "BOOLEAN" COLOR #0000CC, BOLD;
-    "STRING" COLOR #0000CC, BOLD;
-    "INTEGER" COLOR #0000CC, BOLD;
-    //"TEXT" COLOR #0000A0, BOLD;
+    "BOOLEAN" COLOR #00BBCC, BOLD;
+    "STRING" COLOR #00BBCC, BOLD;
+    "INTEGER" COLOR #00BBCC, BOLD;
+   
 }
 
 RULES{
@@ -47,19 +44,19 @@ RULES{
 		          ("md" modifier[] )*
 		          name[]
 		          "("
-		              (parameter)*
+		              (parameter ("," parameter)*)?
 		          ")" ":"
-		          (return[]?| "void")
+		          (return[]? | "void" | p_return? )
 		          ;
 		
 		Attribute::=  ( "ac" access[])?
 		              ( "md" modifier[] )*
 		              name[]
 		              ":"
-		              type[]
+		              ( type[] | p_type? )
 		              ;
 		              
-		Parameter::=  name[] ":" type[] ;
+		Parameter::=  name[] ":" ( type[] | p_type? ) ;
 		
 		Class::= "class" 
 		                  ( "ac" access[])?
@@ -67,8 +64,8 @@ RULES{
                           name[]
                           ("extends" parent[])?
                           "{"
-                                "attribute" "{" attribute* "}"
-                                "method" "{" method* "}"
+                                "attribute" "{" (attribute ("," attribute)*)? "}"
+                                "method" "{" (method ("," method)*)? "}"
                           "}"
                           ;
 		
@@ -77,21 +74,23 @@ RULES{
 		                  "("
 		                      source[] "->" target[]
 		                      ":"
-		                      minCardinality[INTEGER]
+		                      minCardinality['"','"']
 		                      ".."
-		                      maxCardinality[INTEGER]
+		                      maxCardinality['"','"']
 		                  ")" ;
 		                  
-	    Boolean ::= "BOOLEAN" name[] value? ;
+	    Boolean ::= "BOOLEAN" value? ;
         
-        String ::= "STRING" name[] value? ;
+        String ::= "STRING" value? ;
         
-        Integer ::= "INTEGER" name[] value? ;
+        Integer ::= "INTEGER" value? ;
         
-        BooleanObject ::= value[] ;
+        PrimitiveDataType ::= "Type" ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
         
-        IntegerObject ::= value[INTEGER] ;
+        BooleanObject ::= value['"','"'] ;
         
-        StringObject ::= value[TEXT];
+        IntegerObject ::= value['"','"'] ;
+        
+        StringObject ::= value['"','"'];
 		
 }
