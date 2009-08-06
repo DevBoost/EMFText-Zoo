@@ -15,32 +15,31 @@ OPTIONS {
 }
 
 TOKENS {
-		DEFINE GRAPHTYPE $ (('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) |
-		                   (('d'|'D') ('i'|'I') ('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) $;
+	DEFINE GRAPHTYPE $ (('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) |
+	                   (('d'|'D') ('i'|'I') ('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) $;
 
-		DEFINE STRICT $ ('s'|'S') ('t'|'T') ('r'|'R') ('i'|'I') ('c'|'C') ('t'|'T') $;
+	DEFINE STRICT $ ('s'|'S') ('t'|'T') ('r'|'R') ('i'|'I') ('c'|'C') ('t'|'T') $;
 
-		DEFINE SUBGRAPHTYPE $ ('s'|'S') ('u'|'U') ('b'|'B') ('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H') $;
+	DEFINE SUBGRAPHTYPE $ ('s'|'S') ('u'|'U') ('b'|'B') ('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H') $;
 		
-		DEFINE EDGEOP $ '->' | '--' $;
+	DEFINE EDGEOP $ '->' | '--' $;
 		
-		DEFINE CONTEXT $ (('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) |
-		                 (('n'|'N') ('o'|'O') ('d'|'D') ('e'|'E')) |
-		                 (('e'|'E') ('d'|'D') ('g'|'G') ('e'|'E')) $;
+	DEFINE CONTEXT $ (('g'|'G') ('r'|'R') ('a'|'A') ('p'|'P') ('h'|'H')) |
+	                 (('n'|'N') ('o'|'O') ('d'|'D') ('e'|'E')) |
+	                 (('e'|'E') ('d'|'D') ('g'|'G') ('e'|'E')) $;
 	
-	    DEFINE ID $ (('a'..'z'|'A'..'Z'|'_'|'\u0080'..'\u00ff')  ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'\u0080'..'\u00ff')*) |
-		            (('-')? ('.' ('0'..'9')+ ) | (('0'..'9')+ ('.' ('0'..'9')*)?)) |
-		            (('"' ('\\\"' | (~('"'|'\uffff')))* '"') ('+' ('"' ('\\\"' | (~('"'|'\uffff')))* '"'))*) |
-		            ('<' .* '>') $;   // maybe html tag as model              
-                             
-	    DEFINE SL_COMMENT $ '//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
-	    DEFINE ML_COMMENT $ '/*'.*'*/'$ COLLECT IN comments;
-		DEFINE PREPROCESSOR $ '#' (~('\n'|'\r'))* $ COLLECT IN comments;
-		
+	DEFINE ID $ (('a'..'z'|'A'..'Z'|'_'|'\\u0080'..'\\u00ff')  ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'\\u0080'..'\\u00ff')*) |
+	            (('-')? ('.' ('0'..'9')+ ) | (('0'..'9')+ ('.' ('0'..'9')*)?)) |
+	            (('"' ('\\\\\\"' | (~('"'|'\\uffff')))* '"') ('+' ('"' ('\\\\\\"' | (~('"'|'\\uffff')))* '"'))*) |
+	            ('<' .* '>') $;   // maybe html tag as model
+
+	DEFINE SL_COMMENT $ '//'(~('\\n'|'\\r'|'\\uffff'))* $ COLLECT IN comments;
+	DEFINE ML_COMMENT $ '/*'.*'*/'$ COLLECT IN comments;
+	DEFINE PREPROCESSOR $ '#' (~('\\n'|'\\r'))* $ COLLECT IN comments;
 		                 
-		DEFINE WHITESPACE $ (' '|'\t'|'\f'|'\\\r'|'\\\n'|'\\\r\n') $;
-		DEFINE TEXT $ ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+ $;
-		DEFINE LINEBREAKS $ ('\r\n'|'\r'|'\n') $;
+	DEFINE WHITESPACE $ (' '|'\\t'|'\\f'|'\\\\\\r'|'\\\\\\n'|'\\\\\\r\\n') $;
+	DEFINE TEXT $ ('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')+ $;
+	DEFINE LINEBREAKS $ ('\\r\\n'|'\\r'|'\\n') $;
 }
 
 TOKENSTYLES {
