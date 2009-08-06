@@ -14,7 +14,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ ;
+	DEFINE SL_COMMENT $'//'(~('\\n'|'\\r'|'\\uffff'))* $ ;
 	DEFINE ML_COMMENT $'/*'.*'*/'$ ;
 
 	DEFINE T_ABSTRACT $'abstract'$;
@@ -31,8 +31,8 @@ TOKENS {
 	DEFINE T_SERIALIZABLE $'serializable'$;
 	DEFINE T_CONTAINMENT $'containment'$;
 	
-	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
-	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
+	DEFINE WHITESPACE $(' '|'\\t'|'\\f')$;
+	DEFINE LINEBREAKS $('\\r\\n'|'\\r'|'\\n')$;
 		
 	DEFINE TEXT $('A'..'Z' | 'a'..'z' | '0'..'9' | '_' | '-' | '::')+$;
 }

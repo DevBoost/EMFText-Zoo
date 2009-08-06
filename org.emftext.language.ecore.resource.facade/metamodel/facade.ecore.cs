@@ -13,7 +13,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ ;
+	DEFINE SL_COMMENT $'//'(~('\\n'|'\\r'|'\\uffff'))* $ ;
 	DEFINE ML_COMMENT $'/*'.*'*/'$ ;
 
 	DEFINE T_INTERFACE_OR_CLASS $'interface'|'class'$;
