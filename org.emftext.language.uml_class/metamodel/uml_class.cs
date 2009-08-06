@@ -19,55 +19,61 @@ TOKENSTYLES {
     "md" COLOR #0000CC, BOLD;
     "void" COLOR #0000CC, BOLD;
     "class" COLOR #0000CC, BOLD;
-    "extends" COLOR #0000CC, BOLD;
+    "extends" COLOR #0000CC, BOLD; 
     "attribute" COLOR #0000CC, BOLD;
     "method" COLOR #0000CC, BOLD;
     "association" COLOR #0000CC, BOLD;
+    "p" COLOR #0000CC, BOLD;
     "->" COLOR #0000CC, BOLD;
     ".." COLOR #0000CC, BOLD;
     ":" COLOR #0000CC, BOLD;
     "BOOLEAN" COLOR #00BBCC, BOLD;
     "STRING" COLOR #00BBCC, BOLD;
     "INTEGER" COLOR #00BBCC, BOLD;
+    "TYPE" COLOR #00BBCC, BOLD;
    
 }
 
 RULES{
 		
-		ClassDiagramm::= "classdiagramm"  name[] 
+		ClassDiagramm::= "classdiagramm"  name[]
 		                  "{" 
-		                          class (class)*
+		                          primitiveDatatypes*
+		                          class*
 		                          association*
+		                  		  
 		                  "}"  ;
 		
-		Method::= ( "ac" access[])?
-		          ("md" modifier[] )*
-		          name[]
-		          "("
-		              (parameter ("," parameter)*)?
-		          ")" ":"
-		          (return[]? | "void" | p_return? )
-		          ;
+		Method::=	"method" 
+					( "ac" access[])?
+		          	( "md" modifier[] )*
+		          	name[]
+		          	"("
+		          	    (parameter ("," parameter)*)? 
+		          	")" ":"
+		          	(return[]? | "void" | ("p" p_return[])? )
+		          	;
 		
-		Attribute::=  ( "ac" access[])?
+		Attribute::=  "attribute"
+					  ( "ac" access[])?
 		              ( "md" modifier[] )*
 		              name[]
 		              ":"
-		              ( type[] | p_type? )
+		              ( type[]? | ("p" p_type[])? )
 		              ;
 		              
-		Parameter::=  name[] ":" ( type[] | p_type? ) ;
+		Parameter::=  name[] ":" ( type[]? | ("p" p_type[])? ) ;
 		
-		Class::= "class" 
-		                  ( "ac" access[])?
-                          ( "md" modifier[] )*
-                          name[]
-                          ("extends" parent[])?
-                          "{"
-                                "attribute" "{" (attribute ("," attribute)*)? "}"
-                                "method" "{" (method ("," method)*)? "}"
-                          "}"
-                          ;
+		Class::= "class"
+					( "ac" access[])?
+                    ( "md" modifier[] )*
+                    name[]
+                    ("extends" parent[])?
+                    "{"
+                         attribute* 
+                         method*
+                   	"}"
+                    ;
 		
 		Association::= "association"
 		                  targetDesc[]
@@ -79,15 +85,16 @@ RULES{
 		                      maxCardinality['"','"']
 		                  ")" ;
 		                  
-	    Boolean ::= "BOOLEAN" value? ;
+	    Boolean ::= "BOOLEAN" placeholder[] value? ;
         
-        String ::= "STRING" value? ;
+        String ::= "STRING" placeholder[] value? ;
         
-        Integer ::= "INTEGER" value? ;
+        Integer ::= "INTEGER" placeholder[] value? ;
         
-        PrimitiveDataType ::= "Type" ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
+        //allgemeiner Typ, verwendbar für die Erstellung von Regeln
+        PrimitiveDataType ::= "TYPE" placeholder[] ; 
         
-        BooleanObject ::= value['"','"'] ;
+        BooleanObject ::= value['"','"'] ; 
         
         IntegerObject ::= value['"','"'] ;
         

@@ -15,54 +15,58 @@ TOKENS{
 
 TOKENSTYLES {
 	"table" COLOR #0000CC, BOLD;
-	"fkeys" COLOR #0000CC, BOLD;
+	"fkey" COLOR #0000CC, BOLD;
 	"column" COLOR #0000CC, BOLD;
-	"columns" COLOR #0000CC, BOLD;
 	"database" COLOR #0000CC, BOLD;
-	"pkeys" COLOR #0000CC, BOLD;
-	"reference" COLOR #0000CC, BOLD;
+	"pkey" COLOR #0000CC, BOLD;
 	"procedure" COLOR #0000CC, BOLD;
 	":" COLOR #0000CC, BOLD;
 	"BOOLEAN" COLOR #00CCCC, BOLD;
 	"VARCHAR" COLOR #00CCCC, BOLD;
 	"INTEGER" COLOR #00CCCC, BOLD;
+	"TYPE" COLOR #00CCCC, BOLD;
 	
 }
 
 RULES{
 		
 		Database ::=  "database" name[] "{" 
+							
+							types* 
 							table* 
-							procedure* 
+							procedure*
+							
 					  "}" ;
 		
 		Table ::= "table" name[] "{" 
-						"fkeys" "{" 
-							(fkey ("," fkey)*)? 
-						"}" 
-						"pkeys" "{" 
-							(pkey[] ("," pkey[])*)? 
-						"}" 
-						"columns" "{" 
-							column* 
-						"}"  
+						
+						fkey* 
+						pkey* 
+						column* 
+						
 					"}"  ;
 		
-		FKey ::= "reference" reference[] "column" column[] ("," column[])*  ;
+		FKey ::= "fkey" reference[] "column" column[] ("," column[])*  ;
 		
-		Column ::= name[] ":" type ;
+		PKey ::= "pkey" "column" column[] ("," column[])*  ;
 		
-		Procedure ::= "procedure" name[] "(" (parameter ("," parameter)*)? ")" ":" return? ;
+		Column ::= "column" name[] ":" type[] ;
+		
+		Procedure ::= "procedure" name[] "(" 
+								
+								(parameter ("," parameter)*)? ")" 
+								
+								":" return[]? ;
 	
-		Parameter ::= name[] ":" type ;
+		Parameter ::= name[] ":" type[] ;
 		
-		BOOLEAN ::= "BOOLEAN" value? ;
+		BOOLEAN ::= "BOOLEAN" placeholder[] value? ;
 		
-		VARCHAR ::= "VARCHAR" value? ;
+		VARCHAR ::= "VARCHAR" placeholder[] value? ;
 		
-		INTEGER ::= "INTEGER" value? ;
+		INTEGER ::= "INTEGER" placeholder[] value? ;
 		
-		Type ::= "Type" ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
+		Type ::= "TYPE" placeholder[] ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
 		
 		BooleanObject ::= value[] ;
 		
