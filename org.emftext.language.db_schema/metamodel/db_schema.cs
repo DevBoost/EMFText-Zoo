@@ -46,7 +46,7 @@ RULES{
 						
 					"}"  ;
 		
-		FKey ::= "fkey" name[] "table "reference[] "column" column[] ("," column[])*  ;
+		FKey ::= "fkey" name[] "table" reference[] "column" column[] ("," column[])*  ;
 		
 		PKey ::= "pkey" name[] "column" column[] ("," column[])*  ;
 		
@@ -72,7 +72,7 @@ RULES{
 		
 		IntegerObject ::= value[INTEGER] ;
 		
-		StringObject ::= value[TEXT];
+		StringObject ::= value[TEXT]; 
 		
 		
 		
