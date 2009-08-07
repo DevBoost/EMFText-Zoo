@@ -8,7 +8,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE COMMENT $'//'(~('\\n'|'\\r'))*$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 }
 
 TOKENSTYLES {

@@ -17,9 +17,9 @@ TOKENS {
 	
 	DEFINE CHAR  $('a'..'z')|('A'..'Z')$;
 	
-	DEFINE WHITESPACE $(' '|'\\t'|'\\f')$;
-	DEFINE LINEBREAKS $('\\r\\n'|'\\r'|'\\n')$;
-	DEFINE COMMENT $'//'(~('\\n'|'\\r'|'\\uffff'))*$;
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }
 
 TOKENSTYLES {

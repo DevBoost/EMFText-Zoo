@@ -10,7 +10,7 @@ OPTIONS {
 }
 
 TOKENS{
-		DEFINE COMMENT$'//'(~('\\n'|'\\r'))*$;
+		DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
 		DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 		DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
 }

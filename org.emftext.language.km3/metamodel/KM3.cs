@@ -22,9 +22,9 @@ TOKENS {
 	DEFINE NAME $(('a'..'z')|('A'..'Z')) (('a'..'z')|('A'..'Z')|('0'..'9'))*$;
 	DEFINE CARDINALITY $('0'..'9')|('*')$;
 	
-	DEFINE COMMENT $'--'(~('\\n'|'\\r'|'\\uffff'))*$;
-	DEFINE WHITESPACE $(' '|'\\t'|'\\f')$;
-	DEFINE LINEBREAKS $('\\r\\n'|'\\r'|'\\n')$;
+	DEFINE COMMENT $'--'(~('\n'|'\r'|'\uffff'))*$;
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 
 TOKENSTYLES {
