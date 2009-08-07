@@ -46,9 +46,9 @@ RULES{
 						
 					"}"  ;
 		
-		FKey ::= "fkey" reference[] "column" column[] ("," column[])*  ;
+		FKey ::= "fkey" name[] "table "reference[] "column" column[] ("," column[])*  ;
 		
-		PKey ::= "pkey" "column" column[] ("," column[])*  ;
+		PKey ::= "pkey" name[] "column" column[] ("," column[])*  ;
 		
 		Column ::= "column" name[] ":" type[] ;
 		
@@ -60,13 +60,13 @@ RULES{
 	
 		Parameter ::= name[] ":" type[] ;
 		
-		BOOLEAN ::= "BOOLEAN" placeholder[] value? ;
+		BOOLEAN ::= "BOOLEAN" name[] value? ;
 		
-		VARCHAR ::= "VARCHAR" placeholder[] value? ;
+		VARCHAR ::= "VARCHAR" name[] value? ;
 		
-		INTEGER ::= "INTEGER" placeholder[] value? ;
+		INTEGER ::= "INTEGER" name[] value? ;
 		
-		Type ::= "TYPE" placeholder[] ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
+		Type ::= "TYPE" name[] ; //allgemeiner Typ, verwendbar für die Erstellung von Regeln
 		
 		BooleanObject ::= value[] ;
 		

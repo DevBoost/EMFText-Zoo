@@ -76,7 +76,7 @@ RULES{
                     ;
 		
 		Association::= "association"
-		                  targetDesc[]
+		                  name[]
 		                  "("
 		                      source[] "->" target[]
 		                      ":"
@@ -85,14 +85,14 @@ RULES{
 		                      maxCardinality['"','"']
 		                  ")" ;
 		                  
-	    Boolean ::= "BOOLEAN" placeholder[] value? ;
+	    Boolean ::= "BOOLEAN" name[] value? ;
         
-        String ::= "STRING" placeholder[] value? ;
+        String ::= "STRING" name[] value? ;
         
-        Integer ::= "INTEGER" placeholder[] value? ;
+        Integer ::= "INTEGER" name[] value? ;
         
         //allgemeiner Typ, verwendbar für die Erstellung von Regeln
-        PrimitiveDataType ::= "TYPE" placeholder[] ; 
+        PrimitiveDataType ::= "TYPE" name[] ; 
         
         BooleanObject ::= value['"','"'] ; 
         
