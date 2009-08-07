@@ -42,23 +42,23 @@ RULES{
 						
 						fkey* 
 						pkey* 
-						column* 
+						column*  
 						
 					"}"  ;
 		
-		FKey ::= "fkey" name[] "table" reference[] "column" column[] ("," column[])*  ;
+		FKey ::= "fkey" name[] "table" reference "column" column[] ("," column[])*  ; 
 		
 		PKey ::= "pkey" name[] "column" column[] ("," column[])*  ;
 		
-		Column ::= "column" name[] ":" type[] ;
+		Column ::= "column" name[] ":" type ;
 		
 		Procedure ::= "procedure" name[] "(" 
 								
 								(parameter ("," parameter)*)? ")" 
 								
-								":" return[]? ;
+								":" return? ;
 	
-		Parameter ::= name[] ":" type[] ;
+		Parameter ::= name[] ":" type ;
 		
 		BOOLEAN ::= "BOOLEAN" name[] value? ;
 		

@@ -14,7 +14,7 @@ TOKENS{
 }
 
 TOKENSTYLES {
-    "classdiagramm" COLOR #0000CC, BOLD;
+    "classdiagramm" COLOR #0000CC, BOLD; 
     "ac" COLOR #0000CC, BOLD;
     "md" COLOR #0000CC, BOLD;
     "void" COLOR #0000CC, BOLD;
@@ -50,8 +50,9 @@ RULES{
 		          	name[]
 		          	"("
 		          	    (parameter ("," parameter)*)? 
-		          	")" ":"
-		          	(return[]? | "void" | ("p" p_return[])? )
+		          	")" 
+		          	":"
+		          	(return[] | "void" | p_return )
 		          	;
 		
 		Attribute::=  "attribute"
@@ -59,10 +60,10 @@ RULES{
 		              ( "md" modifier[] )*
 		              name[]
 		              ":"
-		              ( type[]? | ("p" p_type[])? )
+		              ( type[] | p_type )
 		              ;
 		              
-		Parameter::=  name[] ":" ( type[]? | ("p" p_type[])? ) ;
+		Parameter::=  name[] ":" ( type[] | p_type ) ; 
 		
 		Class::= "class"
 					( "ac" access[])?
@@ -78,7 +79,7 @@ RULES{
 		Association::= "association"
 		                  name[]
 		                  "("
-		                      source[] "->" target[]
+		                      source "->" target 
 		                      ":"
 		                      minCardinality['"','"']
 		                      ".."
