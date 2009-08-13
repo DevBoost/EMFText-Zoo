@@ -24,12 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.NestedExpression;
 import org.emftext.language.java.generics.TypeParameter;
@@ -56,6 +58,27 @@ public class ClassifierReferenceTargetReferenceResolver extends
 	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (classifier instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) classifier;
+			
+			Object fullNamesOption = container.eResource().getResourceSet().getLoadOptions().get(
+					JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);	
+			if (!(fullNamesOption instanceof Boolean)) {
+				fullNamesOption = Boolean.FALSE;
+			}		
+			if (Boolean.TRUE.equals(fullNamesOption)) {
+				String packageName = "";
+				String fullClassName = concreteClassifier.getName();
+				EObject parent = concreteClassifier.eContainer();
+				while(parent instanceof Classifier) {
+					fullClassName = ((Classifier)parent).getName() + "." + fullClassName;
+					parent = parent.eContainer();
+				}
+				if (parent instanceof CompilationUnit) {
+					EList<String> namespaces = ((CompilationUnit)parent).getNamespaces();
+					for(String s : namespaces) { packageName += s + "."; }
+				}
+				return packageName + fullClassName;
+			}
+			
 			if(concreteClassifier.getFullName() != null) {
 				return concreteClassifier.getFullName();
 			}

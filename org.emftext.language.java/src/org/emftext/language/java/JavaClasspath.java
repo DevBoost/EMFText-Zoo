@@ -76,6 +76,9 @@ public class JavaClasspath extends AdapterImpl {
 	 */
 	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
 	
+	public static final String OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES = "OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES";
+	
+	
 	/**
 	 * Singleton instance.
 	 */
