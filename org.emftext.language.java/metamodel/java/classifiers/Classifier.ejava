@@ -1,0 +1,110 @@
+epackage java.classifiers;
+
+//ecore
+import java.classifiers.Annotation;
+import java.classifiers.Class;
+import java.classifiers.Classifier;
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Enumeration;
+import java.classifiers.Interface;
+import java.generics.TypeParameter;
+import java.members.Member;
+import java.modifiers.AnnotableAndModifiable;
+import java.types.TypeReference;
+
+
+//java
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.util.JavaClasspathUtil;
+import org.emftext.language.java.util.JavaUtil;
+
+
+eclass Classifier {
+	
+	/**
+	 * Returns all members of the given classifier including inner classes and 
+	 * all members of super types (extended classes and implemented interfaces).
+	 * 
+	 * @param context to check protected visibility
+	 * @return member list
+	 */
+	getAllMembers() {
+		EList<Member> memberList = new BasicEList<Member>();
+		if (this == null) {
+			return memberList;
+		}
+		
+		if (this instanceof ConcreteClassifier) {
+			ConcreteClassifier concreteClassifier = (ConcreteClassifier) this;
+			memberList.addAll(concreteClassifier.getMembers());
+			memberList.addAll(concreteClassifier.getDefaultMembers());
+			//because inner classes are found in separate class files
+			memberList.addAll(concreteClassifier.getAllInnerClassifiers());
+		}
+		
+		EList<EObject> possiblyVisibleSuperClassifier = ECollections.emptyEList();
+		if (this instanceof TypeParameter) {
+			possiblyVisibleSuperClassifier = new BasicEList<EObject>();
+			for(TypeReference typeReference : ((TypeParameter)this).getExtendTypes()) {
+				possiblyVisibleSuperClassifier.add(typeReference.getTarget());
+			}
+		}
+		
+		for (ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
+			for(Member member : superClassifier.getMembers()) {
+				if(member instanceof AnnotableAndModifiable) {					
+					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
+
+					if(!modifiable.isHidden(context)) {
+						memberList.add(member);
+					}
+					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {
+						memberList.add(member);
+					}
+				}
+				else {
+					memberList.add(member);
+				}
+			}
+			memberList.addAll(superClassifier.getDefaultMembers());
+		}
+		return memberList;
+	}
+	
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
+		if(this == null) {
+			return superClassifierList;
+		}
+
+		if (this instanceof Class) {
+			Class javaClass = (Class) this;
+			javaClass.collectAllSuperClassifiers(superClassifierList);
+		} else if (this instanceof Interface) {
+			Interface javaInterface = (Interface) this;
+			superClassifierList.addAll(javaInterface.getAllSuperInterfaces());
+		} else if (this instanceof Annotation) {
+			superClassifierList.add(JavaClasspathUtil.getAnnotationClass(this));
+		} else if (this instanceof Enumeration) {
+			Enumeration enumeration = (Enumeration) this;
+			superClassifierList.addAll(enumeration.getAllSuperInterfaces());
+			//enumerations inherit from java.lang.Enum
+			Class enumClass = JavaClasspathUtil.getClass("Enum", this);
+			superClassifierList.add(enumClass);
+			enumClass.collectAllSuperClassifiers(superClassifierList);
+			
+		} else if (this instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) this;
+			typeParameter.collectAllSuperClassifiers(superClassifierList);
+		} else if (this instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
+			for(Classifier superType : ((TypeParameterUtil.TemporalCompositeClassImpl)this).getSuperTypes()) {
+				superClassifierList.addAll(superType.getAllSuperClassifiers());
+			}
+		}
+
+		return superClassifierList;
+	}
+}

@@ -1,0 +1,103 @@
+epackage java.classifiers;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+import org.emftext.language.java.util.JavaClasspathUtil;
+
+import java.types.PrimitiveType;
+import java.types.*;
+import java.types.TypeReference;
+
+eclass Class {
+	
+	/**
+	 * Recursively collects all super types (extended classes and implemented interfaces)
+	 * of the given class.
+	 * 
+	 * @param classifierList the list for the result
+	 */
+	collectAllSuperClassifiers() {
+		
+		//collects all superclasses
+		Class superClass =  this;
+		while (superClass != null && !superClass.eIsProxy() && 
+				!superClass.equals(JavaClasspathUtil.getObjectClass(this))) {
+			superClass = superClass.getSuperClass();
+			if (superClass != null) {
+				classifierList.add(superClass);
+			}
+		}
+		
+		EList<ConcreteClassifier> superClassList = 
+			new BasicEList<ConcreteClassifier>(classifierList);
+		
+		//collect all implemented interfaces
+		classifierList.addAll(
+				InterfaceUtil.getAllSuperInterfaces(
+						this.getImplements()));
+		
+		//collect all implemented interfaces of super classes
+		for(Classifier superClassifier : superClassList) {
+			if (superClassifier instanceof Class) {
+				classifierList.addAll(
+						InterfaceUtil.getAllSuperInterfaces(
+								((Class)superClassifier).getImplements()));
+			}
+		}
+	}
+	
+	/**
+	 * @param this
+	 * @return the direct super class
+	 */
+	getSuperClass() {
+		TypeReference superClassReference = this.getExtends();
+		if (superClassReference == null) {
+			superClassReference = this.getDefaultExtends();
+		}
+		Type result = superClassReference.getTarget();
+		if (result instanceof Class) {
+			return (Class) result;
+		}
+		return null;
+	}
+	
+	/**
+	 * @param this
+	 * @return primitive type, if the class can be wrapped
+	 */
+	unWrapPrimitiveType() {	
+		//TODO how to instantiate?
+		if (JavaClasspathUtil.getClass("Boolean", this).equals(this)) {
+			return new Boolean();
+		}
+		if (JavaClasspathUtil.getClass("Byte", this).equals(this)) {
+			return new Byte();
+		}
+		if (JavaClasspathUtil.getClass("Character", this).equals(this)) {
+			return new Char();
+		}
+		if (JavaClasspathUtil.getClass("Float", this).equals(this)) {
+			return new Float();
+		}
+		if (JavaClasspathUtil.getClass("Double", this).equals(this)) {
+			return new Double();
+		}
+		if (JavaClasspathUtil.getClass("Integer", this).equals(this)) {
+			return new Int();
+		}
+		if (JavaClasspathUtil.getClass("Long", this).equals(this)) {
+			return new Long();
+		}
+		if (JavaClasspathUtil.getClass("Short", this).equals(this)) {
+			return new Short();
+		}
+		if (JavaClasspathUtil.getClass("Void", this).equals(this)) {
+			return new Void();
+		}
+		return null;
+	}
+
+
+
+}

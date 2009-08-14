@@ -1,0 +1,40 @@
+epackage java.classifiers;
+
+//ecore
+import java.types.TypeReference;
+
+//java
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+
+eclass Interface {
+
+	getAllSuperInterfaces() {
+		EList<EList<ConcreteClassifier>> resultInterfaceList = new BasicEList<ConcreteClassifier>();
+		collectAllSuperInterfaces(this.getExtends(), resultInterfaceList);
+		collectAllSuperInterfaces(this.getDefaultExtends(), resultInterfaceList);
+		EList<ConcreteClassifier> completeResult = new BasicEList<ConcreteClassifier>();
+		for(EList<ConcreteClassifier> levelList : resultInterfaceList) {
+			completeResult.addAll(levelList);
+		}
+		return completeResult;
+	}
+	
+	collectAllSuperInterfaces() {
+		for (TypeReference typeArg : interfaceReferences) {
+			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				resultInterfaceList.add(superInterface);
+				if (superInterface instanceof Interface) {
+					collectAllSuperInterfaces(
+							((Interface)superInterface).getExtends(), resultInterfaceList);
+					collectAllSuperInterfaces(
+							((Interface)superInterface).getDefaultExtends(), resultInterfaceList);
+				}
+			}
+		}
+	}
+		
+}
