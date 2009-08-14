@@ -24,6 +24,7 @@ import java.io.InputStream;
 
 import org.emftext.runtime.InputStreamProcessor;
 import org.emftext.runtime.IInputStreamProcessorProvider;
+import org.emftext.runtime.util.UnicodeConverter;
 
 /**
  * Provides the instances of the UnicodeConverter class to be used when
