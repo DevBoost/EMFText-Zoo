@@ -102,10 +102,14 @@ public class ExtendedEjavaResource extends EjavaResource {
 	}
 	
 	private String printBody(EOperationWrapper wrapper) {
+		byte[] lineBreak = System.getProperty ("line.separator").getBytes();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		EjavaPrinter printer = new PlainJavaEjavaPrinter(outputStream, this);
 		for(FeatureStatementListContainerStatements statement : wrapper.getStatements()) {
 			printer.print(statement);
+			try {
+				printer.outputStream.write(lineBreak);
+			} catch (IOException e) {}
 		}
 		return outputStream.toString();
 	}
