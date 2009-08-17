@@ -1,0 +1,194 @@
+epackage java.commons;
+
+//Java
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
+import org.emftext.language.java.JavaClasspath;
+
+//ecore
+import java.classifiers.AnonymousClass;
+import java.classifiers.Class;
+import java.classifiers.Classifier;
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Interface;
+import java.containers.CompilationUnit;
+import java.annotations.AnnotationInstance;
+
+
+eclass Commentable {
+
+	getConcreteClassifier() {
+		return (ConcreteClassifier) JavaClasspath.get(this).getClassifier(name);
+	}
+	
+	getConcreteClassifiers() {
+		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		for(EObject classifier : JavaClasspath.get(this).getClassifiers(packageName, classifierQuery)) {
+			result.add((ConcreteClassifier)classifier);
+		}
+		return result;
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing the class with the given name located in <code>java.lang</code>.
+	 * 
+     * @param name name of the Class
+	 * @return the Class
+	 */
+	getClass() {
+		if (this.eResource() == null) {
+			throw new IllegalArgumentException("object context element must have a resource");
+		}
+		Class classClass = (Class) getConcreteClassifier(
+				"java.lang." + name);
+		classClass = (Class) EcoreUtil.resolve(classClass, this);
+		return classClass;
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Interface</code>
+	 * representing the interface with the given name located in <code>java.lang</code>.
+	 * 
+     * @param name name of the Interface
+	 * @return the Class
+	 */
+	getInterface() {
+		if (this.eResource() == null) {
+			throw new IllegalArgumentException("object context element  must have a resource");
+		}
+		ConcreteClassifier classClass = getConcreteClassifier(
+				"java.lang." + name);
+		return (Interface) EcoreUtil.resolve(classClass, this);
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing <code>java.lang.Class</code>.
+	 * 
+	 * @return the Class
+	 */
+	getClassClass()  {
+		return getClass("Class");
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing <code>java.lang.Object</code>.
+	 * 
+	 * @return the Class
+	 */
+	getObjectClass()  {
+		return getClass("Object");
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing <code>java.lang.String</code>.
+	 * 
+	 * @return the Class
+	 */
+	getStringClass() {
+		return getClass("String");
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Interface</code>
+	 * representing <code>java.lang.annotation.Annotation</code>.
+	 * 
+	 * @return the Class
+	 */
+	getAnnotationInterface() {
+		if (this.eResource() == null) {
+			throw new IllegalArgumentException("object context element must have a resource");
+		}
+		Interface annotationClass = (Interface) EcoreUtil.resolve(
+				getConcreteClassifier("java.lang.annotation.Annotation"), this);
+		return annotationClass;
+	}
+	
+	//===== Container look up =====
+	
+	/**
+	 * Finds the containing classifier for the given element.
+	 * 
+	 * @param value
+	 * @return containing classifier
+	 */
+	getContainingConcreteClassifier() {
+		EObject value = this;
+		while (!(value instanceof ConcreteClassifier) && value != null) {
+			value = value.eContainer();
+		}
+		return (ConcreteClassifier) value;
+	}
+	
+	/**
+	 * Finds the containing anonymous class for the given element.
+	 * 
+	 * @param value
+	 * @return containing anonymous class 
+	 */
+	getContainingAnonymousClass() {
+		EObject value = this;
+		while (!(value instanceof AnonymousClass) 
+				&& !(value instanceof ConcreteClassifier) //do not jump over other classifiers 
+				&& value != null) {
+			value = value.eContainer();
+		}
+		if (!(value instanceof AnonymousClass)) {
+			return null;
+		}
+		return (AnonymousClass) value;
+	}
+	
+	/**
+	 * Finds the containing compilation unit for the given element.
+	 * 
+	 * @param value
+	 * @return containing compilation unit
+	 */
+	getContainingCompilationUnit() {
+		EObject value = this;
+		while (!(value instanceof CompilationUnit) && value != null) {
+			value = value.eContainer();
+		}
+		return (CompilationUnit) value;
+	}
+
+	/**
+	 * Finds the containing annotation instance for the given element.
+	 * 
+	 * @param value
+	 * @return containing annotation instance
+	 */
+	getContainingAnnotationInstance() {
+		EObject value = this;
+		while (!(value instanceof AnnotationInstance) && value != null) {
+			value = value.eContainer();
+		}
+		return (AnnotationInstance) value;
+	}
+	
+	getContainingPackageName() {
+		CompilationUnit cu = getContainingCompilationUnit();
+		if (cu == null) {
+			return null;
+		}
+		
+		int idx = cu.getNamespaces().size();
+		if(cu.getName() != null) {
+			char[] fullName = cu.getName().toCharArray();
+			for(int i = 0; i < fullName.length; i++) {
+				if (fullName[i] == '$') {
+					idx--;
+				}
+			}
+		}
+		return new BasicEList<String>(cu.getNamespaces().subList(0, idx));
+	}
+	
+
+}

@@ -1,0 +1,73 @@
+epackage java.generics;
+
+//ecore
+import java.classifiers.*;
+import java.containers.*;
+import java.members.*;
+import java.types.*;
+import java.modifiers.AnnotableAndModifiable;
+
+//java
+import org.eclipse.emf.common.util.*;
+import org.eclipse.emf.ecore.*;
+import org.eclipse.emf.ecore.util.*;
+import org.emftext.language.java.*;
+import org.emftext.language.java.util.*;
+
+
+eclass TypeParameter {
+	
+	/**
+	 * @return all type restrictions
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		for(TypeReference typeRef : getExtendTypes()) {
+			Type type = typeRef.getTarget();
+			if (type instanceof ConcreteClassifier) {
+				result.add((ConcreteClassifier)type);
+			}
+			if (type instanceof Classifier) {
+				result.addAll(((Classifier)type).getAllSuperClassifiers());	
+			}
+		}		
+		
+		return result;
+	}
+	
+	/**
+	 * Returns all members of the given classifier including inner classes and 
+	 * all members of super types (extended classes and implemented interfaces).
+	 * 
+	 * @param context to check protected visibility
+	 * @return member list
+	 */
+	getAllMembers() {
+		EList<Member> memberList = new BasicEList<Member>();
+
+		BasicEList<Type> possiblyVisibleSuperClassifier = new BasicEList<Type>();
+		for(TypeReference typeReference : ((TypeParameter)this).getExtendTypes()) {
+			possiblyVisibleSuperClassifier.add(typeReference.getTarget());
+		}
+		
+		for (ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
+			for(Member member : superClassifier.getMembers()) {
+				if(member instanceof AnnotableAndModifiable) {					
+					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
+
+					if(!modifiable.isHidden(context)) {
+						memberList.add(member);
+					}
+					else if (possiblyVisibleSuperClassifier.contains(superClassifier)) {
+						memberList.add(member);
+					}
+				}
+				else {
+					memberList.add(member);
+				}
+			}
+			memberList.addAll(superClassifier.getDefaultMembers());
+		}
+		return memberList;
+	}
+}

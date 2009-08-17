@@ -9,32 +9,37 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 eclass Interface {
-
-	getAllSuperInterfaces() {
-		EList<EList<ConcreteClassifier>> resultInterfaceList = new BasicEList<ConcreteClassifier>();
-		collectAllSuperInterfaces(this.getExtends(), resultInterfaceList);
-		collectAllSuperInterfaces(this.getDefaultExtends(), resultInterfaceList);
-		EList<ConcreteClassifier> completeResult = new BasicEList<ConcreteClassifier>();
-		for(EList<ConcreteClassifier> levelList : resultInterfaceList) {
-			completeResult.addAll(levelList);
-		}
-		return completeResult;
-	}
 	
-	collectAllSuperInterfaces() {
-		for (TypeReference typeArg : interfaceReferences) {
+	/**
+	 * @return all interfaces extended by this interface. The type is 
+	 * ConcreteClassifier, because java.lang.Object is also extended although
+	 * it is a Class.
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		
+		for (TypeReference typeArg : this.getExtends()) {
 			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
 			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
 			if (superInterface != null) {
-				resultInterfaceList.add(superInterface);
+				result.add(superInterface);
 				if (superInterface instanceof Interface) {
-					collectAllSuperInterfaces(
-							((Interface)superInterface).getExtends(), resultInterfaceList);
-					collectAllSuperInterfaces(
-							((Interface)superInterface).getDefaultExtends(), resultInterfaceList);
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
 				}
 			}
 		}
+		
+		for (TypeReference typeArg : this.getDefaultExtends()) {
+			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
+			}
+		}
+		return result;
 	}
 		
 }

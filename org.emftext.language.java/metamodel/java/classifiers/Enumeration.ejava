@@ -1,0 +1,37 @@
+epackage java.classifiers;
+
+//ecore
+import java.types.TypeReference;
+
+//java
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+eclass Enumeration {
+	
+	/**
+	 * @return all interfaces extended by this enumeration.
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		
+		//enumerations inherit from java.lang.Enum
+		Class enumClass = getClass("Enum");
+		result.add(enumClass);
+		result.addAll(enumClass.getAllSuperClassifiers());
+		
+		//collect all implemented interfaces
+		for (TypeReference typeArg : this.getImplements()) {
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
+			}
+		}
+		
+		return result;
+	}
+		
+}

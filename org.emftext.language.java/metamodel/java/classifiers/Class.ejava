@@ -2,11 +2,8 @@ epackage java.classifiers;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.emftext.language.java.util.JavaClasspathUtil;
 
-import java.types.PrimitiveType;
 import java.types.*;
-import java.types.TypeReference;
 
 eclass Class {
 	
@@ -16,34 +13,46 @@ eclass Class {
 	 * 
 	 * @param classifierList the list for the result
 	 */
-	collectAllSuperClassifiers() {
-		
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = 
+			new BasicEList<ConcreteClassifier>();
+					
 		//collects all superclasses
-		Class superClass =  this;
+		Class superClass = this;
 		while (superClass != null && !superClass.eIsProxy() && 
-				!superClass.equals(JavaClasspathUtil.getObjectClass(this))) {
+				!superClass.equals(getObjectClass())) {
 			superClass = superClass.getSuperClass();
 			if (superClass != null) {
-				classifierList.add(superClass);
+				result.add(superClass);
 			}
 		}
-		
-		EList<ConcreteClassifier> superClassList = 
-			new BasicEList<ConcreteClassifier>(classifierList);
 		
 		//collect all implemented interfaces
-		classifierList.addAll(
-				InterfaceUtil.getAllSuperInterfaces(
-						this.getImplements()));
-		
-		//collect all implemented interfaces of super classes
-		for(Classifier superClassifier : superClassList) {
-			if (superClassifier instanceof Class) {
-				classifierList.addAll(
-						InterfaceUtil.getAllSuperInterfaces(
-								((Class)superClassifier).getImplements()));
+		for (TypeReference typeArg : this.getImplements()) {
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
 			}
 		}
+		
+		//collect all implemented interfaces of super classes	
+		if (superClass != null && !superClass.eIsProxy() && 
+				!superClass.equals(getObjectClass())) {
+			for (TypeReference typeArg : superClass.getImplements()) {
+				ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+				if (superInterface != null) {
+					result.add(superInterface);
+					if (superInterface instanceof Interface) {
+						result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+					}
+				}
+			}
+		}	
+
+		return result;
 	}
 	
 	/**
@@ -68,36 +77,34 @@ eclass Class {
 	 */
 	unWrapPrimitiveType() {	
 		//TODO how to instantiate?
-		if (JavaClasspathUtil.getClass("Boolean", this).equals(this)) {
-			return new Boolean();
+		if (getClass("Boolean").equals(this)) {
+			return #Boolean;
 		}
-		if (JavaClasspathUtil.getClass("Byte", this).equals(this)) {
-			return new Byte();
+		if (getClass("Byte").equals(this)) {
+			return #Byte;
 		}
-		if (JavaClasspathUtil.getClass("Character", this).equals(this)) {
-			return new Char();
+		if (getClass("Character").equals(this)) {
+			return #Char;
 		}
-		if (JavaClasspathUtil.getClass("Float", this).equals(this)) {
-			return new Float();
+		if (getClass("Float").equals(this)) {
+			return #Float;
 		}
-		if (JavaClasspathUtil.getClass("Double", this).equals(this)) {
-			return new Double();
+		if (getClass("Double").equals(this)) {
+			return #Double;
 		}
-		if (JavaClasspathUtil.getClass("Integer", this).equals(this)) {
-			return new Int();
+		if (getClass("Integer").equals(this)) {
+			return #Int;
 		}
-		if (JavaClasspathUtil.getClass("Long", this).equals(this)) {
-			return new Long();
+		if (getClass("Long").equals(this)) {
+			return #Long;
 		}
-		if (JavaClasspathUtil.getClass("Short", this).equals(this)) {
-			return new Short();
+		if (getClass("Short").equals(this)) {
+			return #Short;
 		}
-		if (JavaClasspathUtil.getClass("Void", this).equals(this)) {
-			return new Void();
+		if (getClass("Void").equals(this)) {
+			return #Void;
 		}
 		return null;
 	}
-
-
 
 }
