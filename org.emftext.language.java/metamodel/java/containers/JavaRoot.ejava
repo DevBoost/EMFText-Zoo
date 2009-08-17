@@ -1,0 +1,23 @@
+epackage java.containers;
+
+import java.classifiers.ConcreteClassifier;
+
+import org.eclipse.emf.common.util.*;
+
+eclass JavaRoot {
+	
+	/**
+	 * @return all classes in the same package imports
+	 */
+	getClassifiersInSamePackage() {
+		EList<ConcreteClassifier> defaultImportList = new BasicEList<ConcreteClassifier>();
+		
+		String packageName = getNamespacesAsString();
+		
+		defaultImportList.addAll(getConcreteClassifiers(
+				packageName + ".", "*"));
+
+		return defaultImportList;
+	}
+
+}

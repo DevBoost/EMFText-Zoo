@@ -1,0 +1,39 @@
+epackage java.containers;
+
+import java.classifiers.ConcreteClassifier;
+
+import org.eclipse.emf.common.util.*;
+
+eclass CompilationUnit {
+	
+	/**
+	 * @param name name of the contained Classifier
+	 * @return the Classifier
+	 */
+	getContainedClassifier() {
+		for(ConcreteClassifier candidate : getClassifiers()) {
+			if(candidate.getName().equals(name)) {
+				return candidate;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * @return all classes in the same package imports
+	 */
+	getClassifiersInSamePackage() {
+		EList<ConcreteClassifier> defaultImportList = new BasicEList<ConcreteClassifier>();
+		
+		String packageName = getNamespacesAsString();
+
+		//locally defined in this container
+		defaultImportList.addAll(getClassifiers());
+		
+		defaultImportList.addAll(getConcreteClassifiers(
+				packageName + ".", "*"));
+
+		return defaultImportList;
+	}
+
+}

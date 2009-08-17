@@ -126,6 +126,29 @@ eclass Commentable {
 	}
 	
 	/**
+	 * Finds the classifier that is the parent of this element. If 
+	 * this element is an inner classifier the parent classifier does
+	 * not necessarily contain this element, since it can reside in 
+	 * a different compilation unit when stored in byte code.
+	 * 
+	 * @param value
+	 * @return containing classifier
+	 */
+	getParentConcreteClassifier() {
+		ConcreteClassifier classifier = getContainingConcreteClassifier();
+		if(classifier == null) {
+			CompilationUnit cu = getContainingCompilationUnit();
+			//maybe the outer classifier is in an extra cu
+			classifier = (ConcreteClassifier) EcoreUtil.resolve(
+					getConcreteClassifier(cu.getNamespacesAsString()), this);
+			if(classifier.eIsProxy())  {
+				classifier = null;
+			}
+		}
+		return classifier;
+	}
+	
+	/**
 	 * Finds the containing anonymous class for the given element.
 	 * 
 	 * @param value
@@ -189,6 +212,8 @@ eclass Commentable {
 		}
 		return new BasicEList<String>(cu.getNamespaces().subList(0, idx));
 	}
+	
+
 	
 
 }
