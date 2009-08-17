@@ -55,16 +55,18 @@ eclass Type {
 			return false;
 		}
 		
-		if (this instanceof TypeParameterUtil.TemporalCompositeClassImpl || otherType instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
-			EList<Type> thisTypeList = new BasicEList<Type>();
+		Type _this = this;
+		
+		if (_this instanceof TemporalCompositeClassifier || otherType instanceof TemporalCompositeClassifier) {
+			EList<Type> _thisTypeList = new BasicEList<Type>();
 			EList<Type> otherTypeList = new BasicEList<Type>();
-			if (this instanceof TemporalCompositeClassifier) {
-				for(EObject aType : ((TemporalCompositeClassifier)this).getSuperTypes()) {
-					thisTypeList.add((Type)aType);
+			if (_this instanceof TemporalCompositeClassifier) {
+				for(EObject aType : ((TemporalCompositeClassifier)_this).getSuperTypes()) {
+					_thisTypeList.add((Type)aType);
 				}
 			}
 			else {
-				thisTypeList.add(this);
+				_thisTypeList.add(_this);
 			}
 			if (otherType instanceof TemporalCompositeClassifier) {
 				for(EObject aType : ((TemporalCompositeClassifier)otherType).getSuperTypes()) {
@@ -72,13 +74,13 @@ eclass Type {
 				}
 			}
 			else {
-				otherTypeList.add(this);
+				otherTypeList.add(_this);
 			}
 			
 			
-			for(Type oneThisType : thisTypeList) {
+			for(Type one_thisType : _thisTypeList) {
 				for(Type oneOtherType : otherTypeList) {
-					boolean result = oneThisType.isSuperType(arrayDimension, oneOtherType, otherArrayType);
+					boolean result = one_thisType.isSuperType(arrayDimension, oneOtherType, otherArrayType);
 					if (result) {
 						return true;
 					}	
@@ -88,7 +90,7 @@ eclass Type {
 		}
 		
 		//if I am a void, I am of every type
-		if (this.equals(getClass("Void"))) {
+		if (_this.equals(getClass("Void"))) {
 			return true;
 		}
 		
@@ -99,15 +101,15 @@ eclass Type {
 		
 		//String, primitives, and arrays are serializable
 		ConcreteClassifier serializableClass = (ConcreteClassifier) EcoreUtil.resolve(
-				getConcreteClassifier("java.io.Serializable"), this);
+				getConcreteClassifier("java.io.Serializable"), _this);
 		if (otherType.equals(serializableClass)) {
-			if (this.equals(serializableClass)) {
+			if (_this.equals(serializableClass)) {
 	 			return true;
 			}
-			else if (this.equals(getStringClass())) {
+			else if (_this.equals(getStringClass())) {
 	 			return true;
 			}
-			else if (this instanceof PrimitiveType) {
+			else if (_this instanceof PrimitiveType) {
 				return true;
 			}
 			else if (arrayDimension > 0) {
@@ -117,7 +119,7 @@ eclass Type {
 		}
 		
 		//if one of us is a parameter to the best of my knowledge, we might match
-		if(this instanceof TypeParameter) {
+		if(_this instanceof TypeParameter) {
 			return true;
 		}
 		if(otherType instanceof TypeParameter ) {
@@ -127,12 +129,12 @@ eclass Type {
 		//if array dimensions do not match, I am no subtype
 		boolean isTypeParameter = false;		
 		if (otherArrayType instanceof TypedElement) {
-			Type type = ((TypedElement)otherArrayType).getType().getTarget();
+			Type type = ((TypedElement)otherArrayType).getTypeReference().getTarget();
 			isTypeParameter = type instanceof TypeParameter;
 		}
 		boolean isVariableLengthParameter = otherArrayType instanceof VariableLengthParameter;
 		
-		int otherArrayDim = otherArrayType.getArrayDimension();
+		long otherArrayDim = otherArrayType.getArrayDimension();
 		if (isTypeParameter && isVariableLengthParameter) {
 			if(arrayDimension != otherArrayDim && 
 				arrayDimension != otherArrayDim-1 && 
@@ -158,31 +160,31 @@ eclass Type {
 		}
 		
 		//annotations
-		if(this instanceof Annotation && 
+		if(_this instanceof Annotation && 
 				(otherType.equals(getAnnotationInterface()) ||
-						((ConcreteClassifier)this).getAllSuperClassifiers(
+						((ConcreteClassifier)_this).getAllSuperClassifiers(
 							).contains(getAnnotationInterface()))) {
 			return true;
 		}
 
 		//do comparison on the classifier level
-		if (this instanceof PrimitiveType) {
-			this = ((PrimitiveType) this).wrapPrimitiveType();
+		if (_this instanceof PrimitiveType) {
+			_this = ((PrimitiveType) _this).wrapPrimitiveType();
 		}
 		if (otherType instanceof PrimitiveType) {
 			otherType = ((PrimitiveType) otherType).wrapPrimitiveType();
 		}
 		
 		//compare in type hierarchy
-		if (otherType instanceof ConcreteClassifier && this instanceof ConcreteClassifier &&
-				(otherType.equals(this) || 
-						((ConcreteClassifier)this).getAllSuperClassifiers(
+		if (otherType instanceof ConcreteClassifier && _this instanceof ConcreteClassifier &&
+				(otherType.equals(_this) || 
+						((ConcreteClassifier)_this).getAllSuperClassifiers(
 								).contains(otherType))) {
 			return true;
 		}
 		
-		if (otherType instanceof ConcreteClassifier && this instanceof AnonymousClass &&
-				((AnonymousClass)this).getAllSuperClassifiers(
+		if (otherType instanceof ConcreteClassifier && _this instanceof AnonymousClass &&
+				((AnonymousClass)_this).getAllSuperClassifiers(
 						).contains(otherType)) {
 			
 			return true;
@@ -208,15 +210,15 @@ eclass Type {
 			otherType = primitiveType;
 		}
 		
-		if (this instanceof Class) {
-			PrimitiveType primitiveType = ((Class) this).unWrapPrimitiveType();
+		if (_this instanceof Class) {
+			PrimitiveType primitiveType = ((Class) _this).unWrapPrimitiveType();
 			if(primitiveType == null) {
 				return false;
 			}
-			this = primitiveType;
+			_this = primitiveType;
 		}
 
-		if (this instanceof Boolean) {
+		if (_this instanceof Boolean) {
 			if (otherType instanceof Boolean) {
 				return true;
 			}
@@ -224,11 +226,11 @@ eclass Type {
 				return false;
 			}
 		}
-		if (this instanceof Byte ||
-				this instanceof Int ||
-				this instanceof Short ||
-				this instanceof Long ||
-				this instanceof Char) {
+		if (_this instanceof Byte ||
+				_this instanceof Int ||
+				_this instanceof Short ||
+				_this instanceof Long ||
+				_this instanceof Char) {
 			if (otherType instanceof Byte ||
 					otherType instanceof Int ||
 					otherType instanceof Short ||
@@ -242,8 +244,8 @@ eclass Type {
 				return false;
 			}
 		}
-		if (this instanceof Float ||
-				this instanceof Double) {
+		if (_this instanceof Float ||
+				_this instanceof Double) {
 			if (otherType instanceof Float ||
 					otherType instanceof Double) {
 				return true;
@@ -254,5 +256,10 @@ eclass Type {
 		}
 
 		return false;
+	}
+	
+	getAllMembers() {
+		//method has to be specified in subclasses
+		throw new UnsupportedOperationException();
 	}
 }

@@ -115,14 +115,16 @@ eclass TypeParameter {
 				parentReference = expressionReference;
 				Type prevType = nestedExpression.getExpression().getType();
 				if(prevType instanceof TemporalCompositeClassifier) {
-					prevTypeList.addAll(((TemporalCompositeClassifier)prevType).getSuperTypes());
+					for(EObject aType : ((TemporalCompositeClassifier)prevType).getSuperTypes()) {
+						prevTypeList.add((Type)aType);
+					}
 				}
 				else {
 					prevTypeList.add(prevType);
 				}
 			}
 			else if (nestedExpression.getExpression() instanceof CastExpression) {
-				prevTypeList.add(((CastExpression)nestedExpression.getExpression()).getType().getTarget());
+				prevTypeList.add(((CastExpression)nestedExpression.getExpression()).getTypeReference().getTarget());
 			}
 		}
 		else if (reference != null && reference.getPrevious() != null) {
@@ -147,7 +149,9 @@ eclass TypeParameter {
 			if (parentReference != null) {
 				Type prevType = parentReference.getType();
 				if(prevType instanceof TemporalCompositeClassifier) {
-					prevTypeList.addAll(((TemporalCompositeClassifier)prevType).getSuperTypes());
+					for(EObject aType : ((TemporalCompositeClassifier)prevType).getSuperTypes()) {
+						prevTypeList.add((Type)aType);
+					}
 				}
 				else {
 					prevTypeList.add(prevType);
@@ -172,12 +176,12 @@ eclass TypeParameter {
 					if(parentReference instanceof ElementReference) {
 						ReferenceableElement prevReferenced = ((ElementReference) parentReference).getTarget();
 						if(prevReferenced instanceof TypedElement) {
-							classifierReference = ((TypedElement) prevReferenced).getType().getPureClassifierReference();
+							classifierReference = ((TypedElement) prevReferenced).getTypeReference().getPureClassifierReference();
 						}
 					}
 					if(parentReference instanceof TypedElement) {
 						//e.g. New Constructor Call
-						classifierReference = ((TypedElement) parentReference).getType().getPureClassifierReference();
+						classifierReference = ((TypedElement) parentReference).getTypeReference().getPureClassifierReference();
 					}
 					if (prevType instanceof ConcreteClassifier) {
 						//bound through inheritance?
@@ -190,7 +194,7 @@ eclass TypeParameter {
 												typeParameterDeclarator)) {					 
 									TypeArgument arg = superClassifierReference.getTypeArguments().get(typeParameterIndex);
 									if (arg instanceof QualifiedTypeArgument) {
-										resultList.add(idx, ((QualifiedTypeArgument) arg).getType().getTarget());
+										resultList.add(idx, ((QualifiedTypeArgument) arg).getTypeReference().getTarget());
 										idx++;
 									}
 								}
@@ -219,7 +223,7 @@ eclass TypeParameter {
 						if (typeParameterIndex < typeArgumentList.size())  {
 							TypeArgument arg = typeArgumentList.get(typeParameterIndex);
 							if (arg instanceof QualifiedTypeArgument) {
-								ClassifierReference theTypeRef = ((QualifiedTypeArgument) arg).getType().getPureClassifierReference();
+								ClassifierReference theTypeRef = ((QualifiedTypeArgument) arg).getTypeReference().getPureClassifierReference();
 								Type theType = theTypeRef.getBoundTarget(parentReference);
 								if (theType != null) {
 									if (!theTypeRef.getTypeArguments().isEmpty()) {
@@ -267,7 +271,7 @@ eclass TypeParameter {
 				if(method.getTypeParameters().size() == methodCall.getCallTypeArguments().size()) {
 					TypeArgument typeArgument = methodCall.getCallTypeArguments().get(method.getTypeParameters().indexOf(this));
 					if (typeArgument instanceof QualifiedTypeArgument) {
-						resultList.add(0, ((QualifiedTypeArgument)typeArgument).getType().getBoundTarget(parentReference)); 
+						resultList.add(0, ((QualifiedTypeArgument)typeArgument).getTypeReference().getBoundTarget(parentReference)); 
 					} 
 				}
 
@@ -279,16 +283,16 @@ eclass TypeParameter {
 					for(Parameter parameter : method.getParameters()) {
 						for (TypeArgument typeArgument : parameter.getTypeArguments()) {
 							if(typeArgument instanceof QualifiedTypeArgument) {
-								if(((QualifiedTypeArgument) typeArgument).getType().getTarget().equals(this)) {
+								if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
 									idx = method.getParameters().indexOf(parameter);
 								}
 							}
 						}
-						ClassifierReference paramTypeReference = parameter.getType().getPureClassifierReference();
+						ClassifierReference paramTypeReference = parameter.getTypeReference().getPureClassifierReference();
 						if (paramTypeReference != null) {
 							for (TypeArgument typeArgument : paramTypeReference.getTypeArguments()) {
 								if(typeArgument instanceof QualifiedTypeArgument) {
-									if(this.equals(((QualifiedTypeArgument) typeArgument).getType().getTarget())) {
+									if(this.equals(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget())) {
 										idx = method.getParameters().indexOf(parameter);
 									}
 								}
@@ -300,14 +304,14 @@ eclass TypeParameter {
 				if (idx < methodCall.getArguments().size() && idx >= 0) {
 					Expression argument = methodCall.getArguments().get(idx);
 					Parameter parameter = method.getParameters().get(idx);
-					ClassifierReference parameterType = parameter.getType().getPureClassifierReference();
+					ClassifierReference parameterType = parameter.getTypeReference().getPureClassifierReference();
 					if (argument instanceof NewConstructorCall) {
-						ClassifierReference argumentType = ((NewConstructorCall)argument).getType().getPureClassifierReference();
+						ClassifierReference argumentType = ((NewConstructorCall)argument).getTypeReference().getPureClassifierReference();
 						if (argumentType != null && parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
 							for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 								if(typeArgument instanceof QualifiedTypeArgument) {
-									if(((QualifiedTypeArgument) typeArgument).getType().getTarget().equals(this)) {
-										resultList.add(0, ((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getType(
+									if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
+										resultList.add(0, ((QualifiedTypeArgument)argumentType.getTypeArguments().get(parameterType.getTypeArguments().indexOf(typeArgument))).getTypeReference(
 											).getTarget());
 									}
 								}
@@ -332,14 +336,14 @@ eclass TypeParameter {
 								elementReference = (ElementReference) elementReference.getNext();
 							}
 							if (elementReference.getTarget() instanceof TypedElement) {
-								ClassifierReference argumentType = ((TypedElement)elementReference.getTarget()).getType().getPureClassifierReference();
+								ClassifierReference argumentType = ((TypedElement)elementReference.getTarget()).getTypeReference().getPureClassifierReference();
 								if (argumentType != null && parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
-											if(((QualifiedTypeArgument) typeArgument).getType().getTarget().equals(this)) {
+											if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
 												int idx2 = parameterType.getTypeArguments().indexOf(typeArgument);
 												if (argumentType.getTypeArguments().get(idx2) instanceof QualifiedTypeArgument) {
-													resultList.add(0, ((QualifiedTypeArgument)argumentType.getTypeArguments().get(idx2)).getType().getTarget());
+													resultList.add(0, ((QualifiedTypeArgument)argumentType.getTypeArguments().get(idx2)).getTypeReference().getTarget());
 												}
 												else if (argumentType.getTypeArguments().get(idx2) instanceof ExtendsTypeArgument) {
 													for(TypeReference extendedType : ((ExtendsTypeArgument) argumentType.getTypeArguments().get(idx2)).getExtendTypes()) {
@@ -358,7 +362,7 @@ eclass TypeParameter {
 								if (parameterType.getTypeArguments().size() == 1) {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
-											if(((QualifiedTypeArgument) typeArgument).getType().getTarget().equals(this)) {
+											if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
 												resultList.add(0, elementReference.getType());
 											}
 										}
@@ -382,7 +386,7 @@ eclass TypeParameter {
 					//bound by the type of a method argument?
 					EList<Classifier> allSuperTypes = null;
 					for(Parameter parameter : method.getParameters()) {
-						if(this.equals(parameter.getType().getTarget())) {
+						if(this.equals(parameter.getTypeReference().getTarget())) {
 							idx = method.getParameters().indexOf(parameter);
 							Classifier argumentType = (Classifier) methodCall.getArguments().get(idx).getType();
 							if(allSuperTypes == null) {

@@ -36,7 +36,7 @@ eclass AnonymousClass {
 			return memberList;
 		}
 		else {
-			ConcreteClassifier classifier = (ConcreteClassifier) ncCall.getType().getTarget();
+			ConcreteClassifier classifier = (ConcreteClassifier) ncCall.getTypeReference().getTarget();
 			if (classifier != null) {
 				EList<Member> superMemberList = classifier.getAllMembers(context);
 				for(Member superMember : superMemberList) {
@@ -84,7 +84,7 @@ eclass AnonymousClass {
 		NewConstructorCall ncCall = null;
 		if (this.eContainer() instanceof NewConstructorCall) {
 			ncCall = (NewConstructorCall) this.eContainer();
-			ConcreteClassifier superClassifier = (ConcreteClassifier) ncCall.getType().getTarget();
+			ConcreteClassifier superClassifier = (ConcreteClassifier) ncCall.getTypeReference().getTarget();
 			return superClassifier;
 		}
 		else if (this.eContainer() instanceof EnumConstant) {
