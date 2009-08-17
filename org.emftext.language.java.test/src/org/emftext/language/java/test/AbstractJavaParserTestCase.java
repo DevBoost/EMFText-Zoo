@@ -72,7 +72,7 @@ import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
 import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
-import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
+import org.emftext.runtime.util.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.util.JavaUtil;

@@ -30,7 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.antlr.runtime.ANTLRInputStream;
-import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverter;
+import org.emftext.runtime.util.UnicodeConverter;
 import org.junit.Test;
 
 public class UnicodeConverterTest {
