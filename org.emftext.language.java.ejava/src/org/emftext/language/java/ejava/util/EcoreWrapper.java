@@ -1,5 +1,7 @@
 package org.emftext.language.java.ejava.util;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.ECollections;
@@ -51,7 +53,7 @@ import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 public class EcoreWrapper {
 	
 	public static void wrap(EPackageWrapper mainEPackageWrapper) {
-		EMap<EList<String>, EPackage> ePackages = findEPackagesInScope(mainEPackageWrapper);
+		EMap<EList<String>, GenPackage> ePackages = findGenPackagesInScope(mainEPackageWrapper);
 		
 		for(EList<String> namespaces : ePackages.keySet()) {
 			wrapEPackage(ePackages.get(namespaces), namespaces, mainEPackageWrapper);
@@ -59,7 +61,7 @@ public class EcoreWrapper {
 		
 	}
 
-	public static void wrapEPackage(EPackage ePackage, EList<String> namespaces, EPackageWrapper mainEPackageWrapper) {
+	public static void wrapEPackage(GenPackage genPackage, EList<String> namespaces, EPackageWrapper mainEPackageWrapper) {
 		EPackageWrapper wrapper = null;
 		Resource wrapperResource = null;
 		JavaClasspath cp = JavaClasspath.get(mainEPackageWrapper);
@@ -69,10 +71,11 @@ public class EcoreWrapper {
 		if (mainEPackageWrapper.getNamespaces().equals(namespaces)) {
 			wrapper = mainEPackageWrapper;
 			wrapperResource = mainEPackageWrapper.eResource();
-			wrapper.setEPackage(ePackage);
+			wrapper.setGenPackage(genPackage);
+			wrapper.setEPackage(genPackage.getEcorePackage());
 		}
 		
-		for(EClassifier eClassifier : ePackage.getEClassifiers()) {
+		for(EClassifier eClassifier : genPackage.getEcorePackage().getEClassifiers()) {
 			if (wrapper == null) {
 				URI uri = JavaUniquePathConstructor.getJavaFileResourceURI(packageName + eClassifier.getName());
 				ResourceSet rs = mainEPackageWrapper.eResource().getResourceSet();
@@ -87,7 +90,8 @@ public class EcoreWrapper {
 				wrapper = EjavaFactory.eINSTANCE.createEPackageWrapper();
 				wrapperResource.getContents().add(wrapper);
 				wrapper.getNamespaces().addAll(namespaces);
-				wrapper.setEPackage(ePackage);
+				wrapper.setGenPackage(genPackage);
+				wrapper.setEPackage(genPackage.getEcorePackage());
 			}
 			wrapEClassifier(eClassifier, wrapper);
 			cp.registerClassifier(packageName, eClassifier.getName(), wrapperResource.getURI());
@@ -165,42 +169,6 @@ public class EcoreWrapper {
 		wrapper.getParameters().add(parameter);
 	}
 	
-	private static EMap<EList<String>, EPackage> findEPackagesInScope(EPackageWrapper context) {
-		Resource eJavaResource = context.eResource();
-		if (eJavaResource == null) {
-			return ECollections.emptyEMap();
-		}
-		ResourceSet rs = eJavaResource.getResourceSet();
-		if (rs == null) {
-			return ECollections.emptyEMap();
-		}
-		
-		String fileName = context.getNamespaces().get(0) + ".ecore";
-		URI ecoreURI = eJavaResource.getURI().trimSegments(
-				1 + context.getNamespaces().size()).appendSegment(fileName);
-		Resource ecoreResource = rs.getResource(ecoreURI, true);
-		EcoreUtil.resolveAll(ecoreResource);
-		
-		EMap<EList<String>, EPackage> result = new BasicEMap<EList<String>, EPackage>();
-		for(Resource r : rs.getResources()) {
-			if (!r.getContents().isEmpty() && r.getContents().get(0) instanceof EPackage) {
-				collectEPackages((EPackage)r.getContents().get(0), new BasicEList<String>(), result);
-			}
-		}
-		
-		return result;
-	}
-
-	private static void collectEPackages(EPackage ePackage,
-			EList<String> basePackageName, EMap<EList<String>, EPackage> result) {
-		basePackageName.add(ePackage.getName());
-		result.put(ECollections.unmodifiableEList(basePackageName), ePackage);
-		for(EPackage subEPackage : ePackage.getESubpackages()) {
-			collectEPackages(subEPackage, new BasicEList<String>(basePackageName), result);
-		}
-		
-	}
-	
 	public static void wrapEOperation(
 			EOperation eOperation, EClassifierWrapper eClassifierWrapper) { 
 		EOperationWrapper wrapper = (EOperationWrapper) MemberContainerUtil.getOnlyMethodWithName(
@@ -214,12 +182,53 @@ public class EcoreWrapper {
 		wrapper.setEOperation(eOperation);
 		wrapper.setType(createTypeReferenceForETypedElement(eOperation));
 		
-		for(EParameter eParameter : eOperation.getEParameters()) {
-			Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
-			parameter.setName(eParameter.getName());
-			parameter.setType(createTypeReferenceForETypedElement(eParameter));
-			wrapper.getParameters().add(parameter);
+		if (wrapper.getParameters().isEmpty()) {
+			for(EParameter eParameter : eOperation.getEParameters()) {
+				Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
+				parameter.setName(eParameter.getName());
+				parameter.setType(createTypeReferenceForETypedElement(eParameter));
+				wrapper.getParameters().add(parameter);
+			}
 		}
+	}
+	
+	private static EMap<EList<String>, GenPackage> findGenPackagesInScope(EPackageWrapper context) {
+		Resource eJavaResource = context.eResource();
+		if (eJavaResource == null) {
+			return ECollections.emptyEMap();
+		}
+		ResourceSet rs = eJavaResource.getResourceSet();
+		if (rs == null) {
+			return ECollections.emptyEMap();
+		}
+		
+		String fileName = context.getNamespaces().get(0) + ".genmodel";
+		URI ecoreURI = eJavaResource.getURI().trimSegments(
+				1 + context.getNamespaces().size()).appendSegment(fileName);
+		Resource genModelResource = rs.getResource(ecoreURI, true);
+		EcoreUtil.resolveAll(genModelResource);
+		
+		EMap<EList<String>, GenPackage> result = new BasicEMap<EList<String>, GenPackage>();
+		for(Resource r : rs.getResources()) {
+			if (!r.getContents().isEmpty() && r.getContents().get(0) instanceof GenModel) {
+				GenModel genModel = (GenModel)r.getContents().get(0);
+				for(GenPackage genPackage : genModel.getGenPackages()) {
+					collectGenPackages(genPackage, new BasicEList<String>(), result);
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	private static void collectGenPackages(GenPackage genPackage,
+			EList<String> basePackageName, EMap<EList<String>, GenPackage> result) {
+		basePackageName.add(genPackage.getPackageName());
+		result.put(ECollections.unmodifiableEList(basePackageName), genPackage);
+		for(GenPackage subGenPackage : genPackage.getSubGenPackages()) {
+			collectGenPackages(subGenPackage, new BasicEList<String>(basePackageName), result);
+		}
+		
 	}
 	
 	private static Type getType(EClassifier eClassifier)  {

@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
-import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -97,25 +94,16 @@ public class ExtendedEjavaResource extends EjavaResource {
 	
 	private void setToRealJavaPackage(EPackageWrapper wrapper) {
 		// the only way to find the base package is to go to the genmodel
-		URI genModelURI = wrapper.getEPackage().eResource().getURI().trimFileExtension().appendFileExtension("genmodel");
-		Resource genModelResource = wrapper.eResource().getResourceSet().getResource(genModelURI, true);
-		for(TreeIterator<EObject> i = genModelResource.getAllContents(); i.hasNext(); ) {
-			EObject next = i.next();
-			if(next instanceof GenPackage) {
-				GenPackage genPackage = (GenPackage) next;
-				if(genPackage.getEcorePackage().equals(wrapper.getEPackage())) {
-					wrapper.getNamespaces().clear();
-					wrapper.getNamespaces().addAll(
-							Arrays.asList(genPackage.getBasePackage().split("\\.")));
-					wrapper.getNamespaces().add(wrapper.getEPackage().getName());
-				}
-			}
-		}
+		wrapper.getNamespaces().clear();
+		wrapper.getNamespaces().addAll(
+				Arrays.asList(wrapper.getGenPackage().getBasePackage().split("\\.")));
+		wrapper.getNamespaces().add(wrapper.getEPackage().getName());
+
 	}
 	
 	private String printBody(EOperationWrapper wrapper) {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		EjavaPrinter printer = new EjavaPrinter(outputStream, this);
+		EjavaPrinter printer = new PlainJavaEjavaPrinter(outputStream, this);
 		for(FeatureStatementListContainerStatements statement : wrapper.getStatements()) {
 			printer.print(statement);
 		}
