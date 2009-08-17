@@ -1,0 +1,127 @@
+epackage java.modifiers;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import java.classifiers.AnonymousClass;
+import java.classifiers.Classifier;
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Interface;
+import java.commons.Commentable;
+import java.containers.CompilationUnit;
+import java.literals.Self;
+import java.modifiers.AnnotableAndModifiable;
+import java.modifiers.AnnotationInstanceOrModifier;
+import java.modifiers.Private;
+import java.modifiers.Protected;
+import java.modifiers.Public;
+import java.modifiers.Static;
+import java.references.Reference;
+import java.references.SelfReference;
+import java.types.Type;
+
+
+
+eclass AnnotableAndModifiable {
+
+	isStatic() {
+		//all members of an interface as static by default
+		if (this.eContainer() instanceof Interface) {
+			return true;
+		}
+		
+		for(AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {
+			if(modifier instanceof Static) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	isHidden() {
+		//all members of an interface are public by default
+		if (this.eContainer() instanceof Interface) {
+			return false;
+		}
+		
+		if(context.eIsProxy()) {
+			context = (Commentable) EcoreUtil.resolve(context, this);
+		}
+		
+		ConcreteClassifier contextClassifier = context.getContainingConcreteClassifier(); 
+		ConcreteClassifier myClassifier = ((Commentable)eContainer()).getParentConcreteClassifier();
+		
+		//special case: self reference to outer instance
+		if(context instanceof Reference) {
+			if (((Reference)context).getPrevious() instanceof SelfReference) {
+				SelfReference selfReference = ((Reference)context).getPrevious();
+				if (selfReference.getSelf() instanceof Self) {
+					if(selfReference.getPrevious() != null) {
+						Type type = selfReference.getPrevious().getType();
+						if (type instanceof ConcreteClassifier) {
+							contextClassifier = (ConcreteClassifier) type;
+						}
+					}
+				}
+			}
+		}
+		
+		for(AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {
+			if(modifier instanceof Private) {
+				if (myClassifier.equalsType(0, contextClassifier, 0)) {
+					return false;
+				}
+				return true;
+			}
+			if(modifier instanceof Public) {
+				return false;
+			}
+			if(modifier instanceof Protected) {
+				//package visibility
+				if (getContainingPackageName() != null && 
+						getContainingPackageName().equals(context.getContainingPackageName())) {
+					return false;
+				}
+				//try outer classifiers as well 
+				while(contextClassifier instanceof Classifier) {
+					if (contextClassifier.isSuperType(0, myClassifier, null)) {
+						return false;
+					}
+					contextClassifier = 
+						((Commentable)contextClassifier.eContainer()).getParentConcreteClassifier();
+		
+					if (contextClassifier != null && !contextClassifier.eIsProxy() && 
+							contextClassifier.isSuperType(0, myClassifier, null)) {
+						return false;
+					}
+				}
+				//visibility through anonymous subclass
+				AnonymousClass anonymousClass = context.getContainingAnonymousClass();
+				while (anonymousClass != null) {
+					contextClassifier = anonymousClass.getSuperClassifier();
+					if (contextClassifier.isSuperType(0, myClassifier, null)) {
+						return false;
+					}
+					anonymousClass = ((Commentable)anonymousClass.eContainer()
+						).getContainingAnonymousClass();
+				}
+				return true;
+			}
+		}
+		//package visibility?
+		if (getContainingPackageName() != null && 
+				getContainingPackageName().equals(context.getContainingPackageName())) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	
+
+
+
+	
+	
+
+}

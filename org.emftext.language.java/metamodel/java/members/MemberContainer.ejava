@@ -1,0 +1,62 @@
+epackage java.members;
+
+import java.classifiers.ConcreteClassifier;
+import java.members.Field;
+import java.members.Member;
+import java.members.MemberContainer;
+import java.members.Method;
+
+/**
+ * A utility class that provides methods that belong to class 
+ * MemberContainer, but can not go there, because MemberContainer 
+ * is generated.
+ */
+eclass MemberContainer {
+	
+	/**
+	 * @param name
+	 * @return classifier with the given name defined in this member container
+	 */
+	getContainedClassifier() {
+		for(Member member : getMembers()) {
+			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
+				return (ConcreteClassifier) member;
+			}
+ 		}
+		return null;
+	}
+	
+	/**
+	 * @param name
+	 * @return field with the given name defined in this member container
+	 */
+	getContainedField() {
+		for(Member member : getMembers()) {
+			if (member instanceof Field && name.equals(member.getName())) {
+				return (Field) member;
+			}
+ 		}
+		return null;
+	}
+
+	/**
+	 * @param name
+	 * @return method with the given name defined in this member container;
+	 *         null, if there is no such method 
+	 *         or if there are multiple methods with the same name
+	 */
+	getContainedMethod() {
+		Method found = null;
+		for(Member member : getMembers()) {
+			if (member instanceof Method && name.equals(member.getName())) {
+				if(found != null) {
+					return null;
+				}
+				else {
+					found = (Method) member;
+				}
+			}
+ 		}
+		return found;
+	}
+}

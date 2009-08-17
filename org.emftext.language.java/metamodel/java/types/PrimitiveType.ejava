@@ -1,0 +1,55 @@
+epackage java.types;
+
+import org.eclipse.emf.common.util.EList;
+
+import java.classifiers.Class;
+import java.commons.Commentable;
+import java.members.Member;
+
+eclass PrimitiveType {
+
+	/**
+	 * @param context to check protected visibility
+	 * @return all members (including super type members)
+	 */
+	getAllMembers() {
+		Class javaClass = wrapPrimitiveType();	
+		return javaClass.getAllMembers(context);
+	}
+	
+	/**
+	 * @return primitive type as a class representation
+	 */
+	wrapPrimitiveType() {
+		Class javaClass = null;
+		
+		if (this instanceof Boolean) {
+			javaClass = getClass("Boolean");
+		}
+		if (this instanceof Byte) {
+			javaClass = getClass("Byte");
+		}
+		if (this instanceof Char) {
+			javaClass = getClass("Character");
+		}
+		if (this instanceof Double) {
+			javaClass = getClass("Double");
+		}
+		if (this instanceof Float) {
+			javaClass = getClass("Float");
+		}
+		if (this instanceof Int) {
+			javaClass = getClass("Integer");
+		}
+		if (this instanceof Long) {
+			javaClass = getClass("Long");
+		}
+		if (this instanceof Short) {
+			javaClass = getClass("Short");
+		}
+		if (this instanceof Void) {
+			javaClass = getClass("Void");
+		}
+		return javaClass;
+	}
+}
