@@ -17,6 +17,7 @@ import java.references.ReferenceableElement;
 import java.types.Type;
 import java.variables.AdditionalLocalVariable;
 import java.variables.LocalVariable;
+import java.parameters.VariableLengthParameter;
 
 eclass Expression {
 
@@ -47,7 +48,7 @@ eclass Expression {
 			while(reference.getNext() != null) {
 				reference = reference.getNext();
 			}
-			type = reference.getType();
+			type = reference.getReferencedType();
 		}
 		else if (this instanceof Literal) {
 			type = ((Literal) this).getType();
@@ -124,7 +125,7 @@ eclass Expression {
 					nextType = ((CastExpression)next).getTypeReference().getTarget();
 				}
 				else {
-					nextType = ((Reference) next).getType();
+					nextType = ((Reference) next).getReferencedType();
 				}
 				i.prune();
 
@@ -170,7 +171,7 @@ eclass Expression {
 					reference.getPrevious() != null) {
 				ReferenceableElement target = ((ElementReference)reference).getTarget();
 				if (target instanceof Method) {
-					if(((Method)target).getName().equals("clone")) {
+					if("clone".equals(((Method)target).getName())) {
 						reference = (Reference) reference.eContainer();
 					}
 				}
@@ -195,12 +196,18 @@ eclass Expression {
 				}
 			}
 			else if (this instanceof ArrayTypeable) {
-				arrayType = (ArrayTypeable) this;
+				size += ((ArrayTypeable)this).getArrayDimensionsBefore().size() + ((ArrayTypeable)this).getArrayDimensionsAfter().size();
+				if (this instanceof VariableLengthParameter) {
+					size++;
+				}
 			}
 			size -= reference.getArraySelectors().size();
 		}
 		else if (this instanceof ArrayTypeable) {
-			arrayType = (ArrayTypeable) this;
+			size += ((ArrayTypeable)this).getArrayDimensionsBefore().size() + ((ArrayTypeable)this).getArrayDimensionsAfter().size();
+			if (this instanceof VariableLengthParameter) {
+				size++;
+			}
 		}
 		
 		if(this instanceof ArrayInstantiationBySize) {

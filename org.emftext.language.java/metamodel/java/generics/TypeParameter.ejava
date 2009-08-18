@@ -147,7 +147,7 @@ eclass TypeParameter {
 				}
 			}
 			if (parentReference != null) {
-				Type prevType = parentReference.getType();
+				Type prevType = parentReference.getReferencedType();
 				if(prevType instanceof TemporalCompositeClassifier) {
 					for(EObject aType : ((TemporalCompositeClassifier)prevType).getSuperTypes()) {
 						prevTypeList.add((Type)aType);
@@ -258,7 +258,7 @@ eclass TypeParameter {
 				if(reference != null && reference.eContainer() instanceof ReflectiveClassReference) {
 					if (reference.eContainer().eContainer() instanceof Reference) {
 						//the ".class" instantiation implicitly binds the T parameter of java.lang.Class to the class itself
-						resultList.add(0, ((Reference)reference.eContainer().eContainer()).getType());
+						resultList.add(0, ((Reference)reference.eContainer().eContainer()).getReferencedType());
 					}
 				}
 			}
@@ -363,7 +363,7 @@ eclass TypeParameter {
 									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
 										if(typeArgument instanceof QualifiedTypeArgument) {
 											if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
-												resultList.add(0, elementReference.getType());
+												resultList.add(0, elementReference.getReferencedType());
 											}
 										}
 									}
@@ -375,7 +375,7 @@ eclass TypeParameter {
 								while (argReference.getNext() instanceof Reference) {
 									argReference = argReference.getNext();
 								}
-								resultList.add(0, ((Reference) argReference).getType());
+								resultList.add(0, ((Reference) argReference).getReferencedType());
 							}
 						}
 					}			

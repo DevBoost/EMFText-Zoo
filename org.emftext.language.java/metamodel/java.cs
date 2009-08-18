@@ -352,7 +352,7 @@ references.SelfReference ::= self
 		(#0 "." #0 next)? 
 	;
 	
-references.PrimitiveTypeReference ::= type
+references.PrimitiveTypeReference ::= primitiveType
 		arraySelectors* (#0 "." #0 next)? 
 	;
 			

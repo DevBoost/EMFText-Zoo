@@ -17,7 +17,7 @@ eclass Class {
 		EList<ConcreteClassifier> result = 
 			new BasicEList<ConcreteClassifier>();
 					
-		//collects all superclasses
+		//collects all superclasses first
 		Class superClass = this;
 		while (superClass != null && !superClass.eIsProxy() && 
 				!superClass.equals(getObjectClass())) {
@@ -38,7 +38,8 @@ eclass Class {
 			}
 		}
 		
-		//collect all implemented interfaces of super classes	
+		//collect all implemented interfaces of super classes
+		superClass = this.getSuperClass();	
 		if (superClass != null && !superClass.eIsProxy() && 
 				!superClass.equals(getObjectClass())) {
 			for (TypeReference typeArg : superClass.getImplements()) {

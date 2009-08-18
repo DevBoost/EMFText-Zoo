@@ -22,7 +22,7 @@ eclass Reference {
 	 * 
 	 * @return the determined type
 	 */
-	getType() {
+	getReferencedType() {
 		if (this instanceof Literal) {
 			return ((Literal) this).getType();
 		}
@@ -38,7 +38,7 @@ eclass Reference {
 		else if (this instanceof SelfReference) {
 			Type thisClass = null;
 			if (this.getPrevious() != null) {
-				thisClass = this.getPrevious().getType();
+				thisClass = this.getPrevious().getReferencedType();
 			}
 			else {
 				AnonymousClass anonymousContainer = getContainingAnonymousClass();
@@ -102,7 +102,7 @@ eclass Reference {
 			type = ((NestedExpression) this).getExpression().getType();
 		}
 		else if (this instanceof PrimitiveTypeReference) {
-			type = ((PrimitiveTypeReference)this).getType();
+			type = ((PrimitiveTypeReference)this).getPrimitiveType();
 		}
 		else {
 			assert(false);
