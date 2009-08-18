@@ -1,3 +1,8 @@
+/*
+ * This Java grammar inspired java.ecore and java.cs
+ * source: http://www.antlr.org/grammar/1152141644268/Java.g
+ * (more information at the end of the file)
+ */
 grammar Java;
 options {backtrack=true; memoize=true;}
 
