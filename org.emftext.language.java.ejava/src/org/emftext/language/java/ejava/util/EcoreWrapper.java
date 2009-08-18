@@ -46,9 +46,8 @@ import org.emftext.language.java.util.members.MemberContainerUtil;
 import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 
 /**
- * Wraps an Ecore model in an eJava model. This was, the Ecore types can be interpreted as 
+ * Wraps an Ecore model in an eJava model. This way, the Ecore types can be interpreted as 
  * Java types by JaMoPP.
- *
  */
 public class EcoreWrapper {
 	
@@ -124,10 +123,13 @@ public class EcoreWrapper {
 			for(EClass extendedEClass : eClass.getESuperTypes()) {
 				superTypeList.add(createTypeReferenceForEClassifier(extendedEClass));
 			}
-			JavaClasspath cp = JavaClasspath.get(eClassifier);
-			ClassifierReference eObjectRef = TypesFactory.eINSTANCE.createClassifierReference();
-			eObjectRef.setTarget(cp.getClassifier("org.eclipse.emf.ecore.EObject"));
-			superTypeList.add(eObjectRef);
+
+			//if (eClassifier.getName().equals("Commentable")) {
+				JavaClasspath cp = JavaClasspath.get(eClassifier);
+				ClassifierReference eObjectRef = TypesFactory.eINSTANCE.createClassifierReference();
+				eObjectRef.setTarget(cp.getClassifier("org.eclipse.emf.ecore.EObject"));
+				superTypeList.add(eObjectRef);
+			//}
 			for(EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
 				wrapEStructuralFeatureForGet(eStructuralFeature, wrapper);
 				if (!eStructuralFeature.isMany()) {

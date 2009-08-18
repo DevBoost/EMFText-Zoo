@@ -13,6 +13,7 @@ OPTIONS {
 	overrideManifest = "false";
 	overridePluginXML = "false";
 	overrideClasspath = "false";
+	//overrideBuildProperties = "false";
 }
 
 RULES {
