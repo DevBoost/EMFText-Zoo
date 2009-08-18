@@ -30,8 +30,6 @@ import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.members.Method;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.classifiers.ClassifierUtil;
 
 /**
  * To resolve annotation attributes.
@@ -49,7 +47,7 @@ public class InterfaceMethodDecider extends AbstractDecider {
 
 	public EList<? extends EObject> getAdditionalCandidates(String identifier, EObject container) {
 		if (container instanceof Classifier) {
-			return ClassifierUtil.getAllMembers((Classifier)container, (Classifier)container);
+			return ((Classifier)container).getAllMembers((Classifier)container);
 		}
 		return null;
 	}
@@ -57,9 +55,9 @@ public class InterfaceMethodDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof InterfaceMethod) {
 			Method method = (Method) element;
-			if (id.equals(JavaUtil.getName(method))) {
+			if (id.equals(method.getName())) {
 				NamedElement ne = (NamedElement) element;
-				return id.equals(JavaUtil.getName(ne));
+				return id.equals(ne.getName());
 			}
 		}
 		return false;

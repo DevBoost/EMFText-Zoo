@@ -35,12 +35,6 @@ import org.emftext.language.java.imports.StaticMemberImport;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.Method;
 import org.emftext.language.java.references.MethodCall;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
-import org.emftext.language.java.util.classifiers.ClassifierUtil;
-import org.emftext.language.java.util.imports.ImportUtil;
-import org.emftext.language.java.util.members.MethodUtil;
-import org.emftext.language.java.util.modifiers.ModifiableUtil;
 
 /**
  * A decider that looks for methods.
@@ -68,21 +62,21 @@ public class MethodDecider extends AbstractDecider {
 		if (container instanceof Classifier) {
 			if (container instanceof ConcreteClassifier && insideDefiningClassifier){	
 				EList<Member> memberList = 
-					ClassifierUtil.getAllMembers((Classifier)container, methodCall);
+					((Classifier)container).getAllMembers(methodCall);
 				for(Member member : memberList) {
 					if (member instanceof Method) {
 						resultList.add(member);
 					}
 				}
 				insideDefiningClassifier = false;
-				isStatic = ModifiableUtil.isStatic((ConcreteClassifier)container);
+				isStatic = ((ConcreteClassifier)container).isStatic();
 			}
 			else {
 				EList<Member> memberList = 
-					ClassifierUtil.getAllMembers((Classifier)container, methodCall);
+					((Classifier)container).getAllMembers(methodCall);
 				for(Member member : memberList) {
 					if (member instanceof Method) {
-						if (!isStatic || ModifiableUtil.isStatic((Method)member)) {
+						if (!isStatic || ((Method)member).isStatic()) {
 							resultList.add(member);
 						}
 					}
@@ -94,7 +88,7 @@ public class MethodDecider extends AbstractDecider {
 			resultList.addAll(((AnonymousClass)container).getMembers());
 			
 			EList<Member> memberList = 
-				AnonymousClassUtil.getAllMembers((AnonymousClass)container, methodCall);
+				((AnonymousClass)container).getAllMembers(methodCall);
 			for(Member member : memberList) {
 				if (member instanceof Method) {
 					resultList.add(member);
@@ -118,7 +112,7 @@ public class MethodDecider extends AbstractDecider {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
-					resultList.addAll(ImportUtil.getMemberList(aImport));
+					resultList.addAll(aImport.getImportedMembers());
 				}
 			}
 		}
@@ -127,15 +121,15 @@ public class MethodDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof Method) {
 			Method method = (Method) element;
-			if (id.equals(JavaUtil.getName(method))) {
+			if (id.equals(method.getName())) {
 				if (lastFound == null) {
-					if (MethodUtil.isMethodForCall(method, methodCall)) {
+					if (method.isSomeMethodForCall(methodCall)) {
 						lastFound = method;
 						return true;
 					}
 				}
 				else if (!lastFound.equals(method)) {
-					if (MethodUtil.isMethodForCall(method, lastFound, methodCall)) {
+					if (method.isBetterMethodForCall(lastFound, methodCall)) {
 						lastFound = method;
 						return true;
 					}

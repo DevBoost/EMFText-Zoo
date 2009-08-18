@@ -30,7 +30,6 @@ import org.emftext.language.java.members.InterfaceMethod;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.decider.InterfaceMethodDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
-import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -38,13 +37,13 @@ public class AnnotationAttributeSettingAttributeReferenceResolver extends
 	AbstractReferenceResolver<AnnotationAttributeSetting, InterfaceMethod> {
 	
 	public java.lang.String deResolve(InterfaceMethod element, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference) {
-		return JavaUtil.getName(element);
+		return element.getName();
 	}
 	
 	public void resolve(java.lang.String identifier, AnnotationAttributeSetting container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<InterfaceMethod> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
-		EObject startingPoint = JavaUtil.findContainingAnnotationInstance(container).getAnnotation();
+		EObject startingPoint = container.getContainingAnnotationInstance().getAnnotation();
 		
 		deciderList.add(new InterfaceMethodDecider());
 		

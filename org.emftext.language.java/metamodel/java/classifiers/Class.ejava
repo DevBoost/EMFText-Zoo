@@ -1,6 +1,6 @@
 epackage java.classifiers;
 
-import org.eclipse.emf.common.util.UniqueEList;
+import org.emftext.language.java.util.UniqueEList;
 import org.eclipse.emf.common.util.EList;
 
 import java.types.*;
@@ -42,15 +42,7 @@ eclass Class {
 		superClass = this.getSuperClass();	
 		if (superClass != null && !superClass.eIsProxy() && 
 				!superClass.equals(getObjectClass())) {
-			for (TypeReference typeArg : superClass.getImplements()) {
-				ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
-				if (superInterface != null) {
-					result.add(superInterface);
-					if (superInterface instanceof Interface) {
-						result.addAll(((Interface)superInterface).getAllSuperClassifiers());
-					}
-				}
-			}
+			result.addAll(superClass.getAllSuperClassifiers());
 		}	
 
 		return result;
@@ -64,6 +56,9 @@ eclass Class {
 		TypeReference superClassReference = this.getExtends();
 		if (superClassReference == null) {
 			superClassReference = this.getDefaultExtends();
+		}
+		if (superClassReference == null) {
+			return null;
 		}
 		Type result = superClassReference.getTarget();
 		if (result instanceof Class) {

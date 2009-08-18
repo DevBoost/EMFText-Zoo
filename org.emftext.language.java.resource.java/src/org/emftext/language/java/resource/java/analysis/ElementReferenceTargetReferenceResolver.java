@@ -50,11 +50,7 @@ import org.emftext.language.java.resource.java.analysis.decider.ParameterDecider
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.PrimitiveType;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.expressions.ExpressionUtil;
-import org.emftext.language.java.util.generics.TypeParameterUtil;
-import org.emftext.language.java.util.references.ReferenceUtil;
-import org.emftext.language.java.util.types.PrimitiveTypeUtil;
+import org.emftext.language.java.util.TemporalCompositeClassifier;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -89,7 +85,7 @@ public class ElementReferenceTargetReferenceResolver extends
 				return concreteClassifier.getFullName();
 			}
 		}
-		return JavaUtil.getName(element);
+		return element.getName();
 	}
 	
 	public void resolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<ReferenceableElement> result) {
@@ -106,19 +102,19 @@ public class ElementReferenceTargetReferenceResolver extends
 				startingPoint = ((IdentifierReference)parentReference).getTarget();
 			}
 			else {
-				startingPoint = ReferenceUtil.getType(parentReference);
+				startingPoint = parentReference.getReferencedType();
 				if (parentReference instanceof NestedExpression) {
-					alternativeStartingPoint = ExpressionUtil.getAlternativeType(
-							((NestedExpression)parentReference).getExpression());
+					alternativeStartingPoint = ((NestedExpression) parentReference
+							).getExpression().getAlternativeType();
 				}
 			
 				//do not search on primitive types but their class representation
 				if (startingPoint instanceof PrimitiveType) {
-					startingPoint = PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType) startingPoint);
+					startingPoint = ((PrimitiveType) startingPoint).wrapPrimitiveType();
 				}
 
 				if (parentReference instanceof NestedExpression) {
-					startingPoint = ExpressionUtil.getType(((NestedExpression)parentReference).getExpression());
+					startingPoint = (((NestedExpression)parentReference).getExpression()).getType();
 				}
 				
 				//special case: anonymous class in constructor call
@@ -143,8 +139,8 @@ public class ElementReferenceTargetReferenceResolver extends
 		}
 		
 		if(target == null) {
-			if(startingPoint instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
-				for(Classifier superType : ((TypeParameterUtil.TemporalCompositeClassImpl)startingPoint).getSuperTypes()) {
+			if(startingPoint instanceof TemporalCompositeClassifier) {
+				for(EObject superType : ((TemporalCompositeClassifier)startingPoint).getSuperTypes()) {
 					target = searchFromStartingPoint(identifier, container, reference,
 							superType);
 					if (target != null) {

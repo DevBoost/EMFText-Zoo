@@ -117,7 +117,7 @@ public class JavaModelRepairer {
 					
 					ShiftExpression rightSide = (ShiftExpression) relationExpression.getChildren().get(idx + 1);
 					NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)((QualifiedTypeArgument)
-							identifierReference.getTypeArguments().get(0)).getType();
+							identifierReference.getTypeArguments().get(0)).getTypeReference();
 					IdentifierReference newReference = createIdentifierReferenceWithProxy(
 							resource, nsClassifierReference);
 					

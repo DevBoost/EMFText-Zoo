@@ -28,7 +28,6 @@ import org.emftext.language.java.parameters.ParametersPackage;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.statements.StatementsPackage;
-import org.emftext.language.java.util.JavaUtil;
 
 /**
  * A decider that looks for parameters.
@@ -42,7 +41,7 @@ public class ParameterDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof Parameter) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(JavaUtil.getName(ne));
+			return id.equals(ne.getName());
 		}
 		return false;
 	}

@@ -45,10 +45,6 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
-import org.emftext.language.java.util.references.ReferenceUtil;
-import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.runtime.resource.IReferenceResolveResult;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
@@ -83,7 +79,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				return concreteClassifier.getFullName();
 			}
 		}
-		return JavaUtil.getName(classifier);
+		return classifier.getName();
 	}	
 
 	public void resolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Classifier> result) {
@@ -121,7 +117,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 			if (startingPoint == null && container.eContainer().eContainer() instanceof NewConstructorCall) {
 				NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
 				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
-					startingPoint = ReferenceUtil.getType((Reference) ncc.eContainer());
+					startingPoint = ((Reference) ncc.eContainer()).getReferencedType();
 					
 					//a ncc can be encapsulated in nested expressions
 					EObject outerContainer = ncc.eContainer();
@@ -141,7 +137,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 							startingPoint = outerNcc.getAnonymousClass();
 						}
 						else {
-							startingPoint = TypeReferenceUtil.getTarget(outerNcc.getType());
+							startingPoint = outerNcc.getTypeReference().getTarget();
 						}
 					}
 				}
@@ -153,8 +149,8 @@ public class ClassifierReferenceTargetReferenceResolver extends
 			
 			if (hasNamespace) {
 				if (startingPoint instanceof ConcreteClassifier) {
-					for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
-						if (identifier.equals(JavaUtil.getName(cand))) {
+					for(ConcreteClassifier cand : ((ConcreteClassifier)startingPoint).getAllInnerClassifiers()) {
+						if (identifier.equals(cand.getName())) {
 							target = cand;
 							break;
 						}
@@ -162,9 +158,9 @@ public class ClassifierReferenceTargetReferenceResolver extends
 				}
 				else if (startingPoint instanceof TypeParameter) {
 					for(TypeReference extendsClassifierReference : ((TypeParameter)startingPoint).getExtendTypes()) {
-						ConcreteClassifier extendsClassifier = (ConcreteClassifier) TypeReferenceUtil.getTarget(extendsClassifierReference);
-						for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers(extendsClassifier)) {
-							if (identifier.equals(JavaUtil.getName(cand))) {
+						ConcreteClassifier extendsClassifier = (ConcreteClassifier) extendsClassifierReference.getTarget();
+						for(ConcreteClassifier cand : extendsClassifier.getAllInnerClassifiers()) {
+							if (identifier.equals(cand.getName())) {
 								target = cand;
 								break;
 							}
@@ -196,15 +192,15 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		if(ncr.getNamespaces().size() > 0 && idx == 0) {
 			EObject target = null;
 			//if the reference is qualified, the target can be directly found
-			String containerName = JavaClasspath.get(ncr).getContainerNameFromNamespace(ncr);
+			String containerName = ncr.getNamespacesAsString();
 			if (containerName.contains("$")) {
 				String firstClassName = containerName.substring(0, containerName.indexOf("$"));
 				ConcreteClassifier firstClass = (ConcreteClassifier) EcoreUtil.resolve(
 						JavaClasspath.get(ncr).getClassifier(firstClassName), container.eResource());
 				target = ConcreteClassifierDecider.resolveRelativeNamespace(
-						ncr, ncr.getNamespaces().indexOf(JavaUtil.getName(firstClass)) + 1, firstClass, container, reference);
-				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)target)) {
-					if (identifier.equals(JavaUtil.getName(cand))) {
+						ncr, ncr.getNamespaces().indexOf(firstClass.getName()) + 1, firstClass, container, reference);
+				for(ConcreteClassifier cand : ((ConcreteClassifier)target).getAllInnerClassifiers()) {
+					if (identifier.equals(cand.getName())) {
 						target = cand;
 						break;
 					}

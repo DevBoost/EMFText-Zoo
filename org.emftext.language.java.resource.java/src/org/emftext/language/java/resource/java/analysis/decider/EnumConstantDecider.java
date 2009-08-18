@@ -41,12 +41,7 @@ import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.statements.Switch;
 import org.emftext.language.java.statements.SwitchCase;
 import org.emftext.language.java.types.Type;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.expressions.ExpressionUtil;
-import org.emftext.language.java.util.generics.TypeParameterUtil;
-import org.emftext.language.java.util.imports.ImportUtil;
-import org.emftext.language.java.util.modifiers.ModifiableUtil;
-import org.emftext.language.java.util.types.TypeReferenceUtil;
+import org.emftext.language.java.util.TemporalCompositeClassifier;
 import org.emftext.language.java.variables.LocalVariable;
 
 /**
@@ -59,7 +54,7 @@ public class EnumConstantDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof EnumConstant) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(JavaUtil.getName(ne));
+			return id.equals(ne.getName());
 		}
 		return false;
 	}
@@ -69,12 +64,12 @@ public class EnumConstantDecider extends AbstractDecider {
 				reference.eContainmentFeature().equals(StatementsPackage.Literals.CONDITIONAL__CONDITION) &&
 				reference.eContainer() instanceof SwitchCase) {
 			Switch aSwitch = (Switch) container;
-			Type variableType = ExpressionUtil.getType(aSwitch.getVariable());
+			Type variableType = aSwitch.getVariable().getType();
 			if (variableType instanceof Enumeration) {
 				return ((Enumeration)variableType).getConstants();	
 			}
-			if (variableType instanceof TypeParameterUtil.TemporalCompositeClassImpl) {
-				for(Type superType : ((TypeParameterUtil.TemporalCompositeClassImpl)variableType).getSuperTypes()) {
+			if (variableType instanceof TemporalCompositeClassifier) {
+				for(EObject superType : ((TemporalCompositeClassifier)variableType).getSuperTypes()) {
 					if (superType instanceof Enumeration) {
 						return ((Enumeration)superType).getConstants();	
 					}
@@ -83,14 +78,14 @@ public class EnumConstantDecider extends AbstractDecider {
 		}
 		if (container instanceof AssignmentExpression) {
 			AssignmentExpression assignmentExpression = (AssignmentExpression) container;
-			Type assignmentExpressionType = ExpressionUtil.getType(assignmentExpression);
+			Type assignmentExpressionType = assignmentExpression.getType();
 			if (assignmentExpressionType instanceof Enumeration) {
 				return ((Enumeration)assignmentExpressionType).getConstants();	
 			}
 		}
 		if (container instanceof LocalVariable) {
 			LocalVariable localVariable = (LocalVariable) container;
-			Type assignmentExpressionType = TypeReferenceUtil.getTarget(localVariable.getType());
+			Type assignmentExpressionType = localVariable.getTypeReference().getTarget();
 			if (assignmentExpressionType instanceof Enumeration) {
 				return ((Enumeration)assignmentExpressionType).getConstants();	
 			}
@@ -109,12 +104,12 @@ public class EnumConstantDecider extends AbstractDecider {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
-					resultList.addAll(ImportUtil.getMemberList(aImport));
+					resultList.addAll(aImport.getImportedMembers());
 				}
 				else if (aImport instanceof ClassifierImport) {
 					for (EObject member : ((ClassifierImport)aImport).getClassifier().getMembers()) {
 						if (member instanceof AnnotableAndModifiable) {
-							if(ModifiableUtil.isStatic((AnnotableAndModifiable)member)) {
+							if(((AnnotableAndModifiable)member).isStatic()) {
 								resultList.add(member);
 							}
 						}

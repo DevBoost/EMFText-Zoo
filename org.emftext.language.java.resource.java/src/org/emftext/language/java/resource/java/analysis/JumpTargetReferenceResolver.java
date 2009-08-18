@@ -30,14 +30,13 @@ import org.emftext.language.java.resource.java.analysis.decider.JumpLabelDecider
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.Jump;
 import org.emftext.language.java.statements.JumpLabel;
-import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 public class JumpTargetReferenceResolver extends 
 	AbstractReferenceResolver<Jump, JumpLabel> {
 	
 	public java.lang.String deResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {
-		return JavaUtil.getName(element);
+		return element.getName();
 	}
 	
 	public void resolve(java.lang.String identifier, Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<JumpLabel> result) {

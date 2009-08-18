@@ -51,9 +51,6 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.util.JavaModelCompletion;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.containers.CompilationUnitUtil;
-import org.emftext.language.java.util.members.MemberContainerUtil;
 import org.emftext.runtime.resource.IContextDependentURIFragment;
 
 /**
@@ -145,15 +142,19 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 		}
 		else {
+			try {
 			result = super.getEObject(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			if(!id.startsWith(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 				if(result != null && !(result instanceof ConcreteClassifier)) {
 					//may happen if members of same name exist
 					if(result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS) 
 							&& result instanceof NamedElement) {
-						String memberName = JavaUtil.getName((NamedElement)result);
+						String memberName = ((NamedElement)result).getName();
 						for(Member m : ((MemberContainer)result.eContainer()).getMembers()) {
-							if(memberName.equals(JavaUtil.getName(m)) && m instanceof ConcreteClassifier) {
+							if(memberName.equals(m.getName()) && m instanceof ConcreteClassifier) {
 								result = m;
 								return result;
 							}
@@ -178,7 +179,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				String name = uriFragment.substring(
 						JavaUniquePathConstructor.CLASSIFIERS_SUB_PATH_PREFIX.length(),
 						uriFragment.length() - 2);
-				eObject = MemberContainerUtil.getConcreteClassifier(memberContainer, name);
+				eObject = memberContainer.getContainedClassifier(name);
 			}
 			else if (eObject instanceof CompilationUnit && uriFragment.startsWith(
 					JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)){
@@ -187,7 +188,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				String name = uriFragment.substring(
 						JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX.length(), 
 						uriFragment.length() - 2);
-				eObject = CompilationUnitUtil.getClassifier(compilationUnit,name);
+				eObject = compilationUnit.getContainedClassifier(name);
 			} else {
 				eObject = null;
 			}
@@ -208,7 +209,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				thePackage.getNamespaces().add(packageNaemParts[i]);
 			}
 			else {
-				JavaUtil.setName(thePackage, packageNaemParts[i]);
+				thePackage.setName(packageNaemParts[i]);
 			}
 		}
 		populatePackage(thePackage);
@@ -228,7 +229,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			//could also be a package-info.java without CU
 			if(root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) getContents().get(0);
-				JavaUtil.setName(cu, myURI.lastSegment());
+				cu.setName(myURI.lastSegment());
 				JavaClasspath.get(this).registerClassifierSource(cu, myURI);	
 			}
 			else if (root instanceof Package) {
@@ -253,7 +254,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	private void populatePackage(Package p) {
 		String fullPackageName = JavaUniquePathConstructor.packageName(p);
-		for (ConcreteClassifier classifier : JavaClasspath.get(this).getClassifiers(
+		for (EObject classifier : JavaClasspath.get(this).getClassifiers(
 				fullPackageName, "*")) {
 			
 			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, this.getResourceSet());
@@ -289,8 +290,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				
 				Package pkg = ContainersFactory.eINSTANCE.createPackage();
 				pkg.getNamespaces().addAll(thisPackage.getNamespaces());
-				pkg.getNamespaces().add(JavaUtil.getName(thisPackage));
-				JavaUtil.setName(pkg, folder.getName());
+				pkg.getNamespaces().add(thisPackage.getName());
+				pkg.setName(folder.getName());
 				thisPackage.getSubpackages().add(pkg);
 				collectSubunits(folder, pkg);
 			}
@@ -317,7 +318,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 					
 					String[] folder = cu.getNamespaces().toArray(
 							new String[cu.getNamespaces().size()]);
-					String   file   = JavaUtil.getName(cu.getClassifiers().get(0));
+					String   file   = cu.getClassifiers().get(0).getName();
 					
 					URI normalizedURI = getResourceSet().getURIConverter().normalize(getURI());
 					

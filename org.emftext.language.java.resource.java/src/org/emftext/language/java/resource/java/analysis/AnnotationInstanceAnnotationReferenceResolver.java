@@ -34,14 +34,13 @@ import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
-import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
 public class AnnotationInstanceAnnotationReferenceResolver extends 
 	AbstractReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
 	
 	public java.lang.String deResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
-		return JavaUtil.getName(element);
+		return element.getName();
 	}
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance annotationInstance, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
@@ -76,7 +75,7 @@ public class AnnotationInstanceAnnotationReferenceResolver extends
 			AnnotationInstance annotationInstance) {
 			
 		if (annotationInstance.getNamespaces().size() > 0) {
-			String containerName = JavaClasspath.get(annotationInstance).getContainerNameFromNamespace(annotationInstance);
+			String containerName = annotationInstance.getNamespacesAsString();
 			ConcreteClassifier target = (ConcreteClassifier) EcoreUtil.resolve(
 					JavaClasspath.get(annotationInstance).getClassifier(containerName + identifier), annotationInstance.eResource());
 		

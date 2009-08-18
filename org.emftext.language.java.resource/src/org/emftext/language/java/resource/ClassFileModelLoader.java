@@ -60,7 +60,6 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.util.JavaUtil;
 
 /**
  * This class constructs a Java EMF-model from a class file using the 
@@ -90,7 +89,7 @@ try{
 					inputStream, classFileName).parse();
 		ConcreteClassifier classifier = constructClassifier(myClass);
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
-		JavaUtil.setName(cu, classFileName);
+		cu.setName(classFileName);
 		List<String> namespace1 = Arrays.asList(myClass.getClassName().split("\\."));
 		List<String> namespace2 = Arrays.asList(namespace1.get(namespace1.size() - 1).split("\\$"));
 		cu.getNamespaces().addAll(namespace1.subList(0, namespace1.size() - 1));
@@ -139,7 +138,7 @@ try{
 			}
 		}
 		
-		JavaUtil.setName(emfClassifier, className);
+		emfClassifier.setName(className);
 			
 		for(Attribute a : clazz.getAttributes()){
 			String signature = a.toString();
@@ -241,7 +240,7 @@ try{
 		else {
 			emfMethod = membersFactory.createClassMethod();
 		}
-		JavaUtil.setName(emfMethod, method.getName());
+		emfMethod.setName(method.getName());
 		
 		String signature = method.getReturnType().getSignature();
 		String plainSignature = "";
@@ -263,7 +262,7 @@ try{
 			typeRef = typeParamRef;
 		}
 
-		emfMethod.setType(typeRef);
+		emfMethod.setTypeReference(typeRef);
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
@@ -287,11 +286,11 @@ try{
 		for(int i = 0; i<tpList.size(); i++) {
 			TypeReference typeParameterReference = tpList.get(i);
 			if(typeParameterReference != null) {
-				TypeReference typeReference = emfMethod.getParameters().get(i).getType();
+				TypeReference typeReference = emfMethod.getParameters().get(i).getTypeReference();
 				if(typeReference instanceof ClassifierReference) {
 					//replace with parameter there is one
 					((TypeParameter)((ClassifierReference)typeParameterReference).getTarget()).getExtendTypes().add(typeReference);
-					emfMethod.getParameters().get(i).setType(typeParameterReference);
+					emfMethod.getParameters().get(i).setTypeReference(typeParameterReference);
 				}
 			}
 		}
@@ -306,7 +305,7 @@ try{
 			
 			String argumentSignature = plainSignature.substring(plainSignature.lastIndexOf("(") + 1, plainSignature.indexOf(")"));
 			for(Parameter parameter : emfMethod.getParameters()) {
-				TypeReference parameterTypeRef = parameter.getType();
+				TypeReference parameterTypeRef = parameter.getTypeReference();
 				if(parameterTypeRef instanceof ClassifierReference) {
 					argumentSignature = constructTypeArguments(argumentSignature, (ClassifierReference) parameterTypeRef, emfMethod, emfClassifier);
 				}
@@ -317,11 +316,11 @@ try{
 				
 		}
 		
-		if (JavaUtil.getName(emfMethod).equals("<init>")) {
+		if (emfMethod.getName().equals("<init>")) {
 			Constructor constructor = MembersFactory.eINSTANCE.createConstructor();
 			constructor.getTypeParameters().addAll(emfMethod.getTypeParameters());
 			constructor.getParameters().addAll(emfMethod.getParameters());
-			JavaUtil.setName(constructor, JavaUtil.getName(emfClassifier));
+			constructor.setName(emfClassifier.getName());
 			return constructor;
 		}
 		
@@ -334,7 +333,7 @@ try{
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
-		emfParameter.setType(emfTypeReference);
+		emfParameter.setTypeReference(emfTypeReference);
 		
         int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
@@ -349,7 +348,7 @@ try{
 		Parameter emfParameter = parametersFactory.createVariableLengthParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
-		emfParameter.setType(emfTypeReference);
+		emfParameter.setTypeReference(emfTypeReference);
 		
         int arrayDimension = getArrayDimension(signature) - 1;
         for(int i = 0; i < arrayDimension; i++) {
@@ -362,7 +361,7 @@ try{
 	
 	protected Field constructField(org.apache.bcel.classfile.Field field, ConcreteClassifier emfClassifier) {
 		Field emfField = membersFactory.createField();
-		JavaUtil.setName(emfField, field.getName());
+		emfField.setName(field.getName());
 		String signature = field.getType().getSignature();
 		
 		String plainSignature = "";
@@ -382,7 +381,7 @@ try{
 			typeRef = typeParamRef;
 		}
 
-		emfField.setType(typeRef);
+		emfField.setTypeReference(typeRef);
 		
 		int arrayDimension = getArrayDimension(signature);
         for(int i = 0; i < arrayDimension; i++) {
@@ -446,7 +445,7 @@ try{
 			org.apache.bcel.classfile.Field field) {
 		
 		EnumConstant enumConstant = membersFactory.createEnumConstant();
-		JavaUtil.setName(enumConstant, field.getName());
+		enumConstant.setName(field.getName());
 		return enumConstant;
 	}
 	
@@ -454,14 +453,14 @@ try{
 		TypeParameter typeParameter =  null;
 		if (method != null) {
 			for(TypeParameter cand : method.getTypeParameters()) {
-				if(JavaUtil.getName(cand).equals(name)) {
+				if(cand.getName().equals(name)) {
 					typeParameter = cand;
 				}
 			}
 		}
 		if (typeParameter == null) {
 			for(TypeParameter cand : emfClassifier.getTypeParameters()) {
-				if(JavaUtil.getName(cand).equals(name)) {
+				if(cand.getName().equals(name)) {
 					typeParameter = cand;
 				}
 			}
@@ -502,14 +501,14 @@ try{
 		TypeParameter typeParameter =  null;
 		if (element instanceof TypeParametrizable) { //methods
 			for(TypeParameter cand : ((TypeParametrizable)element).getTypeParameters()) {
-				if(JavaUtil.getName(cand).equals(name)) {
+				if(cand.getName().equals(name)) {
 					typeParameter = cand;
 				}
 			}
 		}
 		if (typeParameter == null) {
 			for(TypeParameter cand : emfClassifier.getTypeParameters()) {
-				if(JavaUtil.getName(cand).equals(name)) {
+				if(cand.getName().equals(name)) {
 					typeParameter = cand;
 				}
 			}
@@ -565,13 +564,13 @@ try{
 				String name = signature.substring(1,idx);
 				TypeParameter typeParameter = null;
 				for(TypeParameter cand : method.getTypeParameters()) {
-					if(JavaUtil.getName(cand).equals(name)) {
+					if(cand.getName().equals(name)) {
 						typeParameter = cand;
 					}
 				}
 				if (typeParameter == null) {
 					for(TypeParameter cand : emfClassifier.getTypeParameters()) {
-						if(JavaUtil.getName(cand).equals(name)) {
+						if(cand.getName().equals(name)) {
 							typeParameter = cand;
 						}
 					}
@@ -613,7 +612,7 @@ try{
 			String name = signature.substring(0,idx);
 			if (!name.equals("")) {
 				TypeParameter typeParameter = GenericsFactory.eINSTANCE.createTypeParameter();
-				JavaUtil.setName(typeParameter, name);
+				typeParameter.setName(name);
 				result.add(typeParameter);				
 			}
 			signature = signature.substring(idx + 1);
@@ -759,7 +758,7 @@ try{
 								
 
 								QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-								typeArgument.setType(argumentType);
+								typeArgument.setTypeReference(argumentType);
 								if (typeRef != null) {
 									typeRef.getTypeArguments().add(typeArgument);
 								}
@@ -785,7 +784,7 @@ try{
 	
 	private TypeReference createReferenceToClassifier(String fullClassifierName) { 
 		fullClassifierName = fullClassifierName.replaceAll("/", ".");
-		Classifier classifier = javaClasspath.getClassifier(fullClassifierName);
+		Classifier classifier = (Classifier) javaClasspath.getClassifier(fullClassifierName);
 		ClassifierReference classifierReference = 
 			TypesFactory.eINSTANCE.createClassifierReference();
 		classifierReference.setTarget(classifier);

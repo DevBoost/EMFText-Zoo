@@ -35,6 +35,7 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.containers.JavaRoot;
 import org.emftext.language.java.containers.Package;
@@ -50,12 +51,6 @@ import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.StatementsPackage;
 import org.emftext.language.java.types.ClassifierReference;
-import org.emftext.language.java.util.JavaUtil;
-import org.emftext.language.java.util.classifiers.AnonymousClassUtil;
-import org.emftext.language.java.util.classifiers.ClassifierUtil;
-import org.emftext.language.java.util.classifiers.ConcreteClassifierUtil;
-import org.emftext.language.java.util.containers.JavaRootUtil;
-import org.emftext.language.java.util.imports.ImportUtil;
 
 /**
  * A decider that looks for concrete classifiers.
@@ -68,7 +63,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	private ConcreteClassifier baseClassifier = null;
 	private boolean insideDefiningClassifier = true;
 	
-	private EObject reference = null;
+	private Commentable reference = null;
 	
 	/**
 	 * @return true for statements lists
@@ -94,10 +89,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			Package p = (Package) container;
 			String packageName = JavaUniquePathConstructor.packageName(p);
 			if (packageName.equals("")) {
-				packageName = JavaUtil.getName(p);
+				packageName = p.getName();
 			}
 			else {
-				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + JavaUtil.getName(p);
+				packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR + p.getName();
 			}
 			
 			resultList.addAll(JavaClasspath.get(resource).getClassifiers(
@@ -112,23 +107,21 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			resultList.add(classifier);
 			
 			if (!classifier.eIsProxy()) {
-				for(Member member : ClassifierUtil.getAllMembers(
-						classifier, reference)) {
+				for(Member member : classifier.getAllMembers(
+						reference)) {
 					if(member instanceof ConcreteClassifier) {
 						innerTypeSuperTypeList.add((ConcreteClassifier) member);
 					}
 				}
 				if (classifier instanceof ConcreteClassifier) {	
 					if (insideDefiningClassifier){	
-						innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-								(ConcreteClassifier) classifier));
+						innerTypeSuperTypeList.addAll(((ConcreteClassifier) classifier).getAllInnerClassifiers());
 						
 						insideDefiningClassifier = false;
 						//isStatic = ModifiableUtil.isStatic((ConcreteClassifier)classifier);
 					}
 					else {
-						EList<ConcreteClassifier> innerClassifierList = ConcreteClassifierUtil.getAllInnerClassifiers(
-								(ConcreteClassifier) classifier);
+						EList<ConcreteClassifier> innerClassifierList = ((ConcreteClassifier) classifier).getAllInnerClassifiers();
 						innerTypeSuperTypeList.addAll(innerClassifierList);
 						
 					}
@@ -142,22 +135,22 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				EList<ConcreteClassifier> innerClassifiers = new BasicEList<ConcreteClassifier>();
 				if(classifier instanceof ConcreteClassifier) {
 					innerClassifiers.addAll(
-							JavaClasspath.get(resource).getInnnerClassifiers((ConcreteClassifier) classifier));	
+							((ConcreteClassifier) classifier).getInnerClassifiers());	
 				}
-				for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(classifier)) {
+				for(ConcreteClassifier superClassifier : classifier.getAllSuperClassifiers()) {
 					innerClassifiers.addAll(
-							JavaClasspath.get(resource).getInnnerClassifiers(superClassifier));
+							superClassifier.getInnerClassifiers());
 				}
 				
 				outer: for(int i = 0; i < path.length; i++) {
 					for(ConcreteClassifier innerClassifier : innerClassifiers) {
-						if(path[i].equals(JavaUtil.getName(innerClassifier))) {
+						if(path[i].equals(innerClassifier.getName())) {
 							innerClassifiers.clear();
 							innerClassifiers.addAll(
-									JavaClasspath.get(resource).getInnnerClassifiers(innerClassifier));
-							for(ConcreteClassifier superClassifier : ClassifierUtil.getAllSuperClassifiers(innerClassifier)) {
+									innerClassifier.getInnerClassifiers());
+							for(ConcreteClassifier superClassifier : innerClassifier.getAllSuperClassifiers()) {
 								innerClassifiers.addAll(
-										JavaClasspath.get(resource).getInnnerClassifiers(superClassifier));
+										superClassifier.getInnerClassifiers());
 							}
 							classifier = innerClassifier;
 							if (i == path.length - 1) {
@@ -172,14 +165,16 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}
 		
 		if(container instanceof AnonymousClass) {
-			for(Member member : AnonymousClassUtil.getAllMembers(
-					(AnonymousClass) container, reference)) {
+			for(Member member : ((AnonymousClass) container).getAllMembers(
+					reference)) {
 				if(member instanceof ConcreteClassifier) {
 					innerTypeSuperTypeList.add((ConcreteClassifier) member);
 				}
 			}
-			innerTypeSuperTypeList.addAll(ConcreteClassifierUtil.getAllInnerClassifiers(
-					AnonymousClassUtil.getSuperClassifier((AnonymousClass)container)));
+			ConcreteClassifier superClassifier = ((AnonymousClass)container).getSuperClassifier();
+			if (superClassifier != null) {
+				innerTypeSuperTypeList.addAll(superClassifier.getAllInnerClassifiers());
+			}
 		}
 		
 		addImportsAndInnerClasses(container, resultList);
@@ -203,7 +198,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 					resultList.addAll(((StaticMemberImport)aImport).getStaticMembers());
 				}
 				else if (aImport instanceof StaticClassifierImport) {
-					resultList.addAll(ImportUtil.getMemberList(aImport));
+					resultList.addAll(aImport.getImportedMembers());
 				}
 			}
 		}	
@@ -211,16 +206,14 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			
 		//3) same package
 		if(container instanceof JavaRoot) {
-			resultList.addAll(JavaRootUtil.getClassifiersInSamePackage(
-					(JavaRoot) container));
+			resultList.addAll(((JavaRoot) container).getClassifiersInSamePackage());
 		}
 		if(container instanceof ImportingElement) {	
 			//4) other packages
 			EList<EObject> packageImports = new BasicEList<EObject>();
 			for(Import aImport : ((ImportingElement)container).getImports()) {
 				if(aImport instanceof PackageImport) {
-					packageImports.addAll(ImportUtil.getClassifierList(
-							aImport));
+					packageImports.addAll(aImport.getImportedClassifiers());
 				}
 				
 			}
@@ -230,8 +223,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}	
 		//5) java.lang
 		if(container instanceof JavaRoot || container.eContainer() == null) {
-			resultList.addAll(JavaUtil.getDefaultImports(
-					container));
+			resultList.addAll(((JavaRoot)container).getDefaultImports());
 		}
 	}
 	
@@ -241,7 +233,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier)element;
-			if(id.equals(JavaUtil.getName(concreteClassifier))) {
+			if(id.equals(concreteClassifier.getName())) {
 				if(concreteClassifier.eIsProxy()) {
 					concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
 				}
@@ -253,7 +245,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 			if(id.contains("$")) {	
 				String mainID = id.substring(id.lastIndexOf("$") + 1);
-				if( mainID.equals(JavaUtil.getName(concreteClassifier))) {
+				if( mainID.equals(concreteClassifier.getName())) {
 					//set the full id for reprint
 					if(concreteClassifier.eIsProxy()) {
 						concreteClassifier = (ConcreteClassifier) EcoreUtil.resolve(concreteClassifier, resource);
@@ -274,6 +266,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	public boolean canFindTargetsFor(EObject referenceContainer,
 			EReference crossReference) {
 		
+		if (!(referenceContainer instanceof Commentable)) {
+			return false;
+		}
+		
 		resource = referenceContainer.eResource();
 		if(referenceContainer instanceof ClassifierReference) {
 			if (referenceContainer.eContainer().eContainer() instanceof ConcreteClassifier) {
@@ -285,7 +281,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			return false;
 		}
 		
-		reference = referenceContainer;
+		reference = (Commentable) referenceContainer;
 		return (referenceContainer instanceof Reference ||
 				referenceContainer instanceof ClassifierReference);
 	}
@@ -321,8 +317,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 				target = treeWalker.walk(startingPoint, identifier, referenceContainer, crossReference);
 			}
 			else {
-				for(ConcreteClassifier cand : ConcreteClassifierUtil.getAllInnerClassifiers((ConcreteClassifier)startingPoint)) {
-					if (identifier.equals(JavaUtil.getName(cand))) {
+				for(ConcreteClassifier cand : ((ConcreteClassifier)startingPoint).getAllInnerClassifiers()) {
+					if (identifier.equals(cand.getName())) {
 						target = cand;
 						break;
 					}

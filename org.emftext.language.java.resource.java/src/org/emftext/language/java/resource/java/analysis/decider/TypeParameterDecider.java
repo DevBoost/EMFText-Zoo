@@ -28,7 +28,6 @@ import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.types.ClassifierReference;
-import org.emftext.language.java.util.JavaUtil;
 
 /**
  * A decider that looks for type parameters.
@@ -38,7 +37,7 @@ public class TypeParameterDecider extends AbstractDecider {
 	public boolean isPossibleTarget(String id, EObject element) {
 		if (element instanceof TypeParameter) {
 			NamedElement ne = (NamedElement) element;
-			return id.equals(JavaUtil.getName(ne));
+			return id.equals(ne.getName());
 		}
 		return false;
 	}
