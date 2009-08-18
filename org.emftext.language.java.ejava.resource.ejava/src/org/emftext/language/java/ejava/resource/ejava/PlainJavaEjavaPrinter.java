@@ -6,7 +6,6 @@ import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
-import org.emftext.language.java.util.types.TypeReferenceUtil;
 import org.emftext.runtime.resource.ITextResource;
 
 /**
@@ -21,8 +20,11 @@ public class PlainJavaEjavaPrinter extends EjavaPrinter {
 	}
 	
 	public void print_org_emftext_language_java_ejava_EObjectInstantiation(org.emftext.language.java.ejava.EObjectInstantiation element, java.lang.String outertab, java.io.PrintWriter out) {
-		TypeReference typeReference = element.getType();
-		Type type = TypeReferenceUtil.getTarget(typeReference);
+		TypeReference typeReference = element.getTypeReference();
+		if(typeReference == null) {
+			return;
+		}
+		Type type = typeReference.getTarget();
 		
 		if(!(type instanceof EClassifierWrapper)) {
 			out.print("/* Can only instantiate EObjects */");

@@ -39,5 +39,5 @@ RULES {
 			 name[] "(" ")" "{" (!2 statements)* !1 "}"
 	    ;
 	    
-	EObjectInstantiation ::= "#"  type;
+	EObjectInstantiation ::= "#"  typeReference;
 }

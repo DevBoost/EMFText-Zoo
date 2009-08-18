@@ -41,9 +41,6 @@ import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.types.TypesPackage;
 import org.emftext.language.java.types.Void;
-import org.emftext.language.java.util.containers.CompilationUnitUtil;
-import org.emftext.language.java.util.members.MemberContainerUtil;
-import org.emftext.language.java.util.types.PrimitiveTypeUtil;
 
 /**
  * Wraps an Ecore model in an eJava model. This way, the Ecore types can be interpreted as 
@@ -98,7 +95,7 @@ public class EcoreWrapper {
 	}
 
 	public static EClassifierWrapper wrapEClassifier(EClassifier eClassifier, EPackageWrapper ePackageWrapper)  {
-		EClassifierWrapper wrapper = (EClassifierWrapper) CompilationUnitUtil.getClassifier(ePackageWrapper, eClassifier.getName());
+		EClassifierWrapper wrapper = (EClassifierWrapper) ePackageWrapper.getContainedClassifier(eClassifier.getName());
 		
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper();
@@ -127,7 +124,7 @@ public class EcoreWrapper {
 			//if (eClassifier.getName().equals("Commentable")) {
 				JavaClasspath cp = JavaClasspath.get(eClassifier);
 				ClassifierReference eObjectRef = TypesFactory.eINSTANCE.createClassifierReference();
-				eObjectRef.setTarget(cp.getClassifier("org.eclipse.emf.ecore.EObject"));
+				eObjectRef.setTarget((Classifier) cp.getClassifier("org.eclipse.emf.ecore.EObject"));
 				superTypeList.add(eObjectRef);
 			//}
 			for(EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
@@ -152,7 +149,7 @@ public class EcoreWrapper {
 		eClassifierWrapper.getMembers().add(wrapper);
 		
 		wrapper.setName("get" + firstToUpperCase(eStructuralFeature.getName()));
-		wrapper.setType(createTypeReferenceForETypedElement(eStructuralFeature));
+		wrapper.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
 	}
 	
 	public static void wrapEStructuralFeatureForSet(
@@ -163,18 +160,18 @@ public class EcoreWrapper {
 		eClassifierWrapper.getMembers().add(wrapper);
 		
 		wrapper.setName("set" + firstToUpperCase(eStructuralFeature.getName()));
-		wrapper.setType(TypesFactory.eINSTANCE.createVoid());
+		wrapper.setTypeReference(TypesFactory.eINSTANCE.createVoid());
 		
 		Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
 		parameter.setName("value");
-		parameter.setType(createTypeReferenceForETypedElement(eStructuralFeature));
+		parameter.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
 		wrapper.getParameters().add(parameter);
 	}
 	
 	public static void wrapEOperation(
 			EOperation eOperation, EClassifierWrapper eClassifierWrapper) { 
-		EOperationWrapper wrapper = (EOperationWrapper) MemberContainerUtil.getOnlyMethodWithName(
-				eClassifierWrapper, eOperation.getName());
+		EOperationWrapper wrapper = (EOperationWrapper)
+				eClassifierWrapper.getContainedMethod(eOperation.getName());
 		
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEOperationWrapper();
@@ -182,13 +179,13 @@ public class EcoreWrapper {
 			eClassifierWrapper.getMembers().add(wrapper);
 		}
 		wrapper.setEOperation(eOperation);
-		wrapper.setType(createTypeReferenceForETypedElement(eOperation));
+		wrapper.setTypeReference(createTypeReferenceForETypedElement(eOperation));
 		
 		if (wrapper.getParameters().isEmpty()) {
 			for(EParameter eParameter : eOperation.getEParameters()) {
 				Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
 				parameter.setName(eParameter.getName());
-				parameter.setType(createTypeReferenceForETypedElement(eParameter));
+				parameter.setTypeReference(createTypeReferenceForETypedElement(eParameter));
 				wrapper.getParameters().add(parameter);
 			}
 		}
@@ -253,7 +250,7 @@ public class EcoreWrapper {
 			
 		}
 		JavaClasspath cp = JavaClasspath.get(eClassifier);
-		return cp.getClassifier(javaTypeName);
+		return (Type) cp.getClassifier(javaTypeName);
 	}
 	
 	private static TypeReference createTypeReferenceForEClassifier(EClassifier eClassifier) {
@@ -278,13 +275,13 @@ public class EcoreWrapper {
 		else {
 			if (baseTypeRef instanceof PrimitiveType) {
 				baseTypeRef = TypesFactory.eINSTANCE.createClassifierReference();
-				((ClassifierReference)baseTypeRef).setTarget(PrimitiveTypeUtil.wrapPrimitiveType((PrimitiveType)baseTypeRef));
+				((ClassifierReference)baseTypeRef).setTarget(((PrimitiveType)baseTypeRef).wrapPrimitiveType());
 			}
-			Classifier listType = JavaClasspath.get(eTypedElement).getClassifier("org.eclipse.emf.common.util.EList");
+			Classifier listType = (Classifier) JavaClasspath.get(eTypedElement).getClassifier("org.eclipse.emf.common.util.EList");
 			ClassifierReference listTypeRef = TypesFactory.eINSTANCE.createClassifierReference();
 			listTypeRef.setTarget((Classifier)listType);
 			QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-			typeArgument.setType(baseTypeRef);
+			typeArgument.setTypeReference(baseTypeRef);
 			listTypeRef.getTypeArguments().add(typeArgument);
 			return listTypeRef;
 		}
