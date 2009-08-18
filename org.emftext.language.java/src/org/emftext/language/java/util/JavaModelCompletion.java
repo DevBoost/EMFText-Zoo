@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.annotations.AnnotationAttributeSetting;
 import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.annotations.AnnotationsFactory;
@@ -43,7 +42,6 @@ import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.util.members.MemberContainerUtil;
 
 /**
  * Utility class that enhances and simplifies a Java model based on
@@ -82,7 +80,7 @@ public class JavaModelCompletion {
 	 */
 	public static void addDefaultSuperClass(Class javaClass) {
 		if (javaClass.getExtends() == null && javaClass.getDefaultExtends() == null) {
-			Class objectClass = JavaClasspathUtil.getObjectClass(javaClass);
+			Class objectClass = javaClass.getObjectClass();
 			ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 			classifierReference.setTarget(objectClass);
 			javaClass.setDefaultExtends(classifierReference);
@@ -97,7 +95,7 @@ public class JavaModelCompletion {
 	 */
 	public static void addDefaultSuperInterface(Interface javaInterface) {
 		if (javaInterface.getExtends().isEmpty() && javaInterface.getDefaultExtends().isEmpty()) {
-			Class objectClass = JavaClasspathUtil.getObjectClass(javaInterface);
+			Class objectClass = javaInterface.getObjectClass();
 			ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 			classifierReference.setTarget(objectClass);
 			javaInterface.getDefaultExtends().add(classifierReference);
@@ -106,13 +104,13 @@ public class JavaModelCompletion {
 
 	public static void addMissingAnnotationMembers(Annotation annotation) {
 		String valueMethodName = "value";
-		Method valueMethod = MemberContainerUtil.getOnlyMethodWithName(annotation, valueMethodName);
+		Method valueMethod = annotation.getContainedMethod(valueMethodName);
 		if (valueMethod == null) {
 			valueMethod = AnnotationsFactory.eINSTANCE.createAnnotationAttribute();
-			JavaUtil.setName(valueMethod, valueMethodName);
+			valueMethod.setName(valueMethodName);
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
-			type.setTarget(JavaClasspath.get(annotation).getClassifier("java.lang.String"));
-			valueMethod.setType(type);
+			type.setTarget(annotation.getConcreteClassifier("java.lang.String"));
+			valueMethod.setTypeReference(type);
 			annotation.getDefaultMembers().add(valueMethod);
 		}
 	}
@@ -127,35 +125,35 @@ public class JavaModelCompletion {
 		
 		//add the values
 		String valuesMethodName = "values";
-		Method valuesMethod = MemberContainerUtil.getOnlyMethodWithName(enumeration, valuesMethodName);
+		Method valuesMethod = enumeration.getContainedMethod(valuesMethodName);
 		
 		if (valuesMethod == null) {
 			valuesMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
-			JavaUtil.setName(valuesMethod, valuesMethodName);
+			valuesMethod.setName(valuesMethodName);
 			
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
-			valuesMethod.setType(type);
+			valuesMethod.setTypeReference(type);
 			enumeration.getDefaultMembers().add(valuesMethod);
 		}
 		
 		//add the value of method
 		String valueOfMethodName = "valueOf";
-		Method valueOfMethod = MemberContainerUtil.getOnlyMethodWithName(enumeration, valueOfMethodName);
+		Method valueOfMethod = enumeration.getContainedMethod(valueOfMethodName);
 		
 		if (valueOfMethod == null) {
 			valueOfMethod = MembersFactory.eINSTANCE.createInterfaceMethod();
-			JavaUtil.setName(valueOfMethod, valueOfMethodName);
+			valueOfMethod.setName(valueOfMethodName);
 			
 			ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 			type.setTarget(enumeration);
-			valueOfMethod.setType(type);
+			valueOfMethod.setTypeReference(type);
 			
 			Parameter strParameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
-			JavaUtil.setName(strParameter, "str");
+			strParameter.setName("str");
 			type = TypesFactory.eINSTANCE.createClassifierReference();
-			type.setTarget(JavaClasspath.get(enumeration).getClassifier("java.lang.String"));
-			strParameter.setType(type);
+			type.setTarget(enumeration.getConcreteClassifier("java.lang.String"));
+			strParameter.setTypeReference(type);
 			
 			valueOfMethod.getParameters().add(strParameter);
 			enumeration.getDefaultMembers().add(valueOfMethod);

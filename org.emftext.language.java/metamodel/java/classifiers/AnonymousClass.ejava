@@ -11,7 +11,7 @@ import java.modifiers.AnnotableAndModifiable;
 
 
 //java
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -24,7 +24,7 @@ eclass AnonymousClass {
 	 * @return a view on all members including super classifiers' members
 	 */
 	getAllMembers() {
-		EList<Member> memberList = new BasicEList<Member>();
+		EList<Member> memberList = new UniqueEList<Member>();
 		memberList.addAll(this.getMembers());
 		memberList.addAll(this.getDefaultMembers());
 		
@@ -63,7 +63,7 @@ eclass AnonymousClass {
 	 * @return a view on all super classifiers
 	 */
 	getAllSuperClassifiers() {
-		EList<ConcreteClassifier> superClassifierList = new BasicEList<ConcreteClassifier>();
+		EList<ConcreteClassifier> superClassifierList = new UniqueEList<ConcreteClassifier>();
 		
 		ConcreteClassifier superClassifier = getSuperClassifier();
 		

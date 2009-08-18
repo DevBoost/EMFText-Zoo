@@ -30,7 +30,7 @@ eclass TypeParameter {
 	 * @return all type restrictions
 	 */
 	getAllSuperClassifiers() {
-		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		for(TypeReference typeRef : getExtendTypes()) {
 			Type type = typeRef.getTarget();
 			if (type instanceof ConcreteClassifier) {
@@ -52,9 +52,9 @@ eclass TypeParameter {
 	 * @return member list
 	 */
 	getAllMembers() {
-		EList<Member> memberList = new BasicEList<Member>();
+		EList<Member> memberList = new UniqueEList<Member>();
 
-		BasicEList<Type> possiblyVisibleSuperClassifier = new BasicEList<Type>();
+		UniqueEList<Type> possiblyVisibleSuperClassifier = new UniqueEList<Type>();
 		for(TypeReference typeReference : ((TypeParameter)this).getExtendTypes()) {
 			possiblyVisibleSuperClassifier.add(typeReference.getTarget());
 		}
@@ -90,10 +90,10 @@ eclass TypeParameter {
 	 */
 	getBoundType() {
 
-		EList<Type> resultList = new BasicEList<Type>();
+		EList<Type> resultList = new UniqueEList<Type>();
 		TypeParametrizable typeParameterDeclarator = (TypeParametrizable) this.eContainer();
 		Reference parentReference = null;
-		EList<Type> prevTypeList = new BasicEList<Type>();
+		EList<Type> prevTypeList = new UniqueEList<Type>();
 		if (reference != null && 
 				reference.getPrevious() instanceof NestedExpression) {
 			NestedExpression nestedExpression = (NestedExpression) reference.getPrevious();
@@ -390,17 +390,17 @@ eclass TypeParameter {
 							idx = method.getParameters().indexOf(parameter);
 							Classifier argumentType = (Classifier) methodCall.getArguments().get(idx).getType();
 							if(allSuperTypes == null) {
-								allSuperTypes = new BasicEList<Classifier>();
+								allSuperTypes = new UniqueEList<Classifier>();
 								allSuperTypes.add(argumentType);
 								allSuperTypes.addAll(argumentType.getAllSuperClassifiers());
 							}
 							else {
 								allSuperTypes.add(argumentType);
-								EList<Classifier> allOtherSuperTypes = new BasicEList<Classifier>();
+								EList<Classifier> allOtherSuperTypes = new UniqueEList<Classifier>();
 								allOtherSuperTypes.add(argumentType);
 								allOtherSuperTypes.addAll(argumentType.getAllSuperClassifiers());
 								EList<Classifier> temp = allSuperTypes;
-								allSuperTypes = new BasicEList<Classifier>();
+								allSuperTypes = new UniqueEList<Classifier>();
 								for(Classifier st : allOtherSuperTypes) {
 									if(temp.contains(st)) {
 										allSuperTypes.add(st);

@@ -4,6 +4,7 @@ epackage java.commons;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.emftext.language.java.JavaClasspath;
 
@@ -24,7 +25,7 @@ eclass Commentable {
 	}
 	
 	getConcreteClassifiers() {
-		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		for(EObject classifier : JavaClasspath.get(this).getClassifiers(packageName, classifierQuery)) {
 			result.add((ConcreteClassifier)classifier);
 		}

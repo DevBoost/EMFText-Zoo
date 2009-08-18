@@ -15,7 +15,7 @@ import org.emftext.language.java.JavaUniquePathConstructor;
 eclass ConcreteClassifier {
 	
 	getAllInnerClassifiers() {	
-		EList<ConcreteClassifier> innerClassifierList = new BasicEList<ConcreteClassifier>();
+		EList<ConcreteClassifier> innerClassifierList = new UniqueEList<ConcreteClassifier>();
 
 		innerClassifierList.addAll(getInnerClassifiers());
 
@@ -60,7 +60,7 @@ eclass ConcreteClassifier {
 		}
 
 		//for classes declared locally inside methods that are not registered in the class path
-		EList<ConcreteClassifier> result = new BasicEList<ConcreteClassifier>();
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		//can not call ClassifierUtil.getAllMembers, because it will try to call this method!
 		for(Member member : getMembers()) {
 			if(member instanceof ConcreteClassifier) {
@@ -79,7 +79,7 @@ eclass ConcreteClassifier {
 	}
 	
 	getSuperTypeReferences() {
-		EList<ClassifierReference> typeReferenceList = new BasicEList<ClassifierReference>();
+		EList<ClassifierReference> typeReferenceList = new UniqueEList<ClassifierReference>();
 		if(this == null) {
 			return typeReferenceList;
 		}
@@ -118,7 +118,7 @@ eclass ConcreteClassifier {
 	 * @return member list
 	 */
 	getAllMembers() {
-		EList<Member> memberList = new BasicEList<Member>();
+		EList<Member> memberList = new UniqueEList<Member>();
 
 		ConcreteClassifier concreteClassifier = (ConcreteClassifier) this;
 		memberList.addAll(concreteClassifier.getMembers());
