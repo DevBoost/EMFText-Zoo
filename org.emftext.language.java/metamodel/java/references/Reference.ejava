@@ -83,7 +83,9 @@ eclass Reference {
 			}
 			if (target instanceof TypedElement) {
 				TypeReference typeRef = ((TypedElement) target).getTypeReference();
-				type = typeRef.getBoundTarget(this);
+				if (typeRef != null) {
+					type = typeRef.getBoundTarget(this);
+				}
 			}
 			else if (target instanceof Type /*e.g. Annotation*/ ) {
 				return (Type) target;
