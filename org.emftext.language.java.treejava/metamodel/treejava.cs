@@ -16,5 +16,5 @@ OPTIONS {
 }
 
 RULES {
-	Node ::= "#"  type name[]? ( ">" "(" children+ ")" )?;
+	Node ::= "#"  typeReference name[]? ( ">" "(" children+ ")" )?;
 }

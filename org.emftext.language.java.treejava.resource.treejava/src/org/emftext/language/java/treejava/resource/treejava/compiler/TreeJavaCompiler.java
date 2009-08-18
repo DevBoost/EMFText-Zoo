@@ -61,7 +61,7 @@ public class TreeJavaCompiler implements IResourcePostProcessor,
 
 	private NewConstructorCall convertTreeToNewConstructorCallChain(Node rootNode) {
 		NewConstructorCall ncc = InstantiationsFactory.eINSTANCE.createNewConstructorCall();
-		ncc.setType(rootNode.getType());
+		ncc.setTypeReference(rootNode.getTypeReference());
 		if (rootNode.getName() != null) {
 			StringReference stringReference = ReferencesFactory.eINSTANCE.createStringReference();
 			stringReference.setValue(rootNode.getName());
