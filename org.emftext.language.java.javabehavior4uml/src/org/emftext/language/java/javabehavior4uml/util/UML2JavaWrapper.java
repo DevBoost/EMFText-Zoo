@@ -26,11 +26,14 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.Property;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.containers.ContainersFactory;
 import org.emftext.language.java.javabehavior4uml.Javabehavior4umlFactory;
@@ -38,8 +41,6 @@ import org.emftext.language.java.javabehavior4uml.UMLClassWrapper;
 import org.emftext.language.java.javabehavior4uml.UMLPropertyWrapper;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.util.JavaClasspathUtil;
-import org.emftext.language.java.util.JavaUtil;
 
 public class UML2JavaWrapper {
 	
@@ -65,7 +66,7 @@ public class UML2JavaWrapper {
 	
 	public static UMLClassWrapper wrapClass(Class umlClass) {
 		UMLClassWrapper wrapper = f.createUMLClassWrapper();
-		JavaUtil.setName(wrapper, umlClass.getName());
+		wrapper.setName(umlClass.getName());
 		wrapper.setUmlClass(umlClass);
 		
 		for(Property umlProperty : umlClass.getAttributes()) {
@@ -78,12 +79,15 @@ public class UML2JavaWrapper {
 	
 	public static UMLPropertyWrapper wrapProperty(Property umlProperty) {
 		UMLPropertyWrapper wrapper = f.createUMLPropertyWrapper();
-		JavaUtil.setName(wrapper, umlProperty.getName());
+		wrapper.setName(umlProperty.getName());
 		wrapper.setUmlProperty(umlProperty);
 		
 		ClassifierReference type = TypesFactory.eINSTANCE.createClassifierReference();
 		if (umlProperty.getType().getName().equals("String")) {
-			type.setTarget(JavaClasspathUtil.getStringClass(umlProperty));
+			JavaClasspath cp = JavaClasspath.get(umlProperty);
+			Classifier stringCLass = (Classifier) EcoreUtil.resolve(
+					cp.getClassifier("java.lang.String"), umlProperty);
+			type.setTarget(stringCLass);
 		}
 		else {
 			UMLClassWrapper wrapperProxy = f.createUMLClassWrapper();
@@ -93,7 +97,7 @@ public class UML2JavaWrapper {
 			((InternalEObject)wrapperProxy).eSetProxyURI(proxyURI);
 			type.setTarget(wrapperProxy);
 		}
-		wrapper.setType(type);
+		wrapper.setTypeReference(type);
 		
 		return wrapper;
 	}

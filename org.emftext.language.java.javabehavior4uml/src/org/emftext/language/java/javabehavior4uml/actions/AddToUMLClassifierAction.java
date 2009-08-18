@@ -57,7 +57,6 @@ import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.types.TypesFactory;
-import org.emftext.language.java.util.JavaUtil;
 
 public class AddToUMLClassifierAction implements IObjectActionDelegate {
 	
@@ -115,8 +114,8 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 					JavaMethodBehavior behavior = Javabehavior4umlFactory.eINSTANCE.createJavaMethodBehavior();
 					operation.getMethods().add(behavior);
 					ClassMethod javaMethod = MembersFactory.eINSTANCE.createClassMethod();
-					JavaUtil.setName(javaMethod, operation.getName());
-					javaMethod.setType(TypesFactory.eINSTANCE.createVoid());
+					javaMethod.setName(operation.getName());
+					javaMethod.setTypeReference(TypesFactory.eINSTANCE.createVoid());
 					javaMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
 					behavior.setJavaMethod(javaMethod);
 					classifier.getOwnedBehaviors().add(behavior);
@@ -158,7 +157,7 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 		for(CompilationUnit cu : UML2JavaWrapper.wrapPackage(umlPackage)) {
 			URI uri = JavaUniquePathConstructor.getJavaFileResourceURI(
 					JavaUniquePathConstructor.packageName(cu) + "." + 
-					JavaUtil.getName(cu.getClassifiers().get(0)));
+					cu.getClassifiers().get(0).getName());
 			
 			Resource resource = resourceSet.createResource(uri);
 			JavaClasspath.get(resourceSet).registerClassifierSource(cu, uri);
