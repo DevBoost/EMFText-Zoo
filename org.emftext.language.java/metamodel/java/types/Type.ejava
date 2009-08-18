@@ -134,7 +134,11 @@ eclass Type {
 		}
 		boolean isVariableLengthParameter = otherArrayType instanceof VariableLengthParameter;
 		
-		long otherArrayDim = otherArrayType.getArrayDimension();
+		long otherArrayDim = 0;
+		if(otherArrayType != null) {
+			otherArrayDim = otherArrayType.getArrayDimension();
+		}
+		
 		if (isTypeParameter && isVariableLengthParameter) {
 			if(arrayDimension != otherArrayDim && 
 				arrayDimension != otherArrayDim-1 && 
