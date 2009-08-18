@@ -75,7 +75,6 @@ import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor
 import org.emftext.runtime.util.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
 import org.emftext.language.java.types.NamespaceClassifierReference;
-import org.emftext.language.java.util.JavaUtil;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.resource.ITextDiagnostic;
 import org.emftext.runtime.resource.ITextResource;
@@ -515,7 +514,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	protected void assertClassifierName(Classifier declaration,
 			String expectedName) {
 		assertEquals("The name of the declared classifier should equal '"
-				+ expectedName + "'", expectedName, JavaUtil.getName(declaration));
+				+ expectedName + "'", expectedName, declaration.getName());
 	}
 
 	protected void assertNumberOfClassifiers(CompilationUnit model,
@@ -528,7 +527,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	protected void assertModifierCount(Method method,
 			int expectedNumberOfModifiers) {
 		List<Modifier> annotationsAndModifiers = getModifiers(method);
-		assertEquals("Method '" + JavaUtil.getName(method) + "' should have "
+		assertEquals("Method '" + method.getName() + "' should have "
 				+ expectedNumberOfModifiers + " modifier(s).",
 				expectedNumberOfModifiers, annotationsAndModifiers.size());
 	}
@@ -545,7 +544,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 
 	protected void assertIsPublic(Method method) {
-		assertTrue("Method '" + JavaUtil.getName(method) + "' should be public.",
+		assertTrue("Method '" + method.getName() + "' should be public.",
 				getModifiers(method).get(0) instanceof Public);
 	}
 
@@ -644,7 +643,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 			int expectedCount) {
 		String name = container.toString();
 		if (container instanceof NamedElement) {
-			name = JavaUtil.getName((NamedElement) container);
+			name = ((NamedElement) container).getName();
 		}
 		assertEquals(name + " should have " + expectedCount
 				+ " member(s).", expectedCount, container.getMembers().size());
