@@ -104,7 +104,6 @@ public class EcoreWrapper {
 			ePackageWrapper.getClassifiers().add(wrapper);
 		}
 		wrapper.setEClassifier(eClassifier);
-		wrapper.setEClassifier(eClassifier);
 
 		if (eClassifier instanceof EClass) {
 			EClass eClass = (EClass)eClassifier;
@@ -122,12 +121,11 @@ public class EcoreWrapper {
 				superTypeList.add(createTypeReferenceForEClassifier(extendedEClass));
 			}
 
-			//if (eClassifier.getName().equals("Commentable")) {
-				JavaClasspath cp = JavaClasspath.get(eClassifier);
-				ClassifierReference eObjectRef = TypesFactory.eINSTANCE.createClassifierReference();
-				eObjectRef.setTarget((Classifier) cp.getClassifier("org.eclipse.emf.ecore.EObject"));
-				superTypeList.add(eObjectRef);
-			//}
+			JavaClasspath cp = JavaClasspath.get(eClassifier);
+			ClassifierReference eObjectRef = TypesFactory.eINSTANCE.createClassifierReference();
+			eObjectRef.setTarget((Classifier) cp.getClassifier("org.eclipse.emf.ecore.EObject"));
+			superTypeList.add(eObjectRef);
+
 			for(EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
 				wrapEStructuralFeatureForGet(eStructuralFeature, wrapper);
 				if (!eStructuralFeature.isMany()) {
@@ -144,29 +142,38 @@ public class EcoreWrapper {
 
 	public static void wrapEStructuralFeatureForGet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
+		String getterName = "get" + firstToUpperCase(eStructuralFeature.getName());
+		EStructuralFeatureGetWrapper wrapper = (EStructuralFeatureGetWrapper) eClassifierWrapper.getContainedMethod(getterName);
 		
-		EStructuralFeatureGetWrapper wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper();
+		if (wrapper == null) {
+			wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper();
+			eClassifierWrapper.getMembers().add(wrapper);
+			wrapper.setName(getterName);
+		}
 		wrapper.setEStructuralFeature(eStructuralFeature);
-		eClassifierWrapper.getMembers().add(wrapper);
-		
-		wrapper.setName("get" + firstToUpperCase(eStructuralFeature.getName()));
 		wrapper.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
+
 	}
 	
 	public static void wrapEStructuralFeatureForSet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
 		
-		EStructuralFeatureSetWrapper wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper();
+		String setterName = "set" + firstToUpperCase(eStructuralFeature.getName());
+		EStructuralFeatureSetWrapper wrapper = (EStructuralFeatureSetWrapper) eClassifierWrapper.getContainedMethod(setterName);
+		
+		if(wrapper == null) {
+			wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper();
+			eClassifierWrapper.getMembers().add(wrapper);
+			wrapper.setName(setterName);
+			
+			Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
+			parameter.setName("value");
+			parameter.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
+			wrapper.getParameters().add(parameter);
+		}
+		
 		wrapper.setEStructuralFeature(eStructuralFeature);
-		eClassifierWrapper.getMembers().add(wrapper);
-		
-		wrapper.setName("set" + firstToUpperCase(eStructuralFeature.getName()));
 		wrapper.setTypeReference(TypesFactory.eINSTANCE.createVoid());
-		
-		Parameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
-		parameter.setName("value");
-		parameter.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
-		wrapper.getParameters().add(parameter);
 	}
 	
 	public static void wrapEOperation(
