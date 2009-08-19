@@ -54,6 +54,8 @@ import org.emftext.language.forms.resource.forms.FormsPrinter;
 import org.emftext.language.forms.resource.forms.FormsResource;
 import org.emftext.language.formular.resource.formular.FormularPrinter;
 import org.emftext.language.formular.resource.formular.FormularResource;
+import org.emftext.language.java.ejava.resource.ejava.EjavaPrinter;
+import org.emftext.language.java.ejava.resource.ejava.EjavaResource;
 import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorPrinter;
 import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorResource;
 import org.emftext.language.java.resource.java.JavaPrinter;
@@ -366,6 +368,19 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 	}
 	
+	private class EJavaTestItem extends AbstractTestItem {
+
+		public EClass[] getStartClasses() {
+			return new EClass[] {
+					org.emftext.language.java.ejava.EjavaPackage.eINSTANCE.getEPackageWrapper()
+			};
+		}
+		
+		public ITextPrinter getPrinter(OutputStream stream) {
+			return new EjavaPrinter(stream, new EjavaResource());
+		}
+	}
+	
 	private class JavaBehavior4UMLTestItem extends AbstractTestItem {
 
 		public EClass[] getStartClasses() {
@@ -451,6 +466,7 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new TextAdventureTestItem());
 		test(new ThreeValuedLogicTestItem());
 		test(new JavaTestItem());
+		test(new EJavaTestItem());
 		test(new JavaBehavior4UMLTestItem());
 		test(new ReuseJavaTestItem());
 		test(new TreeJavaTestItem());
