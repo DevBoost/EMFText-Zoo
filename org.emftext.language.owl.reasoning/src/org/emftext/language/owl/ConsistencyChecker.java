@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.owl.reasoning.EMFTextOWLReasoner;
 import org.emftext.language.owl.reasoning.PelletReasoner;
+import org.emftext.language.owl.reasoning.ReasoningException;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
@@ -54,8 +55,24 @@ public class ConsistencyChecker implements IResourcePostProcessor,
 			}
 			br.close();
 			String content = sb.toString();
-			Set<OWLClass> inconsistentClasses = reasoner
-					.getInconsistentClasses(content);
+			Set<OWLClass> inconsistentClasses;
+			System.out.println(content);
+			try {
+				inconsistentClasses = reasoner.getInconsistentClasses(content);
+			} catch (final ReasoningException e) {
+				resource.addProblem(new AbstractProblem() {
+
+					public EProblemType getType() {
+						return EProblemType.ERROR;
+					}
+
+					public String getMessage() {
+						return e.getMessage();
+					}
+				}, resource.getContents().get(0));
+				
+				return;
+			}
 			Set<String> invalidIris = new HashSet<String>();
 			for (OWLClass class1 : inconsistentClasses) {
 				invalidIris.add(class1.getURI().getFragment());

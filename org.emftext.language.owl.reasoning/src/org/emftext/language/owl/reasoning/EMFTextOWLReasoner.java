@@ -26,6 +26,6 @@ import org.semanticweb.owl.model.OWLClass;
 
 public interface EMFTextOWLReasoner {
 	
-	public Set<OWLClass> getInconsistentClasses(String owlRepresentation);
+	public Set<OWLClass> getInconsistentClasses(String owlRepresentation) throws ReasoningException;
 	
 }

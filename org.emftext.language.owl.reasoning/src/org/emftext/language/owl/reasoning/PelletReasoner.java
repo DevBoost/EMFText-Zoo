@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.coode.manchesterowlsyntax.ManchesterOWLSyntaxParserFactory;
+import org.mindswap.pellet.exceptions.InternalReasonerException;
 import org.mindswap.pellet.owlapi.Reasoner;
 import org.semanticweb.owl.apibinding.OWLManager;
 import org.semanticweb.owl.io.OWLOntologyInputSource;
@@ -37,7 +38,7 @@ import org.semanticweb.owl.model.OWLOntologyManager;
 
 public class PelletReasoner implements org.emftext.language.owl.reasoning.EMFTextOWLReasoner {
 
-	public Set<OWLClass> getInconsistentClasses(String owlRepresentation) {
+	public Set<OWLClass> getInconsistentClasses(String owlRepresentation) throws ReasoningException {
 		Set<OWLClass> inconsistentClasses = new HashSet<OWLClass>();
 		
 		
@@ -65,10 +66,14 @@ public class PelletReasoner implements org.emftext.language.owl.reasoning.EMFTex
 			return inconsistentClasses;
 
 		} catch (OWLOntologyCreationException e) {
-			System.out.println("The ontology could not be created: "
-					+ e.getMessage());
+			String message = "The ontology could not be checked for consistency: "
+					+ e.getMessage();
+			throw new ReasoningException(message, e);
+		} catch (InternalReasonerException e) {
+			String message = "The ontology could not be checked for consistency: "+ e.getMessage();
+			throw new ReasoningException(message, e);
 		}
-		return inconsistentClasses;
+	
 
 	}
 	
