@@ -29,6 +29,7 @@ import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.EStructuralFeatureGetWrapper;
+import org.emftext.language.java.ejava.EStructuralFeatureSetWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
@@ -155,7 +156,7 @@ public class EcoreWrapper {
 	public static void wrapEStructuralFeatureForSet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
 		
-		EStructuralFeatureGetWrapper wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper();
+		EStructuralFeatureSetWrapper wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper();
 		wrapper.setEStructuralFeature(eStructuralFeature);
 		eClassifierWrapper.getMembers().add(wrapper);
 		
