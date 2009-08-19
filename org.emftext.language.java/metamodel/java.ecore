@@ -342,8 +342,7 @@
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
-          eType="#//classifiers/ConcreteClassifier" containment="true">
-      </eStructuralFeatures>
+          eType="#//classifiers/ConcreteClassifier" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//containers/JavaRoot #//annotations/Annotable #//references/ReferenceableElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
@@ -633,8 +632,7 @@
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-          eType="#//imports/Import" containment="true">
-      </eStructuralFeatures>
+          eType="#//imports/Import" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StaticImport" abstract="true" eSuperTypes="#//imports/Import">
       <eStructuralFeatures xsi:type="ecore:EReference" name="static" lowerBound="1"
@@ -642,15 +640,13 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ClassifierImport" eSuperTypes="#//imports/Import">
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" lowerBound="1"
-          eType="#//classifiers/ConcreteClassifier">
-      </eStructuralFeatures>
+          eType="#//classifiers/ConcreteClassifier"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PackageImport" eSuperTypes="#//imports/Import"/>
     <eClassifiers xsi:type="ecore:EClass" name="StaticClassifierImport" eSuperTypes="#//imports/StaticImport"/>
     <eClassifiers xsi:type="ecore:EClass" name="StaticMemberImport" eSuperTypes="#//imports/StaticImport">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticMembers" lowerBound="1"
-          upperBound="-1" eType="#//references/ReferenceableElement">
-      </eStructuralFeatures>
+          upperBound="-1" eType="#//references/ReferenceableElement"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="instantiations" nsURI="http://www.emftext.org/java/instantiations"
@@ -756,8 +752,7 @@
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-          eType="#//members/Member" containment="true" eOpposite="#//members/Member/container">
-      </eStructuralFeatures>
+          eType="#//members/Member" containment="true" eOpposite="#//members/Member/container"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="defaultMembers" upperBound="-1"
           eType="#//members/Member" transient="true" containment="true"/>
     </eClassifiers>
@@ -823,7 +818,7 @@
         eSuperTypes="#//commons/Commentable">
       <eOperations name="isHidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="//all members of an interface are public by default&#xA;if ( this .eContainer ( ) instanceof org.emftext.language.java.classifiers.Interface ) { return false ; } &#xA;if ( context .eIsProxy ( ) ) { context = ( org.emftext.language.java.commons.Commentable ) org.eclipse.emf.ecore.util.EcoreUtil .resolve ( context , this ) ; } &#xA;org.emftext.language.java.classifiers.ConcreteClassifier contextClassifier = context .getContainingConcreteClassifier ( ) ; &#xA;org.emftext.language.java.classifiers.ConcreteClassifier myClassifier = ( ( org.emftext.language.java.commons.Commentable ) eContainer ( ) ) .getParentConcreteClassifier ( ) ; &#xA;//special case: self reference to outer instance&#xA;if ( context instanceof org.emftext.language.java.references.Reference ) { if ( ( ( org.emftext.language.java.references.Reference ) context ) .getPrevious ( ) instanceof org.emftext.language.java.references.SelfReference ) { org.emftext.language.java.references.SelfReference selfReference = ( org.emftext.language.java.references.SelfReference ) ( ( org.emftext.language.java.references.Reference ) context ) .getPrevious ( ) ; if ( selfReference .getSelf ( ) instanceof org.emftext.language.java.literals.Self ) { if ( selfReference .getPrevious ( ) != null ) { org.emftext.language.java.types.Type type = selfReference .getPrevious ( ) .getReferencedType ( ) ; if ( type instanceof org.emftext.language.java.classifiers.ConcreteClassifier ) { contextClassifier = ( org.emftext.language.java.classifiers.ConcreteClassifier ) type ; } } } } } &#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : this .getAnnotationsAndModifiers ( ) ) { if ( modifier instanceof org.emftext.language.java.modifiers.Private ) { if ( myClassifier .equalsType ( 0 , contextClassifier , 0 ) ) { return false ; } return true ; } if ( modifier instanceof org.emftext.language.java.modifiers.Public ) { return false ; } if ( modifier instanceof org.emftext.language.java.modifiers.Protected ) { //package visibility&#xA;if ( getContainingPackageName ( ) != null &amp;&amp; getContainingPackageName ( ) .equals ( context .getContainingPackageName ( ) ) ) { return false ; } //try outer classifiers as well &#xA;while ( contextClassifier instanceof org.emftext.language.java.classifiers.Classifier ) { if ( contextClassifier .isSuperType ( 0 , myClassifier , null ) ) { return false ; } contextClassifier = ( ( org.emftext.language.java.commons.Commentable ) contextClassifier .eContainer ( ) ) .getParentConcreteClassifier ( ) ; if ( contextClassifier != null &amp;&amp; ! contextClassifier .eIsProxy ( ) &amp;&amp; contextClassifier .isSuperType ( 0 , myClassifier , null ) ) { return false ; } } //visibility through anonymous subclass&#xA;org.emftext.language.java.classifiers.AnonymousClass anonymousClass = context .getContainingAnonymousClass ( ) ; while ( anonymousClass != null ) { contextClassifier = anonymousClass .getSuperClassifier ( ) ; if ( contextClassifier .isSuperType ( 0 , myClassifier , null ) ) { return false ; } anonymousClass = ( ( org.emftext.language.java.commons.Commentable ) anonymousClass .eContainer ( ) ) .getContainingAnonymousClass ( ) ; } return true ; } } &#xA;//package visibility?&#xA;if ( getContainingPackageName ( ) != null &amp;&amp; getContainingPackageName ( ) .equals ( context .getContainingPackageName ( ) ) ) { return false ; } &#xA;return true ; &#xA;"/>
+          <details key="body" value="//all members of an interface are public by default&#xA;if ( this .eContainer ( ) instanceof org.emftext.language.java.classifiers.Interface ) { return false ; } &#xA;if ( context .eIsProxy ( ) ) { context = ( org.emftext.language.java.commons.Commentable ) org.eclipse.emf.ecore.util.EcoreUtil .resolve ( context , this ) ; } &#xA;org.emftext.language.java.classifiers.ConcreteClassifier contextClassifier = context .getContainingConcreteClassifier ( ) ; &#xA;org.emftext.language.java.classifiers.ConcreteClassifier myClassifier = ( ( org.emftext.language.java.commons.Commentable ) eContainer ( ) ) .getParentConcreteClassifier ( ) ; &#xA;//special case: self reference to outer instance&#xA;if ( context instanceof org.emftext.language.java.references.Reference ) { if ( ( ( org.emftext.language.java.references.Reference ) context ) .getPrevious ( ) instanceof org.emftext.language.java.references.SelfReference ) { org.emftext.language.java.references.SelfReference selfReference = ( org.emftext.language.java.references.SelfReference ) ( ( org.emftext.language.java.references.Reference ) context ) .getPrevious ( ) ; if ( selfReference .getSelf ( ) instanceof org.emftext.language.java.literals.Self ) { if ( selfReference .getPrevious ( ) != null ) { org.emftext.language.java.types.Type type = selfReference .getPrevious ( ) .getReferencedType ( ) ; if ( type instanceof org.emftext.language.java.classifiers.ConcreteClassifier ) { contextClassifier = ( org.emftext.language.java.classifiers.ConcreteClassifier ) type ; } } } } } &#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : this .getAnnotationsAndModifiers ( ) ) { if ( modifier instanceof org.emftext.language.java.modifiers.Private ) { if ( myClassifier .equalsType ( 0 , contextClassifier , 0 ) ) { return false ; } return true ; } if ( modifier instanceof org.emftext.language.java.modifiers.Public ) { return false ; } if ( modifier instanceof org.emftext.language.java.modifiers.Protected ) { //package visibility&#xA;if ( getContainingPackageName ( ) != null &amp;&amp; getContainingPackageName ( ) .equals ( context .getContainingPackageName ( ) ) ) { return false ; } //try outer classifiers as well &#xA;while ( contextClassifier instanceof org.emftext.language.java.classifiers.Classifier ) { if ( contextClassifier .isSuperType ( 0 , myClassifier , null ) ) { return false ; } contextClassifier = ( ( org.emftext.language.java.commons.Commentable ) contextClassifier .eContainer ( ) ) .getParentConcreteClassifier ( ) ; if ( contextClassifier != null &amp;&amp; ! contextClassifier .eIsProxy ( ) &amp;&amp; contextClassifier .isSuperType ( 0 , myClassifier , null ) ) { return false ; } } //visibility through anonymous subclass&#xA;org.emftext.language.java.classifiers.AnonymousClass anonymousClass = context .getContainingAnonymousClass ( ) ; while ( anonymousClass != null ) { contextClassifier = anonymousClass .getSuperClassifier ( ) ; if ( contextClassifier == null ) { return true ; } if ( contextClassifier .isSuperType ( 0 , myClassifier , null ) ) { return false ; } anonymousClass = ( ( org.emftext.language.java.commons.Commentable ) anonymousClass .eContainer ( ) ) .getContainingAnonymousClass ( ) ; } return true ; } } &#xA;//package visibility?&#xA;if ( getContainingPackageName ( ) != null &amp;&amp; getContainingPackageName ( ) .equals ( context .getContainingPackageName ( ) ) ) { return false ; } &#xA;return true ; &#xA;"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>

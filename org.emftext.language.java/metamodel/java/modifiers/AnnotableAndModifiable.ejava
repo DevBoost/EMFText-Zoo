@@ -99,6 +99,9 @@ eclass AnnotableAndModifiable {
 				AnonymousClass anonymousClass = context.getContainingAnonymousClass();
 				while (anonymousClass != null) {
 					contextClassifier = anonymousClass.getSuperClassifier();
+					if (contextClassifier == null) {
+						return true;
+					}
 					if (contextClassifier.isSuperType(0, myClassifier, null)) {
 						return false;
 					}
