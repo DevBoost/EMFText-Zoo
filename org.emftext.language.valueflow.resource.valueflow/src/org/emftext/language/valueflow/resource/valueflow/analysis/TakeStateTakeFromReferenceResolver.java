@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class TakeStateTakeFromReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.valueflow.TakeState, org.emftext.language.valueflow.GiveState> {
 	
-	private ValueflowDefaultResolverDelegate<org.emftext.language.valueflow.TakeState, org.emftext.language.valueflow.GiveState> delegate = new ValueflowDefaultResolverDelegate<org.emftext.language.valueflow.TakeState, org.emftext.language.valueflow.GiveState>();
+	private TextValueflowDefaultResolverDelegate<org.emftext.language.valueflow.TakeState, org.emftext.language.valueflow.GiveState> delegate = new TextValueflowDefaultResolverDelegate<org.emftext.language.valueflow.TakeState, org.emftext.language.valueflow.GiveState>();
 	
 	public java.lang.String deResolve(org.emftext.language.valueflow.GiveState element, org.emftext.language.valueflow.TakeState container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
