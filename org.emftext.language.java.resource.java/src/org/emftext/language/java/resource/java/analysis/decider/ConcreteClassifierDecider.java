@@ -223,7 +223,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		}	
 		//5) java.lang
 		if(container instanceof JavaRoot || container.eContainer() == null) {
-			resultList.addAll(((JavaRoot)container).getDefaultImports());
+			resultList.addAll(org.emftext.language.java.JavaClasspath.get(container).getDefaultImports());
 		}
 	}
 	
