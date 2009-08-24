@@ -54,13 +54,16 @@ public class ClassifierReferenceTargetReferenceResolver extends
 	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (classifier instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) classifier;
-			
+			boolean namespaceMissing = true;
+			if(container.eContainer() instanceof NamespaceClassifierReference) {
+				namespaceMissing = ((NamespaceClassifierReference)container.eContainer()).getNamespaces().isEmpty();
+			}		
 			Object fullNamesOption = container.eResource().getResourceSet().getLoadOptions().get(
 					JavaClasspath.OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES);	
 			if (!(fullNamesOption instanceof Boolean)) {
 				fullNamesOption = Boolean.FALSE;
-			}		
-			if (Boolean.TRUE.equals(fullNamesOption)) {
+			}
+			if (namespaceMissing && Boolean.TRUE.equals(fullNamesOption)) {
 				String packageName = "";
 				String fullClassName = concreteClassifier.getName();
 				EObject parent = concreteClassifier.eContainer();
