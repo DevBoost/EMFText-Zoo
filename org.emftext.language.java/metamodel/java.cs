@@ -220,13 +220,13 @@ members.EnumConstant
     ;
 
 statements.Block
-	::=	modifiers* "{" #1 statements* #0 "}"
+	::=	modifiers* "{" (!1 statements)* !0 "}"
 	;
 
 members.Constructor
 	::=	annotationsAndModifiers* ("<" typeParameters ("," typeParameters)* ">")? boxedName
 	"(" (parameters ("," parameters)* )? ")" 
-	("throws" exceptions ("," exceptions)*)? "{" statements* "}"
+	("throws" exceptions ("," exceptions)*)? "{" (!1 statements)* !0 "}"
 	;
 
 members.InterfaceMethod
@@ -238,7 +238,7 @@ members.InterfaceMethod
 members.ClassMethod
 	::=	annotationsAndModifiers* ("<" #0 typeParameters (#0 "," typeParameters)* #0 ">")? (typeReference arrayDimensionsBefore*) boxedName  
 	"(" #0 (parameters ("," parameters)* )? #0 ")" arrayDimensionsAfter*
-	("throws" exceptions ("," exceptions)*)? "{" (!2 statements)* !1 "}"
+	("throws" exceptions ("," exceptions)*)? "{" (!1 statements)* !0 "}"
 	;
 	
 annotations.AnnotationAttribute
@@ -402,25 +402,25 @@ statements.EmptyStatement
 	::= ";" ;
 	
 statements.SynchronizedBlock
-	::= "synchronized" "(" lockProvider:expressions.AssignmentExpression ")" "{" statements* "}" ;
+	::= "synchronized" "(" lockProvider:expressions.AssignmentExpression ")" "{" (!1 statements)* !0 "}" ;
 	
 statements.TryBlock
-	::= "try" "{" statements* "}"
+	::= "try" "{" (!1 statements)* !0 "}"
 		catcheBlocks* 
 		("finally" finallyBlock)?;
 
 statements.CatchBlock
-	::=	"catch" "(" parameter ")" "{" statements* "}"
+	::=	"catch" "(" parameter ")" "{" (!1 statements)* !0 "}"
 	;
 
 statements.Switch
 	::= "switch" "(" variable:expressions.AssignmentExpression ")" "{" (cases*) "}";
 	
 statements.NormalSwitchCase
-	::= "case" condition:expressions.AssignmentExpression ":" statements* ;
+	::= "case" condition:expressions.AssignmentExpression ":" (!1 statements)* !0 ;
 	
 statements.DefaultSwitchCase
-	::= "default" ":" statements* ;
+	::= "default" ":" (!1 statements)* !0 ;
 	
 statements.Return
 	::= "return" returnValue:expressions.AssignmentExpression? ";" ;
