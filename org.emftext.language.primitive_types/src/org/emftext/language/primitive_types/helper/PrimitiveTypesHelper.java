@@ -23,13 +23,30 @@ package org.emftext.language.primitive_types.helper;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.emftext.language.primitive_types.Primitive_typesPackage;
 
 public class PrimitiveTypesHelper {
 
 	public static Object getPrimitiveType(Object type) {
 		if (!(type instanceof EClass)) {
-			return type;
+			if (!(type instanceof EDataType)) {
+				return type;
+			}
+			
+			//EData types
+			EDataType dataType = (EDataType) type;
+			if (dataType.getInstanceClassName().equals("java.lang.String")) {
+				return Primitive_typesPackage.Literals.STRING_OBJECT;
+			}
+			if (dataType.getInstanceClassName().equals("java.lang.Integer")) {
+				return Primitive_typesPackage.Literals.INTEGER_OBJECT;
+			}
+			if (dataType.getInstanceClassName().equals("java.lang.Boolean")) {
+				return Primitive_typesPackage.Literals.BOOLEAN_OBJECT;
+			}	
+			//TODO add more
+			return dataType;		
 		}
 		EClass typeClass = (EClass) type;
 		List<EClass> superTypes = typeClass.getEAllSuperTypes();
@@ -38,6 +55,9 @@ public class PrimitiveTypesHelper {
 				return superType;
 			}
 		}
+		
+
+		
 		return null;
 	}
 }
