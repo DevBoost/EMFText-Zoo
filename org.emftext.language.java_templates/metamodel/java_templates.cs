@@ -9,7 +9,8 @@ IMPORTS {
 
 OPTIONS {
 	usePredefinedTokens = "false";
-	overrideManifest = "false";
+	overrideManifest  = "false";
+	overridePluginXML = "false";
 }
 
 TOKENSTYLES {
