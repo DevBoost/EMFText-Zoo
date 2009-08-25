@@ -177,7 +177,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			
 			// now we have both the primitive type of the expression and the target of the
 			// placeholder. lets compare them...
-			if (!placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
+			if (placeHolderExpressionPrimitiveType == null || !placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
 				resource.addProblem(
 						new AbstractProblem() {
 							
