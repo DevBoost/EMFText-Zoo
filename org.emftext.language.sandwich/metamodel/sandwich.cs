@@ -19,7 +19,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	Recipe ::= "RECIPE" ingredients* !0 instructions ("," !0 instructions)*;
+	Recipe ::= "RECIPE" name[] ingredients* !0 instructions ("," !0 instructions)*;
 	Ingredient ::= name;
 	IngredientName ::= value[];
 	Clean ::= "CLEAN" using[]?;
