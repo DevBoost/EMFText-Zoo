@@ -290,10 +290,14 @@ public class InterpreterWithState {
 		// TODO mseifert: this is a dirty hack, but it works, since all primitive types
 		// have the attribute 'value'.
 		// mboehme: Should be resolved when no PrimitiveTypes are needed in inputModels anymore
-		EObject evaluatedEObject = (EObject) evaluatedObject;
-		EClass evaluateEObjectClass = evaluatedEObject.eClass();
-		tiAttributeElement.eSet(tiConcreteAttributeClass.getEStructuralFeature("value"), evaluatedEObject.eGet(evaluateEObjectClass.getEStructuralFeature("value")));
-		
+		if (evaluatedObject instanceof EObject) {
+			EObject evaluatedEObject = (EObject) evaluatedObject;
+			EClass evaluateEObjectClass = evaluatedEObject.eClass();
+			tiAttributeElement.eSet(tiConcreteAttributeClass.getEStructuralFeature("value"), evaluatedEObject.eGet(evaluateEObjectClass.getEStructuralFeature("value")));			
+		}
+		else {
+			tiAttributeElement.eSet(tiConcreteAttributeClass.getEStructuralFeature("value"), evaluatedObject);						
+		}
 		return tiAttributeElement;
 	}
 
