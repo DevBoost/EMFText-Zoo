@@ -1,6 +1,6 @@
 package org.emftext.language.sparql.resource.sparql.analysis;
 
-public class SparqlDEF_PN_PREFIXTokenResolver extends org.emftext.runtime.resource.impl.AbstractTokenResolver {
+public class SparqlVARNAMETokenResolver extends org.emftext.runtime.resource.impl.AbstractTokenResolver {
 	
 	private org.emftext.language.sparql.resource.sparql.SparqlDefaultTokenResolver defaultTokenResolver = new org.emftext.language.sparql.resource.sparql.SparqlDefaultTokenResolver();
 	
