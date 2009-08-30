@@ -94,8 +94,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OrderCondition" abstract="true" eSuperTypes="#//LocatedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="OrderConditionLeftNE" eSuperTypes="#//OrderCondition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ascending" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ascOrDecs" ordered="false"
+        lowerBound="1" eType="#//AscOrDecs" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="brackettedexpression" ordered="false"
         lowerBound="1" eType="#//BrackettedExpression" containment="true"/>
   </eClassifiers>
@@ -116,10 +116,12 @@
         eType="#//LimitClause" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LimitClause" eSuperTypes="#//LocatedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="integer" eType="#//INTEGER"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="integer" eType="#//INTEGER"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OffsetClause" eSuperTypes="#//LocatedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="integer" eType="#//INTEGER"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="integer" eType="#//INTEGER"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SolutionsDisplayNE" abstract="true"
       eSuperTypes="#//LocatedElement"/>
@@ -153,8 +155,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SourceSelector" eSuperTypes="#//LocatedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="WhereClause" eSuperTypes="#//LocatedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syntaxWhere" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="where" ordered="false"
+        lowerBound="1" eType="#//WhereLiteral" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groupgraphpattern" ordered="false"
         lowerBound="1" eType="#//GroupGraphPattern" containment="true"/>
   </eClassifiers>
@@ -551,4 +553,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ws" ordered="false" unique="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhereLiteral"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AscOrDecs" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AscendingLiteral" eSuperTypes="#//AscOrDecs"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DescendingLiteral" eSuperTypes="#//AscOrDecs"/>
 </ecore:EPackage>

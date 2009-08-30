@@ -45,13 +45,27 @@ RULES{
 	BaseDecl ::= "BASE" iriref  ;
 	PrefixDecl ::= "PREFIX" pnamens iriref  ;
 	
-	SelectQuery ::= "SELECT" ( "DISTINCT" | "REDUCED" )? ( var+ | "*" ) datasetclause* ;
-	// WhereClause SolutionModifier
+	SelectQuery ::= "SELECT" solutionsdisplay? ( var+ | "*" ) datasetclause* whereclause? solutionmodifier;
+	//  SolutionModifier
 	
+	DistinctNE ::= "DISTINCT";
+	ReducedNE ::= "REDUCED" ;
 	DatasetClause ::= "FROM" graphclause ;
 	DefaultGraphClause ::= sourceselector ;
 	NamedGraphClause ::= "NAMED" sourceselector ;
 	
+	WhereClause ::= where? ;
+	//groupgraphpattern
+	SolutionModifier ::= orderclause? limitoffsetclauses? ;
+	OrderClause ::= "ORDER" "BY" ordercondition+ ;
+	OrderConditionLeftNE ::= ascOrDecs brackettedexpression ;
+	LimitOffsetClausesLeftNE ::= limitclause offsetclause? ;
+	LimitOffsetClausesRightNE ::= offsetclause limitclause? ; 
+	LimitClause ::= "LIMIT" integer ;
+	OffsetClause ::= "OFFSET" integer ;
+	
+	BrackettedExpression ::= "(" ")" ;
+	//Expression
 	
 	IRI_REF ::= iri_ref[DEF_IRI_REF] ;
 	PNAME_NS ::= pn_prefix[DEF_PNAME_NS] ;	
@@ -60,5 +74,8 @@ RULES{
 	PN_LOCAL ::= pn_local[DEF_PN_LOCAL];
 	
 	INTEGER ::= integer[DEF_INTEGER];
-
+	
+	WhereLiteral ::= "WHERE";
+	AscendingLiteral ::= "ASC";
+	DescendingLiteral ::= "DESC";
 }
