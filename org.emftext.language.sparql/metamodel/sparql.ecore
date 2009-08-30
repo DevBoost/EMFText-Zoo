@@ -132,7 +132,10 @@
         lowerBound="1" upperBound="-1" eType="#//Var" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VarOrIRIref" abstract="true" eSuperTypes="#//Verb"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Var" abstract="true" eSuperTypes="#//VarOrIRIref #//PrimaryExpression #//VarOrTerm #//OrderConditionRightNE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Var" eSuperTypes="#//VarOrIRIref #//PrimaryExpression #//VarOrTerm #//OrderConditionRightNE">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varname" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IRIref" abstract="true" eSuperTypes="#//VarOrIRIref #//GraphTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrefixedName" abstract="true" eSuperTypes="#//IRIref"/>
   <eClassifiers xsi:type="ecore:EClass" name="DatasetClause" eSuperTypes="#//LocatedElement">
@@ -487,11 +490,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" abstract="true" eSuperTypes="#//PrimaryExpression #//GraphTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="TrueBooleanLiteralNE" eSuperTypes="#//BooleanLiteral"/>
   <eClassifiers xsi:type="ecore:EClass" name="FalseBooleanLiteralNE" eSuperTypes="#//BooleanLiteral"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VAR1" eSuperTypes="#//Var">
+  <eClassifiers xsi:type="ecore:EClass" name="VAR1">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" ordered="false" lowerBound="1"
         eType="#//VARNAME" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VAR2" eSuperTypes="#//Var">
+  <eClassifiers xsi:type="ecore:EClass" name="VAR2">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" ordered="false" lowerBound="1"
         eType="#//VARNAME" containment="true"/>
   </eClassifiers>
@@ -503,8 +506,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="iri_ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PNAME_NS" eSuperTypes="#//PrefixedName #//VarOrIRIref">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pn_prefix" ordered="false"
-        eType="#//PN_PREFIX" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pn_prefix" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PNAME_LN" eSuperTypes="#//PrefixedName #//VarOrIRIref">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pname_ns" ordered="false"
