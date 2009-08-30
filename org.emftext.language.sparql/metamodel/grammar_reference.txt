@@ -6,10 +6,8 @@
 
 //done	
 [2]   	Prologue 	  ::=   	BaseDecl? PrefixDecl*
-
 //done
 [3]   	BaseDecl 	  ::=   	'BASE' IRI_REF
-
 //done
 [4]   	PrefixDecl 	  ::=   	'PREFIX' PNAME_NS IRI_REF
 
@@ -19,10 +17,16 @@
 [6]   	ConstructQuery 	  ::=   	'CONSTRUCT' ConstructTemplate DatasetClause* WhereClause SolutionModifier
 [7]   	DescribeQuery 	  ::=   	'DESCRIBE' ( VarOrIRIref+ | '*' ) DatasetClause* WhereClause? SolutionModifier
 [8]   	AskQuery 	  ::=   	'ASK' DatasetClause* WhereClause
+
+//done
 [9]   	DatasetClause 	  ::=   	'FROM' ( DefaultGraphClause | NamedGraphClause )
+//done
 [10]   	DefaultGraphClause 	  ::=   	SourceSelector
+//done
 [11]   	NamedGraphClause 	  ::=   	'NAMED' SourceSelector
+//done
 [12]   	SourceSelector 	  ::=   	IRIref
+
 [13]   	WhereClause 	  ::=   	'WHERE'? GroupGraphPattern
 [14]   	SolutionModifier 	  ::=   	OrderClause? LimitOffsetClauses?
 [15]   	LimitOffsetClauses 	  ::=   	( LimitClause OffsetClause? | OffsetClause LimitClause? )
@@ -56,7 +60,7 @@
 [42]   	VarOrTerm 	  ::=   	Var | GraphTerm
 [43]   	VarOrIRIref 	  ::=   	Var | IRIref
 
-//done
+//done as Token, elementar
 [44]   	Var 	  ::=   	VAR1 | VAR2
 
 [45]   	GraphTerm 	  ::=   	IRIref | RDFLiteral | NumericLiteral | BooleanLiteral | BlankNode | NIL
@@ -94,30 +98,35 @@
 [64]   	NumericLiteralNegative 	  ::=   	INTEGER_NEGATIVE | DECIMAL_NEGATIVE | DOUBLE_NEGATIVE
 [65]   	BooleanLiteral 	  ::=   	'true' | 'false'
 [66]   	String 	  ::=   	STRING_LITERAL1 | STRING_LITERAL2 | STRING_LITERAL_LONG1 | STRING_LITERAL_LONG2
+
+//done
 [67]   	IRIref 	  ::=   	IRI_REF | PrefixedName
+//done
 [68]   	PrefixedName 	  ::=   	PNAME_LN | PNAME_NS
+
+
 [69]   	BlankNode 	  ::=   	BLANK_NODE_LABEL | ANON
 
 
 Productions for terminals:
-//done as token, zugelassen sind ALLE Zeichen außer die hier aufgeführten, Hexcode als Unicode
+//done as token, zugelassen sind ALLE Zeichen außer die hier aufgeführten, Hexcode als Unicode, elementar
 [70]   	IRI_REF 	  ::=   	'<' ([^<>"{}|^`\]-[#x00-#x20])* '>'
-
-//done
+//done as Token, elementar
 [71]   	PNAME_NS 	  ::=   	PN_PREFIX? ':'
-
+//done
 [72]   	PNAME_LN 	  ::=   	PNAME_NS PN_LOCAL
+
 [73]   	BLANK_NODE_LABEL 	  ::=   	'_:' PN_LOCAL
 
-//done
+//überflüssig
 [74]   	VAR1 	  ::=   	'?' VARNAME
-//done
+//überflüssig
 [75]   	VAR2 	  ::=   	'$' VARNAME
 
 
 [76]   	LANGTAG 	  ::=   	'@' [a-zA-Z]+ ('-' [a-zA-Z0-9]+)*
 
-//done as token
+//done as token, elementar
 [77]   	INTEGER 	  ::=   	[0-9]+
 
 [78]   	DECIMAL 	  ::=   	[0-9]+ '.' [0-9]* | '.' [0-9]+
@@ -150,14 +159,14 @@ Productions for terminals:
 //done as Token, in VARNAME, PN_PREFIX und PN_LOCAL eingearbeitet
 [96]   	PN_CHARS_U 	  ::=   	PN_CHARS_BASE | '_'
 
-//pre-done as Token, Hexcode als Unicode
+//pre-done in Var, Hexcode als Unicode
 [97]   	VARNAME 	  ::=   	( PN_CHARS_U | [0-9] ) ( PN_CHARS_U | [0-9] | #x00B7 | [#x0300-#x036F] | [#x203F-#x2040] )*
 
 //done as Token, in VARNAME, PN_PREFIX und PN_LOCAL eingearbeitet, Hexcode als Unicode
 [98]   	PN_CHARS 	  ::=   	PN_CHARS_U | '-' | [0-9] | #x00B7 | [#x0300-#x036F] | [#x203F-#x2040]
 
-//pre-done as Token
+//pre-done in PNAME_NS
 [99]   	PN_PREFIX 	  ::=   	PN_CHARS_BASE ((PN_CHARS|'.')* PN_CHARS)?
 
-//pre-done as Token
+//pre-done as Token, elementar
 [100]   PN_LOCAL 	  ::=   	( PN_CHARS_U | [0-9] ) ((PN_CHARS|'.')* PN_CHARS)?

@@ -45,12 +45,17 @@ RULES{
 	BaseDecl ::= "BASE" iriref  ;
 	PrefixDecl ::= "PREFIX" pnamens iriref  ;
 	
-	SelectQuery ::= "SELECT" ( "DISTINCT" | "REDUCED" )? ( var+ | "*" )  ;
-	//DatasetClause* WhereClause SolutionModifier
+	SelectQuery ::= "SELECT" ( "DISTINCT" | "REDUCED" )? ( var+ | "*" ) datasetclause* ;
+	// WhereClause SolutionModifier
 	
-	IRI_REF_STRING ::= iri_ref[DEF_IRI_REF] ;
+	DatasetClause ::= "FROM" graphclause ;
+	DefaultGraphClause ::= sourceselector ;
+	NamedGraphClause ::= "NAMED" sourceselector ;
+	
+	
+	IRI_REF ::= iri_ref[DEF_IRI_REF] ;
 	PNAME_NS ::= pn_prefix[DEF_PNAME_NS] ;	
-	
+	PNAME_LN ::= pname_ns pn_local ;
 	Var ::= varname[VARNAME] ;
 	PN_LOCAL ::= pn_local[DEF_PN_LOCAL];
 	
