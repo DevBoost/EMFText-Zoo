@@ -7,6 +7,7 @@ IMPORTS{
 
 OPTIONS{
 	tokenspace="1";
+	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens="false";
 	generateCodeFromGeneratorModel="true";
 	reloadGeneratorModel="true";
@@ -38,15 +39,20 @@ TOKENS{
 
 RULES{
 	
-	SparqlQueries ::= prologue;
-	// query  
+	SparqlQueries ::= prologue query;
 	
 	Prologue ::= basedeclaration? prefixdeclaration* ; 
 	BaseDecl ::= "BASE" iriref  ;
 	PrefixDecl ::= "PREFIX" pnamens iriref  ;
 	
+	SelectQuery ::= "SELECT" ( "DISTINCT" | "REDUCED" )? ( var+ | "*" )  ;
+	//DatasetClause* WhereClause SolutionModifier
+	
 	IRI_REF_STRING ::= iri_ref[DEF_IRI_REF] ;
 	PNAME_NS ::= pn_prefix? ":" ;
+	
+	VAR1 ::= "?" name ;
+  	VAR2 ::= "$" name ;
 	
 	INTEGER ::= integer[DEF_INTEGER];
 	

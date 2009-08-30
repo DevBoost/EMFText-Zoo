@@ -3,11 +3,19 @@
 [1]    	Query  	  ::=    	Prologue
 						( SelectQuery | ConstructQuery | DescribeQuery | AskQuery )
 	//multiple Queries im Metamodell vorgesehen, Grammatik sieht aber nur EINE vor?
-	
+
+//done	
 [2]   	Prologue 	  ::=   	BaseDecl? PrefixDecl*
+
+//done
 [3]   	BaseDecl 	  ::=   	'BASE' IRI_REF
+
+//done
 [4]   	PrefixDecl 	  ::=   	'PREFIX' PNAME_NS IRI_REF
+
+//pre-done, Bedeutung von solutionsdisplay im ecore unklar 
 [5]   	SelectQuery 	  ::=   	'SELECT' ( 'DISTINCT' | 'REDUCED' )? ( Var+ | '*' ) DatasetClause* WhereClause SolutionModifier
+
 [6]   	ConstructQuery 	  ::=   	'CONSTRUCT' ConstructTemplate DatasetClause* WhereClause SolutionModifier
 [7]   	DescribeQuery 	  ::=   	'DESCRIBE' ( VarOrIRIref+ | '*' ) DatasetClause* WhereClause? SolutionModifier
 [8]   	AskQuery 	  ::=   	'ASK' DatasetClause* WhereClause
@@ -47,7 +55,10 @@
 [41]   	GraphNode 	  ::=   	VarOrTerm | TriplesNode
 [42]   	VarOrTerm 	  ::=   	Var | GraphTerm
 [43]   	VarOrIRIref 	  ::=   	Var | IRIref
+
+//done
 [44]   	Var 	  ::=   	VAR1 | VAR2
+
 [45]   	GraphTerm 	  ::=   	IRIref | RDFLiteral | NumericLiteral | BooleanLiteral | BlankNode | NIL
 [46]   	Expression 	  ::=   	ConditionalOrExpression
 [47]   	ConditionalOrExpression 	  ::=   	ConditionalAndExpression ( '||' ConditionalAndExpression )*
@@ -89,30 +100,37 @@
 
 
 Productions for terminals:
-[70]   	IRI_REF 	  ::=   	'<' ([^<>"{}|^`\]-[#x00-#x20])* '>'
 //done as token, zugelassen sind ALLE Zeichen außer die hier aufgeführten, Hexcode als Unicode
+[70]   	IRI_REF 	  ::=   	'<' ([^<>"{}|^`\]-[#x00-#x20])* '>'
 
+//done
 [71]   	PNAME_NS 	  ::=   	PN_PREFIX? ':'
+
 [72]   	PNAME_LN 	  ::=   	PNAME_NS PN_LOCAL
 [73]   	BLANK_NODE_LABEL 	  ::=   	'_:' PN_LOCAL
+
+//done
 [74]   	VAR1 	  ::=   	'?' VARNAME
+//done
 [75]   	VAR2 	  ::=   	'$' VARNAME
+
+
 [76]   	LANGTAG 	  ::=   	'@' [a-zA-Z]+ ('-' [a-zA-Z0-9]+)*
 
-[77]   	INTEGER 	  ::=   	[0-9]+
 //done as token
+[77]   	INTEGER 	  ::=   	[0-9]+
 
 [78]   	DECIMAL 	  ::=   	[0-9]+ '.' [0-9]* | '.' [0-9]+
 [79]   	DOUBLE 	  ::=   	[0-9]+ '.' [0-9]* EXPONENT | '.' ([0-9])+ EXPONENT | ([0-9])+ EXPONENT
 
-[80]   	INTEGER_POSITIVE 	  ::=   	'+' INTEGER
 //done in INTEGER
+[80]   	INTEGER_POSITIVE 	  ::=   	'+' INTEGER
 
 [81]   	DECIMAL_POSITIVE 	  ::=   	'+' DECIMAL
 [82]   	DOUBLE_POSITIVE 	  ::=   	'+' DOUBLE
 
-[83]   	INTEGER_NEGATIVE 	  ::=   	'-' INTEGER
 //done in INTEGER
+[83]   	INTEGER_NEGATIVE 	  ::=   	'-' INTEGER
  
 [84]   	DECIMAL_NEGATIVE 	  ::=   	'-' DECIMAL
 [85]   	DOUBLE_NEGATIVE 	  ::=   	'-' DOUBLE
