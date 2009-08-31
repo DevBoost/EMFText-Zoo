@@ -64,12 +64,15 @@ RULES{
 	GraphGraphPattern ::= "GRAPH" varoririref groupgraphpattern;
 	GroupOrUnionGraphPattern ::= groupgraphpattern ( "UNION" groupgraphpattern )* ;
 	
-	Filter ::= "FILTER"  ;
-	//Constraint
+	Filter ::= "FILTER" constraint ;
 	
-	TriplesSameSubjectLeftNE ::= varorterm ;
-	//propertylistnotempty
-	//TriplesSameSubjectRightNE ::= triplesnode propertylist;
+	TriplesSameSubjectLeftNE ::= varorterm propertylistnotempty ;
+	//TriplesSameSubjectRightNE ::= triplesnode propertylistnotempty?;
+	
+	PropertyListNotEmpty ::= verb objectlist ( ";" ( verb objectlist )? )* ;
+	ObjectList ::= object ( "," object )* ;
+	Object ::= graphnode ; //abstract möglich?
+	
 	
 	SolutionModifier ::= orderclause? limitoffsetclauses? ;
 	
@@ -95,4 +98,5 @@ RULES{
 	WhereLiteral ::= "WHERE";
 	AscendingLiteral ::= "ASC";
 	DescendingLiteral ::= "DESC";
+	VerbANE ::= "a" ;
 }
