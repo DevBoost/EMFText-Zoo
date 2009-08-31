@@ -27,7 +27,7 @@ TOKENS{
 	DEFINE PCDATA $'>' (~('<'|'>'))* '<'$;
 	
 	DEFINE ATTRDATA $('"' (~('"'))* '"'| '\'' (~('\''))* '\'')$;
-	DEFINE WS_LB $(('\r\n'|'\r'|'\n'|' '|'\t'|'\f')*)$;
+	DEFINE WS_LB $(('\r\n'|'\r'|'\n'|' '|'\t'|'\f')+)$;
 }
 
 RULES{
