@@ -46,8 +46,8 @@ import org.emftext.language.ecore.resource.facade.FacadeEcorePrinter;
 import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
 import org.emftext.language.ecore.resource.text.TextEcorePrinter;
 import org.emftext.language.ecore.resource.text.TextEcoreResource;
-import org.emftext.language.emfxml.resource.xml.XmlPrinter;
-import org.emftext.language.emfxml.resource.xml.XmlResource;
+import org.emftext.language.xml.resource.xml.XmlPrinter;
+import org.emftext.language.xml.resource.xml.XmlResource;
 import org.emftext.language.feature.resource.feature.FeaturePrinter;
 import org.emftext.language.feature.resource.feature.FeatureResource;
 import org.emftext.language.forms.resource.forms.FormsPrinter;
@@ -195,8 +195,7 @@ public class NewFileContentCreationTest extends TestCase {
 
 		public EClass[] getStartClasses() {
 			return new EClass[] {
-					org.emftext.language.emfxml.EmfxmlPackage.eINSTANCE.getCompactElement(),
-					org.emftext.language.emfxml.EmfxmlPackage.eINSTANCE.getOpeningElement()
+					org.emftext.language.exml.ExmlPackage.eINSTANCE.getDocument()
 			};
 		}
 
