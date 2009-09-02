@@ -2,58 +2,55 @@
 	<property file="run-all-tests.properties"/>
 		
 	<target name="run-all-tests">
+		<path id="junit_classpath">
+			<pathelement path="../org.emftext.runtime/bin" />
+			<pathelement path="../org.emftext.runtime.antlr/bin" />
+			<pathelement path="../org.emftext.runtime.ocl/bin" />
+			<pathelement path="../org.emftext.sdk/bin" />
+			<pathelement path="../org.emftext.sdk.ant/bin" />
+			<pathelement path="../org.emftext.sdk.antlr/bin" />
+			<pathelement path="../org.emftext.sdk.automaton/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax/bin" />
+			<pathelement path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
+			<pathelement path="../org.emftext.test/bin" />
+			<pathelement path="../org.emftext.test.grammar_features/bin" />
+			<pathelement path="../org.emftext.test.grammar_features.resource.grammar_features/bin" />
+			<pathelement path="../org.emftext.test.scannerless_parser/bin" />
+			
+			<path path="../org.emftext.language.primitive_types/bin" />
+			<path path="../org.emftext.language.java/bin" />
+			<path path="../org.emftext.language.java.resource/bin" />
+			<path path="../org.emftext.language.java.resource.java/bin" />
+
+			<path path="../org.emftext.language.java.test/bin" />
+			<path path="../org.emftext.language.java.test.bulk/bin" />
+		
+			<fileset dir="${eclipse.home}/">
+				<include name="plugins/**/org.junit*/junit.jar"/>
+				<include name="plugins/**/org.hamcrest*.jar"/>
+				<include name="plugins/**/org.eclipse.core.*.jar"/>
+				<include name="plugins/**/org.eclipse.emf.*.jar"/>
+				<include name="plugins/**/org.eclipse.equinox.*.jar"/>
+				<include name="plugins/**/org.eclipse.osgi*.jar"/>
+				<include name="plugins/org.eclipse.jdt.core*.jar"/>
+				<include name="plugins/org.eclipse.jdt.compiler.apt*.jar"/>
+				<include name="plugins/org.eclipse.jdt.compiler.tool*.jar"/>
+			</fileset>
+		</path>
+
+		<manifestclasspath property="junit_classpath_prop" jarfile="../temp_classpath.jar">
+			<classpath refid="junit_classpath" />
+		</manifestclasspath>
+		
+		<jar destfile="../temp_classpath.jar">
+			<manifest>
+				<attribute name="Class-Path" value="${junit_classpath_prop}"/>
+			</manifest>
+		</jar>
 
 		<junit printsummary="true" fork="true" maxmemory="1024m">
 			<classpath>
-				<fileset dir="${eclipse.home}/">
-
-					<include name="plugins/org.junit4_*/junit.jar"/>
-					
-					<include name="plugins/com.ibm.icu.source_*.jar"/>
-					<include name="plugins/com.ibm.icu_*.jar"/>
-					<include name="plugins/com.jcraft.jsch_*.jar"/>
-					<include name="plugins/javax.servlet.jsp.source_*.jar"/>
-					<include name="plugins/javax.servlet.jsp_*jar"/>
-					<include name="plugins/javax.servlet.source_*.jar"/>
-					<include name="plugins/javax.servlet_2.*.jar"/>
-					<include name="plugins/net.sourceforge.lpg.lpgjavaruntime_1.*.jar"/>
-					<include name="plugins/org.apache.commons.el.source_1.*.jar"/>
-					<include name="plugins/org.apache.commons.el_1.*.jar"/>
-					<include name="plugins/org.apache.commons.logging.source_1.*.jar"/>
-					<include name="plugins/org.apache.commons.logging_1.*.jar"/>
-					<include name="plugins/org.apache.jasper.source_5.*.jar"/>
-					<include name="plugins/org.apache.jasper_5.*.jar"/>
-					<include name="plugins/org.apache.lucene.analysis.source_1.*.jar"/>
-					<include name="plugins/org.apache.lucene.analysis_1.*.jar"/>
-					<include name="plugins/org.apache.lucene.source_1.*.jar"/>
-					<include name="plugins/org.apache.lucene_1.*.jar"/>
-					<include name="plugins/org.eclipse.compare.source_3.*.jar"/>
-					<include name="plugins/org.eclipse.compare_3.*.jar"/>
-					<include name="plugins/org.eclipse.core*.jar"/>
-					<include name="plugins/org.eclipse.emf*.jar"/>
-					<include name="plugins/org.eclipse.equinox*.jar"/>
-					<include name="plugins/org.eclipse.osgi*.jar"/>
-					<include name="plugins/org.eclipse.jdt*.jar"/>
-					<include name="plugins/org.eclipse.text_3.*.jar"/>
-				</fileset>
-
-				<path path="../org.emftext.runtime/bin" />
-				<path path="../org.emftext.runtime.antlr/bin" />
-				<path path="../org.emftext.runtime.ocl/bin" />
-				<path path="../org.emftext.sdk/bin" />
-				<path path="../org.emftext.sdk.ant/bin" />
-				<path path="../org.emftext.sdk.antlr/bin" />
-				<path path="../org.emftext.sdk.automaton/bin" />
-				<path path="../org.emftext.sdk.concretesyntax/bin" />
-				<path path="../org.emftext.sdk.concretesyntax.resource.cs/bin" />
-
-				<path path="../org.emftext.language.primitive_types/bin" />
-				<path path="../org.emftext.language.java/bin" />
-				<path path="../org.emftext.language.java.resource/bin" />
-				<path path="../org.emftext.language.java.resource.java/bin" />
-
-				<path path="../org.emftext.language.java.test/bin" />
-				<path path="../org.emftext.language.java.test.bulk/bin" />
+				<path path="../temp_classpath.jar"/>
 			</classpath>
 			<formatter type="plain"/>
 			
