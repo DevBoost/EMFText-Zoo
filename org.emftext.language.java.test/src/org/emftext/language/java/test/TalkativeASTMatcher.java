@@ -751,7 +751,7 @@ public class TalkativeASTMatcher extends ASTMatcher {
 	protected String diff = "";
 	
 	protected boolean setDiff(Object o1, Object o2, boolean result) {
-		if (!result) {
+		if (!result && "".equals(diff)) {
 			diff += ("\nORIGINAL: \n");
 			diff += (o1.toString());
 			diff += ("\nREPRINT:\n");
