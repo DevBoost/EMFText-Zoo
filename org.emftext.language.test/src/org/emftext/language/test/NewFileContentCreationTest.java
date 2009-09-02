@@ -191,7 +191,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 	}
 	
-	private class EmfXmlTestItem extends AbstractTestItem {
+	private class XmlTestItem extends AbstractTestItem {
 
 		public EClass[] getStartClasses() {
 			return new EClass[] {
@@ -452,7 +452,6 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new CustomSandwichTestItem());
 		test(new CustomerTestItem());
 		test(new DotTestItem());
-		test(new EmfXmlTestItem());
 		test(new FeatureTestItem());
 		test(new FormsTestItem());
 		test(new FormularTestItem());
@@ -469,6 +468,7 @@ public class NewFileContentCreationTest extends TestCase {
 		test(new JavaBehavior4UMLTestItem());
 		test(new ReuseJavaTestItem());
 		test(new TreeJavaTestItem());
+		test(new XmlTestItem());
 
 		// TODO add test items for remaining languages
 		//test(org.emftext.language.c_sharp.CsharpPackage);
