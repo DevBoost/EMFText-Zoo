@@ -40,7 +40,6 @@ public class JavaCHARACTER_LITERALTokenResolver implements ITokenResolver{
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		assert lexem.length() == 3;
 		// remove single quotes
 		assert lexem.charAt(0) == '\'';
 		assert lexem.charAt(lexem.length() - 1) == '\'';
