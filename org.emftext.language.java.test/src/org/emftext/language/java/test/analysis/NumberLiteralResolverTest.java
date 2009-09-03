@@ -22,6 +22,9 @@ package org.emftext.language.java.test.analysis;
 
 import java.math.BigInteger;
 
+import junit.framework.TestCase;
+
+import org.emftext.language.java.resource.java.JavaTokenResolveResult;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_DOUBLE_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_FLOAT_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_INTEGER_LITERALTokenResolver;
@@ -34,9 +37,6 @@ import org.emftext.language.java.resource.java.analysis.JavaOCTAL_INTEGER_LITERA
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_LONG_LITERALTokenResolver;
 import org.emftext.runtime.resource.ITokenResolveResult;
 import org.emftext.runtime.resource.ITokenResolver;
-import org.emftext.runtime.resource.impl.TokenResolveResult;
-
-import junit.framework.TestCase;
 
 public class NumberLiteralResolverTest extends TestCase {
 
@@ -214,7 +214,7 @@ public class NumberLiteralResolverTest extends TestCase {
 	}
 
 	private Object resolve(ITokenResolver resolver, String lexem) {
-		ITokenResolveResult resolveResult = new TokenResolveResult();
+		ITokenResolveResult resolveResult = new JavaTokenResolveResult();
 		resolver.resolve(lexem, null, resolveResult);
 		Object result = resolveResult.getResolvedToken();
 		assertNotNull(result);
