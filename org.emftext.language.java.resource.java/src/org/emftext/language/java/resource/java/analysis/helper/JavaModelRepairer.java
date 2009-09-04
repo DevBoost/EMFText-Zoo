@@ -145,10 +145,10 @@ public class JavaModelRepairer {
 			UnaryExpression unaryExpression = (UnaryExpression) castExpression.getChild();
 			if (unaryExpression.getOperators().size() == 1 && 
 					unaryExpression.getOperators().get(0) instanceof AdditiveOperator &&
-					castExpression.getType() instanceof NamespaceClassifierReference) {
+					castExpression.getTypeReference() instanceof NamespaceClassifierReference) {
 				
 				//try to resolve the cast
-				NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getType();
+				NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference)castExpression.getTypeReference();
 				EObject proxy = (EObject) nsClassifierReference
 						.getClassifierReferences().get(0).eGet(TypesPackage.Literals.CLASSIFIER_REFERENCE__TARGET, false);
 				EObject resolved = EcoreUtil.resolve(proxy, castExpression.eResource());
