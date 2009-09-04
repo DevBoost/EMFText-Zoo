@@ -55,8 +55,8 @@ public abstract class AbstractZipFileInputTest extends AbstractJavaParserTestCas
 	 * @param startEntryName name of an entry in src.zip as start position of the test
 	 */
 	protected static Test constructSuite(String testFolderName, String startEntryName, int threadNumber) throws CoreException, IOException {
-		// run with 8 threads and wait for maximal 5 minutes
-		TestSuite suite = new ThreadedTestSuite("Suite testing all files.", 5 * 60 * 1000, threadNumber);
+		// run with 'threadNumber' threads and wait for maximal 15 minutes
+		TestSuite suite = new ThreadedTestSuite("Suite testing all files.", 15 * 60 * 1000, threadNumber);
 		
 		List<String> inputZips = getInputZips(testFolderName);
 		for (String inputZip : inputZips) {
