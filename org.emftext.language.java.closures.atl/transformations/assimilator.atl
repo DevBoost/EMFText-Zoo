@@ -1,0 +1,33 @@
+module assimilator;
+create OUT : Class from IN : Class;
+
+//lazyMatchedRule rule IDentifire
+rule Annotate {
+//inPattern	
+	from //inPatternElement
+//		Identifire ":" oclType
+		a : Closures!Closures
+		
+//outPattern	
+	to //outPatternElement
+//		IDENTIFIER ':' oclType
+		a : Java!Java(
+//			(oclExpression <- oclExpression;)
+			name <- 'wasHere'
+		)
+}
+
+rule Closure2Class
+	from
+		closure : Java!AssignmentExpression
+		(
+			Closure
+		)
+		
+		
+	to
+		innerClass : Class!Class
+		(
+				class.name <- closure.IdentifireReference.name
+				
+		)
