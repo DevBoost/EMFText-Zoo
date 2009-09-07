@@ -4,92 +4,95 @@
 module translator;
 create OUT : MMJava from IN : MMClosures;
 
-helper context MMClosures!Closures def : isExpressionStatement(): Boolean =
-	self.oclIsTypeOf(MMClosures!ExpressionStatement)
+uses Lib4MMClosures;
 
-helper context MMClosures!Expression def : isExpression():Boolean = 
-	self.oclIsTypOf(MMCLosures!Expression)
 
-helper context MMClosures!Closures def : isClosure(): Boolean =
-	self.oclIsTypeOf(MMClosures!Closures)
+rule ClosureClass2JavaClass{
+	from
+		c : MMClosures!Class 
+		
+	to
+		j: MMJava!Class
+		(
+			name <- c.name,
+			members <- c.members -> collect (m |thisModule.cMembers(m))
+		)
+		
+		
 
-rule Closure2Method
+}
+
+lazy rule cMembers
+{
+	from 
+		c : MMCLosures!Member
+	to
+		j : MMJava!Member
+		(
+			name<-c.name
+			--auswahl zw. verschieden typen
+		)
+}
+--todo
+lazy rule cMethod
+{
+	from
+		c : MMCLosures!Method
+		
+	to
+		j : MMJava!Method
+		(
+			
+		)
+}
+
+lazy rule Closure2Class{
+	from
+		c : MMClosures!AssignmentExpression
+	
+	to
+		j : MMJava!AnonymousClass
+		(
+				name <- c.IdentifireReference.name,
+				StatementListContainer <- c.StatementListContainer,
+				Parameterizable <- c.Parameterizable
+				
+		)
+
+}
+
+lazy rule Closure2Method{
 	from 
 		c : MMClosures!Closure
 			(c.isClosure)
 	to
 		m : MMJava!ClassMethod
 	(
-		m.name<-'invoke'
-		m.parameters <- c.parameters
-		m.statements <- c.statements
+		name<-'invoke',
+		parameters <- c.parameters,
+		statements <- c.statements
 	)
+}
 
-rule Closure2Class
-	from
-		a : MMCLosures!AssignmentExpression
-	
-	to
-		c : MMJava!AnonymousClass
-		(
-				c.name <- a.IdentifireReference.name
-				c.members <- this.Module.Closure2Method(a)
-				
-		)
-
-		
-rule ClosureEStatement2JavaEStatement
+rule EStatement2JavaEStatement{
 	from 
-		closureEStatement : MMCLosures!ExpressionStatement
+		closureEStatement : MMClosures!ExpressionStatement (not closureEStatement.isExpression())
 	to
 		javaEStatement : MMJava!ExpressionStatement
 		(
-			if (closureEStatement.expression.isClosure())
-			then
-			(
-				javaEstatement.expression <- this.Module.Closure2Class(javaEStatement)
-			)
-			else
-			(
-				javaEStatement.expression <- closureEStatement.expression
-			)	
+			
 		)
 		
+			
+	}
 
-rule ClosureMember2JavaMember
+rule ClosureMemberEpression2JavaMemberExpression
+{
 		from 
-			closureMember : MMClosures!Member
+			closureMember : MMClosures!Member (not closureMember.isExpressionStatement())
 		to
 			javaMember : MMJava!Member
 			(
-				
+				members <- closureMember.members
 			)
-		
-rule ClosureClass2JavaClass
-	from
-		closureClass : MMClosures!Class
-		
-	to
-		javaClass: MMJava!Class
-		(
-			javaClass.name<-closureClass.name
-			javaClass.members <- defClosure
-			
-			defClosure : distinct MMJava!Class foreach(closureMember in closureClass.members)
-			(
-				if (closureMember.isExpressionStatement())
-				{
-					this.Module.ClosureEStatement2JavaEStatement(closureMember)
-					//javaClass.members <- ClosureEStatement2JavaEStatement(closureMember)
-				}
-				else
-				{
-					this.Module.ClosureMember2JavaMember(closureMember)
-					//javaClass.members <- closureMemeber
-				}
-			)
-			
-			
-			javaClass.members <- this.Module.Closure2Class(closureClass)
-		)
-		
+}		
