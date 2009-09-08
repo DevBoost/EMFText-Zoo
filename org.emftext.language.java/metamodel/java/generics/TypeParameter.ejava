@@ -227,15 +227,17 @@ eclass TypeParameter {
 							TypeArgument arg = typeArgumentList.get(typeParameterIndex);
 							if (arg instanceof QualifiedTypeArgument) {
 								ClassifierReference theTypeRef = ((QualifiedTypeArgument) arg).getTypeReference().getPureClassifierReference();
-								Type theType = theTypeRef.getBoundTarget(parentReference);
-								if (theType != null) {
-									if (!theTypeRef.getTypeArguments().isEmpty()) {
-										ttah = new TemporalTypeArgumentHolder();
-										ttah.getTypeArguments().addAll(theTypeRef.getTypeArguments());
-										theType.eAdapters().add(ttah);
+								if (theTypeRef != null) {
+									Type theType = theTypeRef.getBoundTarget(parentReference);
+									if (theType != null) {
+										if (!theTypeRef.getTypeArguments().isEmpty()) {
+											ttah = new TemporalTypeArgumentHolder();
+											ttah.getTypeArguments().addAll(theTypeRef.getTypeArguments());
+											theType.eAdapters().add(ttah);
+										}
+										resultList.add(0, theType);
 									}
 								}
-								resultList.add(0, theType);
 							}
 							if (arg instanceof ExtendsTypeArgument) {
 								for(TypeReference extendedType : ((ExtendsTypeArgument) arg).getExtendTypes()) {
