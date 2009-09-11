@@ -18,5 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface ParameterUsage extends EObject {
+public interface ParameterUsage extends EObject
+{
 } // ParameterUsage

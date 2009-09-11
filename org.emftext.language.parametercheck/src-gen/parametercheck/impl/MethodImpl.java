@@ -43,237 +43,259 @@ import parametercheck.ParametercheckPackage;
  *
  * @generated
  */
-public class MethodImpl extends EObjectImpl implements Method {
-	/**
-	 * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ParameterDecl> parameter;
+public class MethodImpl extends EObjectImpl implements Method
+{
+  /**
+   * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getParameter()
+   * @generated
+   * @ordered
+   */
+  protected EList<ParameterDecl> parameter;
 
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
-	/**
-	 * The cached value of the '{@link #getCheck() <em>Check</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCheck()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Check> check;
+  /**
+   * The cached value of the '{@link #getCheck() <em>Check</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCheck()
+   * @generated
+   * @ordered
+   */
+  protected EList<Check> check;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MethodImpl() {
-		super();
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected MethodImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ParametercheckPackage.Literals.METHOD;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return ParametercheckPackage.Literals.METHOD;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ParameterDecl> getParameter() {
-		if (parameter == null) {
-			parameter = new EObjectContainmentEList<ParameterDecl>(ParameterDecl.class, this, ParametercheckPackage.METHOD__PARAMETER);
-		}
-		return parameter;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ParameterDecl> getParameter()
+  {
+    if (parameter == null)
+    {
+      parameter = new EObjectContainmentEList<ParameterDecl>(ParameterDecl.class, this, ParametercheckPackage.METHOD__PARAMETER);
+    }
+    return parameter;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParametercheckPackage.METHOD__NAME, oldName, name));
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ParametercheckPackage.METHOD__NAME, oldName, name));
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Check> getCheck() {
-		if (check == null) {
-			check = new EObjectContainmentWithInverseEList<Check>(Check.class, this, ParametercheckPackage.METHOD__CHECK, ParametercheckPackage.CHECK__PARENTMETHOD);
-		}
-		return check;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Check> getCheck()
+  {
+    if (check == null)
+    {
+      check = new EObjectContainmentWithInverseEList<Check>(Check.class, this, ParametercheckPackage.METHOD__CHECK, ParametercheckPackage.CHECK__PARENTMETHOD);
+    }
+    return check;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ParametercheckPackage.METHOD__CHECK:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getCheck()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ParametercheckPackage.METHOD__CHECK:
+        return ((InternalEList<InternalEObject>)(InternalEList<?>)getCheck()).basicAdd(otherEnd, msgs);
+    }
+    return super.eInverseAdd(otherEnd, featureID, msgs);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ParametercheckPackage.METHOD__PARAMETER:
-				return ((InternalEList<?>)getParameter()).basicRemove(otherEnd, msgs);
-			case ParametercheckPackage.METHOD__CHECK:
-				return ((InternalEList<?>)getCheck()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ParametercheckPackage.METHOD__PARAMETER:
+        return ((InternalEList<?>)getParameter()).basicRemove(otherEnd, msgs);
+      case ParametercheckPackage.METHOD__CHECK:
+        return ((InternalEList<?>)getCheck()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ParametercheckPackage.METHOD__PARAMETER:
-				return getParameter();
-			case ParametercheckPackage.METHOD__NAME:
-				return getName();
-			case ParametercheckPackage.METHOD__CHECK:
-				return getCheck();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
+    switch (featureID)
+    {
+      case ParametercheckPackage.METHOD__PARAMETER:
+        return getParameter();
+      case ParametercheckPackage.METHOD__NAME:
+        return getName();
+      case ParametercheckPackage.METHOD__CHECK:
+        return getCheck();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ParametercheckPackage.METHOD__PARAMETER:
-				getParameter().clear();
-				getParameter().addAll((Collection<? extends ParameterDecl>)newValue);
-				return;
-			case ParametercheckPackage.METHOD__NAME:
-				setName((String)newValue);
-				return;
-			case ParametercheckPackage.METHOD__CHECK:
-				getCheck().clear();
-				getCheck().addAll((Collection<? extends Check>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
+    switch (featureID)
+    {
+      case ParametercheckPackage.METHOD__PARAMETER:
+        getParameter().clear();
+        getParameter().addAll((Collection<? extends ParameterDecl>)newValue);
+        return;
+      case ParametercheckPackage.METHOD__NAME:
+        setName((String)newValue);
+        return;
+      case ParametercheckPackage.METHOD__CHECK:
+        getCheck().clear();
+        getCheck().addAll((Collection<? extends Check>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ParametercheckPackage.METHOD__PARAMETER:
-				getParameter().clear();
-				return;
-			case ParametercheckPackage.METHOD__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case ParametercheckPackage.METHOD__CHECK:
-				getCheck().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID)
+  {
+    switch (featureID)
+    {
+      case ParametercheckPackage.METHOD__PARAMETER:
+        getParameter().clear();
+        return;
+      case ParametercheckPackage.METHOD__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case ParametercheckPackage.METHOD__CHECK:
+        getCheck().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ParametercheckPackage.METHOD__PARAMETER:
-				return parameter != null && !parameter.isEmpty();
-			case ParametercheckPackage.METHOD__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ParametercheckPackage.METHOD__CHECK:
-				return check != null && !check.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID)
+  {
+    switch (featureID)
+    {
+      case ParametercheckPackage.METHOD__PARAMETER:
+        return parameter != null && !parameter.isEmpty();
+      case ParametercheckPackage.METHOD__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case ParametercheckPackage.METHOD__CHECK:
+        return check != null && !check.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
 
 } //MethodImpl

@@ -22,24 +22,27 @@ import parametercheck.ParametercheckPackage;
  *
  * @generated
  */
-public abstract class ParameterUsageImpl extends EObjectImpl implements ParameterUsage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ParameterUsageImpl() {
-		super();
-	}
+public abstract class ParameterUsageImpl extends EObjectImpl implements ParameterUsage
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ParameterUsageImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ParametercheckPackage.Literals.PARAMETER_USAGE;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return ParametercheckPackage.Literals.PARAMETER_USAGE;
+  }
 
 } //ParameterUsageImpl
