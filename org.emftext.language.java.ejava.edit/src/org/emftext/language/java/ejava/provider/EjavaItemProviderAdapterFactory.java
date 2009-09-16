@@ -37,10 +37,10 @@ import org.emftext.language.java.ejava.util.EjavaAdapterFactory;
 public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 		implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This keeps track of the root adapter factory that delegates to this adapter factory.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
@@ -53,11 +53,11 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc --> <!--
+   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+   * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
@@ -67,12 +67,12 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * @generated
 	 */
 	public EjavaItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    supportedTypes.add(IEditingDomainItemProvider.class);
+    supportedTypes.add(IStructuredItemContentProvider.class);
+    supportedTypes.add(ITreeItemContentProvider.class);
+    supportedTypes.add(IItemLabelProvider.class);
+    supportedTypes.add(IItemPropertySource.class);
+  }
 
 	/**
 	 * This keeps track of the one adapter used for all
@@ -92,18 +92,19 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 */
 	@Override
 	public Adapter createEPackageWrapperAdapter() {
-		if (ePackageWrapperItemProvider == null) {
-			ePackageWrapperItemProvider = new EPackageWrapperItemProvider(this);
-		}
+    if (ePackageWrapperItemProvider == null)
+    {
+      ePackageWrapperItemProvider = new EPackageWrapperItemProvider(this);
+    }
 
-		return ePackageWrapperItemProvider;
-	}
+    return ePackageWrapperItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EClassifierClassWrapper} instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EClassifierClassWrapper} instances.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	protected EClassifierClassWrapperItemProvider eClassifierClassWrapperItemProvider;
 
 	/**
@@ -115,18 +116,19 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 */
 	@Override
 	public Adapter createEClassifierClassWrapperAdapter() {
-		if (eClassifierClassWrapperItemProvider == null) {
-			eClassifierClassWrapperItemProvider = new EClassifierClassWrapperItemProvider(this);
-		}
+    if (eClassifierClassWrapperItemProvider == null)
+    {
+      eClassifierClassWrapperItemProvider = new EClassifierClassWrapperItemProvider(this);
+    }
 
-		return eClassifierClassWrapperItemProvider;
-	}
+    return eClassifierClassWrapperItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EClassifierInterfaceWrapper} instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EClassifierInterfaceWrapper} instances.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	protected EClassifierInterfaceWrapperItemProvider eClassifierInterfaceWrapperItemProvider;
 
 	/**
@@ -138,54 +140,57 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 */
 	@Override
 	public Adapter createEClassifierInterfaceWrapperAdapter() {
-		if (eClassifierInterfaceWrapperItemProvider == null) {
-			eClassifierInterfaceWrapperItemProvider = new EClassifierInterfaceWrapperItemProvider(this);
-		}
+    if (eClassifierInterfaceWrapperItemProvider == null)
+    {
+      eClassifierInterfaceWrapperItemProvider = new EClassifierInterfaceWrapperItemProvider(this);
+    }
 
-		return eClassifierInterfaceWrapperItemProvider;
-	}
+    return eClassifierInterfaceWrapperItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EStructuralFeatureGetWrapper} instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EStructuralFeatureGetWrapper} instances.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	protected EStructuralFeatureGetWrapperItemProvider eStructuralFeatureGetWrapperItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.java.ejava.EStructuralFeatureGetWrapper}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This creates an adapter for a {@link org.emftext.language.java.ejava.EStructuralFeatureGetWrapper}.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Adapter createEStructuralFeatureGetWrapperAdapter() {
-		if (eStructuralFeatureGetWrapperItemProvider == null) {
-			eStructuralFeatureGetWrapperItemProvider = new EStructuralFeatureGetWrapperItemProvider(this);
-		}
+    if (eStructuralFeatureGetWrapperItemProvider == null)
+    {
+      eStructuralFeatureGetWrapperItemProvider = new EStructuralFeatureGetWrapperItemProvider(this);
+    }
 
-		return eStructuralFeatureGetWrapperItemProvider;
-	}
+    return eStructuralFeatureGetWrapperItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EStructuralFeatureSetWrapper} instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EStructuralFeatureSetWrapper} instances.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	protected EStructuralFeatureSetWrapperItemProvider eStructuralFeatureSetWrapperItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.java.ejava.EStructuralFeatureSetWrapper}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This creates an adapter for a {@link org.emftext.language.java.ejava.EStructuralFeatureSetWrapper}.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Adapter createEStructuralFeatureSetWrapperAdapter() {
-		if (eStructuralFeatureSetWrapperItemProvider == null) {
-			eStructuralFeatureSetWrapperItemProvider = new EStructuralFeatureSetWrapperItemProvider(this);
-		}
+    if (eStructuralFeatureSetWrapperItemProvider == null)
+    {
+      eStructuralFeatureSetWrapperItemProvider = new EStructuralFeatureSetWrapperItemProvider(this);
+    }
 
-		return eStructuralFeatureSetWrapperItemProvider;
-	}
+    return eStructuralFeatureSetWrapperItemProvider;
+  }
 
 	/**
 	 * This keeps track of the one adapter used for all
@@ -205,18 +210,19 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 */
 	@Override
 	public Adapter createEOperationWrapperAdapter() {
-		if (eOperationWrapperItemProvider == null) {
-			eOperationWrapperItemProvider = new EOperationWrapperItemProvider(this);
-		}
+    if (eOperationWrapperItemProvider == null)
+    {
+      eOperationWrapperItemProvider = new EOperationWrapperItemProvider(this);
+    }
 
-		return eOperationWrapperItemProvider;
-	}
+    return eOperationWrapperItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EObjectInstantiation} instances.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EObjectInstantiation} instances.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	protected EObjectInstantiationItemProvider eObjectInstantiationItemProvider;
 
 	/**
@@ -228,12 +234,13 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 */
 	@Override
 	public Adapter createEObjectInstantiationAdapter() {
-		if (eObjectInstantiationItemProvider == null) {
-			eObjectInstantiationItemProvider = new EObjectInstantiationItemProvider(this);
-		}
+    if (eObjectInstantiationItemProvider == null)
+    {
+      eObjectInstantiationItemProvider = new EObjectInstantiationItemProvider(this);
+    }
 
-		return eObjectInstantiationItemProvider;
-	}
+    return eObjectInstantiationItemProvider;
+  }
 
 	/**
 	 * This returns the root adapter factory that contains this factory. <!--
@@ -242,8 +249,8 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+  }
 
 	/**
 	 * This sets the composed adapter factory that contains this factory. <!--
@@ -253,61 +260,63 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 */
 	public void setParentAdapterFactory(
 			ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    this.parentAdapterFactory = parentAdapterFactory;
+  }
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    return supportedTypes.contains(type) || super.isFactoryForType(type);
+  }
 
 	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This implementation substitutes the factory itself as the key for the adapter.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    return super.adapt(notifier, this);
+  }
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    if (isFactoryForType(type))
+    {
+      Object adapter = super.adapt(object, type);
+      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+      {
+        return adapter;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This adds a listener.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    changeNotifier.addListener(notifyChangedListener);
+  }
 
 	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * This removes a listener.
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * @generated
+   */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    changeNotifier.removeListener(notifyChangedListener);
+  }
 
 	/**
 	 * This delegates to {@link #changeNotifier} and to
@@ -317,12 +326,13 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * @generated
 	 */
 	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+    if (parentAdapterFactory != null)
+    {
+      parentAdapterFactory.fireNotifyChanged(notification);
+    }
+  }
 
 	/**
 	 * This disposes all of the item providers created by this factory. <!--
@@ -331,13 +341,13 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
 	 * @generated
 	 */
 	public void dispose() {
-		if (ePackageWrapperItemProvider != null) ePackageWrapperItemProvider.dispose();
-		if (eClassifierClassWrapperItemProvider != null) eClassifierClassWrapperItemProvider.dispose();
-		if (eClassifierInterfaceWrapperItemProvider != null) eClassifierInterfaceWrapperItemProvider.dispose();
-		if (eStructuralFeatureGetWrapperItemProvider != null) eStructuralFeatureGetWrapperItemProvider.dispose();
-		if (eStructuralFeatureSetWrapperItemProvider != null) eStructuralFeatureSetWrapperItemProvider.dispose();
-		if (eOperationWrapperItemProvider != null) eOperationWrapperItemProvider.dispose();
-		if (eObjectInstantiationItemProvider != null) eObjectInstantiationItemProvider.dispose();
-	}
+    if (ePackageWrapperItemProvider != null) ePackageWrapperItemProvider.dispose();
+    if (eClassifierClassWrapperItemProvider != null) eClassifierClassWrapperItemProvider.dispose();
+    if (eClassifierInterfaceWrapperItemProvider != null) eClassifierInterfaceWrapperItemProvider.dispose();
+    if (eStructuralFeatureGetWrapperItemProvider != null) eStructuralFeatureGetWrapperItemProvider.dispose();
+    if (eStructuralFeatureSetWrapperItemProvider != null) eStructuralFeatureSetWrapperItemProvider.dispose();
+    if (eOperationWrapperItemProvider != null) eOperationWrapperItemProvider.dispose();
+    if (eObjectInstantiationItemProvider != null) eObjectInstantiationItemProvider.dispose();
+  }
 
 }

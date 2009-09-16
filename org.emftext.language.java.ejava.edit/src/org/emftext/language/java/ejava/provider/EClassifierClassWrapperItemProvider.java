@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.emftext.language.java.classifiers.ClassifiersPackage;
 import org.emftext.language.java.classifiers.provider.ClassItemProvider;
+import org.emftext.language.java.ejava.EClassifierClassWrapper;
 import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.ejava.EjavaPackage;
@@ -44,8 +45,8 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	 * @generated
 	 */
 	public EClassifierClassWrapperItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+    super(adapterFactory);
+  }
 
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
@@ -55,13 +56,14 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    if (itemPropertyDescriptors == null)
+    {
+      super.getPropertyDescriptors(object);
 
-			addEClassifierPropertyDescriptor(object);
-		}
-		return itemPropertyDescriptors;
-	}
+      addEClassifierPropertyDescriptor(object);
+    }
+    return itemPropertyDescriptors;
+  }
 
 	/**
 	 * This adds a property descriptor for the EClassifier feature. <!--
@@ -70,20 +72,20 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	 * @generated
 	 */
 	protected void addEClassifierPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_EClassifierWrapper_eClassifier_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EClassifierWrapper_eClassifier_feature", "_UI_EClassifierWrapper_type"),
-				 EjavaPackage.Literals.ECLASSIFIER_WRAPPER__ECLASSIFIER,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_EClassifierWrapper_eClassifier_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_EClassifierWrapper_eClassifier_feature", "_UI_EClassifierWrapper_type"),
+         EjavaPackage.Literals.ECLASSIFIER_WRAPPER__ECLASSIFIER,
+         true,
+         false,
+         true,
+         null,
+         null,
+         null));
+  }
 
 	/**
 	 * This returns EClassifierInterfaceWrapper.gif. <!-- begin-user-doc -->
@@ -110,17 +112,17 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+   * This handles model notifications by calling {@link #updateChildren} to update any cached
+   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
-		super.notifyChanged(notification);
-	}
+    updateChildren(notification);
+    super.notifyChanged(notification);
+  }
 
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
@@ -132,58 +134,58 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
-				 EjavaFactory.eINSTANCE.createEClassifierClassWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierClassWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
-				 EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
-				 EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
-				 EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
-				 EjavaFactory.eINSTANCE.createEOperationWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEOperationWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
-				 EjavaFactory.eINSTANCE.createEClassifierClassWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierClassWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
-				 EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
-				 EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
-				 EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper()));
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
-				 EjavaFactory.eINSTANCE.createEOperationWrapper()));
-	}
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEOperationWrapper()));
+  }
 
 	/**
 	 * This returns the label text for
@@ -195,22 +197,23 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	@Override
 	public String getCreateChildText(Object owner, Object feature,
 			Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
+    Object childFeature = feature;
+    Object childObject = child;
 
-		boolean qualify =
-			childFeature == MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS ||
-			childFeature == MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS ||
-			childFeature == ClassifiersPackage.Literals.IMPLEMENTOR__IMPLEMENTS ||
-			childFeature == ClassifiersPackage.Literals.CLASS__EXTENDS;
+    boolean qualify =
+      childFeature == MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS ||
+      childFeature == MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS ||
+      childFeature == ClassifiersPackage.Literals.IMPLEMENTOR__IMPLEMENTS ||
+      childFeature == ClassifiersPackage.Literals.CLASS__EXTENDS;
 
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
-	}
+    if (qualify)
+    {
+      return getString
+        ("_UI_CreateChild_text2",
+         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+    }
+    return super.getCreateChildText(owner, feature, child, selection);
+  }
 
 	/**
 	 * Return the resource locator for this item provider's resources. <!--
@@ -220,7 +223,7 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return EjavaEditPlugin.INSTANCE;
-	}
+    return EjavaEditPlugin.INSTANCE;
+  }
 
 }

@@ -39,8 +39,8 @@ public class EObjectInstantiationItemProvider extends InstantiationItemProvider
 	 * @generated
 	 */
 	public EObjectInstantiationItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+    super(adapterFactory);
+  }
 
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
@@ -50,47 +50,48 @@ public class EObjectInstantiationItemProvider extends InstantiationItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    if (itemPropertyDescriptors == null)
+    {
+      super.getPropertyDescriptors(object);
 
-		}
-		return itemPropertyDescriptors;
-	}
+    }
+    return itemPropertyDescriptors;
+  }
 
 	/**
-	 * This returns EObjectInstantiation.gif.
-	 * <!-- begin-user-doc --> <!--
+   * This returns EObjectInstantiation.gif.
+   * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EObjectInstantiation"));
-	}
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/EObjectInstantiation"));
+  }
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc
+   * This returns the label text for the adapted class.
+   * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_EObjectInstantiation_type");
-	}
+    return getString("_UI_EObjectInstantiation_type");
+  }
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+   * This handles model notifications by calling {@link #updateChildren} to update any cached
+   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
-		super.notifyChanged(notification);
-	}
+    updateChildren(notification);
+    super.notifyChanged(notification);
+  }
 
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
@@ -102,18 +103,18 @@ public class EObjectInstantiationItemProvider extends InstantiationItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ReferencesPackage.Literals.REFERENCE__NEXT,
-				 EjavaFactory.eINSTANCE.createEObjectInstantiation()));
+    newChildDescriptors.add
+      (createChildParameter
+        (ReferencesPackage.Literals.REFERENCE__NEXT,
+         EjavaFactory.eINSTANCE.createEObjectInstantiation()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-				 EjavaFactory.eINSTANCE.createEObjectInstantiation()));
-	}
+    newChildDescriptors.add
+      (createChildParameter
+        (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
+         EjavaFactory.eINSTANCE.createEObjectInstantiation()));
+  }
 
 	/**
 	 * This returns the label text for
@@ -125,20 +126,21 @@ public class EObjectInstantiationItemProvider extends InstantiationItemProvider
 	@Override
 	public String getCreateChildText(Object owner, Object feature,
 			Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
+    Object childFeature = feature;
+    Object childObject = child;
 
-		boolean qualify =
-			childFeature == ReferencesPackage.Literals.REFERENCE__NEXT ||
-			childFeature == ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS;
+    boolean qualify =
+      childFeature == ReferencesPackage.Literals.REFERENCE__NEXT ||
+      childFeature == ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS;
 
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
-	}
+    if (qualify)
+    {
+      return getString
+        ("_UI_CreateChild_text2",
+         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+    }
+    return super.getCreateChildText(owner, feature, child, selection);
+  }
 
 	/**
 	 * Return the resource locator for this item provider's resources. <!--
@@ -148,7 +150,7 @@ public class EObjectInstantiationItemProvider extends InstantiationItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-		return EjavaEditPlugin.INSTANCE;
-	}
+    return EjavaEditPlugin.INSTANCE;
+  }
 
 }

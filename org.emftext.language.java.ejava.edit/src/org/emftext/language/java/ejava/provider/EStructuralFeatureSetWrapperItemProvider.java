@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.emftext.language.java.arrays.ArraysPackage;
+import org.emftext.language.java.ejava.EStructuralFeatureSetWrapper;
 import org.emftext.language.java.ejava.EStructuralFeatureWrapper;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.types.TypesPackage;
@@ -39,8 +40,8 @@ public class EStructuralFeatureSetWrapperItemProvider extends
 	 */
 	public EStructuralFeatureSetWrapperItemProvider(
 			AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+    super(adapterFactory);
+  }
 
 	/**
 	 * This returns the property descriptors for the adapted class. <!--
@@ -50,12 +51,13 @@ public class EStructuralFeatureSetWrapperItemProvider extends
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    if (itemPropertyDescriptors == null)
+    {
+      super.getPropertyDescriptors(object);
 
-		}
-		return itemPropertyDescriptors;
-	}
+    }
+    return itemPropertyDescriptors;
+  }
 
 	/**
 	 * This returns EStructuralFeatureGetWrapper.gif. <!-- begin-user-doc -->
@@ -88,17 +90,17 @@ public class EStructuralFeatureSetWrapperItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+   * This handles model notifications by calling {@link #updateChildren} to update any cached
+   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
-		super.notifyChanged(notification);
-	}
+    updateChildren(notification);
+    super.notifyChanged(notification);
+  }
 
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
@@ -110,8 +112,8 @@ public class EStructuralFeatureSetWrapperItemProvider extends
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
+    super.collectNewChildDescriptors(newChildDescriptors, object);
+  }
 
 	/**
 	 * This returns the label text for
@@ -123,21 +125,22 @@ public class EStructuralFeatureSetWrapperItemProvider extends
 	@Override
 	public String getCreateChildText(Object owner, Object feature,
 			Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
+    Object childFeature = feature;
+    Object childObject = child;
 
-		boolean qualify =
-			childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_REFERENCE ||
-			childFeature == MembersPackage.Literals.EXCEPTION_THROWER__EXCEPTIONS ||
-			childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_BEFORE ||
-			childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_AFTER;
+    boolean qualify =
+      childFeature == TypesPackage.Literals.TYPED_ELEMENT__TYPE_REFERENCE ||
+      childFeature == MembersPackage.Literals.EXCEPTION_THROWER__EXCEPTIONS ||
+      childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_BEFORE ||
+      childFeature == ArraysPackage.Literals.ARRAY_TYPEABLE__ARRAY_DIMENSIONS_AFTER;
 
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
-	}
+    if (qualify)
+    {
+      return getString
+        ("_UI_CreateChild_text2",
+         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+    }
+    return super.getCreateChildText(owner, feature, child, selection);
+  }
 
 }
