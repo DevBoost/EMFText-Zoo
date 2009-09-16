@@ -139,11 +139,17 @@ public class PropertyItemProvider
    * This returns Property.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
+   * @generated NOT
    */
   @Override
   public Object getImage(Object object)
   {
+	  if (object instanceof Property) {
+		  Property property = (Property) object;
+		  if (property != null && property.isReadonly()) {
+			    return overlayImage(object, getResourceLocator().getImage("full/obj16/Property_RO"));
+		  }
+	  }
     return overlayImage(object, getResourceLocator().getImage("full/obj16/Property"));
   }
 
