@@ -179,12 +179,18 @@ eclass TypeParameter {
 					if(parentReference instanceof ElementReference) {
 						ReferenceableElement prevReferenced = ((ElementReference) parentReference).getTarget();
 						if(prevReferenced instanceof TypedElement) {
-							classifierReference = ((TypedElement) prevReferenced).getTypeReference().getPureClassifierReference();
+							TypeReference prevTypeReference = ((TypedElement)prevReferenced).getTypeReference ();
+							if (prevTypeReference != null) {
+								classifierReference = prevTypeReference.getPureClassifierReference(); 
+							}
 						}
 					}
 					if(parentReference instanceof TypedElement) {
 						//e.g. New Constructor Call
-						classifierReference = ((TypedElement) parentReference).getTypeReference().getPureClassifierReference();
+						TypeReference prevParentReference = ((TypedElement)parentReference).getTypeReference ();
+						if (prevParentReference != null) {
+							classifierReference = prevParentReference.getPureClassifierReference(); 
+						}
 					}
 					if (prevType instanceof ConcreteClassifier) {
 						//bound through inheritance?
