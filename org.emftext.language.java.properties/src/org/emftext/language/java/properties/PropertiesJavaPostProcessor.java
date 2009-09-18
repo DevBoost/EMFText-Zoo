@@ -37,7 +37,7 @@ public class PropertiesJavaPostProcessor implements IResourcePostProcessor,
 		}
 	}
 	
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
@@ -29,7 +30,8 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		return options;
 	}
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
+		FacadeEcoreResource facadeResource = (FacadeEcoreResource) resource;
 		if(resource.getContents().isEmpty()) {
 			return;
 		}
@@ -44,7 +46,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		uri = uri.resolve(resource.getURI());
 		
 		if (uri.equals(resource.getURI())) {
-			addError(resource, "The model can not be a facade for itself. Change the URI.", ePackage);
+			addError(facadeResource, "The model can not be a facade for itself. Change the URI.", ePackage);
 			return;
 		}
 		
@@ -55,7 +57,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		} catch (Exception e ) {}
 		
 		if (annotatedResource == null) {
-			addError(resource, "Ecore model not found: " + uri.toString(), ePackage);
+			addError(facadeResource, "Ecore model not found: " + uri.toString(), ePackage);
 			return;
 		}
 		
@@ -68,7 +70,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 					((ENamedElement) realElement).getEAnnotations().addAll(element.getEAnnotations());
 				}
 				else {
-					addError(resource, "Element '" + element.getName() + "' not decalred", element);
+					addError(facadeResource, "Element '" + element.getName() + "' not decalred", element);
 				}
 			}
 		}

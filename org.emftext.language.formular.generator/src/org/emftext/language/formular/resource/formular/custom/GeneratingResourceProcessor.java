@@ -19,16 +19,16 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.formular.Formular;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.ITextResource;
 
 public class GeneratingResourceProcessor implements IResourcePostProcessor,
 		IResourcePostProcessorProvider {
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
 		EList<EObject> contents = resource.getContents();
 		
 		Set<EObject> distinctObjects = new HashSet<EObject>();

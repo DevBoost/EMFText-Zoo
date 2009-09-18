@@ -23,12 +23,13 @@ package org.emftext.language.java.resource.java.analysis.helper;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.resource.java.JavaResource;
 import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.ITextResource;
 
 /**
  * Post processor that performs 
@@ -45,9 +46,10 @@ public class JavaPostProcessor implements IOptionProvider, IResourcePostProcesso
 		return map;
 	}
 
-	public void process(ITextResource resource) {
-		JavaModelRepairer.repair(resource);
-		JavaModelCompletion.complete(resource);
+	public void process(Resource resource) {
+		JavaResource javaResource = (JavaResource) resource;
+		JavaModelRepairer.repair(javaResource);
+		JavaModelCompletion.complete(javaResource);
 	}
 
 	public IResourcePostProcessor getResourcePostProcessor() {

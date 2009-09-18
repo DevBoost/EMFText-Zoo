@@ -27,6 +27,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.chess.resource.cg.CgResource;
 import org.emftext.runtime.IOptionProvider;
@@ -34,7 +35,6 @@ import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
 import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.ITextResource;
 import org.emftext.runtime.resource.impl.AbstractProblem;
 
 /**
@@ -51,7 +51,7 @@ public class MoveChecker implements IResourcePostProcessor,
 		return options;
 	}
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
 		CgResource chessResource = (CgResource) resource;
 		List<EObject> contents = chessResource.getContents();
 		for (EObject next : contents) {

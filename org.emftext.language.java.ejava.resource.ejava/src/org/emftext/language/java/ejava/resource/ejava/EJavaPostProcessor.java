@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
@@ -34,7 +35,8 @@ public class EJavaPostProcessor implements IOptionProvider, IResourcePostProcess
 		return map;
 	}
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
+		EjavaResource eJavaResource = (EjavaResource) resource;
 		if (!resource.getContents().isEmpty()) {
 			try {
 				JavaClasspath cp = JavaClasspath.get(resource);
@@ -48,7 +50,7 @@ public class EJavaPostProcessor implements IOptionProvider, IResourcePostProcess
 
 			EPackageWrapper ePackageWrapper = (EPackageWrapper) resource.getContents().get(0);
 			EcoreWrapper.wrap(ePackageWrapper);
-			validate(ePackageWrapper, resource);
+			validate(ePackageWrapper, eJavaResource);
 		}
 	}
 
@@ -57,7 +59,7 @@ public class EJavaPostProcessor implements IOptionProvider, IResourcePostProcess
 	}
 	
 	
-	private void validate(EPackageWrapper ePackageWrapper, ITextResource resource) {
+	private void validate(EPackageWrapper ePackageWrapper, EjavaResource resource) {
 		if (ePackageWrapper.getEPackage() == null) {
 			attachError(ePackageWrapper, resource);
 		}

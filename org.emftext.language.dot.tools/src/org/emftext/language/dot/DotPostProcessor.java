@@ -7,13 +7,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.dot.util.ExeUtil;
 import org.emftext.language.dot.util.Pair;
 import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.resource.ITextResource;
-
-import org.eclipse.core.runtime.Platform;
 
 public class DotPostProcessor implements IResourcePostProcessor {
 
@@ -21,7 +20,7 @@ public class DotPostProcessor implements IResourcePostProcessor {
 	private static final Logger logger = Logger
 			.getLogger(DotPostProcessor.class.getName());
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
 		if (!testDOT()) {
 			// TODO externalize
 			logger.severe("can't run dot. please check your path!"); //$NON-NLS-1$

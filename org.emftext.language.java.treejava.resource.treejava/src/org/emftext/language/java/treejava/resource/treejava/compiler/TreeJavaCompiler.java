@@ -18,7 +18,6 @@ import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.ITextResource;
 
 public class TreeJavaCompiler implements IResourcePostProcessor,
 	IResourcePostProcessorProvider, IOptionProvider {
@@ -29,7 +28,7 @@ public class TreeJavaCompiler implements IResourcePostProcessor,
 		return options;
 	}
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
