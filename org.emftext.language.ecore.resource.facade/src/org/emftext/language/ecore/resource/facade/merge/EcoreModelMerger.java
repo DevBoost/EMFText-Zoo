@@ -12,25 +12,25 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.impl.AbstractProblem;
+import org.emftext.language.ecore.resource.facade.FacadeEcoreEProblemType;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreOptionProvider;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreOptions;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreProblem;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreResourcePostProcessor;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreResourcePostProcessorProvider;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreTextResource;
+import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreResource;
 
-public class EcoreModelMerger  implements IResourcePostProcessor,
-	IResourcePostProcessorProvider, IOptionProvider {
+public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
+	IFacadeEcoreResourcePostProcessorProvider, IFacadeEcoreOptionProvider {
 
 	public Map<?, ?> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new EcoreModelMerger());
+		options.put(IFacadeEcoreOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new EcoreModelMerger());
 		return options;
 	}
 
-	public void process(Resource resource) {
+	public void process(FacadeEcoreResource resource) {
 		FacadeEcoreResource facadeResource = (FacadeEcoreResource) resource;
 		if(resource.getContents().isEmpty()) {
 			return;
@@ -79,12 +79,12 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		resource.getContents().addAll(EcoreUtil.copyAll(annotatedResource.getContents()));
 	}
 
-	private void addError(ITextResource resource, final String message,
+	private void addError(IFacadeEcoreTextResource resource, final String message,
 			EObject cause) {
-		resource.addProblem(new AbstractProblem() {
+		resource.addProblem(new IFacadeEcoreProblem() {
 			
-			public EProblemType getType() {
-				return EProblemType.ERROR;
+			public FacadeEcoreEProblemType getType() {
+				return FacadeEcoreEProblemType.ERROR;
 			}
 			
 			public String getMessage() {
@@ -93,7 +93,7 @@ public class EcoreModelMerger  implements IResourcePostProcessor,
 		}, cause);
 	}
 
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public IFacadeEcoreResourcePostProcessor getResourcePostProcessor() {
 		return new EcoreModelMerger();
 	}
 

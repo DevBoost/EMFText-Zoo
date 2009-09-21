@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
+import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreResource;
 
 /**
  * This is an experimental subclass of EcoreResource. In contrast

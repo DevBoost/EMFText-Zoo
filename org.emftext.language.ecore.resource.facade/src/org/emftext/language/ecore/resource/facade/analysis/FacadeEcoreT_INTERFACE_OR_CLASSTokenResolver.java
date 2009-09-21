@@ -1,8 +1,12 @@
 package org.emftext.language.ecore.resource.facade.analysis;
 
-public class FacadeEcoreT_INTERFACE_OR_CLASSTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
+
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreTokenResolveResult;
+import org.emftext.language.ecore.resource.facade.IFacadeEcoreTokenResolver;
+
+public class FacadeEcoreT_INTERFACE_OR_CLASSTokenResolver implements IFacadeEcoreTokenResolver {
 	
-	@Override
 	public java.lang.String deResolve(java.lang.Object value,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
 			org.eclipse.emf.ecore.EObject container) {
@@ -13,14 +17,16 @@ public class FacadeEcoreT_INTERFACE_OR_CLASSTokenResolver extends org.emftext.ru
 		}
 	}
 
-	@Override
 	public void resolve(java.lang.String lexem,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
-			org.emftext.runtime.resource.ITokenResolveResult result) {
+			IFacadeEcoreTokenResolveResult result) {
 		if (feature.getName().equalsIgnoreCase(lexem)) {
 			result.setResolvedToken(true);
 		} else {
 			result.setResolvedToken(false);
 		}
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }
