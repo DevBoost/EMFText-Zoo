@@ -20,16 +20,24 @@
  ******************************************************************************/
 package org.emftext.language.chess.resource.cg.analysis;
 
-public class CgDIGITTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
+
+import org.emftext.language.chess.resource.cg.ICgTokenResolveResult;
+import org.emftext.language.chess.resource.cg.ICgTokenResolver;
+
+public class CgDIGITTokenResolver implements ICgTokenResolver {
 	
-	@Override	
+	private CgDefaultTokenResolver defaultResolver = new CgDefaultTokenResolver();
+	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
+		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	@Override	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		super.resolve(lexem, feature, result);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, ICgTokenResolveResult result) {
+		defaultResolver.resolve(lexem, feature, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

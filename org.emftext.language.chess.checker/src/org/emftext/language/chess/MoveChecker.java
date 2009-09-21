@@ -29,13 +29,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.chess.resource.cg.CgResource;
+import org.emftext.language.chess.resource.cg.CgEProblemType;
+import org.emftext.language.chess.resource.cg.ICgProblem;
+import org.emftext.language.chess.resource.cg.mopp.CgResource;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.impl.AbstractProblem;
 
 /**
  * This is very rough implementation of the rules to move pieces.
@@ -82,10 +82,10 @@ public class MoveChecker implements IResourcePostProcessor,
 		
 		Square fromSquare = getSquare(board, fromColumn, fromRow);
 		if (fromSquare instanceof EmptySquare) {
-			resource.addProblem(new AbstractProblem() {
+			resource.addProblem(new ICgProblem() {
 				
-				public EProblemType getType() {
-					return EProblemType.ERROR;
+				public CgEProblemType getType() {
+					return CgEProblemType.ERROR;
 				}
 				
 				public String getMessage() {
@@ -126,10 +126,10 @@ public class MoveChecker implements IResourcePostProcessor,
 		}
 		
 		if (!isValidMove) {
-			resource.addProblem(new AbstractProblem() {
+			resource.addProblem(new ICgProblem() {
 				
-				public EProblemType getType() {
-					return EProblemType.ERROR;
+				public CgEProblemType getType() {
+					return CgEProblemType.ERROR;
 				}
 				
 				public String getMessage() {
