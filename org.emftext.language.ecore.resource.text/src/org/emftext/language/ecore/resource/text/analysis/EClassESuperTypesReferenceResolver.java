@@ -22,15 +22,17 @@ package org.emftext.language.ecore.resource.text.analysis;
 
 import java.util.Map;
 
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolver;
 import org.emftext.language.ecore.resource.text.analysis.helper.EMFTypesResolver;
 
-public class EClassESuperTypesReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EClass> {
+public class EClassESuperTypesReferenceResolver implements ITextEcoreReferenceResolver<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EClass> {
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.eclipse.emf.ecore.EClass container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EClass container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EClass container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITextEcoreReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
 		new EMFTypesResolver().doResolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 

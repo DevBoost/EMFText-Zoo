@@ -20,11 +20,13 @@
  ******************************************************************************/
 package org.emftext.language.ecore.resource.text.analysis.helper;
 
-public class BooleanAttributeResolver extends
-		org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements
-		org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
 
-	@Override
+import org.emftext.language.ecore.resource.text.ITextEcoreTokenResolveResult;
+import org.emftext.language.ecore.resource.text.ITextEcoreTokenResolver;
+
+public class BooleanAttributeResolver implements ITextEcoreTokenResolver {
+
 	public java.lang.String deResolve(java.lang.Object value,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
 			org.eclipse.emf.ecore.EObject container) {
@@ -35,10 +37,9 @@ public class BooleanAttributeResolver extends
 		}
 	}
 
-	@Override
 	public void resolve(java.lang.String lexem,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
-			org.emftext.runtime.resource.ITokenResolveResult result) {
+			ITextEcoreTokenResolveResult result) {
 		if (feature.getName().equalsIgnoreCase(lexem)) {
 			result.setResolvedToken(true);
 		} else {
@@ -46,4 +47,6 @@ public class BooleanAttributeResolver extends
 		}
 	}
 
+	public void setOptions(Map<?, ?> options) {
+	}
 }

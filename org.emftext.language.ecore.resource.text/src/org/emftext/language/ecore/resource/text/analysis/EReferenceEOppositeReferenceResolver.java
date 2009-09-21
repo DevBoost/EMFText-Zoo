@@ -26,14 +26,16 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolver;
 
-public class EReferenceEOppositeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EReference, org.eclipse.emf.ecore.EReference> {
+public class EReferenceEOppositeReferenceResolver implements ITextEcoreReferenceResolver<org.eclipse.emf.ecore.EReference, org.eclipse.emf.ecore.EReference> {
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EReference element, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITextEcoreReferenceResolveResult<org.eclipse.emf.ecore.EReference> result) {
 		EClass oppositeType = container.getEReferenceType();
 		if (!resolveFuzzy) {
 			EStructuralFeature opposite = oppositeType.getEStructuralFeature(identifier);

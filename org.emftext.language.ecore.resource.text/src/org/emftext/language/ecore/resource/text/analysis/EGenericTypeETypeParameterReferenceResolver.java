@@ -24,8 +24,10 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ETypeParameter;
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolver;
 
-public class EGenericTypeETypeParameterReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.emf.ecore.EGenericType, org.eclipse.emf.ecore.ETypeParameter> {
+public class EGenericTypeETypeParameterReferenceResolver implements ITextEcoreReferenceResolver<org.eclipse.emf.ecore.EGenericType, org.eclipse.emf.ecore.ETypeParameter> {
 	
 	private TextEcoreDefaultResolverDelegate<EGenericType, ETypeParameter> delegate = new TextEcoreDefaultResolverDelegate<EGenericType, ETypeParameter>();
 	
@@ -33,7 +35,7 @@ public class EGenericTypeETypeParameterReferenceResolver extends org.emftext.run
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.ETypeParameter> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITextEcoreReferenceResolveResult<org.eclipse.emf.ecore.ETypeParameter> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 

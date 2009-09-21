@@ -25,7 +25,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -38,7 +37,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.runtime.resource.IReferenceResolveResult;
+import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
 
 public class EMFTypesResolver {
 	
@@ -49,7 +48,7 @@ public class EMFTypesResolver {
 			org.eclipse.emf.ecore.EReference reference, 
 			int position, 
 			boolean resolveFuzzy, 
-			org.emftext.runtime.resource.IReferenceResolveResult<?> result) {
+			ITextEcoreReferenceResolveResult<?> result) {
 		
 		EPackage ePackage = null;
 		String eClassName = identifier;
@@ -118,7 +117,7 @@ public class EMFTypesResolver {
 	}
 
 	private void addResults(String identifier, String className, List<EClassifier> candidates,
-			boolean resolveFuzzy, IReferenceResolveResult result) {
+			boolean resolveFuzzy, ITextEcoreReferenceResolveResult result) {
 		for (EClassifier next : candidates) {
 			if (next instanceof EClassifier) {
 				EClassifier classifier = (EClassifier) next;
