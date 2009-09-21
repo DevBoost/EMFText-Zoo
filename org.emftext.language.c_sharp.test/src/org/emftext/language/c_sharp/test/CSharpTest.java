@@ -79,7 +79,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 	protected static final String TEST_INPUT_FOLDER = "input";
 	
 	@Override
-	protected String getTestInputFolder() {
+	public String getTestInputFolder() {
 		return TEST_INPUT_FOLDER;
 	}
 	

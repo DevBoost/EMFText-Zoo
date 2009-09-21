@@ -23,7 +23,7 @@ package org.emftext.language.c_sharp.test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
+import org.emftext.language.c_sharp.resource.csharp.mopp.CsharpResource;
 
 public class ForceEOFTest extends AbstractCSharpTestCase {
 	
@@ -39,7 +39,7 @@ public class ForceEOFTest extends AbstractCSharpTestCase {
 	}
 
 	@Override
-	protected String getTestInputFolder() {
+	public String getTestInputFolder() {
 		return null;
 	}
 }

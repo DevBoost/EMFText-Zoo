@@ -44,7 +44,7 @@ import org.emftext.language.c_sharp.common.NamespaceOrTypeName;
 import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.namespaces.Namespace;
 import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
-import org.emftext.language.c_sharp.resource.csharp.CsharpResource;
+import org.emftext.language.c_sharp.resource.csharp.mopp.CsharpResource;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSPrecondition;
 
 public abstract class AbstractCSharpTestCase extends TestCase {
