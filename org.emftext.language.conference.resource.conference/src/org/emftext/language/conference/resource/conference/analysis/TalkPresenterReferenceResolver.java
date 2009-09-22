@@ -1,10 +1,10 @@
 package org.emftext.language.conference.resource.conference.analysis;
 
-public class TalkPresenterReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.conference.Talk, org.emftext.language.conference.Participant> {
+public class TalkPresenterReferenceResolver implements org.emftext.language.conference.resource.conference.IConferenceReferenceResolver<org.emftext.language.conference.Talk, org.emftext.language.conference.Participant> {
 	
 	private org.emftext.language.conference.resource.conference.analysis.ConferenceDefaultResolverDelegate<org.emftext.language.conference.Talk, org.emftext.language.conference.Participant> delegate = new org.emftext.language.conference.resource.conference.analysis.ConferenceDefaultResolverDelegate<org.emftext.language.conference.Talk, org.emftext.language.conference.Participant>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.conference.Talk container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.conference.Participant> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.conference.Talk container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.conference.resource.conference.IConferenceReferenceResolveResult<org.emftext.language.conference.Participant> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
