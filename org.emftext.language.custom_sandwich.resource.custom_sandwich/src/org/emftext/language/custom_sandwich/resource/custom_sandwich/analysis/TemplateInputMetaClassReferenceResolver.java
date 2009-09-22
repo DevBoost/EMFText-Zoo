@@ -1,41 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2006-2009 
- * Software Technology Group, Dresden University of Technology
- * 
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version. This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * 
- * See the GNU Lesser General Public License for more details. You should have
- * received a copy of the GNU Lesser General Public License along with this
- * program; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
- * Suite 330, Boston, MA  02111-1307 USA
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *   - initial API and implementation
- ******************************************************************************/
 package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
 
-import java.util.Map;
-
-import org.emftext.language.template_concepts.InputMetaClassReferenceResolver;
-
-public class TemplateInputMetaClassReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EClass> {
+public class TemplateInputMetaClassReferenceResolver implements org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichReferenceResolver<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EClass> {
 	
-	private InputMetaClassReferenceResolver resolverDelegate = new InputMetaClassReferenceResolver();
+	private org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis.Custom_sandwichDefaultResolverDelegate<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EClass> delegate = new org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis.Custom_sandwichDefaultResolverDelegate<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EClass>();
+	
+	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	}
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference) {
-		return resolverDelegate.deResolve(element, container, reference);
+		return delegate.deResolve(element, container, reference);
 	}
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
-		resolverDelegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+	public void setOptions(java.util.Map<?,?> options) {
+		// TODO save options in a field or leave method empty if this resolver does not depend on any option
 	}
-
-	public void setOptions(Map<?, ?> options) {
-	}
+	
 }
