@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.featherweight_java.resource.fj.FjResourceFactory;
+import org.emftext.language.featherweight_java.resource.fj.mopp.FjResourceFactory;
 
 public class FJTest extends TestCase {
 
