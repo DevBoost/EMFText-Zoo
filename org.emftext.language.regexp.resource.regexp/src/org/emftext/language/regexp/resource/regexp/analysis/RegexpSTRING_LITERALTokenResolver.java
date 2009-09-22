@@ -20,16 +20,24 @@
  ******************************************************************************/
 package org.emftext.language.regexp.resource.regexp.analysis;
 
-public class RegexpSTRING_LITERALTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
+
+import org.emftext.language.regexp.resource.regexp.IRegexpTokenResolveResult;
+import org.emftext.language.regexp.resource.regexp.IRegexpTokenResolver;
+
+public class RegexpSTRING_LITERALTokenResolver implements IRegexpTokenResolver {
 	
-	@Override	
+	private RegexpDefaultTokenResolver defaultResolver = new RegexpDefaultTokenResolver();
+	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
+		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	@Override	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		super.resolve(lexem, feature, result);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IRegexpTokenResolveResult result) {
+		defaultResolver.resolve(lexem, feature, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }
