@@ -1,10 +1,9 @@
 package org.emftext.language.forms.resource.forms.analysis.helper;
 
-public class BooleanAttributeResolver extends
-		org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements
-		org.emftext.runtime.resource.ITokenResolver {
+import org.emftext.language.forms.resource.forms.IFormsTokenResolveResult;
 
-	@Override
+public class BooleanAttributeResolver {
+
 	public java.lang.String deResolve(java.lang.Object value,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
 			org.eclipse.emf.ecore.EObject container) {
@@ -16,10 +15,9 @@ public class BooleanAttributeResolver extends
 		}
 	}
 
-	@Override
 	public void resolve(java.lang.String lexem,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
-			org.emftext.runtime.resource.ITokenResolveResult result) {
+			IFormsTokenResolveResult result) {
 		if (feature.getName().equalsIgnoreCase(lexem)) {
 			result.setResolvedToken(true);
 		} else {

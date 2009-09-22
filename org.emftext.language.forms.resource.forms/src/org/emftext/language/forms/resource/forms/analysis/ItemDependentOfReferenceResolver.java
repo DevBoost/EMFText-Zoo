@@ -1,10 +1,10 @@
 package org.emftext.language.forms.resource.forms.analysis;
 
-public class ItemDependentOfReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.forms.Item, org.emftext.language.forms.Option> {
+public class ItemDependentOfReferenceResolver implements org.emftext.language.forms.resource.forms.IFormsReferenceResolver<org.emftext.language.forms.Item, org.emftext.language.forms.Option> {
 	
 	private org.emftext.language.forms.resource.forms.analysis.FormsDefaultResolverDelegate<org.emftext.language.forms.Item, org.emftext.language.forms.Option> delegate = new org.emftext.language.forms.resource.forms.analysis.FormsDefaultResolverDelegate<org.emftext.language.forms.Item, org.emftext.language.forms.Option>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.forms.Item container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.forms.Option> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.forms.Item container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.forms.resource.forms.IFormsReferenceResolveResult<org.emftext.language.forms.Option> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
