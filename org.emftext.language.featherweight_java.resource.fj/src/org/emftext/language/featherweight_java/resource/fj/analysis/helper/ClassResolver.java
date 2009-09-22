@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.featherweight_java.Class;
 import org.emftext.language.featherweight_java.Featherweight_javaFactory;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.util.EObjectUtil;
+import org.emftext.language.featherweight_java.resource.fj.IFjReferenceResolveResult;
+import org.emftext.language.featherweight_java.resource.fj.util.FjEObjectUtil;
 
 // TODO maybe we should add resolving for files that are in the same directory
 public class ClassResolver {
@@ -20,10 +20,11 @@ public class ClassResolver {
 	}
 
 	public void resolve(String identifier, EObject container,
-			IReferenceResolveResult<Class> result) {
+			EReference reference, int position, boolean resolveFuzzy, IFjReferenceResolveResult<Class> result) {
 
 		Resource resource = container.eResource();
-		Collection<org.emftext.language.featherweight_java.Class> classes = EObjectUtil.getObjectsByType(resource.getAllContents(), org.emftext.language.featherweight_java.Featherweight_javaPackage.eINSTANCE.getClass_());
+		Collection<org.emftext.language.featherweight_java.Class> classes = 
+			FjEObjectUtil.getObjectsByType(resource.getAllContents(), org.emftext.language.featherweight_java.Featherweight_javaPackage.eINSTANCE.getClass_());
 		for (Class nextClass : classes) {
 			if (identifier.equals(nextClass.getName())) {
 				result.addMapping(identifier, nextClass);
