@@ -1,10 +1,13 @@
 package org.emftext.language.quickuml.resource.quml.analysis;
 
-public class TypedElementTypeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.uml2.uml.TypedElement, org.eclipse.uml2.uml.Type> {
+import org.emftext.language.quickuml.resource.quml.IQumlReferenceResolveResult;
+import org.emftext.language.quickuml.resource.quml.IQumlReferenceResolver;
+
+public class TypedElementTypeReferenceResolver implements IQumlReferenceResolver<org.eclipse.uml2.uml.TypedElement, org.eclipse.uml2.uml.Type> {
 	
 	private org.emftext.language.quickuml.resource.quml.analysis.QumlDefaultResolverDelegate<org.eclipse.uml2.uml.TypedElement, org.eclipse.uml2.uml.Type> delegate = new org.emftext.language.quickuml.resource.quml.analysis.QumlDefaultResolverDelegate<org.eclipse.uml2.uml.TypedElement, org.eclipse.uml2.uml.Type>();
 	
-	public void resolve(java.lang.String identifier, org.eclipse.uml2.uml.TypedElement container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.uml2.uml.Type> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.uml2.uml.TypedElement container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IQumlReferenceResolveResult<org.eclipse.uml2.uml.Type> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
