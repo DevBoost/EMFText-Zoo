@@ -1,10 +1,10 @@
 package org.emftext.language.db_schema.resource.db_schema.analysis;
 
-public class FKeyColumnReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.db_schema.FKey, org.emftext.language.db_schema.Column> {
+public class FKeyColumnReferenceResolver implements org.emftext.language.db_schema.resource.db_schema.IDb_schemaReferenceResolver<org.emftext.language.db_schema.FKey, org.emftext.language.db_schema.Column> {
 	
 	private org.emftext.language.db_schema.resource.db_schema.analysis.Db_schemaDefaultResolverDelegate<org.emftext.language.db_schema.FKey, org.emftext.language.db_schema.Column> delegate = new org.emftext.language.db_schema.resource.db_schema.analysis.Db_schemaDefaultResolverDelegate<org.emftext.language.db_schema.FKey, org.emftext.language.db_schema.Column>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.db_schema.FKey container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.db_schema.Column> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.db_schema.FKey container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.db_schema.resource.db_schema.IDb_schemaReferenceResolveResult<org.emftext.language.db_schema.Column> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
