@@ -20,22 +20,30 @@
  ******************************************************************************/
 package org.emftext.language.models.resource.model.analysis;
 
-public class ModelQUOTED_34_34TokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
+
+import org.emftext.language.models.resource.model.IModelTokenResolveResult;
+import org.emftext.language.models.resource.model.IModelTokenResolver;
+
+public class ModelQUOTED_34_34TokenResolver implements IModelTokenResolver {
 	
-	@Override	
+	private ModelDefaultTokenResolver defaultResolver = new ModelDefaultTokenResolver();
+	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
+		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		result = result.replaceAll(java.util.regex.Pattern.quote("\""),"\\\\\"");
 		result += "\"";
 		result = "\"" + result;
 		return result;
 	}
 	
-	@Override	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IModelTokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0, lexem.length() - 1);
 		lexem = lexem.replaceAll("\\\\"+java.util.regex.Pattern.quote("\""),"\"");
-		super.resolve(lexem, feature, result);
+		defaultResolver.resolve(lexem, feature, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }
