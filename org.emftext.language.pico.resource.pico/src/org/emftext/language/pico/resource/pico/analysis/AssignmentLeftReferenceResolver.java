@@ -1,10 +1,13 @@
 package org.emftext.language.pico.resource.pico.analysis;
 
-public class AssignmentLeftReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.pico.Assignment, org.emftext.language.pico.IDType> {
+import org.emftext.language.pico.resource.pico.IPicoReferenceResolveResult;
+import org.emftext.language.pico.resource.pico.IPicoReferenceResolver;
+
+public class AssignmentLeftReferenceResolver implements IPicoReferenceResolver<org.emftext.language.pico.Assignment, org.emftext.language.pico.IDType> {
 	
 	private org.emftext.language.pico.resource.pico.analysis.PicoDefaultResolverDelegate<org.emftext.language.pico.Assignment, org.emftext.language.pico.IDType> delegate = new org.emftext.language.pico.resource.pico.analysis.PicoDefaultResolverDelegate<org.emftext.language.pico.Assignment, org.emftext.language.pico.IDType>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.pico.Assignment container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.pico.IDType> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.pico.Assignment container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IPicoReferenceResolveResult<org.emftext.language.pico.IDType> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
