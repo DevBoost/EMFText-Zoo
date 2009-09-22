@@ -1,15 +1,23 @@
 package org.emftext.language.km3.resource.km3.analysis;
 
-public class Km3T_ORDEREDTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
+
+import org.emftext.language.km3.resource.km3.IKm3TokenResolveResult;
+import org.emftext.language.km3.resource.km3.IKm3TokenResolver;
+
+public class Km3T_ORDEREDTokenResolver implements IKm3TokenResolver {
 	
-	@Override	
+	private Km3DefaultTokenResolver defaultResolver = new Km3DefaultTokenResolver();
+	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
+		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	@Override	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		super.resolve(lexem, feature, result);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IKm3TokenResolveResult result) {
+		defaultResolver.resolve(lexem, feature, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
 	}
 }

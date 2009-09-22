@@ -2,7 +2,10 @@ package org.emftext.language.km3.resource.km3.analysis;
 
 import java.util.Map;
 
-public class ClassSupertypesReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.eclipse.gmt.am3.dsls.KM3.Class, org.eclipse.gmt.am3.dsls.KM3.Class> {
+import org.emftext.language.km3.resource.km3.IKm3ReferenceResolveResult;
+import org.emftext.language.km3.resource.km3.IKm3ReferenceResolver;
+
+public class ClassSupertypesReferenceResolver implements IKm3ReferenceResolver<org.eclipse.gmt.am3.dsls.KM3.Class, org.eclipse.gmt.am3.dsls.KM3.Class> {
 	
 	private Km3DefaultResolverDelegate<org.eclipse.gmt.am3.dsls.KM3.Class, org.eclipse.gmt.am3.dsls.KM3.Class> delegate = new Km3DefaultResolverDelegate<org.eclipse.gmt.am3.dsls.KM3.Class, org.eclipse.gmt.am3.dsls.KM3.Class>();
 	
@@ -10,7 +13,7 @@ public class ClassSupertypesReferenceResolver extends org.emftext.runtime.resour
 		return delegate.deResolve(element, container, reference);
 	}
 	
-	public void resolve(java.lang.String identifier, org.eclipse.gmt.am3.dsls.KM3.Class container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.gmt.am3.dsls.KM3.Class> result) {
+	public void resolve(java.lang.String identifier, org.eclipse.gmt.am3.dsls.KM3.Class container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IKm3ReferenceResolveResult<org.eclipse.gmt.am3.dsls.KM3.Class> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 
