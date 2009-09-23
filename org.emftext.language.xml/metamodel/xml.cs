@@ -5,8 +5,6 @@ START Document
 OPTIONS{
 	tokenspace="1";
 	defaultTokenName="IDENTIFIER";
-	overridePluginXML="false";
-	overrideManifest="false";
 	generateCodeFromGeneratorModel="false";
 	backtracking="true";
 	usePredefinedTokens="false";

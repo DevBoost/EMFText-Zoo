@@ -2,26 +2,40 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.xml.resource.xml.XmlResourceFactory" type="xml">
+		<parser class="org.emftext.language.xml.resource.xml.mopp.XmlResourceFactory" type="xml">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.xml.resource.xml.XmlMetaInformation" id="org.emftext.language.xml.resource.xml.XmlMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.xml.resource.xml.mopp.XmlMetaInformation" id="org.emftext.language.xml.resource.xml.mopp.XmlMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="xml">
+		<content-type id="org.emftext.filetype.xml" name="EMFText xml Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.xml" file-extensions="xml">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.xml.resource.xml.ui.XmlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.xml.resource.xml.ui.XmlEditor" name="EMFText xml Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.xml" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.xml.resource.xml.ui.XmlPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.xml.resource.xml.XmlNewFileWizard" id="org.emftext.language.xml.resource.xml.XmlNewFileWizard" name="EMFText .xml file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.xml.resource.xml.ui.XmlNewFileWizard" id="org.emftext.language.xml.resource.xml.ui.XmlNewFileWizard" name="EMFText .xml file">
 		</wizard>
 	</extension>
-	
 	
 </plugin>
