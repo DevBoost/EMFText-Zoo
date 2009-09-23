@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.owl.resource.owl.OwlMetaInformation;
+import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
 
 public class ParseOWLTest extends TestCase {
 
@@ -87,6 +87,6 @@ public class ParseOWLTest extends TestCase {
 	private void registerResourceFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"owl",
-				new org.emftext.language.owl.resource.owl.OwlResourceFactory());
+				new org.emftext.language.owl.resource.owl.mopp.OwlResourceFactory());
 	}
 }
