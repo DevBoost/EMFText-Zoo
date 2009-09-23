@@ -1,10 +1,10 @@
 package org.emftext.language.parametercheck.resource.pcheck.analysis;
 
-public class DeclaredParameterParameterReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<parametercheck.DeclaredParameter, parametercheck.ParameterDecl> {
+public class DeclaredParameterParameterReferenceResolver implements org.emftext.language.parametercheck.resource.pcheck.IPcheckReferenceResolver<parametercheck.DeclaredParameter, parametercheck.ParameterDecl> {
 	
 	private org.emftext.language.parametercheck.resource.pcheck.analysis.PcheckDefaultResolverDelegate<parametercheck.DeclaredParameter, parametercheck.ParameterDecl> delegate = new org.emftext.language.parametercheck.resource.pcheck.analysis.PcheckDefaultResolverDelegate<parametercheck.DeclaredParameter, parametercheck.ParameterDecl>();
 	
-	public void resolve(java.lang.String identifier, parametercheck.DeclaredParameter container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<parametercheck.ParameterDecl> result) {
+	public void resolve(java.lang.String identifier, parametercheck.DeclaredParameter container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.parametercheck.resource.pcheck.IPcheckReferenceResolveResult<parametercheck.ParameterDecl> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	

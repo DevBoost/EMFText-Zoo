@@ -2,24 +2,39 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.parametercheck.resource.pcheck.PcheckResourceFactory" type="pcheck">
+		<parser class="org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckResourceFactory" type="pcheck">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.parametercheck.resource.pcheck.PcheckMetaInformation" id="org.emftext.language.parametercheck.resource.pcheck.PcheckMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckMetaInformation" id="org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="pcheck">
+		<content-type id="org.emftext.filetype.pcheck" name="EMFText pcheck Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.pcheck" file-extensions="pcheck">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.parametercheck.resource.pcheck.ui.PcheckEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.parametercheck.resource.pcheck.ui.PcheckEditor" name="EMFText pcheck Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.pcheck" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.parametercheck.resource.pcheck.ui.PcheckPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.parametercheck.resource.pcheck.PcheckNewFileWizard" id="org.emftext.language.parametercheck.resource.pcheck.PcheckNewFileWizard" name="EMFText .pcheck file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.parametercheck.resource.pcheck.ui.PcheckNewFileWizard" id="org.emftext.language.parametercheck.resource.pcheck.ui.PcheckNewFileWizard" name="EMFText .pcheck file">
 		</wizard>
 	</extension>
 	
