@@ -20,6 +20,7 @@
  ******************************************************************************/
 package org.emftext.language.java_templates.test;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateResourceFactory;
 import org.emftext.language.template_concepts.interpreter.test.AbstractInterpreterTest;
 
 public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
@@ -36,7 +37,7 @@ public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
 				new org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java_template",
-				new org.emftext.language.java_templates.resource.java_template.Java_templateResourceFactory());
+				new Java_templateResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"customer",
 				new org.emftext.language.customer.resource.customer.CustomerResourceFactory());
