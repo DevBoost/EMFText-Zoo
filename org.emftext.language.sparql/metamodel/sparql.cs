@@ -11,7 +11,6 @@ OPTIONS{
 	usePredefinedTokens="false";
 	generateCodeFromGeneratorModel="true";
 	reloadGeneratorModel="true";
-	overrideManifest="false";	
 }
 
 TOKENS{
