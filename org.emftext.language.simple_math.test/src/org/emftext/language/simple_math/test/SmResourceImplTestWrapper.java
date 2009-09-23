@@ -29,7 +29,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.simple_math.resource.sm.SmResource;
+import org.emftext.language.simple_math.resource.sm.mopp.SmResource;
 
 public class SmResourceImplTestWrapper extends SmResource {
 	
