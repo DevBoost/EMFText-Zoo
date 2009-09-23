@@ -6,7 +6,6 @@ OPTIONS {
 	backtracking = "true";
 	memoize = "true";
 	reloadGeneratorModel = "true";
-	overrideManifest = "false";
 	tokenspace = "1";
 }
 

@@ -20,16 +20,25 @@
  ******************************************************************************/
 package org.emftext.language.threevaluedlogic.resource.tvl.analysis;
 
-public class TvlTEXTTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+import java.util.Map;
+
+import org.emftext.language.threevaluedlogic.resource.tvl.ITvlTokenResolveResult;
+import org.emftext.language.threevaluedlogic.resource.tvl.ITvlTokenResolver;
+
+public class TvlTEXTTokenResolver implements ITvlTokenResolver {
 	
-	@Override	
+	private TvlDefaultTokenResolver defaultResolver = new TvlDefaultTokenResolver();
+	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
+		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	@Override	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		super.resolve(lexem, feature, result);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, ITvlTokenResolveResult result) {
+		defaultResolver.resolve(lexem, feature, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
+		defaultResolver.setOptions(options);
 	}
 }

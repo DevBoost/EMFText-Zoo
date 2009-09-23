@@ -2,24 +2,39 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.threevaluedlogic.resource.tvl.TvlResourceFactory" type="tvl">
+		<parser class="org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlResourceFactory" type="tvl">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.threevaluedlogic.resource.tvl.TvlMetaInformation" id="org.emftext.language.threevaluedlogic.resource.tvl.TvlMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlMetaInformation" id="org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="tvl">
+		<content-type id="org.emftext.filetype.tvl" name="EMFText tvl Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.tvl" file-extensions="tvl">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.threevaluedlogic.resource.tvl.ui.TvlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.threevaluedlogic.resource.tvl.ui.TvlEditor" name="EMFText tvl Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.tvl" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.threevaluedlogic.resource.tvl.ui.TvlPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.threevaluedlogic.resource.tvl.TvlNewFileWizard" id="org.emftext.language.threevaluedlogic.resource.tvl.TvlNewFileWizard" name="EMFText .tvl file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.threevaluedlogic.resource.tvl.ui.TvlNewFileWizard" id="org.emftext.language.threevaluedlogic.resource.tvl.ui.TvlNewFileWizard" name="EMFText .tvl file">
 		</wizard>
 	</extension>
 	
