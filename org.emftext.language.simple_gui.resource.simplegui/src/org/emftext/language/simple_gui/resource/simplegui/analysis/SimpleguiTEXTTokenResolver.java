@@ -20,15 +20,25 @@
  ******************************************************************************/
 package org.emftext.language.simple_gui.resource.simplegui.analysis;
 
-public class SimpleguiTEXTTokenResolver extends org.emftext.runtime.resource.impl.JavaBasedTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
-	@Override
+import java.util.Map;
+
+import org.emftext.language.simple_gui.resource.simplegui.ISimpleguiTokenResolveResult;
+import org.emftext.language.simple_gui.resource.simplegui.ISimpleguiTokenResolver;
+
+public class SimpleguiTEXTTokenResolver implements ISimpleguiTokenResolver {
+	
+	private SimpleguiDefaultTokenResolver defaultResolver = new SimpleguiDefaultTokenResolver();
+
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = super.deResolve(value, feature, container);
+		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		return result;
 	}
 
-	@Override
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
-		super.resolve(lexem, feature, result);
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, ISimpleguiTokenResolveResult result) {
+		defaultResolver.resolve(lexem, feature, result);
+	}
+
+	public void setOptions(Map<?, ?> options) {
+		defaultResolver.setOptions(options);
 	}
 }
