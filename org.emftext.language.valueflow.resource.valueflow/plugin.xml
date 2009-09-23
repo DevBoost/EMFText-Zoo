@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
-<plugin>	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.valueflow.resource.valueflow.TextValueflowMetaInformation" id="org.emftext.language.valueflow.resource.valueflow.TextValueflowMetaInformation">
+<plugin>
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.valueflow.resource.valueflow.mopp.TextValueflowResourceFactory" type="text.valueflow">
+		</parser>
+	</extension>
+	
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.valueflow.resource.valueflow.mopp.TextValueflowMetaInformation" id="org.emftext.language.valueflow.resource.valueflow.mopp.TextValueflowMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="text.valueflow">
+		<content-type id="org.emftext.filetype.text.valueflow" name="EMFText text.valueflow Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.text.valueflow" file-extensions="text.valueflow">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.valueflow.resource.valueflow.ui.TextValueflowEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.valueflow.resource.valueflow.ui.TextValueflowEditor" name="EMFText text.valueflow Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.text.valueflow" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.valueflow.resource.valueflow.ui.TextValueflowPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.valueflow.resource.valueflow.TextValueflowNewFileWizard" id="org.emftext.language.valueflow.resource.valueflow.TextValueflowNewFileWizard" name="EMFText .text.valueflow file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.valueflow.resource.valueflow.ui.TextValueflowNewFileWizard" id="org.emftext.language.valueflow.resource.valueflow.ui.TextValueflowNewFileWizard" name="EMFText .text.valueflow file">
 		</wizard>
 	</extension>
-	
-	 <extension
-	       point="org.emftext.language.valueflow.resource.additional_valueflow_extension_parser">
-	    <parser
-	          class="org.emftext.language.valueflow.resource.valueflow.TextValueflowResourceFactory"
-	          type="text">
-	    </parser>
-	 </extension>
 	
 </plugin>

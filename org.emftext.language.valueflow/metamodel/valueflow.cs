@@ -4,8 +4,6 @@ START Model
 
 OPTIONS {
 	tokenspace = "1";
-	overrideManifest = "false";
-	overridePluginXML = "false";
 	
 	resourcePluginID = "org.emftext.language.valueflow.resource.valueflow";
 	basePackage = "org.emftext.language.valueflow.resource.valueflow";
