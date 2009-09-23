@@ -12,10 +12,25 @@
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="project">
+		<content-type id="org.emftext.filetype.project" name="EMFText project Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.project" file-extensions="project">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.project.resource.project.ui.ProjectEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.project.resource.project.ui.ProjectEditor" name="EMFText project Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.project" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.project.resource.project.ui.ProjectPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>

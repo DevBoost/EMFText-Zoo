@@ -12,10 +12,25 @@
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="petrinet">
+		<content-type id="org.emftext.filetype.petrinet" name="EMFText petrinet Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.petrinet" file-extensions="petrinet">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetEditor" name="EMFText petrinet Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.petrinet" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.petrinet.resource.petrinet.ui.PetrinetPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
