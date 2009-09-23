@@ -4,7 +4,6 @@ OPTIONS {
 	tokenspace = "1";
 	resourcePluginID = "org.emftext.language.statemachine.resource.statemachine";
 	basePackage = "org.emftext.language.statemachine.resource.statemachine";
-	overrideManifest = "false";
 }
 
 TOKENS {
