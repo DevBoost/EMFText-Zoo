@@ -1,10 +1,13 @@
 package org.emftext.language.textadventure.resource.tas.analysis;
 
-public class RoomConnectorFromReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.textadventure.RoomConnector, org.emftext.language.textadventure.Room> {
+import org.emftext.language.textadventure.resource.tas.ITasReferenceResolveResult;
+import org.emftext.language.textadventure.resource.tas.ITasReferenceResolver;
+
+public class RoomConnectorFromReferenceResolver implements ITasReferenceResolver<org.emftext.language.textadventure.RoomConnector, org.emftext.language.textadventure.Room> {
 	
 	private org.emftext.language.textadventure.resource.tas.analysis.TasDefaultResolverDelegate<org.emftext.language.textadventure.RoomConnector, org.emftext.language.textadventure.Room> delegate = new org.emftext.language.textadventure.resource.tas.analysis.TasDefaultResolverDelegate<org.emftext.language.textadventure.RoomConnector, org.emftext.language.textadventure.Room>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.textadventure.RoomConnector container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.textadventure.Room> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.textadventure.RoomConnector container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITasReferenceResolveResult<org.emftext.language.textadventure.Room> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	

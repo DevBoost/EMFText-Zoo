@@ -2,24 +2,39 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.textadventure.resource.tas.TasResourceFactory" type="tas">
+		<parser class="org.emftext.language.textadventure.resource.tas.mopp.TasResourceFactory" type="tas">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.textadventure.resource.tas.TasMetaInformation" id="org.emftext.language.textadventure.resource.tas.TasMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation" id="org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="tas">
+		<content-type id="org.emftext.filetype.tas" name="EMFText tas Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.tas" file-extensions="tas">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.textadventure.resource.tas.ui.TasEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.textadventure.resource.tas.ui.TasEditor" name="EMFText tas Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.tas" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.textadventure.resource.tas.ui.TasPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.textadventure.resource.tas.TasNewFileWizard" id="org.emftext.language.textadventure.resource.tas.TasNewFileWizard" name="EMFText .tas file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.textadventure.resource.tas.ui.TasNewFileWizard" id="org.emftext.language.textadventure.resource.tas.ui.TasNewFileWizard" name="EMFText .tas file">
 		</wizard>
 	</extension>
 	
