@@ -15,23 +15,23 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.owl.reasoning.EMFTextOWLReasoner;
 import org.emftext.language.owl.reasoning.PelletReasoner;
 import org.emftext.language.owl.reasoning.ReasoningException;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.impl.AbstractProblem;
+import org.emftext.language.owl.resource.owl.IOwlOptionProvider;
+import org.emftext.language.owl.resource.owl.IOwlOptions;
+import org.emftext.language.owl.resource.owl.IOwlProblem;
+import org.emftext.language.owl.resource.owl.IOwlResourcePostProcessor;
+import org.emftext.language.owl.resource.owl.IOwlResourcePostProcessorProvider;
+import org.emftext.language.owl.resource.owl.OwlEProblemType;
+import org.emftext.language.owl.resource.owl.mopp.OwlResource;
 import org.semanticweb.owl.model.OWLClass;
 
-public class ConsistencyChecker implements IResourcePostProcessor,
-		IResourcePostProcessorProvider, IOptionProvider {
+public class ConsistencyChecker implements IOwlResourcePostProcessor,
+		IOwlResourcePostProcessorProvider, IOwlOptionProvider {
 
 	private EMFTextOWLReasoner reasoner;
 
 	public Map<?, ?> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER,
+		options.put(IOwlOptions.RESOURCE_POSTPROCESSOR_PROVIDER,
 				new ConsistencyChecker());
 		return options;
 	}
@@ -41,7 +41,7 @@ public class ConsistencyChecker implements IResourcePostProcessor,
 
 	}
 
-	public void process(ITextResource resource) {
+	public void process(OwlResource resource) {
 		IFile file = WorkspaceSynchronizer.getFile(resource);
 		try {
 			InputStream stream = file.getContents();
@@ -60,10 +60,10 @@ public class ConsistencyChecker implements IResourcePostProcessor,
 			try {
 				inconsistentClasses = reasoner.getInconsistentClasses(content);
 			} catch (final ReasoningException e) {
-				resource.addProblem(new AbstractProblem() {
+				resource.addProblem(new IOwlProblem() {
 
-					public EProblemType getType() {
-						return EProblemType.ERROR;
+					public OwlEProblemType getType() {
+						return OwlEProblemType.ERROR;
 					}
 
 					public String getMessage() {
@@ -83,10 +83,10 @@ public class ConsistencyChecker implements IResourcePostProcessor,
 				if (next instanceof Class) {
 					final Class c = ((Class) next);
 					if (invalidIris.contains(c.getIri())) {
-						resource.addProblem(new AbstractProblem() {
+						resource.addProblem(new IOwlProblem() {
 
-							public EProblemType getType() {
-								return EProblemType.ERROR;
+							public OwlEProblemType getType() {
+								return OwlEProblemType.ERROR;
 							}
 
 							public String getMessage() {
@@ -104,7 +104,7 @@ public class ConsistencyChecker implements IResourcePostProcessor,
 		}
 	}
 
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public IOwlResourcePostProcessor getResourcePostProcessor() {
 		return new ConsistencyChecker();
 	}
 
