@@ -38,6 +38,8 @@ import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
+import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
@@ -45,11 +47,9 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypeReference;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-public class ClassifierReferenceTargetReferenceResolver extends 
-	AbstractReferenceResolver<ClassifierReference, Classifier> {
+public class ClassifierReferenceTargetReferenceResolver implements 
+	IJavaReferenceResolver<ClassifierReference, Classifier> {
 	
 	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (classifier instanceof ConcreteClassifier) {
@@ -85,7 +85,7 @@ public class ClassifierReferenceTargetReferenceResolver extends
 		return classifier.getName();
 	}	
 
-	public void resolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Classifier> result) {
+	public void resolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<Classifier> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = null;

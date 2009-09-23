@@ -23,18 +23,18 @@ package org.emftext.language.java.resource.java.analysis.helper;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
+import org.emftext.language.java.resource.java.IJavaOptionProvider;
+import org.emftext.language.java.resource.java.IJavaOptions;
 
 /**
  * Add the UnicodeConverterProvider to the list of input stream pre-processor
  * providers.
  */
-public class UnicodeConverterOptionProvider implements IOptionProvider {
+public class UnicodeConverterOptionProvider implements IJavaOptionProvider {
 	
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		return map;
 	}
 }

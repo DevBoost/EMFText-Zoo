@@ -30,17 +30,17 @@ import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
 import org.emftext.language.java.references.ReferenceableElement;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
+import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
+import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 
-public class StaticMemberImportStaticMembersReferenceResolver extends 
-	AbstractReferenceResolver<StaticMemberImport, ReferenceableElement> {
+public class StaticMemberImportStaticMembersReferenceResolver implements 
+	IJavaReferenceResolver<StaticMemberImport, ReferenceableElement> {
 	
 	public java.lang.String deResolve(ReferenceableElement element, StaticMemberImport container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, StaticMemberImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<ReferenceableElement> result) {
+	public void resolve(java.lang.String identifier, StaticMemberImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<ReferenceableElement> result) {
 		ConcreteClassifier classifier = theImport.getClassifierAtNamespaces();
 		classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, theImport.eResource());
 		if (classifier != null && !classifier.eIsProxy()) {

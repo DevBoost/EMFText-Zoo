@@ -43,13 +43,13 @@ import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.ReferencesPackage;
-import org.emftext.language.java.resource.java.JavaContextDependentURIFragmentFactory;
-import org.emftext.language.java.resource.java.JavaReferenceResolverSwitch;
+import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
+import org.emftext.language.java.resource.java.IJavaTextResource;
+import org.emftext.language.java.resource.java.mopp.JavaContextDependentURIFragmentFactory;
+import org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypesPackage;
-import org.emftext.runtime.resource.IContextDependentURIFragment;
-import org.emftext.runtime.resource.ITextResource;
 
 /**
  * The JavaModelRepairer can be used to fix part of Java models that
@@ -69,7 +69,7 @@ public class JavaModelRepairer {
 	 * 
 	 * @param resource
 	 */
-	public static void repair(ITextResource resource) {
+	public static void repair(IJavaTextResource resource) {
 		for(Iterator<EObject> i = resource.getAllContents(); i.hasNext(); ) {
 			EObject next = i.next();
 			if (next instanceof CastExpression) {
@@ -90,7 +90,7 @@ public class JavaModelRepairer {
 	 * @param resource
 	 */
 	public static void repairWrongTypeArguments(
-			IdentifierReference identifierReference, ITextResource resource) {
+			IdentifierReference identifierReference, IJavaTextResource resource) {
 		if(identifierReference.getTypeArguments().size() == 1) {
 			//find containing relation expression
 			EObject container = identifierReference;
@@ -140,7 +140,7 @@ public class JavaModelRepairer {
 	 * 
 	 * @param resource
 	 */
-	public static void repairWrongCasts(CastExpression castExpression, ITextResource resource) {
+	public static void repairWrongCasts(CastExpression castExpression, IJavaTextResource resource) {
 		if(castExpression.getChild() instanceof UnaryExpression) {
 			UnaryExpression unaryExpression = (UnaryExpression) castExpression.getChild();
 			if (unaryExpression.getOperators().size() == 1 && 
@@ -190,7 +190,7 @@ public class JavaModelRepairer {
 		}
 	}
 
-	private static IdentifierReference createIdentifierReferenceWithProxy(ITextResource resource,
+	private static IdentifierReference createIdentifierReferenceWithProxy(IJavaTextResource resource,
 			NamespaceClassifierReference nsClassifierReference) {
 		EObject proxy = (EObject) nsClassifierReference
 			.getClassifierReferences().get(0).eGet(TypesPackage.Literals.CLASSIFIER_REFERENCE__TARGET, false);
@@ -199,7 +199,7 @@ public class JavaModelRepairer {
 		mainIdReference.eSet(
 				ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET, proxy);
 		String id = ((InternalEObject)proxy).eProxyURI().fragment();
-		id = id.substring(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+		id = id.substring(IJavaContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 		id = id.substring(id.indexOf("_") + 1);
 		
 		resource.registerContextDependentProxy(

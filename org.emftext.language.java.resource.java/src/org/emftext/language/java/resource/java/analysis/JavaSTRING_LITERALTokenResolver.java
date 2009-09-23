@@ -24,9 +24,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.language.java.resource.java.JavaDefaultTokenResolver;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
-import org.emftext.runtime.resource.ITokenResolver;
 
 // TODO @mseifert: add conversion of supplementary unicode characters
 // These consist of two characters (high and low surrogate).
@@ -35,7 +35,7 @@ import org.emftext.runtime.resource.ITokenResolver;
 // The supplementary unicode characters can not be converted 
 // by the InputStreamConverter, because ANTLR does not support
 // them.
-public class JavaSTRING_LITERALTokenResolver implements ITokenResolver{ 
+public class JavaSTRING_LITERALTokenResolver implements IJavaTokenResolver { 
 
 	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
 
@@ -49,7 +49,7 @@ public class JavaSTRING_LITERALTokenResolver implements ITokenResolver{
 		return result;
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		// remove double quotes
 		assert lexem.charAt(0) == '"';
 		assert lexem.charAt(lexem.length() - 1) == '"';

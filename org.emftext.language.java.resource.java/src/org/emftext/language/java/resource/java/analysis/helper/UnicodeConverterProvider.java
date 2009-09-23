@@ -22,18 +22,18 @@ package org.emftext.language.java.resource.java.analysis.helper;
 
 import java.io.InputStream;
 
-import org.emftext.runtime.InputStreamProcessor;
-import org.emftext.runtime.IInputStreamProcessorProvider;
-import org.emftext.runtime.util.UnicodeConverter;
+import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider;
+import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
+import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 
 /**
  * Provides the instances of the UnicodeConverter class to be used when
  * reading Java source files. The UnicodeConverter convert Unicode escape
  * sequences to real characters.
  */
-public class UnicodeConverterProvider implements IInputStreamProcessorProvider {
+public class UnicodeConverterProvider implements IJavaInputStreamProcessorProvider {
 	
-	public InputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
-		return new UnicodeConverter(inputStream);
+	public JavaInputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
+		return new JavaUnicodeConverter(inputStream);
 	}
 }

@@ -24,11 +24,11 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.language.java.resource.java.JavaDefaultTokenResolver;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
-import org.emftext.runtime.resource.ITokenResolver;
 
-public class JavaCHARACTER_LITERALTokenResolver implements ITokenResolver{ 
+public class JavaCHARACTER_LITERALTokenResolver implements IJavaTokenResolver { 
 	
 	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
 
@@ -39,7 +39,7 @@ public class JavaCHARACTER_LITERALTokenResolver implements ITokenResolver{
 		return result;
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		// remove single quotes
 		assert lexem.charAt(0) == '\'';
 		assert lexem.charAt(lexem.length() - 1) == '\'';

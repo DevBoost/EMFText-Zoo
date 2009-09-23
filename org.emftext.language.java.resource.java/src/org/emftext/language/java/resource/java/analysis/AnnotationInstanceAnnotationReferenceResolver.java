@@ -31,19 +31,20 @@ import org.emftext.language.java.annotations.AnnotationInstance;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
+import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-public class AnnotationInstanceAnnotationReferenceResolver extends 
-	AbstractReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
+public class AnnotationInstanceAnnotationReferenceResolver implements 
+	IJavaReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
 	
 	public java.lang.String deResolve(org.emftext.language.java.classifiers.Classifier element, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance annotationInstance, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance annotationInstance, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		EObject startingPoint = annotationInstance;
 		EObject target =  null; 

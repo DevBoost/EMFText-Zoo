@@ -27,9 +27,10 @@ import java.util.Map;
 
 import org.emftext.language.java.literals.DecimalFloatLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
-import org.emftext.runtime.resource.ITokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-public class JavaDECIMAL_FLOAT_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaDECIMAL_FLOAT_LITERALTokenResolver implements IJavaTokenResolver {
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof DecimalFloatLiteral;
@@ -37,7 +38,7 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver implements org.emftext.runti
 		return value.toString() + FLOAT_SUFFIX;
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
 
@@ -45,7 +46,7 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver implements org.emftext.runti
 		parseToFloat(lexem, result);
 	}
 
-	public static void parseToFloat(String lexem, ITokenResolveResult result) {
+	public static void parseToFloat(String lexem, IJavaTokenResolveResult result) {
 		try {
 			BigDecimal tempDecimal = new BigDecimal(lexem);
 			Float value = tempDecimal.floatValue();

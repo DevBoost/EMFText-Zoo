@@ -39,6 +39,8 @@ import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesPackage;
+import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
+import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.EnumConstantDecider;
 import org.emftext.language.java.resource.java.analysis.decider.FieldDecider;
@@ -51,11 +53,9 @@ import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDec
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.util.TemporalCompositeClassifier;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-public class ElementReferenceTargetReferenceResolver extends 
-	AbstractReferenceResolver<ElementReference, ReferenceableElement> {
+public class ElementReferenceTargetReferenceResolver implements 
+	IJavaReferenceResolver<ElementReference, ReferenceableElement> {
 	
 	public java.lang.String deResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
 		if (element instanceof ConcreteClassifier) {
@@ -88,7 +88,7 @@ public class ElementReferenceTargetReferenceResolver extends
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<ReferenceableElement> result) {
+	public void resolve(java.lang.String identifier, ElementReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<ReferenceableElement> result) {
 		EObject startingPoint = null;
 		EObject alternativeStartingPoint = null;
 		EObject target = null;

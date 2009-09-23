@@ -20,16 +20,18 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
 
-import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
 import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.LONG_SUFFIX;
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
 
 import java.math.BigInteger;
 import java.util.Map;
 
 import org.emftext.language.java.literals.LiteralsPackage;
 import org.emftext.language.java.literals.OctalLongLiteral;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-public class JavaOCTAL_LONG_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaOCTAL_LONG_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof OctalLongLiteral;
@@ -38,7 +40,7 @@ public class JavaOCTAL_LONG_LITERALTokenResolver implements org.emftext.runtime.
 		return OCT_PREFIX + ((BigInteger) value).toString(8) + LONG_SUFFIX;
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getLongLiteral());
 		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
 

@@ -23,13 +23,12 @@ package org.emftext.language.java.resource.java.analysis.helper;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.java.resource.java.JavaResource;
+import org.emftext.language.java.resource.java.IJavaOptionProvider;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.java.IJavaResourcePostProcessor;
+import org.emftext.language.java.resource.java.IJavaResourcePostProcessorProvider;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.util.JavaModelCompletion;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
 
 /**
  * Post processor that performs 
@@ -38,21 +37,21 @@ import org.emftext.runtime.IResourcePostProcessorProvider;
  * <i>java model completion</i>
  * on a resource after parsing using the JavaModelRepairer.
  */
-public class JavaPostProcessor implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
+public class JavaPostProcessor implements IJavaOptionProvider, IJavaResourcePostProcessor, IJavaResourcePostProcessorProvider {
 	
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 		return map;
 	}
 
-	public void process(Resource resource) {
+	public void process(JavaResource resource) {
 		JavaResource javaResource = (JavaResource) resource;
 		JavaModelRepairer.repair(javaResource);
 		JavaModelCompletion.complete(javaResource);
 	}
 
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public IJavaResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 }

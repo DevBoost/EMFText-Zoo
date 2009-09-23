@@ -27,8 +27,10 @@ import java.util.Map;
 
 import org.emftext.language.java.literals.LiteralsPackage;
 import org.emftext.language.java.literals.OctalIntegerLiteral;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-public class JavaOCTAL_INTEGER_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaOCTAL_INTEGER_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof OctalIntegerLiteral;
@@ -37,7 +39,7 @@ public class JavaOCTAL_INTEGER_LITERALTokenResolver implements org.emftext.runti
 		return OCT_PREFIX + ((BigInteger) value).toString(8);
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
 		
 		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, result);

@@ -24,12 +24,12 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.language.java.resource.java.JavaDefaultTokenResolver;
-import org.emftext.runtime.resource.ITokenResolver;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
 // TODO @mseifert: add conversion of supplementary unicode characters
 // see JavaSTRING_LITERALTokenResolver
-public class JavaIDENTIFIERTokenResolver implements ITokenResolver {
+public class JavaIDENTIFIERTokenResolver implements IJavaTokenResolver {
 	
 	private JavaDefaultTokenResolver defaultResolver = new JavaDefaultTokenResolver();
 	
@@ -38,7 +38,7 @@ public class JavaIDENTIFIERTokenResolver implements ITokenResolver {
 		return result;
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		defaultResolver.resolve(lexem, feature, result);
 	}
 

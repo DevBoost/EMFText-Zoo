@@ -25,8 +25,10 @@ import java.util.Map;
 
 import org.emftext.language.java.literals.DecimalIntegerLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-public class JavaDECIMAL_INTEGER_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaDECIMAL_INTEGER_LITERALTokenResolver implements IJavaTokenResolver {
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof DecimalIntegerLiteral;
@@ -34,7 +36,7 @@ public class JavaDECIMAL_INTEGER_LITERALTokenResolver implements org.emftext.run
 		return value.toString();
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
 		
 		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 10, result);

@@ -27,8 +27,10 @@ import java.util.Map;
 
 import org.emftext.language.java.literals.HexDoubleLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-public class JavaHEX_DOUBLE_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaHEX_DOUBLE_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof HexDoubleLiteral;
@@ -36,7 +38,7 @@ public class JavaHEX_DOUBLE_LITERALTokenResolver implements org.emftext.runtime.
 		return Double.toHexString((Double) value);
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDoubleLiteral());
 		// this assertion is wrong, because hex literals of the form 0x1P10 are also valid
 		//assert lexem.contains(".");

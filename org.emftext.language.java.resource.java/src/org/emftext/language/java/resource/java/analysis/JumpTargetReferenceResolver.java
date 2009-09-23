@@ -25,21 +25,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
+import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.decider.JumpLabelDecider;
 import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.statements.Jump;
 import org.emftext.language.java.statements.JumpLabel;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
 
-public class JumpTargetReferenceResolver extends 
-	AbstractReferenceResolver<Jump, JumpLabel> {
+public class JumpTargetReferenceResolver implements 
+	IJavaReferenceResolver<Jump, JumpLabel> {
 	
 	public java.lang.String deResolve(JumpLabel element, Jump container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<JumpLabel> result) {
+	public void resolve(java.lang.String identifier, Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<JumpLabel> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		
 		EObject startingPoint = container;

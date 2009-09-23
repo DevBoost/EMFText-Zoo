@@ -20,16 +20,18 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
 
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.HEX_PREFIX;
+import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.LONG_SUFFIX;
+
 import java.math.BigInteger;
 import java.util.Map;
 
 import org.emftext.language.java.literals.HexLongLiteral;
 import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
-import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.HEX_PREFIX;
-import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.LONG_SUFFIX;
-
-public class JavaHEX_LONG_LITERALTokenResolver implements org.emftext.runtime.resource.ITokenResolver {
+public class JavaHEX_LONG_LITERALTokenResolver implements IJavaTokenResolver {
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		assert container == null || container instanceof HexLongLiteral;
@@ -37,7 +39,7 @@ public class JavaHEX_LONG_LITERALTokenResolver implements org.emftext.runtime.re
 		return HEX_PREFIX + ((BigInteger) value).toString(16) + LONG_SUFFIX;
 	}
 
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
 		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getLongLiteral());
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
