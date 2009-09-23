@@ -1,9 +1,9 @@
- SYNTAXDEF petrinet
-FOR <http://org.emftext/petrinet>
+SYNTAXDEF petrinet
+FOR <http://www.emftext.org/language/petrinet>
 START PetriNet
 
 TOKENS{
-	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }
 
 TOKENSTYLES{
@@ -15,7 +15,7 @@ TOKENSTYLES{
 	"->" COLOR #7F0055, BOLD;
 }
 
-RULES{
+RULES {
 	
 	PetriNet::= "PN"  "{" (name['"','"'])? "(" (nodes)* ")" "(" (arcs)* ")" "}" ;
 	

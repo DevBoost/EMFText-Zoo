@@ -1,5 +1,5 @@
- SYNTAXDEF project
-FOR <http://org.emftext/project>
+SYNTAXDEF project
+FOR <http://www.emftext.org/language/project>
 START Project
 
 OPTIONS{
@@ -8,7 +8,7 @@ OPTIONS{
 }
 
 TOKENS{
-	DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
+	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 }
 
 TOKENSTYLES{
@@ -22,7 +22,7 @@ TOKENSTYLES{
 	"->" COLOR #7F0055, BOLD;
 }
 
-RULES{
+RULES {
 	
 	Train::= "Train" (name['"','"'])? ; 
 	
