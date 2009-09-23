@@ -24,7 +24,8 @@ import java.math.BigInteger;
 
 import junit.framework.TestCase;
 
-import org.emftext.language.java.resource.java.JavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
+import org.emftext.language.java.resource.java.IJavaTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_DOUBLE_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_FLOAT_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaDECIMAL_INTEGER_LITERALTokenResolver;
@@ -35,7 +36,7 @@ import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALT
 import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_INTEGER_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_LONG_LITERALTokenResolver;
-import org.emftext.runtime.resource.ITokenResolveResult;
+import org.emftext.language.java.resource.java.mopp.JavaTokenResolveResult;
 import org.emftext.runtime.resource.ITokenResolver;
 
 public class NumberLiteralResolverTest extends TestCase {
@@ -213,8 +214,8 @@ public class NumberLiteralResolverTest extends TestCase {
 		return deResolve(octLong, resolved);
 	}
 
-	private Object resolve(ITokenResolver resolver, String lexem) {
-		ITokenResolveResult resolveResult = new JavaTokenResolveResult();
+	private Object resolve(IJavaTokenResolver resolver, String lexem) {
+		IJavaTokenResolveResult resolveResult = new JavaTokenResolveResult();
 		resolver.resolve(lexem, null, resolveResult);
 		Object result = resolveResult.getResolvedToken();
 		assertNotNull(result);
@@ -230,7 +231,7 @@ public class NumberLiteralResolverTest extends TestCase {
 		return result;
 	}
 
-	private String deResolve(ITokenResolver resolver,
+	private String deResolve(IJavaTokenResolver resolver,
 			Object resolved) {
 		String result = resolver.deResolve(resolved, null, null);
 		assertNotNull(result);
