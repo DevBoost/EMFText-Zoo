@@ -25,17 +25,17 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.uml2.uml.Transition;
 import org.eclipse.uml2.uml.Vertex;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
+import org.emftext.language.statemachine.resource.statemachine.IStatemachineReferenceResolveResult;
+import org.emftext.language.statemachine.resource.statemachine.IStatemachineReferenceResolver;
 
-public class TransitionTargetReferenceResolver extends 
-	AbstractReferenceResolver<Transition, Vertex> {
+public class TransitionTargetReferenceResolver implements 
+	IStatemachineReferenceResolver<Transition, Vertex> {
 
 	public java.lang.String deResolve(Vertex element, org.eclipse.uml2.uml.Transition container, org.eclipse.emf.ecore.EReference reference) {
 		return element.getName();
 	}
 
-	public void resolve(String identifier, Transition container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<Vertex> result) {	
+	public void resolve(String identifier, Transition container, EReference reference, int position, boolean resolveFuzzy, IStatemachineReferenceResolveResult<Vertex> result) {	
 		for (Vertex targetCand: container.getContainer().getSubvertices()) {
 			if (resolveFuzzy) {
 				if (targetCand.getName().startsWith(identifier)) {
