@@ -3,7 +3,6 @@ FOR <http://www.emftext.org/language/simple_gui>
 START Frame
 
 OPTIONS {
-	overrideManifest = "false";
 	tokenspace = "1";
 }
 
