@@ -2,24 +2,39 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.usecaseinvariant.resource.ucinv.UcinvResourceFactory" type="ucinv">
+		<parser class="org.emftext.language.usecaseinvariant.resource.ucinv.mopp.UcinvResourceFactory" type="ucinv">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.usecaseinvariant.resource.ucinv.UcinvMetaInformation" id="org.emftext.language.usecaseinvariant.resource.ucinv.UcinvMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.usecaseinvariant.resource.ucinv.mopp.UcinvMetaInformation" id="org.emftext.language.usecaseinvariant.resource.ucinv.mopp.UcinvMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="ucinv">
+		<content-type id="org.emftext.filetype.ucinv" name="EMFText ucinv Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.ucinv" file-extensions="ucinv">
 		</file-association>
 	</extension>
 	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvEditor" name="EMFText ucinv Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.ucinv" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvPreferenceInitializer">
+		</initializer>
+	</extension>
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.usecaseinvariant.resource.ucinv.UcinvNewFileWizard" id="org.emftext.language.usecaseinvariant.resource.ucinv.UcinvNewFileWizard" name="EMFText .ucinv file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvNewFileWizard" id="org.emftext.language.usecaseinvariant.resource.ucinv.ui.UcinvNewFileWizard" name="EMFText .ucinv file">
 		</wizard>
 	</extension>
 	

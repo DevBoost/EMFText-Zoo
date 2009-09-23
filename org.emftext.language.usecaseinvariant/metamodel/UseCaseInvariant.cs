@@ -4,7 +4,6 @@ START UseCaseModel
 
 OPTIONS {
 	reloadGeneratorModel = "true";
-	overrideManifest = "false";
 	tokenspace = "1";
 }
 
