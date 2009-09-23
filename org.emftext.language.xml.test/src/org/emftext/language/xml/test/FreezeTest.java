@@ -4,13 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.antlr.runtime.Token;
-import org.emftext.language.xml.resource.xml.XmlAntlrScanner;
-import org.emftext.language.xml.resource.xml.XmlLexer;
-import org.emftext.language.xml.resource.xml.XmlMetaInformation;
-import org.emftext.runtime.resource.ITextToken;
-
 import junit.framework.TestCase;
+
+import org.antlr.runtime.Token;
+import org.emftext.language.xml.resource.xml.IXmlTextToken;
+import org.emftext.language.xml.resource.xml.mopp.XmlAntlrScanner;
+import org.emftext.language.xml.resource.xml.mopp.XmlLexer;
 
 /**
  * This is a test for bug 854 (EMFText Editor freezes for invalid xml files).
@@ -37,9 +36,9 @@ public class FreezeTest extends TestCase {
 		try {
 			InputStream actualInputStream = new ByteArrayInputStream(example.getBytes());
 			XmlLexer lexer = new XmlLexer(new org.antlr.runtime.ANTLRInputStream(actualInputStream));
-			XmlAntlrScanner antlrScanner = new XmlAntlrScanner(new XmlMetaInformation(), lexer);
+			XmlAntlrScanner antlrScanner = new XmlAntlrScanner(lexer);
 			int counter = 0;
-			ITextToken nextToken = antlrScanner.getNextToken();
+			IXmlTextToken nextToken = antlrScanner.getNextToken();
 			while (nextToken != null) {
 				System.out.println("FreezeTest.testAntlrScannerFreezing() \"" + nextToken.getText() + "\"");
 				if (counter > 10000) {
