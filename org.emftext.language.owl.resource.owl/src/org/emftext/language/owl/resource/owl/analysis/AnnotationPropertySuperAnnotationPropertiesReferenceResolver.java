@@ -22,9 +22,11 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 import java.util.Map;
 
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolver;
 import org.emftext.language.owl.resource.owl.analysis.custom.CrossResourceIRIResolver;
 
-public class AnnotationPropertySuperAnnotationPropertiesReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.AnnotationProperty, org.emftext.language.owl.AnnotationProperty> {
+public class AnnotationPropertySuperAnnotationPropertiesReferenceResolver implements IOwlReferenceResolver<org.emftext.language.owl.AnnotationProperty, org.emftext.language.owl.AnnotationProperty> {
 	
 	private OwlDefaultResolverDelegate<org.emftext.language.owl.AnnotationProperty, org.emftext.language.owl.AnnotationProperty> delegate = 
 		new OwlDefaultResolverDelegate<org.emftext.language.owl.AnnotationProperty, org.emftext.language.owl.AnnotationProperty>();
@@ -34,7 +36,7 @@ public class AnnotationPropertySuperAnnotationPropertiesReferenceResolver extend
 	}
 	
 		
-	public void resolve(java.lang.String identifier, org.emftext.language.owl.AnnotationProperty container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.AnnotationProperty> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.owl.AnnotationProperty container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IOwlReferenceResolveResult<org.emftext.language.owl.AnnotationProperty> result) {
 		CrossResourceIRIResolver.theInstance().doResolve(identifier, container, resolveFuzzy, result, org.emftext.language.owl.AnnotationProperty.class);
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}

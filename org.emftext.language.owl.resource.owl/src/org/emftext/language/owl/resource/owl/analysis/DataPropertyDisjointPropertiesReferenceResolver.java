@@ -22,9 +22,11 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 import java.util.Map;
 
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolver;
 import org.emftext.language.owl.resource.owl.analysis.custom.CrossResourceIRIResolver;
 
-public class DataPropertyDisjointPropertiesReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.DataProperty, org.emftext.language.owl.DataProperty> {
+public class DataPropertyDisjointPropertiesReferenceResolver implements IOwlReferenceResolver<org.emftext.language.owl.DataProperty, org.emftext.language.owl.DataProperty> {
 	
 	private OwlDefaultResolverDelegate<org.emftext.language.owl.DataProperty, org.emftext.language.owl.DataProperty> delegate = 
 		new OwlDefaultResolverDelegate<org.emftext.language.owl.DataProperty, org.emftext.language.owl.DataProperty>();
@@ -35,7 +37,7 @@ public class DataPropertyDisjointPropertiesReferenceResolver extends org.emftext
 	}
 	
 		
-	public void resolve(java.lang.String identifier, org.emftext.language.owl.DataProperty container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.DataProperty> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.owl.DataProperty container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IOwlReferenceResolveResult<org.emftext.language.owl.DataProperty> result) {
 		CrossResourceIRIResolver.theInstance().doResolve(identifier, container, resolveFuzzy, result, org.emftext.language.owl.DataProperty.class);
 				
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);

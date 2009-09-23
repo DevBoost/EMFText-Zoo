@@ -22,9 +22,11 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 import java.util.Map;
 
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolver;
 import org.emftext.language.owl.resource.owl.analysis.custom.CrossResourceIRIResolver;
 
-public class IRITargetTargetReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.IRITarget, org.emftext.language.owl.IRIIdentified> {
+public class IRITargetTargetReferenceResolver implements IOwlReferenceResolver<org.emftext.language.owl.IRITarget, org.emftext.language.owl.IRIIdentified> {
 	
 	private OwlDefaultResolverDelegate<org.emftext.language.owl.IRITarget, org.emftext.language.owl.IRIIdentified> delegate = 
 		new OwlDefaultResolverDelegate<org.emftext.language.owl.IRITarget, org.emftext.language.owl.IRIIdentified>();
@@ -34,7 +36,7 @@ public class IRITargetTargetReferenceResolver extends org.emftext.runtime.resour
 	}
 	
 		
-	public void resolve(java.lang.String identifier, org.emftext.language.owl.IRITarget container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.IRIIdentified> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.owl.IRITarget container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IOwlReferenceResolveResult<org.emftext.language.owl.IRIIdentified> result) {
 		CrossResourceIRIResolver.theInstance().doResolve(identifier, container, resolveFuzzy, result, org.emftext.language.owl.IRIIdentified.class);
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}

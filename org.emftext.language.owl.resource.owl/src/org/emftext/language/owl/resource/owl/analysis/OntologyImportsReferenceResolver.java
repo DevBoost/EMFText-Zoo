@@ -22,7 +22,10 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 import java.util.Map;
 
-public class OntologyImportsReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology> {
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolver;
+
+public class OntologyImportsReferenceResolver implements IOwlReferenceResolver<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology> {
 	
 	private OwlDefaultResolverDelegate<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology> delegate = 
 		new OwlDefaultResolverDelegate<org.emftext.language.owl.Ontology, org.emftext.language.owl.Ontology>();
@@ -32,7 +35,7 @@ public class OntologyImportsReferenceResolver extends org.emftext.runtime.resour
 	}
 	
 		
-	public void resolve(java.lang.String identifier, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Ontology> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.owl.Ontology container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IOwlReferenceResolveResult<org.emftext.language.owl.Ontology> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 

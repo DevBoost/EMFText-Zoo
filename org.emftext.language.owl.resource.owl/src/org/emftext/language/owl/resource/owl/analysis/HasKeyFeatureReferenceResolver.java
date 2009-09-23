@@ -22,9 +22,11 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 import java.util.Map;
 
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolver;
 import org.emftext.language.owl.resource.owl.analysis.custom.CrossResourceIRIResolver;
 
-public class HasKeyFeatureReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.owl.HasKey, org.emftext.language.owl.Feature> {
+public class HasKeyFeatureReferenceResolver implements IOwlReferenceResolver<org.emftext.language.owl.HasKey, org.emftext.language.owl.Feature> {
 	
 	private OwlDefaultResolverDelegate<org.emftext.language.owl.HasKey, org.emftext.language.owl.Feature> delegate = 
 		new OwlDefaultResolverDelegate<org.emftext.language.owl.HasKey, org.emftext.language.owl.Feature>();
@@ -34,7 +36,7 @@ public class HasKeyFeatureReferenceResolver extends org.emftext.runtime.resource
 	}
 	
 		
-	public void resolve(java.lang.String identifier, org.emftext.language.owl.HasKey container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.owl.Feature> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.owl.HasKey container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IOwlReferenceResolveResult<org.emftext.language.owl.Feature> result) {
 		CrossResourceIRIResolver.theInstance().doResolve(identifier, container, resolveFuzzy, result, org.emftext.language.owl.Feature.class);
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}

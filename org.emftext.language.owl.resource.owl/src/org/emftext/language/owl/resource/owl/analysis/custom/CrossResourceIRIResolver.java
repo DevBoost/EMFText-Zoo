@@ -33,7 +33,7 @@ import org.emftext.language.owl.OntologyDocument;
 import org.emftext.language.owl.OwlFactory;
 import org.emftext.language.owl.OwlPackage;
 import org.emftext.language.owl.loading.RemoteLoader;
-import org.emftext.runtime.resource.IReferenceResolveResult;
+import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
 
 public class CrossResourceIRIResolver {
 	
@@ -63,7 +63,7 @@ public class CrossResourceIRIResolver {
 	
 	public <RESULT extends IRIIdentified> void doResolve(String identifier,
 			EObject containerObject, boolean resolveFuzzy,
-			 IReferenceResolveResult<RESULT> result, Class<RESULT> c) {
+			 IOwlReferenceResolveResult<RESULT> result, Class<RESULT> c) {
 		RESULT r = null;
 		if (!hasPrefix(identifier)) return;
 		String iriPrefix = getPrefix(identifier);
