@@ -1,15 +1,18 @@
 package org.emftext.language.sparql.resource.sparql.analysis;
 
-public class SparqlDEF_IRI_REFTokenResolver extends org.emftext.runtime.resource.impl.AbstractTokenResolver {
+import org.emftext.language.sparql.resource.sparql.ISparqlTokenResolveResult;
+import org.emftext.language.sparql.resource.sparql.ISparqlTokenResolver;
+
+public class SparqlDEF_IRI_REFTokenResolver implements ISparqlTokenResolver {
 	
-	private org.emftext.language.sparql.resource.sparql.SparqlDefaultTokenResolver defaultTokenResolver = new org.emftext.language.sparql.resource.sparql.SparqlDefaultTokenResolver();
+	private SparqlDefaultTokenResolver defaultTokenResolver = new SparqlDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.runtime.resource.ITokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, ISparqlTokenResolveResult result) {
 		defaultTokenResolver.resolve(lexem, feature, result);
 	}
 	
