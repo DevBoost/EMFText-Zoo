@@ -4,7 +4,6 @@ START ParameterCheckModel
 
 OPTIONS {
 	usePredefinedTokens = "false";
-	srcFolder = "src-gen";
 	resourcePluginID = "org.emftext.language.parametercheck.resource.pcheck";
 	generateCodeFromGeneratorModel = "true";
 	basePackage = "org.emftext.language.parametercheck.resource.pcheck";
