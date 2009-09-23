@@ -13,20 +13,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.ModelEntry;
 import org.eclipse.pde.core.plugin.PluginRegistry;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.impl.AbstractProblem;
+import org.emftext.language.plugin.resource.topf.ITopfProblem;
+import org.emftext.language.plugin.resource.topf.ITopfResourcePostProcessor;
+import org.emftext.language.plugin.resource.topf.ITopfResourcePostProcessorProvider;
+import org.emftext.language.plugin.resource.topf.TopfEProblemType;
+import org.emftext.language.plugin.resource.topf.mopp.TopfResource;
 
-public class PluginDataInitializer implements IResourcePostProcessorProvider,
-		IResourcePostProcessor {
+public class PluginDataInitializer implements ITopfResourcePostProcessorProvider,
+		ITopfResourcePostProcessor {
 
 	private Map<String, ExtensionPoint> ids2eps = new HashMap<String, ExtensionPoint>();
-	private ITextResource resource;;
+	private TopfResource resource;;
 
-	public void process(ITextResource resource) {
-		this.resource = resource;
+	public void process(TopfResource resource) {
+		this.resource = (TopfResource) resource;
 		EList<EObject> contents = resource.getContents();
 		for (EObject root : contents) {
 			if (root instanceof ToolProductFamily) {
@@ -106,10 +106,10 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 						IContributor contributor = extension.getContributor();
 						if (getPlugin(contributor.getName(), family) == null) {
 							final String contributorName = contributor.getName();
-							resource.addProblem(new AbstractProblem() {
+							resource.addProblem(new ITopfProblem() {
 								
-								public EProblemType getType() {
-									return EProblemType.WARNING;
+								public TopfEProblemType getType() {
+									return TopfEProblemType.WARNING;
 								}
 								
 								public String getMessage() {
@@ -129,10 +129,10 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 		
 		ModelEntry entry = PluginRegistry.findEntry(plugin.getPluginId()) ;
 		if (entry == null) {
-			resource.addProblem(new AbstractProblem() {
+			resource.addProblem(new ITopfProblem() {
 				
-				public EProblemType getType() {
-					return EProblemType.ERROR;
+				public TopfEProblemType getType() {
+					return TopfEProblemType.ERROR;
 				}
 				
 				public String getMessage() {
@@ -147,9 +147,7 @@ public class PluginDataInitializer implements IResourcePostProcessorProvider,
 		
 	}
 
-	
-
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public ITopfResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 
