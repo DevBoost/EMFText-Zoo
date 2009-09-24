@@ -27,32 +27,31 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.chess.resource.cg.CgEProblemType;
+import org.emftext.language.chess.resource.cg.ICgOptionProvider;
+import org.emftext.language.chess.resource.cg.ICgOptions;
 import org.emftext.language.chess.resource.cg.ICgProblem;
+import org.emftext.language.chess.resource.cg.ICgResourcePostProcessor;
+import org.emftext.language.chess.resource.cg.ICgResourcePostProcessorProvider;
 import org.emftext.language.chess.resource.cg.mopp.CgResource;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
 
 /**
  * This is very rough implementation of the rules to move pieces.
  * It is neither complete nor correct, but it shows how the chess
  * model can be analyzed.
  */
-public class MoveChecker implements IResourcePostProcessor,
-	IResourcePostProcessorProvider, IOptionProvider {
+public class MoveChecker implements ICgResourcePostProcessor,
+	ICgResourcePostProcessorProvider, ICgOptionProvider {
 
 	public Map<?, ?> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new MoveChecker());
+		options.put(ICgOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new MoveChecker());
 		return options;
 	}
 
-	public void process(Resource resource) {
-		CgResource chessResource = (CgResource) resource;
+	public void process(CgResource resource) {
+		CgResource chessResource = resource;
 		List<EObject> contents = chessResource.getContents();
 		for (EObject next : contents) {
 			ChessGame game = (ChessGame) next;
@@ -205,7 +204,7 @@ public class MoveChecker implements IResourcePostProcessor,
 		return sqare;
 	}
 
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public ICgResourcePostProcessor getResourcePostProcessor() {
 		return new MoveChecker();
 	}
 }

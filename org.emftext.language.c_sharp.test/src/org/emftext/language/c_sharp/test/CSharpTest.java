@@ -54,6 +54,7 @@ import org.emftext.language.c_sharp.namespaces.CompilationUnit;
 import org.emftext.language.c_sharp.namespaces.Namespace;
 import org.emftext.language.c_sharp.namespaces.NamespaceMemberDeclaration;
 import org.emftext.language.c_sharp.namespaces.UsingDirective;
+import org.emftext.language.c_sharp.resource.csharp.util.CsharpEObjectUtil;
 import org.emftext.language.c_sharp.statements.DeclarationStatement;
 import org.emftext.language.c_sharp.test.cssyntaxcheck.CheckCSSyntaxWrapper;
 import org.emftext.language.c_sharp.types.Bool;
@@ -70,7 +71,6 @@ import org.emftext.language.c_sharp.types.Short;
 import org.emftext.language.c_sharp.types.UInt;
 import org.emftext.language.c_sharp.types.ULong;
 import org.emftext.language.c_sharp.types.UShort;
-import org.emftext.runtime.util.EObjectUtil;
 import org.junit.Test;
 
 
@@ -105,7 +105,7 @@ public class CSharpTest extends AbstractCSharpTestCase {
 		assertMemberCount(clazz, 7);
 		
 		// check that there are 6 field declarations
-		Collection<Object> fieldDeclarations = EObjectUtil.getObjectsByType(clazz.eAllContents(), ClassesPackage.eINSTANCE.getFieldDeclaration());
+		Collection<Object> fieldDeclarations = CsharpEObjectUtil.getObjectsByType(clazz.eAllContents(), ClassesPackage.eINSTANCE.getFieldDeclaration());
 		assertEquals(6, fieldDeclarations.size());
 		
 		List<ClassMemberDeclaration> cmd = clazz.getClassMemberDeclarations();

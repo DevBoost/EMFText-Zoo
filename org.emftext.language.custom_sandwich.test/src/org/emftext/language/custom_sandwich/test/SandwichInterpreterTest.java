@@ -37,7 +37,7 @@ public class SandwichInterpreterTest extends AbstractInterpreterTest {
 	protected void registerResourceFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"sandwich",
-				new org.emftext.language.sandwich.resource.sandwich.SandwichResourceFactory());
+				new org.emftext.language.sandwich.resource.sandwich.mopp.SandwichResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"custom_sandwich",
 				new org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResourceFactory());

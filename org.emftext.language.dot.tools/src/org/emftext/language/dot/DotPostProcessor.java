@@ -9,18 +9,18 @@ import java.util.logging.Logger;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.dot.resource.dot.IDotResourcePostProcessor;
+import org.emftext.language.dot.resource.dot.mopp.DotResource;
 import org.emftext.language.dot.util.ExeUtil;
 import org.emftext.language.dot.util.Pair;
-import org.emftext.runtime.IResourcePostProcessor;
 
-public class DotPostProcessor implements IResourcePostProcessor {
+public class DotPostProcessor implements IDotResourcePostProcessor {
 
 	private static final String dotExecutable = getDOTExecutable();
 	private static final Logger logger = Logger
 			.getLogger(DotPostProcessor.class.getName());
 
-	public void process(Resource resource) {
+	public void process(DotResource resource) {
 		if (!testDOT()) {
 			// TODO externalize
 			logger.severe("can't run dot. please check your path!"); //$NON-NLS-1$
