@@ -21,6 +21,9 @@
 package org.emftext.language.custom_sandwich.test;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichResourceFactory;
+import org.emftext.language.customer.resource.customer.mopp.CustomerResourceFactory;
+import org.emftext.language.sandwich.resource.sandwich.mopp.SandwichResourceFactory;
 import org.emftext.language.template_concepts.interpreter.test.AbstractInterpreterTest;
 
 public class SandwichInterpreterTest extends AbstractInterpreterTest {
@@ -37,13 +40,13 @@ public class SandwichInterpreterTest extends AbstractInterpreterTest {
 	protected void registerResourceFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"sandwich",
-				new org.emftext.language.sandwich.resource.sandwich.mopp.SandwichResourceFactory());
+				new SandwichResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"custom_sandwich",
-				new org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResourceFactory());
+				new Custom_sandwichResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"customer",
-				new org.emftext.language.customer.resource.customer.CustomerResourceFactory());
+				new CustomerResourceFactory());
 	}
 
 	@Override
