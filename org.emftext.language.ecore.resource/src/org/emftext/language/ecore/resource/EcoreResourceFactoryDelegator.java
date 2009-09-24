@@ -30,7 +30,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.emftext.runtime.EMFTextRuntimePlugin;
 
 /**
  * This resource factory delegates to different resource factories
@@ -64,8 +63,9 @@ public class EcoreResourceFactoryDelegator implements Resource.Factory {
 			            
 			            ecoreFactories.put(type, factory);
 					} catch (CoreException e) {
-						EMFTextRuntimePlugin.logError(
-								"Error while instatiating: " + parserPoints[i].getAttribute("class"), e);
+						e.printStackTrace();
+						//EMFTextRuntimePlugin.logError(
+						//		"Error while instatiating: " + parserPoints[i].getAttribute("class"), e);
 					}
 		        }
 	        }
