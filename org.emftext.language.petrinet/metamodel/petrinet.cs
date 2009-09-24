@@ -2,29 +2,28 @@ SYNTAXDEF petrinet
 FOR <http://www.emftext.org/language/petrinet>
 START PetriNet
 
-TOKENS{
+TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }
 
-TOKENSTYLES{
-	"PN" COLOR #7F0055, BOLD;
-	"A" COLOR #7F0055, BOLD;
-	"Tr" COLOR #7F0055, BOLD;
-	"P" COLOR #7F0055, BOLD;
-	"To" COLOR #7F0055, BOLD;
+TOKENSTYLES {
+	"net" COLOR #7F0055, BOLD;
+	"arc" COLOR #7F0055, BOLD;
+	"transition" COLOR #7F0055, BOLD;
+	"place" COLOR #7F0055, BOLD;
+	"token" COLOR #7F0055, BOLD;
 	"->" COLOR #7F0055, BOLD;
 }
 
 RULES {
 	
-	PetriNet::= "PN"  "{" (name['"','"'])? "(" (nodes)* ")" "(" (arcs)* ")" "}" ;
+	PetriNet::= "net"  (name['"','"'])?  "{" nodes* arcs* "}" ;
 	
-	Arc::= "A" (name['"','"'])? source[] "->" target[] ;
+	Arc::= "arc" (name['"','"'])? source['"','"'] "->" target['"','"'] ;
 	
-	Transition::= "Tr" (name['"','"'])? ;
+	Transition::= "transition" (name['"','"'])? ;
 	
-	Place::= "P" "{" (name['"','"'])? (marking)* "}" ;
+	Place::= "place" (name['"','"'])? ("{" marking* "}")? ;
 	
-	Token::= "To" (name['"','"'])? ;
-	
+	Token::= "token" (name['"','"'])? ;
 }

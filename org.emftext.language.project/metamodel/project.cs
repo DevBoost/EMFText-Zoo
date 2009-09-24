@@ -7,35 +7,43 @@ OPTIONS{
     reloadGeneratorModel = "true";
 }
 
-TOKENS{
+TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
 }
 
-TOKENSTYLES{
-	"Train" COLOR #7F0055, BOLD;
-	"P" COLOR #7F0055, BOLD;
-	"T" COLOR #7F0055, BOLD;
-	"S" COLOR #7F0055, BOLD;
-	"C" COLOR #7F0055, BOLD;
-	"O" COLOR #7F0055, BOLD;
-	"I" COLOR #7F0055, BOLD;
+TOKENSTYLES {
+	"plan" COLOR #7F0055, BOLD;
+	"train" COLOR #7F0055, BOLD;
+	"switch" COLOR #7F0055, BOLD;
+	"connect" COLOR #7F0055, BOLD;
+	"out:" COLOR #7F0055, BOLD;
+	"in:" COLOR #7F0055, BOLD;
 	"->" COLOR #7F0055, BOLD;
 }
 
 RULES {
 	
-	Train::= "Train" (name['"','"'])? ; 
+	Project ::= "plan" (name['"','"'])? "{" 
+			components* connections*
+		"}";
 	
-	Project::= "P" "{" (name['"','"'])? "(" (components)* ")" "(" (connections)* ")" "}";
+	Train ::= "train" (name['"','"'])? ; 
 	
-	Track::= "T" "{" (name['"','"'])? "(" (ports)* ")" "(" (trains)* ")" "}" ;
+	Track ::= "track" (name['"','"'])? 
+		"{" 
+			ports* 
+			trains* 
+		"}" ;
 	
-	Switch::= "S" "{" (name['"','"'])? "(" (ports)* ")" "(" (trains)* ")" "}" ;
+	Switch ::= "switch" (name['"','"'])?
+		"{" 
+			ports*
+			trains* 
+		"}" ;
 	
-	Connection::= "C" (name['"','"'])? source[] "->" target[] ;
+	Connection ::= "connect" (name['"','"'])? source['"','"'] "->" target['"','"'] ;
 	
-	Out::= "O" (name['"','"'])?  ;
+	Out ::= "out:" (name['"','"'])? ;
 	
-	In::= "I" (name['"','"'])? ;
-	
+	In  ::= "in:"  (name['"','"'])? ;
 }
