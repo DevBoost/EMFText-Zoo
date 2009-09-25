@@ -49,9 +49,9 @@ import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
-import org.emftext.language.java.resource.java.JavaResource;
+import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.util.JavaModelCompletion;
-import org.emftext.runtime.resource.IContextDependentURIFragment;
 
 /**
  * A resource that uses either the generated <code>JavaParser</code> or
@@ -147,7 +147,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if(!id.startsWith(IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+			if(!id.startsWith(IJavaContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 				if(result != null && !(result instanceof ConcreteClassifier)) {
 					//may happen if members of same name exist
 					if(result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS) 
