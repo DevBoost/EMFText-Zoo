@@ -9,9 +9,6 @@ IMPORTS {
 OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
-	overrideManifest = "false";
-	overridePluginXML = "false";
-	overrideClasspath = "false";
 }
 
 TOKENS {
