@@ -2,6 +2,8 @@ package org.emftext.language.tbool.test;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.emftext.language.bool.resource.bool.mopp.BoolResourceFactory;
+import org.emftext.language.tbool.resource.tbool.mopp.TboolResourceFactory;
 import org.emftext.language.template_concepts.interpreter.test.AbstractInterpreterTest;
 
 public class TBoolInterpretationTest extends AbstractInterpreterTest {
@@ -14,10 +16,10 @@ public class TBoolInterpretationTest extends AbstractInterpreterTest {
 	protected void registerResourceFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"bool",
-				new org.emftext.language.bool.resource.bool.BoolResourceFactory());
+				new BoolResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"tbool",
-				new org.emftext.language.tbool.resource.tbool.TboolResourceFactory());
+				new TboolResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore",
 				new EcoreResourceFactoryImpl());
