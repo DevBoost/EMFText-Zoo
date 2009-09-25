@@ -12,8 +12,24 @@
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="reusejava">
+		<content-type id="org.emftext.filetype.reusejava" name="EMFText reusejava Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.reusejava" file-extensions="reusejava">
 		</file-association>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaEditor" name="EMFText reusejava Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.reusejava" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferenceInitializer">
+		</initializer>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -22,5 +38,16 @@
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaNewFileWizard" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaNewFileWizard" name="EMFText .reusejava file">
 		</wizard>
 	</extension>
+	
+	<extension id="org.emftext.language.java.reusejava.resource.reusejava.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.java.reusejava.resource.reusejava.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
 	
 </plugin>
