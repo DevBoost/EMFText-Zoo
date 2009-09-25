@@ -1,12 +1,14 @@
 package org.emftext.language.tbool.resource.tbool.analysis;
 
+import org.emftext.language.tbool.resource.tbool.ITboolReferenceResolveResult;
+import org.emftext.language.tbool.resource.tbool.ITboolReferenceResolver;
 import org.emftext.language.template_concepts.InputMetaClassReferenceResolver;
 
-public class TemplateInputMetaClassReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EClass> {
+public class TemplateInputMetaClassReferenceResolver implements ITboolReferenceResolver<org.emftext.language.template_concepts.Template, org.eclipse.emf.ecore.EClass> {
 	
 	private InputMetaClassReferenceResolver resolverDelegate = new InputMetaClassReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITboolReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
 		resolverDelegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
