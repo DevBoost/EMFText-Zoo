@@ -14,15 +14,13 @@ import org.emftext.language.java.commons.NamespaceAwareElement;
 import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.ejava.util.EcoreWrapper;
 import org.emftext.language.java.members.Member;
 import org.emftext.runtime.IOptionProvider;
 import org.emftext.runtime.IOptions;
 import org.emftext.runtime.IResourcePostProcessor;
 import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.IProblem;
-import org.emftext.runtime.resource.ITextResource;
 
 /**
  * Post processor that wraps the Ecore model for the eJava specification.
@@ -81,10 +79,10 @@ public class EJavaPostProcessor implements IOptionProvider, IResourcePostProcess
 		}
 	}
 	
-	private void attachError(final NamedElement element, final ITextResource resource) {
-		resource.addProblem(new IProblem() {			
-			public EProblemType getType() {
-				return EProblemType.ERROR;
+	private void attachError(final NamedElement element, final EjavaResource resource) {
+		resource.addProblem(new IEjavaProblem() {			
+			public EjavaEProblemType getType() {
+				return EjavaEProblemType.ERROR;
 			}
 			
 			public String getMessage() {

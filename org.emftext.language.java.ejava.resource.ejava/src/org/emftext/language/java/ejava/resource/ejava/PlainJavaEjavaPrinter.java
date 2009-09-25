@@ -4,9 +4,9 @@ import java.io.OutputStream;
 
 import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaPrinter;
 import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
-import org.emftext.runtime.resource.ITextResource;
 
 /**
  * A printer that prints EJava specific elements to corresponding
@@ -15,7 +15,7 @@ import org.emftext.runtime.resource.ITextResource;
  */
 public class PlainJavaEjavaPrinter extends EjavaPrinter {
 
-	public PlainJavaEjavaPrinter(OutputStream o, ITextResource resource) {
+	public PlainJavaEjavaPrinter(OutputStream o, IEjavaTextResource resource) {
 		super(o, resource);
 	}
 	

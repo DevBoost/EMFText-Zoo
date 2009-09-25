@@ -16,6 +16,8 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaPrinter;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.statements.FeatureStatementListContainerStatements;
 
@@ -108,7 +110,8 @@ public class ExtendedEjavaResource extends EjavaResource {
 		for(FeatureStatementListContainerStatements statement : wrapper.getStatements()) {
 			printer.print(statement);
 			try {
-				printer.outputStream.write(lineBreak);
+				// TODO jendrik: this was printer.outputStream.write() ?!
+				outputStream.write(lineBreak);
 			} catch (IOException e) {}
 		}
 		return outputStream.toString();
