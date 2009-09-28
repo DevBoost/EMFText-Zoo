@@ -31,17 +31,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.call.TemplateCall;
-import org.emftext.runtime.resource.IReferenceResolveResult;
-import org.emftext.runtime.resource.impl.AbstractReferenceResolver;
+import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolveResult;
+import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolver;
 
-public class TemplateCallParameterModelReferenceResolver extends AbstractReferenceResolver<TemplateCall, EObject> {
+public class TemplateCallParameterModelReferenceResolver implements ITemplate_callReferenceResolver<TemplateCall, EObject> {
 	
 	public java.lang.String deResolve(EObject element, TemplateCall container, EReference reference) {
 		// TODO
 		return null;
 	}
 	
-	public void resolve(String identifier, TemplateCall container, EReference reference, int position, boolean resolveFuzzy, IReferenceResolveResult<EObject> result) {
+	public void resolve(String identifier, TemplateCall container, EReference reference, int position, boolean resolveFuzzy, ITemplate_callReferenceResolveResult<EObject> result) {
 		Resource resource = container.eResource();
 		URI uri = resource.getURI();
 		URI uriWithoutExtension = uri.trimSegments(1);

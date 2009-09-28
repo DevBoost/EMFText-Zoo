@@ -2,12 +2,12 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.template_concepts.call.resource.template_call.Template_callResourceFactory" type="template_call">
+		<parser class="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResourceFactory" type="template_call">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.template_concepts.call.resource.template_call.Template_callMetaInformation" id="org.emftext.language.template_concepts.call.resource.template_call.Template_callMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callTextResourcePluginMetaInformation" id="org.emftext.language.template_concepts.call.resource.template_call.Template_callMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
@@ -19,17 +19,19 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.template_concepts.call.resource.template_call.Template_callNewFileWizard" id="org.emftext.language.template_concepts.call.resource.template_call.Template_callNewFileWizard" name="EMFText .template_call file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callNewFileWizard" id="org.emftext.language.template_concepts.call.resource.template_call.Template_callNewFileWizard" name="EMFText .template_call file">
 		</wizard>
 	</extension>
 	
  <extension
-       point="org.emftext.runtime.default_load_options">
+       point="org.emftext.language.template_concepts.call.resource.template_call.default_load_options">
     <provider
           class="org.emftext.language.template_concepts.call.resource.template_call.post_processing.InterpreterExecuter"
-          csName="template_call"
           id="org.emftext.language.template_concepts.call.resource.template_call.post_processing.InterpreterExecuter">
     </provider>
  </extension>
+ 
+ <extension-point id="org.emftext.language.template_concepts.call.resource.template_call.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+ 
 	
 </plugin>

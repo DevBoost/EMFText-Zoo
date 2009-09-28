@@ -30,11 +30,11 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
 import org.emftext.language.template_concepts.interpreter.TemplateInterpreterFactory;
-import org.emftext.runtime.resource.IProblem;
 
 public abstract class AbstractInterpreterTest extends TestCase {
 	
@@ -57,7 +57,7 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			Template template = (Template) templateResource.getContents().get(0);
 			
 			ITemplateInterpreter interpreter = TemplateInterpreterFactory.createTemplateInterpreter();
-			EObject templateInstanceAST = interpreter.interprete(template, inputModelRoot, Collections.<IProblem>emptyList());
+			EObject templateInstanceAST = interpreter.interprete(template, inputModelRoot, Collections.<Diagnostic>emptyList());
 			assertNotNull(templateInstanceAST);
 			
 			// pretty print templateInstanceAST

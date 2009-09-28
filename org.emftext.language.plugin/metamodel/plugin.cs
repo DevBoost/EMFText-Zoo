@@ -4,6 +4,7 @@ START ToolProductFamily
 
 OPTIONS {
 	overridePluginXML = "false";
+	overrideManifest = "false";
 	tokenspace = "1"; 
 }
 

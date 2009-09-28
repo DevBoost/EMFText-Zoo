@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.commons.NamedElement;
@@ -17,23 +16,19 @@ import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.ejava.util.EcoreWrapper;
 import org.emftext.language.java.members.Member;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
 
 /**
  * Post processor that wraps the Ecore model for the eJava specification.
  */
-public class EJavaPostProcessor implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
+public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourcePostProcessor, IEjavaResourcePostProcessorProvider {
 
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new EJavaPostProcessor());
+		map.put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new EJavaPostProcessor());
 		return map;
 	}
 
-	public void process(Resource resource) {
+	public void process(EjavaResource resource) {
 		EjavaResource eJavaResource = (EjavaResource) resource;
 		if (!resource.getContents().isEmpty()) {
 			try {
@@ -52,7 +47,7 @@ public class EJavaPostProcessor implements IOptionProvider, IResourcePostProcess
 		}
 	}
 
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public IEjavaResourcePostProcessor getResourcePostProcessor() {
 		return new EJavaPostProcessor();
 	}
 	

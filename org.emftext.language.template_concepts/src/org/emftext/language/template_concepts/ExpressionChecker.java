@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
@@ -45,13 +47,7 @@ import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
 import org.emftext.language.primitive_types.helper.PrimitiveTypesHelper;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.resource.impl.AbstractProblem;
+
 
 /**
  * An ExpressionChecker can be used to check and evaluate OCL queries 
@@ -67,9 +63,9 @@ import org.emftext.runtime.resource.impl.AbstractProblem;
  * 
  * TODO clean this mess up
  */
-public class ExpressionChecker implements IOptionProvider, IResourcePostProcessor, IResourcePostProcessorProvider {
+public class ExpressionChecker  {
 
-	public void process(ITextResource resource) {
+	public void process(Resource resource) {
 		List<EObject> templates = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getTemplate());
 		if (templates.size() < 1) {
 			return;
@@ -86,7 +82,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		check(resource, metaClass, contents, variables);
 	}
 
-	private void check(ITextResource resource, EClass metaClass,
+	private void check(Resource resource, EClass metaClass,
 			List<EObject> contents, Map<String, EObject> variables) {
 		for (EObject next : contents) {
 			if (next instanceof TemplateConcept) {
@@ -97,23 +93,30 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		}
 	}
 
-	private void check(ITextResource resource, EClass metaClass,
+	private void check(Resource resource, EClass metaClass,
 			TemplateConcept concept, Map<String, EObject> variables) {
 		final String expression = concept.getExpression();
 		final Object errorOrQuery = createQuery(metaClass, variables, expression);
 		if (errorOrQuery instanceof String) {
 			final String error = (String) errorOrQuery;
-			resource.addProblem(
-					new AbstractProblem() {
-						
-						public EProblemType getType() {
-							return EProblemType.ERROR;
-						}
-						
-						public String getMessage() {
-							return "The expression \"" + expression + "\" is invalid (" + error + ").";
-						}
-					}, concept);
+			resource.getErrors().add(new Diagnostic() {
+				
+				public String getMessage() {
+					return "The expression \"" + expression + "\" is invalid (" + error + ").";
+				}
+				
+				public String getLocation() {
+					return null;
+				}
+				
+				public int getLine() {
+					return 0; //TODO line from concepts
+				}
+				
+				public int getColumn() {
+					return 0; //TODO column from concepts
+				}
+			});
 		} else {
 			if (concept instanceof ForEach) {
 				ForEach forEach = (ForEach) concept;
@@ -143,7 +146,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		}
 	}
 
-	private void checkPlaceholderExpressionType(ITextResource resource,
+	private void checkPlaceholderExpressionType(Resource resource,
 			EClass metaClass, TemplateConcept concept, String expression) {
 		Object queryOrError = createQuery(metaClass, null, expression);
 		if (queryOrError instanceof Query) {
@@ -178,17 +181,24 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 			// now we have both the primitive type of the expression and the target of the
 			// placeholder. lets compare them...
 			if (placeHolderExpressionPrimitiveType == null || !placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
-				resource.addProblem(
-						new AbstractProblem() {
-							
-							public EProblemType getType() {
-								return EProblemType.ERROR;
-							}
-							
-							public String getMessage() {
-								return "The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")";
-							}
-						}, concept);
+				resource.getErrors().add(new Diagnostic() {
+					
+					public String getMessage() {
+						return "The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")";
+					}
+					
+					public String getLocation() {
+						return null;
+					}
+					
+					public int getLine() {
+						return 0; //TODO line from concepts
+					}
+					
+					public int getColumn() {
+						return 0; //TODO column from concepts
+					}
+				});
 			}
 		} else {
 			System.out.println("Error while checking placeholder - error: " + queryOrError);
@@ -212,7 +222,7 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		return null;
 	}
 
-	private List<EObject> getObjectsByType(ITextResource resource, EClass metaClass) {
+	private List<EObject> getObjectsByType(Resource resource, EClass metaClass) {
 		List<EObject> foundObjects = new ArrayList<EObject>();
 		
 		TreeIterator<EObject> contents = resource.getAllContents();
@@ -294,15 +304,5 @@ public class ExpressionChecker implements IOptionProvider, IResourcePostProcesso
 		for (String variableName : variables.keySet()) {
 			query.getEvaluationEnvironment().add(variableName, variables.get(variableName));
 		}
-	}
-
-	public IResourcePostProcessor getResourcePostProcessor() {
-		return this;
-	}
-
-	public Map<?, ?> getOptions() {
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
-		return options;
 	}
 }

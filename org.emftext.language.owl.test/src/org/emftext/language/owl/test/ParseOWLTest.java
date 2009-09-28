@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation;
+import org.emftext.language.owl.resource.owl.mopp.OwlTextResourcePluginMetaInformation;
 
 public class ParseOWLTest extends TestCase {
 
@@ -44,7 +44,7 @@ public class ParseOWLTest extends TestCase {
 		File[] exampleFiles = modelDir.listFiles(new FileFilter() {
 			public boolean accept(File file) {
 				String filename = file.getName();
-				boolean isOwlFile = filename.endsWith("." + new OwlMetaInformation().getSyntaxName());
+				boolean isOwlFile = filename.endsWith("." + new OwlTextResourcePluginMetaInformation().getSyntaxName());
 				return isOwlFile && 
 					!"ill.owl".equals(filename) &&
 					!"large_galen.owl".equals(filename);

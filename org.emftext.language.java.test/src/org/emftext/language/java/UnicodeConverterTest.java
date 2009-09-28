@@ -20,8 +20,8 @@
  ******************************************************************************/
 package org.emftext.language.java;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
@@ -30,15 +30,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.antlr.runtime.ANTLRInputStream;
-import org.emftext.runtime.util.UnicodeConverter;
+import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.junit.Test;
 
 public class UnicodeConverterTest {
 	
 	@Test
 	public void testUnsignedByteToInt() {
-		assertEquals(255, UnicodeConverter.unsignedByteToInt((byte) 0xFF));
-		assertEquals(1, UnicodeConverter.unsignedByteToInt((byte) 0x01));
+		assertEquals(255, JavaUnicodeConverter.unsignedByteToInt((byte) 0xFF));
+		assertEquals(1, JavaUnicodeConverter.unsignedByteToInt((byte) 0x01));
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class UnicodeConverterTest {
 	}
 
 	private void assertConversion(String expectedOutput, String input) throws IOException {
-		UnicodeConverter converter = new UnicodeConverter(new ByteArrayInputStream(input.getBytes()));
+		JavaUnicodeConverter converter = new JavaUnicodeConverter(new ByteArrayInputStream(input.getBytes()));
 		byte[] bytes = new byte[100];
 		int next;
 		int i = 0;
@@ -71,21 +71,21 @@ public class UnicodeConverterTest {
 	@Test
 	public void testStreaming() {
 		try {
-			byte[] bs = UnicodeConverter.encode(new int[] {0x202a});
+			byte[] bs = JavaUnicodeConverter.encode(new int[] {0x202a});
 			InputStream stream = new ByteArrayInputStream(bs);
 
 			InputStreamReader reader = new InputStreamReader(stream, "UTF-8");
 			assertEquals(0x202a, reader.read());
 			assertEquals(-1, reader.read());
 
-			bs = UnicodeConverter.encode(new int[] {0x40, 0x202a});
+			bs = JavaUnicodeConverter.encode(new int[] {0x40, 0x202a});
 			stream = new ByteArrayInputStream(bs);
 			ANTLRInputStream antlrStream = new ANTLRInputStream(stream, "UTF-8");
 			int byte1 = antlrStream.LT(2);
 			assertEquals(0x202a, byte1);
 			
 			System.out.println("ANTLRStreamTest.testStreaming()");
-			stream = new UnicodeConverter(new ByteArrayInputStream("a\\u202a".getBytes()));
+			stream = new JavaUnicodeConverter(new ByteArrayInputStream("a\\u202a".getBytes()));
 			antlrStream = new ANTLRInputStream(stream, "UTF-8");
 			byte1 = antlrStream.LT(2);
 			assertEquals(0x202a, byte1);

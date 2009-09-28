@@ -3,7 +3,6 @@ FOR <http://www.emftext.org/language/formular>
 START Formular
 
 OPTIONS {
-	overridePluginXML = "false";
 	overrideClasspath = "false";
 	overrideManifest = "false";
 	overrideProjectFile = "false";

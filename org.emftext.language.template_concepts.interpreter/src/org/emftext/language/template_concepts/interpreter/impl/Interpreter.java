@@ -24,15 +24,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
-import org.emftext.runtime.resource.EProblemType;
-import org.emftext.runtime.resource.IProblem;
-import org.emftext.runtime.resource.impl.AbstractProblem;
 
 public class Interpreter implements ITemplateInterpreter {
 
-	public EObject interprete(Template template, EObject paramModel, Collection<IProblem> problems) {
+	public EObject interprete(Template template, EObject paramModel, Collection<Diagnostic> problems) {
 		try {
 			final EClass inputMetaClass = template.getInputMetaClass();
 			
@@ -53,17 +51,25 @@ public class Interpreter implements ITemplateInterpreter {
 		}
 	}
 
-	private void addError(Collection<IProblem> problems,
+	private void addError(Collection<Diagnostic> problems,
 			final String message) {
-		problems.add(new AbstractProblem() {
-					
-					public EProblemType getType() {
-						return EProblemType.ERROR;
-					}
-					
-					public String getMessage() {
-						return message;
-					}
-				});
+		problems.add(new Diagnostic() {
+			
+			public String getMessage() {
+				return message;
+			}
+			
+			public String getLocation() {
+				return null;
+			}
+			
+			public int getLine() {
+				return 0;
+			}
+			
+			public int getColumn() {
+				return 0;
+			}
+		});
 	}
 }

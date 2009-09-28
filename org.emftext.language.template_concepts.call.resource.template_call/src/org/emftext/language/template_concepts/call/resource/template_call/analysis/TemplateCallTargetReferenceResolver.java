@@ -26,19 +26,26 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.template_concepts.Template;
+import org.emftext.language.template_concepts.call.TemplateCall;
+import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolveResult;
+import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolver;
 
-public class TemplateCallTargetReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.template_concepts.call.TemplateCall, org.emftext.language.template_concepts.Template> {
+public class TemplateCallTargetReferenceResolver implements ITemplate_callReferenceResolver<TemplateCall, EObject> {
 	
-	public java.lang.String deResolve(org.emftext.language.template_concepts.Template element, org.emftext.language.template_concepts.call.TemplateCall container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(EObject element, TemplateCall container,
+			EReference reference) {
 		// TODO
 		return null;
 	}
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.call.TemplateCall container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.template_concepts.Template> result) {
+	public void resolve(String identifier, TemplateCall container,
+			EReference reference, int position, boolean resolveFuzzy,
+			ITemplate_callReferenceResolveResult<EObject> result) {
 		Resource resource = container.eResource();
 		URI uri = resource.getURI();
 		URI uriWithoutExtension = uri.trimSegments(1);
@@ -68,4 +75,5 @@ public class TemplateCallTargetReferenceResolver extends org.emftext.runtime.res
 
 	public void setOptions(Map<?, ?> options) {
 	}
+
 }

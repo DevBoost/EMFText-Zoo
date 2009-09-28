@@ -14,21 +14,22 @@ import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.references.StringReference;
 import org.emftext.language.java.treejava.Node;
-import org.emftext.runtime.IOptionProvider;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.language.java.treejava.resource.treejava.ITreejavaOptionProvider;
+import org.emftext.language.java.treejava.resource.treejava.ITreejavaOptions;
+import org.emftext.language.java.treejava.resource.treejava.ITreejavaResourcePostProcessor;
+import org.emftext.language.java.treejava.resource.treejava.ITreejavaResourcePostProcessorProvider;
+import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaResource;
 
-public class TreeJavaCompiler implements IResourcePostProcessor,
-	IResourcePostProcessorProvider, IOptionProvider {
+public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
+	ITreejavaResourcePostProcessorProvider, ITreejavaOptionProvider {
 
 	public Map<?, ?> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new TreeJavaCompiler());
+		options.put(ITreejavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new TreeJavaCompiler());
 		return options;
 	}
 
-	public void process(Resource resource) {
+	public void process(TreejavaResource resource) {
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
@@ -73,7 +74,7 @@ public class TreeJavaCompiler implements IResourcePostProcessor,
 		return ncc;
 	}
 	
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public ITreejavaResourcePostProcessor getResourcePostProcessor() {
 		return new TreeJavaCompiler();
 	}
 

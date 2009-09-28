@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -47,7 +48,6 @@ import org.emftext.language.template_concepts.Template_conceptsPackage;
 import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
-import org.emftext.runtime.util.ListUtil;
 
 /**
  * This is the actual interpreter. It maintains a state. Thus,
@@ -320,7 +320,7 @@ public class InterpreterWithState {
 		System.out.println("attach() " + parent.eClass().getName() + "." + feature.getName() + " <- " + child.eClass().getName());
 		//multiplicity > 1
 		if (parent.eGet(feature) instanceof List<?>) {
-			ListUtil.castListUnchecked(parent.eGet(feature)).add(child);
+			((EList<EObject>)parent.eGet(feature)).add(child);
 		//multiplicity <=1
 		} else {
 			parent.eSet(feature, child);
@@ -390,7 +390,7 @@ public class InterpreterWithState {
 			}
 			//BODY (can contain multiple elements)
 			if (forBodyO instanceof List<?>) {
-				List<EObject> forBodyList = ListUtil.castListUnchecked(forBodyO);
+				List<EObject> forBodyList = (List<EObject>)forBodyO;
 				for (EObject forBody : forBodyList) {
 					bodyElements.add(evaluate(forBody, currentTiParent, currentTiReference));
 				}
@@ -437,7 +437,7 @@ public class InterpreterWithState {
 		if (condition) {
 			//ifBody
 			if (ifBodyO instanceof List<?>) {
-				List<EObject> ifBodyList = ListUtil.castListUnchecked(ifBodyO);
+				List<EObject> ifBodyList = (List<EObject>)ifBodyO;
 				for (EObject ifBody : ifBodyList) {
 					bodyElements.add(evaluate(ifBody, currentTiParent, currentTiReference));
 				}
@@ -448,7 +448,7 @@ public class InterpreterWithState {
 			// elseBody can be null (this method is also used to evaluate IF statements
 			if (elseBodyO != null) {
 				if (elseBodyO instanceof List<?>) {
-					List<EObject> elseBodyList = ListUtil.castListUnchecked(elseBodyO);
+					List<EObject> elseBodyList = (List<EObject>) elseBodyO;
 					for (EObject elseBody : elseBodyList) {
 						bodyElements.add(evaluate(elseBody, currentTiParent, currentTiReference));
 					}

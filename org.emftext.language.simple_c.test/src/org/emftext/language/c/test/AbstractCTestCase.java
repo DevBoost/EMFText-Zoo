@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.language.simple_c.CPackage;
-import org.emftext.runtime.IOptions;
+import org.emftext.language.simple_c.resource.c.ICOptions;
 
 public class AbstractCTestCase extends TestCase {
 	
@@ -51,7 +51,7 @@ public class AbstractCTestCase extends TestCase {
 		CResourceImplTestWrapper resource = new CResourceImplTestWrapper();
 		Map<String,EClass> options = new HashMap<String,EClass>();
 		if (type != null) {
-			options.put(IOptions.RESOURCE_CONTENT_TYPE, type);
+			options.put(ICOptions.RESOURCE_CONTENT_TYPE, type);
 		}
 		resource.load(inputStream,options);
 		assertEquals("The resource should have one content element.", 1,

@@ -27,9 +27,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.resource.java.IJavaLocationMap;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
-import org.emftext.runtime.resource.ILocationMap;
-import org.emftext.runtime.resource.ITextResource;
 import org.junit.Test;
 
 /**
@@ -67,9 +67,9 @@ public class LocationTest extends AbstractJavaParserTestCase {
 
 	private void assertElementLocation(EObject element, int line, int column, int charStart, int charEnd) {
 		Resource resource = element.eResource();
-		assertTrue(resource instanceof ITextResource);
-		ITextResource textResource = (ITextResource) resource;
-		ILocationMap locationMap = textResource.getLocationMap();
+		assertTrue(resource instanceof JavaResource);
+		JavaResource textResource = (JavaResource) resource;
+		IJavaLocationMap locationMap = textResource.getLocationMap();
 		
 		assertEquals(element.eClass().getName() + ": Wrong line", line, locationMap.getLine(element));
 		assertEquals(element.eClass().getName() + ": Wrong column", column, locationMap.getColumn(element));

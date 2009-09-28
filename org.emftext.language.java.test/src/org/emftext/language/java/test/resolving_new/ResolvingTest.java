@@ -45,8 +45,8 @@ import org.emftext.language.java.commons.Commentable;
 import org.emftext.language.java.commons.CommonsPackage;
 import org.emftext.language.java.commons.Name;
 import org.emftext.language.java.commons.NamedElement;
+import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
-import org.emftext.runtime.util.EObjectUtil;
 
 /**
  * A test for the reference resolving mechanism. Each folder
@@ -148,7 +148,7 @@ public class ResolvingTest extends TestCase {
 		}
 
 		private void pushUpCommentsFromNames(Resource resource) {
-			Collection<Name> nameObjects = EObjectUtil.getObjectsByType(resource.getAllContents(), CommonsPackage.eINSTANCE.getName_());
+			Collection<Name> nameObjects = JavaEObjectUtil.getObjectsByType(resource.getAllContents(), CommonsPackage.eINSTANCE.getName_());
 			for (Name name : nameObjects) {
 				((NamedElement) name.eContainer()).getComments().addAll(name.getComments());
 				name.getComments().clear();

@@ -37,7 +37,6 @@ import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALToke
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_INTEGER_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaOCTAL_LONG_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.mopp.JavaTokenResolveResult;
-import org.emftext.runtime.resource.ITokenResolver;
 
 public class NumberLiteralResolverTest extends TestCase {
 

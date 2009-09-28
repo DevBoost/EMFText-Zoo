@@ -23,6 +23,7 @@ package org.emftext.language.template_concepts;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 public class InputMetaClassReferenceResolver {
 	
@@ -31,19 +32,20 @@ public class InputMetaClassReferenceResolver {
 		return eClass.getEPackage().getNsURI() + "::" + eClass.getName();
 	}
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+	public EClass resolve(String identifier, Template container, EReference reference, int position, boolean resolveFuzzy) {
 		String[] namespaceAndClassName = identifier.split("::");
 		if (namespaceAndClassName.length == 2) {
 			String namespace = namespaceAndClassName[0];
 			String className = namespaceAndClassName[1];
 			EClassifier classifier = findEClassifier(namespace, className);
 			if (classifier == null) {
-				return;
+				return null;
 			}
 			if (classifier instanceof EClass) {
-				result.addMapping(identifier, (EClass) classifier);
+				return (EClass) classifier;
 			}
 		}
+		return null;
 	}
 	
 	private EClassifier findEClassifier(String nsURI, String eClassName) {

@@ -5,6 +5,7 @@ START OntologyDocument
 OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	overrideManifest = "false";
+	overridePluginXML = "false";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	//memoize = "true";

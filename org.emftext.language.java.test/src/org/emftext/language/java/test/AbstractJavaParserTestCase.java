@@ -71,14 +71,14 @@ import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
 import org.emftext.language.java.modifiers.Modifier;
 import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.java.IJavaTextDiagnostic;
 import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
-import org.emftext.runtime.util.UnicodeConverter;
 import org.emftext.language.java.resource.java.analysis.helper.UnicodeConverterProvider;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.types.NamespaceClassifierReference;
-import org.emftext.runtime.IOptions;
-import org.emftext.runtime.resource.ITextDiagnostic;
-import org.emftext.runtime.resource.ITextResource;
-import org.emftext.runtime.util.ResourceUtil;
+import org.emftext.sdk.util.ResourceUtil;
+import org.emftext.sdk.util.UnicodeConverter;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -143,7 +143,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	
 	private JavaRoot loadResource(
 			URI uri) throws IOException {
-		ITextResource resource = (ITextResource) getResourceSet().createResource(uri);
+		JavaResource resource = (JavaResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource);
 		assertNoWarnings(uri.toString(), resource);
@@ -159,14 +159,14 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 
 	protected Map<?, ?> getLoadOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
-		map.put(IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+		map.put(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		map.put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, Boolean.TRUE);
 		return map;
 	}
 
 	private static void assertNoErrors(String fileIdentifier,
-			ITextResource resource) {
+			JavaResource resource) {
 		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
 		printErrors(fileIdentifier, errors);
 		assertTrue("The resource should be parsed without errors.", errors
@@ -174,7 +174,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 
 	private static void assertNoWarnings(String fileIdentifier,
-			ITextResource resource) {
+			JavaResource resource) {
 		EList<Diagnostic> warnings = resource.getWarnings();
 		printWarnings(fileIdentifier, warnings);
 		assertTrue("The resource should be parsed without warnings.", warnings
@@ -200,8 +200,8 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				+ "':\n");
 		for (Diagnostic diagnostic : errors) {
 			String text;
-			if (diagnostic instanceof ITextDiagnostic) {
-				ITextDiagnostic textDiagnostic = (ITextDiagnostic) diagnostic;
+			if (diagnostic instanceof IJavaTextDiagnostic) {
+				IJavaTextDiagnostic textDiagnostic = (IJavaTextDiagnostic) diagnostic;
 				text = textDiagnostic.getMessage() + " at ("
 						+ textDiagnostic.getLine() + ","
 						+ textDiagnostic.getColumn() + ")";
@@ -285,7 +285,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		Resource resource = getResourceSet().createResource(URI.createFileURI(inputFile.getCanonicalPath().toString()));
 		resource.load(getLoadOptions());
 		
-		assertNoErrors(resource.getURI().toString(), (ITextResource) resource);
+		assertNoErrors(resource.getURI().toString(), (JavaResource) resource);
 		addParsedResource(inputFile);
 		
 		if (!ignoreSemanticErrors(file.getPath())) {

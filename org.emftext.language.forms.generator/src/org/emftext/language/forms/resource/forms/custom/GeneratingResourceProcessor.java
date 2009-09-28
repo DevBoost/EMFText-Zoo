@@ -19,16 +19,16 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.forms.Form;
-import org.emftext.runtime.IResourcePostProcessor;
-import org.emftext.runtime.IResourcePostProcessorProvider;
+import org.emftext.language.forms.resource.forms.IFormsResourcePostProcessor;
+import org.emftext.language.forms.resource.forms.IFormsResourcePostProcessorProvider;
+import org.emftext.language.forms.resource.forms.mopp.FormsResource;
 
-public class GeneratingResourceProcessor implements IResourcePostProcessor,
-		IResourcePostProcessorProvider {
+public class GeneratingResourceProcessor implements IFormsResourcePostProcessor,
+		IFormsResourcePostProcessorProvider {
 
-	public void process(Resource resource) {
+	public void process(FormsResource resource) {
 		EList<EObject> contents = resource.getContents();
 		
 		Set<EObject> distinctObjects = new HashSet<EObject>();
@@ -117,7 +117,7 @@ public class GeneratingResourceProcessor implements IResourcePostProcessor,
 		return null;
 	}
 
-	public IResourcePostProcessor getResourcePostProcessor() {
+	public IFormsResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 
