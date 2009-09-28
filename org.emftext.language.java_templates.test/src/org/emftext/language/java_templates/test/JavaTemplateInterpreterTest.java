@@ -40,7 +40,7 @@ public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
 				new Java_templateResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"customer",
-				new org.emftext.language.customer.resource.customer.CustomerResourceFactory());
+				new org.emftext.language.customer.resource.customer.mopp.CustomerResourceFactory());
 	}
 
 	@Override

@@ -2,12 +2,12 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.java_templates.resource.java_template.Java_templateResourceFactory" type="java_template">
+		<parser class="org.emftext.language.java_templates.resource.java_template.mopp.Java_templateResourceFactory" type="java_template">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.java_templates.resource.java_template.Java_templateMetaInformation" id="org.emftext.language.java_templates.resource.java_template.Java_templateMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.java_templates.resource.java_template.mopp.Java_templateMetaInformation" id="org.emftext.language.java_templates.resource.java_template.Java_templateMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
@@ -19,17 +19,18 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java_templates.resource.java_template.Java_templateNewFileWizard" id="org.emftext.language.java_templates.resource.java_template.Java_templateNewFileWizard" name="EMFText .java_template file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java_templates.resource.java_template.ui.Java_templateNewFileWizard" id="org.emftext.language.java_templates.resource.java_template.Java_templateNewFileWizard" name="EMFText .java_template file">
 		</wizard>
 	</extension>
 
    <extension
-         point="org.emftext.runtime.default_load_options">
+         point="org.emftext.language.java_templates.resource.java_template.default_load_options">
       <provider
             class="org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor"
-            csName="java_template"
             id="org.emftext.language.java.expression_simplifier_option_provider">
       </provider>
    </extension>
-   	
+
+	<extension-point id="org.emftext.language.java_templates.resource.java_template.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
 </plugin>
