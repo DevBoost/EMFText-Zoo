@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-
-	<extension point="org.emftext.language.tbool.resource.tbool.default_load_options">
-		<provider
-			class="org.emftext.language.template_concepts.ExpressionChecker"
-			id="org.emftext.language.template_concepts.ExpressionChecker">
-		</provider>
-	</extension>
-
 	<extension point="org.eclipse.emf.ecore.extension_parser">
 		<parser class="org.emftext.language.tbool.resource.tbool.mopp.TboolResourceFactory" type="tbool">
 		</parser>
 	</extension>
 	
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.emftext.language.tbool.resource.tbool.mopp.TboolTextResourcePluginMetaInformation" id="org.emftext.language.tbool.resource.tbool.mopp.TboolTextResourcePluginMetaInformation">
+		<metaInformationProvider class="org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation" id="org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
@@ -45,6 +37,15 @@
 		</category>
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.tbool.resource.tbool.ui.TboolNewFileWizard" id="org.emftext.language.tbool.resource.tbool.ui.TboolNewFileWizard" name="EMFText .tbool file">
 		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.tbool.resource.tbool.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
 	</extension>
 	
 	<extension-point id="org.emftext.language.tbool.resource.tbool.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>

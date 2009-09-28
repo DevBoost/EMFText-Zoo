@@ -7,7 +7,7 @@
 	</extension>
 	
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaTextResourcePluginMetaInformation" id="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaTextResourcePluginMetaInformation">
+		<metaInformationProvider class="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaMetaInformation" id="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
@@ -39,6 +39,29 @@
 		</wizard>
 	</extension>
 	
+	<extension id="org.emftext.language.java.properties.resource.propjava.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
 	<extension-point id="org.emftext.language.java.properties.resource.propjava.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
 	
+	<extension point="org.emftext.language.java.properties.resource.propjava.default_load_options">
+    <provider
+          class="org.emftext.language.java.properties.PropertiesJavaPostProcessor"
+          id="org.emftext.language.java.properties.PropertiesJavaPostProcessor">
+    </provider>
+   </extension>
+   
+   <extension point="org.emftext.language.java.properties.resource.propjava.default_load_options">
+      <provider
+            class="org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor"
+            id="org.emftext.language.java.expression_simplifier_option_provider">
+      </provider>
+   </extension>
+   
 </plugin>

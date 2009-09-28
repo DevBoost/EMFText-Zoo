@@ -2,24 +2,52 @@
 <?eclipse version="3.2"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.formular.resource.formular.FormularResourceFactory" type="formular">
+		<parser class="org.emftext.language.formular.resource.formular.mopp.FormularResourceFactory" type="formular">
 		</parser>
 	</extension>
 	
-	<extension point="org.emftext.runtime.syntax">
-		<metaInformationProvider class="org.emftext.language.formular.resource.formular.FormularMetaInformation" id="org.emftext.language.valueflow.resource.valueflow.ValueflowMetaInformation">
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.formular.resource.formular.mopp.FormularMetaInformation" id="org.emftext.language.formular.resource.formular.mopp.FormularMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
 	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="formular">
+		<content-type id="org.emftext.filetype.formular" name="EMFText formular Files">
+		</content-type>
+		<file-association content-type="org.emftext.filetype.formular" file-extensions="formular">
 		</file-association>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.formular.resource.formular.ui.FormularEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.formular.resource.formular.ui.FormularEditor" name="EMFText formular Editor">
+			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
+			</contentTypeBinding>
+			<contentTypeBinding contentTypeId="org.emftext.filetype.formular" >
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.formular.resource.formular.ui.FormularPreferenceInitializer">
+		</initializer>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.formular.resource.formular.FormularNewFileWizard" id="org.emftext.language.formular.resource.formular.FormularNewFileWizard" name="EMFText .formular file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.formular.resource.formular.ui.FormularNewFileWizard" id="org.emftext.language.formular.resource.formular.ui.FormularNewFileWizard" name="EMFText .formular file">
 		</wizard>
 	</extension>
+	
+	<extension id="org.emftext.language.formular.resource.formular.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.formular.resource.formular.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
 </plugin>

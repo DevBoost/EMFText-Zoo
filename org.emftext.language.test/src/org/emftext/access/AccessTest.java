@@ -15,51 +15,51 @@ public class AccessTest extends TestCase {
 	@Before
 	public void setUp() {
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.c_sharp.resource.csharp.CsharpMetaInformation());
+				new org.emftext.language.c_sharp.resource.csharp.mopp.CsharpMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichMetaInformation());
+				new org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.customer.resource.customer.CustomerMetaInformation());
+				new org.emftext.language.customer.resource.customer.mopp.CustomerMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.dot.resource.dot.DotMetaInformation());
+				new org.emftext.language.dot.resource.dot.mopp.DotMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.ecore.resource.facade.FacadeEcoreMetaInformation());
+				new org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.ecore.resource.text.TextEcoreMetaInformation());
+				new org.emftext.language.ecore.resource.text.mopp.TextEcoreMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.xml.resource.xml.XmlMetaInformation());
+				new org.emftext.language.xml.resource.xml.mopp.XmlMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.feature.resource.feature.FeatureMetaInformation());
+				new org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.formular.resource.formular.FormularMetaInformation());
+				new org.emftext.language.formular.resource.formular.mopp.FormularMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.java.resource.java.JavaMetaInformation());
+				new org.emftext.language.java.resource.java.mopp.JavaMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorMetaInformation());
+				new org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.java.reusejava.resource.reusejava.ReusejavaMetaInformation());
+				new org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.java.treejava.resource.treejava.TreejavaMetaInformation());
+				new org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.regexp.resource.regexp.RegexpMetaInformation());
+				new org.emftext.language.regexp.resource.regexp.mopp.RegexpMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.simple_c.resource.c.CMetaInformation());
+				new org.emftext.language.simple_c.resource.c.mopp.CMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.simple_gui.resource.simplegui.SimpleguiMetaInformation());
+				new org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.simple_math.resource.sm.SmMetaInformation());
+				new org.emftext.language.simple_math.resource.sm.mopp.SmMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.statemachine.resource.statemachine.StatemachineMetaInformation());
+				new org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.template_concepts.call.resource.template_call.Template_callMetaInformation());
+				new org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.textadventure.resource.tas.TasMetaInformation());
+				new org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.threevaluedlogic.resource.tvl.TvlMetaInformation());
+				new org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.forms.resource.forms.FormsMetaInformation());
+				new org.emftext.language.forms.resource.forms.mopp.FormsMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.java.ejava.resource.ejava.EjavaMetaInformation());
+				new org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation());
 	}
 	
 
