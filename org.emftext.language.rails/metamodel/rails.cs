@@ -1,8 +1,8 @@
-SYNTAXDEF project
-FOR <http://www.emftext.org/language/project>
+SYNTAXDEF rails
+FOR <http://www.emftext.org/language/rails>
 START Project
 
-OPTIONS{
+OPTIONS {
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
 }
