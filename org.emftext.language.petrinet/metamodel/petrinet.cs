@@ -13,17 +13,18 @@ TOKENSTYLES {
 	"place" COLOR #7F0055, BOLD;
 	"token" COLOR #7F0055, BOLD;
 	"->" COLOR #7F0055, BOLD;
+	"COMMENT" COLOR #008000;
 }
 
 RULES {
 	
-	PetriNet::= "net"  (name['"','"'])?  "{" nodes* arcs* "}" ;
+	PetriNet::= "net"  (name[])?  "{" nodes* arcs* "}" ;
 	
-	Arc::= "arc" (name['"','"'])? source['"','"'] "->" target['"','"'] ;
+	Arc::= "arc" (name[])? source[] "->" target[] ;
 	
-	Transition::= "transition" (name['"','"'])? ;
+	Transition::= "transition" (name[])? ;
 	
-	Place::= "place" (name['"','"'])? ("{" marking* "}")? ;
+	Place::= "place" (name[])? ("{" marking* "}")? ;
 	
-	Token::= "token" (name['"','"'])? ;
+	Token::= "token" (name[])? ;
 }
