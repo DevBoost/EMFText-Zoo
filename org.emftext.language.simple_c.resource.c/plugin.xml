@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.simple_c.resource.c.mopp.CResourceFactory" type="c">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.simple_c.resource.c.mopp.CMetaInformation" id="org.emftext.language.simple_c.resource.c.mopp.CMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.simple_c.resource.c.ui.CPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="C Text Editor" id="org.emftext.language.simple_c.resource.c.ui.CPreferencePage" class="org.emftext.language.simple_c.resource.c.ui.CPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.simple_c.resource.c.ui.CSyntaxColoringPreferencePage" class="org.emftext.language.simple_c.resource.c.ui.CSyntaxColoringPreferencePage" category="org.emftext.language.simple_c.resource.c.ui.CPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.simple_c.resource.c.ui.CBracketPreferencePage" class="org.emftext.language.simple_c.resource.c.ui.CBracketPreferencePage" category="org.emftext.language.simple_c.resource.c.ui.CPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.simple_c.resource.c.ui.COccurrencePreferencePage" class="org.emftext.language.simple_c.resource.c.ui.COccurrencePreferencePage" category="org.emftext.language.simple_c.resource.c.ui.CPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.simple_c.resource.c.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.simple_c.resource.c.mopp.CResourceFactoryDelegator" type="c">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.simple_c.resource.c.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>
