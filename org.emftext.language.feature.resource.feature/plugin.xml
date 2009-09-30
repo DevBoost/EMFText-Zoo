@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.feature.resource.feature.mopp.FeatureResourceFactory" type="feature">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation" id="org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.feature.resource.feature.ui.FeaturePreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Feature Text Editor" id="org.emftext.language.feature.resource.feature.ui.FeaturePreferencePage" class="org.emftext.language.feature.resource.feature.ui.FeaturePreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.feature.resource.feature.ui.FeatureSyntaxColoringPreferencePage" class="org.emftext.language.feature.resource.feature.ui.FeatureSyntaxColoringPreferencePage" category="org.emftext.language.feature.resource.feature.ui.FeaturePreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.feature.resource.feature.ui.FeatureBracketPreferencePage" class="org.emftext.language.feature.resource.feature.ui.FeatureBracketPreferencePage" category="org.emftext.language.feature.resource.feature.ui.FeaturePreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.feature.resource.feature.ui.FeatureOccurrencePreferencePage" class="org.emftext.language.feature.resource.feature.ui.FeatureOccurrencePreferencePage" category="org.emftext.language.feature.resource.feature.ui.FeaturePreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.feature.resource.feature.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.feature.resource.feature.mopp.FeatureResourceFactoryDelegator" type="feature">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.feature.resource.feature.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

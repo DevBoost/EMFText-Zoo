@@ -6,7 +6,6 @@ OPTIONS {
 	tokenspace = "1";
 	resourcePluginID = "org.emftext.language.feature.resource.feature";
 	basePackage = "org.emftext.language.feature.resource.feature";
-	overrideManifest = "false";
 }
 
 TOKENS{
