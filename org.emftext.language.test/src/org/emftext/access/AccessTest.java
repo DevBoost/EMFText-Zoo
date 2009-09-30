@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 
 import junit.framework.TestCase;
 
-import org.emftext.access.resource.ITextResourcePluginMetaInformation;
+import org.emftext.access.resource.IMetaInformation;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -65,8 +65,8 @@ public class AccessTest extends TestCase {
 
 	@Test
 	public void testAccessInterfaces() throws Exception {
-		for(ITextResourcePluginMetaInformation metaInformation : EMFTextAccessPlugin.getConcreteSyntaxRegistry()) {
-			invokeAllMethods(metaInformation, ITextResourcePluginMetaInformation.class);
+		for(IMetaInformation metaInformation : EMFTextAccessPlugin.getConcreteSyntaxRegistry()) {
+			invokeAllMethods(metaInformation, IMetaInformation.class);
 		}
 	}
 

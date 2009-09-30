@@ -21,8 +21,8 @@
 package org.emftext.language.test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -34,64 +34,63 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.emftext.language.chess.resource.cg.CgPrinter;
-import org.emftext.language.chess.resource.cg.CgResource;
-import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichPrinter;
-import org.emftext.language.custom_sandwich.resource.custom_sandwich.Custom_sandwichResource;
-import org.emftext.language.customer.resource.customer.CustomerPrinter;
-import org.emftext.language.customer.resource.customer.CustomerResource;
-import org.emftext.language.dot.resource.dot.DotPrinter;
-import org.emftext.language.dot.resource.dot.DotResource;
-import org.emftext.language.ecore.resource.facade.FacadeEcorePrinter;
-import org.emftext.language.ecore.resource.facade.FacadeEcoreResource;
-import org.emftext.language.ecore.resource.text.TextEcorePrinter;
-import org.emftext.language.ecore.resource.text.TextEcoreResource;
-import org.emftext.language.xml.resource.xml.XmlPrinter;
-import org.emftext.language.xml.resource.xml.XmlResource;
-import org.emftext.language.feature.resource.feature.FeaturePrinter;
-import org.emftext.language.feature.resource.feature.FeatureResource;
-import org.emftext.language.forms.resource.forms.FormsPrinter;
-import org.emftext.language.forms.resource.forms.FormsResource;
-import org.emftext.language.formular.resource.formular.FormularPrinter;
-import org.emftext.language.formular.resource.formular.FormularResource;
-import org.emftext.language.java.ejava.resource.ejava.EjavaPrinter;
-import org.emftext.language.java.ejava.resource.ejava.EjavaResource;
-import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorPrinter;
-import org.emftext.language.java.javabehavior4uml.resource.javabehavior.JavabehaviorResource;
-import org.emftext.language.java.resource.java.JavaPrinter;
-import org.emftext.language.java.resource.java.JavaResource;
-import org.emftext.language.java.reusejava.resource.reusejava.ReusejavaPrinter;
-import org.emftext.language.java.reusejava.resource.reusejava.ReusejavaResource;
-import org.emftext.language.java.treejava.resource.treejava.TreejavaPrinter;
-import org.emftext.language.java.treejava.resource.treejava.TreejavaResource;
-import org.emftext.language.regexp.resource.regexp.RegexpPrinter;
-import org.emftext.language.regexp.resource.regexp.RegexpResource;
-import org.emftext.language.simple_c.resource.c.CPrinter;
-import org.emftext.language.simple_c.resource.c.CResource;
-import org.emftext.language.simple_gui.resource.simplegui.SimpleguiPrinter;
-import org.emftext.language.simple_gui.resource.simplegui.SimpleguiResource;
-import org.emftext.language.simple_math.resource.sm.SmPrinter;
-import org.emftext.language.simple_math.resource.sm.SmResource;
-import org.emftext.language.statemachine.resource.statemachine.StatemachinePrinter;
-import org.emftext.language.statemachine.resource.statemachine.StatemachineResource;
-import org.emftext.language.template_concepts.call.resource.template_call.Template_callPrinter;
-import org.emftext.language.template_concepts.call.resource.template_call.Template_callResource;
-import org.emftext.language.textadventure.resource.tas.TasPrinter;
-import org.emftext.language.textadventure.resource.tas.TasResource;
-import org.emftext.language.threevaluedlogic.resource.tvl.TvlPrinter;
-import org.emftext.language.threevaluedlogic.resource.tvl.TvlResource;
-import org.emftext.runtime.resource.ITextPrinter;
-import org.emftext.runtime.util.MinimalModelHelper;
+import org.emftext.language.chess.resource.cg.mopp.CgPrinter;
+import org.emftext.language.chess.resource.cg.mopp.CgResource;
+import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichPrinter;
+import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichResource;
+import org.emftext.language.customer.resource.customer.mopp.CustomerPrinter;
+import org.emftext.language.customer.resource.customer.mopp.CustomerResource;
+import org.emftext.language.dot.resource.dot.mopp.DotPrinter;
+import org.emftext.language.dot.resource.dot.mopp.DotResource;
+import org.emftext.language.ecore.resource.facade.mopp.FacadeEcorePrinter;
+import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreResource;
+import org.emftext.language.ecore.resource.text.mopp.TextEcorePrinter;
+import org.emftext.language.ecore.resource.text.mopp.TextEcoreResource;
+import org.emftext.language.feature.resource.feature.mopp.FeaturePrinter;
+import org.emftext.language.feature.resource.feature.mopp.FeatureResource;
+import org.emftext.language.forms.resource.forms.mopp.FormsPrinter;
+import org.emftext.language.forms.resource.forms.mopp.FormsResource;
+import org.emftext.language.formular.resource.formular.mopp.FormularPrinter;
+import org.emftext.language.formular.resource.formular.mopp.FormularResource;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaPrinter;
+import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
+import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorPrinter;
+import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorResource;
+import org.emftext.language.java.resource.java.mopp.JavaPrinter;
+import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaPrinter;
+import org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaResource;
+import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaPrinter;
+import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaResource;
+import org.emftext.language.regexp.resource.regexp.mopp.RegexpPrinter;
+import org.emftext.language.regexp.resource.regexp.mopp.RegexpResource;
+import org.emftext.language.simple_c.resource.c.mopp.CPrinter;
+import org.emftext.language.simple_c.resource.c.mopp.CResource;
+import org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiPrinter;
+import org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiResource;
+import org.emftext.language.simple_math.resource.sm.mopp.SmPrinter;
+import org.emftext.language.simple_math.resource.sm.mopp.SmResource;
+import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachinePrinter;
+import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineResource;
+import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callPrinter;
+import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResource;
+import org.emftext.language.textadventure.resource.tas.mopp.TasPrinter;
+import org.emftext.language.textadventure.resource.tas.mopp.TasResource;
+import org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlPrinter;
+import org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlResource;
+import org.emftext.language.xml.resource.xml.mopp.XmlPrinter;
+import org.emftext.language.xml.resource.xml.mopp.XmlResource;
 import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
-import org.emftext.sdk.concretesyntax.resource.cs.CsPrinter;
-import org.emftext.sdk.concretesyntax.resource.cs.CsResource;
+import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsPrinter;
+import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsResource;
+import org.emftext.sdk.concretesyntax.resource.cs.util.CsMinimalModelHelper;
 
 public class NewFileContentCreationTest extends TestCase {
 
 	private interface TestItem {
 		public EPackage[] getAdditionalPackages();
 		public EClass[] getStartClasses();
-		public ITextPrinter getPrinter(OutputStream stream);
+		public Object getPrinter(OutputStream stream);
 	}
 	
 	private abstract class AbstractTestItem implements TestItem {
@@ -108,7 +107,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new TextEcorePrinter(stream, new TextEcoreResource());
 		}
 	}
@@ -121,7 +120,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new FacadeEcorePrinter(stream, new FacadeEcoreResource());
 		}
 	}
@@ -134,7 +133,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new CsPrinter(stream, new CsResource());
 		}
 	}
@@ -147,7 +146,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new CgPrinter(stream, new CgResource());
 		}
 	}
@@ -160,7 +159,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new Custom_sandwichPrinter(stream, new Custom_sandwichResource());
 		}
 	}
@@ -173,7 +172,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new CustomerPrinter(stream, new CustomerResource());
 		}
 	}
@@ -186,7 +185,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new DotPrinter(stream, new DotResource());
 		}
 	}
@@ -199,7 +198,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new XmlPrinter(stream, new XmlResource());
 		}
 	}
@@ -212,7 +211,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new FeaturePrinter(stream, new FeatureResource());
 		}
 	}
@@ -225,7 +224,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new FormsPrinter(stream, new FormsResource());
 		}
 	}
@@ -238,7 +237,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new FormularPrinter(stream, new FormularResource());
 		}
 	}
@@ -251,7 +250,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new RegexpPrinter(stream, new RegexpResource());
 		}
 	}
@@ -264,7 +263,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new CPrinter(stream, new CResource());
 		}
 	}
@@ -277,7 +276,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new SimpleguiPrinter(stream, new SimpleguiResource());
 		}
 	}
@@ -290,7 +289,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new SmPrinter(stream, new SmResource());
 		}
 	}
@@ -303,7 +302,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new StatemachinePrinter(stream, new StatemachineResource());
 		}
 	}
@@ -316,7 +315,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new Template_callPrinter(stream, new Template_callResource());
 		}
 	}
@@ -329,7 +328,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new TasPrinter(stream, new TasResource());
 		}
 	}
@@ -342,7 +341,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new TvlPrinter(stream, new TvlResource());
 		}
 	}
@@ -362,7 +361,7 @@ public class NewFileContentCreationTest extends TestCase {
 			return new EPackage[] {org.emftext.language.java.JavaPackage.eINSTANCE};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new JavaPrinter(stream, new JavaResource());
 		}
 	}
@@ -375,7 +374,7 @@ public class NewFileContentCreationTest extends TestCase {
 			};
 		}
 		
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new EjavaPrinter(stream, new EjavaResource());
 		}
 	}
@@ -396,7 +395,7 @@ public class NewFileContentCreationTest extends TestCase {
 					org.emftext.language.java.javabehavior4uml.Javabehavior4umlPackage.eINSTANCE};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new JavabehaviorPrinter(stream, new JavabehaviorResource());
 		}
 	}
@@ -418,7 +417,7 @@ public class NewFileContentCreationTest extends TestCase {
 					org.emftext.language.java.reusejava.ReusejavaPackage.eINSTANCE};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new ReusejavaPrinter(stream, new ReusejavaResource());
 		}
 	}
@@ -439,7 +438,7 @@ public class NewFileContentCreationTest extends TestCase {
 					org.emftext.language.java.reusejava.ReusejavaPackage.eINSTANCE};
 		}
 
-		public ITextPrinter getPrinter(OutputStream stream) {
+		public Object getPrinter(OutputStream stream) {
 			return new TreejavaPrinter(stream, new TreejavaResource());
 		}
 	}
@@ -475,7 +474,7 @@ public class NewFileContentCreationTest extends TestCase {
 	}
 
 	private void test(TestItem item) {
-		MinimalModelHelper mmh = new MinimalModelHelper();
+		CsMinimalModelHelper mmh = new CsMinimalModelHelper();
 		for (EClass nextStart : item.getStartClasses()) {
 			Collection<EClass> availableClasses = getContainedClasses(item.getAdditionalPackages());
 			availableClasses.addAll(getContainedClasses(nextStart));
@@ -484,10 +483,12 @@ public class NewFileContentCreationTest extends TestCase {
 			assertNotNull(result);
 			
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			ITextPrinter printer = item.getPrinter(buffer);
+			Object printer = item.getPrinter(buffer);
 			try {
-				printer.print(result);
-			} catch (IOException e) {
+				Class<?>[] param = new Class [] {EObject.class};
+				Method printMethod = printer.getClass().getMethod("print", param);
+				printMethod.invoke(printer, result);
+			} catch (Exception e) {
 				fail(e.getMessage());
 			}
 		}
