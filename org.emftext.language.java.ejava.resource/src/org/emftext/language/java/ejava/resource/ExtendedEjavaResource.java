@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -86,12 +90,21 @@ public class ExtendedEjavaResource extends EjavaResource {
 			}
 		}
 
-		Resource ecoreResource = ePackageWrapper.getEPackage().eResource();
-		try {
-			ecoreResource.save(ecoreResource.getResourceSet().getLoadOptions());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		final Resource ecoreResource = ePackageWrapper.getEPackage().eResource();
+		new Job("updating ecore file") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					ecoreResource.save(ecoreResource.getResourceSet().getLoadOptions());
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				return Status.OK_STATUS;
+			}
+		}.schedule();
+
+		
+
 	}
 	
 	private void setToRealJavaPackage(EPackageWrapper wrapper) {
@@ -110,7 +123,6 @@ public class ExtendedEjavaResource extends EjavaResource {
 		for(FeatureStatementListContainerStatements statement : wrapper.getStatements()) {
 			printer.print(statement);
 			try {
-				// TODO jendrik: this was printer.outputStream.write() ?!
 				outputStream.write(lineBreak);
 			} catch (IOException e) {}
 		}
