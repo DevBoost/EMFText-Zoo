@@ -16,7 +16,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
@@ -35,53 +39,58 @@ public class GeneratingResourceProcessor implements IFormsResourcePostProcessor,
 		distinctObjects.addAll(contents);
 		for (EObject eobject : distinctObjects) {
 			if (eobject instanceof Form) {
-				Form form = (Form)eobject;
-				createHTMLForm(form);
-				createIPhoneForm(form);
-				createXMLForm(form);
-				IFile result = createFoForm(form);
-				createPSForm(result,form.getCaption());
+				final Form form = (Form)eobject;
+				final IProject project = WorkspaceSynchronizer.getFile(form.eResource()).getProject();
+				Job creationJob = new Job("Generating Forms") {
+
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						createHTMLForm(project,form);
+						createIPhoneForm(project,form);
+						createXMLForm(project,form);
+						IFile result = createFoForm(project,form);
+						createPSForm(result,form.getCaption());
+						return Status.OK_STATUS;
+					}
+					
+				};
+				
+				creationJob.schedule();
 			}
 		}
 
 	}
 
-	private void createIPhoneForm(Form form) {
+	private void createIPhoneForm(IProject project, Form form) {
 		final IPhoneFormGenerator iphoneFormGen = new IPhoneFormGenerator();
-		generateForm(form, "iphone",form.getCaption()+".html", iphoneFormGen);
+		generateForm(project,form, "iphone",form.getCaption()+".html", iphoneFormGen);
 		final IPhoneIndexGenerator iphoneIndexGen = new IPhoneIndexGenerator();
-		generateForm(form, "iphone","index.html", iphoneIndexGen);
+		generateForm(project,form, "iphone","index.html", iphoneIndexGen);
 		
 	}
 
-	private void createHTMLForm(Form form) {
+	private void createHTMLForm(IProject project, Form form) {
 		final HTMLFormGenerator htmlFormGen = new HTMLFormGenerator();
-		generateForm(form, "html",form.getCaption()+".html",htmlFormGen);
+		generateForm(project,form, "html",form.getCaption()+".html",htmlFormGen);
 	}
 	
-	private void createXMLForm(Form form) {
+	private void createXMLForm(IProject project, Form form) {
 		XMLFormGenerator xmlFormGenerator = new XMLFormGenerator();
-		generateForm(form, "xml",form.getCaption()+".xml",xmlFormGenerator);
+		generateForm(project,form, "xml",form.getCaption()+".xml",xmlFormGenerator);
 	}
 	
-	private IFile createFoForm(Form form) {
+	private IFile createFoForm(IProject project, Form form) {
 		FOFormGenerator foFormGenerator = new FOFormGenerator();
-		return generateForm(form,"xsl-fo",form.getCaption()+".xml",foFormGenerator);
+		return generateForm(project,form,"xsl-fo",form.getCaption()+".xml",foFormGenerator);
 	}
 	
 	private IFile createPSForm(IFile foFile,String titel){
 		PDFFormGenerator psFormGenerator = new PDFFormGenerator();
-		return generateForm(foFile,foFile.getProject(),"pdf",titel+".pdf",psFormGenerator);
+		return generateForm(foFile.getProject(),foFile,"pdf",titel+".pdf",psFormGenerator);
+	}
 
-	}
 	
-	private IFile generateForm (Form form, String folderName, String filename,
-			final IGenerator generator) {
-		IFile resourceFile = WorkspaceSynchronizer.getFile(form.eResource());
-		return generateForm(form,resourceFile.getProject(),folderName,filename,generator);
-	}
-	
-	private IFile generateForm(Object argument,IProject targetProject, String folderName, String filename,
+	private IFile generateForm(IProject targetProject,Object argument, String folderName, String filename,
 			final IGenerator generator) {
 		try {
 			
