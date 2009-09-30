@@ -1,14 +1,14 @@
 package org.emftext.language.petrinet.resource.petrinet.analysis;
 
-public class ArcTargetReferenceResolver implements org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolver<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.XNode> {
+public class ArcTargetReferenceResolver implements org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolver<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes> {
 	
-	private org.emftext.language.petrinet.resource.petrinet.analysis.PetrinetDefaultResolverDelegate<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.XNode> delegate = new org.emftext.language.petrinet.resource.petrinet.analysis.PetrinetDefaultResolverDelegate<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.XNode>();
+	private org.emftext.language.petrinet.resource.petrinet.analysis.PetrinetDefaultResolverDelegate<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes> delegate = new org.emftext.language.petrinet.resource.petrinet.analysis.PetrinetDefaultResolverDelegate<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolveResult<org.emftext.language.petrinet.XNode> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolveResult<org.emftext.language.petrinet.RefNodes> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.petrinet.XNode element, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.emftext.language.petrinet.RefNodes element, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
