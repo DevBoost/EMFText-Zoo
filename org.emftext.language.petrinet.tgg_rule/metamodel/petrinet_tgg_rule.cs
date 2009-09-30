@@ -1,4 +1,4 @@
-SYNTAXDEF petrinet.tgg_rule
+SYNTAXDEF petrinet_tgg_rule
 FOR <http://www.emftext.org/language/petrinet_tgg_rule>
 START AnnotatedPetriNet
 
@@ -14,8 +14,8 @@ OPTIONS {
 }
 
 TOKENS {
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
     DEFINE T_TYPE $'++'$;
-    //DEFINE IDENT2 $'@'('A'..'Z'|'a'..'z'|'0'..'9'|'_')+'++'$;
     DEFINE IDENT $'@'('A'..'Z'|'a'..'z'|'0'..'9'|'_')+$;
 }
 
@@ -26,7 +26,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	TGGRuleAnnotation ::= (identifiers[IDENT])+ type[T_TYPE];
+	TGGRuleAnnotation ::= (identifiers[IDENT])+ (type[T_TYPE])?;
     AnnotatedPetriNet ::= annotation body ;
     AnnotatedArc      ::= annotation body ;
     AnnotatedNode     ::= annotation body ;

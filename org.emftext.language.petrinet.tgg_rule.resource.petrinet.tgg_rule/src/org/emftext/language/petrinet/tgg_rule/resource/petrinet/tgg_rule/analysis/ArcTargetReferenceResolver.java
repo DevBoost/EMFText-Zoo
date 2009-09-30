@@ -1,10 +1,10 @@
 package org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule.analysis;
 
-public class ArcTargetReferenceResolver implements org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule.IPetrinetTgg_ruleReferenceResolver<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes> {
+public class ArcTargetReferenceResolver implements org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule.IPetrinet_tgg_ruleReferenceResolver<org.emftext.language.petrinet.Arc, org.emftext.language.petrinet.RefNodes> {
 	
 	private org.emftext.language.petrinet.resource.petrinet.analysis.ArcTargetReferenceResolver delegate = new org.emftext.language.petrinet.resource.petrinet.analysis.ArcTargetReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule.IPetrinetTgg_ruleReferenceResolveResult<org.emftext.language.petrinet.RefNodes> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.petrinet.Arc container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.petrinet.tgg_rule.resource.petrinet.tgg_rule.IPetrinet_tgg_ruleReferenceResolveResult<org.emftext.language.petrinet.RefNodes> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.petrinet.resource.petrinet.IPetrinetReferenceResolveResult<org.emftext.language.petrinet.RefNodes>() {
 			
 			public boolean wasResolvedUniquely() {

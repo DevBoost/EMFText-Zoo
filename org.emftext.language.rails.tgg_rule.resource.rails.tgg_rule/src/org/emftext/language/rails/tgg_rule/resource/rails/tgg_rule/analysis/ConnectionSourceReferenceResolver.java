@@ -1,10 +1,10 @@
 package org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule.analysis;
 
-public class ConnectionSourceReferenceResolver implements org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule.IRailsTgg_ruleReferenceResolver<org.emftext.language.rails.Connection, org.emftext.language.rails.Out> {
+public class ConnectionSourceReferenceResolver implements org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule.IRails_tgg_ruleReferenceResolver<org.emftext.language.rails.Connection, org.emftext.language.rails.Out> {
 	
 	private org.emftext.language.rails.resource.rails.analysis.ConnectionSourceReferenceResolver delegate = new org.emftext.language.rails.resource.rails.analysis.ConnectionSourceReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.rails.Connection container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule.IRailsTgg_ruleReferenceResolveResult<org.emftext.language.rails.Out> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.rails.Connection container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule.IRails_tgg_ruleReferenceResolveResult<org.emftext.language.rails.Out> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.rails.resource.rails.IRailsReferenceResolveResult<org.emftext.language.rails.Out>() {
 			
 			public boolean wasResolvedUniquely() {

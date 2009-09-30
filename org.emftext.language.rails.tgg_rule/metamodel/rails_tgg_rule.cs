@@ -1,4 +1,4 @@
-SYNTAXDEF rails.tgg_rule
+SYNTAXDEF rails_tgg_rule
 FOR <http://www.emftext.org/language/rails/tgg_rule>
 START AnnotatedProject
 
@@ -14,6 +14,7 @@ OPTIONS {
 }
 
 TOKENS {
+	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
     DEFINE T_TYPE $'++'$;
     DEFINE IDENT $'@'('A'..'Z'|'a'..'z'|'0'..'9'|'_')+$;
 }
@@ -25,7 +26,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	TGGRuleAnnotation ::= (identifiers[IDENT])+ type[T_TYPE];
+	TGGRuleAnnotation ::= (identifiers[IDENT])+ (type[T_TYPE])?;
     AnnotatedProject    ::= annotation body ;
     AnnotatedConnection ::= annotation body ;
     AnnotatedTrain      ::= annotation body ;
