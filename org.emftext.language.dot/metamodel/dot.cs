@@ -7,9 +7,6 @@ START Graph
 OPTIONS {
         reloadGeneratorModel = "true";
         generateCodeFromGeneratorModel = "true";
-		overrideClasspath = "false";
-		overrideManifest = "false";
-		overrideProjectFile = "false";
         usePredefinedTokens = "false";
         tokenspace = "1";
 }
