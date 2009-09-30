@@ -3,8 +3,6 @@ FOR <http://org.emftext.languages/plugin>
 START ToolProductFamily
 
 OPTIONS {
-	overridePluginXML = "false";
-	overrideManifest = "false";
 	tokenspace = "1"; 
 }
 

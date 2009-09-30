@@ -1,30 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.plugin.resource.topf.mopp.TopfResourceFactory" type="topf">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.emftext.language.plugin.resource.topf.mopp.TopfTextResourcePluginMetaInformation" id="org.emftext.language.valueflow.resource.valueflow.ValueflowMetaInformation">
+		<metaInformationProvider class="org.emftext.language.plugin.resource.topf.mopp.TopfMetaInformation" id="org.emftext.language.plugin.resource.topf.mopp.TopfMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="topf">
-		</file-association>
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.plugin.resource.topf.ui.TopfEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="topf" icon="icons/editor_icon.gif" id="org.emftext.language.plugin.resource.topf.ui.TopfEditor" name="EMFText topf Editor">
+		</editor>
 	</extension>
- 
- <extension
-       point="org.emftext.language.plugin.resource.topf.default_load_options">
-    <provider
-          class="org.emftext.language.plugin.PluginDataInitializer"
-          id="org.emftext.language.plugin.resource.topf"
-          name="TopfOptionProvider">
-    </provider>
- </extension>
-
- <extension-point id="org.emftext.language.plugin.resource.topf.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.plugin.resource.topf.ui.TopfPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Topf Text Editor" id="org.emftext.language.plugin.resource.topf.ui.TopfPreferencePage" class="org.emftext.language.plugin.resource.topf.ui.TopfPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.plugin.resource.topf.ui.TopfSyntaxColoringPreferencePage" class="org.emftext.language.plugin.resource.topf.ui.TopfSyntaxColoringPreferencePage" category="org.emftext.language.plugin.resource.topf.ui.TopfPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.plugin.resource.topf.ui.TopfBracketPreferencePage" class="org.emftext.language.plugin.resource.topf.ui.TopfBracketPreferencePage" category="org.emftext.language.plugin.resource.topf.ui.TopfPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.plugin.resource.topf.ui.TopfOccurrencePreferencePage" class="org.emftext.language.plugin.resource.topf.ui.TopfOccurrencePreferencePage" category="org.emftext.language.plugin.resource.topf.ui.TopfPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.plugin.resource.topf.ui.TopfNewFileWizard" id="org.emftext.language.plugin.resource.topf.ui.TopfNewFileWizard" name="EMFText .topf file">
+		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.plugin.resource.topf.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.plugin.resource.topf.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.plugin.resource.topf.mopp.TopfResourceFactoryDelegator" type="topf">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.plugin.resource.topf.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>
