@@ -1,14 +1,14 @@
 package org.emftext.language.uml_class.resource.uml_class.analysis;
 
-public class ParameterTypeReferenceResolver extends org.emftext.runtime.resource.impl.AbstractReferenceResolver<org.emftext.language.uml_class.Parameter, org.emftext.language.uml_class.Classifier> {
+public class ParameterTypeReferenceResolver implements org.emftext.language.uml_class.resource.uml_class.IUml_classReferenceResolver<org.emftext.language.uml_class.Parameter, org.emftext.language.uml_class.XClass> {
 	
-	private org.emftext.language.uml_class.resource.uml_class.analysis.Uml_classDefaultResolverDelegate<org.emftext.language.uml_class.Parameter, org.emftext.language.uml_class.Classifier> delegate = new org.emftext.language.uml_class.resource.uml_class.analysis.Uml_classDefaultResolverDelegate<org.emftext.language.uml_class.Parameter, org.emftext.language.uml_class.Classifier>();
+	private org.emftext.language.uml_class.resource.uml_class.analysis.Uml_classDefaultResolverDelegate<org.emftext.language.uml_class.Parameter, org.emftext.language.uml_class.XClass> delegate = new org.emftext.language.uml_class.resource.uml_class.analysis.Uml_classDefaultResolverDelegate<org.emftext.language.uml_class.Parameter, org.emftext.language.uml_class.XClass>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.uml_class.Parameter container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<org.emftext.language.uml_class.Classifier> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.uml_class.Parameter container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.uml_class.resource.uml_class.IUml_classReferenceResolveResult<org.emftext.language.uml_class.XClass> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.uml_class.Classifier element, org.emftext.language.uml_class.Parameter container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.emftext.language.uml_class.XClass element, org.emftext.language.uml_class.Parameter container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

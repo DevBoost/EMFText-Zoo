@@ -5,10 +5,10 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 	
 	// This standard implementation searches the tree for objects of the 
 	// correct type with a name attribute matching the identifier.
-	protected void resolve(java.lang.String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<ReferenceType> result) {
+	protected void resolve(java.lang.String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.uml_class.resource.uml_class.IUml_classReferenceResolveResult<ReferenceType> result) {
 		try {
 			org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
-			org.eclipse.emf.ecore.EObject root = org.emftext.runtime.util.EObjectUtil.findRootContainer(container);
+			org.eclipse.emf.ecore.EObject root = org.emftext.language.uml_class.resource.uml_class.util.Uml_classEObjectUtil.findRootContainer(container);
 			// first check whether the root element matches
 			boolean continueSearch = checkElement(root, type, identifier, resolveFuzzy, result);
 			if (!continueSearch) {
@@ -28,13 +28,12 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 		}
 	}
 	
-	private boolean checkElement(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EClass type, java.lang.String identifier, boolean resolveFuzzy, org.emftext.runtime.resource.IReferenceResolveResult<ReferenceType> result) {
+	private boolean checkElement(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EClass type, java.lang.String identifier, boolean resolveFuzzy, org.emftext.language.uml_class.resource.uml_class.IUml_classReferenceResolveResult<ReferenceType> result) {
 		if (element.eIsProxy()) {
 			return true;
 		}
 		
-		org.eclipse.emf.ecore.EClass eClass = element.eClass();
-		boolean hasCorrectType = eClass.equals(type) || eClass.getEAllSuperTypes().contains(type);
+		boolean hasCorrectType = hasCorrectType(element, type.getInstanceClass());
 		if (!hasCorrectType) {
 			return true;
 		}
@@ -64,7 +63,7 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 		return (ReferenceType) element;
 	}
 	
-	protected java.lang.String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, org.emftext.runtime.resource.ITextResource resource) {
+	protected java.lang.String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, org.emftext.language.uml_class.resource.uml_class.IUml_classTextResource resource) {
 		java.lang.String msg = getClass().getSimpleName() + ": " + reference.getEType().getName() + " \"" + refObject.toString() + "\" not de-resolveable";
 		return msg;
 	}
@@ -91,7 +90,7 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 			}
 						for (org.eclipse.emf.ecore.EOperation o : element.eClass().getEAllOperations()) {
 				if (o.getName().toLowerCase().endsWith(NAME_FEATURE) && o.getEParameters().size() == 0 ) {
-					java.lang.String result = (java.lang.String) org.emftext.runtime.util.EObjectUtil.invokeOperation(element, o);
+					java.lang.String result = (java.lang.String) org.emftext.language.uml_class.resource.uml_class.util.Uml_classEObjectUtil.invokeOperation(element, o);
 					java.lang.String match = matches(identifier, result, matchFuzzy);
 					if (match != null) {
 						return match;
@@ -119,8 +118,9 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 		org.eclipse.emf.ecore.EStructuralFeature nameAttr = element.eClass().getEStructuralFeature(NAME_FEATURE);
 		if(element.eIsProxy()) {
 			java.lang.String fragment = ((org.eclipse.emf.ecore.InternalEObject) element).eProxyURI().fragment();
-			if (fragment != null && fragment.startsWith(org.emftext.runtime.resource.IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
-				fragment = fragment.substring(org.emftext.runtime.resource.IContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+			if (fragment != null && fragment.startsWith(org.emftext.language.uml_class.resource.uml_class.IUml_classContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+				fragment = fragment.substring(org.emftext.language.uml_class.resource.uml_class.IUml_classContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+				fragment = fragment.substring(fragment.indexOf("_") + 1);
 			}
 			return fragment;
 		}
@@ -135,7 +135,7 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 			}
 			for (org.eclipse.emf.ecore.EOperation o : element.eClass().getEAllOperations()) {
 				if (o.getName().toLowerCase().endsWith(NAME_FEATURE) && o.getEParameters().size() == 0 ) {
-					java.lang.String result = (java.lang.String) org.emftext.runtime.util.EObjectUtil.invokeOperation(element, o);
+					java.lang.String result = (java.lang.String) org.emftext.language.uml_class.resource.uml_class.util.Uml_classEObjectUtil.invokeOperation(element, o);
 					if (result != null) {
 						return result;
 					}
@@ -145,4 +145,7 @@ public class Uml_classDefaultResolverDelegate<ContainerType extends org.eclipse.
 		return null;
 	}
 	
+	private boolean hasCorrectType(org.eclipse.emf.ecore.EObject element, Class<?> expectedTypeClass) {
+		return expectedTypeClass.isInstance(element);
+	}
 }

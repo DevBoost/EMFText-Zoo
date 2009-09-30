@@ -5,7 +5,6 @@ START ClassDiagramm
 OPTIONS{
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
-    overrideManifest = "false";
 }
 
 TOKENS{
