@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   
-   <extension point="org.emftext.language.owl.resource.owl.default_load_options">
-	   <provider
-	          class="org.emftext.language.owl.ConsistencyChecker"
-	          id="org.emftext.language.owl.ConsistencyChecker">
-	   </provider>
-   </extension>
-
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.owl.resource.owl.mopp.OwlResourceFactory" type="owl">
-		</parser>
+	<extension point="org.emftext.language.owl.resource.owl.default_load_options">
+	<provider
+			class="org.emftext.language.owl.ConsistencyChecker"
+			id="org.emftext.language.owl.ConsistencyChecker">
+		</provider>
 	</extension>
-	
+
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.emftext.language.owl.resource.owl.mopp.OwlTextResourcePluginMetaInformation" id="org.emftext.language.owl.resource.owl.mopp.OwlTextResourcePluginMetaInformation">
+		<metaInformationProvider class="org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation" id="org.emftext.language.owl.resource.owl.mopp.OwlMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.emftext.filetype.owl" name="EMFText owl Files">
-		</content-type>
-		<file-association content-type="org.emftext.filetype.owl" file-extensions="owl">
-		</file-association>
-	</extension>
-	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.emftext.language.owl.resource.owl.ui.OwlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.owl.resource.owl.ui.OwlEditor" name="EMFText owl Editor">
-			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
-			</contentTypeBinding>
-			<contentTypeBinding contentTypeId="org.emftext.filetype.owl" >
-			</contentTypeBinding>
+		<editor class="org.emftext.language.owl.resource.owl.ui.OwlEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="owl" icon="icons/editor_icon.gif" id="org.emftext.language.owl.resource.owl.ui.OwlEditor" name="EMFText owl Editor">
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.owl.resource.owl.ui.OwlPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Owl Text Editor" id="org.emftext.language.owl.resource.owl.ui.OwlPreferencePage" class="org.emftext.language.owl.resource.owl.ui.OwlPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.owl.resource.owl.ui.OwlSyntaxColoringPreferencePage" class="org.emftext.language.owl.resource.owl.ui.OwlSyntaxColoringPreferencePage" category="org.emftext.language.owl.resource.owl.ui.OwlPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.owl.resource.owl.ui.OwlBracketPreferencePage" class="org.emftext.language.owl.resource.owl.ui.OwlBracketPreferencePage" category="org.emftext.language.owl.resource.owl.ui.OwlPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.owl.resource.owl.ui.OwlOccurrencePreferencePage" class="org.emftext.language.owl.resource.owl.ui.OwlOccurrencePreferencePage" category="org.emftext.language.owl.resource.owl.ui.OwlPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -47,6 +41,22 @@
 		</wizard>
 	</extension>
 	
+	<extension id="org.emftext.language.owl.resource.owl.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
 	<extension-point id="org.emftext.language.owl.resource.owl.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.owl.resource.owl.mopp.OwlResourceFactoryDelegator" type="owl">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.owl.resource.owl.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>
