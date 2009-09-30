@@ -16,7 +16,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
@@ -35,53 +39,57 @@ public class GeneratingResourceProcessor implements IFormularResourcePostProcess
 		distinctObjects.addAll(contents);
 		for (EObject eobject : distinctObjects) {
 			if (eobject instanceof Formular) {
-				Formular formular = (Formular)eobject;
-				createHTMLForm(formular);
-				createIPhoneForm(formular);
-				createXMLForm(formular);
-				IFile result = createFoForm(formular);
-				createPSForm(result,formular.getTitel());
+				final Formular formular = (Formular)eobject;
+				final IProject project = WorkspaceSynchronizer.getFile(formular.eResource()).getProject();
+				Job creationJob = new Job("Generiere Formular") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						createHTMLForm(project,formular);
+						createIPhoneForm(project,formular);
+						createXMLForm(project,formular);
+						IFile result = createFoForm(project,formular);
+						createPSForm(result,formular.getTitel());
+						return Status.OK_STATUS;
+					}
+					
+				};
+				
+				creationJob.schedule();
 			}
 		}
 
 	}
 
-	private void createIPhoneForm(Formular formular) {
+	private void createIPhoneForm(IProject project, Formular formular) {
 		final IPhoneFormGenerator iphoneFormGen = new IPhoneFormGenerator();
-		generateForm(formular, "iphone",formular.getTitel()+".html", iphoneFormGen);
+		generateForm(project,formular, "iphone",formular.getTitel()+".html", iphoneFormGen);
 		final IPhoneIndexGenerator iphoneIndexGen = new IPhoneIndexGenerator();
-		generateForm(formular, "iphone","index.html", iphoneIndexGen);
+		generateForm(project,formular, "iphone","index.html", iphoneIndexGen);
 		
 	}
 
-	private void createHTMLForm(Formular formular) {
+	private void createHTMLForm(IProject project, Formular formular) {
 		final HTMLFormGenerator htmlFormGen = new HTMLFormGenerator();
-		generateForm(formular, "html",formular.getTitel()+".html",htmlFormGen);
+		generateForm(project,formular, "html",formular.getTitel()+".html",htmlFormGen);
 	}
 	
-	private void createXMLForm(Formular formular) {
+	private void createXMLForm(IProject project, Formular formular) {
 		XMLFormGenerator xmlFormGenerator = new XMLFormGenerator();
-		generateForm(formular, "xml",formular.getTitel()+".xml",xmlFormGenerator);
+		generateForm(project,formular, "xml",formular.getTitel()+".xml",xmlFormGenerator);
 	}
 	
-	private IFile createFoForm(Formular formular) {
+	private IFile createFoForm(IProject project, Formular formular) {
 		FOFormGenerator foFormGenerator = new FOFormGenerator();
-		return generateForm(formular,"xsl-fo",formular.getTitel()+".xml",foFormGenerator);
+		return generateForm(project,formular,"xsl-fo",formular.getTitel()+".xml",foFormGenerator);
 	}
 	
 	private IFile createPSForm(IFile foFile,String titel){
 		PDFFormGenerator psFormGenerator = new PDFFormGenerator();
-		return generateForm(foFile,foFile.getProject(),"pdf",titel+".pdf",psFormGenerator);
+		return generateForm(foFile.getProject(),foFile,"pdf",titel+".pdf",psFormGenerator);
 
 	}
 	
-	private IFile generateForm (Formular formular, String folderName, String filename,
-			final IGenerator generator) {
-		IFile resourceFile = WorkspaceSynchronizer.getFile(formular.eResource());
-		return generateForm(formular,resourceFile.getProject(),folderName,filename,generator);
-	}
-	
-	private IFile generateForm(Object argument,IProject targetProject, String folderName, String filename,
+	private IFile generateForm(IProject targetProject, Object argument, String folderName, String filename,
 			final IGenerator generator) {
 		try {
 			

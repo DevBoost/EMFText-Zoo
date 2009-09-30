@@ -3,9 +3,6 @@ FOR <http://www.emftext.org/language/formular>
 START Formular
 
 OPTIONS {
-	overrideClasspath = "false";
-	overrideManifest = "false";
-	overrideProjectFile = "false";
 	tokenspace = "1";
 }
 
