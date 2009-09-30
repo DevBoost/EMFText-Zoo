@@ -9,11 +9,6 @@ IMPORTS {
 OPTIONS {
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
-	srcFolder = "src-gen";
-	overrideManifest = "false";
-	overridePluginXML = "false";
-	overrideClasspath = "false";
-	//overrideBuildProperties = "false";
 }
 
 RULES {

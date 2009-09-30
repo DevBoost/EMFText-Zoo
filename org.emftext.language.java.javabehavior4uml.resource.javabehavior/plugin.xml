@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorResourceFactory" type="javabehavior">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorMetaInformation" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.emftext.filetype.javabehavior" name="EMFText javabehavior Files">
-		</content-type>
-		<file-association content-type="org.emftext.filetype.javabehavior" file-extensions="javabehavior">
-		</file-association>
-	</extension>
-	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorEditor" name="EMFText javabehavior Editor">
-			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
-			</contentTypeBinding>
-			<contentTypeBinding contentTypeId="org.emftext.filetype.javabehavior" >
-			</contentTypeBinding>
+		<editor class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="javabehavior" icon="icons/editor_icon.gif" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorEditor" name="EMFText javabehavior Editor">
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Javabehavior Text Editor" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorPreferencePage" class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorSyntaxColoringPreferencePage" class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorSyntaxColoringPreferencePage" category="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorBracketPreferencePage" class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorBracketPreferencePage" category="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorOccurrencePreferencePage" class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorOccurrencePreferencePage" category="org.emftext.language.java.javabehavior4uml.resource.javabehavior.ui.JavabehaviorPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorResourceFactoryDelegator" type="javabehavior">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.java.javabehavior4uml.resource.javabehavior.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

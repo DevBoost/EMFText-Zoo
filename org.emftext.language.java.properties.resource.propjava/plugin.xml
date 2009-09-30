@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaResourceFactory" type="propjava">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaMetaInformation" id="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.emftext.filetype.propjava" name="EMFText propjava Files">
-		</content-type>
-		<file-association content-type="org.emftext.filetype.propjava" file-extensions="propjava">
-		</file-association>
-	</extension>
-	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaEditor" name="EMFText propjava Editor">
-			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
-			</contentTypeBinding>
-			<contentTypeBinding contentTypeId="org.emftext.filetype.propjava" >
-			</contentTypeBinding>
+		<editor class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="propjava" icon="icons/editor_icon.gif" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaEditor" name="EMFText propjava Editor">
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Propjava Text Editor" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaPreferencePage" class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaSyntaxColoringPreferencePage" class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaSyntaxColoringPreferencePage" category="org.emftext.language.java.properties.resource.propjava.ui.PropjavaPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaBracketPreferencePage" class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaBracketPreferencePage" category="org.emftext.language.java.properties.resource.propjava.ui.PropjavaPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.java.properties.resource.propjava.ui.PropjavaOccurrencePreferencePage" class="org.emftext.language.java.properties.resource.propjava.ui.PropjavaOccurrencePreferencePage" category="org.emftext.language.java.properties.resource.propjava.ui.PropjavaPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -50,18 +45,11 @@
 	
 	<extension-point id="org.emftext.language.java.properties.resource.propjava.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
 	
-	<extension point="org.emftext.language.java.properties.resource.propjava.default_load_options">
-    <provider
-          class="org.emftext.language.java.properties.PropertiesJavaPostProcessor"
-          id="org.emftext.language.java.properties.PropertiesJavaPostProcessor">
-    </provider>
-   </extension>
-   
-   <extension point="org.emftext.language.java.properties.resource.propjava.default_load_options">
-      <provider
-            class="org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor"
-            id="org.emftext.language.java.expression_simplifier_option_provider">
-      </provider>
-   </extension>
-   
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.java.properties.resource.propjava.mopp.PropjavaResourceFactoryDelegator" type="propjava">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.java.properties.resource.propjava.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
 </plugin>

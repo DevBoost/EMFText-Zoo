@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaResourceFactory" type="reusejava">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaMetaInformation" id="org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.emftext.filetype.reusejava" name="EMFText reusejava Files">
-		</content-type>
-		<file-association content-type="org.emftext.filetype.reusejava" file-extensions="reusejava">
-		</file-association>
-	</extension>
-	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaEditor" name="EMFText reusejava Editor">
-			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
-			</contentTypeBinding>
-			<contentTypeBinding contentTypeId="org.emftext.filetype.reusejava" >
-			</contentTypeBinding>
+		<editor class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="reusejava" icon="icons/editor_icon.gif" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaEditor" name="EMFText reusejava Editor">
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Reusejava Text Editor" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferencePage" class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaSyntaxColoringPreferencePage" class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaSyntaxColoringPreferencePage" category="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaBracketPreferencePage" class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaBracketPreferencePage" category="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaOccurrencePreferencePage" class="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaOccurrencePreferencePage" category="org.emftext.language.java.reusejava.resource.reusejava.ui.ReusejavaPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.java.reusejava.resource.reusejava.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaResourceFactoryDelegator" type="reusejava">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.java.reusejava.resource.reusejava.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>
