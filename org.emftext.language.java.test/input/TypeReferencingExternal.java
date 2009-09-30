@@ -1,5 +1,6 @@
-import pkg.inner.Inner.ExternalInnerInner;
 import java.util.Formatter.BigDecimalLayoutForm;
+
+import pkg.inner.Inner.ExternalInnerInner;
 
 public class TypeReferencingExternal {
 

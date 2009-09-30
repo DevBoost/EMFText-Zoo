@@ -103,8 +103,8 @@ import org.emftext.language.java.resource.java.analysis.JavaHEX_DOUBLE_LITERALTo
 import org.emftext.language.java.resource.java.analysis.JavaHEX_FLOAT_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_INTEGER_LITERALTokenResolver;
 import org.emftext.language.java.resource.java.analysis.JavaHEX_LONG_LITERALTokenResolver;
-import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
 import org.emftext.language.java.resource.java.mopp.JavaTokenResolveResult;
+import org.emftext.language.java.util.CharacterEscaper;
 /**
  * An extension of the JDT ASTMatcher that prints information
  * whenever the matching of two ASTs fails. In addition some

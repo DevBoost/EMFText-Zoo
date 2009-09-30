@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
 import org.emftext.language.java.resource.java.IJavaTokenResolver;
-import org.emftext.language.java.resource.java.analysis.helper.CharacterEscaper;
+import org.emftext.language.java.util.CharacterEscaper;
 
 public class JavaCHARACTER_LITERALTokenResolver implements IJavaTokenResolver { 
 	
