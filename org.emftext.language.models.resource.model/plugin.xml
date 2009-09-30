@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.models.resource.model.mopp.ModelResourceFactory" type="model">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.models.resource.model.mopp.ModelMetaInformation" id="org.emftext.language.models.resource.model.mopp.ModelMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.models.resource.model.ui.ModelPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Model Text Editor" id="org.emftext.language.models.resource.model.ui.ModelPreferencePage" class="org.emftext.language.models.resource.model.ui.ModelPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.models.resource.model.ui.ModelSyntaxColoringPreferencePage" class="org.emftext.language.models.resource.model.ui.ModelSyntaxColoringPreferencePage" category="org.emftext.language.models.resource.model.ui.ModelPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.models.resource.model.ui.ModelBracketPreferencePage" class="org.emftext.language.models.resource.model.ui.ModelBracketPreferencePage" category="org.emftext.language.models.resource.model.ui.ModelPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.models.resource.model.ui.ModelOccurrencePreferencePage" class="org.emftext.language.models.resource.model.ui.ModelOccurrencePreferencePage" category="org.emftext.language.models.resource.model.ui.ModelPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.models.resource.model.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.models.resource.model.mopp.ModelResourceFactoryDelegator" type="model">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.models.resource.model.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

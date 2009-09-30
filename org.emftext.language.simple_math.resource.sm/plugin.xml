@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.simple_math.resource.sm.mopp.SmResourceFactory" type="sm">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.simple_math.resource.sm.mopp.SmMetaInformation" id="org.emftext.language.simple_math.resource.sm.mopp.SmMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.simple_math.resource.sm.ui.SmPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Sm Text Editor" id="org.emftext.language.simple_math.resource.sm.ui.SmPreferencePage" class="org.emftext.language.simple_math.resource.sm.ui.SmPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.simple_math.resource.sm.ui.SmSyntaxColoringPreferencePage" class="org.emftext.language.simple_math.resource.sm.ui.SmSyntaxColoringPreferencePage" category="org.emftext.language.simple_math.resource.sm.ui.SmPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.simple_math.resource.sm.ui.SmBracketPreferencePage" class="org.emftext.language.simple_math.resource.sm.ui.SmBracketPreferencePage" category="org.emftext.language.simple_math.resource.sm.ui.SmPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.simple_math.resource.sm.ui.SmOccurrencePreferencePage" class="org.emftext.language.simple_math.resource.sm.ui.SmOccurrencePreferencePage" category="org.emftext.language.simple_math.resource.sm.ui.SmPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.simple_math.resource.sm.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.simple_math.resource.sm.mopp.SmResourceFactoryDelegator" type="sm">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.simple_math.resource.sm.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

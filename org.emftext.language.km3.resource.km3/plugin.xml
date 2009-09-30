@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.km3.resource.km3.mopp.Km3ResourceFactory" type="km3">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.km3.resource.km3.mopp.Km3MetaInformation" id="org.emftext.language.km3.resource.km3.mopp.Km3MetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.km3.resource.km3.ui.Km3PreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Km3 Text Editor" id="org.emftext.language.km3.resource.km3.ui.Km3PreferencePage" class="org.emftext.language.km3.resource.km3.ui.Km3PreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.km3.resource.km3.ui.Km3SyntaxColoringPreferencePage" class="org.emftext.language.km3.resource.km3.ui.Km3SyntaxColoringPreferencePage" category="org.emftext.language.km3.resource.km3.ui.Km3PreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.km3.resource.km3.ui.Km3BracketPreferencePage" class="org.emftext.language.km3.resource.km3.ui.Km3BracketPreferencePage" category="org.emftext.language.km3.resource.km3.ui.Km3PreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.km3.resource.km3.ui.Km3OccurrencePreferencePage" class="org.emftext.language.km3.resource.km3.ui.Km3OccurrencePreferencePage" category="org.emftext.language.km3.resource.km3.ui.Km3PreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.km3.resource.km3.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.km3.resource.km3.mopp.Km3ResourceFactoryDelegator" type="km3">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.km3.resource.km3.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

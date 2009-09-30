@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.textadventure.resource.tas.mopp.TasResourceFactory" type="tas">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation" id="org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.textadventure.resource.tas.ui.TasPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Tas Text Editor" id="org.emftext.language.textadventure.resource.tas.ui.TasPreferencePage" class="org.emftext.language.textadventure.resource.tas.ui.TasPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.textadventure.resource.tas.ui.TasSyntaxColoringPreferencePage" class="org.emftext.language.textadventure.resource.tas.ui.TasSyntaxColoringPreferencePage" category="org.emftext.language.textadventure.resource.tas.ui.TasPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.textadventure.resource.tas.ui.TasBracketPreferencePage" class="org.emftext.language.textadventure.resource.tas.ui.TasBracketPreferencePage" category="org.emftext.language.textadventure.resource.tas.ui.TasPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.textadventure.resource.tas.ui.TasOccurrencePreferencePage" class="org.emftext.language.textadventure.resource.tas.ui.TasOccurrencePreferencePage" category="org.emftext.language.textadventure.resource.tas.ui.TasPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.textadventure.resource.tas.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.textadventure.resource.tas.mopp.TasResourceFactoryDelegator" type="tas">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.textadventure.resource.tas.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

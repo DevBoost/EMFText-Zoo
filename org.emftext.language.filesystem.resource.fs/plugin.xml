@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.filesystem.resource.fs.mopp.FsResourceFactory" type="fs">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.filesystem.resource.fs.mopp.FsMetaInformation" id="org.emftext.language.filesystem.resource.fs.mopp.FsMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.filesystem.resource.fs.ui.FsPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Fs Text Editor" id="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage" class="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.filesystem.resource.fs.ui.FsSyntaxColoringPreferencePage" class="org.emftext.language.filesystem.resource.fs.ui.FsSyntaxColoringPreferencePage" category="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.filesystem.resource.fs.ui.FsBracketPreferencePage" class="org.emftext.language.filesystem.resource.fs.ui.FsBracketPreferencePage" category="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.filesystem.resource.fs.ui.FsOccurrencePreferencePage" class="org.emftext.language.filesystem.resource.fs.ui.FsOccurrencePreferencePage" category="org.emftext.language.filesystem.resource.fs.ui.FsPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.filesystem.resource.fs.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.filesystem.resource.fs.mopp.FsResourceFactoryDelegator" type="fs">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.filesystem.resource.fs.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

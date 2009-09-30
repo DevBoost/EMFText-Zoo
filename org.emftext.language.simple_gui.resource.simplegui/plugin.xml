@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiResourceFactory" type="simplegui">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiMetaInformation" id="org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Simplegui Text Editor" id="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiPreferencePage" class="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiSyntaxColoringPreferencePage" class="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiSyntaxColoringPreferencePage" category="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiBracketPreferencePage" class="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiBracketPreferencePage" category="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiOccurrencePreferencePage" class="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiOccurrencePreferencePage" category="org.emftext.language.simple_gui.resource.simplegui.ui.SimpleguiPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.simple_gui.resource.simplegui.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiResourceFactoryDelegator" type="simplegui">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.simple_gui.resource.simplegui.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

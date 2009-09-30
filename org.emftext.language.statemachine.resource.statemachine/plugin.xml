@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineResourceFactory" type="statemachine">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation" id="org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation">
 		</metaInformationProvider>
@@ -19,6 +14,17 @@
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachinePreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Statemachine Text Editor" id="org.emftext.language.statemachine.resource.statemachine.ui.StatemachinePreferencePage" class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachinePreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineSyntaxColoringPreferencePage" class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineSyntaxColoringPreferencePage" category="org.emftext.language.statemachine.resource.statemachine.ui.StatemachinePreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineBracketPreferencePage" class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineBracketPreferencePage" category="org.emftext.language.statemachine.resource.statemachine.ui.StatemachinePreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineOccurrencePreferencePage" class="org.emftext.language.statemachine.resource.statemachine.ui.StatemachineOccurrencePreferencePage" category="org.emftext.language.statemachine.resource.statemachine.ui.StatemachinePreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -38,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.statemachine.resource.statemachine.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineResourceFactoryDelegator" type="statemachine">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.statemachine.resource.statemachine.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>
