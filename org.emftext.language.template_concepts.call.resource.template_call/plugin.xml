@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResourceFactory" type="template_call">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callTextResourcePluginMetaInformation" id="org.emftext.language.template_concepts.call.resource.template_call.Template_callMetaInformation">
+		<metaInformationProvider class="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callMetaInformation" id="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="template_call">
-		</file-association>
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="template_call" icon="icons/editor_icon.gif" id="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callEditor" name="EMFText template_call Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Template_call Text Editor" id="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callPreferencePage" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callSyntaxColoringPreferencePage" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callSyntaxColoringPreferencePage" category="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callBracketPreferencePage" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callBracketPreferencePage" category="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callOccurrencePreferencePage" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callOccurrencePreferencePage" category="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callNewFileWizard" id="org.emftext.language.template_concepts.call.resource.template_call.Template_callNewFileWizard" name="EMFText .template_call file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callNewFileWizard" id="org.emftext.language.template_concepts.call.resource.template_call.ui.Template_callNewFileWizard" name="EMFText .template_call file">
 		</wizard>
 	</extension>
 	
- <extension
-       point="org.emftext.language.template_concepts.call.resource.template_call.default_load_options">
-    <provider
-          class="org.emftext.language.template_concepts.call.resource.template_call.post_processing.InterpreterExecuter"
-          id="org.emftext.language.template_concepts.call.resource.template_call.post_processing.InterpreterExecuter">
-    </provider>
- </extension>
- 
- <extension-point id="org.emftext.language.template_concepts.call.resource.template_call.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
- 
+	<extension id="org.emftext.language.template_concepts.call.resource.template_call.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.template_concepts.call.resource.template_call.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResourceFactoryDelegator" type="template_call">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.template_concepts.call.resource.template_call.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

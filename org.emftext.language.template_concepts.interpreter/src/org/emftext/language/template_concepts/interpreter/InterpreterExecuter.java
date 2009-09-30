@@ -1,4 +1,4 @@
-package org.emftext.language.template_concepts.call.resource.template_call.post_processing;
+package org.emftext.language.template_concepts.interpreter;
 
 import java.io.IOException;
 import java.util.ArrayList;
