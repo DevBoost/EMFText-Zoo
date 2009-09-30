@@ -6,7 +6,6 @@ START Conference
 OPTIONS {
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	overrideManifest = "false";
 	tokenspace = "1";
 }
 
