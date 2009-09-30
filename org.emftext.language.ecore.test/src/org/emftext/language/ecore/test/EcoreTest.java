@@ -25,8 +25,9 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.ecore.resource.EcoreResourceFactoryDelegator;
-import org.emftext.language.ecore.resource.text.extension.ExtendedTextEcoreResourceFactory;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.emftext.language.ecore.resource.ecore.mopp.EcoreResourceFactoryDelegator;
+import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,8 +38,10 @@ public class EcoreTest extends AbstractEcoreTestCase {
 		EcoreResourceFactoryDelegator factoryDelegator = new EcoreResourceFactoryDelegator();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", factoryDelegator);
-		factoryDelegator.getEcoreResourceFactoriesMap().put(
-				"text", new ExtendedTextEcoreResourceFactory());
+		factoryDelegator.getResourceFactoriesMap().put(
+				"text", new TextEcoreResourceFactory());
+		factoryDelegator.getResourceFactoriesMap().put(
+				"", new EcoreResourceFactoryImpl());
 	}
 
 	@Test

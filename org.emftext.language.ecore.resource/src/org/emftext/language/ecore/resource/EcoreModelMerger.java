@@ -1,4 +1,4 @@
-package org.emftext.language.ecore.resource.facade.merge;
+package org.emftext.language.ecore.resource;
 
 import java.util.HashMap;
 import java.util.Iterator;

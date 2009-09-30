@@ -3,14 +3,12 @@ FOR       <http://www.eclipse.org/emf/2002/Ecore>
 START     EPackage
 
 OPTIONS {
-	overridePluginXML = "false";
-	overrideManifest = "false";
-	//overrideClasspath = "false";
 	memoize = "true";
 	tokenspace = "0";
 	resourcePluginID = "org.emftext.language.ecore.resource.text";
 	basePackage = "org.emftext.language.ecore.resource.text";
 	usePredefinedTokens = "false";
+	baseResourcePlugin = "org.emftext.language.ecore.resource.ecore";
 }
 
 TOKENS {

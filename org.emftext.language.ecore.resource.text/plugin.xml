@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-
- <extension
-       point="org.emftext.language.ecore.resource.additional_ecore_extension_parser">
-    <parser
-          class="org.emftext.language.ecore.resource.text.extension.ExtendedTextEcoreResourceFactory"
-          type="text">
-    </parser>
- </extension>
- 
-	
 	<extension point="org.emftext.access.syntax">
-		<metaInformationProvider class="org.emftext.language.ecore.resource.text.mopp.TextEcoreTextResourcePluginMetaInformation" id="org.emftext.language.ecore.resource.text.mopp.TextEcoreTextResourcePluginMetaInformation">
+		<metaInformationProvider class="org.emftext.language.ecore.resource.text.mopp.TextEcoreMetaInformation" id="org.emftext.language.ecore.resource.text.mopp.TextEcoreMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="text.ecore">
-		</file-association>
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.ecore.resource.text.ui.TextEcoreEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ecore" icon="icons/editor_icon.gif" id="org.emftext.language.ecore.resource.text.ui.TextEcoreEditor" name="EMFText text.ecore Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.ecore.resource.text.ui.TextEcorePreferenceInitializer">
+		</initializer>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
 		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
 		</category>
-		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.ecore.resource.text.ui.TextEcoreNewFileWizard" id="org.emftext.language.ecore.resource.text.TextEcoreNewFileWizard" name="EMFText .text.ecore file">
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.ecore.resource.text.ui.TextEcoreNewFileWizard" id="org.emftext.language.ecore.resource.text.ui.TextEcoreNewFileWizard" name="EMFText .text.ecore file">
 		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.ecore.resource.text.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.ecore.resource.text.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.emftext.language.ecore.resource.ecore.additional_extension_parser">
+		<parser class="org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory" type="text">
+		</parser>
 	</extension>
 	
 </plugin>
