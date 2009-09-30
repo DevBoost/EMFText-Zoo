@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.db_schema.resource.db_schema.mopp.Db_schemaResourceFactory" type="db_schema">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.db_schema.resource.db_schema.mopp.Db_schemaMetaInformation" id="org.emftext.language.db_schema.resource.db_schema.mopp.Db_schemaMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<file-association content-type="org.emftext.filetype" file-extensions="db_schema">
-		</file-association>
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="db_schema" icon="icons/editor_icon.gif" id="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaEditor" name="EMFText db_schema Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Db_schema Text Editor" id="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaPreferencePage" class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaSyntaxColoringPreferencePage" class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaSyntaxColoringPreferencePage" category="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaBracketPreferencePage" class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaBracketPreferencePage" category="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaOccurrencePreferencePage" class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaOccurrencePreferencePage" category="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -22,5 +33,23 @@
 		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaNewFileWizard" id="org.emftext.language.db_schema.resource.db_schema.ui.Db_schemaNewFileWizard" name="EMFText .db_schema file">
 		</wizard>
 	</extension>
+	
+	<extension id="org.emftext.language.db_schema.resource.db_schema.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.db_schema.resource.db_schema.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.db_schema.resource.db_schema.mopp.Db_schemaResourceFactoryDelegator" type="db_schema">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.db_schema.resource.db_schema.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

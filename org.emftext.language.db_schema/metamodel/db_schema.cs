@@ -6,7 +6,6 @@ OPTIONS{
 	generateCodeFromGeneratorModel = "true";
  	reloadGeneratorModel = "true";
     tokenspace = "1";
-    overrideManifest = "false";
 }
 TOKENS{
 		DEFINE COMMENT $'//'(~('\n'|'\r'))*$;
