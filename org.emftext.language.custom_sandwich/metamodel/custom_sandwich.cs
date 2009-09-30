@@ -10,7 +10,6 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	overrideManifest = "false";
 	tokenspace = "1";
 }
 
