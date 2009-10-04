@@ -137,6 +137,10 @@ public class InterpreterWithState {
 				EObject referencedObjectInInstance = templateToInstanceObjectMap.get(referencedObjectInTemplate);
 				
 				//System.out.println("copy cross reference " + reference.getName() + " target = " + referencedObjectInInstance);
+				if (referencedObjectInInstance == null) {
+					//cross-resource reference: set link to original
+					referencedObjectInInstance = referencedObjectInTemplate;
+				}
 				nextTiObject.eSet(reference, referencedObjectInInstance);
 			}
 		}
