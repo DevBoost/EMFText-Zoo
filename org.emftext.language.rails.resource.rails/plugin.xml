@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension point="org.eclipse.emf.ecore.extension_parser">
-		<parser class="org.emftext.language.rails.resource.rails.mopp.RailsResourceFactory" type="rails">
-		</parser>
-	</extension>
-	
 	<extension point="org.emftext.access.syntax">
 		<metaInformationProvider class="org.emftext.language.rails.resource.rails.mopp.RailsMetaInformation" id="org.emftext.language.rails.resource.rails.mopp.RailsMetaInformation">
 		</metaInformationProvider>
 	</extension>
 	
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type id="org.emftext.filetype.rails" name="EMFText rails Files">
-		</content-type>
-		<file-association content-type="org.emftext.filetype.rails" file-extensions="rails">
-		</file-association>
-	</extension>
-	
 	<extension point="org.eclipse.ui.editors">
-		<editor class="org.emftext.language.rails.resource.rails.ui.RailsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" icon="icons/editor_icon.gif" id="org.emftext.language.rails.resource.rails.ui.RailsEditor" name="EMFText rails Editor">
-			<contentTypeBinding contentTypeId="org.eclipse.core.runtime.text">
-			</contentTypeBinding>
-			<contentTypeBinding contentTypeId="org.emftext.filetype.rails" >
-			</contentTypeBinding>
+		<editor class="org.emftext.language.rails.resource.rails.ui.RailsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rails" icon="icons/editor_icon.gif" id="org.emftext.language.rails.resource.rails.ui.RailsEditor" name="EMFText rails Editor">
 		</editor>
 	</extension>
 	
 	<extension point="org.eclipse.core.runtime.preferences">
 		<initializer class="org.emftext.language.rails.resource.rails.ui.RailsPreferenceInitializer">
 		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Rails Text Editor" id="org.emftext.language.rails.resource.rails.ui.RailsPreferencePage" class="org.emftext.language.rails.resource.rails.ui.RailsPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.rails.resource.rails.ui.RailsSyntaxColoringPreferencePage" class="org.emftext.language.rails.resource.rails.ui.RailsSyntaxColoringPreferencePage" category="org.emftext.language.rails.resource.rails.ui.RailsPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.rails.resource.rails.ui.RailsBracketPreferencePage" class="org.emftext.language.rails.resource.rails.ui.RailsBracketPreferencePage" category="org.emftext.language.rails.resource.rails.ui.RailsPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.rails.resource.rails.ui.RailsOccurrencePreferencePage" class="org.emftext.language.rails.resource.rails.ui.RailsOccurrencePreferencePage" category="org.emftext.language.rails.resource.rails.ui.RailsPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
@@ -49,5 +44,12 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.rails.resource.rails.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.rails.resource.rails.mopp.RailsResourceFactoryDelegator" type="rails">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.rails.resource.rails.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
 	
 </plugin>

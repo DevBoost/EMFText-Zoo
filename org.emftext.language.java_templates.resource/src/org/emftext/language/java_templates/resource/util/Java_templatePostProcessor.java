@@ -70,7 +70,6 @@ public class Java_templatePostProcessor implements IJava_templateOptionProvider,
 		}.repair(resource);
 		
 		JavaModelCompletion.complete(resource);
-		JavaModelCompletion.complete(resource);
 	}
 
 	public IJava_templateResourcePostProcessor getResourcePostProcessor() {

@@ -55,7 +55,12 @@ public class InterpreterExecuter implements ITemplate_callOptionProvider, ITempl
 			return;
 		}
 		// figure out the correct file extension for the template instance
-		String fileExtension = "unknown";
+		
+		String fileExtension = resource.getURI().trimFileExtension().fileExtension();
+			
+		if (fileExtension == null) {
+			fileExtension = "unknown";
+		}
 		// TODO Find different way to resolve object language metamodel (Put into template itself)
 		/*String targetNamespace = templateInstanceAST.eClass().getEPackage().getNsURI();
 		Map<String, URI> syntaxes = EMFTextRuntimePlugin.getURIToConcreteSyntaxLocationMap();
@@ -65,7 +70,7 @@ public class InterpreterExecuter implements ITemplate_callOptionProvider, ITempl
 			}
 		}*/
 		// save it
-		Resource instance = new ResourceSetImpl().createResource(resource.getURI().trimFileExtension().appendFileExtension(fileExtension));
+		Resource instance = new ResourceSetImpl().createResource(resource.getURI().trimFileExtension().trimFileExtension().appendFileExtension(fileExtension));
 		instance.getContents().add(templateInstanceAST);
 		instance.save(null);
 	}
