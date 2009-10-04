@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.ocl.OCL;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.Query;
@@ -64,8 +63,12 @@ import org.emftext.language.primitive_types.helper.PrimitiveTypesHelper;
  * TODO clean this mess up
  */
 public class ExpressionChecker  {
+	
+	public static interface ErrorReporter {
+		void report(EObject element, String message);
+	}
 
-	public void process(Resource resource) {
+	public void process(Resource resource, ErrorReporter errorReporter) {
 		List<EObject> templates = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getTemplate());
 		if (templates.size() < 1) {
 			return;
@@ -79,44 +82,27 @@ public class ExpressionChecker  {
 		
 		Map<String, EObject> variables = new HashMap<String, EObject>();
 		List<EObject> contents = template.eContents();
-		check(resource, metaClass, contents, variables);
+		check(errorReporter, metaClass, contents, variables);
 	}
 
-	private void check(Resource resource, EClass metaClass,
+	private void check(ErrorReporter errorReporter,  EClass metaClass,
 			List<EObject> contents, Map<String, EObject> variables) {
 		for (EObject next : contents) {
 			if (next instanceof TemplateConcept) {
-				check(resource, metaClass, (TemplateConcept) next, variables);
+				check(errorReporter, metaClass, (TemplateConcept) next, variables);
 			} else {
-				check(resource, metaClass, next.eContents(), variables);
+				check(errorReporter, metaClass, next.eContents(), variables);
 			}
 		}
 	}
 
-	private void check(Resource resource, EClass metaClass,
+	private void check(ErrorReporter errorReporter, EClass metaClass,
 			TemplateConcept concept, Map<String, EObject> variables) {
 		final String expression = concept.getExpression();
 		final Object errorOrQuery = createQuery(metaClass, variables, expression);
 		if (errorOrQuery instanceof String) {
 			final String error = (String) errorOrQuery;
-			resource.getErrors().add(new Diagnostic() {
-				
-				public String getMessage() {
-					return "The expression \"" + expression + "\" is invalid (" + error + ").";
-				}
-				
-				public String getLocation() {
-					return null;
-				}
-				
-				public int getLine() {
-					return 0; //TODO line from concepts
-				}
-				
-				public int getColumn() {
-					return 0; //TODO column from concepts
-				}
-			});
+			errorReporter.report(concept, "The expression \"" + expression + "\" is invalid (" + error + ").");
 		} else {
 			if (concept instanceof ForEach) {
 				ForEach forEach = (ForEach) concept;
@@ -138,15 +124,15 @@ public class ExpressionChecker  {
 			}
 			// for placeholders we must check the type
 			if (concept instanceof Placeholder) {
-				checkPlaceholderExpressionType(resource, metaClass,
+				checkPlaceholderExpressionType(errorReporter, metaClass,
 						concept, expression);
 			}
-			check(resource, metaClass, concept.eContents(), variables);
+			check(errorReporter, metaClass, concept.eContents(), variables);
 			// TODO remove variables
 		}
 	}
 
-	private void checkPlaceholderExpressionType(Resource resource,
+	private void checkPlaceholderExpressionType(ErrorReporter errorReporter, 
 			EClass metaClass, TemplateConcept concept, String expression) {
 		Object queryOrError = createQuery(metaClass, null, expression);
 		if (queryOrError instanceof Query) {
@@ -181,24 +167,8 @@ public class ExpressionChecker  {
 			// now we have both the primitive type of the expression and the target of the
 			// placeholder. lets compare them...
 			if (placeHolderExpressionPrimitiveType == null || !placeHolderExpressionPrimitiveType.equals(placeHolderTargetPrimitiveType)) {
-				resource.getErrors().add(new Diagnostic() {
-					
-					public String getMessage() {
-						return "The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")";
-					}
-					
-					public String getLocation() {
-						return null;
-					}
-					
-					public int getLine() {
-						return 0; //TODO line from concepts
-					}
-					
-					public int getColumn() {
-						return 0; //TODO column from concepts
-					}
-				});
+				errorReporter.report(concept, 
+						"The expression in the placeholder has wrong type (was " + placeHolderExpressionPrimitiveType + ", expected " + placeHolderTargetPrimitiveType + ")");
 			}
 		} else {
 			System.out.println("Error while checking placeholder - error: " + queryOrError);

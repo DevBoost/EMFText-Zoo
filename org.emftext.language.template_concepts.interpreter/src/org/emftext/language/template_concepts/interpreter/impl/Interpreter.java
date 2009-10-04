@@ -33,6 +33,10 @@ public class Interpreter implements ITemplateInterpreter {
 	public EObject interprete(Template template, EObject paramModel, Collection<Diagnostic> problems) {
 		try {
 			final EClass inputMetaClass = template.getInputMetaClass();
+			if (inputMetaClass == null) {
+				//model incomplete
+				return null;
+			}
 			
 			// the interpreter must check whether the loaded input model
 			// really confirms to the type expected by the template

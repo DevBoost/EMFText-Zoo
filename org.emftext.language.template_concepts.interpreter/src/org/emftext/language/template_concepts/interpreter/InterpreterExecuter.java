@@ -6,6 +6,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -18,8 +22,6 @@ import org.emftext.language.template_concepts.call.resource.template_call.ITempl
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callResourcePostProcessorProvider;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callTextResource;
 import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResource;
-import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
-import org.emftext.language.template_concepts.interpreter.TemplateInterpreterFactory;
 
 public class InterpreterExecuter implements ITemplate_callOptionProvider, ITemplate_callResourcePostProcessorProvider, ITemplate_callResourcePostProcessor {
 
@@ -39,16 +41,12 @@ public class InterpreterExecuter implements ITemplate_callOptionProvider, ITempl
 			}
 		} else {
 			// pretty print templateInstanceAST
-			try {
-				saveTemplateInstance(resource, templateInstanceAST);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			saveTemplateInstance(resource, templateInstanceAST);
 		}
 	}
 
 	private void saveTemplateInstance(ITemplate_callTextResource resource,
-			EObject templateInstanceAST) throws IOException {
+			EObject templateInstanceAST) {
 		
 		if (templateInstanceAST == null) {
 			System.out.println("Interpreter.saveTemplateInstance() AST is null.");
@@ -70,9 +68,19 @@ public class InterpreterExecuter implements ITemplate_callOptionProvider, ITempl
 			}
 		}*/
 		// save it
-		Resource instance = new ResourceSetImpl().createResource(resource.getURI().trimFileExtension().trimFileExtension().appendFileExtension(fileExtension));
+		final Resource instance = new ResourceSetImpl().createResource(resource.getURI().trimFileExtension().trimFileExtension().appendFileExtension(fileExtension));
 		instance.getContents().add(templateInstanceAST);
-		instance.save(null);
+		new Job("saving " + instance.getURI().lastSegment()) {		
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					instance.save(null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 	public ITemplate_callResourcePostProcessor getResourcePostProcessor() {
