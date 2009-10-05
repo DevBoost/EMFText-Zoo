@@ -1,6 +1,6 @@
 <%TEMPLATE INPUT="http://www.emftext.org/language/sandwich::Recipe" %>
 
-<%IF "ingredients->exists(i | i.oclAsType(Ingredient)->name.oclAsType(IngredientName).value = 'onion')" %>
+<%IF "ingredients->exists(i | i.oclAsType(Ingredient)->name.oclAsType(IngredientName).value = 'ONIONSE')" %>
 	import org.anic.food.*;
 <%ENDIF%>
 
@@ -16,33 +16,43 @@ public class <%= "self.name" %> {
 		A x;
 		<%FOR "ingredients" %>
 		{
-			Object item = buy();
+			Object <%= "self.oclAsType(Ingredient).name.oclAsType(IngredientName)" %> = buy();
+			Object item = new Object();
 			ingredients.add(item);
+			<%IF "self.oclIsKindOf(Clean)" %>
+				doClean(item);
+			<%ENDIF%>
+			doClean(item);
 		}
 		<%ENDFOR%>
 		
 		<%FOR "instructions" %>
-			//<%IF "self.oclIsKindOf(Clean)" %>
-				doClean();
-			//<%ENDIF%>
+		{
+			<%IF "self.oclIsKindOf(Clean)" %>
+				doClean(null);
+			<%ENDIF%>
+		}
 		<%ENDFOR%>
 	}
 	
-	private void buy() {
+	private Object buy() {
 		java.lang.String s = new java.lang.String();
+		s = s + "_something";
 		s.substring(1);
-		a.class;
+		return s;
 	}
 	
 	private void x (
 		int b,
 		<%FOR "self.ingredients" %>
-			int a
+			int <%= "self.oclAsType(Ingredient).name.oclAsType(IngredientName)" %>
 		<%ENDFOR%>
-		, int b, int c) {
+		, int c) {
+		
+		b = 1;
 		
 	}
 
-	private void doClean() {
+	private void doClean(Object item) {
 	}
 }
