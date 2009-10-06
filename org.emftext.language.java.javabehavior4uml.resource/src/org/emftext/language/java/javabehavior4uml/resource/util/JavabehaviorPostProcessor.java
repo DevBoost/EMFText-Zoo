@@ -69,7 +69,7 @@ public class JavabehaviorPostProcessor implements IJavabehaviorOptionProvider, I
 			}
 		}.repair(resource);
 		
-		JavaModelCompletion.complete(resource);
+		
 		JavaModelCompletion.complete(resource);
 	}
 
