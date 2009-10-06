@@ -94,8 +94,7 @@ TOKENSTYLES {
 	"strictfp" COLOR #7F0055, BOLD;
 	"void" COLOR #7F0055, BOLD;
 	"throws" COLOR #7F0055, BOLD;
-	"float" COLOR #7F0055, BOLD;	
-	"default" COLOR #7F0055, BOLD;
+	"float" COLOR #7F0055, BOLD;
 	"final" COLOR #7F0055, BOLD;
 	"private" COLOR #7F0055, BOLD;
 	"protected" COLOR #7F0055, BOLD;
