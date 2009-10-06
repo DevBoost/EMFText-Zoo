@@ -35,9 +35,9 @@ import org.emftext.language.template_concepts.call.TemplateCall;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolveResult;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolver;
 
-public class TemplateCallTargetReferenceResolver implements ITemplate_callReferenceResolver<TemplateCall, EObject> {
+public class TemplateCallTargetReferenceResolver implements ITemplate_callReferenceResolver<TemplateCall, Template> {
 	
-	public String deResolve(EObject element, TemplateCall container,
+	public String deResolve(Template element, TemplateCall container,
 			EReference reference) {
 		// TODO
 		return null;
@@ -45,7 +45,7 @@ public class TemplateCallTargetReferenceResolver implements ITemplate_callRefere
 	
 	public void resolve(String identifier, TemplateCall container,
 			EReference reference, int position, boolean resolveFuzzy,
-			ITemplate_callReferenceResolveResult<EObject> result) {
+			ITemplate_callReferenceResolveResult<Template> result) {
 		Resource resource = container.eResource();
 		URI uri = resource.getURI();
 		URI uriWithoutExtension = uri.trimSegments(1);
