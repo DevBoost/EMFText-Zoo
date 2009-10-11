@@ -3,7 +3,7 @@ FOR <http://www.emftext.org/language/rolecore>
 START RCPackage
 
 OPTIONS {
-	reloadGeneratorModel = "true";
+	//reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 }
 
@@ -25,7 +25,7 @@ TOKENS {
 
 TOKENSTYLES {
 	"RCPackage" COLOR #00A000, BOLD;
-	"CoreClass" COLOR #606060, BOLD;
+	"CoreClass" COLOR #600000, BOLD;
 	"Role" COLOR #00A000, BOLD;
 	"is" COLOR #00A000, BOLD;
 	"played" COLOR #00A000, BOLD;
@@ -34,10 +34,16 @@ TOKENSTYLES {
 }
 
 RULES {
-	RCPackage ::= "RCPackage" name[] coreClasses* roles*;
+	RCPackage ::= 
+		"RCPackage" name[] 
+		(#1 nsPrefix[])? (#1 nsURI['"', '"'])? #1
+		"{"
+			coreClasses* 
+			roles*
+		"}";
 	
 	Role      ::= 
-		"Role" name[] "is" "played" "by" player[]			
+		"Role" name[] "is" "played" "by" player[]
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 		
 	CoreClass ::= 

@@ -1,5 +1,6 @@
 package org.emftext.language.rolecore.ecore_compiler;
 
+import java.awt.geom.GeneralPath;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,12 +18,19 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -42,6 +50,9 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 
 	private static final String ROLES_REFERENCE_NAME = "roles";
 	private static final String CORE_REFERENCE_NAME = "core";
+	private static final String HAS_ROLE_OPERATION_NAME = "hasRole";
+	private static final String GET_ROLE_OPERATION_NAME = "getRole";
+	private static final String ADD_ROLE_OPERATION_NAME = "addRole";
 	
 	private Set<EClass> copyTargets = new LinkedHashSet<EClass>();
 
@@ -77,6 +88,9 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 	private EPackage compile(RCPackage metaModel) {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName(metaModel.getName());
+		ePackage.setNsPrefix(metaModel.getNsPrefix());
+		ePackage.setNsURI(metaModel.getNsURI());
+		
 		compileCoreClasses(metaModel.getCoreClasses(), ePackage);
 		compileRoles(metaModel.getRoles(), ePackage);
 		replaceReferencesToRolesAndCoreClasses(ePackage);
@@ -154,6 +168,12 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 		CoreClass player = role.getPlayer();
 		EClass abstractRoleClass = findOrCreateAbstractRoleClass(ePackage, player);
 		EClass concreteRoleClass = findOrCreateEClass(ePackage, role, "", false, false, abstractRoleClass);
+		if (copyTargets.contains(concreteRoleClass)) {
+			return concreteRoleClass;
+		}
+		copyTargets.add(concreteRoleClass);
+		// TODO is this needed? the concrete role classes inherit from
+		// the core interface anyway?
 		copyEClassContents(role, concreteRoleClass);
 		return concreteRoleClass;
 	}
@@ -176,10 +196,107 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 		EClass coreInterface = findOrCreateEClass(ePackage, coreClass, "", true, true);
 		// add reference to the roles that can by played by the core class
 		findOrCreateRolesReference(coreInterface, coreClass);
+		if (copyTargets.contains(coreInterface)) {
+			return coreInterface;
+		}
+		copyTargets.add(coreInterface);
 		copyEClassContents(coreClass, coreInterface);
+		addRoleHandlingMethods(coreInterface);
 		return coreInterface;
 	}
 	
+	private void addRoleHandlingMethods(EClass coreInterface) {
+		addHasRoleOperation(coreInterface);
+		addGetRoleOperation(coreInterface);
+		addAddRoleOperation(coreInterface);
+	}
+
+	private void addAddRoleOperation(EClass coreInterface) {
+		EClass eObject = EcorePackage.eINSTANCE.getEObject();
+
+		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
+		typeParameterT.setName("T");
+		EGenericType lowerBound = EcoreFactory.eINSTANCE.createEGenericType();
+		lowerBound.setEClassifier(eObject);
+		EGenericType lower = EcoreFactory.eINSTANCE.createEGenericType();
+		lower.setELowerBound(lowerBound);
+		typeParameterT.getEBounds().add(lowerBound);
+
+		EOperation addRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
+		addRoleOperation.setName(ADD_ROLE_OPERATION_NAME);
+
+		addRoleOperation.getETypeParameters().add(typeParameterT);
+		
+		EParameter roleParameter = EcoreFactory.eINSTANCE.createEParameter();
+		roleParameter.setName("role");
+		roleParameter.setEGenericType(createT(typeParameterT));
+		
+		addRoleOperation.getEParameters().add(roleParameter);
+		
+		coreInterface.getEOperations().add(addRoleOperation);
+	}
+
+	private void addGetRoleOperation(EClass coreInterface) {
+		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
+		typeParameterT.setName("T");
+
+		EOperation getRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
+		getRoleOperation.setName(GET_ROLE_OPERATION_NAME);
+		getRoleOperation.setEGenericType(createT(typeParameterT));
+		getRoleOperation.getETypeParameters().add(typeParameterT);
+		
+		EParameter roleClassParameter = EcoreFactory.eINSTANCE.createEParameter();
+		roleClassParameter.setName("roleClass");
+
+		roleClassParameter.setEGenericType(createClassT(typeParameterT));
+		
+		getRoleOperation.getEParameters().add(roleClassParameter);
+		
+		coreInterface.getEOperations().add(getRoleOperation);
+	}
+
+	private void addHasRoleOperation(EClass coreInterface) {
+		EDataType eBoolean = EcorePackage.eINSTANCE.getEBoolean();
+
+		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
+		typeParameterT.setName("T");
+
+		EOperation hasRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
+		hasRoleOperation.setName(HAS_ROLE_OPERATION_NAME);
+		hasRoleOperation.setEType(eBoolean);
+		hasRoleOperation.getETypeParameters().add(typeParameterT);
+		
+		EParameter roleClassParameter = EcoreFactory.eINSTANCE.createEParameter();
+		roleClassParameter.setName("roleClass");
+		roleClassParameter.setEGenericType(createClassT(typeParameterT));
+		
+		hasRoleOperation.getEParameters().add(roleClassParameter);
+		coreInterface.getEOperations().add(hasRoleOperation);
+	}
+
+	private EGenericType getTExtends(ETypeParameter typeParameter, EClassifier lower) {
+		EGenericType genericType = createT(typeParameter);
+		EGenericType roleType = EcoreFactory.eINSTANCE.createEGenericType();
+		roleType.setEClassifier(lower);
+		genericType.setELowerBound(roleType);
+		return genericType;
+	}
+
+	private EGenericType createClassT(ETypeParameter typeParameter) {
+		EDataType javaClass = EcorePackage.eINSTANCE.getEJavaClass();
+		EGenericType genericType = createT(typeParameter);
+		EGenericType lowerBound = EcoreFactory.eINSTANCE.createEGenericType();
+		lowerBound.setEClassifier(javaClass);
+		lowerBound.getETypeArguments().add(genericType);
+		return lowerBound;
+	}
+
+	private EGenericType createT(ETypeParameter typeParameter) {
+		EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
+		genericType.setETypeParameter(typeParameter);
+		return genericType;
+	}
+
 	/**
 	 * Copies the content of 'from' (e.g., attributes, structural features,
 	 * annotations and operations) to 'to':
@@ -188,10 +305,6 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 	 * @param to
 	 */
 	private void copyEClassContents(EClass from, EClass to) {
-		if (copyTargets.contains(to)) {
-			return;
-		}
-		copyTargets.add(to);
 		// TODO is this needed, or is it covers by copying the
 		// structural features?
 		List<EAttribute> attributes = from.getEAttributes();
