@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.rolecore.CoreClass;
 import org.emftext.language.rolecore.RCPackage;
@@ -78,7 +79,50 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 		ePackage.setName(metaModel.getName());
 		compileCoreClasses(metaModel.getCoreClasses(), ePackage);
 		compileRoles(metaModel.getRoles(), ePackage);
+		replaceReferencesToRolesAndCoreClasses(ePackage);
 		return ePackage;
+	}
+
+	private void replaceReferencesToRolesAndCoreClasses(EPackage ePackage) {
+		replaceCrossReferences(ePackage, ePackage);
+	}
+
+	private void replaceCrossReferences(EPackage ePackage, EObject current) {
+		EContentsEList.FeatureIterator<EObject> featureIterator = (EContentsEList.FeatureIterator<EObject>) current.eCrossReferences().iterator();
+		while (featureIterator.hasNext()) {
+		    EObject eObject = (EObject) featureIterator.next();
+		    EReference eReference = (EReference) featureIterator.feature();
+		  
+			if (eObject instanceof Role) {
+				// TODO maybe we need to use the abstract role class here?
+				EClass concreteRoleClass = findOrCreateConcreteRoleClass(ePackage, (Role) eObject);
+				replace(current, eObject, eReference, concreteRoleClass);
+			}
+			if (eObject instanceof CoreClass) {
+				EClass coreClassInterface = findOrCreateCoreInterface(ePackage, (CoreClass) eObject);
+				replace(current, eObject, eReference, coreClassInterface);
+			}
+		}
+		for (EObject eObject : current.eContents()) {
+			replaceCrossReferences(ePackage, eObject);
+		}
+	}
+
+	private void replace(EObject referencingObject, EObject oldReferencedObject,
+			EReference eReference, EObject newReferencedObject) {
+		Object referenceValue = referencingObject.eGet(eReference);
+		if (referenceValue instanceof List<?>) {
+			List<EObject> referenceList = (List<EObject>) referenceValue;
+			int oldIndex = referenceList.indexOf(oldReferencedObject);
+			referenceList.remove(oldIndex);
+			if (oldIndex == referenceList.size()) {
+				referenceList.add(newReferencedObject);
+			} else {
+				referenceList.add(oldIndex, newReferencedObject);
+			}
+		} else {
+			referencingObject.eSet(eReference, newReferencedObject);
+		}
 	}
 
 	private void compileCoreClasses(EList<CoreClass> coreClasses, EPackage ePackage) {
