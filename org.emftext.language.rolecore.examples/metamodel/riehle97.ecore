@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="riehle97"
+    nsURI="http://www.emftext.org/languages/rolecore/examples/riehle97" nsPrefix="riehle97">
+  <eClassifiers xsi:type="ecore:EClass" name="Customer" abstract="true" interface="true">
+    <eOperations name="getAccounts"/>
+    <eOperations name="hasRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eTypeParameters name="T"/>
+      <eParameters name="roleClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//Customer/hasRole/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getRole">
+      <eGenericType eTypeParameter="#//Customer/getRole/T"/>
+      <eTypeParameters name="T"/>
+      <eParameters name="roleClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//Customer/getRole/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addRole">
+      <eTypeParameters name="T">
+        <eBounds eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eTypeParameters>
+      <eParameters name="role">
+        <eGenericType eTypeParameter="#//Customer/addRole/T"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//CustomerRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomerRole" abstract="true" eSuperTypes="#//Customer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="core" lowerBound="1" eType="#//CustomerCore"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomerCore" eSuperTypes="#//Customer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Credit" abstract="true" interface="true">
+    <eOperations name="hasRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eTypeParameters name="T"/>
+      <eParameters name="roleClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//Credit/hasRole/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getRole">
+      <eGenericType eTypeParameter="#//Credit/getRole/T"/>
+      <eTypeParameters name="T"/>
+      <eParameters name="roleClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//Credit/getRole/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addRole">
+      <eTypeParameters name="T">
+        <eBounds eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eTypeParameters>
+      <eParameters name="role">
+        <eGenericType eTypeParameter="#//Credit/addRole/T"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//CreditRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreditRole" abstract="true" eSuperTypes="#//Credit">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="core" lowerBound="1" eType="#//CreditCore"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreditCore" eSuperTypes="#//Credit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityObject" abstract="true" interface="true">
+    <eOperations name="hasRole" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eTypeParameters name="T"/>
+      <eParameters name="roleClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//SecurityObject/hasRole/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getRole">
+      <eGenericType eTypeParameter="#//SecurityObject/getRole/T"/>
+      <eTypeParameters name="T"/>
+      <eParameters name="roleClass">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//SecurityObject/getRole/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addRole">
+      <eTypeParameters name="T">
+        <eBounds eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eTypeParameters>
+      <eParameters name="role">
+        <eGenericType eTypeParameter="#//SecurityObject/addRole/T"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//SecurityObjectRole" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityObjectRole" abstract="true"
+      eSuperTypes="#//SecurityObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="core" lowerBound="1" eType="#//SecurityObjectCore"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityObjectCore" eSuperTypes="#//SecurityObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Borrower" eSuperTypes="#//CustomerRole">
+    <eOperations name="getCredits" eType="#//Credit"/>
+    <eOperations name="getSecurityObject" eType="#//SecurityObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Investor" eSuperTypes="#//CustomerRole"/>
+</ecore:EPackage>
