@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.aterms.resource.aterms.mopp.AtermsMetaInformation" id="org.emftext.language.aterms.resource.aterms.mopp.AtermsMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.aterms.resource.aterms.ui.AtermsEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="aterms" icon="icons/editor_icon.gif" id="org.emftext.language.aterms.resource.aterms.ui.AtermsEditor" name="EMFText aterms Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.aterms.resource.aterms.ui.AtermsPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Aterms Text Editor" id="org.emftext.language.aterms.resource.aterms.ui.AtermsPreferencePage" class="org.emftext.language.aterms.resource.aterms.ui.AtermsPreferencePage">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.aterms.resource.aterms.ui.AtermsSyntaxColoringPreferencePage" class="org.emftext.language.aterms.resource.aterms.ui.AtermsSyntaxColoringPreferencePage" category="org.emftext.language.aterms.resource.aterms.ui.AtermsPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.aterms.resource.aterms.ui.AtermsBracketPreferencePage" class="org.emftext.language.aterms.resource.aterms.ui.AtermsBracketPreferencePage" category="org.emftext.language.aterms.resource.aterms.ui.AtermsPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.aterms.resource.aterms.ui.AtermsOccurrencePreferencePage" class="org.emftext.language.aterms.resource.aterms.ui.AtermsOccurrencePreferencePage" category="org.emftext.language.aterms.resource.aterms.ui.AtermsPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.aterms.resource.aterms.ui.AtermsNewFileWizard" id="org.emftext.language.aterms.resource.aterms.ui.AtermsNewFileWizard" name="EMFText .aterms file">
+		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.aterms.resource.aterms.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.aterms.resource.aterms.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.aterms.resource.aterms.mopp.AtermsResourceFactoryDelegator" type="aterms">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.aterms.resource.aterms.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>
