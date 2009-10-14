@@ -79,7 +79,7 @@ public class PackageDecider extends AbstractDecider {
 			
 			Package p = ContainersFactory.eINSTANCE.createPackage();
 			p.setName(identifier);
-			p.setParent(parentPackage);
+			parentPackage.getSubpackages().add(p);
 			p.getNamespaces().addAll(parentPackage.getNamespaces());
 			p.getNamespaces().add(parentPackage.getName());
 			resultList.add(p);
