@@ -52,6 +52,48 @@ public class CharacterEscaper {
 	            if (c == BACKSLASH) {
 	                char nc = source.charAt(i);
 	                switch (nc) {
+		        		// octal characters: \0 to \377
+		                case '0': 
+		                case '1': 
+		                case '2': 
+		                case '3': {
+		                    // Now we found the '0' we need to find up to 3 octal digits
+		                    // Note: shifting left by 3 is the same as multiplying by 8
+		                    int v = 0; // Accumulator
+		                    int j;
+		                    boolean stop = false;
+		                    for (j = 0; j < 3 && !stop; j++) {
+		                    	if (i + j < source.length()) {
+			                        nc = source.charAt(i + j);
+			                        switch (nc)
+			                        {
+			                            case 48: // '0'
+			                            case 49: // '1'
+			                            case 50: // '2'
+			                            case 51: // '3'
+			                            case 52: // '4'
+			                            case 53: // '5'
+			                            case 54: // '6'
+			                            case 55: // '7'
+			                                v = ((v << 3) + nc) - 48;
+			                                break;
+			                            default:
+			                            	// some other character
+			                                // almost but no go
+			                            	stop = true;
+			                            	// we have to go back one character, because we've read to far
+			                            	j--;
+			                                break;
+			                        }
+		                    	}
+		                    } // for each of the digits
+	
+		                    if (v >= 0) {      // We got a full conversion
+		                        c = (char) v;  // Use the converted char
+		                        i += j;       // skip the numeric values
+		                    }
+		                	break;
+		                }    
 		                case BACKSLASH: {
 		                	// if the next character is a backslash we have an
 		                	// escaped backslash
