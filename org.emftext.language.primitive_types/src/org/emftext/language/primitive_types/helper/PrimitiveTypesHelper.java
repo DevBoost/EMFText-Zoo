@@ -37,13 +37,13 @@ public class PrimitiveTypesHelper {
 			//EData types
 			EDataType dataType = (EDataType) type;
 			if (dataType.getInstanceClassName().equals("java.lang.String")) {
-				return Primitive_typesPackage.Literals.STRING_OBJECT;
+				return Primitive_typesPackage.Literals.ESTRING_ELEMENT;
 			}
 			if (dataType.getInstanceClassName().equals("java.lang.Integer")) {
-				return Primitive_typesPackage.Literals.INTEGER_OBJECT;
+				return Primitive_typesPackage.Literals.EINT_ELEMENT;
 			}
 			if (dataType.getInstanceClassName().equals("java.lang.Boolean")) {
-				return Primitive_typesPackage.Literals.BOOLEAN_OBJECT;
+				return Primitive_typesPackage.Literals.EBOOLEAN_ELEMENT;
 			}	
 			//TODO add more
 			return dataType;		
