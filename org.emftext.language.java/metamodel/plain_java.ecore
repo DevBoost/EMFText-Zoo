@@ -317,7 +317,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//containers/JavaRoot">
       <eOperations name="getContainedClassifier" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="for ( org.emftext.language.java.classifiers.ConcreteClassifier candidate : getClassifiers ( ) ) { &#xA;&#x9;if ( candidate .getName ( ) .equals ( name ) ) { &#xA;&#x9;&#x9;return candidate ; &#xA;&#x9;} &#xA;} &#xA;return null ; &#xA;"/>
+          <details key="body" value="for ( org.emftext.language.java.classifiers.ConcreteClassifier candidate : getClassifiers ( ) ) { &#xA;&#x9;if (name == null) {&#xA;&#x9;&#x9;return null;&#xA;&#x9;}&#xA;&#x9;if ( name.equals(candidate .getName ( )) ) { &#xA;&#x9;&#x9;return candidate ; &#xA;&#x9;} &#xA;} &#xA;return null ; &#xA;"/>
           <details key="documentation" value="&#xA; @param name name of the contained Classifier&#xA; @return the Classifier&#xA;"/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -907,7 +907,7 @@
       </eOperations>
       <eOperations name="getPrevious" eType="#//references/Reference">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if ( eContainer() instanceof org.emftext.language.java.references.Reference ) { &#xA;&#x9;return ( org.emftext.language.java.references.Reference ) eContainer( ) ; &#xA;}&#xA;return null;"/>
+          <details key="body" value="if ( eContainer() instanceof org.emftext.language.java.references.Reference ) { &#xA;&#x9;&#x9;&#x9; Reference container = (Reference) eContainer( ) ; &#xA;&#x9;&#x9;&#x9;  if (this.equals(container.getNext())) {&#xA;&#x9;&#x9;&#x9;&#x9; return container;&#xA;&#x9;&#x9;&#x9; }&#xA;}&#xA;return null;"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>

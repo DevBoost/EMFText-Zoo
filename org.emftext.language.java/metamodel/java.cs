@@ -40,8 +40,8 @@ OPTIONS{
 }
 
 TOKENS{
-	DEFINE SL_COMMENT$'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
-	DEFINE ML_COMMENT$'/*'.*'*/'$ COLLECT IN comments;
+	DEFINE SL_COMMENT$'//'(~('\n'|'\r'|'\uffff'))* $COLLECTINcomments;
+	DEFINE ML_COMMENT$'/*'.*'*/'$COLLECTINcomments;
 	DEFINE BOOLEAN_LITERAL$'true'|'false'$;
 	DEFINE CHARACTER_LITERAL$'\''('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\'('0'..'3')('0'..'7')('0'..'7')|'\\'('0'..'7')('0'..'7')|'\\'('0'..'7'))|~('\''|'\\'))'\''$;
 	DEFINE STRING_LITERAL$'"'('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|'\\'('0'..'7')|~('\\'|'"'))*'"'$;
