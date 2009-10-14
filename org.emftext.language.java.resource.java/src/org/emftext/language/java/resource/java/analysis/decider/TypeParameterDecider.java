@@ -43,7 +43,7 @@ public class TypeParameterDecider extends AbstractDecider {
 	}
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
-		if (GenericsPackage.Literals.TYPE_PARAMETRIZABLE__TYPE_PARAMETERS.equals(containingReference)) {
+		if (GenericsPackage.Literals.TYPE_PARAMETRIZABLE__EXTENSIBLE_TYPE_PARAMETERS.equals(containingReference)) {
 			return true;
 		}
 		return false;

@@ -54,13 +54,13 @@ public class LocalVariableDecider extends AbstractDecider {
 	}
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
-		if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(containingReference)) {
+		if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__EXTENSIBLE_VARIABLE.equals(containingReference)) {
 			return true;
 		}
-		if (VariablesPackage.Literals.LOCAL_VARIABLE__ADDITIONAL_LOCAL_VARIABLES.equals(containingReference)) {
+		if (VariablesPackage.Literals.LOCAL_VARIABLE__EXTENSIBLE_ADDITIONAL_LOCAL_VARIABLES.equals(containingReference)) {
 			return true;
 		}
-		if (StatementsPackage.Literals.FOR_LOOP__INIT.equals(containingReference)) {
+		if (StatementsPackage.Literals.FOR_LOOP__EXTENSIBLE_INIT.equals(containingReference)) {
 			return true;
 		}
 		return false;
@@ -68,16 +68,16 @@ public class LocalVariableDecider extends AbstractDecider {
 	
 	public boolean walkInto(EObject element) {
 		if (element instanceof LocalVariableStatement) {
-			if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(element.eContainmentFeature())) {
+			if (StatementsPackage.Literals.STATEMENT_CONTAINER__EXTENSIBLE_STATEMENT.equals(element.eContainmentFeature())) {
 				return true;
 			}
-			if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS.equals(element.eContainmentFeature())) {
+			if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__EXTENSIBLE_STATEMENTS.equals(element.eContainmentFeature())) {
 				return true;
 			}
 		}
 		if (element instanceof LocalVariable) {
-			if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__VARIABLE.equals(element.eContainmentFeature())
-					|| StatementsPackage.Literals.FOR_LOOP__INIT.equals(element.eContainmentFeature())) {
+			if (StatementsPackage.Literals.LOCAL_VARIABLE_STATEMENT__EXTENSIBLE_VARIABLE.equals(element.eContainmentFeature())
+					|| StatementsPackage.Literals.FOR_LOOP__EXTENSIBLE_INIT.equals(element.eContainmentFeature())) {
 				return true;
 			}
 		}

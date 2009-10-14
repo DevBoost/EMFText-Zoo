@@ -48,11 +48,11 @@ public class PackageDecider extends AbstractDecider {
 			if(idReference.getNext() == null || idReference.getNext() instanceof MethodCall) {
 				return false;
 			}
-			if (!referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+			if (!referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__EXTENSIBLE_NEXT)) {
 				//maybe the root package
 				return true;			
 			}
-			if (referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT) && 
+			if (referenceContainer.eContainingFeature().equals(ReferencesPackage.Literals.REFERENCE__EXTENSIBLE_NEXT) && 
 					idReference.eContainer() instanceof IdentifierReference &&
 					((IdentifierReference)idReference.eContainer()).getTarget() instanceof Package) {
 				//maybe the next sub package

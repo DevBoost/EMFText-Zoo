@@ -1,23 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2006-2009 
- * Software Technology Group, Dresden University of Technology
- * 
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option) any
- * later version. This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * 
- * See the GNU Lesser General Public License for more details. You should have
- * received a copy of the GNU Lesser General Public License along with this
- * program; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
- * Suite 330, Boston, MA  02111-1307 USA
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *   - initial API and implementation
- ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
 
 import java.util.ArrayList;
@@ -39,7 +19,6 @@ import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
-import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 import org.emftext.language.java.resource.java.analysis.decider.ConcreteClassifierDecider;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 import org.emftext.language.java.resource.java.analysis.decider.TypeParameterDecider;
@@ -47,11 +26,16 @@ import org.emftext.language.java.resource.java.analysis.helper.ScopedTreeWalker;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.rtypes.ClassifierReferenceTarget;
 
-public class ClassifierReferenceTargetReferenceResolver implements 
-	IJavaReferenceResolver<ClassifierReference, Classifier> {
+public class ClassifierReferenceTargetValueReferenceResolver implements org.emftext.language.java.resource.java.IJavaReferenceResolver<org.emftext.language.java.types.rtypes.ClassifierReferenceTarget, org.emftext.language.java.classifiers.Classifier> {
 	
-	public java.lang.String deResolve(Classifier classifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(Classifier classifier, ClassifierReferenceTarget tContainer, org.eclipse.emf.ecore.EReference reference) {
+		if(!(tContainer.eContainer() instanceof ClassifierReference)) {
+			return classifier.getName();
+		}
+		ClassifierReference container = (ClassifierReference) tContainer.eContainer();
+		
 		if (classifier instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) classifier;
 			boolean namespaceMissing = true;
@@ -85,8 +69,13 @@ public class ClassifierReferenceTargetReferenceResolver implements
 		return classifier.getName();
 	}	
 
-	public void resolve(java.lang.String identifier, ClassifierReference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<Classifier> result) {
+	public void resolve(java.lang.String identifier, ClassifierReferenceTarget tContainer, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<Classifier> result) {
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
+		
+		if(!(tContainer.eContainer() instanceof ClassifierReference)) {
+			return ;
+		}
+		ClassifierReference container = (ClassifierReference) tContainer.eContainer();
 		
 		EObject startingPoint = null;
 		EObject target = null;
@@ -119,7 +108,7 @@ public class ClassifierReferenceTargetReferenceResolver implements
 			//new constructor call can be part of reference chain
 			if (startingPoint == null && container.eContainer().eContainer() instanceof NewConstructorCall) {
 				NewConstructorCall ncc = (NewConstructorCall) container.eContainer().eContainer();
-				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__NEXT)) {
+				if (ncc.eContainmentFeature().equals(ReferencesPackage.Literals.REFERENCE__EXTENSIBLE_NEXT)) {
 					startingPoint = ((Reference) ncc.eContainer()).getReferencedType();
 					
 					//a ncc can be encapsulated in nested expressions
@@ -222,4 +211,5 @@ public class ClassifierReferenceTargetReferenceResolver implements
 	
 	public void setOptions(Map<?, ?> options) {
 	}
+	
 }

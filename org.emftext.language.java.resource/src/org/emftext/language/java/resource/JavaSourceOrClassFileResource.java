@@ -150,7 +150,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if(!id.startsWith(IJavaContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
 				if(result != null && !(result instanceof ConcreteClassifier)) {
 					//may happen if members of same name exist
-					if(result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS) 
+					if(result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__EXTENSIBLE_MEMBERS) 
 							&& result instanceof NamedElement) {
 						String memberName = ((NamedElement)result).getName();
 						for(Member m : ((MemberContainer)result.eContainer()).getMembers()) {
