@@ -23,7 +23,6 @@ package org.emftext.language.java.test.resolving_new;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,10 +41,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.commons.Commentable;
-import org.emftext.language.java.commons.CommonsPackage;
-import org.emftext.language.java.commons.Name;
-import org.emftext.language.java.commons.NamedElement;
-import org.emftext.language.java.resource.java.util.JavaEObjectUtil;
 import org.emftext.language.java.test.AbstractJavaParserTestCase;
 
 /**
@@ -148,11 +143,14 @@ public class ResolvingTest extends TestCase {
 		}
 
 		private void pushUpCommentsFromNames(Resource resource) {
-			Collection<Name> nameObjects = JavaEObjectUtil.getObjectsByType(resource.getAllContents(), CommonsPackage.eINSTANCE.getName_());
-			for (Name name : nameObjects) {
+			/* TODO is this still needed?
+			 
+			Collection<NamedElementName> nameObjects = JavaEObjectUtil.getObjectsByType(resource.getAllContents(), PtypesPackage.eINSTANCE.getNamedElementName());
+			for (NamedElementName name : nameObjects) {
 				((NamedElement) name.eContainer()).getComments().addAll(name.getComments());
 				name.getComments().clear();
 			}
+			*/
 		}
 
 		private void findSourcesAndTargets(ResourceSet set,

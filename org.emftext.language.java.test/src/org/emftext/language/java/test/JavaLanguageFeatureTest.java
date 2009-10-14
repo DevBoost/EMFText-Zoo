@@ -67,6 +67,7 @@ import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.statements.Block;
 import org.emftext.language.java.statements.FeatureStatement;
 import org.emftext.language.java.statements.ForEachLoop;
+import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
 import org.junit.Before;
 import org.junit.Test;
@@ -894,7 +895,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		Member simpleForEach = clazz.getMembers().get(1);
 		assertType(simpleForEach, ClassMethod.class);
 		ClassMethod simpleForEachMethod = (ClassMethod) simpleForEach;
-		FeatureStatement forEach = simpleForEachMethod.getStatements().get(0);
+		Statement forEach = simpleForEachMethod.getStatements().get(0);
 		assertType(forEach, ForEachLoop.class);
 		parseAndReprint(filename);
 	}

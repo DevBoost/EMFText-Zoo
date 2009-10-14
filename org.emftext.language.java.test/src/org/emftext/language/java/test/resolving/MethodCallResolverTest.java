@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.statements.FeatureStatement;
+import org.emftext.language.java.statements.Statement;
 import org.junit.Test;
 
 /**
@@ -46,7 +46,7 @@ public class MethodCallResolverTest extends AbstractResolverTestCase {
 		ClassMethod method3 = assertIsMethod(members.get(2), "m3");
 		ClassMethod method4 = assertIsMethod(members.get(3), "m3");
 		
-		List<? extends FeatureStatement> methodStatements2 = method2.getStatements();
+		List<? extends Statement> methodStatements2 = method2.getStatements();
 		
 		//assertEquals(4, methodStatements2.size());
 		assertIsCallToMethod(methodStatements2.get(0), method1);
