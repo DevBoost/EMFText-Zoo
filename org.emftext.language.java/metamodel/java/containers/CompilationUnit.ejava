@@ -12,8 +12,11 @@ eclass CompilationUnit {
 	 * @return the Classifier
 	 */
 	getContainedClassifier() {
+		if (name == null) {
+			return null;
+		}
 		for(ConcreteClassifier candidate : getClassifiers()) {
-			if(candidate.getName().equals(name)) {
+			if(name.equals(candidate.getName())) {
 				return candidate;
 			}
 		}
