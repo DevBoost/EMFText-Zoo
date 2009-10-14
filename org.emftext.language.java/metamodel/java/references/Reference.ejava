@@ -16,8 +16,11 @@ import java.variables.AdditionalLocalVariable;
 eclass Reference {
 
 	getPrevious() {
-		if ( eContainer() instanceof org.emftext.language.java.references.Reference ) { 
-			return ( org.emftext.language.java.references.Reference ) eContainer( ) ; 
+		if (eContainer() instanceof Reference) { 
+			 Reference container = (Reference) eContainer( ) ; 
+			  if (this.equals(container.getNext())) {
+				 return container;
+			 }
 		}
 		return null;
 	}
