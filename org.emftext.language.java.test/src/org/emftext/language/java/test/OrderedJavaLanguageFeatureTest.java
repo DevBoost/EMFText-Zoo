@@ -41,8 +41,6 @@ public class OrderedJavaLanguageFeatureTest {
 		};
 		
 		test.testNoTypeArgument();
-		test.testRoundedLiterals();
-		test.testTempLiterals();
 //		test.testBooleanExpressions();
 //		test.testEmptyEnum();
 //		test.testBlocks();

@@ -40,8 +40,8 @@ OPTIONS{
 }
 
 TOKENS{
-	DEFINE SL_COMMENT$'//'(~('\n'|'\r'|'\uffff'))* $COLLECTINcomments;
-	DEFINE ML_COMMENT$'/*'.*'*/'$COLLECTINcomments;
+	DEFINE SL_COMMENT$'//'(~('\n'|'\r'|'\uffff'))* $COLLECT IN comments;
+	DEFINE ML_COMMENT$'/*'.*'*/'$COLLECT IN comments;
 	DEFINE BOOLEAN_LITERAL$'true'|'false'$;
 	DEFINE CHARACTER_LITERAL$'\''('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|('\\'('0'..'3')('0'..'7')('0'..'7')|'\\'('0'..'7')('0'..'7')|'\\'('0'..'7'))|~('\''|'\\'))'\''$;
 	DEFINE STRING_LITERAL$'"'('\\'('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')|('\\''u'('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F')('0'..'9'|'a'..'f'|'A'..'F'))|'\\'('0'..'7')|~('\\'|'"'))*'"'$;
@@ -394,25 +394,25 @@ RULES{
 	
 	types.Double::= "double"  ;
 	
-	literals.DecimalLongLiteral::=extensibleValue  ;
+	literals.DecimalLongLiteral::=extensibleDecimalValue  ;
 	
-	literals.DecimalFloatLiteral::=extensibleValue  ;
+	literals.DecimalFloatLiteral::=extensibleDecimalValue  ;
 	
-	literals.DecimalIntegerLiteral::=extensibleValue  ;
+	literals.DecimalIntegerLiteral::=extensibleDecimalValue  ;
 	
-	literals.DecimalDoubleLiteral::=extensibleValue  ;
+	literals.DecimalDoubleLiteral::=extensibleDecimalValue  ;
 	
-	literals.HexLongLiteral::=extensibleValue  ;
+	literals.HexLongLiteral::=extensibleHexValue  ;
 	
-	literals.HexFloatLiteral::=extensibleValue  ;
+	literals.HexFloatLiteral::=extensibleHexValue  ;
 	
-	literals.HexDoubleLiteral::=extensibleValue  ;
+	literals.HexDoubleLiteral::=extensibleHexValue  ;
 	
-	literals.HexIntegerLiteral::=extensibleValue  ;
+	literals.HexIntegerLiteral::=extensibleHexValue  ;
 	
-	literals.OctalLongLiteral::=extensibleValue  ;
+	literals.OctalLongLiteral::=extensibleOctalValue  ;
 	
-	literals.OctalIntegerLiteral::=extensibleValue  ;
+	literals.OctalIntegerLiteral::=extensibleOctalValue  ;
 	
 	literals.CharacterLiteral::=extensibleValue  ;
 	
@@ -438,13 +438,25 @@ RULES{
 	
 	statements_rtypes.JumpTarget::=value[] ;
 	
-	literals_ptypes.LongLiteralValue::=value[DECIMAL_LONG_LITERAL] ;
+	literals_ptypes.DecimalLongLiteralDecimalValue::=value[DECIMAL_LONG_LITERAL] ;
 	
-	literals_ptypes.FloatLiteralValue::=value[DECIMAL_FLOAT_LITERAL] ;
+	literals_ptypes.DecimalFloatLiteralDecimalValue::=value[DECIMAL_FLOAT_LITERAL] ;
 	
-	literals_ptypes.IntegerLiteralValue::=value[DECIMAL_INTEGER_LITERAL] ;
+	literals_ptypes.DecimalIntegerLiteralDecimalValue::=value[DECIMAL_INTEGER_LITERAL] ;
 	
-	literals_ptypes.DoubleLiteralValue::=value[DECIMAL_DOUBLE_LITERAL] ;
+	literals_ptypes.DecimalDoubleLiteralDecimalValue::=value[DECIMAL_DOUBLE_LITERAL] ;
+	
+	literals_ptypes.HexLongLiteralHexValue::=value[HEX_LONG_LITERAL] ;
+	
+	literals_ptypes.HexFloatLiteralHexValue::=value[HEX_FLOAT_LITERAL] ;
+	
+	literals_ptypes.HexDoubleLiteralHexValue::=value[HEX_DOUBLE_LITERAL] ;
+	
+	literals_ptypes.HexIntegerLiteralHexValue::=value[HEX_INTEGER_LITERAL] ;
+	
+	literals_ptypes.OctalLongLiteralOctalValue::=value[OCTAL_LONG_LITERAL] ;
+	
+	literals_ptypes.OctalIntegerLiteralOctalValue::=value[OCTAL_INTEGER_LITERAL] ;
 	
 	literals_ptypes.CharacterLiteralValue::=value[CHARACTER_LITERAL] ;
 	

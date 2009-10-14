@@ -49,10 +49,18 @@ import org.emftext.language.java.imports.Import;
 import org.emftext.language.java.imports.StaticImport;
 import org.emftext.language.java.literals.BooleanLiteral;
 import org.emftext.language.java.literals.CharacterLiteral;
-import org.emftext.language.java.literals.DoubleLiteral;
-import org.emftext.language.java.literals.FloatLiteral;
+import org.emftext.language.java.literals.DecimalDoubleLiteral;
+import org.emftext.language.java.literals.DecimalFloatLiteral;
+import org.emftext.language.java.literals.DecimalIntegerLiteral;
+import org.emftext.language.java.literals.DecimalLongLiteral;
+import org.emftext.language.java.literals.HexDoubleLiteral;
+import org.emftext.language.java.literals.HexFloatLiteral;
+import org.emftext.language.java.literals.HexIntegerLiteral;
+import org.emftext.language.java.literals.HexLongLiteral;
 import org.emftext.language.java.literals.IntegerLiteral;
 import org.emftext.language.java.literals.LongLiteral;
+import org.emftext.language.java.literals.OctalIntegerLiteral;
+import org.emftext.language.java.literals.OctalLongLiteral;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Constructor;
 import org.emftext.language.java.members.Field;
@@ -65,7 +73,6 @@ import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.util.JavaPostProcessor;
 import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.statements.Block;
-import org.emftext.language.java.statements.FeatureStatement;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
@@ -160,44 +167,92 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		Field charField = (Field) member;
 		Expression initValue = charField.getInitialValue();
 		
-		DoubleLiteral literal = (DoubleLiteral) initValue;
+		DecimalDoubleLiteral literal = (DecimalDoubleLiteral) initValue;
 		
 		assertNotNull(member.getName() + " is not a double field.", literal);
-		assertType(literal, DoubleLiteral.class);
-		DoubleLiteral initLiteral = (DoubleLiteral) literal;
-		assertEquals(expectedInitValue, initLiteral.getValue());
+		assertType(literal, DecimalDoubleLiteral.class);
+		DecimalDoubleLiteral initLiteral = (DecimalDoubleLiteral) literal;
+		assertEquals(expectedInitValue, initLiteral.getDecimalValue());
 	}
 
-	private void assertIsIntegerField(Member member, int expectedInitValue) {
+	private void assertIsHexIntegerField(Member member, int expectedInitValue) {
 		assertType(member, Field.class);
 		Field longField = (Field) member;		
 		Expression initValue = longField.getInitialValue();
 		
 		IntegerLiteral literal = (IntegerLiteral) initValue;
 
-		assertType(literal, IntegerLiteral.class);
-		IntegerLiteral initLiteralForBoolean = (IntegerLiteral) literal;
-		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getValue());
+		assertType(literal, HexIntegerLiteral.class);
+		HexIntegerLiteral initLiteralForBoolean = (HexIntegerLiteral) literal;
+		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getHexValue());
 	}
 
-	private void assertIsLongField(Member member, String expectedInitValue) {
+	private void assertIsDecimalIntegerField(Member member, int expectedInitValue) {
+		assertType(member, Field.class);
+		Field longField = (Field) member;		
+		Expression initValue = longField.getInitialValue();
+		
+		IntegerLiteral literal = (IntegerLiteral) initValue;
+
+		assertType(literal, DecimalIntegerLiteral.class);
+		DecimalIntegerLiteral initLiteralForBoolean = (DecimalIntegerLiteral) literal;
+		assertEquals(BigInteger.valueOf(expectedInitValue), initLiteralForBoolean.getDecimalValue());
+	}
+	
+	private void assertIsOctalLongField(Member member, String expectedInitValue) {
 		assertType(member, Field.class);
 		Field longField = (Field) member;		
 		Expression initValue = longField.getInitialValue();
 		
 		LongLiteral literal = (LongLiteral) initValue;
 
-		assertType(literal, LongLiteral.class);
-		LongLiteral initLiteralForBoolean = (LongLiteral) literal;
+		assertType(literal, OctalLongLiteral.class);
+		OctalLongLiteral initLiteralForBoolean = (OctalLongLiteral) literal;
 		BigInteger expected;
 		if (expectedInitValue.toLowerCase().startsWith("0x")) {
 			expected = new BigInteger(expectedInitValue.substring(2), 16);
 		} else {
 			expected = new BigInteger(expectedInitValue);
 		}
-		assertEquals(expected, initLiteralForBoolean.getValue());
+		assertEquals(expected, initLiteralForBoolean.getOctalValue());
+	}
+	
+	private void assertIsHexLongField(Member member, String expectedInitValue) {
+		assertType(member, Field.class);
+		Field longField = (Field) member;		
+		Expression initValue = longField.getInitialValue();
+		
+		LongLiteral literal = (LongLiteral) initValue;
+
+		assertType(literal, HexLongLiteral.class);
+		HexLongLiteral initLiteralForBoolean = (HexLongLiteral) literal;
+		BigInteger expected;
+		if (expectedInitValue.toLowerCase().startsWith("0x")) {
+			expected = new BigInteger(expectedInitValue.substring(2), 16);
+		} else {
+			expected = new BigInteger(expectedInitValue);
+		}
+		assertEquals(expected, initLiteralForBoolean.getHexValue());
 	}
 
+	private void assertIsDecimalLongField(Member member, String expectedInitValue) {
+		assertType(member, Field.class);
+		Field longField = (Field) member;		
+		Expression initValue = longField.getInitialValue();
+		
+		LongLiteral literal = (LongLiteral) initValue;
+
+		assertType(literal, DecimalLongLiteral.class);
+		DecimalLongLiteral initLiteralForBoolean = (DecimalLongLiteral) literal;
+		BigInteger expected;
+		if (expectedInitValue.toLowerCase().startsWith("0x")) {
+			expected = new BigInteger(expectedInitValue.substring(2), 16);
+		} else {
+			expected = new BigInteger(expectedInitValue);
+		}
+		assertEquals(expected, initLiteralForBoolean.getDecimalValue());
+	}
+	
 	private void assertIsNumericField(EList<Member> members, String name,
 			Object expectedValue) {
 		NamedElement field = findElementByName(members, name);
@@ -207,17 +262,35 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		Expression value = unicode.getInitialValue();
 		
 		Object initValue = null;
-		if (value instanceof IntegerLiteral) {
-			initValue = ((IntegerLiteral) value).getValue();
+		if (value instanceof DecimalIntegerLiteral) {
+			initValue = ((DecimalIntegerLiteral) value).getDecimalValue();
 		}
-		if (value instanceof LongLiteral) {
-			initValue = ((LongLiteral) value).getValue();
+		if (value instanceof DecimalLongLiteral) {
+			initValue = ((DecimalLongLiteral) value).getDecimalValue();
 		}
-		if (value instanceof FloatLiteral) {
-			initValue = ((FloatLiteral) value).getValue();
+		if (value instanceof DecimalFloatLiteral) {
+			initValue = ((DecimalFloatLiteral) value).getDecimalValue();
 		}
-		if (value instanceof DoubleLiteral) {
-			initValue = ((DoubleLiteral) value).getValue();
+		if (value instanceof DecimalDoubleLiteral) {
+			initValue = ((DecimalDoubleLiteral) value).getDecimalValue();
+		}
+		if (value instanceof HexIntegerLiteral) {
+			initValue = ((HexIntegerLiteral) value).getHexValue();
+		}
+		if (value instanceof HexLongLiteral) {
+			initValue = ((HexLongLiteral) value).getHexValue();
+		}
+		if (value instanceof HexFloatLiteral) {
+			initValue = ((HexFloatLiteral) value).getHexValue();
+		}
+		if (value instanceof HexDoubleLiteral) {
+			initValue = ((HexDoubleLiteral) value).getHexValue();
+		}
+		if (value instanceof OctalIntegerLiteral) {
+			initValue = ((OctalIntegerLiteral) value).getOctalValue();
+		}
+		if (value instanceof OctalLongLiteral) {
+			initValue = ((OctalLongLiteral) value).getOctalValue();
 		}
 		assertNotNull("Init value for field " + name + " is null.", initValue);
 		assertEquals("Field " + name, expectedValue, initValue);
@@ -1118,10 +1191,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		
 		EList<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
-		assertIsIntegerField(findElementByName(members, "i1"), 3);
-		assertIsIntegerField(members.get(2), 1);
-		assertIsLongField(members.get(3), "8");
-		assertIsLongField(members.get(4), "0");
+		assertIsDecimalIntegerField(findElementByName(members, "i1"), 3);
+		assertIsHexIntegerField(members.get(2), 1);
+		assertIsOctalLongField(members.get(3), "8");
+		assertIsOctalLongField(members.get(4), "0");
 		assertIsDoubleField(members.get(9), 1.5);
 		assertIsCharField(members.get(10), 'a');
 		assertIsStringField(members.get(11), "abc");
@@ -1130,15 +1203,15 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		
 		Member maxLongField = findElementByName(members, "maxLong");
 		assertNotNull(maxLongField);
-		assertIsLongField(maxLongField, "0xffffffffffffffff");
+		assertIsHexLongField(maxLongField, "0xffffffffffffffff");
 		
 		Member i7Field = findElementByName(members, "i7");
 		assertNotNull(i7Field);
-		assertIsIntegerField(i7Field, 0xff);
+		assertIsHexIntegerField(i7Field, 0xff);
 		
 		Member i8Field = findElementByName(members, "i8");
 		assertNotNull(i8Field);
-		assertIsLongField(i8Field, "10");
+		assertIsDecimalLongField(i8Field, "10");
 		
 		parseAndReprint(filename);
 	}
@@ -1238,19 +1311,19 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		Expression initValue = longField.getInitialValue();
 				
 		TreeIterator<EObject> iter = initValue.eAllContents();
-		IntegerLiteral literal1 = null;
-		IntegerLiteral literal2 = null;
+		DecimalIntegerLiteral literal1 = null;
+		DecimalIntegerLiteral literal2 = null;
 		while(iter.hasNext()){
 			Object obj = iter.next();
-			if (obj instanceof IntegerLiteral) {
-				if (literal1==null)literal1 = (IntegerLiteral)obj;
-				else literal2 = (IntegerLiteral)obj;				
+			if (obj instanceof DecimalIntegerLiteral) {
+				if (literal1==null)literal1 = (DecimalIntegerLiteral)obj;
+				else literal2 = (DecimalIntegerLiteral)obj;				
 			}
 		}
 		assertNotNull("no IntegerLiteral found", literal1);
 		assertNotNull("no second IntegerLiteral found", literal2);
-		assertEquals(BigInteger.valueOf(3), literal1.getValue());
-		assertEquals(BigInteger.valueOf(4), literal2.getValue());
+		assertEquals(BigInteger.valueOf(3), literal1.getDecimalValue());
+		assertEquals(BigInteger.valueOf(4), literal2.getDecimalValue());
 		
 		
 		parseAndReprint(filename);

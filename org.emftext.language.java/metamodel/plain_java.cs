@@ -581,34 +581,34 @@ types.Double ::= "double";
 
 // do not change the order of the literals!
 literals.DecimalLongLiteral 
-	::= value[DECIMAL_LONG_LITERAL];
+	::= decimalValue[DECIMAL_LONG_LITERAL];
 
 literals.DecimalFloatLiteral 
-	::= value[DECIMAL_FLOAT_LITERAL];
+	::= decimalValue[DECIMAL_FLOAT_LITERAL];
 
 literals.DecimalIntegerLiteral 
-	::= value[DECIMAL_INTEGER_LITERAL];
+	::= decimalValue[DECIMAL_INTEGER_LITERAL];
 
 literals.DecimalDoubleLiteral 
-	::= value[DECIMAL_DOUBLE_LITERAL];
+	::= decimalValue[DECIMAL_DOUBLE_LITERAL];
 
 literals.HexLongLiteral 
-	::= value[HEX_LONG_LITERAL];
+	::= hexValue[HEX_LONG_LITERAL];
 
 literals.HexFloatLiteral 
-	::= value[HEX_FLOAT_LITERAL];
+	::= hexValue[HEX_FLOAT_LITERAL];
 
 literals.HexDoubleLiteral 
-	::= value[HEX_DOUBLE_LITERAL];
+	::= hexValue[HEX_DOUBLE_LITERAL];
 
 literals.HexIntegerLiteral 
-	::= value[HEX_INTEGER_LITERAL];
+	::= hexValue[HEX_INTEGER_LITERAL];
 
 literals.OctalLongLiteral 
-	::= value[OCTAL_LONG_LITERAL];
+	::= octalValue[OCTAL_LONG_LITERAL];
 
 literals.OctalIntegerLiteral 
-	::= value[OCTAL_INTEGER_LITERAL];
+	::= octalValue[OCTAL_INTEGER_LITERAL];
 
 literals.CharacterLiteral 
 	::= value[CHARACTER_LITERAL];
