@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +35,7 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 
 	public void process(TreejavaResource resource) {
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
-		Resource javaResource = resource.getResourceSet().createResource(javaURI);
+		final Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
 				EcoreUtil.copyAll(resource.getContents()));
 		
@@ -52,11 +56,18 @@ public class TreeJavaCompiler implements ITreejavaResourcePostProcessor,
 			}
 		}
 		
-		try {
-			javaResource.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		new Job("saving java") {
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					javaResource.save(null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 	private NewConstructorCall convertTreeToNewConstructorCallChain(Node rootNode) {

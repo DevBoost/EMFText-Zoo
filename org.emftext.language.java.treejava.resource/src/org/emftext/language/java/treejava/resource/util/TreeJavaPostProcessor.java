@@ -70,7 +70,6 @@ public class TreeJavaPostProcessor implements ITreejavaOptionProvider, ITreejava
 		}.repair(resource);
 		
 		JavaModelCompletion.complete(resource);
-		JavaModelCompletion.complete(resource);
 	}
 
 	public ITreejavaResourcePostProcessor getResourcePostProcessor() {
