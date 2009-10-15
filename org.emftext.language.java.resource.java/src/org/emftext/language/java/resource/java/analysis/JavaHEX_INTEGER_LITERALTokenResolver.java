@@ -25,21 +25,19 @@ import static org.emftext.language.java.resource.java.analysis.helper.LiteralCon
 import java.math.BigInteger;
 import java.util.Map;
 
-import org.emftext.language.java.literals.HexIntegerLiteral;
-import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.language.java.literals.ptypes.HexIntegerLiteralHexValue;
 import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
 import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
 public class JavaHEX_INTEGER_LITERALTokenResolver implements IJavaTokenResolver {
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container == null || container instanceof HexIntegerLiteral;
+		assert container == null || container instanceof HexIntegerLiteralHexValue;
 		assert value instanceof BigInteger;
 		return HEX_PREFIX + ((BigInteger) value).toString(16);
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		
 		lexem = lexem.substring(2);

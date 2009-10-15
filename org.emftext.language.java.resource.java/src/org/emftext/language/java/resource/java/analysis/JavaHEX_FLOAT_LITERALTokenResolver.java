@@ -26,21 +26,19 @@ import static org.emftext.language.java.resource.java.analysis.helper.LiteralCon
 
 import java.util.Map;
 
-import org.emftext.language.java.literals.HexFloatLiteral;
-import org.emftext.language.java.literals.LiteralsPackage;
+import org.emftext.language.java.literals.ptypes.HexFloatLiteralHexValue;
 import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
 import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
 public class JavaHEX_FLOAT_LITERALTokenResolver implements IJavaTokenResolver {
 
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container == null || container instanceof HexFloatLiteral;
+		assert container == null || container instanceof HexFloatLiteralHexValue;
 		assert value instanceof Float;
 		return Float.toHexString((Float) value) + FLOAT_SUFFIX;
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
 		
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().contains(HEX_EXPONENT) || lexem.contains(".");
