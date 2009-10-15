@@ -1,4 +1,4 @@
- SYNTAXDEF java
+SYNTAXDEF java
 FOR <http://www.emftext.org/java> <java.genmodel>
 START containers.CompilationUnit,containers.Package,containers.EmptyModel
 
