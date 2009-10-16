@@ -65,24 +65,31 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 			return;
 		}
 		RCPackage metaModel = (RCPackage) contents.get(0);
-		final EPackage ePackage = compile(metaModel);
-
-        new Job("saving derived Ecore model") {
-        	
-        	@Override
-        	protected IStatus run(IProgressMonitor monitor) {
-        		try {
-        			URI uri = resource.getURI();
-        			URI newUri = uri.trimFileExtension().appendFileExtension("ecore");
-        			Resource eCoreResource = resource.getResourceSet().createResource(newUri);
-        			eCoreResource.getContents().add(ePackage);
-        			eCoreResource.save(null);
-        		} catch (IOException e) {
-        			RolecorePlugin.logError("Can't save compiled Ecore model.", e);
-        		}
-        		return Status.OK_STATUS;
-        	}
-        }.schedule();
+		// TODO validate 'metaModel' and exit processing if
+		// 'metaModel' is invalid
+		try {
+			final EPackage ePackage = compile(metaModel);
+			
+	        new Job("saving derived Ecore model") {
+	        	
+	        	@Override
+	        	protected IStatus run(IProgressMonitor monitor) {
+	        		try {
+	        			URI uri = resource.getURI();
+	        			URI newUri = uri.trimFileExtension().appendFileExtension("ecore");
+	        			Resource eCoreResource = resource.getResourceSet().createResource(newUri);
+	        			eCoreResource.getContents().add(ePackage);
+	        			eCoreResource.save(null);
+	        		} catch (IOException e) {
+	        			RolecorePlugin.logError("Can't save compiled Ecore model.", e);
+	        		}
+	        		return Status.OK_STATUS;
+	        	}
+	        }.schedule();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 	
 	private EPackage compile(RCPackage metaModel) {
@@ -201,23 +208,24 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 		}
 		copyTargets.add(coreInterface);
 		copyEClassContents(coreClass, coreInterface);
-		addRoleHandlingMethods(coreInterface);
+		addRoleHandlingMethods(coreClass, coreInterface);
 		return coreInterface;
 	}
 	
-	private void addRoleHandlingMethods(EClass coreInterface) {
+	private void addRoleHandlingMethods(CoreClass coreClass, EClass coreInterface) {
 		addHasRoleOperation(coreInterface);
 		addGetRoleOperation(coreInterface);
-		addAddRoleOperation(coreInterface);
+		addAddRoleOperation(coreClass, coreInterface);
 	}
 
-	private void addAddRoleOperation(EClass coreInterface) {
-		EClass eObject = EcorePackage.eINSTANCE.getEObject();
+	private void addAddRoleOperation(CoreClass coreClass, EClass coreInterface) {
+		//EClass eObject = EcorePackage.eINSTANCE.getEObject();
+		EClass abstractRoleClass = findOrCreateAbstractRoleClass(coreInterface.getEPackage(), coreClass);
 
 		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
 		typeParameterT.setName("T");
 		EGenericType lowerBound = EcoreFactory.eINSTANCE.createEGenericType();
-		lowerBound.setEClassifier(eObject);
+		lowerBound.setEClassifier(abstractRoleClass);
 		EGenericType lower = EcoreFactory.eINSTANCE.createEGenericType();
 		lower.setELowerBound(lowerBound);
 		typeParameterT.getEBounds().add(lowerBound);
