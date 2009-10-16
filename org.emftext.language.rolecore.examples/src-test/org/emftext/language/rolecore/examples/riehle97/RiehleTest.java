@@ -1,7 +1,5 @@
 package org.emftext.language.rolecore.examples.riehle97;
 
-import org.eclipse.emf.ecore.EClass;
-
 import junit.framework.TestCase;
 
 public class RiehleTest extends TestCase {
@@ -18,7 +16,7 @@ public class RiehleTest extends TestCase {
 		
 		// check that the role is still there
 		isBorrower = fred.hasRole(Borrower.class);
-		assertFalse(isBorrower);
+		assertTrue(isBorrower);
 		
 		// get the role object
 		Borrower fredPlayingBorrower = fred.getRole(Borrower.class);

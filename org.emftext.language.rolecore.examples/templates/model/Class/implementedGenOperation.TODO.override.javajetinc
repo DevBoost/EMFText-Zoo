@@ -1,0 +1,21 @@
+<% if ("hasRole".equals(genOperation.getName())) { %>
+		for (Object nextRole : getRoles()) {
+			if (roleClass.isInstance(nextRole)) {
+				return true;
+			}
+		}
+		return false;
+<% } else if ("getRole".equals(genOperation.getName())) { %>
+		for (Object nextRole : getRoles()) {
+			if (roleClass.isInstance(nextRole)) {
+				return (T) nextRole;
+			}
+		}
+		return null;
+<% } else if ("addRole".equals(genOperation.getName())) { %>
+		getRoles().add(role);
+<% } else { %>
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+<% } %>
