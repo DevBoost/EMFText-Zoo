@@ -43,11 +43,10 @@ import org.emftext.language.java.operators.OperatorsFactory;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.references.ReferencesFactory;
-import org.emftext.language.java.references.rtypes.ElementReferenceTarget;
+import org.emftext.language.java.references.ReferencesPackage;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 import org.emftext.language.java.types.PrimitiveType;
 import org.emftext.language.java.types.TypesPackage;
-import org.emftext.language.java.types.rtypes.RtypesPackage;
 
 /**
  * The JavaModelRepairer can be used to fix part of Java models that
@@ -191,21 +190,19 @@ public abstract class JavaModelRepairer {
 	private IdentifierReference createIdentifierReferenceWithProxy(Resource resource,
 			NamespaceClassifierReference nsClassifierReference) {
 		EObject proxy = (EObject) nsClassifierReference
-			.getClassifierReferences().get(0).getExtensibleTarget().eGet(RtypesPackage.Literals.CLASSIFIER_REFERENCE_TARGET__VALUE, false);
+			.getClassifierReferences().get(0).eGet(TypesPackage.Literals.CLASSIFIER_REFERENCE__TARGET, false);
 		
-		EReference targetReference = org.emftext.language.java.references.rtypes.RtypesPackage.Literals.ELEMENT_REFERENCE_TARGET__VALUE;	
+		EReference targetReference = ReferencesPackage.Literals.ELEMENT_REFERENCE__TARGET;
+		
 		IdentifierReference mainIdReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
-		ElementReferenceTarget target = org.emftext.language.java.references.rtypes.RtypesFactory.eINSTANCE.createElementReferenceTarget();
-		mainIdReference.setExtensibleTarget(target);
 		
-		target.eSet(
+		mainIdReference.eSet(
 				targetReference, proxy);
 		String id = ((InternalEObject)proxy).eProxyURI().fragment();
 		id = id.substring("EMFTEXT_INTERNAL_URI_FRAGMENT_".length());
 		id = id.substring(id.indexOf("_") + 1);
 		
-		registerContextDependentProxy(resource, 
-				target,
+		registerContextDependentProxy(resource, mainIdReference,
 				targetReference, id, proxy);
 		
 		IdentifierReference rootIdRef = mainIdReference;
@@ -225,7 +222,7 @@ public abstract class JavaModelRepairer {
 			idRef.setTarget((ReferenceableElement) newProxy);
 			
 			registerContextDependentProxy(resource,
-					(ElementReferenceTarget)idRef.getExtensibleTarget(),
+					idRef,
 					targetReference,
 					nsPart,
 					newProxy);
@@ -250,6 +247,6 @@ public abstract class JavaModelRepairer {
 
 	protected abstract void registerContextDependentProxy(
 			Resource resource,
-			ElementReferenceTarget mainIdReference, EReference targetReference,
+			IdentifierReference mainIdReference, EReference targetReference,
 			String id, EObject proxy);
 }

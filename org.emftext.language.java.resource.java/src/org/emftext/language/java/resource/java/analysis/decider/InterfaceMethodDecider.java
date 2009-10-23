@@ -65,7 +65,7 @@ public class InterfaceMethodDecider extends AbstractDecider {
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 		if (container instanceof MemberContainer) {
-			if (MembersPackage.Literals.MEMBER_CONTAINER__EXTENSIBLE_MEMBERS.equals(containingReference)) {
+			if (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS.equals(containingReference)) {
 				return  true;
 			}
 		}

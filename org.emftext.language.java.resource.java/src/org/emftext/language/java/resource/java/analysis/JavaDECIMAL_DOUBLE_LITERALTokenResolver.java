@@ -25,19 +25,21 @@ import static org.emftext.language.java.resource.java.analysis.helper.LiteralCon
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.emftext.language.java.literals.ptypes.DecimalDoubleLiteralDecimalValue;
+import org.emftext.language.java.literals.DecimalDoubleLiteral;
+import org.emftext.language.java.literals.LiteralsPackage;
 import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
 import org.emftext.language.java.resource.java.IJavaTokenResolver;
 
 public class JavaDECIMAL_DOUBLE_LITERALTokenResolver implements IJavaTokenResolver {
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container == null || container instanceof DecimalDoubleLiteralDecimalValue;
+		assert container == null || container instanceof DecimalDoubleLiteral;
 		assert value instanceof Double;
 		return value.toString();
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDoubleLiteral());
 		
 		if (lexem.toLowerCase().endsWith(DOUBLE_SUFFIX)) {
 			lexem = lexem.substring(0, lexem.length() - 1);

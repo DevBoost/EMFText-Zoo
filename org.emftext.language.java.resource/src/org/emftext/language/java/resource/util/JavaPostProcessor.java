@@ -26,8 +26,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.references.ElementReference;
+import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
-import org.emftext.language.java.references.rtypes.ElementReferenceTarget;
 import org.emftext.language.java.resource.java.IJavaOptionProvider;
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaResourcePostProcessor;
@@ -57,10 +58,10 @@ public class JavaPostProcessor implements IJavaOptionProvider, IJavaResourcePost
 		new JavaModelRepairer() {
 			protected void registerContextDependentProxy(
 					Resource resource,
-					ElementReferenceTarget mainIdReference, EReference targetReference,
+					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
 				((JavaResource)resource).registerContextDependentProxy(
-						new JavaContextDependentURIFragmentFactory<ElementReferenceTarget, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetValueReferenceResolver()),
+						new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,

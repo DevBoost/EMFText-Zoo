@@ -20,29 +20,29 @@
  ******************************************************************************/
 package org.emftext.language.java.resource.java.analysis;
 
-import static org.emftext.language.java.resource.java.analysis.helper.LiteralConstants.OCT_PREFIX;
-
-import java.math.BigInteger;
 import java.util.Map;
 
-import org.emftext.language.java.literals.LiteralsPackage;
-import org.emftext.language.java.literals.OctalIntegerLiteral;
-import org.emftext.language.java.resource.java.IJavaTokenResolveResult;
-import org.emftext.language.java.resource.java.IJavaTokenResolver;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.java.classifiers.ConcreteClassifier;
+import org.emftext.language.java.imports.ClassifierImport;
+import org.emftext.language.java.resource.java.IJavaReferenceResolveResult;
+import org.emftext.language.java.resource.java.IJavaReferenceResolver;
 
-public class JavaOCTAL_INTEGER_LITERALTokenResolver implements IJavaTokenResolver {
-
-	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		assert container == null || container instanceof OctalIntegerLiteral;
-		assert value instanceof BigInteger;
-
-		return OCT_PREFIX + ((BigInteger) value).toString(8);
+public class ClassifierImportClassifierReferenceResolver implements 
+	IJavaReferenceResolver<ClassifierImport, ConcreteClassifier> {
+	
+	public java.lang.String deResolve(ConcreteClassifier element, ClassifierImport container, org.eclipse.emf.ecore.EReference reference) {
+		return element.getName();
 	}
-
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
-		
-		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, result);
+	
+	public void resolve(java.lang.String identifier, ClassifierImport theImport, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, IJavaReferenceResolveResult<ConcreteClassifier> result) {
+		ConcreteClassifier importedClassifier = theImport.getImportedClassifier(identifier);
+		if (importedClassifier != null) {
+			importedClassifier = (ConcreteClassifier) EcoreUtil.resolve(importedClassifier, theImport.eResource());
+			if (!importedClassifier.eIsProxy()) {
+				result.addMapping(identifier, importedClassifier);
+			}
+		}	
 	}
 
 	public void setOptions(Map<?, ?> options) {

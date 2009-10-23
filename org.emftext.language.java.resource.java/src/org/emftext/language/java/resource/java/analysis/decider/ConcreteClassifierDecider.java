@@ -71,10 +71,10 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	 */
 	public boolean containsCandidates(EObject container, EReference containingReference) {
 
-		if (StatementsPackage.Literals.STATEMENT_CONTAINER__EXTENSIBLE_STATEMENT.equals(containingReference)) {
+		if (StatementsPackage.Literals.STATEMENT_CONTAINER__STATEMENT.equals(containingReference)) {
 			return true;
 		}
-		if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__EXTENSIBLE_STATEMENTS.equals(containingReference)) {
+		if (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS.equals(containingReference)) {
 			return true;
 		}
 		return false;

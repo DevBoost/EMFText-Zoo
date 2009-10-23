@@ -47,13 +47,13 @@ public class ParameterDecider extends AbstractDecider {
 	}
 
 	public boolean containsCandidates(EObject container, EReference containingReference) {
-		if (ParametersPackage.Literals.PARAMETRIZABLE__EXTENSIBLE_PARAMETERS.equals(containingReference)) {
+		if (ParametersPackage.Literals.PARAMETRIZABLE__PARAMETERS.equals(containingReference)) {
 			return  true;
 		}
-		if (StatementsPackage.Literals.CATCH_BLOCK__EXTENSIBLE_PARAMETER.equals(containingReference)) {
+		if (StatementsPackage.Literals.CATCH_BLOCK__PARAMETER.equals(containingReference)) {
 			return  true;
 		}
-		if (StatementsPackage.Literals.FOR_EACH_LOOP__EXTENSIBLE_NEXT.equals(containingReference)) {
+		if (StatementsPackage.Literals.FOR_EACH_LOOP__NEXT.equals(containingReference)) {
 			return  true;
 		}
 		return false;
