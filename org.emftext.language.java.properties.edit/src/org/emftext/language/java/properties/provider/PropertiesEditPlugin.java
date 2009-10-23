@@ -50,7 +50,6 @@ public final class PropertiesEditPlugin extends EMFPlugin
       (new ResourceLocator [] 
        {
          JavaEditPlugin.INSTANCE,
-         Primitive_typesEditPlugin.INSTANCE,
        });
   }
 

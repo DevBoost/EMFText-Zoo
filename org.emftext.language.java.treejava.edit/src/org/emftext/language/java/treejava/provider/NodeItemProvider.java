@@ -461,12 +461,12 @@ public class NodeItemProvider
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-         LiteralsFactory.eINSTANCE.createDecimalDoubleLiteral()));
+         LiteralsFactory.eINSTANCE.createHexFloatLiteral()));
 
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-         LiteralsFactory.eINSTANCE.createHexFloatLiteral()));
+         LiteralsFactory.eINSTANCE.createDecimalDoubleLiteral()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -481,22 +481,22 @@ public class NodeItemProvider
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-         LiteralsFactory.eINSTANCE.createDecimalLongLiteral()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
          LiteralsFactory.eINSTANCE.createHexIntegerLiteral()));
 
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-         LiteralsFactory.eINSTANCE.createHexLongLiteral()));
+         LiteralsFactory.eINSTANCE.createOctalIntegerLiteral()));
 
     newChildDescriptors.add
       (createChildParameter
         (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
-         LiteralsFactory.eINSTANCE.createOctalIntegerLiteral()));
+         LiteralsFactory.eINSTANCE.createDecimalLongLiteral()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (ReferencesPackage.Literals.ARGUMENTABLE__ARGUMENTS,
+         LiteralsFactory.eINSTANCE.createHexLongLiteral()));
 
     newChildDescriptors.add
       (createChildParameter

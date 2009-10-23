@@ -48,7 +48,6 @@ public final class TreejavaEditPlugin extends EMFPlugin {
       (new ResourceLocator [] 
        {
          JavaEditPlugin.INSTANCE,
-         Primitive_typesEditPlugin.INSTANCE,
        });
   }
 

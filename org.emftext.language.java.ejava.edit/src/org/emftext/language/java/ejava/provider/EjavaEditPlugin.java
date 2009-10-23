@@ -48,7 +48,6 @@ public final class EjavaEditPlugin extends EMFPlugin {
          EcoreEditPlugin.INSTANCE,
          GenModelEditPlugin.INSTANCE,
          JavaEditPlugin.INSTANCE,
-         Primitive_typesEditPlugin.INSTANCE,
        });
   }
 

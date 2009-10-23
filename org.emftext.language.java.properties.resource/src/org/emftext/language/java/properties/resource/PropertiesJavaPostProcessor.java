@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.literals.LiteralsFactory;
 import org.emftext.language.java.members.ClassMethod;
 import org.emftext.language.java.members.Field;
+import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.modifiers.ModifiersFactory;
 import org.emftext.language.java.properties.PropertiesPackage;
@@ -83,7 +84,7 @@ public class PropertiesJavaPostProcessor implements IPropjavaResourcePostProcess
 		TypeReference tReferenceCopy = (TypeReference) EcoreUtil.copy(typeReference);
 		getterMethod.setTypeReference(tReferenceCopy);
 		
-		property.getContainer().getMembers().add(getterMethod);
+		((MemberContainer)property.eContainer()).getMembers().add(getterMethod);
 		EcoreUtil.replace(property, field);
 	}
 

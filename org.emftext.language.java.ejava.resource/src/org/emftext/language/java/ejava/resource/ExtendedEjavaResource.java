@@ -23,7 +23,7 @@ import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaPrinter;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.members.Member;
-import org.emftext.language.java.statements.FeatureStatementListContainerStatements;
+import org.emftext.language.java.statements.Statement;
 
 /**
  * Extension of generate resource implementation that prints all operations into
@@ -120,7 +120,7 @@ public class ExtendedEjavaResource extends EjavaResource {
 		byte[] lineBreak = System.getProperty ("line.separator").getBytes();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		EjavaPrinter printer = new PlainJavaEjavaPrinter(outputStream, this);
-		for(FeatureStatementListContainerStatements statement : wrapper.getStatements()) {
+		for(Statement statement : wrapper.getStatements()) {
 			printer.print(statement);
 			try {
 				outputStream.write(lineBreak);

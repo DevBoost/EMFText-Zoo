@@ -12,6 +12,6 @@ OPTIONS {
 }
 
 RULES {
-	StatementUnit ::=           "statements" boxedName "{" statements "}" ;
-	StatementVariationPoint ::=  "<" "<" boxedName ">" ">"  ";" ;		
+	StatementUnit ::=           "statements" name[] "{" statements "}" ;
+	StatementVariationPoint ::=  "<" "<" name[] ">" ">"  ";" ;		
 }
