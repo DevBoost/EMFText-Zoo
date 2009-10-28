@@ -51,9 +51,10 @@ public class PelletReasoner implements org.emftext.language.owl.reasoning.EMFTex
 			// load and parse ontology in manchester syntax
 			OWLOntologyInputSource inputSource = new StringInputSource(owlRepresentation);
 			OWLOntology ontology = manager.createOntology(URI.create("check"));
+			
 			parser.setOWLOntologyManager(manager);
 			parser.parse(inputSource, ontology);
-
+			
 			// load ontology in pellet 
 			Reasoner reasoner = new Reasoner(manager);
 			Set<OWLOntology> importsClosure = manager

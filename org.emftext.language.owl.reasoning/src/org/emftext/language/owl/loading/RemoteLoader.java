@@ -83,11 +83,13 @@ public class RemoteLoader {
 		
 	}
 		
-	public void loadOntology(String uri,  EObject container) {
+	public Ontology loadOntology(String uri,  EObject container) {
 		ontology = url2ontologies.get(uri);
 		if (ontology == null) {
 			initialise(uri, container);
+			ontology = url2ontologies.get(uri);
 		}
+		return ontology;
 	}
 	
 	public org.eclipse.emf.common.util.URI getLocationHintURI(String locationHint, EObject container) {
@@ -156,6 +158,7 @@ public class RemoteLoader {
 		try {
 			OWLOntology owlOnto = manager.loadOntology( URI.create( uri ) );
 			ontology = propagate(owlOnto);
+			ontology.setUri(uri);
 		} catch (OWLOntologyCreationException e) {
 			// TODO Auto-generated catch block
 			try {

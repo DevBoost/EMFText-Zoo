@@ -118,7 +118,7 @@ public class CrossResourceIRIResolver {
 		EList<Namespace> namespaces = ontologyDocument.getNamespace();
 		for (Namespace namespace : namespaces) {
 			if (iriPrefix.equals(namespace.getPrefix())) {
-				uri = namespace.getUri(); 
+				uri = namespace.getImportedOntology().getUri(); 
 				remoteLoader.loadOntology(uri, ontologyDocument);
 				IRIIdentified entity = remoteLoader.getOntologyElement(identifier);
 				return entity;
@@ -135,6 +135,10 @@ public class CrossResourceIRIResolver {
 
 	private boolean hasPrefix(String identifier) {
 		return (!(identifier.indexOf(":") == -1));
+	}
+
+	public RemoteLoader getRemoteLoader() {
+		return this.remoteLoader;
 	}
 	
 
