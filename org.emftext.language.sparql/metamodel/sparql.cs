@@ -24,12 +24,14 @@ TOKENS{
 	// PN_CHARS_U  $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '\u10000'..'\uEFFFF' | '_' ) $;
 	// PN_CHARS $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '\u10000'..'\uEFFFF' | '_' | '.' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040') $;
 	
+		
 	DEFINE VARNAME 	$ ('?'|'\u0024') ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' )  ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040' )* $; // | '\u10000'..'\uEFFFF' fehlt
 	DEFINE DEF_PNAME_NS $ (('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD') (('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040' | '.')* ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '.' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040'))?)? ':' $;  // | '\u10000'..'\uEFFFF' fehlt
 	DEFINE DEF_PN_LOCAL $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' ) (('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040' | '.' )* ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '.' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040'))? $ ;	// | '\u10000'..'\uEFFFF' fehlt
 	
 	//DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
 	
+	//DEFINE DEF_WS $( '\u0020' | '\u0009' | '\u000D' | '\u000A')$;  //=WITHSPACE, überflüssig?
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 	//IDENTIFIER nur für Fehlervorbeugung, muss noch entfernt werden
@@ -44,6 +46,9 @@ RULES{
 	PrefixDecl ::= "PREFIX" pnamens iriref  ;
 	
 	SelectQuery ::= "SELECT" solutionsdisplay? ( var+ | "*" ) datasetclause* whereclause solutionmodifier;
+	ConstructQuery ::= "CONSTRUCT" constructtemplate datasetclause* whereclause solutionmodifier ;
+	DescribeQuery ::= "DESCRIBE" ( varoririref+ | "*" ) datasetclause* whereclause? solutionmodifier ;
+	AskQuery ::= "ASK" datasetclause* whereclause ;
 	
 	DistinctNE ::= "DISTINCT";
 	ReducedNE ::= "REDUCED" ;
@@ -64,14 +69,21 @@ RULES{
 	GroupOrUnionGraphPattern ::= groupgraphpattern ( "UNION" groupgraphpattern )* ;
 	
 	Filter ::= "FILTER" constraint ;
+	FunctionCall ::=  iriref arglist ;
+	ArgListNILNE ::= nil ;
+	//ArgListExpressionNE ::= "(" expression ( "," addexpression )* ")" ;
+	
+	ConstructTemplate ::= "{" (constructtriples ( "." constructtriples? )* )? "}" ;
 	
 	TriplesSameSubjectLeftNE ::= varorterm propertylistnotempty ;
-	//TriplesSameSubjectRightNE ::= triplesnode propertylistnotempty?;
+	TriplesSameSubjectRightNE ::= triplesnode propertylistnotempty?;
 	
 	PropertyListNotEmpty ::= verb objectlist ( ";" ( verb objectlist )? )* ;
 	ObjectList ::= object ( "," object )* ;
 	Object ::= graphnode ; //abstract möglich?
 	
+	BlankNodePropertyList ::= "[" propertylistnotempty "]" ;
+	Collection ::= "(" graphnode+ ")" ;
 	
 	SolutionModifier ::= orderclause? limitoffsetclauses? ;
 	
@@ -86,7 +98,11 @@ RULES{
 	BrackettedExpression ::= "("    ")" ;
 	//Expression
 	
+	NotInList ::= "("  ")"; //ws=WHITESPACE, daraum entfernt
+	ANON  	  ::= "["  "]"; //ws=WHITESPACE, daraum entfernt
+	
 	IRI_REF ::= iri_ref[DEF_IRI_REF] ;
+	//WS ::= ws[DEF_WS] ; //ws=WHITESPACE/daraum entfernt
 	PNAME_NS ::= pn_prefix[DEF_PNAME_NS] ;	
 	PNAME_LN ::= pname_ns pn_local ;
 	Var ::= varname[VARNAME] ;

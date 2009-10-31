@@ -1,5 +1,5 @@
 //Quelle: http://www.w3.org/TR/rdf-sparql-query/#grammar
-
+//pre-done
 [1]    	Query  	  ::=    	Prologue
 						( SelectQuery | ConstructQuery | DescribeQuery | AskQuery )
 	//multiple Queries im Metamodell vorgesehen, Grammatik sieht aber nur EINE vor?
@@ -10,14 +10,14 @@
 [3]   	BaseDecl 	  ::=   	'BASE' IRI_REF
 //done
 [4]   	PrefixDecl 	  ::=   	'PREFIX' PNAME_NS IRI_REF
-
 //done
 [5]   	SelectQuery 	  ::=   	'SELECT' ( 'DISTINCT' | 'REDUCED' )? ( Var+ | '*' ) DatasetClause* WhereClause SolutionModifier
-
+//done
 [6]   	ConstructQuery 	  ::=   	'CONSTRUCT' ConstructTemplate DatasetClause* WhereClause SolutionModifier
+//done
 [7]   	DescribeQuery 	  ::=   	'DESCRIBE' ( VarOrIRIref+ | '*' ) DatasetClause* WhereClause? SolutionModifier
+//done
 [8]   	AskQuery 	  ::=   	'ASK' DatasetClause* WhereClause
-
 //done
 [9]   	DatasetClause 	  ::=   	'FROM' ( DefaultGraphClause | NamedGraphClause )
 //done
@@ -28,7 +28,6 @@
 [12]   	SourceSelector 	  ::=   	IRIref
 //done
 [13]   	WhereClause 	  ::=   	'WHERE'? GroupGraphPattern
-
 //done
 [14]   	SolutionModifier 	  ::=   	OrderClause? LimitOffsetClauses?
 //done
@@ -55,27 +54,44 @@
 [24]   	GraphGraphPattern 	  ::=   	'GRAPH' VarOrIRIref GroupGraphPattern
 //done
 [25]   	GroupOrUnionGraphPattern 	  ::=   	GroupGraphPattern ( 'UNION' GroupGraphPattern )*
-
-
+//done
 [26]   	Filter 	  ::=   	'FILTER' Constraint
+//done
 [27]   	Constraint 	  ::=   	BrackettedExpression | BuiltInCall | FunctionCall
+//done
 [28]   	FunctionCall 	  ::=   	IRIref ArgList
-[29]   	ArgList 	  ::=   	( NIL | '(' Expression ( ',' Expression )* ')' )
-[30]   	ConstructTemplate 	  ::=   	'{' ConstructTriples? '}'
-[31]   	ConstructTriples 	  ::=   	TriplesSameSubject ( '.' ConstructTriples? )?
-[32]   	TriplesSameSubject 	  ::=   	VarOrTerm PropertyListNotEmpty | TriplesNode PropertyList
-[33]   	PropertyListNotEmpty 	  ::=   	Verb ObjectList ( ';' ( Verb ObjectList )? )*
-[34]   	PropertyList 	  ::=   	PropertyListNotEmpty?
-[35]   	ObjectList 	  ::=   	Object ( ',' Object )*
-[36]   	Object 	  ::=   	GraphNode
-[37]   	Verb 	  ::=   	VarOrIRIref | 'a'
-[38]   	TriplesNode 	  ::=   	Collection | BlankNodePropertyList
-[39]   	BlankNodePropertyList 	  ::=   	'[' PropertyListNotEmpty ']'
-[40]   	Collection 	  ::=   	'(' GraphNode+ ')'
-[41]   	GraphNode 	  ::=   	VarOrTerm | TriplesNode
-[42]   	VarOrTerm 	  ::=   	Var | GraphTerm
-[43]   	VarOrIRIref 	  ::=   	Var | IRIref
 
+//pre-done
+[29]   	ArgList 	  ::=   	( NIL | '(' Expression ( ',' Expression )* ')' )
+
+//done
+[30]   	ConstructTemplate 	  ::=   	'{' ConstructTriples? '}'
+//done in ConstructTemplate
+[31]   	ConstructTriples 	  ::=   	TriplesSameSubject ( '.' ConstructTriples? )?
+//done
+[32]   	TriplesSameSubject 	  ::=   	VarOrTerm PropertyListNotEmpty | TriplesNode PropertyList
+//done
+[33]   	PropertyListNotEmpty 	  ::=   	Verb ObjectList ( ';' ( Verb ObjectList )? )*
+//done in TriplesSameSubjectRightNE
+[34]   	PropertyList 	  ::=   	PropertyListNotEmpty?
+//done
+[35]   	ObjectList 	  ::=   	Object ( ',' Object )*
+//done. könnte Abstract sein
+[36]   	Object 	  ::=   	GraphNode
+// done
+[37]   	Verb 	  ::=   	VarOrIRIref | 'a'
+//done
+[38]   	TriplesNode 	  ::=   	Collection | BlankNodePropertyList
+//done
+[39]   	BlankNodePropertyList 	  ::=   	'[' PropertyListNotEmpty ']'
+//done
+[40]   	Collection 	  ::=   	'(' GraphNode+ ')'
+//done
+[41]   	GraphNode 	  ::=   	VarOrTerm | TriplesNode
+//done
+[42]   	VarOrTerm 	  ::=   	Var | GraphTerm
+//done
+[43]   	VarOrIRIref 	  ::=   	Var | IRIref
 //done as Token, elementar
 [44]   	Var 	  ::=   	VAR1 | VAR2
 
@@ -134,9 +150,9 @@ Productions for terminals:
 
 [73]   	BLANK_NODE_LABEL 	  ::=   	'_:' PN_LOCAL
 
-//überflüssig
+//überflüssig, in Token VARNAME
 [74]   	VAR1 	  ::=   	'?' VARNAME
-//überflüssig
+//überflüssig, in Token VARNAME
 [75]   	VAR2 	  ::=   	'$' VARNAME
 
 
@@ -165,8 +181,12 @@ Productions for terminals:
 [89]   	STRING_LITERAL_LONG1 	  ::=   	"'''" ( ( "'" | "''" )? ( [^'\] | ECHAR ) )* "'''"
 [90]   	STRING_LITERAL_LONG2 	  ::=   	'"""' ( ( '"' | '""' )? ( [^"\] | ECHAR ) )* '"""'
 [91]   	ECHAR 	  ::=   	'\' [tbnrf\"']
+
+//done
 [92]   	NIL 	  ::=   	'(' WS* ')'
+//done as Token
 [93]   	WS 	  ::=   	#x20 | #x9 | #xD | #xA
+//done
 [94]   	ANON 	  ::=   	'[' WS* ']'
 
 //pre-done as Token, in VARNAME, PN_PREFIX und PN_LOCAL eingearbeitet, Hexcode als Unicode, [#x10000-#xEFFFF] lässt sich bisher nicht realisieren
