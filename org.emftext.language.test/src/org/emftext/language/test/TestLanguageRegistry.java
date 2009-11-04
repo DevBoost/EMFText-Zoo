@@ -6,7 +6,7 @@ public class TestLanguageRegistry {
 
 	public void registerAllLanguages() {
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.aterms.resource.aterms.mopp.AtermsInformation());
+				new org.emftext.language.aterms.resource.aterms.mopp.AtermsMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
 				new org.emftext.language.b.resource.mch.mopp.MchMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
