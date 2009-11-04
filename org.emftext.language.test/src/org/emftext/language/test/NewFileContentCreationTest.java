@@ -14,78 +14,117 @@
 package org.emftext.language.test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.emftext.language.chess.resource.cg.mopp.CgPrinter;
-import org.emftext.language.chess.resource.cg.mopp.CgResource;
-import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichPrinter;
-import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichResource;
-import org.emftext.language.customer.resource.customer.mopp.CustomerPrinter;
-import org.emftext.language.customer.resource.customer.mopp.CustomerResource;
-import org.emftext.language.dot.resource.dot.mopp.DotPrinter;
-import org.emftext.language.dot.resource.dot.mopp.DotResource;
-import org.emftext.language.ecore.resource.facade.mopp.FacadeEcorePrinter;
-import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreResource;
-import org.emftext.language.ecore.resource.text.mopp.TextEcorePrinter;
-import org.emftext.language.ecore.resource.text.mopp.TextEcoreResource;
-import org.emftext.language.feature.resource.feature.mopp.FeaturePrinter;
-import org.emftext.language.feature.resource.feature.mopp.FeatureResource;
-import org.emftext.language.forms.resource.forms.mopp.FormsPrinter;
-import org.emftext.language.forms.resource.forms.mopp.FormsResource;
-import org.emftext.language.formular.resource.formular.mopp.FormularPrinter;
-import org.emftext.language.formular.resource.formular.mopp.FormularResource;
-import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaPrinter;
-import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
-import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorPrinter;
-import org.emftext.language.java.javabehavior4uml.resource.javabehavior.mopp.JavabehaviorResource;
-import org.emftext.language.java.resource.java.mopp.JavaPrinter;
-import org.emftext.language.java.resource.java.mopp.JavaResource;
-import org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaPrinter;
-import org.emftext.language.java.reusejava.resource.reusejava.mopp.ReusejavaResource;
-import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaPrinter;
-import org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaResource;
-import org.emftext.language.regexp.resource.regexp.mopp.RegexpPrinter;
-import org.emftext.language.regexp.resource.regexp.mopp.RegexpResource;
-import org.emftext.language.simple_c.resource.c.mopp.CPrinter;
-import org.emftext.language.simple_c.resource.c.mopp.CResource;
-import org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiPrinter;
-import org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiResource;
-import org.emftext.language.simple_math.resource.sm.mopp.SmPrinter;
-import org.emftext.language.simple_math.resource.sm.mopp.SmResource;
-import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachinePrinter;
-import org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineResource;
-import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callPrinter;
-import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResource;
-import org.emftext.language.textadventure.resource.tas.mopp.TasPrinter;
-import org.emftext.language.textadventure.resource.tas.mopp.TasResource;
-import org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlPrinter;
-import org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlResource;
-import org.emftext.language.xml.resource.xml.mopp.XmlPrinter;
-import org.emftext.language.xml.resource.xml.mopp.XmlResource;
-import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
-import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsPrinter;
-import org.emftext.sdk.concretesyntax.resource.cs.mopp.CsResource;
+import org.emftext.access.EMFTextAccessPlugin;
+import org.emftext.access.resource.IMetaInformation;
+import org.emftext.access.resource.ITextPrinter;
 import org.emftext.sdk.concretesyntax.resource.cs.util.CsMinimalModelHelper;
+import org.emftext.test.ConcreteSyntaxTestHelper;
+
 
 public class NewFileContentCreationTest extends TestCase {
+
+	private static final String[] excludedFiles = new String[] {
+		".*/CheckCSSyntax.cs", 
+		".*/ecore.cs", 
+		".*/standardSyntax/forms.cs", 
+		".*/rev6618/java_templates.cs",
+		".*/org/emftext/test/.*"
+	};
+	
+	public static final class MinimalModelTestCase extends TestCase {
+		private final IMetaInformation metaInformation;
+
+		private MinimalModelTestCase(IMetaInformation metaInformation) {
+			super("Test " + metaInformation.getSyntaxName());
+			this.metaInformation = metaInformation;
+		}
+
+		public void runTest() {
+			test(new TestItem() {
+
+				public EPackage[] getAdditionalPackages() {
+					return new EPackage[0];
+				}
+
+				public ITextPrinter getPrinter(OutputStream stream) {
+					return metaInformation.createPrinter(stream, null);
+				}
+
+				public EClass[] getStartClasses() {
+					return metaInformation.getStartSymbols();
+				}
+			});
+		}
+		
+		private void test(TestItem item) {
+			CsMinimalModelHelper mmh = new CsMinimalModelHelper();
+			for (EClass nextStart : item.getStartClasses()) {
+				Collection<EClass> availableClasses = getContainedClasses(item.getAdditionalPackages());
+				availableClasses.addAll(getContainedClasses(nextStart));
+				
+				EObject result = mmh.getMinimalModel(nextStart, availableClasses);
+				assertNotNull(result);
+				
+				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+				ITextPrinter printer = item.getPrinter(buffer);
+				assertNotNull(printer);
+				try {
+					printer.print(result);
+				} catch (IOException e) {
+					fail(e.getMessage());
+				}
+			}
+		}
+
+		private Collection<EClass> getContainedClasses(EClass... classes) {
+			Set<EClass> result = new LinkedHashSet<EClass>();
+			for (EClass nextClass : classes) {
+				result.addAll(getContainedClasses(nextClass.getEPackage()));
+			}
+			return result;
+		}
+
+		private Collection<EClass> getContainedClasses(EPackage... ePackages) {
+			Set<EClass> result = new LinkedHashSet<EClass>();
+			for (EPackage nextPackage : ePackages) {
+				// recursively add EClasses in subpackages
+				for (EPackage nextSubpackage : nextPackage.getESubpackages()) {
+					result.addAll(getContainedClasses(nextSubpackage));
+				}
+				// add EClasses in the package itself
+				for (EClassifier nextClassifier : nextPackage.getEClassifiers()) {
+					if (nextClassifier instanceof EClass) {
+						result.add((EClass) nextClassifier);
+					}
+				}
+			}
+			return result;
+		}
+	}
 
 	private interface TestItem {
 		public EPackage[] getAdditionalPackages();
 		public EClass[] getStartClasses();
-		public Object getPrinter(OutputStream stream);
+		public ITextPrinter getPrinter(OutputStream stream);
 	}
-	
+
+	/*
 	private abstract class AbstractTestItem implements TestItem {
 		public EPackage[] getAdditionalPackages() {
 			return new EPackage[0];
@@ -435,80 +474,48 @@ public class NewFileContentCreationTest extends TestCase {
 			return new TreejavaPrinter(stream, new TreejavaResource());
 		}
 	}
+	*/
 	
-	public void testMinimalModelCreation() {
-		test(new TextEcoreTestItem());
-		test(new FacadeEcoreTestItem());
-		test(new CSTestItem());
-		test(new ChessTestItem());
-		test(new CustomSandwichTestItem());
-		test(new CustomerTestItem());
-		test(new DotTestItem());
-		test(new FeatureTestItem());
-		test(new FormsTestItem());
-		test(new FormularTestItem());
-		test(new RegexpTestItem());
-		test(new SimpleCTestItem());
-		test(new SimpleGuiTestItem());
-		test(new SimpleMathTestItem());
-		test(new StatemachineTestItem());
-		test(new TemplateCallTestItem());
-		test(new TextAdventureTestItem());
-		test(new ThreeValuedLogicTestItem());
-		test(new JavaTestItem());
-		test(new EJavaTestItem());
-		test(new JavaBehavior4UMLTestItem());
-		test(new ReuseJavaTestItem());
-		test(new TreeJavaTestItem());
-		test(new XmlTestItem());
-
-		// TODO add test items for remaining languages
-		//test(org.emftext.language.c_sharp.CsharpPackage);
-	}
-
-	private void test(TestItem item) {
-		CsMinimalModelHelper mmh = new CsMinimalModelHelper();
-		for (EClass nextStart : item.getStartClasses()) {
-			Collection<EClass> availableClasses = getContainedClasses(item.getAdditionalPackages());
-			availableClasses.addAll(getContainedClasses(nextStart));
-			
-			EObject result = mmh.getMinimalModel(nextStart, availableClasses);
-			assertNotNull(result);
-			
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			Object printer = item.getPrinter(buffer);
-			try {
-				Class<?>[] param = new Class [] {EObject.class};
-				Method printMethod = printer.getClass().getMethod("print", param);
-				printMethod.invoke(printer, result);
-			} catch (Exception e) {
-				fail(e.getMessage());
-			}
+	public static class MetaTest extends TestCase {
+		
+		private List<IMetaInformation> metaInformations;
+		
+		public MetaTest(List<IMetaInformation> metaInformations) {
+			super("Check that all .cs files are tested.");
+			this.metaInformations = metaInformations;
 		}
-	}
 
-	private Collection<EClass> getContainedClasses(EClass... classes) {
-		Set<EClass> result = new LinkedHashSet<EClass>();
-		for (EClass nextClass : classes) {
-			result.addAll(getContainedClasses(nextClass.getEPackage()));
-		}
-		return result;
-	}
-
-	private Collection<EClass> getContainedClasses(EPackage... ePackages) {
-		Set<EClass> result = new LinkedHashSet<EClass>();
-		for (EPackage nextPackage : ePackages) {
-			// recursively add EClasses in subpackages
-			for (EPackage nextSubpackage : nextPackage.getESubpackages()) {
-				result.addAll(getContainedClasses(nextSubpackage));
-			}
-			// add EClasses in the package itself
-			for (EClassifier nextClassifier : nextPackage.getEClassifiers()) {
-				if (nextClassifier instanceof EClass) {
-					result.add((EClass) nextClassifier);
+		public void runTest() {
+			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."));
+			for (String grammar : grammars) {
+				boolean foundTest = false;
+				for (IMetaInformation metaInformation : metaInformations) {
+					String pathToCSDefinition = metaInformation.getPathToCSDefinition();
+					grammar = grammar.replace(File.separator, "/");
+					for (String excludedFile : excludedFiles) {
+						if (grammar.matches(excludedFile)) {
+							// found test
+							foundTest = true;
+						}
+					}
+					if (grammar.endsWith(pathToCSDefinition)) {
+						// found test
+						foundTest = true;
+					}
 				}
+				assertTrue("Can't find test for " + grammar, foundTest);
 			}
 		}
-		return result;
+	}
+	
+	public static Test suite() {
+		new TestLanguageRegistry().registerAllLanguages();
+		TestSuite suite = new TestSuite("All tests");
+		List<IMetaInformation> metaInformations = EMFTextAccessPlugin.getConcreteSyntaxRegistry();
+		for (final IMetaInformation metaInformation : metaInformations) {
+			//suite.addTest(new MinimalModelTestCase(metaInformation));
+		}
+		suite.addTest(new MetaTest(metaInformations));
+		return suite;
 	}
 }
