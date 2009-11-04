@@ -107,5 +107,13 @@ public class TestLanguageRegistry {
 				new org.emftext.language.forms.resource.forms.mopp.FormsMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
 				new org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation());
+		EMFTextAccessPlugin.registerConcreteSyntax(
+				new org.emftext.test.cct1.resource.cct1.mopp.Cct1MetaInformation());
+		EMFTextAccessPlugin.registerConcreteSyntax(
+				new org.emftext.test.cct2.resource.cct2.mopp.Cct2MetaInformation());
+		EMFTextAccessPlugin.registerConcreteSyntax(
+				new org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation());
+		EMFTextAccessPlugin.registerConcreteSyntax(
+				new org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation());
 	}
 }

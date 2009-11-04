@@ -44,7 +44,10 @@ public class NewFileContentCreationTest extends TestCase {
 		".*/ecore.cs", 
 		".*/standardSyntax/forms.cs", 
 		".*/rev6618/java_templates.cs",
-		".*/org/emftext/test/.*"
+		".*/org/emftext/test/.*",
+		".*/org.emftext.test.ant/metamodel/simple.cs",
+		".*/org.emftext.test.atl/model/example.cs",
+		".*/org.emftext.test.code_completion.test/input/cs/.*"
 	};
 	
 	public static final class MinimalModelTestCase extends TestCase {
@@ -513,7 +516,7 @@ public class NewFileContentCreationTest extends TestCase {
 		TestSuite suite = new TestSuite("All tests");
 		List<IMetaInformation> metaInformations = EMFTextAccessPlugin.getConcreteSyntaxRegistry();
 		for (final IMetaInformation metaInformation : metaInformations) {
-			//suite.addTest(new MinimalModelTestCase(metaInformation));
+			suite.addTest(new MinimalModelTestCase(metaInformation));
 		}
 		suite.addTest(new MetaTest(metaInformations));
 		return suite;
