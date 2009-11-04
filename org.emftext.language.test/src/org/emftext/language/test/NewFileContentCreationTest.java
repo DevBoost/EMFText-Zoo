@@ -36,7 +36,10 @@ import org.emftext.access.resource.ITextPrinter;
 import org.emftext.sdk.concretesyntax.resource.cs.util.CsMinimalModelHelper;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 
-
+/**
+ * A test that checks whether the creation of minimal models
+ * that is used by the NewFileWizards is working correctly.
+ */
 public class NewFileContentCreationTest extends TestCase {
 
 	private static final String[] excludedFiles = new String[] {
