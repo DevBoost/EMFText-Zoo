@@ -23,11 +23,11 @@ public class SandwichInterpreterTest extends AbstractInterpreterTest {
 
 	public void testSandwichInterpretation() {
 		// basic test (input model is not used)
-		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE bread butter");
+		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE myRecipe bread butter");
 		// basic test for FOREACH loop and placeholder inside of the loop
-		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE bread i1 i2 i3 TOAST bread");
+		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE myRecipe bread i1 i2 i3 TOAST bread");
 		// test loop variable
-		testInterpretation("template3.custom_sandwich", "customer3.customer", "RECIPE bread i1 i2 i3 TOAST bread");
+		testInterpretation("template3.custom_sandwich", "customer3.customer", "RECIPE myRecipe bread i1 i2 i3 TOAST bread");
 	}
 
 	protected void registerResourceFactories() {
