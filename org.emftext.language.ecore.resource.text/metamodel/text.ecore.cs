@@ -87,20 +87,20 @@ RULES {
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
-	EAttribute ::= !2 (eAnnotations)* ( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
-					unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID] #1)* 
+	EAttribute ::= !2 (eAnnotations)* (( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
+					unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID]) #1)* 
 				"attribute" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"'])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
-	EParameter ::= (eAnnotations)* (ordered[T_ORDERED]|unique[T_UNIQUE] #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
+	EParameter ::= (eAnnotations)* ((ordered[T_ORDERED]|unique[T_UNIQUE]) #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
-	EReference ::= (eAnnotations)* !2 ( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
+	EReference ::= (eAnnotations)* !2 (( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
 							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
-							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|resolveProxies[T_RESOLVEPROXIES] #1)* 
+							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|resolveProxies[T_RESOLVEPROXIES]) #1)* 
 					"reference" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"']) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
 	EOperation ::=  (eAnnotations)* !2
-				( ordered[T_ORDERED]|unique[T_UNIQUE] #1)* 
+				(( ordered[T_ORDERED]|unique[T_UNIQUE]) #1)* 
 				"operation" #1  ("void" | eType[]) 
 				( #1 "(" lowerBound[] ".." upperBound[] ")" )? #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 
@@ -125,7 +125,7 @@ RULES {
 	
 	EGenericType ::=
 		"typed"  
-		("<" (eTypeParameter[] | "?" "extends" eUpperBound | "?" "super" eLowerBound) ">")?
+		("<" (eTypeParameter[] | "?" #1 "extends" #1 eUpperBound | "?" #1 "super" #1 eLowerBound) ">")?
 		eClassifier[] 
 		("<" (eTypeArguments | "?") ("," (eTypeArguments | "?"))* ">")?
 		;
