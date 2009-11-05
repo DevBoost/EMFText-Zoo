@@ -15,6 +15,7 @@ package org.emftext.access;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import junit.framework.TestCase;
@@ -41,7 +42,7 @@ public class AccessTest extends TestCase {
 
 	protected void invokeAllMethods(
 			Object accessProxy, Class<?> accessInterface) throws Exception {
-		for(Method method : accessInterface.getMethods()) {
+		for (Method method : accessInterface.getMethods()) {
 			int argNo = method.getParameterTypes().length;
 			Object[] emptyArgs = new Object [argNo];
 			for(int i = 0; i < argNo; i++) {
@@ -56,7 +57,14 @@ public class AccessTest extends TestCase {
 				}
 			}
 
-			Object result = method.invoke(accessProxy, emptyArgs);
+			Object result = null;
+			try {
+				result = method.invoke(accessProxy, emptyArgs);
+			} catch (InvocationTargetException e) {
+				if (!(e.getCause() instanceof IllegalArgumentException)) {
+					fail("Exceptions other than IllegalArgumentException are not allowed.");
+				}
+			}
 			//only an error is reported but no exception is thrown if the method is not found
 			//the result will be null, but it can also be null because the impl method returns null
 			//therefore, there is no assertion can be done here
