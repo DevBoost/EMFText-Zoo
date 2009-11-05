@@ -22,7 +22,11 @@ public class InputMetaClassReferenceResolver {
 	
 	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference) {
 		EClass eClass = (EClass) element;
-		return eClass.getEPackage().getNsURI() + "::" + eClass.getName();
+		EPackage ePackage = eClass.getEPackage();
+		if (ePackage == null) {
+			return null;
+		}
+		return ePackage.getNsURI() + "::" + eClass.getName();
 	}
 	
 	public EClass resolve(String identifier, Template container, EReference reference, int position, boolean resolveFuzzy) {
