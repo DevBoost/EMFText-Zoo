@@ -15,7 +15,6 @@ package org.emftext.language.owl.resource.owl.analysis;
 
 import java.util.Map;
 
-import org.eclipse.ui.internal.handlers.ReuseEditorTester;
 import org.emftext.language.owl.Ontology;
 import org.emftext.language.owl.loading.RemoteLoader;
 import org.emftext.language.owl.resource.owl.IOwlReferenceResolveResult;
