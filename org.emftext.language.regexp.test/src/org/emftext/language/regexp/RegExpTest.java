@@ -56,13 +56,21 @@ public class RegExpTest extends TestCase {
 	@Test
 	public void testSimpleExpressions() throws IOException {
 		parse("'a'");
+		parse("('a')");
+		parse("'a'|'b'");
+		parse("'a'..'b'");
+		parse("('a'|'b')");
+		parse("'a'|'b'*");
+		parse("'a'+|'b'?");
+		parse("('a'|'b')+");
+		parse("~('a'|'b')");
+		parse(".*");
 	}
 
 	@Test
 	public void testExpsFromGrammars() throws IOException {
 		// TODO enable this
 		//extractExpressionsFromCSFilesToInputFile();
-		/*
 		LineNumberReader lnr = new LineNumberReader(new FileReader(new File(INPUT_FILE_PATH)));
 		String line = lnr.readLine();
 		while (line != null) {
@@ -70,7 +78,6 @@ public class RegExpTest extends TestCase {
 			parse(nextRegexp);
 			line = lnr.readLine();
 		}
-		*/
 	}
 
 	private void parse(String nextRegexp) {
