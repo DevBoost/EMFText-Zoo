@@ -40,7 +40,6 @@ import org.emftext.test.ConcreteSyntaxTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 
-// TODO mseifert: add some basic tests for parsing regular expressions
 public class RegExpTest extends TestCase {
 
 	private static final String INPUT_FILE_PATH = "input" + File.separator + "test_expressions.txt";
@@ -69,8 +68,7 @@ public class RegExpTest extends TestCase {
 
 	@Test
 	public void testExpsFromGrammars() throws IOException {
-		// TODO enable this
-		//extractExpressionsFromCSFilesToInputFile();
+		extractExpressionsFromCSFilesToInputFile();
 		LineNumberReader lnr = new LineNumberReader(new FileReader(new File(INPUT_FILE_PATH)));
 		String line = lnr.readLine();
 		while (line != null) {
