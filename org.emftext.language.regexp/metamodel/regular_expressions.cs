@@ -45,7 +45,7 @@ RULES {
 	
 	Alternative ::= elements*;
 	
-	Element ::= atom suffix[MULTIPLICITY];
+	Element ::= atom (suffix[MULTIPLICITY])?;
 	
 	Not ::= "~" body;
 }
