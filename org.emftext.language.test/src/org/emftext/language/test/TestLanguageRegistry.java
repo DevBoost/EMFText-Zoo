@@ -52,7 +52,9 @@ public class TestLanguageRegistry {
 		EMFTextAccessPlugin.registerConcreteSyntax(
 				new org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
-				new org.emftext.language.regexp.resource.regexp.mopp.RegexpMetaInformation());
+				new org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation());
+		EMFTextAccessPlugin.registerConcreteSyntax(
+				new org.emftext.language.regexp.resource.regexp_sdf.mopp.Regexp_sdfMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
 				new org.emftext.language.java_templates.resource.java_template.mopp.Java_templateMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
