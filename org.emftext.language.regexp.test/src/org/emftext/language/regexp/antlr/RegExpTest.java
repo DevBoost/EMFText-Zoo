@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.regexp;
+package org.emftext.language.regexp.antlr;
 
 import static org.emftext.test.ConcreteSyntaxTestHelper.registerResourceFactories;
 
@@ -33,8 +33,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.regexp.resource.regexp.mopp.RegexpMetaInformation;
-import org.emftext.language.regexp.resource.regexp.mopp.RegexpResourceFactory;
+import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation;
+import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrResourceFactory;
 import org.emftext.sdk.concretesyntax.TokenDefinition;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 import org.junit.Before;
@@ -48,8 +48,8 @@ public class RegExpTest extends TestCase {
 	public void setUp() {
 		registerResourceFactories();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				new RegexpMetaInformation().getSyntaxName(),
-				new RegexpResourceFactory());
+				new Regexp_antlrMetaInformation().getSyntaxName(),
+				new Regexp_antlrResourceFactory());
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ public class RegExpTest extends TestCase {
 
 	private void parse(String nextRegexp) {
 		ResourceSet rs = new ResourceSetImpl();
-		Resource r = rs.createResource(URI.createURI("temp." + new RegexpMetaInformation().getSyntaxName()));
+		Resource r = rs.createResource(URI.createURI("temp." + new Regexp_antlrMetaInformation().getSyntaxName()));
 		try {
 			System.out.println("RegExpTest.parse(): " + nextRegexp);
 			r.load(new ByteArrayInputStream(nextRegexp.getBytes()), null);
