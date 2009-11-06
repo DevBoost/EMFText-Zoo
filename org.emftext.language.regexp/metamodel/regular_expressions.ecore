@@ -13,16 +13,21 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="suffix" eType="#//Multiplicity"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Range" eSuperTypes="#//Atom">
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexRange" eSuperTypes="#//Atom #//Compound">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ranges" lowerBound="1"
+        upperBound="-1" eType="#//AtomicRange" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicRange" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntervalRange" eSuperTypes="#//AtomicRange">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Terminal" abstract="true" eSuperTypes="#//Atom"/>
   <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//Atom">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Compound"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Choice #//Atom"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Choice #//Atom #//Compound"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1"
         eType="#//Alternative" containment="true"/>
@@ -32,7 +37,7 @@
     <eLiterals name="plus" value="1" literal="+"/>
     <eLiterals name="questionMark" value="2" literal="?"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CharTerminal" eSuperTypes="#//Terminal">
+  <eClassifiers xsi:type="ecore:EClass" name="CharTerminal" eSuperTypes="#//Terminal #//AtomicRange">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringTerminal" eSuperTypes="#//Terminal">
@@ -40,4 +45,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dot" eSuperTypes="#//Terminal"/>
   <eClassifiers xsi:type="ecore:EEnum" name="EEnum0"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Compound" abstract="true"/>
 </ecore:EPackage>

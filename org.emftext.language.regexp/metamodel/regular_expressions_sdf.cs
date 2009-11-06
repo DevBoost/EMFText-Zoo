@@ -12,22 +12,20 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
-SYNTAXDEF regexp 
-FOR <http://www.emftext.org/language/regexp>
+SYNTAXDEF regexp_sdf 
+FOR <http://www.emftext.org/language/regexp> <./regular_expressions.genmodel>
 START RegularExpression
 
 OPTIONS {
 	usePredefinedTokens = "false";
-	reloadGeneratorModel = "true";
+	//reloadGeneratorModel = "true";
 	tokenspace = "0";
 }
 
 TOKENS {
-	DEFINE CHAR_LITERAL	$'\''('\\'('n'|'r'|'t'|'b'|'f'|'"'|'\''|'\\'|'>'|'u'('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')|.)|~( '\''|'\\'))'\''$;
-	DEFINE STRING_LITERAL $'\''('\\'('n'|'r'|'t'|'b'|'f'|'"'|'\''|'\\'|'>'|'u'('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')|.)|~( '\''|'\\'))('\\'('n'|'r'|'t'|'b'|'f'|'"'|'\''|'\\'|'>'|'u'('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')('0' .. '9'|'a'..'f'|'A'..'F')|.)|~( '\''|'\\'))*'\''$;
+	DEFINE CHAR_LITERAL	$('\\'('n'|'r'|'t'|'?'|'*'|'+'|'_'|' '|'-'|'\\'|'\"'|'\''|('0'..'9'('0'..'9')?('0'..'9')?)) | ('a'..'z'|'A'..'Z'|'0'..'9'))$;
+	DEFINE STRING_LITERAL $('"')(('\\''"')|('\\''\\')|~('"'|'\\'))*('"')$;
 	DEFINE MULTIPLICITY $'?'|'*'|'+'$;
-
-	DEFINE WHITESPACE $(' '|'\t'|'\r'?'\n')+$;
 }
 
 RULES {
@@ -35,7 +33,9 @@ RULES {
 	
 	Block ::= "(" alternatives ( "|" alternatives )* ")";
 	
-	Range ::= from[CHAR_LITERAL] ".." to[CHAR_LITERAL];
+	ComplexRange ::= "[" ranges+ "]";
+	
+	IntervalRange ::= from[CHAR_LITERAL] "-" to[CHAR_LITERAL];
 	
 	CharTerminal ::= value[CHAR_LITERAL];
 	
