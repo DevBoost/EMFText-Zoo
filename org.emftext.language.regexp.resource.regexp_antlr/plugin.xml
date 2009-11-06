@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation" id="org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="regexp_antlr" icon="icons/editor_icon.gif" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrEditor" name="EMFText regexp_antlr Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Regexp_antlr Text Editor" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrPreferencePage" class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrSyntaxColoringPreferencePage" class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrSyntaxColoringPreferencePage" category="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrBracketPreferencePage" class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrBracketPreferencePage" category="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrOccurrencePreferencePage" class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrOccurrencePreferencePage" category="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrNewFileWizard" id="org.emftext.language.regexp.resource.regexp_antlr.ui.Regexp_antlrNewFileWizard" name="EMFText .regexp_antlr file">
+		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.regexp.resource.regexp_antlr.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.regexp.resource.regexp_antlr.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrResourceFactoryDelegator" type="regexp_antlr">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.regexp.resource.regexp_antlr.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>
