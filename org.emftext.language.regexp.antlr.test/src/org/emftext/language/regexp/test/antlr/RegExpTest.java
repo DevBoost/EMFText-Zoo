@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.regexp.antlr;
+package org.emftext.language.regexp.test.antlr;
 
 import static org.emftext.test.ConcreteSyntaxTestHelper.registerResourceFactories;
 
