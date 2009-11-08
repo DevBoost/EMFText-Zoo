@@ -25,8 +25,6 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.emftext.language.java.annotations.provider.JavaEditPlugin;
 
-import org.emftext.language.primitive_types.provider.Primitive_typesEditPlugin;
-
 /**
  * This is the central singleton for the Properties edit plugin.
  * <!-- begin-user-doc -->

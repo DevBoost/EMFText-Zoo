@@ -24,7 +24,6 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 import org.emftext.language.java.annotations.provider.JavaEditPlugin;
-import org.emftext.language.primitive_types.provider.Primitive_typesEditPlugin;
 
 /**
  * This is the central singleton for the Ejava edit plugin.
