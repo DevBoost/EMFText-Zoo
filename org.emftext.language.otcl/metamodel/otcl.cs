@@ -11,7 +11,8 @@ TOKENS{
 	DEFINE T_NONEWLINE $'-''nonewline'$;
 	DEFINE COMMENT $'#'(~('\r\n'|'\r'|'\n'))*$;
 	DEFINE WS      $(' '|'\t'|'\f')+$;
-	DEFINE TEXT    $('A'..'Z'|'a'..'z'|'.'|'_'|'-'|'/'|'='|'+'|':'|'!'|'?'|'0'..'9')+$;
+	DEFINE TEXT    $(~('\r\n'|'\r'|'\n'|' '|'\t'|'\f'|'\u0024'|'#'|'['|']'|'{'|'}'|'"'|';'))+$;
+	//$ = \u0024
 }
 
 TOKENSTYLES {
@@ -23,9 +24,9 @@ RULES{
 	OTclScript::= (commands ("\\r\\n" | ";" |"\\n" | "\\r")+)*;
 	
 	//Words
-	Compound::= "\"" (commands (("\\r\\n" | ";" |"\\n" | "\\r")+ commands)+)? "\"";
+	Compound::= "\"" ("\\r\\n" | ";" |"\\n" | "\\r")* commands? (("\\r\\n" | ";" |"\\n" | "\\r")+ commands)* ("\\r\\n" | ";" |"\\n" | "\\r")* "\"";
 	
-	Block::= "{" (commands (("\\r\\n" | ";" |"\\n" | "\\r")+ commands)+)? "}";
+	Block::=    "{"  ("\\r\\n" | ";" |"\\n" | "\\r")* commands? (("\\r\\n" | ";" |"\\n" | "\\r")+ commands)* ("\\r\\n" | ";" |"\\n" | "\\r")* "}";
 	
 	Word::= value[];
 	
