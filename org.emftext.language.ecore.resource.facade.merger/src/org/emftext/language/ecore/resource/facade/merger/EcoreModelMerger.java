@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.ecore.resource;
+package org.emftext.language.ecore.resource.facade.merger;
 
 import java.util.HashMap;
 import java.util.Iterator;

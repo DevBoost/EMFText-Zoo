@@ -21,7 +21,8 @@ OPTIONS {
 	//tokenspace = "1";
 	resourcePluginID = "org.emftext.language.ecore.resource.facade";
 	basePackage = "org.emftext.language.ecore.resource.facade";
-	baseResourcePlugin = "org.emftext.language.ecore.resource.ecore";
+	baseResourcePlugin = "org.emftext.language.ecore.resource";
+	saveChangedResourcesOnly = "true";
 }
 
 TOKENS {

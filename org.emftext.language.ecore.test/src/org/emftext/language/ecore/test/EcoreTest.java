@@ -19,7 +19,7 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.emftext.language.ecore.resource.ecore.mopp.EcoreResourceFactoryDelegator;
+import org.emftext.language.ecore.resource.EcoreResourceFactoryDelegator;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.junit.Before;
 import org.junit.Test;

@@ -14,7 +14,6 @@
 package org.emftext.language.ecore.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.ecore.resource.ecore.mopp.EcoreResourceFactoryDelegator;
 
 /**
  * This class does not extend or change the functionality of 

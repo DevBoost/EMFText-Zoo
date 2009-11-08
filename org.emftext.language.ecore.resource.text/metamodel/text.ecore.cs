@@ -22,7 +22,8 @@ OPTIONS {
 	resourcePluginID = "org.emftext.language.ecore.resource.text";
 	basePackage = "org.emftext.language.ecore.resource.text";
 	usePredefinedTokens = "false";
-	baseResourcePlugin = "org.emftext.language.ecore.resource.ecore";
+	baseResourcePlugin = "org.emftext.language.ecore.resource";
+	saveChangedResourcesOnly = "true";
 }
 
 TOKENS {
