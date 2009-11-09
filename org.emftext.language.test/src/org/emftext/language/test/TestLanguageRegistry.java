@@ -117,5 +117,7 @@ public class TestLanguageRegistry {
 				new org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation());
 		EMFTextAccessPlugin.registerConcreteSyntax(
 				new org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation());
+		EMFTextAccessPlugin.registerConcreteSyntax(
+				new org.emftext.test.bug933.resource.bug933.mopp.Bug933MetaInformation());
 	}
 }

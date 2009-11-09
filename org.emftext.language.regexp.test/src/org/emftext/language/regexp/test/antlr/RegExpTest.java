@@ -27,13 +27,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrResourceFactory;
-import org.emftext.language.regexp.test.AbstractTest;
+import org.emftext.language.regexp.test.AbstractTestCase;
 import org.emftext.sdk.concretesyntax.TokenDefinition;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RegExpTest extends AbstractTest {
+public class RegExpTest extends AbstractTestCase {
 
 	private static final String INPUT_FILE_PATH = "input" + File.separator + "test_expressions.txt";
 

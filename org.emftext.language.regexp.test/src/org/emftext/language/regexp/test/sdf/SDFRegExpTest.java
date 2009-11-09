@@ -1,9 +1,9 @@
 package org.emftext.language.regexp.test.sdf;
 
 import org.emftext.language.regexp.resource.regexp_sdf.mopp.Regexp_sdfMetaInformation;
-import org.emftext.language.regexp.test.AbstractTest;
+import org.emftext.language.regexp.test.AbstractTestCase;
 
-public class SDFRegExpTest extends AbstractTest {
+public class SDFRegExpTest extends AbstractTestCase {
 
 	public void testSimpleExpressions() {
 		parse("[abc]");

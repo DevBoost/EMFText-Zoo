@@ -20,7 +20,7 @@ import org.junit.Before;
 
 import junit.framework.TestCase;
 
-public class AbstractTest extends TestCase {
+public abstract class AbstractTestCase extends TestCase {
 
 	@Before
 	public void setUp() {

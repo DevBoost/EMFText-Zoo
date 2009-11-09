@@ -7,9 +7,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation;
 import org.emftext.language.regexp.resource.regexp_sdf.IRegexp_sdfTextPrinter;
 import org.emftext.language.regexp.resource.regexp_sdf.mopp.Regexp_sdfMetaInformation;
-import org.emftext.language.regexp.test.AbstractTest;
+import org.emftext.language.regexp.test.AbstractTestCase;
 
-public class ANTLR2SDFTranslationTest extends AbstractTest {
+public class ANTLR2SDFTranslationTest extends AbstractTestCase {
 	
 	public void testTranslation() {
 		translate("'a'..'z'", "[a-z]");
