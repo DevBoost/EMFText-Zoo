@@ -4,8 +4,6 @@ package org.emftext.language.ecore.resource;
 public class EcoreResourcePlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 	
 	public static final String PLUGIN_ID = "org.emftext.language.ecore.resource";
-	public static final String EMFTEXT_SDK_VERSION = "1.2.0";
-	public static final String EP_DEFAULT_LOAD_OPTIONS_ID = PLUGIN_ID + ".default_load_options";
 	public static final String EP_ADDITIONAL_EXTENSION_PARSER_ID = PLUGIN_ID + ".additional_extension_parser";
 	
 	private static EcoreResourcePlugin plugin;
@@ -28,17 +26,6 @@ public class EcoreResourcePlugin extends org.eclipse.ui.plugin.AbstractUIPlugin 
 		return plugin;
 	}
 	
-	public static void showErrorDialog(final String title, final String message) {
-		org.eclipse.swt.widgets.Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				org.eclipse.swt.widgets.Shell parent = new org.eclipse.swt.widgets.Shell();
-				org.eclipse.jface.dialogs.MessageDialog dialog = new org.eclipse.jface.dialogs.MessageDialog(parent, title, null, message, org.eclipse.jface.dialogs.MessageDialog.ERROR,
-				new String[] { org.eclipse.jface.dialogs.IDialogConstants.OK_LABEL }, 0) {
-				};
-				dialog.open();
-			}
-		});
-	}
 	// Helper method for error logging.
 	//
 	// @param message
