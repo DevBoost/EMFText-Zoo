@@ -6,7 +6,6 @@ import org.osgi.framework.BundleContext;
 public class FormsGeneratorPlugin extends Plugin {
 
 	public static final String PLUGIN_ID = "org.emftext.language.forms.generator";
-	public static final String CS_FILE_EXTENSION = "cs";
 	
 	private static FormsGeneratorPlugin plugin;
 	
