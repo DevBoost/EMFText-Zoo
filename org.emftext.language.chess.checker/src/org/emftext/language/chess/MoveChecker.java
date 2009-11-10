@@ -87,7 +87,7 @@ public class MoveChecker implements ICgResourcePostProcessor,
 			return;
 		}
 		checkMove(resource, (NonEmptySquare) fromSquare, move, fromColumn, fromRow, toColumn, toRow);
-		movePiece(board, fromSquare, toColumn, toRow);
+		movePiece(board, fromSquare, fromColumn, fromRow, toColumn, toRow);
 	}
 
 	private void checkMove(CgResource resource, final NonEmptySquare square, Move move, int fromColumn, int fromRow,
@@ -186,15 +186,18 @@ public class MoveChecker implements ICgResourcePostProcessor,
 		return deltaX == deltaY;
 	}
 
-	private void movePiece(Board board, Square fromSquare, int column, int rowIndex) {
-		Row row = board.getRows().get(8 - rowIndex);
-		row.getSquares().set(column - 1, fromSquare);
+	private void movePiece(Board board, Square fromSquare, int fromColumnIdx, int fromRowIdx, int toColumnIdx, int toRowIdx) {
+		Row fromRow = board.getRows().get(8 - fromRowIdx);
+		fromRow.getSquares().set(fromColumnIdx - 1, ChessFactory.eINSTANCE.createEmptySquare());
+		
+		Row toRow = board.getRows().get(8 - toRowIdx);
+		toRow.getSquares().set(toColumnIdx - 1, fromSquare);
 	}
 
 	private Square getSquare(Board board, int column, int rowIndex) {
 		Row row = board.getRows().get(8 - rowIndex);
-		Square sqare = row.getSquares().get(column - 1);
-		return sqare;
+		Square square = row.getSquares().get(column - 1);
+		return square;
 	}
 
 	public ICgResourcePostProcessor getResourcePostProcessor() {
