@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.access.EMFTextAccessPlugin;
 import org.emftext.access.resource.IMetaInformation;
-import org.emftext.access.resource.ITextPrinter;
+import org.emftext.access.resource.IPrinter;
 import org.emftext.sdk.concretesyntax.resource.cs.util.CsMinimalModelHelper;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 
@@ -68,7 +68,7 @@ public class NewFileContentCreationTest extends TestCase {
 					return new EPackage[0];
 				}
 
-				public ITextPrinter getPrinter(OutputStream stream) {
+				public IPrinter getPrinter(OutputStream stream) {
 					return metaInformation.createPrinter(stream, null);
 				}
 
@@ -88,7 +88,7 @@ public class NewFileContentCreationTest extends TestCase {
 				assertNotNull(result);
 				
 				ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-				ITextPrinter printer = item.getPrinter(buffer);
+				IPrinter printer = item.getPrinter(buffer);
 				assertNotNull(printer);
 				try {
 					printer.print(result);
@@ -127,7 +127,7 @@ public class NewFileContentCreationTest extends TestCase {
 	private interface TestItem {
 		public EPackage[] getAdditionalPackages();
 		public EClass[] getStartClasses();
-		public ITextPrinter getPrinter(OutputStream stream);
+		public IPrinter getPrinter(OutputStream stream);
 	}
 
 	/*
