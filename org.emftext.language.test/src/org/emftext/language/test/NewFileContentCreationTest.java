@@ -50,7 +50,8 @@ public class NewFileContentCreationTest extends TestCase {
 		".*/org/emftext/test/.*",
 		".*/org.emftext.test.ant/metamodel/simple.cs",
 		".*/org.emftext.test.atl/model/example.cs",
-		".*/org.emftext.test.code_completion.test/input/cs/.*"
+		".*/org.emftext.test.code_completion.test/input/cs/.*",
+		".*/concretesyntax.newfile.cs"
 	};
 	
 	public static final class MinimalModelTestCase extends TestCase {
