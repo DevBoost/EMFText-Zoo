@@ -16,7 +16,8 @@ SYNTAXDEF quml
 FOR <http://www.eclipse.org/uml2/3.0.0/UML>
 START Model
  
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
  	resourcePluginID = "org.emftext.language.quickuml.resource.quml";
 	basePackage = "org.emftext.language.quickuml.resource.quml";
 	tokenspace = "1";

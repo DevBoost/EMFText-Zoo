@@ -16,7 +16,8 @@
 FOR <http://www.emftext.org/xml> <./xml.genmodel>
 START Document
 
-OPTIONS{
+OPTIONS{	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace="1";
 	defaultTokenName="IDENTIFIER";
 	generateCodeFromGeneratorModel="false";

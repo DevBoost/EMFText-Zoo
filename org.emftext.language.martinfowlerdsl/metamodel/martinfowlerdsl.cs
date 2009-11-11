@@ -20,6 +20,10 @@ TOKENS {
 	DEFINE T_RESETTING $'resetting'$;
 }
 
+OPTIONS {
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+}
+
 TOKENSTYLES {
 	"T_RESETTING" COLOR #800055, BOLD;
 }

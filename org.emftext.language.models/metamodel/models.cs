@@ -16,7 +16,8 @@ SYNTAXDEF model
 FOR <http://www.emftext.org/language/models>
 START Model
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	tokenspace = "1";
 }

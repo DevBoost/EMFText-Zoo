@@ -20,7 +20,8 @@ IMPORTS {
 	java : <http://www.emftext.org/java> WITH SYNTAX java <../../org.emftext.language.java/metamodel/java.cs>
 }
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
     tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";

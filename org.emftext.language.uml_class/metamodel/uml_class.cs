@@ -16,7 +16,8 @@ SYNTAXDEF uml_class
 FOR <http://org.emftext/uml_class>
 START ClassDiagramm
 
-OPTIONS{
+OPTIONS{	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
 }

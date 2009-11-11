@@ -16,7 +16,8 @@ SYNTAXDEF ucinv
 FOR <http://www.emftext.org/language/UseCaseInvariant>
 START UseCaseModel
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 }

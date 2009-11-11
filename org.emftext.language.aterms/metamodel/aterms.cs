@@ -17,6 +17,7 @@ FOR <http://www.emftext.org/language/aterms>
 START ATerm, Value
 
 OPTIONS {
+    licenceHeader ="platform:/resource/org.reuseware/licence.txt";
  	generateCodeFromGeneratorModel = "true";
 }
 

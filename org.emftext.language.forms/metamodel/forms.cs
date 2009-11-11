@@ -16,6 +16,10 @@ SYNTAXDEF forms
 FOR <http://www.emftext.org/language/forms>
 START Form
 
+OPTIONS {
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+}
+
 TOKENS {
 	DEFINE MULTIPLE $'multiple'|'MULTIPLE'$;
 }

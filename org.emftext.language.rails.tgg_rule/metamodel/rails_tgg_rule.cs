@@ -20,7 +20,8 @@ IMPORTS {
     project : <http://www.emftext.org/language/rails> WITH SYNTAX rails <../../org.emftext.language.rails/metamodel/rails.cs>
 }
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
     //reloadGeneratorModel = "true";
     //generateCodeFromGeneratorModel = "true";
     resourcePluginID = "org.emftext.language.rails.tgg_rule.resource.rails.tgg_rule";

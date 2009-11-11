@@ -21,7 +21,8 @@ IMPORTS {
 		WITH SYNTAX java <../../org.emftext.language.java/metamodel/java.cs>
 }
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 }
 

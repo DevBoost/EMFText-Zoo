@@ -8,7 +8,8 @@ IMPORTS {
 	reuse : <http://www.emftext.org/language/tcltk/reuse>
 }
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	//reloadGeneratorModel = "true";
 }

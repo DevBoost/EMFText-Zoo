@@ -16,7 +16,8 @@ SYNTAXDEF sandwich
 FOR <http://www.emftext.org/language/sandwich>
 START Recipe
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	tokenspace = "1";

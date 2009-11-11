@@ -16,7 +16,8 @@ SYNTAXDEF formular
 FOR <http://www.emftext.org/language/formular>
 START Formular
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 }
 

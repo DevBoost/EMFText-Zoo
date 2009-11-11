@@ -17,6 +17,7 @@ FOR <http://org.emftext/db_schema>
 START Database
 
 OPTIONS{
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	generateCodeFromGeneratorModel = "true";
  	reloadGeneratorModel = "true";
     tokenspace = "1";

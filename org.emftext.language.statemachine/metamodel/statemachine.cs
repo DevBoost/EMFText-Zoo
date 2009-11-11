@@ -14,7 +14,8 @@
 
 SYNTAXDEF statemachine FOR <http://www.eclipse.org/uml2/3.0.0/UML> START StateMachine
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 	resourcePluginID = "org.emftext.language.statemachine.resource.statemachine";
 	basePackage = "org.emftext.language.statemachine.resource.statemachine";

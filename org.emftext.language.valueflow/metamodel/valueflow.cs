@@ -16,7 +16,8 @@ SYNTAXDEF text.valueflow
 FOR <http://www.emftext.org/language/valueflow>
 START Model
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 	
 	resourcePluginID = "org.emftext.language.valueflow.resource.valueflow";

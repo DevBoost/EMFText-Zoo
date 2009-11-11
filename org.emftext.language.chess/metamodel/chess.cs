@@ -17,6 +17,7 @@ FOR <http://www.emftext.org/language/chess>
 START ChessGame
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	usePredefinedTokens = "false";
 	tokenspace = "0";

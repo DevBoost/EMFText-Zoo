@@ -16,7 +16,8 @@ SYNTAXDEF owl
 FOR <http://org.emftext/owl.ecore> <owl.genmodel>
 START OntologyDocument
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	generateCodeFromGeneratorModel = "true";
 	overrideManifest = "false";
 	overridePluginXML = "false";

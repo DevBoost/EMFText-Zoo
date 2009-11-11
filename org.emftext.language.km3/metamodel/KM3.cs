@@ -18,7 +18,8 @@ SYNTAXDEF km3
 FOR <http://www.eclipse.org/gmt/2005/KM3> <KM3.genmodel>
 START Metamodel
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	resourcePluginID = "org.emftext.language.km3.resource.km3";

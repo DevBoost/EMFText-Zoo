@@ -16,7 +16,8 @@ SYNTAXDEF template_call
 FOR  <http://www.emftext.org/language/template_concepts/call>
 START TemplateCall
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	generateCodeFromGeneratorModel = "true";
 }

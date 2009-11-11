@@ -16,7 +16,8 @@ SYNTAXDEF simplegui
 FOR <http://www.emftext.org/language/simple_gui>
 START Frame
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 }
 

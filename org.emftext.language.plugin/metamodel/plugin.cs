@@ -16,7 +16,8 @@ SYNTAXDEF topf
 FOR <http://org.emftext.languages/plugin>
 START ToolProductFamily
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1"; 
 }
 

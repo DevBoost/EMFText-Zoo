@@ -16,7 +16,8 @@ SYNTAXDEF c
 FOR <http://www.emftext.org/language/simple_c>
 START CompilationUnit
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 	autofixSimpleLeftrecursion = "false";
 	tokenspace = "1";

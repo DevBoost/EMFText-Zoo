@@ -16,7 +16,8 @@ SYNTAXDEF pcheck
 FOR <http://deftproject.org/parametercheck>
 START ParameterCheckModel
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	resourcePluginID = "org.emftext.language.parametercheck.resource.pcheck";
 	generateCodeFromGeneratorModel = "true";

@@ -16,6 +16,10 @@ SYNTAXDEF petrinet
 FOR <http://www.emftext.org/language/petrinet>
 START PetriNet
 
+OPTIONS {
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+}
+
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }

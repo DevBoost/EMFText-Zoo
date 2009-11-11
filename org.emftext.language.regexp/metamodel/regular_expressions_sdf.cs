@@ -16,7 +16,8 @@ SYNTAXDEF regexp_sdf
 FOR <http://www.emftext.org/language/regexp> <./regular_expressions.genmodel>
 START RegularExpression
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	//reloadGeneratorModel = "true";
 	tokenspace = "0";

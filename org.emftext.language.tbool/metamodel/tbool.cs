@@ -21,7 +21,8 @@ IMPORTS {
 		WITH SYNTAX bool <../../org.emftext.language.bool/metamodel/bool.cs>
 }
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	generateCodeFromGeneratorModel = "true";
 }

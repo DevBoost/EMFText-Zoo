@@ -16,7 +16,8 @@ SYNTAXDEF office
 FOR <http://emftext.org/office>
 START OfficeModel
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	generateCodeFromGeneratorModel = "true";
 }
 

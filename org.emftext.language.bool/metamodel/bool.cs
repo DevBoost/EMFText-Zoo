@@ -17,6 +17,7 @@ FOR <http://www.emftext.org/language/bool>
 START Class
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 }

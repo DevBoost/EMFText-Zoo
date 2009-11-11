@@ -16,7 +16,8 @@ SYNTAXDEF tas // tas = Text Adventure Specification
 FOR <http://www.emftext.org/language/textadventure>
 START Adventure
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 }

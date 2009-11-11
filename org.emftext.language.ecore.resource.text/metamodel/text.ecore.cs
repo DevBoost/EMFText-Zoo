@@ -17,6 +17,7 @@ FOR       <http://www.eclipse.org/emf/2002/Ecore>
 START     EPackage
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	memoize = "true";
 	tokenspace = "0";
 	resourcePluginID = "org.emftext.language.ecore.resource.text";
@@ -24,6 +25,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	baseResourcePlugin = "org.emftext.language.ecore.resource";
 	saveChangedResourcesOnly = "true";
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 }
 
 TOKENS {

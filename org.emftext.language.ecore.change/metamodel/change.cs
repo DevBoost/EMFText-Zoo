@@ -17,6 +17,7 @@ FOR <http://www.eclipse.org/emf/2003/Change>
 START ChangeDescription
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	resourcePluginID = "org.emftext.language.ecore.change.resource.ecore_change";
 	basePackage = "org.emftext.language.ecore.change.resource.ecore_change";
 }

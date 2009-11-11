@@ -17,6 +17,7 @@ FOR <http://www.tudresden.de/feature>
 START FeatureModel
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 	resourcePluginID = "org.emftext.language.feature.resource.feature";
 	basePackage = "org.emftext.language.feature.resource.feature";

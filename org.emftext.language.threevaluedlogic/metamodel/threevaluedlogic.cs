@@ -16,7 +16,8 @@ SYNTAXDEF tvl
 FOR <http://www.emftext.org/language/threevaluedlogic>
 START And, Or, Negation
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	backtracking = "true";
 	memoize = "true";
 	reloadGeneratorModel = "true";

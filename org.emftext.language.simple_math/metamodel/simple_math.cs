@@ -16,7 +16,8 @@ SYNTAXDEF sm
 FOR       <http://www.emftext.org/language/simple_math>
 START     Additive
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	forceEOF = "true";
 	tokenspace = "1";
 }

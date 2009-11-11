@@ -18,6 +18,7 @@ FOR <http://www.emftext.org/language/conference>
 START Conference
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	tokenspace = "1";

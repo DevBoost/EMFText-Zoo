@@ -16,7 +16,8 @@ SYNTAXDEF rolecore
 FOR <http://www.emftext.org/language/rolecore>
 START RCPackage
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	//reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 }

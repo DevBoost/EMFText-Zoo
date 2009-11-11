@@ -16,7 +16,8 @@ SYNTAXDEF rails
 FOR <http://www.emftext.org/language/rails>
 START Project
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
     generateCodeFromGeneratorModel = "true";
     reloadGeneratorModel = "true";
 }

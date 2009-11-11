@@ -32,6 +32,7 @@ IMPORTS {
 }
 
 OPTIONS {
+ 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	tokenspace = "1";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";

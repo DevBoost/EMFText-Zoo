@@ -16,7 +16,8 @@ SYNTAXDEF pico
 FOR <http://www.emftext.org/language/pico>
 START Program
 
-OPTIONS {
+OPTIONS {	
+	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
