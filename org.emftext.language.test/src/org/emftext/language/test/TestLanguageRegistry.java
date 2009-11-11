@@ -4,6 +4,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.emftext.access.EMFTextAccessPlugin;
+import org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax.mopp.CpsyntaxMetaInformation;
+import org.reuseware.coconut.compositionsystem.resource.csys.mopp.CsysMetaInformation;
+import org.reuseware.coconut.fragment.resource.fragment.mopp.FragmentMetaInformation;
+import org.reuseware.coconut.reuseextension.resource.rex.mopp.RexMetaInformation;
 
 public class TestLanguageRegistry {
 
@@ -110,6 +114,16 @@ public class TestLanguageRegistry {
 				new org.emftext.language.forms.resource.forms.mopp.FormsMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation());
+		
+		//Reuseware languages
+		metaInformations.add(
+				new RexMetaInformation());
+		metaInformations.add(
+				new CsysMetaInformation());
+		metaInformations.add(
+				new CpsyntaxMetaInformation());
+		metaInformations.add(
+				new FragmentMetaInformation());
 		
 		return metaInformations;
 	}
