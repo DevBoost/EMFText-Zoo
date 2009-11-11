@@ -34,7 +34,7 @@ public class AccessTest extends TestCase {
 
 	@Test
 	public void testAccessInterfaces() throws Exception {
-		for(IMetaInformation metaInformation : EMFTextAccessPlugin.getConcreteSyntaxRegistry()) {
+		for (IMetaInformation metaInformation : EMFTextAccessPlugin.getConcreteSyntaxRegistry()) {
 			invokeAllMethods(metaInformation, IMetaInformation.class);
 		}
 	}
@@ -62,7 +62,8 @@ public class AccessTest extends TestCase {
 				result = method.invoke(accessProxy, emptyArgs);
 			} catch (InvocationTargetException e) {
 				if (!(e.getCause() instanceof IllegalArgumentException)) {
-					fail("Exceptions other than IllegalArgumentException are not allowed.");
+					e.getCause().printStackTrace();
+					fail("Exceptions other than IllegalArgumentException are not allowed (was " + e.getCause() + ".");
 				}
 			}
 			//only an error is reported but no exception is thrown if the method is not found

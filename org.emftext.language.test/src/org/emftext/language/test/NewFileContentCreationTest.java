@@ -13,6 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -26,11 +27,16 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.emftext.access.EMFTextAccessPlugin;
+import org.emftext.access.EMFTextAccessProxy;
 import org.emftext.access.resource.IMetaInformation;
 import org.emftext.access.resource.IPrinter;
 import org.emftext.sdk.concretesyntax.resource.cs.util.CsMinimalModelHelper;
@@ -96,7 +102,43 @@ public class NewFileContentCreationTest extends TestCase {
 				} catch (IOException e) {
 					fail(e.getMessage());
 				}
+				// the following code checks whether the content that is actually use for
+				// new file is valid. this content may differ from the content created by
+				// the minimal model helper if users provide template files containing 
+				// example code for new documents
+				String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("dummyFileName");
+				Resource.Factory factory = metaInformation.createResourceFactory();
+				String syntaxName = metaInformation.getSyntaxName();
+				if (!isOnUpdateSite(syntaxName)) {
+					return;
+				}
+				Resource resource = factory.createResource(URI.createURI("temp." + syntaxName));
+				try {
+					resource.load(new ByteArrayInputStream(newFileContent.getBytes()), null);
+				} catch (IOException e) {
+					fail(e.getMessage());
+				}
+				EList<Diagnostic> errors = resource.getErrors();
+				if (!errors.isEmpty()) {
+					System.out.println("NewFileContent(" + syntaxName + ") = \"" + newFileContent + "\"");
+				}
+				for (Diagnostic diagnostic : errors) {
+					System.out.println("Error: " + diagnostic.getMessage() + " (" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
+				}
+				assertTrue("New file content contains errors.", errors.isEmpty());
 			}
+		}
+
+		private boolean isOnUpdateSite(String syntaxName) {
+			Set<Object> metaInformationsForLanguageOnUpdateSite = new TestLanguageRegistry().getMetaInformationsForLanguageOnUpdateSite();
+			for (Object metaInformationObject : metaInformationsForLanguageOnUpdateSite) {
+				IMetaInformation metaInformation = (IMetaInformation) EMFTextAccessProxy.get(metaInformationObject, IMetaInformation.class);
+				String language = metaInformation.getSyntaxName();
+				if (language.equals(syntaxName)) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private Collection<EClass> getContainedClasses(EClass... classes) {
