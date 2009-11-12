@@ -3,15 +3,14 @@
  * Software Technology Group, Dresden University of Technology
  * 
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
+ * are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * 
  * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.owl;
+package org.emftext.language.owl.reasoning;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -25,9 +24,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.emftext.language.owl.reasoning.EMFTextOWLReasoner;
-import org.emftext.language.owl.reasoning.PelletReasoner;
-import org.emftext.language.owl.reasoning.ReasoningException;
+import org.emftext.language.owl.Class;
 import org.emftext.language.owl.resource.owl.IOwlOptionProvider;
 import org.emftext.language.owl.resource.owl.IOwlOptions;
 import org.emftext.language.owl.resource.owl.IOwlProblem;

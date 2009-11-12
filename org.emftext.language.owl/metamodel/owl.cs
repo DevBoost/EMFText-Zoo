@@ -20,7 +20,9 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	generateCodeFromGeneratorModel = "true";
 	overrideManifest = "false";
+	overrideBuildProperties = "false";
 	overridePluginXML = "false";
+	overrideProjectFile = "false";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	//memoize = "true";
