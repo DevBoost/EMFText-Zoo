@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  */
 public class ValueflowResourceFactoryDelegator implements Resource.Factory { 
 	
-	public static final String EP_PARSER = "org.emftext.language.valueflow.resource.additional_valueflow_extension_parser";
+	public static final String EP_PARSER = "org.emftext.language.valueflow.resource.additional_extension_parser";
 	
 	private final static Map<String, Resource.Factory> valueflowFactories =
 		new HashMap<String, Resource.Factory>();

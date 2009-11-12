@@ -22,6 +22,7 @@ OPTIONS {
 	
 	resourcePluginID = "org.emftext.language.valueflow.resource.valueflow";
 	basePackage = "org.emftext.language.valueflow.resource.valueflow";
+	baseResourcePlugin = "org.emftext.language.valueflow.resource";
 }
 
 TOKENSTYLES {
