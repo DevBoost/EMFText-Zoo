@@ -13,10 +13,12 @@
  ******************************************************************************/
 package org.emftext.language.java.ejava.resource;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.java.JavaClasspath;
@@ -52,10 +54,10 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 		if (!resource.getContents().isEmpty()) {
 			try {
 				JavaClasspath cp = JavaClasspath.get(resource);
-				String emfEcoreJarLocation  = Platform.getBundle("org.eclipse.emf.ecore").getLocation();
-				String emfCommonJarLocation = Platform.getBundle("org.eclipse.emf.common").getLocation();
-				URI emfEcoreJarURI  = URI.createFileURI(emfEcoreJarLocation.substring(emfEcoreJarLocation.lastIndexOf(':')+1));
-				URI emfCommonJarURI = URI.createFileURI(emfCommonJarLocation.substring(emfCommonJarLocation.lastIndexOf(':')+1));
+				File emfEcoreJarLocation  = FileLocator.getBundleFile(Platform.getBundle("org.eclipse.emf.ecore"));
+				File emfCommonJarLocation = FileLocator.getBundleFile(Platform.getBundle("org.eclipse.emf.common"));
+				URI emfEcoreJarURI  = URI.createFileURI(emfEcoreJarLocation.getCanonicalPath());
+				URI emfCommonJarURI = URI.createFileURI(emfCommonJarLocation.getCanonicalPath());
 				cp.registerClassifierJar(emfEcoreJarURI);
 				cp.registerClassifierJar(emfCommonJarURI);
 			} catch (IOException e) {
