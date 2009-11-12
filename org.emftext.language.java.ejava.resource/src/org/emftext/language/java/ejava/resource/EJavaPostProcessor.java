@@ -52,8 +52,10 @@ public class EJavaPostProcessor implements IEjavaOptionProvider, IEjavaResourceP
 		if (!resource.getContents().isEmpty()) {
 			try {
 				JavaClasspath cp = JavaClasspath.get(resource);
-				URI emfEcoreJarURI  = URI.createFileURI(Platform.getBundle("org.eclipse.emf.ecore").getLocation().substring(15));
-				URI emfCommonJarURI = URI.createFileURI(Platform.getBundle("org.eclipse.emf.common").getLocation().substring(15));
+				String emfEcoreJarLocation  = Platform.getBundle("org.eclipse.emf.ecore").getLocation();
+				String emfCommonJarLocation = Platform.getBundle("org.eclipse.emf.common").getLocation();
+				URI emfEcoreJarURI  = URI.createFileURI(emfEcoreJarLocation.substring(emfEcoreJarLocation.lastIndexOf(':')+1));
+				URI emfCommonJarURI = URI.createFileURI(emfCommonJarLocation.substring(emfCommonJarLocation.lastIndexOf(':')+1));
 				cp.registerClassifierJar(emfEcoreJarURI);
 				cp.registerClassifierJar(emfCommonJarURI);
 			} catch (IOException e) {

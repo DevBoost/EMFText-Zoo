@@ -213,6 +213,7 @@ public class EcoreWrapper {
 	}
 	
 	private static EMap<EList<String>, GenPackage> findGenPackagesInScope(EPackageWrapper context) {
+		
 		Resource eJavaResource = context.eResource();
 		if (eJavaResource == null) {
 			return ECollections.emptyEMap();
@@ -222,13 +223,17 @@ public class EcoreWrapper {
 			return ECollections.emptyEMap();
 		}
 		
+		EMap<EList<String>, GenPackage> result = new BasicEMap<EList<String>, GenPackage>();
 		String fileName = context.getNamespaces().get(0) + ".genmodel";
 		URI ecoreURI = eJavaResource.getURI().trimSegments(
 				1 + context.getNamespaces().size()).appendSegment(fileName);
-		Resource genModelResource = rs.getResource(ecoreURI, true);
-		EcoreUtil.resolveAll(genModelResource);
+		try {
+			Resource genModelResource = rs.getResource(ecoreURI, true);
+			EcoreUtil.resolveAll(genModelResource);
+		} catch(Exception e) {
+			return result;
+		}
 		
-		EMap<EList<String>, GenPackage> result = new BasicEMap<EList<String>, GenPackage>();
 		for(Resource r : rs.getResources()) {
 			if (!r.getContents().isEmpty() && r.getContents().get(0) instanceof GenModel) {
 				GenModel genModel = (GenModel)r.getContents().get(0);
