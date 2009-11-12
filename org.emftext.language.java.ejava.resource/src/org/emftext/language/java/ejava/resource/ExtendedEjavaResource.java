@@ -123,8 +123,12 @@ public class ExtendedEjavaResource extends EjavaResource {
 	private void setToRealJavaPackage(EPackageWrapper wrapper) {
 		// the only way to find the base package is to go to the genmodel
 		wrapper.getNamespaces().clear();
+		String basePackage = wrapper.getGenPackage().getBasePackage();
+		if (basePackage == null) {
+			basePackage = "";
+		}
 		wrapper.getNamespaces().addAll(
-				Arrays.asList(wrapper.getGenPackage().getBasePackage().split("\\.")));
+				Arrays.asList(basePackage.split("\\.")));
 		wrapper.getNamespaces().add(wrapper.getEPackage().getName());
 
 	}
