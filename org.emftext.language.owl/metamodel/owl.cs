@@ -21,7 +21,7 @@ OPTIONS {
 	generateCodeFromGeneratorModel = "true";
 	overrideManifest = "false";
 	overrideBuildProperties = "false";
-	overridePluginXML = "false";
+	overrideClasspath = "false";
 	overrideProjectFile = "false";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
