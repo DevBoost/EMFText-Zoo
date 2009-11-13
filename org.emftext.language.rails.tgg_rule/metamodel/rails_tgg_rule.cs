@@ -30,7 +30,7 @@ OPTIONS {
 
 TOKENS {
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
-    DEFINE T_TYPE $'++'$;
+    DEFINE T_TYPE $'++'|'!'|'/'$;
     DEFINE IDENT $'@'('A'..'Z'|'a'..'z'|'0'..'9'|'_')+$;
 }
 
@@ -38,10 +38,11 @@ TOKENSTYLES {
     "IDENT" COLOR #000000, BOLD;
 	"T_TYPE" COLOR #00BB00, BOLD;
     "COMMENT" COLOR #008000;
+   
 }
 
 RULES {
-	TGGRuleAnnotation ::= (identifiers[IDENT])+ (type[T_TYPE])?;
+	TGGRuleAnnotation ::= (identifiers[IDENT])+ (type[T_TYPE]);
     AnnotatedProject    ::= annotation body ;
     AnnotatedConnection ::= annotation body ;
     AnnotatedTrain      ::= annotation body ;

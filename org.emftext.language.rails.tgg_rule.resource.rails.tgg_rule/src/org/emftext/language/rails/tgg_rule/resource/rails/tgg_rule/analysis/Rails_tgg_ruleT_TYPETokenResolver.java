@@ -28,6 +28,12 @@ public class Rails_tgg_ruleT_TYPETokenResolver implements org.emftext.language.r
 		if ("++".equals(lexem)) {
 			result.setResolvedToken(RuleElementType.CREATE);
 		}
+		if ("!".equals(lexem)) {
+			result.setResolvedToken(RuleElementType.REQUIRED);
+		}
+		if ("/".equals(lexem)) {
+			result.setResolvedToken(RuleElementType.FORBIDDEN);
+		}
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
