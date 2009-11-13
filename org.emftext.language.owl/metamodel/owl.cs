@@ -33,7 +33,7 @@ TOKENS{
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 	DEFINE NOT $'not'$;
-	DEFINE INVERSE $'inverse'$;
+	DEFINE INVERSE $'inverse'|'inv'$;
 	DEFINE INT $('+'|'-')?('0'..'9')+$;
 	DEFINE FLOAT $('0'..'9')+ '.' ('0'..'9')* (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+)? ('f'|'F') 
 				| ('.' ('0'..'9')+ (('e'|'E'|'p'|'P') ('+'|'-')? ('0'..'9')+)?) ('f'|'F') 
