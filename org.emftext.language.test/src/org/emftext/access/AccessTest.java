@@ -70,7 +70,7 @@ public class AccessTest extends TestCase {
 			//the result will be null, but it can also be null because the impl method returns null
 			//therefore, there is no assertion can be done here
 							
-			if (EMFTextAccessProxy.isAccessInterface(method.getReturnType())) {
+			if (isAccessInterface(method.getReturnType())) {
 				if (result != null) {
 					invokeAllMethods(result, method.getReturnType());
 				}
@@ -79,6 +79,15 @@ public class AccessTest extends TestCase {
 				}
 			}
 		}
+	}
+
+	private boolean isAccessInterface(Class<?> returnType) {
+		for (Class<?> nextType : EMFTextAccessProxy.DEFAULT_ACCESS_INTERFACES) {
+			if (nextType == returnType) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
