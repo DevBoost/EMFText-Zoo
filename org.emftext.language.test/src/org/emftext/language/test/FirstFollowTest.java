@@ -36,14 +36,12 @@ public class FirstFollowTest extends TestCase {
 		for (Rule rule : rules) {
 			int i = 0;
 			System.out.println("----> testing " + rule.getMetaclass().getName());
-			computer.i = 0;
 			computer.computeFollowExpectations(syntax, rule);
 			System.out.println("----> testing contents");
 			TreeIterator<EObject> ruleContents = rule.eAllContents();
 			while (ruleContents.hasNext()) {
 				EObject next = ruleContents.next();
 				System.out.println("-> element " + i + " = " + next);
-				computer.i = 0;
 				computer.computeFollowExpectations(syntax, next);
 				i++;
 			}
