@@ -82,11 +82,11 @@ public class FirstFollowTest extends TestCase {
 		for (Rule rule : rules) {
 			int i = 0;
 			System.out.println("----> testing " + rule.getMetaclass().getName());
-			computer.computeFollowExpectations(syntax, rule);
+			computer.computeFollowSet(syntax, rule);
 			TreeIterator<EObject> ruleContents = rule.eAllContents();
 			while (ruleContents.hasNext()) {
 				EObject next = ruleContents.next();
-				computer.computeFollowExpectations(syntax, next);
+				computer.computeFollowSet(syntax, next);
 				i++;
 			}
 		}
