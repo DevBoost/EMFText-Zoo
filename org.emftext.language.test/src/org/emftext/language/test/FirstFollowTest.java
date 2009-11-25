@@ -1,6 +1,8 @@
 package org.emftext.language.test;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -17,6 +19,28 @@ import junit.framework.TestCase;
 
 public class FirstFollowTest extends TestCase {
 
+	// the generator models for these syntax contain references to Ecore or UML
+	// which is not available when this test runs as JUnit test.
+	// some of them refer to meta models that use textual syntax which is not
+	// available either.
+	private String[] excludedFiles = {
+			".*/custom_sandwich.cs",
+			".*/facade.ecore.cs",
+			".*/text.ecore.cs",
+			".*/eJava.cs",
+			".*/JavaBehavior4UML.cs",
+			".*/java_templates.cs",
+			".*/owl.cs",
+			".*/plugin.cs",
+			".*/quickuml.cs",
+			".*/statemachine.cs",
+			".*/tbool.cs",
+			".*/template_call.cs",
+			".*/valueflow.cs",
+			".*/concretesyntax.cs",
+			".*/fragment.cs",
+			".*/rex.cs"
+	};
 	private ExpectationComputer computer;
 
 	public void setUp() {
@@ -25,23 +49,43 @@ public class FirstFollowTest extends TestCase {
 	}
 
 	public void testFirstAndFollowComputations() {
-		// TODO add test for all languages (take paths for TestLanguageRegistry
-		testFirstAndFollowComputation("../org.emftext.language.dot/metamodel/dot.cs");
-		testFirstAndFollowComputation("../org.emftext.language.java/metamodel/java.cs");
+		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."));
+		for (String grammar : grammars) {
+			if (isExcluded(grammar)) {
+				continue;
+			}
+			File grammarFile = new File(grammar);
+			try {
+				grammarFile = grammarFile.getCanonicalFile();
+			} catch (IOException e) {
+				fail(e.getMessage());
+			}
+			testFirstAndFollowComputation(grammarFile.getAbsolutePath());
+		}
+	}
+
+	private boolean isExcluded(String grammar) {
+		for (String excludedFile : excludedFiles) {
+			String normlizedPath = grammar.replace(File.separator, "/");
+			if (normlizedPath.matches(excludedFile)) {
+				System.out.println("Excluded: " + grammar);
+				return true;
+			}
+		}
+		return false;
 	}
 	
-	public void testFirstAndFollowComputation(String syntaxPath) {
+	private void testFirstAndFollowComputation(String syntaxPath) {
+		System.out.println("--> testing " + syntaxPath);
 		ConcreteSyntax syntax = loadSyntax(syntaxPath);
 		EList<Rule> rules = syntax.getRules();
 		for (Rule rule : rules) {
 			int i = 0;
 			System.out.println("----> testing " + rule.getMetaclass().getName());
 			computer.computeFollowExpectations(syntax, rule);
-			System.out.println("----> testing contents");
 			TreeIterator<EObject> ruleContents = rule.eAllContents();
 			while (ruleContents.hasNext()) {
 				EObject next = ruleContents.next();
-				System.out.println("-> element " + i + " = " + next);
 				computer.computeFollowExpectations(syntax, next);
 				i++;
 			}

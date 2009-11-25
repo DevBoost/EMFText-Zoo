@@ -48,18 +48,6 @@ import org.emftext.test.ConcreteSyntaxTestHelper;
  */
 public class NewFileContentCreationTest extends TestCase {
 
-	private static final String[] excludedFiles = new String[] {
-		".*/CheckCSSyntax.cs", 
-		".*/ecore.cs", 
-		".*/standardSyntax/forms.cs", 
-		".*/rev6618/java_templates.cs",
-		".*/org/emftext/test/.*",
-		".*/org.emftext.test.ant/metamodel/simple.cs",
-		".*/org.emftext.test.atl/model/example.cs",
-		".*/org.emftext.test.code_completion.test/input/cs/.*",
-		".*/concretesyntax.newfile.cs"
-	};
-	
 	public static final class MinimalModelTestCase extends TestCase {
 		private final IMetaInformation metaInformation;
 
@@ -189,12 +177,6 @@ public class NewFileContentCreationTest extends TestCase {
 				for (IMetaInformation metaInformation : metaInformations) {
 					String pathToCSDefinition = metaInformation.getPathToCSDefinition();
 					grammar = grammar.replace(File.separator, "/");
-					for (String excludedFile : excludedFiles) {
-						if (grammar.matches(excludedFile)) {
-							// found test
-							foundTest = true;
-						}
-					}
 					if (grammar.endsWith(pathToCSDefinition)) {
 						// found test
 						foundTest = true;
