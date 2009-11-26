@@ -51,7 +51,9 @@ TOKENS{
 RULES{
 	OntologyDocument ::= namespace*  ontology;
 
-	Annotation ::= "Annotations:" ( annotations? annotationProperty[IRI] target (!1 "," annotations? annotationProperty[IRI] target)*)?;
+	Annotation ::= "Annotations:" 
+					( annotations? annotationProperty[IRI] target)? 
+					(!1 "," annotations? annotationProperty[IRI] target)*;
 	
 	IRITarget ::= target[IRI];
 	
@@ -165,9 +167,10 @@ RULES{
 	// Literals
 	
 	TypedLiteral ::= lexicalValue['"','"'] "^^" theDatatype[IRI];
-	AbbreviatedXSDStringLiteral ::= value['"','"'];
 	AbbreviatedRDFTextLiteral ::= value['"','"'] "@" languageTag[IRI];
-	IntegerLiteral ::= value[INT];
+	AbbreviatedXSDStringLiteral ::= value['"','"'];
 	DecimalLiteral ::= preComma[INT] "." postComma[INT];
 	FloatingPointLiteral ::= literal[FLOAT];
+	IntegerLiteral ::= value[INT];
+	
 }
