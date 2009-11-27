@@ -29,12 +29,16 @@ OPTIONS{
 }
 
 TOKENS{
-	
+	//genaue IRI_REF noch unklar
 	DEFINE DEF_IRI_REF $'<' (~( '^' | '<' | '>' | '"' | '{' | '}' | '`' | '\\' | '\u0000'..'\u0020' ))* '>'$;
 	
-	DEFINE DEF_INTEGER $('+'|'-')? ('0'..'9')+$;
+	DEFINE DEF_LANGTAG  $ '@' ('A'..'Z' | 'a'..'z')+ ('-' ('A'..'Z' | 'a'..'z' | '0'..'9')+)* $;
 	
-	//folgende 3 Definition sind in VARNAME, PN_PREFIX und PN_LOCAL eingearbeitet
+	DEFINE DEF_INTEGER $('+'|'-')? ('0'..'9')+$;
+	DEFINE DEF_DECIMAL $('+'|'-')? ((('0'..'9')+ '.' ('0'..'9')* )| ('.' ('0'..'9')+ ))$;
+	DEFINE DEF_DOUBLE  $('+'|'-')? ((('0'..'9')+ '.' ('0'..'9')*)  | ('.' ('0'..'9')+) | (('0'..'9')+ )) ('e'|'E') ('+'|'-')? ('0'..'9')+ $;
+	
+		//folgende 3 Definition sind in VARNAME, PN_PREFIX und PN_LOCAL eingearbeitet
 	// PN_CHARS_BASE $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '\u10000'..'\uEFFFF') $;
 	// PN_CHARS_U  $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '\u10000'..'\uEFFFF' | '_' ) $;
 	// PN_CHARS $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '\u10000'..'\uEFFFF' | '_' | '.' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040') $;
@@ -43,6 +47,13 @@ TOKENS{
 	DEFINE VARNAME 	$ ('?'|'\u0024') ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' )  ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040' )* $; // | '\u10000'..'\uEFFFF' fehlt
 	DEFINE DEF_PNAME_NS $ (('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD') (('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040' | '.')* ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '.' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040'))?)? ':' $;  // | '\u10000'..'\uEFFFF' fehlt
 	DEFINE DEF_PN_LOCAL $ ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6' | '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' ) (('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040' | '.' )* ('A'..'Z' | 'a'..'z' | '\u00C0'..'\u00D6'| '\u00D8'..'\u00F6' | '\u00F8'..'\u02FF' | '\u0370'..'\u037D' | '\u037F'..'\u1FFF' | '\u200C'..'\u200D' | '\u2070'..'\u218F' | '\u2C00'..'\u2FEF' | '\u3001'..'\uD7FF' | '\uF900'..'\uFDCF' | '\uFDF0'..'\uFFFD' | '_' | '.' | '0'..'9' | '\u00B7' | '\u0300'..'\u036F' | '\u203F'..'\u2040'))? $ ;	// | '\u10000'..'\uEFFFF' fehlt
+	
+	//genaue String Definitionen unklar, da es zu überlappung kommt
+	DEFINE DEF_STRING_LITERAL_LONG1 $ '\'\'\'' ( ( '\'' | '\'\'' )? ( ~( '\'' | '\\' ) | ('\\'('t'|'b'|'n'|'r'|'f'|'\\'|'\"'|'\'')) ) )* '\'\'\'' $;
+	DEFINE DEF_STRING_LITERAL_LONG2 $ '"""'    ( ( '"'  | '""'  )? ( ~( '"' | '\\' ) | ('\\'('t'|'b'|'n'|'r'|'f'|'\\'|'\"'|'\'')) ) )* '"""' $;
+	DEFINE DEF_STRING_LITERAL1 $ '\'' ( ~( '\u0027' | '\u005C' | '\u000A' | '\u000D' ) | ('\\'('t'|'b'|'n'|'r'|'f'|'\\'|'\"'|'\'')) )* '\''$;
+	DEFINE DEF_STRING_LITERAL2 $ '"'  ( ~( '\u0022' | '\u005C' | '\u000A' | '\u000D' ) | ('\\'('t'|'b'|'n'|'r'|'f'|'\\'|'\"'|'\'')) )* '"'$;
+	
 	
 	//DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
 	
@@ -71,9 +82,17 @@ RULES{
 	DefaultGraphClause ::= sourceselector ;
 	NamedGraphClause ::= "NAMED" sourceselector ;
 	
-	
 	WhereClause ::= where? groupgraphpattern;
 	
+	SolutionModifier ::= orderclause? limitoffsetclauses? ;
+	
+	OrderClause ::= "ORDER" "BY" ordercondition+ ;
+	OrderConditionLeftNE ::= ascOrDecs brackettedexpression ;
+	
+	LimitOffsetClausesLeftNE ::= limitclause offsetclause? ;
+	LimitOffsetClausesRightNE ::= offsetclause limitclause? ; 
+	LimitClause ::= "LIMIT" integer ;
+	OffsetClause ::= "OFFSET" integer ;
 	
 	GroupGraphPattern ::= "{" triplesblock? additionalGGPelements* "}" ;
 	AdditionalGGPElement ::= patternOrFilterNE (".")? triplesblock? ;
@@ -86,7 +105,7 @@ RULES{
 	Filter ::= "FILTER" constraint ;
 	FunctionCall ::=  iriref arglist ;
 	ArgListNILNE ::= nil ;
-	//ArgListExpressionNE ::= "(" expression ( "," addexpression )* ")" ;
+	ArgListExpressionNE ::= "(" expression ( "," addexpression )* ")" ;
 	
 	ConstructTemplate ::= "{" (constructtriples ( "." constructtriples? )* )? "}" ;
 	
@@ -100,30 +119,80 @@ RULES{
 	BlankNodePropertyList ::= "[" propertylistnotempty "]" ;
 	Collection ::= "(" graphnode+ ")" ;
 	
-	SolutionModifier ::= orderclause? limitoffsetclauses? ;
+	Expression ::= conditionalorexpression ;
+	AdditionalExpressionNE ::= conditionalorexpression ;
 	
-	OrderClause ::= "ORDER" "BY" ordercondition+ ;
-	OrderConditionLeftNE ::= ascOrDecs brackettedexpression ;
+	ConditionalOrExpression ::=	conditionalandexpression addconditionalandexpression* ;
+	AdditionalConditionalAndExpressionNE ::= "||" conditionalandexpression ;
 	
-	LimitOffsetClausesLeftNE ::= limitclause offsetclause? ;
-	LimitOffsetClausesRightNE ::= offsetclause limitclause? ; 
-	LimitClause ::= "LIMIT" integer ;
-	OffsetClause ::= "OFFSET" integer ;
+	ConditionalAndExpression ::= valuelogical addvaluelogical* ;
+	ValueLogical ::= relationalexpression ;
+	AdditionalValueLogicalNE ::= "&&" relationalexpression ;
 	
-	BrackettedExpression ::= "("    ")" ;
-	//Expression
+	RelationalExpression ::= numericexpression addnumericexpression?;
+	EqualsNumericExpressionNE ::=  "=" additiveexpression ;
+	NotEqualNumericExpressionNE ::=  "!=" additiveexpression ;
+	SmallerNumericExpressionNE ::=  "<" additiveexpression ;
+	BiggerNumericExpressionNE ::=  ">" additiveexpression ;
+	SmallerOrEqualNumericExpressionNE ::=  "<=" additiveexpression ;
+	BiggerOrEqualNumericExpressionNE ::=  ">=" additiveexpression ;	
+	NumericExpression ::= additiveexpression ;
 	
-	NotInList ::= "("  ")"; //ws=WHITESPACE, daraum entfernt
-	ANON  	  ::= "["  "]"; //ws=WHITESPACE, daraum entfernt
+	AdditiveExpression ::=  multiplicativeexpression addmultiplicativeexpression *;
+	PlusMultiplicativeExpressionNE ::= "+" multiplicativeexpression ;
+	MinusMultiplicativeExpressionNE ::= "-" multiplicativeexpression ;
+	
+	MultiplicativeExpression ::= unaryexpression addunaryexpression * ;
+	TimesAdditionalUnaryExpressionNE ::= "*" unaryexpression ;
+	DividedByAdditionalUnaryExpressionNE ::= "/" unaryexpression ;
+	
+	NotPrimaryExpressionNE ::= "!" primaryexpression;
+	PlusPrimaryExpressionNE ::= "+" primaryexpression;
+	MinusPrimaryExpressionNE ::= "-" primaryexpression;
+	
+	BrackettedExpression ::= "("  expression  ")" ; 
+	
+	StrBuiltInCallNE 			::= "STR" "(" expression ")" ;
+	LangBuiltInCallNE 			::= "LANG" "(" expression ")" ;
+	LangmatchesBuiltInCallNE 	::= "LANGMATCHES" "(" expression "," addexpression ")" ;
+	DatatypeBuiltInCallNE 		::= "DATATYPE" "(" expression ")" ;
+	BoundBuiltInCallNE 			::= "BOUND" "(" var ")" ;
+	SameTermBuiltInCallNE 		::= "sameTerm" "(" expression "," addexpression ")" ;
+	IsIRIBuiltInCallNE 			::= "isIRI" "(" expression ")" ;
+	IsURIBuiltInCallNE 			::= "isURI" "(" expression ")" ;
+	IsBlankBuiltInCallNE 		::= "isBLANK" "(" expression ")" ;
+	IsLiteralBuiltInCallNE 		::= "isLITERAL" "(" expression ")" ;
+	
+	RegexExpression ::=    	"REGEX" "(" expression "," addexpression ( "," addexpression )? ")" ;
+	
+	IRIrefOrFunction ::= iriref arglist? ;
+	RDFLiteral ::= string langtagoririrefNE? ;
+	UpIRIrefNE ::= "^^" iriref ;
+	
+	TrueBooleanLiteralNE ::= "true";
+	FalseBooleanLiteralNE ::= "false";
 	
 	IRI_REF ::= iri_ref[DEF_IRI_REF] ;
 	//WS ::= ws[DEF_WS] ; //ws=WHITESPACE/daraum entfernt
-	PNAME_NS ::= pn_prefix[DEF_PNAME_NS] ;	
 	PNAME_LN ::= pname_ns pn_local ;
+	PNAME_NS ::= pn_prefix[DEF_PNAME_NS] ;	
+	
 	Var ::= varname[VARNAME] ;
 	PN_LOCAL ::= pn_local[DEF_PN_LOCAL];
+	BLANK_NODE_LABEL ::= "_:" pn_local[DEF_PN_LOCAL];
+	LANGTAG ::= langtag[DEF_LANGTAG];
 	
 	INTEGER ::= integer[DEF_INTEGER];
+	DECIMAL ::= decimal[DEF_DECIMAL];
+	DOUBLE	::= double[DEF_DOUBLE];
+	
+	STRING_LITERAL_LONG1 ::= string[DEF_STRING_LITERAL_LONG1];
+	STRING_LITERAL_LONG2 ::= string[DEF_STRING_LITERAL_LONG2];
+	STRING_LITERAL1 ::= string[DEF_STRING_LITERAL1];
+	STRING_LITERAL2 ::= string[DEF_STRING_LITERAL2];
+	
+	NotInList ::= "("  ")"; //ws=WHITESPACE, daraum entfernt
+	ANON  	  ::= "["  "]"; //ws=WHITESPACE, daraum entfernt
 	
 	WhereLiteral ::= "WHERE";
 	AscendingLiteral ::= "ASC";

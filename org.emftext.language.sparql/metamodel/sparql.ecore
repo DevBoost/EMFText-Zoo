@@ -147,7 +147,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceselector" ordered="false"
         lowerBound="1" eType="#//SourceSelector" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SourceSelector" eSuperTypes="#//LocatedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceSelector" abstract="true" eSuperTypes="#//LocatedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="WhereClause" eSuperTypes="#//LocatedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="where" ordered="false"
         lowerBound="1" eType="#//WhereLiteral" containment="true"/>
@@ -324,10 +324,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditionalConditionalAndExpressionNE"
       eSuperTypes="#//LocatedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="valuelogical" ordered="false"
-        lowerBound="1" eType="#//ValueLogical" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addvaluelogical" ordered="false"
-        upperBound="-1" eType="#//AdditionalValueLogicalNE" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalandexpression"
+        ordered="false" lowerBound="1" eType="#//ConditionalAndExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression" eSuperTypes="#//LocatedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="valuelogical" ordered="false"
@@ -395,16 +393,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="AdditionalMultiplicativeExpressionNE"
       abstract="true" eSuperTypes="#//LocatedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="PlusMultiplicativeExpressionNE" eSuperTypes="#//AdditionalMultiplicativeExpressionNE">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryexpression" ordered="false"
-        lowerBound="1" eType="#//UnaryExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addunaryexpression" ordered="false"
-        upperBound="-1" eType="#//AdditionalUnaryExpressionNE" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicativeexpression"
+        ordered="false" lowerBound="1" eType="#//MultiplicativeExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MinusMultiplicativeExpressionNE" eSuperTypes="#//AdditionalMultiplicativeExpressionNE">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryexpression" ordered="false"
-        lowerBound="1" eType="#//UnaryExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addunaryexpression" ordered="false"
-        upperBound="-1" eType="#//AdditionalUnaryExpressionNE" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicativeexpression"
+        ordered="false" lowerBound="1" eType="#//MultiplicativeExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralPositive" abstract="true"
       eSuperTypes="#//AdditionalMultiplicativeExpressionNE #//NumericLiteral"/>
@@ -442,8 +436,8 @@
         eType="#//ArgList" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RDFLiteral" eSuperTypes="#//PrimaryExpression #//GraphTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" ordered="false"
-        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="string" ordered="false"
+        lowerBound="1" eType="#//StringLiteral" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="langtagoririrefNE" ordered="false"
         eType="#//LANGTAGOrIRIrefNE" containment="true"/>
   </eClassifiers>
@@ -452,7 +446,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="iriref" ordered="false"
         lowerBound="1" eType="#//IRIreference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericLiteral" abstract="true" eSuperTypes="#//PrimaryExpression #//GraphTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericLiteral" abstract="true" eSuperTypes="#//PrimaryExpression #//GraphTerm #//AdditionalMultiplicativeExpressionNE"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralUnsigned" abstract="true"
       eSuperTypes="#//NumericLiteral"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" abstract="true" eSuperTypes="#//PrimaryExpression #//GraphTerm"/>
@@ -487,20 +481,38 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ws" ordered="false" upperBound="-1"
         eType="#//WS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="INTEGER" eSuperTypes="#//NumericLiteralUnsigned">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="INTEGER" eSuperTypes="#//NumericLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integer" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DECIMAL" eSuperTypes="#//NumericLiteralUnsigned">
+  <eClassifiers xsi:type="ecore:EClass" name="DECIMAL" eSuperTypes="#//NumericLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimal" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DOUBLE" eSuperTypes="#//NumericLiteralUnsigned">
+  <eClassifiers xsi:type="ecore:EClass" name="DOUBLE" eSuperTypes="#//NumericLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="double" ordered="false"
         unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="STRING_LITERAL1" eSuperTypes="#//StringLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="STRING_LITERAL2" eSuperTypes="#//StringLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="STRING_LITERAL_LONG1" eSuperTypes="#//StringLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="STRING_LITERAL_LONG2" eSuperTypes="#//StringLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BLANK_NODE_LABEL" eSuperTypes="#//BlankNode">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pn_local" ordered="false"
-        lowerBound="1" eType="#//PN_LOCAL" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pn_local" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ANON" eSuperTypes="#//BlankNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ws" ordered="false" lowerBound="1"
