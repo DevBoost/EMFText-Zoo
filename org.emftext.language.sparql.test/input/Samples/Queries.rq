@@ -1,0 +1,47 @@
+PREFIX info: <http://somewhere/peopleInfo#>
+
+SELECT ?x
+WHERE { ?x  <http://www.w3.org/2001/vcard-rdf/3.0#FN>  "John Smith" }
+
+SELECT ?givenName
+WHERE 
+  { ?y  <http://www.w3.org/2001/vcard-rdf/3.0#Family>  "Smith" .
+    ?y  <http://www.w3.org/2001/vcard-rdf/3.0#Given>  ?givenName
+  }
+
+SELECT ?resource
+WHERE 
+  {
+    ?resource info:age ?age .
+    FILTER (?age >= 24)
+  }
+  
+SELECT ?name ?age
+WHERE 
+{
+    ?person vcard:FN  ?name .
+    OPTIONAL { ?person info:age ?age }
+}
+
+
+SELECT ?name
+WHERE
+{
+  ?test ?p ?name .
+  FILTER ( ?p = "foaf:name" || ?p = "vCard:FN" ) 
+}
+
+
+SELECT ?name1 ?name2
+WHERE
+{
+  ?x ?"A" "foaf:Person" .
+  OPTIONAL { ?x  foaf:name  ?name1 } .
+  OPTIONAL { ?x  vCard:FN   ?name2 }
+}
+
+SELECT *
+WHERE { ?s ?p ?o }
+
+
+

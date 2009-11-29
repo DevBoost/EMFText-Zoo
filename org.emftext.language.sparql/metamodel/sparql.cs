@@ -55,7 +55,7 @@ TOKENS{
 	DEFINE DEF_STRING_LITERAL2 $ '"'  ( ~( '\u0022' | '\u005C' | '\u000A' | '\u000D' ) | ('\\'('t'|'b'|'n'|'r'|'f'|'\\'|'\"'|'\'')) )* '"'$;
 	
 	
-	//DEFINE COMMENT$'//'(~('\n'|'\r'))*$;
+	DEFINE COMMENT $'#'(~('\n'|'\r'))*$;
 	
 	//DEFINE DEF_WS $( '\u0020' | '\u0009' | '\u000D' | '\u000A')$;  //=WITHSPACE, überflüssig?
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
@@ -65,7 +65,7 @@ TOKENS{
 }
 
 RULES{	
-	SparqlQueries ::= prologue query;
+	SparqlQueries ::= prologue query+;
 	
 	Prologue ::= basedeclaration? prefixdeclaration* ; 
 	BaseDecl ::= "BASE" iriref  ;
@@ -152,18 +152,18 @@ RULES{
 	
 	BrackettedExpression ::= "("  expression  ")" ; 
 	
-	StrBuiltInCallNE 			::= "STR" "(" expression ")" ;
-	LangBuiltInCallNE 			::= "LANG" "(" expression ")" ;
-	LangmatchesBuiltInCallNE 	::= "LANGMATCHES" "(" expression "," addexpression ")" ;
-	DatatypeBuiltInCallNE 		::= "DATATYPE" "(" expression ")" ;
-	BoundBuiltInCallNE 			::= "BOUND" "(" var ")" ;
+	StrBuiltInCallNE 			::= ("str" | "STR") "(" expression ")" ;
+	LangBuiltInCallNE 			::= ("lang" | "LANG") "(" expression ")" ;
+	LangmatchesBuiltInCallNE 	::= ("langMatches" | "LANGMATCHES") "(" expression "," addexpression ")" ;
+	DatatypeBuiltInCallNE 		::= ("datatype" | "DATATYPE") "(" expression ")" ;
+	BoundBuiltInCallNE 			::= ("bound" | "BOUND") "(" var ")" ;
 	SameTermBuiltInCallNE 		::= "sameTerm" "(" expression "," addexpression ")" ;
 	IsIRIBuiltInCallNE 			::= "isIRI" "(" expression ")" ;
 	IsURIBuiltInCallNE 			::= "isURI" "(" expression ")" ;
-	IsBlankBuiltInCallNE 		::= "isBLANK" "(" expression ")" ;
-	IsLiteralBuiltInCallNE 		::= "isLITERAL" "(" expression ")" ;
+	IsBlankBuiltInCallNE 		::= ("isBlank" | "isBLANK") "(" expression ")" ;
+	IsLiteralBuiltInCallNE 		::= ("isLiteral" | "isLITERAL") "(" expression ")" ;
 	
-	RegexExpression ::=    	"REGEX" "(" expression "," addexpression ( "," addexpression )? ")" ;
+	RegexExpression ::=    	("regex"|"REGEX") "(" expression "," addexpression ( "," addexpression )? ")" ;
 	
 	IRIrefOrFunction ::= iriref arglist? ;
 	RDFLiteral ::= string langtagoririrefNE? ;
