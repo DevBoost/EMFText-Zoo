@@ -13,7 +13,11 @@
  ******************************************************************************/
 package org.emftext.language.sparql.test;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileReader;
+import java.io.PrintStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.sparql.SparqlQueries;
@@ -49,7 +53,7 @@ public class SparqlTest extends AbstractSparqlTestCase {
 		
 		for (File next : allFiles) {
 			if (next.isFile() && next.getName().endsWith(".rq") && !next.getName().contains("syn-bad")){
-				
+				//wrapFile(next);
 				SparqlResource sRes = loadResourceWithoutAssert(URI.createFileURI(next.getCanonicalPath()));
 				if(sRes != null && sRes.getErrors().size() == 0) parsed++;
 				else {
@@ -60,24 +64,43 @@ public class SparqlTest extends AbstractSparqlTestCase {
 		}
 	}
 	
-	@Test
-	public void testAllInputCSFiles(){
-		String file = INPUT + "helloworld.sparql";
-		//String[] input = {"--file="+file,} ;  //"--query=input/helloworld.sparql"
-		String[] input = {"","--print=op","SELECT ?x WHERE { ?x <http://www.w3.org/2001/vcard-rdf/3.0#FN> \"John Smith\" }"} ;
-		//arq.qparse.main("--query=helloworld.rq");
-		//arq.qparse.main("--help");
-		//arq.qparse.main(input);
+	//funktioniert nicht richtig da arq.qparse die JavaVM einfach beendet bei einem Fehler
+	//Dieser fehler lässt sich nicht abfangen
+	public void wrapFile(File file) throws Exception{
+		BufferedReader br;		
+		br = new BufferedReader(new FileReader(file));			
+		String content = "";
+		String input = "";
+		while((input = br.readLine()) != null) {
+			content += input + "\n";
+		}
+		String[] args = {content} ; 
 		
 		
+		PrintStream old_ps = System.out;
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(bout));
 		
+		arq.qparse.main(args);
+		
+		System.setOut(old_ps);
+		String b = bout.toString().replace(" ", "").replace("\r", "").replace("\n", "");
+		String c = content.toString().replace(" ", "").replace("\n", "");
+		if (!b.equals(c)) System.out.println("Syntax errors in File "+file.getAbsolutePath());
 	}
+	
+	
 	
 	@Test
 	public void testHelloworld() throws Exception {
 		String typename = "hellowolrd";
 		String filename = typename + getFileExtension();
+		
+		wrapFile(new File(getTestInputFolder()+filename));
+		
 		SparqlQueries sQuer = assertParsesToSparqlQueries(typename);
+		
+		
 	
 	}
 	
