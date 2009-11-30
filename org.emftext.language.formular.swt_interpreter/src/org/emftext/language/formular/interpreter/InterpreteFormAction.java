@@ -18,7 +18,6 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -44,7 +43,6 @@ public class InterpreteFormAction implements IObjectActionDelegate {
 	private static final String[] AUSWAHL = {"Auswahl", "Choice"};
 	private static final String[] ZAHL = {"Zahl", "Number"};
 	private static final String[] DATUM = {"Datum", "Date"};
-	//private static final String[] ENTSCHEIDUNG = {"C", "FreiText"};
 	private static final String[] OPTION_OPTIONS = {"options", "optionen"};
 	private static final String[] OPTION_NAME = {"text"};
 	private static final String[] OPTION_MULTIPLE = {"multiple", "mehrfach"};
