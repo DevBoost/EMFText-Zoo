@@ -75,7 +75,9 @@ public class GeneratingResourceProcessor implements
 						createIPhoneForm(project, form);
 						createXMLForm(project, form);
 						IFile result = createFoForm(project, form);
-						createPSForm(result, getTrimedFilename(form));
+						if (result != null) {
+							createPSForm(result, getTrimedFilename(form));
+						}
 						return Status.OK_STATUS;
 					}
 
