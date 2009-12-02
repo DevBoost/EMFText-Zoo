@@ -196,5 +196,5 @@ RULES{
 	WhereLiteral ::= "WHERE";
 	AscendingLiteral ::= "ASC";
 	DescendingLiteral ::= "DESC";
-	VerbANE ::= "a" ;
+	VerbANE ::= " a" ;
 }
