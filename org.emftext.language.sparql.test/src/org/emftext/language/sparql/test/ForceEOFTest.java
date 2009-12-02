@@ -16,7 +16,7 @@ package org.emftext.language.sparql.test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.emftext.language.sparql.resource.sparql.mopp.SparqlResource;
+import org.emftext.language.sparql.resource.sparql.mopp.RqResource;
 
 public class ForceEOFTest extends AbstractSparqlTestCase {
 	
@@ -24,7 +24,7 @@ public class ForceEOFTest extends AbstractSparqlTestCase {
 
 	public void testForceEOF() {
 		try {
-			SparqlResource resource = load(new ByteArrayInputStream(TEST_INPUT_FROM_MEMORY.getBytes()));
+			RqResource resource = load(new ByteArrayInputStream(TEST_INPUT_FROM_MEMORY.getBytes()));
 			assertTrue("Additional semicolon at the end should prevent successful parsing", resource.getErrors().size() > 0);
 		} catch (IOException e) {
 			fail(e.getMessage());

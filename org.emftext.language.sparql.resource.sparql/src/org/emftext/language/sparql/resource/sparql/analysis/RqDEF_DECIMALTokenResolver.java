@@ -6,16 +6,16 @@
  */
 package org.emftext.language.sparql.resource.sparql.analysis;
 
-public class SparqlDEF_DECIMALTokenResolver implements org.emftext.language.sparql.resource.sparql.ISparqlTokenResolver {
+public class RqDEF_DECIMALTokenResolver implements org.emftext.language.sparql.resource.sparql.IRqTokenResolver {
 	
-	private org.emftext.language.sparql.resource.sparql.analysis.SparqlDefaultTokenResolver defaultTokenResolver = new org.emftext.language.sparql.resource.sparql.analysis.SparqlDefaultTokenResolver();
+	private org.emftext.language.sparql.resource.sparql.analysis.RqDefaultTokenResolver defaultTokenResolver = new org.emftext.language.sparql.resource.sparql.analysis.RqDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.sparql.resource.sparql.ISparqlTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.sparql.resource.sparql.IRqTokenResolveResult result) {
 		defaultTokenResolver.resolve(lexem, feature, result);
 	}
 	

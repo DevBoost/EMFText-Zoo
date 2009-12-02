@@ -21,7 +21,7 @@ import java.io.PrintStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.sparql.SparqlQueries;
-import org.emftext.language.sparql.resource.sparql.mopp.SparqlResource;
+import org.emftext.language.sparql.resource.sparql.mopp.RqResource;
 import org.junit.Test;
 
 public class SparqlTest extends AbstractSparqlTestCase {
@@ -54,7 +54,7 @@ public class SparqlTest extends AbstractSparqlTestCase {
 		for (File next : allFiles) {
 			if (next.isFile() && next.getName().endsWith(".rq") && !next.getName().contains("syn-bad")){
 				//wrapFile(next);
-				SparqlResource sRes = loadResourceWithoutAssert(URI.createFileURI(next.getCanonicalPath()));
+				RqResource sRes = loadResourceWithoutAssert(URI.createFileURI(next.getCanonicalPath()));
 				if(sRes != null && sRes.getErrors().size() == 0) parsed++;
 				else {
 					notParsed++;

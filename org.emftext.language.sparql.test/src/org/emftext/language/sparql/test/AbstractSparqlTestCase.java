@@ -18,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -31,7 +30,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.sparql.SparqlQueries;
-import org.emftext.language.sparql.resource.sparql.mopp.SparqlResource;
+import org.emftext.language.sparql.resource.sparql.mopp.RqResource;;
 
 public abstract class AbstractSparqlTestCase extends TestCase {
 	
@@ -63,7 +62,7 @@ public abstract class AbstractSparqlTestCase extends TestCase {
 	
 	protected SparqlQueries loadResource(URI uri) throws IOException {
 			
-		SparqlResource resource = tryToLoadResource(uri);
+		RqResource resource = tryToLoadResource(uri);
 		
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
@@ -76,9 +75,9 @@ public abstract class AbstractSparqlTestCase extends TestCase {
 		assertSuccessfulParsing(cUnit.eResource());
 		return cUnit;
 	}
-	protected SparqlResource loadResourceWithoutAssert(URI uri) throws IOException {
+	protected RqResource loadResourceWithoutAssert(URI uri) throws IOException {
 		
-		SparqlResource resource = tryToLoadResource(uri);
+		RqResource resource = tryToLoadResource(uri);
 		
 		if (resource.getContents().size() == 0) {
 			//System.out.println("tryToLoadResource(" + uri.lastSegment() + ") Can't get any content");
@@ -94,9 +93,9 @@ public abstract class AbstractSparqlTestCase extends TestCase {
 		return resource;
 	}
 
-	protected SparqlResource tryToLoadResource(URI uri) throws IOException {
+	protected RqResource tryToLoadResource(URI uri) throws IOException {
 		
-		SparqlResource resource = new SparqlResource(uri);
+		RqResource resource = new RqResource(uri);
 		resource.load(Collections.EMPTY_MAP);
 		for (Diagnostic diagnostic : resource.getErrors()) {
 			System.out.println("tryToLoadResource(" + uri.lastSegment() + ") found error in resource " + diagnostic.getMessage() + "(" + diagnostic.getLine() + "," + diagnostic.getColumn() + ")");
@@ -123,13 +122,13 @@ public abstract class AbstractSparqlTestCase extends TestCase {
 		return loadResource(file.getCanonicalPath());
 	}
 	
-	public SparqlResource load(File cFile) throws IOException {
+	public RqResource load(File cFile) throws IOException {
 		return load(new FileInputStream(cFile));
 	}
 	
-	public SparqlResource load(InputStream inputStream) throws IOException {
+	public RqResource load(InputStream inputStream) throws IOException {
 		Map<?, ?> options = Collections.EMPTY_MAP;
-		SparqlResource resource = new SparqlResource();
+		RqResource resource = new RqResource();
 		resource.load(inputStream, options);
 		inputStream.close();
 		return resource;
