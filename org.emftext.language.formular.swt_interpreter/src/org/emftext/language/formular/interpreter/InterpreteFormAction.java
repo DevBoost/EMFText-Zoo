@@ -38,14 +38,14 @@ public class InterpreteFormAction implements IObjectActionDelegate {
 	private static final String[] GROUP_NAME = {"name"};
 	private static final String[] GROUP_ITEMS = {"fragen", "items"};
 	private static final String[] ITEM_TEXT = {"text"};
-	private static final String[] ITEM_TYPES = {"antwortTyp", "answerType"};
+	private static final String[] ITEM_TYPES = {"antwortTyp", "itemType"};
 	private static final String[] FREETEXT = {"FreeText", "FreiText"};
-	private static final String[] AUSWAHL = {"Auswahl", "Choice"};
-	private static final String[] ZAHL = {"Zahl", "Number"};
-	private static final String[] DATUM = {"Datum", "Date"};
-	private static final String[] OPTION_OPTIONS = {"options", "optionen"};
-	private static final String[] OPTION_NAME = {"text"};
-	private static final String[] OPTION_MULTIPLE = {"multiple", "mehrfach"};
+	private static final String[] CHOICE = {"Auswahl", "Choice"};
+	private static final String[] NUMBER = {"Zahl", "Number"};
+	private static final String[] DATE = {"Datum", "Date"};
+	private static final String[] CHOICE_OPTIONS = {"options", "optionen"};
+	private static final String[] CHOICE_NAME = {"text"};
+	private static final String[] CHOICE_MULTIPLE = {"multiple", "mehrfach"};
 	
 	private ISelection selection;
 
@@ -118,16 +118,16 @@ public class InterpreteFormAction implements IObjectActionDelegate {
 							text.setLayoutData(gd);
 							question.setLayoutData(gd);
 						}
-						if (isA(itemType, AUSWAHL)) {
+						if (isA(itemType, CHOICE)) {
 							int type = SWT.RADIO;
-							if (getBoolean(itemType, OPTION_MULTIPLE)) {
+							if (getBoolean(itemType, CHOICE_MULTIPLE)) {
 								type = SWT.CHECK;
 							}
-							List<EObject> options = getList(itemType, OPTION_OPTIONS);
+							List<EObject> options = getList(itemType, CHOICE_OPTIONS);
 							for (EObject option : options) {
 								Button radioButton = new Button(composite, type);
 								radioButton.setLayoutData(gd2);
-								String optionName = getString(option, OPTION_NAME);
+								String optionName = getString(option, CHOICE_NAME);
 								if (optionName == null) {
 									optionName = "";
 								}
@@ -135,12 +135,12 @@ public class InterpreteFormAction implements IObjectActionDelegate {
 							}
 							question.setLayoutData(gd2);
 						}
-						if (isA(itemType, ZAHL)) {
+						if (isA(itemType, NUMBER)) {
 							Spinner spinner = new Spinner(composite, SWT.NONE);
 							spinner.setLayoutData(gd);
 							question.setLayoutData(gd);
 						}
-						if (isA(itemType, DATUM)) {
+						if (isA(itemType, DATE)) {
 							DateTime dateTime = new DateTime(composite, SWT.NONE);
 							dateTime.setLayoutData(gd);
 							question.setLayoutData(gd2);
