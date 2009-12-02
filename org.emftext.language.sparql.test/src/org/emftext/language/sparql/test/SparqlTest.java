@@ -18,6 +18,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.sparql.SparqlQueries;
@@ -28,7 +30,9 @@ public class SparqlTest extends AbstractSparqlTestCase {
 
 	private static final String USERDIR=System.getProperty("user.dir") + File.separator;
 	private static final String INPUT="input";
-	private int parsed, notParsed; 
+	private int parsed;
+	private List<String> notParsed = new ArrayList<String>();
+	private static List<String> log = new ArrayList<String>(); 
 	
 	@Override
 	public String getTestInputFolder() {
@@ -37,15 +41,24 @@ public class SparqlTest extends AbstractSparqlTestCase {
 	@Override
 	public void setUp() {
 		parsed=0;
-		notParsed=0;
+		notParsed=new ArrayList<String>();
 	}
 	
 	private void testDirecory(File inputDir)throws Exception{		
 		parseAllSubItems(inputDir);
-		int files=parsed+notParsed;
+		int files=parsed+notParsed.size();
 		System.out.println("Dir: "+ inputDir.getAbsolutePath());
-		System.out.println("Files: "+ files +"  successful: "+parsed+ "  with Errors: "+ notParsed+"\n");
+		System.out.println("Files: "+ files +"  successful: "+parsed+ "  with Errors: "+ notParsed.size()+"\n");
+		if (!notParsed.isEmpty()) {
+			for (String file : notParsed) {
+				log("File " + file + " was not parsed.");
+			}
+		}
 		assertEquals("Not all Files parseable:", files, parsed);
+	}
+	
+	private void log(String string) {
+		this.log.add(string);
 	}
 	
 	private void parseAllSubItems(File folder)throws Exception{
@@ -57,7 +70,7 @@ public class SparqlTest extends AbstractSparqlTestCase {
 				RqResource sRes = loadResourceWithoutAssert(URI.createFileURI(next.getCanonicalPath()));
 				if(sRes != null && sRes.getErrors().size() == 0) parsed++;
 				else {
-					notParsed++;
+					notParsed.add(next.getAbsolutePath());
 					System.out.println("in dir "+folder.getPath()+"\n");
 				}
 			}else if(next.isDirectory()) parseAllSubItems(next);
@@ -230,6 +243,18 @@ public class SparqlTest extends AbstractSparqlTestCase {
 	@Test
 	public void testDAWG_type_promotion() throws Exception{
 		testDirecory(new File(getTestInputFolder()+ "testcases-dawg/data-r2/type-promotion/"));
+	}
+	
+	public void test_meta_EmptyLog() {
+		if (!log.isEmpty()) {
+			System.out.println(log.size() + " file(s) could not be parsed:");
+			for(String logEntry : log) {
+				System.out.println("\t" + logEntry);
+			}
+		}
+		
+		
+		assertTrue(this.log.isEmpty());
 	}
 	
 }
