@@ -41,6 +41,7 @@ public class InterpreteFormAction implements IObjectActionDelegate {
 	private static final String[] ITEM_TYPES = {"antwortTyp", "itemType"};
 	private static final String[] FREETEXT = {"FreeText", "FreiText"};
 	private static final String[] CHOICE = {"Auswahl", "Choice"};
+	private static final String[] DECISION = {"Decision", "Entscheidung"};
 	private static final String[] NUMBER = {"Zahl", "Number"};
 	private static final String[] DATE = {"Datum", "Date"};
 	private static final String[] CHOICE_OPTIONS = {"options", "optionen"};
@@ -118,7 +119,9 @@ public class InterpreteFormAction implements IObjectActionDelegate {
 							text.setLayoutData(gd);
 							question.setLayoutData(gd);
 						}
-						if (isA(itemType, CHOICE)) {
+						boolean itemIsChoice = isA(itemType, CHOICE);
+						boolean itemIsDecision = isA(itemType, DECISION);
+						if (itemIsChoice || itemIsDecision) {
 							int type = SWT.RADIO;
 							if (getBoolean(itemType, CHOICE_MULTIPLE)) {
 								type = SWT.CHECK;
