@@ -145,7 +145,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.sparql.resource.sparql.mopp.SparqlMetaInformation());
+				new org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation());
 		metaInformations.add(
 				new org.emftext.test.cct1.resource.cct1.mopp.Cct1MetaInformation());
 		metaInformations.add(
