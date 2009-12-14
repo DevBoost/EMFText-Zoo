@@ -113,7 +113,7 @@ public class GeneratingResourceProcessor implements
 		if (destFile.exists())
 			return;
 		URL entry = FormularGeneratorPlugin.getDefault().getBundle().getEntry(
-				"/src/WebApp.zip");
+				"/WebApp.zip");
 
 		try {
 			InputStream in = entry.openStream();
