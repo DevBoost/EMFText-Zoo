@@ -13,7 +13,6 @@
  ******************************************************************************/
 package org.emftext.language.rolecore.ecore_compiler;
 
-import java.awt.geom.GeneralPath;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +32,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
