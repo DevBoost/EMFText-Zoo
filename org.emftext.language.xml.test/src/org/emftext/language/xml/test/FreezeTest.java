@@ -19,7 +19,7 @@ import java.io.InputStream;
 
 import junit.framework.TestCase;
 
-import org.antlr.runtime.Token;
+import org.antlr.runtime3_2_0.Token;
 import org.emftext.language.xml.resource.xml.IXmlTextToken;
 import org.emftext.language.xml.resource.xml.mopp.XmlAntlrScanner;
 import org.emftext.language.xml.resource.xml.mopp.XmlLexer;
@@ -34,7 +34,7 @@ public class FreezeTest extends TestCase {
 	public void testLexerFreezing() {
 		try {
 			InputStream actualInputStream = new ByteArrayInputStream(example.getBytes());
-			XmlLexer lexer = new XmlLexer(new org.antlr.runtime.ANTLRInputStream(actualInputStream));
+			XmlLexer lexer = new XmlLexer(new org.antlr.runtime3_2_0.ANTLRInputStream(actualInputStream));
 			Token nextToken = lexer.nextToken();
 			while (nextToken != null && nextToken.getTokenIndex() >= 0) {
 				nextToken = lexer.nextToken();
@@ -48,7 +48,7 @@ public class FreezeTest extends TestCase {
 	public void testAntlrScannerFreezing() {
 		try {
 			InputStream actualInputStream = new ByteArrayInputStream(example.getBytes());
-			XmlLexer lexer = new XmlLexer(new org.antlr.runtime.ANTLRInputStream(actualInputStream));
+			XmlLexer lexer = new XmlLexer(new org.antlr.runtime3_2_0.ANTLRInputStream(actualInputStream));
 			XmlAntlrScanner antlrScanner = new XmlAntlrScanner(lexer);
 			int counter = 0;
 			IXmlTextToken nextToken = antlrScanner.getNextToken();
