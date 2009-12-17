@@ -151,6 +151,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.test.cct2.resource.cct2.mopp.Cct2MetaInformation());
 		metaInformations.add(
+				new org.emftext.test.cct3.resource.cct3.mopp.Cct3MetaInformation());
+		metaInformations.add(
 				new org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation());
 		metaInformations.add(
 				new org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation());

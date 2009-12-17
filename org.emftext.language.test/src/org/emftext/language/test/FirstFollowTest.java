@@ -49,7 +49,7 @@ public class FirstFollowTest extends TestCase {
 	}
 
 	public void testFirstAndFollowComputations() {
-		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."));
+		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), true);
 		for (String grammar : grammars) {
 			if (isExcluded(grammar)) {
 				continue;

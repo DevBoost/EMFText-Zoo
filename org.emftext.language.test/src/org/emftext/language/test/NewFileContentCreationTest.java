@@ -171,7 +171,7 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public void runTest() {
-			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."));
+			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), true);
 			for (String grammar : grammars) {
 				boolean foundTest = false;
 				for (IMetaInformation metaInformation : metaInformations) {
