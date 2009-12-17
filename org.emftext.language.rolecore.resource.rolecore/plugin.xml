@@ -17,7 +17,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.ui.preferencePages">
-		<page name="Rolecore Text Editor" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage" class="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage">
+		<page name="Rolecore Text Editor" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage" class="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
 		</page>
 		<page name="Syntax Coloring" id="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreSyntaxColoringPreferencePage" class="org.emftext.language.rolecore.resource.rolecore.ui.RolecoreSyntaxColoringPreferencePage" category="org.emftext.language.rolecore.resource.rolecore.ui.RolecorePreferencePage">
 		</page>
@@ -41,6 +41,19 @@
 		</super>
 		<super type="org.eclipse.core.resources.textmarker">
 		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.rolecore.resource.rolecore.nature" name="rolecore nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.emftext.language.rolecore.resource.rolecore.mopp.RolecoreNature" />
+		</runtime>
+		<builder id="org.emftext.language.rolecore.resource.rolecore.builder" />
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="org.emftext.language.rolecore.resource.rolecore.builder" name="rolecore Builder">
+		<builder hasNature="true">
+			<run class="org.emftext.language.rolecore.resource.rolecore.mopp.RolecoreBuilderAdapter" />
+		</builder>
 	</extension>
 	
 	<extension-point id="org.emftext.language.rolecore.resource.rolecore.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>

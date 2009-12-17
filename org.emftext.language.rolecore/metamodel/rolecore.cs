@@ -20,6 +20,7 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	//reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
+	overrideBuilder = "false";
 }
 
 TOKENS {

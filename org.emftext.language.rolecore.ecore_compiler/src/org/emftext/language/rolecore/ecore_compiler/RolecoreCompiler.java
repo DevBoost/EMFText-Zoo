@@ -16,10 +16,8 @@ package org.emftext.language.rolecore.ecore_compiler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -48,16 +46,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.rolecore.CoreClass;
 import org.emftext.language.rolecore.RCPackage;
 import org.emftext.language.rolecore.Role;
-import org.emftext.language.rolecore.resource.rolecore.IRolecoreOptionProvider;
-import org.emftext.language.rolecore.resource.rolecore.IRolecoreOptions;
-import org.emftext.language.rolecore.resource.rolecore.IRolecoreResourcePostProcessor;
-import org.emftext.language.rolecore.resource.rolecore.IRolecoreResourcePostProcessorProvider;
-import org.emftext.language.rolecore.resource.rolecore.mopp.RolecorePlugin;
-import org.emftext.language.rolecore.resource.rolecore.mopp.RolecoreResource;
 
 // TODO add code that delegates calls in role to core
 // TODO add code for playsRole(), addRole(), removeRole()
-public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResourcePostProcessorProvider, IRolecoreResourcePostProcessor {
+public class RolecoreCompiler  {
 
 	private static final String ROLES_REFERENCE_NAME = "roles";
 	private static final String CORE_REFERENCE_NAME = "core";
@@ -67,15 +59,15 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 	
 	private Set<EClass> copyTargets = new LinkedHashSet<EClass>();
 
-	public void process(final RolecoreResource resource) {
-		List<EObject> contents = resource.getContents();
+	public IStatus process(final List<EObject> contents) {
 		if (contents == null) {
-			return;
+    		return Status.OK_STATUS;
 		}
 		if (contents.size() == 0) {
-			return;
+    		return Status.OK_STATUS;
 		}
 		RCPackage metaModel = (RCPackage) contents.get(0);
+		final Resource resource = metaModel.eResource();
 		// TODO validate 'metaModel' and exit processing if
 		// 'metaModel' is invalid
 		try {
@@ -92,14 +84,14 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 	        			eCoreResource.getContents().add(ePackage);
 	        			eCoreResource.save(null);
 	        		} catch (IOException e) {
-	        			RolecorePlugin.logError("Can't save compiled Ecore model.", e);
+		        		return new Status(IStatus.ERROR, "org.emftext.language.rolecore.ecore_compiler", "Can't save compiled Ecore model.");
 	        		}
 	        		return Status.OK_STATUS;
 	        	}
 	        }.schedule();
+    		return Status.OK_STATUS;
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+    		return new Status(IStatus.ERROR, "org.emftext.language.rolecore.ecore_compiler", e.getMessage());
 		}
 	}
 	
@@ -407,15 +399,5 @@ public class RolecoreCompiler implements IRolecoreOptionProvider, IRolecoreResou
 			// eClass was created before
 			return coreEClass;
 		}
-	}
-
-	public Map<?, ?> getOptions() {
-		Map<String, Object> options = new LinkedHashMap<String, Object>();
-		options.put(IRolecoreOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
-		return options;
-	}
-
-	public IRolecoreResourcePostProcessor getResourcePostProcessor() {
-		return new RolecoreCompiler();
 	}
 }
