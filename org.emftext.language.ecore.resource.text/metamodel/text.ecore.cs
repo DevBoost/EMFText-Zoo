@@ -25,7 +25,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	baseResourcePlugin = "org.emftext.language.ecore.resource";
 	saveChangedResourcesOnly = "true";
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader = "platform:/resource/org.reuseware/licence.txt";
+	overrideManifest = "false";
 }
 
 TOKENS {
