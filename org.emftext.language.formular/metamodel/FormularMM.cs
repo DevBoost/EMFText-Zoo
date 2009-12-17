@@ -17,7 +17,8 @@ FOR <http://www.emftext.org/language/formular>
 START Formular
 
 OPTIONS {	
-	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	licenceHeader = "platform:/resource/org.reuseware/licence.txt";
+	overrideBuilder = "false";
 	tokenspace = "1";
 }
 

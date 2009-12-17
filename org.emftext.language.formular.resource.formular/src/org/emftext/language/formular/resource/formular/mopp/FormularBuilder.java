@@ -11,23 +11,16 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.formular.resource.formular.custom;
 
-import java.util.HashMap;
-import java.util.Map;
+package org.emftext.language.formular.resource.formular.mopp;
 
-import org.emftext.language.formular.resource.formular.IFormularOptionProvider;
-import org.emftext.language.formular.resource.formular.IFormularOptions;
+import org.emftext.language.formular.resource.formular.custom.GeneratingResourceProcessor;
 
-public class FormularLanguageOptionProvider implements IFormularOptionProvider {
-
-	public FormularLanguageOptionProvider() {
+public class FormularBuilder implements org.emftext.language.formular.resource.formular.IFormularBuilder {
+	
+	public org.eclipse.core.runtime.IStatus build(org.emftext.language.formular.resource.formular.mopp.FormularResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
+		new GeneratingResourceProcessor().process(resource.getContents());
+		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
-
-	public Map<?, ?> getOptions() {
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(IFormularOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new GeneratingResourceProcessor());
-		return options;
-	}
-
+	
 }

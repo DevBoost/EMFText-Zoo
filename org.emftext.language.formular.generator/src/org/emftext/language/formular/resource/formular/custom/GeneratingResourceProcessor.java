@@ -50,15 +50,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.formular.Formular;
 import org.emftext.language.formular.resource.formular.FormularGeneratorPlugin;
-import org.emftext.language.formular.resource.formular.IFormularResourcePostProcessor;
-import org.emftext.language.formular.resource.formular.IFormularResourcePostProcessorProvider;
-import org.emftext.language.formular.resource.formular.mopp.FormularResource;
 
-public class GeneratingResourceProcessor implements
-		IFormularResourcePostProcessor, IFormularResourcePostProcessorProvider {
+public class GeneratingResourceProcessor {
 
-	public void process(FormularResource resource) {
-		EList<EObject> contents = resource.getContents();
+	public void process(EList<EObject> contents) {
 
 		Set<EObject> distinctObjects = new HashSet<EObject>();
 		distinctObjects.addAll(contents);
@@ -241,9 +236,4 @@ public class GeneratingResourceProcessor implements
 		}
 		return null;
 	}
-
-	public IFormularResourcePostProcessor getResourcePostProcessor() {
-		return this;
-	}
-
 }

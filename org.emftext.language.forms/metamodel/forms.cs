@@ -18,6 +18,7 @@ START Form
 
 OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
+	overrideBuilder = "false";
 }
 
 TOKENS {
