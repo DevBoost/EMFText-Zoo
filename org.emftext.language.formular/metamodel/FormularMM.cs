@@ -20,6 +20,7 @@ OPTIONS {
 	licenceHeader = "platform:/resource/org.reuseware/licence.txt";
 	overrideBuilder = "false";
 	tokenspace = "1";
+	additionalDependencies = "org.emftext.language.formular.generator";
 }
 
 TOKENSTYLES {

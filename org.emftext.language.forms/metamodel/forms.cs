@@ -19,6 +19,7 @@ START Form
 OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	overrideBuilder = "false";
+	additionalDependencies = "org.emftext.language.forms.generator";
 }
 
 TOKENS {
