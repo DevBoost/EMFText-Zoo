@@ -6,27 +6,43 @@
  */
 package org.emftext.language.efactory.resource.efactory.analysis;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.efactory.Factory;
+import org.emftext.language.efactory.PackageImport;
 
 public class NewObjectEClassReferenceResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver<org.emftext.language.efactory.NewObject, org.eclipse.emf.ecore.EClass> {
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.efactory.NewObject container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
-		EFactory factory = findFactory(container);
+		Factory factory = findFactory(container);
 		if (factory == null) {
 			return;
 		}
-		EClassifier classifier = factory.getEPackage().getEClassifier(identifier);
-		if (classifier != null && classifier instanceof EClass) {
-			result.addMapping(identifier, (EClass) classifier);
+		EList<PackageImport> ePackages = factory.getEpackages();
+		for (PackageImport packageImport : ePackages) {
+			EList<EClassifier> eClassifiers = packageImport.getEPackage().getEClassifiers();
+			for (EClassifier classifier : eClassifiers) {
+				if (classifier != null && classifier instanceof EClass) {
+					if (resolveFuzzy) {
+						result.addMapping(classifier.getName(), (EClass) classifier);
+					} else {
+						if (identifier.equals(classifier.getName())) {
+							result.addMapping(classifier.getName(), (EClass) classifier);
+						}
+					}
+				}
+			}
 		}
 	}
 	
-	private EFactory findFactory(EObject object) {
-		if (object instanceof EFactory) {
-			return (EFactory) object;
+	private Factory findFactory(EObject object) {
+		if (object == null) {
+			return null;
+		}
+		if (object instanceof Factory) {
+			return (Factory) object;
 		}
 		return findFactory(object.eContainer());
 	}

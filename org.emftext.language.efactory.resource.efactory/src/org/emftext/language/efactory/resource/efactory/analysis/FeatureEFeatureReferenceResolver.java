@@ -32,14 +32,21 @@ public class FeatureEFeatureReferenceResolver implements org.emftext.language.ef
 		}
 		EList<EStructuralFeature> structuralFeatures = eClass.getEAllStructuralFeatures();
 		for (EStructuralFeature eStructuralFeature : structuralFeatures) {
-			if (identifier.equals(eStructuralFeature.getName())) {
-				result.addMapping(identifier, eStructuralFeature);
-				return;
+			if (resolveFuzzy) {
+				result.addMapping(eStructuralFeature.getName(), eStructuralFeature);
+			} else {
+				if (identifier.equals(eStructuralFeature.getName())) {
+					result.addMapping(identifier, eStructuralFeature);
+					return;
+				}
 			}
 		}
 	}
 	
 	private NewObject findNewObject(EObject object) {
+		if (object == null) {
+			return null;
+		}
 		if (object instanceof NewObject) {
 			return (NewObject) object;
 		}

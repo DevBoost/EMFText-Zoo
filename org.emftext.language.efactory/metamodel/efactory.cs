@@ -18,7 +18,7 @@ TOKENS {
 RULES {
 	Factory ::= epackages+ imports* annotations* root;
 
-	PackageImport::= "use" ePackageURI[STRING] ("as" alias[])?;
+	PackageImport::= "use" ePackage[STRING] ("as" alias[])?;
 
 	Import ::= "import" importURI[STRING];
 
