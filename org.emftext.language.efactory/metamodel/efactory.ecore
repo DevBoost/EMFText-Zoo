@@ -10,15 +10,17 @@
         eType="#//Import" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
         eType="#//Annotation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#//NewObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//NewObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageImport">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation"/>
   <eClassifiers xsi:type="ecore:EClass" name="NameMapping" eSuperTypes="#//Annotation"/>
@@ -30,45 +32,48 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="nameFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NewObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//Feature" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMany" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eFeature" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMany" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Containment" eSuperTypes="#//Value">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//NewObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//NewObject"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" abstract="true" eSuperTypes="#//Value"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumAttribute" eSuperTypes="#//Attribute">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EEnumLiteral"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EEnumLiteral"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringAttribute" eSuperTypes="#//Attribute">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerAttribute" eSuperTypes="#//Attribute">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DoubleAttribute" eSuperTypes="#//Attribute">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DateAttribute" eSuperTypes="#//Attribute">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullAttribute" eSuperTypes="#//Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanAttribute" eSuperTypes="#//Attribute">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

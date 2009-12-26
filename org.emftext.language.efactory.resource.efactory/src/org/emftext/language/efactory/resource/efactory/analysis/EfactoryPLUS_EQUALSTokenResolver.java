@@ -6,17 +6,20 @@
  */
 package org.emftext.language.efactory.resource.efactory.analysis;
 
-public class EfactoryTEXTTokenResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryTokenResolver {
+public class EfactoryPLUS_EQUALSTokenResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryTokenResolver {
 	
 	private org.emftext.language.efactory.resource.efactory.analysis.EfactoryDefaultTokenResolver defaultTokenResolver = new org.emftext.language.efactory.resource.efactory.analysis.EfactoryDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
-		return result;
+		if (Boolean.TRUE.equals(value)) {
+			return "+=";
+		} else {
+			return "=";
+		}
 	}
 	
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.efactory.resource.efactory.IEfactoryTokenResolveResult result) {
-		defaultTokenResolver.resolve(lexem, feature, result);
+		result.setResolvedToken(Boolean.TRUE);
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
