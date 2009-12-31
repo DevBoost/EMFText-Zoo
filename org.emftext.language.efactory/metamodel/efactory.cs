@@ -19,8 +19,13 @@ TOKENS {
 	DEFINE EQUALS $'='$;
 	DEFINE BOOLEAN $'true'|'false'$;
 	DEFINE STRING $('"')(('\\''"')|('\\''\\')|~('"'|'\\'))*('"')$;
+	
+	@SuppressWarnings(tokenOverlapping)
 	DEFINE IDENTIFIER $('A'..'Z'|'a'..'z'|'_')('A'..'Z'|'a'..'z'|'0'..'9'|'_'|'-')*$;
+	
+	@SuppressWarnings(unusedToken)
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	@SuppressWarnings(unusedToken)
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 

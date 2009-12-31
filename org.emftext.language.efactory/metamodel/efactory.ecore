@@ -4,8 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="efactory"
     nsURI="http://www.googlecode.com/efactory/EFactory" nsPrefix="efactory">
   <eClassifiers xsi:type="ecore:EClass" name="Factory">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="epackages" upperBound="-1"
-        eType="#//PackageImport" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="epackages" lowerBound="1"
+        upperBound="-1" eType="#//PackageImport" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
@@ -16,20 +16,23 @@
   <eClassifiers xsi:type="ecore:EClass" name="PackageImport">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" lowerBound="1"
         eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Annotation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NameMapping" eSuperTypes="#//Annotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NameMapping" abstract="true" eSuperTypes="#//Annotation"/>
   <eClassifiers xsi:type="ecore:EClass" name="GlobalNameMapping" eSuperTypes="#//NameMapping">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameFeature" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CustomNameMapping" eSuperTypes="#//NameMapping">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nameFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameFeature" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NewObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" lowerBound="1"

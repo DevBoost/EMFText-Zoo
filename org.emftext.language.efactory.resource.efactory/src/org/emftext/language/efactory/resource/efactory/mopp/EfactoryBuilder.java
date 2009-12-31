@@ -40,5 +40,8 @@ public class EfactoryBuilder implements org.emftext.language.efactory.resource.e
 		}
 		return org.eclipse.core.runtime.Status.OK_STATUS;
 	}
-	
+
+	public boolean isBuildingNeeded(URI uri) {
+		return true;
+	}
 }
