@@ -14,6 +14,7 @@
 
 package org.emftext.language.formular.resource.formular.mopp;
 
+import org.eclipse.emf.common.util.URI;
 import org.emftext.language.formular.resource.formular.custom.GeneratingResourceProcessor;
 
 public class FormularBuilder implements org.emftext.language.formular.resource.formular.IFormularBuilder {
@@ -21,6 +22,10 @@ public class FormularBuilder implements org.emftext.language.formular.resource.f
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.formular.resource.formular.mopp.FormularResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		new GeneratingResourceProcessor().process(resource.getContents());
 		return org.eclipse.core.runtime.Status.OK_STATUS;
+	}
+
+	public boolean isBuildingNeeded(URI uri) {
+		return true;
 	}
 	
 }

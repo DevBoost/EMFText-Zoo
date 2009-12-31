@@ -14,6 +14,7 @@
 
 package org.emftext.language.forms.resource.forms.mopp;
 
+import org.eclipse.emf.common.util.URI;
 import org.emftext.language.forms.resource.forms.custom.GeneratingResourceProcessor;
 
 public class FormsBuilder implements org.emftext.language.forms.resource.forms.IFormsBuilder {
@@ -21,6 +22,10 @@ public class FormsBuilder implements org.emftext.language.forms.resource.forms.I
 	public org.eclipse.core.runtime.IStatus build(org.emftext.language.forms.resource.forms.mopp.FormsResource resource, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		new GeneratingResourceProcessor().process(resource.getContents());
 		return org.eclipse.core.runtime.Status.OK_STATUS;
+	}
+
+	public boolean isBuildingNeeded(URI uri) {
+		return true;
 	}
 	
 }
