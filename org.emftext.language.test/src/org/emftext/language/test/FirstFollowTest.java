@@ -27,6 +27,7 @@ public class FirstFollowTest extends TestCase {
 			".*/custom_sandwich.cs",
 			".*/facade.ecore.cs",
 			".*/text.ecore.cs",
+			".*/efactory.cs",
 			".*/eJava.cs",
 			".*/JavaBehavior4UML.cs",
 			".*/java_templates.cs",
@@ -49,7 +50,9 @@ public class FirstFollowTest extends TestCase {
 	}
 
 	public void testFirstAndFollowComputations() {
-		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), true);
+		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), new String[] {
+			//".*/org/emftext/test/bug674/.*"
+		});
 		for (String grammar : grammars) {
 			if (isExcluded(grammar)) {
 				continue;
@@ -76,12 +79,12 @@ public class FirstFollowTest extends TestCase {
 	}
 	
 	private void testFirstAndFollowComputation(String syntaxPath) {
-		System.out.println("--> testing " + syntaxPath);
+		//System.out.println("--> testing " + syntaxPath);
 		ConcreteSyntax syntax = loadSyntax(syntaxPath);
 		EList<Rule> rules = syntax.getRules();
 		for (Rule rule : rules) {
 			int i = 0;
-			System.out.println("----> testing " + rule.getMetaclass().getName());
+			//System.out.println("----> testing " + rule.getMetaclass().getName());
 			computer.computeFollowSet(syntax, rule);
 			TreeIterator<EObject> ruleContents = rule.eAllContents();
 			while (ruleContents.hasNext()) {
