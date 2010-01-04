@@ -43,6 +43,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.ecore.resource.text.mopp.TextEcoreMetaInformation());
 		metaInformations.add(
+				new org.emftext.language.efactory.resource.efactory.mopp.EfactoryMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.featherweight_java.resource.fj.mopp.FjMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation());
