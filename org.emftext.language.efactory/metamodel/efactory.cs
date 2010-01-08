@@ -31,6 +31,10 @@ TOKENS {
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }
 
+TOKENSTYLES {
+	"SL_COMMENT" COLOR #00A000;
+}
+
 RULES {
 	Factory ::= epackages+ imports* annotations* root;
 
