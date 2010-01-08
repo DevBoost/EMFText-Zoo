@@ -51,7 +51,7 @@ public class Builder {
 	@SuppressWarnings("unchecked")
 	private void setFeature(EObject object, EStructuralFeature eFeature,
 			Value value, boolean isMany) {
-		Object newValue = getValue(value);
+		Object newValue = getValue(eFeature, value);
 		int upperBound = eFeature.getUpperBound();
 		if (upperBound > 1 || upperBound < 0) {
 			Object oldValue = object.eGet(eFeature);
@@ -69,7 +69,7 @@ public class Builder {
 		}
 	}
 
-	private Object getValue(Value value) {
+	private Object getValue(EStructuralFeature eFeature, Value value) {
 		if (value instanceof Reference) {
 			Reference reference = (Reference) value;
 			return reference.getValue();
@@ -77,7 +77,7 @@ public class Builder {
 			Containment containment = (Containment) value;
 			return createEObject(containment.getValue());
 		} else if (value instanceof Attribute) {
-			return createAttributeValue((Attribute) value);
+			return createAttributeValue(eFeature, (Attribute) value);
 		} else {
 			// unknown sub-type of Value
 			assert false;
@@ -85,7 +85,7 @@ public class Builder {
 		}
 	}
 
-	private Object createAttributeValue(Attribute value) {
+	private Object createAttributeValue(EStructuralFeature eFeature, Attribute value) {
 		if (value instanceof EnumAttribute) {
 			EnumAttribute enumAttribute = (EnumAttribute) value;
 			EEnumLiteral literal = enumAttribute.getValue();
@@ -96,12 +96,22 @@ public class Builder {
 			return string;
 		} else if (value instanceof IntegerAttribute) {
 			IntegerAttribute integerAttribute = (IntegerAttribute) value;
-			Long integer = integerAttribute.getValue();
-			return integer;
+			if (eFeature.getEType().getInstanceClassName().equals(Long.class.getName())) {
+				Long longValue = integerAttribute.getValue();
+				return longValue;
+			} else {
+				Integer integerValue = (int) integerAttribute.getValue();
+				return integerValue;
+			}
 		} else if (value instanceof DoubleAttribute) {
 			DoubleAttribute doubleAttribute = (DoubleAttribute) value;
-			Double doubleValue = doubleAttribute.getValue();
-			return doubleValue;
+			if (eFeature.getEType().getInstanceClassName().equals(Double.class.getName())) {
+				Double doubleValue = doubleAttribute.getValue();
+				return doubleValue;
+			} else {
+				Float floatValue = (float) doubleAttribute.getValue();
+				return floatValue;
+			}
 		} else if (value instanceof DateAttribute) {
 			DateAttribute dateAttribute = (DateAttribute) value;
 			Date date = dateAttribute.getValue();

@@ -27,6 +27,8 @@ TOKENS {
 	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
 	@SuppressWarnings(unusedToken)
 	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
+	@SuppressWarnings(unusedToken)
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 }
 
 RULES {
