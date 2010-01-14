@@ -40,7 +40,11 @@ public class FirstFollowTest extends TestCase {
 			".*/valueflow.cs",
 			".*/concretesyntax.cs",
 			".*/fragment.cs",
-			".*/rex.cs"
+			".*/rex.cs",
+			".*/YggdrasilComponents.cs",
+			".*/bug856/main.cs",
+			".*/test/syntax_analysis/.*.cs",
+			".*/test/syntax_extension/.*.cs",
 	};
 	private ExpectationComputer computer;
 
@@ -79,7 +83,7 @@ public class FirstFollowTest extends TestCase {
 	}
 	
 	private void testFirstAndFollowComputation(String syntaxPath) {
-		//System.out.println("--> testing " + syntaxPath);
+		System.out.println("--> testing " + syntaxPath);
 		ConcreteSyntax syntax = loadSyntax(syntaxPath);
 		EList<Rule> rules = syntax.getRules();
 		for (Rule rule : rules) {
