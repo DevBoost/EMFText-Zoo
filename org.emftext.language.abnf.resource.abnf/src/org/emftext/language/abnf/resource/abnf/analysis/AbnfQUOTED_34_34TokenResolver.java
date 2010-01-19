@@ -4,11 +4,11 @@
  *
  * 
  */
-package org.emftext.languages.abnf.resource.abnf.analysis;
+package org.emftext.language.abnf.resource.abnf.analysis;
 
-public class AbnfQUOTED_34_34TokenResolver implements org.emftext.languages.abnf.resource.abnf.IAbnfTokenResolver {
+public class AbnfQUOTED_34_34TokenResolver implements org.emftext.language.abnf.resource.abnf.IAbnfTokenResolver {
 	
-	private org.emftext.languages.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver defaultTokenResolver = new org.emftext.languages.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver();
+	private org.emftext.language.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver defaultTokenResolver = new org.emftext.language.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
@@ -17,7 +17,7 @@ public class AbnfQUOTED_34_34TokenResolver implements org.emftext.languages.abnf
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.languages.abnf.resource.abnf.IAbnfTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.abnf.resource.abnf.IAbnfTokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0, lexem.length() - 1);
 		defaultTokenResolver.resolve(lexem, feature, result);
