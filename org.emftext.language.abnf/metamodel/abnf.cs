@@ -11,9 +11,11 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE RULENAME $('A'..'Z'|'a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'-')*$;
 	DEFINE STAR $'*'$;
-	DEFINE INT  $('0'..'9')+$;
+	DEFINE DIGIT $'0'..'9'$;
+	DEFINE DIGITS $'0'..'9' '0'..'9'$;
+	DEFINE HEXDIGITS $('0'..'9'|'a'..'f'|'A'..'F') ('0'..'9'|'a'..'f'|'A'..'F')$;
+	DEFINE RULENAME $('A'..'Z'|'a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'-')*$;
 	
 	//DEFINE CRLF $'\r''n'|'\r'|'n'$;
 	
@@ -28,6 +30,18 @@ TOKENS {
 	// HTAB = '\t'
 }
 
+TOKENSTYLES {
+	"RULENAME" COLOR #000080, BOLD;
+	"QUOTED_34_34" COLOR #606060;
+	"CWSP" COLOR #008000;
+	"CNL" COLOR #008000;
+	"%x" COLOR #A000A0;
+	"%b" COLOR #A000A0;
+	"%d" COLOR #A000A0;
+	"DIGITS" COLOR #A000A0;
+	"HEXDIGITS" COLOR #A000A0;
+}
+
 RULES {
 	
 	RuleSet ::= (rules | (whitespace[CWSP]* whitespace[CNL]))+;
@@ -40,15 +54,28 @@ RULES {
 	
 	RuleReference ::= rule[RULENAME];
 	
-	Alternative ::= alternatives ("/" alternatives)*;
-	OptionalSequence ::= "[" elements* "]";
+	Alternative ::= concatenation (whitespace[CWSP]* "/" whitespace[CWSP]* concatenation)*;
+
+	//alternation    =  concatenation
+    //              *(*c-wsp "/" *c-wsp concatenation)
+
+	Concatenation ::= repetition (whitespace[CWSP]+ repetition)*;
+
+	Repetition ::= (repeat)? element;
+	// element        =  rulename / group / option / char-val / num-val / prose-val
+
+	OptionalSequence ::= "[" whitespace[CWSP]* alternatives* whitespace[CWSP]* "]";
 	
-	Group ::= "(" elements* ")";
+	Group ::= "(" whitespace[CWSP]* alternatives* whitespace[CWSP]* ")";
 	
-	BinaryTerminal      ::= "%b" value[INT];
-	DecimalTerminal     ::= "%d" value[INT];
-	HexadecimalTerminal ::= "%x" value[INT];
+	BinaryTerminal      ::= "%b" value[DIGITS] tail?;
+	DecimalTerminal     ::= "%d" value[DIGITS] tail?;
+	HexadecimalTerminal ::= "%x" (value[HEXDIGITS]|value[DIGITS]) tail?;
+	DecRangeEnd            ::= "-" value[DIGITS];
+	HexRangeEnd            ::= "-" (value[HEXDIGITS]|value[DIGITS]);
+	AdditionalDecTerminal  ::= "." value[DIGITS] tail?;
+	AdditionalHexTerminal  ::= "." (value[HEXDIGITS]|value[DIGITS]) tail?;
 	StringTerminal      ::= value['"','"'];
 	
-	Multiplicity ::= (lowerBound[INT])? (repeat[STAR])? (upperBound[INT])?;
+	Multiplicity ::= (lowerBound[DIGIT])? (repeat[STAR])? (upperBound[DIGIT])?;
 }

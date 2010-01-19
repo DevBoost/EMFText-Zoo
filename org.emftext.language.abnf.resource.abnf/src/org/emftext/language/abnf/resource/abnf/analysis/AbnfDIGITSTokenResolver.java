@@ -6,7 +6,7 @@
  */
 package org.emftext.language.abnf.resource.abnf.analysis;
 
-public class AbnfINTTokenResolver implements org.emftext.language.abnf.resource.abnf.IAbnfTokenResolver {
+public class AbnfDIGITSTokenResolver implements org.emftext.language.abnf.resource.abnf.IAbnfTokenResolver {
 	
 	private org.emftext.language.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver defaultTokenResolver = new org.emftext.language.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver();
 	
