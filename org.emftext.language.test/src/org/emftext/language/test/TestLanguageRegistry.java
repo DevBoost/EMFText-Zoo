@@ -27,6 +27,8 @@ public class TestLanguageRegistry {
 	public Set<Object> getMetaInformationsForLanguageOnUpdateSite() {
 		Set<Object> metaInformations = new LinkedHashSet<Object>();
 		metaInformations.add(
+				new org.emftext.language.abnf.resource.abnf.mopp.AbnfMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.chess.resource.cg.mopp.CgMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.conference.resource.conference.mopp.ConferenceMetaInformation());
