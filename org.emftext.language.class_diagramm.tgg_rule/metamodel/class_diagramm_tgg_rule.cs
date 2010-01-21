@@ -22,14 +22,14 @@ IMPORTS {
 
 OPTIONS {
     licenceHeader ="platform:/resource/org.reuseware/licence.txt";
-    //reloadGeneratorModel = "true";
+    reloadGeneratorModel = "true";
     //generateCodeFromGeneratorModel = "true";
     resourcePluginID = "org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule";
     basePackage = "org.emftext.language.class_diagramm.tgg_rule.resource.class_diagramm.tgg_rule";
 }
 
 TOKENS {
-    DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$; 
+    DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;  
     DEFINE T_TYPE $'++'|'!'|'/'$;
     DEFINE IDENT $'@'('A'..'Z'|'a'..'z'|'0'..'9'|'_')+$;
     DEFINE T_MODIFIER $'public'|'static'|'final'|'private'|'protected'|'abstract'$;
@@ -44,11 +44,11 @@ TOKENSTYLES {
 }
 
 RULES {
-    TGGRuleAnnotation ::= (identifiers[IDENT])+ (type[T_TYPE]);  
+    TGGRuleAnnotation ::= (identifiers[IDENT])+ (type[T_TYPE]);   
     AnnotatedPackage ::= annotation body ;
     AnnotatedDataType      ::= annotation body ;
     AnnotatedMethod     ::= annotation body ;
-    AnnotatedAttribute    ::= annotation body ;
+    AnnotatedAttribute     ::= annotation body ;
     AnnotatedClass    ::= annotation body ;
     AnnotatedAssociation    ::= annotation body ;  
     AnnotatedParameter    ::= annotation body ;
