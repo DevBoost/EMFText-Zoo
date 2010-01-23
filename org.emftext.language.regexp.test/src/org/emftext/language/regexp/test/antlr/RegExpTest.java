@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation;
 import org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrResourceFactory;
 import org.emftext.language.regexp.test.AbstractTestCase;
-import org.emftext.sdk.concretesyntax.TokenDefinition;
+import org.emftext.sdk.concretesyntax.CompleteTokenDefinition;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -88,8 +88,8 @@ public class RegExpTest extends AbstractTestCase {
 			TreeIterator<EObject> contents = resource.getAllContents();
 			while (contents.hasNext()) {
 				EObject object = (EObject) contents.next();
-				if (object instanceof TokenDefinition) {
-					TokenDefinition td = (TokenDefinition) object;
+				if (object instanceof CompleteTokenDefinition) {
+					CompleteTokenDefinition td = (CompleteTokenDefinition) object;
 					String regex = td.getRegex();
 					regex = regex.replace("\n", "");
 					regex = regex.replace("\r", "");
