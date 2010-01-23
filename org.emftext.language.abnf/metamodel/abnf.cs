@@ -12,22 +12,20 @@ OPTIONS {
 
 TOKENS {
 	DEFINE STAR $'*'$;
-	DEFINE DIGIT $'0'..'9'$;
-	DEFINE DIGITS $'0'..'9' '0'..'9'$;
-	DEFINE HEXDIGITS $('0'..'9'|'a'..'f'|'A'..'F') ('0'..'9'|'a'..'f'|'A'..'F')$;
+	DEFINE DIGIT $('0'..'9')$;
+	DEFINE DIGITS $($ + DIGIT + DIGIT + $)$;
+	DEFINE FRAGMENT HEXDIGIT $($ + DIGIT + $|'a'..'f'|'A'..'F'$ + $)$;
+	DEFINE HEXDIGITS HEXDIGIT + HEXDIGIT;
 	DEFINE RULENAME $('A'..'Z'|'a'..'z')('A'..'Z'|'a'..'z'|'0'..'9'|'-')*$;
 	
-	//DEFINE CRLF $'\r''n'|'\r'|'n'$;
-	
-	DEFINE CNL $(';'((' '|'\t') | ('!'..'~'))*('\r\n'|'\r'|'\n')) | ('\r\n'|'\r'|'\n')$; // comment or new line
-	DEFINE CWSP $(' '|'\t') | (';'((' '|'\t') | ('!'..'~'))*('\r\n'|'\r'|'\n') | ('\r\n'|'\r'|'\n') (' '|'\t'))$;
-	//DEFINE COMMENT $';'((' '|'\t') | ('!'..'~'))*('\r''n'|'\r'|'n')$;
-
-	//DEFINE VCHAR $'!'..'~'$; // visible (printing) characters
-
-	// WSP =  SP / HTAB
-	// SP  = ' '
-	// HTAB = '\t'
+	DEFINE FRAGMENT CRLF    $('\r\n'|'\r'|'\n')$;
+	DEFINE FRAGMENT SP      $' '$;
+	DEFINE FRAGMENT HTAB    $'\t'$;
+	DEFINE FRAGMENT WSP     $($ + SP + $|$ + HTAB + $)$;
+	DEFINE FRAGMENT VCHAR   $('!'..'~')$; // visible (printing) characters
+	DEFINE FRAGMENT COMMENT $(';'($ + WSP + $|$ + VCHAR + $)*$ + CRLF + $)$; 
+	DEFINE CNL  COMMENT + $|$ + CRLF; // comment or new line
+	DEFINE CWSP WSP     + $|$ + COMMENT + $|$ + CRLF + WSP + $$;
 }
 
 TOKENSTYLES {
