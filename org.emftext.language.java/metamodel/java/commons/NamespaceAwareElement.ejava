@@ -21,7 +21,6 @@ eclass NamespaceAwareElement {
 	 */
 	getNamespacesAsString() {
 		String containerName = ""; 
-		 Map<String, List<String>> packageClassifierMap = JavaClasspath.get(this).getPackageClassifierMap();
 		for(Iterator<String> it = getNamespaces().iterator(); it.hasNext(); ) {
 			String namespaceFragment = it.next();
 			//does it point at a classifier or a package as container?
@@ -29,7 +28,7 @@ eclass NamespaceAwareElement {
 			String assumedClassifierName = containerName + namespaceFragment + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
 			
 			if (it.hasNext()) {
-				if (packageClassifierMap.containsKey(assumedClassifierName)) {
+				if (JavaClasspath.get(this).existsPackage(assumedClassifierName)) {
 					containerName = assumedClassifierName;
 				}
 				else {
@@ -38,7 +37,7 @@ eclass NamespaceAwareElement {
 				}
 			}
 			else {
-				if (packageClassifierMap.containsKey(assumedPackageName)) {
+				if (JavaClasspath.get(this).existsPackage(assumedPackageName)) {
 					//a package is always available as key
 					containerName = assumedPackageName;
 				}

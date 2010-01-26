@@ -25,17 +25,18 @@ import java.util.zip.ZipFile;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl.URIMap;
+import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
-import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.containers.CompilationUnit;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
@@ -71,8 +72,9 @@ public class JavaClasspath extends AdapterImpl {
 	/**
 	 * Singleton instance.
 	 */
-	public static final JavaClasspath globalClasspath =
-		new JavaClasspath(URIConverter.URI_MAP);
+	
+	private static final JavaClasspath globalClasspath =
+		new JavaClasspath(URIConverter.INSTANCE);
 	
 	static {
 		globalClasspath.registerStdLib();
@@ -118,7 +120,7 @@ public class JavaClasspath extends AdapterImpl {
 				}
 			}
 			JavaClasspath myClasspath = new JavaClasspath(
-					resourceSet.getURIConverter().getURIMap());
+					resourceSet.getURIConverter());
 			resourceSet.eAdapters().add(myClasspath);
 
 			if(Boolean.TRUE.equals(registerStdLibOption))  {
@@ -130,15 +132,82 @@ public class JavaClasspath extends AdapterImpl {
 		
 		return globalClasspath;
 	}
+
+	protected JavaClasspath parentClasspath = null;
 	
-	public JavaClasspath(Map<URI, URI> uriMap) {
-		this.uriMap = uriMap;
+	/**
+	 * Sets the parent classpath of the given resource set if the URIConverter of the 
+	 * resource set is a JavaURIConverter.
+	 * 
+	 * @param resourceSet
+	 * @param parentClasspath
+	 */
+	public static void setParentClasspath(ResourceSet resourceSet, JavaClasspath parentClasspath) {
+		if (resourceSet.getURIConverter() instanceof JavaURIConverter) {
+			JavaURIConverter javaURIConverter = (JavaURIConverter)resourceSet.getURIConverter();
+			javaURIConverter.setParentMap((URIMap)parentClasspath.getURIMap());
+			get(resourceSet).parentClasspath = parentClasspath;
+		}
 	}
 	
-	protected Map<URI, URI> uriMap = null;
+	public JavaClasspath getParentClasspath() {
+		return parentClasspath;
+	}
+
 	protected Map<String, List<String>> packageClassifierMap =
 		new HashMap<String, List<String>>();
+	
+	protected void registerPackage(String packageName, String className) {
+		if (!packageClassifierMap.containsKey(packageName)) {
+			packageClassifierMap.put(packageName, new ArrayList<String>());
+		}
+		if (!packageClassifierMap.get(packageName).contains(className)) {
+			packageClassifierMap.get(packageName).add(className);
+		}
+	}
+	
+	protected void unRegisterPackage(String packageName, String className) {
+		if (packageClassifierMap.containsKey(packageName)) {
+			packageClassifierMap.get(packageName).remove(className);
+		}
+	}
+	
+	protected List<String> getPackageContents(String packageName) {
+		List<String> content = new ArrayList<String>();
+		if (parentClasspath != null) {
+			content.addAll(getParentClasspath().getPackageContents(packageName));
+		}
+		if (packageClassifierMap.containsKey(packageName)) {
+			content.addAll(packageClassifierMap.get(packageName));
+		}
+		return content;
+	}
+	
+	public boolean existsPackage(String packageName) {
+		if (parentClasspath != null) {
+			return packageClassifierMap.containsKey(packageName) ||
+				parentClasspath.existsPackage(packageName);
+		}
+		else {
+			return packageClassifierMap.containsKey(packageName);
+		}
+	}
 
+	protected URIConverter uriConverter = null;
+	
+	public Map<URI,URI> getURIMap() {
+		if (uriConverter == URIConverter.INSTANCE) {
+			return URIConverter.URI_MAP;
+		}
+		return uriConverter.getURIMap();
+	}
+	
+	private JavaClasspath(URIConverter uriConverter) {
+		this.uriConverter = uriConverter;
+	}
+	
+	
+	
 	/**
 	 * Registers all classes of the Java standard library 
 	 * <code>classes.jar</code> located at 
@@ -274,12 +343,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		
 		synchronized (this) {
-			if (!packageClassifierMap.containsKey(qualifiedName)) {
-				packageClassifierMap.put(qualifiedName, new ArrayList<String>());
-			}
-			if (!packageClassifierMap.get(qualifiedName).contains(innerName)) {
-				packageClassifierMap.get(qualifiedName).add(innerName);
-			}
+			registerPackage(qualifiedName, innerName);
 			
 			if (uri != null) {
 				String fullName = null;
@@ -293,13 +357,13 @@ public class JavaClasspath extends AdapterImpl {
 				URI logicalUri = 
 					JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 				
-				URI existinMapping = uriMap.get(logicalUri);
+				URI existinMapping = getURIMap().get(logicalUri);
 				
 				if (existinMapping != null && !uri.equals(existinMapping)) {
 					//do nothing: silently replace old with new version
 				}
 				
-				uriMap.put(logicalUri, uri);
+				getURIMap().put(logicalUri, uri);
 				
 				String outerPackage = qualifiedName;
 				while(outerPackage.endsWith("$")) {
@@ -313,17 +377,14 @@ public class JavaClasspath extends AdapterImpl {
 					String outerClassifier = outerPackage.substring(idx + 1);
 					outerPackage = outerPackage.substring(0, idx + 1);
 					
-					if (!packageClassifierMap.containsKey(outerPackage)) {
-						packageClassifierMap.put(outerPackage, new ArrayList<String>());
-					}
-					if (!packageClassifierMap.get(outerPackage).contains(outerClassifier)) {
-						packageClassifierMap.get(outerPackage).add(outerClassifier);
-					}
+					registerPackage(outerPackage, outerClassifier);
 				}
 			}
 		}
 	}
 	
+
+
 	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri) {
 		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
 			if (innerCand instanceof ConcreteClassifier) {
@@ -367,9 +428,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		
 		synchronized (this) {
-			if (packageClassifierMap.containsKey(qualifiedName)) {
-				packageClassifierMap.get(qualifiedName).remove(innerName);
-			}
+			unRegisterPackage(qualifiedName, innerName);
 			
 			String fullName = null;
 			if (".".equals(packageName)) {
@@ -382,7 +441,7 @@ public class JavaClasspath extends AdapterImpl {
 			URI logicalUri = 
 				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 			
-			uriMap.remove(logicalUri);
+			getURIMap().remove(logicalUri);
 		}
 	}
 	
@@ -396,13 +455,14 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		String containerName = fullQualifiedName.substring(0, idx + 1);
 		String classifierName = fullQualifiedName.substring(idx + 1);
-		List<String> containerContent = packageClassifierMap.get(containerName);
+		List<String> containerContent = getPackageContents(containerName);
 		if(containerContent == null) {
 			return false;
 		}
 		return containerContent.contains(classifierName);
 	}
 
+	//This method is only for testing purpose!
 	public Map<String, List<String>> getPackageClassifierMap() {
 		return packageClassifierMap;
 	}
@@ -448,11 +508,7 @@ public class JavaClasspath extends AdapterImpl {
 		EList<EObject> resultList = new UniqueEList<EObject>();
 
 		synchronized (this) {
-			if(!packageClassifierMap.containsKey(packageName)) {
-				return resultList;
-			}
-			
-			for (String classifierName : packageClassifierMap.get(packageName)) {
+			for (String classifierName : getPackageContents(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
 					InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 					String fullQualifiedName = null;
@@ -489,10 +545,8 @@ public class JavaClasspath extends AdapterImpl {
 		}		
 		
 		resultList.addAll(javaLangPackage);
-
+		
 		return resultList;
 	}
 
-	
-	
 }
