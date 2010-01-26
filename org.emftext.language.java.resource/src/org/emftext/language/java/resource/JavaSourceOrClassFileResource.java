@@ -44,6 +44,7 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.java.util.JavaModelCompletion;
 
 /**
@@ -90,6 +91,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	
 	@Override
 	public void load(Map<?, ?> options) throws IOException {
+		JDTConnector.getInstance().initializeResourceSet(getResourceSet(), uri);
     	URIConverter uriConverter = getURIConverter();
     	URI normalizedURI = uriConverter.normalize(uri);
 		if(normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
