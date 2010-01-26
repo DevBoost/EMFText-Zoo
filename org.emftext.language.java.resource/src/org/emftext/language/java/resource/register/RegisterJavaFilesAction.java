@@ -65,6 +65,14 @@ public class RegisterJavaFilesAction implements IObjectActionDelegate {
 
 	private void registerFileInClasspath(
 			IFile file) {
+		
+		if (file == null) {
+			return;
+		}
+		if (file.getFileExtension() == null) {
+			return;
+		}
+		
 		if (file.getFileExtension().equals("java") || file.getFileExtension().equals("class")) {
 			URI resourceUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 			ResourceSet rs = new ResourceSetImpl();
