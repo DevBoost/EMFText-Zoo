@@ -67,11 +67,11 @@ import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryIm
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaTextDiagnostic;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
+import org.emftext.language.java.resource.java.util.JavaResourceUtil;
+import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.emftext.language.java.resource.util.JavaPostProcessor;
 import org.emftext.language.java.resource.util.UnicodeConverterProvider;
 import org.emftext.language.java.types.NamespaceClassifierReference;
-import org.emftext.sdk.util.ResourceUtil;
-import org.emftext.sdk.util.UnicodeConverter;
 
 /**
  * Abstract superclass that provides some frequently used assert and helper
@@ -312,7 +312,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 			BadLocationException, IOException {
 		
 		//converter unicode
-		inputStream = new UnicodeConverter(inputStream);
+		inputStream = new JavaUnicodeConverter(inputStream);
 		
 		org.eclipse.jdt.core.dom.CompilationUnit unit1 = parseWithJDT(inputStream);
 		removeJavadoc(unit1);
@@ -690,7 +690,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 
 	protected boolean assertResolveAllProxies(Resource resource) {
-		List<EObject> unresolvedProxies = ResourceUtil.findUnresolvedProxies(resource);
+		List<EObject> unresolvedProxies = JavaResourceUtil.findUnresolvedProxies(resource);
 		boolean failure = false;
 		String msg="";
 		
