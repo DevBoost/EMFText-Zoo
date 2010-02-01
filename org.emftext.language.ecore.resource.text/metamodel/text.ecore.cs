@@ -87,7 +87,7 @@ RULES {
 	EClass ::=  (eAnnotations)* !1 (abstract[T_ABSTRACT] #1)? interface[T_INTERFACE_OR_CLASS] #1 
 				("<" eTypeParameters ("," eTypeParameters)* ">")? 
 				name[] 
-				(#1 instanceTypeName['"','"'])? ("extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
+				(#1 instanceTypeName['"','"'])? (#1 "extends" #1 eSuperTypes[] ("," #1 eSuperTypes[])*)? 
 				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
 				!0;
 	
