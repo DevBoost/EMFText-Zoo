@@ -166,7 +166,11 @@ public class JDTConnector {
 				if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
 					// path is jar
 					// System.out.println("registerFileInClasspath for ClassPathEntry library: " + entry);
-					registerFileInClasspath(root.getFile(path), classPath);
+					IFile file = root.getFile(path);
+					if (file.getLocation() != null) {
+						path = file.getLocation();
+					}
+					registerFileInClasspath(path, classPath);
 				} else {
 					// path is binary folder
 					// System.out.println("registerResourceInClasspath for ClassPathEntry library (folder): " + entry);
@@ -196,7 +200,7 @@ public class JDTConnector {
 						IFile file = (IFile)resource;
 						String ext = file.getFileExtension();
 						if (filter == null || filter.equals(ext)) {
-							registerFileInClasspath(file, classPath);
+							registerFileInClasspath(file.getFullPath(), classPath);
 						}
 					} 
 					return true;
@@ -207,25 +211,25 @@ public class JDTConnector {
 		}
 	}
 
-	private void registerFileInClasspath(IFile file, ResourceSet classPath) {
+	private void registerFileInClasspath(IPath file, ResourceSet classPath) {
 		String fileExtension = file.getFileExtension();
 		URI resourceUri = null;
 		if ("java".equals(fileExtension) || "class".equals(fileExtension)) {
-			resourceUri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			resourceUri = URI.createPlatformResourceURI(file.toString(), true);
 		} else if ("jar".equals(fileExtension) || "zip".equals(fileExtension)) {
 			// resourceUri = URI.createFileURI(Platform.getLocation() + file.getFullPath().toString());
-			IPath jarLocation = file.getLocation();
+			IPath jarLocation = file;
 			if (jarLocation != null) {
 				resourceUri = URI.createFileURI(jarLocation.toString());
 			} else {
-				resourceUri = URI.createFileURI(file.getFullPath().toString());
+				resourceUri = URI.createFileURI(file.toString());
 			}
 		} else {
 			// unknown file extension
 			return;
 		}
 		if (resourceUri == null || (! classPath.getURIConverter().exists(resourceUri, null))) {
-			System.err.println("Resource for " + file.getFullPath() + " does not exist (uri=" + resourceUri + ")");
+			System.err.println("Resource for " + file + " does not exist (uri=" + resourceUri + ")");
 			return;
 		}
 		if ("java".equals(fileExtension) || "class".equals(fileExtension)) {
