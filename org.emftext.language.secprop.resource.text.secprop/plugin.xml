@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.secprop.resource.text.secprop.mopp.TextSecpropMetaInformation" id="org.emftext.language.secprop.resource.text.secprop.mopp.TextSecpropMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="secprop" icon="icons/editor_icon.gif" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropEditor" name="EMFText text.secprop Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="TextSecprop Text Editor" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropPreferencePage" class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropSyntaxColoringPreferencePage" class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropSyntaxColoringPreferencePage" category="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropBracketPreferencePage" class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropBracketPreferencePage" category="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropOccurrencePreferencePage" class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropOccurrencePreferencePage" category="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropNewFileWizard" id="org.emftext.language.secprop.resource.text.secprop.ui.TextSecpropNewFileWizard" name="EMFText .text.secprop file">
+		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.secprop.resource.text.secprop.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension-point id="org.emftext.language.secprop.resource.text.secprop.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.emftext.language.secprop.resource.additional_extension_parser">
+		<parser class="org.emftext.language.secprop.resource.text.secprop.mopp.TextSecpropResourceFactory" type="text">
+		</parser>
+	</extension>
+	
+</plugin>
