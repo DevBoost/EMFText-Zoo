@@ -14,7 +14,7 @@
 
 SYNTAXDEF petrinet_tgg_rule
 FOR <http://www.emftext.org/language/petrinet_tgg_rule>
-START AnnotatedPetriNet
+START AnnotatedPetriNet,PetriNet
 
 IMPORTS {
     petrinet : <http://www.emftext.org/language/petrinet> WITH SYNTAX petrinet <../../org.emftext.language.petrinet/metamodel/petrinet.cs>

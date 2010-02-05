@@ -14,7 +14,7 @@
 
 SYNTAXDEF database_tgg_rule 
 FOR <http://www.emftext.org/language/database_tgg_rule>
-START AnnotatedDatabase
+START AnnotatedDatabase,Database
  
 IMPORTS {
     database : <http://www.emftext.org/language/database> WITH SYNTAX database <../../org.emftext.language.database/metamodel/database.cs>

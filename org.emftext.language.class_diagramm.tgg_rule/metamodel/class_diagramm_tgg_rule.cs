@@ -14,7 +14,7 @@
 
 SYNTAXDEF class_diagramm_tgg_rule 
 FOR <http://www.emftext.org/language/class_diagramm_tgg_rule>
-START AnnotatedPackage
+START AnnotatedPackage,Package
  
 IMPORTS {
     class_diagramm : <http://www.emftext.org/language/class_diagramm> WITH SYNTAX class_diagramm <../../org.emftext.language.class_diagramm/metamodel/class_diagramm.cs>

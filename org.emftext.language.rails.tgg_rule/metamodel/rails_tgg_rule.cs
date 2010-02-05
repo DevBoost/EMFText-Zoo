@@ -14,7 +14,7 @@
 
 SYNTAXDEF rails_tgg_rule
 FOR <http://www.emftext.org/language/rails/tgg_rule>
-START AnnotatedProject
+START AnnotatedProject,Project
 
 IMPORTS {
     project : <http://www.emftext.org/language/rails> WITH SYNTAX rails <../../org.emftext.language.rails/metamodel/rails.cs>
