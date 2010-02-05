@@ -334,6 +334,8 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 					Resource subResource = 
 						getResourceSet().createResource(subResourcURI);
 					
+					addPackageDeclaration(cu);
+					
 					subResource.getContents().add(cu);
 					subResource.save(options);					
 				}
@@ -343,7 +345,25 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 		}
 		else {
+			if (!getContents().isEmpty() && getContents().get(0) instanceof CompilationUnit) {
+				CompilationUnit cu = (CompilationUnit) getContents().get(0) ;
+				addPackageDeclaration(cu);
+			}
 			super.doSave(outputStream, options);
+		}
+	}
+
+	/**
+	 * This method adds a package declaration (namespaces) to the given compilation unit
+	 * if none is defined and this resource has a logical URI. The segments of the logical
+	 * URI are assumed as package name.
+	 * 
+	 * @param cu
+	 */
+	private void addPackageDeclaration(CompilationUnit cu) {
+		if (cu.getNamespaces().isEmpty() && !getURI().isFile() && !getURI().isPlatform()) {
+			//if there is no package and this is a logical URI, guess the package based on the URI
+			cu.getNamespaces().addAll(getURI().trimSegments(1).segmentsList());
 		}
 	}
 }
