@@ -22,15 +22,19 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE PSEUDOKIND $'initial'$ ;
+	DEFINE PSEUDOKIND $'initial'|'join'|'fork'$ ;
 }
 
 RULES{	
   StateMachine  ::= "StateMachine" name[] "{" region "}" ;	
   Region        ::= subvertex* "transitions" "{" transition* "}";
   
-  State         ::= "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)? 
-                    "do" ":" doActivity "}" ";";
+  State         ::= ("state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)? 
+                    "do" ":" doActivity "}" ";")|
+                    ("composite" "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)? 
+                    "do" ":" doActivity 
+                    (region)?
+                    "}" ";");
   Pseudostate   ::=  kind[PSEUDOKIND] "state" name[] ";";
   FinalState    ::= "final" "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)?
                     "do" ":" doActivity "}" ";"; 					
