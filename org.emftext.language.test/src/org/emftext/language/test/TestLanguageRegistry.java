@@ -103,6 +103,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation());
 		metaInformations.add(
+				new org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callMetaInformation());
@@ -150,8 +152,6 @@ public class TestLanguageRegistry {
 				new org.emftext.language.xml.resource.xml.mopp.XmlMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.parametercheck.resource.pcheck.mopp.PcheckMetaInformation());
-		metaInformations.add(
-				new org.emftext.language.sparql.resource.sparql.mopp.RqMetaInformation());
 		metaInformations.add(
 				new org.emftext.test.cct1.resource.cct1.mopp.Cct1MetaInformation());
 		metaInformations.add(
