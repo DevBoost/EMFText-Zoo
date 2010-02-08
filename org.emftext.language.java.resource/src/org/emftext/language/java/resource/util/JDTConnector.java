@@ -52,6 +52,10 @@ public class JDTConnector {
 	
 	private IJavaProject getJavaProject(URI uri) {
 		IProject project = getProject(uri);
+		return getJavaProject(project);
+	}
+	
+	private IJavaProject getJavaProject(IProject project) {
 		return (isJavaProject(project) ? JavaCore.create(project) : null);
 	}
 	
@@ -131,61 +135,63 @@ public class JDTConnector {
 	}
 
 	public JavaClasspath getJavaProjectClasspath(URI uri) {
-		return getJavaClasspath(getJavaProject(uri));
+		return getJavaClasspath(getProject(uri));
 	}
 
 	private Map<URI, JavaClasspath> javaClasspaths = new HashMap<URI, JavaClasspath>();
 	
-	private JavaClasspath getJavaClasspath(IJavaProject javaProject) {
-		URI projectUri = URI.createPlatformResourceURI(javaProject.getPath().toString(), true);
+	private JavaClasspath getJavaClasspath(IProject project) {
+		URI projectUri = URI.createPlatformResourceURI(project.getFullPath().toString(), true);
 		JavaClasspath javaClasspath = javaClasspaths.get(projectUri);
 		if (javaClasspath != null) {
 			return javaClasspath;
 		}
+		IJavaProject javaProject = getJavaProject(project);
+		ResourceSet classPath = new ResourceSetImpl();
 		IClasspathEntry[] classpathEntries = null;
-		try {
-			classpathEntries = javaProject.getResolvedClasspath(true);
-		} catch (JavaModelException e) {
+		if (javaProject != null) {
+			try {
+				classpathEntries = javaProject.getResolvedClasspath(true);
+			} catch (JavaModelException e) {
+			}
 		}
-		if (classpathEntries == null) {
-			return null;
-		}
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		final ResourceSet classPath = new ResourceSetImpl();
-		classPath.setURIConverter(new JavaURIConverter());
-		classPath.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, true);
-		classPath.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, false);
-		for (int i = 0; i < classpathEntries.length; i++) {
-			IClasspathEntry entry = classpathEntries[i];
-			IPath path = entry.getPath();
-			if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
-				// path is source folder
-				// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
-				// registerResourceInClasspath(root.getFolder(path), classPath);
-			} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
-				if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
-					// path is jar
-					// System.out.println("registerFileInClasspath for ClassPathEntry library: " + entry);
-					IFile file = root.getFile(path);
-					if (file.getLocation() != null) {
-						path = file.getLocation();
+		if (classpathEntries != null) {
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			classPath.setURIConverter(new JavaURIConverter());
+			classPath.getLoadOptions().put(JavaClasspath.OPTION_USE_LOCAL_CLASSPATH, true);
+			classPath.getLoadOptions().put(JavaClasspath.OPTION_REGISTER_STD_LIB, false);
+			for (int i = 0; i < classpathEntries.length; i++) {
+				IClasspathEntry entry = classpathEntries[i];
+				IPath path = entry.getPath();
+				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					// path is source folder
+					// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
+					// registerResourceInClasspath(root.getFolder(path), classPath);
+				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
+					if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
+						// path is jar
+						// System.out.println("registerFileInClasspath for ClassPathEntry library: " + entry);
+						IFile file = root.getFile(path);
+						if (file.getLocation() != null) {
+							path = file.getLocation();
+						}
+						registerFileInClasspath(path, classPath);
+					} else {
+						// path is binary folder
+						// System.out.println("registerResourceInClasspath for ClassPathEntry library (folder): " + entry);
+						registerResourceInClasspath(root.getFolder(path), "class", classPath);
 					}
-					registerFileInClasspath(path, classPath);
-				} else {
-					// path is binary folder
-					// System.out.println("registerResourceInClasspath for ClassPathEntry library (folder): " + entry);
-					registerResourceInClasspath(root.getFolder(path), "class", classPath);
-				}
-			} else if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
-				// System.out.println("Doing nothing for ClassPathEntry container: " + entry);
-			} else if (entry.getEntryKind() == IClasspathEntry.CPE_VARIABLE) {
-				// System.out.println("Doing nothing for ClassPathEntry variable: " + entry);
-			} 
-		}
-		try {
-			registerResourceInClasspath(root.getFolder(javaProject.getOutputLocation()), "class", classPath);
-		} catch (JavaModelException e) {
-			System.err.println("Exception adding output folder to classpath: " + e);
+				} else if (entry.getEntryKind() == IClasspathEntry.CPE_CONTAINER) {
+					// System.out.println("Doing nothing for ClassPathEntry container: " + entry);
+				} else if (entry.getEntryKind() == IClasspathEntry.CPE_VARIABLE) {
+					// System.out.println("Doing nothing for ClassPathEntry variable: " + entry);
+				} 
+			}
+			try {
+				registerResourceInClasspath(root.getFolder(javaProject.getOutputLocation()), "class", classPath);
+			} catch (JavaModelException e) {
+				System.err.println("Exception adding output folder to classpath: " + e);
+			}
 		}
 		javaClasspath = JavaClasspath.get(classPath);
 		javaClasspaths.put(projectUri, javaClasspath);
