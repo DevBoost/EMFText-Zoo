@@ -94,7 +94,7 @@ public class NewFileContentCreationTest extends TestCase {
 				// new file is valid. this content may differ from the content created by
 				// the minimal model helper if users provide template files containing 
 				// example code for new documents
-				String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("dummyFileName");
+				String newFileContent = metaInformation.getNewFileContentProvider().getNewFileContent("new_file");
 				Resource.Factory factory = metaInformation.createResourceFactory();
 				String syntaxName = metaInformation.getSyntaxName();
 				if (!isOnUpdateSite(syntaxName)) {
