@@ -116,7 +116,13 @@ public class JDTConnector {
 	}
 
 	public void initializeResourceSet(ResourceSet resourceSet, URI resourceUri) {
-		if(!resourceUri.isPlatformResource()) {
+		if(resourceSet == null) {
+			return;
+		}
+		if (resourceSet.getURIConverter() == null) {
+			return;
+		}
+		if(!resourceSet.getURIConverter().normalize(resourceUri).isPlatformResource()) {
 			return;
 		}
 		if (resourceSet.getURIConverter() instanceof JavaURIConverter) {
