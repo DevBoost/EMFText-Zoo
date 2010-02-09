@@ -59,7 +59,7 @@ public class ElementReferenceTargetReferenceResolver implements
 			if (!(fullNamesOption instanceof Boolean)) {
 				fullNamesOption = Boolean.FALSE;
 			}		
-			if (Boolean.TRUE.equals(fullNamesOption)) {
+			if (container.getPrevious() == null && Boolean.TRUE.equals(fullNamesOption)) {
 				String packageName = "";
 				String fullClassName = concreteClassifier.getName();
 				EObject parent = concreteClassifier.eContainer();
