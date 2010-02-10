@@ -21,6 +21,7 @@ OPTIONS {
 	//reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
 	overrideBuilder = "false";
+	additionalDependencies = "org.emftext.language.rolecore.ecore_compiler";
 }
 
 TOKENS {
