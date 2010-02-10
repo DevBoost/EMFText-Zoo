@@ -97,6 +97,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.sandwich.resource.sandwich.mopp.SandwichMetaInformation());
 		metaInformations.add(
+				new org.emftext.language.secprop.resource.text.secprop.mopp.TextSecpropMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.simple_math.resource.sm.mopp.SmMetaInformation());
