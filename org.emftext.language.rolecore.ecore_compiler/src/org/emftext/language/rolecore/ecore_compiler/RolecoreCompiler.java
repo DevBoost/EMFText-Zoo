@@ -175,7 +175,7 @@ public class RolecoreCompiler  {
 	}
 
 	private EClass findOrCreateConcreteRoleClass(EPackage ePackage, Role role) {
-		CoreClass player = role.getPlayer();
+		CoreClass player = role.getPlayedBy();
 		EClass abstractRoleClass = findOrCreateAbstractRoleClass(ePackage, player);
 		EClass concreteRoleClass = findOrCreateEClass(ePackage, role, "", false, false, abstractRoleClass);
 		if (copyTargets.contains(concreteRoleClass)) {

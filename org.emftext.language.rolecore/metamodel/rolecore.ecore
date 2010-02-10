@@ -3,11 +3,14 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="rolecore"
     nsURI="http://www.emftext.org/language/rolecore" nsPrefix="rolecore">
-  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="player" lowerBound="1"
-        eType="#//CoreClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass #//CoreClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="playedBy" lowerBound="1"
+        eType="#//CoreClass" eOpposite="#//CoreClass/plays"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CoreClass" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CoreClass" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
+        eType="#//Role" eOpposite="#//Role/playedBy"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RCPackage" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage">
     <eStructuralFeatures xsi:type="ecore:EReference" name="coreClasses" upperBound="-1"
         eType="#//CoreClass" containment="true"/>

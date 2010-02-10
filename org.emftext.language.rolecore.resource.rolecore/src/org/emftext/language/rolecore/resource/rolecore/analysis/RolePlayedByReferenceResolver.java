@@ -11,9 +11,10 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
+
 package org.emftext.language.rolecore.resource.rolecore.analysis;
 
-public class RolePlayerReferenceResolver implements org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.emftext.language.rolecore.Role, org.emftext.language.rolecore.CoreClass> {
+public class RolePlayedByReferenceResolver implements org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.emftext.language.rolecore.Role, org.emftext.language.rolecore.CoreClass> {
 	
 	private org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.emftext.language.rolecore.Role, org.emftext.language.rolecore.CoreClass> delegate = new org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.emftext.language.rolecore.Role, org.emftext.language.rolecore.CoreClass>();
 	
@@ -26,7 +27,7 @@ public class RolePlayerReferenceResolver implements org.emftext.language.rolecor
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+		// save options in a field or leave method empty if this resolver does not depend on any option
 	}
 	
 }

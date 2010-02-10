@@ -60,7 +60,7 @@ RULES {
 		"}";
 	
 	Role      ::= 
-		"Role" name[] "is" "played" "by" player[]
+		"Role" name[] "is" "played" "by" playedBy[]
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 		
 	CoreClass ::= 
