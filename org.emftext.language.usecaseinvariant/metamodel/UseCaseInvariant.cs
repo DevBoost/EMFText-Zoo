@@ -22,6 +22,10 @@ OPTIONS {
 	tokenspace = "1";
 }
 
+TOKENS {
+	DEFINE T_INCLUDING $'including'$;
+}
+
 TOKENSTYLES {
 	"TEXT" COLOR #000000;
 	
@@ -29,9 +33,7 @@ TOKENSTYLES {
 	"actor" COLOR #7F0055, BOLD;
 	"counter" COLOR #7F0055, BOLD;
 	"set" COLOR #7F0055, BOLD;
-	"of" COLOR #7F0055, BOLD;
-	"excluding" COLOR #7F0055, BOLD;
-	"including" COLOR #7F0055, BOLD;
+	"T_INCLUDING" COLOR #7F0055, BOLD;
 }
 
 RULES {
@@ -51,13 +53,8 @@ CounterActor
         "counter" name[] ":" "[" (valuesBefore (#0 "," valuesBefore)*)? "]" "-->" "[" (valuesAfter (#0 "," valuesAfter)*)? "]" "."
 	;
 
-SingleValue 
+Value 
    ::=
-        type[] ("(" #0 ID[] #0 ")")?
-	;
-
-SetOfValues
-   ::=
-        "set" "of" type[] ("excluding" excluding)? ("including" including)?
+        type[]  ("set" inSet[T_INCLUDING])? #0 ID[] #0
 	;
 }
