@@ -6,11 +6,11 @@
  */
 package org.emftext.language.database.tgg_rule.resource.database.tgg_rule.analysis;
 
-public class PKeyColumnReferenceResolver implements org.emftext.language.database.tgg_rule.resource.database.tgg_rule.IDatabase_tgg_ruleReferenceResolver<org.emftext.language.database.PKey, org.emftext.language.database.Column> {
+public class FKeyColumnsReferenceResolver implements org.emftext.language.database.tgg_rule.resource.database.tgg_rule.IDatabase_tgg_ruleReferenceResolver<org.emftext.language.database.FKey, org.emftext.language.database.Column> {
 	
-	private org.emftext.language.database.resource.database.analysis.PKeyColumnReferenceResolver delegate = new org.emftext.language.database.resource.database.analysis.PKeyColumnReferenceResolver();
+	private org.emftext.language.database.resource.database.analysis.FKeyColumnsReferenceResolver delegate = new org.emftext.language.database.resource.database.analysis.FKeyColumnsReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.database.PKey container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.database.tgg_rule.resource.database.tgg_rule.IDatabase_tgg_ruleReferenceResolveResult<org.emftext.language.database.Column> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.database.FKey container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.database.tgg_rule.resource.database.tgg_rule.IDatabase_tgg_ruleReferenceResolveResult<org.emftext.language.database.Column> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.database.resource.database.IDatabaseReferenceResolveResult<org.emftext.language.database.Column>() {
 			
 			public boolean wasResolvedUniquely() {
@@ -56,7 +56,7 @@ public class PKeyColumnReferenceResolver implements org.emftext.language.databas
 		
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.database.Column element, org.emftext.language.database.PKey container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.emftext.language.database.Column element, org.emftext.language.database.FKey container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

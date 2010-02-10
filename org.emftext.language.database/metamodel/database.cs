@@ -14,17 +14,17 @@
 
 SYNTAXDEF database
 FOR <http://www.emftext.org/language/database>
-START Database
+START Database 
 
 OPTIONS{
-	//generateCodeFromGeneratorModel = "true";
- 	//reloadGeneratorModel = "true";
+	//generateCodeFromGeneratorModel = "true"; 
+ 	reloadGeneratorModel = "true"; 
     //tokenspace = "1";
-    //overrideManifest = "false"; 
+    //overrideManifest = "false";  
     licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 }
 TOKENS{
-		DEFINE COMMENT $'//'(~('\n'|'\r'))*$;  
+		DEFINE COMMENT $'//'(~('\n'|'\r'))*$; 
 }
 
 TOKENSTYLES {
@@ -43,28 +43,28 @@ RULES{
 		
 		Database ::=  "database" name[] "{" 
 							
-							table* 
-							procedure*
+							tables* 
+							procedures*
 							
 					  "}" ;
 		
 		Table ::= "table" name[] "{" 
 						
-						fkey* 
-						pkey* 
-						column*  
+						fkeys* 
+						pkeys* 
+						columns*  
 						
 					"}"  ;
 		
-		FKey ::= "fkey" name[] "table" reference[] "columns" column[] ("," column[])*  ; 
+		FKey ::= "fkey" name[] "table" reference[] "columns" columns[] ("," columns[])*  ; 
 		
-		PKey ::= "pkey" name[] "columns" column[] ("," column[])*  ;
+		PKey ::= "pkey" name[] "columns" columns[] ("," columns[])*  ;
 		
 		Column ::= "column" name[] ":" type ;
 		
 		Procedure ::= "procedure" name[] "("  
 								
-								(parameter ("," parameter)*)? ")" 
+								(parameters ("," parameters)*)? ")" 
 								
 								":" return? ;
 	
