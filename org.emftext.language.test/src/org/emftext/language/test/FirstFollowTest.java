@@ -46,6 +46,7 @@ public class FirstFollowTest extends TestCase {
 			".*/test/syntax_analysis/.*.cs",
 			".*/test/syntax_extension/.*.cs",
 			".*/reuseextensionactivator.cs",
+			".*/text.secprop.cs",
 	};
 	private ExpectationComputer computer;
 
