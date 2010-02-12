@@ -23,7 +23,7 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE T_INCLUDING $'including'$;
+	DEFINE T_INCLUDING $'set' (' ' | '\t' | '\f')+ 'including'$;
 }
 
 TOKENSTYLES {
@@ -32,7 +32,6 @@ TOKENSTYLES {
 	"invariants" COLOR #7F0055, BOLD;
 	"actor" COLOR #7F0055, BOLD;
 	"counter" COLOR #7F0055, BOLD;
-	"set" COLOR #7F0055, BOLD;
 	"T_INCLUDING" COLOR #7F0055, BOLD;
 }
 
@@ -55,6 +54,6 @@ CounterActor
 
 Value 
    ::=
-        type[]  ("set" inSet[T_INCLUDING])? #0 ID[] #0
+        type[]  (inSet[T_INCLUDING])? #0 ID[] #0
 	;
 }

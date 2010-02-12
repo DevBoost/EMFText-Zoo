@@ -19,7 +19,10 @@ import java.util.Map;
 public class UcinvT_INCLUDINGTokenResolver implements org.emftext.language.usecaseinvariant.resource.ucinv.IUcinvTokenResolver {
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		return "including";
+		if (Boolean.TRUE.equals(value)) {
+			return "set including";
+		}
+		return "";
 	}
 	
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.usecaseinvariant.resource.ucinv.IUcinvTokenResolveResult result) {
