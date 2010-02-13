@@ -41,7 +41,7 @@ public class PDFFormGenerator implements IGenerator {
 		IFile foFile = (IFile)argument;
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream(); 
 		OutputStream bufferedOutStream = new BufferedOutputStream(outStream);
-		try{
+		try {
 			Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, bufferedOutStream);
 			TransformerFactory factory = TransformerFactory.newInstance();
 			Transformer transformer = factory.newTransformer(); 
@@ -53,14 +53,8 @@ public class PDFFormGenerator implements IGenerator {
 			
 			bufferedOutStream.flush();
 			bufferedOutStream.close();
-			/*
-			FileOutputStream ts = new FileOutputStream("test.pdf");
-			ts.write(outStream.toByteArray());
-			ts.close();
-			*/
 			return outStream.toByteArray();
-		}
-		catch(FOPException e){
+		} catch(FOPException e){
 			e.printStackTrace();
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();
@@ -72,7 +66,5 @@ public class PDFFormGenerator implements IGenerator {
 			e.printStackTrace();
 		}
 		return null;
-		
 	}
-
 }
