@@ -41,6 +41,7 @@ public class FirstFollowTest extends TestCase {
 			".*/concretesyntax.cs",
 			".*/fragment.cs",
 			".*/rex.cs",
+			".*/rolecore.cs",
 			".*/YggdrasilComponents.cs",
 			".*/bug856/main.cs",
 			".*/test/syntax_analysis/.*.cs",
