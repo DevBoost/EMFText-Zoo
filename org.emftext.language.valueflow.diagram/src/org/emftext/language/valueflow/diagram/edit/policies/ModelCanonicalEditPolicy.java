@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.edit.policies;
 
 import java.util.Collection;
@@ -40,7 +30,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.valueflow.ValueflowPackage;
 import org.emftext.language.valueflow.diagram.edit.parts.AgentEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.TakeStateEditPart;
 import org.emftext.language.valueflow.diagram.part.ValueflowDiagramUpdater;
@@ -64,8 +53,9 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
-		for (Iterator it = ValueflowDiagramUpdater.getModel_79SemanticChildren(
-				viewObject).iterator(); it.hasNext();) {
+		for (Iterator it = ValueflowDiagramUpdater
+				.getModel_1000SemanticChildren(viewObject).iterator(); it
+				.hasNext();) {
 			result.add(((ValueflowNodeDescriptor) it.next()).getModelElement());
 		}
 		return result;
@@ -82,7 +72,7 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	 * @generated
 	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
-		if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
+		if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
 			return ValueflowDiagramUpdater.isShortcutOrphaned(view);
 		}
 		int visualID = ValueflowVisualIDRegistry.getVisualID(view);
@@ -194,9 +184,9 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 			EObject diagramLinkObject = nextDiagramLink.getElement();
 			EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
-			for (Iterator LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator
+			for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator
 					.hasNext();) {
-				ValueflowLinkDescriptor nextLinkDescriptor = (ValueflowLinkDescriptor) LinkDescriptorsIterator
+				ValueflowLinkDescriptor nextLinkDescriptor = (ValueflowLinkDescriptor) linkDescriptorsIterator
 						.next();
 				if (diagramLinkObject == nextLinkDescriptor.getModelElement()
 						&& diagramLinkSrc == nextLinkDescriptor.getSource()
@@ -205,7 +195,8 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 						&& diagramLinkVisualID == nextLinkDescriptor
 								.getVisualID()) {
 					linksIterator.remove();
-					LinkDescriptorsIterator.remove();
+					linkDescriptorsIterator.remove();
+					break;
 				}
 			}
 		}
@@ -226,7 +217,7 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case ModelEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(ValueflowDiagramUpdater
-						.getModel_79ContainedLinks(view));
+						.getModel_1000ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -237,18 +228,7 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case AgentEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(ValueflowDiagramUpdater
-						.getAgent_1001ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		case InitialEditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(ValueflowDiagramUpdater
-						.getInitial_2001ContainedLinks(view));
+						.getAgent_2001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -259,7 +239,7 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case GiveStateEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(ValueflowDiagramUpdater
-						.getGiveState_2002ContainedLinks(view));
+						.getGiveState_3001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -270,7 +250,7 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case TakeStateEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(ValueflowDiagramUpdater
-						.getTakeState_2003ContainedLinks(view));
+						.getTakeState_3002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -309,7 +289,8 @@ public class ModelCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 				continue;
 			}
 			CreateConnectionViewRequest.ConnectionViewDescriptor descriptor = new CreateConnectionViewRequest.ConnectionViewDescriptor(
-					nextLinkDescriptor.getSemanticAdapter(), null,
+					nextLinkDescriptor.getSemanticAdapter(), String
+							.valueOf(nextLinkDescriptor.getVisualID()),
 					ViewUtil.APPEND, false, ((IGraphicalEditPart) getHost())
 							.getDiagramPreferencesHint());
 			CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(

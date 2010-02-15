@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.part;
 
 import org.eclipse.core.runtime.Platform;
@@ -25,9 +15,7 @@ import org.emftext.language.valueflow.diagram.edit.parts.AgentEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.AgentNameEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateGiveToEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.GiveStateValueEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialNameEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.GiveStateNameEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.StateNextStateEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.TakeStateEditPart;
@@ -144,10 +132,6 @@ public class ValueflowVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case AgentAgentStatesCompartmentEditPart.VISUAL_ID:
-			if (ValueflowPackage.eINSTANCE.getInitial().isSuperTypeOf(
-					domainElement.eClass())) {
-				return InitialEditPart.VISUAL_ID;
-			}
 			if (ValueflowPackage.eINSTANCE.getGiveState().isSuperTypeOf(
 					domainElement.eClass())) {
 				return GiveStateEditPart.VISUAL_ID;
@@ -197,13 +181,8 @@ public class ValueflowVisualIDRegistry {
 				return true;
 			}
 			break;
-		case InitialEditPart.VISUAL_ID:
-			if (InitialNameEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
-			break;
 		case GiveStateEditPart.VISUAL_ID:
-			if (GiveStateValueEditPart.VISUAL_ID == nodeVisualID) {
+			if (GiveStateNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -213,9 +192,6 @@ public class ValueflowVisualIDRegistry {
 			}
 			break;
 		case AgentAgentStatesCompartmentEditPart.VISUAL_ID:
-			if (InitialEditPart.VISUAL_ID == nodeVisualID) {
-				return true;
-			}
 			if (GiveStateEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}

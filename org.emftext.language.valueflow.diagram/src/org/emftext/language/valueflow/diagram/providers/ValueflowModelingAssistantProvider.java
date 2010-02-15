@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.providers;
 
 import java.util.ArrayList;
@@ -53,15 +43,14 @@ public class ValueflowModelingAssistantProvider extends
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
 		if (editPart instanceof AgentAgentStatesCompartmentEditPart) {
-			List types = new ArrayList();
-			types.add(ValueflowElementTypes.Initial_2001);
-			types.add(ValueflowElementTypes.GiveState_2002);
-			types.add(ValueflowElementTypes.TakeState_2003);
+			ArrayList types = new ArrayList(2);
+			types.add(ValueflowElementTypes.GiveState_3001);
+			types.add(ValueflowElementTypes.TakeState_3002);
 			return types;
 		}
 		if (editPart instanceof ModelEditPart) {
-			List types = new ArrayList();
-			types.add(ValueflowElementTypes.Agent_1001);
+			ArrayList types = new ArrayList(1);
+			types.add(ValueflowElementTypes.Agent_2001);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -74,9 +63,10 @@ public class ValueflowModelingAssistantProvider extends
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
 				.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof GiveStateEditPart) {
-			List types = new ArrayList();
-			types.add(ValueflowElementTypes.GiveStateGiveTo_3002);
-			return types;
+			return ((GiveStateEditPart) sourceEditPart).getMARelTypesOnSource();
+		}
+		if (sourceEditPart instanceof TakeStateEditPart) {
+			return ((TakeStateEditPart) sourceEditPart).getMARelTypesOnSource();
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -87,10 +77,11 @@ public class ValueflowModelingAssistantProvider extends
 	public List getRelTypesOnTarget(IAdaptable target) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
+		if (targetEditPart instanceof GiveStateEditPart) {
+			return ((GiveStateEditPart) targetEditPart).getMARelTypesOnTarget();
+		}
 		if (targetEditPart instanceof TakeStateEditPart) {
-			List types = new ArrayList();
-			types.add(ValueflowElementTypes.GiveStateGiveTo_3002);
-			return types;
+			return ((TakeStateEditPart) targetEditPart).getMARelTypesOnTarget();
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -105,11 +96,12 @@ public class ValueflowModelingAssistantProvider extends
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof GiveStateEditPart) {
-			List types = new ArrayList();
-			if (targetEditPart instanceof TakeStateEditPart) {
-				types.add(ValueflowElementTypes.GiveStateGiveTo_3002);
-			}
-			return types;
+			return ((GiveStateEditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
+		}
+		if (sourceEditPart instanceof TakeStateEditPart) {
+			return ((TakeStateEditPart) sourceEditPart)
+					.getMARelTypesOnSourceAndTarget(targetEditPart);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -121,12 +113,13 @@ public class ValueflowModelingAssistantProvider extends
 			IElementType relationshipType) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
+		if (targetEditPart instanceof GiveStateEditPart) {
+			return ((GiveStateEditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
+		}
 		if (targetEditPart instanceof TakeStateEditPart) {
-			List types = new ArrayList();
-			if (relationshipType == ValueflowElementTypes.GiveStateGiveTo_3002) {
-				types.add(ValueflowElementTypes.GiveState_2002);
-			}
-			return types;
+			return ((TakeStateEditPart) targetEditPart)
+					.getMATypesForSource(relationshipType);
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -139,11 +132,12 @@ public class ValueflowModelingAssistantProvider extends
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
 				.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof GiveStateEditPart) {
-			List types = new ArrayList();
-			if (relationshipType == ValueflowElementTypes.GiveStateGiveTo_3002) {
-				types.add(ValueflowElementTypes.TakeState_2003);
-			}
-			return types;
+			return ((GiveStateEditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
+		}
+		if (sourceEditPart instanceof TakeStateEditPart) {
+			return ((TakeStateEditPart) sourceEditPart)
+					.getMATypesForTarget(relationshipType);
 		}
 		return Collections.EMPTY_LIST;
 	}

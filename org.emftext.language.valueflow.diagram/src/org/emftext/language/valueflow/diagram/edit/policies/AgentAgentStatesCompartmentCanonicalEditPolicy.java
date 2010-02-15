@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.edit.policies;
 
 import java.util.Collection;
@@ -24,7 +14,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.emftext.language.valueflow.ValueflowPackage;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.TakeStateEditPart;
 import org.emftext.language.valueflow.diagram.part.ValueflowDiagramUpdater;
 import org.emftext.language.valueflow.diagram.part.ValueflowNodeDescriptor;
@@ -48,7 +37,7 @@ public class AgentAgentStatesCompartmentCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = ValueflowDiagramUpdater
-				.getAgentAgentStatesCompartment_5001SemanticChildren(viewObject)
+				.getAgentAgentStatesCompartment_7001SemanticChildren(viewObject)
 				.iterator(); it.hasNext();) {
 			result.add(((ValueflowNodeDescriptor) it.next()).getModelElement());
 		}
@@ -61,7 +50,6 @@ public class AgentAgentStatesCompartmentCanonicalEditPolicy extends
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		int visualID = ValueflowVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
-		case InitialEditPart.VISUAL_ID:
 		case GiveStateEditPart.VISUAL_ID:
 		case TakeStateEditPart.VISUAL_ID:
 			if (!semanticChildren.contains(view.getElement())) {

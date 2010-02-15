@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.parsers;
 
 import java.text.FieldPosition;
@@ -40,6 +30,11 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	private String defaultEditablePattern;
+
+	/**
+	 * @generated
+	 */
 	private MessageFormat viewProcessor;
 
 	/**
@@ -57,6 +52,14 @@ public class MessageFormatParser extends AbstractParser {
 	 */
 	public MessageFormatParser(EAttribute[] features) {
 		super(features);
+	}
+
+	/**
+	 * @generated
+	 */
+	public MessageFormatParser(EAttribute[] features,
+			EAttribute[] editableFeatures) {
+		super(features, editableFeatures);
 	}
 
 	/**
@@ -81,42 +84,9 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
-	public String getViewPattern() {
-		String pattern = super.getViewPattern();
-		return pattern != null ? pattern : getDefaultPattern();
-	}
-
-	/**
-	 * @generated
-	 */
 	public void setViewPattern(String viewPattern) {
 		super.setViewPattern(viewPattern);
 		viewProcessor = null;
-	}
-
-	/**
-	 * @generated
-	 */
-	protected MessageFormat createViewProcessor(String viewPattern) {
-		return new MessageFormat(viewPattern);
-	}
-
-	/**
-	 * @generated
-	 */
-	protected MessageFormat getViewProcessor() {
-		if (viewProcessor == null) {
-			viewProcessor = createViewProcessor(getViewPattern());
-		}
-		return viewProcessor;
-	}
-
-	/**
-	 * @generated
-	 */
-	public String getEditorPattern() {
-		String pattern = super.getEditorPattern();
-		return pattern != null ? pattern : getDefaultPattern();
 	}
 
 	/**
@@ -130,8 +100,13 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
-	protected MessageFormat createEditorProcessor(String editorPattern) {
-		return new MessageFormat(editorPattern);
+	protected MessageFormat getViewProcessor() {
+		if (viewProcessor == null) {
+			viewProcessor = new MessageFormat(
+					getViewPattern() == null ? getDefaultPattern()
+							: getViewPattern());
+		}
+		return viewProcessor;
 	}
 
 	/**
@@ -139,7 +114,9 @@ public class MessageFormatParser extends AbstractParser {
 	 */
 	protected MessageFormat getEditorProcessor() {
 		if (editorProcessor == null) {
-			editorProcessor = createEditorProcessor(getEditorPattern());
+			editorProcessor = new MessageFormat(
+					getEditorPattern() == null ? getDefaultEditablePattern()
+							: getEditorPattern());
 		}
 		return editorProcessor;
 	}
@@ -147,9 +124,20 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
-	public String getEditPattern() {
-		String pattern = super.getEditPattern();
-		return pattern != null ? pattern : getDefaultPattern();
+	protected String getDefaultEditablePattern() {
+		if (defaultEditablePattern == null) {
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < editableFeatures.length; i++) {
+				if (i > 0) {
+					sb.append(' ');
+				}
+				sb.append('{');
+				sb.append(i);
+				sb.append('}');
+			}
+			defaultEditablePattern = sb.toString();
+		}
+		return defaultEditablePattern;
 	}
 
 	/**
@@ -163,16 +151,11 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
-	protected MessageFormat createEditProcessor(String editPattern) {
-		return new MessageFormat(editPattern);
-	}
-
-	/**
-	 * @generated
-	 */
 	protected MessageFormat getEditProcessor() {
 		if (editProcessor == null) {
-			editProcessor = createEditProcessor(getEditPattern());
+			editProcessor = new MessageFormat(
+					getEditPattern() == null ? getDefaultEditablePattern()
+							: getEditPattern());
 		}
 		return editProcessor;
 	}
@@ -180,18 +163,9 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
-	public String getPrintString(IAdaptable adapter, int flags) {
-		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		return getViewProcessor().format(getValues(element),
-				new StringBuffer(), new FieldPosition(0)).toString();
-	}
-
-	/**
-	 * @generated
-	 */
 	public String getEditString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		return getEditorProcessor().format(getValues(element),
+		return getEditorProcessor().format(getEditableValues(element),
 				new StringBuffer(), new FieldPosition(0)).toString();
 	}
 
@@ -220,4 +194,14 @@ public class MessageFormatParser extends AbstractParser {
 				new ParsePosition(0));
 		return getParseCommand(adapter, values, flags);
 	}
+
+	/**
+	 * @generated
+	 */
+	public String getPrintString(IAdaptable adapter, int flags) {
+		EObject element = (EObject) adapter.getAdapter(EObject.class);
+		return getViewProcessor().format(getValues(element),
+				new StringBuffer(), new FieldPosition(0)).toString();
+	}
+
 }

@@ -1,23 +1,13 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.navigator;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.gmf.runtime.common.ui.services.parser.CommonParserHint;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.common.ui.services.parser.ParserService;
+import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -35,9 +25,7 @@ import org.emftext.language.valueflow.diagram.edit.parts.AgentEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.AgentNameEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateGiveToEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.GiveStateValueEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialNameEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.GiveStateNameEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.StateNextStateEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.TakeStateEditPart;
@@ -118,25 +106,22 @@ public class ValueflowNavigatorLabelProvider extends LabelProvider implements
 		switch (ValueflowVisualIDRegistry.getVisualID(view)) {
 		case ModelEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Diagram?http://www.emftext.org/language/valueflow?Model", ValueflowElementTypes.Model_79); //$NON-NLS-1$
+					"Navigator?Diagram?http://www.emftext.org/language/valueflow?Model", ValueflowElementTypes.Model_1000); //$NON-NLS-1$
 		case AgentEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://www.emftext.org/language/valueflow?Agent", ValueflowElementTypes.Agent_1001); //$NON-NLS-1$
-		case InitialEditPart.VISUAL_ID:
-			return getImage(
-					"Navigator?Node?http://www.emftext.org/language/valueflow?Initial", ValueflowElementTypes.Initial_2001); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.emftext.org/language/valueflow?Agent", ValueflowElementTypes.Agent_2001); //$NON-NLS-1$
 		case GiveStateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/language/valueflow?GiveState", ValueflowElementTypes.GiveState_2002); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/language/valueflow?GiveState", ValueflowElementTypes.GiveState_3001); //$NON-NLS-1$
 		case TakeStateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.emftext.org/language/valueflow?TakeState", ValueflowElementTypes.TakeState_2003); //$NON-NLS-1$
+					"Navigator?Node?http://www.emftext.org/language/valueflow?TakeState", ValueflowElementTypes.TakeState_3002); //$NON-NLS-1$
 		case StateNextStateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://www.emftext.org/language/valueflow?State?nextState", ValueflowElementTypes.StateNextState_3001); //$NON-NLS-1$
+					"Navigator?Link?http://www.emftext.org/language/valueflow?State?nextState", ValueflowElementTypes.StateNextState_4001); //$NON-NLS-1$
 		case GiveStateGiveToEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://www.emftext.org/language/valueflow?GiveState?giveTo", ValueflowElementTypes.GiveStateGiveTo_3002); //$NON-NLS-1$
+					"Navigator?Link?http://www.emftext.org/language/valueflow?GiveState?giveTo", ValueflowElementTypes.GiveStateGiveTo_4002); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -198,19 +183,17 @@ public class ValueflowNavigatorLabelProvider extends LabelProvider implements
 		}
 		switch (ValueflowVisualIDRegistry.getVisualID(view)) {
 		case ModelEditPart.VISUAL_ID:
-			return getModel_79Text(view);
+			return getModel_1000Text(view);
 		case AgentEditPart.VISUAL_ID:
-			return getAgent_1001Text(view);
-		case InitialEditPart.VISUAL_ID:
-			return getInitial_2001Text(view);
+			return getAgent_2001Text(view);
 		case GiveStateEditPart.VISUAL_ID:
-			return getGiveState_2002Text(view);
+			return getGiveState_3001Text(view);
 		case TakeStateEditPart.VISUAL_ID:
-			return getTakeState_2003Text(view);
+			return getTakeState_3002Text(view);
 		case StateNextStateEditPart.VISUAL_ID:
-			return getStateNextState_3001Text(view);
+			return getStateNextState_4001Text(view);
 		case GiveStateGiveToEditPart.VISUAL_ID:
-			return getGiveStateGiveTo_3002Text(view);
+			return getGiveStateGiveTo_4002Text(view);
 		}
 		return getUnknownElementText(view);
 	}
@@ -218,13 +201,13 @@ public class ValueflowNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getModel_79Text(View view) {
+	private String getModel_1000Text(View view) {
 		Model domainModelElement = (Model) view.getElement();
 		if (domainModelElement != null) {
 			return domainModelElement.getName();
 		} else {
 			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"No domain element for view with visualID = " + 79); //$NON-NLS-1$
+					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -232,144 +215,112 @@ public class ValueflowNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getAgent_1001Text(View view) {
-		IAdaptable hintAdapter = new ValueflowParserProvider.HintAdapter(
-				ValueflowElementTypes.Agent_1001,
-				(view.getElement() != null ? view.getElement() : view),
+	private String getAgent_2001Text(View view) {
+		IParser parser = ValueflowParserProvider.getParser(
+				ValueflowElementTypes.Agent_2001,
+				view.getElement() != null ? view.getElement() : view,
 				ValueflowVisualIDRegistry.getType(AgentNameEditPart.VISUAL_ID));
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
 		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
 			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 4004); //$NON-NLS-1$
+					"Parser was not found for label " + 5003); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
-
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getInitial_2001Text(View view) {
-		IAdaptable hintAdapter = new ValueflowParserProvider.HintAdapter(
-				ValueflowElementTypes.Initial_2001,
-				(view.getElement() != null ? view.getElement() : view),
+	private String getGiveState_3001Text(View view) {
+		IParser parser = ValueflowParserProvider.getParser(
+				ValueflowElementTypes.GiveState_3001,
+				view.getElement() != null ? view.getElement() : view,
 				ValueflowVisualIDRegistry
-						.getType(InitialNameEditPart.VISUAL_ID));
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
+						.getType(GiveStateNameEditPart.VISUAL_ID));
 		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
 			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 4001); //$NON-NLS-1$
+					"Parser was not found for label " + 5001); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
-
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getGiveState_2002Text(View view) {
-		IAdaptable hintAdapter = new ValueflowParserProvider.HintAdapter(
-				ValueflowElementTypes.GiveState_2002,
-				(view.getElement() != null ? view.getElement() : view),
-				ValueflowVisualIDRegistry
-						.getType(GiveStateValueEditPart.VISUAL_ID));
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
-		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
-		} else {
-			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 4002); //$NON-NLS-1$
-			return ""; //$NON-NLS-1$
-		}
-
-	}
-
-	/**
-	 * @generated
-	 */
-	private String getTakeState_2003Text(View view) {
-		IAdaptable hintAdapter = new ValueflowParserProvider.HintAdapter(
-				ValueflowElementTypes.TakeState_2003,
-				(view.getElement() != null ? view.getElement() : view),
+	private String getTakeState_3002Text(View view) {
+		IParser parser = ValueflowParserProvider.getParser(
+				ValueflowElementTypes.TakeState_3002,
+				view.getElement() != null ? view.getElement() : view,
 				ValueflowVisualIDRegistry
 						.getType(TakeStateNameEditPart.VISUAL_ID));
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
 		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
 			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 4003); //$NON-NLS-1$
+					"Parser was not found for label " + 5002); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
-
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getStateNextState_3001Text(View view) {
-		IAdaptable hintAdapter = new ValueflowParserProvider.HintAdapter(
-				ValueflowElementTypes.StateNextState_3001,
-				(view.getElement() != null ? view.getElement() : view),
+	private String getStateNextState_4001Text(View view) {
+		IParser parser = ValueflowParserProvider.getParser(
+				ValueflowElementTypes.StateNextState_4001,
+				view.getElement() != null ? view.getElement() : view,
 				CommonParserHint.DESCRIPTION);
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
 		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
 			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 4005); //$NON-NLS-1$
+					"Parser was not found for label " + 6001); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
-
 	}
 
 	/**
 	 * @generated
 	 */
-	private String getGiveStateGiveTo_3002Text(View view) {
-		IAdaptable hintAdapter = new ValueflowParserProvider.HintAdapter(
-				ValueflowElementTypes.GiveStateGiveTo_3002,
-				(view.getElement() != null ? view.getElement() : view),
+	private String getGiveStateGiveTo_4002Text(View view) {
+		IParser parser = ValueflowParserProvider.getParser(
+				ValueflowElementTypes.GiveStateGiveTo_4002,
+				view.getElement() != null ? view.getElement() : view,
 				CommonParserHint.DESCRIPTION);
-		IParser parser = ParserService.getInstance().getParser(hintAdapter);
-
 		if (parser != null) {
-			return parser.getPrintString(hintAdapter, ParserOptions.NONE
-					.intValue());
+			return parser.getPrintString(new EObjectAdapter(
+					view.getElement() != null ? view.getElement() : view),
+					ParserOptions.NONE.intValue());
 		} else {
 			ValueflowDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 4006); //$NON-NLS-1$
+					"Parser was not found for label " + 6002); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
-
 	}
 
 	/**
 	 * @generated
 	 */
 	private String getUnknownElementText(View view) {
-		return "<UnknownElement Visual_ID = " + view.getType() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+		return "<UnknownElement Visual_ID = " + view.getType() + ">"; //$NON-NLS-1$  //$NON-NLS-2$
 	}
 
 	/**
 	 * @generated
 	 */
 	private String getUnresolvedDomainElementProxyText(View view) {
-		return "<Unresolved domain element Visual_ID = " + view.getType() + ">"; //$NON-NLS-1$ //$NON-NLS-2$
+		return "<Unresolved domain element Visual_ID = " + view.getType() + ">"; //$NON-NLS-1$  //$NON-NLS-2$
 	}
 
 	/**

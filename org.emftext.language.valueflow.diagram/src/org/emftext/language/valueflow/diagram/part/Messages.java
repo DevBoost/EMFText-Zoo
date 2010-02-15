@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.part;
 
 import org.eclipse.osgi.util.NLS;
@@ -141,22 +131,22 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String ValueflowInitDiagramFileAction_InitDiagramFileResourceErrorDialogTitle;
+	public static String InitDiagramFile_ResourceErrorDialogTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String ValueflowInitDiagramFileAction_InitDiagramFileResourceErrorDialogMessage;
+	public static String InitDiagramFile_ResourceErrorDialogMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String ValueflowInitDiagramFileAction_InitDiagramFileWizardTitle;
+	public static String InitDiagramFile_WizardTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String ValueflowInitDiagramFileAction_OpenModelFileDialogTitle;
+	public static String InitDiagramFile_OpenModelFileDialogTitle;
 
 	/**
 	 * @generated
@@ -286,32 +276,22 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String Initial3CreationTool_title;
+	public static String Model3CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Initial3CreationTool_desc;
+	public static String Model3CreationTool_desc;
 
 	/**
 	 * @generated
 	 */
-	public static String Model4CreationTool_title;
+	public static String TakeState4CreationTool_title;
 
 	/**
 	 * @generated
 	 */
-	public static String Model4CreationTool_desc;
-
-	/**
-	 * @generated
-	 */
-	public static String TakeState5CreationTool_title;
-
-	/**
-	 * @generated
-	 */
-	public static String TakeState5CreationTool_desc;
+	public static String TakeState4CreationTool_desc;
 
 	/**
 	 * @generated
@@ -346,57 +326,47 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Model_79_links;
+	public static String NavigatorGroupName_Model_1000_links;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Initial_2001_incominglinks;
+	public static String NavigatorGroupName_GiveState_3001_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Initial_2001_outgoinglinks;
+	public static String NavigatorGroupName_GiveState_3001_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_GiveState_2002_incominglinks;
+	public static String NavigatorGroupName_TakeState_3002_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_GiveState_2002_outgoinglinks;
+	public static String NavigatorGroupName_TakeState_3002_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_TakeState_2003_incominglinks;
+	public static String NavigatorGroupName_StateNextState_4001_target;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_TakeState_2003_outgoinglinks;
+	public static String NavigatorGroupName_StateNextState_4001_source;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_StateNextState_3001_target;
+	public static String NavigatorGroupName_GiveStateGiveTo_4002_target;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_StateNextState_3001_source;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_GiveStateGiveTo_3002_target;
-
-	/**
-	 * @generated
-	 */
-	public static String NavigatorGroupName_GiveStateGiveTo_3002_source;
+	public static String NavigatorGroupName_GiveStateGiveTo_4002_source;
 
 	/**
 	 * @generated
@@ -406,17 +376,17 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String AbstractParser_UnexpectedValueTypeMessage;
+	public static String AbstractParser_UnexpectedValueType;
 
 	/**
 	 * @generated
 	 */
-	public static String AbstractParser_WrongStringConversionMessage;
+	public static String AbstractParser_WrongStringConversion;
 
 	/**
 	 * @generated
 	 */
-	public static String AbstractParser_UnknownLiteralMessage;
+	public static String AbstractParser_UnknownLiteral;
 
 	/**
 	 * @generated

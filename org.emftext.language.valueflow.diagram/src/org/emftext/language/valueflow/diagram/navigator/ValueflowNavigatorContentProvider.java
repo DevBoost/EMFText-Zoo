@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.navigator;
 
 import java.util.ArrayList;
@@ -38,7 +28,6 @@ import org.emftext.language.valueflow.diagram.edit.parts.AgentAgentStatesCompart
 import org.emftext.language.valueflow.diagram.edit.parts.AgentEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.GiveStateGiveToEditPart;
-import org.emftext.language.valueflow.diagram.edit.parts.InitialEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.StateNextStateEditPart;
 import org.emftext.language.valueflow.diagram.edit.parts.TakeStateEditPart;
@@ -247,19 +236,22 @@ public class ValueflowNavigatorContentProvider implements
 			Collection result = new ArrayList();
 			result.addAll(getForeignShortcuts((Diagram) view, parentElement));
 			ValueflowNavigatorGroup links = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_Model_79_links,
+					Messages.NavigatorGroupName_Model_1000_links,
 					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
-					.singleton(view), AgentEditPart.VISUAL_ID);
+					.singleton(view), ValueflowVisualIDRegistry
+					.getType(AgentEditPart.VISUAL_ID));
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
 			connectedViews = getDiagramLinksByType(Collections.singleton(view),
-					StateNextStateEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(StateNextStateEditPart.VISUAL_ID));
 			links
 					.addChildren(createNavigatorItems(connectedViews, links,
 							false));
 			connectedViews = getDiagramLinksByType(Collections.singleton(view),
-					GiveStateGiveToEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(GiveStateGiveToEditPart.VISUAL_ID));
 			links
 					.addChildren(createNavigatorItems(connectedViews, links,
 							false));
@@ -272,73 +264,46 @@ public class ValueflowNavigatorContentProvider implements
 		case AgentEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			Collection connectedViews = getChildrenByType(Collections
-					.singleton(view),
-					AgentAgentStatesCompartmentEditPart.VISUAL_ID);
+					.singleton(view), ValueflowVisualIDRegistry
+					.getType(AgentAgentStatesCompartmentEditPart.VISUAL_ID));
 			connectedViews = getChildrenByType(connectedViews,
-					InitialEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(GiveStateEditPart.VISUAL_ID));
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
-			connectedViews = getChildrenByType(Collections.singleton(view),
-					AgentAgentStatesCompartmentEditPart.VISUAL_ID);
-			connectedViews = getChildrenByType(connectedViews,
-					GiveStateEditPart.VISUAL_ID);
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			connectedViews = getChildrenByType(Collections.singleton(view),
-					AgentAgentStatesCompartmentEditPart.VISUAL_ID);
-			connectedViews = getChildrenByType(connectedViews,
-					TakeStateEditPart.VISUAL_ID);
-			result.addAll(createNavigatorItems(connectedViews, parentElement,
-					false));
-			return result.toArray();
-		}
-
-		case InitialEditPart.VISUAL_ID: {
-			Collection result = new ArrayList();
-			ValueflowNavigatorGroup incominglinks = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_Initial_2001_incominglinks,
-					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			ValueflowNavigatorGroup outgoinglinks = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_Initial_2001_outgoinglinks,
-					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getIncomingLinksByType(Collections
-					.singleton(view), StateNextStateEditPart.VISUAL_ID);
-			incominglinks.addChildren(createNavigatorItems(connectedViews,
-					incominglinks, true));
-			connectedViews = getOutgoingLinksByType(
+			connectedViews = getChildrenByType(
 					Collections.singleton(view),
-					StateNextStateEditPart.VISUAL_ID);
-			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
-					outgoinglinks, true));
-			if (!incominglinks.isEmpty()) {
-				result.add(incominglinks);
-			}
-			if (!outgoinglinks.isEmpty()) {
-				result.add(outgoinglinks);
-			}
+					ValueflowVisualIDRegistry
+							.getType(AgentAgentStatesCompartmentEditPart.VISUAL_ID));
+			connectedViews = getChildrenByType(connectedViews,
+					ValueflowVisualIDRegistry
+							.getType(TakeStateEditPart.VISUAL_ID));
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
 			return result.toArray();
 		}
 
 		case GiveStateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			ValueflowNavigatorGroup incominglinks = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_GiveState_2002_incominglinks,
+					Messages.NavigatorGroupName_GiveState_3001_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			ValueflowNavigatorGroup outgoinglinks = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_GiveState_2002_outgoinglinks,
+					Messages.NavigatorGroupName_GiveState_3001_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
-					.singleton(view), StateNextStateEditPart.VISUAL_ID);
+					.singleton(view), ValueflowVisualIDRegistry
+					.getType(StateNextStateEditPart.VISUAL_ID));
 			incominglinks.addChildren(createNavigatorItems(connectedViews,
 					incominglinks, true));
 			connectedViews = getOutgoingLinksByType(
-					Collections.singleton(view),
-					StateNextStateEditPart.VISUAL_ID);
+					Collections.singleton(view), ValueflowVisualIDRegistry
+							.getType(StateNextStateEditPart.VISUAL_ID));
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
 					outgoinglinks, true));
 			connectedViews = getOutgoingLinksByType(
-					Collections.singleton(view),
-					GiveStateGiveToEditPart.VISUAL_ID);
+					Collections.singleton(view), ValueflowVisualIDRegistry
+							.getType(GiveStateGiveToEditPart.VISUAL_ID));
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
 					outgoinglinks, true));
 			if (!incominglinks.isEmpty()) {
@@ -353,23 +318,24 @@ public class ValueflowNavigatorContentProvider implements
 		case TakeStateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			ValueflowNavigatorGroup incominglinks = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_TakeState_2003_incominglinks,
+					Messages.NavigatorGroupName_TakeState_3002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			ValueflowNavigatorGroup outgoinglinks = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_TakeState_2003_outgoinglinks,
+					Messages.NavigatorGroupName_TakeState_3002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
-					.singleton(view), StateNextStateEditPart.VISUAL_ID);
+					.singleton(view), ValueflowVisualIDRegistry
+					.getType(StateNextStateEditPart.VISUAL_ID));
 			incominglinks.addChildren(createNavigatorItems(connectedViews,
 					incominglinks, true));
 			connectedViews = getOutgoingLinksByType(
-					Collections.singleton(view),
-					StateNextStateEditPart.VISUAL_ID);
+					Collections.singleton(view), ValueflowVisualIDRegistry
+							.getType(StateNextStateEditPart.VISUAL_ID));
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews,
 					outgoinglinks, true));
 			connectedViews = getIncomingLinksByType(
-					Collections.singleton(view),
-					GiveStateGiveToEditPart.VISUAL_ID);
+					Collections.singleton(view), ValueflowVisualIDRegistry
+							.getType(GiveStateGiveToEditPart.VISUAL_ID));
 			incominglinks.addChildren(createNavigatorItems(connectedViews,
 					incominglinks, true));
 			if (!incominglinks.isEmpty()) {
@@ -384,33 +350,29 @@ public class ValueflowNavigatorContentProvider implements
 		case StateNextStateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			ValueflowNavigatorGroup target = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_StateNextState_3001_target,
+					Messages.NavigatorGroupName_StateNextState_4001_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			ValueflowNavigatorGroup source = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_StateNextState_3001_source,
+					Messages.NavigatorGroupName_StateNextState_4001_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getLinksTargetByType(Collections
-					.singleton(view), InitialEditPart.VISUAL_ID);
+					.singleton(view), ValueflowVisualIDRegistry
+					.getType(GiveStateEditPart.VISUAL_ID));
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
 			connectedViews = getLinksTargetByType(Collections.singleton(view),
-					GiveStateEditPart.VISUAL_ID);
-			target.addChildren(createNavigatorItems(connectedViews, target,
-					true));
-			connectedViews = getLinksTargetByType(Collections.singleton(view),
-					TakeStateEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(TakeStateEditPart.VISUAL_ID));
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
 			connectedViews = getLinksSourceByType(Collections.singleton(view),
-					InitialEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(GiveStateEditPart.VISUAL_ID));
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
 			connectedViews = getLinksSourceByType(Collections.singleton(view),
-					GiveStateEditPart.VISUAL_ID);
-			source.addChildren(createNavigatorItems(connectedViews, source,
-					true));
-			connectedViews = getLinksSourceByType(Collections.singleton(view),
-					TakeStateEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(TakeStateEditPart.VISUAL_ID));
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
 			if (!target.isEmpty()) {
@@ -425,17 +387,19 @@ public class ValueflowNavigatorContentProvider implements
 		case GiveStateGiveToEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			ValueflowNavigatorGroup target = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_GiveStateGiveTo_3002_target,
+					Messages.NavigatorGroupName_GiveStateGiveTo_4002_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			ValueflowNavigatorGroup source = new ValueflowNavigatorGroup(
-					Messages.NavigatorGroupName_GiveStateGiveTo_3002_source,
+					Messages.NavigatorGroupName_GiveStateGiveTo_4002_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getLinksTargetByType(Collections
-					.singleton(view), TakeStateEditPart.VISUAL_ID);
+					.singleton(view), ValueflowVisualIDRegistry
+					.getType(TakeStateEditPart.VISUAL_ID));
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
 			connectedViews = getLinksSourceByType(Collections.singleton(view),
-					GiveStateEditPart.VISUAL_ID);
+					ValueflowVisualIDRegistry
+							.getType(GiveStateEditPart.VISUAL_ID));
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
 			if (!target.isEmpty()) {
@@ -453,9 +417,8 @@ public class ValueflowNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
-	private Collection getLinksSourceByType(Collection edges, int visualID) {
+	private Collection getLinksSourceByType(Collection edges, String type) {
 		Collection result = new ArrayList();
-		String type = ValueflowVisualIDRegistry.getType(visualID);
 		for (Iterator it = edges.iterator(); it.hasNext();) {
 			Edge nextEdge = (Edge) it.next();
 			View nextEdgeSource = nextEdge.getSource();
@@ -470,9 +433,8 @@ public class ValueflowNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
-	private Collection getLinksTargetByType(Collection edges, int visualID) {
+	private Collection getLinksTargetByType(Collection edges, String type) {
 		Collection result = new ArrayList();
-		String type = ValueflowVisualIDRegistry.getType(visualID);
 		for (Iterator it = edges.iterator(); it.hasNext();) {
 			Edge nextEdge = (Edge) it.next();
 			View nextEdgeTarget = nextEdge.getTarget();
@@ -487,9 +449,8 @@ public class ValueflowNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
-	private Collection getOutgoingLinksByType(Collection nodes, int visualID) {
+	private Collection getOutgoingLinksByType(Collection nodes, String type) {
 		Collection result = new ArrayList();
-		String type = ValueflowVisualIDRegistry.getType(visualID);
 		for (Iterator it = nodes.iterator(); it.hasNext();) {
 			View nextNode = (View) it.next();
 			result.addAll(selectViewsByType(nextNode.getSourceEdges(), type));
@@ -500,9 +461,8 @@ public class ValueflowNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
-	private Collection getIncomingLinksByType(Collection nodes, int visualID) {
+	private Collection getIncomingLinksByType(Collection nodes, String type) {
 		Collection result = new ArrayList();
-		String type = ValueflowVisualIDRegistry.getType(visualID);
 		for (Iterator it = nodes.iterator(); it.hasNext();) {
 			View nextNode = (View) it.next();
 			result.addAll(selectViewsByType(nextNode.getTargetEdges(), type));
@@ -513,9 +473,8 @@ public class ValueflowNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
-	private Collection getChildrenByType(Collection nodes, int visualID) {
+	private Collection getChildrenByType(Collection nodes, String type) {
 		Collection result = new ArrayList();
-		String type = ValueflowVisualIDRegistry.getType(visualID);
 		for (Iterator it = nodes.iterator(); it.hasNext();) {
 			View nextNode = (View) it.next();
 			result.addAll(selectViewsByType(nextNode.getChildren(), type));
@@ -526,9 +485,8 @@ public class ValueflowNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
-	private Collection getDiagramLinksByType(Collection diagrams, int visualID) {
+	private Collection getDiagramLinksByType(Collection diagrams, String type) {
 		Collection result = new ArrayList();
-		String type = ValueflowVisualIDRegistry.getType(visualID);
 		for (Iterator it = diagrams.iterator(); it.hasNext();) {
 			Diagram nextDiagram = (Diagram) it.next();
 			result.addAll(selectViewsByType(nextDiagram.getEdges(), type));

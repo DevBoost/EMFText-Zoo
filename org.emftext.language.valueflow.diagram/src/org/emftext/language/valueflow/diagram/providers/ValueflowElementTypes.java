@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.providers;
 
 import java.util.HashSet;
@@ -29,6 +19,12 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.emftext.language.valueflow.ValueflowPackage;
+import org.emftext.language.valueflow.diagram.edit.parts.AgentEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.GiveStateEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.GiveStateGiveToEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.StateNextStateEditPart;
+import org.emftext.language.valueflow.diagram.edit.parts.TakeStateEditPart;
 import org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorPlugin;
 
 /**
@@ -60,31 +56,27 @@ public class ValueflowElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType Model_79 = getElementType("org.emftext.language.valueflow.diagram.Model_79"); //$NON-NLS-1$
+	public static final IElementType Model_1000 = getElementType("org.emftext.language.valueflow.diagram.Model_1000"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType Agent_1001 = getElementType("org.emftext.language.valueflow.diagram.Agent_1001"); //$NON-NLS-1$
+	public static final IElementType Agent_2001 = getElementType("org.emftext.language.valueflow.diagram.Agent_2001"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType Initial_2001 = getElementType("org.emftext.language.valueflow.diagram.Initial_2001"); //$NON-NLS-1$
+	public static final IElementType GiveState_3001 = getElementType("org.emftext.language.valueflow.diagram.GiveState_3001"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType GiveState_2002 = getElementType("org.emftext.language.valueflow.diagram.GiveState_2002"); //$NON-NLS-1$
+	public static final IElementType TakeState_3002 = getElementType("org.emftext.language.valueflow.diagram.TakeState_3002"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType TakeState_2003 = getElementType("org.emftext.language.valueflow.diagram.TakeState_2003"); //$NON-NLS-1$
+	public static final IElementType StateNextState_4001 = getElementType("org.emftext.language.valueflow.diagram.StateNextState_4001"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType StateNextState_3001 = getElementType("org.emftext.language.valueflow.diagram.StateNextState_3001"); //$NON-NLS-1$
-	/**
-	 * @generated
-	 */
-	public static final IElementType GiveStateGiveTo_3002 = getElementType("org.emftext.language.valueflow.diagram.GiveStateGiveTo_3002"); //$NON-NLS-1$
+	public static final IElementType GiveStateGiveTo_4002 = getElementType("org.emftext.language.valueflow.diagram.GiveStateGiveTo_4002"); //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -197,22 +189,20 @@ public class ValueflowElementTypes extends ElementInitializers {
 		if (elements == null) {
 			elements = new IdentityHashMap();
 
-			elements.put(Model_79, ValueflowPackage.eINSTANCE.getModel());
+			elements.put(Model_1000, ValueflowPackage.eINSTANCE.getModel());
 
-			elements.put(Agent_1001, ValueflowPackage.eINSTANCE.getAgent());
+			elements.put(Agent_2001, ValueflowPackage.eINSTANCE.getAgent());
 
-			elements.put(Initial_2001, ValueflowPackage.eINSTANCE.getInitial());
-
-			elements.put(GiveState_2002, ValueflowPackage.eINSTANCE
+			elements.put(GiveState_3001, ValueflowPackage.eINSTANCE
 					.getGiveState());
 
-			elements.put(TakeState_2003, ValueflowPackage.eINSTANCE
+			elements.put(TakeState_3002, ValueflowPackage.eINSTANCE
 					.getTakeState());
 
-			elements.put(StateNextState_3001, ValueflowPackage.eINSTANCE
+			elements.put(StateNextState_4001, ValueflowPackage.eINSTANCE
 					.getState_NextState());
 
-			elements.put(GiveStateGiveTo_3002, ValueflowPackage.eINSTANCE
+			elements.put(GiveStateGiveTo_4002, ValueflowPackage.eINSTANCE
 					.getGiveState_GiveTo());
 		}
 		return (ENamedElement) elements.get(type);
@@ -231,15 +221,35 @@ public class ValueflowElementTypes extends ElementInitializers {
 	public static boolean isKnownElementType(IElementType elementType) {
 		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet();
-			KNOWN_ELEMENT_TYPES.add(Model_79);
-			KNOWN_ELEMENT_TYPES.add(Agent_1001);
-			KNOWN_ELEMENT_TYPES.add(Initial_2001);
-			KNOWN_ELEMENT_TYPES.add(GiveState_2002);
-			KNOWN_ELEMENT_TYPES.add(TakeState_2003);
-			KNOWN_ELEMENT_TYPES.add(StateNextState_3001);
-			KNOWN_ELEMENT_TYPES.add(GiveStateGiveTo_3002);
+			KNOWN_ELEMENT_TYPES.add(Model_1000);
+			KNOWN_ELEMENT_TYPES.add(Agent_2001);
+			KNOWN_ELEMENT_TYPES.add(GiveState_3001);
+			KNOWN_ELEMENT_TYPES.add(TakeState_3002);
+			KNOWN_ELEMENT_TYPES.add(StateNextState_4001);
+			KNOWN_ELEMENT_TYPES.add(GiveStateGiveTo_4002);
 		}
 		return KNOWN_ELEMENT_TYPES.contains(elementType);
+	}
+
+	/**
+	 * @generated
+	 */
+	public static IElementType getElementType(int visualID) {
+		switch (visualID) {
+		case ModelEditPart.VISUAL_ID:
+			return Model_1000;
+		case AgentEditPart.VISUAL_ID:
+			return Agent_2001;
+		case GiveStateEditPart.VISUAL_ID:
+			return GiveState_3001;
+		case TakeStateEditPart.VISUAL_ID:
+			return TakeState_3002;
+		case StateNextStateEditPart.VISUAL_ID:
+			return StateNextState_4001;
+		case GiveStateGiveToEditPart.VISUAL_ID:
+			return GiveStateGiveTo_4002;
+		}
+		return null;
 	}
 
 }

@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.part;
 
 import java.util.ArrayList;
@@ -45,11 +35,11 @@ public class ValueflowPaletteFactory {
 	private PaletteContainer createObjects1Group() {
 		PaletteDrawer paletteContainer = new PaletteDrawer(
 				Messages.Objects1Group_title);
+		paletteContainer.setId("createObjects1Group"); //$NON-NLS-1$
 		paletteContainer.add(createAgent1CreationTool());
 		paletteContainer.add(createGiveState2CreationTool());
-		paletteContainer.add(createInitial3CreationTool());
-		paletteContainer.add(createModel4CreationTool());
-		paletteContainer.add(createTakeState5CreationTool());
+		paletteContainer.add(createModel3CreationTool());
+		paletteContainer.add(createTakeState4CreationTool());
 		return paletteContainer;
 	}
 
@@ -60,6 +50,7 @@ public class ValueflowPaletteFactory {
 	private PaletteContainer createConnections2Group() {
 		PaletteDrawer paletteContainer = new PaletteDrawer(
 				Messages.Connections2Group_title);
+		paletteContainer.setId("createConnections2Group"); //$NON-NLS-1$
 		paletteContainer.add(createGiveTo1CreationTool());
 		paletteContainer.add(createNextState2CreationTool());
 		return paletteContainer;
@@ -70,12 +61,13 @@ public class ValueflowPaletteFactory {
 	 */
 	private ToolEntry createAgent1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(ValueflowElementTypes.Agent_1001);
+		types.add(ValueflowElementTypes.Agent_2001);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.Agent1CreationTool_title,
 				Messages.Agent1CreationTool_desc, types);
+		entry.setId("createAgent1CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(ValueflowElementTypes
-				.getImageDescriptor(ValueflowElementTypes.Agent_1001));
+				.getImageDescriptor(ValueflowElementTypes.Agent_2001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -85,12 +77,13 @@ public class ValueflowPaletteFactory {
 	 */
 	private ToolEntry createGiveState2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(ValueflowElementTypes.GiveState_2002);
+		types.add(ValueflowElementTypes.GiveState_3001);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.GiveState2CreationTool_title,
 				Messages.GiveState2CreationTool_desc, types);
+		entry.setId("createGiveState2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(ValueflowElementTypes
-				.getImageDescriptor(ValueflowElementTypes.GiveState_2002));
+				.getImageDescriptor(ValueflowElementTypes.GiveState_3001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -98,39 +91,26 @@ public class ValueflowPaletteFactory {
 	/**
 	 * @generated
 	 */
-	private ToolEntry createInitial3CreationTool() {
-		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(ValueflowElementTypes.Initial_2001);
-		NodeToolEntry entry = new NodeToolEntry(
-				Messages.Initial3CreationTool_title,
-				Messages.Initial3CreationTool_desc, types);
-		entry.setSmallIcon(ValueflowElementTypes
-				.getImageDescriptor(ValueflowElementTypes.Initial_2001));
-		entry.setLargeIcon(entry.getSmallIcon());
-		return entry;
-	}
-
-	/**
-	 * @generated
-	 */
-	private ToolEntry createModel4CreationTool() {
-		ToolEntry entry = new ToolEntry(Messages.Model4CreationTool_title,
-				Messages.Model4CreationTool_desc, null, null) {
+	private ToolEntry createModel3CreationTool() {
+		ToolEntry entry = new ToolEntry(Messages.Model3CreationTool_title,
+				Messages.Model3CreationTool_desc, null, null) {
 		};
+		entry.setId("createModel3CreationTool"); //$NON-NLS-1$
 		return entry;
 	}
 
 	/**
 	 * @generated
 	 */
-	private ToolEntry createTakeState5CreationTool() {
+	private ToolEntry createTakeState4CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(ValueflowElementTypes.TakeState_2003);
+		types.add(ValueflowElementTypes.TakeState_3002);
 		NodeToolEntry entry = new NodeToolEntry(
-				Messages.TakeState5CreationTool_title,
-				Messages.TakeState5CreationTool_desc, types);
+				Messages.TakeState4CreationTool_title,
+				Messages.TakeState4CreationTool_desc, types);
+		entry.setId("createTakeState4CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(ValueflowElementTypes
-				.getImageDescriptor(ValueflowElementTypes.TakeState_2003));
+				.getImageDescriptor(ValueflowElementTypes.TakeState_3002));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -140,13 +120,14 @@ public class ValueflowPaletteFactory {
 	 */
 	private ToolEntry createGiveTo1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(ValueflowElementTypes.GiveStateGiveTo_3002);
+		types.add(ValueflowElementTypes.GiveStateGiveTo_4002);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.GiveTo1CreationTool_title,
 				Messages.GiveTo1CreationTool_desc, types);
+		entry.setId("createGiveTo1CreationTool"); //$NON-NLS-1$
 		entry
 				.setSmallIcon(ValueflowElementTypes
-						.getImageDescriptor(ValueflowElementTypes.GiveStateGiveTo_3002));
+						.getImageDescriptor(ValueflowElementTypes.GiveStateGiveTo_4002));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -156,12 +137,13 @@ public class ValueflowPaletteFactory {
 	 */
 	private ToolEntry createNextState2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(ValueflowElementTypes.StateNextState_3001);
+		types.add(ValueflowElementTypes.StateNextState_4001);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.NextState2CreationTool_title,
 				Messages.NextState2CreationTool_desc, types);
+		entry.setId("createNextState2CreationTool"); //$NON-NLS-1$
 		entry.setSmallIcon(ValueflowElementTypes
-				.getImageDescriptor(ValueflowElementTypes.StateNextState_3001));
+				.getImageDescriptor(ValueflowElementTypes.StateNextState_4001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}

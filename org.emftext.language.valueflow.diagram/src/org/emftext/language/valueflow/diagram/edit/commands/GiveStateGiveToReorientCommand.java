@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.edit.commands;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -86,7 +76,7 @@ public class GiveStateGiveToReorientCommand extends EditElementCommand {
 			return false;
 		}
 		return ValueflowBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistGiveStateGiveTo_3002(getNewSource(), getOldTarget());
+				.canExistGiveStateGiveTo_4002(getNewSource(), getOldTarget());
 	}
 
 	/**
@@ -97,7 +87,7 @@ public class GiveStateGiveToReorientCommand extends EditElementCommand {
 			return false;
 		}
 		return ValueflowBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistGiveStateGiveTo_3002(getOldSource(), getNewTarget());
+				.canExistGiveStateGiveTo_4002(getOldSource(), getNewTarget());
 	}
 
 	/**

@@ -1,16 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.edit.policies;
 
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -19,7 +9,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.commands.DuplicateEObjectsCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DuplicateElementsRequest;
-import org.emftext.language.valueflow.ValueflowPackage;
 import org.emftext.language.valueflow.diagram.edit.commands.AgentCreateCommand;
 import org.emftext.language.valueflow.diagram.providers.ValueflowElementTypes;
 
@@ -32,12 +21,15 @@ public class ModelItemSemanticEditPolicy extends
 	/**
 	 * @generated
 	 */
+	public ModelItemSemanticEditPolicy() {
+		super(ValueflowElementTypes.Model_1000);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (ValueflowElementTypes.Agent_1001 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(ValueflowPackage.eINSTANCE
-						.getModel_Agents());
-			}
+		if (ValueflowElementTypes.Agent_2001 == req.getElementType()) {
 			return getGEFWrapper(new AgentCreateCommand(req));
 		}
 		return super.getCreateCommand(req);

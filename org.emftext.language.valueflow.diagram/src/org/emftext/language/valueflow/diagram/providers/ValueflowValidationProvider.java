@@ -1,33 +1,18 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
+/*
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
+ */
 package org.emftext.language.valueflow.diagram.providers;
 
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gmf.runtime.common.ui.services.action.contributionitem.AbstractContributionItemProvider;
-import org.eclipse.gmf.runtime.common.ui.util.IWorkbenchPartDescriptor;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.action.IAction;
 import org.emftext.language.valueflow.diagram.edit.parts.ModelEditPart;
-import org.emftext.language.valueflow.diagram.part.ValidateAction;
 import org.emftext.language.valueflow.diagram.part.ValueflowDiagramEditorPlugin;
 import org.emftext.language.valueflow.diagram.part.ValueflowVisualIDRegistry;
 
 /**
  * @generated
  */
-public class ValueflowValidationProvider extends
-		AbstractContributionItemProvider {
+public class ValueflowValidationProvider {
 
 	/**
 	 * @generated
@@ -67,17 +52,6 @@ public class ValueflowValidationProvider extends
 		} else {
 			task.run();
 		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected IAction createAction(String actionId,
-			IWorkbenchPartDescriptor partDescriptor) {
-		if (ValidateAction.VALIDATE_ACTION_KEY.equals(actionId)) {
-			return new ValidateAction(partDescriptor);
-		}
-		return super.createAction(actionId, partDescriptor);
 	}
 
 	/**

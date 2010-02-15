@@ -8,17 +8,12 @@ package valueflow  valueflow "http://www.emftext.org/language/valueflow"  {
 
 	@"gmf.diagram"
 	class Model extends NamedElement {
-		@"gmf.compartment"
 		containment reference Agent agents (0..-1);
 	}
 	
-	@"gmf.node"("label"="name")
 	class Agent extends NamedElement {
 		@"gmf.compartment"
 		containment reference State states (0..-1);
-	}
-	
-	class Initial extends State {
 	}
 	
 	abstract class State extends NamedElement {
@@ -27,7 +22,7 @@ package valueflow  valueflow "http://www.emftext.org/language/valueflow"  {
 		reference State previousState opposite nextState;
 	}
 	
-	@"gmf.node"("label"="value")
+
 	class GiveState extends State {
 		attribute EString value (1..1);
 		attribute EString ID (0..1);
