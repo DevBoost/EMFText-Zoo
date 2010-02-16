@@ -195,10 +195,12 @@ public class ClassifierReferenceTargetReferenceResolver implements
 						JavaClasspath.get(ncr).getClassifier(firstClassName), container.eResource());
 				target = ConcreteClassifierDecider.resolveRelativeNamespace(
 						ncr, ncr.getNamespaces().indexOf(firstClass.getName()) + 1, firstClass, container, reference);
-				for(ConcreteClassifier cand : ((ConcreteClassifier)target).getAllInnerClassifiers()) {
-					if (identifier.equals(cand.getName())) {
-						target = cand;
-						break;
+				if (target != null) {
+					for(ConcreteClassifier cand : ((ConcreteClassifier)target).getAllInnerClassifiers()) {
+						if (identifier.equals(cand.getName())) {
+							target = cand;
+							break;
+						}
 					}
 				}
 			}
