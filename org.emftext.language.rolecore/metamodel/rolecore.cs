@@ -64,7 +64,7 @@ RULES {
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 		
 	CoreClass ::= 
-		"CoreClass" name[]
+		"CoreClass" name[] (#1 "extends" super[])? #1
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 
 	EAttribute ::= 
