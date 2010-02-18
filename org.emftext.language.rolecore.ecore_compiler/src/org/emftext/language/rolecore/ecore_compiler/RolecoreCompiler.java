@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -110,7 +109,61 @@ public class RolecoreCompiler  {
 		compileCoreClasses(metaModel.getCoreClasses(), ePackage);
 		compileRoles(metaModel.getRoles(), ePackage);
 		replaceReferencesToRolesAndCoreClasses(ePackage);
+		// replace reference with reference roles between core classes
+		addReferenceRoles(metaModel.getCoreClasses(), ePackage);
 		return ePackage;
+	}
+
+	private void addReferenceRoles(EList<CoreClass> coreClasses,
+			EPackage ePackage) {
+		for (CoreClass coreClass:coreClasses){
+			
+			EList<EReference> referenceList = coreClass.getEReferences();
+			for (EReference reference:referenceList){
+				addReferenceRole(reference, coreClass, ePackage);
+			}
+		}
+		
+	}
+
+	private void addReferenceRole(EReference reference, CoreClass coreClass, EPackage ePackage) {
+		//replace only references between core classes
+		EClass targetClass = (EClass)reference.getEType();
+		EClass abstractRole = (EClass)ePackage.getEClassifier(coreClass.getName()+"Role");
+		if (!(targetClass instanceof CoreClass)||abstractRole == null)
+			return;
+		EClass targetEClass = (EClass)ePackage.getEClassifier(targetClass.getName());
+		String roleName = firstLetter2UpperCase(coreClass.getName())+ 
+			firstLetter2UpperCase(targetEClass.getName())+
+			firstLetter2UpperCase(reference.getName())+"Role";
+		EClass referenceRole = (EClass)ePackage.getEClassifier(roleName);
+		if (referenceRole!=null)
+			return;
+		
+		referenceRole = EcoreFactory.eINSTANCE.createEClass();
+		referenceRole.setName(roleName);
+		referenceRole.getESuperTypes().add(abstractRole);
+		createRefRoleToCoreClassReference(ePackage, reference, referenceRole, targetEClass);
+		ePackage.getEClassifiers().add(referenceRole);
+	}
+
+	private EReference createRefRoleToCoreClassReference(EPackage ePackage,
+			EReference rcReference, EClass referenceRole, EClass coreClass) {
+		EReference reference = EcoreFactory.eINSTANCE.createEReference();
+		reference.setName(rcReference.getName());
+		reference.setLowerBound(1);
+		reference.setUpperBound(1);
+		reference.setContainment(rcReference.isContainment());
+		referenceRole.getEStructuralFeatures().add(reference);
+		reference.setEType(coreClass);
+		return reference;
+	}
+
+	private String firstLetter2UpperCase(String string) {
+		if (string!=null&&string.length()>0){
+			return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+		}
+		return string;
 	}
 
 	private void replaceReferencesToRolesAndCoreClasses(EPackage ePackage) {
@@ -152,7 +205,7 @@ public class RolecoreCompiler  {
 			}
 		} else {
 			referencingObject.eSet(eReference, newReferencedObject);
-			// TK Test, the opposite reference get the an opposite if there is none
+			// Hoang-Kim Test: the opposite reference get the an opposite if there is none
 			EReference opposite = eReference.getEOpposite();
 			if (opposite!=null)
 				if (opposite.getEOpposite()==null)
@@ -178,13 +231,13 @@ public class RolecoreCompiler  {
 			return;
 		}
 		// create an implementation for the core class and the abstract role class
-		EClass core = findOrCreateCoreClass(ePackage, coreClass);
+		EClass coreEClass = findOrCreateCoreClass(ePackage, coreClass);
 		EClass abstractRoleClass = findOrCreateAbstractRoleClass(coreInterface.getEPackage(), coreClass);
 		String coreName = coreClass.getName().toLowerCase();
 		// add reference to the roles that can by played by the core class
-		findOrCreateCoreReference(abstractRoleClass, core, coreName+CORE_REFERENCE_NAME);
+		findOrCreateCoreReference(abstractRoleClass, coreEClass, coreName+CORE_REFERENCE_NAME);
 		// add reference to the core interface which contains the roles
-		findOrCreateRolesReference(core, abstractRoleClass, coreName+ROLES_REFERENCE_NAME);
+		findOrCreateRolesReference(coreEClass, abstractRoleClass, coreName+ROLES_REFERENCE_NAME);
 		
 		copyTargets.add(coreInterface);
 		copyEClassContents(coreClass, coreInterface);
@@ -347,7 +400,7 @@ public class RolecoreCompiler  {
 		lowerBound.getETypeArguments().add(genericType);
 		return lowerBound;
 	}
-
+	
 	private EGenericType createT(ETypeParameter typeParameter) {
 		EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
 		genericType.setETypeParameter(typeParameter);
@@ -373,19 +426,19 @@ public class RolecoreCompiler  {
 		for (EOperation operation : operations) {
 			to.getEOperations().add((EOperation) EcoreUtil.copy(operation));
 		}
-
-		List<EStructuralFeature> features = from.getEStructuralFeatures();
-		for (EStructuralFeature feature : features) {
-			to.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(feature));
-		}
+		//replace by reference Roles
+//		List<EStructuralFeature> features = from.getEStructuralFeatures();
+//		for (EStructuralFeature feature : features) {
+//			to.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(feature));
+//		}
 		
 		// TODO copy annotations
 	}
 
 	private void findOrCreateCoreReference(EClass abstractRoleClass,
-			EClass core, String coreReferenceName) {
+			EClass coreEClass, String coreReferenceName) {
 		EReference coreReference = (EReference)abstractRoleClass.getEStructuralFeature(coreReferenceName);
-		if (coreReference != null && coreReference.getEType().equals(core)) {
+		if (coreReference != null && coreReference.getEType().equals(coreEClass)) {
 			return;
 		}
 		coreReference = EcoreFactory.eINSTANCE.createEReference();
@@ -395,12 +448,12 @@ public class RolecoreCompiler  {
 		coreReference.setContainment(false);
 		abstractRoleClass.getEStructuralFeatures().add(coreReference);
 
-		coreReference.setEType(core);
+		coreReference.setEType(coreEClass);
 	}
 
-	private void findOrCreateRolesReference(EClass core,
+	private void findOrCreateRolesReference(EClass coreEClass,
 			EClass abstractRole, String rolesReferenceName) {
-		EReference rolesReference = (EReference) core.getEStructuralFeature(rolesReferenceName);
+		EReference rolesReference = (EReference) coreEClass.getEStructuralFeature(rolesReferenceName);
 		if (rolesReference != null && rolesReference.getEType().equals(abstractRole)) {
 			return;
 		}
@@ -411,7 +464,7 @@ public class RolecoreCompiler  {
 		// Due to the recursive role object pattern of Riehle, 
 		//the Containment reference is not possible
 		rolesReference.setContainment(true);
-		core.getEStructuralFeatures().add(rolesReference);
+		coreEClass.getEStructuralFeatures().add(rolesReference);
 
 		rolesReference.setEType(abstractRole); 
 	}
