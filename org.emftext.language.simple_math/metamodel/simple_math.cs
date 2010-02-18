@@ -14,7 +14,7 @@
 
 SYNTAXDEF sm
 FOR       <http://www.emftext.org/language/simple_math>
-START     Additive
+START     Root
 
 OPTIONS {	
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
@@ -23,29 +23,30 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE ADDITIVE_OPERATOR $ '+' | '-'$;
+	DEFINE ADDITIVE_OPERATOR $ '+' | '-' $;
 	DEFINE MULTIPLICATIVE_OPERATOR $ '*' | '/' $;
 	DEFINE INTEGER_LITERAL $('1'..'9') ('0'..'9')* | '0'$;
 	DEFINE REAL_LITERAL $ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')*)?$;
-	
-	DEFINE REAL_TYPE $'Real'$;
-	DEFINE INTEGER_TYPE $'Integer'$;
 }
 
 RULES {
-		Additive ::= left (right)*;
-		AdditivePart ::= operator[ADDITIVE_OPERATOR] mul;
-		
-		Multiplicative ::= left (right)*;
-		MultiplicativePart ::= operator[MULTIPLICATIVE_OPERATOR] unary;
-		
-		UnaryMath ::= (operator[ADDITIVE_OPERATOR])? atom;
-		
-		IntegerLiteralExp ::= intValue[INTEGER_LITERAL];
-		RealLiteralExp ::= floatValue[REAL_LITERAL];
-		
-		RealType ::= typename[REAL_TYPE];
-		IntegerType ::= typename[INTEGER_TYPE];
-		
-		BracketExp ::= "(" body ")";
+	Root ::= exp;
+	
+	@Leftassoc(weight="1", identifier="Expression")
+	Multiplicative ::= left operator[MULTIPLICATIVE_OPERATOR] right;
+	
+	@Leftassoc(weight="2", identifier="Expression")
+	Additive ::= left operator[ADDITIVE_OPERATOR] right;
+
+	@Unary(weight="3", identifier="Expression")	
+	Negation ::= "-" body;
+	
+	@Primitive(weight="5", identifier="Expression")
+	BracketExp ::= "(" body ")";
+
+	@Primitive(weight="5", identifier="Expression")
+	IntegerLiteralExp ::= intValue[INTEGER_LITERAL];
+
+	@Primitive(weight="5", identifier="Expression")
+	RealLiteralExp ::= floatValue[REAL_LITERAL];
 }

@@ -23,25 +23,29 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.simple_math.Additive;
+import org.emftext.language.simple_math.Expression;
 import org.emftext.language.simple_math.IntegerLiteralExp;
-import org.emftext.language.simple_math.NumberAtom;
+import org.emftext.language.simple_math.Root;
 
 public class SimpleMathTest extends TestCase {
 	
 	public void testOnePlusTwo() {
 		try {
-			Additive root = loadResource(new FileInputStream("input" + File.separator + "one_plus_two.sm"), "one_plus_two.sm");
+			Root root = loadResource(new FileInputStream("input" + File.separator + "one_plus_two.sm"), "one_plus_two.sm");
+			Expression expression = root.getExp();
+			assert expression instanceof Additive;
+			Additive additive = (Additive) expression;
 			// check left
-			NumberAtom leftAtom = root.getLeft().getLeft().getAtom();
+			Expression leftAtom = additive.getLeft();
 			assertTrue(leftAtom instanceof IntegerLiteralExp);
 			IntegerLiteralExp left = (IntegerLiteralExp) leftAtom;
 			assertEquals(1, left.getIntValue());
 			
 			// check operator
-			assertEquals("+", root.getRight().get(0).getOperator());
+			assertEquals("+", additive.getOperator());
 			
 			// check right
-			NumberAtom rightAtom = root.getRight().get(0).getMul().getLeft().getAtom();
+			Expression rightAtom = additive.getRight();
 			assertTrue(rightAtom instanceof IntegerLiteralExp);
 			IntegerLiteralExp right = (IntegerLiteralExp) rightAtom;
 			assertEquals(2, right.getIntValue());
@@ -52,15 +56,15 @@ public class SimpleMathTest extends TestCase {
 
 	public void testBrackets() {
 		try {
-			Additive root = loadResource(new FileInputStream("input" + File.separator + "brackets.sm"), "brackets.sm");
+			Root root = loadResource(new FileInputStream("input" + File.separator + "brackets.sm"), "brackets.sm");
 			assertNotNull(root);
-			// check left
+			// TODO check left
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
 	}
 
-	private static Additive loadResource(InputStream inputStream,
+	private static Root loadResource(InputStream inputStream,
 			String fileIdentifier) throws IOException {
 		
 		SmResourceImplTestWrapper resource = new SmResourceImplTestWrapper();
@@ -69,11 +73,11 @@ public class SimpleMathTest extends TestCase {
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
 		assertTrue("File '" + fileIdentifier
-				+ "' was parsed to Additive.",
-				content instanceof Additive);
+				+ "' was parsed to Root.",
+				content instanceof Root);
 		assertEquals(0, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
-		Additive root = (Additive) content;
+		Root root = (Root) content;
 		return root;
 	}
 
