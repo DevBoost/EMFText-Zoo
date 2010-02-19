@@ -233,7 +233,7 @@ public class RolecoreCompiler  {
 		// create an implementation for the core class and the abstract role class
 		EClass coreEClass = findOrCreateCoreClass(ePackage, coreClass);
 		EClass abstractRoleClass = findOrCreateAbstractRoleClass(coreInterface.getEPackage(), coreClass);
-		String coreName = coreClass.getName().toLowerCase();
+		String coreName = coreClass.getName().substring(0, 1).toLowerCase()+coreClass.getName().substring(1);
 		// add reference to the roles that can by played by the core class
 		findOrCreateCoreReference(abstractRoleClass, coreEClass, coreName+CORE_REFERENCE_NAME);
 		// add reference to the core interface which contains the roles
@@ -421,12 +421,13 @@ public class RolecoreCompiler  {
 		for (EAttribute attribute : attributes) {
 			to.getEAttributes().add((EAttribute) EcoreUtil.copy(attribute));
 		}
-
+		
 		List<EOperation> operations = from.getEOperations();
 		for (EOperation operation : operations) {
 			to.getEOperations().add((EOperation) EcoreUtil.copy(operation));
 		}
 		//replace by reference Roles
+		// TODO choose the right EType in the right EPackage
 //		List<EStructuralFeature> features = from.getEStructuralFeatures();
 //		for (EStructuralFeature feature : features) {
 //			to.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(feature));
