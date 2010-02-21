@@ -1,8 +1,5 @@
 package org.emftext.language.simple_math.interpreter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.simple_math.Additive;
@@ -14,13 +11,19 @@ import org.emftext.language.simple_math.RealLiteralExp;
 import org.emftext.language.simple_math.Root;
 import org.emftext.language.simple_math.resource.sm.util.AbstractSmInterpreter;
 
-// TODO differentiate between + and -, * and /
+/**
+ * A simple example interpreter that computes the value of the math expression.
+ */
 public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathContext> {
 
 	@Override
 	public boolean interprete_org_emftext_language_simple_005Fmath_Additive(
 			Additive object, SimpleMathContext context) {
-		context.push(context.pop() + context.pop());
+		if ("+".equals(object.getOperator())) {
+			context.push(context.pop() + context.pop());
+		} else {
+			context.push(context.pop() - context.pop());
+		}
 		return true;
 	}
 
@@ -35,7 +38,11 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	public boolean interprete_org_emftext_language_simple_005Fmath_Multiplicative(
 			Multiplicative object, SimpleMathContext context) {
 		
-		context.push(context.pop() * context.pop());
+		if ("*".equals(object.getOperator())) {
+			context.push(context.pop() * context.pop());
+		} else {
+			context.push(context.pop() / context.pop());
+		}
 		return true;
 	}
 
@@ -64,14 +71,8 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	public boolean interprete_org_emftext_language_simple_005Fmath_Root(
 			Root object, SimpleMathContext context) {
 		TreeIterator<EObject> contents = object.eAllContents();
-		List<EObject> contentList = new ArrayList<EObject>();
 		while (contents.hasNext()) {
-			EObject next = contents.next();
-			contentList.add(next);
-		}
-		for (EObject eObject : contentList) {
-			System.out.println("adding " + eObject);
-			addObjectToInterprete(eObject);
+			addObjectToInterprete(contents.next());
 		}
 		return true;
 	}

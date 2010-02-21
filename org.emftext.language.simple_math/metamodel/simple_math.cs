@@ -33,11 +33,13 @@ RULES {
 	Root ::= exp;
 	
 	@Leftassoc(weight="1", identifier="Expression")
-	Multiplicative ::= left operator[MULTIPLICATIVE_OPERATOR] right;
-	
-	@Leftassoc(weight="2", identifier="Expression")
 	Additive ::= left operator[ADDITIVE_OPERATOR] right;
 
+	@Leftassoc(weight="2", identifier="Expression")
+	Multiplicative ::= left operator[MULTIPLICATIVE_OPERATOR] right;
+	
+	// TODO this does not work yet, probably because the '-' is consumed
+	// by the ADDITIVE_OPERATOR token
 	@Unary(weight="3", identifier="Expression")	
 	Negation ::= "-" body;
 	

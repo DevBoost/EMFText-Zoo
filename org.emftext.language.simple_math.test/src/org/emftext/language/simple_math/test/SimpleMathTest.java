@@ -16,18 +16,15 @@ package org.emftext.language.simple_math.test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
+import java.util.Map;
 
-import junit.framework.TestCase;
-
-import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.simple_math.Additive;
 import org.emftext.language.simple_math.Expression;
 import org.emftext.language.simple_math.IntegerLiteralExp;
 import org.emftext.language.simple_math.Root;
 
-public class SimpleMathTest extends TestCase {
+public class SimpleMathTest extends AbstractSimpleMathTest {
 	
 	public void testOnePlusTwo() {
 		try {
@@ -64,21 +61,8 @@ public class SimpleMathTest extends TestCase {
 		}
 	}
 
-	private static Root loadResource(InputStream inputStream,
-			String fileIdentifier) throws IOException {
-		
-		SmResourceImplTestWrapper resource = new SmResourceImplTestWrapper();
-		resource.load(inputStream, Collections.EMPTY_MAP);
-		assertEquals("The resource should have one content element.", 1,
-				resource.getContents().size());
-		EObject content = resource.getContents().get(0);
-		assertTrue("File '" + fileIdentifier
-				+ "' was parsed to Root.",
-				content instanceof Root);
-		assertEquals(0, resource.getErrors().size());
-		assertEquals(0, resource.getWarnings().size());
-		Root root = (Root) content;
-		return root;
+	@Override
+	public Map<?, ?> getLoadOptions() {
+		return Collections.emptyMap();
 	}
-
 }
