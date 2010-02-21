@@ -50,7 +50,7 @@ public abstract class AbstractSimpleMathTest extends TestCase {
 			throws IOException {
 		Map<?, ?> options = getLoadOptions();
 		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.createResource(URI.createURI("temp.sm"));
+		Resource resource = rs.createResource(URI.createURI("temp." + new SmMetaInformation().getSyntaxName()));
 		resource.load(inputStream, options);
 		inputStream.close();
 		return resource;
