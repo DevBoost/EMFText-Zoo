@@ -8,10 +8,12 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.threevaluedlogic.Constants;
 import org.emftext.language.threevaluedlogic.Formula;
@@ -31,31 +33,31 @@ public class TVLTest extends TestCase {
 	
 	public void testInterpreter() {
 		// check basic truth table (for or)
-		assertComputedValue(Constants.TRUE, "TRUE OR TRUE");
-		assertComputedValue(Constants.TRUE, "TRUE OR UNKNOWN"); 
-		assertComputedValue(Constants.TRUE, "TRUE OR FALSE"); 
-		assertComputedValue(Constants.TRUE, "UNKNOWN OR TRUE"); 
-		assertComputedValue(Constants.UNKNOWN, "UNKNOWN OR UNKNOWN"); 
-		assertComputedValue(Constants.UNKNOWN, "UNKNOWN OR FALSE"); 
-		assertComputedValue(Constants.TRUE, "FALSE OR TRUE");
-		assertComputedValue(Constants.UNKNOWN, "FALSE OR UNKNOWN"); 
-		assertComputedValue(Constants.FALSE, "FALSE OR FALSE");
+		assertComputedValue(Constants.TRUE, "true OR true");
+		assertComputedValue(Constants.TRUE, "true OR unknown");
+		assertComputedValue(Constants.TRUE, "true OR false");
+		assertComputedValue(Constants.TRUE, "unknown OR true");
+		assertComputedValue(Constants.UNKNOWN, "unknown OR unknown");
+		assertComputedValue(Constants.UNKNOWN, "unknown OR false");
+		assertComputedValue(Constants.TRUE, "false OR true");
+		assertComputedValue(Constants.UNKNOWN, "false OR unknown");
+		assertComputedValue(Constants.FALSE, "false OR false");
 
 		// check basic truth table (for and)
-		assertComputedValue(Constants.TRUE, "TRUE AND TRUE");
-		assertComputedValue(Constants.UNKNOWN, "TRUE AND UNKNOWN");
-		assertComputedValue(Constants.FALSE, "TRUE AND FALSE");
-		assertComputedValue(Constants.UNKNOWN, "UNKNOWN AND TRUE");
-		assertComputedValue(Constants.UNKNOWN, "UNKNOWN AND UNKNOWN");
-		assertComputedValue(Constants.FALSE, "UNKNOWN AND FALSE");
-		assertComputedValue(Constants.FALSE, "FALSE AND TRUE");
-		assertComputedValue(Constants.FALSE, "FALSE AND UNKNOWN");
-		assertComputedValue(Constants.FALSE, "FALSE AND FALSE");
+		assertComputedValue(Constants.TRUE, "true AND true");
+		assertComputedValue(Constants.UNKNOWN, "true AND unknown");
+		assertComputedValue(Constants.FALSE, "true AND false");
+		assertComputedValue(Constants.UNKNOWN, "unknown AND true");
+		assertComputedValue(Constants.UNKNOWN, "unknown AND unknown");
+		assertComputedValue(Constants.FALSE, "unknown AND false");
+		assertComputedValue(Constants.FALSE, "false AND true");
+		assertComputedValue(Constants.FALSE, "false AND unknown");
+		assertComputedValue(Constants.FALSE, "false AND false");
 
 		// check basic truth table (for not)
-		assertComputedValue(Constants.FALSE, "TRUE");
-		assertComputedValue(Constants.UNKNOWN, "UNKNOWN");
-		assertComputedValue(Constants.TRUE, "FALSE");
+		assertComputedValue(Constants.FALSE, "NOT true");
+		assertComputedValue(Constants.UNKNOWN, "NOT unknown");
+		assertComputedValue(Constants.TRUE, "NOT false");
 	}
 
 	private void assertComputedValue(Constants result, String formula) {
@@ -80,7 +82,11 @@ public class TVLTest extends TestCase {
 		EObject content = resource.getContents().get(0);
 		assertTrue("File '" + fileIdentifier + "' was parsed to type Formula.",
 				content instanceof Formula);
-		assertEquals(0, resource.getErrors().size());
+		EList<Diagnostic> errors = resource.getErrors();
+		for (Diagnostic diagnostic : errors) {
+			System.out.println("loadResource() ERROR: " + diagnostic.getMessage());
+		}
+		assertEquals(0, errors.size());
 		assertEquals(0, resource.getWarnings().size());
 		Formula root = (Formula) content;
 		return root;
