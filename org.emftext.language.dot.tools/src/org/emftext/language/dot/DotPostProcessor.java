@@ -102,7 +102,6 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 		private int exit;
 		private boolean error = false;
 
-		private String stdout;
 		private String stderr;
 
 		public void exit(int exitCode) {
@@ -118,7 +117,6 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 		}
 
 		public void result(Pair<String, String> pair) {
-			stdout = pair.getLeft();
 			stderr = pair.getRight();
 		}
 
@@ -128,10 +126,6 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 
 		public boolean isError() {
 			return error;
-		}
-
-		public String getStdout() {
-			return stdout;
 		}
 
 		public String getStderr() {
