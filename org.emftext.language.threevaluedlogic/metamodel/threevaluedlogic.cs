@@ -24,6 +24,14 @@ OPTIONS {
 	tokenspace = "1";
 }
 
+TOKENSTYLES {
+	"OR" COLOR #00a5f2, BOLD;
+	"AND" COLOR #00a5f2, BOLD;
+	"NOT" COLOR #00a5f2, BOLD;
+	"(" COLOR #00a5f2, BOLD;
+	")" COLOR #00a5f2, BOLD;
+}
+
 RULES {
 	@Leftassoc(weight="1", identifier="Formula")
 	Or       ::= children "OR" children;
