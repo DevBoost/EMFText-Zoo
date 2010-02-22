@@ -18,10 +18,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Logger;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.dot.resource.dot.IDotResourcePostProcessor;
 import org.emftext.language.dot.resource.dot.mopp.DotResource;
 import org.emftext.language.dot.util.ExeUtil;
@@ -30,21 +33,26 @@ import org.emftext.language.dot.util.Pair;
 public class DotPostProcessor implements IDotResourcePostProcessor {
 
 	private static final String dotExecutable = getDOTExecutable();
-	private static final Logger logger = Logger
-			.getLogger(DotPostProcessor.class.getName());
 
 	public void process(DotResource resource) {
 		if (!testDOT()) {
-			// TODO externalize
-			logger.severe("can't run dot. please check your path!"); //$NON-NLS-1$
+			String path = System.getenv("PATH"); //$NON-NLS-1$
+			resource.addError("Cannot run DOT execuatble. Please make sure that it is contained in your PATH variable (" + path +").", null); //$NON-NLS-1$
 			return;
 		}
 
 		URI uri = resource.getURI();
 		String message = runDOT(uri);
-		if (message != null)
-			// TODO externalize
-			logger.severe("dot finished with: " + message); //$NON-NLS-1$
+		if (message != null) {
+			resource.addError("DOT finished with \"" + message + "\"", null); //$NON-NLS-1$
+		} else {
+			final IProject project = WorkspaceSynchronizer.getFile(resource).getProject();
+			try {
+				project.refreshLocal(IProject.DEPTH_INFINITE, new NullProgressMonitor());
+			} catch (CoreException e) {
+				// Do nothing
+			}
+		}
 	}
 
 	private String runDOT(URI uri) {
