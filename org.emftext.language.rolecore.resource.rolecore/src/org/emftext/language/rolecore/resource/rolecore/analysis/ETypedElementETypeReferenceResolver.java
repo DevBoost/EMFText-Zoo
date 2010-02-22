@@ -18,6 +18,13 @@ public class ETypedElementETypeReferenceResolver implements org.emftext.language
 	private org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.eclipse.emf.ecore.ETypedElement, org.eclipse.emf.ecore.EClassifier> delegate = new org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.eclipse.emf.ecore.ETypedElement, org.eclipse.emf.ecore.EClassifier>();
 	
 	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.ETypedElement container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
+		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EClassifier> classifiers = org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getEClassifiers();
+		for (org.eclipse.emf.ecore.EClassifier classifier : classifiers){
+			if (identifier.equals(classifier.getName())){
+					result.addMapping(identifier, classifier);
+					return;
+			}
+		}
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
