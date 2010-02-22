@@ -22,14 +22,12 @@ import java.util.Map;
 import org.emftext.language.simple_math.Additive;
 import org.emftext.language.simple_math.Expression;
 import org.emftext.language.simple_math.IntegerLiteralExp;
-import org.emftext.language.simple_math.Root;
 
 public class SimpleMathTest extends AbstractSimpleMathTest {
 	
 	public void testOnePlusTwo() {
 		try {
-			Root root = loadResource(new FileInputStream("input" + File.separator + "one_plus_two.sm"), "one_plus_two.sm");
-			Expression expression = root.getExp();
+			Expression expression = loadResource(new FileInputStream("input" + File.separator + "one_plus_two.sm"), "one_plus_two.sm");
 			assert expression instanceof Additive;
 			Additive additive = (Additive) expression;
 			// check left
@@ -53,8 +51,8 @@ public class SimpleMathTest extends AbstractSimpleMathTest {
 
 	public void testBrackets() {
 		try {
-			Root root = loadResource(new FileInputStream("input" + File.separator + "brackets.sm"), "brackets.sm");
-			assertNotNull(root);
+			Expression expression = loadResource(new FileInputStream("input" + File.separator + "brackets.sm"), "brackets.sm");
+			assertNotNull(expression);
 			// TODO check left
 		} catch (IOException e) {
 			fail(e.getMessage());

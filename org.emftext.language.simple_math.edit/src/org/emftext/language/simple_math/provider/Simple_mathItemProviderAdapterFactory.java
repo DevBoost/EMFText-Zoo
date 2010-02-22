@@ -76,29 +76,6 @@ public class Simple_mathItemProviderAdapterFactory extends Simple_mathAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.Root} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RootItemProvider rootItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.Root}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRootAdapter() {
-		if (rootItemProvider == null) {
-			rootItemProvider = new RootItemProvider(this);
-		}
-
-		return rootItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.Additive} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -335,7 +312,6 @@ public class Simple_mathItemProviderAdapterFactory extends Simple_mathAdapterFac
 	 * @generated
 	 */
 	public void dispose() {
-		if (rootItemProvider != null) rootItemProvider.dispose();
 		if (additiveItemProvider != null) additiveItemProvider.dispose();
 		if (multiplicativeItemProvider != null) multiplicativeItemProvider.dispose();
 		if (negationItemProvider != null) negationItemProvider.dispose();

@@ -14,7 +14,7 @@
 
 SYNTAXDEF sm
 FOR       <http://www.emftext.org/language/simple_math>
-START     Root
+START     Expression
 
 OPTIONS {	
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
@@ -30,8 +30,7 @@ TOKENS {
 }
 
 RULES {
-	Root ::= exp;
-	
+
 	@Leftassoc(weight="1", identifier="Expression")
 	Additive ::= left operator[ADDITIVE_OPERATOR] right;
 

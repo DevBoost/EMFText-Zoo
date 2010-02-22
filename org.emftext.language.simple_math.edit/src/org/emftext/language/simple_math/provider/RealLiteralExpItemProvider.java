@@ -108,7 +108,7 @@ public class RealLiteralExpItemProvider
 	@Override
 	public String getText(Object object) {
 		RealLiteralExp realLiteralExp = (RealLiteralExp)object;
-		return getString("_UI_RealLiteralExp_type") + " " + realLiteralExp.getFloatValue();
+		return getString("_UI_RealLiteralExp_type") + " " + realLiteralExp.getValue();
 	}
 
 	/**

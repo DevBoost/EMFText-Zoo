@@ -108,7 +108,7 @@ public class IntegerLiteralExpItemProvider
 	@Override
 	public String getText(Object object) {
 		IntegerLiteralExp integerLiteralExp = (IntegerLiteralExp)object;
-		return getString("_UI_IntegerLiteralExp_type") + " " + integerLiteralExp.getIntValue();
+		return getString("_UI_IntegerLiteralExp_type") + " " + integerLiteralExp.getValue();
 	}
 
 	/**

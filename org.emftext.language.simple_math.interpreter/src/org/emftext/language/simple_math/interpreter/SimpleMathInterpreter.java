@@ -1,14 +1,11 @@
 package org.emftext.language.simple_math.interpreter;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.simple_math.Additive;
 import org.emftext.language.simple_math.BracketExp;
 import org.emftext.language.simple_math.IntegerLiteralExp;
 import org.emftext.language.simple_math.Multiplicative;
 import org.emftext.language.simple_math.Negation;
 import org.emftext.language.simple_math.RealLiteralExp;
-import org.emftext.language.simple_math.Root;
 import org.emftext.language.simple_math.resource.sm.util.AbstractSmInterpreter;
 
 /**
@@ -64,16 +61,6 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	public boolean interprete_org_emftext_language_simple_005Fmath_RealLiteralExp(
 			RealLiteralExp object, SimpleMathContext context) {
 		context.push(object.getFloatValue());
-		return true;
-	}
-
-	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_Root(
-			Root object, SimpleMathContext context) {
-		TreeIterator<EObject> contents = object.eAllContents();
-		while (contents.hasNext()) {
-			addObjectToInterprete(contents.next());
-		}
 		return true;
 	}
 }

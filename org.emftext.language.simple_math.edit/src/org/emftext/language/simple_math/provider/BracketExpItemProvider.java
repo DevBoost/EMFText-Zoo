@@ -115,7 +115,8 @@ public class BracketExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_BracketExp_type");
+		BracketExp bracketExp = (BracketExp)object;
+		return getString("_UI_BracketExp_type") + " " + bracketExp.getValue();
 	}
 
 	/**

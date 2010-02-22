@@ -141,10 +141,8 @@ public class AdditiveItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Additive)object).getOperator();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Additive_type") :
-			getString("_UI_Additive_type") + " " + label;
+		Additive additive = (Additive)object;
+		return getString("_UI_Additive_type") + " " + additive.getValue();
 	}
 
 	/**

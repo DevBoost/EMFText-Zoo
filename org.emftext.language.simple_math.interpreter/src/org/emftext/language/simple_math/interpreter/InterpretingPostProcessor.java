@@ -3,9 +3,9 @@ package org.emftext.language.simple_math.interpreter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.simple_math.Root;
+import org.emftext.language.simple_math.Expression;
 import org.emftext.language.simple_math.resource.sm.ISmOptionProvider;
 import org.emftext.language.simple_math.resource.sm.ISmOptions;
 import org.emftext.language.simple_math.resource.sm.ISmResourcePostProcessor;
@@ -25,16 +25,25 @@ public class InterpretingPostProcessor implements ISmOptionProvider, ISmResource
 	}
 
 	public void process(SmResource resource) {
-		EList<EObject> contents = resource.getContents();
-		for (EObject eObject : contents) {
-			if (eObject instanceof Root) {
-				Root root = (Root) eObject;
-				SimpleMathInterpreter interpreter = new SimpleMathInterpreter();
-				SimpleMathContext context = new SimpleMathContext();
 
-				interpreter.addObjectToInterprete(root);
+		TreeIterator<EObject> allContents = resource.getAllContents();
+		while (allContents.hasNext()) {
+			EObject eObject = allContents.next();
+			// interprete eObject
+			if (eObject instanceof Expression) {
+				Expression expression = (Expression) eObject;
+				SimpleMathInterpreter interpreter = new SimpleMathInterpreter();
+				
+				interpreter.addObjectToInterprete(expression);
+				TreeIterator<EObject> children = expression.eAllContents();
+				while (children.hasNext()) {
+					EObject child = (EObject) children.next();
+					interpreter.addObjectToInterprete(child);
+				}
+
+				SimpleMathContext context = new SimpleMathContext();
 				interpreter.interprete(context);
-				root.setValue(context.pop());
+				expression.setValue(context.pop());
 			}
 		}
 	}

@@ -140,10 +140,8 @@ public class NegationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Negation)object).getOperator();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Negation_type") :
-			getString("_UI_Negation_type") + " " + label;
+		Negation negation = (Negation)object;
+		return getString("_UI_Negation_type") + " " + negation.getValue();
 	}
 
 	/**

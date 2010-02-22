@@ -141,10 +141,8 @@ public class MultiplicativeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Multiplicative)object).getOperator();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Multiplicative_type") :
-			getString("_UI_Multiplicative_type") + " " + label;
+		Multiplicative multiplicative = (Multiplicative)object;
+		return getString("_UI_Multiplicative_type") + " " + multiplicative.getValue();
 	}
 
 	/**
