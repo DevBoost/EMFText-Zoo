@@ -24,26 +24,27 @@ public class InterpreterProvider implements ITvlOptionProvider, ITvlResourcePost
 	}
 
 	public void process(TvlResource resource) {
-
+		TVLInterpreter interpreter = new TVLInterpreter();
+		InterpreterContext context = new InterpreterContext();
+		
 		TreeIterator<EObject> contents = resource.getAllContents();
 		while (contents.hasNext()) {
 			EObject next = contents.next();
 			if (next instanceof Formula) {
-				interprete((Formula) next);
+				interpreter.addObjectToInterprete(next);
 			}
 		}
+		interpreter.interprete(context);
 	}
 
-	private void interprete(Formula formula) {
-		TVLInterpreter interpreter = new TVLInterpreter();
-		InterpreterContext context = new InterpreterContext();
-		
-		interpreter.addObjectToInterprete(formula);
-		TreeIterator<EObject> allContents = formula.eAllContents();
-		while (allContents.hasNext()) {
-			interpreter.addObjectToInterprete(allContents.next());
-		}
-		interpreter.interprete(context);
-		formula.setComputedValue(context.pop());
-	}
+//	private void interprete(Formula formula) {
+//		
+//		
+//		TreeIterator<EObject> allContents = formula.eAllContents();
+//		while (allContents.hasNext()) {
+//			interpreter.addObjectToInterprete(allContents.next());
+//		}
+//		
+//		formula.setComputedValue(context.pop());
+//	}
 }

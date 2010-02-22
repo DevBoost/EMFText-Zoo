@@ -37,28 +37,36 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	@Override
 	public boolean interprete_org_emftext_language_threevaluedlogic_And(
 			And object, InterpreterContext context) {
-		context.push(and(context.pop(), context.pop()));
+		Constants result = and(context.pop(), context.pop());
+		context.push(result);
+		object.setComputedValue(result);
 		return true;
 	}
 
 	@Override
 	public boolean interprete_org_emftext_language_threevaluedlogic_Negation(
 			Negation object, InterpreterContext context) {
-		context.push(negate(context.pop()));
+		Constants result = negate(context.pop());
+		context.push(result);
+		object.setComputedValue(result);
 		return true;
 	}
 
 	@Override
 	public boolean interprete_org_emftext_language_threevaluedlogic_Nested(
 			Nested object, InterpreterContext context) {
+		Constants result = context.pop();
+		context.push(result);
+		object.setComputedValue(result);
 		return true;
 	}
 
 	@Override
 	public boolean interprete_org_emftext_language_threevaluedlogic_Or(
 			Or object, InterpreterContext context) {
-
-		context.push(or(context.pop(), context.pop()));
+		Constants result = or(context.pop(), context.pop());
+		context.push(result);
+		object.setComputedValue(result);
 		return true;
 	}
 
@@ -66,6 +74,7 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	public boolean interprete_org_emftext_language_threevaluedlogic_Constant(
 			Constant object, InterpreterContext context) {
 		context.push(object.getValue());
+		object.setComputedValue(object.getValue());
 		return true;
 	}
 }
