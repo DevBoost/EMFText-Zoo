@@ -21,7 +21,7 @@ public class CustomerT_VEGETARIANTokenResolver implements org.emftext.language.c
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		IsVegetarian isVegetarian = (IsVegetarian) container;
-		if (isVegetarian.isValue()) {
+		if (isVegetarian != null && isVegetarian.isValue()) {
 			return VEGETARIAN;
 		} else {
 			return "";
