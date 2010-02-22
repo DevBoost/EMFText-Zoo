@@ -25,26 +25,16 @@ public class InterpretingPostProcessor implements ISmOptionProvider, ISmResource
 	}
 
 	public void process(SmResource resource) {
-
 		TreeIterator<EObject> allContents = resource.getAllContents();
+		SimpleMathInterpreter interpreter = new SimpleMathInterpreter();
 		while (allContents.hasNext()) {
 			EObject eObject = allContents.next();
-			// interprete eObject
 			if (eObject instanceof Expression) {
 				Expression expression = (Expression) eObject;
-				SimpleMathInterpreter interpreter = new SimpleMathInterpreter();
-				
 				interpreter.addObjectToInterprete(expression);
-				TreeIterator<EObject> children = expression.eAllContents();
-				while (children.hasNext()) {
-					EObject child = (EObject) children.next();
-					interpreter.addObjectToInterprete(child);
-				}
-
-				SimpleMathContext context = new SimpleMathContext();
-				interpreter.interprete(context);
-				expression.setValue(context.pop());
 			}
 		}
+		SimpleMathContext context = new SimpleMathContext();
+		interpreter.interprete(context);
 	}
 }
