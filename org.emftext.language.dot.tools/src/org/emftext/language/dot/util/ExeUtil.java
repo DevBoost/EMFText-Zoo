@@ -34,8 +34,6 @@ public class ExeUtil {
 
 		private StringBuffer input = new StringBuffer();
 
-		private Exception lastException;
-
 		private String encoding;
 
 		public StreamReader(InputStream stream, String encoding) {
@@ -56,16 +54,12 @@ public class ExeUtil {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
-				lastException = e;
+				e.printStackTrace();
 			}
 		}
 
 		public StringBuffer getInput() {
 			return input;
-		}
-
-		public Exception getLastException() {
-			return lastException;
 		}
 	}
 
