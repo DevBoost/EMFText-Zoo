@@ -36,15 +36,4 @@ public class InterpreterProvider implements ITvlOptionProvider, ITvlResourcePost
 		}
 		interpreter.interprete(context);
 	}
-
-//	private void interprete(Formula formula) {
-//		
-//		
-//		TreeIterator<EObject> allContents = formula.eAllContents();
-//		while (allContents.hasNext()) {
-//			interpreter.addObjectToInterprete(allContents.next());
-//		}
-//		
-//		formula.setComputedValue(context.pop());
-//	}
 }
