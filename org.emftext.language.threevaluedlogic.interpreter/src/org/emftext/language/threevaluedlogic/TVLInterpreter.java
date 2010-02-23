@@ -2,7 +2,7 @@ package org.emftext.language.threevaluedlogic;
 
 import org.emftext.language.threevaluedlogic.resource.tvl.util.AbstractTvlInterpreter;
 
-public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
+public class TVLInterpreter extends AbstractTvlInterpreter<Boolean, InterpreterContext> {
 
 	private Constants and(Constants arg1, Constants arg2) {
 		if (arg1 == Constants.TRUE && arg2 == Constants.TRUE) {
@@ -35,7 +35,7 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_threevaluedlogic_And(
+	public Boolean interprete_org_emftext_language_threevaluedlogic_And(
 			And object, InterpreterContext context) {
 		Constants result = and(context.pop(), context.pop());
 		context.push(result);
@@ -44,7 +44,7 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_threevaluedlogic_Negation(
+	public Boolean interprete_org_emftext_language_threevaluedlogic_Negation(
 			Negation object, InterpreterContext context) {
 		Constants result = negate(context.pop());
 		context.push(result);
@@ -53,7 +53,7 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_threevaluedlogic_Nested(
+	public Boolean interprete_org_emftext_language_threevaluedlogic_Nested(
 			Nested object, InterpreterContext context) {
 		Constants result = context.pop();
 		context.push(result);
@@ -62,7 +62,7 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_threevaluedlogic_Or(
+	public Boolean interprete_org_emftext_language_threevaluedlogic_Or(
 			Or object, InterpreterContext context) {
 		Constants result = or(context.pop(), context.pop());
 		context.push(result);
@@ -71,7 +71,7 @@ public class TVLInterpreter extends AbstractTvlInterpreter<InterpreterContext> {
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_threevaluedlogic_Constant(
+	public Boolean interprete_org_emftext_language_threevaluedlogic_Constant(
 			Constant object, InterpreterContext context) {
 		context.push(object.getValue());
 		object.setComputedValue(object.getValue());

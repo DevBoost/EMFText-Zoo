@@ -11,10 +11,10 @@ import org.emftext.language.simple_math.resource.sm.util.AbstractSmInterpreter;
 /**
  * A simple example interpreter that computes the value of the math expression.
  */
-public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathContext> {
+public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, SimpleMathContext> {
 
 	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_Additive(
+	public Boolean interprete_org_emftext_language_simple_005Fmath_Additive(
 			Additive object, SimpleMathContext context) {
 		double result;
 		if ("+".equals(object.getOperator())) {
@@ -29,7 +29,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_BracketExp(
+	public Boolean interprete_org_emftext_language_simple_005Fmath_BracketExp(
 			BracketExp object, SimpleMathContext context) {
 		double result = context.pop();
 		context.push(result);
@@ -38,7 +38,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_Multiplicative(
+	public Boolean interprete_org_emftext_language_simple_005Fmath_Multiplicative(
 			Multiplicative object, SimpleMathContext context) {
 		double result;
 		if ("*".equals(object.getOperator())) {
@@ -53,7 +53,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_Negation(
+	public Boolean interprete_org_emftext_language_simple_005Fmath_Negation(
 			Negation object, SimpleMathContext context) {
 		double result = -context.pop();
 		context.push(result);
@@ -62,7 +62,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_IntegerLiteralExp(
+	public Boolean interprete_org_emftext_language_simple_005Fmath_IntegerLiteralExp(
 			IntegerLiteralExp object, SimpleMathContext context) {
 		context.push(object.getIntValue());
 		object.setValue(object.getIntValue());
@@ -70,7 +70,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<SimpleMathConte
 	}
 
 	@Override
-	public boolean interprete_org_emftext_language_simple_005Fmath_RealLiteralExp(
+	public Boolean interprete_org_emftext_language_simple_005Fmath_RealLiteralExp(
 			RealLiteralExp object, SimpleMathContext context) {
 		context.push(object.getFloatValue());
 		object.setValue(object.getFloatValue());
