@@ -35,15 +35,15 @@ public class JavaCHARACTER_LITERALTokenResolverTest {
 		//System.out.println("DRES: " + resolver.deResolve(resolve(resolver, character), null,null));
 		
 		assertEquals('\\', resolve(resolver, "\\\\"));
-		assertEquals('\n', resolve(resolver, "\n"));
-		assertEquals('\b', resolve(resolver, "\b"));
-		assertEquals('\f', resolve(resolver, "\f"));
-		assertEquals('\t', resolve(resolver, "\t"));
-		assertEquals('\r', resolve(resolver, "\r"));
+		assertEquals('\n', resolve(resolver, "\\n"));
+		assertEquals('\b', resolve(resolver, "\\b"));
+		assertEquals('\f', resolve(resolver, "\\f"));
+		assertEquals('\t', resolve(resolver, "\\t"));
+		assertEquals('\r', resolve(resolver, "\\r"));
 		assertEquals('\"', resolve(resolver, "\""));
-		assertEquals('"', resolve(resolver, "\""));
-		assertEquals('\"', resolve(resolver, "\""));
-		assertEquals('\'', resolve(resolver, "\'"));
+		assertEquals('"', resolve(resolver, "\\\""));
+		assertEquals('\"', resolve(resolver, "\\\""));
+		assertEquals('\'', resolve(resolver, "\\'"));
 	}
 
 	private char resolve(JavaCHARACTER_LITERALTokenResolver resolver, String lexem) {
