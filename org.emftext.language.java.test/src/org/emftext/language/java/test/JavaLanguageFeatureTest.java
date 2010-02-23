@@ -1484,6 +1484,16 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
+	public void testSpecialCharacters() throws Exception {
+		String typename = "SpecialCharacters";
+		String filename = typename + JAVA_FILE_EXTENSION;
+		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
+		assertMemberCount(clazz, 3);
+		
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
+	}
+	
+	@Test
 	public void testStatements() throws Exception {
 		registerInClassPath("ConditionalStatements" + JAVA_FILE_EXTENSION);
 		
