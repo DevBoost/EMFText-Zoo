@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dependencies"
+    nsURI="http://www.emftext.org/language/rolecore/dependencies" nsPrefix="org.emftext.language.rolecore.dependencies">
+  <eClassifiers xsi:type="ecore:EClass" name="Graph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelDomain" lowerBound="2"
+        upperBound="2" eType="#//Domain" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelEquivalence" lowerBound="1"
+        eType="#//Equivalence" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataPackage" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Domain">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coreClasses" upperBound="-1"
+        eType="#//CoreClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelPackage" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Equivalence" eSuperTypes="#//Vertex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatory" lowerBound="1"
+        eType="#//Mandatory" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="option" eType="#//Option"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftTerm" lowerBound="1"
+        eType="#//Left" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightTerms" upperBound="-1"
+        eType="#//Right" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operations" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="set" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CoreClass" eSuperTypes="#//Vertex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatory" lowerBound="1"
+        eType="#//Mandatory" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="option" eType="#//Option"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mandatory" eSuperTypes="#//Block"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Option" eSuperTypes="#//Block"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//Edge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Left" eSuperTypes="#//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Right" eSuperTypes="#//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coreClass" eType="#//CoreClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true"/>
+</ecore:EPackage>
