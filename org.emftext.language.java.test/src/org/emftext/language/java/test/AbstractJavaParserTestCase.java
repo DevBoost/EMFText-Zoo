@@ -370,8 +370,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	}
 
 	private static File prepareOutputFile(String outputFileName) {
-		// TODO this does not work on Windows
-		File outputFile = new File(outputFileName.replaceAll(" ", "\\%20"));
+		File outputFile = new File(URI.createFileURI(outputFileName).toFileString());
 		File parent = outputFile.getParentFile();
 		if (!parent.exists()) {
 			parent.mkdirs();
