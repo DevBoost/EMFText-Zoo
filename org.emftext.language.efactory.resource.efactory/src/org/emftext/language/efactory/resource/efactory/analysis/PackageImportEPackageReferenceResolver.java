@@ -13,15 +13,19 @@ public class PackageImportEPackageReferenceResolver implements org.emftext.langu
 	public void resolve(java.lang.String identifier, org.emftext.language.efactory.PackageImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult<org.eclipse.emf.ecore.EPackage> result) {
 		String[] keySet = EPackage.Registry.INSTANCE.keySet().toArray(new String[] {});
 		for (String namespaceURI : keySet) {
-			EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(namespaceURI);
-			if (ePackage != null) {
-				if (resolveFuzzy) {
-					result.addMapping(namespaceURI, ePackage);
-				} else {
-					if (identifier.equals(namespaceURI)) {
-						result.addMapping(identifier, ePackage);
+			try {
+				EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(namespaceURI);
+				if (ePackage != null) {
+					if (resolveFuzzy) {
+						result.addMapping(namespaceURI, ePackage);
+					} else {
+						if (identifier.equals(namespaceURI)) {
+							result.addMapping(identifier, ePackage);
+						}
 					}
 				}
+			} catch (Exception e) {
+				// ignore package that cannot be loaded
 			}
 		}
 	}
