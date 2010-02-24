@@ -60,36 +60,36 @@ TOKENSTYLES {
 
 RULES {
 	@Foldable
-	Program   ::= ("program"|"PROGRAM") name[PL0ID] block ".";
+	Program   ::= ("PROGRAM"|"program") name[PL0ID] !0!0 block ".";
 	
-	Block ::= 	(("const"|"CONST") constants ("," constants)* ";")?
-				(("var"|"VAR") variables ("," variables)* ";")?
+	Block ::= 	(("CONST"|"const") !1 constants ("," !0 constants)* ";"!0!0)?
+				(("VAR"|"var") !1 variables (#0"," #1 variables)* ";"!0!0)?
 				procedures*
 				body;
 	
-	ConstDeclaration ::= name[PL0ID] "=" number[NUMBER];
+	ConstDeclaration ::= name[PL0ID] #1 "=" #1 number[NUMBER];
 	
 	VarDeclaration ::= name[PL0ID];
 	
 	@Foldable
-	ProcedureDeclaration ::= 	("procedure"|"PROCEDURE") name[PL0ID] ";" 
-								block ";";
+	ProcedureDeclaration ::= 	("PROCEDURE"|"procedure") name[PL0ID] ";"!0!0 
+								block ";"!0!0;
 	@Foldable
-	Body ::= 	("begin"|"BEGIN") 
-				(statements (";" statements)*)? 
-				("end"|"END");
+	Body ::= 	("BEGIN"|"begin")!1 
+				(statements (";" !0 statements)*)?!0
+				("END"|"end");
 	
-	CallStatement ::= ("call"|"CALL") procedure[PL0ID];
+	CallStatement ::= ("CALL"|"call") procedure[PL0ID];
 	
-	WhileStatement ::= ("while"|"WHILE") condition ("DO"|"do") do;
+	WhileStatement ::= ("WHILE"|"while") condition ("DO"|"do") do;
 	
-	IfStatement ::= ("if"|"IF") condition ("then"|"THEN") then (("else"|"ELSE") else)?;
+	IfStatement ::= ("IF"|"if") condition ("THEN"|"then") then (("ELSE"|"else") else )?;
 	
-	OddCondition ::= ("odd"|"ODD") expression;
+	OddCondition ::= ("ODD"|"odd") expression;
 	
 	RelationalCondition ::= left op[REL_OP] right;
 	
-	Assignment ::= left[PL0ID] ":=" right;
+	Assignment ::= left[PL0ID] #1 ":=" #1 right;
 	
 	TermExpression ::= op[PLUS_MINUS]? obligatory optional*;
 	
