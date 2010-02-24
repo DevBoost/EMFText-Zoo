@@ -215,15 +215,16 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		if (!(other instanceof CharacterLiteral)) {
 			return false;
 		}
+		//special case: '"' == '\"'
 		CharacterLiteral o = (CharacterLiteral) other;
 		String oToken = o.getEscapedValue();
-		
-		
-		//correctly escape the node
 		String nToken = node.getEscapedValue();
-		nToken =  Character.valueOf(nToken.charAt(1)).toString();
-		nToken = CharacterEscaper.escapeEscapedCharacters(nToken);
-		nToken = "'" + nToken + "'";
+		if (oToken.equals("'\"'")) {
+			oToken = "'\\\"'";
+		}
+		if (nToken.equals("'\"'")) {
+			nToken = "'\\\"'";
+		}
 		
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}

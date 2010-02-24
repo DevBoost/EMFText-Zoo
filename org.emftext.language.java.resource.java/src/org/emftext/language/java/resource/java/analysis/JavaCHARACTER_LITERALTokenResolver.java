@@ -37,6 +37,7 @@ public class JavaCHARACTER_LITERALTokenResolver implements IJavaTokenResolver {
 		assert lexem.charAt(0) == '\'';
 		assert lexem.charAt(lexem.length() - 1) == '\'';
 		lexem = lexem.substring(1, lexem.length() - 1);
+		lexem = CharacterEscaper.unescapeEscapedCharacters(lexem);
 		Character character = Character.valueOf(lexem.charAt(0));
 		result.setResolvedToken(character);
 	}
