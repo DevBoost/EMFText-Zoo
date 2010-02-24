@@ -1,7 +1,10 @@
 package org.emftext.language.efactory.builder;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -30,28 +33,62 @@ import org.emftext.language.efactory.Value;
 public class Builder {
 
 	public EObject build(Factory eFactory) {
+		// stores the commands that set references after creating all objects
+		List<Runnable> commands = new ArrayList<Runnable>();
+		// stores the created objects
+		Map<NewObject, EObject> createdObjectsMap = new LinkedHashMap<NewObject, EObject>();
+		
 		NewObject root = eFactory.getRoot();
-		return createEObject(root);
+		// create the model tree
+		EObject rootEObject = createEObject(root, createdObjectsMap, commands);
+		// set the cross references
+		for (Runnable runnable : commands) {
+			runnable.run();
+		}
+		return rootEObject;
 	}
 
-	private EObject createEObject(NewObject newObject) {
+	private EObject createEObject(
+			NewObject newObject, 
+			Map<NewObject, EObject> createdObjectsMap, 
+			List<Runnable> commands) {
 		EClass eClass = newObject.getEClass();
 		EObject eObject = eClass.getEPackage().getEFactoryInstance().create(eClass);
-		
+		createdObjectsMap.put(newObject, eObject);
 		EList<Feature> features = newObject.getFeatures();
 		for (Feature feature : features) {
 			boolean isMany = feature.isIsMany();
 			EStructuralFeature eFeature = feature.getEFeature();
 			Value value = feature.getValue();
-			setFeature(eObject, eFeature, value, isMany);
+			setFeature(eObject, eFeature, value, isMany, createdObjectsMap, commands);
 		}
 		return eObject;
 	}
 
+	private void setFeature(
+			final EObject object, 
+			final EStructuralFeature eFeature,
+			final Value value, 
+			final boolean isMany, 
+			final Map<NewObject, EObject> createdObjectsMap,
+			final List<Runnable> commands) {
+		if (value instanceof Reference) {
+			// references need to be set at the end, because
+			// the referenced object may not exist yet
+			commands.add(new Runnable() {
+				
+				public void run() {
+					setFeatureBasic(object, eFeature, value, isMany, createdObjectsMap, commands);
+				}
+			});
+		}
+		setFeatureBasic(object, eFeature, value, isMany, createdObjectsMap, commands);
+	}
+
 	@SuppressWarnings("unchecked")
-	private void setFeature(EObject object, EStructuralFeature eFeature,
-			Value value, boolean isMany) {
-		Object newValue = getValue(eFeature, value);
+	private void setFeatureBasic(EObject object, EStructuralFeature eFeature,
+			Value value, boolean isMany, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands) {
+		Object newValue = getValue(eFeature, value, createdObjectsMap, commands);
 		int upperBound = eFeature.getUpperBound();
 		if (upperBound > 1 || upperBound < 0) {
 			Object oldValue = object.eGet(eFeature);
@@ -69,13 +106,15 @@ public class Builder {
 		}
 	}
 
-	private Object getValue(EStructuralFeature eFeature, Value value) {
+	private Object getValue(EStructuralFeature eFeature, Value value, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands) {
 		if (value instanceof Reference) {
 			Reference reference = (Reference) value;
-			return reference.getValue();
+			EObject referencedNewObject = reference.getValue();
+			EObject referencedEObject = createdObjectsMap.get(referencedNewObject);
+			return referencedEObject;
 		} else if (value instanceof Containment) {
 			Containment containment = (Containment) value;
-			return createEObject(containment.getValue());
+			return createEObject(containment.getValue(), createdObjectsMap, commands);
 		} else if (value instanceof Attribute) {
 			return createAttributeValue(eFeature, (Attribute) value);
 		} else {

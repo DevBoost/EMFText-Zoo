@@ -6,15 +6,21 @@
  */
 package org.emftext.language.efactory.resource.efactory.analysis;
 
-public class ReferenceValueReferenceResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver<org.emftext.language.efactory.Reference, org.eclipse.emf.ecore.EObject> {
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.efactory.NewObject;
+import org.emftext.language.efactory.Reference;
+import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult;
+import org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver;
+
+public class ReferenceValueReferenceResolver implements IEfactoryReferenceResolver<Reference, NewObject> {
 	
-	private org.emftext.language.efactory.resource.efactory.analysis.EfactoryDefaultResolverDelegate<org.emftext.language.efactory.Reference, org.eclipse.emf.ecore.EObject> delegate = new org.emftext.language.efactory.resource.efactory.analysis.EfactoryDefaultResolverDelegate<org.emftext.language.efactory.Reference, org.eclipse.emf.ecore.EObject>();
+	private EfactoryDefaultResolverDelegate<Reference, NewObject> delegate = new EfactoryDefaultResolverDelegate<Reference, NewObject>();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.efactory.Reference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult<org.eclipse.emf.ecore.EObject> result) {
+	public void resolve(String identifier, Reference container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final IEfactoryReferenceResolveResult<NewObject> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EObject element, org.emftext.language.efactory.Reference container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(NewObject element, Reference container, EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	
