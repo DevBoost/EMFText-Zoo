@@ -128,7 +128,7 @@ public class Builder {
 		if (value instanceof EnumAttribute) {
 			EnumAttribute enumAttribute = (EnumAttribute) value;
 			EEnumLiteral literal = enumAttribute.getValue();
-			return literal;
+			return literal.getInstance();
 		} else if (value instanceof StringAttribute) {
 			StringAttribute stringAttribute = (StringAttribute) value;
 			String string = stringAttribute.getValue();
