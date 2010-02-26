@@ -31,23 +31,23 @@ TOKENS {
 
 RULES {
 
-	@Leftassoc(weight="1", identifier="Expression")
+	@operator(type="binary_left_associative", weight="1", identifier="Expression")
 	Additive ::= left operator[ADDITIVE_OPERATOR] right;
 
-	@Leftassoc(weight="2", identifier="Expression")
+	@operator(type="binary_left_associative", weight="2", identifier="Expression")
 	Multiplicative ::= left operator[MULTIPLICATIVE_OPERATOR] right;
 	
 	// TODO this does not work yet, probably because the '-' is consumed
 	// by the ADDITIVE_OPERATOR token
-	@Unary(weight="3", identifier="Expression")	
+	@operator(type="unary", weight="3", identifier="Expression")	
 	Negation ::= "-" body;
 	
-	@Primitive(weight="5", identifier="Expression")
+	@operator(type="primitive", weight="5", identifier="Expression")
 	BracketExp ::= "(" body ")";
 
-	@Primitive(weight="5", identifier="Expression")
+	@operator(type="primitive", weight="5", identifier="Expression")
 	IntegerLiteralExp ::= intValue[INTEGER_LITERAL];
 
-	@Primitive(weight="5", identifier="Expression")
+	@operator(type="primitive", weight="5", identifier="Expression")
 	RealLiteralExp ::= floatValue[REAL_LITERAL];
 }
