@@ -27,7 +27,7 @@ public class EfactoryBuilder implements org.emftext.language.efactory.resource.e
 					Factory factory = (Factory) rootObject;
 					Builder builder = new Builder();
 					EObject root = builder.build(factory);
-					URI xmiURI = resource.getURI().trimFileExtension().appendFileExtension(".xmi");
+					URI xmiURI = resource.getURI().trimFileExtension().appendFileExtension("xmi");
 					Resource xmiResource = new ResourceSetImpl().createResource(xmiURI);
 					xmiResource.getContents().add(root);
 					try {
