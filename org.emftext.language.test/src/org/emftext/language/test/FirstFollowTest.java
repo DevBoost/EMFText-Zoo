@@ -11,7 +11,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.sdk.codegen.generators.code_completion.helpers.ExpectationComputer;
+import org.emftext.sdk.concretesyntax.Annotation;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
+import org.emftext.sdk.concretesyntax.KeyValuePair;
 import org.emftext.sdk.concretesyntax.Rule;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 
@@ -96,6 +98,14 @@ public class FirstFollowTest extends TestCase {
 			TreeIterator<EObject> ruleContents = rule.eAllContents();
 			while (ruleContents.hasNext()) {
 				EObject next = ruleContents.next();
+				// ignore annotations
+				if (next instanceof Annotation) {
+					continue;
+				}
+				// ignore annotation values
+				if (next instanceof KeyValuePair) {
+					continue;
+				}
 				computer.computeFollowSet(syntax, next);
 				i++;
 			}
