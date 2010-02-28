@@ -35,7 +35,11 @@ import org.junit.Test;
 
 public class RegExpTest extends AbstractTestCase {
 
-	private static final String INPUT_FILE_PATH = "input" + File.separator + "test_expressions.txt";
+	private final static String INPUT_FILE_PATH = "input" + File.separator + "test_expressions.txt";
+	private final static String[] EXCLUDES = new String[] {
+		".*/invalid_regex1.cs",
+		".*/invalid_regex2.cs"
+	};
 
 	@Before
 	public void setUp() {
@@ -76,7 +80,7 @@ public class RegExpTest extends AbstractTestCase {
 	}
 
 	private void extractExpressionsFromCSFilesToInputFile() throws IOException {
-		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."));
+		Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), EXCLUDES);
 		System.out.println(RegExpTest.class.getSimpleName() + ".testExpsFromGrammars() found " + grammars.size() + " grammar files.");
 		// make sure all grammars are found
 		assertTrue(grammars.size() > 168);
