@@ -19,11 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.dot.resource.dot.IDotResourcePostProcessor;
 import org.emftext.language.dot.resource.dot.mopp.DotResource;
@@ -41,46 +40,43 @@ public class DotPostProcessor implements IDotResourcePostProcessor {
 			return;
 		}
 
-		URI uri = resource.getURI();
-		String message = runDOT(uri);
+		final IFile file = WorkspaceSynchronizer.getFile(resource);
+		final String message = runDOT(file.getProjectRelativePath().toOSString(), 
+				file.getProject().getLocation().toOSString());
+		
 		if (message != null) {
 			resource.addError("DOT finished with \"" + message + "\"", null); //$NON-NLS-1$
 		} else {
-			final IProject project = WorkspaceSynchronizer.getFile(resource).getProject();
 			try {
-				project.refreshLocal(IProject.DEPTH_INFINITE, new NullProgressMonitor());
+				file.getProject().refreshLocal(IProject.DEPTH_INFINITE, new NullProgressMonitor());
 			} catch (CoreException e) {
 				// Do nothing
 			}
 		}
 	}
 
-	private String runDOT(URI uri) {
+	private String runDOT(String file, String workingDir) {
 		List<String> arguments = new ArrayList<String>();
-		String file = uri.toPlatformString(false);
-		if (file.startsWith("/")) //$NON-NLS-1$
-			file = file.substring(1);
-
 		arguments.add(dotExecutable);
 		arguments.add("-Tpdf");//$NON-NLS-1$
 		arguments.add("-O");//$NON-NLS-1$
 		arguments.add(file);
 
-		File workingDir = Platform.getLocation().toFile();
-
 		RunCallback callback = new RunCallback();
-		ExeUtil.runExe(arguments, callback, workingDir, true);
+		ExeUtil.runExe(arguments, callback, new File(workingDir), true);
 
-		if (callback.getExit() != 0)
+		if (callback.getExit() != 0) {
 			return callback.getStderr();
+		}
 
 		return null;
 	}
 
 	private static String getDOTExecutable() {
 		String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH); //$NON-NLS-1$
-		if (os.startsWith("windows")) //$NON-NLS-1$
+		if (os.startsWith("windows")) { //$NON-NLS-1$
 			return "dot.exe"; //$NON-NLS-1$
+		}	
 		return "dot"; //$NON-NLS-1$
 	}
 
