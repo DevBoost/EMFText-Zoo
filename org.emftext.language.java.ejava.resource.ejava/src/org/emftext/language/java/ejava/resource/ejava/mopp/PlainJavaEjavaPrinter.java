@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.java.ejava.resource;
+package org.emftext.language.java.ejava.resource.ejava.mopp;
 
 import java.io.OutputStream;
 
