@@ -36,6 +36,7 @@ import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaPrinter;
 import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaResource;
 import org.emftext.language.java.members.Member;
+import org.emftext.language.java.resource.util.JDTConnector;
 import org.emftext.language.java.statements.Statement;
 
 /**
@@ -49,6 +50,7 @@ public class ExtendedEjavaResource extends EjavaResource {
 	}
 
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
+		JDTConnector.getInstance().initializeResourceSet(getResourceSet(), uri);
 		java.util.Map<java.lang.Object, java.lang.Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
 		if (!getContents().isEmpty()) {
