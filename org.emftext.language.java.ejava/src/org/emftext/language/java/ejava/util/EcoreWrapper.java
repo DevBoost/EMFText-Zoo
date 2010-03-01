@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
@@ -240,6 +241,9 @@ public class EcoreWrapper {
 				for(GenPackage genPackage : genModel.getGenPackages()) {
 					collectGenPackages(genPackage, new BasicEList<String>(), result);
 				}
+				for(GenPackage genPackage : genModel.getUsedGenPackages()) {
+					collectGenPackages(genPackage, new BasicEList<String>(), result);
+				}
 			}
 		}
 		
@@ -264,6 +268,10 @@ public class EcoreWrapper {
 		String javaTypeName = null;
 		if (eClassifier instanceof EClass) {
 			javaTypeName = getFullPackageName(eClassifier.getEPackage()) + "." + eClassifier.getName();
+		}
+		else if (eClassifier instanceof EEnum) {
+			//TODO enum support
+			return TypesFactory.eINSTANCE.createVoid();
 		}
 		else /*if (eClassifier instanceof EDataType)*/ {
 			javaTypeName = ((EDataType)eClassifier).getInstanceTypeName();
