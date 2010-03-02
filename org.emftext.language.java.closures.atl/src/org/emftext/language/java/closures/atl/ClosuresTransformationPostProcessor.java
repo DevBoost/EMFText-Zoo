@@ -17,9 +17,10 @@ package org.emftext.language.java.closures.atl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.emftext.runtime.atl.ATLTransformationPostProcessor;
+import org.emftext.util.atl.ATLTransformationPostProcessor;
 
-final class ClosuresTransformationPostProcessor  extends ATLTransformationPostProcessor {
+public class ClosuresTransformationPostProcessor extends ATLTransformationPostProcessor {
+	
 	@Override
 	protected Map<String, String> getMetamodelURIs() {
 		Map<String, String> metamodels = new HashMap<String, String>();

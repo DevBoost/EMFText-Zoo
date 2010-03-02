@@ -24,27 +24,11 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
-	srcFolder = "src-gen";
-	overrideManifest = "false";
-	overridePluginXML = "false";
-	overrideClasspath = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel="true";
 }
 
-TOKENS{
-}
-
-TOKENSTYLES{
-}
-
-
-
-RULES{
-	
+RULES {
 	Closure::= "{" (parameters ("," parameters)*)? "=>" statements+  "}";
-	
-	
-	
 }
 
