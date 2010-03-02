@@ -29,14 +29,11 @@ public class TransitionTargetReferenceResolver implements
 	}
 
 	public void resolve(String identifier, Transition container, EReference reference, int position, boolean resolveFuzzy, IStatemachineReferenceResolveResult<Vertex> result) {	
-		for (Vertex targetCand: container.getContainer().getSubvertices()) {
-			if (resolveFuzzy) {
-				if (targetCand.getName().startsWith(identifier)) {
-					result.addMapping(targetCand.getName(), targetCand);
-				}
-			} else {
-				if (identifier.equals(targetCand.getName())) {
-					result.addMapping(identifier, targetCand);
+		for (Vertex targetCand : container.getContainer().getSubvertices()) {
+			if (identifier.equals(targetCand.getName()) || resolveFuzzy) {
+				result.addMapping(targetCand.getName(), targetCand);
+				if (!resolveFuzzy) {
+					return;
 				}
 			}
 		}

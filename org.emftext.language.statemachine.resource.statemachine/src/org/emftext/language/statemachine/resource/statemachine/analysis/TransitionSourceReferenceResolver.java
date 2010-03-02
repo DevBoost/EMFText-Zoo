@@ -30,14 +30,11 @@ public class TransitionSourceReferenceResolver implements
 
 	public void resolve(String identifier, Transition container, EReference reference, int position, boolean resolveFuzzy, IStatemachineReferenceResolveResult<Vertex> result) {	
 		
-		for (Vertex sourceCand: container.getContainer().getSubvertices()) {
-			if (resolveFuzzy) {
-				if (sourceCand.getName().startsWith(identifier)) {
-					result.addMapping(sourceCand.getName(), sourceCand);
-				}
-			} else {
-				if (identifier.equals(sourceCand.getName())) {
-					result.addMapping(identifier, sourceCand);
+		for (Vertex sourceCand : container.getContainer().getSubvertices()) {
+			if (sourceCand.getName().equals(identifier) || resolveFuzzy) {
+				result.addMapping(sourceCand.getName(), sourceCand);
+				if (!resolveFuzzy) {
+					return;
 				}
 			}
 		}
