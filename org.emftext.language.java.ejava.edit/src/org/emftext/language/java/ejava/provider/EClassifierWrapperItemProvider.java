@@ -25,7 +25,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -162,6 +161,11 @@ public class EClassifierWrapperItemProvider extends
     newChildDescriptors.add
       (createChildParameter
         (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
          EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper()));
 
     newChildDescriptors.add
@@ -183,6 +187,11 @@ public class EClassifierWrapperItemProvider extends
       (createChildParameter
         (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
          EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper()));
 
     newChildDescriptors.add
       (createChildParameter

@@ -162,6 +162,31 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
   }
 
 	/**
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EClassifierEnumerationWrapper} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected EClassifierEnumerationWrapperItemProvider eClassifierEnumerationWrapperItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.emftext.language.java.ejava.EClassifierEnumerationWrapper}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createEClassifierEnumerationWrapperAdapter()
+  {
+    if (eClassifierEnumerationWrapperItemProvider == null)
+    {
+      eClassifierEnumerationWrapperItemProvider = new EClassifierEnumerationWrapperItemProvider(this);
+    }
+
+    return eClassifierEnumerationWrapperItemProvider;
+  }
+
+  /**
    * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EStructuralFeatureGetWrapper} instances.
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * @generated
@@ -206,6 +231,31 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
   }
 
 	/**
+   * This keeps track of the one adapter used for all {@link org.emftext.language.java.ejava.EEnumLiteralWrapper} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected EEnumLiteralWrapperItemProvider eEnumLiteralWrapperItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.emftext.language.java.ejava.EEnumLiteralWrapper}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createEEnumLiteralWrapperAdapter()
+  {
+    if (eEnumLiteralWrapperItemProvider == null)
+    {
+      eEnumLiteralWrapperItemProvider = new EEnumLiteralWrapperItemProvider(this);
+    }
+
+    return eEnumLiteralWrapperItemProvider;
+  }
+
+  /**
 	 * This keeps track of the one adapter used for all
 	 * {@link org.emftext.language.java.ejava.EOperationWrapper} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -357,8 +407,10 @@ public class EjavaItemProviderAdapterFactory extends EjavaAdapterFactory
     if (ePackageWrapperItemProvider != null) ePackageWrapperItemProvider.dispose();
     if (eClassifierClassWrapperItemProvider != null) eClassifierClassWrapperItemProvider.dispose();
     if (eClassifierInterfaceWrapperItemProvider != null) eClassifierInterfaceWrapperItemProvider.dispose();
+    if (eClassifierEnumerationWrapperItemProvider != null) eClassifierEnumerationWrapperItemProvider.dispose();
     if (eStructuralFeatureGetWrapperItemProvider != null) eStructuralFeatureGetWrapperItemProvider.dispose();
     if (eStructuralFeatureSetWrapperItemProvider != null) eStructuralFeatureSetWrapperItemProvider.dispose();
+    if (eEnumLiteralWrapperItemProvider != null) eEnumLiteralWrapperItemProvider.dispose();
     if (eOperationWrapperItemProvider != null) eOperationWrapperItemProvider.dispose();
     if (eObjectInstantiationItemProvider != null) eObjectInstantiationItemProvider.dispose();
   }

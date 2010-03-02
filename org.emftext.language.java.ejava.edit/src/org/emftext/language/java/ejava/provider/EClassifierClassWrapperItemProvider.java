@@ -35,7 +35,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.emftext.language.java.classifiers.ClassifiersPackage;
 import org.emftext.language.java.classifiers.provider.ClassItemProvider;
-import org.emftext.language.java.ejava.EClassifierClassWrapper;
 import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.ejava.EjavaPackage;
@@ -162,6 +161,11 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
     newChildDescriptors.add
       (createChildParameter
         (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS,
          EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper()));
 
     newChildDescriptors.add
@@ -183,6 +187,11 @@ public class EClassifierClassWrapperItemProvider extends ClassItemProvider
       (createChildParameter
         (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
          EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (MembersPackage.Literals.MEMBER_CONTAINER__DEFAULT_MEMBERS,
+         EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper()));
 
     newChildDescriptors.add
       (createChildParameter

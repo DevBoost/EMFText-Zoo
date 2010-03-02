@@ -182,6 +182,11 @@ public class EPackageWrapperItemProvider extends CompilationUnitItemProvider
       (createChildParameter
         (ContainersPackage.Literals.COMPILATION_UNIT__CLASSIFIERS,
          EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (ContainersPackage.Literals.COMPILATION_UNIT__CLASSIFIERS,
+         EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper()));
   }
 
 	/**

@@ -159,6 +159,11 @@ public class EOperationWrapperItemProvider extends ClassMethodItemProvider
       (createChildParameter
         (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS,
          EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StatementsPackage.Literals.STATEMENT_LIST_CONTAINER__STATEMENTS,
+         EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper()));
   }
 
 	/**
