@@ -23,6 +23,11 @@ eclass MemberContainer {
 				return (ConcreteClassifier) member;
 			}
  		}
+		for(Member member : getDefaultMembers()) {
+			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
+				return (ConcreteClassifier) member;
+			}
+ 		}
 		return null;
 	}
 	
@@ -32,6 +37,11 @@ eclass MemberContainer {
 	 */
 	getContainedField() {
 		for(Member member : getMembers()) {
+			if (member instanceof Field && name.equals(member.getName())) {
+				return (Field) member;
+			}
+ 		}
+		for(Member member : getDefaultMembers()) {
 			if (member instanceof Field && name.equals(member.getName())) {
 				return (Field) member;
 			}
@@ -48,6 +58,16 @@ eclass MemberContainer {
 	getContainedMethod() {
 		Method found = null;
 		for(Member member : getMembers()) {
+			if (member instanceof Method && name.equals(member.getName())) {
+				if(found != null) {
+					return null;
+				}
+				else {
+					found = (Method) member;
+				}
+			}
+ 		}
+ 		for(Member member : getDefaultMembers()) {
 			if (member instanceof Method && name.equals(member.getName())) {
 				if(found != null) {
 					return null;
