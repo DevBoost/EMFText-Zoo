@@ -15,6 +15,10 @@ package org.emftext.language.ecore.resource.facade.analysis;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreTokenResolveResult;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreTokenResolver;
 
@@ -23,6 +27,16 @@ public class FacadeEcoreQUOTED_34_34TokenResolver implements IFacadeEcoreTokenRe
 	private FacadeEcoreDefaultTokenResolver defaultResolver = new FacadeEcoreDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+		// == nsURI field is is misused here as attribute that holds the path to the annotated Ecore file.
+		Resource resource = container.eResource();
+		if (feature.equals(EcorePackage.Literals.EPACKAGE__NS_URI) && resource != null && !resource.getContents().isEmpty()) {
+			EObject annotation = resource.getContents().get(
+					resource.getContents().size() - 1);
+			if (annotation instanceof EAnnotation) {
+				value = ((EAnnotation) annotation).getDetails().get("annotatedURI");
+			}
+		}
+		// ==
 		java.lang.String result = defaultResolver.deResolve(value, feature, container);
 		result = result.replaceAll(java.util.regex.Pattern.quote("\""),"\\\\\"");
 		result += "\"";
