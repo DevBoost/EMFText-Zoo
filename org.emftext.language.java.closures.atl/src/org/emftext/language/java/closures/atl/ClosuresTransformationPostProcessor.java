@@ -13,13 +13,19 @@
  ******************************************************************************/
 package org.emftext.language.java.closures.atl;
 
-
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.emftext.language.java.closures.resource.closure.IClosureOptionProvider;
+import org.emftext.language.java.closures.resource.closure.IClosureOptions;
+import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessor;
+import org.emftext.language.java.closures.resource.closure.IClosureResourcePostProcessorProvider;
+import org.emftext.language.java.closures.resource.closure.mopp.ClosureResource;
+import org.emftext.language.java.resource.util.JavaPostProcessor;
 import org.emftext.util.atl.ATLTransformationPostProcessor;
 
-public class ClosuresTransformationPostProcessor extends ATLTransformationPostProcessor {
+public class ClosuresTransformationPostProcessor extends ATLTransformationPostProcessor implements IClosureOptionProvider, IClosureResourcePostProcessorProvider, IClosureResourcePostProcessor {
 	
 	@Override
 	protected Map<String, String> getMetamodelURIs() {
@@ -52,5 +58,23 @@ public class ClosuresTransformationPostProcessor extends ATLTransformationPostPr
 		newUri += ".java";
 			return newUri;
 		}
+
+	public Map<?, ?> getOptions() {
+		Map<Object, Object> options = new LinkedHashMap<Object, Object>();
+		options.put(IClosureOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+		return options;
+	}
+
+	public IClosureResourcePostProcessor getResourcePostProcessor() {
+		return this;
+	}
+
+	public void process(ClosureResource resource) {
+		// do normal Java post processing
+		JavaPostProcessor jpp = new JavaPostProcessor();
+		jpp.process(resource);
+		// handle closures TODO this should be done by a builder
+		super.process(resource);
+	}
 
 }

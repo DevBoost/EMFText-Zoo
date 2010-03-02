@@ -48,6 +48,10 @@ public class JavaPostProcessor implements IJavaOptionProvider, IJavaResourcePost
 	}
 
 	public void process(JavaResource resource) {
+		process(resource);
+	}
+	
+	public void process(Resource resource) {
 		new JavaModelRepairer() {
 			protected void registerContextDependentProxy(
 					Resource resource,
