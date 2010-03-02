@@ -13,15 +13,13 @@
  ******************************************************************************/
 package org.emftext.language.customer.resource.customer.analysis;
 
-import org.emftext.language.customer.IsVegetarian;
 
 public class CustomerT_VEGETARIANTokenResolver implements org.emftext.language.customer.resource.customer.ICustomerTokenResolver {
 	
 	private static final String VEGETARIAN = "vegetarian";
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
-		IsVegetarian isVegetarian = (IsVegetarian) container;
-		if (isVegetarian != null && isVegetarian.isValue()) {
+		if (Boolean.TRUE.equals(value)) {
 			return VEGETARIAN;
 		} else {
 			return "";
