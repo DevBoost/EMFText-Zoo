@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
@@ -38,8 +39,10 @@ import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.ejava.EClassifierClassWrapper;
+import org.emftext.language.java.ejava.EClassifierEnumerationWrapper;
 import org.emftext.language.java.ejava.EClassifierInterfaceWrapper;
 import org.emftext.language.java.ejava.EClassifierWrapper;
+import org.emftext.language.java.ejava.EEnumLiteralWrapper;
 import org.emftext.language.java.ejava.EOperationWrapper;
 import org.emftext.language.java.ejava.EPackageWrapper;
 import org.emftext.language.java.ejava.EStructuralFeatureGetWrapper;
@@ -47,6 +50,7 @@ import org.emftext.language.java.ejava.EStructuralFeatureSetWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.types.ClassifierReference;
@@ -109,11 +113,19 @@ public class EcoreWrapper {
 		}
 	}
 
-	public static EClassifierWrapper wrapEClassifier(EClassifier eClassifier, EPackageWrapper ePackageWrapper)  {
+	public static void wrapEClassifier(EClassifier eClassifier, EPackageWrapper ePackageWrapper)  {
 		EClassifierWrapper wrapper = (EClassifierWrapper) ePackageWrapper.getContainedClassifier(eClassifier.getName());
 		
 		if (wrapper == null) {
-			wrapper = EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper();
+			if (eClassifier instanceof EClass) {
+				wrapper = EjavaFactory.eINSTANCE.createEClassifierInterfaceWrapper();
+			}
+			else if (eClassifier instanceof EEnum) {
+				wrapper = EjavaFactory.eINSTANCE.createEClassifierEnumerationWrapper();
+			}
+			else {
+				return;
+			}
 			wrapper.setName(eClassifier.getName());
 			ePackageWrapper.getClassifiers().add(wrapper);
 		}
@@ -150,8 +162,12 @@ public class EcoreWrapper {
 				wrapEOperation(eOperation, wrapper);
 			}
 		}
-		
-		return wrapper;
+		else if (eClassifier instanceof EEnum) {
+			EEnum eEnmu = (EEnum) eClassifier;
+			for(EEnumLiteral eEnumLiteral : eEnmu.getELiterals()) {
+				wrapEEnumLiteral(eEnumLiteral, (EClassifierEnumerationWrapper) wrapper);
+			}
+		}
 	}
 
 	public static void wrapEStructuralFeatureForGet(
@@ -213,6 +229,24 @@ public class EcoreWrapper {
 		}
 	}
 	
+	public static void wrapEEnumLiteral(
+			EEnumLiteral eEnumLiteral, EClassifierEnumerationWrapper eClassifierWrapper) { 
+		EEnumLiteralWrapper wrapper = null;
+		
+		for(EnumConstant constant : eClassifierWrapper.getConstants()) {
+			if (constant.getName().equals(eEnumLiteral.getLiteral().toUpperCase())) {
+				wrapper = (EEnumLiteralWrapper) constant;
+			}
+		}
+		
+		if (wrapper == null) {
+			wrapper = EjavaFactory.eINSTANCE.createEEnumLiteralWrapper();
+			wrapper.setName(eEnumLiteral.getLiteral().toUpperCase());
+			eClassifierWrapper.getConstants().add(wrapper);
+		}
+		wrapper.setEEnumLiteral(eEnumLiteral);
+	}
+	
 	private static EMap<EList<String>, GenPackage> findGenPackagesInScope(EPackageWrapper context) {
 		
 		Resource eJavaResource = context.eResource();
@@ -270,8 +304,7 @@ public class EcoreWrapper {
 			javaTypeName = getFullPackageName(eClassifier.getEPackage()) + "." + eClassifier.getName();
 		}
 		else if (eClassifier instanceof EEnum) {
-			//TODO enum support
-			return TypesFactory.eINSTANCE.createVoid();
+			javaTypeName = getFullPackageName(eClassifier.getEPackage()) + "." + eClassifier.getName();
 		}
 		else /*if (eClassifier instanceof EDataType)*/ {
 			javaTypeName = ((EDataType)eClassifier).getInstanceTypeName();
