@@ -32,7 +32,7 @@ public class JavaDECIMAL_FLOAT_LITERALTokenResolver implements IJavaTokenResolve
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDecimalFloatLiteral());
 		assert lexem.toLowerCase().endsWith(FLOAT_SUFFIX);
 
 		lexem = lexem.substring(0, lexem.length() - 1);

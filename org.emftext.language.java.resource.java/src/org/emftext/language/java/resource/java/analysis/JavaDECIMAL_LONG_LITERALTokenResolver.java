@@ -32,7 +32,7 @@ public class JavaDECIMAL_LONG_LITERALTokenResolver implements IJavaTokenResolver
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getLongLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDecimalLongLiteral());
 		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
 
 		lexem = lexem.substring(0, lexem.length() - 1);

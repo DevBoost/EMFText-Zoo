@@ -33,7 +33,7 @@ public class JavaHEX_FLOAT_LITERALTokenResolver implements IJavaTokenResolver {
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getFloatLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getHexFloatLiteral());
 		
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().contains(HEX_EXPONENT) || lexem.contains(".");

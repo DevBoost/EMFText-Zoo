@@ -32,7 +32,7 @@ public class JavaHEX_DOUBLE_LITERALTokenResolver implements IJavaTokenResolver {
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDoubleLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getHexDoubleLiteral());
 		// this assertion is wrong, because hex literals of the form 0x1P10 are also valid
 		//assert lexem.contains(".");
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);

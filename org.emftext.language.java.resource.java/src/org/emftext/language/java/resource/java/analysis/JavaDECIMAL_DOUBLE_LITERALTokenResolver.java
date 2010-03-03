@@ -32,7 +32,7 @@ public class JavaDECIMAL_DOUBLE_LITERALTokenResolver implements IJavaTokenResolv
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDoubleLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getDecimalDoubleLiteral());
 		
 		if (lexem.toLowerCase().endsWith(DOUBLE_SUFFIX)) {
 			lexem = lexem.substring(0, lexem.length() - 1);

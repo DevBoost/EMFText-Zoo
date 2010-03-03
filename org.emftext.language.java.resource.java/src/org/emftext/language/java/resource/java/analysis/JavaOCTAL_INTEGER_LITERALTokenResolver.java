@@ -33,7 +33,7 @@ public class JavaOCTAL_INTEGER_LITERALTokenResolver implements IJavaTokenResolve
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getOctalIntegerLiteral());
 		
 		JavaDECIMAL_LONG_LITERALTokenResolver.parseToLong(lexem, 8, result);
 	}

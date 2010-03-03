@@ -33,7 +33,7 @@ public class JavaHEX_LONG_LITERALTokenResolver implements IJavaTokenResolver {
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getLongLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getHexLongLiteral());
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		assert lexem.toLowerCase().endsWith(LONG_SUFFIX);
 		

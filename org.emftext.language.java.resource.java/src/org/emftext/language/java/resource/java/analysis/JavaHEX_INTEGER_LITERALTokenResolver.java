@@ -32,7 +32,7 @@ public class JavaHEX_INTEGER_LITERALTokenResolver implements IJavaTokenResolver 
 	}
 
 	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, IJavaTokenResolveResult result) {
-		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getIntegerLiteral());
+		assert feature == null || feature.getEContainingClass().equals(LiteralsPackage.eINSTANCE.getHexIntegerLiteral());
 		assert lexem.toLowerCase().startsWith(HEX_PREFIX);
 		
 		lexem = lexem.substring(2);
