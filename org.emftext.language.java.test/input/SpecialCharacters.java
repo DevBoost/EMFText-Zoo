@@ -42,7 +42,9 @@ public class SpecialCharacters {
 		case '\f':
 			outBuffer.append('\\');
 			outBuffer.append('f');
-
+			
+			break;
+		case '\37': //octal format
 			break;
 
 		case '=': // Fall through
