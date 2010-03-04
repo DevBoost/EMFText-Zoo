@@ -72,9 +72,9 @@ public class ClosuresTransformationPostProcessor extends ATLTransformationPostPr
 	public void process(ClosureResource resource) {
 		// do normal Java post processing
 		JavaPostProcessor jpp = new JavaPostProcessor();
-		jpp.process(resource);
+		jpp.processBasic(resource);
 		// handle closures TODO this should be done by a builder
-		super.process(resource);
+		super.processBasic(resource);
 	}
 
 }
