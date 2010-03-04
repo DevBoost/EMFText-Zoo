@@ -154,7 +154,7 @@ public class EcoreWrapper {
 
 			for(EStructuralFeature eStructuralFeature : eClass.getEStructuralFeatures()) {
 				wrapEStructuralFeatureForGet(eStructuralFeature, wrapper);
-				if (!eStructuralFeature.isMany()) {
+				if (!eStructuralFeature.isMany() && !eStructuralFeature.isDerived()) {
 					wrapEStructuralFeatureForSet(eStructuralFeature, wrapper);
 				}
 			}
@@ -173,6 +173,10 @@ public class EcoreWrapper {
 	public static void wrapEStructuralFeatureForGet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
 		String getterName = "get" + firstToUpperCase(eStructuralFeature.getName());
+		if (!(eClassifierWrapper.getContainedMethod(getterName) instanceof EStructuralFeatureGetWrapper)) {
+			// can happen if a methods with the same name was declared in eJava file
+			return;
+		}
 		EStructuralFeatureGetWrapper wrapper = (EStructuralFeatureGetWrapper) eClassifierWrapper.getContainedMethod(getterName);
 		
 		if (wrapper == null) {
@@ -182,13 +186,16 @@ public class EcoreWrapper {
 		}
 		wrapper.setEStructuralFeature(eStructuralFeature);
 		wrapper.setTypeReference(createTypeReferenceForETypedElement(eStructuralFeature));
-
 	}
 	
 	public static void wrapEStructuralFeatureForSet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
 		
 		String setterName = "set" + firstToUpperCase(eStructuralFeature.getName());
+		if (!(eClassifierWrapper.getContainedMethod(setterName) instanceof EStructuralFeatureSetWrapper)) {
+			// can happen if a methods with the same name was declared in eJava file
+			return;
+		}
 		EStructuralFeatureSetWrapper wrapper = (EStructuralFeatureSetWrapper) eClassifierWrapper.getContainedMethod(setterName);
 		
 		if(wrapper == null) {
