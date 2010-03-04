@@ -34,7 +34,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.emftext.language.java.classifiers.provider.InterfaceItemProvider;
-import org.emftext.language.java.ejava.EClassifierInterfaceWrapper;
 import org.emftext.language.java.ejava.EClassifierWrapper;
 import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.ejava.EjavaPackage;

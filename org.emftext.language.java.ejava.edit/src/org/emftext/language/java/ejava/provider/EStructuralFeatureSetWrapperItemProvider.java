@@ -31,7 +31,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.emftext.language.java.arrays.ArraysPackage;
-import org.emftext.language.java.ejava.EStructuralFeatureSetWrapper;
 import org.emftext.language.java.ejava.EStructuralFeatureWrapper;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.types.TypesPackage;
