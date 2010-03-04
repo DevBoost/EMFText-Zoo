@@ -218,22 +218,16 @@ public class TalkativeASTMatcher extends ASTMatcher {
 		CharacterLiteral o = (CharacterLiteral) other;
 		String oToken = o.getEscapedValue();
 		String nToken = node.getEscapedValue();
-		//special case: '"' == '\"'
-		if (oToken.equals("'\"'")) {
-			oToken = "'\\\"'";
-		}
-		if (nToken.equals("'\"'")) {
-			nToken = "'\\\"'";
-		}
-		//octal notation
-		if (oToken.matches("\\'\\\\[0-7]+\\'")) {
+
+		//octal notation and escaped characters
+		if (oToken.matches("\\'\\\\.+\\'")) {
 			oToken = oToken.substring(1, oToken.length() - 1);
 			oToken = "'" + CharacterEscaper.unescapeEscapedCharacters(oToken) + "'";
 		}
-		if (nToken.matches("\\'\\\\[0-7]+\\'")) {
+		if (nToken.matches("\\'\\\\.+\\'")) {
 			nToken = nToken.substring(1, nToken.length() - 1);
 			nToken = "'" + CharacterEscaper.unescapeEscapedCharacters(nToken) + "'";
-		}		
+		}
 		return setDiff(node, other, safeEquals(nToken, oToken));
 	}
 

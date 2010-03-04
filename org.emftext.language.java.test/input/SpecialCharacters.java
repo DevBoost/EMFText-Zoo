@@ -5,6 +5,8 @@ public class SpecialCharacters {
 
 	void m1() {
 		char aChar = ' ';
+		aChar = '\"'; // " 1
+		aChar = '"'; // " 2
 		int x = 0;
 		StringBuffer outBuffer = new StringBuffer();
 		boolean escapeSpace = true;
@@ -21,10 +23,10 @@ public class SpecialCharacters {
 
 			break;
 
-		case '\t':
+		case '\t': //tab 1
 			outBuffer.append('\\');
 			outBuffer.append('t');
-
+			aChar = '	'; //tab 2
 			break;
 
 		case '\n':
@@ -45,6 +47,8 @@ public class SpecialCharacters {
 			
 			break;
 		case '\37': //octal format
+			break;
+		case '\010': //octal format
 			break;
 
 		case '=': // Fall through
