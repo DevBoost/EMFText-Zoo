@@ -235,12 +235,11 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 		}
 		
 		//addReprintedResource(inputFile);
-		resource.setURI(URI.createFileURI(outputFileName));	
+		resource.setURI(URI.createFileURI(outputFile.getCanonicalPath()));	
 		resource.save(null);
 		
-		//This assertion sometimes fails in Windows because of ' ' vs. '%20'
-		//assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
-		//		outputFile.exists());
+		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
+				outputFile.exists());
 
 		compareTextContents(file.getInputStream(entry),
 					new FileInputStream(outputFile));
