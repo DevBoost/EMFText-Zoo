@@ -51,6 +51,7 @@ import org.emftext.language.java.ejava.EjavaFactory;
 import org.emftext.language.java.generics.GenericsFactory;
 import org.emftext.language.java.generics.QualifiedTypeArgument;
 import org.emftext.language.java.members.EnumConstant;
+import org.emftext.language.java.members.Method;
 import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.types.ClassifierReference;
@@ -173,11 +174,12 @@ public class EcoreWrapper {
 	public static void wrapEStructuralFeatureForGet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
 		String getterName = "get" + firstToUpperCase(eStructuralFeature.getName());
-		if (!(eClassifierWrapper.getContainedMethod(getterName) instanceof EStructuralFeatureGetWrapper)) {
+		Method method = eClassifierWrapper.getContainedMethod(getterName);
+		if (method != null && !(method instanceof EStructuralFeatureGetWrapper)) {
 			// can happen if a methods with the same name was declared in eJava file
 			return;
 		}
-		EStructuralFeatureGetWrapper wrapper = (EStructuralFeatureGetWrapper) eClassifierWrapper.getContainedMethod(getterName);
+		EStructuralFeatureGetWrapper wrapper = (EStructuralFeatureGetWrapper) method;
 		
 		if (wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureGetWrapper();
@@ -189,14 +191,14 @@ public class EcoreWrapper {
 	}
 	
 	public static void wrapEStructuralFeatureForSet(
-			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
-		
+			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {		
 		String setterName = "set" + firstToUpperCase(eStructuralFeature.getName());
-		if (!(eClassifierWrapper.getContainedMethod(setterName) instanceof EStructuralFeatureSetWrapper)) {
+		Method method = eClassifierWrapper.getContainedMethod(setterName);
+		if (method != null && !(method instanceof EStructuralFeatureGetWrapper)) {
 			// can happen if a methods with the same name was declared in eJava file
 			return;
 		}
-		EStructuralFeatureSetWrapper wrapper = (EStructuralFeatureSetWrapper) eClassifierWrapper.getContainedMethod(setterName);
+		EStructuralFeatureSetWrapper wrapper = (EStructuralFeatureSetWrapper) method;
 		
 		if(wrapper == null) {
 			wrapper = EjavaFactory.eINSTANCE.createEStructuralFeatureSetWrapper();
