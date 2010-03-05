@@ -49,7 +49,11 @@ public class CharacterEscaper {
 		                case '0': 
 		                case '1': 
 		                case '2': 
-		                case '3': {
+		                case '3': 
+		                case '4': 
+		                case '5': 
+		                case '6': 
+		                case '7': {
 		                    // Now we found the '0' we need to find up to 3 octal digits
 		                    // Note: shifting left by 3 is the same as multiplying by 8
 		                    int v = 0; // Accumulator

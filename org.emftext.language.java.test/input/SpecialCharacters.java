@@ -4,9 +4,11 @@ import java.util.Map;
 public class SpecialCharacters {
 
 	void m1() {
+		"xyz\5abc".toString();
 		char aChar = ' ';
 		aChar = '\"'; // " 1
 		aChar = '"'; // " 2
+		aChar = '\5';
 		int x = 0;
 		StringBuffer outBuffer = new StringBuffer();
 		boolean escapeSpace = true;
