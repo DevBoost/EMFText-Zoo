@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
@@ -173,7 +174,12 @@ public class EcoreWrapper {
 
 	public static void wrapEStructuralFeatureForGet(
 			EStructuralFeature eStructuralFeature, EClassifierWrapper eClassifierWrapper) {
-		String getterName = "get" + firstToUpperCase(eStructuralFeature.getName());
+		String prefix = "get";
+		EClassifier type = eStructuralFeature.getEType();
+		if (type != null && "EBoolean".equals(type.getName())) {
+			prefix = "is";
+		}
+		String getterName = prefix + firstToUpperCase(eStructuralFeature.getName());
 		Method method = eClassifierWrapper.getContainedMethod(getterName);
 		if (method != null && !(method instanceof EStructuralFeatureGetWrapper)) {
 			// can happen if a methods with the same name was declared in eJava file
