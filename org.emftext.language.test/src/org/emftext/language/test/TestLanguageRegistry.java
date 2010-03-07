@@ -111,6 +111,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.tbool.resource.tbool.mopp.TboolMetaInformation());
 		metaInformations.add(
+				new org.emftext.language.tcltk.resource.tcl.mopp.TclMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation());
