@@ -74,9 +74,23 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 		
 		private void test(TestItem item) {
+			Collection<EClass> availableClasses = getContainedClasses(item.getAdditionalPackages());
+
 			CsMinimalModelHelper mmh = new CsMinimalModelHelper();
-			for (EClass nextStart : item.getStartClasses()) {
-				Collection<EClass> availableClasses = getContainedClasses(item.getAdditionalPackages());
+			Set<EClass> startClasses = new LinkedHashSet<EClass>();
+			for (EClass eClass : item.getStartClasses()) {
+				if (eClass.isAbstract()) {
+					// find and add subclasses
+					for (EClass next : availableClasses) {
+						if (next.getEAllSuperTypes().contains(eClass) && !next.isAbstract()) {
+							startClasses.add(next);
+						}
+					}
+				} else {
+					startClasses.add(eClass);
+				}
+			}
+			for (EClass nextStart : startClasses) {
 				availableClasses.addAll(getContainedClasses(nextStart));
 				
 				EObject result = mmh.getMinimalModel(nextStart, availableClasses);
