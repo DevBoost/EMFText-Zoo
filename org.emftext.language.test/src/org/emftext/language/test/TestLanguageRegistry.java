@@ -8,6 +8,7 @@ import org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax.mopp.Cps
 import org.reuseware.coconut.compositionsystem.resource.csys.mopp.CsysMetaInformation;
 import org.reuseware.coconut.fragment.resource.fragment.mopp.FragmentMetaInformation;
 import org.reuseware.coconut.reuseextension.resource.rex.mopp.RexMetaInformation;
+import org.reuseware.coconut.reuseextensionactivator.resource.rexactivator.mopp.Rex_activatorMetaInformation;
 
 public class TestLanguageRegistry {
 
@@ -138,6 +139,8 @@ public class TestLanguageRegistry {
 				new CpsyntaxMetaInformation());
 		metaInformations.add(
 				new FragmentMetaInformation());
+		metaInformations.add(
+				new Rex_activatorMetaInformation());
 		
 		return metaInformations;
 	}
@@ -165,11 +168,15 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.test.cct3.resource.cct3.mopp.Cct3MetaInformation());
 		metaInformations.add(
+				new org.emftext.test.cct4.resource.cct4.mopp.Cct4MetaInformation());
+		metaInformations.add(
 				new org.emftext.test.escaping.resource.escaping.mopp.EscapingMetaInformation());
 		metaInformations.add(
 				new org.emftext.test.grammar_features.resource.grammar_features.mopp.Grammar_featuresMetaInformation());
 		metaInformations.add(
 				new org.emftext.test.bug933.resource.bug933.mopp.Bug933MetaInformation());
+		metaInformations.add(
+				new org.emftext.test.bug1154.resource.bug1154.mopp.Bug1154MetaInformation());
 		return metaInformations;
 	}
 }
