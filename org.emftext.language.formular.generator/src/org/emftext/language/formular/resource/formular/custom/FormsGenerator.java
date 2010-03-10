@@ -51,7 +51,11 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.emftext.language.formular.Formular;
 import org.emftext.language.formular.resource.formular.FormularGeneratorPlugin;
 
-public class GeneratingResourceProcessor {
+/**
+ * The FormsGenerator use all available generators to
+ * transform .form files to readable output formats.
+ */
+public class FormsGenerator {
 
 	public void process(EList<EObject> contents) {
 
