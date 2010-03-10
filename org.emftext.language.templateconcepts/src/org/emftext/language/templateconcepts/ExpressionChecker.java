@@ -43,7 +43,7 @@ import org.emftext.language.templateconcepts.ForEach;
 import org.emftext.language.templateconcepts.Placeholder;
 import org.emftext.language.templateconcepts.Template;
 import org.emftext.language.templateconcepts.TemplateConcept;
-import org.emftext.language.templateconcepts.Template_conceptsPackage;
+import org.emftext.language.templateconcepts.TemplateconceptsPackage;
 
 
 /**
@@ -67,7 +67,7 @@ public class ExpressionChecker  {
 	}
 
 	public void process(Resource resource, ErrorReporter errorReporter) {
-		List<EObject> templates = getObjectsByType(resource, Template_conceptsPackage.eINSTANCE.getTemplate());
+		List<EObject> templates = getObjectsByType(resource, TemplateconceptsPackage.eINSTANCE.getTemplate());
 		if (templates.size() < 1) {
 			return;
 		}
