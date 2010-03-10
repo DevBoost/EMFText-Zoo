@@ -12,8 +12,8 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
-SYNTAXDEF template_call
-FOR  <http://www.emftext.org/language/template_concepts/call>
+SYNTAXDEF templatecall
+FOR  <http://www.emftext.org/language/templateconcepts/call>
 START TemplateCall
 
 OPTIONS {	

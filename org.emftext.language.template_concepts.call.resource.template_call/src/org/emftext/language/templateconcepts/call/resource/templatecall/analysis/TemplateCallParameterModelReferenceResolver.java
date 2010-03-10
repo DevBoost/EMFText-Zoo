@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.call.resource.template_call.analysis;
+package org.emftext.language.templateconcepts.call.resource.templatecall.analysis;
 
 import java.io.IOException;
 import java.util.List;
