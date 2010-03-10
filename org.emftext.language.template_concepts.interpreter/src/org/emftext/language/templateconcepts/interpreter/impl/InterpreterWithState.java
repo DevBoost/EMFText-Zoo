@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter.impl;
+package org.emftext.language.templateconcepts.interpreter.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,18 +29,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.language.template_concepts.ExpressionChecker;
-import org.emftext.language.template_concepts.ForEach;
-import org.emftext.language.template_concepts.If;
-import org.emftext.language.template_concepts.IfElse;
-import org.emftext.language.template_concepts.Placeholder;
-import org.emftext.language.template_concepts.Template;
-import org.emftext.language.template_concepts.TemplateConcept;
-import org.emftext.language.template_concepts.TemplateMetamodelConstants;
-import org.emftext.language.template_concepts.Template_conceptsPackage;
-import org.emftext.language.template_concepts.interpreter.exceptions.InterpreterException;
-import org.emftext.language.template_concepts.interpreter.exceptions.TemplateException;
-import org.emftext.language.template_concepts.interpreter.exceptions.TemplateMetamodelException;
+import org.emftext.language.templateconcepts.ExpressionChecker;
+import org.emftext.language.templateconcepts.ForEach;
+import org.emftext.language.templateconcepts.If;
+import org.emftext.language.templateconcepts.IfElse;
+import org.emftext.language.templateconcepts.Placeholder;
+import org.emftext.language.templateconcepts.Template;
+import org.emftext.language.templateconcepts.TemplateConcept;
+import org.emftext.language.templateconcepts.TemplateMetamodelConstants;
+import org.emftext.language.templateconcepts.Template_conceptsPackage;
+import org.emftext.language.templateconcepts.interpreter.exceptions.InterpreterException;
+import org.emftext.language.templateconcepts.interpreter.exceptions.TemplateException;
+import org.emftext.language.templateconcepts.interpreter.exceptions.TemplateMetamodelException;
 
 /**
  * This is the actual interpreter. It maintains a state. Thus,

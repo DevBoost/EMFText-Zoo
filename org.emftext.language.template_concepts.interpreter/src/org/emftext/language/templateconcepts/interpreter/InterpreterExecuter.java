@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter;
+package org.emftext.language.templateconcepts.interpreter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.call.TemplateCall;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callOptionProvider;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callOptions;
@@ -35,6 +34,7 @@ import org.emftext.language.template_concepts.call.resource.template_call.ITempl
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callResourcePostProcessorProvider;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callTextResource;
 import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResource;
+import org.emftext.language.templateconcepts.Template;
 
 public class InterpreterExecuter implements ITemplate_callOptionProvider, ITemplate_callResourcePostProcessorProvider, ITemplate_callResourcePostProcessor {
 

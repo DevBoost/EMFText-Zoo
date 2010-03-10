@@ -11,16 +11,17 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts;
+package org.emftext.language.templateconcepts;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.templateconcepts.Template;
 
 public class InputMetaClassReferenceResolver {
 	
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.template_concepts.Template container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.templateconcepts.Template container, org.eclipse.emf.ecore.EReference reference) {
 		EClass eClass = (EClass) element;
 		EPackage ePackage = eClass.getEPackage();
 		if (ePackage == null) {

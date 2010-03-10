@@ -14,7 +14,7 @@
 package org.emftext.language.java_templates.test;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateResourceFactory;
-import org.emftext.language.template_concepts.interpreter.test.AbstractInterpreterTest;
+import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTest;
 
 public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
 

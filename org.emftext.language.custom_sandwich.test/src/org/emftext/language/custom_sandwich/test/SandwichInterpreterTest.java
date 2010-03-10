@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichResourceFactory;
 import org.emftext.language.customer.resource.customer.mopp.CustomerResourceFactory;
 import org.emftext.language.sandwich.resource.sandwich.mopp.SandwichResourceFactory;
-import org.emftext.language.template_concepts.interpreter.test.AbstractInterpreterTest;
+import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTest;
 
 public class SandwichInterpreterTest extends AbstractInterpreterTest {
 

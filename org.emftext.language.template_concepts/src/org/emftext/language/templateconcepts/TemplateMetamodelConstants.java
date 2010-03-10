@@ -11,26 +11,16 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-/**
- * 
- */
-package org.emftext.language.template_concepts.interpreter.exceptions;
+package org.emftext.language.templateconcepts;
 
 /**
- * Thrown on user error in template
- * @author Marcel Boehme
- * Comment created on: 14.04.2009
+ * This class encapsulate some constants for feature names that are
+ * create when a language is extended with template concepts.
  */
-public class TemplateException extends InterpreterException{
-	private static final long serialVersionUID = 8746948627637314078L;
-
-	public TemplateException(Exception e) {
-		super(e);
-	}
-	public TemplateException(String message) {
-		super(message);
-	}
-	public TemplateException(String message, Exception e){
-		super(message,e);
-	}
+public class TemplateMetamodelConstants {
+	public static final String REFERENCE_TEMPLATE_BODY = "body";
+	public static final String REFERENCE_FOR_BODY = "body";
+	public static final String REFERENCE_IF_BODY = "body";
+	public static final String REFERENCE_ELSE_BODY = "elseBody";
+	public static final String FEATURE = "Feature";
 }

@@ -11,15 +11,26 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter;
+/**
+ * 
+ */
+package org.emftext.language.templateconcepts.interpreter.exceptions;
 
-import java.util.Collection;
+/**
+ * Thrown on user error in template
+ * @author Marcel Boehme
+ * Comment created on: 14.04.2009
+ */
+public class TemplateException extends InterpreterException{
+	private static final long serialVersionUID = 8746948627637314078L;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.emftext.language.template_concepts.Template;
-
-public interface ITemplateInterpreter {
-
-	public EObject interprete(Template template, EObject paramModel, Collection<Diagnostic> problems);
+	public TemplateException(Exception e) {
+		super(e);
+	}
+	public TemplateException(String message) {
+		super(message);
+	}
+	public TemplateException(String message, Exception e){
+		super(message,e);
+	}
 }

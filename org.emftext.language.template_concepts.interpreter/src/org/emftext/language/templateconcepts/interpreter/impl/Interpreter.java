@@ -11,15 +11,15 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter.impl;
+package org.emftext.language.templateconcepts.interpreter.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.emftext.language.template_concepts.Template;
-import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
+import org.emftext.language.templateconcepts.Template;
+import org.emftext.language.templateconcepts.interpreter.ITemplateInterpreter;
 
 public class Interpreter implements ITemplateInterpreter {
 

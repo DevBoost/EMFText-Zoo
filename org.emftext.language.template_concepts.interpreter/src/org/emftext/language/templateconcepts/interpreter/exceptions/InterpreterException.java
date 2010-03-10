@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter.exceptions;
+package org.emftext.language.templateconcepts.interpreter.exceptions;
 
 /**
  * @author Marcel Boehme

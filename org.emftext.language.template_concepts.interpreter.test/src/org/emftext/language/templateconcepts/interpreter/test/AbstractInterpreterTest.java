@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter.test;
+package org.emftext.language.templateconcepts.interpreter.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.template_concepts.Template;
-import org.emftext.language.template_concepts.interpreter.ITemplateInterpreter;
-import org.emftext.language.template_concepts.interpreter.TemplateInterpreterFactory;
+import org.emftext.language.templateconcepts.Template;
+import org.emftext.language.templateconcepts.interpreter.ITemplateInterpreter;
+import org.emftext.language.templateconcepts.interpreter.TemplateInterpreterFactory;
 
 public abstract class AbstractInterpreterTest extends TestCase {
 	

@@ -11,16 +11,21 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts;
+/**
+ * 
+ */
+package org.emftext.language.templateconcepts.interpreter.exceptions;
 
 /**
- * This class encapsulate some constants for feature names that are
- * create when a language is extended with template concepts.
+ * Just wraps the {@link InterpreterException} in case 
+ * the surrounding method cannot be marked as throwing it (throws ..)
+ * @author Marcel Böhme
+ * Comment created on: 15.04.2009
  */
-public class TemplateMetamodelConstants {
-	public static final String REFERENCE_TEMPLATE_BODY = "body";
-	public static final String REFERENCE_FOR_BODY = "body";
-	public static final String REFERENCE_IF_BODY = "body";
-	public static final String REFERENCE_ELSE_BODY = "elseBody";
-	public static final String FEATURE = "Feature";
+public class InterpreterWrapperException extends Exception {
+	private static final long serialVersionUID = -5145531545251140139L;
+	
+	public InterpreterWrapperException(InterpreterException e) {
+		super(e);
+	}
 }

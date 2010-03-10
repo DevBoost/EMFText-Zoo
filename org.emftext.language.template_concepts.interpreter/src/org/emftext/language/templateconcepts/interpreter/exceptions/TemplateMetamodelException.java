@@ -14,7 +14,7 @@
 /**
  * 
  */
-package org.emftext.language.template_concepts.interpreter.exceptions;
+package org.emftext.language.templateconcepts.interpreter.exceptions;
 
 /**
  * Thrown if there is an error with the metamodel

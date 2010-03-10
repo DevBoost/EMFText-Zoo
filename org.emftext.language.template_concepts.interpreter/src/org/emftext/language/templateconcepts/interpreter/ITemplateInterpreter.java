@@ -11,21 +11,15 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-/**
- * 
- */
-package org.emftext.language.template_concepts.interpreter.exceptions;
+package org.emftext.language.templateconcepts.interpreter;
 
-/**
- * Just wraps the {@link InterpreterException} in case 
- * the surrounding method cannot be marked as throwing it (throws ..)
- * @author Marcel Böhme
- * Comment created on: 15.04.2009
- */
-public class InterpreterWrapperException extends Exception {
-	private static final long serialVersionUID = -5145531545251140139L;
-	
-	public InterpreterWrapperException(InterpreterException e) {
-		super(e);
-	}
+import java.util.Collection;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.emftext.language.templateconcepts.Template;
+
+public interface ITemplateInterpreter {
+
+	public EObject interprete(Template template, EObject paramModel, Collection<Diagnostic> problems);
 }

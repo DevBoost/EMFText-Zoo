@@ -23,10 +23,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.template_concepts.Template;
 import org.emftext.language.template_concepts.call.TemplateCall;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolveResult;
 import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolver;
+import org.emftext.language.templateconcepts.Template;
 
 public class TemplateCallTargetReferenceResolver implements ITemplate_callReferenceResolver<TemplateCall, Template> {
 	

@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts;
+package org.emftext.language.templateconcepts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +39,11 @@ import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
 import org.emftext.language.primitive_types.helper.PrimitiveTypesHelper;
+import org.emftext.language.templateconcepts.ForEach;
+import org.emftext.language.templateconcepts.Placeholder;
+import org.emftext.language.templateconcepts.Template;
+import org.emftext.language.templateconcepts.TemplateConcept;
+import org.emftext.language.templateconcepts.Template_conceptsPackage;
 
 
 /**

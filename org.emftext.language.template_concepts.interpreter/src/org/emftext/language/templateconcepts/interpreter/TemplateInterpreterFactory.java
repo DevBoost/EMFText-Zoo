@@ -11,9 +11,9 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.template_concepts.interpreter;
+package org.emftext.language.templateconcepts.interpreter;
 
-import org.emftext.language.template_concepts.interpreter.impl.Interpreter;
+import org.emftext.language.templateconcepts.interpreter.impl.Interpreter;
 
 public class TemplateInterpreterFactory {
 

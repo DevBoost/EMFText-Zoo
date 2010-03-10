@@ -19,14 +19,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolveResult;
 import org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolver;
-import org.emftext.language.template_concepts.InputMetaClassReferenceResolver;
-import org.emftext.language.template_concepts.Template;
+import org.emftext.language.templateconcepts.InputMetaClassReferenceResolver;
+import org.emftext.language.templateconcepts.Template;
 
-public class TemplateInputMetaClassReferenceResolver implements IJava_templateReferenceResolver<org.emftext.language.template_concepts.Template, EClass> {
+public class TemplateInputMetaClassReferenceResolver implements IJava_templateReferenceResolver<org.emftext.language.templateconcepts.Template, EClass> {
 	
 	private InputMetaClassReferenceResolver resolverDelegate = new InputMetaClassReferenceResolver();
 
-	public java.lang.String deResolve(EClass element, org.emftext.language.template_concepts.Template container, EReference reference) {
+	public java.lang.String deResolve(EClass element, org.emftext.language.templateconcepts.Template container, EReference reference) {
 		return resolverDelegate.deResolve(element, container, reference);
 	}
 	
