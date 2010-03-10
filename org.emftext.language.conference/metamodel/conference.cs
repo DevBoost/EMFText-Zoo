@@ -30,18 +30,18 @@ TOKENSTYLES {
 
 RULES {
 	Conference ::= 
-		"CONFERENCE" name['"','"'] 
-		"(" organizers['"','"'] ("," organizers['"','"'])* ")" 
-	    ( elements )* 
-	    "REGISTERED" "SPEAKERS" ":" speakers ("," speakers)*;
+		"CONFERENCE" #1 name['"','"'] #1 
+		"(" organizers['"','"'] ("," #1 organizers['"','"'])* ")"
+	    !0 ( !0 elements )* 
+	    !0 "REGISTERED" "SPEAKERS" ":" !0 speakers ("," !0 speakers)*;
 		
-	Participant ::= name['"','"'] "FROM" country [];
+	Participant ::= name['"','"'] #1 "FROM" #1 country [];
 		
-	Talk ::= "TALK" name['"','"'] "PRESENTED" "BY" presenter['"','"'];
+	Talk ::= "TALK" #1 name['"','"'] #1 "PRESENTED" "BY" presenter['"','"'] !0;
 		
-	Track ::= "TRACK" name['"','"'] ":" slots*;
+	Track ::= "TRACK" #1 name['"','"'] ":" !0 (slots)*;
 		
-	Slot ::= "AT" hour[] ":" minute[] ":" talk;
+	Slot ::= "AT" #1 hour[] #0 ":" #0 minute[] ":" #1 talk;
 	
-	Lunch ::= "AT" hour[] ":" minute[] "LUNCH";
+	Lunch ::= "AT" hour[] #0 ":" #0 minute[] #1 "LUNCH" !0;
 }
