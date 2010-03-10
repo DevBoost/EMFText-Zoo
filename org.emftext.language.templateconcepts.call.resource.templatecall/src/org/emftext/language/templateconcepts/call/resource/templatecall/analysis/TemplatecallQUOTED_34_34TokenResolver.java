@@ -11,11 +11,12 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
+
 package org.emftext.language.templateconcepts.call.resource.templatecall.analysis;
 
-public class Template_callQUOTED_34_34TokenResolver implements org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callTokenResolver {
+public class TemplatecallQUOTED_34_34TokenResolver implements org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallTokenResolver {
 	
-	private org.emftext.language.template_concepts.call.resource.template_call.analysis.Template_callDefaultTokenResolver defaultTokenResolver = new org.emftext.language.template_concepts.call.resource.template_call.analysis.Template_callDefaultTokenResolver();
+	private org.emftext.language.templateconcepts.call.resource.templatecall.analysis.TemplatecallDefaultTokenResolver defaultTokenResolver = new org.emftext.language.templateconcepts.call.resource.templatecall.analysis.TemplatecallDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
@@ -24,7 +25,7 @@ public class Template_callQUOTED_34_34TokenResolver implements org.emftext.langu
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallTokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0, lexem.length() - 1);
 		defaultTokenResolver.resolve(lexem, feature, result);

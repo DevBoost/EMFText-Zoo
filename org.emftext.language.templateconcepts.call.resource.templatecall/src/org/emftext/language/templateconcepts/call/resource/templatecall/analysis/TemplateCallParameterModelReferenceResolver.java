@@ -23,18 +23,18 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.template_concepts.call.TemplateCall;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolveResult;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callReferenceResolver;
+import org.emftext.language.templateconcepts.call.TemplateCall;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallReferenceResolveResult;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallReferenceResolver;
 
-public class TemplateCallParameterModelReferenceResolver implements ITemplate_callReferenceResolver<TemplateCall, EObject> {
+public class TemplateCallParameterModelReferenceResolver implements ITemplatecallReferenceResolver<TemplateCall, EObject> {
 	
 	public java.lang.String deResolve(EObject element, TemplateCall container, EReference reference) {
 		// TODO
 		return null;
 	}
 	
-	public void resolve(String identifier, TemplateCall container, EReference reference, int position, boolean resolveFuzzy, ITemplate_callReferenceResolveResult<EObject> result) {
+	public void resolve(String identifier, TemplateCall container, EReference reference, int position, boolean resolveFuzzy, ITemplatecallReferenceResolveResult<EObject> result) {
 		Resource resource = container.eResource();
 		URI uri = resource.getURI();
 		URI uriWithoutExtension = uri.trimSegments(1);

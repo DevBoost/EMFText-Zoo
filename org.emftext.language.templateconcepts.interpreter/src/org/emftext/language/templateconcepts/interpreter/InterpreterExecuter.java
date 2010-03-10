@@ -27,18 +27,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.template_concepts.call.TemplateCall;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callOptionProvider;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callOptions;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callResourcePostProcessor;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callResourcePostProcessorProvider;
-import org.emftext.language.template_concepts.call.resource.template_call.ITemplate_callTextResource;
-import org.emftext.language.template_concepts.call.resource.template_call.mopp.Template_callResource;
+import org.emftext.language.templateconcepts.call.TemplateCall;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallOptionProvider;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallOptions;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallResourcePostProcessor;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallResourcePostProcessorProvider;
+import org.emftext.language.templateconcepts.call.resource.templatecall.ITemplatecallTextResource;
+import org.emftext.language.templateconcepts.call.resource.templatecall.mopp.TemplatecallResource;
 import org.emftext.language.templateconcepts.Template;
 
-public class InterpreterExecuter implements ITemplate_callOptionProvider, ITemplate_callResourcePostProcessorProvider, ITemplate_callResourcePostProcessor {
+public class InterpreterExecuter implements ITemplatecallOptionProvider, ITemplatecallResourcePostProcessorProvider, ITemplatecallResourcePostProcessor {
 
-	public void process(Template_callResource resource) {
+	public void process(TemplatecallResource resource) {
 		if (resource==null || resource.getContents().size() == 0) {
 			return;
 		}
@@ -58,7 +58,7 @@ public class InterpreterExecuter implements ITemplate_callOptionProvider, ITempl
 		}
 	}
 
-	private void saveTemplateInstance(ITemplate_callTextResource resource,
+	private void saveTemplateInstance(ITemplatecallTextResource resource,
 			EObject templateInstanceAST) {
 		
 		if (templateInstanceAST == null) {
@@ -96,13 +96,13 @@ public class InterpreterExecuter implements ITemplate_callOptionProvider, ITempl
 		}.schedule();
 	}
 
-	public ITemplate_callResourcePostProcessor getResourcePostProcessor() {
+	public ITemplatecallResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 
 	public Map<?, ?> getOptions() {
 		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(ITemplate_callOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+		options.put(ITemplatecallOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 		return options;
 	}
 }

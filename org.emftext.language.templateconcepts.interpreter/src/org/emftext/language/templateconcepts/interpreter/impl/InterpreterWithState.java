@@ -37,7 +37,7 @@ import org.emftext.language.templateconcepts.Placeholder;
 import org.emftext.language.templateconcepts.Template;
 import org.emftext.language.templateconcepts.TemplateConcept;
 import org.emftext.language.templateconcepts.TemplateMetamodelConstants;
-import org.emftext.language.templateconcepts.Template_conceptsPackage;
+import org.emftext.language.templateconcepts.TemplateconceptsPackage;
 import org.emftext.language.templateconcepts.interpreter.exceptions.InterpreterException;
 import org.emftext.language.templateconcepts.interpreter.exceptions.TemplateException;
 import org.emftext.language.templateconcepts.interpreter.exceptions.TemplateMetamodelException;
@@ -250,7 +250,7 @@ public class InterpreterWithState {
 	private boolean isTemplateConcept(EObject tiObject) {
 		List<EClass> supertypes = tiObject.eClass().getEAllSuperTypes();
 		for (EClass supertype : supertypes) {
-			if (supertype.getEPackage().getNsURI().equals(Template_conceptsPackage.eNS_URI)) {
+			if (supertype.getEPackage().getNsURI().equals(TemplateconceptsPackage.eNS_URI)) {
 				return true;
 			}
 		}
@@ -268,7 +268,7 @@ public class InterpreterWithState {
 		}
 		EClass tAttributeElementClass = null;
 		for (EClass superClass : superClasses) {
-			if (!superClass.equals(Template_conceptsPackage.eINSTANCE.getPlaceholder())) {
+			if (!superClass.equals(TemplateconceptsPackage.eINSTANCE.getPlaceholder())) {
 				tAttributeElementClass = superClass;
 			}
 		}
@@ -340,7 +340,7 @@ public class InterpreterWithState {
 			EClass eClass = (EClass) classifier;
 			//mboehme: Bugfix: Shouldn't return eClass if it is a template concept (e.g. placeholder)
 			if (eClass.getEAllSuperTypes().contains(abstractAttributeClass)
-					&& !eClass.getEAllSuperTypes().contains(Template_conceptsPackage.eINSTANCE.getTemplateConcept())) {
+					&& !eClass.getEAllSuperTypes().contains(TemplateconceptsPackage.eINSTANCE.getTemplateConcept())) {
 				return eClass;
 			}
 		}
