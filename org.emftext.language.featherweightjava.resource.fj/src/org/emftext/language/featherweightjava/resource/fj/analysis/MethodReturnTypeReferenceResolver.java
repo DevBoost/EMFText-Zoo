@@ -11,19 +11,19 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.featherweight_java.resource.fj.analysis;
+package org.emftext.language.featherweightjava.resource.fj.analysis;
 
-import org.emftext.language.featherweight_java.resource.fj.analysis.helper.ClassResolver;
+import org.emftext.language.featherweightjava.resource.fj.analysis.helper.ClassResolver;
 
-public class CastTypeReferenceResolver implements org.emftext.language.featherweight_java.resource.fj.IFjReferenceResolver<org.emftext.language.featherweight_java.Cast, org.emftext.language.featherweight_java.Class> {
+public class MethodReturnTypeReferenceResolver implements org.emftext.language.featherweightjava.resource.fj.IFjReferenceResolver<org.emftext.language.featherweightjava.Method, org.emftext.language.featherweightjava.Class> {
 	
 	private ClassResolver delegate = new ClassResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.featherweight_java.Cast container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.featherweight_java.resource.fj.IFjReferenceResolveResult<org.emftext.language.featherweight_java.Class> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.featherweightjava.Method container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.featherweightjava.resource.fj.IFjReferenceResolveResult<org.emftext.language.featherweightjava.Class> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
 	
-	public java.lang.String deResolve(org.emftext.language.featherweight_java.Class element, org.emftext.language.featherweight_java.Cast container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.emftext.language.featherweightjava.Class element, org.emftext.language.featherweightjava.Method container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.featherweight_java.test;
+package org.emftext.language.featherweightjava.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.featherweight_java.resource.fj.mopp.FjResourceFactory;
+import org.emftext.language.featherweightjava.resource.fj.mopp.FjResourceFactory;
 
 public class FJTest extends TestCase {
 

@@ -11,18 +11,18 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.featherweight_java.resource.fj.analysis;
+package org.emftext.language.featherweightjava.resource.fj.analysis;
 
-public class FjTEXTTokenResolver implements org.emftext.language.featherweight_java.resource.fj.IFjTokenResolver {
+public class FjTEXTTokenResolver implements org.emftext.language.featherweightjava.resource.fj.IFjTokenResolver {
 	
-	private org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultTokenResolver defaultTokenResolver = new org.emftext.language.featherweight_java.resource.fj.analysis.FjDefaultTokenResolver();
+	private org.emftext.language.featherweightjava.resource.fj.analysis.FjDefaultTokenResolver defaultTokenResolver = new org.emftext.language.featherweightjava.resource.fj.analysis.FjDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.featherweight_java.resource.fj.IFjTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.featherweightjava.resource.fj.IFjTokenResolveResult result) {
 		defaultTokenResolver.resolve(lexem, feature, result);
 	}
 	

@@ -13,7 +13,7 @@
 // ******************************************************************************/
 
 SYNTAXDEF fj 
-FOR <http://www.emftext.org/language/featherweight_java>
+FOR <http://www.emftext.org/language/featherweightjava>
 START Class
 
 OPTIONS {
