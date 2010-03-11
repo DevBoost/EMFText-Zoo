@@ -11,11 +11,11 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
+package org.emftext.language.customsandwich.resource.customsandwich.analysis;
 
-public class Custom_sandwichQUOTED_34_34TokenResolver implements org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichTokenResolver {
+public class CustomsandwichQUOTED_34_34TokenResolver implements org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichTokenResolver {
 	
-	private org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis.Custom_sandwichDefaultTokenResolver defaultTokenResolver = new org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis.Custom_sandwichDefaultTokenResolver();
+	private org.emftext.language.customsandwich.resource.customsandwich.analysis.CustomsandwichDefaultTokenResolver defaultTokenResolver = new org.emftext.language.customsandwich.resource.customsandwich.analysis.CustomsandwichDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
@@ -24,7 +24,7 @@ public class Custom_sandwichQUOTED_34_34TokenResolver implements org.emftext.lan
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichTokenResolveResult result) {
 		lexem = lexem.substring(1);
 		lexem = lexem.substring(0, lexem.length() - 1);
 		defaultTokenResolver.resolve(lexem, feature, result);

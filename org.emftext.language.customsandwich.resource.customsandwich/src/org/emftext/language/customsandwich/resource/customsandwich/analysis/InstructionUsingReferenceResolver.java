@@ -11,13 +11,13 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
+package org.emftext.language.customsandwich.resource.customsandwich.analysis;
 
-public class InstructionUsingReferenceResolver implements org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichReferenceResolver<org.emftext.language.sandwich.Instruction, org.emftext.language.sandwich.FeatureInstructionUsing> {
+public class InstructionUsingReferenceResolver implements org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolver<org.emftext.language.sandwich.Instruction, org.emftext.language.sandwich.FeatureInstructionUsing> {
 	
 	private org.emftext.language.sandwich.resource.sandwich.analysis.InstructionUsingReferenceResolver delegate = new org.emftext.language.sandwich.resource.sandwich.analysis.InstructionUsingReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.sandwich.Instruction container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.sandwich.resource.sandwich.ISandwichReferenceResolveResult<org.emftext.language.sandwich.FeatureInstructionUsing>() {
 			
 			public boolean wasResolvedUniquely() {

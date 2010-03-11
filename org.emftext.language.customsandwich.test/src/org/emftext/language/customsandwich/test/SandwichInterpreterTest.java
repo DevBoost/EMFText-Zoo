@@ -11,10 +11,10 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.custom_sandwich.test;
+package org.emftext.language.customsandwich.test;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichResourceFactory;
+import org.emftext.language.customsandwich.resource.customsandwich.mopp.CustomsandwichResourceFactory;
 import org.emftext.language.customer.resource.customer.mopp.CustomerResourceFactory;
 import org.emftext.language.sandwich.resource.sandwich.mopp.SandwichResourceFactory;
 import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTest;
@@ -23,11 +23,11 @@ public class SandwichInterpreterTest extends AbstractInterpreterTest {
 
 	public void testSandwichInterpretation() {
 		// basic test (input model is not used)
-		testInterpretation("template1.custom_sandwich", "customer1.customer", "RECIPE myRecipe bread butter");
+		testInterpretation("template1.customsandwich", "customer1.customer", "RECIPE myRecipe bread butter");
 		// basic test for FOREACH loop and placeholder inside of the loop
-		testInterpretation("template2.custom_sandwich", "customer2.customer", "RECIPE myRecipe bread i1 i2 i3 TOAST bread");
+		testInterpretation("template2.customsandwich", "customer2.customer", "RECIPE myRecipe bread i1 i2 i3 TOAST bread");
 		// test loop variable
-		testInterpretation("template3.custom_sandwich", "customer3.customer", "RECIPE myRecipe bread i1 i2 i3 TOAST bread");
+		testInterpretation("template3.customsandwich", "customer3.customer", "RECIPE myRecipe bread i1 i2 i3 TOAST bread");
 	}
 
 	protected void registerResourceFactories() {
@@ -35,8 +35,8 @@ public class SandwichInterpreterTest extends AbstractInterpreterTest {
 				"sandwich",
 				new SandwichResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"custom_sandwich",
-				new Custom_sandwichResourceFactory());
+				"customsandwich",
+				new CustomsandwichResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"customer",
 				new CustomerResourceFactory());

@@ -11,16 +11,16 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
+package org.emftext.language.customsandwich.resource.customsandwich.analysis;
 
 import org.eclipse.emf.ecore.EClass;
 import org.emftext.language.templateconcepts.InputMetaClassReferenceResolver;
 
-public class TemplateInputMetaClassReferenceResolver implements org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichReferenceResolver<org.emftext.language.templateconcepts.Template, org.eclipse.emf.ecore.EClass> {
+public class TemplateInputMetaClassReferenceResolver implements org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolver<org.emftext.language.templateconcepts.Template, org.eclipse.emf.ecore.EClass> {
 	
 	private InputMetaClassReferenceResolver resolverDelegate = new InputMetaClassReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.templateconcepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.templateconcepts.Template container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
 		EClass resolved = resolverDelegate.resolve(identifier, container, reference, position, resolveFuzzy);
 		if (resolved != null) {
 			result.addMapping(identifier, resolved);

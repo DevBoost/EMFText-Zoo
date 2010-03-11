@@ -12,8 +12,8 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
-SYNTAXDEF custom_sandwich
-FOR <http://www.emftext.org/language/custom_sandwich>
+SYNTAXDEF customsandwich
+FOR <http://www.emftext.org/language/customsandwich>
 START RecipeTemplate
 
 IMPORTS {

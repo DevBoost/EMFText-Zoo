@@ -11,9 +11,9 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.custom_sandwich.resource.custom_sandwich.analysis;
+package org.emftext.language.customsandwich.resource.customsandwich.analysis;
 
-public class SandwichTEXTTokenResolver implements org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichTokenResolver {
+public class SandwichTEXTTokenResolver implements org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichTokenResolver {
 	
 	private org.emftext.language.sandwich.resource.sandwich.analysis.SandwichTEXTTokenResolver importedResolver = new org.emftext.language.sandwich.resource.sandwich.analysis.SandwichTEXTTokenResolver();
 	
@@ -22,7 +22,7 @@ public class SandwichTEXTTokenResolver implements org.emftext.language.custom_sa
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, final org.emftext.language.custom_sandwich.resource.custom_sandwich.ICustom_sandwichTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, final org.emftext.language.customsandwich.resource.customsandwich.ICustomsandwichTokenResolveResult result) {
 		importedResolver.resolve(lexem, feature, new org.emftext.language.sandwich.resource.sandwich.ISandwichTokenResolveResult() {
 			public String getErrorMessage() {
 				return result.getErrorMessage();
