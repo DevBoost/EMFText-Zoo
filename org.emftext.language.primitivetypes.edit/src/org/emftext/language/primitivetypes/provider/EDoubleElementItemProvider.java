@@ -17,7 +17,7 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 
 import java.util.Collection;
@@ -39,11 +39,11 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.EDoubleElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.EDoubleElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.EDoubleElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.EDoubleElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -96,7 +96,7 @@ public class EDoubleElementItemProvider
          getResourceLocator(),
          getString("_UI_EDoubleElement_value_feature"),
          getString("_UI_PropertyDescriptor_description", "_UI_EDoubleElement_value_feature", "_UI_EDoubleElement_type"),
-         Primitive_typesPackage.Literals.EDOUBLE_ELEMENT__VALUE,
+         PrimitivetypesPackage.Literals.EDOUBLE_ELEMENT__VALUE,
          true,
          false,
          false,
@@ -130,7 +130,7 @@ public class EDoubleElementItemProvider
 
     switch (notification.getFeatureID(EDoubleElement.class))
     {
-      case Primitive_typesPackage.EDOUBLE_ELEMENT__VALUE:
+      case PrimitivetypesPackage.EDOUBLE_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -157,7 +157,7 @@ public class EDoubleElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

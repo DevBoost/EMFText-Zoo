@@ -1,35 +1,22 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
- * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
 /**
  * <copyright>
  * </copyright>
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
- * This is the central singleton for the Primitive_types edit plugin.
+ * This is the central singleton for the Primitivetypes edit plugin.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public final class Primitive_typesEditPlugin extends EMFPlugin
+public final class PrimitivetypesEditPlugin extends EMFPlugin
 {
   /**
    * Keep track of the singleton.
@@ -37,7 +24,7 @@ public final class Primitive_typesEditPlugin extends EMFPlugin
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final Primitive_typesEditPlugin INSTANCE = new Primitive_typesEditPlugin();
+  public static final PrimitivetypesEditPlugin INSTANCE = new PrimitivetypesEditPlugin();
 
   /**
    * Keep track of the singleton.
@@ -53,7 +40,7 @@ public final class Primitive_typesEditPlugin extends EMFPlugin
    * <!-- end-user-doc -->
    * @generated
    */
-  public Primitive_typesEditPlugin()
+  public PrimitivetypesEditPlugin()
   {
     super
       (new ResourceLocator [] 

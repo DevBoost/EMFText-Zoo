@@ -17,7 +17,7 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 
 import java.util.Collection;
@@ -39,16 +39,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.EIntElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.EStringElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.EIntElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.EStringElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EIntElementItemProvider
+public class EStringElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -62,7 +62,7 @@ public class EIntElementItemProvider
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EIntElementItemProvider(AdapterFactory adapterFactory) {
+	public EStringElementItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
@@ -94,13 +94,13 @@ public class EIntElementItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_EIntElement_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EIntElement_value_feature", "_UI_EIntElement_type"),
-         Primitive_typesPackage.Literals.EINT_ELEMENT__VALUE,
+         getString("_UI_EStringElement_value_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_EStringElement_value_feature", "_UI_EStringElement_type"),
+         PrimitivetypesPackage.Literals.ESTRING_ELEMENT__VALUE,
          true,
          false,
          false,
-         ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
          null,
          null));
   }
@@ -113,8 +113,10 @@ public class EIntElementItemProvider
    */
 	@Override
 	public String getText(Object object) {
-    EIntElement eIntElement = (EIntElement)object;
-    return getString("_UI_EIntElement_type") + " " + eIntElement.getValue();
+    String label = ((EStringElement)object).getValue();
+    return label == null || label.length() == 0 ?
+      getString("_UI_EStringElement_type") :
+      getString("_UI_EStringElement_type") + " " + label;
   }
 
 	/**
@@ -128,9 +130,9 @@ public class EIntElementItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(EIntElement.class))
+    switch (notification.getFeatureID(EStringElement.class))
     {
-      case Primitive_typesPackage.EINT_ELEMENT__VALUE:
+      case PrimitivetypesPackage.ESTRING_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -157,7 +159,7 @@ public class EIntElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

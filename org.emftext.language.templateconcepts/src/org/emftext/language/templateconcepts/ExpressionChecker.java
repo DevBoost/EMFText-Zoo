@@ -38,7 +38,7 @@ import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
-import org.emftext.language.primitive_types.helper.PrimitiveTypesHelper;
+import org.emftext.language.primitivetypes.helper.PrimitiveTypesHelper;
 import org.emftext.language.templateconcepts.ForEach;
 import org.emftext.language.templateconcepts.Placeholder;
 import org.emftext.language.templateconcepts.Template;

@@ -17,10 +17,8 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
-
-import java.math.BigInteger;
 
 import java.util.Collection;
 import java.util.List;
@@ -41,16 +39,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.EBigIntegerElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.EIntElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.EBigIntegerElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.EIntElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EBigIntegerElementItemProvider
+public class EIntElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -64,7 +62,7 @@ public class EBigIntegerElementItemProvider
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EBigIntegerElementItemProvider(AdapterFactory adapterFactory) {
+	public EIntElementItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
@@ -96,13 +94,13 @@ public class EBigIntegerElementItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_EBigIntegerElement_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EBigIntegerElement_value_feature", "_UI_EBigIntegerElement_type"),
-         Primitive_typesPackage.Literals.EBIG_INTEGER_ELEMENT__VALUE,
+         getString("_UI_EIntElement_value_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_EIntElement_value_feature", "_UI_EIntElement_type"),
+         PrimitivetypesPackage.Literals.EINT_ELEMENT__VALUE,
          true,
          false,
          false,
-         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+         ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
          null,
          null));
   }
@@ -115,11 +113,8 @@ public class EBigIntegerElementItemProvider
    */
 	@Override
 	public String getText(Object object) {
-    BigInteger labelValue = ((EBigIntegerElement)object).getValue();
-    String label = labelValue == null ? null : labelValue.toString();
-    return label == null || label.length() == 0 ?
-      getString("_UI_EBigIntegerElement_type") :
-      getString("_UI_EBigIntegerElement_type") + " " + label;
+    EIntElement eIntElement = (EIntElement)object;
+    return getString("_UI_EIntElement_type") + " " + eIntElement.getValue();
   }
 
 	/**
@@ -133,9 +128,9 @@ public class EBigIntegerElementItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(EBigIntegerElement.class))
+    switch (notification.getFeatureID(EIntElement.class))
     {
-      case Primitive_typesPackage.EBIG_INTEGER_ELEMENT__VALUE:
+      case PrimitivetypesPackage.EINT_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -162,7 +157,7 @@ public class EBigIntegerElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

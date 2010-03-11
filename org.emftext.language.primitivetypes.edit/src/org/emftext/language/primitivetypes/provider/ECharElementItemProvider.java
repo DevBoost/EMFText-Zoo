@@ -17,7 +17,7 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 
 import java.util.Collection;
@@ -39,16 +39,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.EFloatElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.ECharElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.EFloatElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.ECharElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EFloatElementItemProvider
+public class ECharElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -62,7 +62,7 @@ public class EFloatElementItemProvider
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EFloatElementItemProvider(AdapterFactory adapterFactory) {
+	public ECharElementItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
@@ -94,13 +94,13 @@ public class EFloatElementItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_EFloatElement_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EFloatElement_value_feature", "_UI_EFloatElement_type"),
-         Primitive_typesPackage.Literals.EFLOAT_ELEMENT__VALUE,
+         getString("_UI_ECharElement_value_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_ECharElement_value_feature", "_UI_ECharElement_type"),
+         PrimitivetypesPackage.Literals.ECHAR_ELEMENT__VALUE,
          true,
          false,
          false,
-         ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+         ItemPropertyDescriptor.TEXT_VALUE_IMAGE,
          null,
          null));
   }
@@ -113,8 +113,8 @@ public class EFloatElementItemProvider
    */
 	@Override
 	public String getText(Object object) {
-    EFloatElement eFloatElement = (EFloatElement)object;
-    return getString("_UI_EFloatElement_type") + " " + eFloatElement.getValue();
+    ECharElement eCharElement = (ECharElement)object;
+    return getString("_UI_ECharElement_type") + " " + eCharElement.getValue();
   }
 
 	/**
@@ -128,9 +128,9 @@ public class EFloatElementItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(EFloatElement.class))
+    switch (notification.getFeatureID(ECharElement.class))
     {
-      case Primitive_typesPackage.EFLOAT_ELEMENT__VALUE:
+      case PrimitivetypesPackage.ECHAR_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -157,7 +157,7 @@ public class EFloatElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

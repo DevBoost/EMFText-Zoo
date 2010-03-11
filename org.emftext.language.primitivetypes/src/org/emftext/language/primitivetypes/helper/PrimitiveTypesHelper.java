@@ -11,13 +11,13 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.primitive_types.helper;
+package org.emftext.language.primitivetypes.helper;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 public class PrimitiveTypesHelper {
 
@@ -30,13 +30,13 @@ public class PrimitiveTypesHelper {
 			//EData types
 			EDataType dataType = (EDataType) type;
 			if (dataType.getInstanceClassName().equals("java.lang.String")) {
-				return Primitive_typesPackage.Literals.ESTRING_ELEMENT;
+				return PrimitivetypesPackage.Literals.ESTRING_ELEMENT;
 			}
 			if (dataType.getInstanceClassName().equals("java.lang.Integer")) {
-				return Primitive_typesPackage.Literals.EINT_ELEMENT;
+				return PrimitivetypesPackage.Literals.EINT_ELEMENT;
 			}
 			if (dataType.getInstanceClassName().equals("java.lang.Boolean")) {
-				return Primitive_typesPackage.Literals.EBOOLEAN_ELEMENT;
+				return PrimitivetypesPackage.Literals.EBOOLEAN_ELEMENT;
 			}	
 			//TODO add more
 			return dataType;		
@@ -44,7 +44,7 @@ public class PrimitiveTypesHelper {
 		EClass typeClass = (EClass) type;
 		List<EClass> superTypes = typeClass.getEAllSuperTypes();
 		for (EClass superType : superTypes) {
-			if (Primitive_typesPackage.eINSTANCE.getNsURI().equals(superType.getEPackage().getNsURI())) {
+			if (PrimitivetypesPackage.eINSTANCE.getNsURI().equals(superType.getEPackage().getNsURI())) {
 				return superType;
 			}
 		}

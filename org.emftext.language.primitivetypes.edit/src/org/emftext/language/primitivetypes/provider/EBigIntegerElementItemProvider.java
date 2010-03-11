@@ -17,8 +17,10 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
+
+import java.math.BigInteger;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,16 +41,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.ECharElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.EBigIntegerElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.ECharElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.EBigIntegerElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ECharElementItemProvider
+public class EBigIntegerElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -62,7 +64,7 @@ public class ECharElementItemProvider
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public ECharElementItemProvider(AdapterFactory adapterFactory) {
+	public EBigIntegerElementItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
@@ -94,13 +96,13 @@ public class ECharElementItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_ECharElement_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_ECharElement_value_feature", "_UI_ECharElement_type"),
-         Primitive_typesPackage.Literals.ECHAR_ELEMENT__VALUE,
+         getString("_UI_EBigIntegerElement_value_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_EBigIntegerElement_value_feature", "_UI_EBigIntegerElement_type"),
+         PrimitivetypesPackage.Literals.EBIG_INTEGER_ELEMENT__VALUE,
          true,
          false,
          false,
-         ItemPropertyDescriptor.TEXT_VALUE_IMAGE,
+         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
          null,
          null));
   }
@@ -113,8 +115,11 @@ public class ECharElementItemProvider
    */
 	@Override
 	public String getText(Object object) {
-    ECharElement eCharElement = (ECharElement)object;
-    return getString("_UI_ECharElement_type") + " " + eCharElement.getValue();
+    BigInteger labelValue = ((EBigIntegerElement)object).getValue();
+    String label = labelValue == null ? null : labelValue.toString();
+    return label == null || label.length() == 0 ?
+      getString("_UI_EBigIntegerElement_type") :
+      getString("_UI_EBigIntegerElement_type") + " " + label;
   }
 
 	/**
@@ -128,9 +133,9 @@ public class ECharElementItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(ECharElement.class))
+    switch (notification.getFeatureID(EBigIntegerElement.class))
     {
-      case Primitive_typesPackage.ECHAR_ELEMENT__VALUE:
+      case PrimitivetypesPackage.EBIG_INTEGER_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -157,7 +162,7 @@ public class ECharElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

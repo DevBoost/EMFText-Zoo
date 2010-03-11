@@ -17,7 +17,7 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 
 import java.util.Collection;
@@ -39,16 +39,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.EBooleanElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.EFloatElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.EBooleanElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.EFloatElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EBooleanElementItemProvider
+public class EFloatElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -62,7 +62,7 @@ public class EBooleanElementItemProvider
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EBooleanElementItemProvider(AdapterFactory adapterFactory) {
+	public EFloatElementItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
@@ -94,13 +94,13 @@ public class EBooleanElementItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_EBooleanElement_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EBooleanElement_value_feature", "_UI_EBooleanElement_type"),
-         Primitive_typesPackage.Literals.EBOOLEAN_ELEMENT__VALUE,
+         getString("_UI_EFloatElement_value_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_EFloatElement_value_feature", "_UI_EFloatElement_type"),
+         PrimitivetypesPackage.Literals.EFLOAT_ELEMENT__VALUE,
          true,
          false,
          false,
-         ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+         ItemPropertyDescriptor.REAL_VALUE_IMAGE,
          null,
          null));
   }
@@ -113,8 +113,8 @@ public class EBooleanElementItemProvider
    */
 	@Override
 	public String getText(Object object) {
-    EBooleanElement eBooleanElement = (EBooleanElement)object;
-    return getString("_UI_EBooleanElement_type") + " " + eBooleanElement.isValue();
+    EFloatElement eFloatElement = (EFloatElement)object;
+    return getString("_UI_EFloatElement_type") + " " + eFloatElement.getValue();
   }
 
 	/**
@@ -128,9 +128,9 @@ public class EBooleanElementItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(EBooleanElement.class))
+    switch (notification.getFeatureID(EFloatElement.class))
     {
-      case Primitive_typesPackage.EBOOLEAN_ELEMENT__VALUE:
+      case PrimitivetypesPackage.EFLOAT_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -157,7 +157,7 @@ public class EBooleanElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

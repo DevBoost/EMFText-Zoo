@@ -26,7 +26,7 @@ public class FirstFollowTest extends TestCase {
 	// some of them refer to meta models that use textual syntax which is not
 	// available either.
 	private String[] excludedFiles = {
-			".*/custom_sandwich.cs",
+			".*/customsandwich.cs",
 			".*/facade.ecore.cs",
 			".*/text.ecore.cs",
 			".*/efactory.cs",

@@ -33,7 +33,7 @@ import org.emftext.language.java_templates.resource.java_template.mopp.Java_temp
 import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateProblem;
 import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateReferenceResolverSwitch;
 import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateResource;
-import org.emftext.language.template_concepts.ExpressionChecker;
+import org.emftext.language.templateconcepts.ExpressionChecker;
 
 /**
  * Post processor that performs 

@@ -17,7 +17,7 @@
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 
 import java.util.Collection;
@@ -39,16 +39,16 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.emftext.language.primitive_types.EStringElement;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
+import org.emftext.language.primitivetypes.EBooleanElement;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.primitive_types.EStringElement} object.
+ * This is the item provider adapter for a {@link org.emftext.language.primitivetypes.EBooleanElement} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EStringElementItemProvider
+public class EBooleanElementItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -62,7 +62,7 @@ public class EStringElementItemProvider
 	 * <!-- end-user-doc -->
    * @generated
    */
-	public EStringElementItemProvider(AdapterFactory adapterFactory) {
+	public EBooleanElementItemProvider(AdapterFactory adapterFactory) {
     super(adapterFactory);
   }
 
@@ -94,13 +94,13 @@ public class EStringElementItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_EStringElement_value_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_EStringElement_value_feature", "_UI_EStringElement_type"),
-         Primitive_typesPackage.Literals.ESTRING_ELEMENT__VALUE,
+         getString("_UI_EBooleanElement_value_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_EBooleanElement_value_feature", "_UI_EBooleanElement_type"),
+         PrimitivetypesPackage.Literals.EBOOLEAN_ELEMENT__VALUE,
          true,
          false,
          false,
-         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+         ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
          null,
          null));
   }
@@ -113,10 +113,8 @@ public class EStringElementItemProvider
    */
 	@Override
 	public String getText(Object object) {
-    String label = ((EStringElement)object).getValue();
-    return label == null || label.length() == 0 ?
-      getString("_UI_EStringElement_type") :
-      getString("_UI_EStringElement_type") + " " + label;
+    EBooleanElement eBooleanElement = (EBooleanElement)object;
+    return getString("_UI_EBooleanElement_type") + " " + eBooleanElement.isValue();
   }
 
 	/**
@@ -130,9 +128,9 @@ public class EStringElementItemProvider
 	public void notifyChanged(Notification notification) {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(EStringElement.class))
+    switch (notification.getFeatureID(EBooleanElement.class))
     {
-      case Primitive_typesPackage.ESTRING_ELEMENT__VALUE:
+      case PrimitivetypesPackage.EBOOLEAN_ELEMENT__VALUE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
     }
@@ -159,7 +157,7 @@ public class EStringElementItemProvider
    */
 	@Override
 	public ResourceLocator getResourceLocator() {
-    return Primitive_typesEditPlugin.INSTANCE;
+    return PrimitivetypesEditPlugin.INSTANCE;
   }
 
 }

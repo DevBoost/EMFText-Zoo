@@ -1,23 +1,10 @@
-/*******************************************************************************
- * Copyright (c) 2006-2010 
- * Software Technology Group, Dresden University of Technology
- * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0 
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   Software Technology Group - TU Dresden, Germany 
- *      - initial API and implementation
- ******************************************************************************/
 /**
  * <copyright>
  * </copyright>
  *
  * $Id$
  */
-package org.emftext.language.primitive_types.provider;
+package org.emftext.language.primitivetypes.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,7 +25,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.emftext.language.primitive_types.util.Primitive_typesAdapterFactory;
+import org.emftext.language.primitivetypes.util.PrimitivetypesAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -49,7 +36,7 @@ import org.emftext.language.primitive_types.util.Primitive_typesAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class Primitive_typesItemProviderAdapterFactory extends Primitive_typesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable
+public class PrimitivetypesItemProviderAdapterFactory extends PrimitivetypesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable
 {
   /**
    * This keeps track of the root adapter factory that delegates to this adapter factory.
@@ -81,7 +68,7 @@ public class Primitive_typesItemProviderAdapterFactory extends Primitive_typesAd
    * <!-- end-user-doc -->
    * @generated
    */
-  public Primitive_typesItemProviderAdapterFactory()
+  public PrimitivetypesItemProviderAdapterFactory()
   {
     supportedTypes.add(IEditingDomainItemProvider.class);
     supportedTypes.add(IStructuredItemContentProvider.class);

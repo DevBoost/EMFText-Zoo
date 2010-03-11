@@ -34,7 +34,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.conference.resource.conference.mopp.ConferenceMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.custom_sandwich.resource.custom_sandwich.mopp.Custom_sandwichMetaInformation());
+				new org.emftext.language.customsandwich.resource.customsandwich.mopp.customsandwichMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.customer.resource.customer.mopp.CustomerMetaInformation());
 		metaInformations.add(
@@ -48,7 +48,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.efactory.resource.efactory.mopp.EfactoryMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.featherweight_java.resource.fj.mopp.FjMetaInformation());
+				new org.emftext.language.featherweightjava.resource.fj.mopp.FjMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.feature.resource.feature.mopp.FeatureMetaInformation());
 		metaInformations.add(
