@@ -32,7 +32,7 @@ RULES {
 		"MACHINE" name[]
 		("SET" sets (";" sets)*)?
 		("VARIABLES" variables ("," variables)*)?
-		("INVARIANT" invariants ("/\\" invariants)*)?
+		("INVARIANT" invariants ("/\\\\" invariants)*)?
 		("INITIALISATION" initialisations ("||" initialisations)*)?
 		("OPERATIONS" operations (";" operations)*)?
 		"END"
@@ -52,7 +52,7 @@ RULES {
 	Begin      ::= expression[];
 	
 	Operation ::= outputs "<--" name[] ("(" inputs ")")? "=="
-		("PRE" preconditions ("/\\")* "THEN")?
+		("PRE" preconditions ("/\\\\")* "THEN")?
 		statements ("||" statements)*
 		"END";
 	
