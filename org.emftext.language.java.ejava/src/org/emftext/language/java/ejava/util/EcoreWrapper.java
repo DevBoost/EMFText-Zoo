@@ -13,7 +13,11 @@
  ******************************************************************************/
 package org.emftext.language.java.ejava.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.BasicEMap;
@@ -31,6 +35,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -160,7 +165,9 @@ public class EcoreWrapper {
 					wrapEStructuralFeatureForSet(eStructuralFeature, wrapper);
 				}
 			}
-			for(EOperation eOperation : eClass.getEOperations()) {
+			EList<EOperation> eOperations = eClass.getEOperations();
+			eOperations.addAll(getMissingOperations(eClass));
+			for(EOperation eOperation : eOperations) {
 				wrapEOperation(eOperation, wrapper);
 			}
 		}
@@ -170,6 +177,27 @@ public class EcoreWrapper {
 				wrapEEnumLiteral(eEnumLiteral, (EClassifierEnumerationWrapper) wrapper);
 			}
 		}
+	}
+
+	/**
+	 * Returns operations that are present in the implementation of
+	 * the given EClass but that are not declared in the meta model.
+	 * This is needed because the classes from the EMF GenModel package
+	 * do contain methods that are not declared in the meta model.
+	 * 
+	 * @param eClass
+	 * @return
+	 */
+	private static Collection<EOperation> getMissingOperations(EClass eClass) {
+		Collection<EOperation> operations = new ArrayList<EOperation>();
+		// TODO this name check is not sufficient
+		if (eClass.getName().equals(GenModelPackage.eINSTANCE.getGenClass().getName())) {
+			EOperation getQualifiedInterfaceNameOperation = EcoreFactory.eINSTANCE.createEOperation();
+			getQualifiedInterfaceNameOperation.setName("getQualifiedInterfaceName");
+			getQualifiedInterfaceNameOperation.setEType(EcorePackage.eINSTANCE.getEString());
+			operations.add(getQualifiedInterfaceNameOperation);
+		}
+		return operations;
 	}
 
 	public static void wrapEStructuralFeatureForGet(
@@ -359,13 +387,20 @@ public class EcoreWrapper {
 				baseTypeRef = TypesFactory.eINSTANCE.createClassifierReference();
 				((ClassifierReference)baseTypeRef).setTarget(((PrimitiveType)baseTypeRef).wrapPrimitiveType());
 			}
-			Classifier listType = (Classifier) JavaClasspath.get(eTypedElement).getClassifier("org.eclipse.emf.common.util.EList");
-			ClassifierReference listTypeRef = TypesFactory.eINSTANCE.createClassifierReference();
-			listTypeRef.setTarget((Classifier)listType);
-			QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
-			typeArgument.setTypeReference(baseTypeRef);
-			listTypeRef.getTypeArguments().add(typeArgument);
-			return listTypeRef;
+			ClassifierReference typeRef = TypesFactory.eINSTANCE.createClassifierReference();
+			if (java.util.Map.Entry.class.getName().equals(eTypedElement.getEType().getInstanceClassName())) {
+				Classifier mapType = (Classifier) JavaClasspath.get(eTypedElement).getClassifier(EMap.class.getName());
+				typeRef.setTarget((Classifier) mapType);
+				// TODO set type arguments for map
+			} else {
+				Classifier listType;
+				listType = (Classifier) JavaClasspath.get(eTypedElement).getClassifier(EList.class.getName());
+				typeRef.setTarget((Classifier)listType);
+				QualifiedTypeArgument typeArgument = GenericsFactory.eINSTANCE.createQualifiedTypeArgument();
+				typeArgument.setTypeReference(baseTypeRef);
+				typeRef.getTypeArguments().add(typeArgument);
+			}
+			return typeRef;
 		}
 	}
 	
