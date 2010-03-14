@@ -13,7 +13,10 @@
  ******************************************************************************/
 package org.emftext.language.java.jtemplates.test;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.customer.resource.customer.mopp.CustomerMetaInformation;
+import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateMetaInformation;
 import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateResourceFactory;
+import org.emftext.language.java.resource.java.mopp.JavaMetaInformation;
 import org.emftext.language.templateconcepts.interpreter.test.AbstractInterpreterTest;
 
 public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
@@ -26,13 +29,13 @@ public class JavaTemplateInterpreterTest extends AbstractInterpreterTest {
 
 	protected void registerResourceFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"java",
+				new JavaMetaInformation().getSyntaxName(),
 				new org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"java_template",
+				new JavatemplateMetaInformation().getSyntaxName(),
 				new JavatemplateResourceFactory());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"customer",
+				new CustomerMetaInformation().getSyntaxName(),
 				new org.emftext.language.customer.resource.customer.mopp.CustomerResourceFactory());
 	}
 
