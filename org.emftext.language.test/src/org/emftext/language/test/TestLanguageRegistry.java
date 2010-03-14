@@ -72,7 +72,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.regexp.resource.regexp_sdf.mopp.Regexp_sdfMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.java_templates.resource.java_template.mopp.Java_templateMetaInformation());
+				new org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.km3.resource.km3.mopp.Km3MetaInformation());
 		metaInformations.add(

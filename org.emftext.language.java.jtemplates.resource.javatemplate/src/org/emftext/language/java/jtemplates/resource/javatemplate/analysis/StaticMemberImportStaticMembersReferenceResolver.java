@@ -13,11 +13,11 @@
  ******************************************************************************/
 package org.emftext.language.java.jtemplates.resource.javatemplate.analysis;
 
-public class StaticMemberImportStaticMembersReferenceResolver implements org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolver<org.emftext.language.java.imports.StaticMemberImport, org.emftext.language.java.references.ReferenceableElement> {
+public class StaticMemberImportStaticMembersReferenceResolver implements org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolver<org.emftext.language.java.imports.StaticMemberImport, org.emftext.language.java.references.ReferenceableElement> {
 	
 	private org.emftext.language.java.resource.java.analysis.StaticMemberImportStaticMembersReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.StaticMemberImportStaticMembersReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.imports.StaticMemberImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.java.imports.StaticMemberImport container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.references.ReferenceableElement>() {
 			
 			public boolean wasResolvedUniquely() {

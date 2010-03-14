@@ -13,11 +13,11 @@
  ******************************************************************************/
 package org.emftext.language.java.jtemplates.resource.javatemplate.analysis;
 
-public class JumpTargetReferenceResolver implements org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolver<org.emftext.language.java.statements.Jump, org.emftext.language.java.statements.JumpLabel> {
+public class JumpTargetReferenceResolver implements org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolver<org.emftext.language.java.statements.Jump, org.emftext.language.java.statements.JumpLabel> {
 	
 	private org.emftext.language.java.resource.java.analysis.JumpTargetReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.JumpTargetReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.statements.Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolveResult<org.emftext.language.java.statements.JumpLabel> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.java.statements.Jump container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolveResult<org.emftext.language.java.statements.JumpLabel> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.statements.JumpLabel>() {
 			
 			public boolean wasResolvedUniquely() {

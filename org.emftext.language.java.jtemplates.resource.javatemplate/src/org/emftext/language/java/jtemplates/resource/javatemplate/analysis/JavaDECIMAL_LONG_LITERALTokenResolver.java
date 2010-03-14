@@ -13,7 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.java.jtemplates.resource.javatemplate.analysis;
 
-public class JavaDECIMAL_LONG_LITERALTokenResolver implements org.emftext.language.java_templates.resource.java_template.IJava_templateTokenResolver {
+public class JavaDECIMAL_LONG_LITERALTokenResolver implements org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateTokenResolver {
 	
 	private org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LONG_LITERALTokenResolver importedResolver = new org.emftext.language.java.resource.java.analysis.JavaDECIMAL_LONG_LITERALTokenResolver();
 	
@@ -22,7 +22,7 @@ public class JavaDECIMAL_LONG_LITERALTokenResolver implements org.emftext.langua
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, final org.emftext.language.java_templates.resource.java_template.IJava_templateTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, final org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateTokenResolveResult result) {
 		importedResolver.resolve(lexem, feature, new org.emftext.language.java.resource.java.IJavaTokenResolveResult() {
 			public String getErrorMessage() {
 				return result.getErrorMessage();

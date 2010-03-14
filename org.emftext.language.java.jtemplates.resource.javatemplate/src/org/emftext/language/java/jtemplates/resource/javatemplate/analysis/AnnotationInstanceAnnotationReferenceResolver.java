@@ -13,11 +13,11 @@
  ******************************************************************************/
 package org.emftext.language.java.jtemplates.resource.javatemplate.analysis;
 
-public class AnnotationInstanceAnnotationReferenceResolver implements org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
+public class AnnotationInstanceAnnotationReferenceResolver implements org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolver<org.emftext.language.java.annotations.AnnotationInstance, org.emftext.language.java.classifiers.Classifier> {
 	
 	private org.emftext.language.java.resource.java.analysis.AnnotationInstanceAnnotationReferenceResolver delegate = new org.emftext.language.java.resource.java.analysis.AnnotationInstanceAnnotationReferenceResolver();
 	
-	public void resolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
+	public void resolve(java.lang.String identifier, org.emftext.language.java.annotations.AnnotationInstance container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolveResult<org.emftext.language.java.classifiers.Classifier> result) {
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, new org.emftext.language.java.resource.java.IJavaReferenceResolveResult<org.emftext.language.java.classifiers.Classifier>() {
 			
 			public boolean wasResolvedUniquely() {

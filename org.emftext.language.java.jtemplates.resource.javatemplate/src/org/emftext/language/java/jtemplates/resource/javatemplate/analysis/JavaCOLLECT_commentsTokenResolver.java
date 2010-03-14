@@ -13,7 +13,7 @@
  ******************************************************************************/
 package org.emftext.language.java.jtemplates.resource.javatemplate.analysis;
 
-public class JavaCOLLECT_commentsTokenResolver implements org.emftext.language.java_templates.resource.java_template.IJava_templateTokenResolver {
+public class JavaCOLLECT_commentsTokenResolver implements org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateTokenResolver {
 	
 	private org.emftext.language.java.resource.java.analysis.JavaCOLLECT_commentsTokenResolver importedResolver = new org.emftext.language.java.resource.java.analysis.JavaCOLLECT_commentsTokenResolver();
 	
@@ -22,7 +22,7 @@ public class JavaCOLLECT_commentsTokenResolver implements org.emftext.language.j
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, final org.emftext.language.java_templates.resource.java_template.IJava_templateTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, final org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateTokenResolveResult result) {
 		importedResolver.resolve(lexem, feature, new org.emftext.language.java.resource.java.IJavaTokenResolveResult() {
 			public String getErrorMessage() {
 				return result.getErrorMessage();

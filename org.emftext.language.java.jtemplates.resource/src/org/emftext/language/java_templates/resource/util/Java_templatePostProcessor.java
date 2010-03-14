@@ -19,20 +19,20 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateOptionProvider;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateOptions;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateResourcePostProcessor;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateResourcePostProcessorProvider;
+import org.emftext.language.java.jtemplates.resource.javatemplate.JavatemplateEProblemType;
+import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateContextDependentURIFragmentFactory;
+import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateProblem;
+import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateReferenceResolverSwitch;
+import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateResource;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.IdentifierReference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.util.JavaModelCompletion;
 import org.emftext.language.java.util.JavaModelRepairer;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateOptionProvider;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateOptions;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateResourcePostProcessor;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateResourcePostProcessorProvider;
-import org.emftext.language.java_templates.resource.java_template.Java_templateEProblemType;
-import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateContextDependentURIFragmentFactory;
-import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateProblem;
-import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateReferenceResolverSwitch;
-import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateResource;
 import org.emftext.language.templateconcepts.ExpressionChecker;
 
 /**
@@ -42,24 +42,24 @@ import org.emftext.language.templateconcepts.ExpressionChecker;
  * <i>java model completion</i>
  * on a resource after parsing using the JavaModelRepairer.
  */
-public class Java_templatePostProcessor implements IJava_templateOptionProvider, IJava_templateResourcePostProcessor, IJava_templateResourcePostProcessorProvider {
+public class Java_templatePostProcessor implements IJavatemplateOptionProvider, IJavatemplateResourcePostProcessor, IJavatemplateResourcePostProcessorProvider {
 	
 	private ExpressionChecker expressionChecker = new ExpressionChecker();
 	
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJava_templateOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
+		map.put(IJavatemplateOptions.RESOURCE_POSTPROCESSOR_PROVIDER, this);
 		return map;
 	}
 
-	public void process(final Java_templateResource resource) {
+	public void process(final JavatemplateResource resource) {
 		new JavaModelRepairer() {
 			protected void registerContextDependentProxy(
 					Resource resource,
 					IdentifierReference mainIdReference, EReference targetReference,
 					String id, EObject proxy) {
-				((Java_templateResource)resource).registerContextDependentProxy(
-						new Java_templateContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new Java_templateReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
+				((JavatemplateResource)resource).registerContextDependentProxy(
+						new JavatemplateContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(new JavatemplateReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
 						mainIdReference,
 						targetReference,
 						id,
@@ -71,12 +71,12 @@ public class Java_templatePostProcessor implements IJava_templateOptionProvider,
 		expressionChecker.process(resource, new ExpressionChecker.ErrorReporter() {
 			
 			public void report(EObject element, String message) {
-				resource.addProblem(new Java_templateProblem(message, Java_templateEProblemType.ERROR), element);			
+				resource.addProblem(new JavatemplateProblem(message, JavatemplateEProblemType.ERROR), element);			
 			}
 		});
 	}
 
-	public IJava_templateResourcePostProcessor getResourcePostProcessor() {
+	public IJavatemplateResourcePostProcessor getResourcePostProcessor() {
 		return this;
 	}
 }

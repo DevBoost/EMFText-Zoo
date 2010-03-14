@@ -17,11 +17,11 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.emftext.language.java_templates.resource.java_template.IJava_templateInputStreamProcessorProvider;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateOptionProvider;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateOptions;
-import org.emftext.language.java_templates.resource.java_template.mopp.Java_templateInputStreamProcessor;
-import org.emftext.language.java_templates.resource.java_template.util.Java_templateUnicodeConverter;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateInputStreamProcessorProvider;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateOptionProvider;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateOptions;
+import org.emftext.language.java.jtemplates.resource.javatemplate.mopp.JavatemplateInputStreamProcessor;
+import org.emftext.language.java.jtemplates.resource.javatemplate.util.JavatemplateUnicodeConverter;
 
 /**
  * Provides the instances of the UnicodeConverter class to be used when
@@ -30,15 +30,15 @@ import org.emftext.language.java_templates.resource.java_template.util.Java_temp
  * Adds the UnicodeConverterProvider to the list of input stream pre-processor
  * providers.
  */
-public class UnicodeConverterProvider implements IJava_templateOptionProvider, IJava_templateInputStreamProcessorProvider {
+public class UnicodeConverterProvider implements IJavatemplateOptionProvider, IJavatemplateInputStreamProcessorProvider {
 	
-	public Java_templateInputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
-		return new Java_templateUnicodeConverter(inputStream);
+	public JavatemplateInputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
+		return new JavatemplateUnicodeConverter(inputStream);
 	}
 	
 	public Map<?, ?> getOptions() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IJava_templateOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
+		map.put(IJavatemplateOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, new UnicodeConverterProvider());
 		return map;
 	}
 }

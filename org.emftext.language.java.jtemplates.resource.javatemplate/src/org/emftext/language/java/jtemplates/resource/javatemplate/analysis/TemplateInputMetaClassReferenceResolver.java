@@ -17,12 +17,12 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolveResult;
-import org.emftext.language.java_templates.resource.java_template.IJava_templateReferenceResolver;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolveResult;
+import org.emftext.language.java.jtemplates.resource.javatemplate.IJavatemplateReferenceResolver;
 import org.emftext.language.templateconcepts.InputMetaClassReferenceResolver;
 import org.emftext.language.templateconcepts.Template;
 
-public class TemplateInputMetaClassReferenceResolver implements IJava_templateReferenceResolver<org.emftext.language.templateconcepts.Template, EClass> {
+public class TemplateInputMetaClassReferenceResolver implements IJavatemplateReferenceResolver<org.emftext.language.templateconcepts.Template, EClass> {
 	
 	private InputMetaClassReferenceResolver resolverDelegate = new InputMetaClassReferenceResolver();
 
@@ -30,7 +30,7 @@ public class TemplateInputMetaClassReferenceResolver implements IJava_templateRe
 		return resolverDelegate.deResolve(element, container, reference);
 	}
 	
-	public void resolve(String identifier, Template container, EReference reference, int position, boolean resolveFuzzy, IJava_templateReferenceResolveResult<EClass> result) {
+	public void resolve(String identifier, Template container, EReference reference, int position, boolean resolveFuzzy, IJavatemplateReferenceResolveResult<EClass> result) {
 		EClass resolved = resolverDelegate.resolve(identifier, container, reference, position, resolveFuzzy);
 		if (resolved != null) {
 			result.addMapping(identifier, resolved);
