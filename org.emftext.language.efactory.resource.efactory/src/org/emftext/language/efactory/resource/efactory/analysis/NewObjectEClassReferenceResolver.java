@@ -6,6 +6,9 @@
  */
 package org.emftext.language.efactory.resource.efactory.analysis;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -15,7 +18,17 @@ import org.emftext.language.efactory.PackageImport;
 
 public class NewObjectEClassReferenceResolver implements org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolver<org.emftext.language.efactory.NewObject, org.eclipse.emf.ecore.EClass> {
 	
+	// TODO mseifert: use cache in default reference resolver instead
+	private Map<String, EClass> nameToEClassMap = new LinkedHashMap<String, EClass>();
+
 	public void resolve(java.lang.String identifier, org.emftext.language.efactory.NewObject container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.efactory.resource.efactory.IEfactoryReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+		EClass eClassInCache = nameToEClassMap.get(identifier);
+		if (eClassInCache != null && !resolveFuzzy) {
+			//System.out.println("Cache hit");
+			result.addMapping(identifier, eClassInCache);
+			return;
+		}
+		//System.out.println("Cache miss");
 		Factory factory = findFactory(container);
 		if (factory == null) {
 			return;
@@ -29,7 +42,9 @@ public class NewObjectEClassReferenceResolver implements org.emftext.language.ef
 						result.addMapping(classifier.getName(), (EClass) classifier);
 					} else {
 						if (identifier.equals(classifier.getName())) {
+							nameToEClassMap.put(classifier.getName(), (EClass) classifier);
 							result.addMapping(classifier.getName(), (EClass) classifier);
+							return;
 						}
 					}
 				}

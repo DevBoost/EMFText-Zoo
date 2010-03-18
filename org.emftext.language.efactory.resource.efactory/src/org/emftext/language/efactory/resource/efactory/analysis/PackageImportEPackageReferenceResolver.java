@@ -21,6 +21,7 @@ public class PackageImportEPackageReferenceResolver implements org.emftext.langu
 					} else {
 						if (identifier.equals(namespaceURI)) {
 							result.addMapping(identifier, ePackage);
+							return;
 						}
 					}
 				}
