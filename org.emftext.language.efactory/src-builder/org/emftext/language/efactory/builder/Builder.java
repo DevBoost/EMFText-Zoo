@@ -9,8 +9,13 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.emftext.access.EMFTextAccessProxy;
+import org.emftext.access.resource.IResource;
 import org.emftext.language.efactory.Attribute;
 import org.emftext.language.efactory.BooleanAttribute;
 import org.emftext.language.efactory.Containment;
@@ -53,7 +58,9 @@ public class Builder {
 			Map<NewObject, EObject> createdObjectsMap, 
 			List<Runnable> commands) {
 		EClass eClass = newObject.getEClass();
-		EObject eObject = eClass.getEPackage().getEFactoryInstance().create(eClass);
+		EPackage ePackage = eClass.getEPackage();
+		EFactory eFactoryInstance = ePackage.getEFactoryInstance();
+		EObject eObject = eFactoryInstance.create(eClass);
 		createdObjectsMap.put(newObject, eObject);
 		EList<Feature> features = newObject.getFeatures();
 		for (Feature feature : features) {
@@ -88,21 +95,27 @@ public class Builder {
 	@SuppressWarnings("unchecked")
 	private void setFeatureBasic(EObject object, EStructuralFeature eFeature,
 			Value value, boolean isMany, Map<NewObject, EObject> createdObjectsMap, List<Runnable> commands) {
-		Object newValue = getValue(eFeature, value, createdObjectsMap, commands);
-		int upperBound = eFeature.getUpperBound();
-		if (upperBound > 1 || upperBound < 0) {
-			Object oldValue = object.eGet(eFeature);
-			if (oldValue instanceof List<?>) {
-				List<Object> list = (List<Object>) oldValue;
-				if (!isMany) {
-					list.clear();
+		try {
+			Object newValue = getValue(eFeature, value, createdObjectsMap, commands);
+			int upperBound = eFeature.getUpperBound();
+			if (upperBound > 1 || upperBound < 0) {
+				Object oldValue = object.eGet(eFeature);
+				if (oldValue instanceof List<?>) {
+					List<Object> list = (List<Object>) oldValue;
+					if (!isMany) {
+						list.clear();
+					}
+					list.add(newValue);
+				} else {
+					assert false;
 				}
-				list.add(newValue);
 			} else {
-				assert false;
+				object.eSet(eFeature, newValue);
 			}
-		} else {
-			object.eSet(eFeature, newValue);
+		} catch (IllegalArgumentException e) {
+			Resource resource = value.eResource();
+			IResource textResource = (IResource) EMFTextAccessProxy.get(resource, IResource.class);
+			textResource.addError("Can't set value.", value);
 		}
 	}
 
