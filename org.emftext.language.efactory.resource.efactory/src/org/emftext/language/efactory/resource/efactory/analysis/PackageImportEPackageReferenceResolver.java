@@ -25,7 +25,7 @@ public class PackageImportEPackageReferenceResolver implements org.emftext.langu
 					}
 				}
 			} catch (Exception e) {
-				// ignore package that cannot be loaded
+				// ignore packages that cannot be loaded
 			}
 		}
 	}
