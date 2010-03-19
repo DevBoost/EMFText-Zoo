@@ -24,8 +24,8 @@ OPTIONS {
 }
 
 TOKENS {
-	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ COLLECT IN comments;
-	DEFINE ML_COMMENT $'/*'.*'*/'$ COLLECT IN comments;
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $;
+	DEFINE ML_COMMENT $'/*'.*'*/'$;
 	
 	DEFINE PL0ID $(('a'..'z')|('A'..'Z'))((('a'..'z')|('A'..'Z'))|'0'..'9')*$;
 	DEFINE NUMBER $('0')|(('1'..'9')('0'..'9')*)$;
@@ -91,7 +91,7 @@ RULES {
 	
 	Assignment ::= left[PL0ID] #1 ":=" #1 right;
 	
-	TermExpression ::= op[PLUS_MINUS]? obligatory optional*;
+	TermExpression ::= (op[PLUS_MINUS])? obligatory optional*;
 	
 	OptionalTerm ::= op[PLUS_MINUS] term;
 	
