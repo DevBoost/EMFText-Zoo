@@ -38,6 +38,50 @@ public class LoadTest extends TestCase {
 		registerEPackages();
 	}
 
+	public void testEnumModel() {
+		testLoadModel("enumtest.efactory");
+		testLoadModel("enumtest2.efactory");
+	}
+	
+	public void testLoadSmallModel() {
+		testLoadModel("small.efactory");
+	}
+	
+	public void testLoadLargeModel() {
+		testLoadModel("large.efactory");
+	}
+
+	private void testLoadModel(String filename) {
+		System.out.println("loading " + filename + "...");
+		Resource resource = rs.getResource(URI.createFileURI("." + File.separator + "input_load" + File.separator + filename), true);
+		EList<Diagnostic> errors = resource.getErrors();
+		EList<Diagnostic> warnings = resource.getWarnings();
+		print(errors, "Error: ");
+		print(warnings, "Warning: ");
+		assertEquals(0, errors.size());
+		assertEquals(0, warnings.size());
+		System.out.println("resolving " + filename + "...");
+		EcoreUtil.resolveAll(resource);
+
+		Builder builder = new Builder();
+
+		System.out.println("building " + filename + "...");
+		EList<EObject> contents = resource.getContents();
+		for (EObject eObject : contents) {
+			if (eObject instanceof Factory) {
+				Factory eFactory = (Factory) eObject;
+				EObject root = builder.build(eFactory);
+				assertNotNull(root);
+			}
+		}
+	}
+
+	private void print(EList<Diagnostic> diagnostics, String string) {
+		for (Diagnostic diagnostic : diagnostics) {
+			System.out.println(string + diagnostic.getMessage());
+		}
+	}
+
 	private void registerEPackages() {
 		File metamodelFolder = new File("." + File.separator + "metamodels");
 		File[] metamodels = metamodelFolder.listFiles(new FileFilter() {
@@ -71,46 +115,6 @@ public class LoadTest extends TestCase {
 		EList<EPackage> eSubpackages = ePackage.getESubpackages();
 		for (EPackage subPackage : eSubpackages) {
 			register(subPackage);
-		}
-	}
-
-	public void testLoadLargeModel() {
-		testLoadModel("large.efactory");
-	}
-
-	public void testLoadSmallModels() {
-		testLoadModel("enumtest.efactory");
-		testLoadModel("small.efactory");
-	}
-	
-	private void testLoadModel(String filename) {
-		System.out.println("loading " + filename + "...");
-		Resource resource = rs.getResource(URI.createFileURI("." + File.separator + "input_load" + File.separator + filename), true);
-		EList<Diagnostic> errors = resource.getErrors();
-		EList<Diagnostic> warnings = resource.getWarnings();
-		print(errors, "Error: ");
-		print(warnings, "Warning: ");
-		assertEquals(0, errors.size());
-		assertEquals(0, warnings.size());
-		System.out.println("resolving " + filename + "...");
-		EcoreUtil.resolveAll(resource);
-
-		Builder builder = new Builder();
-
-		System.out.println("building " + filename + "...");
-		EList<EObject> contents = resource.getContents();
-		for (EObject eObject : contents) {
-			if (eObject instanceof Factory) {
-				Factory eFactory = (Factory) eObject;
-				EObject root = builder.build(eFactory);
-				assertNotNull(root);
-			}
-		}
-	}
-
-	private void print(EList<Diagnostic> diagnostics, String string) {
-		for (Diagnostic diagnostic : diagnostics) {
-			System.out.println(string + diagnostic.getMessage());
 		}
 	}
 }
