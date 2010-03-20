@@ -26,18 +26,18 @@ TOKENS {
 }
 
 RULES{	
-  StateMachine  ::= "StateMachine" name[] "{" region "}" ;	
-  Region        ::= subvertex* "transitions" "{" transition* "}";
+  StateMachine  ::= "StateMachine" #1 name[] "{" !1 region !0 "}" ;	
+  Region        ::= (subvertex !0 !0)* "transitions" "{" !1 (transition !0)* !0 "}";
   
-  State         ::= ("state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)? 
-                    "do" ":" doActivity "}" ";")|
-                    ("composite" "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)? 
-                    "do" ":" doActivity 
-                    (region)?
-                    "}" ";");
+  State         ::= ("state" name[] "{" !1 
+  						("entry" ":" entry !0)? 
+  						("exit" ":" exit !0)? 
+                    	"do" ":" doActivity !0 
+                    	(region)?
+                    !0 "}" ";");
   Pseudostate   ::=  kind[PSEUDOKIND] "state" name[] ";";
-  FinalState    ::= "final" "state" name[] "{" ("entry" ":" entry)? ("exit" ":" exit)?
-                    "do" ":" doActivity "}" ";"; 					
+  FinalState    ::= "final" "state" name[] "{" !1 ("entry" ":" entry !0)? ("exit" ":" exit !0)?
+                    "do" ":" doActivity !0"}" ";"; 					
   
   Transition    ::= source[] "->" target[] "when" trigger 
                     ( "do" ":" effect )? ";";		
