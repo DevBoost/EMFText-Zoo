@@ -28,8 +28,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -38,34 +36,33 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.rolecore.CoreClass;
 import org.emftext.language.rolecore.RCPackage;
 import org.emftext.language.rolecore.Role;
+import org.emftext.language.rolecore.rcinterfaces.RcinterfacesPackage;
 
 // TODO add code that delegates calls in role to core
 // TODO add code for playsRole(), addRole(), removeRole()
-public class RolecoreCompiler  {
+public class RolecoreCompiler {
 
-	private static final String ROLES_REFERENCE_NAME = "Roles";
-	private static final String CORE_REFERENCE_NAME = "Core";
-	private static final String HAS_ROLE_OPERATION_NAME = "hasRole";
-	private static final String GET_ROLE_OPERATION_NAME = "getRole";
-	private static final String GET_ROLES_OPERATION_NAME = "getRoles";
+//	private static final String ROLES_REFERENCE_NAME = "roles";
+//	private static final String CORE_REFERENCE_NAME = "core";
+	// private static final String HAS_ROLE_OPERATION_NAME = "hasRole";
+	// private static final String GET_ROLE_OPERATION_NAME = "getRole";
+	// private static final String GET_ROLES_OPERATION_NAME = "getRoles";
 	private static final String ADD_ROLE_OPERATION_NAME = "addRole";
-	
+
 	private Set<EClass> copyTargets = new LinkedHashSet<EClass>();
-	private EClass rcRole; 
-	
+
 	public IStatus process(final List<EObject> contents) {
 		if (contents == null) {
-    		return Status.OK_STATUS;
+			return Status.OK_STATUS;
 		}
 		if (contents.size() == 0) {
-    		return Status.OK_STATUS;
+			return Status.OK_STATUS;
 		}
 		RCPackage metaModel = (RCPackage) contents.get(0);
 		final Resource resource = metaModel.eResource();
@@ -73,39 +70,36 @@ public class RolecoreCompiler  {
 		// 'metaModel' is invalid
 		try {
 			final EPackage ePackage = compile(metaModel);
-			
-	        new Job("saving derived Ecore model") {
-	        	
-	        	@Override
-	        	protected IStatus run(IProgressMonitor monitor) {
-	        		try {
-	        			URI uri = resource.getURI();
-	        			URI newUri = uri.trimFileExtension().appendFileExtension("ecore");
-	        			Resource eCoreResource = resource.getResourceSet().createResource(newUri);
-	        			eCoreResource.getContents().add(ePackage);
-	        			eCoreResource.save(null);
-	        		} catch (IOException e) {
-		        		return new Status(IStatus.ERROR, "org.emftext.language.rolecore.ecore_compiler", "Can't save compiled Ecore model.");
-	        		}
-	        		return Status.OK_STATUS;
-	        	}
-	        }.schedule();
-    		return Status.OK_STATUS;
+
+			new Job("saving derived Ecore model") {
+
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+					try {
+						URI uri = resource.getURI();
+						URI newUri = uri.trimFileExtension().appendFileExtension("ecore");
+						Resource eCoreResource = resource.getResourceSet().createResource(newUri);
+						eCoreResource.getContents().add(ePackage);
+						eCoreResource.save(null);
+					} catch (IOException e) {
+						return new Status(IStatus.ERROR, "org.emftext.language.rolecore.ecore_compiler",
+								"Can't save compiled Ecore model.");
+					}
+					return Status.OK_STATUS;
+				}
+			}.schedule();
+			return Status.OK_STATUS;
 		} catch (Exception e) {
-    		return new Status(IStatus.ERROR, "org.emftext.language.rolecore.ecore_compiler", e.getMessage());
+			return new Status(IStatus.ERROR, "org.emftext.language.rolecore.ecore_compiler", e.getMessage());
 		}
 	}
-	
+
 	private EPackage compile(RCPackage metaModel) {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage.setName(metaModel.getName());
 		ePackage.setNsPrefix(metaModel.getNsPrefix());
 		ePackage.setNsURI(metaModel.getNsURI());
-		
-		rcRole = EcoreFactory.eINSTANCE.createEClass();
-		rcRole.setName("RCRole");
-		rcRole = findOrCreateEClass(ePackage, rcRole, "", true, true); 
-		
+
 		compileCoreClasses(metaModel.getCoreClasses(), ePackage);
 		compileRoles(metaModel.getRoles(), ePackage);
 		replaceReferencesToRolesAndCoreClasses(ePackage);
@@ -114,32 +108,30 @@ public class RolecoreCompiler  {
 		return ePackage;
 	}
 
-	private void addReferenceRoles(EList<CoreClass> coreClasses,
-			EPackage ePackage) {
-		for (CoreClass coreClass:coreClasses){
-			
+	private void addReferenceRoles(EList<CoreClass> coreClasses, EPackage ePackage) {
+		for (CoreClass coreClass : coreClasses) {
+
 			EList<EReference> referenceList = coreClass.getEReferences();
-			for (EReference reference:referenceList){
+			for (EReference reference : referenceList) {
 				addReferenceRole(reference, coreClass, ePackage);
 			}
 		}
-		
+
 	}
 
 	private void addReferenceRole(EReference reference, CoreClass coreClass, EPackage ePackage) {
-		//replace only references between core classes
-		EClass targetClass = (EClass)reference.getEType();
-		EClass abstractRole = (EClass)ePackage.getEClassifier(coreClass.getName()+"Role");
-		if (!(targetClass instanceof CoreClass)||abstractRole == null)
+		// replace only references between core classes
+		EClass targetClass = (EClass) reference.getEType();
+		EClass abstractRole = (EClass) ePackage.getEClassifier(coreClass.getName() + "Role");
+		if (!(targetClass instanceof CoreClass) || abstractRole == null)
 			return;
-		EClass targetEClass = (EClass)ePackage.getEClassifier(targetClass.getName());
-		String roleName = firstLetter2UpperCase(coreClass.getName())+ 
-			firstLetter2UpperCase(targetEClass.getName())+
-			firstLetter2UpperCase(reference.getName())+"Role";
-		EClass referenceRole = (EClass)ePackage.getEClassifier(roleName);
-		if (referenceRole!=null)
+		EClass targetEClass = (EClass) ePackage.getEClassifier(targetClass.getName());
+		String roleName = firstLetter2UpperCase(coreClass.getName()) + firstLetter2UpperCase(targetEClass.getName())
+				+ firstLetter2UpperCase(reference.getName()) + "Role";
+		EClass referenceRole = (EClass) ePackage.getEClassifier(roleName);
+		if (referenceRole != null)
 			return;
-		
+
 		referenceRole = EcoreFactory.eINSTANCE.createEClass();
 		referenceRole.setName(roleName);
 		referenceRole.getESuperTypes().add(abstractRole);
@@ -147,8 +139,8 @@ public class RolecoreCompiler  {
 		ePackage.getEClassifiers().add(referenceRole);
 	}
 
-	private EReference createRefRoleToCoreClassReference(EPackage ePackage,
-			EReference rcReference, EClass referenceRole, EClass coreClass) {
+	private EReference createRefRoleToCoreClassReference(EPackage ePackage, EReference rcReference,
+			EClass referenceRole, EClass coreClass) {
 		EReference reference = EcoreFactory.eINSTANCE.createEReference();
 		reference.setName(rcReference.getName());
 		reference.setLowerBound(1);
@@ -160,7 +152,7 @@ public class RolecoreCompiler  {
 	}
 
 	private String firstLetter2UpperCase(String string) {
-		if (string!=null&&string.length()>0){
+		if (string != null && string.length() > 0) {
 			return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
 		}
 		return string;
@@ -171,11 +163,12 @@ public class RolecoreCompiler  {
 	}
 
 	private void replaceCrossReferences(EPackage ePackage, EObject current) {
-		EContentsEList.FeatureIterator<EObject> featureIterator = (EContentsEList.FeatureIterator<EObject>) current.eCrossReferences().iterator();
+		EContentsEList.FeatureIterator<EObject> featureIterator = (EContentsEList.FeatureIterator<EObject>) current
+				.eCrossReferences().iterator();
 		while (featureIterator.hasNext()) {
-		    EObject eObject = (EObject) featureIterator.next();
-		    EReference eReference = (EReference) featureIterator.feature();
-		  
+			EObject eObject = (EObject) featureIterator.next();
+			EReference eReference = (EReference) featureIterator.feature();
+
 			if (eObject instanceof Role) {
 				// TODO maybe we need to use the abstract role class here?
 				EClass concreteRoleClass = findOrCreateConcreteRoleClass(ePackage, (Role) eObject);
@@ -191,8 +184,9 @@ public class RolecoreCompiler  {
 		}
 	}
 
-	private void replace(EObject referencingObject, EObject oldReferencedObject,
-			EReference eReference, EObject newReferencedObject) {
+	@SuppressWarnings("unchecked")
+	private void replace(EObject referencingObject, EObject oldReferencedObject, EReference eReference,
+			EObject newReferencedObject) {
 		Object referenceValue = referencingObject.eGet(eReference);
 		if (referenceValue instanceof List<?>) {
 			List<EObject> referenceList = (List<EObject>) referenceValue;
@@ -205,19 +199,20 @@ public class RolecoreCompiler  {
 			}
 		} else {
 			referencingObject.eSet(eReference, newReferencedObject);
-			// Hoang-Kim Test: the opposite reference get the an opposite if there is none
+			// Hoang-Kim Test: the opposite reference get the an opposite if
+			// there is none
 			EReference opposite = eReference.getEOpposite();
-			if (opposite!=null)
-				if (opposite.getEOpposite()==null)
+			if (opposite != null)
+				if (opposite.getEOpposite() == null)
 					opposite.setEOpposite(eReference);
 		}
 	}
 
 	private void compileCoreClasses(EList<CoreClass> coreClasses, EPackage ePackage) {
 		// add operations to the RCRole interface
-		addHasRoleOperation();
-		addGetRoleOperation();
-		addGetRolesOperation(); 
+		// addHasRoleOperation();
+		// addGetRoleOperation();
+		// addGetRolesOperation();
 		for (CoreClass coreClass : coreClasses) {
 			compileCoreClass(ePackage, coreClass);
 		}
@@ -226,19 +221,26 @@ public class RolecoreCompiler  {
 	private void compileCoreClass(EPackage ePackage, CoreClass coreClass) {
 		// create an interface for the core class
 		EClass coreInterface = findOrCreateCoreInterface(ePackage, coreClass);
-		//if the core interface is handles, return
+		// if the core interface is handles, return
 		if (copyTargets.contains(coreInterface)) {
 			return;
 		}
-		// create an implementation for the core class and the abstract role class
-		EClass coreEClass = findOrCreateCoreClass(ePackage, coreClass);
-		EClass abstractRoleClass = findOrCreateAbstractRoleClass(coreInterface.getEPackage(), coreClass);
-		String coreName = coreClass.getName().substring(0, 1).toLowerCase()+coreClass.getName().substring(1);
+		// create an implementation for the core class and the abstract role
+		// class
+		// EClass coreEClass = findOrCreateCoreClass(ePackage, coreClass);
+		// EClass abstractRoleEClass =
+		// findOrCreateAbstractRoleClass(coreInterface
+		// .getEPackage(), coreClass);
+		findOrCreateCoreClass(ePackage, coreClass);
+		findOrCreateAbstractRoleClass(coreInterface.getEPackage(), coreClass);
 		// add reference to the roles that can by played by the core class
-		findOrCreateCoreReference(abstractRoleClass, coreEClass, coreName+CORE_REFERENCE_NAME);
+		// if (coreClass.getSuper()==null)
+		// findOrCreateCoreReference(abstractRoleEClass, coreInterface,
+		// CORE_REFERENCE_NAME);
 		// add reference to the core interface which contains the roles
-		findOrCreateRolesReference(coreEClass, abstractRoleClass, coreName+ROLES_REFERENCE_NAME);
-		
+		// findOrCreateRolesReference(coreEClass, abstractRoleEClass,
+		// ROLES_REFERENCE_NAME);
+
 		copyTargets.add(coreInterface);
 		copyEClassContents(coreClass, coreInterface);
 		addRoleHandlingMethods(coreClass, coreInterface);
@@ -273,35 +275,46 @@ public class RolecoreCompiler  {
 	private EClass findOrCreateAbstractRoleClass(EPackage ePackage, CoreClass coreClass) {
 		EClass playerInterface = findOrCreateCoreInterface(ePackage, coreClass);
 		EClass abstractRoleClass = findOrCreateEClass(ePackage, coreClass, "Role", true, false, playerInterface);
-		//copyEClassContents(coreClass, abstractRoleClass);
+		if (coreClass.getSuper() == null) {
+			abstractRoleClass.getESuperTypes().add(RcinterfacesPackage.eINSTANCE.getRCRole());
+		}
+		// copyEClassContents(coreClass, abstractRoleClass);
 		return abstractRoleClass;
 	}
 
 	private EClass findOrCreateCoreClass(EPackage ePackage, CoreClass coreClass) {
 		EClass coreEInterface = findOrCreateCoreInterface(ePackage, coreClass);
-		return findOrCreateEClass(ePackage, coreClass, "Core", false, false, coreEInterface);
-	}
-	
-	private EClass findOrCreateCoreInterface(EPackage ePackage, CoreClass coreClass) {
-		//EClass coreInterface = findOrCreateEClass(ePackage, coreClass, "", true, true);
-		//EClass coreInterface = null;
+		EClass coreEClass = findOrCreateEClass(ePackage, coreClass, "Core", false, false, coreEInterface);
 		CoreClass superCoreClass = coreClass.getSuper();
-		if (superCoreClass==null)
-			return findOrCreateEClass(ePackage, coreClass, "", true, true, rcRole);
-		else
-		{
+		if (superCoreClass == null) {
+			coreEClass.getESuperTypes().add(RcinterfacesPackage.eINSTANCE.getRCCore());
+		}else{
+			coreEClass.getESuperTypes().add(findOrCreateCoreClass(ePackage, superCoreClass));
+		}
+		return coreEClass;
+	}
+
+	private EClass findOrCreateCoreInterface(EPackage ePackage, CoreClass coreClass) {
+		// EClass coreInterface = findOrCreateEClass(ePackage, coreClass, "",
+		// true, true);
+		// EClass coreInterface = null;
+		CoreClass superCoreClass = coreClass.getSuper();
+		if (superCoreClass == null)
+			return findOrCreateEClass(ePackage, coreClass, "", true, true, RcinterfacesPackage.eINSTANCE
+					.getRCInterface());
+		else {
 			EClass superCoreInterface = findOrCreateEClass(ePackage, superCoreClass, "Role", true, true);
 			return findOrCreateEClass(ePackage, coreClass, "", false, false, superCoreInterface);
 		}
-		//return coreInterface; 
+		// return coreInterface;
 	}
-	
+
 	private void addRoleHandlingMethods(CoreClass coreClass, EClass coreInterface) {
 		addAddRoleOperation(coreClass, coreInterface);
 	}
 
 	private void addAddRoleOperation(CoreClass coreClass, EClass coreInterface) {
-		//EClass eObject = EcorePackage.eINSTANCE.getEObject();
+		// EClass eObject = EcorePackage.eINSTANCE.getEObject();
 		EClass abstractRoleClass = findOrCreateAbstractRoleClass(coreInterface.getEPackage(), coreClass);
 
 		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
@@ -316,91 +329,98 @@ public class RolecoreCompiler  {
 		addRoleOperation.setName(ADD_ROLE_OPERATION_NAME);
 
 		addRoleOperation.getETypeParameters().add(typeParameterT);
-		
+
 		EParameter roleParameter = EcoreFactory.eINSTANCE.createEParameter();
 		roleParameter.setName("role");
 		roleParameter.setEGenericType(createT(typeParameterT));
-		
+
 		addRoleOperation.getEParameters().add(roleParameter);
-		
+
 		coreInterface.getEOperations().add(addRoleOperation);
 	}
 
-	private void addGetRoleOperation() {
-		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
-		typeParameterT.setName("T");
+	// private void addGetRoleOperation() {
+	// ETypeParameter typeParameterT = EcoreFactory.eINSTANCE
+	// .createETypeParameter();
+	// typeParameterT.setName("T");
+	//
+	// EOperation getRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
+	// getRoleOperation.setName(GET_ROLE_OPERATION_NAME);
+	// getRoleOperation.setEGenericType(createT(typeParameterT));
+	// getRoleOperation.getETypeParameters().add(typeParameterT);
+	//
+	// EParameter roleClassParameter = EcoreFactory.eINSTANCE
+	// .createEParameter();
+	// roleClassParameter.setName("roleClass");
+	//
+	// roleClassParameter.setEGenericType(createClassT(typeParameterT));
+	//
+	// getRoleOperation.getEParameters().add(roleClassParameter);
+	//
+	// rcRole.getEOperations().add(getRoleOperation);
+	// }
 
-		EOperation getRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
-		getRoleOperation.setName(GET_ROLE_OPERATION_NAME);
-		getRoleOperation.setEGenericType(createT(typeParameterT));
-		getRoleOperation.getETypeParameters().add(typeParameterT);
-		
-		EParameter roleClassParameter = EcoreFactory.eINSTANCE.createEParameter();
-		roleClassParameter.setName("roleClass");
+	// private void addGetRolesOperation() {
+	// ETypeParameter typeParameterT = EcoreFactory.eINSTANCE
+	// .createETypeParameter();
+	// typeParameterT.setName("T");
+	//
+	// EOperation getRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
+	// getRoleOperation.setName(GET_ROLES_OPERATION_NAME);
+	// getRoleOperation.setEGenericType(createT(typeParameterT));
+	// getRoleOperation.getETypeParameters().add(typeParameterT);
+	// getRoleOperation.setLowerBound(0);
+	// getRoleOperation.setUpperBound(-1);
+	// EParameter roleClassParameter = EcoreFactory.eINSTANCE
+	// .createEParameter();
+	// roleClassParameter.setName("roleClass");
+	//
+	// roleClassParameter.setEGenericType(createClassT(typeParameterT));
+	//
+	// getRoleOperation.getEParameters().add(roleClassParameter);
+	//
+	// rcRole.getEOperations().add(getRoleOperation);
+	// }
 
-		roleClassParameter.setEGenericType(createClassT(typeParameterT));
-		
-		getRoleOperation.getEParameters().add(roleClassParameter);
-		
-		rcRole.getEOperations().add(getRoleOperation);
-	}
-	
-	private void addGetRolesOperation() {
-		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
-		typeParameterT.setName("T");
-		
-		EOperation getRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
-		getRoleOperation.setName(GET_ROLES_OPERATION_NAME);
-		getRoleOperation.setEGenericType(createT(typeParameterT));
-		getRoleOperation.getETypeParameters().add(typeParameterT);
-		getRoleOperation.setLowerBound(0);
-		getRoleOperation.setUpperBound(-1);
-		EParameter roleClassParameter = EcoreFactory.eINSTANCE.createEParameter();
-		roleClassParameter.setName("roleClass");
+	// private void addHasRoleOperation() {
+	// EDataType eBoolean = EcorePackage.eINSTANCE.getEBoolean();
+	//
+	// ETypeParameter typeParameterT = EcoreFactory.eINSTANCE
+	// .createETypeParameter();
+	// typeParameterT.setName("T");
+	//
+	// EOperation hasRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
+	// hasRoleOperation.setName(HAS_ROLE_OPERATION_NAME);
+	// hasRoleOperation.setEType(eBoolean);
+	// hasRoleOperation.getETypeParameters().add(typeParameterT);
+	//
+	// EParameter roleClassParameter = EcoreFactory.eINSTANCE
+	// .createEParameter();
+	// roleClassParameter.setName("roleClass");
+	// roleClassParameter.setEGenericType(createClassT(typeParameterT));
+	//
+	// hasRoleOperation.getEParameters().add(roleClassParameter);
+	// rcRole.getEOperations().add(hasRoleOperation);
+	// }
 
-		roleClassParameter.setEGenericType(createClassT(typeParameterT));
-		
-		getRoleOperation.getEParameters().add(roleClassParameter);
-		
-		rcRole.getEOperations().add(getRoleOperation);
-	}
+	// private EGenericType getTExtends(ETypeParameter typeParameter,
+	// EClassifier lower) {
+	// EGenericType genericType = createT(typeParameter);
+	// EGenericType roleType = EcoreFactory.eINSTANCE.createEGenericType();
+	// roleType.setEClassifier(lower);
+	// genericType.setELowerBound(roleType);
+	// return genericType;
+	// }
+	//
+	// private EGenericType createClassT(ETypeParameter typeParameter) {
+	// EDataType javaClass = EcorePackage.eINSTANCE.getEJavaClass();
+	// EGenericType genericType = createT(typeParameter);
+	// EGenericType lowerBound = EcoreFactory.eINSTANCE.createEGenericType();
+	// lowerBound.setEClassifier(javaClass);
+	// lowerBound.getETypeArguments().add(genericType);
+	// return lowerBound;
+	// }
 
-	private void addHasRoleOperation() {
-		EDataType eBoolean = EcorePackage.eINSTANCE.getEBoolean();
-
-		ETypeParameter typeParameterT = EcoreFactory.eINSTANCE.createETypeParameter();
-		typeParameterT.setName("T");
-
-		EOperation hasRoleOperation = EcoreFactory.eINSTANCE.createEOperation();
-		hasRoleOperation.setName(HAS_ROLE_OPERATION_NAME);
-		hasRoleOperation.setEType(eBoolean);
-		hasRoleOperation.getETypeParameters().add(typeParameterT);
-		
-		EParameter roleClassParameter = EcoreFactory.eINSTANCE.createEParameter();
-		roleClassParameter.setName("roleClass");
-		roleClassParameter.setEGenericType(createClassT(typeParameterT));
-		
-		hasRoleOperation.getEParameters().add(roleClassParameter);
-		rcRole.getEOperations().add(hasRoleOperation);
-	}
-
-	private EGenericType getTExtends(ETypeParameter typeParameter, EClassifier lower) {
-		EGenericType genericType = createT(typeParameter);
-		EGenericType roleType = EcoreFactory.eINSTANCE.createEGenericType();
-		roleType.setEClassifier(lower);
-		genericType.setELowerBound(roleType);
-		return genericType;
-	}
-
-	private EGenericType createClassT(ETypeParameter typeParameter) {
-		EDataType javaClass = EcorePackage.eINSTANCE.getEJavaClass();
-		EGenericType genericType = createT(typeParameter);
-		EGenericType lowerBound = EcoreFactory.eINSTANCE.createEGenericType();
-		lowerBound.setEClassifier(javaClass);
-		lowerBound.getETypeArguments().add(genericType);
-		return lowerBound;
-	}
-	
 	private EGenericType createT(ETypeParameter typeParameter) {
 		EGenericType genericType = EcoreFactory.eINSTANCE.createEGenericType();
 		genericType.setETypeParameter(typeParameter);
@@ -421,67 +441,69 @@ public class RolecoreCompiler  {
 		for (EAttribute attribute : attributes) {
 			to.getEAttributes().add((EAttribute) EcoreUtil.copy(attribute));
 		}
-		
+
 		List<EOperation> operations = from.getEOperations();
 		for (EOperation operation : operations) {
 			to.getEOperations().add((EOperation) EcoreUtil.copy(operation));
 		}
-		//replace by reference Roles
+		// replace by reference Roles
 		// TODO choose the right EType in the right EPackage
-//		List<EStructuralFeature> features = from.getEStructuralFeatures();
-//		for (EStructuralFeature feature : features) {
-//			to.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(feature));
-//		}
-		
+		// List<EStructuralFeature> features = from.getEStructuralFeatures();
+		// for (EStructuralFeature feature : features) {
+		// to.getEStructuralFeatures().add((EStructuralFeature)
+		// EcoreUtil.copy(feature));
+		// }
+
 		// TODO copy annotations
 	}
 
-	private void findOrCreateCoreReference(EClass abstractRoleClass,
-			EClass coreEClass, String coreReferenceName) {
-		EReference coreReference = (EReference)abstractRoleClass.getEStructuralFeature(coreReferenceName);
-		if (coreReference != null && coreReference.getEType().equals(coreEClass)) {
-			return;
-		}
-		coreReference = EcoreFactory.eINSTANCE.createEReference();
-		coreReference.setName(coreReferenceName);
-		coreReference.setLowerBound(1);
-		coreReference.setUpperBound(1);
-		coreReference.setContainment(false);
-		abstractRoleClass.getEStructuralFeatures().add(coreReference);
+//	private void findOrCreateCoreReference(EClass abstractRoleClass, EClass coreInterface, String coreReferenceName) {
+//		EReference coreReference = (EReference) abstractRoleClass.getEStructuralFeature(coreReferenceName);
+//		if (coreReference != null && coreReference.getEType().equals(coreInterface)) {
+//			return;
+//		}
+//		coreReference = EcoreFactory.eINSTANCE.createEReference();
+//		coreReference.setName(coreReferenceName);
+//		coreReference.setLowerBound(1);
+//		coreReference.setUpperBound(1);
+//		coreReference.setContainment(false);
+//		abstractRoleClass.getEStructuralFeatures().add(coreReference);
+//
+//		coreReference.setEType(coreInterface);
+//	}
+//
+//	private void findOrCreateRolesReference(EClass coreEClass, EClass abstractRole, String rolesReferenceName) {
+//		EReference rolesReference = (EReference) coreEClass.getEStructuralFeature(rolesReferenceName);
+//		if (rolesReference != null && rolesReference.getEType().equals(abstractRole)) {
+//			return;
+//		}
+//		rolesReference = EcoreFactory.eINSTANCE.createEReference();
+//		rolesReference.setName(rolesReferenceName);
+//		rolesReference.setLowerBound(0);
+//		rolesReference.setUpperBound(-1);
+//		// Due to the recursive role object pattern of Riehle,
+//		// the Containment reference is not possible
+//		rolesReference.setContainment(false);
+//		coreEClass.getEStructuralFeatures().add(rolesReference);
+//
+//		rolesReference.setEType(abstractRole);
+//	}
 
-		coreReference.setEType(coreEClass);
-	}
-
-	private void findOrCreateRolesReference(EClass coreEClass,
-			EClass abstractRole, String rolesReferenceName) {
-		EReference rolesReference = (EReference) coreEClass.getEStructuralFeature(rolesReferenceName);
-		if (rolesReference != null && rolesReference.getEType().equals(abstractRole)) {
-			return;
-		}
-		rolesReference = EcoreFactory.eINSTANCE.createEReference();
-		rolesReference.setName(rolesReferenceName);
-		rolesReference.setLowerBound(0);
-		rolesReference.setUpperBound(-1);
-		// Due to the recursive role object pattern of Riehle, 
-		//the Containment reference is not possible
-		rolesReference.setContainment(true);
-		coreEClass.getEStructuralFeatures().add(rolesReference);
-
-		rolesReference.setEType(abstractRole); 
-	}
-
-	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract, boolean isInterface) {
+	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract,
+			boolean isInterface) {
 		List<EClass> superTypes = new ArrayList<EClass>();
 		return findOrCreateEClass(ePackage, roleOrCoreClass, nameSuffix, isAbstract, isInterface, superTypes);
 	}
-	
-	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract, boolean isInterface, EClass superType) {
+
+	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract,
+			boolean isInterface, EClass superType) {
 		List<EClass> superTypes = new ArrayList<EClass>();
 		superTypes.add(superType);
 		return findOrCreateEClass(ePackage, roleOrCoreClass, nameSuffix, isAbstract, isInterface, superTypes);
 	}
-	
-	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract, boolean isInterface, Collection<EClass> superTypes) {
+
+	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract,
+			boolean isInterface, Collection<EClass> superTypes) {
 		String name = roleOrCoreClass.getName() + nameSuffix;
 		EClass coreEClass = (EClass) ePackage.getEClassifier(name);
 		if (coreEClass == null) {
