@@ -6,7 +6,7 @@
  */
 package org.emftext.language.rolecore.dependencies.resource.dependencies.analysis;
 
-public class DependenciesREFERTOTokenResolver implements org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesTokenResolver {
+public class DependenciesREFERREDTOTokenResolver implements org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesTokenResolver {
 	
 	private org.emftext.language.rolecore.dependencies.resource.dependencies.analysis.DependenciesDefaultTokenResolver defaultTokenResolver = new org.emftext.language.rolecore.dependencies.resource.dependencies.analysis.DependenciesDefaultTokenResolver();
 	

@@ -12,11 +12,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.language.rolecore.dependencies.CoreClass;
 import org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolveResult;
-public class TermRoleReferenceResolver implements org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolver<org.emftext.language.rolecore.dependencies.Term, org.eclipse.emf.ecore.EClass> {
-	
-	private org.emftext.language.rolecore.dependencies.resource.dependencies.analysis.DependenciesDefaultResolverDelegate<org.emftext.language.rolecore.dependencies.Term, org.eclipse.emf.ecore.EClass> delegate = new org.emftext.language.rolecore.dependencies.resource.dependencies.analysis.DependenciesDefaultResolverDelegate<org.emftext.language.rolecore.dependencies.Term, org.eclipse.emf.ecore.EClass>();
 
-	public void resolve(java.lang.String identifier, org.emftext.language.rolecore.dependencies.Term container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
+public class SimpleTermRoleReferenceResolver implements org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolver<org.emftext.language.rolecore.dependencies.SimpleTerm, org.eclipse.emf.ecore.EClass> {
+	
+	private org.emftext.language.rolecore.dependencies.resource.dependencies.analysis.DependenciesDefaultResolverDelegate<org.emftext.language.rolecore.dependencies.SimpleTerm, org.eclipse.emf.ecore.EClass> delegate = new org.emftext.language.rolecore.dependencies.resource.dependencies.analysis.DependenciesDefaultResolverDelegate<org.emftext.language.rolecore.dependencies.SimpleTerm, org.eclipse.emf.ecore.EClass>();
+	
+	public void resolve(java.lang.String identifier, org.emftext.language.rolecore.dependencies.SimpleTerm container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
 		CoreClass coreClass = container.getCoreClass();
 		if (coreClass != null){
 			resolveRole(coreClass.getType(), identifier, result);
@@ -57,7 +58,7 @@ public class TermRoleReferenceResolver implements org.emftext.language.rolecore.
 		}
 	}
 
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.rolecore.dependencies.Term container, org.eclipse.emf.ecore.EReference reference) {
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EClass element, org.emftext.language.rolecore.dependencies.SimpleTerm container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
 	

@@ -17,8 +17,8 @@ public class CoreClassTypeReferenceResolver implements org.emftext.language.role
 	
 	public void resolve(java.lang.String identifier, org.emftext.language.rolecore.dependencies.CoreClass container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rolecore.dependencies.resource.dependencies.IDependenciesReferenceResolveResult<org.eclipse.emf.ecore.EClass> result) {
 		Domain domain = null;
-		if (container.eContainer() instanceof Domain)
-			domain = (Domain)container.eContainer();
+		if (container.eContainer().eContainer() instanceof Domain)
+			domain = (Domain)container.eContainer().eContainer();
 		if (domain == null)
 			return;
 		EList<EClassifier> classifiers = domain.getModelPackage().getEClassifiers();
