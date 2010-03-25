@@ -6,8 +6,8 @@ TOKENS{
 	DEFINE COMMENT$'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE INTEGER$('-')?('1'..'9')('0'..'9')*|'0'$;
 	DEFINE FLOAT$('-')?(('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ $;
-	DEFINE SET$':''='$;
-	DEFINE REFERTO$'=''>'$;
+	DEFINE EQUAL$':''='$;
+	DEFINE REFERREDTO$'=''>'$;
 }
 
 TOKENSTYLES{
@@ -18,24 +18,30 @@ TOKENSTYLES{
 
 RULES{
 	
-	Graph::= ("Data" dataPackage['"','"'])? 
-	modelDomain modelDomain
-		"Equivalences" modelEquivalence ;
+	Graph::= "Graph" name[] ("priority" priority[])? !0 
+		modelDomains !0
+		(modelDomains !0)?
+		("Equivalences" modelEquivalence)? ;
 	
-	Domain::= "Domain" name[] "ModelPackage" modelPackage['"','"'] "{" (coreClasses)* "}"  ;
+	Domain::= "Domain" name[] "ModelPackage" modelPackage['"','"'] "{" !0 
+		("Required" required )? ("SemiRequired" semiRequired )? ("Create" create )? !0 "}"  ;
 	
-	Equivalence::= mandatory option? ;
+	Equivalence::= "{" edges+ "}";
 	
-	CoreClass::= type[] name[] mandatory option? ;
+	Required::= "{" !0 coreClasses+ !0 "}" ;
 	
-	Mandatory::= "(" edges * ")"  ;
+	SemiRequired::= "{" !0 coreClasses+ !0 "}" ;
 	
-	Option::= "[" edges* "]"  ;
+	Create::= "{" !0 coreClasses+ !0 "}" ;
 	
-	Edge::= leftTerm (referTo[REFERTO] rightTerms | set[SET] (value['"','"'] | rightTerms (operations['"','"'] rightTerms)*)) ";";
+	CoreClass::= type[] name[] ("(" edges+ ")")?;
+	
+	Edge::= simpleTerm (referredTo[REFERREDTO] | equal[EQUAL]) rightTerm ";" ; 
+	
 		
-	Left::= (coreClass[])? ("role" role[])?  ;
+	SimpleTerm::= (coreClass[])? ("role" role[])?  ;
 	
-	Right::= (coreClass[])? ("role" role[])?  ;
+	RightTerm::= (value ['"','"'] | simpleTerms ("," simpleTerms)* | operation) ;
 	
+	Operation::= operationType['"','"'] "(" rightTerms ("/" rightTerms)? ")" ;
 }
