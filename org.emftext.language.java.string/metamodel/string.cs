@@ -1,4 +1,4 @@
-//*******************************************************************************
+//******************************************************************************* 
 // Copyright (c) 2006-2010 
 // Software Technology Group, Dresden University of Technology
 // 
@@ -12,7 +12,7 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
-SYNTAXDEF stringjava
+SYNTAXDEF stringjava 
 FOR <http://www.emftext.org/language/java/string>
 START java.Containers.CompilationUnit
 
@@ -24,8 +24,10 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	defaultTokenName = "IDENTIFIER";
 	usePredefinedTokens = "false";
-	overrideIResourcePostProcessor = "true";
 	reloadGeneratorModel = "true";
+	//overrideBuilder = "true";
+	disableBuilder = "true";
+
 }
 
 RULES {

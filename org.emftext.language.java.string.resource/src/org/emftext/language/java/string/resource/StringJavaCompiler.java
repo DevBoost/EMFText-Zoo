@@ -1,6 +1,7 @@
 package org.emftext.language.java.string.resource;
 
 import java.io.IOException;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +11,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.java.arrays.ArrayDimension;
-import org.emftext.language.java.arrays.ArrayInitializationValue;
 import org.emftext.language.java.arrays.ArrayInstantiationBySize;
 import org.emftext.language.java.arrays.ArrayInstantiationByValues;
 import org.emftext.language.java.arrays.ArrayTypeable;
@@ -43,6 +42,8 @@ import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersFactory;
 import org.emftext.language.java.members.MembersPackage;
 import org.emftext.language.java.modifiers.AnnotationInstanceOrModifier;
+import org.emftext.language.java.modifiers.ModifiersFactory;
+import org.emftext.language.java.modifiers.Public;
 import org.emftext.language.java.operators.AdditiveOperator;
 import org.emftext.language.java.operators.OperatorsFactory;
 import org.emftext.language.java.references.Reference;
@@ -68,15 +69,22 @@ public class StringJavaCompiler implements
 		IStringjavaResourcePostProcessorProvider, 
 		IStringjavaOptionProvider {
 
-	@Override
+	/**
+	 * Entry point of the PostProcessor.
+	 * Converts the StringJava into a Java <b></b>Resource.
+	 * Call {@link #convertToStringMethod(Resource, AutomaticString)}.
+	 * 
+	 * @param resource
+	 */
 	public void process(StringjavaResource resource) {
 		
+		// new resource, make copy of all elements
 		URI javaURI = resource.getURI().trimFileExtension().appendFileExtension("java");
 		final Resource javaResource = resource.getResourceSet().createResource(javaURI);
 		javaResource.getContents().addAll(
 				EcoreUtil.copyAll(resource.getContents()));
 		
-		
+		// look if a AutomaticString is inside the syntax tree
 		Collection<AutomaticString> properties = 
 			StringjavaEObjectUtil.getObjectsByType(
 					javaResource.getAllContents(), 
@@ -85,10 +93,11 @@ public class StringJavaCompiler implements
 		// only one string id is necessary
 		if(properties.size() > 0){
 			AutomaticString automaticString = properties.iterator().next();
+			// call the convert method
 			convertToStringMethod(javaResource, automaticString);
 		}
 		
-		
+		// save new java resource
 		try {
 			javaResource.save(null);
 		} catch (IOException e) {
@@ -97,15 +106,18 @@ public class StringJavaCompiler implements
 	}
 
 	private void convertToStringMethod(
-			Resource javaResource, 
-			AutomaticString automaticString){
+						Resource javaResource, 
+						AutomaticString automaticString){
 		
 		MemberContainer mc = (MemberContainer)automaticString.eContainer();
 		
+		// create toString method
 		ClassMethod method = createMethod(createReturnExpression(javaResource));
-			
+		
+		// replace #toString with the created toString method
 		EcoreUtil.replace(automaticString, method);
-			
+		
+		// add import java.lang.String
 		if(mc != null){
 			EObject container = mc.eContainer();
 			if(container instanceof CompilationUnit){
@@ -117,23 +129,21 @@ public class StringJavaCompiler implements
 	
 	private Expression createReturnExpression(Resource javaResource){
 		
-//		String returnString;
-//		returnString = "[";
-		
+		// get all fields of the class
 		Collection<Field> fields =
 			StringjavaEObjectUtil.getObjectsByType(
 					javaResource.getAllContents(),
 					MembersPackage.eINSTANCE.getField());
 		
+		// s1 + s2 + s3 + ...
 		AdditiveExpression additiveExpression =
 			ExpressionsFactory.eINSTANCE.createAdditiveExpression();
-		
-		
 		
 		for(Field field : fields){
 			
 			String returnString = "";
 			
+			// modifier
 			returnString += "[";
 			for(AnnotationInstanceOrModifier modifier : 
 				field.getAnnotationsAndModifiers()){
@@ -142,37 +152,41 @@ public class StringJavaCompiler implements
 				returnString += " ";
 			}
 			
-			
+			// type of field
 			returnString += getTypeReference(field.getTypeReference());
-			
-			
+						
 			for(int i=0;i<field.getArrayDimensionsBefore().size();i++){
 				returnString += "[]";
 			}
 			
+			// name of field
 			returnString += " ";
 			returnString += field.getName();
 			returnString += " = ";
 			
+			// value of field
 			Expression expression = findLeafExpression(field.getInitialValue());
 			
 			returnString += getValueOfExpression(expression);
 			
 			returnString += "]";
 			
+			// create string
 			StringReference stringRef = 
 				ReferencesFactory.eINSTANCE.createStringReference();
 			stringRef.setValue(returnString);
 			
+			// add string to additive expression
 			additiveExpression.getChildren().add(stringRef);
 			
 			AdditiveOperator plus = OperatorsFactory.eINSTANCE.createAddition();
 			additiveExpression.getAdditiveOperators().add(plus);
 		}
 		
-//		returnString += "]";
+		// delete last plus
+		additiveExpression.getAdditiveOperators().remove(
+				additiveExpression.getAdditiveOperators().size()-1);
 		
-//		return returnString;
 		return additiveExpression;
 	}
 	
@@ -388,9 +402,15 @@ public class StringJavaCompiler implements
 	
 	private ClassMethod createMethod(Expression returnExpression){
 		
+		// create method name
 		ClassMethod toStringMethod = MembersFactory.eINSTANCE.createClassMethod();
 		toStringMethod.setName("toString");
 		
+		// add public modifier
+		Public _public = ModifiersFactory.eINSTANCE.createPublic();
+		toStringMethod.getAnnotationsAndModifiers().add(_public);
+		
+		// create reference on String
 		org.emftext.language.java.classifiers.Class stringClassifier =
 			ClassifiersFactory.eINSTANCE.createClass();
 		stringClassifier.setFullName("String");
@@ -407,9 +427,7 @@ public class StringJavaCompiler implements
 		
 		toStringMethod.setTypeReference(stringReference);
 		
-//		StringReference stringRef = ReferencesFactory.eINSTANCE.createStringReference();
-//		stringRef.setValue(returnString);
-		
+		// add return statement
 		Return returnStatement = StatementsFactory.eINSTANCE.createReturn();
 		returnStatement.setReturnValue(returnExpression);
 		
