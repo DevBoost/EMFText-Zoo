@@ -10,12 +10,22 @@
   <eClassifiers xsi:type="ecore:EClass" name="CoreClass" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
         eType="#//Role" eOpposite="#//Role/playedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rcPackage" eType="#//RCPackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" eType="#//CoreClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RCPackage" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="coreClasses" upperBound="-1"
         eType="#//CoreClass" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
         eType="#//Role" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rcPackage" lowerBound="1"
+        eType="#//RCPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rcPackageLocationHint"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

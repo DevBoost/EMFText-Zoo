@@ -38,6 +38,8 @@ TOKENS {
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
 
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
+	
+	
 }
 
 TOKENSTYLES {
@@ -53,18 +55,21 @@ TOKENSTYLES {
 RULES {
 	RCPackage ::= 
 		"RCPackage" name[] 
-		(#1 nsPrefix[])? (#1 nsURI['"', '"'])? #1
+		(#1 nsPrefix[])? (#1 nsURI['"', '"'])? !0
+		("Imports" "{" !0 (imports)+ !0	"}")? #1
 		"{"
 			coreClasses* 
 			roles*
 		"}";
+	
+	Import ::= "prefix" ":" prefix[] #1 rcPackage['<','>'] ( #1 rcPackageLocationHint['<','>'])?;
 	
 	Role      ::= 
 		"Role" name[] "is" "played" "by" playedBy[]
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 		
 	CoreClass ::= 
-		"CoreClass" name[] (#1 "extends" super[])? #1
+		"CoreClass" name[] (#1 "extends" #1 (rcPackage[] ".")? super[])? #1
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 
 	EAttribute ::= 
