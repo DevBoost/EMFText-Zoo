@@ -6,7 +6,6 @@ import java.util.Set;
 import org.emftext.access.EMFTextAccessPlugin;
 import org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax.mopp.CpsyntaxMetaInformation;
 import org.reuseware.coconut.compositionsystem.resource.csys.mopp.CsysMetaInformation;
-import org.reuseware.coconut.fragment.resource.fragment.mopp.FragmentMetaInformation;
 import org.reuseware.coconut.reuseextension.resource.rex.mopp.RexMetaInformation;
 import org.reuseware.coconut.reuseextensionactivator.resource.rexactivator.mopp.Rex_activatorMetaInformation;
 
@@ -137,8 +136,6 @@ public class TestLanguageRegistry {
 				new CsysMetaInformation());
 		metaInformations.add(
 				new CpsyntaxMetaInformation());
-		metaInformations.add(
-				new FragmentMetaInformation());
 		metaInformations.add(
 				new Rex_activatorMetaInformation());
 		
