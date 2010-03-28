@@ -16,12 +16,16 @@ public class CoreClassRcPackageReferenceResolver implements org.emftext.language
 	public void resolve(java.lang.String identifier, org.emftext.language.rolecore.CoreClass container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.emftext.language.rolecore.RCPackage> result) {
 		//delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 		RCPackage rcPackage = (RCPackage) container.eContainer();
-		if (rcPackage.getImports()!=null)
+		if (rcPackage.getImports()!=null){
 			for (Import packageImport : rcPackage.getImports()){
-				if (packageImport.getPrefix().equals(identifier)){
-					result.addMapping(identifier, packageImport.getRcPackage());
+				if (packageImport.getPrefix().equals(identifier)||resolveFuzzy&&packageImport.getPrefix().startsWith(identifier)){
+					result.addMapping(packageImport.getPrefix(), packageImport.getRcPackage());
+					if(!resolveFuzzy){
+						return;
+					}
 				}
 			}
+		}
 	}
 	
 	public java.lang.String deResolve(org.emftext.language.rolecore.RCPackage element, org.emftext.language.rolecore.CoreClass container, org.eclipse.emf.ecore.EReference reference) {

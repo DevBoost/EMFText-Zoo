@@ -24,17 +24,18 @@ public class CoreClassSuperReferenceResolver
 			final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.emftext.language.rolecore.CoreClass> result) {
 		if (container.getRcPackage() != null) {
 			EList<CoreClass> coreClasses = container.getRcPackage().getCoreClasses();
-			for (CoreClass coreClass :coreClasses) {
-
-				if (coreClass.getName().equals(identifier)||resolveFuzzy&&coreClass.getName().startsWith(identifier)){
+			for (CoreClass coreClass : coreClasses) {
+				if (coreClass.getName().equals(identifier) || resolveFuzzy
+						&& coreClass.getName().startsWith(identifier)) {
 					result.addMapping(coreClass.getName(), (CoreClass) coreClass);
-					if (!resolveFuzzy){
+					if (!resolveFuzzy) {
 						return;
 					}
 				}
 			}
-		} else
+		} else {
 			delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
+		}
 	}
 
 	public java.lang.String deResolve(org.emftext.language.rolecore.CoreClass element,
