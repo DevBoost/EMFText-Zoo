@@ -1,17 +1,21 @@
 package org.emftext.language.rolecore.dependencies.interpreter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.rolecore.dependencies.CoreClass;
 import org.emftext.language.rolecore.dependencies.Domain;
 import org.emftext.language.rolecore.dependencies.Edge;
+import org.emftext.language.rolecore.dependencies.Equivalence;
 import org.emftext.language.rolecore.dependencies.Graph;
+import org.emftext.language.rolecore.dependencies.SimpleTerm;
 import org.emftext.language.rolecore.dependencies.resource.dependencies.util.AbstractDependenciesInterpreter;
 
 import org.eclipse.emf.ecore.change.ChangeDescription;
@@ -65,14 +69,14 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 				interprete_org_emftext_language_rolecore_dependencies_Graph(dependencies, context);
 				i++;
 				resetChangeKind(context);
-				if (i == 1)
-					return true;
-				if (i == 0)
-					System.out.println("Cannot find the dependencies!");
-				if (i > 1)
-					System.out.println("There are " + i + " dependencies!");
 			}
 		}
+		if (i == 1)
+			return true;
+		if (i == 0)
+			System.out.println("Cannot find the dependencies!");
+		if (i > 1)
+			System.out.println("There are " + i + " dependencies!");
 		return false;
 	}
 
@@ -93,15 +97,24 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 			if (interprete_org_emftext_language_rolecore_dependencies_Domain(domain, context)) {
 				// TODO to remove
 				System.out.println("Interpret successfully!");
+				// apply changes
+				cd.applyAndReverse();
 				List<Domain> otherDomains = getOtherDomains(object, domain);
-				for (Domain otherDomain : otherDomains) {
-					if (!apply_org_emftext_language_rolecore_dependencies_Domain(otherDomain, context)) {
-						System.out.println("Invalid Dependencies!");
-						resetChanges();
-						return false;
+				// create correspondences
+				if (otherDomains != null) {
+					for (Domain otherDomain : otherDomains) {
+						if (!createCoreClassesInDomain(otherDomain, context)) {
+							System.out.println("Invalid Dependencies!");
+							cd.apply();
+							resetChanges();
+							return false;
+						}
 					}
+					// create trace links
+					createTraceLinks(object, context);
+
 				}
-				//context.addCreatingDependencies();
+				// context.addCreatingDependencies();
 				return true;
 			} else {
 				resetChanges();
@@ -110,9 +123,61 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		return false;
 	}
 
-	private boolean apply_org_emftext_language_rolecore_dependencies_Domain(Domain otherDomain,
-			InterpretationContext context) {
-		// TODO apply the changes and create this domain
+	private boolean createTraceLinks(Graph graph, InterpretationContext context) {
+		// TODO create trace links
+		// create for equal trace links
+		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
+		Equivalence equivalence = graph.getModelEquivalence();
+		CreatingHelpClass creatingHelpClass = context.getCreatingHelpClass();
+		if (equivalence != null) {
+			EList<Edge> edges = equivalence.getEdges();
+			if (edges != null && edges.size() > 0) {
+				for (Edge edge : edges) {
+					if (edge.isEqual()) {
+						if (edge.getSimpleTerm().getRole() == null && context.hasNoRoles(edge.getRightTerm())) {
+							EList<SimpleTerm> simpleTerms = edge.getRightTerm().getSimpleTerms();
+							for (SimpleTerm simpleTerm : simpleTerms) {
+								EqualTraceLink traceLink = InterpreterFactory.eINSTANCE.createEqualTraceLink();
+								traceLink.setSource(creatingHelpClass.getEObjectCoreClass(edge.getSimpleTerm()
+										.getCoreClass().getName()));
+								traceLink.setTarget(creatingHelpClass.getEObjectCoreClass(simpleTerm.getCoreClass()
+										.getName()));
+								traceLinksDR.getEObjects().add(traceLink);
+							}
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean createCoreClassesInDomain(Domain domain, InterpretationContext context) {
+		// TODO map the Required (should this core classes be created if they
+		// don't exist?)
+		// TODO create and map SemiRequired
+		// create and map Create
+		EList<CoreClass> createCoreClasses = domain.getCreate().getCoreClasses();
+		for (CoreClass coreClassToCreate : createCoreClasses) {
+			context.getCreatingHelpClass().addEObjectCoreClass(coreClassToCreate.getName(),
+					context.createCoreClass(coreClassToCreate.getType()));
+		}
+		// TODO create links
+		// add core classes with no container to the root
+		List<EObject> addToRootEObjects = new ArrayList<EObject>();
+		// TODO for the other blocks as well
+		for (CoreClass coreClass : createCoreClasses) {
+			EObject eObject = context.getCreatingHelpClass().getEObjectCoreClass(coreClass.getName());
+			if (eObject != null && eObject.eContainer() == null) {
+				addToRootEObjects.add(eObject);
+			}
+		}
+		if (addToRootEObjects.size() > 0) {
+			DomainRoot domainRoot = context.findOrCreateDomainRoot(domain.getName());
+			for (EObject eObject : addToRootEObjects) {
+				domainRoot.getEObjects().add(eObject);
+			}
+		}
 		return true;
 
 	}
@@ -122,10 +187,10 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 			return null;
 		List<Domain> domains = new ArrayList<Domain>();
 		for (Domain otherDomain : object.getModelDomains()) {
-			if (!domain.getName().equals(otherDomain.getName()))
+			if (!domain.equals(otherDomain))
 				domains.add(otherDomain);
 		}
-		return null;
+		return (domains.size() == 0) ? null : domains;
 	}
 
 	/**
@@ -139,14 +204,11 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		creatingHelpClass.setListsAndMaps(cd.getObjectChanges(), object);
 		// maybe just start with the 1st element in mapOfObjectsToChange
 		DomainRoot domainRoot = context.findOrCreateDomainRoot(object.getName());
-		// TODO these feature changes are applied here, so it must be removed
 		EList<FeatureChange> featureChanges = cd.getObjectChanges().get(domainRoot);
-		if (featureChanges != null) {// resource change
-			System.out.println("resource change");
+		if (featureChanges != null) {// root change
+			System.out.println("root change");
 			if (!creatingHelpClass.addNextElementsFromRoot(featureChanges, object))
 				return false;
-			// apply the "resource changes"
-			applyResourceChanges(creatingHelpClass, domainRoot, featureChanges, object);
 		} else {// normal feature change, which starts in Required
 			System.out.println("feature change");
 			if (!creatingHelpClass.addNextElementsFromCreate(object))
@@ -158,23 +220,6 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		if (interprete_org_emftext_language_rolecore_dependencies_CoreClass(entry.getValue(), context))
 			return true;
 		return false;
-	}
-
-	// TODO manage the sharing
-	private void applyResourceChanges(CreatingHelpClass creatingDependencies, EObject eObject,
-			EList<FeatureChange> featureChanges, Domain domain) {
-		for (FeatureChange featureChange : featureChanges) {
-			EList<ListChange> listChanges = featureChange.getListChanges();
-			for (ListChange listChange : listChanges) {
-				EList<EObject> eObjectsToAdd = listChange.getReferenceValues();
-				for (EObject eObjectToAdd : eObjectsToAdd) {
-					CoreClass coreClassToAdd = creatingDependencies.getMapOfNextElements().get(eObjectToAdd);
-					creatingDependencies.addEObjectCoreClass(coreClassToAdd.getName(), eObjectToAdd);
-					// creating and adding the correspondence core classes
-					creatingDependencies.createSynchronizationCoreClasses(coreClassToAdd);
-				}
-			}
-		}
 	}
 
 	/**
@@ -189,7 +234,8 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 	public Boolean interprete_org_emftext_language_rolecore_dependencies_CoreClass(CoreClass object,
 			InterpretationContext context) {
 		// assume type of CoreClass and eObject are the same.
-		// TODO Hoang-Kim in this case there this no references in the core class
+		// TODO Hoang-Kim in this case there this no references in the core
+		// class
 		System.out.println("Enter interprete CoreClass");
 		EObject eObject = (EObject) context.pop();
 		CreatingHelpClass creatingHelpClass = context.getCreatingHelpClass();
@@ -199,6 +245,8 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		EList<Edge> edges = object.getEdges();
 		// maximal satisfy - for each the feature change, minimal satisfy - for
 		// each the edges
+		if (edges == null || edges.size() == 0)
+			return true;
 		for (FeatureChange featureChange : coreToRolesFC) {
 			// TODO validated edges have to take out of the list to prevent
 			// further validation

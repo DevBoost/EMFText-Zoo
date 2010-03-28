@@ -206,10 +206,14 @@ public class CreatingHelpClass {
 					EList<EObject> coreClassEObjects =listChange.getReferenceValues();
 					for (EObject eObject : coreClassEObjects) {
 						CoreClass coreClass = getCoreClassFromBlock(eObject.eClass(),domain.getCreate());
-						if (coreClass==null)
+						if (coreClass==null){
 							coreClass = getCoreClassFromBlock(eObject.eClass(), domain.getSemiRequired());
-						if (coreClass!=null)
+						}
+						if (coreClass!=null){
 							mapOfNextElements.put(eObject,coreClass);
+							//TODO map to the coreClassesMap too, but this map should contains only correct mappings 
+							coreClassesMap.put(coreClass.getName(), eObject);
+						}
 						else return false;
 					}
 				}

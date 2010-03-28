@@ -24,6 +24,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.rolecore.RCPackage;
 import org.emftext.language.rolecore.dependencies.Domain;
 import org.emftext.language.rolecore.dependencies.Graph;
+import org.emftext.language.rolecore.dependencies.RightTerm;
+import org.emftext.language.rolecore.dependencies.SimpleTerm;
+import org.emftext.language.rolecore.dependencies.interpreter.DomainRoot;
 
 /**
  * @author BluAngel
@@ -48,6 +51,7 @@ public class InterpretationContext {
 
 	private static final String ROLES_REFERENCE_SUFFIX = "Roles";
 	private static final String CORE_REFERENCE_SUFFIX = "Core";
+	private static final String TRACE_LINK_DOMAIN_ROOT_NAME = "TraceLinks";
 	private CreatingHelpClass creatingHelpClass;
 
 	public List<Resource> getResources() {
@@ -148,13 +152,18 @@ public class InterpretationContext {
 
 	public DomainRoot findOrCreateDomainRoot(String domainName) {
 		for (DomainRoot domainRoot : domainRoots) {
-			if (domainName.equals(domainRoot.getName()))
+			if (domainName.equals(domainRoot.getName())){
 				return domainRoot;
+			}
 		}
 		DomainRoot domainRoot = InterpreterPackage.eINSTANCE.getInterpreterFactory().createDomainRoot();
 		domainRoot.setName(domainName);
 		domainRoots.add(domainRoot);
 		return domainRoot;
+	}
+	
+	public DomainRoot findOrCreateTraceLinksDomainRoot(){
+		return findOrCreateDomainRoot(TRACE_LINK_DOMAIN_ROOT_NAME);
 	}
 
 	/**
@@ -458,5 +467,15 @@ public class InterpretationContext {
 		default:
 			return false;
 		}
+	}
+
+	public boolean hasNoRoles(RightTerm rightTerm) {
+		EList<SimpleTerm> simpleTerms = rightTerm.getSimpleTerms();
+		for (SimpleTerm simpleTerm : simpleTerms) {
+			if(simpleTerm.getRole()!=null){
+				return false;
+			}
+		}
+		return true;
 	}
 }
