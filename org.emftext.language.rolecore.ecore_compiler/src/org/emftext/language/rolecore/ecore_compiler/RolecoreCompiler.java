@@ -37,6 +37,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.rolecore.CoreClass;
@@ -48,8 +50,8 @@ import org.emftext.language.rolecore.rcinterfaces.RcinterfacesPackage;
 // TODO add code for playsRole(), addRole(), removeRole()
 public class RolecoreCompiler {
 
-//	private static final String ROLES_REFERENCE_NAME = "roles";
-//	private static final String CORE_REFERENCE_NAME = "core";
+	// private static final String ROLES_REFERENCE_NAME = "roles";
+	// private static final String CORE_REFERENCE_NAME = "core";
 	// private static final String HAS_ROLE_OPERATION_NAME = "hasRole";
 	// private static final String GET_ROLE_OPERATION_NAME = "getRole";
 	// private static final String GET_ROLES_OPERATION_NAME = "getRoles";
@@ -65,6 +67,13 @@ public class RolecoreCompiler {
 			return Status.OK_STATUS;
 		}
 		RCPackage metaModel = (RCPackage) contents.get(0);
+		System.out.println("\n" + metaModel.getName());
+		for (CoreClass coreClass : metaModel.getCoreClasses()) {
+			System.out.println(coreClass.getName() + " is Proxy: " + coreClass.eIsProxy());
+		}
+		for (Role role : metaModel.getRoles()) {
+			System.out.println("Role " + role.getName() + " is Proxy: " + role.eIsProxy());
+		}
 		final Resource resource = metaModel.eResource();
 		// TODO validate 'metaModel' and exit processing if
 		// 'metaModel' is invalid
@@ -288,10 +297,30 @@ public class RolecoreCompiler {
 		CoreClass superCoreClass = coreClass.getSuper();
 		if (superCoreClass == null) {
 			coreEClass.getESuperTypes().add(RcinterfacesPackage.eINSTANCE.getRCCore());
-		}else{
+		} else if (superCoreClass.eResource().equals(coreClass.eResource())) {
 			coreEClass.getESuperTypes().add(findOrCreateCoreClass(ePackage, superCoreClass));
+		} else {
+			coreEClass.getESuperTypes().add(
+					findOrCreateCoreClass(getSuperCoreClassEPackage(superCoreClass), superCoreClass));
 		}
 		return coreEClass;
+	}
+
+	private EPackage getSuperCoreClassEPackage(CoreClass superCoreClass) {
+		URI ePackageURI = superCoreClass.eResource().getURI().trimFileExtension().appendFileExtension("ecore");
+		Resource resource = loadResource(ePackageURI);
+		return (EPackage) resource.getContents().get(0);
+	}
+
+	public Resource loadResource(URI uri) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		try {
+			Resource resource = resourceSet.getResource(uri, true);
+			return resource;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private EClass findOrCreateCoreInterface(EPackage ePackage, CoreClass coreClass) {
@@ -299,14 +328,18 @@ public class RolecoreCompiler {
 		// true, true);
 		// EClass coreInterface = null;
 		CoreClass superCoreClass = coreClass.getSuper();
+		EClass superCoreInterface = null;
 		if (superCoreClass == null)
 			return findOrCreateEClass(ePackage, coreClass, "", true, true, RcinterfacesPackage.eINSTANCE
 					.getRCInterface());
-		else {
-			EClass superCoreInterface = findOrCreateEClass(ePackage, superCoreClass, "Role", true, true);
-			return findOrCreateEClass(ePackage, coreClass, "", false, false, superCoreInterface);
+		else if (coreClass.eResource().equals(superCoreClass.eResource())) {
+			superCoreInterface = findOrCreateEClass(ePackage, superCoreClass, "Role", true, true);
+		} else {
+			superCoreInterface = findOrCreateEClass(getSuperCoreClassEPackage(superCoreClass), superCoreClass, "Role",
+					true, true);
+
 		}
-		// return coreInterface;
+		return findOrCreateEClass(ePackage, coreClass, "", false, false, superCoreInterface);
 	}
 
 	private void addRoleHandlingMethods(CoreClass coreClass, EClass coreInterface) {
@@ -457,37 +490,43 @@ public class RolecoreCompiler {
 		// TODO copy annotations
 	}
 
-//	private void findOrCreateCoreReference(EClass abstractRoleClass, EClass coreInterface, String coreReferenceName) {
-//		EReference coreReference = (EReference) abstractRoleClass.getEStructuralFeature(coreReferenceName);
-//		if (coreReference != null && coreReference.getEType().equals(coreInterface)) {
-//			return;
-//		}
-//		coreReference = EcoreFactory.eINSTANCE.createEReference();
-//		coreReference.setName(coreReferenceName);
-//		coreReference.setLowerBound(1);
-//		coreReference.setUpperBound(1);
-//		coreReference.setContainment(false);
-//		abstractRoleClass.getEStructuralFeatures().add(coreReference);
-//
-//		coreReference.setEType(coreInterface);
-//	}
-//
-//	private void findOrCreateRolesReference(EClass coreEClass, EClass abstractRole, String rolesReferenceName) {
-//		EReference rolesReference = (EReference) coreEClass.getEStructuralFeature(rolesReferenceName);
-//		if (rolesReference != null && rolesReference.getEType().equals(abstractRole)) {
-//			return;
-//		}
-//		rolesReference = EcoreFactory.eINSTANCE.createEReference();
-//		rolesReference.setName(rolesReferenceName);
-//		rolesReference.setLowerBound(0);
-//		rolesReference.setUpperBound(-1);
-//		// Due to the recursive role object pattern of Riehle,
-//		// the Containment reference is not possible
-//		rolesReference.setContainment(false);
-//		coreEClass.getEStructuralFeatures().add(rolesReference);
-//
-//		rolesReference.setEType(abstractRole);
-//	}
+	// private void findOrCreateCoreReference(EClass abstractRoleClass, EClass
+	// coreInterface, String coreReferenceName) {
+	// EReference coreReference = (EReference)
+	// abstractRoleClass.getEStructuralFeature(coreReferenceName);
+	// if (coreReference != null &&
+	// coreReference.getEType().equals(coreInterface)) {
+	// return;
+	// }
+	// coreReference = EcoreFactory.eINSTANCE.createEReference();
+	// coreReference.setName(coreReferenceName);
+	// coreReference.setLowerBound(1);
+	// coreReference.setUpperBound(1);
+	// coreReference.setContainment(false);
+	// abstractRoleClass.getEStructuralFeatures().add(coreReference);
+	//
+	// coreReference.setEType(coreInterface);
+	// }
+	//
+	// private void findOrCreateRolesReference(EClass coreEClass, EClass
+	// abstractRole, String rolesReferenceName) {
+	// EReference rolesReference = (EReference)
+	// coreEClass.getEStructuralFeature(rolesReferenceName);
+	// if (rolesReference != null &&
+	// rolesReference.getEType().equals(abstractRole)) {
+	// return;
+	// }
+	// rolesReference = EcoreFactory.eINSTANCE.createEReference();
+	// rolesReference.setName(rolesReferenceName);
+	// rolesReference.setLowerBound(0);
+	// rolesReference.setUpperBound(-1);
+	// // Due to the recursive role object pattern of Riehle,
+	// // the Containment reference is not possible
+	// rolesReference.setContainment(false);
+	// coreEClass.getEStructuralFeatures().add(rolesReference);
+	//
+	// rolesReference.setEType(abstractRole);
+	// }
 
 	private EClass findOrCreateEClass(EPackage ePackage, EClass roleOrCoreClass, String nameSuffix, boolean isAbstract,
 			boolean isInterface) {
