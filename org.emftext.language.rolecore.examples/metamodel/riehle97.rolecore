@@ -1,17 +1,18 @@
-RCPackage riehle97 riehle97 "http://www.emftext.org/languages/rolecore/examples/riehle97" {
-
-	CoreClass Customer {
-		operation void getAccounts();
+RCPackage riehle97 riehle97 "http://www.emftext.org/language/rolecore/riehle97" 
+Imports { 
+		prefix: base <riehle97base.rolecore>
+}{
+	CoreClass Credit {
+		reference SecurityObject securityObject (1..1);
 	}
-
-	CoreClass Credit {}
-	CoreClass SecurityObject {}
-
-	Role Borrower is played by Customer {
+	CoreClass Borrower extends base.Customer {
+		containment reference Credit credits (0..-1); 
+		containment reference SecurityObject securityObject (1..1);
 		operation Credit getCredits();
 		operation SecurityObject getSecurityObject();
 	}
-
-	Role Investor is played by Customer {
-	}
+	CoreClass SecurityObject {}
+	
+	Role Private is played by Borrower {}
+	Role Business is played by Borrower {}
 }
