@@ -175,7 +175,7 @@ public class JDTConnector {
 				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
 					// path is source folder
 					// System.out.println("Doing nothing for ClassPathEntry source: " + entry);
-					// registerResourceInClasspath(root.getFolder(path), classPath);
+					registerResourceInClasspath(root.getFolder(path), "java", classPath);
 				} else if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 					if ("jar".equals(path.getFileExtension()) || "zip".equals(path.getFileExtension())) {
 						// path is jar
@@ -196,11 +196,13 @@ public class JDTConnector {
 					// System.out.println("Doing nothing for ClassPathEntry variable: " + entry);
 				} 
 			}
+			/*
 			try {
-				registerResourceInClasspath(root.getFolder(javaProject.getOutputLocation()), "class", classPath);
+				//registerResourceInClasspath(root.getFolder(javaProject.getOutputLocation()), "class", classPath);
 			} catch (JavaModelException e) {
 				System.err.println("Exception adding output folder to classpath: " + e);
 			}
+			*/
 		}
 		javaClasspath = JavaClasspath.get(classPath);
 		javaClasspaths.put(projectUri, javaClasspath);
@@ -214,7 +216,7 @@ public class JDTConnector {
 					if (resource instanceof IFile) {
 						IFile file = (IFile)resource;
 						String ext = file.getFileExtension();
-						if (filter == null || filter.equals(ext)) {
+						if (file.getType() == IFile.FILE || filter == null || filter.equals(ext)) {
 							registerFileInClasspath(file.getFullPath(), classPath);
 						}
 					} 
