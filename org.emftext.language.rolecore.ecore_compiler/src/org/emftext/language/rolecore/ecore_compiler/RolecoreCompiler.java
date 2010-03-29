@@ -20,6 +20,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -38,13 +39,13 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EContentsEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.rolecore.CoreClass;
 import org.emftext.language.rolecore.RCPackage;
 import org.emftext.language.rolecore.Role;
-import org.emftext.language.rolecore.rcinterfaces.RcinterfacesPackage;
 
 // TODO add code that delegates calls in role to core
 // TODO add code for playsRole(), addRole(), removeRole()
@@ -59,7 +60,24 @@ public class RolecoreCompiler {
 
 	private Set<EClass> copyTargets = new LinkedHashSet<EClass>();
 
+	private EPackage interfacesPackage;
+
 	public IStatus process(final List<EObject> contents) {
+		Resource interfacesResource = null;
+		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform
+				.getBundle("org.emftext.language.rolecore.ecore_compiler");
+		try {
+			interfacesResource = loadResource(URI.createURI(FileLocator.toFileURL(bundle.getEntry("/metamodel/interfaces.ecore"))
+					.toString()));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		// TODO find a better way to set the URI relative
+		interfacesResource.setURI(URI.createPlatformPluginURI("org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore", true));
+				
+		interfacesPackage = (EPackage) interfacesResource.getContents().get(0);
+
 		if (contents == null) {
 			return Status.OK_STATUS;
 		}
@@ -67,13 +85,6 @@ public class RolecoreCompiler {
 			return Status.OK_STATUS;
 		}
 		RCPackage metaModel = (RCPackage) contents.get(0);
-		System.out.println("\n" + metaModel.getName());
-		for (CoreClass coreClass : metaModel.getCoreClasses()) {
-			System.out.println(coreClass.getName() + " is Proxy: " + coreClass.eIsProxy());
-		}
-		for (Role role : metaModel.getRoles()) {
-			System.out.println("Role " + role.getName() + " is Proxy: " + role.eIsProxy());
-		}
 		final Resource resource = metaModel.eResource();
 		// TODO validate 'metaModel' and exit processing if
 		// 'metaModel' is invalid
@@ -285,7 +296,7 @@ public class RolecoreCompiler {
 		EClass playerInterface = findOrCreateCoreInterface(ePackage, coreClass);
 		EClass abstractRoleClass = findOrCreateEClass(ePackage, coreClass, "Role", true, false, playerInterface);
 		if (coreClass.getSuper() == null) {
-			abstractRoleClass.getESuperTypes().add(RcinterfacesPackage.eINSTANCE.getRCRole());
+			abstractRoleClass.getESuperTypes().add((EClass) interfacesPackage.getEClassifier("RCRole"));
 		}
 		// copyEClassContents(coreClass, abstractRoleClass);
 		return abstractRoleClass;
@@ -296,7 +307,7 @@ public class RolecoreCompiler {
 		EClass coreEClass = findOrCreateEClass(ePackage, coreClass, "Core", false, false, coreEInterface);
 		CoreClass superCoreClass = coreClass.getSuper();
 		if (superCoreClass == null) {
-			coreEClass.getESuperTypes().add(RcinterfacesPackage.eINSTANCE.getRCCore());
+			coreEClass.getESuperTypes().add((EClass) interfacesPackage.getEClassifier("RCCore"));
 		} else if (superCoreClass.eResource().equals(coreClass.eResource())) {
 			coreEClass.getESuperTypes().add(findOrCreateCoreClass(ePackage, superCoreClass));
 		} else {
@@ -330,8 +341,8 @@ public class RolecoreCompiler {
 		CoreClass superCoreClass = coreClass.getSuper();
 		EClass superCoreInterface = null;
 		if (superCoreClass == null)
-			return findOrCreateEClass(ePackage, coreClass, "", true, true, RcinterfacesPackage.eINSTANCE
-					.getRCInterface());
+			return findOrCreateEClass(ePackage, coreClass, "", true, true, (EClass) interfacesPackage
+					.getEClassifier("RCInterface"));
 		else if (coreClass.eResource().equals(superCoreClass.eResource())) {
 			superCoreInterface = findOrCreateEClass(ePackage, superCoreClass, "Role", true, true);
 		} else {
