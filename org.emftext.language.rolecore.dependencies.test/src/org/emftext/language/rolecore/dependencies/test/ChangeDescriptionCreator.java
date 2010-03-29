@@ -22,7 +22,7 @@ import org.emftext.language.rolecore.dependencies.interpreter.InterpretationCont
 import org.emftext.language.rolecore.dependencies.interpreter.InterpreterPackage;
 import org.emftext.language.rolecore.families.FamiliesPackage;
 import org.emftext.language.rolecore.families.FamilyDomainCore;
-import org.emftext.language.rolecore.examples.riehle97.Riehle97Package;
+import org.emftext.language.rolecore.riehle97base.Riehle97basePackage;
 
 public class ChangeDescriptionCreator {
 
@@ -40,14 +40,8 @@ public class ChangeDescriptionCreator {
 	 * @return
 	 */
 	public ChangeDescription createAddCustomerToResourceCD(Resource cResource) {
-		DomainRoot domainRoot = null;
-		if (cResource.getContents().size()==0){
-			domainRoot = context.findOrCreateDomainRoot("customersA");
-			cResource.getContents().add(domainRoot);
-			context.saveResource(cResource, null);
-		}else
-			domainRoot = (DomainRoot) cResource.getContents().get(0);
-		Riehle97Package cEPackage = Riehle97Package.eINSTANCE;
+		DomainRoot domainRoot = (DomainRoot) cResource.getContents().get(0);
+		Riehle97basePackage cEPackage = Riehle97basePackage.eINSTANCE;
 		EObject customerCore = context.createCoreClass(cEPackage.getCustomerCore());
 		
 		ChangeDescription cd = ChangeFactory.eINSTANCE.createChangeDescription();
@@ -56,7 +50,7 @@ public class ChangeDescriptionCreator {
 		ListChange lc = ChangeFactory.eINSTANCE.createListChange();
 		cd.getObjectChanges().add(entry);
 		entry.getValue().add(fc);
-		fc.setFeature(InterpreterPackage.eINSTANCE.getDomainRoot_CoreClasses());
+		fc.setFeature(InterpreterPackage.eINSTANCE.getDomainRoot_EObjects());
 		fc.getListChanges().add(lc);
 		lc.getReferenceValues().add(customerCore);
 		cd.getObjectsToAttach().add(customerCore);

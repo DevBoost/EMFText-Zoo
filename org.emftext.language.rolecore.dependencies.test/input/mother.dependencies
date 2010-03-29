@@ -1,0 +1,21 @@
+Domain families ModelPackage "http://www.emftext.org/language/rolecore/persons" {
+	Female female()
+} 
+Domain persons ModelPackage "http://www.emftext.org/language/rolecore/families" {
+	Member member (
+		role FirstName := "?"; 
+		role MemberFamilyFamilymotherRole => family;
+	)[role MemberFamilyFamilydaughterRole => parentFamily;]
+	Family family (
+		role LastName := "?"; 
+		role FamilyMemberMotherRole => member;
+	)
+	Family parentFamily (
+		role LastName := "?";
+		role FamilyMemberDaughterRole => member; 
+	) 
+}
+Equivalences (
+	female := member; 
+	female role FullName := member role FirstName "+" family role LastName;
+)

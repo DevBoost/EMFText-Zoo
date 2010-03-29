@@ -6,6 +6,8 @@
  */
 package org.emftext.language.rolecore.resource.rolecore.analysis;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,38 +29,43 @@ public class ImportRcPackageReferenceResolver
 			int position,
 			boolean resolveFuzzy,
 			final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.emftext.language.rolecore.RCPackage> result) {
-		// delegate.resolve(identifier, container, reference, position,
-		// resolveFuzzy, result);
 		String locationHint = container.getRcPackageLocationHint();
-		RCPackage rcPackage = findRCPackage(identifier, locationHint, container);
-		if (rcPackage!=null)
-			result.addMapping(identifier, rcPackage);
+		findRCPackages(identifier, locationHint, container, resolveFuzzy, result);
 	}
 
-	private RCPackage findRCPackage(String identifier, String locationHint, Import container) {
-		if (identifier==null)
-			return null;
-		RCPackage rcPackage = (RCPackage) EPackage.Registry.INSTANCE.getEPackage(identifier);
-		if (rcPackage!=null) {
-			return rcPackage;
-		} else if (locationHint==null){
-			String resourceURI = container.eResource().getURI().toPlatformString(true);
-			return loadRCPackage(resourceURI.substring(0, resourceURI.lastIndexOf("/")+1)+container.getPrefix() + ".rolecore");
+	private void findRCPackages(
+			String identifier,
+			String locationHint,
+			Import container,
+			boolean resolveFuzzy,
+			final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.emftext.language.rolecore.RCPackage> result) {
+		if (!resolveFuzzy) {
+			RCPackage rcPackage = null;
+			if (locationHint == null) {
+				String resourceURI = container.eResource().getURI().toPlatformString(true);
+				rcPackage = loadRCPackage(resourceURI.substring(0, resourceURI.lastIndexOf("/") + 1)
+						+ identifier);
+			} else {
+				// TODO verify
+				rcPackage = loadRCPackage(locationHint + identifier);
+			}
+			result.addMapping(rcPackage.getNsURI(), rcPackage);
 		} else {
-			return loadRCPackage(locationHint + container.getPrefix() + ".rolecore");
+			// too complex
 		}
 	}
 
 	public RCPackage loadRCPackage(String fileURI) {
 		// create resource set and resource
 		ResourceSet resourceSet = new ResourceSetImpl();
-		
+
 		try {
 			return (RCPackage) resourceSet.getResource(URI.createPlatformResourceURI(fileURI, true), true)
 					.getContents().get(0);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Resource " + fileURI + " does not exist");
 		}
 		return null;
 	}

@@ -27,6 +27,7 @@ import org.emftext.language.rolecore.dependencies.Graph;
 import org.emftext.language.rolecore.dependencies.RightTerm;
 import org.emftext.language.rolecore.dependencies.SimpleTerm;
 import org.emftext.language.rolecore.dependencies.interpreter.DomainRoot;
+import org.emftext.language.rolecore.interfaces.InterfacesPackage;
 
 /**
  * @author BluAngel
@@ -184,35 +185,36 @@ public class InterpretationContext {
 		if (coreClass == null)
 			return null;
 
-		// determine the super core class
-		// 1st is the core interface, 2nd the role interface
-		EClass roleInterfaceEClass = coreEClass.getESuperTypes().get(0).getESuperTypes().get(0);
-		EClass rcRole = (EClass) coreEClass.getEPackage().getEClassifier("RCRole");
-		if (!roleInterfaceEClass.equals(rcRole)) {
-			EClass superCoreEClass = (EClass) getStructuralFeature(coreEClass, CORE_REFERENCE_SUFFIX).getEType();
+		// determine the super core class and add itself to it as role
+		EList<EClass> superEClasses = coreEClass.getESuperTypes();
+		EClass superCoreEClass = null;
+		for (EClass eClass : superEClasses) {
+			if(eClass.getName().endsWith(CORE_REFERENCE_SUFFIX)){
+				superCoreEClass = eClass;
+			}
+		}
+		if (!superCoreEClass.equals(InterfacesPackage.eINSTANCE.getRCCore())) {
 			EObject superCoreClass = createCoreClass(superCoreEClass);
 
-			EStructuralFeature rolesStructuralFeature = getStructuralFeature(superCoreEClass, ROLES_REFERENCE_SUFFIX);
+			EStructuralFeature rolesStructuralFeature = getRolesStructuralFeature(superCoreEClass);
 			EList<EObject> roles = (EList<EObject>) superCoreClass.eGet(rolesStructuralFeature);
 			roles.add(coreClass);
 			// set the super core class to the core class as core
-			EStructuralFeature coreStructuralFeature = getStructuralFeature(coreEClass, CORE_REFERENCE_SUFFIX);
+			EStructuralFeature coreStructuralFeature = getCoreStructuralFeature(coreEClass); 
 			try {
 				coreClass.eSet(coreStructuralFeature, superCoreClass);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// do the same to the super core class
 		}
 		return coreClass;
 	}
 
-	public EStructuralFeature getStructuralFeature(EClass eClass, String suffix) {
+	public EStructuralFeature getStructuralFeature(EClass eClass, String featureName) {
 		if (eClass != null) {
 			EList<EStructuralFeature> structuralFeatures = eClass.getEAllStructuralFeatures();
 			for (EStructuralFeature structuralFeature : structuralFeatures) {
-				if (structuralFeature.getName().endsWith(suffix))
+				if (structuralFeature.getName().equals(featureName))
 					return structuralFeature;
 			}
 		}
