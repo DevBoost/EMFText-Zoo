@@ -39,9 +39,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
-import org.emftext.language.java.resource.java.analysis.helper.JavaPostProcessor;
-import org.emftext.language.primitive_types.Primitive_typesPackage;
-import org.emftext.runtime.IOptions;
+import org.emftext.language.java.resource.java.IJavaOptions;
+import org.emftext.language.java.resource.util.JavaPostProcessor;
+import org.emftext.language.primitivetypes.PrimitivetypesPackage;
 
 public class JaMoPPC {
 
@@ -126,7 +126,7 @@ public class JaMoPPC {
 				Resource.Factory.Registry.DEFAULT_EXTENSION,
 				new XMIResourceFactoryImpl());
 		rs.getLoadOptions().put(
-				IOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
+				IJavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, new JavaPostProcessor());
 		
 	}
 	
@@ -135,7 +135,7 @@ public class JaMoPPC {
 
 		URI ptEcoreURI = outUri.appendSegment("primitive_types.ecore");
 		Resource ptEcoreResource = rs.createResource(ptEcoreURI);
-		ptEcoreResource.getContents().add(Primitive_typesPackage.eINSTANCE);
+		ptEcoreResource.getContents().add(PrimitivetypesPackage.eINSTANCE);
 
 		URI javaEcoreURI = outUri.appendSegment("java.ecore");
 		Resource javaEcoreResource = rs.createResource(javaEcoreURI);
