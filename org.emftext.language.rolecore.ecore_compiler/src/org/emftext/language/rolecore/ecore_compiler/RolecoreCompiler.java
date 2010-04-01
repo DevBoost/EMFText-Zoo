@@ -67,15 +67,16 @@ public class RolecoreCompiler {
 		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform
 				.getBundle("org.emftext.language.rolecore.ecore_compiler");
 		try {
-			interfacesResource = loadResource(URI.createURI(FileLocator.toFileURL(bundle.getEntry("/metamodel/interfaces.ecore"))
-					.toString()));
+			interfacesResource = loadResource(URI.createURI(FileLocator.toFileURL(
+					bundle.getEntry("/metamodel/interfaces.ecore")).toString()));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		// TODO find a better way to set the URI relative
-		interfacesResource.setURI(URI.createPlatformPluginURI("org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore", true));
-				
+		interfacesResource.setURI(URI.createPlatformPluginURI(
+				"org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore", true));
+
 		interfacesPackage = (EPackage) interfacesResource.getContents().get(0);
 
 		if (contents == null) {
@@ -141,13 +142,11 @@ public class RolecoreCompiler {
 
 	private void addReferenceRole(EReference reference, CoreClass coreClass, EPackage ePackage) {
 		// replace only references between core classes
-		EClass targetClass = (EClass) reference.getEType();
 		EClass abstractRole = (EClass) ePackage.getEClassifier(coreClass.getName() + "Role");
-		if (!(targetClass instanceof CoreClass) || abstractRole == null)
+		if (!(reference.getEType() instanceof CoreClass) || abstractRole == null)
 			return;
-		EClass targetEClass = (EClass) ePackage.getEClassifier(targetClass.getName());
-		String roleName = firstLetter2UpperCase(coreClass.getName()) + firstLetter2UpperCase(targetEClass.getName())
-				+ firstLetter2UpperCase(reference.getName()) + "Role";
+		String roleName = firstLetter2UpperCase(coreClass.getName()) + firstLetter2UpperCase(reference.getName())
+				+ "Role";
 		EClass referenceRole = (EClass) ePackage.getEClassifier(roleName);
 		if (referenceRole != null)
 			return;
@@ -155,7 +154,14 @@ public class RolecoreCompiler {
 		referenceRole = EcoreFactory.eINSTANCE.createEClass();
 		referenceRole.setName(roleName);
 		referenceRole.getESuperTypes().add(abstractRole);
-		createRefRoleToCoreClassReference(ePackage, reference, referenceRole, targetEClass);
+		if (!coreClass.eResource().equals(reference.getEType().eResource())) {
+			EPackage importEPackage = getCoreClassEPackage((CoreClass) reference.getEType());
+			createRefRoleToCoreClassReference(ePackage, reference, referenceRole, (EClass) importEPackage
+					.getEClassifier(reference.getEType().getName() + "Core"));
+		} else {
+			createRefRoleToCoreClassReference(ePackage, reference, referenceRole, (EClass) ePackage
+					.getEClassifier(reference.getEType().getName() + "Core"));
+		}
 		ePackage.getEClassifiers().add(referenceRole);
 	}
 
@@ -309,16 +315,24 @@ public class RolecoreCompiler {
 		if (superCoreClass == null) {
 			coreEClass.getESuperTypes().add((EClass) interfacesPackage.getEClassifier("RCCore"));
 		} else if (superCoreClass.eResource().equals(coreClass.eResource())) {
-			coreEClass.getESuperTypes().add(findOrCreateCoreClass(ePackage, superCoreClass));
+			addSuperCoreEClass(coreEClass, findOrCreateCoreClass(ePackage, superCoreClass));
 		} else {
-			coreEClass.getESuperTypes().add(
-					findOrCreateCoreClass(getSuperCoreClassEPackage(superCoreClass), superCoreClass));
+			addSuperCoreEClass(coreEClass, findOrCreateCoreClass(getCoreClassEPackage(superCoreClass), superCoreClass));
 		}
 		return coreEClass;
 	}
 
-	private EPackage getSuperCoreClassEPackage(CoreClass superCoreClass) {
-		URI ePackageURI = superCoreClass.eResource().getURI().trimFileExtension().appendFileExtension("ecore");
+	private void addSuperCoreEClass(EClass core, EClass superCore) {
+		for (EClass eClass : core.getESuperTypes()) {
+			if (superCore.getName().equals(eClass.getName())) {
+				return;
+			}
+		}
+		core.getESuperTypes().add(superCore);
+	}
+
+	private EPackage getCoreClassEPackage(CoreClass coreClass) {
+		URI ePackageURI = coreClass.eResource().getURI().trimFileExtension().appendFileExtension("ecore");
 		Resource resource = loadResource(ePackageURI);
 		return (EPackage) resource.getContents().get(0);
 	}
@@ -346,15 +360,15 @@ public class RolecoreCompiler {
 		else if (coreClass.eResource().equals(superCoreClass.eResource())) {
 			superCoreInterface = findOrCreateEClass(ePackage, superCoreClass, "Role", true, true);
 		} else {
-			superCoreInterface = findOrCreateEClass(getSuperCoreClassEPackage(superCoreClass), superCoreClass, "Role",
-					true, true);
+			superCoreInterface = findOrCreateEClass(getCoreClassEPackage(superCoreClass), superCoreClass, "Role", true,
+					true);
 
 		}
 		return findOrCreateEClass(ePackage, coreClass, "", false, false, superCoreInterface);
 	}
 
 	private void addRoleHandlingMethods(CoreClass coreClass, EClass coreInterface) {
-		addAddRoleOperation(coreClass, coreInterface);
+		// addAddRoleOperation(coreClass, coreInterface);
 	}
 
 	private void addAddRoleOperation(CoreClass coreClass, EClass coreInterface) {
