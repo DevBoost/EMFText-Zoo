@@ -31,14 +31,14 @@ import org.emftext.language.rolecore.interfaces.InterfacesPackage;
 
 /**
  * @author BluAngel
- *
+ * 
  */
 public class InterpretationContext {
 
 	private RCPackage createdConstraintsModelPackage;
 	private RCPackage creatingConstraintsModelPackage;
-//	private Domain createdDomain;
-//	private Domain creatingDomain;
+	// private Domain createdDomain;
+	// private Domain creatingDomain;
 	private Map<String, Graph> dependencies;
 	private Stack<Object> stack = new Stack<Object>();
 	private int changeKind = -1;
@@ -47,11 +47,13 @@ public class InterpretationContext {
 	private List<Resource> resources = new ArrayList<Resource>();
 	private List<DomainRoot> domainRoots = new ArrayList<DomainRoot>();
 	private boolean isResourceChanged = false;
-	//TODO is needed?
+	// TODO is needed?
 	private boolean isCreated;
 
-	private static final String ROLES_REFERENCE_SUFFIX = "Roles";
-	private static final String CORE_REFERENCE_SUFFIX = "Core";
+	private static final String ROLES_REFERENCE = "roles";
+	private static final String CORE_REFERENCE = "core";
+	private static final String ABSTRACT_ROLE_CLASS_SUFFIX = "Role";
+	private static final String CORE_CLASS_SUFFIX = "Core";
 	private static final String TRACE_LINK_DOMAIN_ROOT_NAME = "TraceLinks";
 	private CreatingHelpClass creatingHelpClass;
 
@@ -59,11 +61,11 @@ public class InterpretationContext {
 		return resources;
 	}
 
-	//TODO should add the domain root of the resource here if available.
+	// TODO should add the domain root of the resource here if available.
 	public void addResource(Resource resource) {
 		resources.add(resource);
 		EList<EObject> contents = resource.getContents();
-		if (contents!=null&&contents.size()>0&&contents.get(0) instanceof DomainRoot)
+		if (contents != null && contents.size() > 0 && contents.get(0) instanceof DomainRoot)
 			domainRoots.add((DomainRoot) contents.get(0));
 	}
 
@@ -94,12 +96,12 @@ public class InterpretationContext {
 			return creatingConstraintsModelPackage;
 	}
 
-//	public Domain getDomain(boolean isCreated) {
-//		if (isCreated)
-//			return createdDomain;
-//		else
-//			return creatingDomain;
-//	}
+	// public Domain getDomain(boolean isCreated) {
+	// if (isCreated)
+	// return createdDomain;
+	// else
+	// return creatingDomain;
+	// }
 
 	/**
 	 * Set the domain and the role core meta model according to the
@@ -109,36 +111,37 @@ public class InterpretationContext {
 	 * @param modelDomain
 	 * @param isCreated
 	 */
-//	public void setPackage(Domain modelDomain, boolean isCreated) {
-//		String baseURI = "../org.emftext.language.rolecore/";
-//		if (isCreated) {
-//			createdDomain = modelDomain;
-//			// createdConstraintsModelPackage =
-//			// loadModel(getRolecorePath(baseURI, modelDomain.getName()));
-//		} else {
-//			creatingDomain = modelDomain;
-//			// creatingConstraintsModelPackage =
-//			// loadModel(getRolecorePath(baseURI, modelDomain.getName()));
-//		}
-//	}
+	// public void setPackage(Domain modelDomain, boolean isCreated) {
+	// String baseURI = "../org.emftext.language.rolecore/";
+	// if (isCreated) {
+	// createdDomain = modelDomain;
+	// // createdConstraintsModelPackage =
+	// // loadModel(getRolecorePath(baseURI, modelDomain.getName()));
+	// } else {
+	// creatingDomain = modelDomain;
+	// // creatingConstraintsModelPackage =
+	// // loadModel(getRolecorePath(baseURI, modelDomain.getName()));
+	// }
+	// }
 
-//	private String getRolecorePath(String baseURI, String modelName) {
-//		return baseURI + "." + modelName + "metamodel/" + modelName + ".rolecore";
-//	}
+	// private String getRolecorePath(String baseURI, String modelName) {
+	// return baseURI + "." + modelName + "metamodel/" + modelName +
+	// ".rolecore";
+	// }
 
-//	private RCPackage loadModel(String pathName) {
-//		ResourceSet rs = new ResourceSetImpl();
-//		Resource r = null;
-//		try {
-//			// r = rs.getResource(URI.createFileURI(pathName), true);
-//			r = rs.getResource(URI.createPlatformResourceURI(pathName, true), true);
-//			System.out.println(r.toString());
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return (RCPackage) r.getContents().get(0);
-//	}
+	// private RCPackage loadModel(String pathName) {
+	// ResourceSet rs = new ResourceSetImpl();
+	// Resource r = null;
+	// try {
+	// // r = rs.getResource(URI.createFileURI(pathName), true);
+	// r = rs.getResource(URI.createPlatformResourceURI(pathName, true), true);
+	// System.out.println(r.toString());
+	// } catch (Exception e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// return (RCPackage) r.getContents().get(0);
+	// }
 
 	public void setDependencies(Map<String, Graph> dependencies) {
 		this.dependencies = dependencies;
@@ -153,7 +156,7 @@ public class InterpretationContext {
 
 	public DomainRoot findOrCreateDomainRoot(String domainName) {
 		for (DomainRoot domainRoot : domainRoots) {
-			if (domainName.equals(domainRoot.getName())){
+			if (domainName.equals(domainRoot.getName())) {
 				return domainRoot;
 			}
 		}
@@ -162,8 +165,8 @@ public class InterpretationContext {
 		domainRoots.add(domainRoot);
 		return domainRoot;
 	}
-	
-	public DomainRoot findOrCreateTraceLinksDomainRoot(){
+
+	public DomainRoot findOrCreateTraceLinksDomainRoot() {
 		return findOrCreateDomainRoot(TRACE_LINK_DOMAIN_ROOT_NAME);
 	}
 
@@ -178,7 +181,7 @@ public class InterpretationContext {
 	@SuppressWarnings("unchecked")
 	public EObject createCoreClass(EClass coreEClass) {
 		EFactory eFactory = coreEClass.getEPackage().getEFactoryInstance();
-		if (!coreEClass.getName().endsWith(CORE_REFERENCE_SUFFIX))
+		if (!coreEClass.getName().endsWith(CORE_CLASS_SUFFIX))
 			return null;
 		// Create the core class
 		EObject coreClass = eFactory.create(coreEClass);
@@ -189,18 +192,18 @@ public class InterpretationContext {
 		EList<EClass> superEClasses = coreEClass.getESuperTypes();
 		EClass superCoreEClass = null;
 		for (EClass eClass : superEClasses) {
-			if(eClass.getName().endsWith(CORE_REFERENCE_SUFFIX)){
+			if (eClass.getName().endsWith(CORE_CLASS_SUFFIX)) {
 				superCoreEClass = eClass;
 			}
 		}
 		if (!superCoreEClass.equals(InterfacesPackage.eINSTANCE.getRCCore())) {
 			EObject superCoreClass = createCoreClass(superCoreEClass);
-
+			// set the core to the super core as role
 			EStructuralFeature rolesStructuralFeature = getRolesStructuralFeature(superCoreEClass);
 			EList<EObject> roles = (EList<EObject>) superCoreClass.eGet(rolesStructuralFeature);
 			roles.add(coreClass);
 			// set the super core class to the core class as core
-			EStructuralFeature coreStructuralFeature = getCoreStructuralFeature(coreEClass); 
+			EStructuralFeature coreStructuralFeature = getCoreStructuralFeature(coreEClass);
 			try {
 				coreClass.eSet(coreStructuralFeature, superCoreClass);
 			} catch (Exception e) {
@@ -221,12 +224,24 @@ public class InterpretationContext {
 		return null;
 	}
 
+	/**
+	 * Get the structural feature of a role which points to its core.
+	 * 
+	 * @param roleEClass
+	 * @return
+	 */
 	public EStructuralFeature getCoreStructuralFeature(EClass roleEClass) {
-		return getStructuralFeature(roleEClass, CORE_REFERENCE_SUFFIX);
+		return getStructuralFeature(roleEClass, CORE_REFERENCE);
 	}
 
+	/**
+	 * Get the structural feature of a core which points of its roles.
+	 * 
+	 * @param coreEClass
+	 * @return
+	 */
 	public EStructuralFeature getRolesStructuralFeature(EClass coreEClass) {
-		return getStructuralFeature(coreEClass, ROLES_REFERENCE_SUFFIX);
+		return getStructuralFeature(coreEClass, ROLES_REFERENCE);
 	}
 
 	/**
@@ -270,7 +285,7 @@ public class InterpretationContext {
 	@SuppressWarnings("unchecked")
 	public boolean addRoleToCore(EObject coreClass, EClass roleEClass, Object object, String featureName) {
 		EFactory eFactory = roleEClass.getEPackage().getEFactoryInstance();
-		EClass coreOfRoleEClass = (EClass) getCoreStructuralFeature(roleEClass).getEType();
+		EClass coreOfRoleEClass = (EClass) getCoreEClassOf(roleEClass);
 		if (coreClass.eClass().equals(coreOfRoleEClass)) {
 			EObject roleClass = eFactory.create(roleEClass);
 			EList<EObject> rolesList = (EList<EObject>) coreClass.eGet(getRolesStructuralFeature(coreClass.eClass()));
@@ -278,19 +293,42 @@ public class InterpretationContext {
 			// add the core to its role
 			try {
 				roleClass.eSet(getCoreStructuralFeature(roleEClass), coreClass);
-				roleClass.eSet(getStructuralFeature(roleEClass, featureName), object);
+				if (featureName != null) {
+					EStructuralFeature feature = getStructuralFeature(roleEClass, featureName);
+					if (feature != null) {
+						roleClass.eSet(feature, object);
+					}
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			return true;
 		} else {
-			EStructuralFeature coreStructuralFeature = getStructuralFeature(coreClass.eClass(), CORE_REFERENCE_SUFFIX);
-			if (coreStructuralFeature == null) {
+			EObject superCore = getCoreEObjectOf(coreClass);
+			if (superCore == null) {
 				return false;
 			}
-			EObject superCoreClass = (EObject) coreClass.eGet(coreStructuralFeature);
-			return addRoleToCore(superCoreClass, roleEClass, object, featureName);
+			return addRoleToCore(superCore, roleEClass, object, featureName);
 		}
+	}
+
+	private EClass getCoreEClassOf(EClass role) {
+		EList<EClass> superTypes = role.getESuperTypes();
+		EClass abstractRole = null;
+		for (EClass eClass : superTypes) {
+			if (eClass.getName().endsWith(ABSTRACT_ROLE_CLASS_SUFFIX)) {
+				abstractRole = eClass;
+				break;
+			}
+		}
+		if (abstractRole != null) {
+			String interfaceName = abstractRole.getName().substring(0,
+					abstractRole.getName().lastIndexOf(ABSTRACT_ROLE_CLASS_SUFFIX));
+			EClass core = (EClass) role.getEPackage().getEClassifier(interfaceName + CORE_CLASS_SUFFIX);
+			if (core != null)
+				return core;
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -425,9 +463,9 @@ public class InterpretationContext {
 	}
 
 	/**
-	 * If the description has only one kind, the kind is set accordingly
-	 * and return true, else return false.
-	 * TODO CHANGE + ADD is possible
+	 * If the description has only one kind, the kind is set accordingly and
+	 * return true, else return false. TODO CHANGE + ADD is possible
+	 * 
 	 * @param changeDescription
 	 * @return
 	 */
@@ -446,17 +484,17 @@ public class InterpretationContext {
 							isADD = 2;
 						else if (listChange.getKind().equals(ChangeKind.REMOVE_LITERAL))
 							isREMOVE = 4;
-						if (isADD+isREMOVE==6)
+						if (isADD + isREMOVE == 6)
 							break;
 					}
-					if (isADD+isREMOVE==6)
+					if (isADD + isREMOVE == 6)
 						break;
 				}
-				if (isADD+isREMOVE==6)
+				if (isADD + isREMOVE == 6)
 					break;
 			}
 		}
-		switch (isCHANGE+isADD+isREMOVE) {
+		switch (isCHANGE + isADD + isREMOVE) {
 		case 1:
 			setChangeKind(ChangeKind.MOVE);
 			return true;
@@ -474,10 +512,18 @@ public class InterpretationContext {
 	public boolean hasNoRoles(RightTerm rightTerm) {
 		EList<SimpleTerm> simpleTerms = rightTerm.getSimpleTerms();
 		for (SimpleTerm simpleTerm : simpleTerms) {
-			if(simpleTerm.getRole()!=null){
+			if (simpleTerm.getRole() != null) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	public EObject getCoreEObjectOf(EObject role) {
+		EStructuralFeature coreSF = getCoreStructuralFeature(role.eClass());
+		if (coreSF == null) {
+			return null;
+		}
+		return (EObject) role.eGet(coreSF);
 	}
 }
