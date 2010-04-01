@@ -4,60 +4,32 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="riehle97"
     nsURI="http://www.emftext.org/language/rolecore/riehle97" nsPrefix="riehle97">
   <eClassifiers xsi:type="ecore:EClass" name="Credit" abstract="true" interface="true"
-      eSuperTypes="platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCInterface">
-    <eOperations name="addRole">
-      <eTypeParameters name="T">
-        <eBounds eClassifier="#//CreditRole"/>
-      </eTypeParameters>
-      <eParameters name="role">
-        <eGenericType eTypeParameter="#//Credit/addRole/T"/>
-      </eParameters>
-    </eOperations>
-  </eClassifiers>
+      eSuperTypes="platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCInterface"/>
   <eClassifiers xsi:type="ecore:EClass" name="CreditCore" eSuperTypes="#//Credit platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCCore"/>
   <eClassifiers xsi:type="ecore:EClass" name="CreditRole" abstract="true" eSuperTypes="#//Credit platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="Borrower" eSuperTypes="riehle97base.ecore#//CustomerRole">
     <eOperations name="getCredits" eType="#//Credit"/>
     <eOperations name="getSecurityObject" eType="#//SecurityObject"/>
-    <eOperations name="addRole">
-      <eTypeParameters name="T">
-        <eBounds eClassifier="#//BorrowerRole"/>
-      </eTypeParameters>
-      <eParameters name="role">
-        <eGenericType eTypeParameter="#//Borrower/addRole/T"/>
-      </eParameters>
-    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BorrowerCore" eSuperTypes="#//Borrower riehle97base.ecore#//CustomerCore"/>
   <eClassifiers xsi:type="ecore:EClass" name="BorrowerRole" abstract="true" eSuperTypes="#//Borrower"/>
   <eClassifiers xsi:type="ecore:EClass" name="SecurityObject" abstract="true" interface="true"
-      eSuperTypes="platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCInterface">
-    <eOperations name="addRole">
-      <eTypeParameters name="T">
-        <eBounds eClassifier="#//SecurityObjectRole"/>
-      </eTypeParameters>
-      <eParameters name="role">
-        <eGenericType eTypeParameter="#//SecurityObject/addRole/T"/>
-      </eParameters>
-    </eOperations>
-  </eClassifiers>
+      eSuperTypes="platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCInterface"/>
   <eClassifiers xsi:type="ecore:EClass" name="SecurityObjectCore" eSuperTypes="#//SecurityObject platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCCore"/>
   <eClassifiers xsi:type="ecore:EClass" name="SecurityObjectRole" abstract="true"
       eSuperTypes="#//SecurityObject platform:/plugin/org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore#//RCRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="Private" eSuperTypes="#//BorrowerRole"/>
   <eClassifiers xsi:type="ecore:EClass" name="Business" eSuperTypes="#//BorrowerRole"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CreditSecurityobjectSecurityobjectRole"
-      eSuperTypes="#//CreditRole">
+  <eClassifiers xsi:type="ecore:EClass" name="CreditSecurityobjectRole" eSuperTypes="#//CreditRole">
     <eStructuralFeatures xsi:type="ecore:EReference" name="securityObject" lowerBound="1"
-        eType="#//SecurityObject"/>
+        eType="#//SecurityObjectCore"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BorrowerCreditCreditsRole" eSuperTypes="#//BorrowerRole">
+  <eClassifiers xsi:type="ecore:EClass" name="BorrowerCreditsRole" eSuperTypes="#//BorrowerRole">
     <eStructuralFeatures xsi:type="ecore:EReference" name="credits" lowerBound="1"
-        eType="#//Credit" containment="true"/>
+        eType="#//CreditCore" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BorrowerSecurityobjectSecurityobjectRole"
-      eSuperTypes="#//BorrowerRole">
+  <eClassifiers xsi:type="ecore:EClass" name="BorrowerSecurityobjectRole" eSuperTypes="#//BorrowerRole">
     <eStructuralFeatures xsi:type="ecore:EReference" name="securityObject" lowerBound="1"
-        eType="#//SecurityObject" containment="true"/>
+        eType="#//SecurityObjectCore" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
