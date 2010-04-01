@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.ChangeFactory;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
-import org.eclipse.emf.ecore.change.ResourceChange;
-import org.eclipse.emf.ecore.change.impl.EObjectToChangesMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.rolecore.dependencies.interpreter.DomainRoot;
 import org.emftext.language.rolecore.dependencies.interpreter.InterpretationContext;
