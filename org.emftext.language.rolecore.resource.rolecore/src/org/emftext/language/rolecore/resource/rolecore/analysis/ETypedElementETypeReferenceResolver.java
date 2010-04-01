@@ -13,27 +13,63 @@
  ******************************************************************************/
 package org.emftext.language.rolecore.resource.rolecore.analysis;
 
-public class ETypedElementETypeReferenceResolver implements org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.eclipse.emf.ecore.ETypedElement, org.eclipse.emf.ecore.EClassifier> {
-	
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EReference;
+import org.emftext.language.rolecore.CoreClass;
+import org.emftext.language.rolecore.Import;
+import org.emftext.language.rolecore.RCPackage;
+
+public class ETypedElementETypeReferenceResolver
+		implements
+		org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolver<org.eclipse.emf.ecore.ETypedElement, org.eclipse.emf.ecore.EClassifier> {
+
 	private org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.eclipse.emf.ecore.ETypedElement, org.eclipse.emf.ecore.EClassifier> delegate = new org.emftext.language.rolecore.resource.rolecore.analysis.RolecoreDefaultResolverDelegate<org.eclipse.emf.ecore.ETypedElement, org.eclipse.emf.ecore.EClassifier>();
-	
-	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.ETypedElement container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
-		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EClassifier> classifiers = org.eclipse.emf.ecore.EcorePackage.eINSTANCE.getEClassifiers();
-		for (org.eclipse.emf.ecore.EClassifier classifier : classifiers){
-			if (identifier.equals(classifier.getName())){
+
+	public void resolve(
+			java.lang.String identifier,
+			org.eclipse.emf.ecore.ETypedElement container,
+			org.eclipse.emf.ecore.EReference reference,
+			int position,
+			boolean resolveFuzzy,
+			final org.emftext.language.rolecore.resource.rolecore.IRolecoreReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
+		// TODO resolve fuzzy
+		if (container instanceof EAttribute) {
+			org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EClassifier> classifiers = org.eclipse.emf.ecore.EcorePackage.eINSTANCE
+					.getEClassifiers();
+			for (org.eclipse.emf.ecore.EClassifier classifier : classifiers) {
+				if (identifier.equals(classifier.getName())) {
 					result.addMapping(identifier, classifier);
 					return;
+				}
+			}
+		}
+		else if (container instanceof EReference && identifier.indexOf("->")>-0){
+			RCPackage rcPackage = (RCPackage) container.eContainer().eContainer();
+			int arrowPos = identifier.indexOf("->");
+			String prefix = identifier.substring(0, arrowPos);
+			String type = identifier.substring(arrowPos+2, identifier.length());
+			for (Import importPackage : rcPackage.getImports()){
+				if (importPackage.getPrefix().equals(prefix)){
+					for (CoreClass coreClass : importPackage.getRcPackage().getCoreClasses()) {
+						if (coreClass.getName().equals(type)){
+							result.addMapping(coreClass.getName(), coreClass);
+							return;
+						}
+					}
+				}
 			}
 		}
 		delegate.resolve(identifier, container, reference, position, resolveFuzzy, result);
 	}
-	
-	public java.lang.String deResolve(org.eclipse.emf.ecore.EClassifier element, org.eclipse.emf.ecore.ETypedElement container, org.eclipse.emf.ecore.EReference reference) {
+
+	public java.lang.String deResolve(org.eclipse.emf.ecore.EClassifier element,
+			org.eclipse.emf.ecore.ETypedElement container, org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}
-	
-	public void setOptions(java.util.Map<?,?> options) {
-		// TODO save options in a field or leave method empty if this resolver does not depend on any option
+
+	public void setOptions(java.util.Map<?, ?> options) {
+		// TODO save options in a field or leave method empty if this resolver
+		// does not depend on any option
 	}
-	
+
 }

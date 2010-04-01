@@ -36,9 +36,9 @@ TOKENS {
 	DEFINE T_ID $'iD'$;
 	DEFINE T_CONTAINMENT $'containment'$;
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
-
 	DEFINE COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	
+	DEFINE REFTYPE $'type:'(('A'..'Z'|'a'..'z'|'0'..'9'|'_')+'->')?('A'..'Z'|'a'..'z'|'0'..'9'|'-'|'_')+$;
 	
 }
 
@@ -64,10 +64,12 @@ RULES {
 	
 	Import ::= "prefix" ":" prefix[] #1 rcPackage['<','>'] ( #1 rcPackageLocationHint['<','>'])?;
 	
+	@Foldable
 	Role      ::= 
 		"Role" name[] "is" "played" "by" playedBy[]
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
-		
+	
+	@Foldable	
 	CoreClass ::= 
 		"CoreClass" name[] (#1 "extends" #1 (rcPackage[] ".")? super[])? #1
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
@@ -104,7 +106,7 @@ RULES {
 			changeable[T_CHANGEABLE] |
 			resolveProxies[T_RESOLVEPROXIES]
 		)* 
-		"reference" #1 eType[] #1 name[] 
+		"reference" #1 eType[REFTYPE] #1 name[] 
 		( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])? ";";
 	
 	EOperation ::=
