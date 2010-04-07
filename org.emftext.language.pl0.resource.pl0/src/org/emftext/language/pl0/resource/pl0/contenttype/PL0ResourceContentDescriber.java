@@ -3,7 +3,6 @@ package org.emftext.language.pl0.resource.pl0.contenttype;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.QualifiedName;
@@ -35,7 +34,6 @@ public class PL0ResourceContentDescriber implements IContentDescriber {
 			}
 		} catch (Exception e) {
 			// do nothing
-			System.out.println("error while loading");
 		}
 		return IContentDescriber.INDETERMINATE;
 	}
