@@ -8,6 +8,18 @@
 	
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.emftext.language.pl0.resource.pl0.ui.Pl0Editor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="pl0" icon="icons/editor_icon.gif" id="org.emftext.language.pl0.resource.pl0.ui.Pl0Editor" name="EMFText pl0 Editor">
+     
+     <!-- 
+     This binding connects the editor with the content type.
+     It can be useful if someone renames a pl0 file from *.pl0 to *.arbitrary
+     then the PL0 editor still opens this file
+     look down for registration of the content type
+      -->
+     <contentTypeBinding
+           contentTypeId="org.emftext.language.pl0.resource.pl0.contentType">
+     </contentTypeBinding>
+		
+		
 		</editor>
 	</extension>
 	
@@ -64,5 +76,18 @@
 	</extension>
 	
 	<extension-point id="org.emftext.language.pl0.resource.pl0.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+ 
+ <!-- this is needed to define a content type -->
+ <extension
+       point="org.eclipse.core.contenttype.contentTypes">
+    <content-type
+          base-type="org.eclipse.core.runtime.text"
+          describer="org.emftext.language.pl0.resource.pl0.contenttype.PL0ResourceContentDescriber"
+          file-extensions="pl0"
+          id="org.emftext.language.pl0.resource.pl0.contentType"
+          name="PL0 *.pl0 Content Type"
+          priority="normal">
+    </content-type>
+ </extension>
 	
 </plugin>
