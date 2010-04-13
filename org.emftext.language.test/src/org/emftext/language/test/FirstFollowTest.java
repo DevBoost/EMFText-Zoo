@@ -15,6 +15,7 @@ import org.emftext.sdk.concretesyntax.Annotation;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.sdk.concretesyntax.KeyValuePair;
 import org.emftext.sdk.concretesyntax.Rule;
+import org.emftext.sdk.concretesyntax.SyntaxElement;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 
 import junit.framework.TestCase;
@@ -106,7 +107,8 @@ public class FirstFollowTest extends TestCase {
 				if (next instanceof KeyValuePair) {
 					continue;
 				}
-				computer.computeFollowSet(syntax, next);
+				assertTrue(next instanceof SyntaxElement);
+				computer.computeFollowSet(syntax, (SyntaxElement) next);
 				i++;
 			}
 		}
