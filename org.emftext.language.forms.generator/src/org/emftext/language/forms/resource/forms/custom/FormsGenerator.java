@@ -215,7 +215,10 @@ public class FormsGenerator {
 			}
 			IFile file = folder.getFile(filename);
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-			outStream.write(generator.generate(argument));
+			byte[] generatedBytes = generator.generate(argument);
+			if (generatedBytes != null) {
+				outStream.write(generatedBytes);
+			}
 			outStream.flush();
 
 			if (!file.exists()) {
