@@ -21,6 +21,14 @@ OPTIONS {
 	tokenspace = "1";
 }
 
+TOKENS {
+	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))* $ ;
+}
+
+TOKENSTYLES {
+	"SL_COMMENT" COLOR #00bb00;
+}
+
 RULES {
 	Frame ::= "F" "(" name[] ")" "contains" children* ";";
 	
