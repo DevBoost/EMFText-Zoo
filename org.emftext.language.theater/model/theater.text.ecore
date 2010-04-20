@@ -1,0 +1,59 @@
+package theater theater "http://www.emftext.org/language/theater" {
+
+	class Play {
+			unique ordered attribute EString name (0..1);
+			containment unique ordered resolveProxies reference Role declaredRoles (1..-1);
+			containment unique ordered resolveProxies reference Act acts (1..-1);
+			containment unique ordered resolveProxies reference Ensemble ensemble (1..1);
+	}
+	
+	class Ensemble {
+			containment unique ordered resolveProxies reference Actor actors (1..-1);
+	}
+	
+	class Actor {
+			 unique ordered attribute EString name (1..1);
+			 unique ordered resolveProxies reference Role plays (1..-1);
+			@"http://www.eclipse.org/ocl/examples/OCL"("derive"=
+			"plays->speeches->scene->act")
+			 derived transient volatile unique ordered unchangeable resolveProxies reference Act appearsIn (0..-1);
+	}
+	
+	class Role {
+			 unique ordered attribute EString name (0..1);
+			 unique ordered resolveProxies reference Speech speeches (0..-1) opposite playedBy;
+			@"http://www.eclipse.org/ocl/examples/OCL"("derive"=
+			"speeches->collect(roleSpeech | 
+				let index:Integer=roleSpeech.scene.elements->indexOf(roleSpeech) in 
+					roleSpeech.scene.elements->select(candidate | 
+						candidate.scene.elements->indexOf(candidate) >= index-1 
+						and candidate.scene.elements->indexOf(candidate) <= index+1 
+						and candidate.oclIsTypeOf(Speech) ))->asOrderedSet()")
+			 derived transient volatile unique ordered unchangeable resolveProxies reference Speech roleScript (0..-1);
+	}
+	
+	class Act {
+			unique ordered attribute EString name (0..1);
+			containment unique ordered resolveProxies reference Scene scenes (1..-1) opposite act;
+	}
+	
+	class Scene {
+			unique ordered attribute EString name (0..1);
+			containment unique ordered resolveProxies reference Element elements (1..-1) opposite scene;
+			unique ordered resolveProxies reference Act act (1..1) opposite scenes;
+	}
+	
+	class Element {
+			unique ordered resolveProxies reference Scene scene (1..1) opposite elements;
+	}
+	
+	class Direction extends Element {
+			unique ordered attribute EString text (1..1);
+	}
+	
+	class Speech extends Element {
+			unique ordered resolveProxies reference Role playedBy (1..-1) opposite speeches;
+			unique ordered attribute EString text (1..1);
+	}
+	
+}

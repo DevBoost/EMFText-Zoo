@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.theater.resource.theater.mopp.TheaterMetaInformation" id="org.emftext.language.theater.resource.theater.mopp.TheaterMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.theater.resource.theater.ui.TheaterEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="theater" icon="icons/editor_icon.gif" id="org.emftext.language.theater.resource.theater.ui.TheaterEditor" name="EMFText theater Editor">
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.theater.resource.theater.ui.TheaterPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Theater Text Editor" id="org.emftext.language.theater.resource.theater.ui.TheaterPreferencePage" class="org.emftext.language.theater.resource.theater.ui.TheaterPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.theater.resource.theater.ui.TheaterSyntaxColoringPreferencePage" class="org.emftext.language.theater.resource.theater.ui.TheaterSyntaxColoringPreferencePage" category="org.emftext.language.theater.resource.theater.ui.TheaterPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.theater.resource.theater.ui.TheaterBracketPreferencePage" class="org.emftext.language.theater.resource.theater.ui.TheaterBracketPreferencePage" category="org.emftext.language.theater.resource.theater.ui.TheaterPreferencePage">
+		</page>
+		<page name="Occurrence" id="org.emftext.language.theater.resource.theater.ui.TheaterOccurrencePreferencePage" class="org.emftext.language.theater.resource.theater.ui.TheaterOccurrencePreferencePage" category="org.emftext.language.theater.resource.theater.ui.TheaterPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.theater.resource.theater.ui.TheaterNewFileWizard" id="org.emftext.language.theater.resource.theater.ui.TheaterNewFileWizard" name="EMFText .theater file">
+		</wizard>
+	</extension>
+	
+	<extension id="org.emftext.language.theater.resource.theater.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.theater.resource.theater.nature" name="theater nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.emftext.language.theater.resource.theater.mopp.TheaterNature" />
+		</runtime>
+		<builder id="org.emftext.language.theater.resource.theater.builder" />
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="org.emftext.language.theater.resource.theater.builder" name="theater Builder">
+		<builder hasNature="true">
+			<run class="org.emftext.language.theater.resource.theater.mopp.TheaterBuilderAdapter" />
+		</builder>
+	</extension>
+	
+	<extension-point id="org.emftext.language.theater.resource.theater.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.theater.resource.theater.mopp.TheaterResourceFactoryDelegator" type="theater">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.theater.resource.theater.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>
