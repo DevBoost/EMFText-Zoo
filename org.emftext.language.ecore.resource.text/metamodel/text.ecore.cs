@@ -39,7 +39,7 @@ TOKENS {
 	DEFINE T_UNIQUE $'unique'$;
 	DEFINE T_ORDERED $'ordered'$;
 	DEFINE T_UNSETTABLE $'unsettable'$;
-	DEFINE T_CHANGEABLE $'changeable'$;
+	DEFINE T_UNCHANGEABLE $'unchangeable'$;
 	DEFINE T_TRANSIENT $'transient'$;
 	DEFINE T_ID $'iD'$;
 	DEFINE T_RESOLVEPROXIES $'resolveProxies'$;
@@ -62,7 +62,7 @@ TOKENSTYLES {
 	"T_UNIQUE" COLOR #7F0055, BOLD;
 	"T_ORDERED" COLOR #7F0055, BOLD;
 	"T_UNSETTABLE" COLOR #7F0055, BOLD;
-	"T_CHANGEABLE" COLOR #7F0055, BOLD;
+	"T_UNCHANGEABLE" COLOR #7F0055, BOLD;
 	"T_TRANSIENT" COLOR #7F0055, BOLD;
 	"T_ID" COLOR #7F0055, BOLD;
 	"T_RESOLVEPROXIES" COLOR #7F0055, BOLD;
@@ -92,14 +92,14 @@ RULES {
 				!0;
 	
 	EAttribute ::= !2 (eAnnotations)* (( derived[T_DERIVED]|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]|
-					unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID]) #1)* 
+					unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|transient[T_TRANSIENT]|iD[T_ID]) #1)* 
 				"attribute" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"'])? ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ";";
 	
 	EParameter ::= (eAnnotations)* ((ordered[T_ORDERED]|unique[T_UNIQUE]) #1)* eType[] #1 name[] ( #1 "(" lowerBound[] ".." upperBound[] ")" )? ;
 	
 	EReference ::= (eAnnotations)* !2 (( containment[T_CONTAINMENT]|derived[T_DERIVED]|transient[T_TRANSIENT]
 							|volatile[T_VOLATILE]|unique[T_UNIQUE]|ordered[T_ORDERED]
-							|unsettable[T_UNSETTABLE]|changeable[T_CHANGEABLE]|resolveProxies[T_RESOLVEPROXIES]) #1)* 
+							|unsettable[T_UNSETTABLE]|changeable[T_UNCHANGEABLE]|resolveProxies[T_RESOLVEPROXIES]) #1)* 
 					"reference" #1 (eType[] | eGenericType) #1 name[] ("=" defaultValueLiteral['"','"']) ?
 					( #1 "(" lowerBound[] ".." upperBound[] ")" )?  (#1 "opposite" #1 eOpposite[])?";";
 	
