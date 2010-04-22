@@ -13,6 +13,7 @@ TOKENS{
 TOKENSTYLES{
 	"Equivalences" COLOR #7F0055, BOLD;
 	"ModelPackage" COLOR #7F0055, BOLD;
+	"RCPackage" COLOR #7F0055, BOLD;
 	"Domain" COLOR #7F0055, BOLD;
 }
 
@@ -23,7 +24,7 @@ RULES{
 		(modelDomains !0)?
 		("Equivalences" modelEquivalence)? ;
 	
-	Domain::= "Domain" name[] "ModelPackage" modelPackage['"','"'] "{" !0 
+	Domain::= "Domain" name[] "ModelPackage" modelPackage['"','"'] "RCPackage" rcPackage['"','"'] "{" !0 
 		("Required" required )? ("SemiRequired" semiRequired )? ("Create" create )? !0 "}"  ;
 	
 	Equivalence::= "{" edges+ "}";
