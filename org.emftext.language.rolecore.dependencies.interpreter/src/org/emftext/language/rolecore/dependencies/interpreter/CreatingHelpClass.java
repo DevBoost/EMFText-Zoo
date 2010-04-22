@@ -5,64 +5,143 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+
+import javax.sound.sampled.ReverbType;
 
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeKind;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.rolecore.RCPackage;
 import org.emftext.language.rolecore.dependencies.Block;
 import org.emftext.language.rolecore.dependencies.CoreClass;
+import org.emftext.language.rolecore.dependencies.Create;
 import org.emftext.language.rolecore.dependencies.Edge;
 import org.emftext.language.rolecore.dependencies.Graph;
 import org.emftext.language.rolecore.dependencies.Domain;
 import org.emftext.language.rolecore.dependencies.RightTerm;
 import org.emftext.language.rolecore.dependencies.SimpleTerm;
+import org.emftext.language.rolecore.interfaces.RCCore;
 
 public class CreatingHelpClass {
 
 	private HashMap<String, EObject> coreClassesMap;
 	private Graph dependencies;
-	private EMap<EObject, EList<FeatureChange>> mapOfObjectsToChange;
-	private EMap<EObject, CoreClass> mapOfNextElements;
 	private List<CoreClass> listOfCoreClassesToInterpret;
+	private EMap<EObject, CoreClass> mapOfNextElements;
+	private Map<EObject, List<FeatureChange>> mapOfObjectsToChange;
+	private InterpretationContext context;
 
-	public CreatingHelpClass(Graph dependencies) {
+	public CreatingHelpClass(Graph dependencies, InterpretationContext context) {
 		this.dependencies = dependencies;
 		coreClassesMap = new HashMap<String, EObject>();
 		mapOfNextElements = new BasicEMap<EObject, CoreClass>(10);
 		listOfCoreClassesToInterpret = new ArrayList<CoreClass>();
+		this.context = context;
 	}
 
-	public void addEObjectCoreClass(String synchronizationName, EObject eObject) {
-		coreClassesMap.put(synchronizationName, eObject);
+	private void addCoreClassesToList(Block block, List<CoreClass> coreClassList) {
+		if (block != null && block.getCoreClasses() != null)
+			for (CoreClass coreClass : block.getCoreClasses()) {
+				coreClassList.add(coreClass);
+			}
 	}
 
-	/**
-	 * Is this EObject in contained in the list already?
-	 * 
-	 * @param eObject
-	 * @return
-	 */
-	public boolean hasEObjectCoreClass(EObject eObject) {
-		for (Iterator<String> synchronizationNames = coreClassesMap.keySet().iterator(); synchronizationNames.hasNext();) {
-			if (coreClassesMap.get(synchronizationNames).equals(eObject))
-				return true;
+	public void addCoreEObjectToMap(String coreClassName, EObject coreEObject) {
+		// TODO remove
+		System.out.println("Add the core class " + coreClassName + " to core classes map");
+
+		coreClassesMap.put(coreClassName, coreEObject);
+	}
+
+	public boolean addNextElementsFromRequired(Domain domain, Entry<EObject, EList<FeatureChange>> entry) {
+		if (mapOfObjectsToChange.size() == 0)
+			return false;
+		CoreClass coreClass = getCoreClassFromBlock(entry.getKey().eClass(), domain.getRequired());
+		if (coreClass != null) {
+			mapOfNextElements.put(entry.getKey(), coreClass);
+			// TODO only for decidable case
+			addCoreEObjectToMap(coreClass.getName(), entry.getKey());
 		}
 		return false;
 	}
 
-	public String getSynchronizationName(EObject eObject) {
-		for (Iterator<String> synchronizationNames = coreClassesMap.keySet().iterator(); synchronizationNames.hasNext();) {
-			String synchronizationName = synchronizationNames.next();
-			if (coreClassesMap.get(synchronizationName).equals(eObject))
-				return synchronizationName;
+	/**
+	 * The first element is in Create or SemiCreate because of domain root. If
+	 * it is a containment reference then it is in Create. Now assume it is in
+	 * Create first.
+	 * 
+	 * @param featureChanges
+	 */
+	public boolean addNextElementsFromRoot(List<FeatureChange> featureChanges, Domain domain) {
+		// TODO should be applied these feature changes here?
+		if (featureChanges == null)
+			return false;
+		for (FeatureChange featureChange : featureChanges) {
+			EList<ListChange> listChanges = featureChange.getListChanges();
+			for (ListChange listChange : listChanges) {
+				if (listChange.getKind().equals(ChangeKind.ADD_LITERAL)) {
+					EList<EObject> coreClassEObjects = listChange.getReferenceValues();
+					for (EObject eObject : coreClassEObjects) {
+						CoreClass coreClass = getCoreClassFromBlock(eObject.eClass(), domain.getCreate());
+						if (coreClass == null) {
+							coreClass = getCoreClassFromBlock(eObject.eClass(), domain.getSemiRequired());
+						}
+						if (coreClass != null) {
+							mapOfNextElements.put(eObject, coreClass);
+							// TODO map to the coreClassesMap too, but this map
+							// should contains only correct mappings
+							addCoreEObjectToMap(coreClass.getName(), eObject);
+						} else
+							return false;
+					}
+				}
+			}
 		}
+		return true;
+	}
+
+	/**
+	 * Create the synchronized core classes of the given core class if they are
+	 * not existed yet. This method will not do yet!
+	 * 
+	 * @param coreClass
+	 *            with the created core class EObject
+	 * @param context
+	 */
+	public void createSynchronizationCoreClasses(CoreClass coreClass) {
+		Set<CoreClass> synchCoreClasses = getSynchronizedCoreClasses(coreClass);
+		if (synchCoreClasses != null && synchCoreClasses.size() > 0) {
+			for (CoreClass synchCoreClass : synchCoreClasses) {
+				EObject synchCoreClassEObject = getCoreEObjectFromMap(synchCoreClass.getName());
+				if (synchCoreClassEObject == null) {
+					// TODO this create have to create the super cores, too
+					synchCoreClassEObject = synchCoreClass.getType().getEPackage().getEFactoryInstance().create(
+							synchCoreClass.getType());
+					addCoreEObjectToMap(synchCoreClass.getName(), synchCoreClassEObject);
+				}
+			}
+		}
+	}
+
+	private CoreClass getCoreClassFromBlock(EClass eClass, Block block) {
+		if (block != null && block.getCoreClasses() != null && block.getCoreClasses().size() > 0)
+			for (CoreClass coreClass : block.getCoreClasses()) {
+				if (coreClass.getType().equals(eClass))
+					return coreClass;
+			}
 		return null;
 	}
 
@@ -95,28 +174,16 @@ public class CreatingHelpClass {
 		return null;
 	}
 
-	public EObject getEObjectCoreClass(String synchronizationName) {
-		return coreClassesMap.get(synchronizationName);
+	public EObject getCoreEObjectFromMap(String coreClassName) {
+		return coreClassesMap.get(coreClassName);
 	}
 
-	/**
-	 * Create the synchronization core classes of the given core class if they
-	 * are not existed yet.
-	 * 
-	 * @param coreClass
-	 * @param context
-	 */
-	public void createSynchronizationCoreClasses(CoreClass coreClass) {
-		Set<CoreClass> synchCoreClasses = getSynchronizationCoreClasses(coreClass);
-		if (synchCoreClasses != null && synchCoreClasses.size() > 0)
-			for (CoreClass synchCoreClass : synchCoreClasses) {
-				EObject synchCoreClassEObject = getEObjectCoreClass(synchCoreClass.getName());
-				if (synchCoreClassEObject == null) {
-					synchCoreClassEObject = synchCoreClass.getType().getEPackage().getEFactoryInstance().create(
-							synchCoreClass.getType());
-					coreClassesMap.put(synchCoreClass.getName(), synchCoreClassEObject);
-				}
-			}
+	public Map<EObject, List<FeatureChange>> getListOfObjectsToChange() {
+		return mapOfObjectsToChange;
+	}
+
+	public EMap<EObject, CoreClass> getMapOfNextElements() {
+		return mapOfNextElements;
 	}
 
 	/**
@@ -126,7 +193,7 @@ public class CreatingHelpClass {
 	 * @param context
 	 * @return
 	 */
-	private Set<CoreClass> getSynchronizationCoreClasses(CoreClass coreClass) {
+	private Set<CoreClass> getSynchronizedCoreClasses(CoreClass coreClass) {
 		EList<Edge> edges = dependencies.getModelEquivalence().getEdges();
 		Set<CoreClass> synchCoreClasses = new HashSet<CoreClass>();
 		for (Edge edge : edges) {
@@ -153,96 +220,392 @@ public class CreatingHelpClass {
 		return synchCoreClasses;
 	}
 
-	public void setListsAndMaps(EMap<EObject, EList<FeatureChange>> objectChanges, Domain domain) {
-		mapOfObjectsToChange = objectChanges;
-		addCoreClassesToListOfCoreClassesToInterpret(domain.getRequired());
-		addCoreClassesToListOfCoreClassesToInterpret(domain.getCreate());
-		addCoreClassesToListOfCoreClassesToInterpret(domain.getSemiRequired());
-	}
-	
-	private void addCoreClassesToListOfCoreClassesToInterpret(Block block) {
-		if (block != null && block.getCoreClasses()!=null)
-			for (CoreClass coreClass : block.getCoreClasses()) {
-				listOfCoreClassesToInterpret.add(coreClass);
-			}
+	public String getSynchronizationName(EObject eObject) {
+		for (Iterator<String> synchronizationNames = coreClassesMap.keySet().iterator(); synchronizationNames.hasNext();) {
+			String synchronizationName = synchronizationNames.next();
+			if (coreClassesMap.get(synchronizationName).equals(eObject))
+				return synchronizationName;
+		}
+		return null;
 	}
 
-	public EMap<EObject, EList<FeatureChange>> getListOfObjectsToChange(){
-		return mapOfObjectsToChange;
+	/**
+	 * Is this EObject in contained in the list already?
+	 * 
+	 * @param eObject
+	 * @return
+	 */
+	public boolean hasEObjectCoreClass(EObject eObject) {
+		for (Iterator<String> synchronizationNames = coreClassesMap.keySet().iterator(); synchronizationNames.hasNext();) {
+			if (coreClassesMap.get(synchronizationNames).equals(eObject))
+				return true;
+		}
+		return false;
 	}
-	
-//	public List<CoreClass> getListOfCoreClassesToInterpret(){
-//		return listOfCoreClassesToInterpret;
-//	}
+
+	// public List<CoreClass> getListOfCoreClassesToInterpret(){
+	// return listOfCoreClassesToInterpret;
+	// }
 	/**
 	 * 
 	 */
-	public Entry<EObject, CoreClass> popNextElement(){
-		if (mapOfNextElements.size()==0)
+	public Entry<EObject, CoreClass> popNextElement() {
+		if (mapOfNextElements.size() == 0)
 			return null;
-		return mapOfNextElements.get(0);
+		return mapOfNextElements.remove(0);
 	}
-	
-	public boolean pushNextElement(EObject key, CoreClass value){
+
+	public boolean pushNextElement(EObject key, CoreClass value) {
 		if (coreClassesMap.containsValue(key))
 			return false;
 		mapOfNextElements.put(key, value);
 		return true;
 	}
 
-	/**
-	 * The first element is in Create or SemiCreate because of domain root. 
-	 * If it is a containment reference then it is in Create. Now assume it is in Create first.
-	 * @param featureChanges
-	 */
-	public boolean addNextElementsFromRoot(EList<FeatureChange> featureChanges, Domain domain) {
-		//TODO should be applied these feature changes here?
-		if (featureChanges==null)
-			return false;
-		for (FeatureChange featureChange : featureChanges) {
-			EList<ListChange> listChanges = featureChange.getListChanges();
-			for (ListChange listChange : listChanges) {
-				if (listChange.getKind().equals(ChangeKind.ADD_LITERAL)){
-					EList<EObject> coreClassEObjects =listChange.getReferenceValues();
-					for (EObject eObject : coreClassEObjects) {
-						CoreClass coreClass = getCoreClassFromBlock(eObject.eClass(),domain.getCreate());
-						if (coreClass==null){
-							coreClass = getCoreClassFromBlock(eObject.eClass(), domain.getSemiRequired());
+	public void removeFeatureChangesOf(EObject eObject, List<FeatureChange> newFeatureChanges, Boolean isCore) {
+		List<FeatureChange> featureChanges = mapOfObjectsToChange.remove(eObject);
+		if (featureChanges != null) {
+			for (FeatureChange featureChange : featureChanges) {
+				newFeatureChanges.add(featureChange);
+			}
+		}
+		if (isCore) {
+			// if eObject is a core class there more feature changes of the
+			// super core class
+			// TODO catch the exception
+			Object superCoreClass = null;
+			try {
+				superCoreClass = eObject.eGet(context.getCoreStructuralFeature());
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(eObject);
+				System.out.println(superCoreClass);
+				return;
+			}
+			if (superCoreClass != null && superCoreClass instanceof RCCore) {
+				removeFeatureChangesOf((EObject) superCoreClass, newFeatureChanges, isCore);
+			}
+		}
+	}
+
+	public void setListsAndMaps(EMap<EObject, EList<FeatureChange>> objectChanges, Domain domain) {
+		// objectChanges.getKey() is not enough, because the same key can exist
+		// more than once and only the first is returned
+		mapOfObjectsToChange = new HashMap<EObject, List<FeatureChange>>();
+		for (Entry<EObject, EList<FeatureChange>> entry : objectChanges) {
+			List<FeatureChange> fcList = mapOfObjectsToChange.get(entry.getKey());
+			if (fcList == null) {
+				fcList = new ArrayList<FeatureChange>();
+				mapOfObjectsToChange.put(entry.getKey(), fcList);
+			}
+			for (FeatureChange featureChange : entry.getValue()) {
+				fcList.add(featureChange);
+			}
+		}
+		addCoreClassesToList(domain.getRequired(), listOfCoreClassesToInterpret);
+		addCoreClassesToList(domain.getCreate(), listOfCoreClassesToInterpret);
+		addCoreClassesToList(domain.getSemiRequired(), listOfCoreClassesToInterpret);
+	}
+
+	public void addNextElement(CoreClass coreClass, EObject nextEObject) {
+		// TODO working with listOfCoreClassesToInterpret instead of
+		// mapOfObjectsToChange
+		if (mapOfObjectsToChange.get(nextEObject) != null) {
+			// this object is not interpreted yet
+			mapOfNextElements.put(nextEObject, coreClass);
+			addCoreEObjectToMap(coreClass.getName(), nextEObject);
+		}
+	}
+
+	public void showInfo() {
+		System.out.println("\nMapping in the dependencies");
+		for (Iterator<String> it = coreClassesMap.keySet().iterator(); it.hasNext();) {
+			String coreClassName = it.next();
+			System.out.println(coreClassName + " is mapped to " + coreClassesMap.get(coreClassName).eClass().getName());
+		}
+
+	}
+
+	public EObject getSharedBaseCore(CoreClass coreClass) {
+		Set<CoreClass> coreClasses = getSynchronizedCoreClassesWithSharedRole(coreClass);
+		// find the first core class with the common base core
+		EList<EClass> superTypes = coreClass.getType().getESuperTypes();
+		for (CoreClass synchCoreClass : coreClasses) {
+			EObject synchCoreEObject = coreClassesMap.get(synchCoreClass.getName());
+			if (synchCoreEObject != null) {
+				List<EObject> superCores = context.getSuperCores(coreClassesMap.get(synchCoreClass.getName()));
+				for (EObject superCore : superCores) {
+					for (EClass superType : superTypes) {
+						if (superCore.eClass().equals(superType)) {
+							return superCore;
 						}
-						if (coreClass!=null){
-							mapOfNextElements.put(eObject,coreClass);
-							//TODO map to the coreClassesMap too, but this map should contains only correct mappings 
-							coreClassesMap.put(coreClass.getName(), eObject);
-						}
-						else return false;
 					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private Set<CoreClass> getSynchronizedCoreClassesWithSharedRole(CoreClass coreClass) {
+		EList<Edge> edges = dependencies.getModelEquivalence().getEdges();
+		Set<CoreClass> coreClasses = new HashSet<CoreClass>();
+		for (Edge edge : edges) {
+			if (edge.getSimpleTerm().getRole() != null) {
+				EList<SimpleTerm> simpleTerms = edge.getRightTerm().getSimpleTerms();
+				if (simpleTerms != null && simpleTerms.size() == 1) {
+					if (edge.getSimpleTerm().getCoreClass().equals(coreClass)) {
+						coreClasses.add(simpleTerms.get(0).getCoreClass());
+					} else if (simpleTerms.get(0).getCoreClass().equals(coreClass)) {
+						coreClasses.add(edge.getSimpleTerm().getCoreClass());
+					}
+				}
+			}
+		}
+		return coreClasses;
+	}
+
+	public void handleSemiRequiredCoreClass(CoreClass coreClass, Domain domain) {
+		Set<CoreClass> synchCoreClasses = getSynchronizedCoreClasses(coreClass);
+		EObject coreEObject = null;
+		if (synchCoreClasses.size() > 0) {
+			// search for existed core class
+			for (CoreClass synchCoreClass : synchCoreClasses) {
+				// search in the trace links, if it is available it is already
+				// in the domain root
+				coreEObject = searchInTheTraceLinks(coreClass, coreClassesMap.get(synchCoreClass.getName()));
+				if (coreEObject != null) {
+					break;
+				}
+			}
+			if (coreEObject != null) {
+				addCoreEObjectToMap(coreClass.getName(), coreEObject);
+			} else {
+				// it is not available in the trace links, search in the domain
+				// root with the single valued conditions
+				coreEObject = findOrCreateCoreClass(coreClass, domain);
+				for (CoreClass synchCoreClass : synchCoreClasses) {
+					context.addEqualTraceLink(coreEObject, coreClassesMap.get(synchCoreClass.getName()));
+				}
+			}
+		} else {
+			coreEObject = findOrCreateCoreClass(coreClass, domain);
+		}
+		if (coreEObject != null) {
+			addCoreEObjectToMap(coreClass.getName(), coreEObject);
+		}
+	}
+
+	private EObject searchInTheTraceLinks(CoreClass coreClass, EObject synchEObject) {
+		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
+		if (traceLinksDR.getEObjects() != null) {
+			for (EObject link : traceLinksDR.getEObjects()) {
+				if (link instanceof EqualTraceLink) {
+					EqualTraceLink equalTL = (EqualTraceLink) link;
+					EObject coreEObject = null;
+					EObject sourceEObject = equalTL.getSource();
+					EObject targetEOject = equalTL.getTarget();
+					if (sourceEObject.equals(synchEObject)
+							&& targetEOject.eClass().equals(coreClass.getType())) {
+						coreEObject = targetEOject;
+					}
+					if (targetEOject.equals(synchEObject)
+							&& sourceEObject.eClass().equals(coreClass.getType())) {
+						coreEObject = sourceEObject;
+					}
+					// validate the constraints
+					if (coreEObject != null && isValid(coreEObject, coreClass)) {
+						return coreEObject;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private boolean isValid(EObject coreEObject, CoreClass coreClass) {
+		// check only single valued attribute
+		EList<Edge> edges = coreClass.getEdges();
+		for (Edge edge : edges) {
+			if (edge.getRightTerm().getValue() != null) {
+				boolean validEdge = false;
+				EClass role = edge.getSimpleTerm().getRole();
+				if (role.getEAttributes().size() == 1) {
+					List<EObject> roleList = context.getRoleEObjects(coreEObject, role);
+					// TODO extend the rolecore model the cardinality for roles
+					if (roleList.size() == 1) {
+						EObject roleEObject = roleList.get(0);
+						EAttribute attrib = role.getEAttributes().get(0);
+						Object data = roleEObject.eGet(attrib);
+						// TODO check only on String for now
+						if (data instanceof String && data.equals(edge.getRightTerm().getValue())) {
+							validEdge = true;
+							break;
+						}
+					}
+				}
+				if (!validEdge) {
+					return false;
 				}
 			}
 		}
 		return true;
 	}
 
-	private CoreClass getCoreClassFromBlock(EClass eClass, Block block) {
-		if (block!=null&&block.getCoreClasses()!=null&&block.getCoreClasses().size()>0)
-			for (CoreClass coreClass : block.getCoreClasses()) {
-				if (coreClass.getType().equals(eClass))
-					return coreClass;
+	private EObject findOrCreateCoreClass(CoreClass coreClass, Domain domain) {
+		DomainRoot domainRoot = context.findOrCreateDomainRoot(domain.getName());
+		if (domainRoot.getEObjects() != null) {
+			for (EObject eObject : domainRoot.getEObjects()) {
+				if (coreClass.getType().equals(eObject.eClass()) && isValid(eObject, coreClass)) {
+					System.out.println("Found " + eObject.eClass().getName() + " in domain root "
+							+ domainRoot.getName());
+					return eObject;
+				}
 			}
-		return null;
+		}
+		// TODO is it possible to add this class to the domain root right here?
+		EObject coreEObject = context.createCoreClass(coreClass.getType());
+		System.out.println("Create " + coreEObject.eClass().getName());
+		// after creating the single valued attributes have to be set. Only data
+		// attribute for now
+		for (Edge edge : coreClass.getEdges()) {
+			if (edge.isEqual()) {
+				EClass roleEClass = edge.getSimpleTerm().getRole();
+				String featureName = roleEClass.getEAttributes().get(0).getName();
+				context.addRoleToCore(coreEObject, roleEClass, edge.getRightTerm().getValue(), featureName);
+				// TODO remove
+				System.out.println("The role " + roleEClass.getName() + " is added to the semi required core class "
+						+ coreClass.getName() + " with the value \"" + edge.getRightTerm().getValue() + "\"");
+			}
+		}
+		return coreEObject;
 	}
 
-	public boolean addNextElementsFromCreate(Domain domain) {
-		if(mapOfObjectsToChange.size()==0)
+	public void setAttributesAndCreateReferences(Domain domain) {
+		List<CoreClass> coreClassList = new ArrayList<CoreClass>();
+		addCoreClassesToList(domain.getRequired(), coreClassList);
+		addCoreClassesToList(domain.getSemiRequired(), coreClassList);
+		addCoreClassesToList(domain.getCreate(), coreClassList);
+		for (CoreClass coreClass : coreClassList) {
+			EObject coreEObject = coreClassesMap.get(coreClass.getName());
+			for (Edge edge : coreClass.getEdges()) {
+				EClass roleEClass = edge.getSimpleTerm().getRole();
+				if (isMany(coreEObject.eClass(), roleEClass, domain)) {
+					addDataToRole(coreEObject, roleEClass, edge);
+				} else if (coreClass.eContainer() instanceof Create) {
+					// assumed the trace link roles are set, handle only normal
+					// edges now
+					// TODO set the trace link roles at creating
+					if (!existAssignmentTraceLink(roleEClass)) {
+						addDataToRole(coreEObject, roleEClass, edge);
+					}
+				}
+			}
+		}
+	}
+
+	private void addDataToRole(EObject coreEObject, EClass roleEClass, Edge edge) {
+		if (edge.isReferredTo()) {
+			String referredCoreName = edge.getRightTerm().getSimpleTerms().get(0).getCoreClass().getName();
+			EObject referredCore = coreClassesMap.get(referredCoreName);
+			context.addRoleToCore(coreEObject, roleEClass, referredCore);
+
+			// TODO remove
+			System.out.println("Added role " + roleEClass.getName() + " to the core "
+					+ ((CoreClass) edge.eContainer()).getName() + " with the referred core " + referredCoreName);
+		}
+		if (edge.isEqual()) {
+			context.addRoleToCore(coreEObject, roleEClass, edge.getRightTerm().getValue());
+			// TODO remove
+			System.out.println("Added role " + roleEClass.getName() + " to the core "
+					+ ((CoreClass) edge.eContainer()).getName() + " with the value " + edge.getRightTerm().getValue());
+		}
+	}
+
+	private boolean existAssignmentTraceLink(EClass roleEClass) {
+		if (dependencies.getModelEquivalence() == null || dependencies.getModelEquivalence().getEdges().size() == 0) {
 			return false;
-		Entry<EObject, EList<FeatureChange>> entry = mapOfObjectsToChange.get(0);
-		CoreClass coreClass = getCoreClassFromBlock(entry.getKey().eClass(), domain.getRequired());
-		if (coreClass!=null)
-			mapOfNextElements.put(entry.getKey(), coreClass);
+		}
+		for (Edge edge : dependencies.getModelEquivalence().getEdges()) {
+			if (edge.isEqual()) {
+				if (edge.getSimpleTerm().getRole() != null && edge.getSimpleTerm().getRole().equals(roleEClass)) {
+					return true;
+				}
+				for (SimpleTerm simpleTerm : edge.getRightTerm().getSimpleTerms()) {
+					if (simpleTerm.getRole() != null && simpleTerm.getRole().equals(roleEClass)) {
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 
-	public EMap<EObject,CoreClass> getMapOfNextElements() {
-		return mapOfNextElements;
+	private boolean isMany(EClass coreEClass, EClass roleEClass, Domain domain) {
+		// assumed every role has only one direct structural feature
+		String featureName = roleEClass.getEStructuralFeatures().get(0).getName();
+		String interfaceName = coreEClass.getName().substring(0, coreEClass.getName().lastIndexOf("Core"));
+		EClass rcCore = null;
+		for (EClass core : domain.getRcPackage().getCoreClasses()) {
+			if (core.getName().equals(interfaceName)) {
+				rcCore = core;
+				break;
+			}
+		}
+		if (rcCore == null) {
+			return false;
+		}
+		EStructuralFeature feature = rcCore.getEStructuralFeature(featureName);
+		if (feature == null) {
+			// TODO this role is not a reference role, therefore look up the
+			// cardinality of the role, which is not supported right now
+			return false;
+		}
+		return feature.isMany();
 	}
 
+	private Object getRoleData(EObject roleEObject, EClass referencedType) {
+		if (referencedType != null) {
+			EList<EReference> references = roleEObject.eClass().getEReferences();
+			for (EReference eReference : references) {
+				if (!eReference.equals(context.getCoreStructuralFeature())
+						&& eReference.getEType().equals(referencedType)) {
+					return roleEObject.eGet(eReference);
+				}
+			}
+		} else {
+			EAttribute attrib = roleEObject.eClass().getEAllAttributes().get(0);
+			return roleEObject.eGet(attrib);
+		}
+		return null;
+	}
+
+	public void addObjectsToRootDomain(Domain domain) {
+		Set<EObject> eObjects = new HashSet<EObject>();
+		DomainRoot domainRoot = context.findOrCreateDomainRoot(domain.getName());
+		String modelPrefix = domain.getModelPackage().getNsPrefix();
+		if (domain.getSemiRequired() != null) {
+			for (CoreClass coreClass : domain.getSemiRequired().getCoreClasses()) {
+				context.addEObjectsWithoutContainer(coreClassesMap.get(coreClass.getName()), eObjects);
+			}
+		}
+		if (domain.getCreate() != null) {
+			for (CoreClass coreClass : domain.getCreate().getCoreClasses()) {
+				context.addEObjectsWithoutContainer(coreClassesMap.get(coreClass.getName()), eObjects);
+			}
+		}
+		for (Iterator<EObject> iterator = eObjects.iterator(); iterator.hasNext();) {
+			EObject eObject = (EObject) iterator.next();
+			String nsPrefix = eObject.eClass().getEPackage().getNsPrefix();
+			if (modelPrefix.equals(nsPrefix)){
+				domainRoot.getEObjects().add(eObject);
+				// TODO remove
+				//System.out.println("Add " + eObject.eClass().getName() + " to domain root " + domain.getName());
+			}
+			else {
+				context.findOrCreateDomainRoot(nsPrefix).getEObjects().add(eObject);
+				// TODO remove
+				//System.out.println("Add " + eObject.eClass().getName() + " to domain root " + nsPrefix);
+			}
+		}
+	}
 }
