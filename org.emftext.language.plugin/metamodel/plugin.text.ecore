@@ -1,37 +1,36 @@
 package plugin  plugin  "http://org.emftext.languages/plugin"  { 
 
-	 class ToolProductFamily  { 
-			  unique ordered  changeable   attribute EString  name  ( 1 .. 1 ) ; 
-			containment    unique ordered  changeable resolveProxies reference Plugin  plugins  ( 1 .. -1 ) ; 
-			containment    unique ordered  changeable resolveProxies reference RequiredPlugins  requiredPlugins  ( 1 .. 1 ) ; 
+	class ToolProductFamily { 
+			unique ordered attribute EString  name  ( 1 .. 1 ) ; 
+			containment unique ordered resolveProxies reference Plugin  plugins  ( 1 .. -1 ) ; 
+			containment unique ordered resolveProxies reference RequiredPlugins  requiredPlugins  ( 1 .. 1 ) ; 
 	} 
 	
-	 class RequiredPlugins  { 
-			containment    unique ordered  changeable resolveProxies reference Plugin  required  ( 1 .. -1 ) ; 
+	class RequiredPlugins { 
+			containment unique ordered resolveProxies reference Plugin  required  ( 1 .. -1 ) ; 
 	} 
 	
-	 class Plugin  { 
-			  unique ordered  changeable  iD attribute EString  pluginId  ( 1 .. 1 ) ; 
-			  unique ordered  changeable   attribute EString  name  ( 1 .. 1 ) ; 
-			  unique ordered  changeable   attribute EString  version  ( 1 .. 1 ) ; 
-			  unique ordered  changeable   attribute EString  supplier  ( 1 .. 1 ) ; 
-			    unique ordered  changeable resolveProxies reference Plugin  requiredPlugins  ( 0 .. -1 ) ; 
-			containment    unique ordered  changeable resolveProxies reference ExtensionPoint  extensionPoints  ( 0 .. -1 )  opposite definedIn ; 
-			containment    unique ordered  changeable resolveProxies reference Extension  extensions  ( 1 .. -1 ) ; 
+	class Plugin { 
+			unique ordered iD attribute EString  pluginId  ( 1 .. 1 ) ; 
+			unique ordered attribute EString  name  ( 1 .. 1 ) ; 
+			unique ordered attribute EString  version  ( 1 .. 1 ) ; 
+			unique ordered attribute EString  supplier  ( 1 .. 1 ) ; 
+			unique ordered resolveProxies reference Plugin  requiredPlugins  ( 0 .. -1 ) ; 
+			containment unique ordered  resolveProxies reference ExtensionPoint  extensionPoints  ( 0 .. -1 )  opposite definedIn ; 
+			containment unique ordered  resolveProxies reference Extension  extensions  ( 1 .. -1 ) ; 
 	} 
 	
-	 class ExtensionPoint  { 
-			  unique ordered  changeable   attribute EString  name  ( 1 .. 1 ) ; 
-			  unique ordered  changeable  iD attribute EString  extensionPointId  ( 1 .. 1 ) ; 
-			  unique ordered  changeable   attribute EString  schema  ( 0 .. 1 ) ; 
-			    unique ordered  changeable resolveProxies reference Plugin  definedIn  ( 1 .. 1 )  opposite extensionPoints ; 
-			    unique ordered  changeable resolveProxies reference Extension  boundBy  ( 0 .. -1 )  opposite binds ; 
+	class ExtensionPoint { 
+			unique ordered attribute EString  name  ( 1 .. 1 ) ; 
+			unique ordered iD attribute EString  extensionPointId  ( 1 .. 1 ) ; 
+			unique ordered attribute EString  schema  ( 0 .. 1 ) ; 
+			unique ordered resolveProxies reference Plugin  definedIn  ( 1 .. 1 )  opposite extensionPoints ; 
+			unique ordered resolveProxies reference Extension  boundBy  ( 0 .. -1 )  opposite binds ; 
 	} 
 	
-	 class Extension  { 
-			  unique ordered  changeable  iD attribute EString  name  ( 1 .. 1 ) ; 
-			  unique ordered  changeable   attribute EString  extensionId  ( 1 .. 1 ) ; 
-			    unique ordered  changeable resolveProxies reference ExtensionPoint  binds  ( 1 .. 1 )  opposite boundBy ; 
+	class Extension { 
+			unique ordered iD attribute EString  name  ( 1 .. 1 ) ; 
+			unique ordered attribute EString  extensionId  ( 1 .. 1 ) ; 
+			unique ordered resolveProxies reference ExtensionPoint  binds  ( 1 .. 1 )  opposite boundBy ; 
 	} 
-	
 } 
