@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.ChangeFactory;
@@ -26,6 +25,8 @@ import org.emftext.language.rolecore.blockdomain.BlockdomainPackage;
 import org.emftext.language.rolecore.blockdomain.SystemBlock;
 import org.emftext.language.rolecore.classdomain.ClassDiagram;
 import org.emftext.language.rolecore.classdomain.ClassdomainFactory;
+import org.emftext.language.rolecore.classdomain.ClassdomainPackage;
+import org.emftext.language.rolecore.classdomain.Stereotype;
 import org.emftext.language.rolecore.dependencies.interpreter.DomainRoot;
 import org.emftext.language.rolecore.dependencies.interpreter.InterpretationContext;
 import org.emftext.language.rolecore.dependencies.interpreter.InterpreterPackage;
@@ -124,8 +125,24 @@ public class ChangeDescriptionCreator {
 	}
 
 	private void addRoleToCoreAndReverse(EObject role, EObject core, ChangeDescription changeDescription) {
-		addRoleToCore(role, core, changeDescription);
-		addCoreToRole(core, role, changeDescription);
+		EClass playCoreEClass = context.getCoreEClassOf(role.eClass());
+		EObject playCoreEObject = null;
+		if (core.eClass().equals(playCoreEClass)) {
+			playCoreEObject = core;
+		} else {
+			List<EObject> superCores = context.getSuperCores(core);
+			for (EObject eObject : superCores) {
+				if (eObject.eClass().equals(playCoreEClass)) {
+					playCoreEObject = eObject;
+					break;
+				}
+			}
+		}
+		if (playCoreEObject == null) {
+			return;
+		}
+		addRoleToCore(role, playCoreEObject, changeDescription);
+		addCoreToRole(playCoreEObject, role, changeDescription);
 	}
 
 	public ChangeDescription createAddClassDiagram(String domainName) {
@@ -232,19 +249,67 @@ public class ChangeDescriptionCreator {
 		// add SystemBlock to DomainRoot
 		addCoreToDomainRoot(dr, sb, cd);
 		// add role Name to SystemBlock and SystemBlock to role Name
-		EObject modelElementCore = getSuperCore(sb, BlockclassbasePackage.eINSTANCE.getModelElementCore());
-		addRoleToCoreAndReverse(name, modelElementCore, cd);
 		// set attribute Name
-		addAttributeToRole(name, "ProSys", cd);
+		EObject modelElementCore = getSuperCore(sb, BlockclassbasePackage.eINSTANCE.getModelElementCore());
+		addRoleAndDataTypeToCore(modelElementCore, name, "ProSys", cd);
 		// add ModelelementBlockdiagramRole to SystemBlock and reverse
-		addRoleToCoreAndReverse(mebdRole, modelElementCore, cd);
 		// add BlockDiagram to ModelelementBlockdiagramRole
-		addReferenceToRole(mebdRole, bd, cd);
+		addRoleAndReferenceCoreToCore(modelElementCore, mebdRole, bd, cd);
 		// add BlockdiagramElementsRole to BlockDiagram
-		addRoleToCoreAndReverse(bdeRole, bd, cd);
 		// add SystemBlock to BlockdiagramElementsRole
-		addReferenceToRole(bdeRole, sb, cd);
+		addRoleAndReferenceCoreToCore(bd, bdeRole, sb, cd);
 		return cd;
+	}
+
+	public ChangeDescription createClassTypeSystem(String domainName) {
+		DomainRoot dr = context.findOrCreateDomainRoot(domainName);
+		ClassDiagram classDiagram = null;
+		for (EObject eObject : dr.getEObjects()) {
+			if (eObject instanceof ClassDiagram) {
+				classDiagram = (ClassDiagram) eObject;
+				break;
+			}
+		}
+		Stereotype stereotype = (Stereotype) context.createCoreClass(ClassdomainPackage.eINSTANCE.getStereotypeCore());
+		org.emftext.language.rolecore.classdomain.Class classEObject = (org.emftext.language.rolecore.classdomain.Class) context
+				.createCoreClass(ClassdomainPackage.eINSTANCE.getClassCore());
+		Name name = BlockclassbaseFactory.eINSTANCE.createName();
+		EObject classDiagramElementsRole = ClassdomainFactory.eINSTANCE.createClassdiagramElementsRole();
+		EObject stereotypeName = BlockclassbaseFactory.eINSTANCE.createName();
+		EObject modelElementClassDiagramRole = BlockclassbaseFactory.eINSTANCE.createModelelementClassdiagramRole();
+		EObject modelElementStereotypeRole = BlockclassbaseFactory.eINSTANCE.createModelelementStereotypeRole();
+
+		ChangeDescription cd = ChangeFactory.eINSTANCE.createChangeDescription();
+		// add Class to DomainRoot
+		addCoreToDomainRoot(dr, classEObject, cd);
+		// add role Name to Class and vice versa
+		// set attribute Name
+		//EObject modelElementCore = getSuperCore(classEObject, BlockclassbasePackage.eINSTANCE.getModelElementCore());
+		addRoleAndDataTypeToCore(classEObject, name, "ProSys", cd);
+		// add ModelelementClassdiagramRole to Class and reverse
+		// add ClassDiagram to ModelElementClassDiagramRole
+		addRoleAndReferenceCoreToCore(classEObject, modelElementClassDiagramRole, classDiagram, cd);
+		// add ModelelementStereotypeRole to Class and reverse
+		// add Stereotype to ModelElementStereotypeRole
+		addRoleAndReferenceCoreToCore(classEObject, modelElementStereotypeRole, stereotype, cd);
+		// add ClassDiagramElementsRole to ClassDiagram and reverse
+		// add Class to ClassDiagramElementsRole
+		addRoleAndReferenceCoreToCore(classDiagram, classDiagramElementsRole, classEObject, cd);
+		// add name for Stereotype
+		addRoleAndDataTypeToCore(stereotype, stereotypeName, "system", cd);
+		return cd;
+	}
+
+	private void addRoleAndDataTypeToCore(EObject coreEObject, EObject role, String data,
+			ChangeDescription changeDescription) {
+		addRoleToCoreAndReverse(role, coreEObject, changeDescription);
+		addAttributeToRole(role, data, changeDescription);
+	}
+
+	private void addRoleAndReferenceCoreToCore(EObject coreEObject, EObject roleEObject, EObject referenceCoreEObject,
+			ChangeDescription changeDescription) {
+		addRoleToCoreAndReverse(roleEObject, coreEObject, changeDescription);
+		addReferenceToRole(roleEObject, referenceCoreEObject, changeDescription);
 	}
 
 	/**

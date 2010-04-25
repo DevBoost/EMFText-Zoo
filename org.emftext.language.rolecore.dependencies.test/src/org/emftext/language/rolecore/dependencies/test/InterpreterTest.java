@@ -5,10 +5,13 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.ChangePackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -68,7 +71,10 @@ public class InterpreterTest extends TestCase {
 		dependencies = new ArrayList<Graph>();
 	}
 
-	public void testAddCustomer() {
+	/**
+	 * Simple checking for two objects of the same type
+	 */
+	public void distestAddCustomer() {
 		// load instance models
 		Resource customerAResource = context.loadResource(inputURI + "customersA.xmi");
 		Resource customerBResource = context.loadResource(inputURI + "customersB.xmi");
@@ -113,7 +119,10 @@ public class InterpreterTest extends TestCase {
 		assertEquals(customerB, equalTraceLink.getTarget());
 	}
 
-	public void testAddClassDiagram() {
+	/**
+	 * Simple checking for two objects of different type
+	 */
+	public void distestAddClassDiagram() {
 		// load dependency models
 		// TODO add more dependencies
 		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
@@ -151,6 +160,14 @@ public class InterpreterTest extends TestCase {
 		assertEquals(classDiagram, equalTraceLink.getTarget());
 	}
 	
+	/**
+	 * <ul>
+	 * <li>Add system block w/o container</li>
+	 * <li>Create Stereotype if not available</li>
+	 * <li>Get class diagram through trace link</li>
+	 * <li>Use same base ModelElement for system block and class</li>
+	 * </ul>
+	 */
 	public void testAddSystemBlock(){
 		//load resources
 		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
@@ -172,8 +189,42 @@ public class InterpreterTest extends TestCase {
 			System.out.println("Synchronization is successful!");
 		}
 		// save domain roots to output, there is a base resource
-		saveDomainRootsToResources(context, outputURI, "Scene02");
+		saveDomainRootsToResources(context, outputURI, "Scene02A");
 		// check result
+		checkResults4SystemBlock();
+	}
+
+	/**
+	 * Test the inverted way of testAddSystemBlock and the indirect Roles.
+	 * Results must be the same like testAddSystemBlock
+	 */
+	public void testAddSystemClass(){
+		//load resources
+		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene02TraceLinks.xmi"));
+		// load dependency models
+		// TODO test more dependencies
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
+				.get(0));
+		context.setDependencies(dependencies);
+		// create change in memory (http://www.eclipse.org/emf/2003/Change)
+		// domain name is in the dependencies
+		ChangeDescription addSystemClassDC = cdCreator.createClassTypeSystem("classDomain");
+		// execute interpreter
+		Interpreter interpreter = new Interpreter();
+		if (interpreter.interprete(addSystemClassDC, context)) {
+			System.out.println("Synchronization is successful!");
+		}
+		// save domain roots to output, there is a base resource
+		saveDomainRootsToResources(context, outputURI, "Scene02B");
+		// check result
+		checkResults4SystemBlock();
+	}
+
+	private void checkResults4SystemBlock() {
 		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
 		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
 		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
@@ -195,7 +246,7 @@ public class InterpreterTest extends TestCase {
 		EObject systemBlockName = getRoleOf(systemBlock, name);
 		assertEquals(className, systemBlockName);
 	}
-
+	
 	private EObject getSynchronizedObject(EObject coreEObject, DomainRoot traceLinksDR) {
 		for (EObject eObject : traceLinksDR.getEObjects()) {
 			if(eObject instanceof EqualTraceLink){
