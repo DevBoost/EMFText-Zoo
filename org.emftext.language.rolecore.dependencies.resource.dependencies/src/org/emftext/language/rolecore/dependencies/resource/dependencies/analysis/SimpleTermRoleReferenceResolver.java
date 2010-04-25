@@ -60,9 +60,9 @@ public class SimpleTermRoleReferenceResolver
 				}
 			}
 		}
-		for (EClass eClass : coreEClass.getESuperTypes()) {
-			if (eClass.getName().endsWith("Core")&&!eClass.getName().equals("RCCore")){
-				resolveFuzzyRole(eClass, identifier, result);
+		for (EClass superTypeEClass : coreEClass.getESuperTypes()) {
+			if (superTypeEClass.getName().endsWith("Core")&&!superTypeEClass.getName().equals("RCCore")){
+				resolveFuzzyRole(superTypeEClass, identifier, result);
 			}
 		}
 	}

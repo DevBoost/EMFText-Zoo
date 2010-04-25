@@ -9,12 +9,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import javax.sound.sampled.ReverbType;
-
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -23,8 +20,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeKind;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.language.rolecore.RCPackage;
 import org.emftext.language.rolecore.dependencies.Block;
 import org.emftext.language.rolecore.dependencies.CoreClass;
 import org.emftext.language.rolecore.dependencies.Create;
@@ -50,6 +45,10 @@ public class CreatingHelpClass {
 		mapOfNextElements = new BasicEMap<EObject, CoreClass>(10);
 		listOfCoreClassesToInterpret = new ArrayList<CoreClass>();
 		this.context = context;
+	}
+
+	public List<CoreClass> getListOfCoreClassesToInterpret() {
+		return listOfCoreClassesToInterpret;
 	}
 
 	private void addCoreClassesToList(Block block, List<CoreClass> coreClassList) {
@@ -307,11 +306,14 @@ public class CreatingHelpClass {
 		addCoreClassesToList(domain.getSemiRequired(), listOfCoreClassesToInterpret);
 	}
 
+	/**
+	 * The next element can be added if the <code>listOfCoreClassesToInterpret</code> contains it.
+	 * Interpreted elements can not be interpret again.
+	 * @param coreClass
+	 * @param nextEObject
+	 */
 	public void addNextElement(CoreClass coreClass, EObject nextEObject) {
-		// TODO working with listOfCoreClassesToInterpret instead of
-		// mapOfObjectsToChange
-		if (mapOfObjectsToChange.get(nextEObject) != null) {
-			// this object is not interpreted yet
+		if (listOfCoreClassesToInterpret.contains(coreClass)) {
 			mapOfNextElements.put(nextEObject, coreClass);
 			addCoreEObjectToMap(coreClass.getName(), nextEObject);
 		}
@@ -329,7 +331,7 @@ public class CreatingHelpClass {
 	public EObject getSharedBaseCore(CoreClass coreClass) {
 		Set<CoreClass> coreClasses = getSynchronizedCoreClassesWithSharedRole(coreClass);
 		// find the first core class with the common base core
-		EList<EClass> superTypes = coreClass.getType().getESuperTypes();
+		EList<EClass> superTypes = coreClass.getType().getEAllSuperTypes();
 		for (CoreClass synchCoreClass : coreClasses) {
 			EObject synchCoreEObject = coreClassesMap.get(synchCoreClass.getName());
 			if (synchCoreEObject != null) {
@@ -377,9 +379,7 @@ public class CreatingHelpClass {
 					break;
 				}
 			}
-			if (coreEObject != null) {
-				addCoreEObjectToMap(coreClass.getName(), coreEObject);
-			} else {
+			if (coreEObject == null) {
 				// it is not available in the trace links, search in the domain
 				// root with the single valued conditions
 				coreEObject = findOrCreateCoreClass(coreClass, domain);
@@ -414,6 +414,8 @@ public class CreatingHelpClass {
 					}
 					// validate the constraints
 					if (coreEObject != null && isValid(coreEObject, coreClass)) {
+						//TODO remove
+						System.out.println("Found " + coreClass.getName() + " in the trace links");
 						return coreEObject;
 					}
 				}
@@ -605,6 +607,17 @@ public class CreatingHelpClass {
 				context.findOrCreateDomainRoot(nsPrefix).getEObjects().add(eObject);
 				// TODO remove
 				//System.out.println("Add " + eObject.eClass().getName() + " to domain root " + nsPrefix);
+			}
+		}
+	}
+
+	public void addImplicitEdges(CoreClass coreClass, List<Edge> edgesToInterpret) {
+		if(dependencies.getModelEquivalence()!=null&& dependencies.getModelEquivalence().getEdges().size()>0){
+			for (Edge edge : dependencies.getModelEquivalence().getEdges()) {
+				SimpleTerm simpleTerm = edge.getSimpleTerm();
+				if(simpleTerm.getCoreClass().equals(coreClass) && simpleTerm.getRole()!=null){
+					edgesToInterpret.add(edge);
+				}
 			}
 		}
 	}

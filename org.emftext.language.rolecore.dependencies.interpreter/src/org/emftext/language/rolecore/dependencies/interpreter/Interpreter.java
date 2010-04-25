@@ -255,41 +255,43 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		// creatingHelpClass.getListOfObjectsToChange().remove(eObject);
 		List<FeatureChange> coreToRolesFC = new ArrayList<FeatureChange>();
 		creatingHelpClass.removeFeatureChangesOf(eObject, coreToRolesFC, true);
+		List<Edge> edgesToInterpret = new ArrayList<Edge>();
 		EList<Edge> edges = object.getEdges();
 		// maximal satisfy - for each the feature change, minimal satisfy - for
 		// each the edges
-		if (edges == null || edges.size() == 0) {
+		if (edges != null && edges.size() > 0) {
 			// TODO if there is no edges but there are feature change for this
 			// object, it should return false
-			return true;
-		}
-		List<Edge> edgesToInterpret = new ArrayList<Edge>();
-		// TODO add more edges which are required not only by the domain, but
-		// implicitly by equivalences
-		for (Edge edge : edges) {
-			edgesToInterpret.add(edge);
-		}
-		for (FeatureChange featureChange : coreToRolesFC) {
-			// TODO validated edges have to take out of the list to prevent
-			// further validation
-			// TODO a core has only a roles feature, but changes for this
-			// feature can be in different feature changes or list changes, have
-			// to cover all this
-			EList<ListChange> listChanges = featureChange.getListChanges();
-			for (ListChange listChange : listChanges) {
-				for (EObject role : listChange.getReferenceValues()) {
-					boolean hasRole = false;
-					for (Edge edge : edgesToInterpret) {
-						context.push(role);
-						if (interprete_org_emftext_language_rolecore_dependencies_Edge(edge, context)) {
-							edgesToInterpret.remove(edge);
-							hasRole = true;
-							System.out.println(" and is from " + eObject.eClass().getName());
-							break;
+			// TODO add more edges which are required not only by the domain,
+			// but
+			// implicitly by equivalences
+			for (Edge edge : edges) {
+				edgesToInterpret.add(edge);
+			}
+			creatingHelpClass.addImplicitEdges(object, edgesToInterpret);
+			for (FeatureChange featureChange : coreToRolesFC) {
+				// TODO validated edges have to take out of the list to prevent
+				// further validation
+				// TODO a core has only a roles feature, but changes for this
+				// feature can be in different feature changes or list changes,
+				// have
+				// to cover all this
+				EList<ListChange> listChanges = featureChange.getListChanges();
+				for (ListChange listChange : listChanges) {
+					for (EObject role : listChange.getReferenceValues()) {
+						boolean hasRole = false;
+						for (Edge edge : edgesToInterpret) {
+							context.push(role);
+							if (interprete_org_emftext_language_rolecore_dependencies_Edge(edge, context)) {
+								edgesToInterpret.remove(edge);
+								hasRole = true;
+								System.out.println(" and is from " + eObject.eClass().getName());
+								break;
+							}
 						}
-					}
-					if (!hasRole) {
-						return false;
+						if (!hasRole) {
+							return false;
+						}
 					}
 				}
 			}
@@ -301,18 +303,21 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		Entry<EObject, CoreClass> entry = creatingHelpClass.popNextElement();
 		if (entry != null) {
 			context.push(entry.getKey());
+			creatingHelpClass.getListOfCoreClassesToInterpret().remove(object);
 			return interprete_org_emftext_language_rolecore_dependencies_CoreClass(entry.getValue(), context);
 		}
 		return true;
 	}
 
+	/**
+	 * This method interpret the direct and indirect edges of a core class only.
+	 * Edges of Equivalences cannot be interpret.
+	 */
 	@Override
 	public Boolean interprete_org_emftext_language_rolecore_dependencies_Edge(Edge object, InterpretationContext context) {
 		System.out.println("Enter interprete Edge");
 		EObject role = (EObject) context.pop();
-		if (object.getSimpleTerm().getCoreClass() == null && object.getSimpleTerm().getRole().equals(role.eClass())) {
-			// TODO after the role is valid, its attribute must be valid,
-			// too and the core will be added to the next elements
+		if (object.getSimpleTerm().getRole().equals(role.eClass())) {
 			List<FeatureChange> featureChanges = new ArrayList<FeatureChange>();
 			context.getCreatingHelpClass().removeFeatureChangesOf(role, featureChanges, false);
 			for (FeatureChange featureChange : featureChanges) {

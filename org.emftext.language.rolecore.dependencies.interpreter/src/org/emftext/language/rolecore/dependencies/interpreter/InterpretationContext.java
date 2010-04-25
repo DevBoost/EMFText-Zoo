@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.ChangeKind;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -117,6 +119,7 @@ public class InterpretationContext {
 				}
 			}
 		}
+		
 	}
 
 	public DomainRoot findOrCreateDomainRoot(String domainName) {
@@ -328,7 +331,7 @@ public class InterpretationContext {
 		return addRoleToCore(coreEObject, roleEClass, object, featureName);
 	}
 
-	private EClass getCoreEClassOf(EClass role) {
+	public EClass getCoreEClassOf(EClass role) {
 		EList<EClass> superTypes = role.getESuperTypes();
 		EClass abstractRole = null;
 		for (EClass eClass : superTypes) {
