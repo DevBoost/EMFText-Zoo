@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -64,21 +65,9 @@ public class RolecoreCompiler {
 
 	public IStatus process(final List<EObject> contents) {
 		Resource interfacesResource = null;
-		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform
-				.getBundle("org.emftext.language.rolecore.ecore_compiler");
-		try {
-			interfacesResource = loadResource(URI.createURI(FileLocator.toFileURL(
-					bundle.getEntry("/metamodel/interfaces.ecore")).toString()));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		// TODO find a better way to set the URI relative
-		interfacesResource.setURI(URI.createPlatformPluginURI(
+		interfacesResource = loadResource(URI.createPlatformResourceURI(
 				"org.emftext.language.rolecore.ecore_compiler/metamodel/interfaces.ecore", true));
-
 		interfacesPackage = (EPackage) interfacesResource.getContents().get(0);
-
 		if (contents == null) {
 			return Status.OK_STATUS;
 		}
