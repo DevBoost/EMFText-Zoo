@@ -168,7 +168,7 @@ public class InterpreterTest extends TestCase {
 	 * <li>Use same base ModelElement for system block and class</li>
 	 * </ul>
 	 */
-	public void testAddSystemBlock(){
+	public void distestAddSystemBlock(){
 		//load resources
 		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
 		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
@@ -198,7 +198,7 @@ public class InterpreterTest extends TestCase {
 	 * Test the inverted way of testAddSystemBlock and the indirect Roles.
 	 * Results must be the same like testAddSystemBlock
 	 */
-	public void testAddSystemClass(){
+	public void distestAddSystemClass(){
 		//load resources
 		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
 		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
@@ -245,6 +245,35 @@ public class InterpreterTest extends TestCase {
 		assertNotNull(className);
 		EObject systemBlockName = getRoleOf(systemBlock, name);
 		assertEquals(className, systemBlockName);
+	}
+	
+	public void testAddBlock(){
+		//load resources
+		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
+		// load dependency models
+		// TODO test more dependencies
+//		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
+//				.get(0));
+//		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
+//				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
+				.get(0));
+		context.setDependencies(dependencies);
+		// create change in memory (http://www.eclipse.org/emf/2003/Change)
+		// domain name is in the dependencies
+		ChangeDescription addBlockDC = cdCreator.createBlock("blockDomain");
+		// execute interpreter
+		Interpreter interpreter = new Interpreter();
+		if (interpreter.interprete(addBlockDC, context)) {
+			System.out.println("Synchronization is successful!");
+		}
+		// save domain roots to output, there is a base resource
+		saveDomainRootsToResources(context, outputURI, "Scene03");
+		// check result
+		
 	}
 	
 	private EObject getSynchronizedObject(EObject coreEObject, DomainRoot traceLinksDR) {

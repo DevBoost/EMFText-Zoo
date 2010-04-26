@@ -19,11 +19,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.rolecore.blockclassbase.BlockclassbaseFactory;
 import org.emftext.language.rolecore.blockclassbase.BlockclassbasePackage;
 import org.emftext.language.rolecore.blockclassbase.Name;
+import org.emftext.language.rolecore.blockdomain.Block;
 import org.emftext.language.rolecore.blockdomain.BlockDiagram;
+import org.emftext.language.rolecore.blockdomain.BlockDiagramCore;
 import org.emftext.language.rolecore.blockdomain.BlockdomainFactory;
 import org.emftext.language.rolecore.blockdomain.BlockdomainPackage;
 import org.emftext.language.rolecore.blockdomain.SystemBlock;
+import org.emftext.language.rolecore.blockdomain.SystemBlockCore;
 import org.emftext.language.rolecore.classdomain.ClassDiagram;
+import org.emftext.language.rolecore.classdomain.ClassDiagramCore;
 import org.emftext.language.rolecore.classdomain.ClassdomainFactory;
 import org.emftext.language.rolecore.classdomain.ClassdomainPackage;
 import org.emftext.language.rolecore.classdomain.Stereotype;
@@ -96,8 +100,7 @@ public class ChangeDescriptionCreator {
 		// assume the core existed in the resource, no add to change description
 	}
 
-	// TODO test
-	private void addReferenceToRole(EObject role, EObject referenceCore, ChangeDescription changeDescription) {
+	private void addReferenceCoreToRole(EObject role, EObject referenceCore, ChangeDescription changeDescription) {
 		Entry<EObject, EList<FeatureChange>> entry = ChangeFactory.eINSTANCE.createEObjectToChangesMapEntry(role);
 		FeatureChange featureChange = ChangeFactory.eINSTANCE.createFeatureChange();
 		// ListChange listChange = ChangeFactory.eINSTANCE.createListChange();
@@ -110,6 +113,12 @@ public class ChangeDescriptionCreator {
 		if (referenceCore.eContainer() == null) {
 			changeDescription.getObjectsToAttach().add(referenceCore);
 		}
+		List<EObject> superCores = context.getSuperCores(referenceCore);
+		for (EObject eObject : superCores) {
+			if (eObject.eContainer() == null){
+				changeDescription.getObjectsToAttach().add(eObject);
+			}
+		}
 	}
 
 	private void addRoleToCore(EObject role, EObject core, ChangeDescription changeDescription) {
@@ -121,7 +130,9 @@ public class ChangeDescriptionCreator {
 		featureChange.setFeature(context.getRolesStructuralFeature());
 		featureChange.getListChanges().add(listChange);
 		listChange.getReferenceValues().add(role);
-		changeDescription.getObjectsToAttach().add(role);
+		if (role.eContainer()==null){
+			changeDescription.getObjectsToAttach().add(role);
+		}
 	}
 
 	private void addRoleToCoreAndReverse(EObject role, EObject core, ChangeDescription changeDescription) {
@@ -235,7 +246,7 @@ public class ChangeDescriptionCreator {
 		DomainRoot dr = context.findOrCreateDomainRoot(domainName);
 		BlockDiagram bd = null;
 		for (EObject eObject : dr.getEObjects()) {
-			if (eObject instanceof BlockDiagram) {
+			if (eObject instanceof BlockDiagramCore) {
 				bd = (BlockDiagram) eObject;
 				break;
 			}
@@ -265,7 +276,7 @@ public class ChangeDescriptionCreator {
 		DomainRoot dr = context.findOrCreateDomainRoot(domainName);
 		ClassDiagram classDiagram = null;
 		for (EObject eObject : dr.getEObjects()) {
-			if (eObject instanceof ClassDiagram) {
+			if (eObject instanceof ClassDiagramCore) {
 				classDiagram = (ClassDiagram) eObject;
 				break;
 			}
@@ -299,6 +310,39 @@ public class ChangeDescriptionCreator {
 		addRoleAndDataTypeToCore(stereotype, stereotypeName, "system", cd);
 		return cd;
 	}
+	
+	public ChangeDescription createBlock(String domainName) {
+		DomainRoot dr = context.findOrCreateDomainRoot(domainName);
+		BlockDiagram bd = null;
+		SystemBlock container = null;
+		for (EObject eObject : dr.getEObjects()) {
+			if (eObject instanceof BlockDiagramCore) {
+				bd = (BlockDiagram) eObject;
+			}
+			if (eObject instanceof SystemBlockCore){
+				container = (SystemBlock) eObject;
+			}
+		}
+		Block block = (Block) context.createCoreClass(BlockdomainPackage.eINSTANCE.getBlockCore());
+		EObject blockChildrenRole = BlockdomainFactory.eINSTANCE.createBlockChildrenRole();
+		EObject connectableContainerRole = BlockdomainFactory.eINSTANCE.createConnectableContainerRole();
+		Name name = BlockclassbaseFactory.eINSTANCE.createName();
+		EObject mebdRole = BlockclassbaseFactory.eINSTANCE.createModelelementBlockdiagramRole();
+		EObject bdeRole = BlockdomainFactory.eINSTANCE.createBlockdiagramElementsRole();
+
+		ChangeDescription cd = ChangeFactory.eINSTANCE.createChangeDescription();
+		// associate container and child
+		addRoleAndReferenceCoreToCore(container, blockChildrenRole, block, cd);
+		// add a Name for Block
+		addRoleAndDataTypeToCore(block, name, "Station", cd);
+		// add a block diagram to block
+		addRoleAndReferenceCoreToCore(block, mebdRole, bd, cd);
+		// add container
+		addRoleAndReferenceCoreToCore(block, connectableContainerRole, container, cd);
+		// add block to block diagram
+		addRoleAndReferenceCoreToCore(bd, bdeRole, block, cd);
+		return cd;
+	}
 
 	private void addRoleAndDataTypeToCore(EObject coreEObject, EObject role, String data,
 			ChangeDescription changeDescription) {
@@ -309,7 +353,7 @@ public class ChangeDescriptionCreator {
 	private void addRoleAndReferenceCoreToCore(EObject coreEObject, EObject roleEObject, EObject referenceCoreEObject,
 			ChangeDescription changeDescription) {
 		addRoleToCoreAndReverse(roleEObject, coreEObject, changeDescription);
-		addReferenceToRole(roleEObject, referenceCoreEObject, changeDescription);
+		addReferenceCoreToRole(roleEObject, referenceCoreEObject, changeDescription);
 	}
 
 	/**
