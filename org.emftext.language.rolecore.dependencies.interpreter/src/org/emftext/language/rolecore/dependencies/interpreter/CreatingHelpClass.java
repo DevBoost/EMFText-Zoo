@@ -301,9 +301,15 @@ public class CreatingHelpClass {
 				fcList.add(featureChange);
 			}
 		}
-		addCoreClassesToList(domain.getRequired(), listOfCoreClassesToInterpret);
-		addCoreClassesToList(domain.getCreate(), listOfCoreClassesToInterpret);
-		addCoreClassesToList(domain.getSemiRequired(), listOfCoreClassesToInterpret);
+		listOfCoreClassesToInterpret = getAllCoreClasses(domain);
+	}
+
+	private List<CoreClass> getAllCoreClasses(Domain domain) {
+		List<CoreClass> coreClassList = new ArrayList<CoreClass>();
+		addCoreClassesToList(domain.getRequired(), coreClassList);
+		addCoreClassesToList(domain.getCreate(), coreClassList);
+		addCoreClassesToList(domain.getSemiRequired(), coreClassList);
+		return coreClassList;
 	}
 
 	/**
@@ -455,7 +461,7 @@ public class CreatingHelpClass {
 		return true;
 	}
 
-	//TODO fit the sub types, too
+	// TODO fit the sub types, too
 	private EObject findOrCreateCoreClass(CoreClass coreClass, Domain domain) {
 		DomainRoot domainRoot = context.findOrCreateDomainRoot(domain.getName());
 		if (domainRoot.getEObjects() != null) {
@@ -467,7 +473,7 @@ public class CreatingHelpClass {
 				}
 			}
 		}
-		if(coreClass.eContainer() instanceof Required){
+		if (coreClass.eContainer() instanceof Required) {
 			return null;
 		}
 		// TODO is it possible to add this class to the domain root right here?
@@ -588,21 +594,14 @@ public class CreatingHelpClass {
 	}
 
 	public void addObjectsToRootDomain(Domain domain) {
-		Set<EObject> eObjects = new HashSet<EObject>();
+		Set<EObject> eObjectSet = new HashSet<EObject>();
 		DomainRoot domainRoot = context.findOrCreateDomainRoot(domain.getName());
 		String modelPrefix = domain.getModelPackage().getNsPrefix();
-		if (domain.getSemiRequired() != null) {
-			for (CoreClass coreClass : domain.getSemiRequired().getCoreClasses()) {
-				context.addEObjectsWithoutContainer(coreClassesMap.get(coreClass.getName()), eObjects);
-			}
+		List<CoreClass> coreClassList = getAllCoreClasses(domain);
+		for (CoreClass coreClass : coreClassList) {
+			context.addEObjectsWithoutContainer(coreClassesMap.get(coreClass.getName()), eObjectSet);
 		}
-		if (domain.getCreate() != null) {
-			for (CoreClass coreClass : domain.getCreate().getCoreClasses()) {
-				context.addEObjectsWithoutContainer(coreClassesMap.get(coreClass.getName()), eObjects);
-			}
-		}
-		for (Iterator<EObject> iterator = eObjects.iterator(); iterator.hasNext();) {
-			EObject eObject = (EObject) iterator.next();
+		for (EObject eObject : eObjectSet) {
 			String nsPrefix = eObject.eClass().getEPackage().getNsPrefix();
 			if (modelPrefix.equals(nsPrefix)) {
 				domainRoot.getEObjects().add(eObject);

@@ -74,7 +74,7 @@ public class InterpreterTest extends TestCase {
 	/**
 	 * Simple checking for two objects of the same type
 	 */
-	public void distestAddCustomer() {
+	public void testAddCustomer() {
 		// load instance models
 		Resource customerAResource = context.loadResource(inputURI + "customersA.xmi");
 		Resource customerBResource = context.loadResource(inputURI + "customersB.xmi");
@@ -122,7 +122,7 @@ public class InterpreterTest extends TestCase {
 	/**
 	 * Simple checking for two objects of different type
 	 */
-	public void distestAddClassDiagram() {
+	public void testAddClassDiagram() {
 		// load dependency models
 		// TODO add more dependencies
 		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
@@ -168,7 +168,7 @@ public class InterpreterTest extends TestCase {
 	 * <li>Use same base ModelElement for system block and class</li>
 	 * </ul>
 	 */
-	public void distestAddSystemBlock(){
+	public void testAddSystemBlock(){
 		//load resources
 		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
 		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
@@ -198,7 +198,7 @@ public class InterpreterTest extends TestCase {
 	 * Test the inverted way of testAddSystemBlock and the indirect Roles.
 	 * Results must be the same like testAddSystemBlock
 	 */
-	public void distestAddSystemClass(){
+	public void testAddSystemClass(){
 		//load resources
 		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
 		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
@@ -255,10 +255,10 @@ public class InterpreterTest extends TestCase {
 		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
 		// load dependency models
 		// TODO test more dependencies
-//		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-//				.get(0));
-//		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
-//				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
+				.get(0));
 		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
 				.get(0));
 		context.setDependencies(dependencies);

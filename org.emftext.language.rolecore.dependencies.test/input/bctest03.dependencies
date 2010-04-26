@@ -30,17 +30,17 @@ Domain classDomain ModelPackage "http://www.emftext.org/language/rolecore/classd
 						role ModelelementClassdiagramRole => classDiagram; 
 						role ModelelementStereotypeRole => stereotype;
 					)
-		ClassRole containerRole (
-			role ClassroleClassRole => containerClass;
-			role ClassroleSourceRole => containerChild;
-			role ClassroleCardRole => containerCardinality;
+		CRole containerRole (
+			role CroleClassRole => containerClass;
+			role CroleSourceRole => containerChild;
+			role CroleCardRole => containerCardinality;
 		)
 		Cardinality containerCardinality (role CardinalityCardRole => containerRole; role CardString := "1..1";)
 		Association containerChild (role AssociationSourceRole => containerRole; role AssociationTargetRole => childRole;)
-		ClassRole childRole (
-			role ClassroleClassRole => class;
-			role ClassroleTargetRole => containerChild;
-			role ClassroleCardRole => childCardinality;
+		CRole childRole (
+			role CroleClassRole => class;
+			role CroleTargetRole => containerChild;
+			role CroleCardRole => childCardinality;
 		)
 		Cardinality childCardinality (role CardinalityCardRole => childRole; role CardString := "1..1";)
 	}
