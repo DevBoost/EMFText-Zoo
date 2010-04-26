@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.rolecore.dependencies.Block;
 import org.emftext.language.rolecore.dependencies.CoreClass;
 import org.emftext.language.rolecore.dependencies.Domain;
 import org.emftext.language.rolecore.dependencies.Edge;
@@ -166,15 +167,11 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 	private boolean createCoreClassesInDomain(Domain domain, InterpretationContext context) {
 		// TODO remove
 		System.out.println("\nCreating the domain " + domain.getName());
-		// TODO map the Required
-		// create and map SemiRequired
-		if (domain.getSemiRequired() != null) {
-			EList<CoreClass> semiRequiredCoreClasses = domain.getSemiRequired().getCoreClasses();
-			if (semiRequiredCoreClasses != null && semiRequiredCoreClasses.size() > 0) {
-				for (CoreClass coreClass : semiRequiredCoreClasses) {
-					context.getCreatingHelpClass().handleSemiRequiredCoreClass(coreClass, domain);
-				}
-			}
+		if (!handleRequiredBlock(domain.getRequired(), context)) {
+			return false;
+		}
+		if (!handleRequiredBlock(domain.getSemiRequired(), context)) {
+			return false;
 		}
 
 		// create and map Create
@@ -188,6 +185,20 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 
 		// add core classes with no container to the root
 		context.getCreatingHelpClass().addObjectsToRootDomain(domain);
+		return true;
+	}
+
+	private boolean handleRequiredBlock(Block block, InterpretationContext context) {
+		if (block != null) {
+			EList<CoreClass> requiredCoreClasses = block.getCoreClasses();
+			if (requiredCoreClasses != null && requiredCoreClasses.size() > 0) {
+				for (CoreClass coreClass : requiredCoreClasses) {
+					if (!context.getCreatingHelpClass().handleRequiredCoreClass(coreClass, (Domain) block.eContainer())) {
+						return false;
+					}
+				}
+			}
+		}
 		return true;
 	}
 
@@ -251,8 +262,6 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 		// remove from listOfObjectsToChange
 		// the leaf core is not always the core of this role, the feature
 		// changes have to be of all the cores
-		// EList<FeatureChange> coreToRolesFC =
-		// creatingHelpClass.getListOfObjectsToChange().remove(eObject);
 		List<FeatureChange> coreToRolesFC = new ArrayList<FeatureChange>();
 		creatingHelpClass.removeFeatureChangesOf(eObject, coreToRolesFC, true);
 		List<Edge> edgesToInterpret = new ArrayList<Edge>();
@@ -328,22 +337,27 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 							+ featureChange.getDataValue());
 					return true;
 				}
-				if (object.isReferredTo() && featureChange.getReferenceValue() != null) {
+				if (object.isReferredTo() && featureChange.getFeature() != context.getCoreStructuralFeature()
+						&& featureChange.getReferenceValue() != null) {
 					EObject nextEObject = featureChange.getReferenceValue();
 					EList<SimpleTerm> simpleTerms = object.getRightTerm().getSimpleTerms();
 					if (simpleTerms != null && simpleTerms.size() > 0) {
 						SimpleTerm simpleTerm = simpleTerms.get(0);
 						if (simpleTerm.getRole() == null && simpleTerm.getCoreClass() != null) {
 							EClass coreEClass = simpleTerm.getCoreClass().getType();
-							if (coreEClass.equals(nextEObject.eClass())) {
-								// add to the next element if it was not
-								// interpreted
-								CreatingHelpClass creatingHelpClass = context.getCreatingHelpClass();
-								creatingHelpClass.addNextElement(simpleTerm.getCoreClass(), nextEObject);
-								// TODO remove
-								System.out.print("\tRole " + role.eClass().getName() + " refers to "
-										+ nextEObject.eClass().getName());
-								return true;
+							List<EObject> superCores = context.getSuperCores(nextEObject);
+							superCores.add(0, nextEObject);
+							for (EObject eObject : superCores) {
+								if (coreEClass.equals(eObject.eClass())) {
+									// add to the next element if it was not
+									// interpreted
+									CreatingHelpClass creatingHelpClass = context.getCreatingHelpClass();
+									creatingHelpClass.addNextElement(simpleTerm.getCoreClass(), nextEObject);
+									// TODO remove
+									System.out.print("\tRole " + role.eClass().getName() + " refers to "
+											+ nextEObject.eClass().getName());
+									return true;
+								}
 							}
 						}
 					}

@@ -26,6 +26,7 @@ import org.emftext.language.rolecore.dependencies.Create;
 import org.emftext.language.rolecore.dependencies.Edge;
 import org.emftext.language.rolecore.dependencies.Graph;
 import org.emftext.language.rolecore.dependencies.Domain;
+import org.emftext.language.rolecore.dependencies.Required;
 import org.emftext.language.rolecore.dependencies.RightTerm;
 import org.emftext.language.rolecore.dependencies.SimpleTerm;
 import org.emftext.language.rolecore.interfaces.RCCore;
@@ -61,8 +62,7 @@ public class CreatingHelpClass {
 	public void addCoreEObjectToMap(String coreClassName, EObject coreEObject) {
 		// TODO remove
 		System.out.println("Add the core class " + coreClassName + " to core classes map");
-
-		coreClassesMap.put(coreClassName, coreEObject);
+		coreClassesMap.put(coreClassName, context.getLeafCore(coreEObject));
 	}
 
 	public boolean addNextElementsFromRequired(Domain domain, Entry<EObject, EList<FeatureChange>> entry) {
@@ -71,8 +71,8 @@ public class CreatingHelpClass {
 		CoreClass coreClass = getCoreClassFromBlock(entry.getKey().eClass(), domain.getRequired());
 		if (coreClass != null) {
 			mapOfNextElements.put(entry.getKey(), coreClass);
-			// TODO only for decidable case
 			addCoreEObjectToMap(coreClass.getName(), entry.getKey());
+			return true;
 		}
 		return false;
 	}
@@ -138,7 +138,7 @@ public class CreatingHelpClass {
 	private CoreClass getCoreClassFromBlock(EClass eClass, Block block) {
 		if (block != null && block.getCoreClasses() != null && block.getCoreClasses().size() > 0)
 			for (CoreClass coreClass : block.getCoreClasses()) {
-				if (coreClass.getType().equals(eClass))
+				if (eClass.equals(coreClass.getType()) || eClass.getEAllSuperTypes().contains(coreClass.getType()))
 					return coreClass;
 			}
 		return null;
@@ -307,8 +307,10 @@ public class CreatingHelpClass {
 	}
 
 	/**
-	 * The next element can be added if the <code>listOfCoreClassesToInterpret</code> contains it.
-	 * Interpreted elements can not be interpret again.
+	 * The next element can be added if the
+	 * <code>listOfCoreClassesToInterpret</code> contains it. Interpreted
+	 * elements can not be interpret again.
+	 * 
 	 * @param coreClass
 	 * @param nextEObject
 	 */
@@ -366,7 +368,7 @@ public class CreatingHelpClass {
 		return coreClasses;
 	}
 
-	public void handleSemiRequiredCoreClass(CoreClass coreClass, Domain domain) {
+	public boolean handleRequiredCoreClass(CoreClass coreClass, Domain domain) {
 		Set<CoreClass> synchCoreClasses = getSynchronizedCoreClasses(coreClass);
 		EObject coreEObject = null;
 		if (synchCoreClasses.size() > 0) {
@@ -392,7 +394,9 @@ public class CreatingHelpClass {
 		}
 		if (coreEObject != null) {
 			addCoreEObjectToMap(coreClass.getName(), coreEObject);
+			return true;
 		}
+		return false;
 	}
 
 	private EObject searchInTheTraceLinks(CoreClass coreClass, EObject synchEObject) {
@@ -404,17 +408,15 @@ public class CreatingHelpClass {
 					EObject coreEObject = null;
 					EObject sourceEObject = equalTL.getSource();
 					EObject targetEOject = equalTL.getTarget();
-					if (sourceEObject.equals(synchEObject)
-							&& targetEOject.eClass().equals(coreClass.getType())) {
+					if (sourceEObject.equals(synchEObject) && targetEOject.eClass().equals(coreClass.getType())) {
 						coreEObject = targetEOject;
 					}
-					if (targetEOject.equals(synchEObject)
-							&& sourceEObject.eClass().equals(coreClass.getType())) {
+					if (targetEOject.equals(synchEObject) && sourceEObject.eClass().equals(coreClass.getType())) {
 						coreEObject = sourceEObject;
 					}
 					// validate the constraints
 					if (coreEObject != null && isValid(coreEObject, coreClass)) {
-						//TODO remove
+						// TODO remove
 						System.out.println("Found " + coreClass.getName() + " in the trace links");
 						return coreEObject;
 					}
@@ -453,6 +455,7 @@ public class CreatingHelpClass {
 		return true;
 	}
 
+	//TODO fit the sub types, too
 	private EObject findOrCreateCoreClass(CoreClass coreClass, Domain domain) {
 		DomainRoot domainRoot = context.findOrCreateDomainRoot(domain.getName());
 		if (domainRoot.getEObjects() != null) {
@@ -463,6 +466,9 @@ public class CreatingHelpClass {
 					return eObject;
 				}
 			}
+		}
+		if(coreClass.eContainer() instanceof Required){
+			return null;
 		}
 		// TODO is it possible to add this class to the domain root right here?
 		EObject coreEObject = context.createCoreClass(coreClass.getType());
@@ -598,24 +604,25 @@ public class CreatingHelpClass {
 		for (Iterator<EObject> iterator = eObjects.iterator(); iterator.hasNext();) {
 			EObject eObject = (EObject) iterator.next();
 			String nsPrefix = eObject.eClass().getEPackage().getNsPrefix();
-			if (modelPrefix.equals(nsPrefix)){
+			if (modelPrefix.equals(nsPrefix)) {
 				domainRoot.getEObjects().add(eObject);
 				// TODO remove
-				//System.out.println("Add " + eObject.eClass().getName() + " to domain root " + domain.getName());
-			}
-			else {
+				// System.out.println("Add " + eObject.eClass().getName() +
+				// " to domain root " + domain.getName());
+			} else {
 				context.findOrCreateDomainRoot(nsPrefix).getEObjects().add(eObject);
 				// TODO remove
-				//System.out.println("Add " + eObject.eClass().getName() + " to domain root " + nsPrefix);
+				// System.out.println("Add " + eObject.eClass().getName() +
+				// " to domain root " + nsPrefix);
 			}
 		}
 	}
 
 	public void addImplicitEdges(CoreClass coreClass, List<Edge> edgesToInterpret) {
-		if(dependencies.getModelEquivalence()!=null&& dependencies.getModelEquivalence().getEdges().size()>0){
+		if (dependencies.getModelEquivalence() != null && dependencies.getModelEquivalence().getEdges().size() > 0) {
 			for (Edge edge : dependencies.getModelEquivalence().getEdges()) {
 				SimpleTerm simpleTerm = edge.getSimpleTerm();
-				if(simpleTerm.getCoreClass().equals(coreClass) && simpleTerm.getRole()!=null){
+				if (simpleTerm.getCoreClass().equals(coreClass) && simpleTerm.getRole() != null) {
 					edgesToInterpret.add(edge);
 				}
 			}

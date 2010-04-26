@@ -63,7 +63,6 @@ public class InterpretationContext {
 	private CreatingHelpClass creatingHelpClass;
 	private ResourceSet resourceSet;
 
-	
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
@@ -119,7 +118,7 @@ public class InterpretationContext {
 				}
 			}
 		}
-		
+
 	}
 
 	public DomainRoot findOrCreateDomainRoot(String domainName) {
@@ -269,16 +268,16 @@ public class InterpretationContext {
 	@SuppressWarnings("unchecked")
 	public EObject getLeafCore(EObject coreClass) {
 		EStructuralFeature rolesStructuralFeature = getRolesStructuralFeature();
-		if (rolesStructuralFeature != null) {
-			EList<EObject> roles = (EList<EObject>) coreClass.eGet(rolesStructuralFeature);
+		Object object = coreClass.eGet(rolesStructuralFeature);
+		if (object instanceof EList<?>) {
+			EList<EObject> roles = (EList<EObject>) object;
 			for (EObject role : roles) {
-				EObject leafCore = getLeafCore(role);
-				if (leafCore != null)
-					return leafCore;
+				if (role instanceof RCCore){
+					return getLeafCore(role);
+				}
 			}
-			return coreClass;
 		}
-		return null;
+		return coreClass;
 	}
 
 	public List<EObject> getSuperCores(EObject coreClass) {
