@@ -228,15 +228,15 @@ public class InterpreterTest extends TestCase {
 		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
 		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
 		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
-		EObject stereotype = getCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
+		EObject stereotype = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
 		assertNotNull(stereotype);
 		EClass name = BlockclassbasePackage.eINSTANCE.getName_();
 		Name stereotypeName = (Name) getRoleOf(stereotype, name); 
 		assertNotNull(stereotypeName);
 		assertEquals("system", stereotypeName.getName());
-		EObject classEObject = getCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getClassCore());
+		EObject classEObject = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getClassCore());
 		assertNotNull(classEObject);
-		EObject systemBlock = getCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getSystemBlockCore());
+		EObject systemBlock = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getSystemBlockCore());
 		assertNotNull(systemBlock);
 		EObject synchSystemBlock = getSynchronizedObject(classEObject, traceLinksDR);
 		assertNotNull(synchSystemBlock);
@@ -247,6 +247,9 @@ public class InterpreterTest extends TestCase {
 		assertEquals(className, systemBlockName);
 	}
 	
+	/**
+	 * Test the container object in Required.
+	 */
 	public void testAddBlock(){
 		//load resources
 		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
@@ -273,7 +276,28 @@ public class InterpreterTest extends TestCase {
 		// save domain roots to output, there is a base resource
 		saveDomainRootsToResources(context, outputURI, "Scene03");
 		// check result
+		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
+		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
+		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
 		
+		EObject blockEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getBlockCore());
+		assertNotNull(blockEObject);
+		EObject classEObject = getSynchronizedObject(blockEObject, traceLinksDR);
+		assertNotNull(classEObject);
+		EObject blockName = getRoleOf(blockEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		EObject className = getRoleOf(classEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		assertEquals(blockName, className);
+		assertEquals("Station", blockName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject blockStereotype = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
+		assertNotNull(blockStereotype);
+		EObject blockStereotypeName = getRoleOf(blockStereotype, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotNull(blockStereotypeName);
+		assertEquals("block", blockStereotypeName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
+		assertNotNull(association);
+		EObject containerAdornement = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAdornment());
+		assertNotNull(containerAdornement);
+		assertEquals("COMPOSITION", containerAdornement.eGet(ClassdomainPackage.eINSTANCE.getAdornment_Adornment()));
 	}
 	
 	private EObject getSynchronizedObject(EObject coreEObject, DomainRoot traceLinksDR) {
@@ -299,22 +323,22 @@ public class InterpreterTest extends TestCase {
 		return null;
 	}
 
-	private EObject getCoreEObject(DomainRoot domainRoot, EClass coreEClass) {
-		List<EObject> coreEObjects = getCoreEObjects(domainRoot, coreEClass);
+	private EObject getLastCoreEObject(DomainRoot domainRoot, EClass coreEClass) {
+		List<EObject> coreEObjects = new ArrayList<EObject>();
+		addCoreEObjects(domainRoot, coreEClass, coreEObjects);
 		if (coreEObjects.size()>0){
-			return coreEObjects.get(0);
+			return coreEObjects.get(coreEObjects.size()-1);
 		}
 		return null;
 	}
 
-	private List<EObject> getCoreEObjects(DomainRoot classDomainDR, EClass coreEClass) {
-		List<EObject> coreEObjects = new ArrayList<EObject>();
-		for (EObject eObject : classDomainDR.getEObjects()) {
-			if (eObject.eClass().equals(coreEClass)){
+	private void addCoreEObjects(EObject container, EClass coreEClass, List<EObject> coreEObjects) {
+		for (EObject eObject : container.eContents()) {
+			if (eObject.eClass().equals(coreEClass) && eObject.equals(context.getLeafCore(eObject))){
 				coreEObjects.add(eObject);
 			}
+			addCoreEObjects(eObject, coreEClass, coreEObjects);
 		}
-		return coreEObjects;
 	}
 
 	private void saveDomainRootsToResources(InterpretationContext context, String location, String prefix) {
