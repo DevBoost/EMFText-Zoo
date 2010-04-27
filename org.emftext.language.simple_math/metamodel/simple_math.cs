@@ -20,6 +20,7 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	forceEOF = "true";
 	tokenspace = "1";
+	usePredefinedTokens = "false";
 }
 
 TOKENS {
@@ -32,15 +33,16 @@ TOKENS {
 RULES {
 
 	@operator(type="binary_left_associative", weight="1", identifier="Expression")
-	Additive ::= left operator[ADDITIVE_OPERATOR] right;
+	Additive ::= left (operator[ADDITIVE_OPERATOR]) right;
 
 	@operator(type="binary_left_associative", weight="2", identifier="Expression")
 	Multiplicative ::= left operator[MULTIPLICATIVE_OPERATOR] right;
 	
-	// TODO this does not work yet, probably because the '-' is consumed
-	// by the ADDITIVE_OPERATOR token
-	@operator(type="unary", weight="3", identifier="Expression")	
-	Negation ::= "-" body;
+	@operator(type="binary_right_associative", weight="3", identifier="Expression")
+	Potence ::= base "^" exponent;
+	
+ 	@operator(type="unary_prefix", weight="4", identifier="Expression")	
+	Negation ::= operator[ADDITIVE_OPERATOR] body;
 	
 	@operator(type="primitive", weight="5", identifier="Expression")
 	BracketExp ::= "(" body ")";

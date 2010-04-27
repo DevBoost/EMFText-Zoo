@@ -21,8 +21,9 @@ public class InterpreterTest extends AbstractSimpleMathTest {
 	public void testInterpretation() {
 		assertRootValue(3.0, "1+2");
 		assertRootValue(7.0, "1+2*3");
-		assertRootValue(5.0, "1+8/2");
-		assertRootValue(-4.0, "8/-2");
+		assertRootValue(3.6, "(1+8)/(2/4+1*2)");
+		assertRootValue(512, "2^3^2");
+		assertRootValue(0, "1-1+2+(-2)");
 	}
 
 	private void assertRootValue(double result, String expression) {

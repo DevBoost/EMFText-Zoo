@@ -55,7 +55,10 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 	@Override
 	public Boolean interprete_org_emftext_language_simple_005fmath_Negation(
 			Negation object, SimpleMathContext context) {
-		double result = -context.pop();
+		double result = context.pop();
+		if("-".equals(object.getOperator())){
+			result = - result;
+		}
 		context.push(result);
 		object.setValue(result);
 		return true;
@@ -76,4 +79,14 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 		object.setValue(object.getFloatValue());
 		return true;
 	}
+	
+	public Boolean interprete_org_emftext_language_simple_005fmath_Potence(org.emftext.language.simple_math.Potence object, SimpleMathContext context) {
+		double exponent = context.pop();
+		double base = context.pop();
+		double result = Math.pow(base,exponent);
+		object.setValue(result);
+		context.push(result);
+		return true;
+	}
+
 }
