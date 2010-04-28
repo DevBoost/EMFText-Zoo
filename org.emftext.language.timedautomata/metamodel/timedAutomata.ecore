@@ -3,7 +3,8 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="timedAutomata"
     nsURI="http://www.emftext.org/language/timedAutomata" nsPrefix="timedAutomata">
-  <eSubpackages name="base" nsURI="base" nsPrefix="base">
+  <eSubpackages name="base" nsURI="http://www.emftext.org/language/timedAutomata/base"
+      nsPrefix="base">
     <eClassifiers xsi:type="ecore:EClass" name="Commentable" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           defaultValueLiteral=""/>
@@ -16,7 +17,8 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="bnf" nsURI="bnf" nsPrefix="bnf">
+  <eSubpackages name="bnf" nsURI="http://www.emftext.org/language/timedAutomata/bnf"
+      nsPrefix="bnf">
     <eClassifiers xsi:type="ecore:EClass" name="Identifier">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -27,7 +29,8 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SendSynchronisation" eSuperTypes="#//bnf/Synchronisation"/>
     <eClassifiers xsi:type="ecore:EClass" name="ReceiveSynchronisation" eSuperTypes="#//bnf/Synchronisation"/>
-    <eSubpackages name="expressions" nsURI="expressions" nsPrefix="expressions">
+    <eSubpackages name="expressions" nsURI="http://www.emftext.org/language/timedAutomata/bnf/expressions"
+        nsPrefix="expressions">
       <eClassifiers xsi:type="ecore:EEnum" name="AssignOperator">
         <eLiterals name="ASSIGN" value="1" literal="="/>
         <eLiterals name="ADD_ASIGN" value="2" literal="+="/>
@@ -153,7 +156,8 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="#//bnf/Identifier"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="declarations" nsURI="declarations" nsPrefix="declarations">
+    <eSubpackages name="declarations" nsURI="http://www.emftext.org/language/timedAutomata/bnf/declarations"
+        nsPrefix="declarations">
       <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" interface="true"
           eSuperTypes="#//base/Commentable"/>
       <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//bnf/declarations/Declaration">
@@ -282,7 +286,8 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//bnf/expressions/Expression"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="types" nsURI="types" nsPrefix="types">
+    <eSubpackages name="types" nsURI="http://www.emftext.org/language/timedAutomata/bnf/types"
+        nsPrefix="types">
       <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" interface="true">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="#//bnf/types/TypePrefix"/>
       </eClassifiers>
@@ -319,12 +324,13 @@
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>
-  <eSubpackages name="core" nsURI="core" nsPrefix="core">
+  <eSubpackages name="core" nsURI="http://www.emftext.org/language/timedAutomata/core"
+      nsPrefix="core">
     <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//core/TAElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="globalDeclarations" upperBound="-1"
           eType="#//bnf/declarations/Declaration" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="templates" upperBound="-1"
-          eType="#//core/Template"/>
+          eType="#//core/Template" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="systemDeclaration" lowerBound="1"
           eType="#//core/SystemDefinition"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -337,9 +343,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="taParameters" upperBound="-1"
           eType="ecore:EClass simpleGraph.ecore#//Parameter"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="locations" upperBound="-1"
-          eType="#//core/Location"/>
+          eType="#//core/Location" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
-          eType="#//core/Edge"/>
+          eType="#//core/Edge" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#//core/TAElement simpleGraph.ecore#//Position">
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//core/Location"/>
