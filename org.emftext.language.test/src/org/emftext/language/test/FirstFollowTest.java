@@ -4,21 +4,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.emftext.sdk.codegen.generators.code_completion.helpers.ExpectationComputer;
+import org.emftext.sdk.codegen.resource.generators.code_completion.helpers.ExpectationComputer;
 import org.emftext.sdk.concretesyntax.Annotation;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.sdk.concretesyntax.KeyValuePair;
 import org.emftext.sdk.concretesyntax.Rule;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
 import org.emftext.test.ConcreteSyntaxTestHelper;
-
-import junit.framework.TestCase;
 
 public class FirstFollowTest extends TestCase {
 
