@@ -21,9 +21,9 @@ OPTIONS {
 	memoize = "true";
 	tokenspace = "0";
 	resourcePluginID = "org.emftext.language.ecore.resource.text";
-	resourceUIPluginID = "org.emftext.language.ecore.resource.ui.text";
 	basePackage = "org.emftext.language.ecore.resource.text";
-	uiBasePackage = "org.emftext.language.ecore.resource.ui.text";
+	resourceUIPluginID = "org.emftext.language.ecore.resource.text.ui";
+	uiBasePackage = "org.emftext.language.ecore.resource.text.ui";
 	usePredefinedTokens = "false";
 	baseResourcePlugin = "org.emftext.language.ecore.resource";
 	saveChangedResourcesOnly = "true";

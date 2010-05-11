@@ -22,8 +22,9 @@ OPTIONS {
 	//tokenspace = "1";
 	resourcePluginID = "org.emftext.language.ecore.resource.facade";
 	basePackage = "org.emftext.language.ecore.resource.facade";
-	resourceUIPluginID = "org.emftext.language.ecore.resource.ui.facade";
-	uiBasePackage = "org.emftext.language.ecore.resource.ui.facade";
+	resourceUIPluginID = "org.emftext.language.ecore.resource.facade.ui";
+	uiBasePackage = "org.emftext.language.ecore.resource.facade.ui";
+	
 	baseResourcePlugin = "org.emftext.language.ecore.resource";
 	saveChangedResourcesOnly = "true";
 }
