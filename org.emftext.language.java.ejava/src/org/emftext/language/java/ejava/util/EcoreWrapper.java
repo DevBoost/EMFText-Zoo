@@ -197,6 +197,12 @@ public class EcoreWrapper {
 			getQualifiedInterfaceNameOperation.setEType(EcorePackage.eINSTANCE.getEString());
 			operations.add(getQualifiedInterfaceNameOperation);
 		}
+		if (eClass.getName().equals(GenModelPackage.eINSTANCE.getGenFeature().getName())) {
+			EOperation getTypeGenClassOperation = EcoreFactory.eINSTANCE.createEOperation();
+			getTypeGenClassOperation.setName("getTypeGenClass");
+			getTypeGenClassOperation.setEType(GenModelPackage.eINSTANCE.getGenClass());
+			operations.add(getTypeGenClassOperation);
+		}
 		return operations;
 	}
 
