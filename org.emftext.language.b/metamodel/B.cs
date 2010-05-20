@@ -20,6 +20,8 @@ OPTIONS {
     licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	basePackage = "org.emftext.language.b.resource.mch";
 	resourcePluginID = "org.emftext.language.b.resource.mch";
+	uiBasePackage = "org.emftext.language.b.resource.mch.ui";
+	resourceUIPluginID = "org.emftext.language.b.resource.mch.ui";
 }
 
 TOKENS {
