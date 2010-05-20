@@ -66,7 +66,7 @@ RULES {
 	
 	@Foldable
 	Role      ::= 
-		"Role" name[] "is" "played" "by" playedBy[]
+		"Role" name[] "is" "played" "by" playedBy[] ( "(" lowerBound[] ".." upperBound[] ")" )?
 		"{" ( eStructuralFeatures | eOperations )* !0 "}";
 	
 	@Foldable	
