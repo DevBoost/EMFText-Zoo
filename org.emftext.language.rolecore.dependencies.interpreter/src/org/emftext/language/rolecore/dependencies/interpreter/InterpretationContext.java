@@ -162,10 +162,11 @@ public class InterpretationContext {
 			baseCore = creatingHelpClass.getSharedBaseCore(coreClass);
 		}
 		// TODO remove
-		if (baseCore != null)
+		if (baseCore != null) {
 			System.out.println("Create " + coreClass.getName() + " with base core " + baseCore.eClass().getName());
-		else
+		} else {
 			System.out.println("Create " + coreClass.getName());
+		}
 		EObject coreEObject = createSynchronizationCoreClass(coreClass.getType(), baseCore);
 		creatingHelpClass.addCoreEObjectToMap(coreClass.getName(), coreEObject);
 		return coreEObject;
@@ -272,7 +273,7 @@ public class InterpretationContext {
 		if (object instanceof EList<?>) {
 			EList<EObject> roles = (EList<EObject>) object;
 			for (EObject role : roles) {
-				if (role instanceof RCCore){
+				if (role instanceof RCCore) {
 					return getLeafCore(role);
 				}
 			}
@@ -327,6 +328,16 @@ public class InterpretationContext {
 
 	public boolean addRoleToCore(EObject coreEObject, EClass roleEClass, Object object) {
 		String featureName = roleEClass.getEStructuralFeatures().get(0).getName();
+		if (object instanceof EObject) {
+			// TODO remove
+			System.out.println("Added role " + roleEClass.getName() + " to the core "
+					+ creatingHelpClass.getSynchronizationName(coreEObject) + " with the referred core "
+					+ creatingHelpClass.getSynchronizationName((EObject) object));
+		} else {
+			// TODO remove
+			System.out.println("Added role " + roleEClass.getName() + " to the core "
+					+ creatingHelpClass.getSynchronizationName(coreEObject) + " with the value " + object.toString());
+		}
 		return addRoleToCore(coreEObject, roleEClass, object, featureName);
 	}
 
@@ -566,6 +577,15 @@ public class InterpretationContext {
 		System.out.println("Set trace link with source " + sourceEObject.eClass().getName() + " and target "
 				+ targetEObject.eClass().getName());
 
+	}
+	
+	public void addAssignmentTraceLink(AssignmentTraceLink assignmentTraceLink){
+		DomainRoot traceLinksDR = findOrCreateTraceLinksDomainRoot();
+		traceLinksDR.getEObjects().add(assignmentTraceLink);
+		// TODO remove
+		Edge edge = (Edge)assignmentTraceLink.getEdge();
+		System.out.println("Set assignment trace link for core class " + edge.getSimpleTerm().getCoreClass().getName() + " and role "
+				+ edge.getSimpleTerm().getRole().getName());
 	}
 
 	@SuppressWarnings("unchecked")

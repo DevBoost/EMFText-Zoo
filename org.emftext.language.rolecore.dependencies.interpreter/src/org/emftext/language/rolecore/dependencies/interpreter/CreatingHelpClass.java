@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -338,6 +339,9 @@ public class CreatingHelpClass {
 
 	public EObject getSharedBaseCore(CoreClass coreClass) {
 		Set<CoreClass> coreClasses = getSynchronizedCoreClassesWithSharedRole(coreClass);
+		if (coreClasses == null) {
+			return null;
+		}
 		// find the first core class with the common base core
 		EList<EClass> superTypes = coreClass.getType().getEAllSuperTypes();
 		for (CoreClass synchCoreClass : coreClasses) {
@@ -357,16 +361,22 @@ public class CreatingHelpClass {
 	}
 
 	private Set<CoreClass> getSynchronizedCoreClassesWithSharedRole(CoreClass coreClass) {
-		EList<Edge> edges = dependencies.getModelEquivalence().getEdges();
+		if (dependencies.getModelEquivalence() == null) {
+			return null;
+		}
 		Set<CoreClass> coreClasses = new HashSet<CoreClass>();
+		EList<Edge> edges = dependencies.getModelEquivalence().getEdges();
 		for (Edge edge : edges) {
 			if (edge.getSimpleTerm().getRole() != null) {
 				EList<SimpleTerm> simpleTerms = edge.getRightTerm().getSimpleTerms();
 				if (simpleTerms != null && simpleTerms.size() == 1) {
-					if (edge.getSimpleTerm().getCoreClass().equals(coreClass)) {
-						coreClasses.add(simpleTerms.get(0).getCoreClass());
-					} else if (simpleTerms.get(0).getCoreClass().equals(coreClass)) {
-						coreClasses.add(edge.getSimpleTerm().getCoreClass());
+					SimpleTerm simpleTerm = simpleTerms.get(0);
+					if (simpleTerm.getRole().equals(edge.getSimpleTerm().getRole())) {
+						if (edge.getSimpleTerm().getCoreClass().equals(coreClass)) {
+							coreClasses.add(simpleTerm.getCoreClass());
+						} else if (simpleTerm.getCoreClass().equals(coreClass)) {
+							coreClasses.add(edge.getSimpleTerm().getCoreClass());
+						}
 					}
 				}
 			}
@@ -501,20 +511,135 @@ public class CreatingHelpClass {
 		addCoreClassesToList(domain.getCreate(), coreClassList);
 		for (CoreClass coreClass : coreClassList) {
 			EObject coreEObject = coreClassesMap.get(coreClass.getName());
+			List<Edge> edges = new ArrayList<Edge>();
+			if (coreClass.eContainer() instanceof Create) {
+				addImplicitEdges(coreClass, edges);
+			}
 			for (Edge edge : coreClass.getEdges()) {
+				edges.add(edge);
+			}
+			for (Edge edge : edges) {
 				EClass roleEClass = edge.getSimpleTerm().getRole();
 				if (isMany(coreEObject.eClass(), roleEClass, domain)) {
 					addDataToRole(coreEObject, roleEClass, edge);
 				} else if (coreClass.eContainer() instanceof Create) {
-					// assumed the trace link roles are set, handle only normal
-					// edges now
-					// TODO set the trace link roles at creating
-					if (!existAssignmentTraceLink(roleEClass)) {
+					if (!isAssignmentTraceLink(coreClass, roleEClass)) {
 						addDataToRole(coreEObject, roleEClass, edge);
+					} else {
+						setAttributeInTraceLink(coreClass, edge);
 					}
 				}
 			}
+			// add roles of indirect trace links
 		}
+	}
+
+	private void setAttributeInTraceLink(CoreClass coreClass, Edge edge) {
+		EClass roleEClass = edge.getSimpleTerm().getRole();
+		if (coreClass.equals(edge.getSimpleTerm().getCoreClass()) && roleEClass.equals(edge.getSimpleTerm().getRole())) {
+			EObject coreEObject = coreClassesMap.get(coreClass.getName());
+			if (!existRoleEObject(coreEObject, roleEClass)) {
+				context.addRoleToCore(coreEObject, roleEClass, evaluateRightTerm(edge.getRightTerm()));
+				return;
+			}
+		}
+		for (Edge traceLinkEdge : dependencies.getModelEquivalence().getEdges()) {
+			if (traceLinkEdge.getSimpleTerm().getRole() != null) {
+				EObject leftCoreEObject = coreClassesMap.get(traceLinkEdge.getSimpleTerm().getCoreClass().getName());
+				EObject leftRoleEObject = context.getRoleEObjects(leftCoreEObject,
+						traceLinkEdge.getSimpleTerm().getRole()).get(0);
+				EObject rightCoreEObject = coreClassesMap.get(coreClass.getName());
+				// not the same base
+				List<EObject> rightRoleEObjects = context.getRoleEObjects(rightCoreEObject, traceLinkEdge
+						.getSimpleTerm().getRole());
+				if (rightRoleEObjects == null || rightRoleEObjects.size() == 1
+						&& !rightRoleEObjects.get(0).equals(leftRoleEObject)) {
+					addDataToCoreClassInRightTerm(leftRoleEObject, coreClass, roleEClass, traceLinkEdge.getRightTerm());
+				}
+			}
+		}
+	}
+
+	public void addRoleToAssignmentTraceLink(String coreClassName, EObject roleEObject,
+			AssignmentTraceLink assignmentTraceLink) {
+		EList<EObject> roles = assignmentTraceLink.getCoreNameToRolesMap().get(coreClassName);
+		if (roles == null) {
+			Entry<String, EList<EObject>> entry = InterpreterFactory.eINSTANCE
+					.createEObjectToChangesMapEntry(coreClassName);
+			roles = entry.getValue();
+			assignmentTraceLink.getCoreNameToRolesMap().add(entry);
+		}
+		if (!roles.contains(roleEObject)) {
+			roles.add(roleEObject);
+		}
+	}
+
+	private boolean existRoleEObject(EObject coreEObject, EClass role) {
+		List<EObject> roleEObjects = context.getRoleEObjects(coreEObject, role);
+		if (roleEObjects != null && roleEObjects.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean addDataToCoreClassInRightTerm(EObject leftRoleEObject, CoreClass rightCoreClass,
+			EClass rightRoleEClass, RightTerm rightTerm) {
+		EList<SimpleTerm> simpleTerms = rightTerm.getSimpleTerms();
+		if (simpleTerms != null && simpleTerms.size() == 1 && rightCoreClass.equals(simpleTerms.get(0).getCoreClass())
+				&& rightRoleEClass.equals(simpleTerms.get(0).getRole())) {
+			EList<EAttribute> attributes = leftRoleEObject.eClass().getEAttributes();
+			if (attributes != null && attributes.size() > 0) {
+				EClassifier attributeType = attributes.get(0).getEAttributeType();
+				EList<EAttribute> rightRoleAttributes = rightRoleEClass.getEAttributes();
+				if (rightRoleAttributes != null && rightRoleAttributes.size() > 0
+						&& attributeType.equals(rightRoleAttributes.get(0).getEAttributeType())) {
+					context.addRoleToCore(coreClassesMap.get(rightCoreClass.getName()), rightRoleEClass, getRoleData(
+							leftRoleEObject, null));
+					return true;
+				}
+			}
+		}
+		if (rightTerm.getOperation() != null) {
+			for (RightTerm rightTermInOperation : rightTerm.getOperation().getRightTerms()) {
+				if (addDataToCoreClassInRightTerm(leftRoleEObject, rightCoreClass, rightRoleEClass,
+						rightTermInOperation)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private Object evaluateRightTerm(RightTerm rightTerm) {
+		if (rightTerm.getValue() != null) {
+			return rightTerm.getValue();
+		}
+		if (rightTerm.getOperation() != null && rightTerm.getOperation().getOperationType().equals("+")) {
+			String result = "";
+			for (RightTerm rightTermInList : rightTerm.getOperation().getRightTerms()) {
+				Object rightTermResult = evaluateRightTerm(rightTermInList);
+				if (rightTermResult instanceof String) {
+					result += rightTermResult.toString();
+				}
+			}
+			return result;
+		}
+		EList<SimpleTerm> simpleTerms = rightTerm.getSimpleTerms();
+		if (simpleTerms != null && simpleTerms.size() > 0) {
+			String result = "";
+			for (SimpleTerm simpleTerm : simpleTerms) {
+				EObject coreEObject = coreClassesMap.get(simpleTerm.getCoreClass().getName());
+				List<EObject> roleEObjects = context.getRoleEObjects(coreEObject, simpleTerm.getRole());
+				if (roleEObjects != null & roleEObjects.size() == 1) {
+					Object data = getRoleData(roleEObjects.get(0), null);
+					if (data instanceof String) {
+						result += data.toString();
+					}
+				}
+			}
+			return result;
+		}
+		return null;
 	}
 
 	private void addDataToRole(EObject coreEObject, EClass roleEClass, Edge edge) {
@@ -522,32 +647,44 @@ public class CreatingHelpClass {
 			String referredCoreName = edge.getRightTerm().getSimpleTerms().get(0).getCoreClass().getName();
 			EObject referredCore = coreClassesMap.get(referredCoreName);
 			context.addRoleToCore(coreEObject, roleEClass, referredCore);
-
-			// TODO remove
-			System.out.println("Added role " + roleEClass.getName() + " to the core "
-					+ ((CoreClass) edge.eContainer()).getName() + " with the referred core " + referredCoreName);
 		}
 		if (edge.isEqual()) {
 			context.addRoleToCore(coreEObject, roleEClass, edge.getRightTerm().getValue());
-			// TODO remove
-			System.out.println("Added role " + roleEClass.getName() + " to the core "
-					+ ((CoreClass) edge.eContainer()).getName() + " with the value " + edge.getRightTerm().getValue());
 		}
 	}
 
-	private boolean existAssignmentTraceLink(EClass roleEClass) {
+	private boolean isAssignmentTraceLink(CoreClass coreClass, EClass roleEClass) {
 		if (dependencies.getModelEquivalence() == null || dependencies.getModelEquivalence().getEdges().size() == 0) {
 			return false;
 		}
 		for (Edge edge : dependencies.getModelEquivalence().getEdges()) {
 			if (edge.isEqual()) {
-				if (edge.getSimpleTerm().getRole() != null && edge.getSimpleTerm().getRole().equals(roleEClass)) {
+				if (edge.getSimpleTerm().getRole() != null && edge.getSimpleTerm().getRole().equals(roleEClass)
+						&& edge.getSimpleTerm().getCoreClass().equals(coreClass)) {
 					return true;
 				}
-				for (SimpleTerm simpleTerm : edge.getRightTerm().getSimpleTerms()) {
-					if (simpleTerm.getRole() != null && simpleTerm.getRole().equals(roleEClass)) {
-						return true;
-					}
+				if (isInRightTerm(coreClass, roleEClass, edge.getRightTerm())) {
+					return true;
+				}
+
+			}
+		}
+		return false;
+	}
+
+	private boolean isInRightTerm(CoreClass coreClass, EClass roleEClass, RightTerm rightTerm) {
+		if (rightTerm.getSimpleTerms() != null) {
+			for (SimpleTerm simpleTerm : rightTerm.getSimpleTerms()) {
+				if (simpleTerm.getRole() != null && (simpleTerm.getRole().equals(roleEClass) || roleEClass == null)
+						&& simpleTerm.getCoreClass().equals(coreClass)) {
+					return true;
+				}
+			}
+		}
+		if (rightTerm.getOperation() != null) {
+			for (RightTerm rightTermInOperation : rightTerm.getOperation().getRightTerms()) {
+				if (isInRightTerm(coreClass, roleEClass, rightTermInOperation)) {
+					return true;
 				}
 			}
 		}
@@ -577,6 +714,14 @@ public class CreatingHelpClass {
 		return feature.isMany();
 	}
 
+	/**
+	 * Get data of the role. If referenceType is <code>null</code> the role will
+	 * return its attribute.
+	 * 
+	 * @param roleEObject
+	 * @param referencedType
+	 * @return
+	 */
 	private Object getRoleData(EObject roleEObject, EClass referencedType) {
 		if (referencedType != null) {
 			EList<EReference> references = roleEObject.eClass().getEReferences();
@@ -587,7 +732,7 @@ public class CreatingHelpClass {
 				}
 			}
 		} else {
-			EAttribute attrib = roleEObject.eClass().getEAllAttributes().get(0);
+			EAttribute attrib = roleEObject.eClass().getEAttributes().get(0);
 			return roleEObject.eGet(attrib);
 		}
 		return null;
@@ -624,6 +769,21 @@ public class CreatingHelpClass {
 				if (simpleTerm.getCoreClass().equals(coreClass) && simpleTerm.getRole() != null) {
 					edgesToInterpret.add(edge);
 				}
+			}
+		}
+	}
+
+	public void addRoleToAssignmentTraceLinkInRightTerm(RightTerm rightTerm, AssignmentTraceLink assignmentTraceLink) {
+		if (rightTerm.getSimpleTerms() != null) {
+			for (SimpleTerm simpleTerm : rightTerm.getSimpleTerms()) {
+				EObject coreEObject = coreClassesMap.get(simpleTerm.getCoreClass().getName());
+				EObject roleEObject = context.getRoleEObjects(coreEObject, simpleTerm.getRole()).get(0);
+				addRoleToAssignmentTraceLink(simpleTerm.getCoreClass().getName(), roleEObject, assignmentTraceLink);
+			}
+		}
+		if (rightTerm.getOperation() != null){
+			for (RightTerm rightTermInOperation : rightTerm.getOperation().getRightTerms()) {
+				addRoleToAssignmentTraceLinkInRightTerm(rightTermInOperation, assignmentTraceLink);
 			}
 		}
 	}

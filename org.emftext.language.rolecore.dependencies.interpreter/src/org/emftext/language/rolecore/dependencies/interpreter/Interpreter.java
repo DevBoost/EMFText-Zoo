@@ -13,6 +13,7 @@ import org.emftext.language.rolecore.dependencies.Domain;
 import org.emftext.language.rolecore.dependencies.Edge;
 import org.emftext.language.rolecore.dependencies.Equivalence;
 import org.emftext.language.rolecore.dependencies.Graph;
+import org.emftext.language.rolecore.dependencies.RightTerm;
 import org.emftext.language.rolecore.dependencies.SimpleTerm;
 import org.emftext.language.rolecore.dependencies.resource.dependencies.util.AbstractDependenciesInterpreter;
 
@@ -119,8 +120,6 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 	}
 
 	private boolean createTraceLinks(Graph graph, InterpretationContext context) {
-		// TODO create trace links
-		// create for equal trace links
 		Equivalence equivalence = graph.getModelEquivalence();
 		CreatingHelpClass creatingHelpClass = context.getCreatingHelpClass();
 		if (equivalence != null) {
@@ -128,41 +127,33 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 			if (edges != null && edges.size() > 0) {
 				for (Edge edge : edges) {
 					if (edge.isEqual()) {
-						if (!context.isAssignment(edge)) {
-							EList<SimpleTerm> simpleTerms = edge.getRightTerm().getSimpleTerms();
-							for (SimpleTerm simpleTerm : simpleTerms) {
-								EObject sourceEObject = null;
-								if (edge.getSimpleTerm().getRole() != null) {
-									if (simpleTerms.size() == 1) {
-										EClass rightRole = simpleTerms.get(0).getRole();
-										if (edge.getSimpleTerm().getRole().equals(rightRole)) {
-											break;
-										}
-									}
-									List<EObject> roles = context.getRoleEObjects(context.getCreatingHelpClass()
-											.getCoreEObjectFromMap(edge.getSimpleTerm().getCoreClass().getName()), edge
-											.getSimpleTerm().getRole());
-									if (roles != null & roles.size() == 1) {
-										sourceEObject = roles.get(0);
-									}
-								}
-								if (sourceEObject == null) {
-									sourceEObject = creatingHelpClass.getCoreEObjectFromMap(edge.getSimpleTerm()
-											.getCoreClass().getName());
-								}
-								EObject targetEObject = creatingHelpClass.getCoreEObjectFromMap(simpleTerm
-										.getCoreClass().getName());
-								context.addEqualTraceLink(sourceEObject, targetEObject);
-							}
-						} else {
-							// TODO for assignment tracelink
+						if (context.isAssignment(edge)) {
+							String coreClassName = edge.getSimpleTerm().getCoreClass().getName();
+							AssignmentTraceLink assignmentTraceLink = InterpreterFactory.eINSTANCE
+									.createAssignmentTraceLink();
+							assignmentTraceLink.setEdge(edge);
+							EObject roleEObject = context.getRoleEObjects(creatingHelpClass.getCoreEObjectFromMap(coreClassName), edge.getSimpleTerm().getRole()).get(0);
+							creatingHelpClass.addRoleToAssignmentTraceLink(coreClassName, roleEObject, assignmentTraceLink);
+							creatingHelpClass.addRoleToAssignmentTraceLinkInRightTerm(edge.getRightTerm(), assignmentTraceLink);
+							context.addAssignmentTraceLink(assignmentTraceLink);
 						}
 					}
 				}
 			}
 		}
+		EList<CoreClass> sourceCoreClasses = graph.getModelDomains().get(0).getCreate().getCoreClasses();
+		if (graph.getModelDomains().get(1) != null) {
+			EList<CoreClass> targetCoreClasses = graph.getModelDomains().get(1).getCreate().getCoreClasses();
+			for (CoreClass sourceCoreClass : sourceCoreClasses) {
+				for (CoreClass targetCoreClass : targetCoreClasses) {
+					context.addEqualTraceLink(creatingHelpClass.getCoreEObjectFromMap(sourceCoreClass.getName()),
+							creatingHelpClass.getCoreEObjectFromMap(targetCoreClass.getName()));
+				}
+			}
+		}
 		return true;
 	}
+
 
 	private boolean createCoreClassesInDomain(Domain domain, InterpretationContext context) {
 		// TODO remove
