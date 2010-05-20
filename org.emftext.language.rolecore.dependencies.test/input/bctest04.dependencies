@@ -1,15 +1,13 @@
-Graph Block
+Graph Process
 
 Domain blockDomain ModelPackage "http://www.emftext.org/language/rolecore/blockdomain"
 		RCPackage "org.emftext.language.rolecore.examples/metamodel/blockDomain.rolecore"{
 	Required {
-		Block containerBlock (role BlockChildrenRole => block;)
-			BlockDiagram blockDiagram (role BlockdiagramElementsRole => block;)
-	
+		Block containerBlock (role BlockChildrenRole => process;)
+		BlockDiagram blockDiagram (role BlockdiagramElementsRole => process;)
 	}
 	Create {
-		Block block (
-			role Name := "Block"; 
+		Process process (
 			role ModelelementBlockdiagramRole => blockDiagram;
 			role ConnectableContainerRole => containerBlock;	
 		)
@@ -22,10 +20,11 @@ Domain classDomain ModelPackage "http://www.emftext.org/language/rolecore/classd
 		ClassDiagram classDiagram (role ClassdiagramElementsRole => class;)
 	}
 	SemiRequired{
-		Stereotype stereotype (role Name := "block";)
+		Stereotype stereotype (role Name := "process";)
 	}
 	Create {
 		Class class (
+						role Name := "?";
 						role ModelelementClassdiagramRole => classDiagram; 
 						role ModelelementStereotypeRole => stereotype;
 					)
@@ -48,6 +47,6 @@ Domain classDomain ModelPackage "http://www.emftext.org/language/rolecore/classd
 }
 Equivalences{
 	containerBlock := containerClass;
-	class role Name := block role Name; 
+	process role Name := "+" (class role Name/"Operation"); 
 	classDiagram:=blockDiagram;
 }

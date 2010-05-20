@@ -162,7 +162,7 @@ public class InterpreterTest extends TestCase {
 	
 	/**
 	 * <ul>
-	 * <li>Add system block w/o container</li>
+	 * <li>testAdd system block w/o container</li>
 	 * <li>Create Stereotype if not available</li>
 	 * <li>Get class diagram through trace link</li>
 	 * <li>Use same base ModelElement for system block and class</li>
@@ -195,8 +195,8 @@ public class InterpreterTest extends TestCase {
 	}
 
 	/**
-	 * Test the inverted way of testAddSystemBlock and the indirect Roles.
-	 * Results must be the same like testAddSystemBlock
+	 * Test the inverted way of testtestAddSystemBlock and the indirect Roles.
+	 * Results must be the same like testtestAddSystemBlock
 	 */
 	public void testAddSystemClass(){
 		//load resources
@@ -295,9 +295,110 @@ public class InterpreterTest extends TestCase {
 		assertEquals("block", blockStereotypeName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
 		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
 		assertNotNull(association);
-		EObject containerAdornement = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAdornment());
-		assertNotNull(containerAdornement);
-		assertEquals("COMPOSITION", containerAdornement.eGet(ClassdomainPackage.eINSTANCE.getAdornment_Adornment()));
+	}
+	/**
+	 * Test the container object in Required.
+	 */
+	public void testAddProcessA(){
+		//load resources
+		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
+		// load dependency models
+		// TODO test more dependencies
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest04.dependencies").getContents()
+				.get(0));
+		context.setDependencies(dependencies);
+		// create change in memory (http://www.eclipse.org/emf/2003/Change)
+		// domain name is in the dependencies
+		ChangeDescription addProcessDC = cdCreator.createProcess("blockDomain");
+		// execute interpreter
+		Interpreter interpreter = new Interpreter();
+		if (interpreter.interprete(addProcessDC, context)) {
+			System.out.println("Synchronization is successful!");
+		}
+		// save domain roots to output, there is a base resource
+		saveDomainRootsToResources(context, outputURI, "Scene04");
+		// check result
+		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
+		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
+		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
+		
+		EObject processEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getProcessCore());
+		assertNotNull(processEObject);
+		EObject classEObject = getSynchronizedObject(processEObject, traceLinksDR);
+		assertNotNull(classEObject);
+		EObject processName = getRoleOf(processEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		EObject className = getRoleOf(classEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotSame(processName, className);
+		assertEquals("Control", processName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		assertEquals("Control", className.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject processStereotype = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
+		assertNotNull(processStereotype);
+		EObject processStereotypeName = getRoleOf(processStereotype, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotNull(processStereotypeName);
+		assertEquals("process", processStereotypeName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
+		assertNotNull(association);
+	}
+	/**
+	 * Test the container object in Required.
+	 */
+	public void testAddProcessB(){
+		//load resources
+		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
+		// load dependency models
+		// TODO test more dependencies
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
+				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest05.dependencies").getContents()
+				.get(0));
+		context.setDependencies(dependencies);
+		// create change in memory (http://www.eclipse.org/emf/2003/Change)
+		// domain name is in the dependencies
+		ChangeDescription addProcessDC = cdCreator.createProcess("blockDomain");
+		// execute interpreter
+		Interpreter interpreter = new Interpreter();
+		if (interpreter.interprete(addProcessDC, context)) {
+			System.out.println("Synchronization is successful!");
+		}
+		// save domain roots to output, there is a base resource
+		saveDomainRootsToResources(context, outputURI, "Scene05");
+		// check result
+		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
+		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
+		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
+		
+		EObject processEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getProcessCore());
+		assertNotNull(processEObject);
+		EObject classEObject = getSynchronizedObject(processEObject, traceLinksDR);
+		assertNotNull(classEObject);
+		EObject processName = getRoleOf(processEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		EObject className = getRoleOf(classEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotSame(processName, className);
+		assertEquals("Control", processName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		assertEquals("ControlOperation", className.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject processStereotype = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
+		assertNotNull(processStereotype);
+		EObject processStereotypeName = getRoleOf(processStereotype, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotNull(processStereotypeName);
+		assertEquals("process", processStereotypeName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
+		assertNotNull(association);
 	}
 	
 	private EObject getSynchronizedObject(EObject coreEObject, DomainRoot traceLinksDR) {

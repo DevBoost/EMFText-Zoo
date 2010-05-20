@@ -24,6 +24,7 @@ import org.emftext.language.rolecore.blockdomain.BlockDiagram;
 import org.emftext.language.rolecore.blockdomain.BlockDiagramCore;
 import org.emftext.language.rolecore.blockdomain.BlockdomainFactory;
 import org.emftext.language.rolecore.blockdomain.BlockdomainPackage;
+import org.emftext.language.rolecore.blockdomain.ProcessCore;
 import org.emftext.language.rolecore.blockdomain.SystemBlock;
 import org.emftext.language.rolecore.blockdomain.SystemBlockCore;
 import org.emftext.language.rolecore.classdomain.ClassDiagram;
@@ -344,6 +345,38 @@ public class ChangeDescriptionCreator {
 		return cd;
 	}
 
+	public ChangeDescription createProcess(String domainName) {
+		DomainRoot dr = context.findOrCreateDomainRoot(domainName);
+		BlockDiagram bd = null;
+		SystemBlock container = null;
+		for (EObject eObject : dr.getEObjects()) {
+			if (eObject instanceof BlockDiagramCore) {
+				bd = (BlockDiagram) eObject;
+			}
+			if (eObject instanceof SystemBlockCore){
+				container = (SystemBlock) eObject;
+			}
+		}
+		ProcessCore process = (ProcessCore) context.createCoreClass(BlockdomainPackage.eINSTANCE.getProcessCore());
+		EObject blockChildrenRole = BlockdomainFactory.eINSTANCE.createBlockChildrenRole();
+		EObject connectableContainerRole = BlockdomainFactory.eINSTANCE.createConnectableContainerRole();
+		Name name = BlockclassbaseFactory.eINSTANCE.createName();
+		EObject mebdRole = BlockclassbaseFactory.eINSTANCE.createModelelementBlockdiagramRole();
+		EObject bdeRole = BlockdomainFactory.eINSTANCE.createBlockdiagramElementsRole();
+
+		ChangeDescription cd = ChangeFactory.eINSTANCE.createChangeDescription();
+		// associate container and child
+		addRoleAndReferenceCoreToCore(container, blockChildrenRole, process, cd);
+		// add a Name for Process
+		addRoleAndDataTypeToCore(process, name, "Control", cd);
+		// add a block diagram to process
+		addRoleAndReferenceCoreToCore(process, mebdRole, bd, cd);
+		// add container
+		addRoleAndReferenceCoreToCore(process, connectableContainerRole, container, cd);
+		// add process to block diagram
+		addRoleAndReferenceCoreToCore(bd, bdeRole, process, cd);
+		return cd;
+	}
 	private void addRoleAndDataTypeToCore(EObject coreEObject, EObject role, String data,
 			ChangeDescription changeDescription) {
 		addRoleToCoreAndReverse(role, coreEObject, changeDescription);
