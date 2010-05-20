@@ -26,6 +26,8 @@ OPTIONS {
 	reloadGeneratorModel="true";
 	resourcePluginID="org.emftext.language.xml.resource.xml";
 	basePackage="org.emftext.language.xml.resource.xml";
+	resourceUIPluginID="org.emftext.language.xml.resource.xml.ui";
+	uiBasePackage="org.emftext.language.xml.resource.xml.ui";
 }
 
 TOKENS{

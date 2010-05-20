@@ -24,6 +24,8 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	resourcePluginID = "org.emftext.language.km3.resource.km3";
 	basePackage = "org.emftext.language.km3.resource.km3";
+	resourceUIPluginID = "org.emftext.language.km3.resource.km3.ui";
+	uiBasePackage = "org.emftext.language.km3.resource.km3.ui";
 	defaultTokenName ="NAME";
 	tokenspace = "1";
 }

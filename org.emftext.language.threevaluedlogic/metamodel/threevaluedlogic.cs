@@ -39,7 +39,7 @@ RULES {
 	@operator(type="binary_left_associative",weight="2", identifier="Formula")
 	And      ::= children "AND" children;
 	
-	@operator(type="unary", weight="3", identifier="Formula")
+	@operator(type="unary_prefix", weight="3", identifier="Formula")
 	Negation ::= "NOT" body;
 	
 	@operator(type="primitive", weight="4", identifier="Formula")

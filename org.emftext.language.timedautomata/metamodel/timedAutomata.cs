@@ -15,6 +15,8 @@ OPTIONS {
 	reloadGeneratorModel = "true";
 	resourcePluginID = "org.emftext.language.timedautomata.resource.ta";
 	basePackage = "org.emftext.language.timedautomata.resource.ta";
+	resourceUIPluginID = "org.emftext.language.timedautomata.resource.ta.ui";
+	uiBasePackage = "org.emftext.language.timedautomata.resource.ta.ui";
 }
 
 TOKENS {

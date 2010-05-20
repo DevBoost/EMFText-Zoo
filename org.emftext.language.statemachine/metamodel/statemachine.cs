@@ -19,6 +19,8 @@ OPTIONS {
 	tokenspace = "1";
 	resourcePluginID = "org.emftext.language.statemachine.resource.statemachine";
 	basePackage = "org.emftext.language.statemachine.resource.statemachine";
+	resourceUIPluginID = "org.emftext.language.statemachine.resource.statemachine.ui";
+	uiBasePackage = "org.emftext.language.statemachine.resource.statemachine.ui";
 }
 
 TOKENS {
