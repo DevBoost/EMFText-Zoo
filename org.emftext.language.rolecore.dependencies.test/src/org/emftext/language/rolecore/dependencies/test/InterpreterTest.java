@@ -47,7 +47,7 @@ public class InterpreterTest extends TestCase {
 	private ChangeDescriptionCreator cdCreator;
 	private InterpretationContext context;
 	private List<Graph> dependencies;
-	
+
 	public void setUp() {
 		// register the Factories
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -57,8 +57,10 @@ public class InterpreterTest extends TestCase {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("change", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		// register the Packages
-		/*register(FamiliesPackage.eINSTANCE);
-		register(PersonsPackage.eINSTANCE);*/
+		/*
+		 * register(FamiliesPackage.eINSTANCE);
+		 * register(PersonsPackage.eINSTANCE);
+		 */
 		register(Riehle97Package.eINSTANCE);
 		register(InterpreterPackage.eINSTANCE);
 		register(ChangePackage.eINSTANCE);
@@ -82,8 +84,7 @@ public class InterpreterTest extends TestCase {
 		context.addResource(customerBResource);
 
 		// load dependency models
-		dependencies.add((Graph) context.loadResource(inputURI + "customer.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "customer.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		ChangeDescription addCustomerToCustomerADC = cdCreator.createAddCustomerToResourceCD(customerAResource);
@@ -96,8 +97,7 @@ public class InterpreterTest extends TestCase {
 		context.saveResource(addCustomerToCustomerADC, outputURI + "addCustomerToCustomersA.change.xmi");
 		context.saveResource(customerAResource, outputURI + "customersA.xmi");
 		context.saveResource(customerBResource, outputURI + "customersB.xmi");
-		context.saveResource(context.findOrCreateTraceLinksDomainRoot(), outputURI
-				+ "customersABTraceLinks.xmi");
+		context.saveResource(context.findOrCreateTraceLinksDomainRoot(), outputURI + "customersABTraceLinks.xmi");
 		// check result
 		DomainRoot customersADR = context.findOrCreateDomainRoot("customersA");
 		DomainRoot customersBDR = context.findOrCreateDomainRoot("customersB");
@@ -125,8 +125,7 @@ public class InterpreterTest extends TestCase {
 	public void testAddClassDiagram() {
 		// load dependency models
 		// TODO add more dependencies
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		ChangeDescription addClassDiagramDC = cdCreator.createAddClassDiagram("classDomain");
@@ -159,7 +158,7 @@ public class InterpreterTest extends TestCase {
 		assertEquals(blockDiagram, equalTraceLink.getSource());
 		assertEquals(classDiagram, equalTraceLink.getTarget());
 	}
-	
+
 	/**
 	 * <ul>
 	 * <li>testAdd system block w/o container</li>
@@ -168,17 +167,15 @@ public class InterpreterTest extends TestCase {
 	 * <li>Use same base ModelElement for system block and class</li>
 	 * </ul>
 	 */
-	public void testAddSystemBlock(){
-		//load resources
-		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene02TraceLinks.xmi"));
+	public void testAddSystemBlock() {
+		// load resources
+		context.addResource(context.loadResource(inputURI + "Scene02blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene02classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene02TraceLinks.xmi"));
 		// load dependency models
 		// TODO test more dependencies
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		// domain name is in the dependencies
@@ -198,17 +195,15 @@ public class InterpreterTest extends TestCase {
 	 * Test the inverted way of testtestAddSystemBlock and the indirect Roles.
 	 * Results must be the same like testtestAddSystemBlock
 	 */
-	public void testAddSystemClass(){
-		//load resources
-		context.addResource(context.loadResource(inputURI+"Scene02blockDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene02classDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene02TraceLinks.xmi"));
+	public void testAddSystemClass() {
+		// load resources
+		context.addResource(context.loadResource(inputURI + "Scene02blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene02classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene02TraceLinks.xmi"));
 		// load dependency models
 		// TODO test more dependencies
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		// domain name is in the dependencies
@@ -231,7 +226,7 @@ public class InterpreterTest extends TestCase {
 		EObject stereotype = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
 		assertNotNull(stereotype);
 		EClass name = BlockclassbasePackage.eINSTANCE.getName_();
-		Name stereotypeName = (Name) getRoleOf(stereotype, name); 
+		Name stereotypeName = (Name) getRoleOf(stereotype, name);
 		assertNotNull(stereotypeName);
 		assertEquals("system", stereotypeName.getName());
 		EObject classEObject = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getClassCore());
@@ -246,24 +241,21 @@ public class InterpreterTest extends TestCase {
 		EObject systemBlockName = getRoleOf(systemBlock, name);
 		assertEquals(className, systemBlockName);
 	}
-	
+
 	/**
 	 * Test the container object in Required.
 	 */
-	public void testAddBlock(){
-		//load resources
-		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03blockDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03classDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
+	public void testAddBlock() {
+		// load resources
+		context.addResource(context.loadResource(inputURI + "Scene03blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03TraceLinks.xmi"));
 		// load dependency models
 		// TODO test more dependencies
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		// domain name is in the dependencies
@@ -279,7 +271,7 @@ public class InterpreterTest extends TestCase {
 		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
 		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
 		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
-		
+
 		EObject blockEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getBlockCore());
 		assertNotNull(blockEObject);
 		EObject classEObject = getSynchronizedObject(blockEObject, traceLinksDR);
@@ -296,25 +288,23 @@ public class InterpreterTest extends TestCase {
 		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
 		assertNotNull(association);
 	}
+
 	/**
-	 * Test the container object in Required.
+	 * Test the indirect role Name of process. Due to the unidirectional
+	 * operation role Name of class is the same as of process.
 	 */
-	public void testAddProcessA(){
-		//load resources
-		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03blockDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03classDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
+	public void testAddProcessA() {
+		// load resources
+		context.addResource(context.loadResource(inputURI + "Scene03blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03TraceLinks.xmi"));
 		// load dependency models
 		// TODO test more dependencies
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest04.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest04.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		// domain name is in the dependencies
@@ -330,7 +320,7 @@ public class InterpreterTest extends TestCase {
 		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
 		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
 		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
-		
+
 		EObject processEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getProcessCore());
 		assertNotNull(processEObject);
 		EObject classEObject = getSynchronizedObject(processEObject, traceLinksDR);
@@ -348,25 +338,23 @@ public class InterpreterTest extends TestCase {
 		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
 		assertNotNull(association);
 	}
+
 	/**
-	 * Test the container object in Required.
+	 * Test the direct role Name of process. Due to the unidirectional operation
+	 * role Name of class is not the same as of process.
 	 */
-	public void testAddProcessB(){
-		//load resources
-		context.addResource(context.loadResource(inputURI+"Scene03blockclassbase.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03blockDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03classDomain.xmi"));
-		context.addResource(context.loadResource(inputURI+"Scene03TraceLinks.xmi"));
+	public void testAddProcessB() {
+		// load resources
+		context.addResource(context.loadResource(inputURI + "Scene03blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene03TraceLinks.xmi"));
 		// load dependency models
 		// TODO test more dependencies
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents()
-				.get(0));
-		dependencies.add((Graph) context.loadResource(inputURI + "bctest05.dependencies").getContents()
-				.get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest05.dependencies").getContents().get(0));
 		context.setDependencies(dependencies);
 		// create change in memory (http://www.eclipse.org/emf/2003/Change)
 		// domain name is in the dependencies
@@ -378,11 +366,12 @@ public class InterpreterTest extends TestCase {
 		}
 		// save domain roots to output, there is a base resource
 		saveDomainRootsToResources(context, outputURI, "Scene05");
+		saveDomainRootsToResources(context, inputURI, "Scene05");
 		// check result
 		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
 		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
 		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
-		
+
 		EObject processEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getProcessCore());
 		assertNotNull(processEObject);
 		EObject classEObject = getSynchronizedObject(processEObject, traceLinksDR);
@@ -400,15 +389,65 @@ public class InterpreterTest extends TestCase {
 		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
 		assertNotNull(association);
 	}
-	
+
+	/**
+	 * Change the process name to "Observing"
+	 */
+	public void testChangeProcessName() {
+		// load resources
+		context.addResource(context.loadResource(inputURI + "Scene05blockclassbase.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene05blockDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene05classDomain.xmi"));
+		context.addResource(context.loadResource(inputURI + "Scene05TraceLinks.xmi"));
+		// load dependency models
+		// TODO test more dependencies
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest01.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest02.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest03.dependencies").getContents().get(0));
+		dependencies.add((Graph) context.loadResource(inputURI + "bctest05.dependencies").getContents().get(0));
+		context.setDependencies(dependencies);
+		// create change in memory (http://www.eclipse.org/emf/2003/Change)
+		// domain name is in the dependencies
+		ChangeDescription changeProcessNameDC = cdCreator.changeProcessName("blockDomain");
+		// execute interpreter
+		Interpreter interpreter = new Interpreter();
+		if (interpreter.interprete(changeProcessNameDC, context)) {
+			System.out.println("Synchronization is successful!");
+		}
+//		 save domain roots to output, there is a base resource
+//		saveDomainRootsToResources(context, outputURI, "Scene05A");
+//		 check result
+		DomainRoot classDomainDR = context.findOrCreateDomainRoot("classDomain");
+		DomainRoot blockDomainDR = context.findOrCreateDomainRoot("blockDomain");
+		DomainRoot traceLinksDR = context.findOrCreateTraceLinksDomainRoot();
+		EObject processEObject = getLastCoreEObject(blockDomainDR, BlockdomainPackage.eINSTANCE.getProcessCore());
+		assertNotNull(processEObject);
+		EObject classEObject = getSynchronizedObject(processEObject, traceLinksDR);
+		assertNotNull(classEObject);
+		EObject processName = getRoleOf(processEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		EObject className = getRoleOf(classEObject, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotSame(processName, className);
+		assertEquals("Observing", processName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		assertEquals("ObservingOperation", className.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject processStereotype = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getStereotypeCore());
+		assertNotNull(processStereotype);
+		EObject processStereotypeName = getRoleOf(processStereotype, BlockclassbasePackage.eINSTANCE.getName_());
+		assertNotNull(processStereotypeName);
+		assertEquals("process", processStereotypeName.eGet(BlockclassbasePackage.eINSTANCE.getName_Name()));
+		EObject association = getLastCoreEObject(classDomainDR, ClassdomainPackage.eINSTANCE.getAssociationCore());
+		assertNotNull(association);
+	}
+
 	private EObject getSynchronizedObject(EObject coreEObject, DomainRoot traceLinksDR) {
 		for (EObject eObject : traceLinksDR.getEObjects()) {
-			if(eObject instanceof EqualTraceLink){
+			if (eObject instanceof EqualTraceLink) {
 				EqualTraceLink link = (EqualTraceLink) eObject;
-				if (link.getSource().equals(coreEObject)){
+//				EObject sourceOE = link.getSource();
+//				EObject targetOE = link.getTarget();
+				if (link.getSource().equals(coreEObject)) {
 					return link.getTarget();
 				}
-				if (link.getTarget().equals(coreEObject)){
+				if (link.getTarget().equals(coreEObject)) {
 					return link.getSource();
 				}
 			}
@@ -418,7 +457,7 @@ public class InterpreterTest extends TestCase {
 
 	private EObject getRoleOf(EObject coreEObject, EClass role) {
 		List<EObject> roles = context.getRoleEObjects(coreEObject, role);
-		if (roles!=null&&roles.size()>0){
+		if (roles != null && roles.size() > 0) {
 			return roles.get(0);
 		}
 		return null;
@@ -427,15 +466,15 @@ public class InterpreterTest extends TestCase {
 	private EObject getLastCoreEObject(DomainRoot domainRoot, EClass coreEClass) {
 		List<EObject> coreEObjects = new ArrayList<EObject>();
 		addCoreEObjects(domainRoot, coreEClass, coreEObjects);
-		if (coreEObjects.size()>0){
-			return coreEObjects.get(coreEObjects.size()-1);
+		if (coreEObjects.size() > 0) {
+			return coreEObjects.get(coreEObjects.size() - 1);
 		}
 		return null;
 	}
 
 	private void addCoreEObjects(EObject container, EClass coreEClass, List<EObject> coreEObjects) {
 		for (EObject eObject : container.eContents()) {
-			if (eObject.eClass().equals(coreEClass) && eObject.equals(context.getLeafCore(eObject))){
+			if (eObject.eClass().equals(coreEClass) && eObject.equals(context.getLeafCore(eObject))) {
 				coreEObjects.add(eObject);
 			}
 			addCoreEObjects(eObject, coreEClass, coreEObjects);
@@ -443,15 +482,24 @@ public class InterpreterTest extends TestCase {
 	}
 
 	private void saveDomainRootsToResources(InterpretationContext context, String location, String prefix) {
-		ResourceSet resourceSet = new ResourceSetImpl();
+		// ResourceSet resourceSet = new ResourceSetImpl();
+		ResourceSet resourceSet = context.getResourceSet();
 		List<Resource> resources = new ArrayList<Resource>();
 		for (DomainRoot domainRoot : context.getDomainRoots()) {
-			Resource resource = resourceSet.createResource(URI.createFileURI(location + prefix + domainRoot.getName() + ".xmi"));
+			Resource resource = resourceSet.createResource(URI.createFileURI(location + prefix + domainRoot.getName()
+					+ ".xmi"));
 			resource.getContents().add(domainRoot);
 			resources.add(resource);
 		}
 		for (Resource resource : resources) {
-			context.saveResource(resource, null);
+			if (!((DomainRoot) resource.getContents().get(0)).getName().equals("TraceLinks")) {
+				context.saveResource(resource, null);
+			}
+		}
+		for (Resource resource : resources) {
+			if (((DomainRoot) resource.getContents().get(0)).getName().equals("TraceLinks")) {
+				context.saveResource(resource, null);
+			}
 		}
 	}
 

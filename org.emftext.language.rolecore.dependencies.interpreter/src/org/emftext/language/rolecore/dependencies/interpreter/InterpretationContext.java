@@ -2,25 +2,20 @@ package org.emftext.language.rolecore.dependencies.interpreter;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.ChangeKind;
 import org.eclipse.emf.ecore.change.FeatureChange;
 import org.eclipse.emf.ecore.change.ListChange;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -30,12 +25,10 @@ import org.emftext.language.rolecore.dependencies.CoreClass;
 import org.emftext.language.rolecore.dependencies.Domain;
 import org.emftext.language.rolecore.dependencies.Edge;
 import org.emftext.language.rolecore.dependencies.Graph;
-import org.emftext.language.rolecore.dependencies.RightTerm;
 import org.emftext.language.rolecore.dependencies.SimpleTerm;
 import org.emftext.language.rolecore.dependencies.interpreter.DomainRoot;
 import org.emftext.language.rolecore.interfaces.InterfacesPackage;
 import org.emftext.language.rolecore.interfaces.RCCore;
-import org.emftext.language.rolecore.interfaces.RCRole;
 
 /**
  * @author BluAngel
@@ -61,6 +54,7 @@ public class InterpretationContext {
 	private static final String CORE_CLASS_SUFFIX = "Core";
 	private static final String TRACE_LINK_DOMAIN_ROOT_NAME = "TraceLinks";
 	private CreatingHelpClass creatingHelpClass;
+	private ChangingHelpClass changingHelpClass;
 	private ResourceSet resourceSet;
 
 	public ResourceSet getResourceSet() {
@@ -496,8 +490,8 @@ public class InterpretationContext {
 		int isCHANGE = 1;
 		int isADD = 0;
 		int isREMOVE = 0;
-		for (Iterator<EObject> eObjects = changeDescription.getObjectChanges().keySet().iterator(); eObjects.hasNext();) {
-			EList<FeatureChange> featureChanges = changeDescription.getObjectChanges().get(eObjects.next());
+		for (EObject eObject : changeDescription.getObjectChanges().keySet()) {
+			EList<FeatureChange> featureChanges = changeDescription.getObjectChanges().get(eObject);
 			for (FeatureChange featureChange : featureChanges) {
 				EList<ListChange> listChanges = featureChange.getListChanges();
 				if (listChanges != null && listChanges.size() > 0) {
@@ -606,6 +600,14 @@ public class InterpretationContext {
 		if (superCoreEObject != null && superCoreEObject instanceof RCCore) {
 			addEObjectsWithoutContainer((EObject) superCoreEObject, eObjects);
 		}
+	}
+
+	public void resetChangingHelpClass() {
+		changingHelpClass = new ChangingHelpClass(this);
+	}
+	
+	public ChangingHelpClass getChangingHelpClass(){
+		return changingHelpClass;
 	}
 
 }

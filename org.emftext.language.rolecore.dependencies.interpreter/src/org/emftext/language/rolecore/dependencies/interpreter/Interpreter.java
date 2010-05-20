@@ -69,6 +69,11 @@ public class Interpreter extends AbstractDependenciesInterpreter<Boolean, Interp
 				}
 			}
 		}
+		if (context.isChangeKind(ChangeKind.MOVE)){
+			context.resetChangingHelpClass();
+			context.getChangingHelpClass().applyChange(changeDescription);
+			success = true;
+		}
 		resetChangeKind(context);
 		return success;
 	}

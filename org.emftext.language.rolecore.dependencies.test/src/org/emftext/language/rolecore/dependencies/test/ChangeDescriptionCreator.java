@@ -38,6 +38,7 @@ import org.emftext.language.rolecore.dependencies.interpreter.InterpreterPackage
 import org.emftext.language.rolecore.families.FamiliesPackage;
 import org.emftext.language.rolecore.families.FamilyDomainCore;
 import org.emftext.language.rolecore.interfaces.RCCore;
+import org.emftext.language.rolecore.interfaces.RCRole;
 import org.emftext.language.rolecore.riehle97base.Riehle97basePackage;
 
 public class ChangeDescriptionCreator {
@@ -377,6 +378,26 @@ public class ChangeDescriptionCreator {
 		addRoleAndReferenceCoreToCore(bd, bdeRole, process, cd);
 		return cd;
 	}
+	
+	public ChangeDescription changeProcessName(String domainName) {
+		DomainRoot dr = context.findOrCreateDomainRoot(domainName);
+		ProcessCore process = null;
+		for (EObject eObject : dr.getEObjects()) {
+			if (eObject instanceof RCRole){
+				for (EObject child : eObject.eContents()){
+					if (child instanceof ProcessCore){
+						process = (ProcessCore) child;
+						break;
+					}
+				}
+			}
+		}
+		EObject name = context.getRoleEObjects(process, BlockclassbasePackage.eINSTANCE.getName_()).get(0);
+		ChangeDescription cd = ChangeFactory.eINSTANCE.createChangeDescription();
+		addAttributeToRole(name, "Observing", cd);
+		return cd;
+	}
+	
 	private void addRoleAndDataTypeToCore(EObject coreEObject, EObject role, String data,
 			ChangeDescription changeDescription) {
 		addRoleToCoreAndReverse(role, coreEObject, changeDescription);
