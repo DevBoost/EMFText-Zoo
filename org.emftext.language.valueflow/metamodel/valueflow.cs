@@ -22,6 +22,8 @@ OPTIONS {
 	
 	resourcePluginID = "org.emftext.language.valueflow.resource.valueflow";
 	basePackage = "org.emftext.language.valueflow.resource.valueflow";
+	resourceUIPluginID = "org.emftext.language.valueflow.resource.valueflow.ui";
+	uiBasePackage = "org.emftext.language.valueflow.resource.valueflow.ui";
 	baseResourcePlugin = "org.emftext.language.valueflow.resource";
 }
 

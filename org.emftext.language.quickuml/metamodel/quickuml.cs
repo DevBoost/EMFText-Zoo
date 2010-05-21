@@ -20,6 +20,8 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
  	resourcePluginID = "org.emftext.language.quickuml.resource.quml";
 	basePackage = "org.emftext.language.quickuml.resource.quml";
+ 	resourceUIPluginID = "org.emftext.language.quickuml.resource.quml.ui";
+	uiBasePackage = "org.emftext.language.quickuml.resource.quml.ui";
 	tokenspace = "1";
 }
 
