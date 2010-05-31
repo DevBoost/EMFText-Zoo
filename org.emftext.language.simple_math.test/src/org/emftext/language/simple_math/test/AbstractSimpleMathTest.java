@@ -32,15 +32,15 @@ public abstract class AbstractSimpleMathTest extends TestCase {
 			String fileIdentifier) throws IOException {
 
 		Resource resource = load(inputStream, fileIdentifier);
+		EList<Diagnostic> errors = resource.getErrors();
+		for (Diagnostic diagnostic : errors) {
+			System.out.println("loadResource() ERROR: " + diagnostic.getMessage());
+		}
 		assertEquals("The resource should have one content element.", 1,
 				resource.getContents().size());
 		EObject content = resource.getContents().get(0);
 		assertTrue("File '" + fileIdentifier + "' was parsed to type Expression.",
 				content instanceof Expression);
-		EList<Diagnostic> errors = resource.getErrors();
-		for (Diagnostic diagnostic : errors) {
-			System.out.println("loadResource() ERROR: " + diagnostic.getMessage());
-		}
 		assertEquals(0, errors.size());
 		assertEquals(0, resource.getWarnings().size());
 		Expression root = (Expression) content;
