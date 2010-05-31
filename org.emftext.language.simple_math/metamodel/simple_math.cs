@@ -28,6 +28,9 @@ TOKENS {
 	DEFINE MULTIPLICATIVE_OPERATOR $ '*' | '/' $;
 	DEFINE INTEGER_LITERAL $('1'..'9') ('0'..'9')* | '0'$;
 	DEFINE REAL_LITERAL $ (('1'..'9') ('0'..'9')* | '0') '.' ('0'..'9')+ (('e'|'E') ('+'|'-')? ('0'..'9')*)?$;
+
+	DEFINE WHITESPACE $(' '|'\t'|'\f')$;
+	DEFINE LINEBREAKS $('\r\n'|'\r'|'\n')$;
 }
 
 RULES {
