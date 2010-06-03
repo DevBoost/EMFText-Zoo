@@ -1,0 +1,74 @@
+package org.emftext.language.simple_math.test;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EList;
+import org.emftext.language.simple_math.Additive;
+import org.emftext.language.simple_math.Expression;
+import org.emftext.language.simple_math.IntegerLiteralExp;
+import org.emftext.language.simple_math.resource.sm.mopp.SmLayoutInformation;
+import org.emftext.language.simple_math.resource.sm.mopp.SmLayoutInformationAdapter;
+
+public class LayoutAdapterTest extends AbstractSimpleMathTest {
+
+	public void testStartOffsets() {
+		InputStream bais = new ByteArrayInputStream("1+2".getBytes());
+		try {
+			Expression expression = loadResource(bais, "memory");
+			assertTrue(expression instanceof Additive);
+			// the first character that belongs to the additive
+			// expression is the plus, which is why the start offset
+			// is 1
+			assertStartOffset(expression, 1);
+			
+			Additive additive = (Additive) expression;
+			Expression left = additive.getLeft();
+			assertTrue(left instanceof IntegerLiteralExp);
+			assertStartOffset(left, 0);
+
+			Expression right = additive.getRight();
+			assertTrue(right instanceof IntegerLiteralExp);
+			assertStartOffset(right, 2);
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	private void assertStartOffset(Expression expression, int expectedOffset) {
+		int actualOffset = getStartOffset(expression);
+		assertEquals("Offsets must match.", expectedOffset, actualOffset);
+	}
+
+	private int getStartOffset(Expression expression) {
+		SmLayoutInformationAdapter adapter = getLayoutInformationAdapter(expression);
+		assertNotNull(adapter);
+		List<SmLayoutInformation> informations = adapter.getLayoutInformations();
+		assertNotNull(informations);
+		assertTrue(informations.size() > 0);
+		SmLayoutInformation first = informations.get(0);
+		assertNotNull(first);
+		return first.getStartOffset();
+	}
+
+	private SmLayoutInformationAdapter getLayoutInformationAdapter(
+			Expression expression) {
+		EList<Adapter> adapters = expression.eAdapters();
+		for (Adapter adapter : adapters) {
+			if (adapter instanceof SmLayoutInformationAdapter) {
+				return (SmLayoutInformationAdapter) adapter;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Map<?, ?> getLoadOptions() {
+		return Collections.emptyMap();
+	}
+}
