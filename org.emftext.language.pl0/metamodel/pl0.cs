@@ -21,7 +21,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
-	overridePluginXML = "false";
+	//overridePluginXML = "false";
 }
 
 TOKENS {
@@ -46,16 +46,16 @@ TOKENSTYLES {
 	"QUOTED_34_34" COLOR #FF0000, BOLD;
 	"PL0ID" COLOR #0000FF;
 	"NUMBER" COLOR #00FF00, ITALIC;
-	"program" COLOR #7F0085, BOLD;
-	"const" COLOR #7F0085, BOLD;
-	"var" COLOR #7F0085, BOLD;
-	"odd" COLOR #7F0085, BOLD;
-	"begin" COLOR #7F0085, BOLD;
-	"end" COLOR #7F0085, BOLD;
-	"while" COLOR #7F0085, BOLD;
-	"do" COLOR #7F0085, BOLD;
-	"then" COLOR #7F0085, BOLD;
-	"else" COLOR #7F0085, BOLD;
+	//"program" COLOR #7F0085, BOLD;
+	//"const" COLOR #7F0085, BOLD;
+	//"var" COLOR #7F0085, BOLD;
+	//"odd" COLOR #7F0085, BOLD;
+	//"begin" COLOR #7F0085, BOLD;
+	//"end" COLOR #7F0085, BOLD;
+	//"while" COLOR #7F0085, BOLD;
+	//"do" COLOR #7F0085, BOLD;
+	//"then" COLOR #7F0085, BOLD;
+	//"else" COLOR #7F0085, BOLD;
 	":=" COLOR #000000, BOLD;
 }
 
