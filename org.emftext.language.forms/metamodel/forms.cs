@@ -20,6 +20,7 @@ OPTIONS {
 	licenceHeader ="platform:/resource/org.reuseware/licence.txt";
 	overrideBuilder = "false";
 	additionalDependencies = "org.emftext.language.forms.generator";
+	//useClassicPrinter = "false";
 }
 
 TOKENS {
@@ -41,9 +42,9 @@ TOKENSTYLES {
 }
   
 RULES {
-	Form ::= "FORM" caption['"','"'] groups*;
-	Group ::= "GROUP" name['"','"'] items*;
-	Item ::= "ITEM" text['"','"'] ( explanation['"','"'] )? ("ONLY" "IF" dependentOf[])? ":" itemType;
+	Form ::= "FORM" caption['"','"'] !1 groups*;
+	Group ::= !0 "GROUP" name['"','"'] !0 items*;
+	Item ::= "ITEM" text['"','"'] ( explanation['"','"'] )? ("ONLY" "IF" dependentOf[])? ":" itemType !0;
 	Choice ::= "CHOICE" (multiple[MULTIPLE])? "(" options ("," options)* ")";
 	Option ::= ( id[] ":")? text['"','"'];
 	Date ::= "DATE";
