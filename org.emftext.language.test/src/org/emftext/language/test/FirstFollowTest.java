@@ -16,7 +16,10 @@ import org.emftext.sdk.codegen.resource.generators.code_completion.helpers.Expec
 import org.emftext.sdk.concretesyntax.Annotation;
 import org.emftext.sdk.concretesyntax.ConcreteSyntax;
 import org.emftext.sdk.concretesyntax.KeyValuePair;
+import org.emftext.sdk.concretesyntax.PLUS;
+import org.emftext.sdk.concretesyntax.QUESTIONMARK;
 import org.emftext.sdk.concretesyntax.Rule;
+import org.emftext.sdk.concretesyntax.STAR;
 import org.emftext.sdk.concretesyntax.SyntaxElement;
 import org.emftext.test.ConcreteSyntaxTestHelper;
 
@@ -33,13 +36,13 @@ public class FirstFollowTest extends TestCase {
 			".*/efactory.cs",
 			".*/eJava.cs",
 			".*/JavaBehavior4UML.cs",
-			".*/java_templates.cs",
+			".*/jtemplates.cs",
 			".*/owl.cs",
 			".*/plugin.cs",
 			".*/quickuml.cs",
 			".*/statemachine.cs",
 			".*/tbool.cs",
-			".*/template_call.cs",
+			".*/templatecall.cs",
 			".*/valueflow.cs",
 			".*/concretesyntax.cs",
 			".*/fragment.cs",
@@ -51,6 +54,9 @@ public class FirstFollowTest extends TestCase {
 			".*/test/syntax_extension/.*.cs",
 			".*/reuseextensionactivator.cs",
 			".*/text.secprop.cs",
+			".*/rolemapping.cs",
+			".*/theater.cs",
+			".*/Properties.cs"
 	};
 	private ExpectationComputer computer;
 
@@ -107,7 +113,16 @@ public class FirstFollowTest extends TestCase {
 				if (next instanceof KeyValuePair) {
 					continue;
 				}
-				assertTrue(next instanceof SyntaxElement);
+				if (next instanceof STAR) {
+					continue;
+				}
+				if (next instanceof PLUS) {
+					continue;
+				}
+				if (next instanceof QUESTIONMARK) {
+					continue;
+				}
+				assertTrue(next + " must be a SyntaxElement", next instanceof SyntaxElement);
 				computer.computeFollowSet(syntax, (SyntaxElement) next);
 				i++;
 			}
