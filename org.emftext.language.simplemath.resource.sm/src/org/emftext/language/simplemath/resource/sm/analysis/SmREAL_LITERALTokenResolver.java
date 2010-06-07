@@ -11,18 +11,19 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.simple_math.resource.sm.analysis;
 
-public class SmADDITIVE_OPERATORTokenResolver implements org.emftext.language.simple_math.resource.sm.ISmTokenResolver {
+package org.emftext.language.simplemath.resource.sm.analysis;
+
+public class SmREAL_LITERALTokenResolver implements org.emftext.language.simplemath.resource.sm.ISmTokenResolver {
 	
-	private org.emftext.language.simple_math.resource.sm.analysis.SmDefaultTokenResolver defaultTokenResolver = new org.emftext.language.simple_math.resource.sm.analysis.SmDefaultTokenResolver();
+	private org.emftext.language.simplemath.resource.sm.analysis.SmDefaultTokenResolver defaultTokenResolver = new org.emftext.language.simplemath.resource.sm.analysis.SmDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
 		return result;
 	}
 	
-	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.simple_math.resource.sm.ISmTokenResolveResult result) {
+	public void resolve(java.lang.String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.emftext.language.simplemath.resource.sm.ISmTokenResolveResult result) {
 		defaultTokenResolver.resolve(lexem, feature, result);
 	}
 	
