@@ -12,8 +12,6 @@ import org.emftext.language.ecore.resource.text.ITextEcoreTokenResolveResult;
 
 public class TextEcoreT_UNCHANGEABLETokenResolver implements org.emftext.language.ecore.resource.text.ITextEcoreTokenResolver {
 	
-	private org.emftext.language.ecore.resource.text.analysis.TextEcoreDefaultTokenResolver defaultTokenResolver = new org.emftext.language.ecore.resource.text.analysis.TextEcoreDefaultTokenResolver();
-	
 	public java.lang.String deResolve(java.lang.Object value,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
 			org.eclipse.emf.ecore.EObject container) {
@@ -36,5 +34,4 @@ public class TextEcoreT_UNCHANGEABLETokenResolver implements org.emftext.languag
 
 	public void setOptions(Map<?, ?> options) {
 	}
-	
 }
