@@ -11,14 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.simple_gui.resource.simplegui.analysis;
+
+package org.emftext.language.simplegui.resource.simplegui.analysis;
 
 import java.util.Map;
 
-import org.emftext.language.simple_gui.resource.simplegui.ISimpleguiTokenResolveResult;
-import org.emftext.language.simple_gui.resource.simplegui.ISimpleguiTokenResolver;
+import org.emftext.language.simplegui.resource.simplegui.ISimpleguiTokenResolveResult;
 
-public class SimpleguiTEXTTokenResolver implements ISimpleguiTokenResolver {
+public class SimpleguiTEXTTokenResolver implements org.emftext.language.simplegui.resource.simplegui.ISimpleguiTokenResolver {
 	
 	private SimpleguiDefaultTokenResolver defaultResolver = new SimpleguiDefaultTokenResolver();
 
