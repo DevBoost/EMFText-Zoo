@@ -95,15 +95,15 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.rails.resource.rails.mopp.RailsMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.simple_c.resource.c.mopp.CMetaInformation());
+				new org.emftext.language.simplec.resource.c.mopp.CMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.sandwich.resource.sandwich.mopp.SandwichMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.secprop.resource.text.secprop.mopp.TextSecpropMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.simple_gui.resource.simplegui.mopp.SimpleguiMetaInformation());
+				new org.emftext.language.simplegui.resource.simplegui.mopp.SimpleguiMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.simple_math.resource.sm.mopp.SmMetaInformation());
+				new org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.statemachine.resource.statemachine.mopp.StatemachineMetaInformation());
 		metaInformations.add(
