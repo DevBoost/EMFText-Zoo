@@ -1,4 +1,4 @@
-package org.emftext.language.simple_math.interpreter;
+package org.emftext.language.simplemath.interpreter;
 
 import java.util.Stack;
 

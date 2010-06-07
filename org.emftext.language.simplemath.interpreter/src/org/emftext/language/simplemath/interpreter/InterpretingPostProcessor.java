@@ -1,16 +1,16 @@
-package org.emftext.language.simple_math.interpreter;
+package org.emftext.language.simplemath.interpreter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.emftext.language.simple_math.Expression;
-import org.emftext.language.simple_math.resource.sm.ISmOptionProvider;
-import org.emftext.language.simple_math.resource.sm.ISmOptions;
-import org.emftext.language.simple_math.resource.sm.ISmResourcePostProcessor;
-import org.emftext.language.simple_math.resource.sm.ISmResourcePostProcessorProvider;
-import org.emftext.language.simple_math.resource.sm.mopp.SmResource;
+import org.emftext.language.simplemath.Expression;
+import org.emftext.language.simplemath.resource.sm.ISmOptionProvider;
+import org.emftext.language.simplemath.resource.sm.ISmOptions;
+import org.emftext.language.simplemath.resource.sm.ISmResourcePostProcessor;
+import org.emftext.language.simplemath.resource.sm.ISmResourcePostProcessorProvider;
+import org.emftext.language.simplemath.resource.sm.mopp.SmResource;
 
 public class InterpretingPostProcessor implements ISmOptionProvider, ISmResourcePostProcessorProvider, ISmResourcePostProcessor {
 

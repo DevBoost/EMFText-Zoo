@@ -1,12 +1,13 @@
-package org.emftext.language.simple_math.interpreter;
+package org.emftext.language.simplemath.interpreter;
 
-import org.emftext.language.simple_math.Additive;
-import org.emftext.language.simple_math.BracketExp;
-import org.emftext.language.simple_math.IntegerLiteralExp;
-import org.emftext.language.simple_math.Multiplicative;
-import org.emftext.language.simple_math.Negation;
-import org.emftext.language.simple_math.RealLiteralExp;
-import org.emftext.language.simple_math.resource.sm.util.AbstractSmInterpreter;
+import org.emftext.language.simplemath.Additive;
+import org.emftext.language.simplemath.BracketExp;
+import org.emftext.language.simplemath.IntegerLiteralExp;
+import org.emftext.language.simplemath.Multiplicative;
+import org.emftext.language.simplemath.Negation;
+import org.emftext.language.simplemath.Potence;
+import org.emftext.language.simplemath.RealLiteralExp;
+import org.emftext.language.simplemath.resource.sm.util.AbstractSmInterpreter;
 
 /**
  * A simple example interpreter that computes the value of the math expression.
@@ -14,7 +15,7 @@ import org.emftext.language.simple_math.resource.sm.util.AbstractSmInterpreter;
 public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, SimpleMathContext> {
 
 	@Override
-	public Boolean interprete_org_emftext_language_simple_005fmath_Additive(
+	public Boolean interprete_org_emftext_language_simplemath_Additive(
 			Additive object, SimpleMathContext context) {
 		double result;
 		if ("+".equals(object.getOperator())) {
@@ -29,7 +30,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_simple_005fmath_BracketExp(
+	public Boolean interprete_org_emftext_language_simplemath_BracketExp(
 			BracketExp object, SimpleMathContext context) {
 		double result = context.pop();
 		context.push(result);
@@ -38,7 +39,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_simple_005fmath_Multiplicative(
+	public Boolean interprete_org_emftext_language_simplemath_Multiplicative(
 			Multiplicative object, SimpleMathContext context) {
 		double result;
 		if ("*".equals(object.getOperator())) {
@@ -53,7 +54,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_simple_005fmath_Negation(
+	public Boolean interprete_org_emftext_language_simplemath_Negation(
 			Negation object, SimpleMathContext context) {
 		double result = context.pop();
 		if("-".equals(object.getOperator())){
@@ -65,7 +66,7 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_simple_005fmath_IntegerLiteralExp(
+	public Boolean interprete_org_emftext_language_simplemath_IntegerLiteralExp(
 			IntegerLiteralExp object, SimpleMathContext context) {
 		context.push(object.getIntValue());
 		object.setValue(object.getIntValue());
@@ -73,14 +74,14 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 	}
 
 	@Override
-	public Boolean interprete_org_emftext_language_simple_005fmath_RealLiteralExp(
+	public Boolean interprete_org_emftext_language_simplemath_RealLiteralExp(
 			RealLiteralExp object, SimpleMathContext context) {
 		context.push(object.getFloatValue());
 		object.setValue(object.getFloatValue());
 		return true;
 	}
 	
-	public Boolean interprete_org_emftext_language_simple_005fmath_Potence(org.emftext.language.simple_math.Potence object, SimpleMathContext context) {
+	public Boolean interprete_org_emftext_language_simple_005fmath_Potence(Potence object, SimpleMathContext context) {
 		double exponent = context.pop();
 		double base = context.pop();
 		double result = Math.pow(base,exponent);
