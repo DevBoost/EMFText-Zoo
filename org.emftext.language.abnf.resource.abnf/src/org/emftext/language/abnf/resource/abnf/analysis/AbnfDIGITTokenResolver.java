@@ -11,6 +11,12 @@ public class AbnfDIGITTokenResolver implements org.emftext.language.abnf.resourc
 	private org.emftext.language.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver defaultTokenResolver = new org.emftext.language.abnf.resource.abnf.analysis.AbnfDefaultTokenResolver();
 	
 	public java.lang.String deResolve(java.lang.Object value, org.eclipse.emf.ecore.EStructuralFeature feature, org.eclipse.emf.ecore.EObject container) {
+		if (value instanceof Integer) {
+			Integer intValue = (Integer) value;
+			if (intValue.intValue() == 0) {
+				return "";
+			}
+		}
 		java.lang.String result = defaultTokenResolver.deResolve(value, feature, container);
 		return result;
 	}
