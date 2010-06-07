@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -21,13 +20,13 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simple_math.NumberLiteralExp} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simple_math.NumberAtom} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NumberLiteralExpItemProvider
-	extends NumberAtomItemProvider
+public class NumberAtomItemProvider
+	extends ExpressionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -40,7 +39,7 @@ public class NumberLiteralExpItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NumberLiteralExpItemProvider(AdapterFactory adapterFactory) {
+	public NumberAtomItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -60,17 +59,6 @@ public class NumberLiteralExpItemProvider
 	}
 
 	/**
-	 * This returns NumberLiteralExp.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/NumberLiteralExp"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +66,7 @@ public class NumberLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_NumberLiteralExp_type");
+		return getString("_UI_NumberAtom_type");
 	}
 
 	/**

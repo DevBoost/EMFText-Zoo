@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -22,10 +20,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.emftext.language.simple_math.BracketExp;
-import org.emftext.language.simple_math.Simple_mathFactory;
-import org.emftext.language.simple_math.Simple_mathPackage;
+import org.emftext.language.simplemath.BracketExp;
+import org.emftext.language.simplemath.SimplemathFactory;
+import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
  * This is the item provider adapter for a {@link org.emftext.language.simple_math.BracketExp} object.
@@ -78,7 +75,7 @@ public class BracketExpItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Simple_mathPackage.Literals.BRACKET_EXP__BODY);
+			childrenFeatures.add(SimplemathPackage.Literals.BRACKET_EXP__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -131,7 +128,7 @@ public class BracketExpItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BracketExp.class)) {
-			case Simple_mathPackage.BRACKET_EXP__BODY:
+			case SimplemathPackage.BRACKET_EXP__BODY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -151,33 +148,33 @@ public class BracketExpItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.BRACKET_EXP__BODY,
-				 Simple_mathFactory.eINSTANCE.createAdditive()));
+				(SimplemathPackage.Literals.BRACKET_EXP__BODY,
+				 SimplemathFactory.eINSTANCE.createAdditive()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.BRACKET_EXP__BODY,
-				 Simple_mathFactory.eINSTANCE.createMultiplicative()));
+				(SimplemathPackage.Literals.BRACKET_EXP__BODY,
+				 SimplemathFactory.eINSTANCE.createMultiplicative()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.BRACKET_EXP__BODY,
-				 Simple_mathFactory.eINSTANCE.createNegation()));
+				(SimplemathPackage.Literals.BRACKET_EXP__BODY,
+				 SimplemathFactory.eINSTANCE.createNegation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.BRACKET_EXP__BODY,
-				 Simple_mathFactory.eINSTANCE.createIntegerLiteralExp()));
+				(SimplemathPackage.Literals.BRACKET_EXP__BODY,
+				 SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.BRACKET_EXP__BODY,
-				 Simple_mathFactory.eINSTANCE.createRealLiteralExp()));
+				(SimplemathPackage.Literals.BRACKET_EXP__BODY,
+				 SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.BRACKET_EXP__BODY,
-				 Simple_mathFactory.eINSTANCE.createBracketExp()));
+				(SimplemathPackage.Literals.BRACKET_EXP__BODY,
+				 SimplemathFactory.eINSTANCE.createBracketExp()));
 	}
 
 }

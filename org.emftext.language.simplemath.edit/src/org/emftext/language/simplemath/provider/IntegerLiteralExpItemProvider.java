@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,9 +12,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,19 +20,18 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.emftext.language.simple_math.Expression;
-import org.emftext.language.simple_math.Simple_mathPackage;
+import org.emftext.language.simplemath.IntegerLiteralExp;
+import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simple_math.Expression} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simple_math.IntegerLiteralExp} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionItemProvider
-	extends ItemProviderAdapter
+public class IntegerLiteralExpItemProvider
+	extends ExpressionItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +44,7 @@ public class ExpressionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionItemProvider(AdapterFactory adapterFactory) {
+	public IntegerLiteralExpItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,42 +59,42 @@ public class ExpressionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
+			addIntValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
+	 * This adds a property descriptor for the Int Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addValuePropertyDescriptor(Object object) {
+	protected void addIntValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Expression_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Expression_value_feature", "_UI_Expression_type"),
-				 Simple_mathPackage.Literals.EXPRESSION__VALUE,
+				 getString("_UI_IntegerLiteralExp_intValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerLiteralExp_intValue_feature", "_UI_IntegerLiteralExp_type"),
+				 SimplemathPackage.Literals.INTEGER_LITERAL_EXP__INT_VALUE,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns Expression.gif.
+	 * This returns IntegerLiteralExp.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Expression"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IntegerLiteralExp"));
 	}
 
 	/**
@@ -109,8 +105,8 @@ public class ExpressionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Expression expression = (Expression)object;
-		return getString("_UI_Expression_type") + " " + expression.getValue();
+		IntegerLiteralExp integerLiteralExp = (IntegerLiteralExp)object;
+		return getString("_UI_IntegerLiteralExp_type") + " " + integerLiteralExp.getValue();
 	}
 
 	/**
@@ -124,8 +120,8 @@ public class ExpressionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Expression.class)) {
-			case Simple_mathPackage.EXPRESSION__VALUE:
+		switch (notification.getFeatureID(IntegerLiteralExp.class)) {
+			case SimplemathPackage.INTEGER_LITERAL_EXP__INT_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -142,17 +138,6 @@ public class ExpressionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return Simple_mathEditPlugin.INSTANCE;
 	}
 
 }

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,21 +12,25 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.emftext.language.simplemath.RealLiteralExp;
+import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simple_math.NumberAtom} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simple_math.RealLiteralExp} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NumberAtomItemProvider
+public class RealLiteralExpItemProvider
 	extends ExpressionItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -40,7 +44,7 @@ public class NumberAtomItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NumberAtomItemProvider(AdapterFactory adapterFactory) {
+	public RealLiteralExpItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -55,8 +59,42 @@ public class NumberAtomItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addFloatValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Float Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFloatValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RealLiteralExp_floatValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RealLiteralExp_floatValue_feature", "_UI_RealLiteralExp_type"),
+				 SimplemathPackage.Literals.REAL_LITERAL_EXP__FLOAT_VALUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns RealLiteralExp.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RealLiteralExp"));
 	}
 
 	/**
@@ -67,7 +105,8 @@ public class NumberAtomItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_NumberAtom_type");
+		RealLiteralExp realLiteralExp = (RealLiteralExp)object;
+		return getString("_UI_RealLiteralExp_type") + " " + realLiteralExp.getValue();
 	}
 
 	/**
@@ -80,6 +119,12 @@ public class NumberAtomItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(RealLiteralExp.class)) {
+			case SimplemathPackage.REAL_LITERAL_EXP__FLOAT_VALUE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

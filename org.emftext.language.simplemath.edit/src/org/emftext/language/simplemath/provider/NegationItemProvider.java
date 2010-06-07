@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,18 +22,17 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.emftext.language.simple_math.Additive;
-import org.emftext.language.simple_math.Simple_mathFactory;
-import org.emftext.language.simple_math.Simple_mathPackage;
+import org.emftext.language.simplemath.Negation;
+import org.emftext.language.simplemath.SimplemathFactory;
+import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simple_math.Additive} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simple_math.Negation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AdditiveItemProvider
+public class NegationItemProvider
 	extends ExpressionItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +46,7 @@ public class AdditiveItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AdditiveItemProvider(AdapterFactory adapterFactory) {
+	public NegationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -80,9 +77,9 @@ public class AdditiveItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Additive_operator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Additive_operator_feature", "_UI_Additive_type"),
-				 Simple_mathPackage.Literals.ADDITIVE__OPERATOR,
+				 getString("_UI_Negation_operator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Negation_operator_feature", "_UI_Negation_type"),
+				 SimplemathPackage.Literals.NEGATION__OPERATOR,
 				 true,
 				 false,
 				 false,
@@ -103,8 +100,7 @@ public class AdditiveItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Simple_mathPackage.Literals.ADDITIVE__LEFT);
-			childrenFeatures.add(Simple_mathPackage.Literals.ADDITIVE__RIGHT);
+			childrenFeatures.add(SimplemathPackage.Literals.NEGATION__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -123,14 +119,14 @@ public class AdditiveItemProvider
 	}
 
 	/**
-	 * This returns Additive.gif.
+	 * This returns Negation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Additive"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Negation"));
 	}
 
 	/**
@@ -141,8 +137,8 @@ public class AdditiveItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Additive additive = (Additive)object;
-		return getString("_UI_Additive_type") + " " + additive.getValue();
+		Negation negation = (Negation)object;
+		return getString("_UI_Negation_type") + " " + negation.getValue();
 	}
 
 	/**
@@ -156,12 +152,11 @@ public class AdditiveItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Additive.class)) {
-			case Simple_mathPackage.ADDITIVE__OPERATOR:
+		switch (notification.getFeatureID(Negation.class)) {
+			case SimplemathPackage.NEGATION__OPERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case Simple_mathPackage.ADDITIVE__LEFT:
-			case Simple_mathPackage.ADDITIVE__RIGHT:
+			case SimplemathPackage.NEGATION__BODY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -181,86 +176,33 @@ public class AdditiveItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createAdditive()));
+				(SimplemathPackage.Literals.NEGATION__BODY,
+				 SimplemathFactory.eINSTANCE.createAdditive()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createMultiplicative()));
+				(SimplemathPackage.Literals.NEGATION__BODY,
+				 SimplemathFactory.eINSTANCE.createMultiplicative()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createNegation()));
+				(SimplemathPackage.Literals.NEGATION__BODY,
+				 SimplemathFactory.eINSTANCE.createNegation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createIntegerLiteralExp()));
+				(SimplemathPackage.Literals.NEGATION__BODY,
+				 SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createRealLiteralExp()));
+				(SimplemathPackage.Literals.NEGATION__BODY,
+				 SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createBracketExp()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createAdditive()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createMultiplicative()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createNegation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createIntegerLiteralExp()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createRealLiteralExp()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(Simple_mathPackage.Literals.ADDITIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createBracketExp()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == Simple_mathPackage.Literals.ADDITIVE__LEFT ||
-			childFeature == Simple_mathPackage.Literals.ADDITIVE__RIGHT;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				(SimplemathPackage.Literals.NEGATION__BODY,
+				 SimplemathFactory.eINSTANCE.createBracketExp()));
 	}
 
 }

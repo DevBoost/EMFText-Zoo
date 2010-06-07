@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,18 +22,17 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.emftext.language.simple_math.Multiplicative;
-import org.emftext.language.simple_math.Simple_mathFactory;
-import org.emftext.language.simple_math.Simple_mathPackage;
+import org.emftext.language.simplemath.Additive;
+import org.emftext.language.simplemath.SimplemathFactory;
+import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simple_math.Multiplicative} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simple_math.Additive} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class MultiplicativeItemProvider
+public class AdditiveItemProvider
 	extends ExpressionItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +46,7 @@ public class MultiplicativeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MultiplicativeItemProvider(AdapterFactory adapterFactory) {
+	public AdditiveItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -80,9 +77,9 @@ public class MultiplicativeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Multiplicative_operator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Multiplicative_operator_feature", "_UI_Multiplicative_type"),
-				 Simple_mathPackage.Literals.MULTIPLICATIVE__OPERATOR,
+				 getString("_UI_Additive_operator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Additive_operator_feature", "_UI_Additive_type"),
+				 SimplemathPackage.Literals.ADDITIVE__OPERATOR,
 				 true,
 				 false,
 				 false,
@@ -103,8 +100,8 @@ public class MultiplicativeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT);
-			childrenFeatures.add(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT);
+			childrenFeatures.add(SimplemathPackage.Literals.ADDITIVE__LEFT);
+			childrenFeatures.add(SimplemathPackage.Literals.ADDITIVE__RIGHT);
 		}
 		return childrenFeatures;
 	}
@@ -123,14 +120,14 @@ public class MultiplicativeItemProvider
 	}
 
 	/**
-	 * This returns Multiplicative.gif.
+	 * This returns Additive.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Multiplicative"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Additive"));
 	}
 
 	/**
@@ -141,8 +138,8 @@ public class MultiplicativeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Multiplicative multiplicative = (Multiplicative)object;
-		return getString("_UI_Multiplicative_type") + " " + multiplicative.getValue();
+		Additive additive = (Additive)object;
+		return getString("_UI_Additive_type") + " " + additive.getValue();
 	}
 
 	/**
@@ -156,12 +153,12 @@ public class MultiplicativeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Multiplicative.class)) {
-			case Simple_mathPackage.MULTIPLICATIVE__OPERATOR:
+		switch (notification.getFeatureID(Additive.class)) {
+			case SimplemathPackage.ADDITIVE__OPERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case Simple_mathPackage.MULTIPLICATIVE__LEFT:
-			case Simple_mathPackage.MULTIPLICATIVE__RIGHT:
+			case SimplemathPackage.ADDITIVE__LEFT:
+			case SimplemathPackage.ADDITIVE__RIGHT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -181,63 +178,63 @@ public class MultiplicativeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createAdditive()));
+				(SimplemathPackage.Literals.ADDITIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createAdditive()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createMultiplicative()));
+				(SimplemathPackage.Literals.ADDITIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createMultiplicative()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createNegation()));
+				(SimplemathPackage.Literals.ADDITIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createNegation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createIntegerLiteralExp()));
+				(SimplemathPackage.Literals.ADDITIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createRealLiteralExp()));
+				(SimplemathPackage.Literals.ADDITIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT,
-				 Simple_mathFactory.eINSTANCE.createBracketExp()));
+				(SimplemathPackage.Literals.ADDITIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createBracketExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createAdditive()));
+				(SimplemathPackage.Literals.ADDITIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createAdditive()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createMultiplicative()));
+				(SimplemathPackage.Literals.ADDITIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createMultiplicative()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createNegation()));
+				(SimplemathPackage.Literals.ADDITIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createNegation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createIntegerLiteralExp()));
+				(SimplemathPackage.Literals.ADDITIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createRealLiteralExp()));
+				(SimplemathPackage.Literals.ADDITIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT,
-				 Simple_mathFactory.eINSTANCE.createBracketExp()));
+				(SimplemathPackage.Literals.ADDITIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createBracketExp()));
 	}
 
 	/**
@@ -252,8 +249,8 @@ public class MultiplicativeItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == Simple_mathPackage.Literals.MULTIPLICATIVE__LEFT ||
-			childFeature == Simple_mathPackage.Literals.MULTIPLICATIVE__RIGHT;
+			childFeature == SimplemathPackage.Literals.ADDITIVE__LEFT ||
+			childFeature == SimplemathPackage.Literals.ADDITIVE__RIGHT;
 
 		if (qualify) {
 			return getString

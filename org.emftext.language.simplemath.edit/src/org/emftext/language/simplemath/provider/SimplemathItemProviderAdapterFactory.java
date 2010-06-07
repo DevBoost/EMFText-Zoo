@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +12,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -24,8 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
-import org.emftext.language.simple_math.util.Simple_mathAdapterFactory;
+import org.emftext.language.simplemath.util.SimplemathAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -36,7 +34,7 @@ import org.emftext.language.simple_math.util.Simple_mathAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class Simple_mathItemProviderAdapterFactory extends Simple_mathAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class SimplemathItemProviderAdapterFactory extends SimplemathAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -67,7 +65,7 @@ public class Simple_mathItemProviderAdapterFactory extends Simple_mathAdapterFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Simple_mathItemProviderAdapterFactory() {
+	public SimplemathItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);

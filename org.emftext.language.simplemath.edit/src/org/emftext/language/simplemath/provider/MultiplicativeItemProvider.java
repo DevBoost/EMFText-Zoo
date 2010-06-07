@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 
 import java.util.Collection;
@@ -12,9 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,18 +22,17 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import org.emftext.language.simple_math.Negation;
-import org.emftext.language.simple_math.Simple_mathFactory;
-import org.emftext.language.simple_math.Simple_mathPackage;
+import org.emftext.language.simplemath.Multiplicative;
+import org.emftext.language.simplemath.SimplemathFactory;
+import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simple_math.Negation} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simple_math.Multiplicative} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class NegationItemProvider
+public class MultiplicativeItemProvider
 	extends ExpressionItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -49,7 +46,7 @@ public class NegationItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NegationItemProvider(AdapterFactory adapterFactory) {
+	public MultiplicativeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -80,9 +77,9 @@ public class NegationItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Negation_operator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Negation_operator_feature", "_UI_Negation_type"),
-				 Simple_mathPackage.Literals.NEGATION__OPERATOR,
+				 getString("_UI_Multiplicative_operator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Multiplicative_operator_feature", "_UI_Multiplicative_type"),
+				 SimplemathPackage.Literals.MULTIPLICATIVE__OPERATOR,
 				 true,
 				 false,
 				 false,
@@ -103,7 +100,8 @@ public class NegationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Simple_mathPackage.Literals.NEGATION__BODY);
+			childrenFeatures.add(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT);
+			childrenFeatures.add(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT);
 		}
 		return childrenFeatures;
 	}
@@ -122,14 +120,14 @@ public class NegationItemProvider
 	}
 
 	/**
-	 * This returns Negation.gif.
+	 * This returns Multiplicative.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Negation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Multiplicative"));
 	}
 
 	/**
@@ -140,8 +138,8 @@ public class NegationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Negation negation = (Negation)object;
-		return getString("_UI_Negation_type") + " " + negation.getValue();
+		Multiplicative multiplicative = (Multiplicative)object;
+		return getString("_UI_Multiplicative_type") + " " + multiplicative.getValue();
 	}
 
 	/**
@@ -155,11 +153,12 @@ public class NegationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Negation.class)) {
-			case Simple_mathPackage.NEGATION__OPERATOR:
+		switch (notification.getFeatureID(Multiplicative.class)) {
+			case SimplemathPackage.MULTIPLICATIVE__OPERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case Simple_mathPackage.NEGATION__BODY:
+			case SimplemathPackage.MULTIPLICATIVE__LEFT:
+			case SimplemathPackage.MULTIPLICATIVE__RIGHT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -179,33 +178,86 @@ public class NegationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.NEGATION__BODY,
-				 Simple_mathFactory.eINSTANCE.createAdditive()));
+				(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createAdditive()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.NEGATION__BODY,
-				 Simple_mathFactory.eINSTANCE.createMultiplicative()));
+				(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createMultiplicative()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.NEGATION__BODY,
-				 Simple_mathFactory.eINSTANCE.createNegation()));
+				(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createNegation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.NEGATION__BODY,
-				 Simple_mathFactory.eINSTANCE.createIntegerLiteralExp()));
+				(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.NEGATION__BODY,
-				 Simple_mathFactory.eINSTANCE.createRealLiteralExp()));
+				(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Simple_mathPackage.Literals.NEGATION__BODY,
-				 Simple_mathFactory.eINSTANCE.createBracketExp()));
+				(SimplemathPackage.Literals.MULTIPLICATIVE__LEFT,
+				 SimplemathFactory.eINSTANCE.createBracketExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createAdditive()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createMultiplicative()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createNegation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createRealLiteralExp()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT,
+				 SimplemathFactory.eINSTANCE.createBracketExp()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == SimplemathPackage.Literals.MULTIPLICATIVE__LEFT ||
+			childFeature == SimplemathPackage.Literals.MULTIPLICATIVE__RIGHT;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

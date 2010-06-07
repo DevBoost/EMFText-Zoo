@@ -4,10 +4,9 @@
  *
  * $Id$
  */
-package org.emftext.language.simple_math.provider;
+package org.emftext.language.simplemath.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
@@ -16,14 +15,14 @@ import org.eclipse.emf.common.util.ResourceLocator;
  * <!-- end-user-doc -->
  * @generated
  */
-public final class Simple_mathEditPlugin extends EMFPlugin {
+public final class SimplemathEditPlugin extends EMFPlugin {
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final Simple_mathEditPlugin INSTANCE = new Simple_mathEditPlugin();
+	public static final SimplemathEditPlugin INSTANCE = new SimplemathEditPlugin();
 
 	/**
 	 * Keep track of the singleton.
@@ -39,7 +38,7 @@ public final class Simple_mathEditPlugin extends EMFPlugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Simple_mathEditPlugin() {
+	public SimplemathEditPlugin() {
 		super
 		  (new ResourceLocator [] {
 		   });
