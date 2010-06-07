@@ -13,7 +13,7 @@
 // ******************************************************************************/
 
 SYNTAXDEF simplegui
-FOR <http://www.emftext.org/language/simple_gui>
+FOR <http://www.emftext.org/language/simplegui>
 START Frame
 
 OPTIONS {	

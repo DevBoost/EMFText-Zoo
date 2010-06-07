@@ -13,7 +13,7 @@
 // ******************************************************************************/
 
 SYNTAXDEF sm
-FOR       <http://www.emftext.org/language/simple_math>
+FOR       <http://www.emftext.org/language/simplemath>
 START     Expression
 
 OPTIONS {	

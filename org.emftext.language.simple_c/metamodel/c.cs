@@ -13,7 +13,7 @@
 // ******************************************************************************/
 
 SYNTAXDEF c
-FOR <http://www.emftext.org/language/simple_c>
+FOR <http://www.emftext.org/language/simplec>
 START CompilationUnit
 
 OPTIONS {	
