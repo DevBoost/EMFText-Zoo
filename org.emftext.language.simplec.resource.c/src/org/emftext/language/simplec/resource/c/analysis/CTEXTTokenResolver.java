@@ -11,14 +11,14 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.simple_c.resource.c.analysis;
+
+package org.emftext.language.simplec.resource.c.analysis;
 
 import java.util.Map;
 
-import org.emftext.language.simple_c.resource.c.ICTokenResolveResult;
-import org.emftext.language.simple_c.resource.c.ICTokenResolver;
+import org.emftext.language.simplec.resource.c.ICTokenResolveResult;
 
-public class CTEXTTokenResolver implements ICTokenResolver {
+public class CTEXTTokenResolver implements org.emftext.language.simplec.resource.c.ICTokenResolver {
 	
 	private CDefaultTokenResolver defaultResolver = new CDefaultTokenResolver();
 
