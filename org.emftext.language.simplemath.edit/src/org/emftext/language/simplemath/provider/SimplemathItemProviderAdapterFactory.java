@@ -36,286 +36,321 @@ import org.emftext.language.simplemath.util.SimplemathAdapterFactory;
  */
 public class SimplemathItemProviderAdapterFactory extends SimplemathAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the root adapter factory that delegates to this adapter factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ComposedAdapterFactory parentAdapterFactory;
 
 	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
+   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
+   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public SimplemathItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    supportedTypes.add(IEditingDomainItemProvider.class);
+    supportedTypes.add(IStructuredItemContentProvider.class);
+    supportedTypes.add(ITreeItemContentProvider.class);
+    supportedTypes.add(IItemLabelProvider.class);
+    supportedTypes.add(IItemPropertySource.class);
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.Additive} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.Additive} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected AdditiveItemProvider additiveItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.Additive}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.simplemath.Additive}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createAdditiveAdapter() {
-		if (additiveItemProvider == null) {
-			additiveItemProvider = new AdditiveItemProvider(this);
-		}
+    if (additiveItemProvider == null)
+    {
+      additiveItemProvider = new AdditiveItemProvider(this);
+    }
 
-		return additiveItemProvider;
-	}
+    return additiveItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.Multiplicative} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.Multiplicative} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected MultiplicativeItemProvider multiplicativeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.Multiplicative}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.simplemath.Multiplicative}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createMultiplicativeAdapter() {
-		if (multiplicativeItemProvider == null) {
-			multiplicativeItemProvider = new MultiplicativeItemProvider(this);
-		}
+    if (multiplicativeItemProvider == null)
+    {
+      multiplicativeItemProvider = new MultiplicativeItemProvider(this);
+    }
 
-		return multiplicativeItemProvider;
-	}
+    return multiplicativeItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.Negation} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.Negation} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected NegationItemProvider negationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.Negation}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.simplemath.Negation}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createNegationAdapter() {
-		if (negationItemProvider == null) {
-			negationItemProvider = new NegationItemProvider(this);
-		}
+    if (negationItemProvider == null)
+    {
+      negationItemProvider = new NegationItemProvider(this);
+    }
 
-		return negationItemProvider;
-	}
+    return negationItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.IntegerLiteralExp} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.IntegerLiteralExp} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected IntegerLiteralExpItemProvider integerLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.IntegerLiteralExp}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.simplemath.IntegerLiteralExp}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createIntegerLiteralExpAdapter() {
-		if (integerLiteralExpItemProvider == null) {
-			integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(this);
-		}
+    if (integerLiteralExpItemProvider == null)
+    {
+      integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(this);
+    }
 
-		return integerLiteralExpItemProvider;
-	}
+    return integerLiteralExpItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.RealLiteralExp} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.RealLiteralExp} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RealLiteralExpItemProvider realLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.RealLiteralExp}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.simplemath.RealLiteralExp}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createRealLiteralExpAdapter() {
-		if (realLiteralExpItemProvider == null) {
-			realLiteralExpItemProvider = new RealLiteralExpItemProvider(this);
-		}
+    if (realLiteralExpItemProvider == null)
+    {
+      realLiteralExpItemProvider = new RealLiteralExpItemProvider(this);
+    }
 
-		return realLiteralExpItemProvider;
-	}
+    return realLiteralExpItemProvider;
+  }
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.emftext.language.simple_math.BracketExp} instances.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.BracketExp} instances.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected BracketExpItemProvider bracketExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.emftext.language.simple_math.BracketExp}.
-	 * <!-- begin-user-doc -->
+   * This creates an adapter for a {@link org.emftext.language.simplemath.BracketExp}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter createBracketExpAdapter() {
-		if (bracketExpItemProvider == null) {
-			bracketExpItemProvider = new BracketExpItemProvider(this);
-		}
+    if (bracketExpItemProvider == null)
+    {
+      bracketExpItemProvider = new BracketExpItemProvider(this);
+    }
 
-		return bracketExpItemProvider;
-	}
+    return bracketExpItemProvider;
+  }
 
 	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This keeps track of the one adapter used for all {@link org.emftext.language.simplemath.Potence} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected PotenceItemProvider potenceItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.emftext.language.simplemath.Potence}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createPotenceAdapter()
+  {
+    if (potenceItemProvider == null)
+    {
+      potenceItemProvider = new PotenceItemProvider(this);
+    }
+
+    return potenceItemProvider;
+  }
+
+  /**
+   * This returns the root adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+  }
 
 	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
+   * This sets the composed adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    this.parentAdapterFactory = parentAdapterFactory;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    return supportedTypes.contains(type) || super.isFactoryForType(type);
+  }
 
 	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
+   * This implementation substitutes the factory itself as the key for the adapter.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    return super.adapt(notifier, this);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    if (isFactoryForType(type))
+    {
+      Object adapter = super.adapt(object, type);
+      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+      {
+        return adapter;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
 	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
+   * This adds a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    changeNotifier.addListener(notifyChangedListener);
+  }
 
 	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
+   * This removes a listener.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    changeNotifier.removeListener(notifyChangedListener);
+  }
 
 	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
+   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+    if (parentAdapterFactory != null)
+    {
+      parentAdapterFactory.fireNotifyChanged(notification);
+    }
+  }
 
 	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
+   * This disposes all of the item providers created by this factory. 
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void dispose() {
-		if (additiveItemProvider != null) additiveItemProvider.dispose();
-		if (multiplicativeItemProvider != null) multiplicativeItemProvider.dispose();
-		if (negationItemProvider != null) negationItemProvider.dispose();
-		if (integerLiteralExpItemProvider != null) integerLiteralExpItemProvider.dispose();
-		if (realLiteralExpItemProvider != null) realLiteralExpItemProvider.dispose();
-		if (bracketExpItemProvider != null) bracketExpItemProvider.dispose();
-	}
+    if (additiveItemProvider != null) additiveItemProvider.dispose();
+    if (multiplicativeItemProvider != null) multiplicativeItemProvider.dispose();
+    if (negationItemProvider != null) negationItemProvider.dispose();
+    if (integerLiteralExpItemProvider != null) integerLiteralExpItemProvider.dispose();
+    if (realLiteralExpItemProvider != null) realLiteralExpItemProvider.dispose();
+    if (bracketExpItemProvider != null) bracketExpItemProvider.dispose();
+    if (potenceItemProvider != null) potenceItemProvider.dispose();
+  }
 
 }

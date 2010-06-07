@@ -12,258 +12,243 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.emftext.language.simplemath.Additive;
+
+import org.emftext.language.simplemath.Potence;
 import org.emftext.language.simplemath.SimplemathFactory;
 import org.emftext.language.simplemath.SimplemathPackage;
 
 /**
- * This is the item provider adapter for a {@link org.emftext.language.simplemath.Additive} object.
+ * This is the item provider adapter for a {@link org.emftext.language.simplemath.Potence} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class AdditiveItemProvider
-	extends ExpressionItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
-	/**
+public class PotenceItemProvider
+  extends ExpressionItemProvider
+  implements
+    IEditingDomainItemProvider,
+    IStructuredItemContentProvider,
+    ITreeItemContentProvider,
+    IItemLabelProvider,
+    IItemPropertySource
+{
+  /**
    * This constructs an instance from a factory and a notifier.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	public AdditiveItemProvider(AdapterFactory adapterFactory) {
+  public PotenceItemProvider(AdapterFactory adapterFactory)
+  {
     super(adapterFactory);
   }
 
-	/**
+  /**
    * This returns the property descriptors for the adapted class.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+  @Override
+  public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
+  {
     if (itemPropertyDescriptors == null)
     {
       super.getPropertyDescriptors(object);
 
-      addOperatorPropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
 
-	/**
-   * This adds a property descriptor for the Operator feature.
-   * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-   * @generated
-   */
-	protected void addOperatorPropertyDescriptor(Object object) {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_Additive_operator_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_Additive_operator_feature", "_UI_Additive_type"),
-         SimplemathPackage.Literals.ADDITIVE__OPERATOR,
-         true,
-         false,
-         false,
-         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-         null,
-         null));
-  }
-
-	/**
+  /**
    * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
    * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
    * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+  @Override
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
+  {
     if (childrenFeatures == null)
     {
       super.getChildrenFeatures(object);
-      childrenFeatures.add(SimplemathPackage.Literals.ADDITIVE__LEFT);
-      childrenFeatures.add(SimplemathPackage.Literals.ADDITIVE__RIGHT);
+      childrenFeatures.add(SimplemathPackage.Literals.POTENCE__EXPONENT);
+      childrenFeatures.add(SimplemathPackage.Literals.POTENCE__BASE);
     }
     return childrenFeatures;
   }
 
-	/**
+  /**
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
+  @Override
+  protected EStructuralFeature getChildFeature(Object object, Object child)
+  {
     // Check the type of the specified child object and return the proper feature to use for
     // adding (see {@link AddCommand}) it as a child.
 
     return super.getChildFeature(object, child);
   }
 
-	/**
-   * This returns Additive.gif.
+  /**
+   * This returns Potence.gif.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	public Object getImage(Object object) {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/Additive"));
+  @Override
+  public Object getImage(Object object)
+  {
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/Potence"));
   }
 
-	/**
+  /**
    * This returns the label text for the adapted class.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	public String getText(Object object) {
-    Additive additive = (Additive)object;
-    return getString("_UI_Additive_type") + " " + additive.getValue();
+  @Override
+  public String getText(Object object)
+  {
+    Potence potence = (Potence)object;
+    return getString("_UI_Potence_type") + " " + potence.getValue();
   }
 
-	/**
+  /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
    * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	public void notifyChanged(Notification notification) {
+  @Override
+  public void notifyChanged(Notification notification)
+  {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(Additive.class))
+    switch (notification.getFeatureID(Potence.class))
     {
-      case SimplemathPackage.ADDITIVE__OPERATOR:
-        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-        return;
-      case SimplemathPackage.ADDITIVE__LEFT:
-      case SimplemathPackage.ADDITIVE__RIGHT:
+      case SimplemathPackage.POTENCE__EXPONENT:
+      case SimplemathPackage.POTENCE__BASE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
         return;
     }
     super.notifyChanged(notification);
   }
 
-	/**
+  /**
    * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
    * that can be created under this object.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+  @Override
+  protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
+  {
     super.collectNewChildDescriptors(newChildDescriptors, object);
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createAdditive()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createMultiplicative()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createNegation()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createBracketExp()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__LEFT,
+        (SimplemathPackage.Literals.POTENCE__EXPONENT,
          SimplemathFactory.eINSTANCE.createPotence()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createAdditive()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createMultiplicative()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createNegation()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createIntegerLiteralExp()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createRealLiteralExp()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createBracketExp()));
 
     newChildDescriptors.add
       (createChildParameter
-        (SimplemathPackage.Literals.ADDITIVE__RIGHT,
+        (SimplemathPackage.Literals.POTENCE__BASE,
          SimplemathFactory.eINSTANCE.createPotence()));
   }
 
-	/**
+  /**
    * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
    * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+  @Override
+  public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
+  {
     Object childFeature = feature;
     Object childObject = child;
 
     boolean qualify =
-      childFeature == SimplemathPackage.Literals.ADDITIVE__LEFT ||
-      childFeature == SimplemathPackage.Literals.ADDITIVE__RIGHT;
+      childFeature == SimplemathPackage.Literals.POTENCE__EXPONENT ||
+      childFeature == SimplemathPackage.Literals.POTENCE__BASE;
 
     if (qualify)
     {
