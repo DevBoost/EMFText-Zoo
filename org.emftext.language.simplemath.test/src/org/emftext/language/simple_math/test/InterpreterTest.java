@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.emftext.language.simple_math.Expression;
-import org.emftext.language.simple_math.interpreter.InterpretingPostProcessor;
-import org.emftext.language.simple_math.resource.sm.ISmOptions;
-import org.emftext.language.simple_math.resource.sm.ISmResourcePostProcessor;
-import org.emftext.language.simple_math.resource.sm.ISmResourcePostProcessorProvider;
+import org.emftext.language.simplemath.Expression;
+import org.emftext.language.simplemath.interpreter.InterpretingPostProcessor;
+import org.emftext.language.simplemath.resource.sm.ISmOptions;
+import org.emftext.language.simplemath.resource.sm.ISmResourcePostProcessor;
+import org.emftext.language.simplemath.resource.sm.ISmResourcePostProcessorProvider;
 
 
 public class InterpreterTest extends AbstractSimpleMathTest {

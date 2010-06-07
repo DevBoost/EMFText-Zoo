@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.simple_math.Additive;
-import org.emftext.language.simple_math.Expression;
-import org.emftext.language.simple_math.IntegerLiteralExp;
+import org.emftext.language.simplemath.Additive;
+import org.emftext.language.simplemath.Expression;
+import org.emftext.language.simplemath.IntegerLiteralExp;
 
 public class SimpleMathTest extends AbstractSimpleMathTest {
 	

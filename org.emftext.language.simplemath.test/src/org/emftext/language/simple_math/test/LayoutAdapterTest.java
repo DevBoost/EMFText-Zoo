@@ -9,11 +9,11 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
-import org.emftext.language.simple_math.Additive;
-import org.emftext.language.simple_math.Expression;
-import org.emftext.language.simple_math.IntegerLiteralExp;
-import org.emftext.language.simple_math.resource.sm.mopp.SmLayoutInformation;
-import org.emftext.language.simple_math.resource.sm.mopp.SmLayoutInformationAdapter;
+import org.emftext.language.simplemath.Additive;
+import org.emftext.language.simplemath.Expression;
+import org.emftext.language.simplemath.IntegerLiteralExp;
+import org.emftext.language.simplemath.resource.sm.mopp.SmLayoutInformation;
+import org.emftext.language.simplemath.resource.sm.mopp.SmLayoutInformationAdapter;
 
 public class LayoutAdapterTest extends AbstractSimpleMathTest {
 

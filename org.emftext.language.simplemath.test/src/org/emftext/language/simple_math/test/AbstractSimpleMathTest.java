@@ -12,12 +12,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.simple_math.Expression;
-import org.emftext.language.simple_math.resource.sm.mopp.SmMetaInformation;
-import org.emftext.language.simple_math.resource.sm.mopp.SmResourceFactory;
+import org.emftext.language.simplemath.Expression;
+import org.emftext.language.simplemath.resource.sm.mopp.SmMetaInformation;
+import org.emftext.language.simplemath.resource.sm.mopp.SmResourceFactory;
 
 public abstract class AbstractSimpleMathTest extends TestCase {
 	
