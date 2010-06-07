@@ -18,12 +18,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.emftext.language.simple_c.CPackage;
-import org.emftext.language.simple_c.CompilationUnit;
-import org.emftext.language.simple_c.Definition;
-import org.emftext.language.simple_c.Method;
-import org.emftext.language.simple_c.Statement;
-import org.emftext.language.simple_c.Variable;
+import org.emftext.language.simplec.CPackage;
+import org.emftext.language.simplec.CompilationUnit;
+import org.emftext.language.simplec.Definition;
+import org.emftext.language.simplec.Method;
+import org.emftext.language.simplec.Statement;
+import org.emftext.language.simplec.Variable;
 
 public class CTest extends AbstractCTestCase {
 	
@@ -41,7 +41,7 @@ public class CTest extends AbstractCTestCase {
 		}
 	}
 	
-	public void testMethodFragment(){
+	public void testMethodFragment() {
 		try {
 			Method method = (Method)loadResource(new FileInputStream("input" + File.separator + "method.c"), "method.c", CPackage.eINSTANCE.getMethod());
 			List<Statement> statements = method.getStatements();

@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.emftext.language.simple_c.CPackage;
-import org.emftext.language.simple_c.resource.c.ICOptions;
+import org.emftext.language.simplec.CPackage;
+import org.emftext.language.simplec.resource.c.ICOptions;
 
 public class AbstractCTestCase extends TestCase {
 	

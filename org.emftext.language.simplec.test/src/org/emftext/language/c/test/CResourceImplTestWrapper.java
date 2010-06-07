@@ -22,7 +22,7 @@ import java.io.OutputStream;
 import java.util.Collections;
 import java.util.Map;
 
-import org.emftext.language.simple_c.resource.c.mopp.CResource;
+import org.emftext.language.simplec.resource.c.mopp.CResource;
 
 public class CResourceImplTestWrapper extends CResource {
 	
