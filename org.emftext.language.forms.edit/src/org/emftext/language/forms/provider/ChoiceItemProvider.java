@@ -136,12 +136,12 @@ public class ChoiceItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
 		Choice choice = (Choice)object;
-		return (choice.isMultiple() ? "Multiple" : "") + " " + getString("_UI_Choice_type");
+		return (choice.isMultiple() ? "Multiple " : "") + getString("_UI_Choice_type");
 	}
 
 	/**
