@@ -23,6 +23,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.action.IAction;
@@ -68,13 +71,23 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
                 } 
                 if (next instanceof EObject) {
                 	if (!(next instanceof Element)) {
-                		//maybe only the diagram
-                		for(EObject diagramElement : ((EObject)next).eContents()) {
-                			for(EObject candidate : diagramElement.eCrossReferences()) {
-                				if (candidate instanceof Element) {
-                					next = candidate;
-                				}
-                			}
+                		//find model element behind diagram (e.g. in GMF)
+            			for(EObject candidate : ((EObject)next).eCrossReferences()) {
+            				if (candidate instanceof Element) {
+            					next = candidate;
+            					break;
+            				}
+            			}
+                		// still not found -> need to go deeper down (e.g. in Topcased)
+                		if (!(next instanceof Element)) {
+                    		for(EObject diagramElement : ((EObject)next).eContents()) {
+                    			for(EObject candidate : diagramElement.eCrossReferences()) {
+                    				if (candidate instanceof Element) {
+                    					next = candidate;
+                    					break;
+                    				}
+                    			}
+                    		}
                 		}
                 	}
 
@@ -93,34 +106,44 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 		if (selectedElement instanceof BehavioralFeature) {
 			
 			Resource umlResource = selectedElement.eResource();
-			BehavioralFeature operation = (BehavioralFeature) selectedElement;
-
+			final BehavioralFeature operation = (BehavioralFeature) selectedElement;
 			
 			if(umlResource != null && operation.eContainer() instanceof BehavioredClassifier) {
-				BehavioredClassifier classifier = (BehavioredClassifier) operation.eContainer();
+				final BehavioredClassifier classifier = (BehavioredClassifier) operation.eContainer();
 				URI uri = umlResource.getURI();
 				uri = uri.appendFileExtension(classifier.getName());
 				uri = uri.appendFileExtension(operation.getName());
 				uri = uri.appendFileExtension("javabehavior");
 				ResourceSet rs = umlResource.getResourceSet();
 				Resource behaviorResource = rs.getResource(uri, false);
+				
 				if (behaviorResource == null) {
-					//create
-					behaviorResource = rs.createResource(uri);
-					JavaMethodBehavior behavior = Javabehavior4umlFactory.eINSTANCE.createJavaMethodBehavior();
-					operation.getMethods().add(behavior);
-					ClassMethod javaMethod = MembersFactory.eINSTANCE.createClassMethod();
-					javaMethod.setName(operation.getName());
-					javaMethod.setTypeReference(TypesFactory.eINSTANCE.createVoid());
-					javaMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
-					behavior.setJavaMethod(javaMethod);
-					classifier.getOwnedBehaviors().add(behavior);
-					behaviorResource.getContents().add(behavior);
+					final Resource newBehaviorResource = rs.createResource(uri);
+					
+					TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(operation);
+					
+					if (editingDomain != null) {
+						editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {			
+							@Override
+							protected void doExecute() {
+								insertBehavior(operation, classifier, newBehaviorResource);
+							}
+						});
+					}
+					else {
+						insertBehavior(operation, classifier, newBehaviorResource);
+					}
+
+					//save
 					try {
-						behaviorResource.save(null);
+						if (classifier.eResource() != null) {
+							classifier.eResource().save(rs.getLoadOptions());
+						}
+						newBehaviorResource.save(rs.getLoadOptions());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					behaviorResource = newBehaviorResource;
 				}
 				
 				IFile file = (IFile) WorkspaceSynchronizer.getFile(behaviorResource);
@@ -151,6 +174,22 @@ public class AddToUMLClassifierAction implements IObjectActionDelegate {
 				}
 			}
 		}
+	}
+	
+	private void insertBehavior(
+			BehavioralFeature operation, 
+			BehavioredClassifier classifier,
+			Resource newBehaviorResource) {
+		JavaMethodBehavior behavior = Javabehavior4umlFactory.eINSTANCE.createJavaMethodBehavior();
+		final ClassMethod javaMethod = MembersFactory.eINSTANCE.createClassMethod();
+		javaMethod.setTypeReference(TypesFactory.eINSTANCE.createVoid());
+		javaMethod.getAnnotationsAndModifiers().add(ModifiersFactory.eINSTANCE.createPublic());
+		
+		operation.getMethods().add(behavior);
+		classifier.getOwnedBehaviors().add(behavior);
+		javaMethod.setName(operation.getName());
+		behavior.setJavaMethod(javaMethod);
+		newBehaviorResource.getContents().add(behavior);
 	}
 	
 	private void registerPackage(Package umlPackage, ResourceSet resourceSet) {
