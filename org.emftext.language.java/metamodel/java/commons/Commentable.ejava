@@ -20,11 +20,37 @@ import java.annotations.AnnotationInstance;
 
 eclass Commentable {
 
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.ConcreteClassifier</code>
+	 * representing the class with the given classified name.
+	 * 
+     * @param name classified name of the ConcreteClassifier
+	 */
 	getConcreteClassifier() {
+		return (ConcreteClassifier) EcoreUtil.resolve(
+			JavaClasspath.get(this).getClassifier(name), this);
+	}
+	
+	/**
+	 * Finds all <code>org.emftext.language.java.classifiers.ConcreteClassifier</code>
+	 * representing the classes in the given package or a single class from that package.
+	 * 
+     * @param packageName name of the package
+     * @param classifierQuery * for all classifiers or name of a single classifier
+	 */
+	getConcreteClassifiers() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		for(EObject classifier : JavaClasspath.get(this).getClassifiers(packageName, classifierQuery)) {
+			result.add((ConcreteClassifier) EcoreUtil.resolve(classifier, this));
+		}
+		return result;
+	}
+	
+	getConcreteClassifierProxy() {
 		return (ConcreteClassifier) JavaClasspath.get(this).getClassifier(name);
 	}
 	
-	getConcreteClassifiers() {
+	getConcreteClassifierProxies() {
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		for(EObject classifier : JavaClasspath.get(this).getClassifiers(packageName, classifierQuery)) {
 			result.add((ConcreteClassifier)classifier);
@@ -43,7 +69,7 @@ eclass Commentable {
 		if (this.eResource() == null) {
 			throw new IllegalArgumentException("object context element must have a resource");
 		}
-		Class classClass = (Class) getConcreteClassifier(
+		Class classClass = (Class) getConcreteClassifierProxy(
 				"java.lang." + name);
 		classClass = (Class) EcoreUtil.resolve(classClass, this);
 		return classClass;
@@ -60,7 +86,7 @@ eclass Commentable {
 		if (this.eResource() == null) {
 			throw new IllegalArgumentException("object context element  must have a resource");
 		}
-		ConcreteClassifier classClass = getConcreteClassifier(
+		ConcreteClassifier classClass = getConcreteClassifierProxy(
 				"java.lang." + name);
 		return (Interface) EcoreUtil.resolve(classClass, this);
 	}
@@ -106,7 +132,7 @@ eclass Commentable {
 			throw new IllegalArgumentException("object context element must have a resource");
 		}
 		Interface annotationClass = (Interface) EcoreUtil.resolve(
-				getConcreteClassifier("java.lang.annotation.Annotation"), this);
+				getConcreteClassifierProxy("java.lang.annotation.Annotation"), this);
 		return annotationClass;
 	}
 	
@@ -141,7 +167,7 @@ eclass Commentable {
 			CompilationUnit cu = getContainingCompilationUnit();
 			//maybe the outer classifier is in an extra cu
 			classifier = (ConcreteClassifier) EcoreUtil.resolve(
-					getConcreteClassifier(cu.getNamespacesAsString()), this);
+					getConcreteClassifierProxy(cu.getNamespacesAsString()), this);
 			if(classifier.eIsProxy())  {
 				classifier = null;
 			}
