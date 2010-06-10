@@ -216,7 +216,7 @@ public class EcoreWrapper {
 		String getterName = prefix + firstToUpperCase(eStructuralFeature.getName());
 		Method method = eClassifierWrapper.getContainedMethod(getterName);
 		if (method != null && !(method instanceof EStructuralFeatureGetWrapper)) {
-			// can happen if a methods with the same name was declared in eJava file
+			// can happen if a method with the same name was declared in eJava file
 			return;
 		}
 		EStructuralFeatureGetWrapper wrapper = (EStructuralFeatureGetWrapper) method;
@@ -235,7 +235,7 @@ public class EcoreWrapper {
 		String setterName = "set" + firstToUpperCase(eStructuralFeature.getName());
 		Method method = eClassifierWrapper.getContainedMethod(setterName);
 		if (method != null && !(method instanceof EStructuralFeatureGetWrapper)) {
-			// can happen if a methods with the same name was declared in eJava file
+			// can happen if a method with the same name was declared in eJava file
 			return;
 		}
 		EStructuralFeatureSetWrapper wrapper = (EStructuralFeatureSetWrapper) method;
