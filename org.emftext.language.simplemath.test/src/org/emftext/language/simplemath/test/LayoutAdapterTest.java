@@ -1,4 +1,4 @@
-package org.emftext.language.simple_math.test;
+package org.emftext.language.simplemath.test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -11,7 +11,7 @@
  *   Software Technology Group - TU Dresden, Germany 
  *      - initial API and implementation
  ******************************************************************************/
-package org.emftext.language.simple_math.test;
+package org.emftext.language.simplemath.test;
 
 import java.io.File;
 import java.io.FileInputStream;
