@@ -81,7 +81,8 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 		return true;
 	}
 	
-	public Boolean interprete_org_emftext_language_simple_005fmath_Potence(Potence object, SimpleMathContext context) {
+	@Override
+	public Boolean interprete_org_emftext_language_simplemath_Potence(Potence object, SimpleMathContext context) {
 		double exponent = context.pop();
 		double base = context.pop();
 		double result = Math.pow(base,exponent);
@@ -89,5 +90,4 @@ public class SimpleMathInterpreter extends AbstractSmInterpreter<Boolean, Simple
 		context.push(result);
 		return true;
 	}
-
 }
