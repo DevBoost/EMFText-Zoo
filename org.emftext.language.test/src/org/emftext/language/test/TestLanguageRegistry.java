@@ -91,6 +91,8 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.pl0.resource.pl0.mopp.Pl0MetaInformation());
 		metaInformations.add(
+				new org.emftext.language.pl0extended.resource.pl0extended.mopp.Pl0extendedMetaInformation());
+		metaInformations.add(
 				new org.emftext.language.quickuml.resource.quml.mopp.QumlMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.rails.resource.rails.mopp.RailsMetaInformation());
