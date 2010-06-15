@@ -11,6 +11,7 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	reloadGeneratorModel = "true";
 	generateCodeFromGeneratorModel = "true";
+	additionalDependencies = "org.emftext.language.pl0.resource.pl0";
 }
 
 RULES {
