@@ -37,7 +37,9 @@ public class Pl0ExtendedTest extends TestCase {
 	}
 	
 	public void testParsing() {
+		// first parse with Pl0 parser
 		testParsing("1 < 2", PL0_FILE_EXTENSION);
+		// then parse with Pl0extended parser
 		testParsing("1 < 2", PL0_EXTENDED_FILE_EXTENSION);
 	}
 
