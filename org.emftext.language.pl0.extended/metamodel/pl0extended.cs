@@ -20,7 +20,7 @@ RULES {
 								("import" #1 imports)* !0!0
 								 block ".";
 								 
-	Import ::= programReference['<','>'];
+	Import ::= programReference['"','"'];
 	
 	ExternalIdentReference ::= importReference[PL0ID] #0 "." #0 referencedDeclaration[PL0ID];
 }
