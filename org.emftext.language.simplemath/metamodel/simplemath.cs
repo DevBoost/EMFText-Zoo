@@ -35,24 +35,24 @@ TOKENS {
 
 RULES {
 
-	@operator(type="binary_left_associative", weight="1", identifier="Expression")
+	@operator(type="binary_left_associative", weight="1", superclass="Expression")
 	Additive ::= left (operator[ADDITIVE_OPERATOR]) right;
 
-	@operator(type="binary_left_associative", weight="2", identifier="Expression")
+	@operator(type="binary_left_associative", weight="2", superclass="Expression")
 	Multiplicative ::= left operator[MULTIPLICATIVE_OPERATOR] right;
 	
-	@operator(type="binary_right_associative", weight="3", identifier="Expression")
+	@operator(type="binary_right_associative", weight="3", superclass="Expression")
 	Potence ::= base "^" exponent;
 	
- 	@operator(type="unary_prefix", weight="4", identifier="Expression")	
+ 	@operator(type="unary_prefix", weight="4", superclass="Expression")	
 	Negation ::= operator[ADDITIVE_OPERATOR] body;
 	
-	@operator(type="primitive", weight="5", identifier="Expression")
+	@operator(type="primitive", weight="5", superclass="Expression")
 	BracketExp ::= "(" body ")";
 
-	@operator(type="primitive", weight="5", identifier="Expression")
+	@operator(type="primitive", weight="5", superclass="Expression")
 	IntegerLiteralExp ::= intValue[INTEGER_LITERAL];
 
-	@operator(type="primitive", weight="5", identifier="Expression")
+	@operator(type="primitive", weight="5", superclass="Expression")
 	RealLiteralExp ::= floatValue[REAL_LITERAL];
 }
