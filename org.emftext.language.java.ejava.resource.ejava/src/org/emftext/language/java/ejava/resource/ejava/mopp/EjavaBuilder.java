@@ -127,12 +127,15 @@ public class EjavaBuilder implements org.emftext.language.java.ejava.resource.ej
 	private String printBody(EOperationWrapper wrapper, EjavaResource resource) {
 		byte[] lineBreak = System.getProperty ("line.separator").getBytes();
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		// TODO we should obtain the printer from the eJavaMetaInformation class
 		EjavaPrinter printer = new PlainJavaEjavaPrinter(outputStream, resource);
-		for(Statement statement : wrapper.getStatements()) {
-			printer.print(statement);
+		for (Statement statement : wrapper.getStatements()) {
 			try {
+				printer.print(statement);
 				outputStream.write(lineBreak);
-			} catch (IOException e) {}
+			} catch (IOException e) {
+				EjavaPlugin.logError("Error while printing eJava method body.", e);
+			}
 		}
 		return outputStream.toString();
 	}
