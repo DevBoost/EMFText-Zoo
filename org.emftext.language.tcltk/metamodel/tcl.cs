@@ -29,7 +29,7 @@ TOKENSTYLES {
 }
 
 RULES{
-	TclScript::= ("\\r\\n" | ";" |"\\n" | "\\r")* (commands ("\\r\\n" | ";" |"\\n" | "\\r")+)*;
+	TclScript::= ("\r\n" | ";" |"\n" | "\r")* (commands ("\r\n" | ";" |"\n" | "\r")+)*;
 	
 	//TCL Commands
 	tcl.Comment::= value[COMMENT];
@@ -63,9 +63,9 @@ RULES{
 	//TCL Values - this needs to stay at the end
 	tcl.ProcedureCall::= procedure arguments*;
 	
-	tcl.Compound ::= "\"" ("\\r\\n" | ";" |"\\n" | "\\r")* commands? (("\\r\\n" | ";" |"\\n" | "\\r")+ commands)* ("\\r\\n" | ";" |"\\n" | "\\r")* "\"";
+	tcl.Compound ::= "\"" ("\r\n" | ";" |"\n" | "\r")* commands? (("\r\n" | ";" |"\n" | "\r")+ commands)* ("\r\n" | ";" |"\n" | "\r")* "\"";
 	
-	tcl.Block::=    "{"  ("\\r\\n" | ";" |"\\n" | "\\r")* commands? (("\\r\\n" | ";" |"\\n" | "\\r")+ commands)* ("\\r\\n" | ";" |"\\n" | "\\r")* "}";
+	tcl.Block::=    "{"  ("\r\n" | ";" |"\n" | "\r")* commands? (("\r\n" | ";" |"\n" | "\r")+ commands)* ("\r\n" | ";" |"\n" | "\r")* "}";
 	
 	tcl.Word::= value[];
 	
