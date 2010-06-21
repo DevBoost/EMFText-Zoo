@@ -185,7 +185,12 @@ public class NewFileContentCreationTest extends TestCase {
 		}
 
 		public void runTest() {
-			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), ".*/org/emftext/test/.*");
+			String[] excludes = new String[] {
+					".*/org/emftext/test/.*", 
+					".*/sandwich_simple.cs",	
+					".*/org.emftext.refactoring.tests.properties/metamodel/Properties.cs",	
+			};
+			Collection<String> grammars = ConcreteSyntaxTestHelper.findAllGrammars(new File(".."), excludes);
 			for (String grammar : grammars) {
 				boolean foundTest = false;
 				for (IMetaInformation metaInformation : metaInformations) {

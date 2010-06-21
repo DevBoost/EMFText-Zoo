@@ -4,8 +4,16 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.emftext.access.EMFTextAccessPlugin;
+import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
+import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation;
+import org.emftext.language.refactoring.specification.resource.mopp.RefspecMetaInformation;
+import org.emftext.language.theater.resource.theater.mopp.TheaterMetaInformation;
+import org.emftext.language.timedautomata.resource.ta.mopp.TaMetaInformation;
+import org.emftext.test.bug1233.resource.bug1233.mopp.Bug1233MetaInformation;
+import org.emftext.test.printing.resource.printing.mopp.PrintingMetaInformation;
 import org.reuseware.coconut.compositionprogramsyntax.resource.cpsyntax.mopp.CpsyntaxMetaInformation;
 import org.reuseware.coconut.compositionsystem.resource.csys.mopp.CsysMetaInformation;
+import org.reuseware.coconut.fragment.resource.fragment.mopp.FragmentMetaInformation;
 import org.reuseware.coconut.reuseextension.resource.rex.mopp.RexMetaInformation;
 import org.reuseware.coconut.reuseextensionactivator.resource.rexactivator.mopp.Rex_activatorMetaInformation;
 
@@ -118,6 +126,7 @@ public class TestLanguageRegistry {
 				new org.emftext.language.templateconcepts.call.resource.templatecall.mopp.TemplatecallMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.textadventure.resource.tas.mopp.TasMetaInformation());
+		metaInformations.add(new TheaterMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.threevaluedlogic.resource.tvl.mopp.TvlMetaInformation());
 		metaInformations.add(
@@ -132,14 +141,16 @@ public class TestLanguageRegistry {
 				new org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation());
 		
 		//Reuseware languages
-		metaInformations.add(
-				new RexMetaInformation());
-		metaInformations.add(
-				new CsysMetaInformation());
-		metaInformations.add(
-				new CpsyntaxMetaInformation());
-		metaInformations.add(
-				new Rex_activatorMetaInformation());
+		metaInformations.add(new RexMetaInformation());
+		metaInformations.add(new CsysMetaInformation());
+		metaInformations.add(new CpsyntaxMetaInformation());
+		metaInformations.add(new Rex_activatorMetaInformation());
+		metaInformations.add(new FragmentMetaInformation());
+		
+		//Refactory languages
+		metaInformations.add(new RolemappingMetaInformation());
+		metaInformations.add(new RolestextMetaInformation());
+		metaInformations.add(new RefspecMetaInformation());
 		
 		return metaInformations;
 	}
@@ -176,6 +187,9 @@ public class TestLanguageRegistry {
 				new org.emftext.test.bug933.resource.bug933.mopp.Bug933MetaInformation());
 		metaInformations.add(
 				new org.emftext.test.bug1154.resource.bug1154.mopp.Bug1154MetaInformation());
+		metaInformations.add(new Bug1233MetaInformation());
+		metaInformations.add(new PrintingMetaInformation());
+		metaInformations.add(new TaMetaInformation());
 		return metaInformations;
 	}
 }
