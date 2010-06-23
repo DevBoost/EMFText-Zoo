@@ -63,9 +63,9 @@ public abstract class AbstractInterpreterTest extends TestCase {
 			
 			// normalize output
 			String result = new String(outputStream.toByteArray());
-			result = result.replace("\n", "");
-			result = result.replace("\r", "");
-			result = result.replace("\t", "");
+			result = result.replace("\n", " ");
+			result = result.replace("\r", " ");
+			result = result.replace("\t", " ");
 			result = result.replace("  ", " ");
 			result = result.trim();
 			
