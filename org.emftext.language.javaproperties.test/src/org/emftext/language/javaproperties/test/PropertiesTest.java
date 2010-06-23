@@ -1,6 +1,7 @@
 package org.emftext.language.javaproperties.test;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,18 +24,24 @@ import org.emftext.language.javaproperties.resource.properties.analysis.Properti
 
 public class PropertiesTest extends TestCase {
 
+	private static final String FILE_EXTENSION = new PropertiesMetaInformation().getSyntaxName();
+
 	public void setUp() {
 		registerResourceFactories();
 	}
 	
 	private void registerResourceFactories() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				new PropertiesMetaInformation().getSyntaxName(),
+				FILE_EXTENSION,
 				new PropertiesResourceFactory());
 	}
 
 	public void testParsing() {
-		File[] inputFiles = new File("input").listFiles();
+		File[] inputFiles = new File("input").listFiles(new FileFilter() {
+			public boolean accept(File file) {
+				return file.getName().endsWith("." + FILE_EXTENSION);
+			}
+		});
 		for (File file : inputFiles) {
 			PropertySet ecoreProperties = loadAsEcoreModel(file);
 			Properties javaProperties = loadAsJavaObject(file);
@@ -64,6 +71,7 @@ public class PropertiesTest extends TestCase {
 	}
 
 	private PropertySet loadAsEcoreModel(File file) {
+		System.out.println("loadAsEcoreModel(" + file.getAbsolutePath() + ")");
 		URI uri = URI.createFileURI(file.getAbsolutePath());
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource(uri);
