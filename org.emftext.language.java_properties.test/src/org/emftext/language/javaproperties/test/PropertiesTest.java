@@ -1,4 +1,4 @@
-package org.emftext.language.java_properties.test;
+package org.emftext.language.javaproperties.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.emftext.language.java_properties.KeyValuePair;
-import org.emftext.language.java_properties.PropertySet;
-import org.emftext.language.java_properties.resource.properties.analysis.PropertiesVALUETokenResolver;
-import org.emftext.language.java_properties.resource.properties.mopp.PropertiesMetaInformation;
-import org.emftext.language.java_properties.resource.properties.mopp.PropertiesResourceFactory;
+import org.emftext.language.javaproperties.KeyValuePair;
+import org.emftext.language.javaproperties.PropertySet;
+import org.emftext.language.javaproperties.resource.properties.mopp.PropertiesMetaInformation;
+import org.emftext.language.javaproperties.resource.properties.mopp.PropertiesResourceFactory;
+import org.emftext.language.javaproperties.resource.properties.analysis.PropertiesVALUETokenResolver;
 
 public class PropertiesTest extends TestCase {
 

@@ -1,5 +1,5 @@
 SYNTAXDEF properties
-FOR <http://www.emftext.org/language/java_properties>
+FOR <http://www.emftext.org/language/javaproperties>
 START PropertySet
 
 OPTIONS {

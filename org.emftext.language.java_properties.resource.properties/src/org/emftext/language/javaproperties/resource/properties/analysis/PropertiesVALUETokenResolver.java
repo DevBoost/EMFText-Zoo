@@ -1,11 +1,11 @@
-package org.emftext.language.java_properties.resource.properties.analysis;
+package org.emftext.language.javaproperties.resource.properties.analysis;
 
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.emftext.language.java_properties.resource.properties.IPropertiesTokenResolveResult;
-import org.emftext.language.java_properties.resource.properties.IPropertiesTokenResolver;
+import org.emftext.language.javaproperties.resource.properties.IPropertiesTokenResolveResult;
+import org.emftext.language.javaproperties.resource.properties.IPropertiesTokenResolver;
 
 public class PropertiesVALUETokenResolver implements IPropertiesTokenResolver {
 
