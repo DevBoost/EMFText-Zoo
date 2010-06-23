@@ -73,7 +73,7 @@ public class TestLanguageRegistry {
 		metaInformations.add(
 				new org.emftext.language.java.treejava.resource.treejava.mopp.TreejavaMetaInformation());
 		metaInformations.add(
-				new org.emftext.language.java_properties.resource.properties.mopp.PropertiesMetaInformation());
+				new org.emftext.language.javaproperties.resource.properties.mopp.PropertiesMetaInformation());
 		metaInformations.add(
 				new org.emftext.language.regexp.resource.regexp_antlr.mopp.Regexp_antlrMetaInformation());
 		metaInformations.add(
