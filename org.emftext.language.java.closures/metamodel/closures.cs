@@ -29,6 +29,18 @@ OPTIONS {
 }
 
 RULES {
-	Closure::= "{" (parameters ("," parameters)*)? "=>" statements+  "}";
+	MemberClosure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" name[] "=" "{" (parameters ("," parameters)*)? "=>" statements+  "}";
+	
+	MethodClosure ::= "{" (parameters ("," parameters)*)? "=>" statements+  "}" ".invoke" "(" (arguments ("," arguments)*)? ")" ;
+
+	MemberClosureCall ::= memberClosure[]? ".invoke" "(" (arguments ("," arguments)*)? ")" ;
+
+	ParameterClosureCall ::= parameterClosure[]? ".call" "(" (arguments ("," arguments)*)? ")" ;
+
+	ParameterClosure ::= "{" (parameterTypes ("," parameterTypes)*)? "=>" valueType  "}" name[] ;
+	
+	ParameterClosureAssignment ::= "{" (parameters ("," parameters)*)? "=>" statements+  "}";
 }
 
+
+//{ => System.out.println("Hallo Welt"); }.invoke(); 
