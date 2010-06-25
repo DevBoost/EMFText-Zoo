@@ -21,11 +21,13 @@ import java.util.Map;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -34,14 +36,16 @@ import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult
 
 public class EMFTypesResolver {
 	
+	
 	protected Resource resource = null;
 	
 	public void doResolve(java.lang.String identifier, 
 			EObject container, 
 			org.eclipse.emf.ecore.EReference reference, 
-			int position, 
-			boolean resolveFuzzy, 
-			ITextEcoreReferenceResolveResult<?> result) {
+			EClass typeToResolve, 
+			boolean resolveFuzzy, ITextEcoreReferenceResolveResult<?> result) {
+		
+	
 		
 		EPackage ePackage = null;
 		String eClassName = identifier;
@@ -102,17 +106,17 @@ public class EMFTypesResolver {
 		
 		
 
-		addResults(identifier, eClassName, candidates, resolveFuzzy, result);
+		addResults(identifier, eClassName, candidates, typeToResolve, resolveFuzzy, result);
 		if (!result.wasResolved() && !identifier.contains("::")) {
 			//try the "default" package Ecore
-			addResults(identifier, identifier, EcorePackage.eINSTANCE.getEClassifiers(), resolveFuzzy, result);
+			addResults(identifier, identifier, EcorePackage.eINSTANCE.getEClassifiers(), typeToResolve, resolveFuzzy, result);
 		}
 	}
 
 	private void addResults(String identifier, String className, List<EClassifier> candidates,
-			boolean resolveFuzzy, ITextEcoreReferenceResolveResult result) {
+			EClass typeToResolve, boolean resolveFuzzy, ITextEcoreReferenceResolveResult result) {
 		for (EClassifier next : candidates) {
-			if (next instanceof EClassifier) {
+			if (typeToResolve.isInstance(next)) {
 				EClassifier classifier = (EClassifier) next;
 				
 				if (resolveFuzzy) {			

@@ -15,6 +15,7 @@ package org.emftext.language.ecore.resource.text.analysis;
 
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EcorePackage;
 import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolveResult;
 import org.emftext.language.ecore.resource.text.ITextEcoreReferenceResolver;
 import org.emftext.language.ecore.resource.text.analysis.helper.EMFTypesResolver;
@@ -26,7 +27,7 @@ public class EGenericTypeEClassifierReferenceResolver implements ITextEcoreRefer
 	}
 	
 	public void resolve(java.lang.String identifier, org.eclipse.emf.ecore.EGenericType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, ITextEcoreReferenceResolveResult<org.eclipse.emf.ecore.EClassifier> result) {
-		new EMFTypesResolver().doResolve(identifier, container, reference, position, resolveFuzzy, result);
+		new EMFTypesResolver().doResolve(identifier, container, reference, EcorePackage.eINSTANCE.getEClassifier(), resolveFuzzy, result);
 	}
 
 	public void setOptions(Map<?, ?> options) {
