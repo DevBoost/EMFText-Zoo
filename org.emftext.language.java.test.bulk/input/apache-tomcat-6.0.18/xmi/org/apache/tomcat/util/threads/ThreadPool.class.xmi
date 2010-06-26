@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="org.apache.tomcat.util.threads.ThreadPool.java">
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>tomcat</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>threads</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="ThreadPool">
+    <members xsi:type="members:Field" name="log">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="../../../juli/logging/Log.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="sm">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../res/StringManager.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="logfull">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="MAX_THREADS">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="MAX_THREADS_MIN">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="MAX_SPARE_THREADS">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="MIN_SPARE_THREADS">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="WORK_WAIT_TIMEOUT">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="pool">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="ThreadPool$ControlRunnable.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="monitor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="ThreadPool$MonitorRunnable.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="maxThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="minSpareThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="maxSpareThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="currentThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="currentThreadsBusy">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="stopThePool">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="isDaemon">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="threads">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/util/Hashtable.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="listeners">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/util/Vector.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="name">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sequence">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="threadPriority">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="&lt;clinit>">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ThreadPool"/>
+    <members xsi:type="members:ClassMethod" name="createThreadPool">
+      <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="start">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMonitor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="ThreadPool$MonitorRunnable.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setThreadPriority">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getThreadPriority">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMaxThreads">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMinSpareThreads">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMinSpareThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMaxSpareThreads">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxSpareThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCurrentThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCurrentThreadsBusy">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isDaemon">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDebug">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setDaemon">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDaemon">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setName">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getName">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSequence">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="incSequence">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addThread">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="ThreadPool$ControlRunnable.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeThread">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/Thread.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addThreadPoolListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Interface" href="ThreadPool$ThreadPoolListener.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getThreads">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="../../../../../java/util/Enumeration.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="run">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Interface" href="../../../../../java/lang/Runnable.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="runIt">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Interface" href="ThreadPoolRunnable.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="findControlRunnable">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="ThreadPool$ControlRunnable.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="logFull">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Interface" href="../../../juli/logging/Log.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="shutdown">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkSpareControllers">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="returnController">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="ThreadPool$ControlRunnable.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="notifyThreadEnd">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="ThreadPool$ControlRunnable.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="adjustLimits">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="openThreads">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="log">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:ClassMethod" name="threadStatusString">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getThreadStatus">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getThreadParam">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    <extends xsi:type="types:ClassifierReference">
+      <target xsi:type="classifiers:Class" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="SSLValve.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; *&#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>valves</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/ByteArrayInputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <namespaces>cert</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../security/cert/CertificateFactory.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <namespaces>cert</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>valves</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SSLValve">
+    <members xsi:type="members:ClassMethod" name="mygetHeader">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="header">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/*&#xA;    private static final String info =&#xA;        &quot;SSLValve/1.0&quot;;&#xA;    protected static StringManager sm =&#xA;        StringManager.getManager(Constants.Package);&#xA;    public String getInfo() {&#xA;        return (info);&#xA;    }&#xA;    public String toString() {&#xA;        StringBuffer sb = new StringBuffer(&quot;SSLValve[&quot;);&#xA;                if (container != null)&#xA;            sb.append(container.getName());&#xA;        sb.append(&quot;]&quot;);&#xA;        return (sb.toString());&#xA;    }&#xA; */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="strcert0">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.149"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.1"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:NullLiteral"/>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>/* mod_header writes &quot;(null)&quot; when the ssl variable is no filled */</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:NullLiteral"/>
+        </statement>
+        <condition xsi:type="references:StringReference" value="(null)">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="invoke">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="strcert0">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>/* mod_header converts the '\n' into ' ' so we have to rebuild the client certificate */</comments>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.0">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            <arguments xsi:type="references:StringReference" value="ssl_client_cert"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="strcert1">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.59"/>
+                  <arguments xsi:type="literals:CharacterLiteral" value="32"/>
+                  <arguments xsi:type="literals:CharacterLiteral" value="10"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="strcert2">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.56"/>
+                  <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="28"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                      </next>
+                    </children>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="26"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </arguments>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="strcert3">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:StringReference" value="-----BEGIN CERTIFICATE-----&#xA;"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="strcert4">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.2/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.58"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.1/@variable"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="strcerts">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.3/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.58"/>
+                  <arguments xsi:type="references:StringReference" value="&#xA;-----END CERTIFICATE-----&#xA;"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="bais">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <comments>// ByteArrayInputStream bais = new ByteArrayInputStream(strcerts.getBytes(&quot;UTF-8&quot;));</comments>
+                  <target xsi:type="classifiers:Class" href="../../../../io/ByteArrayInputStream.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../io/ByteArrayInputStream.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.4/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.32"/>
+                  </next>
+                </arguments>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="jsseCerts">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arrayDimensionsAfter/>
+              <initialValue xsi:type="literals:NullLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="cf">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../security/cert/CertificateFactory.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../security/cert/CertificateFactory.class.xmi#//@classifiers.0/@members.4"/>
+                    <arguments xsi:type="references:StringReference" value="X.509"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../security/cert/CertificateFactory.class.xmi#//@classifiers.0"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="cert">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="expressions:CastExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.7/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../security/cert/CertificateFactory.class.xmi#//@classifiers.0/@members.9"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.5/@variable"/>
+                    </next>
+                  </child>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.6/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="arrays:ArrayInstantiationBySize">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                </value>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.6/@variable">
+                  <arraySelectors>
+                    <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  </arraySelectors>
+                </child>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.7/@statements.1/@variable"/>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../io/PrintStream.class.xmi#//@classifiers.0/@members.42"/>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:StringReference" value="SSLValve failed "/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.4/@variable"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../lang/System.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/System.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../io/PrintStream.class.xmi#//@classifiers.0/@members.42"/>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:StringReference" value="SSLValve failed "/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.7/@catcheBlocks.0/@parameter"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../lang/System.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/System.class.xmi#//@classifiers.0"/>
+                </expression>
+              </statements>
+              <parameter name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <namespaces>java</namespaces>
+                  <namespaces>security</namespaces>
+                  <namespaces>cert</namespaces>
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../security/cert/CertificateException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.119"/>
+                <arguments xsi:type="references:StringReference" value="javax.servlet.request.X509Certificate"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.1/@statement/@statements.6/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="28"/>
+            <relationOperators xsi:type="operators:GreaterThan"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.0">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            <arguments xsi:type="references:StringReference" value="ssl_cipher"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.119"/>
+                <arguments xsi:type="references:StringReference" value="javax.servlet.request.cipher_suite"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.0">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            <arguments xsi:type="references:StringReference" value="ssl_session_id"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.119"/>
+                <arguments xsi:type="references:StringReference" value="javax.servlet.request.ssl_session"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.0">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            <arguments xsi:type="references:StringReference" value="ssl_cipher_usekeysize"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.119"/>
+                <arguments xsi:type="references:StringReference" value="javax.servlet.request.key_size"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/Valve.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1"/>
+          </next>
+          <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.15"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/*&#xA; * Valve to fill the SSL informations in the request&#xA; * mod_header is used to fill the headers and the valve&#xA; * will fill the parameters of the request.&#xA; * In httpd.conf add the following:&#xA; * &lt;IfModule ssl_module>&#xA; *   RequestHeader set SSL_CLIENT_CERT &quot;%{SSL_CLIENT_CERT}s&quot;&#xA; *   RequestHeader set SSL_CIPHER &quot;%{SSL_CIPHER}s&quot;&#xA; *   RequestHeader set SSL_SESSION_ID &quot;%{SSL_SESSION_ID}s&quot;&#xA; *   RequestHeader set SSL_CIPHER_USEKEYSIZE &quot;%{SSL_CIPHER_USEKEYSIZE}s&quot;&#xA; * &lt;/IfModule>&#xA; *&#xA; * @author Jean-Frederic Clere&#xA; * @version $Revision: 420067 $, $Date: 2006-07-08 09:16:58 +0200 (sub, 08 srp 2006) $&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="Channel.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>tribes</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../io/Serializable.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Channel">
+    <members xsi:type="members:Field" name="DEFAULT">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="15"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Start and stop sequences can be controlled by these constants&#xA;     * This allows you to start separate components of the channel &lt;br>&#xA;     * DEFAULT - starts or stops all components in the channel&#xA;     * @see #start(int)&#xA;     * @see #stop(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SND_RX_SEQ">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Start and stop sequences can be controlled by these constants&#xA;     * This allows you to start separate components of the channel &lt;br>&#xA;     * SND_RX_SEQ - starts or stops the data receiver. Start means opening a server socket&#xA;     * in case of a TCP implementation&#xA;     * @see #start(int)&#xA;     * @see #stop(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SND_TX_SEQ">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Start and stop sequences can be controlled by these constants&#xA;     * This allows you to start separate components of the channel &lt;br>&#xA;     * SND_TX_SEQ - starts or stops the data sender. This should not open any sockets,&#xA;     * as sockets are opened on demand when a message is being sent&#xA;     * @see #start(int)&#xA;     * @see #stop(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MBR_RX_SEQ">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Start and stop sequences can be controlled by these constants&#xA;     * This allows you to start separate components of the channel &lt;br>&#xA;     * MBR_RX_SEQ - starts or stops the membership listener. In a multicast implementation&#xA;     * this will open a datagram socket and join a group and listen for membership messages&#xA;     * members joining&#xA;     * @see #start(int)&#xA;     * @see #stop(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="MBR_TX_SEQ">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Start and stop sequences can be controlled by these constants&#xA;     * This allows you to start separate components of the channel &lt;br>&#xA;     * MBR_TX_SEQ - starts or stops the membership broadcaster. In a multicast implementation&#xA;     * this will open a datagram socket and join a group and broadcast the local member information&#xA;     * @see #start(int)&#xA;     * @see #stop(int)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEND_OPTIONS_BYTE_MESSAGE">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send options, when a message is sent, it can have an option flag&#xA;     * to trigger certain behavior. Most flags are used to trigger channel interceptors&#xA;     * as the message passes through the channel stack. &lt;br>&#xA;     * However, there are five default flags that every channel implementation must implement&lt;br>&#xA;     * SEND_OPTIONS_BYTE_MESSAGE - The message is a pure byte message and no marshalling or unmarshalling will&#xA;     * be performed.&lt;br>&#xA;     * &#xA;     * @see #send(Member[], Serializable , int)&#xA;     * @see #send(Member[], Serializable, int, ErrorHandler)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEND_OPTIONS_USE_ACK">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send options, when a message is sent, it can have an option flag&#xA;     * to trigger certain behavior. Most flags are used to trigger channel interceptors&#xA;     * as the message passes through the channel stack. &lt;br>&#xA;     * However, there are five default flags that every channel implementation must implement&lt;br>&#xA;     * SEND_OPTIONS_USE_ACK - Message is sent and an ACK is received when the message has been received by the recipient&lt;br>&#xA;     * If no ack is received, the message is not considered successful&lt;br>&#xA;     * @see #send(Member[], Serializable , int)&#xA;     * @see #send(Member[], Serializable, int, ErrorHandler)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEND_OPTIONS_SYNCHRONIZED_ACK">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send options, when a message is sent, it can have an option flag&#xA;     * to trigger certain behavior. Most flags are used to trigger channel interceptors&#xA;     * as the message passes through the channel stack. &lt;br>&#xA;     * However, there are five default flags that every channel implementation must implement&lt;br>&#xA;     * SEND_OPTIONS_SYNCHRONIZED_ACK - Message is sent and an ACK is received when the message has been received and &#xA;     * processed by the recipient&lt;br>&#xA;     * If no ack is received, the message is not considered successful&lt;br>&#xA;     * @see #send(Member[], Serializable , int)&#xA;     * @see #send(Member[], Serializable, int, ErrorHandler)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEND_OPTIONS_ASYNCHRONOUS">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="8"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send options, when a message is sent, it can have an option flag&#xA;     * to trigger certain behavior. Most flags are used to trigger channel interceptors&#xA;     * as the message passes through the channel stack. &lt;br>&#xA;     * However, there are five default flags that every channel implementation must implement&lt;br>&#xA;     * SEND_OPTIONS_ASYNCHRONOUS - Message is sent and an ACK is received when the message has been received and &#xA;     * processed by the recipient&lt;br>&#xA;     * If no ack is received, the message is not considered successful&lt;br>&#xA;     * @see #send(Member[], Serializable , int)&#xA;     * @see #send(Member[], Serializable, int, ErrorHandler)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEND_OPTIONS_SECURE">
+      <initialValue xsi:type="literals:HexIntegerLiteral" hexValue="16"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send options, when a message is sent, it can have an option flag&#xA;     * to trigger certain behavior. Most flags are used to trigger channel interceptors&#xA;     * as the message passes through the channel stack. &lt;br>&#xA;     * However, there are five default flags that every channel implementation must implement&lt;br>&#xA;     * SEND_OPTIONS_SECURE - Message is sent over an encrypted channel&lt;br>&#xA;     * @see #send(Member[], Serializable , int)&#xA;     * @see #send(Member[], Serializable, int, ErrorHandler)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="SEND_OPTIONS_DEFAULT">
+      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send options, when a message is sent, it can have an option flag&#xA;     * to trigger certain behavior. Most flags are used to trigger channel interceptors&#xA;     * as the message passes through the channel stack. &lt;br>&#xA;     * However, there are five default flags that every channel implementation must implement&lt;br>&#xA;     * SEND_OPTIONS_DEFAULT - the default sending options, just a helper variable. &lt;br>&#xA;     * The default is &lt;code>int SEND_OPTIONS_DEFAULT = SEND_OPTIONS_USE_ACK;&lt;/code>&lt;br>&#xA;     * @see #SEND_OPTIONS_USE_ACK&#xA;     * @see #send(Member[], Serializable , int)&#xA;     * @see #send(Member[], Serializable, int, ErrorHandler)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addInterceptor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="interceptor">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/ChannelInterceptor.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Adds an interceptor to the channel message chain.&#xA;     * @param interceptor ChannelInterceptor&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="start">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="svc">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Starts up the channel. This can be called multiple times for individual services to start&#xA;     * The svc parameter can be the logical or value of any constants&#xA;     * @param svc int value of &lt;BR>&#xA;     * DEFAULT - will start all services &lt;BR>&#xA;     * MBR_RX_SEQ - starts the membership receiver &lt;BR>&#xA;     * MBR_TX_SEQ - starts the membership broadcaster &lt;BR>&#xA;     * SND_TX_SEQ - starts the replication transmitter&lt;BR>&#xA;     * SND_RX_SEQ - starts the replication receiver&lt;BR>&#xA;     * &lt;b>Note:&lt;/b> In order for the membership broadcaster to &#xA;     * transmit the correct information, it has to be started after the replication receiver.&#xA;     * @throws ChannelException if a startup error occurs or the service is already started or an error occurs.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="stop">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="svc">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Shuts down the channel. This can be called multiple times for individual services to shutdown&#xA;     * The svc parameter can be the logical or value of any constants&#xA;     * @param svc int value of &lt;BR>&#xA;     * DEFAULT - will shutdown all services &lt;BR>&#xA;     * MBR_RX_SEQ - stops the membership receiver &lt;BR>&#xA;     * MBR_TX_SEQ - stops the membership broadcaster &lt;BR>&#xA;     * SND_TX_SEQ - stops the replication transmitter&lt;BR>&#xA;     * SND_RX_SEQ - stops the replication receiver&lt;BR>&#xA;     * @throws ChannelException if a startup error occurs or the service is already stopped or an error occurs.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="send">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/tribes/UniqueId.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="destination">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="msg">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../io/Serializable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="options">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send a message to one or more members in the cluster&#xA;     * @param destination Member[] - the destinations, can not be null or zero length, the reason for that&#xA;     * is that a membership change can occur and at that time the application is uncertain what group the message&#xA;     * actually got sent to.&#xA;     * @param msg Serializable - the message to send, has to be serializable, or a &lt;code>ByteMessage&lt;/code> to &#xA;     * send a pure byte array&#xA;     * @param options int - sender options, see class documentation for each interceptor that is configured in order to trigger interceptors&#xA;     * @return a unique Id that identifies the message that is sent&#xA;     * @see ByteMessage&#xA;     * @see #SEND_OPTIONS_USE_ACK&#xA;     * @see #SEND_OPTIONS_ASYNCHRONOUS&#xA;     * @see #SEND_OPTIONS_SYNCHRONIZED_ACK&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="send">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/tribes/UniqueId.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="destination">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="msg">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../io/Serializable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="options">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="handler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/ErrorHandler.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Send a message to one or more members in the cluster&#xA;     * @param destination Member[] - the destinations, null or zero length means all&#xA;     * @param msg ClusterMessage - the message to send&#xA;     * @param options int - sender options, see class documentation&#xA;     * @param handler ErrorHandler - handle errors through a callback, rather than throw it&#xA;     * @return a unique Id that identifies the message that is sent&#xA;     * @exception ChannelException - if a serialization error happens.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="heartbeat">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sends a heart beat through the interceptor stacks&#xA;     * Use this method to alert interceptors and other components to &#xA;     * clean up garbage, timed out messages etc.&lt;br>&#xA;     * If you application has a background thread, then you can save one thread,&#xA;     * by configuring your channel to not use an internal heartbeat thread&#xA;     * and invoking this method.&#xA;     * @see #setHeartbeat(boolean)&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setHeartbeat">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="enable">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Enables or disables internal heartbeat.&#xA;     * @param enable boolean - default value is implementation specific&#xA;     * @see #heartbeat()&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addMembershipListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/MembershipListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Add a membership listener, will get notified when a new member joins, leaves or crashes&#xA;     * &lt;br>If the membership listener implements the Heartbeat interface&#xA;     * the &lt;code>heartbeat()&lt;/code> method will be invoked when the heartbeat runs on the channel&#xA;     * @param listener MembershipListener&#xA;     * @see MembershipListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="addChannelListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/ChannelListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Add a channel listener, this is a callback object when messages are received&#xA;     * &lt;br>If the channel listener implements the Heartbeat interface&#xA;     * the &lt;code>heartbeat()&lt;/code> method will be invoked when the heartbeat runs on the channel&#xA;     * @param listener ChannelListener&#xA;     * @see ChannelListener&#xA;     * @see Heartbeat&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeMembershipListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/MembershipListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * remove a membership listener, listeners are removed based on Object.hashCode and Object.equals&#xA;     * @param listener MembershipListener&#xA;     * @see MembershipListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="removeChannelListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/ChannelListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * remove a channel listener, listeners are removed based on Object.hashCode and Object.equals&#xA;     * @param listener ChannelListener&#xA;     * @see ChannelListener&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="hasMembers">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns true if there are any members in the group,&#xA;     * this call is the same as &lt;code>getMembers().length>0&lt;/code>&#xA;     * @return boolean - true if there are any members automatically discovered&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMembers">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Get all current group members&#xA;     * @return all members or empty array, never null &#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getLocalMember">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="incAlive">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Return the member that represents this node. This is also the data&#xA;     * that gets broadcasted through the membership broadcaster component&#xA;     * @param incAlive - optimization, true if you want it to calculate alive time&#xA;     * since the membership service started.&#xA;     * @return Member&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getMember">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="mbr">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the member from the membership service with complete and &#xA;     * recent data. Some implementations might serialize and send &#xA;     * membership information along with a message, and instead of sending&#xA;     * complete membership details, only send the primary identifier for the member&#xA;     * but not the payload or other information. When such message is received&#xA;     * the application can retrieve the cached member through this call.&lt;br>&#xA;     * In most cases, this is not necessary.&#xA;     * @param mbr Member&#xA;     * @return Member&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Channel interface&lt;br>&#xA; * A channel is a representation of a group of nodes all participating in some sort of&#xA; * communication with each other.&lt;br>&#xA; * The channel is the main API class for Tribes, this is essentially the only class&#xA; * that an application needs to be aware of. Through the channel the application can:&lt;br>&#xA; * 1. send messages&lt;br>&#xA; * 2. receive message (by registering a &lt;code>ChannelListener&lt;/code>&lt;br>&#xA; * 3. get all members of the group &lt;code>getMembers()&lt;/code>&lt;br>&#xA; * 4. receive notifications of members added and members disappeared by&#xA; *    registerering a &lt;code>MembershipListener&lt;/code>&lt;br>&#xA; * &lt;br>&#xA; * The channel has 5 major components:&lt;br>&#xA; * 1. Data receiver, with a built in thread pool to receive messages from other peers&lt;br>&#xA; * 2. Data sender, an implementation for sending data using NIO or java.io&lt;br>&#xA; * 3. Membership listener,listens for membership broadcasts&lt;br>&#xA; * 4. Membership broadcaster, broadcasts membership pings.&lt;br>&#xA; * 5. Channel interceptors, the ability to manipulate messages as they are sent or arrive&lt;br>&lt;br>&#xA; * The channel layout is:&#xA; * &lt;pre>&lt;code>&#xA; *  ChannelListener_1..ChannelListener_N MembershipListener_1..MembershipListener_N [Application Layer]&#xA; *            \          \                  /                   /&#xA; *             \          \                /                   /&#xA; *              \          \              /                   /&#xA; *               \          \            /                   /&#xA; *                \          \          /                   /&#xA; *                 \          \        /                   /&#xA; *                  ---------------------------------------&#xA; *                                  |&#xA; *                                  |&#xA; *                               Channel&#xA; *                                  |&#xA; *                         ChannelInterceptor_1&#xA; *                                  |                                               [Channel stack]&#xA; *                         ChannelInterceptor_N&#xA; *                                  |&#xA; *                             Coordinator (implements MessageListener,MembershipListener,ChannelInterceptor)&#xA; *                          --------------------&#xA; *                         /        |           \ &#xA; *                        /         |            \&#xA; *                       /          |             \&#xA; *                      /           |              \&#xA; *                     /            |               \&#xA; *           MembershipService ChannelSender ChannelReceiver                        [IO layer]&#xA; * &lt;/code>&lt;/pre>&#xA; * &#xA; * For example usage @see org.apache.catalina.tribes.group.GroupChannel&#xA; * @author Filip Hanik&#xA; * @version $Revision: 467222 $, $Date: 2006-10-24 05:17:11 +0200 (Tue, 24 Oct 2006) $&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

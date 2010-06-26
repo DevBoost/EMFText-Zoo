@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="FactoryCreateRule.java">
+  <comments>/* $Id: FactoryCreateRule.java 467222 2006-10-24 03:17:11Z markt $&#xA; *&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>tomcat</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>digester</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>xml</namespaces>
+    <namespaces>sax</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/xml/sax/Attributes.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="FactoryCreateRule">
+    <members xsi:type="members:Field" name="ignoreCreateExceptions">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// ----------------------------------------------------------- Fields</comments>
+        <comments>/** Should exceptions thrown by the factory be ignored? */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="exceptionIgnoredStack">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/ArrayStack.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/** Stock to manage */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="digester">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// ----------------------------------------------------------- Constructors</comments>
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class name to create an {@link ObjectCreationFactory} which will&#xA;     * then be used to create an object and push it on the stack.&#xA;     *&#xA;     * @param digester The associated Digester&#xA;     * @param className Java class name of the object creation factory class&#xA;     *&#xA;     * @deprecated The digester instance is now set in the {@link Digester#addRule} method. &#xA;     * Use {@link #FactoryCreateRule(String className)} instead.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="digester">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clazz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class to create an {@link ObjectCreationFactory} which will&#xA;     * then be used to create an object and push it on the stack.&#xA;     *&#xA;     * @param digester The associated Digester&#xA;     * @param clazz Java class name of the object creation factory class&#xA;     *&#xA;     * @deprecated The digester instance is now set in the {@link Digester#addRule} method. &#xA;     * Use {@link #FactoryCreateRule(Class clazz)} instead.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.2"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="digester">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class name (possibly overridden by the specified attribute if present)&#xA;     * to create an {@link ObjectCreationFactory}, which will then be used&#xA;     * to instantiate an object instance and push it onto the stack.&#xA;     *&#xA;     * @param digester The associated Digester&#xA;     * @param className Default Java class name of the factory class&#xA;     * @param attributeName Attribute name which, if present, contains an&#xA;     *  override of the class name of the object creation factory to create.&#xA;     *&#xA;     * @deprecated The digester instance is now set in the {@link Digester#addRule} method. &#xA;     * Use {@link #FactoryCreateRule(String className, String attributeName)} instead.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@parameters.2"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="digester">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clazz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class (possibly overridden by the specified attribute if present)&#xA;     * to create an {@link ObjectCreationFactory}, which will then be used&#xA;     * to instantiate an object instance and push it onto the stack.&#xA;     *&#xA;     * @param digester The associated Digester&#xA;     * @param clazz Default Java class name of the factory class&#xA;     * @param attributeName Attribute name which, if present, contains an&#xA;     *  override of the class name of the object creation factory to create.&#xA;     *&#xA;     * @deprecated The digester instance is now set in the {@link Digester#addRule} method. &#xA;     * Use {@link #FactoryCreateRule(Class clazz, String attributeName)} instead.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="digester">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="creationFactory">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule using the given, already instantiated,&#xA;     * {@link ObjectCreationFactory}.&#xA;     *&#xA;     * @param digester The associated Digester&#xA;     * @param creationFactory called on to create the object.&#xA;     *&#xA;     * @deprecated The digester instance is now set in the {@link Digester#addRule} method. &#xA;     * Use {@link #FactoryCreateRule(ObjectCreationFactory creationFactory)} instead.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@parameters.0"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Construct a factory create rule that will use the specified&#xA;     * class name to create an {@link ObjectCreationFactory} which will&#xA;     * then be used to create an object and push it on the stack.&lt;/p>&#xA;     *&#xA;     * &lt;p>Exceptions thrown during the object creation process will be propagated.&lt;/p>&#xA;     *&#xA;     * @param className Java class name of the object creation factory class&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clazz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Construct a factory create rule that will use the specified&#xA;     * class to create an {@link ObjectCreationFactory} which will&#xA;     * then be used to create an object and push it on the stack.&lt;/p>&#xA;     *&#xA;     * &lt;p>Exceptions thrown during the object creation process will be propagated.&lt;/p>&#xA;     *&#xA;     * @param clazz Java class name of the object creation factory class&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Construct a factory create rule that will use the specified&#xA;     * class name (possibly overridden by the specified attribute if present)&#xA;     * to create an {@link ObjectCreationFactory}, which will then be used&#xA;     * to instantiate an object instance and push it onto the stack.&lt;/p>&#xA;     *&#xA;     * &lt;p>Exceptions thrown during the object creation process will be propagated.&lt;/p>&#xA;     *&#xA;     * @param className Default Java class name of the factory class&#xA;     * @param attributeName Attribute name which, if present, contains an&#xA;     *  override of the class name of the object creation factory to create.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clazz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Construct a factory create rule that will use the specified&#xA;     * class (possibly overridden by the specified attribute if present)&#xA;     * to create an {@link ObjectCreationFactory}, which will then be used&#xA;     * to instantiate an object instance and push it onto the stack.&lt;/p>&#xA;     *&#xA;     * &lt;p>Exceptions thrown during the object creation process will be propagated.&lt;/p>&#xA;     *&#xA;     * @param clazz Default Java class name of the factory class&#xA;     * @param attributeName Attribute name which, if present, contains an&#xA;     *  override of the class name of the object creation factory to create.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+          <arguments xsi:type="literals:BooleanLiteral"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="creationFactory">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * &lt;p>Construct a factory create rule using the given, already instantiated,&#xA;     * {@link ObjectCreationFactory}.&lt;/p>&#xA;     *&#xA;     * &lt;p>Exceptions thrown during the object creation process will be propagated.&lt;/p>&#xA;     *&#xA;     * @param creationFactory called on to create the object.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ignoreCreateExceptions">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class name to create an {@link ObjectCreationFactory} which will&#xA;     * then be used to create an object and push it on the stack.&#xA;     *&#xA;     * @param className Java class name of the object creation factory class&#xA;     * @param ignoreCreateExceptions if true, exceptions thrown by the object&#xA;     *  creation factory&#xA;     * will be ignored.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clazz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ignoreCreateExceptions">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class to create an {@link ObjectCreationFactory} which will&#xA;     * then be used to create an object and push it on the stack.&#xA;     *&#xA;     * @param clazz Java class name of the object creation factory class&#xA;     * @param ignoreCreateExceptions if true, exceptions thrown by the&#xA;     *  object creation factory&#xA;     * will be ignored.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.2"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="className">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ignoreCreateExceptions">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class name (possibly overridden by the specified attribute if present)&#xA;     * to create an {@link ObjectCreationFactory}, which will then be used&#xA;     * to instantiate an object instance and push it onto the stack.&#xA;     *&#xA;     * @param className Default Java class name of the factory class&#xA;     * @param attributeName Attribute name which, if present, contains an&#xA;     *  override of the class name of the object creation factory to create.&#xA;     * @param ignoreCreateExceptions if true, exceptions thrown by the object&#xA;     *  creation factory will be ignored.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+            </next>
+          </arguments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.2"/>
+          <callTarget xsi:type="literals:This"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="clazz">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributeName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ignoreCreateExceptions">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule that will use the specified&#xA;     * class (possibly overridden by the specified attribute if present)&#xA;     * to create an {@link ObjectCreationFactory}, which will then be used&#xA;     * to instantiate an object instance and push it onto the stack.&#xA;     *&#xA;     * @param clazz Default Java class name of the factory class&#xA;     * @param attributeName Attribute name which, if present, contains an&#xA;     *  override of the class name of the object creation factory to create.&#xA;     * @param ignoreCreateExceptions if true, exceptions thrown by the object&#xA;     *  creation factory will be ignored.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Constructor" name="FactoryCreateRule">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="creationFactory">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ignoreCreateExceptions">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct a factory create rule using the given, already instantiated,&#xA;     * {@link ObjectCreationFactory}.&#xA;     *&#xA;     * @param creationFactory called on to create the object.&#xA;     * @param ignoreCreateExceptions if true, exceptions thrown by the object&#xA;     *  creation factory will be ignored.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="attributeName">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// ----------------------------------------------------- Instance Variables</comments>
+        <comments>/**&#xA;     * The attribute containing an override class name if it is present.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="className">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The Java class name of the ObjectCreationFactory to be created.&#xA;     * This class must have a no-arguments constructor.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="creationFactory">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The object creation factory we will use to instantiate objects&#xA;     * as required based on the attributes specified in the matched XML&#xA;     * element.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="begin">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="namespace">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributes">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/xml/sax/Attributes.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// --------------------------------------------------------- Public Methods</comments>
+        <comments>/**&#xA;     * Process the beginning of this element.&#xA;     *&#xA;     * @param attributes The attribute list of this element&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/ArrayStack.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="instance">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../lang/Object.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.24">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0/@members.0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.2"/>
+                  </next>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.2"/>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                        <arguments xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:StringReference" value="[FactoryCreateRule]{"/>
+                          <children xsi:type="references:IdentifierReference">
+                            <next xsi:type="references:IdentifierReference">
+                              <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.12"/>
+                            </next>
+                            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                          </children>
+                          <children xsi:type="references:StringReference" value="} New "/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@statement/@statements.1/@statements.0/@variable">
+                            <next xsi:type="references:MethodCall">
+                              <next xsi:type="references:MethodCall">
+                                <target xsi:type="members:ClassMethod" href="../../../../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                              </next>
+                              <target xsi:type="members:ClassMethod" href="../../../../../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+                            </next>
+                          </children>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                        </arguments>
+                      </next>
+                      <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.148"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@statement/@statements.1/@statements.0/@variable"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+              </expression>
+            </statements>
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/ArrayStack.class.xmi#//@classifiers.0/@members.7"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                </next>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <statements xsi:type="statements:Condition">
+                <comments>// log message and error</comments>
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.10"/>
+                          <arguments xsi:type="expressions:AdditiveExpression">
+                            <children xsi:type="references:StringReference" value="[FactoryCreateRule] Create exception ignored: "/>
+                            <children xsi:type="expressions:NestedExpression">
+                              <expression xsi:type="expressions:ConditionalExpression">
+                                <child xsi:type="expressions:NestedExpression">
+                                  <expression xsi:type="expressions:EqualityExpression">
+                                    <equalityOperators xsi:type="operators:Equal"/>
+                                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@statement/@statements.1/@catcheBlocks.0/@parameter">
+                                      <next xsi:type="references:MethodCall">
+                                        <target xsi:type="members:ClassMethod" href="../../../../../lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+                                      </next>
+                                    </children>
+                                    <children xsi:type="literals:NullLiteral"/>
+                                  </expression>
+                                </child>
+                                <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@statement/@statements.1/@catcheBlocks.0/@parameter">
+                                  <next xsi:type="references:MethodCall">
+                                    <next xsi:type="references:MethodCall">
+                                      <target xsi:type="members:ClassMethod" href="../../../../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                                    </next>
+                                    <target xsi:type="members:ClassMethod" href="../../../../../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+                                  </next>
+                                </expressionIf>
+                                <expressionElse xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@statement/@statements.1/@catcheBlocks.0/@parameter">
+                                  <next xsi:type="references:MethodCall">
+                                    <target xsi:type="members:ClassMethod" href="../../../../../lang/Throwable.class.xmi#//@classifiers.0/@members.9"/>
+                                  </next>
+                                </expressionElse>
+                              </expression>
+                            </children>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                          </arguments>
+                        </next>
+                        <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                      </next>
+                      <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <statement xsi:type="statements:Block">
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:IdentifierReference">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.9"/>
+                              <arguments xsi:type="references:StringReference" value="[FactoryCreateRule] Ignored exception:"/>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@statement/@statements.1/@catcheBlocks.0/@parameter"/>
+                            </next>
+                            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                          </next>
+                          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                        </expression>
+                      </statements>
+                    </statement>
+                    <condition xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                        </next>
+                        <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                      </next>
+                      <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                    </condition>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/ArrayStack.class.xmi#//@classifiers.0/@members.7"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+              <parameter name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="instance">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../lang/Object.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.24">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0/@members.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.2"/>
+                </next>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.2"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:StringReference" value="[FactoryCreateRule]{"/>
+                        <children xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:IdentifierReference">
+                            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.12"/>
+                          </next>
+                          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                        </children>
+                        <children xsi:type="references:StringReference" value="} New "/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@elseStatement/@statements.0/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                            </next>
+                            <target xsi:type="members:ClassMethod" href="../../../../../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+                          </next>
+                        </children>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.148"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.0/@elseStatement/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="end">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="namespace">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Process the end of this element.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// check if object was created </comments>
+        <comments>// this only happens if an exception was thrown and we're ignoring them</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <comments>// creation exception was ignored</comments>
+                <comments>// nothing was put onto the stack</comments>
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.6"/>
+                          <arguments xsi:type="references:StringReference" value="[FactoryCreateRule] No creation so no push so no pop"/>
+                        </next>
+                        <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                      </next>
+                      <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.4"/>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Return"/>
+            </statement>
+            <condition xsi:type="expressions:NestedExpression">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0/@members.8"/>
+              </next>
+              <expression xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/ArrayStack.class.xmi#//@classifiers.0/@members.6"/>
+                  </next>
+                </child>
+              </expression>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="expressions:NestedExpression">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/ArrayStack.class.xmi#//@classifiers.0/@members.3"/>
+                </next>
+              </expression>
+            </child>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="top">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.147"/>
+            </next>
+            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="[FactoryCreateRule]{"/>
+                    <children xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.12"/>
+                      </next>
+                      <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                    </children>
+                    <children xsi:type="references:StringReference" value="} Pop "/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.1/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../lang/Class.class.xmi#//@classifiers.0/@members.44"/>
+                        </next>
+                        <target xsi:type="members:ClassMethod" href="../../../../../lang/Object.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+          </next>
+          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="finish">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Clean up after parsing is complete.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:NullLiteral"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="toString">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Render a printable version of this Rule.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sb">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="FactoryCreateRule["/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:StringReference" value="className="/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:StringReference" value=", attributeName="/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+                <arguments xsi:type="references:StringReference" value=", creationFactory="/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.18"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.19"/>
+            <arguments xsi:type="references:StringReference" value="]"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.55"/>
+            </next>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getFactory">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="attributes">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/xml/sax/Attributes.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// ------------------------------------------------------ Protected Methods</comments>
+        <comments>/**&#xA;     * Return an instance of our associated object creation factory,&#xA;     * creating one if necessary.&#xA;     *&#xA;     * @param attributes Attributes passed to our factory creation element&#xA;     *&#xA;     * @exception Exception if any error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="realClassName">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="value">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/xml/sax/Attributes.class.xmi#//@classifiers.0/@members.11"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:StringReference" value="[FactoryCreateRule]{"/>
+                        <children xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:IdentifierReference">
+                            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.12"/>
+                          </next>
+                          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                        </children>
+                        <children xsi:type="references:StringReference" value="} New factory "/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.0/@variable"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                    </next>
+                    <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.28"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="clazz">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../lang/Class.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../lang/ClassLoader.class.xmi#//@classifiers.0/@members.24"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.0/@variable"/>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/digester/Digester.class.xmi#//@classifiers.0/@members.37"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.3/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../lang/Class.class.xmi#//@classifiers.0/@members.35"/>
+                  </next>
+                </child>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/tomcat/util/digester/ObjectCreationFactory.class.xmi#//@classifiers.0/@members.2"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0/@members.0"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19"/>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &lt;p>Rule implementation that uses an {@link ObjectCreationFactory} to create&#xA; * a new object which it pushes onto the object stack.  When the element is&#xA; * complete, the object will be popped.&lt;/p>&#xA; *&#xA; * &lt;p>This rule is intended in situations where the element's attributes are&#xA; * needed before the object can be created.  A common senario is for the&#xA; * ObjectCreationFactory implementation to use the attributes  as parameters&#xA; * in a call to either a factory method or to a non-empty constructor.&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/digester/Rule.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

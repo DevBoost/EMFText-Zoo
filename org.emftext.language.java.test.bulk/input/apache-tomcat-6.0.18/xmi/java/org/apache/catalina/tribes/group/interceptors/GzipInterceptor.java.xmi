@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../java.ecore#/16" name="GzipInterceptor.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>tribes</namespaces>
+  <namespaces>group</namespaces>
+  <namespaces>interceptors</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../io/ByteArrayInputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../io/ByteArrayOutputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../util/Arrays.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>zip</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../util/zip/GZIPInputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>zip</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>tribes</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>tribes</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>tribes</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>tribes</namespaces>
+    <namespaces>group</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/group/ChannelInterceptorBase.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>tribes</namespaces>
+    <namespaces>group</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/group/InterceptorPayload.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="GzipInterceptor">
+    <members xsi:type="members:Field" name="DEFAULT_BUFFER_SIZE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2048"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="sendMessage">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="destination">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../../org/apache/catalina/tribes/Member.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="msg">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="payload">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/group/InterceptorPayload.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="data">
+            <typeReference xsi:type="types:Byte"/>
+            <arrayDimensionsBefore/>
+            <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.18"/>
+                  </next>
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+              </arguments>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.13"/>
+                    </next>
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+                  </next>
+                </arguments>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.25"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@statements.0/@variable"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelInterceptor.class.xmi#//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.2"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/group/ChannelInterceptorBase.class.xmi#//@classifiers.0/@members.8"/>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.14"/>
+                <arguments xsi:type="references:StringReference" value="Unable to compress byte contents"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../../../org/apache/catalina/tribes/group/ChannelInterceptorBase.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/ChannelException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@catcheBlocks.0/@parameter"/>
+            </throwable>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="messageReceived">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="msg">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="data">
+            <typeReference xsi:type="types:Byte"/>
+            <arrayDimensionsBefore/>
+            <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.18"/>
+                  </next>
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+              </arguments>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.13"/>
+                    </next>
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+                  </next>
+                </arguments>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/io/XByteBuffer.class.xmi#//@classifiers.0/@members.25"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@statements.0/@variable"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference"/>
+                </arguments>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelMessage.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/catalina/tribes/ChannelInterceptor.class.xmi#//@classifiers.0/@members.7"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+            </next>
+            <target xsi:type="members:ClassMethod" href="../../../../../../../org/apache/catalina/tribes/group/ChannelInterceptorBase.class.xmi#//@classifiers.0/@members.11"/>
+          </expression>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.15"/>
+                <arguments xsi:type="references:StringReference" value="Unable to decompress byte contents"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@catcheBlocks.0/@parameter"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../../../org/apache/catalina/tribes/group/ChannelInterceptorBase.class.xmi#//@classifiers.0/@members.0"/>
+            </expression>
+          </statements>
+          <parameter name="x">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="compress">
+      <typeReference xsi:type="types:Byte"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bout">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../io/ByteArrayOutputStream.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../io/ByteArrayOutputStream.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="gout">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../io/FilterOutputStream.class.xmi#//@classifiers.0/@members.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../io/FilterOutputStream.class.xmi#//@classifiers.0/@members.5"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.1/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../util/zip/DeflaterOutputStream.class.xmi#//@classifiers.0/@members.10"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../io/ByteArrayOutputStream.class.xmi#//@classifiers.0/@members.8"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="decompress">
+      <typeReference xsi:type="types:Byte"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="data">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @todo Fix to create an automatically growing buffer.&#xA;     * @param data byte[]&#xA;     * @return byte[]&#xA;     * @throws IOException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bin">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../io/ByteArrayInputStream.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../io/ByteArrayInputStream.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="gin">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../util/zip/GZIPInputStream.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../util/zip/GZIPInputStream.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="tmp">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="length">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../io/FilterInputStream.class.xmi#//@classifiers.0/@members.3"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.2/@variable"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.3/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../lang/System.class.xmi#//@classifiers.0/@members.20"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.2/@variable"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.4/@variable"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.3/@variable"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../../../../lang/System.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4/@statements.4/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="main">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="data">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:Byte"/>
+            <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="1024"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../util/Arrays.class.xmi#//@classifiers.0/@members.83"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+            <arguments xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:Byte"/>
+              <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </arguments>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../../../../util/Arrays.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="compress">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.3">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.0/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="decompress">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.4">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5/@statements.2/@variable"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../io/PrintStream.class.xmi#//@classifiers.0/@members.42"/>
+              <arguments xsi:type="references:StringReference" value="Debug test"/>
+            </next>
+            <target xsi:type="members:Field" href="../../../../../../lang/System.class.xmi#//@classifiers.0/@members.1"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../../../../lang/System.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; *&#xA; *&#xA; * @author Filip Hanik&#xA; * @version 1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../../../org/apache/catalina/tribes/group/ChannelInterceptorBase.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,2035 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../../java.ecore#/17" name="ApplicationFilterFactory.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>core</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../javax/servlet/Servlet.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../javax/servlet/ServletRequest.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletRequest.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/CometFilter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/Wrapper.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>deploy</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="ApplicationFilterFactory">
+    <members xsi:type="members:Field" name="ERROR">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// -------------------------------------------------------------- Constants</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ERROR_INTEGER">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FORWARD">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="FORWARD_INTEGER">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="INCLUDE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="INCLUDE_INTEGER">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="REQUEST">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="8"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="REQUEST_INTEGER">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DISPATCHER_TYPE_ATTR">
+      <initialValue xsi:type="references:IdentifierReference">
+        <next xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.4"/>
+        </next>
+        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="DISPATCHER_REQUEST_PATH_ATTR">
+      <initialValue xsi:type="references:IdentifierReference">
+        <next xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.5"/>
+        </next>
+        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="factory">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:EmptyMember"/>
+    <members xsi:type="members:Constructor" name="ApplicationFilterFactory">
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// ----------------------------------------------------------- Constructors</comments>
+        <comments>/*&#xA;     * Prevent instanciation outside of the getInstanceMethod().&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getInstance">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// --------------------------------------------------------- Public Methods</comments>
+        <comments>/**&#xA;     * Return the fqctory instance.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences target="//@classifiers.0"/>
+                </typeReference>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createFilterChain">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/ServletRequest.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="wrapper">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/Wrapper.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="servlet">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/Servlet.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Construct and return a FilterChain implementation that will wrap the&#xA;     * execution of the specified servlet instance.  If we should not execute&#xA;     * a filter chain at all, return &lt;code>null&lt;/code>.&#xA;     *&#xA;     * @param request The servlet request we are processing&#xA;     * @param servlet The servlet instance to be wrapped&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="dispatcher">
+          <typeReference xsi:type="types:Int">
+            <comments>// get the dispatcher type</comments>
+          </typeReference>
+          <initialValue xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="dispatcherInt">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../lang/Integer.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../javax/servlet/ServletRequest.class.xmi#//@classifiers.0/@members.0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.1/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/Integer.class.xmi#//@classifiers.0/@members.27"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../javax/servlet/ServletRequest.class.xmi#//@classifiers.0/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            </next>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="requestPath">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="attribute">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/Object.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../javax/servlet/ServletRequest.class.xmi#//@classifiers.0/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.3/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/Object.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.3/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="hreq">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletRequest.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.5/@variable"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletRequest.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletRequest.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// If there is no servlet to execute, return null</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="literals:NullLiteral"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="comet">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="filterChain">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Create and initialize a filter chain object</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="req">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.8/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.10/@statement/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.177"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+                    <comments>// Security: Do not recycle</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.10/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.62"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.8/@variable"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.38"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.10/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.61"/>
+                      </next>
+                    </child>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="instantiations:NewConstructorCall">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                      </value>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.10/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.62"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+                  <children xsi:type="literals:NullLiteral"/>
+                </condition>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+                <comments>// Request dispatcher in use</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </value>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0/@members.24"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.2"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0/@members.25"/>
+            <arguments xsi:type="expressions:NestedExpression">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/StandardWrapper.class.xmi#//@classifiers.0/@members.40"/>
+              </next>
+              <expression xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/StandardWrapper.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+              </expression>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="context">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Acquire the filter mappings for this Context</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/StandardContext.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/StandardContext.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.21"/>
+              </next>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="filterMaps">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.13/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/StandardContext.class.xmi#//@classifiers.0/@members.235"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// If there are no filter mappings, we are done</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                <next xsi:type="references:IdentifierReference"/>
+              </children>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="servletName">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Acquire the information we will need to match filter mappings</comments>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.19"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>// Add the relevant path-mapped filters to this filter chain</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Continue"/>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.18">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@init"/>
+                  </arraySelectors>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable"/>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Continue"/>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@init"/>
+                  </arraySelectors>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable"/>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="filterConfig">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterConfig.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterConfig.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.13/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/StandardContext.class.xmi#//@classifiers.0/@members.284"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.23"/>
+                      </next>
+                      <arraySelectors>
+                        <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@init"/>
+                      </arraySelectors>
+                    </arguments>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:EmptyStatement"/>
+              <statements xsi:type="statements:Continue">
+                <comments>// FIXME - log configuration problem</comments>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@statement/@statements.2/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="isCometFilter">
+              <typeReference xsi:type="types:Boolean"/>
+              <initialValue xsi:type="literals:BooleanLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@statement/@statements.4/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:InstanceOfExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/CometFilter.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@statement/@statements.2/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterConfig.class.xmi#//@classifiers.0/@members.12"/>
+                        </next>
+                      </child>
+                    </value>
+                  </expression>
+                </statements>
+                <catcheBlocks>
+                  <comments>// Note: The try catch is there because getFilter has a lot of </comments>
+                  <comments>// declared exceptions. However, the filter is allocated much</comments>
+                  <comments>// earlier</comments>
+                  <parameter name="e">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0/@members.21"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@statement/@statements.2/@variable"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@statement/@statements.4/@variable"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.8/@variable"/>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0/@members.21"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@statement/@statements.2/@variable"/>
+                  </next>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+            <next xsi:type="references:IdentifierReference"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.17/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <comments>// Add filters that match on servlet name second</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Continue"/>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.18">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@init"/>
+                  </arraySelectors>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.0/@variable"/>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Continue"/>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.17">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                  <arraySelectors>
+                    <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@init"/>
+                  </arraySelectors>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.16/@variable"/>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="filterConfig">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterConfig.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/core/ApplicationFilterConfig.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.13/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/StandardContext.class.xmi#//@classifiers.0/@members.284"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.23"/>
+                      </next>
+                      <arraySelectors>
+                        <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@init"/>
+                      </arraySelectors>
+                    </arguments>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:EmptyStatement"/>
+              <statements xsi:type="statements:Continue">
+                <comments>// FIXME - log configuration problem</comments>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@statement/@statements.2/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="isCometFilter">
+              <typeReference xsi:type="types:Boolean"/>
+              <initialValue xsi:type="literals:BooleanLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@statement/@statements.4/@variable"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:InstanceOfExpression">
+                      <typeReference xsi:type="types:NamespaceClassifierReference">
+                        <classifierReferences>
+                          <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/CometFilter.class.xmi#//@classifiers.0"/>
+                        </classifierReferences>
+                      </typeReference>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@statement/@statements.2/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterConfig.class.xmi#//@classifiers.0/@members.12"/>
+                        </next>
+                      </child>
+                    </value>
+                  </expression>
+                </statements>
+                <catcheBlocks>
+                  <comments>// Note: The try catch is there because getFilter has a lot of </comments>
+                  <comments>// declared exceptions. However, the filter is allocated much</comments>
+                  <comments>// earlier</comments>
+                  <parameter name="e">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../lang/Exception.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0/@members.21"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@statement/@statements.2/@variable"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@statement/@statements.4/@variable"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.8/@variable"/>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/core/ApplicationFilterChain.class.xmi#//@classifiers.0/@members.21"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@statement/@statements.2/@variable"/>
+                  </next>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.14/@variable">
+            <next xsi:type="references:IdentifierReference"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.18/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>// Return the completed filter chain</comments>
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.9/@variable"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="matchFiltersURL">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filterMap">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requestPath">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>// -------------------------------------------------------- Private Methods</comments>
+        <comments>/**&#xA;     * Return &lt;code>true&lt;/code> if the context-relative request path&#xA;     * matches the requirements of the specified filter mapping;&#xA;     * otherwise, return &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @param filterMap Filter mapping being checked&#xA;     * @param requestPath Context-relative request path of this request&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// Check the specific &quot;*&quot; special URL pattern, which also matches</comments>
+        <comments>// named dispatches</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="literals:BooleanLiteral" value="true"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.27"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="literals:BooleanLiteral"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="testPaths">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Match on context relative request path</comments>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.29"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="literals:BooleanLiteral" value="true"/>
+                </returnValue>
+              </statements>
+            </statement>
+            <condition xsi:type="references:MethodCall" target="//@classifiers.0/@members.16">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+                <arraySelectors>
+                  <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+                </arraySelectors>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.2/@variable">
+            <next xsi:type="references:IdentifierReference"/>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.3/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>// No match</comments>
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="literals:BooleanLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="matchFiltersURL">
+      <comments>// NOTE - Not relevant for selecting filters</comments>
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="testPath">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="requestPath">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Return &lt;code>true&lt;/code> if the context-relative request path&#xA;     * matches the requirements of the specified filter mapping;&#xA;     * otherwise, return &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @param testPath URL mapping being checked&#xA;     * @param requestPath Context-relative request path of this request&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="literals:BooleanLiteral"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// Case 1 - Exact Match</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="literals:BooleanLiteral" value="true"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// Case 2 - Path Match (&quot;/.../*&quot;)</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <expression xsi:type="literals:BooleanLiteral" value="true"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+            <arguments xsi:type="references:StringReference" value="/*"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:Return">
+                    <returnValue xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="literals:BooleanLiteral" value="true"/>
+                    </returnValue>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                    </next>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                        </next>
+                      </children>
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      <additiveOperators xsi:type="operators:Subtraction"/>
+                    </expression>
+                  </children>
+                </condition>
+                <elseStatement xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="literals:BooleanLiteral" value="true"/>
+                      </returnValue>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="literals:CharacterLiteral" value="47"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.23"/>
+                        <arguments xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                            </next>
+                          </children>
+                          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                          <additiveOperators xsi:type="operators:Subtraction"/>
+                        </arguments>
+                      </next>
+                    </children>
+                  </condition>
+                </elseStatement>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.39"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+                <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <arguments xsi:type="expressions:AdditiveExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                    </next>
+                  </children>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                  <additiveOperators xsi:type="operators:Subtraction"/>
+                </arguments>
+              </next>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="literals:BooleanLiteral"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.43"/>
+            <arguments xsi:type="references:StringReference" value="/*"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// Case 3 - Extension Match</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="slash">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.47"/>
+                  <arguments xsi:type="literals:CharacterLiteral" value="47"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="period">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.47"/>
+                  <arguments xsi:type="literals:CharacterLiteral" value="46"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="expressions:NestedExpression">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.39"/>
+                      <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@statement/@statements.1/@variable"/>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                        <additiveOperators xsi:type="operators:Addition"/>
+                      </arguments>
+                      <arguments xsi:type="expressions:AdditiveExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                          </next>
+                        </children>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                        <additiveOperators xsi:type="operators:Subtraction"/>
+                      </arguments>
+                    </next>
+                  </expression>
+                </returnValue>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@statement/@statements.0/@variable"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+                </expression>
+              </children>
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@statement/@statements.1/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@statement/@statements.0/@variable"/>
+                  <relationOperators xsi:type="operators:GreaterThan"/>
+                </expression>
+              </children>
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@statement/@statements.1/@variable"/>
+                  <children xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                      </next>
+                    </children>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </children>
+                </expression>
+              </children>
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                        </next>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.4/@statement/@statements.1/@variable"/>
+                      <additiveOperators xsi:type="operators:Subtraction"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                        </next>
+                      </children>
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                      <additiveOperators xsi:type="operators:Subtraction"/>
+                    </expression>
+                  </children>
+                </expression>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.42"/>
+            <arguments xsi:type="references:StringReference" value="*."/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>// Case 4 - &quot;Default&quot; Match</comments>
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="literals:BooleanLiteral"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="matchFiltersServlet">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filterMap">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="servletName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Return &lt;code>true&lt;/code> if the specified servlet name matches&#xA;     * the requirements of the specified filter mapping; otherwise&#xA;     * return &lt;code>false&lt;/code>.&#xA;     *&#xA;     * @param filterMap Filter mapping being checked&#xA;     * @param servletName Servlet name being checked&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// Check the specific &quot;*&quot; special servlet name</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="literals:BooleanLiteral"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+        <elseStatement xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="expressions:NestedExpression">
+                <expression xsi:type="literals:BooleanLiteral" value="true"/>
+              </returnValue>
+            </statements>
+          </statement>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.28"/>
+            </next>
+          </condition>
+          <elseStatement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="servletNames">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arrayDimensionsBefore/>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.25"/>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:ForLoop">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="expressions:NestedExpression">
+                        <expression xsi:type="literals:BooleanLiteral" value="true"/>
+                      </returnValue>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.1">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@elseStatement/@elseStatement/@statements.0/@variable">
+                        <arraySelectors>
+                          <position xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@elseStatement/@elseStatement/@statements.1/@init"/>
+                        </arraySelectors>
+                      </arguments>
+                    </next>
+                  </condition>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@elseStatement/@elseStatement/@statements.1/@init"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@elseStatement/@elseStatement/@statements.0/@variable">
+                  <next xsi:type="references:IdentifierReference"/>
+                </children>
+                <relationOperators xsi:type="operators:LessThan"/>
+              </condition>
+              <init xsi:type="variables:LocalVariable" name="i">
+                <typeReference xsi:type="types:Int"/>
+                <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </init>
+              <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@elseStatement/@elseStatement/@statements.1/@init"/>
+                <operator xsi:type="operators:PlusPlus"/>
+              </updates>
+            </statements>
+            <statements xsi:type="statements:Return">
+              <returnValue xsi:type="literals:BooleanLiteral"/>
+            </statements>
+          </elseStatement>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="matchDispatcher">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filterMap">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dispatcher">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Convienience method which returns true if  the dispatcher type&#xA;     * matches the dispatcher types specified in the FilterMap&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Switch">
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Block">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.12"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.9"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.10"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.14"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Block">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.3"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.4"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.13"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.11"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.10"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.14"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Block">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.7"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.8"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.13"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.11"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.12"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.9"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.14"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.10"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+        </cases>
+        <cases xsi:type="statements:NormalSwitchCase">
+          <statements xsi:type="statements:Block">
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalOrExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.4"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.8"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.9"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.10"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.32"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0/@members.11"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/FilterMap.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Break"/>
+          </statements>
+          <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </cases>
+        <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.1"/>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Factory for the creation and caching of Filters and creationg &#xA; * of Filter Chains.&#xA; *&#xA; * @author Greg Murray&#xA; * @author Remy Maucherat&#xA; * @version $Revision: 1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+    <annotationsAndModifiers xsi:type="modifiers:Final"/>
+  </classifiers>
+</containers:CompilationUnit>

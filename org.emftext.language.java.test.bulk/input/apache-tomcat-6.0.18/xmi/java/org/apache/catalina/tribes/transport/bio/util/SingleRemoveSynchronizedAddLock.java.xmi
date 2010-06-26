@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../../../java.ecore#/5 http://www.emftext.org/java/literals ../../../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../../../java.ecore#/16" name="SingleRemoveSynchronizedAddLock.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>tribes</namespaces>
+  <namespaces>transport</namespaces>
+  <namespaces>bio</namespaces>
+  <namespaces>util</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="SingleRemoveSynchronizedAddLock">
+    <members xsi:type="members:Constructor" name="SingleRemoveSynchronizedAddLock">
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:Constructor" name="SingleRemoveSynchronizedAddLock">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+        </expression>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dataAvailable">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:Field" name="addWaitTimeout">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="10000"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Time in milliseconds after which threads&#xA;     * waiting for an add lock are woken up.&#xA;     * This is used as a safety measure in case&#xA;     * thread notification via the unlock methods&#xA;     * has a bug.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="removeWaitTimeout">
+      <initialValue xsi:type="literals:DecimalLongLiteral" decimalValue="30000"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Time in milliseconds after which threads&#xA;     * waiting for a remove lock are woken up.&#xA;     * This is used as a safety measure in case&#xA;     * thread notification via the unlock methods&#xA;     * has a bug.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="remover">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * The current remove thread.&#xA;     * It is set to the remove thread polling for entries.&#xA;     * It is reset to null when the remove thread&#xA;     * releases the lock and proceeds processing&#xA;     * the removed entries.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="addLocked">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * A flag indicating, if an add thread owns the lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="removeLocked">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * A flag indicating, if the remove thread owns the lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="removeEnabled">
+      <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * A flag indicating, if the remove thread is allowed&#xA;     * to wait for the lock. The flag is set to false, when aborting.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="dataAvailable">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * A flag indicating, if the remover needs polling.&#xA;     * It indicates, if the locked object has data available&#xA;     * to be removed.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAddWaitTimeout">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @return Value of addWaitTimeout&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAddWaitTimeout">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Set value of addWaitTimeout&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getRemoveWaitTimeout">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @return Value of removeWaitTimeout&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setRemoveWaitTimeout">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Set value of removeWaitTimeout&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isDataAvailable">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Check if the locked object has data available&#xA;     * i.e. the remover can stop poling and get the lock.&#xA;     * @return True iff the lock Object has data available.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isAddLocked">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Check if an add thread owns the lock.&#xA;     * @return True iff an add thread owns the lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isRemoveLocked">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Check if the remove thread owns the lock.&#xA;     * @return True iff the remove thread owns the lock.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isRemovePolling">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Check if the remove thread is polling.&#xA;     * @return True iff the remove thread is polling.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:BooleanLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="lockAdd">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires the lock by an add thread and sets the add flag.&#xA;     * If any add thread or the remove thread already acquired the lock&#xA;     * this add thread will block until the lock is released.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:DoWhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Object.class.xmi#//@classifiers.0/@members.9"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                  </expression>
+                </statements>
+                <catcheBlocks>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.53"/>
+                        </next>
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0"/>
+                    </expression>
+                  </statements>
+                  <parameter name="e">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="lockRemove">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Acquires the lock by the remove thread and sets the remove flag.&#xA;     * If any add thread already acquired the lock or the queue is&#xA;     * empty, the remove thread will block until the lock is released&#xA;     * and the queue is not empty.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0"/>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:DoWhileLoop">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:TryBlock">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Object.class.xmi#//@classifiers.0/@members.9"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                  </expression>
+                </statements>
+                <catcheBlocks>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:MethodCall">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.53"/>
+                        </next>
+                        <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.33"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0"/>
+                    </expression>
+                  </statements>
+                  <parameter name="e">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../../lang/InterruptedException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </parameter>
+                </catcheBlocks>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:ConditionalOrExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                  <children xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+                  </children>
+                </expression>
+              </children>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:NullLiteral"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Negate"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+              </children>
+            </expression>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:BooleanLiteral" value="true"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unlockAdd">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dataAvailable">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Releases the lock by an add thread and reset the remove flag.&#xA;     * If the reader thread is polling, notify it.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.52"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Negate"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+              </children>
+            </expression>
+          </children>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Object.class.xmi#//@classifiers.0/@members.8"/>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unlockRemove">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Releases the lock by the remove thread and reset the add flag.&#xA;     * Notify all waiting add threads,&#xA;     * that the lock has been released by the remove thread.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Object.class.xmi#//@classifiers.0/@members.8"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="abortRemove">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Abort any polling remover thread&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../../lang/Thread.class.xmi#//@classifiers.0/@members.52"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The class &lt;b>SingleRemoveSynchronizedAddLock&lt;/b> implement locking for accessing the queue&#xA; * by a single remove thread and multiple add threads.&#xA; *&#xA; * A thread is only allowed to be either the remove or&#xA; * an add thread.&#xA; *&#xA; * The lock can either be owned by the remove thread&#xA; * or by a single add thread.&#xA; *&#xA; * If the remove thread tries to get the lock,&#xA; * but the queue is empty, it will block (poll)&#xA; * until an add threads adds an entry to the queue and&#xA; * releases the lock.&#xA; * &#xA; * If the remove thread and add threads compete for&#xA; * the lock and an add thread releases the lock, then&#xA; * the remove thread will get the lock first.&#xA; *&#xA; * The remove thread removes all entries in the queue&#xA; * at once and proceeses them without further&#xA; * polling the queue.&#xA; *&#xA; * The lock is not reentrant, in the sense, that all&#xA; * threads must release an owned lock before competing&#xA; * for the lock again!&#xA; *&#xA; * @author Rainer Jung&#xA; * @author Peter Rossbach&#xA; * @version 1.1&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

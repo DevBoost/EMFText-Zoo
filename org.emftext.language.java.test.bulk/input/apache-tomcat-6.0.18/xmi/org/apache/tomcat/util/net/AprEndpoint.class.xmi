@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="org.apache.tomcat.util.net.AprEndpoint.java">
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>tomcat</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>net</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="AprEndpoint">
+    <members xsi:type="members:Field" name="log">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="../../../juli/logging/Log.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="sm">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../res/StringManager.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="CIPHER_SUITE_KEY">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="KEY_SIZE_KEY">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="CERTIFICATE_KEY">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="SESSION_ID_KEY">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="workers">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$WorkerStack.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="running">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:Field" name="paused">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:Field" name="initialized">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="curThreadsBusy">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="curThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sequence">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="rootPool">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="serverSock">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="serverSockPool">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sslContext">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="deferAccept">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="executor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="../../../../../java/util/concurrent/Executor.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="maxThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="threadPriority">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="pollerSize">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sendfileSize">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="port">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="address">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="handler">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="AprEndpoint$Handler.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="backlog">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="tcpNoDelay">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="soLinger">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="soTimeout">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="keepAliveTimeout">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="pollTime">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="daemon">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="name">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="useSendfile">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="useComet">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="acceptorThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sendfileThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="pollerThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="pollers">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Poller.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="pollerRoundRobin">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="cometPollers">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Poller.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="cometPollerRoundRobin">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sendfiles">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Sendfile.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sendfileRoundRobin">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLEnabled">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLProtocol">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLPassword">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCipherSuite">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCertificateFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCertificateKeyFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCertificateChainFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCACertificatePath">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCACertificateFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCARevocationPath">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLCARevocationFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLVerifyClient">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="SSLVerifyDepth">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="&lt;clinit>">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Constructor" name="AprEndpoint"/>
+    <members xsi:type="members:ClassMethod" name="setExecutor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Interface" href="../../../../../java/util/concurrent/Executor.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getExecutor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="../../../../../java/util/concurrent/Executor.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMaxThreads">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setThreadPriority">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getThreadPriority">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPollerSize">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPollerSize">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSendfileSize">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSendfileSize">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPort">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPort">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAddress">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAddress">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/net/InetAddress.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setHandler">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Interface" href="AprEndpoint$Handler.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getHandler">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Interface" href="AprEndpoint$Handler.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBacklog">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBacklog">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getTcpNoDelay">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setTcpNoDelay">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSoLinger">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSoLinger">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSoTimeout">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSoTimeout">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getKeepAliveTimeout">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setKeepAliveTimeout">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPollTime">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPollTime">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setDaemon">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getDaemon">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setName">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getName">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setUseSendfile">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getUseSendfile">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setUseComet">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getUseComet">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setAcceptorThreadCount">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getAcceptorThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSendfileThreadCount">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSendfileThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setPollerThreadCount">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPollerThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getPoller">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Poller.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCometPoller">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Poller.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSendfile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Sendfile.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMaxSpareThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMinSpareThreads">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isSSLEnabled">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLEnabled">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLProtocol">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLProtocol">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLPassword">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLPassword">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCipherSuite">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCipherSuite">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCertificateFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCertificateFile">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCertificateKeyFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCertificateKeyFile">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCertificateChainFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCertificateChainFile">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCACertificatePath">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCACertificatePath">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCACertificateFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCACertificateFile">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCARevocationPath">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCARevocationPath">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLCARevocationFile">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLCARevocationFile">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLVerifyClient">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLVerifyClient">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="../../../../../java/lang/String.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSSLVerifyDepth">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSSLVerifyDepth">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getKeepAliveCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSendfileCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCurrentThreadCount">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCurrentThreadsBusy">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isRunning">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isPaused">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="init">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="start">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="pause">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="resume">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="stop">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="destroy">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSequence">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="unlockAccept">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSocketOptions">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="createWorkerThread">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Worker.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newWorkerThread">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Worker.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getWorkerThread">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="AprEndpoint$Worker.class.xmi#//@classifiers.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="recycleWorkerThread">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="AprEndpoint$Worker.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="allocatePoller">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="processSocketWithOptions">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="processSocket">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="processSocket">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Enumeration" href="SocketStatus.class.xmi#//@classifiers.0"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    <extends xsi:type="types:ClassifierReference">
+      <target xsi:type="classifiers:Class" href="../../../../../java/lang/Object.class.xmi#//@classifiers.0"/>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

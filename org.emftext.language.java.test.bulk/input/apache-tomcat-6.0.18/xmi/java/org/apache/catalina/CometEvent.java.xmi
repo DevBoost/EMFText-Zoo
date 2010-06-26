@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../../java.ecore#/7 http://www.emftext.org/java/members ../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../java.ecore#/16" name="CometEvent.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../javax/servlet/http/HttpServletRequest.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="CometEvent">
+    <members xsi:type="classifiers:Enumeration" name="EventType">
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Enumeration describing the major events that the container can invoke &#xA;     * the CometProcessors event() method with&#xA;     * BEGIN - will be called at the beginning &#xA;     *  of the processing of the connection. It can be used to initialize any relevant &#xA;     *  fields using the request and response objects. Between the end of the processing &#xA;     *  of this event, and the beginning of the processing of the end or error events,&#xA;     *  it is possible to use the response object to write data on the open connection.&#xA;     *  Note that the response object and depedent OutputStream and Writer are still &#xA;     *  not synchronized, so when they are accessed by multiple threads, &#xA;     *  synchronization is mandatory. After processing the initial event, the request &#xA;     *  is considered to be committed.&#xA;     * READ - This indicates that input data is available, and that one read can be made&#xA;     *  without blocking. The available and ready methods of the InputStream or&#xA;     *  Reader may be used to determine if there is a risk of blocking: the servlet&#xA;     *  should read while data is reported available. When encountering a read error, &#xA;     *  the servlet should report it by propagating the exception properly. Throwing &#xA;     *  an exception will cause the error event to be invoked, and the connection &#xA;     *  will be closed. &#xA;     *  Alternately, it is also possible to catch any exception, perform clean up&#xA;     *  on any data structure the servlet may be using, and using the close method&#xA;     *  of the event. It is not allowed to attempt reading data from the request &#xA;     *  object outside of the execution of this method.&#xA;     * END - End may be called to end the processing of the request. Fields that have&#xA;     *  been initialized in the begin method should be reset. After this event has&#xA;     *  been processed, the request and response objects, as well as all their dependent&#xA;     *  objects will be recycled and used to process other requests. End will also be &#xA;     *  called when data is available and the end of file is reached on the request input&#xA;     *  (this usually indicates the client has pipelined a request).&#xA;     * ERROR - Error will be called by the container in the case where an IO exception&#xA;     *  or a similar unrecoverable error occurs on the connection. Fields that have&#xA;     *  been initialized in the begin method should be reset. After this event has&#xA;     *  been processed, the request and response objects, as well as all their dependent&#xA;     *  objects will be recycled and used to process other requests.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <constants name="BEGIN"/>
+      <constants name="READ"/>
+      <constants name="END"/>
+      <constants name="ERROR"/>
+    </members>
+    <members xsi:type="classifiers:Enumeration" name="EventSubType">
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Event details&#xA;     * TIMEOUT - the connection timed out (sub type of ERROR); note that this ERROR type is not fatal, and&#xA;     *   the connection will not be closed unless the servlet uses the close method of the event&#xA;     * CLIENT_DISCONNECT - the client connection was closed (sub type of ERROR)&#xA;     * IOEXCEPTION - an IO exception occurred, such as invalid content, for example, an invalid chunk block (sub type of ERROR)&#xA;     * WEBAPP_RELOAD - the webapplication is being reloaded (sub type of END)&#xA;     * SERVER_SHUTDOWN - the server is shutting down (sub type of END)&#xA;     * SESSION_END - the servlet ended the session (sub type of END)&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <constants name="TIMEOUT"/>
+      <constants name="CLIENT_DISCONNECT"/>
+      <constants name="IOEXCEPTION"/>
+      <constants name="WEBAPP_RELOAD"/>
+      <constants name="SERVER_SHUTDOWN"/>
+      <constants name="SESSION_END"/>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getHttpServletRequest">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../javax/servlet/http/HttpServletRequest.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the HttpServletRequest.&#xA;     * &#xA;     * @return HttpServletRequest&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getHttpServletResponse">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the HttpServletResponse.&#xA;     * &#xA;     * @return HttpServletResponse&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEventType">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.0"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the event type.&#xA;     * &#xA;     * @return EventType&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="getEventSubType">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.1"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Returns the sub type of this event.&#xA;     * &#xA;     * @return EventSubType&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Ends the Comet session. This signals to the container that &#xA;     * the container wants to end the comet session. This will send back to the&#xA;     * client a notice that the server has no more data to send as part of this&#xA;     * request. The servlet should perform any needed cleanup as if it had recieved&#xA;     * an END or ERROR event. &#xA;     * &#xA;     * @throws IOException if an IO exception occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="setTimeout">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../lang/UnsupportedOperationException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sets the timeout for this Comet connection. Please NOTE, that the implementation &#xA;     * of a per connection timeout is OPTIONAL and MAY NOT be implemented.&lt;br/>&#xA;     * This method sets the timeout in milliseconds of idle time on the connection.&#xA;     * The timeout is reset every time data is received from the connection or data is flushed&#xA;     * using &lt;code>response.flushBuffer()&lt;/code>. If a timeout occurs, the &#xA;     * &lt;code>error(HttpServletRequest, HttpServletResponse)&lt;/code> method is invoked. The &#xA;     * web application SHOULD NOT attempt to reuse the request and response objects after a timeout&#xA;     * as the &lt;code>error(HttpServletRequest, HttpServletResponse)&lt;/code> method indicates.&lt;br/>&#xA;     * This method should not be called asynchronously, as that will have no effect.&#xA;     * &#xA;     * @param timeout The timeout in milliseconds for this connection, must be a positive value, larger than 0&#xA;     * @throws IOException An IOException may be thrown to indicate an IO error, &#xA;     *         or that the EOF has been reached on the connection&#xA;     * @throws ServletException An exception has occurred, as specified by the root&#xA;     *         cause&#xA;     * @throws UnsupportedOperationException if per connection timeout is not supported, either at all or at this phase&#xA;     *         of the invocation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The CometEvent interface.&#xA; * &#xA; * @author Filip Hanik&#xA; * @author Remy Maucherat&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

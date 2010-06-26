@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="TryCatchFinally.java">
+  <comments>/*&#xA;* Licensed to the Apache Software Foundation (ASF) under one or more&#xA;* contributor license agreements.  See the NOTICE file distributed with&#xA;* this work for additional information regarding copyright ownership.&#xA;* The ASF licenses this file to You under the Apache License, Version 2.0&#xA;* (the &quot;License&quot;); you may not use this file except in compliance with&#xA;* the License.  You may obtain a copy of the License at&#xA;*&#xA;*     http://www.apache.org/licenses/LICENSE-2.0&#xA;*&#xA;* Unless required by applicable law or agreed to in writing, software&#xA;* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;* See the License for the specific language governing permissions and&#xA;* limitations under the License.&#xA;*/</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>servlet</namespaces>
+  <namespaces>jsp</namespaces>
+  <namespaces>tagext</namespaces>
+  <classifiers xsi:type="classifiers:Interface" name="TryCatchFinally">
+    <members xsi:type="members:InterfaceMethod" name="doCatch">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Invoked if a Throwable occurs while evaluating the BODY&#xA;     * inside a tag or in any of the following methods:&#xA;     * Tag.doStartTag(), Tag.doEndTag(),&#xA;     * IterationTag.doAfterBody() and BodyTag.doInitBody().&#xA;     *&#xA;     * &lt;p>This method is not invoked if the Throwable occurs during&#xA;     * one of the setter methods.&#xA;     *&#xA;     * &lt;p>This method may throw an exception (the same or a new one)&#xA;     * that will be propagated further up the nest chain.  If an exception&#xA;     * is thrown, doFinally() will be invoked.&#xA;     *&#xA;     * &lt;p>This method is intended to be used to respond to an exceptional&#xA;     * condition.&#xA;     *&#xA;     * @param t The throwable exception navigating through this tag.&#xA;     * @throws Throwable if the exception is to be rethrown further up &#xA;     *     the nest chain.&#xA;     */</comments>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="t">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/Throwable.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/Throwable.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="doFinally">
+      <typeReference xsi:type="types:Void">
+        <comments>/**&#xA;     * Invoked in all cases after doEndTag() for any class implementing&#xA;     * Tag, IterationTag or BodyTag.  This method is invoked even if&#xA;     * an exception has occurred in the BODY of the tag,&#xA;     * or in any of the following methods:&#xA;     * Tag.doStartTag(), Tag.doEndTag(),&#xA;     * IterationTag.doAfterBody() and BodyTag.doInitBody().&#xA;     *&#xA;     * &lt;p>This method is not invoked if the Throwable occurs during&#xA;     * one of the setter methods.&#xA;     *&#xA;     * &lt;p>This method should not throw an Exception.&#xA;     *&#xA;     * &lt;p>This method is intended to maintain per-invocation data&#xA;     * integrity and resource management actions.&#xA;     */</comments>
+      </typeReference>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The auxiliary interface of a Tag, IterationTag or BodyTag tag&#xA; * handler that wants additional hooks for managing resources.&#xA; *&#xA; * &lt;p>This interface provides two new methods: doCatch(Throwable)&#xA; * and doFinally().  The prototypical invocation is as follows:&#xA; *&#xA; * &lt;pre>&#xA; * h = get a Tag();  // get a tag handler, perhaps from pool&#xA; *&#xA; * h.setPageContext(pc);  // initialize as desired&#xA; * h.setParent(null);&#xA; * h.setFoo(&quot;foo&quot;);&#xA; * &#xA; * // tag invocation protocol; see Tag.java&#xA; * try {&#xA; *   doStartTag()...&#xA; *   ....&#xA; *   doEndTag()...&#xA; * } catch (Throwable t) {&#xA; *   // react to exceptional condition&#xA; *   h.doCatch(t);&#xA; * } finally {&#xA; *   // restore data invariants and release per-invocation resources&#xA; *   h.doFinally();&#xA; * }&#xA; * &#xA; * ... other invocations perhaps with some new setters&#xA; * ...&#xA; * h.release();  // release long-term resources&#xA; * &lt;/pre>&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

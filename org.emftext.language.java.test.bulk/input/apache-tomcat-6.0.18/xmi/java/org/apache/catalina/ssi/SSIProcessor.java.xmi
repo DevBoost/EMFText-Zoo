@@ -1,0 +1,1867 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xmlns:variables="http://www.emftext.org/java/variables" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../java.ecore#/16 http://www.emftext.org/java/variables ../../../../../java.ecore#/17" name="SSIProcessor.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; *&#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>ssi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/PrintWriter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/Reader.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/StringWriter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../util/HashMap.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../util/StringTokenizer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/util/IOTools.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SSIProcessor">
+    <members xsi:type="members:Field" name="COMMAND_START">
+      <initialValue xsi:type="references:StringReference" value="&lt;!--#"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** The start pattern */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="COMMAND_END">
+      <initialValue xsi:type="references:StringReference" value="-->"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/** The end pattern */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="BUFFER_SIZE">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="4096"/>
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="ssiExternalResolver">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/ssi/SSIExternalResolver.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="commands">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../util/HashMap.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../util/HashMap.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="debug">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Constructor" name="SSIProcessor">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.7"/>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssiExternalResolver">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/ssi/SSIExternalResolver.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="debug">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addBuiltinCommands">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="config"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIConfig.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="echo"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIEcho.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="exec"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIExec.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="include"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIInclude.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="flastmod"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIFlastmod.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="fsize"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIFsize.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="printenv"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIPrintenv.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="set"/>
+          <arguments xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSISet.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </arguments>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="ssiConditional">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIConditional.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIConditional.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="if"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.8/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="elif"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.8/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="endif"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.8/@variable"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.8">
+          <arguments xsi:type="references:StringReference" value="else"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7/@statements.8/@variable"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addCommand">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="name">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/ssi/SSICommand.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../util/HashMap.class.xmi#//@classifiers.0/@members.31"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="process">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="reader">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../io/Reader.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lastModifiedDate">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="writer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../io/PrintWriter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Process a file with server-side commands, reading from reader and&#xA;     * writing the processed version to writer. NOTE: We really should be doing&#xA;     * this in a streaming way rather than converting it to an array first.&#xA;     * &#xA;     * @param reader&#xA;     *            the reader to read the file containing SSIs from&#xA;     * @param writer&#xA;     *            the writer to write the file with the SSIs processed.&#xA;     * @return the most current modified date resulting from any SSI commands&#xA;     * @throws IOException&#xA;     *             when things go horribly awry. Should be unlikely since the&#xA;     *             SSICommand usually catches 'normal' IOExceptions.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="ssiMediator">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="stringWriter">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../io/StringWriter.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../io/StringWriter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/util/IOTools.class.xmi#//@classifiers.0/@members.2"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable"/>
+          </next>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/util/IOTools.class.xmi#//@classifiers.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="fileContents">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../io/StringWriter.class.xmi#//@classifiers.0/@members.10"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.1/@variable"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="index">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="inside">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="command">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:WhileLoop">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:LocalVariableStatement">
+              <variable name="c">
+                <typeReference xsi:type="types:Char"/>
+                <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.23"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                  </next>
+                </initialValue>
+              </variable>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <comments>//clear the command string</comments>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:AssignmentExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.6/@variable"/>
+                        <assignmentOperator xsi:type="operators:Assignment"/>
+                        <value xsi:type="literals:BooleanLiteral" value="true"/>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:AssignmentExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                        <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                        <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                          </next>
+                        </value>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.7/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.10"/>
+                          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                        </next>
+                      </expression>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:ConditionalAndExpression">
+                    <children xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:Equal"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.0/@variable"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.23"/>
+                          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                        </next>
+                      </children>
+                    </children>
+                    <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@variable"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                    </children>
+                  </condition>
+                  <elseStatement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Condition">
+                      <statement xsi:type="statements:Block">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../io/PrintWriter.class.xmi#//@classifiers.0/@members.18"/>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.0/@variable"/>
+                            </next>
+                          </expression>
+                        </statements>
+                      </statement>
+                      <condition xsi:type="expressions:UnaryExpression">
+                        <operators xsi:type="operators:Negate"/>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <next xsi:type="references:IdentifierReference">
+                              <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                            </next>
+                            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0/@members.22"/>
+                          </next>
+                        </child>
+                      </condition>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                        <operator xsi:type="operators:PlusPlus"/>
+                      </expression>
+                    </statements>
+                  </elseStatement>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Negate"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.6/@variable"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:AssignmentExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.6/@variable"/>
+                        <assignmentOperator xsi:type="operators:Assignment"/>
+                        <value xsi:type="literals:BooleanLiteral"/>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:AssignmentExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                        <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                        <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                          </next>
+                        </value>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="strCmd">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.12">
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.7/@variable"/>
+                        </initialValue>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:Condition">
+                      <statement xsi:type="statements:Block">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/ssi/SSIExternalResolver.class.xmi#//@classifiers.0/@members.7"/>
+                              <arguments xsi:type="expressions:AdditiveExpression">
+                                <children xsi:type="references:StringReference" value="SSIProcessor.process -- processing command: "/>
+                                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable"/>
+                                <additiveOperators xsi:type="operators:Addition"/>
+                              </arguments>
+                              <arguments xsi:type="literals:NullLiteral"/>
+                            </next>
+                          </expression>
+                        </statements>
+                      </statement>
+                      <condition xsi:type="expressions:RelationExpression">
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                        <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                        <relationOperators xsi:type="operators:GreaterThan"/>
+                      </condition>
+                    </statements>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="paramNames">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <arrayDimensionsBefore/>
+                        <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.10">
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.7/@variable"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                            </next>
+                          </arguments>
+                        </initialValue>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="paramValues">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <arrayDimensionsBefore/>
+                        <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.11">
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.7/@variable"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                            </next>
+                          </arguments>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.4/@variable">
+                            <next xsi:type="references:IdentifierReference"/>
+                          </arguments>
+                        </initialValue>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="configErrMsg">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <comments>//We need to fetch this value each time, since it may</comments>
+                            <comments>// change</comments>
+                            <comments>// during the loop</comments>
+                            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0/@members.19"/>
+                          </next>
+                        </initialValue>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="ssiCommand">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/ssi/SSICommand.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <initialValue xsi:type="expressions:CastExpression">
+                          <typeReference xsi:type="types:NamespaceClassifierReference">
+                            <classifierReferences>
+                              <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/ssi/SSICommand.class.xmi#//@classifiers.0"/>
+                            </classifierReferences>
+                          </typeReference>
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../util/HashMap.class.xmi#//@classifiers.0/@members.27"/>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable">
+                                <next xsi:type="references:MethodCall">
+                                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.68"/>
+                                </next>
+                              </arguments>
+                            </next>
+                          </child>
+                        </initialValue>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:LocalVariableStatement">
+                      <variable name="errorMessage">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <initialValue xsi:type="literals:NullLiteral"/>
+                      </variable>
+                    </statements>
+                    <statements xsi:type="statements:Condition">
+                      <statement xsi:type="statements:Block">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="expressions:AssignmentExpression">
+                            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.8/@variable"/>
+                            <assignmentOperator xsi:type="operators:Assignment"/>
+                            <value xsi:type="expressions:AdditiveExpression">
+                              <children xsi:type="references:StringReference" value="Unknown command: "/>
+                              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable"/>
+                              <additiveOperators xsi:type="operators:Addition"/>
+                            </value>
+                          </expression>
+                        </statements>
+                      </statement>
+                      <condition xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.7/@variable"/>
+                        <children xsi:type="literals:NullLiteral"/>
+                      </condition>
+                      <elseStatement xsi:type="statements:Condition">
+                        <statement xsi:type="statements:Block">
+                          <statements xsi:type="statements:ExpressionStatement">
+                            <expression xsi:type="expressions:AssignmentExpression">
+                              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.8/@variable"/>
+                              <assignmentOperator xsi:type="operators:Assignment"/>
+                              <value xsi:type="references:StringReference" value="Error parsing directive parameters."/>
+                            </expression>
+                          </statements>
+                        </statement>
+                        <condition xsi:type="expressions:EqualityExpression">
+                          <equalityOperators xsi:type="operators:Equal"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.5/@variable"/>
+                          <children xsi:type="literals:NullLiteral"/>
+                        </condition>
+                        <elseStatement xsi:type="statements:Condition">
+                          <statement xsi:type="statements:Block">
+                            <statements xsi:type="statements:ExpressionStatement">
+                              <expression xsi:type="expressions:AssignmentExpression">
+                                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.8/@variable"/>
+                                <assignmentOperator xsi:type="operators:Assignment"/>
+                                <value xsi:type="expressions:AdditiveExpression">
+                                  <children xsi:type="references:StringReference" value="Parameter names count does not match parameter values count on command: "/>
+                                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable"/>
+                                  <additiveOperators xsi:type="operators:Addition"/>
+                                </value>
+                              </expression>
+                            </statements>
+                          </statement>
+                          <condition xsi:type="expressions:EqualityExpression">
+                            <equalityOperators xsi:type="operators:NotEqual"/>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.4/@variable">
+                              <next xsi:type="references:IdentifierReference"/>
+                            </children>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.5/@variable">
+                              <next xsi:type="references:IdentifierReference"/>
+                            </children>
+                          </condition>
+                          <elseStatement xsi:type="statements:Block">
+                            <statements xsi:type="statements:Condition">
+                              <comments>// don't process the command if we are processing</comments>
+                              <comments>// conditional</comments>
+                              <comments>// commands only and the</comments>
+                              <comments>// command is not conditional</comments>
+                              <statement xsi:type="statements:Block">
+                                <statements xsi:type="statements:LocalVariableStatement">
+                                  <variable name="lmd">
+                                    <typeReference xsi:type="types:Long"/>
+                                    <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.7/@variable">
+                                      <next xsi:type="references:MethodCall">
+                                        <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/ssi/SSICommand.class.xmi#//@classifiers.0/@members.0"/>
+                                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable"/>
+                                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.2/@variable"/>
+                                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.4/@variable"/>
+                                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.5/@variable"/>
+                                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2"/>
+                                      </next>
+                                    </initialValue>
+                                  </variable>
+                                </statements>
+                                <statements xsi:type="statements:Condition">
+                                  <statement xsi:type="statements:Block">
+                                    <statements xsi:type="statements:ExpressionStatement">
+                                      <expression xsi:type="expressions:AssignmentExpression">
+                                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                                        <assignmentOperator xsi:type="operators:Assignment"/>
+                                        <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.9/@elseStatement/@elseStatement/@elseStatement/@statements.0/@statement/@statements.0/@variable"/>
+                                      </expression>
+                                    </statements>
+                                  </statement>
+                                  <condition xsi:type="expressions:RelationExpression">
+                                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.9/@elseStatement/@elseStatement/@elseStatement/@statements.0/@statement/@statements.0/@variable"/>
+                                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+                                    <relationOperators xsi:type="operators:GreaterThan"/>
+                                  </condition>
+                                </statements>
+                              </statement>
+                              <condition xsi:type="expressions:ConditionalOrExpression">
+                                <children xsi:type="expressions:UnaryExpression">
+                                  <operators xsi:type="operators:Negate"/>
+                                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.0/@variable">
+                                    <next xsi:type="references:MethodCall">
+                                      <next xsi:type="references:IdentifierReference">
+                                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                                      </next>
+                                      <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0/@members.22"/>
+                                    </next>
+                                  </child>
+                                </children>
+                                <children xsi:type="expressions:InstanceOfExpression">
+                                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                                    <classifierReferences>
+                                      <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIConditional.class.xmi#//@classifiers.0"/>
+                                    </classifierReferences>
+                                  </typeReference>
+                                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.7/@variable"/>
+                                </children>
+                              </condition>
+                            </statements>
+                          </elseStatement>
+                        </elseStatement>
+                      </elseStatement>
+                    </statements>
+                    <statements xsi:type="statements:Condition">
+                      <statement xsi:type="statements:Block">
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/ssi/SSIExternalResolver.class.xmi#//@classifiers.0/@members.7"/>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.8/@variable"/>
+                              <arguments xsi:type="literals:NullLiteral"/>
+                            </next>
+                          </expression>
+                        </statements>
+                        <statements xsi:type="statements:ExpressionStatement">
+                          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.2">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../io/PrintWriter.class.xmi#//@classifiers.0/@members.22"/>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.6/@variable"/>
+                            </next>
+                          </expression>
+                        </statements>
+                      </statement>
+                      <condition xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:NotEqual"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.1/@elseStatement/@statements.0/@statement/@statements.8/@variable"/>
+                        <children xsi:type="literals:NullLiteral"/>
+                      </condition>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:ConditionalAndExpression">
+                    <children xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:Equal"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.0/@variable"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.23"/>
+                          <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                        </next>
+                      </children>
+                    </children>
+                    <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@variable"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                    </children>
+                  </condition>
+                  <elseStatement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.7/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.26"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.8/@statements.0/@statement/@statements.0/@variable"/>
+                        </next>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+                        <operator xsi:type="operators:PlusPlus"/>
+                      </expression>
+                    </statements>
+                  </elseStatement>
+                </statements>
+              </elseStatement>
+            </statements>
+          </statement>
+          <condition xsi:type="expressions:RelationExpression">
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.5/@variable"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@statements.3/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </children>
+            <relationOperators xsi:type="operators:LessThan"/>
+          </condition>
+        </statements>
+        <catcheBlocks>
+          <comments>//If we are here, then we have already stopped processing, so all</comments>
+          <comments>// is good</comments>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIStopProcessingException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.1"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="parseParamNames">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmd">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Parse a StringBuffer and take out the param type token. Called from&#xA;     * &lt;code>requestHandler&lt;/code>&#xA;     * &#xA;     * @param cmd&#xA;     *            a value of type 'StringBuffer'&#xA;     * @return a value of type 'String[]'&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="bIdx">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.1"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="quotes">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="inside">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="retBuf">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:WhileLoop">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                      </next>
+                    </children>
+                    <relationOperators xsi:type="operators:LessThan"/>
+                  </children>
+                  <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                      </next>
+                    </arguments>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Break"/>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                  <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:WhileLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.4/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.26"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                          </next>
+                        </arguments>
+                      </next>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                      <operator xsi:type="operators:PlusPlus"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                      </next>
+                    </children>
+                    <relationOperators xsi:type="operators:LessThan"/>
+                  </children>
+                  <children xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                      </next>
+                    </children>
+                    <children xsi:type="literals:CharacterLiteral" value="61"/>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.4/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.26"/>
+                    <arguments xsi:type="literals:CharacterLiteral" value="61"/>
+                  </next>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.3/@variable"/>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="escaped">
+                  <typeReference xsi:type="types:Boolean"/>
+                  <initialValue xsi:type="literals:BooleanLiteral"/>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ForLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:LocalVariableStatement">
+                    <variable name="c">
+                      <typeReference xsi:type="types:Char"/>
+                      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                        </next>
+                      </initialValue>
+                    </variable>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <comments>// Need to skip escaped characters</comments>
+                    <statement xsi:type="statements:Block">
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@statement/@statements.0/@elseStatement/@statements.4/@variable"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="literals:BooleanLiteral" value="true"/>
+                        </expression>
+                      </statements>
+                      <statements xsi:type="statements:Continue"/>
+                    </statement>
+                    <condition xsi:type="expressions:ConditionalAndExpression">
+                      <children xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@statement/@statements.0/@elseStatement/@statements.5/@statement/@statements.0/@variable"/>
+                        <children xsi:type="literals:CharacterLiteral" value="92"/>
+                      </children>
+                      <children xsi:type="expressions:UnaryExpression">
+                        <operators xsi:type="operators:Negate"/>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@statement/@statements.0/@elseStatement/@statements.4/@variable"/>
+                      </children>
+                    </condition>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <statement xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                        <operator xsi:type="operators:PlusPlus"/>
+                      </expression>
+                    </statement>
+                    <condition xsi:type="expressions:ConditionalAndExpression">
+                      <children xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@statement/@statements.0/@elseStatement/@statements.5/@statement/@statements.0/@variable"/>
+                        <children xsi:type="literals:CharacterLiteral" value="34"/>
+                      </children>
+                      <children xsi:type="expressions:UnaryExpression">
+                        <operators xsi:type="operators:Negate"/>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@statement/@statements.0/@elseStatement/@statements.4/@variable"/>
+                      </children>
+                    </condition>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.5/@statement/@statements.0/@elseStatement/@statements.4/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="literals:BooleanLiteral"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                      </next>
+                    </children>
+                    <relationOperators xsi:type="operators:LessThan"/>
+                  </children>
+                  <children xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.2/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="2"/>
+                  </children>
+                </condition>
+                <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </updates>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.0/@variable"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="str">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../util/StringTokenizer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../util/StringTokenizer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.4/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.55"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:StringReference" value="="/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="retString">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.6/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../util/StringTokenizer.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </sizes>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.7/@variable">
+                <arraySelectors>
+                  <position xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.1/@variable"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </position>
+                </arraySelectors>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.6/@variable">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.71"/>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../../util/StringTokenizer.class.xmi#//@classifiers.0/@members.18"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.6/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../util/StringTokenizer.class.xmi#//@classifiers.0/@members.17"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.10/@statements.7/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="parseParamValues">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmd">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="start">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="count">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Parse a StringBuffer and take out the param token. Called from&#xA;     * &lt;code>requestHandler&lt;/code>&#xA;     * &#xA;     * @param cmd&#xA;     *            a value of type 'StringBuffer'&#xA;     * @return a value of type 'String[]'&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="valIndex">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="inside">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="vals">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsBefore/>
+          <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <sizes xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.2"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="sb">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="endQuote">
+          <typeReference xsi:type="types:Char"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:WhileLoop">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                    <operator xsi:type="operators:PlusPlus"/>
+                  </expression>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                      </next>
+                    </children>
+                    <relationOperators xsi:type="operators:LessThan"/>
+                  </children>
+                  <children xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.15">
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                        </next>
+                      </arguments>
+                    </child>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Break"/>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                  <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.4/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                    </next>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="escaped">
+                  <typeReference xsi:type="types:Boolean"/>
+                  <initialValue xsi:type="literals:BooleanLiteral"/>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ForLoop">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:LocalVariableStatement">
+                    <variable name="c">
+                      <typeReference xsi:type="types:Char"/>
+                      <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                        </next>
+                      </initialValue>
+                    </variable>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <comments>// Check for escapes</comments>
+                    <statement xsi:type="statements:Block">
+                      <statements xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.0/@variable"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="literals:BooleanLiteral" value="true"/>
+                        </expression>
+                      </statements>
+                      <statements xsi:type="statements:Continue"/>
+                    </statement>
+                    <condition xsi:type="expressions:ConditionalAndExpression">
+                      <children xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.1/@statement/@statements.0/@variable"/>
+                        <children xsi:type="literals:CharacterLiteral" value="92"/>
+                      </children>
+                      <children xsi:type="expressions:UnaryExpression">
+                        <operators xsi:type="operators:Negate"/>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.0/@variable"/>
+                      </children>
+                    </condition>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <comments>// If we reach the other &quot; then stop</comments>
+                    <statement xsi:type="statements:Break"/>
+                    <condition xsi:type="expressions:ConditionalAndExpression">
+                      <children xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.1/@statement/@statements.0/@variable"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.4/@variable"/>
+                      </children>
+                      <children xsi:type="expressions:UnaryExpression">
+                        <operators xsi:type="operators:Negate"/>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.0/@variable"/>
+                      </children>
+                    </condition>
+                  </statements>
+                  <statements xsi:type="statements:Condition">
+                    <comments>// Since parsing of attributes and var</comments>
+                    <comments>// substitution is done in separate places,</comments>
+                    <comments>// we need to leave escape in the string</comments>
+                    <statement xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.3/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.26"/>
+                          <arguments xsi:type="literals:CharacterLiteral" value="92"/>
+                        </next>
+                      </expression>
+                    </statement>
+                    <condition xsi:type="expressions:ConditionalAndExpression">
+                      <children xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.1/@statement/@statements.0/@variable"/>
+                        <children xsi:type="literals:CharacterLiteral" value="36"/>
+                      </children>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.0/@variable"/>
+                    </condition>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="literals:BooleanLiteral"/>
+                    </expression>
+                  </statements>
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.3/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.26"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@statement/@statements.0/@elseStatement/@statements.1/@statement/@statements.0/@variable"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                  <relationOperators xsi:type="operators:LessThan"/>
+                </condition>
+                <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </updates>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <comments>// If we hit the end without seeing a quote</comments>
+                <comments>// the signal an error</comments>
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="literals:NullLiteral"/>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.2/@variable">
+                    <arraySelectors>
+                      <position xsi:type="expressions:SuffixUnaryModificationExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+                        <operator xsi:type="operators:PlusPlus"/>
+                      </position>
+                    </arraySelectors>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.3/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.55"/>
+                    </next>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.3/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.32"/>
+                    <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.3/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable">
+                    <comments>// clear the buffer</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.1/@variable"/>
+                  </value>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="bIdx">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.1"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.5/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.2/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="parseCmd">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cmd">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Parse a StringBuffer and take out the command token. Called from&#xA;     * &lt;code>requestHandler&lt;/code>&#xA;     * &#xA;     * @param cmd&#xA;     *            a value of type 'StringBuffer'&#xA;     * @return a value of type 'String', or null if there is none&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="firstLetter">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="lastLetter">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ForLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="c">
+              <typeReference xsi:type="types:Char"/>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.11"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@init"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@init"/>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+                  <children xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Subtraction"/>
+                    <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@init"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/Character.class.xmi#//@classifiers.0/@members.112"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@variable"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../lang/Character.class.xmi#//@classifiers.0"/>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Break"/>
+                  </statement>
+                  <condition xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+                    <children xsi:type="expressions:UnaryExpression">
+                      <operators xsi:type="operators:Subtraction"/>
+                      <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    </children>
+                    <relationOperators xsi:type="operators:GreaterThan"/>
+                  </condition>
+                </statements>
+              </statement>
+              <condition xsi:type="references:MethodCall" target="//@classifiers.0/@members.14">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@statement/@statements.0/@variable"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:Break"/>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@init"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </children>
+          <relationOperators xsi:type="operators:LessThan"/>
+        </condition>
+        <init xsi:type="variables:LocalVariable" name="i">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </init>
+        <updates xsi:type="expressions:SuffixUnaryModificationExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.2/@init"/>
+          <operator xsi:type="operators:PlusPlus"/>
+        </updates>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="command">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.3/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/StringBuffer.class.xmi#//@classifiers.0/@members.37"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.1/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.0/@variable"/>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@statements.3/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="charCmp">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="buf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="index">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="command">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.39"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.2">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </arguments>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isSpace">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="c">
+        <typeReference xsi:type="types:Char"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="32"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="10"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="9"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="13"/>
+          </children>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isQuote">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="c">
+        <typeReference xsi:type="types:Char"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="39"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="34"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:Equal"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <children xsi:type="literals:CharacterLiteral" value="96"/>
+          </children>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * The entry point to SSI processing. This class does the actual parsing,&#xA; * delegating to the SSIMediator, SSICommand, and SSIExternalResolver as&#xA; * necessary[&#xA; * &#xA; * @author Dan Sandberg&#xA; * @author David Becker&#xA; * @version $Revision: 649207 $, $Date: 2008-04-17 19:55:30 +0200 (Thu, 17 Apr 2008) $&#xA; */</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

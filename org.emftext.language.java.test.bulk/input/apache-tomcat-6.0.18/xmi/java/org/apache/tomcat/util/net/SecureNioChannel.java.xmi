@@ -1,0 +1,2219 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="SecureNioChannel.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; *&#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>tomcat</namespaces>
+  <namespaces>util</namespaces>
+  <namespaces>net</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>channels</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>channels</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>net</namespaces>
+    <namespaces>ssl</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>net</namespaces>
+    <namespaces>ssl</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>net</namespaces>
+    <namespaces>ssl</namespaces>
+    <namespaces>SSLEngineResult</namespaces>
+    <classifier xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>net</namespaces>
+    <namespaces>ssl</namespaces>
+    <namespaces>SSLEngineResult</namespaces>
+    <classifier xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>nio</namespaces>
+    <namespaces>channels</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../nio/channels/Selector.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>tomcat</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/MutableInteger.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SecureNioChannel">
+    <members xsi:type="members:Field" name="netInBuffer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="netOutBuffer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="sslEngine">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="initHandshakeComplete">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="initHandshakeStatus">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="closed">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>//gets set by begin handshake</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="closing">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="pool">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/net/NioSelectorPool.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Constructor" name="SecureNioChannel">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="instantiations:ExplicitConstructorCall">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2"/>
+          <callTarget xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="appBufSize">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/net/ssl/SSLSession.class.xmi#//@classifiers.0/@members.20"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.23"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="netBufSize">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../javax/net/ssl/SSLSession.class.xmi#//@classifiers.0/@members.19"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.23"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//allocate network buffers - TODO, add in optional direct non-direct buffers</comments>
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0/@members.7"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.3/@variable"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0/@members.7"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.3/@variable"/>
+              </next>
+              <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+            </value>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            <self xsi:type="literals:This">
+              <comments>//selector pool for blocking operations</comments>
+            </self>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2">
+          <comments>//ensure that the application has a large enough read/write buffers</comments>
+          <comments>//by doing this, we should not encounter any buffer overflow errors</comments>
+          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.0">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.1"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2">
+          <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.0">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.2">
+              <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.2"/>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@statements.2/@variable"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.10"/>
+      </statements>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="channel">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="engine">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bufHandler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.22"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="pool">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/net/NioSelectorPool.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="engine">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.9/@parameters.0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.10"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="reset">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.6"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.10"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.10"/>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <comments>//initiate handshake</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.24"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.25"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBufferSize">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="size">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:SelfReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+            <self xsi:type="literals:Super"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+          <value xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </child>
+            <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.6"/>
+              </next>
+            </expressionIf>
+            <expressionElse xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+          <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+          <value xsi:type="expressions:ConditionalExpression">
+            <child xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </child>
+            <expressionIf xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.6"/>
+              </next>
+            </expressionIf>
+            <expressionElse xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="flush">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="block">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="s">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/channels/Selector.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="timeout">
+        <typeReference xsi:type="types:Long"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="lastWrite">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/MutableInteger.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>//===========================================================================================    </comments>
+        <comments>//                  NIO SSL METHODS</comments>
+        <comments>//===========================================================================================</comments>
+        <comments>/**&#xA;     * returns true if the network buffer has &#xA;     * been flushed out and is empty&#xA;     * @return boolean&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/net/NioSelectorPool.class.xmi#//@classifiers.0/@members.20"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                <arguments xsi:type="references:SelfReference">
+                  <self xsi:type="literals:This"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.1"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@parameters.3"/>
+              </next>
+            </expression>
+          </statements>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.17"/>
+            </next>
+          </child>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="flush">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="buf">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Flushes the buffer to the network, non blocking&#xA;     * @param buf ByteBuffer&#xA;     * @return boolean true if the buffer has been emptied out, false otherwise&#xA;     * @throws IOException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="remaining">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.16"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="written">
+              <typeReference xsi:type="types:Int"/>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@parameters.0"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.1/@statement/@statements.0/@variable"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable"/>
+              <relationOperators xsi:type="operators:GreaterThanOrEqual"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.13/@statements.0/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="literals:BooleanLiteral" value="true"/>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handshake">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="read">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="write">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Performs SSL handshake, non blocking, but performs NEED_TASK on the same thread.&lt;br>&#xA;     * Hence, you should never call this method using your Acceptor thread, as you would slow down&#xA;     * your system significantly.&lt;br>&#xA;     * The return for this operation is 0 if the handshake is complete and a positive value if it is not complete.&#xA;     * In the event of a positive value coming back, reregister the selection key for the return values interestOps.&#xA;     * @param read boolean - true if the underlying channel is readable&#xA;     * @param write boolean - true if the underlying channel is writable&#xA;     * @return int - 0 if hand shake is complete, otherwise it returns a SelectionKey interestOps value&#xA;     * @throws IOException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//we have done our initial handshake</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0/@members.1"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </child>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="handshake">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//we still have data to write</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <comments>//switch</comments>
+          <statements xsi:type="statements:Switch">
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Block">
+                <statements xsi:type="statements:Throw">
+                  <comments>//should never happen</comments>
+                  <throwable xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:StringReference" value="NOT_HANDSHAKING during handshake"/>
+                  </throwable>
+                </statements>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.0"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                      <comments>//we are complete if we have delivered the last package</comments>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="expressions:UnaryExpression">
+                      <operators xsi:type="operators:Negate"/>
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.17"/>
+                        </next>
+                      </child>
+                    </value>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Return">
+                  <comments>//return 0 if we are complete, otherwise we still have data to write</comments>
+                  <returnValue xsi:type="expressions:ConditionalExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+                    <expressionIf xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <expressionElse xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+                    </expressionElse>
+                  </returnValue>
+                </statements>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.1"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Block">
+                <comments>//fall down to NEED_UNWRAP on the same call, will result in a </comments>
+                <comments>//BUFFER_UNDERFLOW if it needs data</comments>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable">
+                      <comments>//perform the wrap function</comments>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.16">
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.1"/>
+                    </value>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Condition">
+                      <statement xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+                        </expression>
+                      </statement>
+                      <condition xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                        <children xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:IdentifierReference">
+                            <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.2"/>
+                          </next>
+                          <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                        </children>
+                      </condition>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                      </next>
+                    </children>
+                    <children xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.2"/>
+                      </next>
+                      <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                    </children>
+                  </condition>
+                  <elseStatement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Throw">
+                      <comments>//wrap should always work with our buffers</comments>
+                      <throwable xsi:type="instantiations:NewConstructorCall">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <arguments xsi:type="expressions:AdditiveExpression">
+                          <children xsi:type="references:StringReference" value="Unexpected status:"/>
+                          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable">
+                            <next xsi:type="references:MethodCall">
+                              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                            </next>
+                          </children>
+                          <children xsi:type="references:StringReference" value=" during handshake WRAP."/>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                          <additiveOperators xsi:type="operators:Addition"/>
+                        </arguments>
+                      </throwable>
+                    </statements>
+                  </elseStatement>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Return">
+                      <comments>//should actually return OP_READ if we have NEED_UNWRAP</comments>
+                      <returnValue xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:Field" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0/@members.1"/>
+                        </next>
+                        <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+                      </returnValue>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:ConditionalOrExpression">
+                    <children xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:NotEqual"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                      <children xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.4"/>
+                        </next>
+                        <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                      </children>
+                    </children>
+                    <children xsi:type="expressions:NestedExpression">
+                      <expression xsi:type="expressions:UnaryExpression">
+                        <operators xsi:type="operators:Negate"/>
+                        <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                        </child>
+                      </expression>
+                    </children>
+                  </condition>
+                </statements>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.3"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable">
+                      <comments>//perform the unwrap function</comments>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.17">
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+                    </value>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Condition">
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:Condition">
+                      <statement xsi:type="statements:ExpressionStatement">
+                        <expression xsi:type="expressions:AssignmentExpression">
+                          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                          <assignmentOperator xsi:type="operators:Assignment"/>
+                          <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+                        </expression>
+                      </statement>
+                      <condition xsi:type="expressions:EqualityExpression">
+                        <equalityOperators xsi:type="operators:Equal"/>
+                        <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                        <children xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:IdentifierReference">
+                            <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.2"/>
+                          </next>
+                          <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                        </children>
+                      </condition>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:Equal"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                      </next>
+                    </children>
+                    <children xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.2"/>
+                      </next>
+                      <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                    </children>
+                  </condition>
+                  <elseStatement xsi:type="statements:Condition">
+                    <statement xsi:type="statements:Block">
+                      <statements xsi:type="statements:Return">
+                        <comments>//read more data, reregister for OP_READ</comments>
+                        <returnValue xsi:type="references:IdentifierReference">
+                          <next xsi:type="references:IdentifierReference">
+                            <target xsi:type="members:Field" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0/@members.0"/>
+                          </next>
+                          <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+                        </returnValue>
+                      </statements>
+                    </statement>
+                    <condition xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:Equal"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@statements.2/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                        </next>
+                      </children>
+                      <children xsi:type="references:IdentifierReference">
+                        <next xsi:type="references:IdentifierReference">
+                          <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.0"/>
+                        </next>
+                        <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                      </children>
+                    </condition>
+                    <elseStatement xsi:type="statements:Block">
+                      <statements xsi:type="statements:Throw">
+                        <throwable xsi:type="instantiations:NewConstructorCall">
+                          <typeReference xsi:type="types:NamespaceClassifierReference">
+                            <classifierReferences>
+                              <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                            </classifierReferences>
+                          </typeReference>
+                          <arguments xsi:type="expressions:AdditiveExpression">
+                            <children xsi:type="references:StringReference" value="Invalid handshake status:"/>
+                            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                            <children xsi:type="references:StringReference" value=" during handshake UNWRAP."/>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                            <additiveOperators xsi:type="operators:Addition"/>
+                          </arguments>
+                        </throwable>
+                      </statements>
+                    </elseStatement>
+                  </elseStatement>
+                </statements>
+                <statements xsi:type="statements:Break">
+                  <comments>//switch</comments>
+                </statements>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.4"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:NormalSwitchCase">
+              <statements xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Break"/>
+              </statements>
+              <condition xsi:type="references:IdentifierReference">
+                <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.2"/>
+              </condition>
+            </cases>
+            <cases xsi:type="statements:DefaultSwitchCase">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Invalid handshake status:"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </throwable>
+              </statements>
+            </cases>
+            <variable xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>//while      </comments>
+        <comments>//return 0 if we are complete, otherwise reregister for any activity that </comments>
+        <comments>//would cause this method to be called again.</comments>
+        <returnValue xsi:type="expressions:ConditionalExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          <expressionIf xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <expressionElse xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:InclusiveOrExpression">
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SelectionKey.class.xmi#//@classifiers.0"/>
+              </children>
+            </expression>
+          </expressionElse>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="tasks">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>SSLEngineResult</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Executes all the tasks needed on the same thread.&#xA;     * @return HandshakeStatus&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="r">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../lang/Runnable.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:WhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../lang/Runnable.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.12"/>
+                </next>
+              </value>
+            </expression>
+          </children>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.25"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handshakeWrap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="doWrite">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Performs the WRAP function&#xA;     * @param doWrite boolean&#xA;     * @return SSLEngineResult&#xA;     * @throws IOException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <comments>//this should never be called with a network buffer that contains data</comments>
+          <comments>//so we can clear it here.</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.13"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//perform the wrap</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.2"/>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.2"/>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <comments>//prepare the results to be written</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.14"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+            <comments>//set the status</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.6"/>
+            </next>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//optimization, if we do have a writable channel, write it now</comments>
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handshakeUnwrap">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="doread">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Perform handshake unwrap&#xA;     * @param doread boolean&#xA;     * @return SSLEngineResult&#xA;     * @throws IOException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <comments>//clear the buffer if we have emptied it out on data</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.13"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.7"/>
+            </next>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.9"/>
+            </next>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="read">
+              <typeReference xsi:type="types:Int">
+                <comments>//if we have data to read, read it</comments>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0/@members.9"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:StringReference" value="EOF encountered during handshake."/>
+              </throwable>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.1/@statement/@statements.0/@variable"/>
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Subtraction"/>
+                <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="result">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="cont">
+          <typeReference xsi:type="types:Boolean"/>
+          <initialValue xsi:type="literals:BooleanLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:DoWhileLoop">
+        <comments>//loop while we can perform pure SSLEngine data</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <comments>//prepare the buffer with the incoming data</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                <comments>//call unwrap</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.9"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.1"/>
+                    <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.2"/>
+                  </arguments>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <comments>//compact the buffer, this is an optional method, wonder what would happen if we didn't</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0/@members.26"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                <comments>//read in the status</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.6"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+                    <comments>//execute tasks if we need to</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+                </children>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.6"/>
+                  </next>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                </children>
+              </children>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.3/@variable">
+                <comments>//perform another unwrap?</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.2"/>
+                      </next>
+                      <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.4"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.3/@variable"/>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.2/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Sends a SSL close message, will not physically close the connection here.&lt;br>&#xA;     * To close the connection, you could do something like&#xA;     * &lt;pre>&lt;code>&#xA;     *   close();&#xA;     *   while (isOpen() &amp;&amp; !myTimeoutFunction()) Thread.sleep(25);&#xA;     *   if ( isOpen() ) close(true); //forces a close if you timed out&#xA;     * &lt;/code>&lt;/pre>&#xA;     * @throws IOException if an I/O error occurs&#xA;     * @throws IOException if there is data on the outgoing network buffer and we are unable to flush it&#xA;     * @todo Implement this java.io.Closeable method&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return"/>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.15"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Remaining data in the network buffer, can't send SSL close message, force a close with close(true) instead"/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+          </child>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <comments>//prep the buffer for the close message</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.13"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="handshake">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//perform the close, since we called sslEngine.closeOutbound</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:MethodCall" target="//@classifiers.0/@members.27"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//we should be in a close state</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:StringReference" value="Invalid close state, will not send network data."/>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.5/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+            </next>
+          </children>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.3"/>
+              </next>
+              <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <comments>//prepare the buffer for writing</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.14"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+          <comments>//if there is data to be written</comments>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5">
+            <comments>//is the channel closed?</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:UnaryExpression">
+                <operators xsi:type="operators:Negate"/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.17"/>
+                  </next>
+                </child>
+              </children>
+              <children xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:NotEqual"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.5/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.3"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                  </children>
+                </expression>
+              </children>
+            </expression>
+          </value>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="close">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="force">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Force a close, can throw an IOException&#xA;     * @param force boolean&#xA;     * @throws IOException&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.18"/>
+        </statements>
+        <finallyBlock>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../net/Socket.class.xmi#//@classifiers.0/@members.59"/>
+                    </next>
+                    <target xsi:type="members:ClassMethod" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0/@members.4"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../nio/channels/spi/AbstractInterruptibleChannel.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.19/@parameters.0"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            </condition>
+          </statements>
+        </finallyBlock>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="read">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="dst">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Reads a sequence of bytes from this channel into the given buffer.&#xA;     *&#xA;     * @param dst The buffer into which bytes are to be transferred&#xA;     * @return The number of bytes read, possibly zero, or &lt;tt>-1&lt;/tt> if the channel has reached end-of-stream&#xA;     * @throws IOException If some other I/O error occurs&#xA;     * @throws IllegalArgumentException if the destination buffer is different than bufHandler.getReadBuffer()&#xA;     * @todo Implement this java.nio.channels.ReadableByteChannel method&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>//if we want to take advantage of the expand function, make sure we only use the ApplicationBufferHandler's buffers</comments>
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="You can only read using the application read buffer provided by the handler."/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+          <children xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.1"/>
+            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.2"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//are we in the middle of closing or closed?</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//did we finish our handshake?</comments>
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../lang/IllegalStateException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:StringReference" value="Handshake incomplete, you must complete handshake before reading data."/>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="netread">
+          <typeReference xsi:type="types:Int">
+            <comments>//read from the network</comments>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0/@members.9"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//did we reach EOF? if so send EOF up one layer.</comments>
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.3/@variable"/>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Subtraction"/>
+            <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="read">
+          <typeReference xsi:type="types:Int">
+            <comments>//the data read</comments>
+          </typeReference>
+          <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="unwrap">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>//the SSL engine result</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:DoWhileLoop">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <comments>//prepare the buffer</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                <comments>//unwrap the data</comments>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.9"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <comments>//compact the buffer</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0/@members.26"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@variable">
+                    <comments>//we did receive some data, add it to our total</comments>
+                  </child>
+                  <assignmentOperator xsi:type="operators:AssignmentPlus"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.8"/>
+                    </next>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <comments>//perform any tasks if needed</comments>
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <comments>//if we need more network data, then bail out for now.</comments>
+                <statement xsi:type="statements:Break"/>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.0"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                  </children>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.2"/>
+                  </next>
+                  <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                </children>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:Equal"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                </children>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.0"/>
+                  </next>
+                  <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                </children>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Break">
+                  <comments>//buffer overflow can happen, if we have read data, then </comments>
+                  <comments>//empty out the dst buffer before we do another read</comments>
+                </statements>
+              </statement>
+              <condition xsi:type="expressions:ConditionalAndExpression">
+                <children xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.1"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+                  </children>
+                </children>
+                <children xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@variable"/>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:GreaterThan"/>
+                </children>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:Throw">
+                  <comments>//here we should trap BUFFER_OVERFLOW and call expand on the buffer</comments>
+                  <comments>//for now, throw an exception, as we initialized the buffers</comments>
+                  <comments>//in the constructor</comments>
+                  <throwable xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="expressions:AdditiveExpression">
+                      <children xsi:type="references:StringReference" value="Unable to unwrap data, invalid status: "/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.6/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                        </next>
+                      </children>
+                      <additiveOperators xsi:type="operators:Addition"/>
+                    </arguments>
+                  </throwable>
+                </statements>
+              </elseStatement>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:NestedExpression">
+          <expression xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.7"/>
+              </next>
+            </children>
+            <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          </expression>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <comments>//continue to unwrapping as long as the input buffer has stuff</comments>
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@statements.5/@variable"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="write">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="src">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Writes a sequence of bytes to this channel from the given buffer.&#xA;     *&#xA;     * @param src The buffer from which bytes are to be retrieved&#xA;     * @return The number of bytes written, possibly zero&#xA;     * @throws IOException If some other I/O error occurs&#xA;     * @todo Implement this java.nio.channels.WritableByteChannel method&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="written">
+              <typeReference xsi:type="types:Int">
+                <comments>//we can get here through a recursive call</comments>
+                <comments>//by using the NioBlockingSelector</comments>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0/@members.12"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@statement/@statements.0/@variable"/>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+          <children xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            <self xsi:type="literals:This"/>
+          </children>
+        </condition>
+        <elseStatement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <comments>//make sure we can handle expand, and that we only use on buffer</comments>
+            <statement xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../lang/IllegalArgumentException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:StringReference" value="You can only write using the application write buffer provided by the handler."/>
+              </throwable>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall" target="//@classifiers.0/@members.22/@members.2"/>
+                <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.2"/>
+              </children>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>//are we closing or closed?</comments>
+            <statement xsi:type="statements:Throw">
+              <throwable xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:StringReference" value="Channel is in closing state."/>
+              </throwable>
+            </statement>
+            <condition xsi:type="expressions:ConditionalOrExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="written">
+              <typeReference xsi:type="types:Int">
+                <comments>//the number of bytes written</comments>
+              </typeReference>
+              <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Return">
+                <comments>//we haven't emptied out the buffer yet</comments>
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.2/@variable"/>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <comments>/*&#xA;             * The data buffer is empty, we can reuse the entire buffer.&#xA;             */</comments>
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.13"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="result">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0/@members.6"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.2/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.5/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.7"/>
+                </next>
+              </value>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../nio/Buffer.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.15"/>
+                </statement>
+                <condition xsi:type="expressions:EqualityExpression">
+                  <equalityOperators xsi:type="operators:Equal"/>
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.5/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.6"/>
+                    </next>
+                  </children>
+                  <children xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0/@constants.2"/>
+                    </next>
+                    <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$HandshakeStatus.class.xmi#//@classifiers.0"/>
+                  </children>
+                </condition>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.5/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                </next>
+              </children>
+              <children xsi:type="references:IdentifierReference">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:EnumConstant" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0/@constants.2"/>
+                </next>
+                <target xsi:type="classifiers:Enumeration" href="../../../../../../javax/net/ssl/SSLEngineResult$Status.class.xmi#//@classifiers.0"/>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:Throw">
+                <throwable xsi:type="instantiations:NewConstructorCall">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Unable to wrap data, invalid engine state: "/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.5/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../javax/net/ssl/SSLEngineResult.class.xmi#//@classifiers.0/@members.5"/>
+                      </next>
+                    </children>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </throwable>
+              </statements>
+            </elseStatement>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.13">
+              <comments>//force a flush</comments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@elseStatement/@statements.2/@variable"/>
+          </statements>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="classifiers:Interface" name="ApplicationBufferHandler">
+      <members xsi:type="members:InterfaceMethod" name="expand">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="buffer">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="remaining">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <members xsi:type="members:InterfaceMethod" name="getReadBuffer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <members xsi:type="members:InterfaceMethod" name="getWriteBuffer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Callback interface to be able to expand buffers&#xA;     * when buffer overflow exceptions happen&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getBufHandler">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences target="//@classifiers.0/@members.22"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.2"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isInitHandshakeComplete">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="isClosing">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSslEngine">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/net/ssl/SSLEngine.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getEmptyBuf">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../nio/ByteBuffer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBufHandler">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="bufHandler">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.22"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.2"/>
+            </next>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getIOChannel">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../nio/channels/SocketChannel.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference">
+          <target xsi:type="members:Field" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0/@members.1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * &#xA; * Implementation of a secure socket channel&#xA; * @author Filip Hanik&#xA; * @version 1.0&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/net/NioChannel.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="SSIConditional.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; *&#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>ssi</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/PrintWriter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>text</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../text/ParseException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SSIConditional">
+    <members xsi:type="members:ClassMethod" name="process">
+      <typeReference xsi:type="types:Long"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssiMediator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="commandName">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paramNames">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paramValues">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="writer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../io/PrintWriter.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIStopProcessingException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @see SSICommand&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="lastModified">
+          <typeReference xsi:type="types:Long">
+            <comments>// Assume anything using conditionals was modified by it</comments>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../lang/System.class.xmi#//@classifiers.0/@members.18"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../lang/System.class.xmi#//@classifiers.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="state">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Retrieve the current state information</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0/@members.22"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <comments>// Do nothing if we are nested in a false branch</comments>
+            <comments>// except count it</comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </child>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+              <next xsi:type="references:IdentifierReference">
+                <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+              </next>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.1"/>
+                </next>
+              </child>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>// Evaluate the expression</comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <comments>// No more branches can be taken for this if block</comments>
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:MethodCall" target="//@classifiers.0/@members.1">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.2"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.3"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.0"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <comments>// Do not process this branch</comments>
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral"/>
+                </expression>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="references:StringReference" value="if">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.36"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.1"/>
+          </next>
+        </condition>
+        <elseStatement xsi:type="statements:Condition">
+          <statement xsi:type="statements:Block">
+            <statements xsi:type="statements:Condition">
+              <comments>// No need to even execute if we are nested in</comments>
+              <comments>// a false branch</comments>
+              <statement xsi:type="statements:Return">
+                <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+              </statement>
+              <condition xsi:type="expressions:RelationExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                </children>
+                <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                <relationOperators xsi:type="operators:GreaterThan"/>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <comments>// If a branch was already taken in this if block</comments>
+              <comments>// then disable output and return</comments>
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral" value="true"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:Return">
+                  <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+                </statements>
+              </statement>
+              <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                <next xsi:type="references:IdentifierReference">
+                  <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                </next>
+              </condition>
+            </statements>
+            <statements xsi:type="statements:Condition">
+              <comments>// Evaluate the expression</comments>
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <comments>// Turn back on output and mark the branch</comments>
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral" value="true"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:MethodCall" target="//@classifiers.0/@members.1">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.2"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.3"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.0"/>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <comments>// Do not process this branch</comments>
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral" value="true"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral"/>
+                  </expression>
+                </statements>
+              </elseStatement>
+            </statements>
+          </statement>
+          <condition xsi:type="references:StringReference" value="elif">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.36"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.1"/>
+            </next>
+          </condition>
+          <elseStatement xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <comments>// No need to even execute if we are nested in</comments>
+                <comments>// a false branch</comments>
+                <statement xsi:type="statements:Return">
+                  <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+                </statement>
+                <condition xsi:type="expressions:RelationExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.1"/>
+                    </next>
+                  </children>
+                  <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                  <relationOperators xsi:type="operators:GreaterThan"/>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <comments>// If we've already taken another branch then</comments>
+                    <comments>// disable output otherwise enable it.</comments>
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </value>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                    <comments>// And in any case, it's safe to say a branch</comments>
+                    <comments>// has been taken.</comments>
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                    </next>
+                  </child>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="literals:BooleanLiteral" value="true"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:StringReference" value="else">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.36"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.1"/>
+              </next>
+            </condition>
+            <elseStatement xsi:type="statements:Condition">
+              <statement xsi:type="statements:Block">
+                <statements xsi:type="statements:Condition">
+                  <comments>// If we are nested inside a false branch then pop out</comments>
+                  <comments>// one level on the nesting count</comments>
+                  <statement xsi:type="statements:Block">
+                    <statements xsi:type="statements:ExpressionStatement">
+                      <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                          <next xsi:type="references:IdentifierReference">
+                            <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.1"/>
+                          </next>
+                        </child>
+                        <operator xsi:type="operators:MinusMinus"/>
+                      </expression>
+                    </statements>
+                    <statements xsi:type="statements:Return">
+                      <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+                    </statements>
+                  </statement>
+                  <condition xsi:type="expressions:RelationExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                    </children>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <relationOperators xsi:type="operators:GreaterThan"/>
+                  </condition>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <comments>// Turn output back on</comments>
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.2"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral"/>
+                  </expression>
+                </statements>
+                <statements xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="expressions:AssignmentExpression">
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.1/@variable">
+                      <comments>// Reset the branch status for any outer if blocks,</comments>
+                      <comments>// since clearly we took a branch to have gotten here</comments>
+                      <comments>// in the first place.</comments>
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/ssi/SSIConditionalState.class.xmi#//@classifiers.0/@members.0"/>
+                      </next>
+                    </child>
+                    <assignmentOperator xsi:type="operators:Assignment"/>
+                    <value xsi:type="literals:BooleanLiteral" value="true"/>
+                  </expression>
+                </statements>
+              </statement>
+              <condition xsi:type="references:StringReference" value="endif">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.36"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@parameters.1"/>
+                </next>
+              </condition>
+              <elseStatement xsi:type="statements:Block">
+                <comments>//throw new SsiCommandException( &quot;Not a conditional command:&quot; +</comments>
+                <comments>// cmdName );</comments>
+                <statements xsi:type="statements:Throw">
+                  <throwable xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIStopProcessingException.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                  </throwable>
+                </statements>
+              </elseStatement>
+            </elseStatement>
+          </elseStatement>
+        </elseStatement>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="evaluateArguments">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="names">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="values">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="ssiMediator">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIMediator.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIStopProcessingException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Retrieves the expression from the specified arguments and peforms the&#xA;     * necessary evaluation steps.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="expr">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.2">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.1"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <comments>//throw new SsiCommandException( &quot;No expression specified.&quot; );</comments>
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIStopProcessingException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:TryBlock">
+        <statements xsi:type="statements:LocalVariableStatement">
+          <variable name="tree">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/ExpressionParseTree.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <initialValue xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/ExpressionParseTree.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.0/@variable"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@parameters.2"/>
+            </initialValue>
+          </variable>
+        </statements>
+        <statements xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1/@statements.2/@statements.0/@variable">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/ssi/ExpressionParseTree.class.xmi#//@classifiers.0/@members.8"/>
+            </next>
+          </returnValue>
+        </statements>
+        <catcheBlocks>
+          <statements xsi:type="statements:Throw">
+            <comments>//throw new SsiCommandException( &quot;Error parsing expression.&quot; );</comments>
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/ssi/SSIStopProcessingException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+            </throwable>
+          </statements>
+          <parameter name="e">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../text/ParseException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </parameter>
+        </catcheBlocks>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getExpression">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paramNames">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="paramValues">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private">
+        <comments>/**&#xA;     * Returns the &quot;expr&quot; if the arg name is appropriate, otherwise returns&#xA;     * null.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1">
+            <arraySelectors>
+              <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            </arraySelectors>
+          </returnValue>
+        </statement>
+        <condition xsi:type="references:StringReference" value="expr">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../lang/String.class.xmi#//@classifiers.0/@members.36"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+              <arraySelectors>
+                <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </arraySelectors>
+            </arguments>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * SSI command that handles all conditional directives.&#xA; * &#xA; * @version $Revision: 531303 $&#xA; * @author Paul Speed&#xA; * @author David Becker&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../org/apache/catalina/ssi/SSICommand.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

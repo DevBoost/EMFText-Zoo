@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:imports="http://www.emftext.org/java/imports" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../java.ecore#/4 http://www.emftext.org/java/imports ../../../java.ecore#/7 http://www.emftext.org/java/members ../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../java.ecore#/11 http://www.emftext.org/java/parameters ../../../java.ecore#/13 http://www.emftext.org/java/types ../../../java.ecore#/16" name="Filter.java">
+  <comments>/*&#xA;* Licensed to the Apache Software Foundation (ASF) under one or more&#xA;* contributor license agreements.  See the NOTICE file distributed with&#xA;* this work for additional information regarding copyright ownership.&#xA;* The ASF licenses this file to You under the Apache License, Version 2.0&#xA;* (the &quot;License&quot;); you may not use this file except in compliance with&#xA;* the License.  You may obtain a copy of the License at&#xA;*&#xA;*     http://www.apache.org/licenses/LICENSE-2.0&#xA;*&#xA;* Unless required by applicable law or agreed to in writing, software&#xA;* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA;* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA;* See the License for the specific language governing permissions and&#xA;* limitations under the License.&#xA;*/</comments>
+  <namespaces>javax</namespaces>
+  <namespaces>servlet</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Interface" name="Filter">
+    <members xsi:type="members:InterfaceMethod" name="init">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="filterConfig">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../javax/servlet/FilterConfig.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/** &#xA;&#x9;* Called by the web container to indicate to a filter that it is being placed into&#xA;&#x9;* service. The servlet container calls the init method exactly once after instantiating the&#xA;&#x9;* filter. The init method must complete successfully before the filter is asked to do any&#xA;&#x9;* filtering work. &lt;br>&lt;br>&#xA;&#xA;     &#x9;* The web container cannot place the filter into service if the init method either&lt;br>&#xA;        * 1.Throws a ServletException &lt;br>&#xA;        * 2.Does not return within a time period defined by the web container &#xA;&#x9;*/</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="doFilter">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../javax/servlet/ServletRequest.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../javax/servlet/ServletResponse.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="chain">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../javax/servlet/FilterChain.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9;* The &lt;code>doFilter&lt;/code> method of the Filter is called by the container&#xA;&#x9;* each time a request/response pair is passed through the chain due&#xA;&#x9;* to a client request for a resource at the end of the chain. The FilterChain passed in to this&#xA;&#x9;* method allows the Filter to pass on the request and response to the next entity in the&#xA;&#x9;* chain.&lt;p>&#xA;&#x9;* A typical implementation of this method would follow the following pattern:- &lt;br>&#xA;&#x9;* 1. Examine the request&lt;br>&#xA;&#x9;* 2. Optionally wrap the request object with a custom implementation to&#xA;&#x9;* filter content or headers for input filtering &lt;br>&#xA;&#x9;* 3. Optionally wrap the response object with a custom implementation to&#xA;&#x9;* filter content or headers for output filtering &lt;br>&#xA;&#x9;* 4. a) &lt;strong>Either&lt;/strong> invoke the next entity in the chain using the FilterChain object (&lt;code>chain.doFilter()&lt;/code>), &lt;br>   &#xA;&#x9;** 4. b) &lt;strong>or&lt;/strong> not pass on the request/response pair to the next entity in the filter chain to block the request processing&lt;br>&#xA;&#x9;** 5. Directly set headers on the response after invocation of the next entity in the filter chain.&#xA;&#x9;**/</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:InterfaceMethod" name="destroy">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;&#x9;* Called by the web container to indicate to a filter that it is being taken out of service. This &#xA;&#x9;* method is only called once all threads within the filter's doFilter method have exited or after&#xA;&#x9;* a timeout period has passed. After the web container calls this method, it will not call the&#xA;&#x9;* doFilter method again on this instance of the filter. &lt;br>&lt;br>&#xA;&#x9;* &#xA;     &#x9;* This method gives the filter an opportunity to clean up any resources that are being held (for&#xA;&#x9;* example, memory, file handles, threads) and make sure that any persistent state is synchronized&#xA;&#x9;* with the filter's current state in memory.&#xA;&#x9;*/</comments>
+      </annotationsAndModifiers>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/** &#xA;&#x9;* A filter is an object that performs filtering tasks on either the request to a resource (a servlet or static content), or on the response from a resource, or both.&#xA;        * &lt;br>&lt;br>&#xA;&#x9;* Filters perform filtering in the &lt;code>doFilter&lt;/code> method. Every Filter has access to &#xA;&#x9;** a FilterConfig object from which it can obtain its initialization parameters, a&#xA;&#x9;** reference to the ServletContext which it can use, for example, to load resources&#xA;&#x9;** needed for filtering tasks.&#xA;&#x9;** &lt;p>&#xA;&#x9;** Filters are configured in the deployment descriptor of a web application&#xA;&#x9;** &lt;p>&#xA;&#x9;** Examples that have been identified for this design are&lt;br>&#xA;&#x9;** 1) Authentication Filters &lt;br>&#xA;&#x9;** 2) Logging and Auditing Filters &lt;br>&#xA;&#x9;** 3) Image conversion Filters &lt;br>&#xA;    &#x9;** 4) Data compression Filters &lt;br>&#xA;&#x9;** 5) Encryption Filters &lt;br>&#xA;&#x9;** 6) Tokenizing Filters &lt;br>&#xA;&#x9;** 7) Filters that trigger resource access events &lt;br>&#xA;&#x9;** 8) XSL/T filters &lt;br>&#xA;&#x9;** 9) Mime-type chain Filter &lt;br>&#xA;&#x9; * @since&#x9;Servlet 2.3&#xA;&#x9;*/</comments>
+    </annotationsAndModifiers>
+  </classifiers>
+</containers:CompilationUnit>

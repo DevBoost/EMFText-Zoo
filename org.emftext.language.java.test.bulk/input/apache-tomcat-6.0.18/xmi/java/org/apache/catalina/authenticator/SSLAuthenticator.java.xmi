@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../java.ecore#/7 http://www.emftext.org/java/literals ../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../java.ecore#/16" name="SSLAuthenticator.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>authenticator</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../security/Principal.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>security</namespaces>
+    <namespaces>cert</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>coyote</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/coyote/ActionCode.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>deploy</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/LoginConfig.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="SSLAuthenticator">
+    <members xsi:type="members:Field" name="info">
+      <initialValue xsi:type="references:StringReference" value="org.apache.catalina.authenticator.SSLAuthenticator/1.0"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// ------------------------------------------------------------- Properties</comments>
+        <comments>/**&#xA;     * Descriptive information about this implementation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Return descriptive information about this Valve implementation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="authenticate">
+      <typeReference xsi:type="types:Boolean"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="config">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/deploy/LoginConfig.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// --------------------------------------------------------- Public Methods</comments>
+        <comments>/**&#xA;     * Authenticate the user by checking for the existence of a certificate&#xA;     * chain, and optionally asking a trust manager to validate that we trust&#xA;     * this user.&#xA;     *&#xA;     * @param request Request we are processing&#xA;     * @param response Response we are creating&#xA;     * @param config    Login configuration describing how authentication&#xA;     *              should be performed&#xA;     *&#xA;     * @exception IOException if an input/output error occurs&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="principal">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// Have we already authenticated someone?</comments>
+              <target xsi:type="classifiers:Interface" href="../../../../security/Principal.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.173"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>//String ssoId = (String) request.getNote(Constants.REQ_SSOID_NOTE);</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:StringReference" value="Already authenticated '"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../security/Principal.class.xmi#//@classifiers.0/@members.3"/>
+                      </next>
+                    </children>
+                    <children xsi:type="references:StringReference" value="'"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="ssoId">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <comments>// Associate the session with any existing SSO session in order</comments>
+                  <comments>// to get coordinated session invalidation at logout</comments>
+                  <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../lang/String.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.78"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/authenticator/Constants.class.xmi#//@classifiers.0/@members.14"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/authenticator/Constants.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </child>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.36"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@statement/@statements.1/@variable"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.175"/>
+                    <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                  </next>
+                </arguments>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.1/@statement/@statements.1/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="literals:BooleanLiteral" value="true"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// NOTE: We don't try to reauthenticate using any existing SSO session,</comments>
+        <comments>// because that will only work if the original authentication was</comments>
+        <comments>// BASIC or FORM, which are less secure than the CLIENT_CERT auth-type</comments>
+        <comments>// specified for this webapp</comments>
+        <comments>//</comments>
+        <comments>// Uncomment below to allow previous FORM or BASIC authentications</comments>
+        <comments>// to authenticate users for this webapp</comments>
+        <comments>// TODO make this a configurable attribute (in SingleSignOn??)</comments>
+        <comments>/*&#xA;        // Is there an SSO session against which we can try to reauthenticate?&#xA;        if (ssoId != null) {&#xA;            if (log.isDebugEnabled())&#xA;                log.debug(&quot;SSO Id &quot; + ssoId + &quot; set; attempting &quot; +&#xA;                          &quot;reauthentication&quot;);&#xA;            // Try to reauthenticate using data cached by SSO.  If this fails,&#xA;            // either the original SSO logon was of DIGEST or SSL (which&#xA;            // we can't reauthenticate ourselves because there is no&#xA;            // cached username and password), or the realm denied&#xA;            // the user's reauthentication for some reason.&#xA;            // In either case we have to prompt the user for a logon&#xA;            if (reauthenticateFromSSO(ssoId, request))&#xA;                return true;&#xA;        }&#xA;        */</comments>
+        <comments>// Retrieve the certificate chain for this client</comments>
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+              <arguments xsi:type="references:StringReference" value=" Looking up certificates"/>
+            </next>
+            <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+          <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="certs">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <arrayDimensionsAfter/>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arrayDimensionsBefore/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.91"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.1"/>
+                  </next>
+                  <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+                </arguments>
+              </next>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../org/apache/coyote/Request.class.xmi#//@classifiers.0/@members.69"/>
+                  <arguments xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:IdentifierReference">
+                      <target xsi:type="members:Field" href="../../../../../org/apache/coyote/ActionCode.class.xmi#//@classifiers.0/@members.14"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../org/apache/coyote/ActionCode.class.xmi#//@classifiers.0"/>
+                  </arguments>
+                  <arguments xsi:type="literals:NullLiteral"/>
+                </next>
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.53"/>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="expressions:CastExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../security/cert/X509Certificate.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arrayDimensionsBefore/>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.91"/>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.1"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                  </next>
+                </child>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable">
+                <next xsi:type="references:IdentifierReference"/>
+              </children>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="references:StringReference" value="  No certificates included with this request"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0/@members.84"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0/@members.17"/>
+                  </next>
+                  <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                    <arguments xsi:type="references:StringReference" value="authenticator.certificates"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.14"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="literals:BooleanLiteral"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalOrExpression">
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </expression>
+          </children>
+          <children xsi:type="expressions:NestedExpression">
+            <expression xsi:type="expressions:RelationExpression">
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable">
+                <next xsi:type="references:IdentifierReference"/>
+              </children>
+              <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+              <relationOperators xsi:type="operators:LessThan"/>
+            </expression>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable">
+            <comments>// Authenticate the specified certificate chain</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/Realm.class.xmi#//@classifiers.0/@members.7"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.3/@variable"/>
+              </next>
+              <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.25"/>
+            </next>
+            <target xsi:type="members:Field" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.5"/>
+          </value>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="references:StringReference" value="  Realm.authenticate() returned false"/>
+                </next>
+                <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+              </expression>
+            </statement>
+            <condition xsi:type="references:IdentifierReference">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+              <target xsi:type="members:Field" href="../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.2"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0/@members.84"/>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:IdentifierReference">
+                    <target xsi:type="members:Field" href="../../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0/@members.18"/>
+                  </next>
+                  <target xsi:type="classifiers:Interface" href="../../../../../javax/servlet/http/HttpServletResponse.class.xmi#//@classifiers.0"/>
+                </arguments>
+                <arguments xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                    <arguments xsi:type="references:StringReference" value="authenticator.unauthorized"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.14"/>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Return">
+            <returnValue xsi:type="expressions:NestedExpression">
+              <expression xsi:type="literals:BooleanLiteral"/>
+            </returnValue>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <comments>// Cache the principal (if requested) and record this authentication</comments>
+          <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.42"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@parameters.1"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2/@statements.0/@variable"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../org/apache/catalina/authenticator/Constants.class.xmi#//@classifiers.0/@members.2"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/authenticator/Constants.class.xmi#//@classifiers.0"/>
+          </arguments>
+          <arguments xsi:type="literals:NullLiteral"/>
+          <arguments xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="literals:BooleanLiteral" value="true"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="start">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// ------------------------------------------------------ Lifecycle Methods</comments>
+        <comments>/**&#xA;     * Initialize the database we will be using for client verification&#xA;     * and certificate validation (if any).&#xA;     *&#xA;     * @exception LifecycleException if this component detects a fatal error&#xA;     *  that prevents this component from being used&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.46"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="stop">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Finalize the database we used for client verification and&#xA;     * certificate validation (if any).&#xA;     *&#xA;     * @exception LifecycleException if this component detects a fatal error&#xA;     *  that prevents this component from being used&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:SelfReference">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0/@members.47"/>
+          </next>
+          <self xsi:type="literals:Super"/>
+        </expression>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * An &lt;b>Authenticator&lt;/b> and &lt;b>Valve&lt;/b> implementation of authentication&#xA; * that utilizes SSL certificates to identify client users.&#xA; *&#xA; * @author Craig R. McClanahan&#xA; * @version $Revision: 500629 $ $Date: 2007-01-27 22:32:52 +0100 (Sat, 27 Jan 2007) $&#xA; */</comments>
+    </annotationsAndModifiers>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../org/apache/catalina/authenticator/AuthenticatorBase.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

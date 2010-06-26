@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arrays="http://www.emftext.org/java/arrays" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/arrays ../../../../../../java.ecore#/1 http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="GzipOutputFilter.java">
+  <comments>/*&#xA; *  Licensed to the Apache Software Foundation (ASF) under one or more&#xA; *  contributor license agreements.  See the NOTICE file distributed with&#xA; *  this work for additional information regarding copyright ownership.&#xA; *  The ASF licenses this file to You under the Apache License, Version 2.0&#xA; *  (the &quot;License&quot;); you may not use this file except in compliance with&#xA; *  the License.  You may obtain a copy of the License at&#xA; *&#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; *&#xA; *  Unless required by applicable law or agreed to in writing, software&#xA; *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; *  See the License for the specific language governing permissions and&#xA; *  limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>coyote</namespaces>
+  <namespaces>http11</namespaces>
+  <namespaces>filters</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../io/OutputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>zip</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>tomcat</namespaces>
+    <namespaces>util</namespaces>
+    <namespaces>buf</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>coyote</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/coyote/OutputBuffer.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>coyote</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/coyote/Response.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>coyote</namespaces>
+    <namespaces>http11</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/coyote/http11/OutputFilter.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="GzipOutputFilter">
+    <members xsi:type="members:Field" name="ENCODING_NAME">
+      <initialValue xsi:type="references:StringReference" value="gzip"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// -------------------------------------------------------------- Constants</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="ENCODING">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="statements:Block">
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.18"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.32"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <modifiers xsi:type="modifiers:Static">
+        <comments>// ----------------------------------------------------- Static Initializer</comments>
+      </modifiers>
+    </members>
+    <members xsi:type="members:Field" name="buffer">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/coyote/OutputBuffer.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// ----------------------------------------------------- Instance Variables</comments>
+        <comments>/**&#xA;     * Next buffer in the pipeline.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="compressionStream">
+      <initialValue xsi:type="literals:NullLiteral"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Compression output stream.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="fakeOutputStream">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences target="//@classifiers.0/@members.12"/>
+        </typeReference>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/OutputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Fake internal output stream.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="doWrite">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="chunk">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="res">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/coyote/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// --------------------------------------------------- OutputBuffer Methods</comments>
+        <comments>/**&#xA;     * Write some bytes.&#xA;     * &#xA;     * @return number of bytes written by the filter&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0/@members.6"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.22"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.24"/>
+              </next>
+            </arguments>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.27"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.27"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setResponse">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/coyote/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// --------------------------------------------------- OutputFilter Methods</comments>
+        <comments>/**&#xA;     * Some filters need additional parameters from the response. All the &#xA;     * necessary reading can occur in that method, as this method is called&#xA;     * after the response header processing is complete.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setBuffer">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="buffer">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/coyote/OutputBuffer.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Set the next buffer in the filter pipeline.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="end">
+      <typeReference xsi:type="types:Long"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * End the current request. It is acceptable to write extra bytes using&#xA;     * buffer.doWrite during the execution of this method.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="instantiations:NewConstructorCall">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../util/zip/GZIPOutputStream.class.xmi#//@classifiers.0/@members.7"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../util/zip/DeflaterOutputStream.class.xmi#//@classifiers.0/@members.10"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/coyote/http11/OutputFilter.class.xmi#//@classifiers.0/@members.5"/>
+          </next>
+          <expression xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/coyote/http11/OutputFilter.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3"/>
+          </expression>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="recycle">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Make the filter ready to process the next request.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4">
+            <comments>// Set compression stream to null</comments>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getEncodingName">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Return the name of the associated encoding; Here, the value is &#xA;     * &quot;identity&quot;.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+      </statements>
+    </members>
+    <members xsi:type="classifiers:Class" name="FakeOutputStream">
+      <members xsi:type="members:Field" name="outputChunk">
+        <initialValue xsi:type="instantiations:NewConstructorCall">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+        </initialValue>
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      </members>
+      <members xsi:type="members:Field" name="singleByteBuffer">
+        <initialValue xsi:type="arrays:ArrayInstantiationBySize">
+          <typeReference xsi:type="types:Byte"/>
+          <sizes xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+        </initialValue>
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+        <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+      </members>
+      <members xsi:type="members:ClassMethod" name="write">
+        <typeReference xsi:type="types:Void"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <exceptions>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </exceptions>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:AssignmentExpression">
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.1">
+              <comments>// Shouldn't get used for good performance, but is needed for </comments>
+              <comments>// compatibility with Sun JDK 1.4.0</comments>
+              <arraySelectors>
+                <position xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              </arraySelectors>
+            </child>
+            <assignmentOperator xsi:type="operators:Assignment"/>
+            <value xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:Byte"/>
+              <child xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:AndExpression">
+                  <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.2/@parameters.0"/>
+                  <children xsi:type="literals:HexIntegerLiteral" hexValue="255"/>
+                </expression>
+              </child>
+            </value>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.18"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.1"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+              <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/coyote/OutputBuffer.class.xmi#//@classifiers.0/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.0"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </next>
+          </expression>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="write">
+        <typeReference xsi:type="types:Void"/>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="b">
+          <typeReference xsi:type="types:Byte"/>
+          <arrayDimensionsBefore/>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="off">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <parameters xsi:type="parameters:OrdinaryParameter" name="len">
+          <typeReference xsi:type="types:Int"/>
+        </parameters>
+        <exceptions>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </exceptions>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/tomcat/util/buf/ByteChunk.class.xmi#//@classifiers.0/@members.18"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.3/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.3/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.3/@parameters.2"/>
+            </next>
+          </expression>
+        </statements>
+        <statements xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/coyote/OutputBuffer.class.xmi#//@classifiers.0/@members.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.12/@members.0"/>
+              <arguments xsi:type="literals:NullLiteral"/>
+            </next>
+          </expression>
+        </statements>
+      </members>
+      <members xsi:type="members:ClassMethod" name="flush">
+        <typeReference xsi:type="types:Void"/>
+        <exceptions>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </exceptions>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <members xsi:type="members:ClassMethod" name="close">
+        <typeReference xsi:type="types:Void"/>
+        <exceptions>
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </exceptions>
+        <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      </members>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>// ------------------------------------------- FakeOutputStream Inner Class</comments>
+      </annotationsAndModifiers>
+      <extends xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/OutputStream.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </extends>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Gzip output filter.&#xA; * &#xA; * @author Remy Maucherat&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/coyote/http11/OutputFilter.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+  </classifiers>
+</containers:CompilationUnit>

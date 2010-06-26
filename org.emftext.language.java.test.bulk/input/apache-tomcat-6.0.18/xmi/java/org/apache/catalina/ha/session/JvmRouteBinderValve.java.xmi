@@ -1,0 +1,2162 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:expressions="http://www.emftext.org/java/expressions" xmlns:imports="http://www.emftext.org/java/imports" xmlns:instantiations="http://www.emftext.org/java/instantiations" xmlns:literals="http://www.emftext.org/java/literals" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:operators="http://www.emftext.org/java/operators" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:references="http://www.emftext.org/java/references" xmlns:statements="http://www.emftext.org/java/statements" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../../../../../java.ecore#/2 http://www.emftext.org/java/containers ../../../../../../java.ecore#/4 http://www.emftext.org/java/expressions ../../../../../../java.ecore#/5 http://www.emftext.org/java/imports ../../../../../../java.ecore#/7 http://www.emftext.org/java/instantiations ../../../../../../java.ecore#/8 http://www.emftext.org/java/literals ../../../../../../java.ecore#/9 http://www.emftext.org/java/members ../../../../../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../../../../../java.ecore#/11 http://www.emftext.org/java/operators ../../../../../../java.ecore#/12 http://www.emftext.org/java/parameters ../../../../../../java.ecore#/13 http://www.emftext.org/java/references ../../../../../../java.ecore#/14 http://www.emftext.org/java/statements ../../../../../../java.ecore#/15 http://www.emftext.org/java/types ../../../../../../java.ecore#/16" name="JvmRouteBinderValve.java">
+  <comments>/*&#xA; * Licensed to the Apache Software Foundation (ASF) under one or more&#xA; * contributor license agreements.  See the NOTICE file distributed with&#xA; * this work for additional information regarding copyright ownership.&#xA; * The ASF licenses this file to You under the Apache License, Version 2.0&#xA; * (the &quot;License&quot;); you may not use this file except in compliance with&#xA; * the License.  You may obtain a copy of the License at&#xA; * &#xA; *      http://www.apache.org/licenses/LICENSE-2.0&#xA; * &#xA; * Unless required by applicable law or agreed to in writing, software&#xA; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#xA; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#xA; * See the License for the specific language governing permissions and&#xA; * limitations under the License.&#xA; */</comments>
+  <namespaces>org</namespaces>
+  <namespaces>apache</namespaces>
+  <namespaces>catalina</namespaces>
+  <namespaces>ha</namespaces>
+  <namespaces>session</namespaces>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>java</namespaces>
+    <namespaces>io</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>javax</namespaces>
+    <namespaces>servlet</namespaces>
+    <namespaces>http</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Engine.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Host.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Lifecycle.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/LifecycleListener.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Manager.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>ha</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>ha</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>ha</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterMessage.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>ha</namespaces>
+    <classifier xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterValve.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>connector</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>session</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/session/ManagerBase.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>util</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0"/>
+  </imports>
+  <imports xsi:type="imports:ClassifierImport">
+    <namespaces>org</namespaces>
+    <namespaces>apache</namespaces>
+    <namespaces>catalina</namespaces>
+    <namespaces>valves</namespaces>
+    <classifier xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0"/>
+  </imports>
+  <classifiers xsi:type="classifiers:Class" name="JvmRouteBinderValve">
+    <members xsi:type="members:Field" name="log">
+      <initialValue xsi:type="references:IdentifierReference">
+        <next xsi:type="references:IdentifierReference">
+          <next xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <next xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/juli/logging/LogFactory.class.xmi#//@classifiers.0/@members.17"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0">
+                    <next xsi:type="references:ReflectiveClassReference"/>
+                  </arguments>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/apache/juli/logging/LogFactory.class.xmi#//@classifiers.0"/>
+              </next>
+            </next>
+          </next>
+        </next>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <namespaces>org</namespaces>
+        <namespaces>apache</namespaces>
+        <namespaces>juli</namespaces>
+        <namespaces>logging</namespaces>
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/*--Static Variables----------------------------------------*/</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="info">
+      <initialValue xsi:type="references:StringReference" value="org.apache.catalina.ha.session.JvmRouteBinderValve/1.2"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The descriptive information about this implementation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+    </members>
+    <members xsi:type="members:Field" name="cluster">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/*--Instance Variables--------------------------------------*/</comments>
+        <comments>/**&#xA;     * the cluster&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="sm">
+      <initialValue xsi:type="references:IdentifierReference">
+        <next xsi:type="references:MethodCall">
+          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.12"/>
+          <arguments xsi:type="references:IdentifierReference">
+            <next xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/apache/catalina/ha/session/Constants.class.xmi#//@classifiers.0/@members.0"/>
+            </next>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/ha/session/Constants.class.xmi#//@classifiers.0"/>
+          </arguments>
+        </next>
+        <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0"/>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The string manager for this package.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="started">
+      <initialValue xsi:type="literals:BooleanLiteral"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Has this component been started yet?&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="enabled">
+      <initialValue xsi:type="literals:BooleanLiteral" value="true"/>
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * enabled this component&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="numberOfSessions">
+      <initialValue xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * number of session that no at this tomcat instanz hosted&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:Field" name="sessionIdAttribute">
+      <initialValue xsi:type="references:StringReference" value="org.apache.catalina.ha.session.JvmRouteOrignalSessionID"/>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected"/>
+    </members>
+    <members xsi:type="members:Field" name="lifecycle">
+      <initialValue xsi:type="instantiations:NewConstructorCall">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+        <arguments xsi:type="references:SelfReference">
+          <self xsi:type="literals:This"/>
+        </arguments>
+      </initialValue>
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * The lifecycle event support for this component.&#xA;     */</comments>
+      </annotationsAndModifiers>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getInfo">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/*--Logic---------------------------------------------------*/</comments>
+        <comments>/**&#xA;     * Return descriptive information about this implementation.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="expressions:NestedExpression">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.1"/>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getSessionIdAttribute">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * set session id attribute to failed node for request.&#xA;     * &#xA;     * @return Returns the sessionIdAttribute.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setSessionIdAttribute">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sessionIdAttribute">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * get name of failed reqeust session attribute&#xA;     * &#xA;     * @param sessionIdAttribute&#xA;     *            The sessionIdAttribute to set.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.11/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getNumberOfSessions">
+      <typeReference xsi:type="types:Long"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @return Returns the number of migrated sessions.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getEnabled">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @return Returns the enabled.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setEnabled">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="enabled">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @param enabled&#xA;     *            The enabled to set.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.5"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.14/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="invoke">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../javax/servlet/ServletException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Detect possible the JVMRoute change at cluster backup node..&#xA;     * &#xA;     * @param request&#xA;     *            tomcat request being processed&#xA;     * @param response&#xA;     *            tomcat response being processed&#xA;     * @exception IOException&#xA;     *                if an input/output error has occurred&#xA;     * @exception ServletException&#xA;     *                if a servlet error has occurred&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="manager">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <comments>// valve cluster can access manager - other cluster handle turnover </comments>
+                  <comments>// at host level - hopefully!</comments>
+                  <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Manager.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.10"/>
+                  </next>
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.16">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable"/>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+              <children xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable"/>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.19">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0/@members.16"/>
+                    <arguments xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0/@members.3"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@statements.0/@statement/@statements.0/@variable"/>
+                      </expression>
+                    </arguments>
+                  </next>
+                </children>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.13"/>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:MethodCall" target="//@classifiers.0/@members.19"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+              </next>
+            </children>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0/@members.21"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+            </next>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall">
+          <comments>// Pass this request on to the next valve in our pipeline</comments>
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Valve.class.xmi#//@classifiers.0/@members.4"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.15/@parameters.1"/>
+          </next>
+          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.15"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handlePossibleTurnover">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * handle possible session turn over.&#xA;     * &#xA;     * @see JvmRouteBinderValve#handleJvmRoute(Request, Response, String, String)&#xA;     * @param request current request&#xA;     * @param response current response&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="session">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.175"/>
+              <arguments xsi:type="literals:BooleanLiteral"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="t1">
+              <typeReference xsi:type="types:Long"/>
+              <initialValue xsi:type="references:IdentifierReference">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../lang/System.class.xmi#//@classifiers.0/@members.18"/>
+                </next>
+                <target xsi:type="classifiers:Class" href="../../../../../lang/System.class.xmi#//@classifiers.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="jvmRoute">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.17">
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                          <arguments xsi:type="references:StringReference" value="jvmRoute.missingJvmRouteAttribute"/>
+                        </next>
+                      </arguments>
+                    </next>
+                  </expression>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Return"/>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:Equal"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@statement/@statements.1/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.21">
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.0"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@parameters.1"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0/@members.9"/>
+                </next>
+              </arguments>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@statement/@statements.1/@variable"/>
+            </expression>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="t2">
+                  <typeReference xsi:type="types:Long"/>
+                  <initialValue xsi:type="references:IdentifierReference">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../lang/System.class.xmi#//@classifiers.0/@members.18"/>
+                    </next>
+                    <target xsi:type="classifiers:Class" href="../../../../../lang/System.class.xmi#//@classifiers.0"/>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="time">
+                  <typeReference xsi:type="types:Long"/>
+                  <initialValue xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@statement/@statements.4/@statement/@statements.0/@variable"/>
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@statement/@statements.0/@variable"/>
+                    <additiveOperators xsi:type="operators:Subtraction"/>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                        <arguments xsi:type="references:StringReference" value="jvmRoute.turnoverInfo"/>
+                        <arguments xsi:type="instantiations:NewConstructorCall">
+                          <typeReference xsi:type="types:NamespaceClassifierReference">
+                            <classifierReferences>
+                              <target xsi:type="classifiers:Class" href="../../../../../lang/Long.class.xmi#//@classifiers.0"/>
+                            </classifierReferences>
+                          </typeReference>
+                          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.1/@statement/@statements.4/@statement/@statements.1/@variable"/>
+                        </arguments>
+                      </next>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.16/@statements.0/@variable"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getLocalJvmRoute">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * get jvmroute from engine&#xA;     * &#xA;     * @param request current request&#xA;     * @return return jvmRoute from ManagerBase or null&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="manager">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Manager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:MethodCall" target="//@classifiers.0/@members.18">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@parameters.0"/>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Return">
+          <returnValue xsi:type="expressions:NestedExpression">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/session/ManagerBase.class.xmi#//@classifiers.0/@members.77"/>
+            </next>
+            <expression xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/session/ManagerBase.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable"/>
+            </expression>
+          </returnValue>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/session/ManagerBase.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.17/@statements.0/@variable"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="literals:NullLiteral"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getManager">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Manager.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * get Cluster DeltaManager&#xA;     * &#xA;     * @param request current request&#xA;     * @return manager or null&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="manager">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Manager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+            <next xsi:type="references:MethodCall">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.10"/>
+              </next>
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                      <arguments xsi:type="references:StringReference" value="jvmRoute.foundManager"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.19"/>
+                          </next>
+                          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+                        </next>
+                      </arguments>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+            <elseStatement xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                      <arguments xsi:type="references:StringReference" value="jvmRoute.notFoundManager"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@parameters.0">
+                        <next xsi:type="references:MethodCall">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.19"/>
+                          </next>
+                          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+                        </next>
+                      </arguments>
+                    </next>
+                  </arguments>
+                </next>
+              </expression>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.18/@statements.0/@variable"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCluster">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @return Returns the cluster.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setCluster">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="cluster">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * @param cluster The cluster to set.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:SelfReference">
+            <next xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+            <self xsi:type="literals:This"/>
+          </child>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.20/@parameters.0"/>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="handleJvmRoute">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sessionId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="localJvmRoute">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Handle jvmRoute stickyness after tomcat instance failed. After this&#xA;     * correction a new Cookie send to client with new jvmRoute and the&#xA;     * SessionID change propage to the other cluster nodes.&#xA;     * &#xA;     * @param request current request&#xA;     * @param response&#xA;     *            Tomcat Response&#xA;     * @param sessionId&#xA;     *            request SessionID from Cookie&#xA;     * @param localJvmRoute&#xA;     *            local jvmRoute&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="requestJvmRoute">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// get requested jvmRoute.</comments>
+              <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="literals:NullLiteral"/>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="index">
+          <typeReference xsi:type="types:Int"/>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.49"/>
+              <arguments xsi:type="references:StringReference" value="."/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="expressions:AssignmentExpression">
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable"/>
+              <assignmentOperator xsi:type="operators:Assignment"/>
+              <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.56"/>
+                  <arguments xsi:type="expressions:AdditiveExpression">
+                    <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.1/@variable"/>
+                    <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    <additiveOperators xsi:type="operators:Addition"/>
+                  </arguments>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                    </next>
+                  </arguments>
+                </next>
+              </value>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:RelationExpression">
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.1/@variable"/>
+          <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+          <relationOperators xsi:type="operators:GreaterThan"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                        <arguments xsi:type="references:StringReference" value="jvmRoute.failover"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.3"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="newSessionID">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <comments>// OK - turnover the session ?</comments>
+                  <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.56"/>
+                    <arguments xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.1/@variable"/>
+                  </next>
+                </children>
+                <children xsi:type="references:StringReference" value="."/>
+                <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.3"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="catalinaSession">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="literals:NullLiteral"/>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:TryBlock">
+            <statements xsi:type="statements:ExpressionStatement">
+              <expression xsi:type="expressions:AssignmentExpression">
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.3/@statement/@statements.2/@variable"/>
+                <assignmentOperator xsi:type="operators:Assignment"/>
+                <value xsi:type="references:MethodCall" target="//@classifiers.0/@members.18">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Manager.class.xmi#//@classifiers.0/@members.27"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2"/>
+                  </next>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+                </value>
+              </expression>
+            </statements>
+            <catcheBlocks>
+              <comments>// Hups!</comments>
+              <parameter name="e">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Class" href="../../../../../io/IOException.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+              </parameter>
+            </catcheBlocks>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.22">
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.0"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.1"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.3/@statement/@statements.1/@variable"/>
+                  <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.3/@statement/@statements.2/@variable"/>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:SuffixUnaryModificationExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+                  <operator xsi:type="operators:PlusPlus"/>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:EqualityExpression">
+              <equalityOperators xsi:type="operators:NotEqual"/>
+              <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.3/@statement/@statements.2/@variable"/>
+              <children xsi:type="literals:NullLiteral"/>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                            <arguments xsi:type="references:StringReference" value="jvmRoute.cannotFindSession"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.2"/>
+                          </next>
+                        </arguments>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </condition>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.21/@parameters.3"/>
+              </next>
+            </child>
+          </children>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="changeSessionID">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sessionId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newSessionID">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="catalinaSession">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * change session id and send to all cluster nodes&#xA;     * &#xA;     * @param request current request&#xA;     * @param response current response&#xA;     * @param sessionId&#xA;     *            original session id&#xA;     * @param newSessionID&#xA;     *            new session id for node migration&#xA;     * @param catalinaSession&#xA;     *            current session with original session id&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.5"/>
+            <arguments xsi:type="references:StringReference" value="Before session migration"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.4"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.135"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.3"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.4">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0/@members.10"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.3"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="expressions:NestedExpression">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/ha/session/DeltaSession.class.xmi#//@classifiers.0/@members.40"/>
+            </next>
+            <expression xsi:type="expressions:CastExpression">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/ha/session/DeltaSession.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.4"/>
+            </expression>
+          </expression>
+        </statement>
+        <condition xsi:type="expressions:InstanceOfExpression">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/ha/session/DeltaSession.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.4"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.24">
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.1"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.3"/>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.167"/>
+          </next>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <comments>// set orginal sessionid at request, to allow application detect the</comments>
+        <comments>// change</comments>
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                        <arguments xsi:type="references:StringReference" value="jvmRoute.set.orignalsessionid"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.2"/>
+                      </next>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+              </next>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.119"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.2"/>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:ConditionalAndExpression">
+          <children xsi:type="expressions:EqualityExpression">
+            <equalityOperators xsi:type="operators:NotEqual"/>
+            <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+            <children xsi:type="literals:NullLiteral"/>
+          </children>
+          <children xsi:type="expressions:UnaryExpression">
+            <operators xsi:type="operators:Negate"/>
+            <child xsi:type="references:StringReference" value="">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.33"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.7"/>
+              </next>
+            </child>
+          </children>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="manager">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <comments>// now sending the change to all other clusternode!</comments>
+              <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="expressions:CastExpression">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.4">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Session.class.xmi#//@classifiers.0/@members.14"/>
+              </next>
+            </child>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:MethodCall" target="//@classifiers.0/@members.23">
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@statements.6/@variable"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.0"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.2"/>
+          <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.3"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.5"/>
+            <arguments xsi:type="references:StringReference" value="After session migration"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.4"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:ExpressionStatement">
+            <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                    <arguments xsi:type="references:StringReference" value="jvmRoute.changeSession"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.2"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.22/@parameters.3"/>
+                  </next>
+                </arguments>
+              </next>
+            </expression>
+          </statements>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+          </next>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="sendSessionIDClusterBackup">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="manager">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sessionId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="newSessionID">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Send the changed Sessionid to all clusternodes.&#xA;     * &#xA;     * @see JvmRouteSessionIDBinderListener#messageReceived(ClusterMessage)&#xA;     * @param manager&#xA;     *            ClusterManager&#xA;     * @param sessionId&#xA;     *            current failed sessionid&#xA;     * @param newSessionID&#xA;     *            new session id, bind to the new cluster node&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="msg">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/ha/session/SessionIDMessage.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/ha/session/SessionIDMessage.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/ha/session/SessionIDMessage.class.xmi#//@classifiers.0/@members.16"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.2"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/ha/session/SessionIDMessage.class.xmi#//@classifiers.0/@members.14"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.3"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:LocalVariableStatement">
+        <variable name="context">
+          <typeReference xsi:type="types:NamespaceClassifierReference">
+            <classifierReferences>
+              <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0"/>
+            </classifierReferences>
+          </typeReference>
+          <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.1">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+            </next>
+          </initialValue>
+        </variable>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/ha/session/SessionIDMessage.class.xmi#//@classifiers.0/@members.10"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.3/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0/@members.33"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/ha/session/SessionIDMessage.class.xmi#//@classifiers.0/@members.8"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.3/@variable">
+              <next xsi:type="references:MethodCall">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.19"/>
+                </next>
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.21"/>
+              </next>
+            </arguments>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0/@members.6"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable"/>
+            </next>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@parameters.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/ha/ClusterManager.class.xmi#//@classifiers.0/@members.7"/>
+          </next>
+        </condition>
+        <elseStatement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0/@members.4"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.23/@statements.0/@variable"/>
+            </next>
+          </expression>
+        </elseStatement>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setNewSessionCookie">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="request">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="response">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="sessionId">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Protected">
+        <comments>/**&#xA;     * Sets a new cookie for the given session id and response and see&#xA;     * {@link org.apache.catalina.connector.Request#configureSessionCookie(javax.servlet.http.Cookie)}&#xA;     * &#xA;     * @param request current request&#xA;     * @param response Tomcat Response&#xA;     * @param sessionId The session id&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="context">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.59"/>
+                </next>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="newCookie">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <comments>// set a new session cookie</comments>
+                      <target xsi:type="classifiers:Class" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="instantiations:NewConstructorCall">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Class" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <arguments xsi:type="references:IdentifierReference">
+                      <next xsi:type="references:IdentifierReference">
+                        <target xsi:type="members:Field" href="../../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.30"/>
+                      </next>
+                      <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+                    </arguments>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.2"/>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0/@members.17"/>
+                    <arguments xsi:type="expressions:UnaryExpression">
+                      <operators xsi:type="operators:Subtraction"/>
+                      <child xsi:type="literals:DecimalIntegerLiteral" decimalValue="1"/>
+                    </arguments>
+                  </next>
+                </expression>
+              </statements>
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="contextPath">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Class" href="../../../../../lang/String.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="literals:NullLiteral"/>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.2/@variable"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.0/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0/@members.25"/>
+                        </next>
+                      </value>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:UnaryExpression">
+                    <operators xsi:type="operators:Negate"/>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1">
+                      <next xsi:type="references:MethodCall">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Connector.class.xmi#//@classifiers.0/@members.57"/>
+                        </next>
+                        <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0/@members.21"/>
+                      </next>
+                    </child>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:NotEqual"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.0/@variable"/>
+                      <children xsi:type="literals:NullLiteral"/>
+                    </expression>
+                  </children>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0/@members.19"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.2/@variable"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:EqualityExpression">
+                      <equalityOperators xsi:type="operators:NotEqual"/>
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.2/@variable"/>
+                      <children xsi:type="literals:NullLiteral"/>
+                    </expression>
+                  </children>
+                  <children xsi:type="expressions:NestedExpression">
+                    <expression xsi:type="expressions:RelationExpression">
+                      <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.2/@variable">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../lang/String.class.xmi#//@classifiers.0/@members.22"/>
+                        </next>
+                      </children>
+                      <children xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+                      <relationOperators xsi:type="operators:GreaterThan"/>
+                    </expression>
+                  </children>
+                </condition>
+                <elseStatement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0/@members.19"/>
+                        <arguments xsi:type="references:StringReference" value="/"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </elseStatement>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:ClassMethod" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0/@members.21"/>
+                        <arguments xsi:type="literals:BooleanLiteral" value="true"/>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Request.class.xmi#//@classifiers.0/@members.117"/>
+                  </next>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.8"/>
+                        <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.7"/>
+                            <arguments xsi:type="references:StringReference" value="jvmRoute.newSessionCookie"/>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.2"/>
+                            <arguments xsi:type="references:IdentifierReference">
+                              <next xsi:type="references:IdentifierReference">
+                                <target xsi:type="members:Field" href="../../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0/@members.30"/>
+                              </next>
+                              <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/Globals.class.xmi#//@classifiers.0"/>
+                            </arguments>
+                            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                              <next xsi:type="references:MethodCall">
+                                <target xsi:type="members:ClassMethod" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0/@members.20"/>
+                              </next>
+                            </arguments>
+                            <arguments xsi:type="instantiations:NewConstructorCall">
+                              <typeReference xsi:type="types:NamespaceClassifierReference">
+                                <classifierReferences>
+                                  <target xsi:type="classifiers:Class" href="../../../../../lang/Boolean.class.xmi#//@classifiers.0"/>
+                                </classifierReferences>
+                              </typeReference>
+                              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable">
+                                <next xsi:type="references:MethodCall">
+                                  <target xsi:type="members:ClassMethod" href="../../../../../../javax/servlet/http/Cookie.class.xmi#//@classifiers.0/@members.22"/>
+                                </next>
+                              </arguments>
+                            </arguments>
+                          </next>
+                        </arguments>
+                      </next>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.0"/>
+                  </next>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/connector/Response.class.xmi#//@classifiers.0/@members.72"/>
+                    <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.1/@statement/@statements.0/@variable"/>
+                  </next>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@statements.0/@statement/@statements.0/@variable">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Context.class.xmi#//@classifiers.0/@members.13"/>
+              </next>
+            </condition>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:NotEqual"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.24/@parameters.1"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addLifecycleListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/LifecycleListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>// ------------------------------------------------------ Lifecycle Methods</comments>
+        <comments>/**&#xA;     * Add a lifecycle event listener to this component.&#xA;     * &#xA;     * @param listener&#xA;     *            The listener to add&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.3"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.25/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="findLifecycleListeners">
+      <typeReference xsi:type="types:NamespaceClassifierReference">
+        <classifierReferences>
+          <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/LifecycleListener.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Get the lifecycle listeners associated with this lifecycle. If this&#xA;     * Lifecycle has no listeners registered, a zero-length array is returned.&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Return">
+        <returnValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.4"/>
+          </next>
+        </returnValue>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeLifecycleListener">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="listener">
+        <typeReference xsi:type="types:NamespaceClassifierReference">
+          <classifierReferences>
+            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/LifecycleListener.class.xmi#//@classifiers.0"/>
+          </classifierReferences>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Remove a lifecycle event listener from this component.&#xA;     * &#xA;     * @param listener&#xA;     *            The listener to add&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.6"/>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.27/@parameters.0"/>
+          </next>
+        </expression>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="start">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Prepare for the beginning of active use of the public methods of this&#xA;     * component. This method should be called after &lt;code>configure()&lt;/code>,&#xA;     * and before any of the public methods of the component are utilized.&#xA;     * &#xA;     * @exception LifecycleException&#xA;     *                if this component detects a fatal error that prevents this&#xA;     *                component from being used&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// Validate and update our current component state</comments>
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:StringReference" value="jvmRoute.valve.alreadyStarted"/>
+              </next>
+            </arguments>
+          </throwable>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.5"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/apache/catalina/Lifecycle.class.xmi#//@classifiers.0/@members.1"/>
+            </arguments>
+            <arguments xsi:type="literals:NullLiteral"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral" value="true"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:LocalVariableStatement">
+            <variable name="hostContainer">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <initialValue xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.12"/>
+              </initialValue>
+            </variable>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <comments>// compatibility with JvmRouteBinderValve version 1.1</comments>
+            <comments>// ( setup at context.xml or context.xml.default )</comments>
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:ExpressionStatement">
+                  <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.12"/>
+                      <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                        <next xsi:type="references:MethodCall">
+                          <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                          <arguments xsi:type="references:StringReference" value="jvmRoute.configure.warn"/>
+                        </next>
+                      </arguments>
+                    </next>
+                  </expression>
+                </statement>
+                <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.5"/>
+                  </next>
+                </condition>
+              </statements>
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.21"/>
+                    </next>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:UnaryExpression">
+              <operators xsi:type="operators:Negate"/>
+              <child xsi:type="expressions:NestedExpression">
+                <expression xsi:type="expressions:InstanceOfExpression">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Host.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable"/>
+                </expression>
+              </child>
+            </condition>
+          </statements>
+          <statements xsi:type="statements:Condition">
+            <statement xsi:type="statements:Block">
+              <statements xsi:type="statements:ExpressionStatement">
+                <expression xsi:type="expressions:AssignmentExpression">
+                  <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                  <assignmentOperator xsi:type="operators:Assignment"/>
+                  <value xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.15"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Host.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable"/>
+                      </expression>
+                    </child>
+                  </value>
+                </expression>
+              </statements>
+            </statement>
+            <condition xsi:type="expressions:ConditionalAndExpression">
+              <children xsi:type="expressions:InstanceOfExpression">
+                <typeReference xsi:type="types:NamespaceClassifierReference">
+                  <classifierReferences>
+                    <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Host.class.xmi#//@classifiers.0"/>
+                  </classifierReferences>
+                </typeReference>
+                <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable"/>
+              </children>
+              <children xsi:type="expressions:EqualityExpression">
+                <equalityOperators xsi:type="operators:NotEqual"/>
+                <children xsi:type="expressions:NestedExpression">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.15"/>
+                  </next>
+                  <expression xsi:type="expressions:CastExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Host.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable"/>
+                  </expression>
+                </children>
+                <children xsi:type="literals:NullLiteral"/>
+              </children>
+            </condition>
+            <elseStatement xsi:type="statements:Block">
+              <statements xsi:type="statements:LocalVariableStatement">
+                <variable name="engine">
+                  <typeReference xsi:type="types:NamespaceClassifierReference">
+                    <classifierReferences>
+                      <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0"/>
+                    </classifierReferences>
+                  </typeReference>
+                  <initialValue xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.0/@variable">
+                    <next xsi:type="references:MethodCall">
+                      <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.21"/>
+                    </next>
+                  </initialValue>
+                </variable>
+              </statements>
+              <statements xsi:type="statements:Condition">
+                <statement xsi:type="statements:Block">
+                  <statements xsi:type="statements:ExpressionStatement">
+                    <expression xsi:type="expressions:AssignmentExpression">
+                      <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+                      <assignmentOperator xsi:type="operators:Assignment"/>
+                      <value xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/CatalinaCluster.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="expressions:NestedExpression">
+                          <next xsi:type="references:MethodCall">
+                            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.15"/>
+                          </next>
+                          <expression xsi:type="expressions:CastExpression">
+                            <typeReference xsi:type="types:NamespaceClassifierReference">
+                              <classifierReferences>
+                                <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Engine.class.xmi#//@classifiers.0"/>
+                              </classifierReferences>
+                            </typeReference>
+                            <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.2/@elseStatement/@statements.0/@variable"/>
+                          </expression>
+                        </child>
+                      </value>
+                    </expression>
+                  </statements>
+                </statement>
+                <condition xsi:type="expressions:ConditionalAndExpression">
+                  <children xsi:type="expressions:InstanceOfExpression">
+                    <typeReference xsi:type="types:NamespaceClassifierReference">
+                      <classifierReferences>
+                        <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Engine.class.xmi#//@classifiers.0"/>
+                      </classifierReferences>
+                    </typeReference>
+                    <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.2/@elseStatement/@statements.0/@variable"/>
+                  </children>
+                  <children xsi:type="expressions:EqualityExpression">
+                    <equalityOperators xsi:type="operators:NotEqual"/>
+                    <children xsi:type="expressions:NestedExpression">
+                      <next xsi:type="references:MethodCall">
+                        <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.15"/>
+                      </next>
+                      <expression xsi:type="expressions:CastExpression">
+                        <typeReference xsi:type="types:NamespaceClassifierReference">
+                          <classifierReferences>
+                            <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Engine.class.xmi#//@classifiers.0"/>
+                          </classifierReferences>
+                        </typeReference>
+                        <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.28/@statements.3/@statement/@statements.2/@elseStatement/@statements.0/@variable"/>
+                      </expression>
+                    </children>
+                    <children xsi:type="literals:NullLiteral"/>
+                  </children>
+                </condition>
+              </statements>
+            </elseStatement>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:Block">
+          <statements xsi:type="statements:Throw">
+            <throwable xsi:type="instantiations:NewConstructorCall">
+              <typeReference xsi:type="types:NamespaceClassifierReference">
+                <classifierReferences>
+                  <target xsi:type="classifiers:Class" href="../../../../../lang/RuntimeException.class.xmi#//@classifiers.0"/>
+                </classifierReferences>
+              </typeReference>
+              <arguments xsi:type="expressions:AdditiveExpression">
+                <children xsi:type="references:StringReference" value="No clustering support at container "/>
+                <children xsi:type="references:IdentifierReference">
+                  <next xsi:type="references:MethodCall">
+                    <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/catalina/Container.class.xmi#//@classifiers.0/@members.19"/>
+                  </next>
+                  <target xsi:type="members:Field" href="../../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0/@members.1"/>
+                </children>
+                <additiveOperators xsi:type="operators:Addition"/>
+              </arguments>
+            </throwable>
+          </statements>
+        </statement>
+        <condition xsi:type="expressions:EqualityExpression">
+          <equalityOperators xsi:type="operators:Equal"/>
+          <children xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <children xsi:type="literals:NullLiteral"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.10"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                  <arguments xsi:type="references:StringReference" value="jvmRoute.valve.started"/>
+                </next>
+              </arguments>
+            </next>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.3"/>
+          </next>
+        </condition>
+      </statements>
+    </members>
+    <members xsi:type="members:ClassMethod" name="stop">
+      <typeReference xsi:type="types:Void"/>
+      <exceptions>
+        <classifierReferences>
+          <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+        </classifierReferences>
+      </exceptions>
+      <annotationsAndModifiers xsi:type="modifiers:Public">
+        <comments>/**&#xA;     * Gracefully terminate the active use of the public methods of this&#xA;     * component. This method should be the last one called on a given instance&#xA;     * of this component.&#xA;     * &#xA;     * @exception LifecycleException&#xA;     *                if this component detects a fatal error that needs to be&#xA;     *                reported&#xA;     */</comments>
+      </annotationsAndModifiers>
+      <statements xsi:type="statements:Condition">
+        <comments>// Validate and update our current component state</comments>
+        <statement xsi:type="statements:Throw">
+          <throwable xsi:type="instantiations:NewConstructorCall">
+            <typeReference xsi:type="types:NamespaceClassifierReference">
+              <classifierReferences>
+                <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/LifecycleException.class.xmi#//@classifiers.0"/>
+              </classifierReferences>
+            </typeReference>
+            <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+              <next xsi:type="references:MethodCall">
+                <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                <arguments xsi:type="references:StringReference" value="jvmRoute.valve.notStarted"/>
+              </next>
+            </arguments>
+          </throwable>
+        </statement>
+        <condition xsi:type="expressions:UnaryExpression">
+          <operators xsi:type="operators:Negate"/>
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+        </condition>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.8">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/LifecycleSupport.class.xmi#//@classifiers.0/@members.5"/>
+            <arguments xsi:type="references:IdentifierReference">
+              <target xsi:type="members:Field" href="../../../../../../org/apache/catalina/Lifecycle.class.xmi#//@classifiers.0/@members.4"/>
+            </arguments>
+            <arguments xsi:type="literals:NullLiteral"/>
+          </next>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.4"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:BooleanLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.2"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:NullLiteral"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:ExpressionStatement">
+        <expression xsi:type="expressions:AssignmentExpression">
+          <child xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.6"/>
+          <assignmentOperator xsi:type="operators:Assignment"/>
+          <value xsi:type="literals:DecimalIntegerLiteral" decimalValue="0"/>
+        </expression>
+      </statements>
+      <statements xsi:type="statements:Condition">
+        <statement xsi:type="statements:ExpressionStatement">
+          <expression xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+            <next xsi:type="references:MethodCall">
+              <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.10"/>
+              <arguments xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.3">
+                <next xsi:type="references:MethodCall">
+                  <target xsi:type="members:ClassMethod" href="../../../../../../org/apache/catalina/util/StringManager.class.xmi#//@classifiers.0/@members.5"/>
+                  <arguments xsi:type="references:StringReference" value="jvmRoute.valve.stopped"/>
+                </next>
+              </arguments>
+            </next>
+          </expression>
+        </statement>
+        <condition xsi:type="references:IdentifierReference" target="//@classifiers.0/@members.0">
+          <next xsi:type="references:MethodCall">
+            <target xsi:type="members:InterfaceMethod" href="../../../../../../org/apache/juli/logging/Log.class.xmi#//@classifiers.0/@members.3"/>
+          </next>
+        </condition>
+      </statements>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public">
+      <comments>/**&#xA; * Valve to handle Tomcat jvmRoute takeover using mod_jk module after node&#xA; * failure. After a node crashed the next request going to other cluster node.&#xA; * Now the answering from apache is slower ( make some error handshaking. Very&#xA; * bad with apache at my windows.). We rewrite now the cookie jsessionid&#xA; * information to the backup cluster node. After the next response all client&#xA; * request goes direct to the backup node. The change sessionid send also to all&#xA; * other cluster nodes. Well, now the session stickyness work directly to the&#xA; * backup node and traffic don't go back too restarted cluster nodes!&#xA; * &#xA; * At all cluster node you must configure the as ClusterListener since 5.5.10&#xA; * {@link org.apache.catalina.ha.session.JvmRouteSessionIDBinderListener JvmRouteSessionIDBinderListener}&#xA; * or before with&#xA; * org.apache.catalina.ha.session.JvmRouteSessionIDBinderListenerLifecycle.&#xA; * &#xA; * Add this Valve to your host definition at conf/server.xml .&#xA; * &#xA; * Since 5.5.10 as direct cluster valve:&lt;br/>&#xA; * &lt;pre>&#xA; *  &amp;lt;Cluster&amp;gt;&#xA; *  &amp;lt;Valve className=&amp;quot;org.apache.catalina.ha.session.JvmRouteBinderValve&amp;quot; /&amp;gt;  &#xA; *  &amp;lt;/Cluster&amp;gt;&#xA; * &lt;/pre>&#xA; * &lt;br />&#xA; * Before 5.5.10 as Host element:&lt;br/>&#xA; * &lt;pre>&#xA; *  &amp;lt;Hostr&amp;gt;&#xA; *  &amp;lt;Valve className=&amp;quot;org.apache.catalina.ha.session.JvmRouteBinderValve&amp;quot; /&amp;gt;  &#xA; *  &amp;lt;/Hostr&amp;gt;&#xA; * &lt;/pre>&#xA; * &#xA; * Trick:&lt;br/>&#xA; * You can enable this mod_jk turnover mode via JMX before you drop a node to all backup nodes!&#xA; * Set enable true on all JvmRouteBinderValve backups, disable worker at mod_jk &#xA; * and then drop node and restart it! Then enable mod_jk Worker and disable JvmRouteBinderValves again. &#xA; * This use case means that only requested session are migrated.&#xA; * &#xA; * @author Peter Rossbach&#xA; * @version $Revision: 467222 $ $Date: 2006-10-24 05:17:11 +0200 (Tue, 24 Oct 2006) $&#xA; */</comments>
+    </annotationsAndModifiers>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/ha/ClusterValve.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <implements xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Interface" href="../../../../../../org/apache/catalina/Lifecycle.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </implements>
+    <extends xsi:type="types:NamespaceClassifierReference">
+      <classifierReferences>
+        <target xsi:type="classifiers:Class" href="../../../../../../org/apache/catalina/valves/ValveBase.class.xmi#//@classifiers.0"/>
+      </classifierReferences>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>
