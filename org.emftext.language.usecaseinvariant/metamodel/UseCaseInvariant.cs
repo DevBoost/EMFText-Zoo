@@ -54,6 +54,6 @@ CounterActor
 
 Value 
    ::=
-        type[]  (inSet[T_INCLUDING])? #0 ID[] #0
+        type[]  (inSet[T_INCLUDING])? ID[]
 	;
 }
