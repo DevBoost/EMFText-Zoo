@@ -35,7 +35,7 @@ public class FormsPrintingTest extends TestCase {
 		try {
 			printer.print(item);
 			String result = outStream.toString();
-			assertEquals("Unexpected result from printer", "ITEM\"d\":DECISION(\"e\",\"f\")", result);
+			assertEquals("Unexpected result from printer", "ITEM\"D\":DECISION(\"e\",\"f\")", result);
 		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getMessage());
