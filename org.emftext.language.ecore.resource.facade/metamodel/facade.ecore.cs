@@ -52,12 +52,12 @@ TOKENSTYLES {
 }
  
 RULES {
-	EPackage ::= "annotate" nsURI['"', '"']
-	(eAnnotations)* "package" name[] "{" ( eClassifiers )* eSubpackages* "}";
+	EPackage ::= "annotate" #1 nsURI['"', '"'] #1
+	(eAnnotations)* "package" name[] "{" ( eClassifiers )* eSubpackages* !0 "}";
 	
 	EClass ::=  (eAnnotations)* !1 interface[T_INTERFACE_OR_CLASS] 
 				#1 name[] 
-				#1 "{" ( eStructuralFeatures | eOperations )* !0"}"
+				#1 "{" ( eStructuralFeatures | eOperations )* !1"}"
 				!0;	
 				
 	EAttribute ::= (eAnnotations)*

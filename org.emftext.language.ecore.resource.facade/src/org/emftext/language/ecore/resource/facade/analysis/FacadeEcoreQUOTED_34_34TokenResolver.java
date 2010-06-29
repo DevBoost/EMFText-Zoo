@@ -15,8 +15,7 @@ package org.emftext.language.ecore.resource.facade.analysis;
 
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreTokenResolveResult;
@@ -30,10 +29,10 @@ public class FacadeEcoreQUOTED_34_34TokenResolver implements IFacadeEcoreTokenRe
 		// == nsURI field is is misused here as attribute that holds the path to the annotated Ecore file.
 		Resource resource = container.eResource();
 		if (feature.equals(EcorePackage.Literals.EPACKAGE__NS_URI) && resource != null && !resource.getContents().isEmpty()) {
-			EObject annotation = resource.getContents().get(
-					resource.getContents().size() - 1);
-			if (annotation instanceof EAnnotation) {
-				value = ((EAnnotation) annotation).getDetails().get("annotatedURI");
+			for(Adapter a : resource.eAdapters()) {
+				if (a instanceof AnnotatedURI) {
+					value = ((AnnotatedURI)a).getUri();
+				}
 			}
 		}
 		// ==

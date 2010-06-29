@@ -17,12 +17,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -34,6 +33,7 @@ import org.emftext.language.ecore.resource.facade.IFacadeEcoreProblem;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreResourcePostProcessor;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreResourcePostProcessorProvider;
 import org.emftext.language.ecore.resource.facade.IFacadeEcoreTextResource;
+import org.emftext.language.ecore.resource.facade.analysis.AnnotatedURI;
 import org.emftext.language.ecore.resource.facade.mopp.FacadeEcoreResource;
 
 public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
@@ -91,14 +91,12 @@ public class EcoreModelMerger implements IFacadeEcoreResourcePostProcessor,
 		}
 		
 		resource.getContents().clear();
+		resource.eAdapters().clear();
 		resource.getContents().addAll(EcoreUtil.copyAll(annotatedResource.getContents()));
 		
 		// == Remember URI of annotated resource for printing
-		EAnnotation annotatedURIAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-		annotatedURIAnnotation.setSource("org.emftext.language.ecore.resource.facade");
-		annotatedURIAnnotation.getDetails().put(
-				"annotatedURI", ePackage.getNsURI());
-		resource.getContents().add(annotatedURIAnnotation);	
+		Adapter annotatedURIAdapter = new AnnotatedURI(ePackage.getNsURI());
+		resource.eAdapters().add(annotatedURIAdapter);
 		// ==
 	}
 
