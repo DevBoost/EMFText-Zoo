@@ -1,19 +1,7 @@
 --@atlcompiler atl2006 
 module uml2java;
-create OUT : java from  IN : uml, LANG : java, UTIL : java;
+create OUT : java from  IN : uml;
 
-helper context uml!Element def : getCorrectType() : OclAny = 
-	 if (self.type = OclUndefined)  then OclUndefined else
-	 if (self.type.name = 'String') then
-	   if   java!Package.allInstances()->collect(e | e.compilationUnits)->flatten()->collect(e | e.classifiers)->flatten()->select(e | e.name = 'String')->size() = 1
-	   then java!Package.allInstances()->collect(e | e.compilationUnits)->flatten()->collect(e | e.classifiers)->flatten()->select(e | e.name = 'String')->at(1)
-	   else OclUndefined endif
-     else	 	
-	 self.type 
-	 endif endif;
-
-helper def : getList() : java!Class = 
-	java!Package.allInstances()->collect(e | e.compilationUnits)->flatten()->collect(e | e.classifiers)->flatten()->select(e | e.name = 'LinkedList')->at(1);
 
 rule Class {
 	from i : uml!Class 
@@ -27,20 +15,14 @@ rule Class {
 						   ->select(e | e.memberEnd->select(end | end.type = i)->size() > 0)
 						   ->collect(e | e.memberEnd)->flatten()->select(end | end.type <> i)
 					  ),
-		"extends" <-  if i.generalization->size() > 0 then typeParam
+		"extends" <-  if i.generalization->size() > 0 then typeRef
 					  else OclUndefined endif
 	),
     cu : java!CompilationUnit (
-    	package <- i.package.name.split('\\.'),
+    	namespaces <- i.package.name.split('\\.'),
 		classifiers <- Sequence{o}
 	),
-	typeParam : java!QualifiedTypeArgument(
-		type <- typeRefSequenceInner
-	),
-	typeRefSequenceInner : java!TypeReferenceSequence (
-		parts <- Sequence{typeRefInner}
-	),
-	typeRefInner : java!ParameterizedPackageOrClassifierReference (
+	typeRef : java!ClassifierReference (
 		target <- if i.generalization->size() > 0
 			then i.generalization->at(1).general
 			else OclUndefined
@@ -52,20 +34,17 @@ rule Property {
 	from umlProperty : uml!Property
 	to javaField : java!Field (
 		name <- umlProperty.name,
-		modifiers <- protected,
-		type <- type
+		annotationsAndModifiers <- protected,
+		typeReference <- typeRef1
 	),
-		protected : java!Protected(
+	protected : java!Protected(
 	),
-	type : java!TypeReference (
+	typeRef1 : java!ClassifierReference (
 		target <- if (umlProperty.upper = 1) then
-					umlProperty.type
-				else
-					java!Package.allInstances()->select(p | p.name = 'lang')->collect(
-						p | p.compilationUnits)->flatten()->collect(
-							cu | cu.classifiers)->flatten()->select(
-								c | c.name = 'LinkedList')->at(1)
-				endif,
+			umlProperty.type
+		else
+			OclUndefined --done in do block
+		endif,
 		typeArguments <- if (umlProperty.upper = 1) then
 					Sequence{}
 				else
@@ -73,28 +52,41 @@ rule Property {
 				endif
 	),
 	typeArgument : java!QualifiedTypeArgument(
+		typeReference <- typeRef2
+	),
+	typeRef2 : java!ClassifierReference (
 		target <- umlProperty.type
 	)
+	do {
+		typeRef1.target <-
+			if (umlProperty.upper = 1) then
+				typeRef1.target
+			else
+				typeRef1.getConcreteClassifier('java.lang.List')
+			endif;
+	}
 }
 
 rule Operation {
 	from i : uml!Operation
-	to o : java!Method (
+	to o : java!ClassMethod (
 		name <- i.name,
-		type <- if i.getCorrectType() = OclUndefined then
+		typeReference <- if i.type = OclUndefined  then
 					voidType
 				  else
-				  	typeRefSequence
+				  	typeRef
 				  endif,
-		body <- body,
-		modifiers <- Sequence{public} --TODO inspect visibility defined in UML
+		statements <- body,
+		annotationsAndModifiers <- Sequence{public} --TODO inspect visibility defined in UML
 	),
 	--return type
-	typeRefSequence : java!TypeReferenceSequence (
-		parts <- Sequence{typeRef}
-	),
-	typeRef : java!ParameterizedPackageOrClassifierReference (
-		target <- i.getCorrectType()
+	typeRef : java!ClassifierReference (
+		target <- if i.type = OclUndefined then OclUndefined else 
+				if i.type.name = 'String' then
+					OclUndefined -- replaced in do block
+				else
+					i.type	
+				endif endif
 	),
 	voidType : java!Void (
 	),
@@ -108,7 +100,13 @@ rule Operation {
 	),
 	public : java!Public (
 	)
+	do {
+		typeRef.target <- if i.type = OclUndefined then typeRef.target else
+				if i.type.name = 'String' then 
+					typeRef.getStringClass() 
+				else
+					typeRef.target
+				endif endif;
+	}
 	
 }
-
-
