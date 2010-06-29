@@ -2,29 +2,35 @@
 module uml2java;
 create OUT : java from  IN : uml;
 
+helper context uml!Element def: correctType(outerType : Boolean) : java!Classifier = 
+	 if (self.type = OclUndefined)  then OclUndefined else
+	 if (self.upper <> 1 and outerType)  then java!Commentable.allInstances()->first().getConcreteClassifier('java.lang.List') else 	
+	 if (self.type.name = 'String') then java!Commentable.allInstances()->first().getStringClass() else
+     self.type 
+	 endif endif endif;
 
 rule Class {
-	from i : uml!Class 
-	to o : java!Class (
-		name <- i.name,
-		members <- i.ownedAttribute
-		              ->union(i.ownedOperation)
+	from umlClass : uml!Class 
+	to javaClass : java!Class (
+		name <- umlClass.name,
+		members <- umlClass.ownedAttribute
+		              ->union(umlClass.ownedOperation)
 		              ->union(
-		              	 i.package.packagedElement
+		              	 umlClass.package.packagedElement
 						   ->select(e | e.oclIsTypeOf(uml!Association))
-						   ->select(e | e.memberEnd->select(end | end.type = i)->size() > 0)
-						   ->collect(e | e.memberEnd)->flatten()->select(end | end.type <> i)
+						   ->select(e | e.memberEnd->select(end | end.type = umlClass)->size() > 0)
+						   ->collect(e | e.memberEnd)->flatten()->select(end | end.type <> umlClass)
 					  ),
-		"extends" <-  if i.generalization->size() > 0 then typeRef
+		"extends" <-  if umlClass.generalization->size() > 0 then typeRef
 					  else OclUndefined endif
 	),
     cu : java!CompilationUnit (
-    	namespaces <- i.package.name.split('\\.'),
-		classifiers <- Sequence{o}
+    	namespaces <- umlClass.package.name.split('\\.'),
+		classifiers <- Sequence{javaClass}
 	),
 	typeRef : java!ClassifierReference (
-		target <- if i.generalization->size() > 0
-			then i.generalization->at(1).general
+		target <- if umlClass.generalization->size() > 0
+			then umlClass.generalization->at(1).general
 			else OclUndefined
 			endif
 	)
@@ -35,43 +41,37 @@ rule Property {
 	to javaField : java!Field (
 		name <- umlProperty.name,
 		annotationsAndModifiers <- protected,
-		typeReference <- typeRef1
+		typeReference <- if umlProperty.type = OclUndefined  then
+					voidType
+				  else
+				  	typeRef1
+				  endif
 	),
 	protected : java!Protected(
 	),
+	voidType : java!Void (
+	),
 	typeRef1 : java!ClassifierReference (
-		target <- if (umlProperty.upper = 1) then
-			umlProperty.type
-		else
-			OclUndefined --done in do block
-		endif,
+		target <- umlProperty.correctType(true),
 		typeArguments <- if (umlProperty.upper = 1) then
-					Sequence{}
-				else
-					Sequence{typeArgument}
-				endif
+				Sequence{}
+			else
+				Sequence{typeArgument}
+			endif
 	),
 	typeArgument : java!QualifiedTypeArgument(
 		typeReference <- typeRef2
 	),
 	typeRef2 : java!ClassifierReference (
-		target <- umlProperty.type
+		target <- umlProperty.correctType(false)
 	)
-	do {
-		typeRef1.target <-
-			if (umlProperty.upper = 1) then
-				typeRef1.target
-			else
-				typeRef1.getConcreteClassifier('java.lang.List')
-			endif;
-	}
 }
 
 rule Operation {
-	from i : uml!Operation
-	to o : java!ClassMethod (
-		name <- i.name,
-		typeReference <- if i.type = OclUndefined  then
+	from umlOperation : uml!Operation
+	to javaMethod : java!ClassMethod (
+		name <- umlOperation.name,
+		typeReference <- if umlOperation.type = OclUndefined  then
 					voidType
 				  else
 				  	typeRef
@@ -81,12 +81,7 @@ rule Operation {
 	),
 	--return type
 	typeRef : java!ClassifierReference (
-		target <- if i.type = OclUndefined then OclUndefined else 
-				if i.type.name = 'String' then
-					OclUndefined -- replaced in do block
-				else
-					i.type	
-				endif endif
+		target <- umlOperation.correctType(true)
 	),
 	voidType : java!Void (
 	),
@@ -95,18 +90,10 @@ rule Operation {
 	--	statements <- Sequence{slot}
 	--),
 	--slot : java!StatementSlot (
-	--	pointName <- i.name, 
-	--	portName <- i.class.package.name
+	--	pointName <- umlOperation.name, 
+	--	portName <- umlOperation.class.package.name
 	),
 	public : java!Public (
 	)
-	do {
-		typeRef.target <- if i.type = OclUndefined then typeRef.target else
-				if i.type.name = 'String' then 
-					typeRef.getStringClass() 
-				else
-					typeRef.target
-				endif endif;
-	}
 	
 }
