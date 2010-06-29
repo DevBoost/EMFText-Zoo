@@ -250,7 +250,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	}
 
 	private void populatePackage(Package p) {
-		String fullPackageName = JavaUniquePathConstructor.packageName(p);
+		String fullPackageName = JavaUniquePathConstructor.packageName(p) + "." + p.getName();;
 		for (EObject classifier : JavaClasspath.get(this).getClassifiers(
 				fullPackageName, "*")) {
 			
@@ -268,7 +268,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		if (container == null) return;
 		
 		IResource[] members = container.members();
-		String fullPackageName = JavaUniquePathConstructor.packageName(thisPackage);
+		String fullPackageName = JavaUniquePathConstructor.packageName(thisPackage) + "." + thisPackage.getName();
 		for (IResource resource : members) {
 			if (resource instanceof IFile) {
 				IFile file = (IFile) resource;
