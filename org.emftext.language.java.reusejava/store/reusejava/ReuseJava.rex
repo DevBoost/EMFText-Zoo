@@ -1,6 +1,5 @@
 componentmodel reusejava.ReuseJava 
 implements     reusejava.ReuseJava
-apply de.tudresden.**
 epackages    <http://www.emftext.org/java> <http://www.emftext.org/reusejava>
 rootclass    java::containers::CompilationUnit, reusejava::StatementUnit
 {
